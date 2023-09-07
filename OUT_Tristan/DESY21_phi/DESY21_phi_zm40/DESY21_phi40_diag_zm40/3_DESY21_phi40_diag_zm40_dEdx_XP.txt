@@ -1,5 +1,5 @@
 Tag           : DESY21_phi40_diag_zm40
-Comment       : _zcalc_yw_4IP_WF1
+Comment       : _zcalc_PRF_4IP_WF3corrLxcos
 EventFile     : ../Data_DESY21/Phi_scan_zm40/phi_200_40_zm40_ym60_diag_iter0.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
@@ -59,33 +59,41 @@ zdrift        = 50 mm
 PT            = 200 ns
 TB            = 40 ns/time bin
 PT/TB         = 5 time bins
-Track fitting : yw
+Track fitting : PRF
 z method      : zcalc
 cut length    = 2 mm
 
 WF correction parameters :379.82 | -3.53 | 0.61 | 1.00 | -0.05
 Processing events:
-1/9352
+0/9352
 Hole in entry 267 | iX = 10 | iY = 16 | RC value reset at 129.29
-502/9352
-1003/9352
-1504/9352
-2005/9352
-2506/9352
-3007/9352
-3508/9352
-4009/9352
-4510/9352
-5011/9352
-5512/9352
-6013/9352
-6514/9352
-7015/9352
-7516/9352
-8017/9352
-8518/9352
-9019/9352
-9352/9352
+500/9352
+1000/9352
+1500/9352
+2000/9352
+2500/9352
+3000/9352
+3500/9352
+4000/9352
+4500/9352
+5000/9352
+5500/9352
+6000/9352
+6500/9352
+7000/9352
+7500/9352
+ALERT: 3 walls crossed for a pad in entry #7915
+33.84 34.97 9.17 10.19
+34.97 33.86 10.21 9.17
+37.22 -0.68 -0.00
+ALERT: 3 walls crossed for a pad in entry #7915
+34.97 36.10 8.15 9.17
+36.07 34.97 9.17 8.13
+37.22 -0.68 -0.00
+8000/9352
+8500/9352
+9000/9352
+9351/9352
 
 Selection Statistics 
  #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
@@ -98,5 +106,5 @@ Selection Statistics
     6  Stage5     9095     7462 (  -17.95)  (  -20.21)      9095     7462 (  -17.95)  (  -20.21)    471380   401320 (  -14.86)  (  -21.62)    910768   768671 (  -15.60)  (  -24.25) 
   Summary Sel     9352     7462             (  -20.21)      9352     7462             (  -20.21)    512007   401320             (  -21.62)   1014804   768671             (  -24.25) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_phi/DESY21_phi_zm40/DESY21_phi40_diag_zm40/2_DESY21_phi40_diag_zm40_Checks_zcalc_yw_4IP_WF1.root
-dEdx: OUT_Tristan/DESY21_phi/DESY21_phi_zm40/DESY21_phi40_diag_zm40/3_DESY21_phi40_diag_zm40_dEdx_zcalc_yw_4IP_WF1.root
+Checks: OUT_Tristan/DESY21_phi/DESY21_phi_zm40/DESY21_phi40_diag_zm40/2_DESY21_phi40_diag_zm40_Checks_zcalc_PRF_4IP_WF3corrLxcos.root
+dEdx: OUT_Tristan/DESY21_phi/DESY21_phi_zm40/DESY21_phi40_diag_zm40/3_DESY21_phi40_diag_zm40_dEdx_zcalc_PRF_4IP_WF3corrLxcos.root

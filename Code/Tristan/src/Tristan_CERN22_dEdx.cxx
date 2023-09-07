@@ -401,24 +401,28 @@ void Tristan_CERN22_dEdx( const std::string& OutDir,
           h1f_WFoLength->                   Fill(h1f_WF_cluster->GetMaximum()/(trk_len_clus*1000)) ;
         }
 
-        // WF v1: Sum(WFmax)/track length
-        WFsel                            += h1f_WF_cluster->GetMaximum()/track_len ;
-        v_WF.                               push_back(h1f_WF_cluster->GetMaximum()) ;
+        // // WF v1: Sum(WFmax)/track length
+        // WFsel                            += h1f_WF_cluster->GetMaximum()/track_len ;
+        // v_WF.                               push_back(h1f_WF_cluster->GetMaximum()) ;
 
-        // // WF v2: Sum(WFmax)/Sum(cluster length) // WF v3: Mean(WFmax/cluster length)
-        // if(trk_len_clus > len_cut){
-        //   float AWF_corr = A_ref / A_corr->Eval(trk_len_clus*1000) ;
-        //   h1f_WFcorr->                      Fill(AWF_corr) ;
-        //   RankedValue rank_WF ;  
-        //   rank_WF.Rank                    = N_crosclus ; 
-        //   rank_WF.Value                   = h1f_WF_cluster->GetMaximum()/(trk_len_clus*100) ;
-        //   // rank_WF.Value                   = h1f_WF_cluster->GetMaximum()*AWF_corr/(Lx/std::cos(fabs(phi)*M_PI/180)) ;
-        //   v_rank_WF.                        push_back(rank_WF) ;
-        //   v_WF.                             push_back(h1f_WF_cluster->GetMaximum()) ;
-        //   // v_WF.                             push_back(h1f_WF_cluster->GetMaximum()*AWF_corr/(Lx/std::cos(fabs(phi)*M_PI/180))) ;
-        //   v_lenclus.                        push_back(trk_len_clus) ;
-        //   N_crosclus++ ;
-        // }
+        // WF v2: Sum(WFmax)/Sum(cluster length) // WF v3: Mean(WFmax/cluster length)
+        if(trk_len_clus > len_cut){
+          float ratio_corr                = A_ref / A_corr->Eval(trk_len_clus*1000) ;
+          h1f_WFcorr->                      Fill(ratio_corr) ;
+          RankedValue rank_WF ;  
+          rank_WF.Rank                    = N_crosclus ; 
+          // rank_WF.Value                   = h1f_WF_cluster->GetMaximum()/(trk_len_clus*100) ;
+          // rank_WF.Value                   = h1f_WF_cluster->GetMaximum()*ratio_corr ;
+          // rank_WF.Value                   = h1f_WF_cluster->GetMaximum()*ratio_corr/Lx*10 ;
+          rank_WF.Value                   = h1f_WF_cluster->GetMaximum()*ratio_corr/Lx*10*std::cos(fabs(phi)*M_PI/180) ;
+          v_rank_WF.                        push_back(rank_WF) ;
+          // v_WF.                             push_back(h1f_WF_cluster->GetMaximum()) ;
+          // v_WF.                             push_back(h1f_WF_cluster->GetMaximum()*ratio_corr) ;
+          // v_WF.                             push_back(h1f_WF_cluster->GetMaximum()*ratio_corr/Lx*10) ;
+          v_WF.                             push_back(h1f_WF_cluster->GetMaximum()*ratio_corr/Lx*10*std::cos(fabs(phi)*M_PI/180)) ;
+          v_lenclus.                        push_back(trk_len_clus) ;
+          N_crosclus++ ;
+        }
 
         // GPv3: cluster-based DPR
         TH1F* h1f_DPRcluster              = DPR("h1f_DPRcluster", -0.5, 509.5, h1f_WF_cluster->GetMaximumBin()-PT_TB, 510, iC, PT, TB) ;
@@ -449,11 +453,11 @@ void Tristan_CERN22_dEdx( const std::string& OutDir,
       // WFsel
       v_h1f_WFsel[iMod]->                   Fill(WFsel) ;
 
-      // WF v1: Sum(WFmax)/track length
-      std::sort(v_WF.begin(), v_WF.end()) ;
-      v_WF.                                 resize(NClus_trunc) ;
-      WFtrunc                             = accumulate(v_WF.begin(), v_WF.end(), 0)/(track_len*(alpha/100)) ;
-      v_h1f_WFtrunc[iMod]->                 Fill(WFtrunc) ;
+      // // WF v1: Sum(WFmax)/track length
+      // std::sort(v_WF.begin(), v_WF.end()) ;
+      // v_WF.                                 resize(NClus_trunc) ;
+      // WFtrunc                             = accumulate(v_WF.begin(), v_WF.end(), 0)/(track_len*(alpha/100)) ;
+      // v_h1f_WFtrunc[iMod]->                 Fill(WFtrunc) ;
 
       // // WF v2: Sum(WFmax)/Sum(cluster length)
       // int N_crosclustrunc                 = int(floor(N_crosclus * (alpha/100))) ; ;
@@ -466,14 +470,14 @@ void Tristan_CERN22_dEdx( const std::string& OutDir,
       // WFtrunc                            /= trk_len_clus_trunc ;
       // v_h1f_WFtrunc[iMod]->                 Fill(WFtrunc) ;
 
-      // // WF v3: Mean(WFmax/cluster length)
-      // int N_crosclustrunc                 = int(floor(N_crosclus * (alpha/100))) ; ;
-      // std::sort(v_rank_WF.begin(), v_rank_WF.end()) ;
-      // v_rank_WF.                            resize(N_crosclustrunc) ;
-      // std::vector<float> v_WFoff ;
-      // for(int iC = 0 ; iC < N_crosclustrunc ; iC++) v_WFoff.push_back(v_rank_WF[iC].Value) ;
-      // float WFoff                         = std::accumulate(v_WFoff.begin(), v_WFoff.end(), 0) /v_WFoff.size() ;
-      // v_h1f_WFtrunc[iMod]->                 Fill(WFoff) ;
+      // WF v3: Mean(WFmax/cluster length)
+      int N_crosclustrunc                 = int(floor(N_crosclus * (alpha/100))) ; ;
+      std::sort(v_rank_WF.begin(), v_rank_WF.end()) ;
+      v_rank_WF.                            resize(N_crosclustrunc) ;
+      std::vector<float> v_WFoff ;
+      for(int iC = 0 ; iC < N_crosclustrunc ; iC++) v_WFoff.push_back(v_rank_WF[iC].Value) ;
+      float WFoff                         = std::accumulate(v_WFoff.begin(), v_WFoff.end(), 0) / N_crosclustrunc ;
+      v_h1f_WFtrunc[iMod]->                 Fill(WFoff) ;
 
       // GPsel
       float GPsel                         = h1f_GWF_mod->GetMaximum()/track_len ;

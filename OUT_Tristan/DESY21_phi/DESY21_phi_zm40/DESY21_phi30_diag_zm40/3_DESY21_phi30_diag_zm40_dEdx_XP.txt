@@ -1,5 +1,5 @@
 Tag           : DESY21_phi30_diag_zm40
-Comment       : _zcalc_yw_4IP_WF1
+Comment       : _zcalc_PRF_4IP_WF3corrLxcos
 EventFile     : ../Data_DESY21/Phi_scan_zm40/phi_200_30_zm40_ym60_diag_iter0.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
@@ -59,40 +59,40 @@ zdrift        = 50 mm
 PT            = 200 ns
 TB            = 40 ns/time bin
 PT/TB         = 5 time bins
-Track fitting : yw
+Track fitting : PRF
 z method      : zcalc
 cut length    = 2 mm
 
 WF correction parameters :394.54 | 23.56 | -3.98 | 1.28 | -0.06
 Processing events:
-1/8719
+0/8719
 Hole in entry 467 | iX = 10 | iY = 16 | RC value reset at 129.29
-502/8719
-1003/8719
-1504/8719
-2005/8719
-2506/8719
-3007/8719
-3508/8719
-4009/8719
-4510/8719
-5011/8719
-5512/8719
-6013/8719
-6514/8719
-7015/8719
-7516/8719
-8017/8719
-ALERT: 3 walls crossed for a pad in entry #8206
-13.54 14.66 21.40 22.42
-14.66 12.93 22.06 21.40
-29.99 -0.58 -0.00
-ALERT: 1 walls crossed for a pad in entry #8206
-14.66 15.79 21.40 22.42
-14.66 12.93 21.40 20.74
-29.99 -0.58 -0.00
-8518/8719
-8719/8719
+500/8719
+1000/8719
+1500/8719
+2000/8719
+2500/8719
+3000/8719
+3500/8719
+4000/8719
+4500/8719
+5000/8719
+5500/8719
+6000/8719
+6500/8719
+7000/8719
+7500/8719
+8000/8719
+ALERT: 1 walls crossed for a pad in entry #8047
+32.71 33.84 11.21 12.23
+32.71 30.74 11.21 10.62
+27.60 -0.48 -0.00
+ALERT: 3 walls crossed for a pad in entry #8047
+32.71 33.84 10.19 11.21
+34.68 32.71 11.21 10.62
+27.60 -0.48 -0.00
+8500/8719
+8718/8719
 
 Selection Statistics 
  #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
@@ -105,5 +105,5 @@ Selection Statistics
     6  Stage5     8393     7149 (  -14.82)  (  -18.01)      8393     7149 (  -14.82)  (  -18.01)    430786   378035 (  -12.25)  (  -20.01)    872156   758439 (  -13.04)  (  -22.92) 
   Summary Sel     8719     7149             (  -18.01)      8719     7149             (  -18.01)    472605   378035             (  -20.01)    983999   758439             (  -22.92) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_phi/DESY21_phi_zm40/DESY21_phi30_diag_zm40/2_DESY21_phi30_diag_zm40_Checks_zcalc_yw_4IP_WF1.root
-dEdx: OUT_Tristan/DESY21_phi/DESY21_phi_zm40/DESY21_phi30_diag_zm40/3_DESY21_phi30_diag_zm40_dEdx_zcalc_yw_4IP_WF1.root
+Checks: OUT_Tristan/DESY21_phi/DESY21_phi_zm40/DESY21_phi30_diag_zm40/2_DESY21_phi30_diag_zm40_Checks_zcalc_PRF_4IP_WF3corrLxcos.root
+dEdx: OUT_Tristan/DESY21_phi/DESY21_phi_zm40/DESY21_phi30_diag_zm40/3_DESY21_phi30_diag_zm40_dEdx_zcalc_PRF_4IP_WF3corrLxcos.root

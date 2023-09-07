@@ -1,5 +1,5 @@
 Tag           : DESY21_phi20_zm40
-Comment       : _zcalc_yw_4IP_WF1
+Comment       : _zcalc_PRF_4IP_WF3corrLxcos
 EventFile     : ../Data_DESY21/Phi_scan_zm40/phi_200_20_zm40_ym60_iter0.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
@@ -59,26 +59,34 @@ zdrift        = 50 mm
 PT            = 200 ns
 TB            = 40 ns/time bin
 PT/TB         = 5 time bins
-Track fitting : yw
+Track fitting : PRF
 z method      : zcalc
 cut length    = 2 mm
 
 Processing events:
-1/6427
+0/6427
 Hole in entry 199 | iX = 10 | iY = 16 | RC value reset at 129
-502/6427
-1003/6427
-1504/6427
-2005/6427
-2506/6427
-3007/6427
-3508/6427
-4009/6427
-4510/6427
-5011/6427
-5512/6427
-6013/6427
-6427/6427
+500/6427
+1000/6427
+1500/6427
+2000/6427
+2500/6427
+ALERT: 3 walls crossed for a pad in entry #2502
+30 32 16 17
+32 29 17 16
+28 -0 -0
+ALERT: 3 walls crossed for a pad in entry #2502
+32 33 15 16
+34 32 16 16
+28 -0 -0
+3000/6427
+3500/6427
+4000/6427
+4500/6427
+5000/6427
+5500/6427
+6000/6427
+6426/6427
 
 Selection Statistics 
  #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
@@ -91,5 +99,5 @@ Selection Statistics
     6  Stage5     6083     2555 (  -58.00)  (  -60.25)      6083     2555 (  -58.00)  (  -60.25)    198897    86870 (  -56.32)  (  -60.23)    599932   257419 (  -57.09)  (  -61.90) 
   Summary Sel     6427     2555             (  -60.25)      6427     2555             (  -60.25)    218405    86870             (  -60.23)    675635   257419             (  -61.90) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_phi/DESY21_phi_zm40/DESY21_phi20_zm40/2_DESY21_phi20_zm40_Checks_zcalc_yw_4IP_WF1.root
-dEdx: OUT_Tristan/DESY21_phi/DESY21_phi_zm40/DESY21_phi20_zm40/3_DESY21_phi20_zm40_dEdx_zcalc_yw_4IP_WF1.root
+Checks: OUT_Tristan/DESY21_phi/DESY21_phi_zm40/DESY21_phi20_zm40/2_DESY21_phi20_zm40_Checks_zcalc_PRF_4IP_WF3corrLxcos.root
+dEdx: OUT_Tristan/DESY21_phi/DESY21_phi_zm40/DESY21_phi20_zm40/3_DESY21_phi20_zm40_dEdx_zcalc_PRF_4IP_WF3corrLxcos.root

@@ -1,5 +1,5 @@
 Tag           : DESY21_phi10_zm40
-Comment       : _zcalc_yw_4IP_WF1
+Comment       : _zcalc_PRF_4IP_WF3corrLxcos
 EventFile     : ../Data_DESY21/Phi_scan_zm40/phi_200_10_zm40_ym60_iter0.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
@@ -59,28 +59,28 @@ zdrift        = 50 mm
 PT            = 200 ns
 TB            = 40 ns/time bin
 PT/TB         = 5 time bins
-Track fitting : yw
+Track fitting : PRF
 z method      : zcalc
 cut length    = 2 mm
 
 Processing events:
-1/7218
+0/7218
 Hole in entry 174 | iX = 10 | iY = 16 | RC value reset at 129
-502/7218
-1003/7218
-1504/7218
-2005/7218
-2506/7218
-3007/7218
-3508/7218
-4009/7218
-4510/7218
-5011/7218
-5512/7218
-6013/7218
-6514/7218
-7015/7218
-7218/7218
+500/7218
+1000/7218
+1500/7218
+2000/7218
+2500/7218
+3000/7218
+3500/7218
+4000/7218
+4500/7218
+5000/7218
+5500/7218
+6000/7218
+6500/7218
+7000/7218
+7217/7218
 
 Selection Statistics 
  #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
@@ -93,5 +93,5 @@ Selection Statistics
     6  Stage5     6726     2800 (  -58.37)  (  -61.21)      6726     2800 (  -58.37)  (  -61.21)    219344    95200 (  -56.60)  (  -61.20)    632149   268307 (  -57.56)  (  -63.50) 
   Summary Sel     7218     2800             (  -61.21)      7218     2800             (  -61.21)    245352    95200             (  -61.20)    735059   268307             (  -63.50) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_phi/DESY21_phi_zm40/DESY21_phi10_zm40/2_DESY21_phi10_zm40_Checks_zcalc_yw_4IP_WF1.root
-dEdx: OUT_Tristan/DESY21_phi/DESY21_phi_zm40/DESY21_phi10_zm40/3_DESY21_phi10_zm40_dEdx_zcalc_yw_4IP_WF1.root
+Checks: OUT_Tristan/DESY21_phi/DESY21_phi_zm40/DESY21_phi10_zm40/2_DESY21_phi10_zm40_Checks_zcalc_PRF_4IP_WF3corrLxcos.root
+dEdx: OUT_Tristan/DESY21_phi/DESY21_phi_zm40/DESY21_phi10_zm40/3_DESY21_phi10_zm40_dEdx_zcalc_PRF_4IP_WF3corrLxcos.root

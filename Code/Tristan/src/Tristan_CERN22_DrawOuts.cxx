@@ -1088,9 +1088,9 @@ void DrawOut_Versions(const std::string& inputDir, const std::string& Method, co
   std::string OutputFile_End  = OutputFile + ")" ;
   TCanvas* pTCanvas           = new TCanvas("TCanvas", "TCanvas", 1800, 1200) ;
   pTCanvas->                    cd() ;
-  TLegend* leg                = new TLegend(0.7,0.75,0.98,0.93) ;
-  std::string leg1            = "XP (constant RC)" ;
-  std::string leg2            = "XP (interpolated RC)" ;
+  TLegend* leg                = new TLegend(0.65,0.75,0.98,0.93) ;
+  std::string leg1            = "WF_{sum} official" ;
+  std::string leg2            = "old WF_{sum}" ;
 
   std::string method ;
   Color_t kBefore ;
@@ -1120,6 +1120,17 @@ void DrawOut_Versions(const std::string& inputDir, const std::string& Method, co
   std::vector<TGraphErrors*>      v_std1 ;
   std::vector<TGraphErrors*>      v_std2 ;
 
+
+  // Get mean & std
+  float mean_1[npoint] ;
+  float mean_2[npoint] ;
+  float dmean_1[npoint] ;
+  float dmean_2[npoint] ;
+  float std_1[npoint] ;
+  float std_2[npoint] ;
+  float dstd_1[npoint] ;
+  float dstd_2[npoint] ;
+
   // Y scan
   std::vector<TF1*>               v_1_y ;
   std::vector<TF1*>               v_2_y ;
@@ -1141,17 +1152,6 @@ void DrawOut_Versions(const std::string& inputDir, const std::string& Method, co
   }
   arr_1.push_back(v_1_y) ;
   arr_2.push_back(v_2_y) ;
-
-
-  // Get mean & std
-  float mean_1[npoint] ;
-  float mean_2[npoint] ;
-  float dmean_1[npoint] ;
-  float dmean_2[npoint] ;
-  float std_1[npoint] ;
-  float std_2[npoint] ;
-  float dstd_1[npoint] ;
-  float dstd_2[npoint] ;
 
   for(int i = 0 ; i < npoint ; i++){
     mean_1[i]                 = arr_1[0][i]->    GetParameter(1) ;
@@ -2813,8 +2813,6 @@ void DrawOut_Phiscan(const std::string& inputDir, const std::string& Comment, co
   // Vectors of TFiles & TH1Fs & TF1s & TGEs
   std::vector<TFile*>       v_pTFile ;
   std::vector<TF1*>         v_tf1_WF ;
-  std::vector<TF1*>         v_tf1_GPv3 ;
-  std::vector<TF1*>         v_tf1_GPv6 ;
   std::vector<TF1*>         v_tf1_XP ;
 
   int phi_arr[] = {0, 5, 10, 20, 30, 30, 40 ,45} ;
@@ -2823,88 +2821,52 @@ void DrawOut_Phiscan(const std::string& inputDir, const std::string& Comment, co
     else if(iphi < 5) v_pTFile. push_back(TFile::Open(TString(inputDir + "/DESY21_phi" + phi_arr[iphi] + "_z" + zdrift + "/3_DESY21_phi" + phi_arr[iphi] + "_z" + zdrift + "_dEdx" + Comment + ".root"))) ;
     else          v_pTFile.   push_back(TFile::Open(TString(inputDir + "/DESY21_phi" + phi_arr[iphi] + "_diag_z" + zdrift + "/3_DESY21_phi" + phi_arr[iphi] + "_diag_z" + zdrift + "_dEdx" + Comment + ".root"))) ;
     v_tf1_WF.                 push_back(v_pTFile[iphi]->   Get<TF1>("tf1_WFtrunc_0")) ;
-    v_tf1_GPv3.               push_back(v_pTFile[iphi]->   Get<TF1>("tf1_GPv3_0")) ;
-    v_tf1_GPv6.               push_back(v_pTFile[iphi]->   Get<TF1>("tf1_GPv6_0")) ;
     v_tf1_XP.                 push_back(v_pTFile[iphi]->   Get<TF1>("tf1_XP_0")) ;
   }
 
   TGraphErrors* pTGE_reso_WF    = new TGraphErrors() ;
-  TGraphErrors* pTGE_reso_GPv3  = new TGraphErrors() ;
-  TGraphErrors* pTGE_reso_GPv6  = new TGraphErrors() ;
   TGraphErrors* pTGE_reso_XP    = new TGraphErrors() ;
 
   TGraphErrors* pTGE_mean_WF    = new TGraphErrors() ;
-  TGraphErrors* pTGE_mean_GPv3  = new TGraphErrors() ;
-  TGraphErrors* pTGE_mean_GPv6  = new TGraphErrors() ;
   TGraphErrors* pTGE_mean_XP    = new TGraphErrors() ;
 
   TGraphErrors* pTGE_std_WF     = new TGraphErrors() ;
-  TGraphErrors* pTGE_std_GPv3   = new TGraphErrors() ;
-  TGraphErrors* pTGE_std_GPv6   = new TGraphErrors() ;
   TGraphErrors* pTGE_std_XP     = new TGraphErrors() ;
 
   // Get mean & std
   float mean_WF[nphi] ;
-  float mean_GPv3[nphi] ;
-  float mean_GPv6[nphi] ;
   float mean_XP[nphi] ;
   float dmean_WF[nphi] ;
-  float dmean_GPv3[nphi] ;
-  float dmean_GPv6[nphi] ;
   float dmean_XP[nphi] ;
   float std_WF[nphi] ;
-  float std_GPv3[nphi] ;
-  float std_GPv6[nphi] ;
   float std_XP[nphi] ;
   float dstd_WF[nphi] ;
-  float dstd_GPv3[nphi] ;
-  float dstd_GPv6[nphi] ;
   float dstd_XP[nphi] ;
 
   int phi_arr_shift[] = {0, 5, 10, 20, 29, 31, 40, 45} ;
   for(int iphi = 0 ; iphi < nphi ; iphi++){
     mean_WF[iphi]                 = v_tf1_WF[iphi]->    GetParameter(1) ;
-    mean_GPv3[iphi]               = v_tf1_GPv3[iphi]->  GetParameter(1) ;
-    mean_GPv6[iphi]               = v_tf1_GPv6[iphi]->  GetParameter(1) ;
     mean_XP[iphi]                 = v_tf1_XP[iphi]->    GetParameter(1) ;
     std_WF[iphi]                  = v_tf1_WF[iphi]->    GetParameter(2) ;
-    std_GPv3[iphi]                = v_tf1_GPv3[iphi]->  GetParameter(2) ;
-    std_GPv6[iphi]                = v_tf1_GPv6[iphi]->  GetParameter(2) ;
     std_XP[iphi]                  = v_tf1_XP[iphi]->    GetParameter(2) ;
     dmean_WF[iphi]                = v_tf1_WF[iphi]->    GetParError(1) ;
-    dmean_GPv3[iphi]              = v_tf1_GPv3[iphi]->  GetParError(1) ;
-    dmean_GPv6[iphi]              = v_tf1_GPv6[iphi]->  GetParError(1) ;
     dmean_XP[iphi]                = v_tf1_XP[iphi]->    GetParError(1) ;
     dstd_WF[iphi]                 = v_tf1_WF[iphi]->    GetParError(2) ;
-    dstd_GPv3[iphi]               = v_tf1_GPv3[iphi]->  GetParError(2) ;
-    dstd_GPv6[iphi]               = v_tf1_GPv6[iphi]->  GetParError(2) ;
     dstd_XP[iphi]                 = v_tf1_XP[iphi]->    GetParError(2) ;
 
     pTGE_reso_WF->  SetPoint      (ipoint, phi_arr_shift[iphi], std_WF[iphi]/mean_WF[iphi]*100) ;
-    pTGE_reso_GPv3->SetPoint      (ipoint, phi_arr_shift[iphi], std_GPv3[iphi]/mean_GPv3[iphi]*100) ;
-    pTGE_reso_GPv6->SetPoint      (ipoint, phi_arr_shift[iphi], std_GPv6[iphi]/mean_GPv6[iphi]*100) ;
     pTGE_reso_XP->  SetPoint      (ipoint, phi_arr_shift[iphi], std_XP[iphi]/mean_XP[iphi]*100) ;
     pTGE_reso_WF->  SetPointError (ipoint, 0,         GetResoError(v_tf1_WF[iphi])) ;
-    pTGE_reso_GPv3->SetPointError (ipoint, 0,         GetResoError(v_tf1_GPv3[iphi])) ;
-    pTGE_reso_GPv6->SetPointError (ipoint, 0,         GetResoError(v_tf1_GPv6[iphi])) ;
     pTGE_reso_XP->  SetPointError (ipoint, 0,         GetResoError(v_tf1_XP[iphi])) ;
 
     pTGE_mean_WF->  SetPoint      (ipoint, phi_arr_shift[iphi], mean_WF[iphi]) ;
-    pTGE_mean_GPv3->SetPoint      (ipoint, phi_arr_shift[iphi], mean_GPv3[iphi]) ;
-    pTGE_mean_GPv6->SetPoint      (ipoint, phi_arr_shift[iphi], mean_GPv6[iphi]) ;
     pTGE_mean_XP->  SetPoint      (ipoint, phi_arr_shift[iphi], mean_XP[iphi]) ;
     pTGE_mean_WF->  SetPointError (ipoint, 0,         dmean_WF[iphi]) ;
-    pTGE_mean_GPv3->SetPointError (ipoint, 0,         dmean_GPv3[iphi]) ;
-    pTGE_mean_GPv6->SetPointError (ipoint, 0,         dmean_GPv6[iphi]) ;
     pTGE_mean_XP->  SetPointError (ipoint, 0,         dmean_XP[iphi]) ;
 
     pTGE_std_WF->  SetPoint       (ipoint, phi_arr_shift[iphi], std_WF[iphi]) ;
-    pTGE_std_GPv3->SetPoint       (ipoint, phi_arr_shift[iphi], std_GPv3[iphi]) ;
-    pTGE_std_GPv6->SetPoint       (ipoint, phi_arr_shift[iphi], std_GPv6[iphi]) ;
     pTGE_std_XP->  SetPoint       (ipoint, phi_arr_shift[iphi], std_XP[iphi]) ;
     pTGE_std_WF->  SetPointError  (ipoint, 0,         dstd_WF[iphi]) ;
-    pTGE_std_GPv3->SetPointError  (ipoint, 0,         dstd_GPv3[iphi]) ;
-    pTGE_std_GPv6->SetPointError  (ipoint, 0,         dstd_GPv6[iphi]) ;
     pTGE_std_XP->  SetPointError  (ipoint, 0,         dstd_XP[iphi]) ;
 
     ipoint++ ;
@@ -2921,7 +2883,7 @@ void DrawOut_Phiscan(const std::string& inputDir, const std::string& Comment, co
   gStyle->                      SetOptStat(0) ;
   gStyle->                      SetGridStyle(1) ;
   pTCanvas->                    cd() ;
-  TLegend* leg                = new TLegend(0.75,0.6,0.98,0.98) ;
+  TLegend* leg                = new TLegend(0.8,0.7,0.98,0.98) ;
 
 
   // Resolution
@@ -2930,16 +2892,10 @@ void DrawOut_Phiscan(const std::string& inputDir, const std::string& Comment, co
   pTGE_reso_WF->                SetMaximum(12) ;
   pTGE_reso_WF->                SetNameTitle("pTGE_reso_WF", "Resolution vs #varphi angle;#varphi angle (#circ);resolution (%)") ;
   Graphic_setup(pTGE_reso_WF,   3, 20, kCyan+2,    1, kBlack) ;
-  Graphic_setup(pTGE_reso_GPv3, 3, 22, kGreen+3,   1, kBlack) ;
-  Graphic_setup(pTGE_reso_GPv6, 3, 23, kOrange-3,  1, kBlack) ;
   Graphic_setup(pTGE_reso_XP,   3, 21, kMagenta+2, 1, kBlack) ;
   pTGE_reso_WF->                Draw("ap") ;
-  // pTGE_reso_GPv3->              Draw("p same") ;
-  // pTGE_reso_GPv6->              Draw("p same") ;
   pTGE_reso_XP->                Draw("p same") ;
-  leg->                         AddEntry(pTGE_reso_WF, "WF ", "ep") ;  
-  // leg->                         AddEntry(pTGE_reso_GPv3, "GPv3 ", "ep") ;  
-  // leg->                         AddEntry(pTGE_reso_GPv6, "GPv6 ", "ep") ;  
+  leg->                         AddEntry(pTGE_reso_WF, "WF ", "ep") ;   
   leg->                         AddEntry(pTGE_reso_XP, "XP ", "ep") ;  
   leg->                         Draw() ;
   pTCanvas->                    SaveAs(OutputFile_Beg.c_str()) ;
@@ -2952,16 +2908,10 @@ void DrawOut_Phiscan(const std::string& inputDir, const std::string& Comment, co
   pTGE_mean_WF->                SetMaximum(1200) ;
   pTGE_mean_WF->                SetNameTitle("pTGE_mean_WF", "Mean vs #varphi angle;#varphi angle (#circ);mean (ADC count)") ;
   Graphic_setup(pTGE_mean_WF,   3, 20, kCyan+2,    1, kBlack) ;
-  Graphic_setup(pTGE_mean_GPv3, 3, 22, kGreen+3,   1, kBlack) ;
-  Graphic_setup(pTGE_mean_GPv6, 3, 23, kOrange-3,  1, kBlack) ;
   Graphic_setup(pTGE_mean_XP,   3, 21, kMagenta+2, 1, kBlack) ;
   pTGE_mean_WF->                Draw("ap") ;
-  // pTGE_mean_GPv3->              Draw("p same") ;
-  // pTGE_mean_GPv6->              Draw("p same") ;
   pTGE_mean_XP->                Draw("p same") ;
   leg->                         AddEntry(pTGE_mean_WF, "WF ", "ep") ;  
-  // leg->                         AddEntry(pTGE_mean_GPv3, "GPv3 ", "ep") ;  
-  // leg->                         AddEntry(pTGE_mean_GPv6, "GPv6 ", "ep") ;  
   leg->                         AddEntry(pTGE_mean_XP, "XP ", "ep") ;  
   leg->                         Draw() ;
   pTCanvas->                    SaveAs(OutputFile.c_str()) ;
@@ -2974,16 +2924,10 @@ void DrawOut_Phiscan(const std::string& inputDir, const std::string& Comment, co
   pTGE_std_WF->                 SetMaximum(120) ;
   pTGE_std_WF->                 SetNameTitle("pTGE_std_WF", "Standard deviation vs #varphi angle;#varphi angle (#circ);standard deviation (ADC count)") ;
   Graphic_setup(pTGE_std_WF,   3, 20, kCyan+2,    1, kBlack) ;
-  Graphic_setup(pTGE_std_GPv3, 3, 22, kGreen+3,   1, kBlack) ;
-  Graphic_setup(pTGE_std_GPv6, 3, 23, kOrange-3,  1, kBlack) ;
   Graphic_setup(pTGE_std_XP,   3, 21, kMagenta+2, 1, kBlack) ;
   pTGE_std_WF->                 Draw("ap") ;
-  // pTGE_std_GPv3->               Draw("p same") ;
-  // pTGE_std_GPv6->               Draw("p same") ;
   pTGE_std_XP->                 Draw("p same") ;
-  leg->                         AddEntry(pTGE_std_WF, "WF ", "ep") ;  
-  // leg->                         AddEntry(pTGE_std_GPv3, "GPv3 ", "ep") ;  
-  // leg->                         AddEntry(pTGE_std_GPv6, "GPv6 ", "ep") ;  
+  leg->                         AddEntry(pTGE_std_WF, "WF ", "ep") ;   
   leg->                         AddEntry(pTGE_std_XP, "XP ", "ep") ;  
   leg->                         Draw() ;
   pTCanvas->                    SaveAs(OutputFile_End.c_str()) ;
@@ -2993,8 +2937,6 @@ void DrawOut_Phiscan(const std::string& inputDir, const std::string& Comment, co
   delete                        leg ;
 
   v_tf1_WF.                     clear() ;
-  v_tf1_GPv3.                   clear() ;
-  v_tf1_GPv6.                   clear() ;
   v_tf1_XP.                     clear() ;
 }
 
@@ -3793,7 +3735,7 @@ void DrawOut_TGE_WFsum_L(const std::string& inputDir, const std::string& Comment
   std::vector<TGraphErrors*>    v_TGE_z950 ;
 
   int phi_arr[] = {30, 40 ,45} ;
-  for(int iphi = 0 ; iphi < 3 ; iphi++){
+  for(int iphi = 0 ; iphi < (int)std::size(phi_arr) ; iphi++){
     TFile* TFile50            = TFile::Open(TString(inputDir + "DESY21_phi_zm40/DESY21_phi" + phi_arr[iphi] + "_diag_zm40/2_DESY21_phi" + phi_arr[iphi] + "_diag_zm40_Checks" + Comment + ".root")) ;
     TH2F* h2f_z50              = TFile50->Get<TH2F>("h2f_WFvsLength") ;
     TGraphErrors* TGE_z50     = Convert_TH2_TGE(h2f_z50) ;

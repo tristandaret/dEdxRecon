@@ -1,5 +1,5 @@
 Tag           : DESY21_zm40_PT200
-Comment       : _zcalc_yw_4IP_WF1
+Comment       : _zcalc_PRF_4IP_WF3corrLxcos
 EventFile     : ../Data_DESY21/zscan_PT200/z_360_275_200_02T_26_m40_iter0.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
@@ -59,31 +59,31 @@ zdrift        = 50 mm
 PT            = 200 ns
 TB            = 50 ns/time bin
 PT/TB         = 4 time bins
-Track fitting : yw
+Track fitting : PRF
 z method      : zcalc
 cut length    = 2 mm
 
 Processing events:
-1/8941
-502/8941
+0/8941
+500/8941
 Hole in entry 578 | iX = 10 | iY = 16 | RC value reset at 129
-1003/8941
-1504/8941
-2005/8941
-2506/8941
-3007/8941
-3508/8941
-4009/8941
-4510/8941
-5011/8941
-5512/8941
-6013/8941
-6514/8941
-7015/8941
-7516/8941
-8017/8941
-8518/8941
-8941/8941
+1000/8941
+1500/8941
+2000/8941
+2500/8941
+3000/8941
+3500/8941
+4000/8941
+4500/8941
+5000/8941
+5500/8941
+6000/8941
+6500/8941
+7000/8941
+7500/8941
+8000/8941
+8500/8941
+8940/8941
 
 Selection Statistics 
  #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
@@ -96,5 +96,5 @@ Selection Statistics
     6  Stage5     8492     3386 (  -60.13)  (  -62.13)      8492     3386 (  -60.13)  (  -62.13)    277518   115124 (  -58.52)  (  -62.11)    785606   317624 (  -59.57)  (  -64.09) 
   Summary Sel     8941     3386             (  -62.13)      8941     3386             (  -62.13)    303816   115124             (  -62.11)    884469   317624             (  -64.09) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_zm40_PT200/2_DESY21_zm40_PT200_Checks_zcalc_yw_4IP_WF1.root
-dEdx: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_zm40_PT200/3_DESY21_zm40_PT200_dEdx_zcalc_yw_4IP_WF1.root
+Checks: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_zm40_PT200/2_DESY21_zm40_PT200_Checks_zcalc_PRF_4IP_WF3corrLxcos.root
+dEdx: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_zm40_PT200/3_DESY21_zm40_PT200_dEdx_zcalc_PRF_4IP_WF3corrLxcos.root
