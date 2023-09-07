@@ -1,0 +1,100 @@
+Tag           : CERN22_ERAM18_e+_1GeV
+Comment       : _zcalc_PRF_4IP
+EventFile     : ../Data_CERN22_vD/ERAM18_350V_412ns_e+_1GeV_iter0.root
+SelectionSet  : T2_CERN22_Event
+NbrOfMod      : -1
+Data_to_Use   : 0
+OUTDirName    : OUT_Tristan/CERN22_ERAM18/CERN22_ERAM18_e+_1GeV/
+
+
+ReadRCmap::ReadRCmap Dir = GainRCMaps/RCfiles/EramName = ERAM18
+ReadRCmap::ReadRCmap m_FileName = GainRCMaps/RCfiles/ERAM18_RCdata_14.root
+
+Uploader_ReadRCmap::Uploader_ReadRCmap RCmapFile = GainRCMaps/RCfiles/ERAM18_RCdata_14.root
+Uploader_ReadRCmap::Uploader_ReadRCmap m_NberOfEntries = 1152
+RC map: loaded
+
+-------------->Predefined selection T2_CERN22_Event
+Number of entries :11899
+module 0 TLeading max = 184
+module 1 TLeading max = 0
+module 2 TLeading max = 0
+module 3 TLeading max = 0
+module 4 TLeading max = 0
+module 5 TLeading max = 0
+module 6 TLeading max = 0
+module 7 TLeading max = 0
+Module whose bin is the most filled: 0
+
+
+-------------->List of selections
+Apply selection  1 -> Remove clusters in first and last columns 
+
+Apply selection 11 -> Remove clusters out of time (Event Based) 
+                      |TLeading -TLeadingMeanOverEvent| <= m_Cut_Stage11_EventBased (=     3)
+
+Apply selection 120 -> Remove clusters out of time  
+                      m_Cut_Stage120_TLow <= TLeading <= m_Cut_Stage120_THigh 
+                      m_Cut_Stage120_TLow  =  162
+                      m_Cut_Stage120_THigh =  201
+
+Apply selection 15 -> Remove Events with an average pad multiplicity too high or too low 
+                      Pad Multiplicity >  m_Cut_StageT15_APM_Low  (=  2.0)
+                      Pad Multiplicity <= m_Cut_StageT15_APM_High (=  4.0)
+
+Apply selection  5 -> Reject Events with too few clusters
+                      NClusters >= m_Cut_Stage5_NCluster_Low (=   34)
+
+
+zdrift        = 415 mm
+PT            = 412 ns
+TB            = 40 ns/time bin
+PT/TB         = 10 time bins
+Track fitting : PRF
+z method      : zcalc
+cut length    = 2 mm
+
+Processing events:
+0/11899
+500/11899
+1000/11899
+1500/11899
+2000/11899
+ALERT: 3 walls crossed for a pad in entry #2194
+6 7 23 24
+-27 6 24 24
+24 0 -0
+ALERT: 1 walls crossed for a pad in entry #2194
+6 7 24 25
+6 -nan 24 24
+24 0 -0
+2500/11899
+3000/11899
+3500/11899
+4000/11899
+4500/11899
+5000/11899
+5500/11899
+6000/11899
+6500/11899
+7000/11899
+7500/11899
+8000/11899
+8500/11899
+9000/11899
+9500/11899
+10000/11899
+10500/11899
+11000/11899
+11500/11899
+11898/11899
+
+Selection Statistics 
+ #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
+    0  Stage1    11899    11899 (    0.00)  (    0.00)     11899    11899 (    0.00)  (    0.00)    424446   401522 (   -5.40)  (   -5.40)   1285240  1220653 (   -5.03)  (   -5.03) 
+    1 Stage11    11899    11216 (   -5.74)  (   -5.74)     11899    11216 (   -5.74)  (   -5.74)    401522   325497 (  -18.93)  (  -23.31)   1220653   952206 (  -21.99)  (  -25.91) 
+    2Stage120    11216     4148 (  -63.02)  (  -65.14)     11216     4148 (  -63.02)  (  -65.14)    325497   130131 (  -60.02)  (  -69.34)    952206   414480 (  -56.47)  (  -67.75) 
+    3StageT15     4148     3579 (  -13.72)  (  -69.92)      4148     3579 (  -13.72)  (  -69.92)    130131   114915 (  -11.69)  (  -72.93)    414480   367003 (  -11.45)  (  -71.44) 
+    4  Stage5     3579     2322 (  -35.12)  (  -80.49)      3579     2322 (  -35.12)  (  -80.49)    114915    78948 (  -31.30)  (  -81.40)    367003   254309 (  -30.71)  (  -80.21) 
+  Summary Sel    11899     2322             (  -80.49)     11899     2322             (  -80.49)    424446    78948             (  -81.40)   1285240   254309             (  -80.21) 
+Fitting: Started... done!

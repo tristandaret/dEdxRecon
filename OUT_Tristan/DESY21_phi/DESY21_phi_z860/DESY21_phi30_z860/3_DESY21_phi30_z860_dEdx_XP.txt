@@ -1,0 +1,95 @@
+Tag           : DESY21_phi30_z860
+Comment       : _zcalc_yw_4IP_WF1
+EventFile     : ../Data_DESY21/Phi_scan_z860/phi_200_30_z860_ym60_iter0.root
+SelectionSet  : T_DESY21_Event
+NbrOfMod      : 0
+Data_to_Use   : 0
+OUTDirName    : OUT_Tristan/DESY21_phi/DESY21_phi_z860/DESY21_phi30_z860/
+
+
+ReadRCmap::ReadRCmap Dir = GainRCMaps/RCfiles/EramName = ERAM01
+ReadRCmap::ReadRCmap m_FileName = GainRCMaps/RCfiles/ERAM01_RCdata_01.root
+
+Uploader_ReadRCmap::Uploader_ReadRCmap RCmapFile = GainRCMaps/RCfiles/ERAM01_RCdata_01.root
+Uploader_ReadRCmap::Uploader_ReadRCmap m_NberOfEntries = 1151
+
+ReadRCmap::ReadRCmap  No Data for iX=10 and  iY=16 in GainRCMaps/RCfiles/ERAM01_RCdata_01.root
+RC map: loaded
+
+-------------->Predefined selection T_DESY21_Event
+Number of entries :6319
+module 0 TLeading max = 344
+module 1 TLeading max = 0
+module 2 TLeading max = 0
+module 3 TLeading max = 0
+module 4 TLeading max = 0
+module 5 TLeading max = 0
+module 6 TLeading max = 0
+module 7 TLeading max = 0
+Module whose bin is the most filled: 0
+
+
+-------------->List of selections
+Apply selection  1 -> Remove clusters in first and last columns 
+
+Apply selection 11 -> Remove clusters out of time (Event Based) 
+                      |TLeading -TLeadingMeanOverEvent| <= m_Cut_Stage11_EventBased (=     3)
+
+Apply selection 120 -> Remove clusters out of time  
+                      m_Cut_Stage120_TLow <= TLeading <= m_Cut_Stage120_THigh 
+                      m_Cut_Stage120_TLow  =  328
+                      m_Cut_Stage120_THigh =  363
+
+Apply selection 15 -> Remove Events with an average pad multiplicity too high or too low 
+                      Pad Multiplicity >  m_Cut_StageT15_APM_Low  (=  2.0)
+                      Pad Multiplicity <= m_Cut_StageT15_APM_High (=  4.0)
+
+Apply selection 10 -> Remove clusters with too many pads 
+                      Npads <= m_Cut_Stage10_Npads_Hig (=   5)
+
+Apply selection 14 -> Remove Clusters with a too high APad 
+                      APad >= m_Cut_Stage14_Amax_Low (=     0)
+                      APad <= m_Cut_Stage14_Amax_Hig (=  3700)
+
+Apply selection  5 -> Reject Events with too few clusters
+                      NClusters >= m_Cut_Stage5_NCluster_Low (=   34)
+
+
+zdrift        = 950 mm
+PT            = 200 ns
+TB            = 40 ns/time bin
+PT/TB         = 5 time bins
+Track fitting : yw
+z method      : zcalc
+cut length    = 2 mm
+
+Processing events:
+1/6319
+Hole in entry 215 | iX = 10 | iY = 16 | RC value reset at 129
+502/6319
+1003/6319
+1504/6319
+2005/6319
+2506/6319
+3007/6319
+3508/6319
+4009/6319
+4510/6319
+5011/6319
+5512/6319
+6013/6319
+6319/6319
+
+Selection Statistics 
+ #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
+    0  Stage1     6319     6319 (    0.00)  (    0.00)      6319     6319 (    0.00)  (    0.00)    211379   211379 (    0.00)  (    0.00)    705117   705117 (    0.00)  (    0.00) 
+    1 Stage11     6319     6271 (   -0.76)  (   -0.76)      6319     6271 (   -0.76)  (   -0.76)    211379   205467 (   -2.80)  (   -2.80)    705117   685011 (   -2.85)  (   -2.85) 
+    2Stage120     6271     6160 (   -1.77)  (   -2.52)      6271     6160 (   -1.77)  (   -2.52)    205467   202158 (   -1.61)  (   -4.36)    685011   675573 (   -1.38)  (   -4.19) 
+    3StageT15     6160     6030 (   -2.11)  (   -4.57)      6160     6030 (   -2.11)  (   -4.57)    202158   198554 (   -1.78)  (   -6.07)    675573   659910 (   -2.32)  (   -6.41) 
+    4 Stage10     6030     6030 (    0.00)  (   -4.57)      6030     6030 (    0.00)  (   -4.57)    198554   197853 (   -0.35)  (   -6.40)    659910   655471 (   -0.67)  (   -7.04) 
+    5 Stage14     6030     6030 (    0.00)  (   -4.57)      6030     6030 (    0.00)  (   -4.57)    197853   195729 (   -1.07)  (   -7.40)    655471   646487 (   -1.37)  (   -8.31) 
+    6  Stage5     6030     2336 (  -61.26)  (  -63.03)      6030     2336 (  -61.26)  (  -63.03)    195729    79424 (  -59.42)  (  -62.43)    646487   260296 (  -59.74)  (  -63.08) 
+  Summary Sel     6319     2336             (  -63.03)      6319     2336             (  -63.03)    211379    79424             (  -62.43)    705117   260296             (  -63.08) 
+Fitting: Started... done!
+Checks: OUT_Tristan/DESY21_phi/DESY21_phi_z860/DESY21_phi30_z860/2_DESY21_phi30_z860_Checks_zcalc_yw_4IP_WF1.root
+dEdx: OUT_Tristan/DESY21_phi/DESY21_phi_z860/DESY21_phi30_z860/3_DESY21_phi30_z860_dEdx_zcalc_yw_4IP_WF1.root

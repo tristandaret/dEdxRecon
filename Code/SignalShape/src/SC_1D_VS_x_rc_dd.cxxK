@@ -1,0 +1,471 @@
+#include "SignalShape/SC_1D_VS_x_rc_dd.h"
+#include "Misc/Util.h"
+
+SC_1D_VS_x_rc_dd::SC_1D_VS_x_rc_dd(const std::string& LoadFile)
+:SC_1D_VS_x_rc_dd_I(LoadFile)
+{
+  m_s2bin = 1000./40. ;
+  Load(LoadFile) ;
+}
+SC_1D_VS_x_rc_dd::SC_1D_VS_x_rc_dd(const std::string& LoadFile,const double& s2bin)
+:SC_1D_VS_x_rc_dd_I(LoadFile,s2bin)
+{
+  m_s2bin = s2bin ;
+  Load(LoadFile) ;
+}
+void SC_1D_VS_x_rc_dd::Load(const std::string& LoadFile)
+{
+  m_LoadFile = LoadFile ;
+
+  std::cout <<" =>SC_1D_VS_x_rc_dd::SC_1D_VS_x_rc_dd : " << m_LoadFile << std::endl ;
+
+  std::ifstream InputFile_LoadFile ; 
+  InputFile_LoadFile.open(m_LoadFile.c_str()); 
+  if(!InputFile_LoadFile) { // file couldn't be opened
+    std::cout << "Error: file " << LoadFile << "could not be opened" << std::endl;
+    abort() ;
+  }
+  
+  std::string line;
+  int linenum_Sample_File = 0. ;
+  while (getline (InputFile_LoadFile, line)){
+  
+    linenum_Sample_File++;
+
+    std::istringstream linestream(line);
+    std::string item;
+    int itemnum = 0 ;
+    while (getline (linestream, item, ';'))
+    {
+      itemnum++;
+
+      if ( itemnum == 1 )  V_DD  .push_back( atof(item.c_str()) ) ;
+      if ( itemnum == 2 )  {
+        Free_trim(item) ;
+        V_File.push_back( item ) ;
+      }
+    }
+    
+  }
+  
+  m_NberOfFiles = V_DD.size() ;
+  for (int iTem = 0 ; iTem< m_NberOfFiles; iTem++){
+    SC_1D_VS_x_rc_FIX_dd* pSC_1D_VS_x_rc_FIX_dd = new SC_1D_VS_x_rc_FIX_dd(V_File[iTem]) ;
+    V_SC_1D_VS_x_rc_FIX_dd.push_back(pSC_1D_VS_x_rc_FIX_dd);
+  }
+  
+  m_DD_Lowest  = V_DD[0] ;
+  m_DD_Highest = V_DD[m_NberOfFiles-1] ;
+  
+}
+
+SC_1D_VS_x_rc_dd::~SC_1D_VS_x_rc_dd()
+{
+  for (int iTem = 0 ; iTem< m_NberOfFiles; iTem++){
+    delete V_SC_1D_VS_x_rc_FIX_dd[iTem] ;
+    V_SC_1D_VS_x_rc_FIX_dd[iTem] = 0 ;
+  }
+  V_SC_1D_VS_x_rc_FIX_dd.clear() ;
+  V_DD.clear()  ;
+  V_File.clear()  ; 
+}
+
+double SC_1D_VS_x_rc_dd::Eval_RhoPRF(const double& vX, const double& vRC , const double& vDDin  )
+{
+  double vDD = std::fabs(vDDin) ;
+  if ( vDD <= m_DD_Lowest ) return V_SC_1D_VS_x_rc_FIX_dd[0]              ->Eval_RhoPRF(vX,vRC) ;
+  if ( vDD >= m_DD_Highest) return V_SC_1D_VS_x_rc_FIX_dd[m_NberOfFiles-1]->Eval_RhoPRF(vX,vRC) ;
+  
+  int Index = int( (vDD - m_DD_Lowest)/50. ) ;
+  double XL = V_DD[Index] ;
+  double XH = V_DD[Index+1] ;
+  double YL = V_SC_1D_VS_x_rc_FIX_dd[Index]  ->Eval_RhoPRF(vX,vRC) ;
+  double YH = V_SC_1D_VS_x_rc_FIX_dd[Index+1]->Eval_RhoPRF(vX,vRC) ;
+
+  return ( YL + (vDD -XL)*(YH-YL)/(XH-XL) ) ;
+    
+}
+
+double SC_1D_VS_x_rc_dd::Eval_AlphaPRF(const double& vX, const double& vRC , const double& vDDin  )
+{
+  double vDD = std::fabs(vDDin) ;
+  if ( vDD <= m_DD_Lowest ) return V_SC_1D_VS_x_rc_FIX_dd[0]              ->Eval_AlphaPRF(vX,vRC) ;
+  if ( vDD >= m_DD_Highest) return V_SC_1D_VS_x_rc_FIX_dd[m_NberOfFiles-1]->Eval_AlphaPRF(vX,vRC) ;
+  
+  int Index = int( (vDD - m_DD_Lowest)/50. ) ;
+  double XL = V_DD[Index] ;
+  double XH = V_DD[Index+1] ;
+  double YL = V_SC_1D_VS_x_rc_FIX_dd[Index]  ->Eval_AlphaPRF(vX,vRC) ;
+  double YH = V_SC_1D_VS_x_rc_FIX_dd[Index+1]->Eval_AlphaPRF(vX,vRC) ;
+
+  return ( YL + (vDD -XL)*(YH-YL)/(XH-XL) ) ;
+    
+}
+
+double SC_1D_VS_x_rc_dd::Eval_TauPRF(const double& vX, const double& vRC , const double& vDDin  )
+{
+  double vDD = std::fabs(vDDin) ;
+  if ( vDD <= m_DD_Lowest ) return V_SC_1D_VS_x_rc_FIX_dd[0]              ->Eval_TauPRF(vX,vRC) ;
+  if ( vDD >= m_DD_Highest) return V_SC_1D_VS_x_rc_FIX_dd[m_NberOfFiles-1]->Eval_TauPRF(vX,vRC) ;
+  
+  int Index = int( (vDD - m_DD_Lowest)/50. ) ;
+  double XL = V_DD[Index] ;
+  double XH = V_DD[Index+1] ;
+  double YL = V_SC_1D_VS_x_rc_FIX_dd[Index]  ->Eval_TauPRF(vX,vRC) ;
+  double YH = V_SC_1D_VS_x_rc_FIX_dd[Index+1]->Eval_TauPRF(vX,vRC) ;
+
+  return ( YL + (vDD -XL)*(YH-YL)/(XH-XL) ) ;
+    
+}
+
+double SC_1D_VS_x_rc_dd::Eval_TauBinPRF(const double& vX, const double& vRC , const double& vDDin  )
+{
+ return ( Eval_TauPRF(vX,vRC,vDDin) * m_s2bin ) ; 
+}
+
+double SC_1D_VS_x_rc_dd::Eval_TimeAbsPRF(const double& vX, const double& vRC , const double& vDDin  )
+{
+  double vDD = std::fabs(vDDin) ;
+  if ( vDD <= m_DD_Lowest ) return V_SC_1D_VS_x_rc_FIX_dd[0]              ->Eval_TimeAbsPRF(vX,vRC) ;
+  if ( vDD >= m_DD_Highest) return V_SC_1D_VS_x_rc_FIX_dd[m_NberOfFiles-1]->Eval_TimeAbsPRF(vX,vRC) ;
+  
+  int Index = int( (vDD - m_DD_Lowest)/50. ) ;
+  double XL = V_DD[Index] ;
+  double XH = V_DD[Index+1] ;
+  double YL = V_SC_1D_VS_x_rc_FIX_dd[Index]  ->Eval_TimeAbsPRF(vX,vRC) ;
+  double YH = V_SC_1D_VS_x_rc_FIX_dd[Index+1]->Eval_TimeAbsPRF(vX,vRC) ;
+
+  return ( YL + (vDD -XL)*(YH-YL)/(XH-XL) ) ;
+    
+}
+
+double SC_1D_VS_x_rc_dd::Eval_Amplitude(const double& vX, const double& vRC , const double& vDDin  )
+{
+  double vDD = std::fabs(vDDin) ;
+  if ( vDD <= m_DD_Lowest ) return V_SC_1D_VS_x_rc_FIX_dd[0]              ->Eval_Amplitude(vX,vRC) ;
+  if ( vDD >= m_DD_Highest) return V_SC_1D_VS_x_rc_FIX_dd[m_NberOfFiles-1]->Eval_Amplitude(vX,vRC) ;
+  
+  int Index = int( (vDD - m_DD_Lowest)/50. ) ;
+  double XL = V_DD[Index] ;
+  double XH = V_DD[Index+1] ;
+  double YL = V_SC_1D_VS_x_rc_FIX_dd[Index]  ->Eval_Amplitude(vX,vRC) ;
+  double YH = V_SC_1D_VS_x_rc_FIX_dd[Index+1]->Eval_Amplitude(vX,vRC) ;
+
+  return ( YL + (vDD -XL)*(YH-YL)/(XH-XL) ) ;
+    
+}
+double SC_1D_VS_x_rc_dd::Am_DW_Base(const double& vX, const double& vRC , const double& vDDin  )
+{
+  double vDD = std::fabs(vDDin) ;
+  if ( vDD <= m_DD_Lowest ) return V_SC_1D_VS_x_rc_FIX_dd[0]              ->Am_DW_Base(vX,vRC) ;
+  if ( vDD >= m_DD_Highest) return V_SC_1D_VS_x_rc_FIX_dd[m_NberOfFiles-1]->Am_DW_Base(vX,vRC) ;
+  
+  int Index = int( (vDD - m_DD_Lowest)/50. ) ;
+  double XL = V_DD[Index] ;
+  double XH = V_DD[Index+1] ;
+  double YL = V_SC_1D_VS_x_rc_FIX_dd[Index]  ->Am_DW_Base(vX,vRC) ;
+  double YH = V_SC_1D_VS_x_rc_FIX_dd[Index+1]->Am_DW_Base(vX,vRC) ;
+
+  return ( YL + (vDD -XL)*(YH-YL)/(XH-XL) ) ;
+    
+}
+double SC_1D_VS_x_rc_dd::Am_LE_Base(const double& vX, const double& vRC , const double& vDDin  )
+{
+  double vDD = std::fabs(vDDin) ;
+  if ( vDD <= m_DD_Lowest ) return V_SC_1D_VS_x_rc_FIX_dd[0]              ->Am_LE_Base(vX,vRC) ;
+  if ( vDD >= m_DD_Highest) return V_SC_1D_VS_x_rc_FIX_dd[m_NberOfFiles-1]->Am_LE_Base(vX,vRC) ;
+  
+  int Index = int( (vDD - m_DD_Lowest)/50. ) ;
+  double XL = V_DD[Index] ;
+  double XH = V_DD[Index+1] ;
+  double YL = V_SC_1D_VS_x_rc_FIX_dd[Index]  ->Am_LE_Base(vX,vRC) ;
+  double YH = V_SC_1D_VS_x_rc_FIX_dd[Index+1]->Am_LE_Base(vX,vRC) ;
+
+  return ( YL + (vDD -XL)*(YH-YL)/(XH-XL) ) ;
+    
+}
+double SC_1D_VS_x_rc_dd::Am_UP_Base(const double& vX, const double& vRC , const double& vDDin  )
+{
+  double vDD = std::fabs(vDDin) ;
+  if ( vDD <= m_DD_Lowest ) return V_SC_1D_VS_x_rc_FIX_dd[0]              ->Am_UP_Base(vX,vRC) ;
+  if ( vDD >= m_DD_Highest) return V_SC_1D_VS_x_rc_FIX_dd[m_NberOfFiles-1]->Am_UP_Base(vX,vRC) ;
+  
+  int Index = int( (vDD - m_DD_Lowest)/50. ) ;
+  double XL = V_DD[Index] ;
+  double XH = V_DD[Index+1] ;
+  double YL = V_SC_1D_VS_x_rc_FIX_dd[Index]  ->Am_UP_Base(vX,vRC) ;
+  double YH = V_SC_1D_VS_x_rc_FIX_dd[Index+1]->Am_UP_Base(vX,vRC) ;
+
+  return ( YL + (vDD -XL)*(YH-YL)/(XH-XL) ) ;
+    
+}
+double SC_1D_VS_x_rc_dd::Ti_DW_Base(const double& vX, const double& vRC , const double& vDDin  )
+{
+  double vDD = std::fabs(vDDin) ;
+  if ( vDD <= m_DD_Lowest ) return V_SC_1D_VS_x_rc_FIX_dd[0]              ->Ti_DW_Base(vX,vRC) ;
+  if ( vDD >= m_DD_Highest) return V_SC_1D_VS_x_rc_FIX_dd[m_NberOfFiles-1]->Ti_DW_Base(vX,vRC) ;
+  
+  int Index = int( (vDD - m_DD_Lowest)/50. ) ;
+  double XL = V_DD[Index] ;
+  double XH = V_DD[Index+1] ;
+  double YL = V_SC_1D_VS_x_rc_FIX_dd[Index]  ->Ti_DW_Base(vX,vRC) ;
+  double YH = V_SC_1D_VS_x_rc_FIX_dd[Index+1]->Ti_DW_Base(vX,vRC) ;
+
+  return ( YL + (vDD -XL)*(YH-YL)/(XH-XL) ) ;
+    
+}
+double SC_1D_VS_x_rc_dd::Ti_LE_Base(const double& vX, const double& vRC , const double& vDDin  )
+{
+  double vDD = std::fabs(vDDin) ;
+  if ( vDD <= m_DD_Lowest ) return V_SC_1D_VS_x_rc_FIX_dd[0]              ->Ti_LE_Base(vX,vRC) ;
+  if ( vDD >= m_DD_Highest) return V_SC_1D_VS_x_rc_FIX_dd[m_NberOfFiles-1]->Ti_LE_Base(vX,vRC) ;
+  
+  int Index = int( (vDD - m_DD_Lowest)/50. ) ;
+  double XL = V_DD[Index] ;
+  double XH = V_DD[Index+1] ;
+  double YL = V_SC_1D_VS_x_rc_FIX_dd[Index]  ->Ti_LE_Base(vX,vRC) ;
+  double YH = V_SC_1D_VS_x_rc_FIX_dd[Index+1]->Ti_LE_Base(vX,vRC) ;
+
+  return ( YL + (vDD -XL)*(YH-YL)/(XH-XL) ) ;
+    
+}
+double SC_1D_VS_x_rc_dd::Ti_UP_Base(const double& vX, const double& vRC , const double& vDDin  )
+{
+  double vDD = std::fabs(vDDin) ;
+  if ( vDD <= m_DD_Lowest ) return V_SC_1D_VS_x_rc_FIX_dd[0]              ->Ti_UP_Base(vX,vRC) ;
+  if ( vDD >= m_DD_Highest) return V_SC_1D_VS_x_rc_FIX_dd[m_NberOfFiles-1]->Ti_UP_Base(vX,vRC) ;
+  
+  int Index = int( (vDD - m_DD_Lowest)/50. ) ;
+  double XL = V_DD[Index] ;
+  double XH = V_DD[Index+1] ;
+  double YL = V_SC_1D_VS_x_rc_FIX_dd[Index]  ->Ti_UP_Base(vX,vRC) ;
+  double YH = V_SC_1D_VS_x_rc_FIX_dd[Index+1]->Ti_UP_Base(vX,vRC) ;
+
+  return ( YL + (vDD -XL)*(YH-YL)/(XH-XL) ) ;
+    
+}
+double SC_1D_VS_x_rc_dd::Am_DW(const double& vX, const double& vRC , const double& vDDin  )
+{
+  double vDD = std::fabs(vDDin) ;
+  if ( vDD <= m_DD_Lowest ) return V_SC_1D_VS_x_rc_FIX_dd[0]              ->Am_DW(vX,vRC) ;
+  if ( vDD >= m_DD_Highest) return V_SC_1D_VS_x_rc_FIX_dd[m_NberOfFiles-1]->Am_DW(vX,vRC) ;
+  
+  int Index = int( (vDD - m_DD_Lowest)/50. ) ;
+  double XL = V_DD[Index] ;
+  double XH = V_DD[Index+1] ;
+  double YL = V_SC_1D_VS_x_rc_FIX_dd[Index]  ->Am_DW(vX,vRC) ;
+  double YH = V_SC_1D_VS_x_rc_FIX_dd[Index+1]->Am_DW(vX,vRC) ;
+
+  return ( YL + (vDD -XL)*(YH-YL)/(XH-XL) ) ;
+    
+}
+double SC_1D_VS_x_rc_dd::Am_LE(const double& vX, const double& vRC , const double& vDDin  )
+{
+  double vDD = std::fabs(vDDin) ;
+  if ( vDD <= m_DD_Lowest ) return V_SC_1D_VS_x_rc_FIX_dd[0]              ->Am_LE(vX,vRC) ;
+  if ( vDD >= m_DD_Highest) return V_SC_1D_VS_x_rc_FIX_dd[m_NberOfFiles-1]->Am_LE(vX,vRC) ;
+  
+  int Index = int( (vDD - m_DD_Lowest)/50. ) ;
+  double XL = V_DD[Index] ;
+  double XH = V_DD[Index+1] ;
+  double YL = V_SC_1D_VS_x_rc_FIX_dd[Index]  ->Am_LE(vX,vRC) ;
+  double YH = V_SC_1D_VS_x_rc_FIX_dd[Index+1]->Am_LE(vX,vRC) ;
+
+  return ( YL + (vDD -XL)*(YH-YL)/(XH-XL) ) ;
+    
+}
+double SC_1D_VS_x_rc_dd::Am_UP(const double& vX, const double& vRC , const double& vDDin  )
+{
+  double vDD = std::fabs(vDDin) ;
+  if ( vDD <= m_DD_Lowest ) return V_SC_1D_VS_x_rc_FIX_dd[0]              ->Am_UP(vX,vRC) ;
+  if ( vDD >= m_DD_Highest) return V_SC_1D_VS_x_rc_FIX_dd[m_NberOfFiles-1]->Am_UP(vX,vRC) ;
+  
+  int Index = int( (vDD - m_DD_Lowest)/50. ) ;
+  double XL = V_DD[Index] ;
+  double XH = V_DD[Index+1] ;
+  double YL = V_SC_1D_VS_x_rc_FIX_dd[Index]  ->Am_UP(vX,vRC) ;
+  double YH = V_SC_1D_VS_x_rc_FIX_dd[Index+1]->Am_UP(vX,vRC) ;
+
+  return ( YL + (vDD -XL)*(YH-YL)/(XH-XL) ) ;
+    
+}
+double SC_1D_VS_x_rc_dd::Ti_DW(const double& vX, const double& vRC , const double& vDDin  )
+{
+  double vDD = std::fabs(vDDin) ;
+  if ( vDD <= m_DD_Lowest ) return V_SC_1D_VS_x_rc_FIX_dd[0]              ->Ti_DW(vX,vRC) ;
+  if ( vDD >= m_DD_Highest) return V_SC_1D_VS_x_rc_FIX_dd[m_NberOfFiles-1]->Ti_DW(vX,vRC) ;
+  
+  int Index = int( (vDD - m_DD_Lowest)/50. ) ;
+  double XL = V_DD[Index] ;
+  double XH = V_DD[Index+1] ;
+  double YL = V_SC_1D_VS_x_rc_FIX_dd[Index]  ->Ti_DW(vX,vRC) ;
+  double YH = V_SC_1D_VS_x_rc_FIX_dd[Index+1]->Ti_DW(vX,vRC) ;
+
+  return ( YL + (vDD -XL)*(YH-YL)/(XH-XL) ) ;
+    
+}
+double SC_1D_VS_x_rc_dd::Ti_LE(const double& vX, const double& vRC , const double& vDDin  )
+{
+  double vDD = std::fabs(vDDin) ;
+  if ( vDD <= m_DD_Lowest ) return V_SC_1D_VS_x_rc_FIX_dd[0]              ->Ti_LE(vX,vRC) ;
+  if ( vDD >= m_DD_Highest) return V_SC_1D_VS_x_rc_FIX_dd[m_NberOfFiles-1]->Ti_LE(vX,vRC) ;
+  
+  int Index = int( (vDD - m_DD_Lowest)/50. ) ;
+  double XL = V_DD[Index] ;
+  double XH = V_DD[Index+1] ;
+  double YL = V_SC_1D_VS_x_rc_FIX_dd[Index]  ->Ti_LE(vX,vRC) ;
+  double YH = V_SC_1D_VS_x_rc_FIX_dd[Index+1]->Ti_LE(vX,vRC) ;
+
+  return ( YL + (vDD -XL)*(YH-YL)/(XH-XL) ) ;
+    
+}
+double SC_1D_VS_x_rc_dd::Ti_UP(const double& vX, const double& vRC , const double& vDDin  )
+{
+  double vDD = std::fabs(vDDin) ;
+  if ( vDD <= m_DD_Lowest ) return V_SC_1D_VS_x_rc_FIX_dd[0]              ->Ti_UP(vX,vRC) ;
+  if ( vDD >= m_DD_Highest) return V_SC_1D_VS_x_rc_FIX_dd[m_NberOfFiles-1]->Ti_UP(vX,vRC) ;
+  
+  int Index = int( (vDD - m_DD_Lowest)/50. ) ;
+  double XL = V_DD[Index] ;
+  double XH = V_DD[Index+1] ;
+  double YL = V_SC_1D_VS_x_rc_FIX_dd[Index]  ->Ti_UP(vX,vRC) ;
+  double YH = V_SC_1D_VS_x_rc_FIX_dd[Index+1]->Ti_UP(vX,vRC) ;
+
+  return ( YL + (vDD -XL)*(YH-YL)/(XH-XL) ) ;
+    
+}
+double SC_1D_VS_x_rc_dd::Alpha_DW(const double& vX, const double& vRC , const double& vDDin  )
+{
+  double vDD = std::fabs(vDDin) ;
+  if ( vDD <= m_DD_Lowest ) return V_SC_1D_VS_x_rc_FIX_dd[0]              ->Alpha_DW(vX,vRC) ;
+  if ( vDD >= m_DD_Highest) return V_SC_1D_VS_x_rc_FIX_dd[m_NberOfFiles-1]->Alpha_DW(vX,vRC) ;
+  
+  int Index = int( (vDD - m_DD_Lowest)/50. ) ;
+  double XL = V_DD[Index] ;
+  double XH = V_DD[Index+1] ;
+  double YL = V_SC_1D_VS_x_rc_FIX_dd[Index]  ->Alpha_DW(vX,vRC) ;
+  double YH = V_SC_1D_VS_x_rc_FIX_dd[Index+1]->Alpha_DW(vX,vRC) ;
+
+  return ( YL + (vDD -XL)*(YH-YL)/(XH-XL) ) ;
+    
+}
+double SC_1D_VS_x_rc_dd::Alpha_UP(const double& vX, const double& vRC , const double& vDDin  )
+{
+  double vDD = std::fabs(vDDin) ;
+  if ( vDD <= m_DD_Lowest ) return V_SC_1D_VS_x_rc_FIX_dd[0]              ->Alpha_UP(vX,vRC) ;
+  if ( vDD >= m_DD_Highest) return V_SC_1D_VS_x_rc_FIX_dd[m_NberOfFiles-1]->Alpha_UP(vX,vRC) ;
+  
+  int Index = int( (vDD - m_DD_Lowest)/50. ) ;
+  double XL = V_DD[Index] ;
+  double XH = V_DD[Index+1] ;
+  double YL = V_SC_1D_VS_x_rc_FIX_dd[Index]  ->Alpha_UP(vX,vRC) ;
+  double YH = V_SC_1D_VS_x_rc_FIX_dd[Index+1]->Alpha_UP(vX,vRC) ;
+
+  return ( YL + (vDD -XL)*(YH-YL)/(XH-XL) ) ;
+    
+}
+double SC_1D_VS_x_rc_dd::Tau_DW(const double& vX, const double& vRC , const double& vDDin  )
+{
+  double vDD = std::fabs(vDDin) ;
+  if ( vDD <= m_DD_Lowest ) return V_SC_1D_VS_x_rc_FIX_dd[0]              ->Tau_DW(vX,vRC) ;
+  if ( vDD >= m_DD_Highest) return V_SC_1D_VS_x_rc_FIX_dd[m_NberOfFiles-1]->Tau_DW(vX,vRC) ;
+  
+  int Index = int( (vDD - m_DD_Lowest)/50. ) ;
+  double XL = V_DD[Index] ;
+  double XH = V_DD[Index+1] ;
+  double YL = V_SC_1D_VS_x_rc_FIX_dd[Index]  ->Tau_DW(vX,vRC) ;
+  double YH = V_SC_1D_VS_x_rc_FIX_dd[Index+1]->Tau_DW(vX,vRC) ;
+
+  return ( YL + (vDD -XL)*(YH-YL)/(XH-XL) ) ;
+    
+}
+double SC_1D_VS_x_rc_dd::Tau_UP(const double& vX, const double& vRC , const double& vDDin  )
+{
+  double vDD = std::fabs(vDDin) ;
+  if ( vDD <= m_DD_Lowest ) return V_SC_1D_VS_x_rc_FIX_dd[0]              ->Tau_UP(vX,vRC) ;
+  if ( vDD >= m_DD_Highest) return V_SC_1D_VS_x_rc_FIX_dd[m_NberOfFiles-1]->Tau_UP(vX,vRC) ;
+  
+  int Index = int( (vDD - m_DD_Lowest)/50. ) ;
+  double XL = V_DD[Index] ;
+  double XH = V_DD[Index+1] ;
+  double YL = V_SC_1D_VS_x_rc_FIX_dd[Index]  ->Tau_UP(vX,vRC) ;
+  double YH = V_SC_1D_VS_x_rc_FIX_dd[Index+1]->Tau_UP(vX,vRC) ;
+
+  return ( YL + (vDD -XL)*(YH-YL)/(XH-XL) ) ;
+    
+}
+double SC_1D_VS_x_rc_dd::TauBin_DW(const double& vX, const double& vRC , const double& vDDin  )
+{
+  double vDD = std::fabs(vDDin) ;
+  if ( vDD <= m_DD_Lowest ) return V_SC_1D_VS_x_rc_FIX_dd[0]              ->TauBin_DW(vX,vRC) ;
+  if ( vDD >= m_DD_Highest) return V_SC_1D_VS_x_rc_FIX_dd[m_NberOfFiles-1]->TauBin_DW(vX,vRC) ;
+  
+  int Index = int( (vDD - m_DD_Lowest)/50. ) ;
+  double XL = V_DD[Index] ;
+  double XH = V_DD[Index+1] ;
+  double YL = V_SC_1D_VS_x_rc_FIX_dd[Index]  ->TauBin_DW(vX,vRC) ;
+  double YH = V_SC_1D_VS_x_rc_FIX_dd[Index+1]->TauBin_DW(vX,vRC) ;
+
+  return ( YL + (vDD -XL)*(YH-YL)/(XH-XL) ) ;
+    
+}
+double SC_1D_VS_x_rc_dd::TauBin_UP(const double& vX, const double& vRC , const double& vDDin  )
+{
+  double vDD = std::fabs(vDDin) ;
+  if ( vDD <= m_DD_Lowest ) return V_SC_1D_VS_x_rc_FIX_dd[0]              ->TauBin_UP(vX,vRC) ;
+  if ( vDD >= m_DD_Highest) return V_SC_1D_VS_x_rc_FIX_dd[m_NberOfFiles-1]->TauBin_UP(vX,vRC) ;
+  
+  int Index = int( (vDD - m_DD_Lowest)/50. ) ;
+  double XL = V_DD[Index] ;
+  double XH = V_DD[Index+1] ;
+  double YL = V_SC_1D_VS_x_rc_FIX_dd[Index]  ->TauBin_UP(vX,vRC) ;
+  double YH = V_SC_1D_VS_x_rc_FIX_dd[Index+1]->TauBin_UP(vX,vRC) ;
+
+  return ( YL + (vDD -XL)*(YH-YL)/(XH-XL) ) ;
+    
+}
+double SC_1D_VS_x_rc_dd::Rho_DW(const double& vX, const double& vRC , const double& vDDin  )
+{
+  double vDD = std::fabs(vDDin) ;
+  if ( vDD <= m_DD_Lowest ) return V_SC_1D_VS_x_rc_FIX_dd[0]              ->Rho_DW(vX,vRC) ;
+  if ( vDD >= m_DD_Highest) return V_SC_1D_VS_x_rc_FIX_dd[m_NberOfFiles-1]->Rho_DW(vX,vRC) ;
+  
+  int Index = int( (vDD - m_DD_Lowest)/50. ) ;
+  double XL = V_DD[Index] ;
+  double XH = V_DD[Index+1] ;
+  double YL = V_SC_1D_VS_x_rc_FIX_dd[Index]  ->Rho_DW(vX,vRC) ;
+  double YH = V_SC_1D_VS_x_rc_FIX_dd[Index+1]->Rho_DW(vX,vRC) ;
+
+  return ( YL + (vDD -XL)*(YH-YL)/(XH-XL) ) ;
+    
+}
+double SC_1D_VS_x_rc_dd::Rho_LE(const double& vX, const double& vRC , const double& vDDin  )
+{
+  double vDD = std::fabs(vDDin) ;
+  if ( vDD <= m_DD_Lowest ) return V_SC_1D_VS_x_rc_FIX_dd[0]              ->Rho_LE(vX,vRC) ;
+  if ( vDD >= m_DD_Highest) return V_SC_1D_VS_x_rc_FIX_dd[m_NberOfFiles-1]->Rho_LE(vX,vRC) ;
+  
+  int Index = int( (vDD - m_DD_Lowest)/50. ) ;
+  double XL = V_DD[Index] ;
+  double XH = V_DD[Index+1] ;
+  double YL = V_SC_1D_VS_x_rc_FIX_dd[Index]  ->Rho_LE(vX,vRC) ;
+  double YH = V_SC_1D_VS_x_rc_FIX_dd[Index+1]->Rho_LE(vX,vRC) ;
+
+  return ( YL + (vDD -XL)*(YH-YL)/(XH-XL) ) ;
+    
+}
+double SC_1D_VS_x_rc_dd::Rho_UP(const double& vX, const double& vRC , const double& vDDin  )
+{
+  double vDD = std::fabs(vDDin) ;
+  if ( vDD <= m_DD_Lowest ) return V_SC_1D_VS_x_rc_FIX_dd[0]              ->Rho_UP(vX,vRC) ;
+  if ( vDD >= m_DD_Highest) return V_SC_1D_VS_x_rc_FIX_dd[m_NberOfFiles-1]->Rho_UP(vX,vRC) ;
+  
+  int Index = int( (vDD - m_DD_Lowest)/50. ) ;
+  double XL = V_DD[Index] ;
+  double XH = V_DD[Index+1] ;
+  double YL = V_SC_1D_VS_x_rc_FIX_dd[Index]  ->Rho_UP(vX,vRC) ;
+  double YH = V_SC_1D_VS_x_rc_FIX_dd[Index+1]->Rho_UP(vX,vRC) ;
+
+  return ( YL + (vDD -XL)*(YH-YL)/(XH-XL) ) ;
+    
+}

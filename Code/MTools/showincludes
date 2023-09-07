@@ -1,0 +1,9 @@
+#!/bin/bash
+
+pref=$1
+
+mdir=`dirname $0`/..
+cd $mdir
+
+make showincludes | sed -e "s,-I,-I${pref},g" | sed -e 's/$/ /'
+

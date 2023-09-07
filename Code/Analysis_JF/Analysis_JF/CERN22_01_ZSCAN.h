@@ -1,0 +1,7 @@
+#include "Misc/Misc.h"
+
+void CERN22_01_PV2_RC_ZSCAN_01();
+void CERN22_01_PV2_RESO_ZSCAN_01();
+
+void CERN22_01_PV3_RC_ZSCAN_01();
+void CERN22_01_PV3_RESO_ZSCAN_01();

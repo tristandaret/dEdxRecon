@@ -1,0 +1,78 @@
+Tristan_CERN22_Control_XP_normsel_cut2mm_zcalc_PRF_4IP_311ang2
+Tag           : DESY19_phi30_diag
+EventFile     : ../Data_DESY19/Phi_scan/phi_412_30_diag_iter0.root
+SelectionSet  : T_DESY21_Event
+iMod    : 0
+Data_to_Use   : 0
+OUTDirName    : OUT_Tristan/DESY19_phi/DESY19_phi/DESY19_phi30_diag/
+
+
+-------------->Predefined selection T_DESY21_Event
+module 0 TLeading max = 127
+module 1 TLeading max = 0
+module 2 TLeading max = 0
+module 3 TLeading max = 0
+module 4 TLeading max = 0
+module 5 TLeading max = 0
+module 6 TLeading max = 0
+module 7 TLeading max = 0
+yinit = 61758.000000
+-61727.000000 < 24.703199
+Module whose bin is the most filled: 0
+
+116 139
+
+-------------->List of selections
+Apply selection  1 -> Remove clusters in first and last columns 
+
+Apply selection 11 -> Remove clusters out of time (Event Based) 
+                      |TLeading -TLeadingMeanOverEvent| <= m_Cut_Stage11_EventBased (=     3)
+
+Apply selection 120 -> Remove clusters out of time  
+                      m_Cut_Stage120_TLow <= TLeading <= m_Cut_Stage120_THigh 
+                      m_Cut_Stage120_TLow  =  116
+                      m_Cut_Stage120_THigh =  139
+
+Apply selection 15 -> Remove Events with an average pad multiplicity too high or too low 
+                      Pad Multiplicity >  m_Cut_StageT15_APM_Low  (=  1.0)
+                      Pad Multiplicity <= m_Cut_StageT15_APM_High (=  3.5)
+
+Apply selection 10 -> Remove clusters with too many pads 
+                      Npads <= m_Cut_Stage10_Npads_Hig (=   5)
+
+Apply selection 14 -> Remove Clusters with a too high APad 
+                      APad >= m_Cut_Stage14_Amax_Low (=     0)
+                      APad <= m_Cut_Stage14_Amax_Hig (=  3700)
+
+Apply selection  5 -> Reject Events with too few clusters
+                      NClusters >= m_Cut_Stage5_NCluster_Low (=   50)
+
+
+Processing events:
+0/6877
+500/6877
+1000/6877
+1500/6877
+2000/6877
+2500/6877
+3000/6877
+3500/6877
+4000/6877
+4500/6877
+5000/6877
+5500/6877
+6000/6877
+6500/6877
+6876/6877
+Nber Of Entries :6877
+
+Selection Statistics 
+ #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
+    0  Stage1     6877     6877 (    0.00)  (    0.00)      6877     6877 (    0.00)  (    0.00)    377711   377711 (    0.00)  (    0.00)    985709   985709 (    0.00)  (    0.00) 
+    1 Stage11     6877     6872 (   -0.07)  (   -0.07)      6877     6872 (   -0.07)  (   -0.07)    377711   339068 (  -10.23)  (  -10.23)    985709   890085 (   -9.70)  (   -9.70) 
+    2Stage120     6872     6835 (   -0.54)  (   -0.61)      6872     6835 (   -0.54)  (   -0.61)    339068   337091 (   -0.58)  (  -10.75)    890085   884927 (   -0.58)  (  -10.22) 
+    3StageT15     6835     6830 (   -0.07)  (   -0.68)      6835     6830 (   -0.07)  (   -0.68)    337091   336895 (   -0.06)  (  -10.81)    884927   884226 (   -0.08)  (  -10.30) 
+    4 Stage10     6830     6830 (    0.00)  (   -0.68)      6830     6830 (    0.00)  (   -0.68)    336895   336895 (    0.00)  (  -10.81)    884226   884226 (    0.00)  (  -10.30) 
+    5 Stage14     6830     6830 (    0.00)  (   -0.68)      6830     6830 (    0.00)  (   -0.68)    336895   335738 (   -0.34)  (  -11.11)    884226   880458 (   -0.43)  (  -10.68) 
+    6  Stage5     6830     3729 (  -45.40)  (  -45.78)      6830     3729 (  -45.40)  (  -45.78)    335738   190909 (  -43.14)  (  -49.46)    880458   495564 (  -43.72)  (  -49.73) 
+  Summary Sel     6877     3729             (  -45.78)      6877     3729             (  -45.78)    377711   190909             (  -49.46)    985709   495564             (  -49.73) 

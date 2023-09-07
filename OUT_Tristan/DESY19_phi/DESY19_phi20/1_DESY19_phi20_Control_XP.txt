@@ -1,0 +1,81 @@
+Tristan_CERN22_Control_XP_normsel_cut2mm_zcalc_PRF_4IP_311ang2
+Tag           : DESY19_phi20
+EventFile     : ../Data_DESY19/Phi_scan/phi_412_20_iter0.root
+SelectionSet  : T_DESY21_Event
+iMod    : 0
+Data_to_Use   : 0
+OUTDirName    : OUT_Tristan/DESY19_phi/DESY19_phi/DESY19_phi20/
+
+
+-------------->Predefined selection T_DESY21_Event
+module 0 TLeading max = 127
+module 1 TLeading max = 0
+module 2 TLeading max = 0
+module 3 TLeading max = 0
+module 4 TLeading max = 0
+module 5 TLeading max = 0
+module 6 TLeading max = 0
+module 7 TLeading max = 0
+yinit = 54386.000000
+-54314.000000 < 21.754400
+Module whose bin is the most filled: 0
+
+116 402
+
+-------------->List of selections
+Apply selection  1 -> Remove clusters in first and last columns 
+
+Apply selection 11 -> Remove clusters out of time (Event Based) 
+                      |TLeading -TLeadingMeanOverEvent| <= m_Cut_Stage11_EventBased (=     3)
+
+Apply selection 120 -> Remove clusters out of time  
+                      m_Cut_Stage120_TLow <= TLeading <= m_Cut_Stage120_THigh 
+                      m_Cut_Stage120_TLow  =  116
+                      m_Cut_Stage120_THigh =  402
+
+Apply selection 15 -> Remove Events with an average pad multiplicity too high or too low 
+                      Pad Multiplicity >  m_Cut_StageT15_APM_Low  (=  2.0)
+                      Pad Multiplicity <= m_Cut_StageT15_APM_High (=  4.0)
+
+Apply selection 10 -> Remove clusters with too many pads 
+                      Npads <= m_Cut_Stage10_Npads_Hig (=   5)
+
+Apply selection 14 -> Remove Clusters with a too high APad 
+                      APad >= m_Cut_Stage14_Amax_Low (=     0)
+                      APad <= m_Cut_Stage14_Amax_Hig (=  3700)
+
+Apply selection  5 -> Reject Events with too few clusters
+                      NClusters >= m_Cut_Stage5_NCluster_Low (=   34)
+
+
+Processing events:
+0/8393
+500/8393
+1000/8393
+1500/8393
+2000/8393
+2500/8393
+3000/8393
+3500/8393
+4000/8393
+4500/8393
+5000/8393
+5500/8393
+6000/8393
+6500/8393
+7000/8393
+7500/8393
+8000/8393
+8392/8393
+Nber Of Entries :8393
+
+Selection Statistics 
+ #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
+    0  Stage1     8393     8393 (    0.00)  (    0.00)      8393     8393 (    0.00)  (    0.00)    285258   285258 (    0.00)  (    0.00)   1192565  1192565 (    0.00)  (    0.00) 
+    1 Stage11     8393     8353 (   -0.48)  (   -0.48)      8393     8353 (   -0.48)  (   -0.48)    285258   273261 (   -4.21)  (   -4.21)   1192565  1124611 (   -5.70)  (   -5.70) 
+    2Stage120     8353     8350 (   -0.04)  (   -0.51)      8353     8350 (   -0.04)  (   -0.51)    273261   273160 (   -0.04)  (   -4.24)   1124611  1124302 (   -0.03)  (   -5.72) 
+    3StageT15     8350     5106 (  -38.85)  (  -39.16)      8350     5106 (  -38.85)  (  -39.16)    273160   170181 (  -37.70)  (  -40.34)   1124302   649611 (  -42.22)  (  -45.53) 
+    4 Stage10     5106     5106 (    0.00)  (  -39.16)      5106     5106 (    0.00)  (  -39.16)    170181   168555 (   -0.96)  (  -40.91)    649611   639559 (   -1.55)  (  -46.37) 
+    5 Stage14     5106     5106 (    0.00)  (  -39.16)      5106     5106 (    0.00)  (  -39.16)    168555   167799 (   -0.45)  (  -41.18)    639559   635899 (   -0.57)  (  -46.68) 
+    6  Stage5     5106     2550 (  -50.06)  (  -69.62)      5106     2550 (  -50.06)  (  -69.62)    167799    86700 (  -48.33)  (  -69.61)    635899   327893 (  -48.44)  (  -72.51) 
+  Summary Sel     8393     2550             (  -69.62)      8393     2550             (  -69.62)    285258    86700             (  -69.61)   1192565   327893             (  -72.51) 
