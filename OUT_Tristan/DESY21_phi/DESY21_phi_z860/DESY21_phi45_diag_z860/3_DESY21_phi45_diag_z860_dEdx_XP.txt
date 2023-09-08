@@ -1,5 +1,5 @@
 Tag           : DESY21_phi45_diag_z860
-Comment       : _zcalc_yw_4IP_WF1
+Comment       : _zcalc_PRF_4IP_WF3
 EventFile     : ../Data_DESY21/Phi_scan_z860/phi_200_45_z860_ym60_diag_iter0.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
@@ -59,43 +59,35 @@ zdrift        = 950 mm
 PT            = 200 ns
 TB            = 40 ns/time bin
 PT/TB         = 5 time bins
-Track fitting : yw
+Track fitting : PRF
 z method      : zcalc
 cut length    = 2 mm
 
 WF correction parameters :511.53 | -4.49 | 4.54 | -0.02 | -0.01
 Processing events:
-1/10384
+0/10384
 Hole in entry 337 | iX = 10 | iY = 16 | RC value reset at 129.29
-502/10384
-ALERT: 3 walls crossed for a pad in entry #810
-23.69 24.82 16.30 17.32
-24.82 23.91 17.57 16.30
-43.32 -1.05 -0.00
-ALERT: 3 walls crossed for a pad in entry #810
-24.82 25.94 15.28 16.30
-25.72 24.82 16.30 15.03
-43.32 -1.05 -0.00
-1003/10384
-1504/10384
-2005/10384
-2506/10384
-3007/10384
-3508/10384
-4009/10384
-4510/10384
-5011/10384
-5512/10384
-6013/10384
-6514/10384
-7015/10384
-7516/10384
-8017/10384
-8518/10384
-9019/10384
-9520/10384
-10021/10384
-10384/10384
+500/10384
+1000/10384
+1500/10384
+2000/10384
+2500/10384
+3000/10384
+3500/10384
+4000/10384
+4500/10384
+5000/10384
+5500/10384
+6000/10384
+6500/10384
+7000/10384
+7500/10384
+8000/10384
+8500/10384
+9000/10384
+9500/10384
+10000/10384
+10383/10384
 
 Selection Statistics 
  #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
@@ -108,5 +100,5 @@ Selection Statistics
     6  Stage5     9980     9071 (   -9.11)  (  -12.64)      9980     9071 (   -9.11)  (  -12.64)    515654   477480 (   -7.40)  (  -13.41)   1026888   943641 (   -8.11)  (  -15.90) 
   Summary Sel    10384     9071             (  -12.64)     10384     9071             (  -12.64)    551442   477480             (  -13.41)   1122020   943641             (  -15.90) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_phi/DESY21_phi_z860/DESY21_phi45_diag_z860/2_DESY21_phi45_diag_z860_Checks_zcalc_yw_4IP_WF1.root
-dEdx: OUT_Tristan/DESY21_phi/DESY21_phi_z860/DESY21_phi45_diag_z860/3_DESY21_phi45_diag_z860_dEdx_zcalc_yw_4IP_WF1.root
+Checks: OUT_Tristan/DESY21_phi/DESY21_phi_z860/DESY21_phi45_diag_z860/2_DESY21_phi45_diag_z860_Checks_zcalc_PRF_4IP_WF3.root
+dEdx: OUT_Tristan/DESY21_phi/DESY21_phi_z860/DESY21_phi45_diag_z860/3_DESY21_phi45_diag_z860_dEdx_zcalc_PRF_4IP_WF3.root

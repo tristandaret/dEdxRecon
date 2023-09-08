@@ -1,5 +1,5 @@
 Tag           : DESY21_phi0_z860
-Comment       : _zcalc_yw_4IP_WF1
+Comment       : _zcalc_PRF_4IP_WF3
 EventFile     : ../Data_DESY21/Phi_scan_z860/phi_200_0_z860_ym60_iter0.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
@@ -59,64 +59,56 @@ zdrift        = 950 mm
 PT            = 200 ns
 TB            = 40 ns/time bin
 PT/TB         = 5 time bins
-Track fitting : yw
+Track fitting : PRF
 z method      : zcalc
 cut length    = 2 mm
 
 Processing events:
-1/21374
+0/21374
 Hole in entry 47 | iX = 10 | iY = 16 | RC value reset at 129
-502/21374
-1003/21374
-1504/21374
-2005/21374
-2506/21374
-3007/21374
-3508/21374
-4009/21374
-4510/21374
-5011/21374
-5512/21374
-6013/21374
-6514/21374
-7015/21374
-7516/21374
-8017/21374
-8518/21374
-9019/21374
-9520/21374
-10021/21374
-10522/21374
-11023/21374
-11524/21374
-12025/21374
-12526/21374
-13027/21374
-13528/21374
-14029/21374
-14530/21374
-15031/21374
-15532/21374
-16033/21374
-16534/21374
-17035/21374
-ALERT: 3 walls crossed for a pad in entry #17110
-19 20 19 20
-20 -nan 19 19
-19 0 -0
-ALERT: 1 walls crossed for a pad in entry #17110
-20 21 19 20
-20 -nan 19 19
-19 0 -0
-17536/21374
-18037/21374
-18538/21374
-19039/21374
-19540/21374
-20041/21374
-20542/21374
-21043/21374
-21374/21374
+500/21374
+1000/21374
+1500/21374
+2000/21374
+2500/21374
+3000/21374
+3500/21374
+4000/21374
+4500/21374
+5000/21374
+5500/21374
+6000/21374
+6500/21374
+7000/21374
+7500/21374
+8000/21374
+8500/21374
+9000/21374
+9500/21374
+10000/21374
+10500/21374
+11000/21374
+11500/21374
+12000/21374
+12500/21374
+13000/21374
+13500/21374
+14000/21374
+14500/21374
+15000/21374
+15500/21374
+16000/21374
+16500/21374
+17000/21374
+17500/21374
+18000/21374
+18500/21374
+19000/21374
+19500/21374
+20000/21374
+20500/21374
+21000/21374
+21373/21374
 
 Selection Statistics 
  #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
@@ -129,5 +121,5 @@ Selection Statistics
     6  Stage5    19912    13647 (  -31.46)  (  -36.15)     19912    13647 (  -31.46)  (  -36.15)    662871   463998 (  -30.00)  (  -36.13)   1722552  1181865 (  -31.39)  (  -39.91) 
   Summary Sel    21374    13647             (  -36.15)     21374    13647             (  -36.15)    726512   463998             (  -36.13)   1966955  1181865             (  -39.91) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_phi/DESY21_phi_z860/DESY21_phi0_z860/2_DESY21_phi0_z860_Checks_zcalc_yw_4IP_WF1.root
-dEdx: OUT_Tristan/DESY21_phi/DESY21_phi_z860/DESY21_phi0_z860/3_DESY21_phi0_z860_dEdx_zcalc_yw_4IP_WF1.root
+Checks: OUT_Tristan/DESY21_phi/DESY21_phi_z860/DESY21_phi0_z860/2_DESY21_phi0_z860_Checks_zcalc_PRF_4IP_WF3.root
+dEdx: OUT_Tristan/DESY21_phi/DESY21_phi_z860/DESY21_phi0_z860/3_DESY21_phi0_z860_dEdx_zcalc_PRF_4IP_WF3.root

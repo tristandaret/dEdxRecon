@@ -1,5 +1,5 @@
 Tag           : DESY21_phi30_diag_z460
-Comment       : _zcalc_yw_4IP_WF1
+Comment       : _zcalc_PRF_4IP_WFoffdiag
 EventFile     : ../Data_DESY21/Phi_scan_z460/phi_200_30_z460_ym60_diag_iter0.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
@@ -59,48 +59,48 @@ zdrift        = 550 mm
 PT            = 200 ns
 TB            = 40 ns/time bin
 PT/TB         = 5 time bins
-Track fitting : yw
+Track fitting : PRF
 z method      : zcalc
 cut length    = 2 mm
 
 WF correction parameters :451.86 | 12.91 | 0.74 | 0.47 | -0.03
 Processing events:
-1/12899
-502/12899
-1003/12899
-1504/12899
+0/12899
+500/12899
+ALERT: 3 walls crossed for a pad in entry #950
+19.18 20.30 21.40 22.42
+20.30 18.76 22.15 21.40
+34.63 -0.64 -0.00
+ALERT: 3 walls crossed for a pad in entry #950
+20.30 21.43 20.38 21.40
+21.84 20.30 21.40 20.65
+34.63 -0.64 -0.00
+1000/12899
+1500/12899
 Hole in entry 1914 | iX = 10 | iY = 16 | RC value reset at 129.29
-2005/12899
-2506/12899
-3007/12899
-3508/12899
-4009/12899
-4510/12899
-ALERT: 1 walls crossed for a pad in entry #4582
-10.15 11.28 25.48 26.49
-12.92 11.28 27.19 26.49
-33.37 -0.60 -0.00
-ALERT: 3 walls crossed for a pad in entry #4582
-11.28 12.41 25.48 26.49
-12.92 11.28 26.49 25.79
-33.37 -0.60 -0.00
-5011/12899
-5512/12899
-6013/12899
-6514/12899
-7015/12899
-7516/12899
-8017/12899
-8518/12899
-9019/12899
-9520/12899
-10021/12899
-10522/12899
-11023/12899
-11524/12899
-12025/12899
-12526/12899
-12899/12899
+2000/12899
+2500/12899
+3000/12899
+3500/12899
+4000/12899
+4500/12899
+5000/12899
+5500/12899
+6000/12899
+6500/12899
+7000/12899
+7500/12899
+8000/12899
+8500/12899
+9000/12899
+9500/12899
+10000/12899
+10500/12899
+11000/12899
+11500/12899
+12000/12899
+12500/12899
+12898/12899
 
 Selection Statistics 
  #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
@@ -113,5 +113,5 @@ Selection Statistics
     6  Stage5    12460    11534 (   -7.43)  (  -10.58)     12460    11534 (   -7.43)  (  -10.58)    664391   624917 (   -5.94)  (  -11.57)   1311500  1227573 (   -6.40)  (  -13.73) 
   Summary Sel    12899    11534             (  -10.58)     12899    11534             (  -10.58)    706694   624917             (  -11.57)   1422973  1227573             (  -13.73) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_phi/DESY21_phi_z460/DESY21_phi30_diag_z460/2_DESY21_phi30_diag_z460_Checks_zcalc_yw_4IP_WF1.root
-dEdx: OUT_Tristan/DESY21_phi/DESY21_phi_z460/DESY21_phi30_diag_z460/3_DESY21_phi30_diag_z460_dEdx_zcalc_yw_4IP_WF1.root
+Checks: OUT_Tristan/DESY21_phi/DESY21_phi_z460/DESY21_phi30_diag_z460/2_DESY21_phi30_diag_z460_Checks_zcalc_PRF_4IP_WFoffdiag.root
+dEdx: OUT_Tristan/DESY21_phi/DESY21_phi_z460/DESY21_phi30_diag_z460/3_DESY21_phi30_diag_z460_dEdx_zcalc_PRF_4IP_WFoffdiag.root

@@ -1,5 +1,5 @@
 Tag           : DESY21_phi20_z860
-Comment       : _zcalc_yw_4IP_WF1
+Comment       : _zcalc_PRF_4IP_WF3
 EventFile     : ../Data_DESY21/Phi_scan_z860/phi_200_20_z860_ym60_iter0.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
@@ -59,31 +59,31 @@ zdrift        = 950 mm
 PT            = 200 ns
 TB            = 40 ns/time bin
 PT/TB         = 5 time bins
-Track fitting : yw
+Track fitting : PRF
 z method      : zcalc
 cut length    = 2 mm
 
 Processing events:
-1/8655
-502/8655
+0/8655
+500/8655
 Hole in entry 590 | iX = 10 | iY = 16 | RC value reset at 129
-1003/8655
-1504/8655
-2005/8655
-2506/8655
-3007/8655
-3508/8655
-4009/8655
-4510/8655
-5011/8655
-5512/8655
-6013/8655
-6514/8655
-7015/8655
-7516/8655
-8017/8655
-8518/8655
-8655/8655
+1000/8655
+1500/8655
+2000/8655
+2500/8655
+3000/8655
+3500/8655
+4000/8655
+4500/8655
+5000/8655
+5500/8655
+6000/8655
+6500/8655
+7000/8655
+7500/8655
+8000/8655
+8500/8655
+8654/8655
 
 Selection Statistics 
  #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
@@ -96,5 +96,5 @@ Selection Statistics
     6  Stage5     8252     5077 (  -38.48)  (  -41.34)      8252     5077 (  -38.48)  (  -41.34)    273584   172618 (  -36.90)  (  -41.31)    858410   535244 (  -37.65)  (  -43.07) 
   Summary Sel     8655     5077             (  -41.34)      8655     5077             (  -41.34)    294142   172618             (  -41.31)    940194   535244             (  -43.07) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_phi/DESY21_phi_z860/DESY21_phi20_z860/2_DESY21_phi20_z860_Checks_zcalc_yw_4IP_WF1.root
-dEdx: OUT_Tristan/DESY21_phi/DESY21_phi_z860/DESY21_phi20_z860/3_DESY21_phi20_z860_dEdx_zcalc_yw_4IP_WF1.root
+Checks: OUT_Tristan/DESY21_phi/DESY21_phi_z860/DESY21_phi20_z860/2_DESY21_phi20_z860_Checks_zcalc_PRF_4IP_WF3.root
+dEdx: OUT_Tristan/DESY21_phi/DESY21_phi_z860/DESY21_phi20_z860/3_DESY21_phi20_z860_dEdx_zcalc_PRF_4IP_WF3.root

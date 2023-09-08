@@ -268,7 +268,6 @@ void Tristan_CERN22_dEdx( const std::string& OutDir,
       int N_crosclus                      = 0 ;
       std::vector<float>                    v_Q ; 
       std::vector<float>                    v_WF ; 
-      std::vector<RankedValue>              v_rank_WF ; 
       std::vector<RankedValue>              v_LP ;          // list of A_max    of leading pads
       std::vector<RankedValue>              v_DPR ;         // list of DPR_max  of crossed pads
       std::vector<float>                    v_ratio ; 
@@ -279,7 +278,6 @@ void Tristan_CERN22_dEdx( const std::string& OutDir,
       float track_len                     = trk_len(pModule, pTrack)*100 ; // in cm from left side  of cluster #0 to right side of last cluster
       float track_len_trc_v6              = track_len ;
       float track_len_trc_XP              = 0 ;
-      float trk_len_clus_trunc            = 0;
 
       // Loop On Clusters
       for (int iC = 0 ; iC < NClusters ; iC++){
@@ -401,26 +399,23 @@ void Tristan_CERN22_dEdx( const std::string& OutDir,
           h1f_WFoLength->                   Fill(h1f_WF_cluster->GetMaximum()/(trk_len_clus*1000)) ;
         }
 
-        // // WF v1: Sum(WFmax)/track length
         // WFsel                            += h1f_WF_cluster->GetMaximum()/track_len ;
+
+        // // WF v1: Sum(WFmax)/track length
         // v_WF.                               push_back(h1f_WF_cluster->GetMaximum()) ;
 
-        // WF v2: Sum(WFmax)/Sum(cluster length) // WF v3: Mean(WFmax/cluster length)
+        // // WF v3: Mean(WFmax/cluster length)
+        // if(trk_len_clus > len_cut){
+        //   v_WF.                              push_back(h1f_WF_cluster->GetMaximum()/(trk_len_clus*100)) ;
+        //   N_crosclus++ ;
+        // }
+
+        // WFoff: Mean(WFmax*ratio_corr)
         if(trk_len_clus > len_cut){
-          float ratio_corr                = A_ref / A_corr->Eval(trk_len_clus*1000) ;
+          float ratio_corr                = 1 ;
+          if(Tag.find("diag") != std::string::npos)ratio_corr = A_ref / A_corr->Eval(trk_len_clus*1000) ;
           h1f_WFcorr->                      Fill(ratio_corr) ;
-          RankedValue rank_WF ;  
-          rank_WF.Rank                    = N_crosclus ; 
-          // rank_WF.Value                   = h1f_WF_cluster->GetMaximum()/(trk_len_clus*100) ;
-          // rank_WF.Value                   = h1f_WF_cluster->GetMaximum()*ratio_corr ;
-          // rank_WF.Value                   = h1f_WF_cluster->GetMaximum()*ratio_corr/Lx*10 ;
-          rank_WF.Value                   = h1f_WF_cluster->GetMaximum()*ratio_corr/Lx*10*std::cos(fabs(phi)*M_PI/180) ;
-          v_rank_WF.                        push_back(rank_WF) ;
-          // v_WF.                             push_back(h1f_WF_cluster->GetMaximum()) ;
-          // v_WF.                             push_back(h1f_WF_cluster->GetMaximum()*ratio_corr) ;
-          // v_WF.                             push_back(h1f_WF_cluster->GetMaximum()*ratio_corr/Lx*10) ;
-          v_WF.                             push_back(h1f_WF_cluster->GetMaximum()*ratio_corr/Lx*10*std::cos(fabs(phi)*M_PI/180)) ;
-          v_lenclus.                        push_back(trk_len_clus) ;
+          v_WF.                             push_back(h1f_WF_cluster->GetMaximum()*ratio_corr/Lx*10) ;
           N_crosclus++ ;
         }
 
@@ -459,25 +454,11 @@ void Tristan_CERN22_dEdx( const std::string& OutDir,
       // WFtrunc                             = accumulate(v_WF.begin(), v_WF.end(), 0)/(track_len*(alpha/100)) ;
       // v_h1f_WFtrunc[iMod]->                 Fill(WFtrunc) ;
 
-      // // WF v2: Sum(WFmax)/Sum(cluster length)
-      // int N_crosclustrunc                 = int(floor(N_crosclus * (alpha/100))) ; ;
-      // std::sort(v_rank_WF.begin(), v_rank_WF.end()) ;
-      // v_rank_WF.                            resize(N_crosclustrunc) ;
-      // for(int iC = 0 ; iC < N_crosclustrunc ; iC++){
-      //   WFtrunc                          += v_WF[v_rank_WF[iC].Rank] ;
-      //   trk_len_clus_trunc               += v_lenclus[v_rank_WF[iC].Rank]*100 ;
-      // }
-      // WFtrunc                            /= trk_len_clus_trunc ;
-      // v_h1f_WFtrunc[iMod]->                 Fill(WFtrunc) ;
-
-      // WF v3: Mean(WFmax/cluster length)
+      // WF3 & WFoff
       int N_crosclustrunc                 = int(floor(N_crosclus * (alpha/100))) ; ;
-      std::sort(v_rank_WF.begin(), v_rank_WF.end()) ;
-      v_rank_WF.                            resize(N_crosclustrunc) ;
-      std::vector<float> v_WFoff ;
-      for(int iC = 0 ; iC < N_crosclustrunc ; iC++) v_WFoff.push_back(v_rank_WF[iC].Value) ;
-      float WFoff                         = std::accumulate(v_WFoff.begin(), v_WFoff.end(), 0) / N_crosclustrunc ;
-      v_h1f_WFtrunc[iMod]->                 Fill(WFoff) ;
+      std::sort(v_WF.begin(), v_WF.end()) ;
+      WFtrunc                             = std::accumulate(v_WF.begin(), v_WF.begin() + N_crosclustrunc, 0) / N_crosclustrunc ;
+      v_h1f_WFtrunc[iMod]->                 Fill(WFtrunc) ;
 
       // GPsel
       float GPsel                         = h1f_GWF_mod->GetMaximum()/track_len ;
@@ -522,8 +503,8 @@ void Tristan_CERN22_dEdx( const std::string& OutDir,
       // if(iEvent < 50) DrawOut_EventDisplay(pModule, OUTDIR_Evt_Display, Tag, "amplitude", pTrack->Get_ParameterValue(2), pTrack->Get_ParameterValue(1), pTrack->Get_ParameterValue(0)) ;
 
       // Methods comparisons
-      // v_h2f_XPvsWF[iMod]->                  Fill(WFoff, XP) ;
-      // v_h2f_WFmWFvsWF[iMod]->               Fill(WFsel,   WFsel-WFoff) ;
+      // v_h2f_XPvsWF[iMod]->                  Fill(WFtrunc, XP) ;
+      // v_h2f_WFmWFvsWF[iMod]->               Fill(WFsel,   WFsel-WFtrunc) ;
 
       for(int i = 0 ; i < (int)v_h1f_DPRcluster.size() ; i++) {delete v_h1f_DPRcluster[i] ; v_h1f_DPRcluster[i] = 0 ; }
       for(int i = 0 ; i < (int)v_trashbin.size() ; i++)       {delete v_trashbin[i]       ; v_trashbin[i]       = 0 ; }
@@ -536,7 +517,6 @@ void Tristan_CERN22_dEdx( const std::string& OutDir,
       delete                                h1f_GPv6 ;
       v_Q.clear() ; 
       v_WF.clear() ; 
-      v_rank_WF.clear() ; 
       v_LP.clear() ;
       v_DPR.clear() ;
       v_ratio.clear() ; 

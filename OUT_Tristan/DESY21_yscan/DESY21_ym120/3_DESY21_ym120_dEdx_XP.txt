@@ -1,5 +1,5 @@
 Tag           : DESY21_ym120
-Comment       : _zcalc_yw_4IP_WF1
+Comment       : _zcalc_PRF_4IP_WF3corrLx
 EventFile     : ../Data_DESY21/yscan/Ym120_Z0_iter0.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
@@ -59,33 +59,25 @@ zdrift        = 90 mm
 PT            = 412 ns
 TB            = 50 ns/time bin
 PT/TB         = 8 time bins
-Track fitting : yw
+Track fitting : PRF
 z method      : zcalc
 cut length    = 2 mm
 
 Processing events:
-1/5989
+0/5989
 Hole in entry 184 | iX = 10 | iY = 16 | RC value reset at 129
-502/5989
-1003/5989
-1504/5989
-2005/5989
-2506/5989
-3007/5989
-3508/5989
-ALERT: 3 walls crossed for a pad in entry #3677
-11 12 26 28
-12 -nan 27 26
-27 -0 -0
-ALERT: 1 walls crossed for a pad in entry #3677
-12 14 26 28
-12 -nan 26 26
-27 -0 -0
-4009/5989
-4510/5989
-5011/5989
-5512/5989
-5989/5989
+500/5989
+1000/5989
+1500/5989
+2000/5989
+2500/5989
+3000/5989
+3500/5989
+4000/5989
+4500/5989
+5000/5989
+5500/5989
+5988/5989
 
 Selection Statistics 
  #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
@@ -98,5 +90,5 @@ Selection Statistics
     6  Stage5     4836     2377 (  -50.85)  (  -60.31)      4836     2377 (  -50.85)  (  -60.31)    159121    80818 (  -49.21)  (  -60.30)    574175   290208 (  -49.46)  (  -62.16) 
   Summary Sel     5989     2377             (  -60.31)      5989     2377             (  -60.31)    203596    80818             (  -60.30)    766923   290208             (  -62.16) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_yscan/DESY21_ym120/2_DESY21_ym120_Checks_zcalc_yw_4IP_WF1.root
-dEdx: OUT_Tristan/DESY21_yscan/DESY21_ym120/3_DESY21_ym120_dEdx_zcalc_yw_4IP_WF1.root
+Checks: OUT_Tristan/DESY21_yscan/DESY21_ym120/2_DESY21_ym120_Checks_zcalc_PRF_4IP_WF3corrLx.root
+dEdx: OUT_Tristan/DESY21_yscan/DESY21_ym120/3_DESY21_ym120_dEdx_zcalc_PRF_4IP_WF3corrLx.root

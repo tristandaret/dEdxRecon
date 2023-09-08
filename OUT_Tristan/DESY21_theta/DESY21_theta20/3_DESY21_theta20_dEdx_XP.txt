@@ -1,5 +1,5 @@
 Tag           : DESY21_theta20
-Comment       : _zcalc_yw_4IP_WF1
+Comment       : _zcalc_PRF_4IP_WF3corrLx
 EventFile     : ../Data_DESY21/Theta_scan/theta_20_02T_z360_y80_iter0.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
@@ -59,32 +59,32 @@ zdrift        = 350 mm
 PT            = 200 ns
 TB            = 40 ns/time bin
 PT/TB         = 5 time bins
-Track fitting : yw
+Track fitting : PRF
 z method      : zcalc
 cut length    = 2 mm
 
 Processing events:
-1/9290
-502/9290
-1003/9290
-1504/9290
+0/9290
+500/9290
+1000/9290
+1500/9290
 Hole in entry 1545 | iX = 10 | iY = 16 | RC value reset at 129
-2005/9290
-2506/9290
-3007/9290
-3508/9290
-4009/9290
-4510/9290
-5011/9290
-5512/9290
-6013/9290
-6514/9290
-7015/9290
-7516/9290
-8017/9290
-8518/9290
-9019/9290
-9290/9290
+2000/9290
+2500/9290
+3000/9290
+3500/9290
+4000/9290
+4500/9290
+5000/9290
+5500/9290
+6000/9290
+6500/9290
+7000/9290
+7500/9290
+8000/9290
+8500/9290
+9000/9290
+9289/9290
 
 Selection Statistics 
  #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
@@ -97,5 +97,5 @@ Selection Statistics
     6  Stage5     8752     4952 (  -43.42)  (  -46.70)      8752     4952 (  -43.42)  (  -46.70)    291202   168368 (  -42.18)  (  -46.67)    787879   445034 (  -43.51)  (  -49.51) 
   Summary Sel     9290     4952             (  -46.70)      9290     4952             (  -46.70)    315691   168368             (  -46.67)    881381   445034             (  -49.51) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_theta/DESY21_theta20/2_DESY21_theta20_Checks_zcalc_yw_4IP_WF1.root
-dEdx: OUT_Tristan/DESY21_theta/DESY21_theta20/3_DESY21_theta20_dEdx_zcalc_yw_4IP_WF1.root
+Checks: OUT_Tristan/DESY21_theta/DESY21_theta20/2_DESY21_theta20_Checks_zcalc_PRF_4IP_WF3corrLx.root
+dEdx: OUT_Tristan/DESY21_theta/DESY21_theta20/3_DESY21_theta20_dEdx_zcalc_PRF_4IP_WF3corrLx.root

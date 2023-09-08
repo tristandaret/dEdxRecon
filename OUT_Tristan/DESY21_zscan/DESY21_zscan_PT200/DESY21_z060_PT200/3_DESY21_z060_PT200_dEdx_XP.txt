@@ -1,5 +1,5 @@
 Tag           : DESY21_z060_PT200
-Comment       : _zcalc_yw_4IP_WF1
+Comment       : _zcalc_PRF_4IP_WF3corrLx
 EventFile     : ../Data_DESY21/zscan_PT200/z_360_275_200_02T_26_060_iter0.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
@@ -59,34 +59,34 @@ zdrift        = 150 mm
 PT            = 200 ns
 TB            = 50 ns/time bin
 PT/TB         = 4 time bins
-Track fitting : yw
+Track fitting : PRF
 z method      : zcalc
 cut length    = 2 mm
 
 Processing events:
-1/10101
-502/10101
-1003/10101
-1504/10101
-2005/10101
-2506/10101
+0/10101
+500/10101
+1000/10101
+1500/10101
+2000/10101
+2500/10101
 Hole in entry 2866 | iX = 10 | iY = 16 | RC value reset at 129
-3007/10101
-3508/10101
-4009/10101
-4510/10101
-5011/10101
-5512/10101
-6013/10101
-6514/10101
-7015/10101
-7516/10101
-8017/10101
-8518/10101
-9019/10101
-9520/10101
-10021/10101
-10101/10101
+3000/10101
+3500/10101
+4000/10101
+4500/10101
+5000/10101
+5500/10101
+6000/10101
+6500/10101
+7000/10101
+7500/10101
+8000/10101
+8500/10101
+9000/10101
+9500/10101
+10000/10101
+10100/10101
 
 Selection Statistics 
  #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
@@ -99,5 +99,5 @@ Selection Statistics
     6  Stage5     9606     4420 (  -53.99)  (  -56.24)      9606     4420 (  -53.99)  (  -56.24)    316147   150280 (  -52.47)  (  -56.22)    893376   416552 (  -53.37)  (  -58.06) 
   Summary Sel    10101     4420             (  -56.24)     10101     4420             (  -56.24)    343292   150280             (  -56.22)    993319   416552             (  -58.06) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_z060_PT200/2_DESY21_z060_PT200_Checks_zcalc_yw_4IP_WF1.root
-dEdx: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_z060_PT200/3_DESY21_z060_PT200_dEdx_zcalc_yw_4IP_WF1.root
+Checks: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_z060_PT200/2_DESY21_z060_PT200_Checks_zcalc_PRF_4IP_WF3corrLx.root
+dEdx: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_z060_PT200/3_DESY21_z060_PT200_dEdx_zcalc_PRF_4IP_WF3corrLx.root

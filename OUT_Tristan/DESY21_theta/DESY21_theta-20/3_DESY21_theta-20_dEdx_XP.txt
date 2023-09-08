@@ -1,5 +1,5 @@
 Tag           : DESY21_theta-20
-Comment       : _zcalc_yw_4IP_WF1
+Comment       : _zcalc_PRF_4IP_WF3corrLx
 EventFile     : ../Data_DESY21/Theta_scan/theta_m20_02T_z260_y80_iter0.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
@@ -59,37 +59,37 @@ zdrift        = 350 mm
 PT            = 200 ns
 TB            = 40 ns/time bin
 PT/TB         = 5 time bins
-Track fitting : yw
+Track fitting : PRF
 z method      : zcalc
 cut length    = 2 mm
 
 Processing events:
-1/11838
-502/11838
-1003/11838
-1504/11838
-2005/11838
-2506/11838
-3007/11838
-3508/11838
-4009/11838
-4510/11838
-5011/11838
+0/11838
+500/11838
+1000/11838
+1500/11838
+2000/11838
+2500/11838
+3000/11838
+3500/11838
+4000/11838
+4500/11838
+5000/11838
+5500/11838
 Hole in entry 5501 | iX = 10 | iY = 16 | RC value reset at 129
-5512/11838
-6013/11838
-6514/11838
-7015/11838
-7516/11838
-8017/11838
-8518/11838
-9019/11838
-9520/11838
-10021/11838
-10522/11838
-11023/11838
-11524/11838
-11838/11838
+6000/11838
+6500/11838
+7000/11838
+7500/11838
+8000/11838
+8500/11838
+9000/11838
+9500/11838
+10000/11838
+10500/11838
+11000/11838
+11500/11838
+11837/11838
 
 Selection Statistics 
  #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
@@ -102,5 +102,5 @@ Selection Statistics
     6  Stage5    10948     2197 (  -79.93)  (  -81.44)     10948     2197 (  -79.93)  (  -81.44)    351824    74698 (  -78.77)  (  -81.43)   1114394   230279 (  -79.34)  (  -82.63) 
   Summary Sel    11838     2197             (  -81.44)     11838     2197             (  -81.44)    402330    74698             (  -81.43)   1326018   230279             (  -82.63) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_theta/DESY21_theta-20/2_DESY21_theta-20_Checks_zcalc_yw_4IP_WF1.root
-dEdx: OUT_Tristan/DESY21_theta/DESY21_theta-20/3_DESY21_theta-20_dEdx_zcalc_yw_4IP_WF1.root
+Checks: OUT_Tristan/DESY21_theta/DESY21_theta-20/2_DESY21_theta-20_Checks_zcalc_PRF_4IP_WF3corrLx.root
+dEdx: OUT_Tristan/DESY21_theta/DESY21_theta-20/3_DESY21_theta-20_dEdx_zcalc_PRF_4IP_WF3corrLx.root

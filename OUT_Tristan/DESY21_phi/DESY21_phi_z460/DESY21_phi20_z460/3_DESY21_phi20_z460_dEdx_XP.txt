@@ -1,5 +1,5 @@
 Tag           : DESY21_phi20_z460
-Comment       : _zcalc_yw_4IP_WF1
+Comment       : _zcalc_PRF_4IP_WFoffdiag
 EventFile     : ../Data_DESY21/Phi_scan_z460/phi_200_20_z460_ym60_iter0.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
@@ -59,31 +59,39 @@ zdrift        = 550 mm
 PT            = 200 ns
 TB            = 40 ns/time bin
 PT/TB         = 5 time bins
-Track fitting : yw
+Track fitting : PRF
 z method      : zcalc
 cut length    = 2 mm
 
 Processing events:
-1/8728
+0/8728
 Hole in entry 37 | iX = 10 | iY = 16 | RC value reset at 129
-502/8728
-1003/8728
-1504/8728
-2005/8728
-2506/8728
-3007/8728
-3508/8728
-4009/8728
-4510/8728
-5011/8728
-5512/8728
-6013/8728
-6514/8728
-7015/8728
-7516/8728
-8017/8728
-8518/8728
-8728/8728
+500/8728
+1000/8728
+1500/8728
+2000/8728
+2500/8728
+3000/8728
+3500/8728
+4000/8728
+4500/8728
+ALERT: 1 walls crossed for a pad in entry #4584
+20 21 19 20
+24 21 21 20
+30 -0 -0
+ALERT: 3 walls crossed for a pad in entry #4584
+21 23 19 20
+24 21 20 20
+30 -0 -0
+5000/8728
+5500/8728
+6000/8728
+6500/8728
+7000/8728
+7500/8728
+8000/8728
+8500/8728
+8727/8728
 
 Selection Statistics 
  #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
@@ -96,5 +104,5 @@ Selection Statistics
     6  Stage5     8334     4710 (  -43.48)  (  -46.04)      8334     4710 (  -43.48)  (  -46.04)    276243   160140 (  -42.03)  (  -46.02)    852094   487746 (  -42.76)  (  -47.66) 
   Summary Sel     8728     4710             (  -46.04)      8728     4710             (  -46.04)    296647   160140             (  -46.02)    931805   487746             (  -47.66) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_phi/DESY21_phi_z460/DESY21_phi20_z460/2_DESY21_phi20_z460_Checks_zcalc_yw_4IP_WF1.root
-dEdx: OUT_Tristan/DESY21_phi/DESY21_phi_z460/DESY21_phi20_z460/3_DESY21_phi20_z460_dEdx_zcalc_yw_4IP_WF1.root
+Checks: OUT_Tristan/DESY21_phi/DESY21_phi_z460/DESY21_phi20_z460/2_DESY21_phi20_z460_Checks_zcalc_PRF_4IP_WFoffdiag.root
+dEdx: OUT_Tristan/DESY21_phi/DESY21_phi_z460/DESY21_phi20_z460/3_DESY21_phi20_z460_dEdx_zcalc_PRF_4IP_WFoffdiag.root

@@ -30,7 +30,7 @@ void Tristan_CERN22_Monitoring()
   int nRC = 21 ; 
 
   std::string Tag    ; 
-  std::string Comment = "_zcalc_PRF_4IP_WF3corrLxcos" ; 
+  std::string Comment = "_zcalc_PRF_4IP_WFoffdiag" ; 
   std::string prtcle ; 
   std::string EvtFile ;
   std::string OutDir  = "OUT_Tristan/";  
@@ -57,7 +57,7 @@ void Tristan_CERN22_Monitoring()
   int DO_Methods      = 1 ;
   int DO_Separation   = 0 ;
   int DO_Resolution   = 1 ;
-  int DO_Global       = 0 ;
+  int DO_Global       = 1 ;
 
   // Energy scan using the prototype (ERAM 18)
   if(prototype){
@@ -105,10 +105,10 @@ void Tristan_CERN22_Monitoring()
       MyMakeDir(OutDir) ; 
       Uploader* pUpld ; Interpol4 LUT ;
       if (Control or dEdx) LUT = GiveMe_LUT(Form("/home/td263283/Documents/Python/LUT_XP/LUT_Dt%i_PT%i_nphi200_nd200/", Dt, PT), nZ, nRC) ;
-      // int index[] = {-1, 4, 8} ;
-      // for (int zDrift : index) {
-      int NFiles = 9 ;
-      for (int zDrift = -1 ; zDrift < 0 ; zDrift++){
+      int index[] = {-1, 4, 8} ;
+      for (int zDrift : index) {
+      // int NFiles = 9 ;
+      // for (int zDrift = -1 ; zDrift < NFiles ; zDrift++){
         if(zDrift == -1) {EvtFile  = Form("../Data_DESY21/zscan_PT%i/z_360_275_%i_02T_26_m40_iter0.root", PT, PT) ; Tag = Form("DESY21_zm40_PT%i", PT) ; prtcle = "electron_z-40" ; }
         else {EvtFile              = Form("../Data_DESY21/zscan_PT%i/z_360_275_%i_02T_26_%i60_iter0.root", PT, PT, zDrift) ; Tag = Form("DESY21_z%i60_PT%i", zDrift, PT) ; prtcle = Form("electron_z%i60", zDrift) ; }
         if(Control or dEdx) pUpld = GiveMe_Uploader (intUploader, EvtFile) ;
@@ -160,8 +160,8 @@ void Tristan_CERN22_Monitoring()
     intUploader     =  2 ;
     NbrOfMod        =  0 ;
     PT              = 200 ; Dt = 310 ; TB = 40 ;
-    // int z_arr[]     = {50, 550, 950} ;
-    int z_arr[]     = {50} ;
+    int z_arr[]     = {50, 550, 950} ;
+    // int z_arr[]     = {950} ;
     Uploader* pUpld ; Interpol4 LUT ;
     if (Control or dEdx) LUT = GiveMe_LUT(Form("/home/td263283/Documents/Python/LUT_XP/LUT_Dt%i_PT%i_nphi200_nd200/", Dt, PT), nZ, nRC) ;
     int phi_arr[]   = {0, 5, 10, 20, 30, 30, 40, 45} ;
@@ -227,7 +227,7 @@ void Tristan_CERN22_Monitoring()
 
 
   // DrawOut_Scans("OUT_Tristan", Comment);
-  // DrawOut_Versions("OUT_Tristan/", "WF", "_zcalc_PRF_4IP_WF3corr", "_zcalc_PRF_4IP_WF1") ;
+  // DrawOut_Versions("OUT_Tristan/", "WF", "_zcalc_PRF_4IP_WF3corrLx", "_zcalc_PRF_4IP_WF1") ;
   // DrawOut_verif("OUT_Tristan/DESY21_phi/DESY21_phi_", Comment) ;
 
 

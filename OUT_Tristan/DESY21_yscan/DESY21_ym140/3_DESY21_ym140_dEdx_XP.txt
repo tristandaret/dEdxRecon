@@ -1,5 +1,5 @@
 Tag           : DESY21_ym140
-Comment       : _zcalc_yw_4IP_WF1
+Comment       : _zcalc_PRF_4IP_WF3corrLx
 EventFile     : ../Data_DESY21/yscan/Ym140_Z0_iter0.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
@@ -59,50 +59,42 @@ zdrift        = 90 mm
 PT            = 412 ns
 TB            = 50 ns/time bin
 PT/TB         = 8 time bins
-Track fitting : yw
+Track fitting : PRF
 z method      : zcalc
 cut length    = 2 mm
 
 Processing events:
-1/14429
+0/14429
 Hole in entry 462 | iX = 10 | iY = 16 | RC value reset at 129
-502/14429
-1003/14429
-1504/14429
-2005/14429
-2506/14429
-3007/14429
-3508/14429
-4009/14429
-4510/14429
-5011/14429
-ALERT: 3 walls crossed for a pad in entry #5020
-36 37 28 29
-37 1 28 28
-29 -0 -0
-ALERT: 1 walls crossed for a pad in entry #5020
-37 38 28 29
-37 1 28 27
-29 -0 -0
-5512/14429
-6013/14429
-6514/14429
-7015/14429
-7516/14429
-8017/14429
-8518/14429
-9019/14429
-9520/14429
-10021/14429
-10522/14429
-11023/14429
-11524/14429
-12025/14429
-12526/14429
-13027/14429
-13528/14429
-14029/14429
-14429/14429
+500/14429
+1000/14429
+1500/14429
+2000/14429
+2500/14429
+3000/14429
+3500/14429
+4000/14429
+4500/14429
+5000/14429
+5500/14429
+6000/14429
+6500/14429
+7000/14429
+7500/14429
+8000/14429
+8500/14429
+9000/14429
+9500/14429
+10000/14429
+10500/14429
+11000/14429
+11500/14429
+12000/14429
+12500/14429
+13000/14429
+13500/14429
+14000/14429
+14428/14429
 
 Selection Statistics 
  #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
@@ -115,5 +107,5 @@ Selection Statistics
     6  Stage5     9955     5023 (  -49.54)  (  -65.19)      9955     5023 (  -49.54)  (  -65.19)    327544   170782 (  -47.86)  (  -65.18)   1192876   621659 (  -47.89)  (  -67.14) 
   Summary Sel    14429     5023             (  -65.19)     14429     5023             (  -65.19)    490439   170782             (  -65.18)   1891664   621659             (  -67.14) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_yscan/DESY21_ym140/2_DESY21_ym140_Checks_zcalc_yw_4IP_WF1.root
-dEdx: OUT_Tristan/DESY21_yscan/DESY21_ym140/3_DESY21_ym140_dEdx_zcalc_yw_4IP_WF1.root
+Checks: OUT_Tristan/DESY21_yscan/DESY21_ym140/2_DESY21_ym140_Checks_zcalc_PRF_4IP_WF3corrLx.root
+dEdx: OUT_Tristan/DESY21_yscan/DESY21_ym140/3_DESY21_ym140_dEdx_zcalc_PRF_4IP_WF3corrLx.root

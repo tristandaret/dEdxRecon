@@ -1,5 +1,5 @@
 Tag           : DESY21_y60
-Comment       : _zcalc_yw_4IP_WF1
+Comment       : _zcalc_PRF_4IP_WF3corrLx
 EventFile     : ../Data_DESY21/yscan/Y60_Z0_iter0.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
@@ -59,37 +59,37 @@ zdrift        = 90 mm
 PT            = 412 ns
 TB            = 50 ns/time bin
 PT/TB         = 8 time bins
-Track fitting : yw
+Track fitting : PRF
 z method      : zcalc
 cut length    = 2 mm
 
 Processing events:
-1/11846
-502/11846
-1003/11846
-1504/11846
+0/11846
+500/11846
+1000/11846
+1500/11846
 Hole in entry 1585 | iX = 10 | iY = 16 | RC value reset at 129
-2005/11846
-2506/11846
-3007/11846
-3508/11846
-4009/11846
-4510/11846
-5011/11846
-5512/11846
-6013/11846
-6514/11846
-7015/11846
-7516/11846
-8017/11846
-8518/11846
-9019/11846
-9520/11846
-10021/11846
-10522/11846
-11023/11846
-11524/11846
-11846/11846
+2000/11846
+2500/11846
+3000/11846
+3500/11846
+4000/11846
+4500/11846
+5000/11846
+5500/11846
+6000/11846
+6500/11846
+7000/11846
+7500/11846
+8000/11846
+8500/11846
+9000/11846
+9500/11846
+10000/11846
+10500/11846
+11000/11846
+11500/11846
+11845/11846
 
 Selection Statistics 
  #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
@@ -102,5 +102,5 @@ Selection Statistics
     6  Stage5    10317     4839 (  -53.10)  (  -59.15)     10317     4839 (  -53.10)  (  -59.15)    338802   164526 (  -51.44)  (  -59.13)   1195930   575264 (  -51.90)  (  -60.96) 
   Summary Sel    11846     4839             (  -59.15)     11846     4839             (  -59.15)    402603   164526             (  -59.13)   1473556   575264             (  -60.96) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_yscan/DESY21_y60/2_DESY21_y60_Checks_zcalc_yw_4IP_WF1.root
-dEdx: OUT_Tristan/DESY21_yscan/DESY21_y60/3_DESY21_y60_dEdx_zcalc_yw_4IP_WF1.root
+Checks: OUT_Tristan/DESY21_yscan/DESY21_y60/2_DESY21_y60_Checks_zcalc_PRF_4IP_WF3corrLx.root
+dEdx: OUT_Tristan/DESY21_yscan/DESY21_y60/3_DESY21_y60_dEdx_zcalc_PRF_4IP_WF3corrLx.root

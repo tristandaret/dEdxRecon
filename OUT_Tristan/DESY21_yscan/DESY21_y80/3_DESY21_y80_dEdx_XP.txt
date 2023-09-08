@@ -1,5 +1,5 @@
 Tag           : DESY21_y80
-Comment       : _zcalc_yw_4IP_WF1
+Comment       : _zcalc_PRF_4IP_WF3corrLx
 EventFile     : ../Data_DESY21/yscan/Y80_Z0_iter0.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
@@ -59,38 +59,38 @@ zdrift        = 90 mm
 PT            = 412 ns
 TB            = 50 ns/time bin
 PT/TB         = 8 time bins
-Track fitting : yw
+Track fitting : PRF
 z method      : zcalc
 cut length    = 2 mm
 
 Processing events:
-1/12322
-502/12322
-1003/12322
-1504/12322
-2005/12322
-2506/12322
-3007/12322
-3508/12322
+0/12322
+500/12322
+1000/12322
+1500/12322
+2000/12322
+2500/12322
+3000/12322
+3500/12322
 Hole in entry 3579 | iX = 10 | iY = 16 | RC value reset at 129
-4009/12322
-4510/12322
-5011/12322
-5512/12322
-6013/12322
-6514/12322
-7015/12322
-7516/12322
-8017/12322
-8518/12322
-9019/12322
-9520/12322
-10021/12322
-10522/12322
-11023/12322
-11524/12322
-12025/12322
-12322/12322
+4000/12322
+4500/12322
+5000/12322
+5500/12322
+6000/12322
+6500/12322
+7000/12322
+7500/12322
+8000/12322
+8500/12322
+9000/12322
+9500/12322
+10000/12322
+10500/12322
+11000/12322
+11500/12322
+12000/12322
+12321/12322
 
 Selection Statistics 
  #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
@@ -103,5 +103,5 @@ Selection Statistics
     6  Stage5    10249     4690 (  -54.24)  (  -61.94)     10249     4690 (  -54.24)  (  -61.94)    335549   159460 (  -52.48)  (  -61.92)   1175487   554225 (  -52.85)  (  -63.76) 
   Summary Sel    12322     4690             (  -61.94)     12322     4690             (  -61.94)    418723   159460             (  -61.92)   1529315   554225             (  -63.76) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_yscan/DESY21_y80/2_DESY21_y80_Checks_zcalc_yw_4IP_WF1.root
-dEdx: OUT_Tristan/DESY21_yscan/DESY21_y80/3_DESY21_y80_dEdx_zcalc_yw_4IP_WF1.root
+Checks: OUT_Tristan/DESY21_yscan/DESY21_y80/2_DESY21_y80_Checks_zcalc_PRF_4IP_WF3corrLx.root
+dEdx: OUT_Tristan/DESY21_yscan/DESY21_y80/3_DESY21_y80_dEdx_zcalc_PRF_4IP_WF3corrLx.root

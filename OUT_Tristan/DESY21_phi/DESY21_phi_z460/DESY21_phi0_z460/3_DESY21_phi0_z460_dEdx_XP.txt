@@ -1,5 +1,5 @@
 Tag           : DESY21_phi0_z460
-Comment       : _zcalc_yw_4IP_WF1
+Comment       : _zcalc_PRF_4IP_WFoffdiag
 EventFile     : ../Data_DESY21/Phi_scan_z460/phi_200_0_z460_ym60_iter0.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
@@ -59,75 +59,43 @@ zdrift        = 550 mm
 PT            = 200 ns
 TB            = 40 ns/time bin
 PT/TB         = 5 time bins
-Track fitting : yw
+Track fitting : PRF
 z method      : zcalc
 cut length    = 2 mm
 
 Processing events:
-1/14577
+0/14577
 Hole in entry 28 | iX = 10 | iY = 16 | RC value reset at 129
-502/14577
-1003/14577
-1504/14577
-ALERT: 3 walls crossed for a pad in entry #1701
-33 34 20 21
-34 13 20 20
-22 -0 -0
-ALERT: 3 walls crossed for a pad in entry #1701
-34 35 19 20
-54 34 20 20
-22 -0 -0
-2005/14577
-2506/14577
-3007/14577
-3508/14577
-4009/14577
-4510/14577
-5011/14577
-ALERT: 3 walls crossed for a pad in entry #5044
-23 24 18 19
-24 9 18 18
-20 -0 0
-ALERT: 1 walls crossed for a pad in entry #5044
-24 25 18 19
-24 9 18 18
-20 -0 0
-5512/14577
-ALERT: 3 walls crossed for a pad in entry #5949
-17 18 18 19
-18 -nan 18 18
-19 0 -0
-ALERT: 1 walls crossed for a pad in entry #5949
-18 19 18 19
-18 -nan 18 18
-19 0 -0
-6013/14577
-6514/14577
-7015/14577
-7516/14577
-8017/14577
-ALERT: 3 walls crossed for a pad in entry #8157
-6 7 21 22
-7 -6 21 21
-22 -0 0
-ALERT: 1 walls crossed for a pad in entry #8157
-7 8 21 22
-7 -6 21 21
-22 -0 0
-8518/14577
-9019/14577
-9520/14577
-10021/14577
-10522/14577
-11023/14577
-11524/14577
-12025/14577
-12526/14577
-13027/14577
-13528/14577
-14029/14577
-14530/14577
-14577/14577
+500/14577
+1000/14577
+1500/14577
+2000/14577
+2500/14577
+3000/14577
+3500/14577
+4000/14577
+4500/14577
+5000/14577
+5500/14577
+6000/14577
+6500/14577
+7000/14577
+7500/14577
+8000/14577
+8500/14577
+9000/14577
+9500/14577
+10000/14577
+10500/14577
+11000/14577
+11500/14577
+12000/14577
+12500/14577
+13000/14577
+13500/14577
+14000/14577
+14500/14577
+14576/14577
 
 Selection Statistics 
  #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
@@ -140,5 +108,5 @@ Selection Statistics
     6  Stage5    13561     8888 (  -34.46)  (  -39.03)     13561     8888 (  -34.46)  (  -39.03)    450871   302192 (  -32.98)  (  -39.01)   1152974   757389 (  -34.31)  (  -42.43) 
   Summary Sel    14577     8888             (  -39.03)     14577     8888             (  -39.03)    495477   302192             (  -39.01)   1315655   757389             (  -42.43) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_phi/DESY21_phi_z460/DESY21_phi0_z460/2_DESY21_phi0_z460_Checks_zcalc_yw_4IP_WF1.root
-dEdx: OUT_Tristan/DESY21_phi/DESY21_phi_z460/DESY21_phi0_z460/3_DESY21_phi0_z460_dEdx_zcalc_yw_4IP_WF1.root
+Checks: OUT_Tristan/DESY21_phi/DESY21_phi_z460/DESY21_phi0_z460/2_DESY21_phi0_z460_Checks_zcalc_PRF_4IP_WFoffdiag.root
+dEdx: OUT_Tristan/DESY21_phi/DESY21_phi_z460/DESY21_phi0_z460/3_DESY21_phi0_z460_dEdx_zcalc_PRF_4IP_WFoffdiag.root

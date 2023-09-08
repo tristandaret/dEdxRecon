@@ -1,5 +1,5 @@
 Tag           : DESY21_zm40_PT412
-Comment       : _zcalc_yw_4IP_WF1
+Comment       : _zcalc_PRF_4IP_WF3corrLx
 EventFile     : ../Data_DESY21/zscan_PT412/z_360_275_412_02T_26_m40_iter0.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
@@ -59,37 +59,37 @@ zdrift        = 50 mm
 PT            = 412 ns
 TB            = 50 ns/time bin
 PT/TB         = 8 time bins
-Track fitting : yw
+Track fitting : PRF
 z method      : zcalc
 cut length    = 2 mm
 
 Processing events:
-1/11975
-502/11975
-1003/11975
+0/11975
+500/11975
+1000/11975
 Hole in entry 1478 | iX = 10 | iY = 16 | RC value reset at 129
-1504/11975
-2005/11975
-2506/11975
-3007/11975
-3508/11975
-4009/11975
-4510/11975
-5011/11975
-5512/11975
-6013/11975
-6514/11975
-7015/11975
-7516/11975
-8017/11975
-8518/11975
-9019/11975
-9520/11975
-10021/11975
-10522/11975
-11023/11975
-11524/11975
-11975/11975
+1500/11975
+2000/11975
+2500/11975
+3000/11975
+3500/11975
+4000/11975
+4500/11975
+5000/11975
+5500/11975
+6000/11975
+6500/11975
+7000/11975
+7500/11975
+8000/11975
+8500/11975
+9000/11975
+9500/11975
+10000/11975
+10500/11975
+11000/11975
+11500/11975
+11974/11975
 
 Selection Statistics 
  #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
@@ -102,5 +102,5 @@ Selection Statistics
     6  Stage5    10478     4968 (  -52.59)  (  -58.51)     10478     4968 (  -52.59)  (  -58.51)    343993   168912 (  -50.90)  (  -58.50)   1224119   596525 (  -51.27)  (  -60.23) 
   Summary Sel    11975     4968             (  -58.51)     11975     4968             (  -58.51)    406991   168912             (  -58.50)   1499843   596525             (  -60.23) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT412/DESY21_zm40_PT412/2_DESY21_zm40_PT412_Checks_zcalc_yw_4IP_WF1.root
-dEdx: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT412/DESY21_zm40_PT412/3_DESY21_zm40_PT412_dEdx_zcalc_yw_4IP_WF1.root
+Checks: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT412/DESY21_zm40_PT412/2_DESY21_zm40_PT412_Checks_zcalc_PRF_4IP_WF3corrLx.root
+dEdx: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT412/DESY21_zm40_PT412/3_DESY21_zm40_PT412_dEdx_zcalc_PRF_4IP_WF3corrLx.root

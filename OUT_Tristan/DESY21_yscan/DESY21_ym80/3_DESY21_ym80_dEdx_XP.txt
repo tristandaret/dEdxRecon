@@ -1,5 +1,5 @@
 Tag           : DESY21_ym80
-Comment       : _zcalc_yw_4IP_WF1
+Comment       : _zcalc_PRF_4IP_WF3corrLx
 EventFile     : ../Data_DESY21/yscan/Ym80_Z0_iter0.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
@@ -59,35 +59,35 @@ zdrift        = 90 mm
 PT            = 412 ns
 TB            = 50 ns/time bin
 PT/TB         = 8 time bins
-Track fitting : yw
+Track fitting : PRF
 z method      : zcalc
 cut length    = 2 mm
 
 Processing events:
-1/10779
+0/10779
 Hole in entry 97 | iX = 10 | iY = 16 | RC value reset at 129
-502/10779
-1003/10779
-1504/10779
-2005/10779
-2506/10779
-3007/10779
-3508/10779
-4009/10779
-4510/10779
-5011/10779
-5512/10779
-6013/10779
-6514/10779
-7015/10779
-7516/10779
-8017/10779
-8518/10779
-9019/10779
-9520/10779
-10021/10779
-10522/10779
-10779/10779
+500/10779
+1000/10779
+1500/10779
+2000/10779
+2500/10779
+3000/10779
+3500/10779
+4000/10779
+4500/10779
+5000/10779
+5500/10779
+6000/10779
+6500/10779
+7000/10779
+7500/10779
+8000/10779
+8500/10779
+9000/10779
+9500/10779
+10000/10779
+10500/10779
+10778/10779
 
 Selection Statistics 
  #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
@@ -100,5 +100,5 @@ Selection Statistics
     6  Stage5     8230     3997 (  -51.43)  (  -62.92)      8230     3997 (  -51.43)  (  -62.92)    270250   135898 (  -49.71)  (  -62.91)    973515   487312 (  -49.94)  (  -64.86) 
   Summary Sel    10779     3997             (  -62.92)     10779     3997             (  -62.92)    366396   135898             (  -62.91)   1386790   487312             (  -64.86) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_yscan/DESY21_ym80/2_DESY21_ym80_Checks_zcalc_yw_4IP_WF1.root
-dEdx: OUT_Tristan/DESY21_yscan/DESY21_ym80/3_DESY21_ym80_dEdx_zcalc_yw_4IP_WF1.root
+Checks: OUT_Tristan/DESY21_yscan/DESY21_ym80/2_DESY21_ym80_Checks_zcalc_PRF_4IP_WF3corrLx.root
+dEdx: OUT_Tristan/DESY21_yscan/DESY21_ym80/3_DESY21_ym80_dEdx_zcalc_PRF_4IP_WF3corrLx.root

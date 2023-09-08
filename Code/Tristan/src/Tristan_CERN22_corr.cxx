@@ -72,7 +72,7 @@ void Tristan_CERN22_corr( const std::string& OutDir,
 
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////
   TH2F* h2f_WFvsLength      = new TH2F("h2f_WFvsLength", "WF_{sum} VS length in cluster;Length in cluster (mm);WF_{sum} (ADC count)", 80, -0.1, 16, 80, 0, 4100) ;
-  TF1* A_corr                = new TF1("A_corr", "[0] + [1]*x + [2]*x*x + [3]*x*x*x + [4]*x*x*x*x", 0, 17); // values provided by Vlada (2022/10/11)
+  TF1* A_corr                = new TF1("A_corr", "[0] + [1]*x + [2]*x*x + [3]*x*x*x + [4]*x*x*x*x", 2, 17); // values provided by Vlada (2022/10/11)
   A_corr->SetParameters(291, 9.47, -4.04, 1.32, -0.0595) ;
   TheFitterTrack aTheFitterTrack("Minuit", n_param_trk) ;
   PRF_param                   aPRF_param  ;
@@ -153,7 +153,7 @@ void Tristan_CERN22_corr( const std::string& OutDir,
   A_corr->                                SetNameTitle("A_corr", "A_corr") ;
   TGraph* tge_WFvsLength                = Convert_TH2_TGE(h2f_WFvsLength) ;
   tge_WFvsLength->                        SetNameTitle("pTGE_A_corr", "pTGE_A_corr") ;
-  tge_WFvsLength->                        Fit(A_corr,"RQ","0", 0, L_phi) ;
+  tge_WFvsLength->                        Fit(A_corr,"RQ","0", 2, L_phi) ;
   ////////////////////////////////////////////////////////////////////////////////////////////////////
   // Saving
   // Checks
