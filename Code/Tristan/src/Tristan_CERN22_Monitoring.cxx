@@ -48,12 +48,13 @@ void Tristan_CERN22_Monitoring()
 
   // Computations
   int Control         = 0 ;
-  int dEdx            = 0 ;
+  int dEdx            = 1 ;
+  int WFcorr          = 0 ;
 
   // DrawOuts
   int DO_Displayer    = 0 ;
   int DO_Control      = 0 ;
-  int DO_Checks       = 0 ;
+  int DO_Checks       = 1 ;
   int DO_Methods      = 1 ;
   int DO_Separation   = 0 ;
   int DO_Resolution   = 1 ;
@@ -161,7 +162,7 @@ void Tristan_CERN22_Monitoring()
     NbrOfMod        =  0 ;
     PT              = 200 ; Dt = 310 ; TB = 40 ;
     int z_arr[]     = {50, 550, 950} ;
-    // int z_arr[]     = {950} ;
+    // int z_arr[]     = {50, 550} ;
     Uploader* pUpld ; Interpol4 LUT ;
     if (Control or dEdx) LUT = GiveMe_LUT(Form("/home/td263283/Documents/Python/LUT_XP/LUT_Dt%i_PT%i_nphi200_nd200/", Dt, PT), nZ, nRC) ;
     int phi_arr[]   = {0, 5, 10, 20, 30, 30, 40, 45} ;
@@ -169,21 +170,17 @@ void Tristan_CERN22_Monitoring()
       if(zdrift == 50) OutDir     =      "OUT_Tristan/DESY21_phi/DESY21_phi_zm40/" ;
       else              OutDir    = Form("OUT_Tristan/DESY21_phi/DESY21_phi_z%i/", zdrift-90) ;  
       MyMakeDir(OutDir) ; 
-      for (int ifile = 0 ; ifile < (int)std::size(phi_arr) ; ifile++){
+      for (int ifile = 5 ; ifile < (int)std::size(phi_arr) ; ifile++){
         int phi                   = phi_arr[ifile] ;
-        if(zdrift == 50){ //deal with case z = "m40" instead of int
+        if(zdrift == 50){
           if(ifile < 5) {EvtFile  = Form("../Data_DESY21/Phi_scan_zm40/phi_200_%i_zm40_ym60_iter0.root", phi) ;       Tag = Form("DESY21_phi%i_zm40", phi) ;      prtcle = Form("electron_phi%i_zm40", phi) ; }
-          // OutDir =  Form("../Data_DESY21/Phi_scan_zm40/phi_200_%i_zm40_ym60_diag_iter0", phi) ;
           else          {EvtFile  = Form("../Data_DESY21/Phi_scan_zm40/phi_200_%i_zm40_ym60_diag_iter0.root", phi) ;  Tag = Form("DESY21_phi%i_diag_zm40", phi) ; prtcle = Form("electron_phi%i_diag_zm40", phi) ; }
         }
         else{
           if(ifile < 5) {EvtFile  = Form("../Data_DESY21/Phi_scan_z%i/phi_200_%i_z%i_ym60_iter0.root", zdrift-90, phi, zdrift-90) ;       Tag = Form("DESY21_phi%i_z%i", phi, zdrift-90) ;      prtcle = Form("electron_phi%i_z%i", phi, zdrift-90) ; }
-          // OutDir =  Form("../Data_DESY21/Phi_scan_z%i/phi_200_%i_z%i_ym60_diag_iter0", zdrift-90, phi, zdrift-90); 
           else          {EvtFile  = Form("../Data_DESY21/Phi_scan_z%i/phi_200_%i_z%i_ym60_diag_iter0.root", zdrift-90, phi, zdrift-90) ;  Tag = Form("DESY21_phi%i_diag_z%i", phi, zdrift-90) ; prtcle = Form("electron_phi%i_diag_z%i", phi, zdrift-90) ; }
         }
         if(Control or dEdx) pUpld = GiveMe_Uploader (intUploader, EvtFile) ;
-        // pUpld = GiveMe_Uploader (intUploader, OutDir+".root") ;  
-        // Tristan_CERN22_corr(OutDir, SelectionSet, pUpld, NbrOfMod, Data_to_Use) ;
         if (Control)      Tristan_CERN22_Control    (OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, Data_to_Use, PT, TB, prtcle) ;
         if (DO_Control)   DrawOut_Control           (OutDir, Tag, Comment, SelectionSet, 1) ;
         if (dEdx)         Tristan_CERN22_dEdx       (OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, Data_to_Use, LUT, PT, TB, zdrift) ;
@@ -426,4 +423,24 @@ void Tristan_CERN22_Monitoring()
     Tristan_Displayer(OutDir, Tag, SelectionSet, pUpld, 0, Data_to_Use, prtcle) ;
     delete                  pUpld ;
   }
+
+  if(WFcorr){
+    SelectionSet    = "T_DESY21_Event" ;
+    intUploader     =  2 ;
+    NbrOfMod        =  0 ;
+    int z_arr[]     = {50, 550, 950} ;
+    int phi_arr[]   = {30, 40, 45} ;
+    for (int zdrift : z_arr){
+      for (int ifile = 0 ; ifile < (int)std::size(phi_arr) ; ifile++){
+        int phi                   = phi_arr[ifile] ;
+        if(zdrift == 50)  OutDir  =  Form("../Data_DESY21/Phi_scan_zm40/phi_200_%i_zm40_ym60_diag_iter0", phi) ;
+        else              OutDir  =  Form("../Data_DESY21/Phi_scan_z%i/phi_200_%i_z%i_ym60_diag_iter0", zdrift-90, phi, zdrift-90); 
+        std::cout << OutDir << std::endl ;
+        Uploader* pUpld           = GiveMe_Uploader (intUploader, OutDir+".root") ;  
+        Tristan_CERN22_corr(OutDir, SelectionSet, pUpld, NbrOfMod, Data_to_Use) ;
+        delete pUpld ;
+      }
+    }
+  }
+
 }

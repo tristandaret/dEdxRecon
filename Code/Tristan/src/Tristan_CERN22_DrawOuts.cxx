@@ -473,12 +473,18 @@ void DrawOut_Checks(const std::string& OutDir, const std::string EvtFile, const 
   TH1F* h1f_dist                = pTFile_Checks->Get<TH1F>("h1f_dist") ;
   TH1F* h1f_dist_clus           = pTFile_Checks->Get<TH1F>("h1f_dist_clus") ;
   TH1F* h1f_WFcorr              = pTFile_Checks->Get<TH1F>("h1f_WFcorr") ;
+  TH1F* h1f_Lmod1VScl           = pTFile_Checks->Get<TH1F>("h1f_Lmod1VScl") ;
+  TH1F* h1f_Lmod2VScl           = pTFile_Checks->Get<TH1F>("h1f_Lmod2VScl") ;
+  TH1F* h1f_LallVScl           = pTFile_Checks->Get<TH1F>("h1f_LallVScl") ;
   TH2F* h2f_ratiodiffZ          = pTFile_Checks->Get<TH2F>("h2f_ratiodiffZ") ;
   TH2F* h2f_AmaxvsLength        = pTFile_Checks->Get<TH2F>("h2f_AmaxvsLength") ;
   TH2F* h2f_QvsLength           = pTFile_Checks->Get<TH2F>("h2f_QvsLength") ;
   TH2F* h2f_LUTvsLength         = pTFile_Checks->Get<TH2F>("h2f_LUTvsLength") ;
   TH2F* h2f_QclvsLength         = pTFile_Checks->Get<TH2F>("h2f_QclvsLength") ;
   TH2F* h2f_WFvsLength          = pTFile_Checks->Get<TH2F>("h2f_WFvsLength") ;
+  TH2F* h2f_WFtruncvsLength     = pTFile_Checks->Get<TH2F>("h2f_WFtruncvsLength") ;
+  TH2F* h2f_WFstarvsLen         = pTFile_Checks->Get<TH2F>("h2f_WFstarvsLen") ;
+  TH2F* h2f_WFstartrcvsLen      = pTFile_Checks->Get<TH2F>("h2f_WFstartrcvsLen") ;
   TF1* A_corr                    = new TF1 ;
     if(Tag.find("diag") != std::string::npos){
     std::string filename = EvtFile.substr(0, EvtFile.length()-5) ;
@@ -486,6 +492,7 @@ void DrawOut_Checks(const std::string& OutDir, const std::string EvtFile, const 
     A_corr                   = pfile->Get<TF1>("A_corr") ;
     pfile->Close() ;
   }
+  TF1* A_corr_Vlada             = new TF1("A_corr_Vlada", "291.012 + 9.4669*x - 4.04*x*x + 1.31624*x*x*x - 0.059534*x*x*x*x", 0, 17); // values provided by Vlada (2022/10/11)
   TH1F* h1f_WFoLength           = pTFile_Checks->Get<TH1F>("h1f_WFoLength") ;
   TH2F* h2f_lenVSd              = pTFile_Checks->Get<TH2F>("h2f_lenVSd") ;
 
@@ -555,6 +562,26 @@ void DrawOut_Checks(const std::string& OutDir, const std::string EvtFile, const 
   h1f_WFcorr->                    SetLineWidth(4) ;
   h1f_WFcorr->                    Draw() ;
   pTCanvas->                      SaveAs(OutputFile.c_str()) ;
+  pTCanvas->                      SetLogy(0) ; 
+
+  pTCanvas->                      Clear() ;
+  gStyle->                        SetStatX(0.89) ;
+  gStyle->                        SetStatY(0.89) ;
+  h1f_Lmod1VScl->                 SetLineWidth(4) ;
+  h1f_Lmod1VScl->                 Draw() ;
+  pTCanvas->                      SaveAs(OutputFile.c_str()) ;
+  pTCanvas->                      SetLogy(0) ;  
+
+  pTCanvas->                      Clear() ;
+  h1f_Lmod2VScl->                 SetLineWidth(4) ;
+  h1f_Lmod2VScl->                 Draw() ;
+  pTCanvas->                      SaveAs(OutputFile.c_str()) ;
+  pTCanvas->                      SetLogy(0) ;  
+
+  pTCanvas->                      Clear() ;
+  h1f_LallVScl->                 SetLineWidth(4) ;
+  h1f_LallVScl->                 Draw() ;
+  pTCanvas->                      SaveAs(OutputFile.c_str()) ;
   pTCanvas->                      SetLogy(0) ;  
 
   gStyle->                        SetStatX(0.33) ;
@@ -576,18 +603,46 @@ void DrawOut_Checks(const std::string& OutDir, const std::string EvtFile, const 
   pTCanvas->                      SaveAs(OutputFile.c_str()) ;
 
   pTCanvas->                      Clear() ;
-  h2f_QclvsLength->                 Draw("colz") ;
-  h2f_QclvsLength->                 GetYaxis()->SetRangeUser(0, 2000) ;
+  h2f_QclvsLength->               Draw("colz") ;
+  h2f_QclvsLength->               GetYaxis()->SetRangeUser(0, 2000) ;
   gPad->                          Update() ;
   pTCanvas->                      SaveAs(OutputFile.c_str()) ;
 
   pTCanvas->                      Clear() ;
   h2f_WFvsLength->                Draw("colz") ;
   if(Tag.find("diag") != std::string::npos){
-    A_corr->                         SetLineWidth(4) ;
-    A_corr->                         Draw("same") ;
+    A_corr->                      SetLineWidth(4) ;
+    A_corr->                      Draw("same") ;
+    A_corr_Vlada->                SetLineWidth(4) ;
+    A_corr_Vlada->                SetLineColor(kBlack) ;
+    A_corr_Vlada->                Draw("same") ;
   }
   h2f_WFvsLength->                GetYaxis()->SetRangeUser(0, 2000) ;
+  gPad->                          Update() ;
+  pTCanvas->                      SaveAs(OutputFile.c_str()) ;
+
+  pTCanvas->                      Clear() ;
+  h2f_WFtruncvsLength->           Draw("colz") ;
+  if(Tag.find("diag") != std::string::npos){
+    A_corr->                      SetLineWidth(4) ;
+    A_corr->                      Draw("same") ;
+    A_corr_Vlada->                SetLineWidth(4) ;
+    A_corr_Vlada->                SetLineColor(kBlack) ;
+    A_corr_Vlada->                Draw("same") ;
+  }
+  h2f_WFtruncvsLength->           GetYaxis()->SetRangeUser(0, 2000) ;
+  gPad->                          Update() ;
+  pTCanvas->                      SaveAs(OutputFile.c_str()) ;
+
+  pTCanvas->                      Clear() ;
+  h2f_WFstarvsLen->               Draw("colz") ;
+  h2f_WFstarvsLen->               GetYaxis()->SetRangeUser(0, 2000) ;
+  gPad->                          Update() ;
+  pTCanvas->                      SaveAs(OutputFile.c_str()) ;
+
+  pTCanvas->                      Clear() ;
+  h2f_WFstartrcvsLen->            Draw("colz") ;
+  h2f_WFstartrcvsLen->            GetYaxis()->SetRangeUser(0, 2000) ;
   gPad->                          Update() ;
   pTCanvas->                      SaveAs(OutputFile.c_str()) ;
 
@@ -651,12 +706,16 @@ void DrawOut_Checks(const std::string& OutDir, const std::string EvtFile, const 
   delete h1f_dnorm ;
   delete h1f_XPdiff ;
   delete h1f_dist ;
+  delete h1f_Lmod1VScl ;
+  delete h1f_Lmod2VScl ;
+  delete h1f_LallVScl ;
   delete h2f_ratiodiffZ ;
   delete h2f_AmaxvsLength ;
   delete h2f_QvsLength ;
   delete h2f_LUTvsLength ;
   delete h2f_QclvsLength ;
   delete h2f_WFvsLength ;
+  delete h2f_WFtruncvsLength ;
   delete h2f_lenVSd ;
   delete pTCanvas ;
 
@@ -1183,7 +1242,7 @@ void DrawOut_Versions(const std::string& inputDir, const std::string& Method, co
 
   // Resolution
   v_reso1[0]->                GetXaxis()->SetLimits(-0.5, 31.5) ;
-  v_reso1[0]->                SetMinimum(7) ;
+  v_reso1[0]->                SetMinimum(4) ;
   v_reso1[0]->                SetMaximum(12) ;
   v_reso1[0]->                SetNameTitle("v_reso1[0]", "Resolution vs Y position;Pad row;resolution (%)") ;
   Graphic_setup(v_reso1[0], 3, 21, kBefore, 1, kBlack) ;
@@ -1197,7 +1256,7 @@ void DrawOut_Versions(const std::string& inputDir, const std::string& Method, co
 
   // Mean
   v_mean1[0]->                GetXaxis()->SetLimits(-0.5, 31.5) ;
-  v_mean1[0]->                SetMinimum(700) ;
+  v_mean1[0]->                SetMinimum(600) ;
   v_mean1[0]->                SetMaximum(1210) ;
   v_mean1[0]->                SetNameTitle("v_mean1[0]", "Mean vs Y position;Pad row;Mean (ADC count)") ;
   Graphic_setup(v_mean1[0], 3, 21, kBefore, 1, kBlack) ;
@@ -1209,7 +1268,7 @@ void DrawOut_Versions(const std::string& inputDir, const std::string& Method, co
 
   // Std
   v_std1[0]->                GetXaxis()->SetLimits(-0.5, 31.5) ;
-  v_std1[0]->                SetMinimum(50) ;
+  v_std1[0]->                SetMinimum(42) ;
   v_std1[0]->                SetMaximum(121) ;
   v_std1[0]->                SetNameTitle("v_std1[0]", "Std vs Y position;Pad row;std (ADC count)") ;
   Graphic_setup(v_std1[0], 3, 21, kBefore, 1, kBlack) ;
@@ -1285,7 +1344,7 @@ void DrawOut_Versions(const std::string& inputDir, const std::string& Method, co
 
   // Resolution
   v_reso1[1]->                GetXaxis()->SetLimits(0, 1000) ;
-  v_reso1[1]->                SetMinimum(7) ;
+  v_reso1[1]->                SetMinimum(4) ;
   v_reso1[1]->                SetMaximum(12) ;
   v_reso1[1]->                SetNameTitle("v_reso1[1]", "Resolution vs Z_{drift} (200 ns);Z_{drift} (mm);resolution (%)") ;
   Graphic_setup(v_reso1[1], 3, 21, kBefore, 1, kBlack) ;
@@ -1299,7 +1358,7 @@ void DrawOut_Versions(const std::string& inputDir, const std::string& Method, co
 
   // Mean
   v_mean1[1]->                GetXaxis()->SetLimits(0, 1000) ;
-  v_mean1[1]->                SetMinimum(700) ;
+  v_mean1[1]->                SetMinimum(600) ;
   v_mean1[1]->                SetMaximum(1210) ;
   v_mean1[1]->                SetNameTitle("v_mean1[1]", "Mean vs Z_{drift} (200 ns);Z_{drift} (mm);Mean (ADC count)") ;
   Graphic_setup(v_mean1[1], 3, 21, kBefore, 1, kBlack) ;
@@ -1311,7 +1370,7 @@ void DrawOut_Versions(const std::string& inputDir, const std::string& Method, co
 
   // Std
   v_std1[1]->                GetXaxis()->SetLimits(0, 1000) ;
-  v_std1[1]->                SetMinimum(50) ;
+  v_std1[1]->                SetMinimum(42) ;
   v_std1[1]->                SetMaximum(121) ;
   v_std1[1]->                SetNameTitle("v_std1[1]", "Std vs Z_{drift} (200 ns);Z_{drift} (mm);std (ADC count)") ;
   Graphic_setup(v_std1[1], 3, 21, kBefore, 1, kBlack) ;
@@ -1388,7 +1447,7 @@ void DrawOut_Versions(const std::string& inputDir, const std::string& Method, co
 
   // Resolution
   v_reso1[2]->                GetXaxis()->SetLimits(0, 1000) ;
-  v_reso1[2]->                SetMinimum(7) ;
+  v_reso1[2]->                SetMinimum(4) ;
   v_reso1[2]->                SetMaximum(12) ;
   v_reso1[2]->                SetNameTitle("v_reso1[2]", "Resolution vs Z_{drift} (412 ns);Z_{drift} (mm);resolution (%)") ;
   Graphic_setup(v_reso1[2], 3, 21, kBefore, 1, kBlack) ;
@@ -1402,7 +1461,7 @@ void DrawOut_Versions(const std::string& inputDir, const std::string& Method, co
 
   // Mean
   v_mean1[2]->                GetXaxis()->SetLimits(0, 1000) ;
-  v_mean1[2]->                SetMinimum(700) ;
+  v_mean1[2]->                SetMinimum(600) ;
   v_mean1[2]->                SetMaximum(1210) ;
   v_mean1[2]->                SetNameTitle("v_mean1[2]", "Mean vs Z_{drift} (412 ns);Z_{drift} (mm);Mean (ADC count)") ;
   Graphic_setup(v_mean1[2], 3, 21, kBefore, 1, kBlack) ;
@@ -1414,7 +1473,7 @@ void DrawOut_Versions(const std::string& inputDir, const std::string& Method, co
 
   // Std
   v_std1[2]->                GetXaxis()->SetLimits(0, 1000) ;
-  v_std1[2]->                SetMinimum(50) ;
+  v_std1[2]->                SetMinimum(42) ;
   v_std1[2]->                SetMaximum(121) ;
   v_std1[2]->                SetNameTitle("v_std1[2]", "Std vs Z_{drift} (412 ns);Z_{drift} (mm);std (ADC count)") ;
   Graphic_setup(v_std1[2], 3, 21, kBefore, 1, kBlack) ;
@@ -1491,7 +1550,7 @@ void DrawOut_Versions(const std::string& inputDir, const std::string& Method, co
 
   // Resolution
   v_reso1[3]->                GetXaxis()->SetLimits(-3, 48) ;
-  v_reso1[3]->                SetMinimum(7) ;
+  v_reso1[3]->                SetMinimum(4) ;
   v_reso1[3]->                SetMaximum(12) ;
   v_reso1[3]->                SetNameTitle("v_reso1[3]", "Resolution vs #varphi angle (Z_{drift} = 50 mm);#varphi angle (#circ);resolution (%)") ;
   Graphic_setup(v_reso1[3], 3, 21, kBefore, 1, kBlack) ;
@@ -1505,7 +1564,7 @@ void DrawOut_Versions(const std::string& inputDir, const std::string& Method, co
 
   // Mean
   v_mean1[3]->                GetXaxis()->SetLimits(-3, 48) ;
-  v_mean1[3]->                SetMinimum(700) ;
+  v_mean1[3]->                SetMinimum(600) ;
   v_mean1[3]->                SetMaximum(1210) ;
   v_mean1[3]->                SetNameTitle("v_mean1[3]", "Mean vs #varphi angle (Z_{drift} = 50 mm);#varphi angle (#circ);Mean (ADC count)") ;
   Graphic_setup(v_mean1[3], 3, 21, kBefore, 1, kBlack) ;
@@ -1517,7 +1576,7 @@ void DrawOut_Versions(const std::string& inputDir, const std::string& Method, co
 
   // Std
   v_std1[3]->                GetXaxis()->SetLimits(-3, 48) ;
-  v_std1[3]->                SetMinimum(50) ;
+  v_std1[3]->                SetMinimum(42) ;
   v_std1[3]->                SetMaximum(121) ;
   v_std1[3]->                SetNameTitle("v_std1[3]", "Std vs #varphi angle (Z_{drift} = 50 mm);#varphi angle (#circ);std (ADC count)") ;
   Graphic_setup(v_std1[3], 3, 21, kBefore, 1, kBlack) ;
@@ -1593,7 +1652,7 @@ void DrawOut_Versions(const std::string& inputDir, const std::string& Method, co
 
   // Resolution
   v_reso1[4]->                GetXaxis()->SetLimits(-3, 48) ;
-  v_reso1[4]->                SetMinimum(7) ;
+  v_reso1[4]->                SetMinimum(4) ;
   v_reso1[4]->                SetMaximum(12) ;
   v_reso1[4]->                SetNameTitle("v_reso1[4]", "Resolution vs #varphi angle (Z_{drift} = 550 mm);#varphi angle (#circ);resolution (%)") ;
   Graphic_setup(v_reso1[4], 3, 21, kBefore, 1, kBlack) ;
@@ -1607,7 +1666,7 @@ void DrawOut_Versions(const std::string& inputDir, const std::string& Method, co
 
   // Mean
   v_mean1[4]->                GetXaxis()->SetLimits(-3, 48) ;
-  v_mean1[4]->                SetMinimum(700) ;
+  v_mean1[4]->                SetMinimum(600) ;
   v_mean1[4]->                SetMaximum(1210) ;
   v_mean1[4]->                SetNameTitle("v_mean1[4]", "Mean vs #varphi angle (Z_{drift} = 550 mm);#varphi angle (#circ);Mean (ADC count)") ;
   Graphic_setup(v_mean1[4], 3, 21, kBefore, 1, kBlack) ;
@@ -1695,7 +1754,7 @@ void DrawOut_Versions(const std::string& inputDir, const std::string& Method, co
 
   // Resolution
   v_reso1[5]->                GetXaxis()->SetLimits(-3, 48) ;
-  v_reso1[5]->                SetMinimum(7) ;
+  v_reso1[5]->                SetMinimum(4) ;
   v_reso1[5]->                SetMaximum(12) ;
   v_reso1[5]->                SetNameTitle("v_reso1[5]", "Resolution vs #varphi angle (Z_{drift} = 950 mm);#varphi angle (#circ);resolution (%)") ;
   Graphic_setup(v_reso1[5], 3, 21, kBefore, 1, kBlack) ;
@@ -1709,7 +1768,7 @@ void DrawOut_Versions(const std::string& inputDir, const std::string& Method, co
 
   // Mean
   v_mean1[5]->                GetXaxis()->SetLimits(-3, 48) ;
-  v_mean1[5]->                SetMinimum(700) ;
+  v_mean1[5]->                SetMinimum(600) ;
   v_mean1[5]->                SetMaximum(1210) ;
   v_mean1[5]->                SetNameTitle("v_mean1[5]", "Mean vs #varphi angle (Z_{drift} = 950 mm);#varphi angle (#circ);Mean (ADC count)") ;
   Graphic_setup(v_mean1[5], 3, 21, kBefore, 1, kBlack) ;
@@ -2580,7 +2639,7 @@ void DrawOut_Zscan(const std::string& inputDir, const std::string& Comment, cons
 
   // Resolution
   pTGE_reso_WF->                GetXaxis()->SetLimits(0, 1000) ;
-  pTGE_reso_WF->                SetMinimum(7) ;
+  pTGE_reso_WF->                SetMinimum(4) ;
   pTGE_reso_WF->                SetMaximum(12) ;
   pTGE_reso_WF->                SetNameTitle("pTGE_reso_WF", "Resolution vs drift distance;drift distance z (mm);resolution (%)") ;
   Graphic_setup(pTGE_reso_WF,   3, 20, kCyan+2,    1, kBlack) ;
@@ -2600,7 +2659,7 @@ void DrawOut_Zscan(const std::string& inputDir, const std::string& Comment, cons
 
   // Mean
   pTCanvas->                    Clear() ;
-  pTGE_mean_WF->                SetMinimum(700) ;
+  pTGE_mean_WF->                SetMinimum(600) ;
   pTGE_mean_WF->                SetMaximum(1200) ;
   pTGE_mean_WF->                SetNameTitle("pTGE_mean_WF", "Mean vs drift distance;drift distance z (mm);Mean (ADC count)") ;
   Graphic_setup(pTGE_mean_WF,   3, 20, kCyan+2,    1, kBlack) ;
@@ -2616,8 +2675,8 @@ void DrawOut_Zscan(const std::string& inputDir, const std::string& Comment, cons
 
   // Standard deviation
   pTCanvas->                    Clear() ;
-  pTGE_std_WF->                 SetMinimum(50) ;
-  pTGE_std_WF->                 SetMaximum(120) ;
+  pTGE_std_WF->                 SetMinimum(42) ;
+  pTGE_std_WF->                 SetMaximum(102) ;
   pTGE_std_WF->                 SetNameTitle("pTGE_std_WF", "std vs drift distance;drift distance z (mm);std (ADC count)") ;
   Graphic_setup(pTGE_std_WF,   3, 20, kCyan+2,    1, kBlack) ;
   Graphic_setup(pTGE_std_GPv3, 3, 22, kGreen+2,   1, kBlack) ;
@@ -2743,7 +2802,7 @@ void DrawOut_Yscan(const std::string& inputDir, const std::string& Comment)
 
   // Resolution
   pTGE_reso_XP->                GetXaxis()->SetLimits(-0.5, 31.5) ;
-  pTGE_reso_XP->                SetMinimum(7) ;
+  pTGE_reso_XP->                SetMinimum(4) ;
   pTGE_reso_XP->                SetMaximum(12) ;
   pTGE_reso_XP->                SetNameTitle("pTGE_reso_XP", "Resolution vs Y position;Pad row;resolution (%)") ;
   Graphic_setup(pTGE_reso_WF, 3, 20, kCyan+2,    1, kBlack) ;
@@ -2758,7 +2817,7 @@ void DrawOut_Yscan(const std::string& inputDir, const std::string& Comment)
   // Mean
   pTCanvas->                    Clear() ;
   pTGE_mean_XP->                GetXaxis()->SetLimits(-0.5, 31.5) ;
-  pTGE_mean_XP->                SetMinimum(700) ;
+  pTGE_mean_XP->                SetMinimum(600) ;
   pTGE_mean_XP->                SetMaximum(1210) ;
   pTGE_mean_XP->                SetNameTitle("pTGE_mean_XP", "Mean vs Y position;Pad row;Mean (ADC count)") ;
   Graphic_setup(pTGE_mean_WF, 3, 20, kCyan+2,    1, kBlack) ;
@@ -2771,7 +2830,7 @@ void DrawOut_Yscan(const std::string& inputDir, const std::string& Comment)
   // Standard deviation
   pTCanvas->                    Clear() ;
   pTGE_std_XP->                 GetXaxis()->SetLimits(-0.5, 31.5) ;
-  pTGE_std_XP->                 SetMinimum(50) ;
+  pTGE_std_XP->                 SetMinimum(42) ;
   pTGE_std_XP->                 SetMaximum(121) ;
   pTGE_std_XP->                 SetNameTitle("pTGE_std_XP", "std vs Y position;Pad row;std (ADC count)") ;
   Graphic_setup(pTGE_std_WF, 3, 20, kCyan+2,    1, kBlack) ;
@@ -2888,7 +2947,7 @@ void DrawOut_Phiscan(const std::string& inputDir, const std::string& Comment, co
 
   // Resolution
   pTGE_reso_WF->                GetXaxis()->SetLimits(-3, 48) ;
-  pTGE_reso_WF->                SetMinimum(7) ;
+  pTGE_reso_WF->                SetMinimum(4) ;
   pTGE_reso_WF->                SetMaximum(12) ;
   pTGE_reso_WF->                SetNameTitle("pTGE_reso_WF", "Resolution vs #varphi angle;#varphi angle (#circ);resolution (%)") ;
   Graphic_setup(pTGE_reso_WF,   3, 20, kCyan+2,    1, kBlack) ;
@@ -2904,7 +2963,7 @@ void DrawOut_Phiscan(const std::string& inputDir, const std::string& Comment, co
   pTCanvas->                    Clear() ;
   leg->                         Clear() ;
   pTGE_mean_WF->                GetXaxis()->SetLimits(-3, 48) ;
-  pTGE_mean_WF->                SetMinimum(700) ;
+  pTGE_mean_WF->                SetMinimum(600) ;
   pTGE_mean_WF->                SetMaximum(1200) ;
   pTGE_mean_WF->                SetNameTitle("pTGE_mean_WF", "Mean vs #varphi angle;#varphi angle (#circ);mean (ADC count)") ;
   Graphic_setup(pTGE_mean_WF,   3, 20, kCyan+2,    1, kBlack) ;
@@ -2920,8 +2979,8 @@ void DrawOut_Phiscan(const std::string& inputDir, const std::string& Comment, co
   pTCanvas->                    Clear() ;
   leg->                         Clear() ;
   pTGE_std_WF->                 GetXaxis()->SetLimits(-3, 48) ;
-  pTGE_std_WF->                 SetMinimum(50) ;
-  pTGE_std_WF->                 SetMaximum(120) ;
+  pTGE_std_WF->                 SetMinimum(42) ;
+  pTGE_std_WF->                 SetMaximum(102) ;
   pTGE_std_WF->                 SetNameTitle("pTGE_std_WF", "Standard deviation vs #varphi angle;#varphi angle (#circ);standard deviation (ADC count)") ;
   Graphic_setup(pTGE_std_WF,   3, 20, kCyan+2,    1, kBlack) ;
   Graphic_setup(pTGE_std_XP,   3, 21, kMagenta+2, 1, kBlack) ;
@@ -3073,7 +3132,7 @@ void DrawOut_Thetascan(const std::string& inputDir, const std::string& Comment)
 
   // Resolution
   pTGE_reso_WF->                GetXaxis()->SetLimits(-48, 23) ;
-  pTGE_reso_WF->                SetMinimum(7) ;
+  pTGE_reso_WF->                SetMinimum(4) ;
   pTGE_reso_WF->                SetMaximum(12) ;
   pTGE_reso_WF->                SetNameTitle("pTGE_reso_WF", "Resolution vs #theta angle;#theta angle (#circ);resolution (%)") ;
   pTGE_mean_WF->                SetNameTitle("pTGE_mean_WF", "Mean vs #varphi angle;#varphi angle (#circ);mean (ADC count)") ;
@@ -3096,7 +3155,7 @@ void DrawOut_Thetascan(const std::string& inputDir, const std::string& Comment)
   pTCanvas->                    Clear() ;
   leg->                         Clear() ;
   pTGE_mean_WF->                GetXaxis()->SetLimits(-48, 23) ;
-  pTGE_mean_WF->                SetMinimum(700) ;
+  pTGE_mean_WF->                SetMinimum(600) ;
   pTGE_mean_WF->                SetMaximum(1200) ;
   pTGE_mean_WF->                SetNameTitle("pTGE_mean_WF", "Mean vs #theta angle;#theta angle (#circ);mean (ADC count)") ;
   pTGE_mean_WF->                SetNameTitle("pTGE_mean_WF", "Mean vs #varphi angle;#varphi angle (#circ);mean (ADC count)") ;
@@ -3119,8 +3178,8 @@ void DrawOut_Thetascan(const std::string& inputDir, const std::string& Comment)
   pTCanvas->                    Clear() ;
   leg->                         Clear() ;
   pTGE_std_WF->                 GetXaxis()->SetLimits(-48, 23) ;
-  pTGE_std_WF->                 SetMinimum(50) ;
-  pTGE_std_WF->                 SetMaximum(120) ;
+  pTGE_std_WF->                 SetMinimum(42) ;
+  pTGE_std_WF->                 SetMaximum(102) ;
   pTGE_std_WF->                 SetNameTitle("pTGE_std_WF", "Standard deviation vs #theta angle;#theta angle (#circ);standard deviation (ADC count)") ;
   pTGE_mean_WF->                SetNameTitle("pTGE_mean_WF", "Mean vs #varphi angle;#varphi angle (#circ);mean (ADC count)") ;
   Graphic_setup(pTGE_std_WF,   3, 20, kCyan+2,    1, kBlack) ;
@@ -3322,7 +3381,7 @@ void DrawOut_Zscan_PT(const std::string& inputDir, const std::string& Comment)
 
   // Resolution
   pTGE_reso_XP_200->                GetXaxis()->SetLimits(0, 1000) ;
-  pTGE_reso_XP_200->                SetMinimum(7) ;
+  pTGE_reso_XP_200->                SetMinimum(4) ;
   pTGE_reso_XP_200->                SetMaximum(10) ;
   pTGE_reso_XP_200->                SetNameTitle("pTGE_reso_XP", "Resolution vs drift distance;drift distance z (mm);resolution (%)") ;
   Graphic_setup(pTGE_reso_WF_200, 3, 20, kCyan+2,    1, kBlack) ;
@@ -3343,7 +3402,7 @@ void DrawOut_Zscan_PT(const std::string& inputDir, const std::string& Comment)
   // Mean
   pTCanvas->                    Clear() ;
   pTGE_mean_XP_200->                GetXaxis()->SetLimits(0, 1000) ;
-  pTGE_mean_XP_200->                SetMinimum(700) ;
+  pTGE_mean_XP_200->                SetMinimum(600) ;
   pTGE_mean_XP_200->                SetMaximum(1200) ;
   pTGE_mean_XP_200->                SetNameTitle("pTGE_mean_XP", "Mean vs drift distance;drift distance z (mm);Mean (ADC count)") ;
   Graphic_setup(pTGE_mean_WF_200, 3, 20, kCyan+2,    1, kBlack) ;
@@ -3360,8 +3419,8 @@ void DrawOut_Zscan_PT(const std::string& inputDir, const std::string& Comment)
   // Standard deviation
   pTCanvas->                    Clear() ;
   pTGE_std_XP_200->                 GetXaxis()->SetLimits(0, 1000) ;
-  pTGE_std_XP_200->                 SetMinimum(50) ;
-  pTGE_std_XP_200->                 SetMaximum(120) ;
+  pTGE_std_XP_200->                 SetMinimum(42) ;
+  pTGE_std_XP_200->                 SetMaximum(102) ;
   pTGE_std_XP_200->                 SetNameTitle("pTGE_std_XP", "std vs drift distance;drift distance z (mm);std (ADC count)") ;
   Graphic_setup(pTGE_std_WF_200, 3, 20, kCyan+2,    1, kBlack) ;
   Graphic_setup(pTGE_std_XP_200, 3, 21, kGreen+3,   1, kBlack) ;
@@ -3592,7 +3651,7 @@ void DrawOut_Phiscan_Z(const std::string& inputDir, const std::string& Comment)
 
   // Resolution
   pTGE_reso_WF_55->                GetXaxis()->SetLimits(-3, 48) ;
-  pTGE_reso_WF_55->                SetMinimum(7) ;
+  pTGE_reso_WF_55->                SetMinimum(4) ;
   pTGE_reso_WF_55->                SetMaximum(12) ;
   pTGE_reso_WF_55->                SetNameTitle("pTGE_reso_WF_55", "Resolution vs #varphi angle;#varphi angle (#circ);resolution (%)") ;
   Graphic_setup(pTGE_reso_WF_5,   3, 20, kCyan+2,    1, kBlack) ;
@@ -3612,7 +3671,7 @@ void DrawOut_Phiscan_Z(const std::string& inputDir, const std::string& Comment)
   pTCanvas->                    Clear() ;
   leg->                         Clear() ;
   pTGE_reso_XP_55->                GetXaxis()->SetLimits(-3, 48) ;
-  pTGE_reso_XP_55->                SetMinimum(7) ;
+  pTGE_reso_XP_55->                SetMinimum(4) ;
   pTGE_reso_XP_55->                SetMaximum(12) ;
   pTGE_reso_XP_55->                SetNameTitle("pTGE_reso_XP_5", "Resolution vs #varphi angle;#varphi angle (#circ);resolution (%)") ;
   pTGE_reso_XP_55->                Draw("ap") ;
@@ -3628,7 +3687,7 @@ void DrawOut_Phiscan_Z(const std::string& inputDir, const std::string& Comment)
   pTCanvas->                    Clear() ;
   leg->                         Clear() ;
   pTGE_mean_WF_55->                GetXaxis()->SetLimits(-3, 48) ;
-  pTGE_mean_WF_55->                SetMinimum(700) ;
+  pTGE_mean_WF_55->                SetMinimum(600) ;
   pTGE_mean_WF_55->                SetMaximum(1200) ;
   pTGE_mean_WF_55->                SetNameTitle("pTGE_mean_WF_55", "Mean vs #varphi angle;#varphi angle (#circ);mean (ADC count)") ;
   Graphic_setup(pTGE_mean_WF_5,   3, 20, kCyan+2,    1, kBlack) ;
@@ -3648,7 +3707,7 @@ void DrawOut_Phiscan_Z(const std::string& inputDir, const std::string& Comment)
   pTCanvas->                    Clear() ;
   leg->                         Clear() ;
   pTGE_mean_XP_55->                GetXaxis()->SetLimits(-3, 48) ;
-  pTGE_mean_XP_55->                SetMinimum(700) ;
+  pTGE_mean_XP_55->                SetMinimum(600) ;
   pTGE_mean_XP_55->                SetMaximum(1200) ;
   pTGE_mean_XP_55->                SetNameTitle("pTGE_mean_XP_5", "Mean vs #varphi angle;#varphi angle (#circ);mean (ADC count)") ;
   pTGE_mean_XP_55->                Draw("ap") ;
@@ -3664,8 +3723,8 @@ void DrawOut_Phiscan_Z(const std::string& inputDir, const std::string& Comment)
   pTCanvas->                    Clear() ;
   leg->                         Clear() ;
   pTGE_std_WF_55->                GetXaxis()->SetLimits(-3, 48) ;
-  pTGE_std_WF_55->                SetMinimum(0) ;
-  pTGE_std_WF_55->                SetMaximum(120) ;
+  pTGE_std_WF_55->                SetMinimum(42) ;
+  pTGE_std_WF_55->                SetMaximum(102) ;
   pTGE_std_WF_55->                SetNameTitle("pTGE_std_WF_55", "Std vs #varphi angle;#varphi angle (#circ);std (ADC count)") ;
   Graphic_setup(pTGE_std_WF_5,   3, 20, kCyan+2,    1, kBlack) ;
   Graphic_setup(pTGE_std_WF_55,  3, 21, kOrange-3,  1, kBlack) ;
@@ -3684,8 +3743,8 @@ void DrawOut_Phiscan_Z(const std::string& inputDir, const std::string& Comment)
   pTCanvas->                    Clear() ;
   leg->                         Clear() ;
   pTGE_std_XP_55->                GetXaxis()->SetLimits(-3, 48) ;
-  pTGE_std_XP_55->                SetMinimum(0) ;
-  pTGE_std_XP_55->                SetMaximum(120) ;
+  pTGE_std_XP_55->                SetMinimum(42) ;
+  pTGE_std_XP_55->                SetMaximum(102) ;
   pTGE_std_XP_55->                SetNameTitle("pTGE_std_XP_5", "Std vs #varphi angle;#varphi angle (#circ);std (ADC count)") ;
   pTGE_std_XP_55->                Draw("ap") ;
   pTGE_std_XP_5->              Draw("p same") ;
@@ -3762,7 +3821,7 @@ void DrawOut_TGE_WFsum_L(const std::string& inputDir, const std::string& Comment
   TLegend* leg                    = new TLegend(0.83,0.75,0.97,0.94) ;
   pTCanvas->cd() ;
   // pTGE_reso_PRF->                 GetXaxis()->SetLimits(0, 1000) ;
-  // pTGE_reso_PRF->                 SetMinimum(7) ;
+  // pTGE_reso_PRF->                 SetMinimum(4) ;
 
   v_TGE_z50[0]->                 SetMaximum(1800) ;
   v_TGE_z50[0]->                    SetNameTitle("TGE_z50", "max of WF_{sum} vs L_{cluster} for Z_{drift} = 50 mm;length in cluster L (mm);A_{max} (ADC counts)") ;

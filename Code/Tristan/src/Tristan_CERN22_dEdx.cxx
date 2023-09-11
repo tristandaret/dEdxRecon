@@ -167,12 +167,18 @@ void Tristan_CERN22_dEdx( const std::string& OutDir,
   TH1F* h1f_Ncross          = new TH1F("h1f_Ncross","Number of crossed pads;# of crossed pads;Count", 45, 15, 60) ;
   TH1F* h1f_angle           = new TH1F("h1f_angle","Angle #varphi in each pad;#varphi (#circ);Count", 66, -55, 10) ;
   TH1F* h1f_WFcorr          = new TH1F("h1f_WFcorr","Correction A_{max} ratio;ratio;Count", 80, 0, 3) ;
+  TH1F* h1f_Lmod1VScl       = new TH1F("h1f_Lmod1VScl","L_{ERAM}*0.7 - #Sigma L_{clus>2mm};difference (mm);Count", 80, -60, 60) ;
+  TH1F* h1f_Lmod2VScl       = new TH1F("h1f_Lmod2VScl","L_{ERAM}*(N_{trunc cross}/N_{clus cross>2mm}) - #Sigma L_{clus>2mm};difference (mm);Count", 80, -60, 60) ;
+  TH1F* h1f_LallVScl        = new TH1F("h1f_LallVScl","L_{clusters} - L_{clusters > 2mm};difference (mm);Count", 80, -60, 60) ;
   TH2F* h2f_ratiodiffZ      = new TH2F("h2f_ratiodiffZ", "LUT(z_{file}) vs LUT(z_{calc});LUT(z_{calc});LUT(z_{file})", 80, 0, 2.1, 80, 0, 2.1) ;
   TH2F* h2f_AmaxvsLength    = new TH2F("h2f_AmaxvsLength", "ADC_{max} VS length in pad (before length cut);Length in pad (mm);ADC_{max}", 80, -0.1, 16, 80, 0, 4100) ;
   TH2F* h2f_QvsLength       = new TH2F("h2f_QvsLength", "Q^{anode} VS length in pad (before length cut);Length in pad (mm);Q^{anode}", 80, -0.1, 16, 80, 0, 4100) ;
   TH2F* h2f_LUTvsLength     = new TH2F("h2f_LUTvsLength", "Q^{anode}/ADC_{max} VS length in pad (before length cut);Length in pad (mm);Q^{anode}/ADC_{max}", 80, -0.1, 16, 80, -0.1, 2.1) ;
   TH2F* h2f_QclvsLength     = new TH2F("h2f_QclvsLength", "Q_{cluster} VS length in cluster;Length in cluster (mm);Q_{cluster} (ADC count)", 80, -0.1, 16, 80, 0, 4100) ;
   TH2F* h2f_WFvsLength      = new TH2F("h2f_WFvsLength", "WF_{sum} VS length in cluster;Length in cluster (mm);WF_{sum} (ADC count)", 80, -0.1, 16, 80, 0, 4100) ;
+  TH2F* h2f_WFtruncvsLength = new TH2F("h2f_WFtruncvsLength", "WF_{sum truncated} VS length in cluster;Length in cluster (mm);WF_{sum trunc} (ADC count)", 80, -0.1, 16, 80, 0, 4100) ;
+  TH2F* h2f_WFstarvsLen     = new TH2F("h2f_WFstarvsLen", "WF*_{sum} VS length in cluster;Length in cluster (mm);WF*_{sum} (ADC count)", 80, -0.1, 16, 80, 0, 4100) ;
+  TH2F* h2f_WFstartrcvsLen  = new TH2F("h2f_WFstartrcvsLen", "WF*_{sum truncated} VS length in cluster;Length in cluster (mm);WF*_{sum trunc} (ADC count)", 80, -0.1, 16, 80, 0, 4100) ;
   TH1F* h1f_WFoLength       = new TH1F("h1f_WFoLength","A_{max}(WF_{sum}) / L_{cluster};A_{max}(WF_{sum}) / L_{cluster} (ADC count/mm);", 80, 0, 4000) ;
   TH2F* h2f_lenVSd          = new TH2F("h2f_lenVSd", "impact parameter d vs length in pad;Length in pad (mm);impact parameter (mm)", 80, -0.1, 16, 80, -7.8, 7.8) ;
 
@@ -182,10 +188,13 @@ void Tristan_CERN22_dEdx( const std::string& OutDir,
   TF1* A_corr                = new TF1("A_corr", "291.012 + 9.4669*x - 4.04*x*x + 1.31624*x*x*x - 0.059534*x*x*x*x", 0, 17); // values provided by Vlada (2022/10/11)
   if(Tag.find("diag") != std::string::npos){
     std::string filename = EventFile.substr(0, EventFile.length()-5) ;
+    int angle ;
+    if( (angle = filename.find("30")) != std::string::npos or (angle = filename.find("45")) != std::string::npos) filename.replace(angle, 2, "40") ;
     TFile* pfile = new TFile((filename + "_WFmax_correction.root").c_str(), "READ") ;
+    std::cout << (filename + "_WFmax_correction.root").c_str() << std::endl ;
     A_corr                   = pfile->Get<TF1>("A_corr") ;
     pfile->Close() ;
-    std::cout << std::setprecision(2) << "WF correction parameters :" << A_corr->GetParameter(0) << " | " << A_corr->GetParameter(1) << " | " << A_corr->GetParameter(2) << " | " << A_corr->GetParameter(3) << " | " << A_corr->GetParameter(4) << std::endl ;
+    std::cout << std::setprecision(2) << "WF correction parameters: " << A_corr->GetParameter(0) << " | " << A_corr->GetParameter(1) << " | " << A_corr->GetParameter(2) << " | " << A_corr->GetParameter(3) << " | " << A_corr->GetParameter(4) << std::endl ;
   }
   float A_ref               = A_corr->Eval(Lx) ;
   TheFitterTrack aTheFitterTrack("Minuit", n_param_trk) ;
@@ -268,6 +277,8 @@ void Tristan_CERN22_dEdx( const std::string& OutDir,
       int N_crosclus                      = 0 ;
       std::vector<float>                    v_Q ; 
       std::vector<float>                    v_WF ; 
+      std::vector<float>                    v_WFmax ; 
+      std::vector<RankedValue>              v_rank_WF ;
       std::vector<RankedValue>              v_LP ;          // list of A_max    of leading pads
       std::vector<RankedValue>              v_DPR ;         // list of DPR_max  of crossed pads
       std::vector<float>                    v_ratio ; 
@@ -276,8 +287,8 @@ void Tristan_CERN22_dEdx( const std::string& OutDir,
       float NClusters                     = pModule->Get_NberOfCluster() ;
       float NClus_trunc                   = int(floor(NClusters * (alpha/100))) ;
       float track_len                     = trk_len(pModule, pTrack)*100 ; // in cm from left side  of cluster #0 to right side of last cluster
-      float track_len_trc_v6              = track_len ;
-      float track_len_trc_XP              = 0 ;
+      float trk_len_sum_2mm               = 0 ;
+      float trk_len_sum                   = 0 ;
 
       // Loop On Clusters
       for (int iC = 0 ; iC < NClusters ; iC++){
@@ -322,6 +333,7 @@ void Tristan_CERN22_dEdx( const std::string& OutDir,
           float d                         = loc_par[0]*1000 ;       // in mm
           if(pTrack->GetNberOfParameters() > 2) phi = loc_par[1] ;  // in degrees, recompute only for curved tracks
           float trk_len_pad               = loc_par[2];             // in m
+          trk_len_sum                    += loc_par[2]*1000 ;
           if(trk_len_pad <= 1e-6)           continue ;
           
           float L_phi                     = std::min({ 11.28/std::fabs(std::cos(phi*M_PI/180)), 10.19/std::fabs(std::sin(phi*M_PI/180)) }) ;
@@ -399,7 +411,7 @@ void Tristan_CERN22_dEdx( const std::string& OutDir,
           h1f_WFoLength->                   Fill(h1f_WF_cluster->GetMaximum()/(trk_len_clus*1000)) ;
         }
 
-        // WFsel                            += h1f_WF_cluster->GetMaximum()/track_len ;
+        WFsel                            += h1f_WF_cluster->GetMaximum()/track_len ;
 
         // // WF v1: Sum(WFmax)/track length
         // v_WF.                               push_back(h1f_WF_cluster->GetMaximum()) ;
@@ -412,11 +424,22 @@ void Tristan_CERN22_dEdx( const std::string& OutDir,
 
         // WFoff: Mean(WFmax*ratio_corr)
         if(trk_len_clus > len_cut){
-          float ratio_corr                = 1 ;
-          if(Tag.find("diag") != std::string::npos)ratio_corr = A_ref / A_corr->Eval(trk_len_clus*1000) ;
+          float ratio_corr                = A_ref / A_corr->Eval(trk_len_clus*1000) ;
           h1f_WFcorr->                      Fill(ratio_corr) ;
-          v_WF.                             push_back(h1f_WF_cluster->GetMaximum()*ratio_corr/Lx*10) ;
+          if(Tag.find("diag") != std::string::npos) v_WF.push_back(h1f_WF_cluster->GetMaximum()*ratio_corr/Lx*10) ;
+          else                                      v_WF.push_back(h1f_WF_cluster->GetMaximum()/(trk_len_clus*100)) ;
+          v_lenclus.                        push_back(trk_len_clus) ;
+          v_WFmax.                          push_back(h1f_WF_cluster->GetMaximum()) ;
+          RankedValue rank_WF ;
+          rank_WF.Rank                    = N_crosclus ;
+          if(Tag.find("diag") != std::string::npos) rank_WF.Value = h1f_WF_cluster->GetMaximum()*ratio_corr/Lx*10 ;
+          else                                      rank_WF.Value = h1f_WF_cluster->GetMaximum()/(trk_len_clus*100) ;
+          // rank_WF.Value                   = h1f_WF_cluster->GetMaximum()*ratio_corr/Lx*10 ;
+          v_rank_WF.                        push_back(rank_WF) ;
           N_crosclus++ ;
+          // h2f_WFvsLength->                  Fill(trk_len_clus*1000, h1f_WF_cluster->GetMaximum()*ratio_corr/Lx*10) ;
+          if(Tag.find("diag") != std::string::npos) h2f_WFstarvsLen->Fill(trk_len_clus*1000, h1f_WF_cluster->GetMaximum()*ratio_corr/Lx*10) ;
+          else                                      h2f_WFstarvsLen->Fill(trk_len_clus*1000, h1f_WF_cluster->GetMaximum()/(trk_len_clus*100)) ;
         }
 
         // GPv3: cluster-based DPR
@@ -451,14 +474,18 @@ void Tristan_CERN22_dEdx( const std::string& OutDir,
       // // WF v1: Sum(WFmax)/track length
       // std::sort(v_WF.begin(), v_WF.end()) ;
       // v_WF.                                 resize(NClus_trunc) ;
-      // WFtrunc                             = accumulate(v_WF.begin(), v_WF.end(), 0)/(track_len*(alpha/100)) ;
+      // WFtrunc                             = accumulate(v_WF.begin(), v_WF.end(), 0)/(track_len*(NClus_trunc/NClusters)) ;
       // v_h1f_WFtrunc[iMod]->                 Fill(WFtrunc) ;
 
       // WF3 & WFoff
-      int N_crosclustrunc                 = int(floor(N_crosclus * (alpha/100))) ; ;
+      int N_crosclustrunc                 = int(floor(N_crosclus * (alpha/100))) ;
       std::sort(v_WF.begin(), v_WF.end()) ;
+      std::sort(v_rank_WF.begin(), v_rank_WF.end()) ;
       WFtrunc                             = std::accumulate(v_WF.begin(), v_WF.begin() + N_crosclustrunc, 0) / N_crosclustrunc ;
       v_h1f_WFtrunc[iMod]->                 Fill(WFtrunc) ;
+      for(int i=0; i<N_crosclustrunc; i++)  h2f_WFtruncvsLength->Fill(v_lenclus[v_rank_WF[i].Rank]*1000, v_WFmax[v_rank_WF[i].Rank]) ;
+      for(int i=0; i<N_crosclustrunc; i++)  h2f_WFstartrcvsLen->Fill(v_lenclus[v_rank_WF[i].Rank]*1000,  v_rank_WF[v_rank_WF[i].Rank].Value) ;
+      for(int i=0; i<N_crosclustrunc; i++)  trk_len_sum_2mm += v_lenclus[v_rank_WF[i].Rank]*1000 ;
 
       // GPsel
       float GPsel                         = h1f_GWF_mod->GetMaximum()/track_len ;
@@ -474,6 +501,7 @@ void Tristan_CERN22_dEdx( const std::string& OutDir,
 
       std::sort(v_DPR.begin(), v_DPR.end()) ;
       // GPv6
+      float track_len_trc_v6              = track_len ;
       TH1F* h1f_GPv6                      = new TH1F("h1f_GPv6", "h1f_GPv6", 510, -0.5, 509.5) ;
       h1f_GPv6->                            Add(h1f_GWF_mod) ;
       for(int iP = (int)N_crossed_trc ; iP < (int)v_DPR.size() ; iP++){
@@ -485,6 +513,7 @@ void Tristan_CERN22_dEdx( const std::string& OutDir,
       v_h1f_GPv6[iMod]->                    Fill(GPv6) ;
 
       // XP
+      float track_len_trc_XP              = 0 ;
       float XP                            = 0 ;
       for(int iP = 0 ; iP < (int)N_crossed_trc ; iP++){
         track_len_trc_XP                 += v_length[v_DPR[iP].Rank]*100 ;
@@ -503,6 +532,9 @@ void Tristan_CERN22_dEdx( const std::string& OutDir,
       // if(iEvent < 50) DrawOut_EventDisplay(pModule, OUTDIR_Evt_Display, Tag, "amplitude", pTrack->Get_ParameterValue(2), pTrack->Get_ParameterValue(1), pTrack->Get_ParameterValue(0)) ;
 
       // Methods comparisons
+      h1f_Lmod1VScl->                       Fill(track_len*10*(alpha/100)                         - trk_len_sum_2mm) ;
+      h1f_Lmod2VScl->                       Fill(track_len*10*((float)N_crosclustrunc/N_crosclus) - trk_len_sum_2mm) ;
+      h1f_LallVScl->                        Fill(trk_len_sum                                      - std::accumulate(v_lenclus.begin(), v_lenclus.begin(), 0)) ;
       // v_h2f_XPvsWF[iMod]->                  Fill(WFtrunc, XP) ;
       // v_h2f_WFmWFvsWF[iMod]->               Fill(WFsel,   WFsel-WFtrunc) ;
 
@@ -517,6 +549,7 @@ void Tristan_CERN22_dEdx( const std::string& OutDir,
       delete                                h1f_GPv6 ;
       v_Q.clear() ; 
       v_WF.clear() ; 
+      v_WFmax.clear() ; 
       v_LP.clear() ;
       v_DPR.clear() ;
       v_ratio.clear() ; 
@@ -588,12 +621,17 @@ void Tristan_CERN22_dEdx( const std::string& OutDir,
   h1f_dist->                                Write() ;
   h1f_dist_clus->                           Write() ;
   h1f_WFcorr->                              Write() ;
+  h1f_Lmod1VScl->                           Write() ;
+  h1f_Lmod2VScl->                           Write() ;
   h2f_ratiodiffZ->                          Write() ;
   h2f_AmaxvsLength->                        Write() ;
   h2f_QvsLength->                           Write() ;
   h2f_LUTvsLength->                         Write() ;
   h2f_QclvsLength->                         Write() ;
   h2f_WFvsLength->                          Write() ;
+  h2f_WFtruncvsLength->                     Write() ;
+  h2f_WFstarvsLen->                         Write() ;
+  h2f_WFstartrcvsLen->                      Write() ;
   h1f_WFoLength->                           Write() ;
   h2f_lenVSd->                              Write() ;
   A_corr->                                  Write() ;
@@ -636,12 +674,17 @@ void Tristan_CERN22_dEdx( const std::string& OutDir,
   delete h1f_dist ;
   delete h1f_dist_clus ;
   delete h1f_WFcorr ;
+  delete h1f_Lmod1VScl ;
+  delete h1f_Lmod2VScl ;
   delete h2f_ratiodiffZ ;
   delete h2f_AmaxvsLength ;
   delete h2f_QvsLength ;
   delete h2f_LUTvsLength ;
   delete h2f_QclvsLength ;
   delete h2f_WFvsLength ;
+  delete h2f_WFtruncvsLength ;
+  delete h2f_WFstarvsLen ;
+  delete h2f_WFstartrcvsLen ;
   delete h1f_WFoLength ;
   delete h2f_lenVSd ;
   delete pfileROOT_checks ;

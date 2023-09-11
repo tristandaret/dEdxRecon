@@ -1,5 +1,5 @@
 Tag           : DESY21_phi10_zm40
-Comment       : _zcalc_PRF_4IP_WFoffdiag
+Comment       : _zcalc_PRF_4IP_WFhatrecon
 EventFile     : ../Data_DESY21/Phi_scan_zm40/phi_200_10_zm40_ym60_iter0.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
@@ -93,5 +93,5 @@ Selection Statistics
     6  Stage5     6726     2800 (  -58.37)  (  -61.21)      6726     2800 (  -58.37)  (  -61.21)    219344    95200 (  -56.60)  (  -61.20)    632149   268307 (  -57.56)  (  -63.50) 
   Summary Sel     7218     2800             (  -61.21)      7218     2800             (  -61.21)    245352    95200             (  -61.20)    735059   268307             (  -63.50) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_phi/DESY21_phi_zm40/DESY21_phi10_zm40/2_DESY21_phi10_zm40_Checks_zcalc_PRF_4IP_WFoffdiag.root
-dEdx: OUT_Tristan/DESY21_phi/DESY21_phi_zm40/DESY21_phi10_zm40/3_DESY21_phi10_zm40_dEdx_zcalc_PRF_4IP_WFoffdiag.root
+Checks: OUT_Tristan/DESY21_phi/DESY21_phi_zm40/DESY21_phi10_zm40/2_DESY21_phi10_zm40_Checks_zcalc_PRF_4IP_WFhatrecon.root
+dEdx: OUT_Tristan/DESY21_phi/DESY21_phi_zm40/DESY21_phi10_zm40/3_DESY21_phi10_zm40_dEdx_zcalc_PRF_4IP_WFhatrecon.root

@@ -1,5 +1,5 @@
 Tag           : DESY21_phi45_diag_z860
-Comment       : _zcalc_PRF_4IP_WF3
+Comment       : _zcalc_PRF_4IP_WFoffdiag
 EventFile     : ../Data_DESY21/Phi_scan_z860/phi_200_45_z860_ym60_diag_iter0.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
@@ -63,7 +63,8 @@ Track fitting : PRF
 z method      : zcalc
 cut length    = 2 mm
 
-WF correction parameters :511.53 | -4.49 | 4.54 | -0.02 | -0.01
+../Data_DESY21/Phi_scan_z860/phi_200_40_z860_ym60_diag_iter0_WFmax_correction.root
+WF correction parameters: 670.27 | -98.03 | 23.99 | -1.77 | 0.05
 Processing events:
 0/10384
 Hole in entry 337 | iX = 10 | iY = 16 | RC value reset at 129.29
@@ -100,5 +101,5 @@ Selection Statistics
     6  Stage5     9980     9071 (   -9.11)  (  -12.64)      9980     9071 (   -9.11)  (  -12.64)    515654   477480 (   -7.40)  (  -13.41)   1026888   943641 (   -8.11)  (  -15.90) 
   Summary Sel    10384     9071             (  -12.64)     10384     9071             (  -12.64)    551442   477480             (  -13.41)   1122020   943641             (  -15.90) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_phi/DESY21_phi_z860/DESY21_phi45_diag_z860/2_DESY21_phi45_diag_z860_Checks_zcalc_PRF_4IP_WF3.root
-dEdx: OUT_Tristan/DESY21_phi/DESY21_phi_z860/DESY21_phi45_diag_z860/3_DESY21_phi45_diag_z860_dEdx_zcalc_PRF_4IP_WF3.root
+Checks: OUT_Tristan/DESY21_phi/DESY21_phi_z860/DESY21_phi45_diag_z860/2_DESY21_phi45_diag_z860_Checks_zcalc_PRF_4IP_WFoffdiag.root
+dEdx: OUT_Tristan/DESY21_phi/DESY21_phi_z860/DESY21_phi45_diag_z860/3_DESY21_phi45_diag_z860_dEdx_zcalc_PRF_4IP_WFoffdiag.root

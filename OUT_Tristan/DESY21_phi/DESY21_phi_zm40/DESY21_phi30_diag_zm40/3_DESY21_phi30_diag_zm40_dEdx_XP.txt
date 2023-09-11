@@ -63,7 +63,8 @@ Track fitting : PRF
 z method      : zcalc
 cut length    = 2 mm
 
-WF correction parameters :394.54 | 23.56 | -3.98 | 1.28 | -0.06
+../Data_DESY21/Phi_scan_zm40/phi_200_40_zm40_ym60_diag_iter0_WFmax_correction.root
+WF correction parameters: 546.82 | -108.87 | 22.47 | -0.82 | -0.00
 Processing events:
 0/8719
 Hole in entry 467 | iX = 10 | iY = 16 | RC value reset at 129.29
