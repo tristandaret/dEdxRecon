@@ -464,7 +464,7 @@ void Tristan_CERN22_dEdx( const std::string& OutDir,
       // Qtrunc
       std::sort(v_Q.begin(), v_Q.end()) ;
       v_Q.resize(NClus_trunc) ;
-      Qtrunc                              = accumulate(v_Q.begin(), v_Q.end(), 0)/(track_len*(alpha/100)) ;
+      Qtrunc                              = accumulate(v_Q.begin(), v_Q.end(), 0.)/(track_len*(alpha/100)) ;
       v_h1f_Qtrunc[iMod]->                  Fill(Qtrunc) ;
 
 
@@ -474,14 +474,14 @@ void Tristan_CERN22_dEdx( const std::string& OutDir,
       // // WF v1: Sum(WFmax)/track length
       // std::sort(v_WF.begin(), v_WF.end()) ;
       // v_WF.                                 resize(NClus_trunc) ;
-      // WFtrunc                             = accumulate(v_WF.begin(), v_WF.end(), 0)/(track_len*(NClus_trunc/NClusters)) ;
+      // WFtrunc                             = accumulate(v_WF.begin(), v_WF.end(), 0.)/(track_len*(NClus_trunc/NClusters)) ;
       // v_h1f_WFtrunc[iMod]->                 Fill(WFtrunc) ;
 
       // WF3 & WFoff
       int N_crosclustrunc                 = int(floor(N_crosclus * (alpha/100))) ;
       std::sort(v_WF.begin(), v_WF.end()) ;
       std::sort(v_rank_WF.begin(), v_rank_WF.end()) ;
-      WFtrunc                             = std::accumulate(v_WF.begin(), v_WF.begin() + N_crosclustrunc, 0) / N_crosclustrunc ;
+      WFtrunc                             = std::accumulate(v_WF.begin(), v_WF.begin() + N_crosclustrunc, 0.) / N_crosclustrunc ;
       v_h1f_WFtrunc[iMod]->                 Fill(WFtrunc) ;
       for(int i=0; i<N_crosclustrunc; i++)  h2f_WFtruncvsLength->Fill(v_lenclus[v_rank_WF[i].Rank]*1000, v_WFmax[v_rank_WF[i].Rank]) ;
       for(int i=0; i<N_crosclustrunc; i++)  h2f_WFstartrcvsLen->Fill(v_lenclus[v_rank_WF[i].Rank]*1000,  v_rank_WF[v_rank_WF[i].Rank].Value) ;
@@ -534,7 +534,7 @@ void Tristan_CERN22_dEdx( const std::string& OutDir,
       // Methods comparisons
       h1f_Lmod1VScl->                       Fill(track_len*10*(alpha/100)                         - trk_len_sum_2mm) ;
       h1f_Lmod2VScl->                       Fill(track_len*10*((float)N_crosclustrunc/N_crosclus) - trk_len_sum_2mm) ;
-      h1f_LallVScl->                        Fill(trk_len_sum                                      - std::accumulate(v_lenclus.begin(), v_lenclus.begin(), 0)) ;
+      h1f_LallVScl->                        Fill(trk_len_sum                                      - 1000*std::accumulate(v_lenclus.begin(), v_lenclus.end(), 0.)) ;
       // v_h2f_XPvsWF[iMod]->                  Fill(WFtrunc, XP) ;
       // v_h2f_WFmWFvsWF[iMod]->               Fill(WFsel,   WFsel-WFtrunc) ;
 
@@ -623,6 +623,7 @@ void Tristan_CERN22_dEdx( const std::string& OutDir,
   h1f_WFcorr->                              Write() ;
   h1f_Lmod1VScl->                           Write() ;
   h1f_Lmod2VScl->                           Write() ;
+  h1f_LallVScl->                            Write() ;
   h2f_ratiodiffZ->                          Write() ;
   h2f_AmaxvsLength->                        Write() ;
   h2f_QvsLength->                           Write() ;
@@ -676,6 +677,7 @@ void Tristan_CERN22_dEdx( const std::string& OutDir,
   delete h1f_WFcorr ;
   delete h1f_Lmod1VScl ;
   delete h1f_Lmod2VScl ;
+  delete h1f_LallVScl ;
   delete h2f_ratiodiffZ ;
   delete h2f_AmaxvsLength ;
   delete h2f_QvsLength ;
