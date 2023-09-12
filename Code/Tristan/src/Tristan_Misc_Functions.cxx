@@ -26,6 +26,54 @@ std::vector<std::vector<float>> readCSV(std::string filename) {
 
 
 
+
+
+// Function to search for a word in a CSV file
+bool Get120_CSV(const std::string& filename, const std::string& targetWord, int& value1, int& value2) {
+  std::ifstream file(filename);
+  if (!file.is_open()) {
+    std::cerr << "Error: Unable to open file " << filename << std::endl;
+    return false;
+  }
+
+  std::string line;
+  while (std::getline(file, line)) {
+    std::istringstream ss(line);
+    std::string word;
+    double val1, val2;
+
+      // Parse the CSV line
+      if (std::getline(ss, word, ',') && ss >> val1 && ss.ignore() && ss >> val2) {
+        if (word == targetWord) {
+          value1 = val1;
+          value2 = val2;
+          return true; // Word found
+      }
+    }
+  }
+
+  return false; // Word not found
+}
+
+
+// Function to update a CSV file
+void Set120_CSV(const std::string& filename, const std::string& targetWord, int value1, int value2) {
+    std::ofstream file(filename, std::ios_base::app); // Open in append mode
+
+    if (!file.is_open()) {
+        std::cerr << "Error: Unable to open file " << filename << std::endl;
+        return;
+    }
+
+    // Append a new line with the provided values
+    file << targetWord << ", " << value1 << ", " << value2 << std::endl;
+
+    file.close();
+}
+
+
+
+
 // Heaviside
 float Heaviside(const float& t, const float& t_0){
   if(t_0 >  t)  return 0.0 ;

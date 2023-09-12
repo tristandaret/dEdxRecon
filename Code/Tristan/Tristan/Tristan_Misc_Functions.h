@@ -11,6 +11,12 @@
 // Read CSV file
 std::vector<std::vector<float>> readCSV(std::string filename) ;
 
+// Function to search for a word in a CSV file
+bool Get120_CSV(const std::string& filename, const std::string& targetWord, int& value1, int& value2) ;
+
+// Function to update a CSV file
+void Set120_CSV(const std::string& filename, const std::string& targetWord, int value1, int value2) ;
+
 //Heaviside
 float Heaviside(const float& t, const float& t_0) ;
 

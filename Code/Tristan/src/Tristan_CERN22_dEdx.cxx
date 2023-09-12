@@ -21,6 +21,7 @@
 #include "SampleTools/Uploader.h"
 #include "SampleTools/GiveMe_Uploader.h"
 #include "SampleTools/ReadRCmap.h"
+#include "SampleTools/ReadGainmap.h"
 #include "SignalShape/PRF_param.h"
 
 void Tristan_CERN22_dEdx( const std::string& OutDir,
@@ -93,6 +94,20 @@ void Tristan_CERN22_dEdx( const std::string& OutDir,
   if(Tag.find("CERN22") != std::string::npos) eram_num = "ERAM18";
   ReadRCmap RCmap(eram_num) ;
   std::cout << "RC map: loaded" << std::endl ;
+  ReadGainmap Gainmap(eram_num) ;
+  std::cout << "Gain map: loaded" << std::endl ;
+
+  int   status  = 0 ;
+  float avg_G   = 0 ;
+  float n_pads  = 0 ;
+  for(int iX = 0 ; iX < 36 ; iX++){
+    for(int iY = 0 ; iY < 32 ; iY++){
+      avg_G += Gainmap.GetData(iX, iY, status) ;
+      if(Gainmap.GetData(iX, iY, status) != 0) n_pads++ ;
+    }
+  }
+  avg_G /= n_pads ;
+  std::cout << "Average Gain in " << eram_num << " = " << avg_G << std::endl ;
   
   /////////////////////////////////////////////////////////////////////////////////////////////////////////
   // Selection stage
@@ -102,11 +117,16 @@ void Tristan_CERN22_dEdx( const std::string& OutDir,
   std::cout << "Number of entries :" << NEvent << std::endl ;
   // Get the correct cut on TLeading
   if(SelectionSet == "T2_CERN22_Event" or SelectionSet == "T_DESY21_Event"){
-    int TLow                      = 0 ;
-    int THigh                     = 0 ;
-    std::vector<int> v_TCut             = GetSelection120Cuts(pUploader, NbrOfMod, Data_to_Use, 0) ;
-    TLow                                = v_TCut[0] ;
-    THigh                               = v_TCut[1] ;
+    int TLow  = 0 ; int THigh = 0 ;
+    if(Get120_CSV("../Data_DESY21/Stage120_Cuts.csv", Tag, TLow, THigh)) std::cout << "TLow = " << TLow << " | THigh = " << THigh << std::endl ;
+    else{
+      std::cout << "No Stage120 cuts found in CSV. Getting them now..." << std::endl ;
+      std::vector<int> v_TCut           = SetStage120Cuts(pUploader, NbrOfMod, Data_to_Use, 0) ;
+      TLow                              = v_TCut[0] ;
+      THigh                             = v_TCut[1] ;
+      Set120_CSV("../Data_DESY21/Stage120_Cuts.csv", Tag, TLow, THigh) ;
+      std::cout << "Stage120 cuts are " << TLow << " to " << THigh << ". Values added to CSV file." << std::endl ;
+    }
     aJFL_Selector.Set_Cut_Stage120_TLow (TLow) ;
     aJFL_Selector.Set_Cut_Stage120_THigh(THigh) ;
   }
@@ -183,20 +203,23 @@ void Tristan_CERN22_dEdx( const std::string& OutDir,
   TH2F* h2f_lenVSd          = new TH2F("h2f_lenVSd", "impact parameter d vs length in pad;Length in pad (mm);impact parameter (mm)", 80, -0.1, 16, 80, -7.8, 7.8) ;
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////
-  // PRF & Track fit initializations
+  // correction functoin & Track fit initializations
 
   TF1* A_corr                = new TF1("A_corr", "291.012 + 9.4669*x - 4.04*x*x + 1.31624*x*x*x - 0.059534*x*x*x*x", 0, 17); // values provided by Vlada (2022/10/11)
   if(Tag.find("diag") != std::string::npos){
     std::string filename = EventFile.substr(0, EventFile.length()-5) ;
-    int angle ;
-    if( (angle = filename.find("30")) != std::string::npos or (angle = filename.find("45")) != std::string::npos) filename.replace(angle, 2, "40") ;
-    TFile* pfile = new TFile((filename + "_WFmax_correction.root").c_str(), "READ") ;
-    std::cout << (filename + "_WFmax_correction.root").c_str() << std::endl ;
+    // int angle ;
+    // if( (angle = filename.find("30")) != std::string::npos or (angle = filename.find("45")) != std::string::npos) filename.replace(angle, 2, "40") ;
+    // TFile* pfile = new TFile((filename + "_WFmax_correction.root").c_str(), "READ") ;
+    // std::cout << (filename + "_WFmax_correction.root").c_str() << std::endl ;
+    TFile* pfile = new TFile((filename + "_WFmax_correction_full_err100.root").c_str(), "READ") ;
+    std::cout << (filename + "_WFmax_correction_full_err100.root").c_str() << std::endl ;
     A_corr                   = pfile->Get<TF1>("A_corr") ;
     pfile->Close() ;
     std::cout << std::setprecision(2) << "WF correction parameters: " << A_corr->GetParameter(0) << " | " << A_corr->GetParameter(1) << " | " << A_corr->GetParameter(2) << " | " << A_corr->GetParameter(3) << " | " << A_corr->GetParameter(4) << std::endl ;
   }
   float A_ref               = A_corr->Eval(Lx) ;
+
   TheFitterTrack aTheFitterTrack("Minuit", n_param_trk) ;
   PRF_param                   aPRF_param  ;
   TF1* tf1_PRF              = new TF1("tf1_PRF",aPRF_param, -2.5*1.128, 2.5*1.128, 5) ;
@@ -303,19 +326,34 @@ void Tristan_CERN22_dEdx( const std::string& OutDir,
         for(int iP = 0 ; iP < NPads ; iP ++){
           const Pad* pPad                 = pCluster->Get_Pad(iP) ;
           int StatusRC = 0 ;
+          int StatusG  = 0 ;
           double RC_pad                   = RCmap.GetData(pPad->Get_iX(),pPad->Get_iY(), StatusRC) ;
+          double G_pad                    = Gainmap.GetData(pPad->Get_iX(),pPad->Get_iY(), StatusG) ;
           if(RC_pad == 0){
-            std::cout << "Hole in entry " << pEvent->Get_EntryNber() << " | iX = " << pPad->Get_iX() << " | iY = " << pPad->Get_iY() ; 
-            float RC_left                 = RCmap.GetData(pPad->Get_iX()-1,pPad->Get_iY(), StatusRC) ;
-            float RC_right                = RCmap.GetData(pPad->Get_iX()+1,pPad->Get_iY(), StatusRC) ;
-            float RC_low                  = RCmap.GetData(pPad->Get_iX(),pPad->Get_iY()-1, StatusRC) ;
-            float RC_top                  = RCmap.GetData(pPad->Get_iX(),pPad->Get_iY()+1, StatusRC) ;
+            std::cout << "RC hole in entry   " << pEvent->Get_EntryNber() << " | iX = " << pPad->Get_iX() << " | iY = " << pPad->Get_iY() ; 
+            float RC_left                 = RCmap.GetData(pPad->Get_iX()-1,pPad->Get_iY(),   StatusRC) ;
+            float RC_right                = RCmap.GetData(pPad->Get_iX()+1,pPad->Get_iY(),   StatusRC) ;
+            float RC_low                  = RCmap.GetData(pPad->Get_iX(),  pPad->Get_iY()-1, StatusRC) ;
+            float RC_top                  = RCmap.GetData(pPad->Get_iX(),  pPad->Get_iY()+1, StatusRC) ;
             RC_pad                        = (RC_left + RC_right + RC_low + RC_top)/4 ;
             RCmap.                          SetData(pPad->Get_iX(),pPad->Get_iY(), RC_pad) ;
-            std::cout << " | RC value reset at " << RC_pad << std::endl ;
+            std::cout << " |  RC  value reset at " << RC_pad << std::endl ;
           }
+          if(G_pad == 0){
+            std::cout << "Gain hole in entry " << pEvent->Get_EntryNber() << " | iX = " << pPad->Get_iX() << " | iY = " << pPad->Get_iY() ; 
+            float G_left                  = Gainmap.GetData(pPad->Get_iX()-1,pPad->Get_iY(),   StatusG) ;
+            float G_right                 = Gainmap.GetData(pPad->Get_iX()+1,pPad->Get_iY(),   StatusG) ;
+            float G_low                   = Gainmap.GetData(pPad->Get_iX(),  pPad->Get_iY()-1, StatusG) ;
+            float G_top                   = Gainmap.GetData(pPad->Get_iX(),  pPad->Get_iY()+1, StatusG) ;
+            G_pad                         = (G_left + G_right + G_low + G_top)/4 ;
+            Gainmap.                        SetData(pPad->Get_iX(),pPad->Get_iY(), G_pad) ;
+            std::cout << " | Gain value reset at " << G_pad << std::endl ;
+          }
+          float Gcorr                     = avg_G/G_pad ;
+          float PadAmaxCorr               = Gcorr*pPad->Get_AMax() ;
 
           TH1F* h1f_WF_pad                = GiveMe_WaveFormDisplay(pPad, "main") ;
+          h1f_WF_pad->                      Scale(Gcorr) ;
           h1f_WF_cluster->                  Add(h1f_WF_pad) ;
           h1f_GWF_mod->                     Add(h1f_WF_pad) ;
           v_trashbin.                       push_back(h1f_WF_pad) ;
@@ -324,7 +362,7 @@ void Tristan_CERN22_dEdx( const std::string& OutDir,
           if(pPad == pCluster->Get_LeadingPad()){
             RankedValue rank_iC ;  
             rank_iC.Rank                  = iC ; 
-            rank_iC.Value                 = pPad->Get_AMax() ;
+            rank_iC.Value                 = PadAmaxCorr ;
             v_LP.                           push_back(rank_iC) ;
           }
 
@@ -380,8 +418,8 @@ void Tristan_CERN22_dEdx( const std::string& OutDir,
           h1f_dist->                        Fill(trk_len_pad*1000) ;
           h1f_Lnorm->                       Fill(LNorm) ;
           h1f_dnorm->                       Fill(d/d_max) ;
-          h2f_AmaxvsLength->                Fill(trk_len_pad*1000, pPad->Get_AMax()) ;
-          h2f_QvsLength->                   Fill(trk_len_pad*1000, pPad->Get_AMax()*ratio) ;
+          h2f_AmaxvsLength->                Fill(trk_len_pad*1000, PadAmaxCorr) ;
+          h2f_QvsLength->                   Fill(trk_len_pad*1000, PadAmaxCorr*ratio) ;
           h2f_LUTvsLength->                 Fill(trk_len_pad*1000, ratio) ;
           h2f_lenVSd->                      Fill(trk_len_pad*1000, d) ;
           if(trk_len_pad <= len_cut)        continue ;
@@ -398,7 +436,7 @@ void Tristan_CERN22_dEdx( const std::string& OutDir,
           // GPv6 & XP: List of pads to truncate (crossed pads wrt to DPR_max)
           RankedValue rank_DPR ;  
           rank_DPR.Rank                   = N_crossed ; 
-          rank_DPR.Value                  = pPad->Get_AMax()*ratio/trk_len_pad ;  // DPR amplitude divided by track length in pad
+          rank_DPR.Value                  = PadAmaxCorr*ratio/trk_len_pad ;  // DPR amplitude divided by track length in pad
           v_DPR.                            push_back(rank_DPR) ;
 
           N_crossed++ ;

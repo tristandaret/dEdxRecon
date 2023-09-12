@@ -55,7 +55,7 @@ void Free_trim(std::string& s) {
 
 
 
-TGraphErrors* Convert_TH2_TGE(const TH2* pTH2)
+TGraphErrors* Convert_TH2_TGE_(const TH2* pTH2)
 {
   TGraphErrors* gr = new TGraphErrors() ;
   for (int i = 1 ; i < pTH2->GetXaxis()->GetNbins() ; ++i) {
@@ -89,23 +89,18 @@ TGraphErrors* Convert_TH2_TGE(const TH2* pTH2)
 
 TGraphErrors* Convert_TH2_TGE_v2(const TH2* pTH2)
 {
-  return Convert_TH2_TGE_v2(pTH2, 1e+9) ;
-}
-TGraphErrors* Convert_TH2_TGE_v2(const TH2* pTH2, const float& cutoff)
-{
-  TGraphErrors* pTGE                    = new TGraphErrors() ;
-  for (int ix = 1 ; ix < pTH2->GetXaxis()->GetNbins()-1; ix++){
-    for (int iy = 0 ; iy < pTH2->GetYaxis()->GetNbins(); iy++){
-      double x                          = pTH2->GetXaxis()->GetBinCenter(ix) ;
-      double y                          = pTH2->GetYaxis()->GetBinCenter(iy) ;
-      double err                        = pTH2->GetBinContent(ix, iy) ;
-      if(err > 0 && err < cutoff){
-        pTGE->                            SetPoint(pTGE->GetN(), x, y) ;
-        pTGE->                            SetPointError(pTGE->GetN()-1, 1/err, 1/err) ; // -1 because a new point was created above
-      }
-    }
+  TGraphErrors* gr = new TGraphErrors() ;
+  for (int i = 1 ; i < pTH2->GetXaxis()->GetNbins() ; ++i) {
+
+    TH1D* temp_h = pTH2-> ProjectionY(Form("projections_bin_%i", i), i, i);
+
+    double x = pTH2->GetXaxis()->GetBinCenter(i);
+    double y = temp_h->GetBinCenter(temp_h->GetMaximumBin());
+
+    gr->SetPoint(gr->GetN(), x, y);
+    gr->SetPointError(gr->GetN()-1, 0, 100);
   }
-  return pTGE ;
+  return gr ;
 }
 
 

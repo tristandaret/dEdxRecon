@@ -146,7 +146,7 @@ void Tristan_CERN22_Control(
     else if(particle == "protons 1GeV")  {TLow = 152 ; THigh = 207 ; }
     else if(particle == "#pi^{-} 0.5GeV"){TLow = 153 ; THigh = 195 ; }
     else{
-      std::vector<int> v_TCut             = GetSelection120Cuts(pUploader, NbrOfMod, Data_to_Use, 0) ;
+      std::vector<int> v_TCut             = SetStage120Cuts(pUploader, NbrOfMod, Data_to_Use, 0) ;
       TLow                                = v_TCut[0] ;
       THigh                               = v_TCut[1] ;
       std::cout << TLow << " " << THigh << std::endl ;

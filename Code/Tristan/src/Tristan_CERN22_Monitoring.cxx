@@ -30,7 +30,7 @@ void Tristan_CERN22_Monitoring()
   int nRC = 21 ; 
 
   std::string Tag    ; 
-  std::string Comment = "_zcalc_PRF_4IP_WFoffdiag" ; 
+  std::string Comment = "_zcalc_PRF_4IP_Gain_WFoffdiag_err100" ; 
   std::string prtcle ; 
   std::string EvtFile ;
   std::string OutDir  = "OUT_Tristan/";  
@@ -41,10 +41,10 @@ void Tristan_CERN22_Monitoring()
 
   // Files to use
   int prototype       = 0 ;
-  int DESY_zscan      = 0 ; 
+  int DESY_zscan      = 1 ; 
   int DESY_yscan      = 0 ; 
   int DESY_phi        = 1 ; 
-  int DESY_theta      = 0 ; 
+  int DESY_theta      = 1 ; 
 
   // Computations
   int Control         = 0 ;
@@ -54,11 +54,11 @@ void Tristan_CERN22_Monitoring()
   // DrawOuts
   int DO_Displayer    = 0 ;
   int DO_Control      = 0 ;
-  int DO_Checks       = 1 ;
-  int DO_Methods      = 1 ;
+  int DO_Checks       = 0 ;
+  int DO_Methods      = 0 ;
   int DO_Separation   = 0 ;
-  int DO_Resolution   = 1 ;
-  int DO_Global       = 1 ;
+  int DO_Resolution   = 0 ;
+  int DO_Global       = 0 ;
 
   // Energy scan using the prototype (ERAM 18)
   if(prototype){
@@ -99,17 +99,17 @@ void Tristan_CERN22_Monitoring()
     intUploader     =  2 ;
     NbrOfMod        =  0 ; 
     Dt              = 310 ; TB = 50 ;
-    // int PT_arr[] = {200, 412} ;
-    int PT_arr[] = {200} ;
+    int PT_arr[] = {200, 412} ;
+    // int PT_arr[] = {200} ;
     for (int PT : PT_arr){
       OutDir        = Form("OUT_Tristan/DESY21_zscan/DESY21_zscan_PT%i/", PT) ; 
       MyMakeDir(OutDir) ; 
       Uploader* pUpld ; Interpol4 LUT ;
       if (Control or dEdx) LUT = GiveMe_LUT(Form("/home/td263283/Documents/Python/LUT_XP/LUT_Dt%i_PT%i_nphi200_nd200/", Dt, PT), nZ, nRC) ;
-      int index[] = {-1, 4, 8} ;
-      for (int zDrift : index) {
-      // int NFiles = 9 ;
-      // for (int zDrift = -1 ; zDrift < NFiles ; zDrift++){
+      // int index[] = {-1, 4, 8} ;
+      // for (int zDrift : index) {
+      int NFiles = 9 ;
+      for (int zDrift = -1 ; zDrift < NFiles ; zDrift++){
         if(zDrift == -1) {EvtFile  = Form("../Data_DESY21/zscan_PT%i/z_360_275_%i_02T_26_m40_iter0.root", PT, PT) ; Tag = Form("DESY21_zm40_PT%i", PT) ; prtcle = "electron_z-40" ; }
         else {EvtFile              = Form("../Data_DESY21/zscan_PT%i/z_360_275_%i_02T_26_%i60_iter0.root", PT, PT, zDrift) ; Tag = Form("DESY21_z%i60_PT%i", zDrift, PT) ; prtcle = Form("electron_z%i60", zDrift) ; }
         if(Control or dEdx) pUpld = GiveMe_Uploader (intUploader, EvtFile) ;
@@ -161,31 +161,25 @@ void Tristan_CERN22_Monitoring()
     intUploader     =  2 ;
     NbrOfMod        =  0 ;
     PT              = 200 ; Dt = 310 ; TB = 40 ;
-    int z_arr[]     = {50, 550, 950} ;
-    // int z_arr[]     = {50, 550} ;
     Uploader* pUpld ; Interpol4 LUT ;
     if (Control or dEdx) LUT = GiveMe_LUT(Form("/home/td263283/Documents/Python/LUT_XP/LUT_Dt%i_PT%i_nphi200_nd200/", Dt, PT), nZ, nRC) ;
-    int phi_arr[]   = {0, 5, 10, 20, 30, 30, 40, 45} ;
-    for (int zdrift : z_arr){
-      if(zdrift == 50) OutDir     =      "OUT_Tristan/DESY21_phi/DESY21_phi_zm40/" ;
-      else              OutDir    = Form("OUT_Tristan/DESY21_phi/DESY21_phi_z%i/", zdrift-90) ;  
+    std::string z_arr[]   = {"m40", "460", "860"} ;
+    int         phi_arr[] = {0, 5, 10, 20, 30, 30, 40, 45} ;
+    for (int iz = 0 ; iz < (int)std::size(z_arr) ; iz++){
+      OutDir    = Form("OUT_Tristan/DESY21_phi/DESY21_phi_z%i/", z_arr[iz].c_str()) ;  
       MyMakeDir(OutDir) ; 
-      for (int ifile = 5 ; ifile < (int)std::size(phi_arr) ; ifile++){
+      for (int ifile = 0 ; ifile < (int)std::size(phi_arr) ; ifile++){
         int phi                   = phi_arr[ifile] ;
-        if(zdrift == 50){
-          if(ifile < 5) {EvtFile  = Form("../Data_DESY21/Phi_scan_zm40/phi_200_%i_zm40_ym60_iter0.root", phi) ;       Tag = Form("DESY21_phi%i_zm40", phi) ;      prtcle = Form("electron_phi%i_zm40", phi) ; }
-          else          {EvtFile  = Form("../Data_DESY21/Phi_scan_zm40/phi_200_%i_zm40_ym60_diag_iter0.root", phi) ;  Tag = Form("DESY21_phi%i_diag_zm40", phi) ; prtcle = Form("electron_phi%i_diag_zm40", phi) ; }
-        }
-        else{
-          if(ifile < 5) {EvtFile  = Form("../Data_DESY21/Phi_scan_z%i/phi_200_%i_z%i_ym60_iter0.root", zdrift-90, phi, zdrift-90) ;       Tag = Form("DESY21_phi%i_z%i", phi, zdrift-90) ;      prtcle = Form("electron_phi%i_z%i", phi, zdrift-90) ; }
-          else          {EvtFile  = Form("../Data_DESY21/Phi_scan_z%i/phi_200_%i_z%i_ym60_diag_iter0.root", zdrift-90, phi, zdrift-90) ;  Tag = Form("DESY21_phi%i_diag_z%i", phi, zdrift-90) ; prtcle = Form("electron_phi%i_diag_z%i", phi, zdrift-90) ; }
-        }
+        const char* z             = z_arr[iz].c_str() ;
+        if(ifile < 5) {EvtFile  = Form("../Data_DESY21/Phi_scan_z%s/phi_200_%i_z%s_ym60_iter0.root", z, phi, z) ; Tag = Form("DESY21_phi%i_z%s", phi, z) ; prtcle = Form("electron_phi%i_z%s", phi, z) ; }
+        else          {EvtFile  = Form("../Data_DESY21/Phi_scan_z%s/phi_200_%i_z%s_ym60_diag_iter0.root", z, phi, z) ; Tag = Form("DESY21_phi%i_diag_z%s", phi, z) ; prtcle = Form("electron_phi%i_diag_z%s", phi, z) ; }
+
         if(Control or dEdx) pUpld = GiveMe_Uploader (intUploader, EvtFile) ;
         if (Control)      Tristan_CERN22_Control    (OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, Data_to_Use, PT, TB, prtcle) ;
         if (DO_Control)   DrawOut_Control           (OutDir, Tag, Comment, SelectionSet, 1) ;
         if (dEdx)         Tristan_CERN22_dEdx       (OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, Data_to_Use, LUT, PT, TB, zdrift) ;
-        if (DO_Checks)     DrawOut_Checks            (OutDir, EvtFile, Tag, Comment) ;
-        if (DO_Methods)  DrawOut_Methods        (OutDir, Tag, Comment, 1, prtcle) ;
+        if (DO_Checks)    DrawOut_Checks            (OutDir, EvtFile, Tag, Comment) ;
+        if (DO_Methods)   DrawOut_Methods           (OutDir, Tag, Comment, 1, prtcle) ;
         delete pUpld ;
       }
       if(DO_Resolution and zdrift == 50) DrawOut_Phiscan ("OUT_Tristan/DESY21_phi/DESY21_phi_zm40", Comment, "m40") ;
@@ -224,7 +218,7 @@ void Tristan_CERN22_Monitoring()
 
 
   // DrawOut_Scans("OUT_Tristan", Comment);
-  // DrawOut_Versions("OUT_Tristan/", "WF", "_zcalc_PRF_4IP_WF3corrLx", "_zcalc_PRF_4IP_WF1") ;
+  // DrawOut_Versions("OUT_Tristan/", "XP", "_zcalc_PRF_4IP_WF1", "_zcalc_PRF_4IP_Gain_WFoffdiag") ;
   // DrawOut_verif("OUT_Tristan/DESY21_phi/DESY21_phi_", Comment) ;
 
 
@@ -425,19 +419,17 @@ void Tristan_CERN22_Monitoring()
   }
 
   if(WFcorr){
-    SelectionSet    = "T_DESY21_Event" ;
-    intUploader     =  2 ;
-    NbrOfMod        =  0 ;
-    int z_arr[]     = {50, 550, 950} ;
-    int phi_arr[]   = {30, 40, 45} ;
-    for (int zdrift : z_arr){
-      for (int ifile = 0 ; ifile < (int)std::size(phi_arr) ; ifile++){
-        int phi                   = phi_arr[ifile] ;
-        if(zdrift == 50)  OutDir  =  Form("../Data_DESY21/Phi_scan_zm40/phi_200_%i_zm40_ym60_diag_iter0", phi) ;
-        else              OutDir  =  Form("../Data_DESY21/Phi_scan_z%i/phi_200_%i_z%i_ym60_diag_iter0", zdrift-90, phi, zdrift-90); 
-        std::cout << OutDir << std::endl ;
-        Uploader* pUpld           = GiveMe_Uploader (intUploader, OutDir+".root") ;  
-        Tristan_CERN22_corr(OutDir, SelectionSet, pUpld, NbrOfMod, Data_to_Use) ;
+    SelectionSet          = "T_DESY21_Event" ;
+    intUploader           =  2 ;
+    NbrOfMod              =  0 ;
+    std::string z_index[] = {"m40", "460", "860"} ;
+    int phi_arr[]         = {30, 40, 45} ;
+    for (int iz = 0 ; iz < (int)std::size(z_index) ; iz++){
+      for (int iphi = 0 ; iphi < (int)std::size(phi_arr) ; iphi++){
+        OutDir            = Form("../Data_DESY21/Phi_scan_z%s/phi_200_%i_z%s_ym60_diag_iter0", z_index[iz].c_str(), phi_arr[iphi], z_index[iz].c_str()) ; 
+        Tag               = Form("DESY21_phi%i_z%s", phi_arr[iphi], z_index[iz].c_str()) ;
+        Uploader* pUpld   = GiveMe_Uploader (intUploader, OutDir+".root") ;  
+        Tristan_CERN22_corr(OutDir, Tag, SelectionSet, pUpld, NbrOfMod, Data_to_Use) ;
         delete pUpld ;
       }
     }

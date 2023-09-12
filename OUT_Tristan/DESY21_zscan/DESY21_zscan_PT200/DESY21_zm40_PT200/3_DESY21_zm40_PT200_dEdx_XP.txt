@@ -1,5 +1,5 @@
 Tag           : DESY21_zm40_PT200
-Comment       : _zcalc_PRF_4IP_WFhatrecon
+Comment       : _zcalc_PRF_4IP_Gain_WFoffdiag_err100
 EventFile     : ../Data_DESY21/zscan_PT200/z_360_275_200_02T_26_m40_iter0.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
@@ -16,18 +16,22 @@ Uploader_ReadRCmap::Uploader_ReadRCmap m_NberOfEntries = 1151
 ReadRCmap::ReadRCmap  No Data for iX=10 and  iY=16 in GainRCMaps/RCfiles/ERAM01_RCdata_01.root
 RC map: loaded
 
+ReadGainmap::ReadGainmap Dir = GainRCMaps/Gainfiles/EramName = ERAM01
+ReadGainmap::ReadGainmap m_FileName = GainRCMaps/Gainfiles/ERAM01_Gaindata_01.root
+
+Uploader_ReadGainmap::Uploader_ReadGainmap GainmapFile = GainRCMaps/Gainfiles/ERAM01_Gaindata_01.root
+Uploader_ReadGainmap::Uploader_ReadGainmap m_NberOfEntries = 1151
+
+ReadGainmap::ReadGainmap  No Data for iX=10 and  iY=16 in GainRCMaps/Gainfiles/ERAM01_Gaindata_01.root
+Gain map: loaded
+Average Gain in ERAM01 = 1947.77
+
 -------------->Predefined selection T_DESY21_Event
 Number of entries :8941
-module 0 TLeading max = 53
-module 1 TLeading max = 0
-module 2 TLeading max = 0
-module 3 TLeading max = 0
-module 4 TLeading max = 0
-module 5 TLeading max = 0
-module 6 TLeading max = 0
-module 7 TLeading max = 0
+No Stage120 cuts found in CSV. Getting them now...
 Module whose bin is the most filled: 0
 
+Stage120 cuts are 39 to 63. Values added to CSV file.
 
 -------------->List of selections
 Apply selection  1 -> Remove clusters in first and last columns 
@@ -66,7 +70,8 @@ cut length    = 2 mm
 Processing events:
 0/8941
 500/8941
-Hole in entry 578 | iX = 10 | iY = 16 | RC value reset at 129
+RC Hole in entry 578 | iX = 10 | iY = 16 | RC value reset at 129
+Gain Hole in entry 578 | iX = 10 | iY = 16 | Gain value reset at 1889
 1000/8941
 1500/8941
 2000/8941
@@ -96,5 +101,5 @@ Selection Statistics
     6  Stage5     8492     3386 (  -60.13)  (  -62.13)      8492     3386 (  -60.13)  (  -62.13)    277518   115124 (  -58.52)  (  -62.11)    785606   317624 (  -59.57)  (  -64.09) 
   Summary Sel     8941     3386             (  -62.13)      8941     3386             (  -62.13)    303816   115124             (  -62.11)    884469   317624             (  -64.09) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_zm40_PT200/2_DESY21_zm40_PT200_Checks_zcalc_PRF_4IP_WFhatrecon.root
-dEdx: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_zm40_PT200/3_DESY21_zm40_PT200_dEdx_zcalc_PRF_4IP_WFhatrecon.root
+Checks: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_zm40_PT200/2_DESY21_zm40_PT200_Checks_zcalc_PRF_4IP_Gain_WFoffdiag_err100.root
+dEdx: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_zm40_PT200/3_DESY21_zm40_PT200_dEdx_zcalc_PRF_4IP_Gain_WFoffdiag_err100.root

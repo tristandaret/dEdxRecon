@@ -18,7 +18,7 @@
 #include "TGraphErrors.h"
 
 // CERN22; Get cut values for the time selection (run based)
-std::vector<int> GetSelection120Cuts(Uploader* pUploader, const int& NbrOfMod, const int& Data_to_Use, const int& CloseWF)
+std::vector<int> SetStage120Cuts(Uploader* pUploader, const int& NbrOfMod, const int& Data_to_Use, const int& CloseWF)
 {
   std::vector<int>                        v_TCut ;
 
@@ -53,7 +53,6 @@ std::vector<int> GetSelection120Cuts(Uploader* pUploader, const int& NbrOfMod, c
     }
     std::vector<double> v_MaxTLead ;
     for (int iMod = 0; iMod < 8; iMod++){
-      std::cout << "module " << iMod << " TLeading max = " << v_pTH1_TLeadCut[iMod]->GetMaximumBin() - 1 << std::endl ;
       v_MaxTLead.                         push_back(v_pTH1_TLeadCut[iMod]->GetMaximum()) ;
     }
 

@@ -475,7 +475,7 @@ void DrawOut_Checks(const std::string& OutDir, const std::string EvtFile, const 
   TH1F* h1f_WFcorr              = pTFile_Checks->Get<TH1F>("h1f_WFcorr") ;
   TH1F* h1f_Lmod1VScl           = pTFile_Checks->Get<TH1F>("h1f_Lmod1VScl") ;
   TH1F* h1f_Lmod2VScl           = pTFile_Checks->Get<TH1F>("h1f_Lmod2VScl") ;
-  TH1F* h1f_LallVScl           = pTFile_Checks->Get<TH1F>("h1f_LallVScl") ;
+  TH1F* h1f_LallVScl            = pTFile_Checks->Get<TH1F>("h1f_LallVScl") ;
   TH2F* h2f_ratiodiffZ          = pTFile_Checks->Get<TH2F>("h2f_ratiodiffZ") ;
   TH2F* h2f_AmaxvsLength        = pTFile_Checks->Get<TH2F>("h2f_AmaxvsLength") ;
   TH2F* h2f_QvsLength           = pTFile_Checks->Get<TH2F>("h2f_QvsLength") ;
@@ -488,7 +488,7 @@ void DrawOut_Checks(const std::string& OutDir, const std::string EvtFile, const 
   TF1* A_corr                    = new TF1 ;
     if(Tag.find("diag") != std::string::npos){
     std::string filename = EvtFile.substr(0, EvtFile.length()-5) ;
-    TFile* pfile = new TFile((filename + "_WFmax_correction.root").c_str(), "READ") ;
+    TFile* pfile = new TFile((filename + "_WFmax_correction_full_err100.root").c_str(), "READ") ;
     A_corr                   = pfile->Get<TF1>("A_corr") ;
     pfile->Close() ;
   }
@@ -1148,8 +1148,8 @@ void DrawOut_Versions(const std::string& inputDir, const std::string& Method, co
   TCanvas* pTCanvas           = new TCanvas("TCanvas", "TCanvas", 1800, 1200) ;
   pTCanvas->                    cd() ;
   TLegend* leg                = new TLegend(0.65,0.75,0.98,0.93) ;
-  std::string leg1            = "WF_{sum} official" ;
-  std::string leg2            = "old WF_{sum}" ;
+  std::string leg1            = "XP w/o Gain correction" ;
+  std::string leg2            = "XP w/ Gain correction" ;
 
   std::string method ;
   Color_t kBefore ;
@@ -1789,7 +1789,6 @@ void DrawOut_Versions(const std::string& inputDir, const std::string& Method, co
   v_std2[5]->                Draw("p same") ;
   leg->                         Draw() ;
   pTCanvas->                    SaveAs(OutputFile_End.c_str()) ;
-  leg->Clear() ;
 }
 
 

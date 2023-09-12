@@ -21,6 +21,7 @@
 #include "SignalShape/PRF_param.h"
 
 void Tristan_CERN22_corr( const std::string& OutDir,
+                          std::string const& Tag,
                           std::string const& SelectionSet,
                           Uploader*          pUploader,
                           int         const& NbrOfMod,
@@ -37,10 +38,8 @@ void Tristan_CERN22_corr( const std::string& OutDir,
   // Geometry
   float Lx              = 11.28 ;                               // Length of pad (mm)
   float Ly              = 10.19 ;                               // Height of pad (mm)
-  float L               = sqrt(pow(Lx, 2) + pow(Ly, 2)) ;       // diagonal length of the pad (mm)
   float n_param_trk     = 3 ;                                   // 2 if there is not magnetic field
   float mean_phi        = 0 ;
-  float len_cut         = 0.002 ;                               // minimum length in pad to be considered truncable (m)
   int n_events          = 0 ;
   std::cout << OutDir << ".root" << std::endl ;
   std::cout << SelectionSet << std::endl ;
@@ -53,27 +52,28 @@ void Tristan_CERN22_corr( const std::string& OutDir,
   std::cout << "Number of entries :" << NEvent << std::endl ;
   // Get the correct cut on TLeading
   if(SelectionSet == "T2_CERN22_Event" or SelectionSet == "T_DESY21_Event"){
-    int TLow                      = 0 ;
-    int THigh                     = 0 ;
-    std::vector<int> v_TCut             = GetSelection120Cuts(pUploader, NbrOfMod, Data_to_Use, 0) ;
-    TLow                                = v_TCut[0] ;
-    THigh                               = v_TCut[1] ;
+    int TLow  = 0 ; int THigh = 0 ;
+    if(Get120_CSV("../Data_DESY21/Stage120_Cuts.csv", Tag, TLow, THigh)) std::cout << "TLow = " << TLow << " | THigh = " << THigh << std::endl ;
+    else{
+      std::cout << "No Stage120 cuts found in CSV. Getting them now..." << std::endl ;
+      std::vector<int> v_TCut           = SetStage120Cuts(pUploader, NbrOfMod, Data_to_Use, 0) ;
+      TLow                              = v_TCut[0] ;
+      THigh                             = v_TCut[1] ;
+      Set120_CSV("../Data_DESY21/Stage120_Cuts.csv", Tag, TLow, THigh) ;
+      std::cout << "Stage120 cuts are " << TLow << " to " << THigh << ". Values added to CSV file." << std::endl ;
+    }
     aJFL_Selector.Set_Cut_Stage120_TLow (TLow) ;
     aJFL_Selector.Set_Cut_Stage120_THigh(THigh) ;
-  }
-  // Selection for DESY21 phi diagonal clustering
-  if(OutDir.find("diag") != std::string::npos){
-    aJFL_Selector.Set_Cut_Stage5_NCluster_Low(50) ;
-    aJFL_Selector.Set_Cut_StageT15_APM_Low(1) ;
-    aJFL_Selector.Set_Cut_StageT15_APM_High(3.5) ;
   }
     
   aJFL_Selector.Tell_Selection() ;
 
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////
   TH2F* h2f_WFvsLength      = new TH2F("h2f_WFvsLength", "WF_{sum} VS length in cluster;Length in cluster (mm);WF_{sum} (ADC count)", 80, -0.1, 16, 80, 0, 4100) ;
-  TF1* A_corr                = new TF1("A_corr", "[0] + [1]*x + [2]*x*x + [3]*x*x*x + [4]*x*x*x*x", 2, 17); // values provided by Vlada (2022/10/11)
+  TF1* A_corr                = new TF1("A_corr", "[0] + [1]*x + [2]*x*x + [3]*x*x*x + [4]*x*x*x*x", 0, 17); // values provided by Vlada (2022/10/11)
   A_corr->SetParameters(291, 9.47, -4.04, 1.32, -0.0595) ;
+  // TF1* A_corr                = new TF1("A_corr", "[0] + [1]*cos([2]*x-[3])", 0, 17);
+  // A_corr->SetParameters(400, 600, M_PI/16, -16) ;
   TheFitterTrack aTheFitterTrack("Minuit", n_param_trk) ;
   PRF_param                   aPRF_param  ;
   TF1* tf1_PRF              = new TF1("tf1_PRF",aPRF_param, -2.5*1.128, 2.5*1.128, 5) ;
@@ -148,16 +148,17 @@ void Tristan_CERN22_corr( const std::string& OutDir,
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////
   // Fitting 
-  float L_phi                           = std::min({ 11.28/std::fabs(std::cos(mean_phi)), 10.19/std::fabs(std::sin(mean_phi)) }) ;
+  // float L_phi                           = std::min({ 11.28/std::fabs(std::cos(mean_phi)), 10.19/std::fabs(std::sin(mean_phi)) }) ;
+  float L_phi                           = 11.28/fabs(cos(mean_phi)) ;
   std::cout << L_phi << std::endl ;
   A_corr->                                SetNameTitle("A_corr", "A_corr") ;
-  TGraph* tge_WFvsLength                = Convert_TH2_TGE(h2f_WFvsLength) ;
+  TGraph* tge_WFvsLength                = Convert_TH2_TGE_v2(h2f_WFvsLength) ;
   tge_WFvsLength->                        SetNameTitle("pTGE_A_corr", "pTGE_A_corr") ;
-  tge_WFvsLength->                        Fit(A_corr,"RQ","0", 2, L_phi) ;
+  tge_WFvsLength->                        Fit(A_corr,"RQ","0", 0, L_phi) ;
   ////////////////////////////////////////////////////////////////////////////////////////////////////
   // Saving
   // Checks
-  TFile* pfileROOT_corr = new TFile(TString(OutDir + "_WFmax_correction.root"), "RECREATE") ;
+  TFile* pfileROOT_corr = new TFile(TString(OutDir + "_WFmax_correction_full_err100.root"), "RECREATE") ;
   h2f_WFvsLength->                        Write() ;
   A_corr->                                Write() ;
   tge_WFvsLength->                        Write() ;

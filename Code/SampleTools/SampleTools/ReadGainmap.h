@@ -12,6 +12,7 @@ public:
    virtual ~ReadGainmap();
    
    double GetData(const int& iX, const int& iY, int& Status);
+  void SetData(const int& iX, const int& iY, const double& Data) ;
 
 private:
   std::string m_EramName ;
@@ -23,7 +24,6 @@ private:
   
   int GetLinear(const int& iX, const int& iY);
   int HasBeenSet(const int& iX, const int& iY);
-  void SetData(const int& iX, const int& iY, const double& Data) ;
 
   void ConstructorEnd();
 

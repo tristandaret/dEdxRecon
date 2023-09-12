@@ -5,6 +5,7 @@
 
 
 void Tristan_CERN22_corr( const std::string& OutDir,
+                          std::string const& Tag,
                           std::string const& SelectionSet,
                           Uploader*          pUploader,
                           int         const& NbrOfMod,
