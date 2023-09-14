@@ -50,3 +50,5 @@ void DrawOut_Phiscan_Z(const std::string& inputDir, const std::string& Comment) 
 void DrawOut_TGE_WFsum_L(const std::string& inputDir, const std::string& Comment) ;
 
 void DrawOut_verif(const std::string& OutDir, const std::string& Comment) ;
+
+void DrawOut_corrections() ;

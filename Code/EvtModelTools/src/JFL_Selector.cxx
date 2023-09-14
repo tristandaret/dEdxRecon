@@ -2155,7 +2155,7 @@ void JFL_Selector::StageT20(Event*  pEvent , const int& ModuleNber)
   int NClusters                   = ClusterSet.size() ;
 
   TH2D* pTH2D_Evt                 = GiveMe_EvtDisplay(pModule, "Selection_StageT20") ;
-  TGraphErrors* pTGE_Evt          = Convert_TH2_TGE_v2(pTH2D_Evt, 900) ;
+  TGraphErrors* pTGE_Evt          = Convert_TH2_TGE_v2(pTH2D_Evt) ;
   TF1* pTF1_Track                 = new TF1("track_selection_stage_20", "[0] + [1]*x", -0.5, 36.5) ;
   float x1 = 0, x2 = 0, y1 = 0, y2 = 0 ;
   for(int iC = 0                 ; iC < NClusters/2 ; iC++) {x1 += (pModule->Get_Cluster(iC)->Get_LeadingPad()->Get_iX()+0.5)*1.128 ; y1 += pModule->Get_Cluster(iC)->Get_LeadingPad()->Get_YPad()*100 ; }

@@ -35,10 +35,7 @@ void ReadRCmap::ConstructorEnd()
 
 //
   std::cout << std::endl ;
-  std::cout << "ReadRCmap::ReadRCmap "  
-    << "Dir = " << m_Dir 
-    << "EramName = " << m_EramName 
-    << std::endl ;
+  
 
   m_FileName = "BIDON" ;
   if (m_EramName=="ERAM01" ) m_FileName = m_Dir + "ERAM01_RCdata_01.root" ;

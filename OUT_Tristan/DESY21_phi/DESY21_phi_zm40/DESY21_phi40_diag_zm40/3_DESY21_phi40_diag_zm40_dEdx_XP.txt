@@ -1,5 +1,5 @@
 Tag           : DESY21_phi40_diag_zm40
-Comment       : _zcalc_PRF_4IP_Gain_WFoffdiag_err100
+Comment       : _zcalc_PRF_4IP_WF4
 EventFile     : ../Data_DESY21/Phi_scan_zm40/phi_200_40_zm40_ym60_diag_iter0.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
@@ -7,20 +7,12 @@ Data_to_Use   : 0
 OUTDirName    : OUT_Tristan/DESY21_phi/DESY21_phi_zm40/DESY21_phi40_diag_zm40/
 
 
-ReadRCmap::ReadRCmap Dir = GainRCMaps/RCfiles/EramName = ERAM01
 ReadRCmap::ReadRCmap m_FileName = GainRCMaps/RCfiles/ERAM01_RCdata_01.root
-
-Uploader_ReadRCmap::Uploader_ReadRCmap RCmapFile = GainRCMaps/RCfiles/ERAM01_RCdata_01.root
-Uploader_ReadRCmap::Uploader_ReadRCmap m_NberOfEntries = 1151
 
 ReadRCmap::ReadRCmap  No Data for iX=10 and  iY=16 in GainRCMaps/RCfiles/ERAM01_RCdata_01.root
 RC map: loaded
 
-ReadGainmap::ReadGainmap Dir = GainRCMaps/Gainfiles/EramName = ERAM01
 ReadGainmap::ReadGainmap m_FileName = GainRCMaps/Gainfiles/ERAM01_Gaindata_01.root
-
-Uploader_ReadGainmap::Uploader_ReadGainmap GainmapFile = GainRCMaps/Gainfiles/ERAM01_Gaindata_01.root
-Uploader_ReadGainmap::Uploader_ReadGainmap m_NberOfEntries = 1151
 
 ReadGainmap::ReadGainmap  No Data for iX=10 and  iY=16 in GainRCMaps/Gainfiles/ERAM01_Gaindata_01.root
 Gain map: loaded
@@ -28,10 +20,7 @@ Average Gain in ERAM01 = 1947.77
 
 -------------->Predefined selection T_DESY21_Event
 Number of entries :9352
-No Stage120 cuts found in CSV. Getting them now...
-Module whose bin is the most filled: 0
-
-Stage120 cuts are 40 to 77. Values added to CSV file.
+TLow = 40 | THigh = 77
 
 -------------->List of selections
 Apply selection  1 -> Remove clusters in first and last columns 
@@ -67,12 +56,12 @@ Track fitting : PRF
 z method      : zcalc
 cut length    = 2 mm
 
-../Data_DESY21/Phi_scan_zm40/phi_200_40_zm40_ym60_diag_iter0_WFmax_correction_full_cos.root
-WF correction parameters: 437.98 | -15.91 | 7.14 | 0.28 | -0.04
+../Data_DESY21/Phi_scan_zm40/phi_200_40_zm40_ym60_diag_iter0_WFmax_correction.root
+WF correction parameters: 383.98 | -10.30 | 2.25 | 0.81 | -0.05
 Processing events:
 0/9352
-RC Hole in entry 267 | iX = 10 | iY = 16 | RC value reset at 129.29
-Gain Hole in entry 267 | iX = 10 | iY = 16 | Gain value reset at 1889.24
+RC hole in entry   267 | iX = 10 | iY = 16 |  RC  value reset at 129.29
+Gain hole in entry 267 | iX = 10 | iY = 16 | Gain value reset at 1889.24
 500/9352
 1000/9352
 1500/9352
@@ -112,5 +101,5 @@ Selection Statistics
     6  Stage5     9095     7462 (  -17.95)  (  -20.21)      9095     7462 (  -17.95)  (  -20.21)    471380   401320 (  -14.86)  (  -21.62)    910768   768671 (  -15.60)  (  -24.25) 
   Summary Sel     9352     7462             (  -20.21)      9352     7462             (  -20.21)    512007   401320             (  -21.62)   1014804   768671             (  -24.25) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_phi/DESY21_phi_zm40/DESY21_phi40_diag_zm40/2_DESY21_phi40_diag_zm40_Checks_zcalc_PRF_4IP_Gain_WFoffdiag_err100.root
-dEdx: OUT_Tristan/DESY21_phi/DESY21_phi_zm40/DESY21_phi40_diag_zm40/3_DESY21_phi40_diag_zm40_dEdx_zcalc_PRF_4IP_Gain_WFoffdiag_err100.root
+Checks: OUT_Tristan/DESY21_phi/DESY21_phi_zm40/DESY21_phi40_diag_zm40/2_DESY21_phi40_diag_zm40_Checks_zcalc_PRF_4IP_WF4.root
+dEdx: OUT_Tristan/DESY21_phi/DESY21_phi_zm40/DESY21_phi40_diag_zm40/3_DESY21_phi40_diag_zm40_dEdx_zcalc_PRF_4IP_WF4.root

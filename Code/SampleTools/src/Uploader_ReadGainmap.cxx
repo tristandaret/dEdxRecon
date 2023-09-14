@@ -3,12 +3,7 @@
 Uploader_ReadGainmap::Uploader_ReadGainmap(
             const std::string& GainmapFile 
 )
-{  
-  std::cout << std::endl ;
-  std::cout << "Uploader_ReadGainmap::Uploader_ReadGainmap " 
-    << "GainmapFile = " << GainmapFile
-    << std::endl ;
-      
+{        
   m_GainmapFile = GainmapFile ;
 
   p_TFile = TFile::Open(m_GainmapFile.c_str(),"READ");
@@ -30,11 +25,6 @@ Uploader_ReadGainmap::Uploader_ReadGainmap(
   }
 
   m_NberOfEntries = (int) p_TTree->GetEntries();
-  
-  std::cout << "Uploader_ReadGainmap::Uploader_ReadGainmap " 
-    << "m_NberOfEntries = " << m_NberOfEntries
-    << std::endl ;
-
   Init();
 
 }

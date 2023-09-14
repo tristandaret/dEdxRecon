@@ -1,5 +1,5 @@
 Tag           : DESY21_theta-45
-Comment       : _zcalc_PRF_4IP_WF3corrLx
+Comment       : 2000_zcalc_PRF_4IP_WF2
 EventFile     : ../Data_DESY21/Theta_scan/theta_m45_02T_z260_y80_iter0.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
@@ -7,27 +7,20 @@ Data_to_Use   : 0
 OUTDirName    : OUT_Tristan/DESY21_theta/DESY21_theta-45/
 
 
-ReadRCmap::ReadRCmap Dir = GainRCMaps/RCfiles/EramName = ERAM01
 ReadRCmap::ReadRCmap m_FileName = GainRCMaps/RCfiles/ERAM01_RCdata_01.root
-
-Uploader_ReadRCmap::Uploader_ReadRCmap RCmapFile = GainRCMaps/RCfiles/ERAM01_RCdata_01.root
-Uploader_ReadRCmap::Uploader_ReadRCmap m_NberOfEntries = 1151
 
 ReadRCmap::ReadRCmap  No Data for iX=10 and  iY=16 in GainRCMaps/RCfiles/ERAM01_RCdata_01.root
 RC map: loaded
 
+ReadGainmap::ReadGainmap m_FileName = GainRCMaps/Gainfiles/ERAM01_Gaindata_01.root
+
+ReadGainmap::ReadGainmap  No Data for iX=10 and  iY=16 in GainRCMaps/Gainfiles/ERAM01_Gaindata_01.root
+Gain map: loaded
+Average Gain in ERAM01 = 1947.77
+
 -------------->Predefined selection T_DESY21_Event
 Number of entries :26640
-module 0 TLeading max = 261
-module 1 TLeading max = 0
-module 2 TLeading max = 0
-module 3 TLeading max = 0
-module 4 TLeading max = 0
-module 5 TLeading max = 0
-module 6 TLeading max = 0
-module 7 TLeading max = 0
-Module whose bin is the most filled: 0
-
+TLow = 249 | THigh = 273
 
 -------------->List of selections
 Apply selection  1 -> Remove clusters in first and last columns 
@@ -65,7 +58,8 @@ cut length    = 2 mm
 
 Processing events:
 0/26640
-Hole in entry 2 | iX = 10 | iY = 16 | RC value reset at 129
+RC hole in entry   2 | iX = 10 | iY = 16 |  RC  value reset at 129
+Gain hole in entry 2 | iX = 10 | iY = 16 | Gain value reset at 1889
 500/26640
 1000/26640
 1500/26640
@@ -132,5 +126,5 @@ Selection Statistics
     6  Stage5    24682     6505 (  -73.64)  (  -75.58)     24682     6505 (  -73.64)  (  -75.58)    799648   221170 (  -72.34)  (  -75.57)   2670322   724297 (  -72.88)  (  -76.92) 
   Summary Sel    26640     6505             (  -75.58)     26640     6505             (  -75.58)    905312   221170             (  -75.57)   3138797   724297             (  -76.92) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_theta/DESY21_theta-45/2_DESY21_theta-45_Checks_zcalc_PRF_4IP_WF3corrLx.root
-dEdx: OUT_Tristan/DESY21_theta/DESY21_theta-45/3_DESY21_theta-45_dEdx_zcalc_PRF_4IP_WF3corrLx.root
+Checks: OUT_Tristan/DESY21_theta/DESY21_theta-45/2_DESY21_theta-45_Checks2000_zcalc_PRF_4IP_WF2.root
+dEdx: OUT_Tristan/DESY21_theta/DESY21_theta-45/3_DESY21_theta-45_dEdx2000_zcalc_PRF_4IP_WF2.root

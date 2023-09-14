@@ -4,11 +4,6 @@ Uploader_ReadRCmap::Uploader_ReadRCmap(
             const std::string& RCmapFile 
 )
 {  
-  std::cout << std::endl ;
-  std::cout << "Uploader_ReadRCmap::Uploader_ReadRCmap " 
-    << "RCmapFile = " << RCmapFile
-    << std::endl ;
-      
   m_RCmapFile = RCmapFile ;
 
   p_TFile = TFile::Open(m_RCmapFile.c_str(),"READ");
@@ -30,11 +25,6 @@ Uploader_ReadRCmap::Uploader_ReadRCmap(
   }
 
   m_NberOfEntries = (int) p_TTree->GetEntries();
-  
-  std::cout << "Uploader_ReadRCmap::Uploader_ReadRCmap " 
-    << "m_NberOfEntries = " << m_NberOfEntries
-    << std::endl ;
-
   Init();
 
 }

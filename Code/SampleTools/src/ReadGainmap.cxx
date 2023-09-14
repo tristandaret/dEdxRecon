@@ -30,10 +30,7 @@ void ReadGainmap::ConstructorEnd()
 
 //
   std::cout << std::endl ;
-  std::cout << "ReadGainmap::ReadGainmap "  
-    << "Dir = " << m_Dir 
-    << "EramName = " << m_EramName 
-    << std::endl ;
+  
 
   m_FileName = "BIDON" ;
   if (m_EramName=="ERAM01" ) m_FileName = m_Dir + "ERAM01_Gaindata_01.root" ;

@@ -488,7 +488,7 @@ void DrawOut_Checks(const std::string& OutDir, const std::string EvtFile, const 
   TF1* A_corr                    = new TF1 ;
     if(Tag.find("diag") != std::string::npos){
     std::string filename = EvtFile.substr(0, EvtFile.length()-5) ;
-    TFile* pfile = new TFile((filename + "_WFmax_correction_full_err100.root").c_str(), "READ") ;
+    TFile* pfile = new TFile((filename + "_WFmax_correction.root").c_str(), "READ") ;
     A_corr                   = pfile->Get<TF1>("A_corr") ;
     pfile->Close() ;
   }
@@ -2295,7 +2295,9 @@ void DrawOut_Separation_Reduced(const std::string& inputDir, const std::string& 
 // Draw all scans together
 void DrawOut_Scans(const std::string& inputDir, const std::string& Comment)
 {
-  std::string OutputFile        = inputDir + "/Scans" + Comment + "_hist.pdf" ;
+  // std::string Comment2 = "_zcalc_PRF_4IP_Gain_WFhatrecon" ;
+  std::string Comment2 = Comment ;
+  std::string OutputFile        = inputDir + "/Scans" + Comment2 + ".pdf" ;
   std::string OutputFile_Beg    = OutputFile + "(" ;
   std::string OutputFile_End    = OutputFile + ")" ;
   gStyle->                      SetPadTickX(1);
@@ -2309,8 +2311,8 @@ void DrawOut_Scans(const std::string& inputDir, const std::string& Comment)
   TLegend* leg                = new TLegend(0.87,0.78,0.98,0.98) ;
 
   int nz                  = 10 ;
-  int nphi                = 8 ;
   int ny                  = 11 ;
+  int nphi                = 8 ;
   int ntheta              = 3 ;
   int npoint              = 0 ;
 
@@ -2369,7 +2371,7 @@ void DrawOut_Scans(const std::string& inputDir, const std::string& Comment)
   for (int iz = 0 ; iz < 3 ; iz++){
     for(int iphi = 0 ; iphi < nphi ; iphi++){
       if(iphi < 5) pTFile     = TFile::Open(TString(inputDir + "/DESY21_phi/DESY21_phi_z" + Z_arr[iz] + "/DESY21_phi" + phi_arr[iphi] + "_z" + Z_arr[iz] + "/3_DESY21_phi" + phi_arr[iphi] + "_z" + Z_arr[iz] + "_dEdx" + Comment + ".root")) ;
-      else         pTFile     = TFile::Open(TString(inputDir + "/DESY21_phi/DESY21_phi_z" + Z_arr[iz] + "/DESY21_phi" + phi_arr[iphi] + "_diag_z" + Z_arr[iz] + "/3_DESY21_phi" + phi_arr[iphi] + "_diag_z" + Z_arr[iz] + "_dEdx" + Comment + ".root")) ;
+      else         pTFile     = TFile::Open(TString(inputDir + "/DESY21_phi/DESY21_phi_z" + Z_arr[iz] + "/DESY21_phi" + phi_arr[iphi] + "_diag_z" + Z_arr[iz] + "/3_DESY21_phi" + phi_arr[iphi] + "_diag_z" + Z_arr[iz] + "_dEdx" + Comment2 + ".root")) ;
       v_tf1_WF.                 push_back(pTFile->Get<TF1>("tf1_WFtrunc_0")) ;
       v_tf1_XP.                 push_back(pTFile->Get<TF1>("tf1_XP_0")) ;
       pTFile->                  Clear() ;
@@ -2868,6 +2870,9 @@ void DrawOut_Phiscan(const std::string& inputDir, const std::string& Comment, co
   gStyle->                      SetPadTickX(1);
   gStyle->                      SetPadTickY(1);
 
+  // std::string Comment2 = "_zcalc_PRF_4IP_Gain_ref" ;
+  std::string Comment2 = Comment ;
+
   // Vectors of TFiles & TH1Fs & TF1s & TGEs
   std::vector<TFile*>       v_pTFile ;
   std::vector<TF1*>         v_tf1_WF ;
@@ -2875,8 +2880,8 @@ void DrawOut_Phiscan(const std::string& inputDir, const std::string& Comment, co
 
   int phi_arr[] = {0, 5, 10, 20, 30, 30, 40 ,45} ;
   for(int iphi = 0 ; iphi < nphi ; iphi++){
-    if(iphi == 0)     v_pTFile. push_back(TFile::Open(TString("OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_z" + zdrift + "_PT200/3_DESY21_z" + zdrift + "_PT200_dEdx" + Comment + ".root"))) ;
-    else if(iphi < 5) v_pTFile. push_back(TFile::Open(TString(inputDir + "/DESY21_phi" + phi_arr[iphi] + "_z" + zdrift + "/3_DESY21_phi" + phi_arr[iphi] + "_z" + zdrift + "_dEdx" + Comment + ".root"))) ;
+    if(iphi == 0)     v_pTFile. push_back(TFile::Open(TString("OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_z" + zdrift + "_PT200/3_DESY21_z" + zdrift + "_PT200_dEdx" + Comment2 + ".root"))) ;
+    else if(iphi < 5) v_pTFile. push_back(TFile::Open(TString(inputDir + "/DESY21_phi" + phi_arr[iphi] + "_z" + zdrift + "/3_DESY21_phi" + phi_arr[iphi] + "_z" + zdrift + "_dEdx" + Comment2 + ".root"))) ;
     else          v_pTFile.   push_back(TFile::Open(TString(inputDir + "/DESY21_phi" + phi_arr[iphi] + "_diag_z" + zdrift + "/3_DESY21_phi" + phi_arr[iphi] + "_diag_z" + zdrift + "_dEdx" + Comment + ".root"))) ;
     v_tf1_WF.                 push_back(v_pTFile[iphi]->   Get<TF1>("tf1_WFtrunc_0")) ;
     v_tf1_XP.                 push_back(v_pTFile[iphi]->   Get<TF1>("tf1_XP_0")) ;
@@ -3461,6 +3466,8 @@ void DrawOut_Phiscan_Z(const std::string& inputDir, const std::string& Comment)
   int nphi                = 8 ;
   gStyle->                      SetPadTickX(1);
   gStyle->                      SetPadTickY(1);
+  // std::string Comment2 = "_zcalc_PRF_4IP_Gain_ref" ;
+  std::string Comment2 = Comment ;
 
   // Vectors of TFiles & TH1Fs & TF1s & 
   std::vector<TFile*>       v_pTFile_5 ;
@@ -3482,17 +3489,17 @@ void DrawOut_Phiscan_Z(const std::string& inputDir, const std::string& Comment)
   int phi_arr[] = {0, 5, 10, 20, 30, 30, 40, 45} ;
   for(int iphi = 0 ; iphi < nphi ; iphi++){
     if(iphi == 0){
-      v_pTFile_5.           push_back(TFile::Open(TString("OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_zm40_PT200/3_DESY21_zm40_PT200_dEdx" + Comment + ".root"))) ;
-      v_pTFile_55.          push_back(TFile::Open(TString("OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_z460_PT200/3_DESY21_z460_PT200_dEdx" + Comment + ".root"))) ;
-      v_pTFile_95.          push_back(TFile::Open(TString("OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_z860_PT200/3_DESY21_z860_PT200_dEdx" + Comment + ".root"))) ;
-      // v_pTFile_5.           push_back(TFile::Open(TString(inputDir + "/DESY21_phi_zm40/DESY21_phi" + phi_arr[iphi] + "_zm40/3_DESY21_phi" + phi_arr[iphi] + "_zm40_dEdx" + Comment + ".root"))) ;
-      // v_pTFile_55.          push_back(TFile::Open(TString(inputDir + "/DESY21_phi_z460/DESY21_phi" + phi_arr[iphi] + "_z460/3_DESY21_phi" + phi_arr[iphi] + "_z460_dEdx" + Comment + ".root"))) ;
-      // v_pTFile_95.          push_back(TFile::Open(TString(inputDir + "/DESY21_phi_z860/DESY21_phi" + phi_arr[iphi] + "_z860/3_DESY21_phi" + phi_arr[iphi] + "_z860_dEdx" + Comment + ".root"))) ;
+      v_pTFile_5.           push_back(TFile::Open(TString("OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_zm40_PT200/3_DESY21_zm40_PT200_dEdx" + Comment2 + ".root"))) ;
+      v_pTFile_55.          push_back(TFile::Open(TString("OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_z460_PT200/3_DESY21_z460_PT200_dEdx" + Comment2 + ".root"))) ;
+      v_pTFile_95.          push_back(TFile::Open(TString("OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_z860_PT200/3_DESY21_z860_PT200_dEdx" + Comment2 + ".root"))) ;
+      // v_pTFile_5.           push_back(TFile::Open(TString(inputDir + "/DESY21_phi_zm40/DESY21_phi" + phi_arr[iphi] + "_zm40/3_DESY21_phi" + phi_arr[iphi] + "_zm40_dEdx" + Comment2 + ".root"))) ;
+      // v_pTFile_55.          push_back(TFile::Open(TString(inputDir + "/DESY21_phi_z460/DESY21_phi" + phi_arr[iphi] + "_z460/3_DESY21_phi" + phi_arr[iphi] + "_z460_dEdx" + Comment2 + ".root"))) ;
+      // v_pTFile_95.          push_back(TFile::Open(TString(inputDir + "/DESY21_phi_z860/DESY21_phi" + phi_arr[iphi] + "_z860/3_DESY21_phi" + phi_arr[iphi] + "_z860_dEdx" + Comment2 + ".root"))) ;
     }
     else if(iphi < 5){
-      v_pTFile_5.           push_back(TFile::Open(TString(inputDir + "/DESY21_phi_zm40/DESY21_phi" + phi_arr[iphi] + "_zm40/3_DESY21_phi" + phi_arr[iphi] + "_zm40_dEdx" + Comment + ".root"))) ;
-      v_pTFile_55.          push_back(TFile::Open(TString(inputDir + "/DESY21_phi_z460/DESY21_phi" + phi_arr[iphi] + "_z460/3_DESY21_phi" + phi_arr[iphi] + "_z460_dEdx" + Comment + ".root"))) ;
-      v_pTFile_95.          push_back(TFile::Open(TString(inputDir + "/DESY21_phi_z860/DESY21_phi" + phi_arr[iphi] + "_z860/3_DESY21_phi" + phi_arr[iphi] + "_z860_dEdx" + Comment + ".root"))) ;
+      v_pTFile_5.           push_back(TFile::Open(TString(inputDir + "/DESY21_phi_zm40/DESY21_phi" + phi_arr[iphi] + "_zm40/3_DESY21_phi" + phi_arr[iphi] + "_zm40_dEdx" + Comment2 + ".root"))) ;
+      v_pTFile_55.          push_back(TFile::Open(TString(inputDir + "/DESY21_phi_z460/DESY21_phi" + phi_arr[iphi] + "_z460/3_DESY21_phi" + phi_arr[iphi] + "_z460_dEdx" + Comment2 + ".root"))) ;
+      v_pTFile_95.          push_back(TFile::Open(TString(inputDir + "/DESY21_phi_z860/DESY21_phi" + phi_arr[iphi] + "_z860/3_DESY21_phi" + phi_arr[iphi] + "_z860_dEdx" + Comment2 + ".root"))) ;
     }
     else{
       v_pTFile_5.           push_back(TFile::Open(TString(inputDir + "/DESY21_phi_zm40/DESY21_phi" + phi_arr[iphi] + "_diag_zm40/3_DESY21_phi" + phi_arr[iphi] + "_diag_zm40_dEdx" + Comment + ".root"))) ;
@@ -3942,5 +3949,109 @@ void DrawOut_verif(const std::string& OutDir, const std::string& Comment){
     leg->                           Clear() ;
   }
 
+  delete pTCanvas ;
+}
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+void DrawOut_corrections(){
+
+  gStyle->                        SetOptStat(0) ;
+
+  // Get histograms
+  std::vector<TF1*>         v_tf1 ;
+  std::vector<std::string>  v_filename ;
+  v_filename.push_back("../Data_DESY21/Phi_scan_zm40/phi_200_30_zm40_ym60_diag_iter0_WFmax_correction.root") ;
+  v_filename.push_back("../Data_DESY21/Phi_scan_z460/phi_200_30_z460_ym60_diag_iter0_WFmax_correction.root") ;
+  v_filename.push_back("../Data_DESY21/Phi_scan_z860/phi_200_30_z860_ym60_diag_iter0_WFmax_correction.root") ;
+  v_filename.push_back("../Data_DESY21/Phi_scan_zm40/phi_200_40_zm40_ym60_diag_iter0_WFmax_correction.root") ;
+  v_filename.push_back("../Data_DESY21/Phi_scan_z460/phi_200_40_z460_ym60_diag_iter0_WFmax_correction.root") ;
+  v_filename.push_back("../Data_DESY21/Phi_scan_z860/phi_200_40_z860_ym60_diag_iter0_WFmax_correction.root") ;
+  v_filename.push_back("../Data_DESY21/Phi_scan_zm40/phi_200_45_zm40_ym60_diag_iter0_WFmax_correction.root") ;
+  v_filename.push_back("../Data_DESY21/Phi_scan_z460/phi_200_45_z460_ym60_diag_iter0_WFmax_correction.root") ;
+  v_filename.push_back("../Data_DESY21/Phi_scan_z860/phi_200_45_z860_ym60_diag_iter0_WFmax_correction.root") ;
+
+  TF1* F_Vlada                = new TF1("F_Vlada", "291.012 + 9.4669*x - 4.04*x*x + 1.31624*x*x*x - 0.059534*x*x*x*x", 0, 17); // values provided by Vlada (2022/10/11)
+  v_tf1.push_back(F_Vlada) ;
+  for(int i = 0 ; i < (int)v_filename.size() ; i++){
+    TFile* pfile = new TFile(v_filename[i].c_str(), "READ") ;
+    v_tf1.push_back(pfile->Get<TF1>("A_corr")) ;
+    pfile->Close() ;
+  }
+
+  // Draw out
+  std::string OutputFile        = "OUT_Tristan/DESY21_phi/Correction_functions_WFmax_correction.pdf" ;
+  std::string OutputFile_Beg    = OutputFile + "(" ;
+  std::string OutputFile_End    = OutputFile + ")" ;
+
+  std::string z[]               = {"50", "550", "950"} ;
+  TCanvas* pTCanvas             = new TCanvas("pTCanvas", "pTCanvas", 2700, 1800) ;
+  TLegend* leg                  = new TLegend(0.85,0.8,0.99,0.99) ;
+  pTCanvas->                      cd() ;
+  v_tf1[0]->                      SetLineColor(kGray) ;  
+  v_tf1[0]->                      SetLineWidth(4) ; 
+  v_tf1[0]->                      GetYaxis()->SetRangeUser(0, 1500) ;
+  
+  v_tf1[0]->                      SetTitle("Correction functions 30#circ;L_{cluster} (mm);WF_{sum} (ADC count)") ;
+  leg->                           AddEntry(v_tf1[0], "Vlada" , "l") ;
+  for (int i = 1 ; i < 4 ; i++){
+    v_tf1[0]->                    Draw() ;
+    v_tf1[i]->                    SetLineColor(kGreen+2*(i-1)) ;
+    v_tf1[i]->                    SetLineWidth(4) ;
+    v_tf1[i]->                    SetLineStyle((i-1)%3+1) ;
+    leg->                         AddEntry(v_tf1[i], Form("%s mm", z[i-1].c_str()), "l") ;
+  }
+  for (int i = 1 ; i < 4 ; i++)v_tf1[i]->Draw("same") ;
+  leg->                           Draw() ;
+  pTCanvas->                      SaveAs(OutputFile_Beg.c_str()) ;
+  leg->                           Clear() ;
+  pTCanvas->                      Clear() ;
+  
+  v_tf1[0]->                      SetTitle("Correction functions 40#circ;L_{cluster} (mm);WF_{sum} (ADC count)") ;
+  leg->                           AddEntry(v_tf1[0], "Vlada" , "l") ;
+  for(int i = 4 ; i < 7 ; i++){ 
+    v_tf1[0]->                    Draw() ;
+    v_tf1[i]->                    SetLineColor(kBlue+2*(i-4)) ;
+    v_tf1[i]->                    SetLineWidth(4) ;
+    v_tf1[i]->                    SetLineStyle((i-1)%3+1) ;
+    leg->                         AddEntry(v_tf1[i], Form("%s mm", z[i-4].c_str()), "l") ;
+  }
+  for (int i = 4 ; i < 7 ; i++)v_tf1[i]->Draw("same") ;
+  leg->                           Draw() ;
+  pTCanvas->                      SaveAs(OutputFile.c_str()) ;
+  leg->                           Clear() ;
+  pTCanvas->                      Clear() ;
+  
+  v_tf1[0]->                      SetTitle("Correction functions 45#circ;L_{cluster} (mm);WF_{sum} (ADC count)") ;
+  leg->                           AddEntry(v_tf1[0], "Vlada" , "l") ;
+  for(int i = 7 ; i < 10; i++){ 
+    v_tf1[0]->                    Draw() ;
+    v_tf1[i]->                    SetLineColor(kRed+2*(i-7)) ;
+    v_tf1[i]->                    SetLineWidth(4) ;
+    v_tf1[i]->                    SetLineStyle((i-1)%3+1) ;
+    leg->                         AddEntry(v_tf1[i], Form("%s mm", z[i-7].c_str()), "l") ;
+  }
+  for (int i = 7 ; i < 10 ; i++)v_tf1[i]->Draw("same") ;
+  leg->                           Draw() ;
+  pTCanvas->                      SaveAs(OutputFile.c_str()) ;
+  leg->                           Clear() ;
+  pTCanvas->                      Clear() ;
+  
+  TLegend* legAll               = new TLegend(0.85,0.65,0.99,0.99) ;
+  v_tf1[0]->                      SetTitle("Correction functions;L_{cluster} (mm);WF_{sum} (ADC count)") ;
+  legAll->                        AddEntry(v_tf1[0], "Vlada" , "l") ;
+  for(int i = 1 ; i < 10; i++){ 
+    v_tf1[0]->                    Draw() ;
+    v_tf1[i]->                    Draw("same") ;
+    legAll->                      AddEntry(v_tf1[i], Form("%s mm", z[(i-1)%3].c_str()), "l") ;
+  }
+  for (int i = 1 ; i < 10 ; i++)v_tf1[i]->Draw("same") ;
+  legAll->                        Draw() ;
+  pTCanvas->                      SaveAs(OutputFile_End.c_str()) ;
   delete pTCanvas ;
 }

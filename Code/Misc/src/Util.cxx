@@ -55,7 +55,7 @@ void Free_trim(std::string& s) {
 
 
 
-TGraphErrors* Convert_TH2_TGE_(const TH2* pTH2)
+TGraphErrors* Convert_TH2_TGE(const TH2* pTH2)
 {
   TGraphErrors* gr = new TGraphErrors() ;
   for (int i = 1 ; i < pTH2->GetXaxis()->GetNbins() ; ++i) {

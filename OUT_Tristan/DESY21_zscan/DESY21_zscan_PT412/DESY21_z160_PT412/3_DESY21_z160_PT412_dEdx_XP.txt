@@ -1,5 +1,5 @@
 Tag           : DESY21_z160_PT412
-Comment       : _zcalc_PRF_4IP_WF3corrLx
+Comment       : 2000_zcalc_PRF_4IP_WF2
 EventFile     : ../Data_DESY21/zscan_PT412/z_360_275_412_02T_26_160_iter0.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
@@ -7,27 +7,20 @@ Data_to_Use   : 0
 OUTDirName    : OUT_Tristan/DESY21_zscan/DESY21_zscan_PT412/DESY21_z160_PT412/
 
 
-ReadRCmap::ReadRCmap Dir = GainRCMaps/RCfiles/EramName = ERAM01
 ReadRCmap::ReadRCmap m_FileName = GainRCMaps/RCfiles/ERAM01_RCdata_01.root
-
-Uploader_ReadRCmap::Uploader_ReadRCmap RCmapFile = GainRCMaps/RCfiles/ERAM01_RCdata_01.root
-Uploader_ReadRCmap::Uploader_ReadRCmap m_NberOfEntries = 1151
 
 ReadRCmap::ReadRCmap  No Data for iX=10 and  iY=16 in GainRCMaps/RCfiles/ERAM01_RCdata_01.root
 RC map: loaded
 
+ReadGainmap::ReadGainmap m_FileName = GainRCMaps/Gainfiles/ERAM01_Gaindata_01.root
+
+ReadGainmap::ReadGainmap  No Data for iX=10 and  iY=16 in GainRCMaps/Gainfiles/ERAM01_Gaindata_01.root
+Gain map: loaded
+Average Gain in ERAM01 = 1947.77
+
 -------------->Predefined selection T_DESY21_Event
 Number of entries :13700
-module 0 TLeading max = 109
-module 1 TLeading max = 0
-module 2 TLeading max = 0
-module 3 TLeading max = 0
-module 4 TLeading max = 0
-module 5 TLeading max = 0
-module 6 TLeading max = 0
-module 7 TLeading max = 0
-Module whose bin is the most filled: 0
-
+TLow = 98 | THigh = 143
 
 -------------->List of selections
 Apply selection  1 -> Remove clusters in first and last columns 
@@ -67,7 +60,8 @@ Processing events:
 0/13700
 500/13700
 1000/13700
-Hole in entry 1172 | iX = 10 | iY = 16 | RC value reset at 129
+RC hole in entry   1172 | iX = 10 | iY = 16 |  RC  value reset at 129
+Gain hole in entry 1172 | iX = 10 | iY = 16 | Gain value reset at 1889
 1500/13700
 2000/13700
 2500/13700
@@ -106,5 +100,5 @@ Selection Statistics
     6  Stage5    12336     6603 (  -46.47)  (  -51.80)     12336     6603 (  -46.47)  (  -51.80)    407203   224502 (  -44.87)  (  -51.79)   1444687   788956 (  -45.39)  (  -53.66) 
   Summary Sel    13700     6603             (  -51.80)     13700     6603             (  -51.80)    465671   224502             (  -51.79)   1702635   788956             (  -53.66) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT412/DESY21_z160_PT412/2_DESY21_z160_PT412_Checks_zcalc_PRF_4IP_WF3corrLx.root
-dEdx: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT412/DESY21_z160_PT412/3_DESY21_z160_PT412_dEdx_zcalc_PRF_4IP_WF3corrLx.root
+Checks: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT412/DESY21_z160_PT412/2_DESY21_z160_PT412_Checks2000_zcalc_PRF_4IP_WF2.root
+dEdx: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT412/DESY21_z160_PT412/3_DESY21_z160_PT412_dEdx2000_zcalc_PRF_4IP_WF2.root

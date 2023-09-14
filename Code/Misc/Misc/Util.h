@@ -19,9 +19,8 @@ int MyMakeDir(const std::string& DirName);
 
 int ListDir(std::string DirName, std::vector < std::string >& VectorOfStrings);
 
-TGraphErrors* Convert_TH2_TGE     (const TH2* pTH2) ; // one mean value for a given x
+TGraphErrors* Convert_TH2_TGE     (const TH2* pTH2) ;
 TGraphErrors* Convert_TH2_TGE_v2  (const TH2* pTH2) ; // several values for a given x
-TGraphErrors* Convert_TH2_TGE_v2  (const TH2* pTH2, const float& cutoff) ;
 
 void Free_trim(std::string& s) ;
 

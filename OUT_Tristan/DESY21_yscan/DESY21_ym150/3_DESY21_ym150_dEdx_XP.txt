@@ -1,5 +1,5 @@
 Tag           : DESY21_ym150
-Comment       : _zcalc_PRF_4IP_WF1
+Comment       : 2000_zcalc_PRF_4IP_WF2
 EventFile     : ../Data_DESY21/yscan/Ym150_Z0_iter0.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
@@ -7,20 +7,12 @@ Data_to_Use   : 0
 OUTDirName    : OUT_Tristan/DESY21_yscan/DESY21_ym150/
 
 
-ReadRCmap::ReadRCmap Dir = GainRCMaps/RCfiles/EramName = ERAM01
 ReadRCmap::ReadRCmap m_FileName = GainRCMaps/RCfiles/ERAM01_RCdata_01.root
-
-Uploader_ReadRCmap::Uploader_ReadRCmap RCmapFile = GainRCMaps/RCfiles/ERAM01_RCdata_01.root
-Uploader_ReadRCmap::Uploader_ReadRCmap m_NberOfEntries = 1151
 
 ReadRCmap::ReadRCmap  No Data for iX=10 and  iY=16 in GainRCMaps/RCfiles/ERAM01_RCdata_01.root
 RC map: loaded
 
-ReadGainmap::ReadGainmap Dir = GainRCMaps/Gainfiles/EramName = ERAM01
 ReadGainmap::ReadGainmap m_FileName = GainRCMaps/Gainfiles/ERAM01_Gaindata_01.root
-
-Uploader_ReadGainmap::Uploader_ReadGainmap GainmapFile = GainRCMaps/Gainfiles/ERAM01_Gaindata_01.root
-Uploader_ReadGainmap::Uploader_ReadGainmap m_NberOfEntries = 1151
 
 ReadGainmap::ReadGainmap  No Data for iX=10 and  iY=16 in GainRCMaps/Gainfiles/ERAM01_Gaindata_01.root
 Gain map: loaded
@@ -28,7 +20,6 @@ Average Gain in ERAM01 = 1947.77
 
 -------------->Predefined selection T_DESY21_Event
 Number of entries :11975
-DESY21_ym150,42,68
 TLow = 42 | THigh = 68
 
 -------------->List of selections
@@ -68,3 +59,42 @@ cut length    = 2 mm
 Processing events:
 0/11975
 500/11975
+1000/11975
+RC hole in entry   1478 | iX = 10 | iY = 16 |  RC  value reset at 129
+Gain hole in entry 1478 | iX = 10 | iY = 16 | Gain value reset at 1889
+1500/11975
+2000/11975
+2500/11975
+3000/11975
+3500/11975
+4000/11975
+4500/11975
+5000/11975
+5500/11975
+6000/11975
+6500/11975
+7000/11975
+7500/11975
+8000/11975
+8500/11975
+9000/11975
+9500/11975
+10000/11975
+10500/11975
+11000/11975
+11500/11975
+11974/11975
+
+Selection Statistics 
+ #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
+    0  Stage1    11975    11975 (    0.00)  (    0.00)     11975    11975 (    0.00)  (    0.00)    406991   406991 (    0.00)  (    0.00)   1499843  1499843 (    0.00)  (    0.00) 
+    1 Stage11    11975    11886 (   -0.74)  (   -0.74)     11975    11886 (   -0.74)  (   -0.74)    406991   395939 (   -2.72)  (   -2.72)   1499843  1446797 (   -3.54)  (   -3.54) 
+    2Stage120    11886    11726 (   -1.35)  (   -2.08)     11886    11726 (   -1.35)  (   -2.08)    395939   390898 (   -1.27)  (   -3.95)   1446797  1431887 (   -1.03)  (   -4.53) 
+    3StageT15    11726    10478 (  -10.64)  (  -12.50)     11726    10478 (  -10.64)  (  -12.50)    390898   350809 (  -10.26)  (  -13.80)   1431887  1261124 (  -11.93)  (  -15.92) 
+    4 Stage10    10478    10478 (    0.00)  (  -12.50)     10478    10478 (    0.00)  (  -12.50)    350809   347390 (   -0.97)  (  -14.64)   1261124  1239848 (   -1.69)  (  -17.33) 
+    5 Stage14    10478    10478 (    0.00)  (  -12.50)     10478    10478 (    0.00)  (  -12.50)    347390   343993 (   -0.98)  (  -15.48)   1239848  1224119 (   -1.27)  (  -18.38) 
+    6  Stage5    10478     4968 (  -52.59)  (  -58.51)     10478     4968 (  -52.59)  (  -58.51)    343993   168912 (  -50.90)  (  -58.50)   1224119   596525 (  -51.27)  (  -60.23) 
+  Summary Sel    11975     4968             (  -58.51)     11975     4968             (  -58.51)    406991   168912             (  -58.50)   1499843   596525             (  -60.23) 
+Fitting: Started... done!
+Checks: OUT_Tristan/DESY21_yscan/DESY21_ym150/2_DESY21_ym150_Checks2000_zcalc_PRF_4IP_WF2.root
+dEdx: OUT_Tristan/DESY21_yscan/DESY21_ym150/3_DESY21_ym150_dEdx2000_zcalc_PRF_4IP_WF2.root

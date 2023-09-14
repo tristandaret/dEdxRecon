@@ -19,6 +19,7 @@
 #include "SampleTools/Uploader.h"
 #include "SampleTools/GiveMe_Uploader.h"
 #include "SignalShape/PRF_param.h"
+#include "SampleTools/ReadGainmap.h"
 
 void Tristan_CERN22_corr( const std::string& OutDir,
                           std::string const& Tag,
@@ -44,6 +45,24 @@ void Tristan_CERN22_corr( const std::string& OutDir,
   std::cout << OutDir << ".root" << std::endl ;
   std::cout << SelectionSet << std::endl ;
   
+  std::string eram_num ;
+  if(Tag.find("DESY") != std::string::npos) eram_num = "ERAM01";
+  if(Tag.find("CERN22") != std::string::npos) eram_num = "ERAM18";
+  ReadGainmap Gainmap(eram_num) ;
+  std::cout << "Gain map: loaded" << std::endl ;
+
+  int   status  = 0 ;
+  float avg_G   = 0 ;
+  float n_pads  = 0 ;
+  for(int iX = 0 ; iX < 36 ; iX++){
+    for(int iY = 0 ; iY < 32 ; iY++){
+      avg_G += Gainmap.GetData(iX, iY, status) ;
+      if(Gainmap.GetData(iX, iY, status) != 0) n_pads++ ;
+    }
+  }
+  avg_G /= n_pads ;
+  std::cout << "Average Gain in " << eram_num << " = " << avg_G << std::endl ;
+
   /////////////////////////////////////////////////////////////////////////////////////////////////////////
   // Selection stage
 
@@ -64,6 +83,18 @@ void Tristan_CERN22_corr( const std::string& OutDir,
     }
     aJFL_Selector.Set_Cut_Stage120_TLow (TLow) ;
     aJFL_Selector.Set_Cut_Stage120_THigh(THigh) ;
+  }
+  // Selection for DESY21 phi diagonal clustering
+  if(Tag.find("diag") != std::string::npos){
+    aJFL_Selector.Set_Cut_Stage5_NCluster_Low(50) ;
+    aJFL_Selector.Set_Cut_StageT15_APM_Low(1) ;
+    aJFL_Selector.Set_Cut_StageT15_APM_High(3.5) ;
+  }
+  // Selection for DESY21 theta
+  if(Tag.find("theta") != std::string::npos){
+    aJFL_Selector.Set_Cut_Stage120_TLow(0) ;
+    aJFL_Selector.Set_Cut_Stage120_THigh(510) ;
+    aJFL_Selector.Set_Cut_Stage11_EventBased(200) ;
   }
     
   aJFL_Selector.Tell_Selection() ;
@@ -102,7 +133,6 @@ void Tristan_CERN22_corr( const std::string& OutDir,
       TheFitterTrack                      aTheFitterTrack("Minuit", n_param_trk) ;
       int reco                          = DoTracksReconstruction_Event(aTheFitterTrack, pEvent, iMod, n_param_trk) ;
 
-
       // Track details
       const Track* pTrack                 = pEvent->GiveMe_Track_ForThisModule(iMod) ;
       mean_phi                           += std::atan(pTrack->Get_ParameterValue(1)) ;
@@ -120,45 +150,58 @@ void Tristan_CERN22_corr( const std::string& OutDir,
         int NPads                         = pCluster->Get_NberOfPads() ;
         for(int iP = 0 ; iP < NPads ; iP ++){
           const Pad* pPad                 = pCluster->Get_Pad(iP) ;
+          int StatusG  = 0 ;
+          double G_pad                    = Gainmap.GetData(pPad->Get_iX(),pPad->Get_iY(), StatusG) ;
+          if(G_pad == 0){
+            std::cout << "Gain hole in entry " << pEvent->Get_EntryNber() << " | iX = " << pPad->Get_iX() << " | iY = " << pPad->Get_iY() ; 
+            float G_left                  = Gainmap.GetData(pPad->Get_iX()-1,pPad->Get_iY(),   StatusG) ;
+            float G_right                 = Gainmap.GetData(pPad->Get_iX()+1,pPad->Get_iY(),   StatusG) ;
+            float G_low                   = Gainmap.GetData(pPad->Get_iX(),  pPad->Get_iY()-1, StatusG) ;
+            float G_top                   = Gainmap.GetData(pPad->Get_iX(),  pPad->Get_iY()+1, StatusG) ;
+            G_pad                         = (G_left + G_right + G_low + G_top)/4 ;
+            Gainmap.                        SetData(pPad->Get_iX(),pPad->Get_iY(), G_pad) ;
+            std::cout << " | Gain value reset at " << G_pad << std::endl ;
+          }
+          float Gcorr                     = avg_G/G_pad ;
+
           TH1F* h1f_WF_pad                = GiveMe_WaveFormDisplay(pPad, "main") ;
+          h1f_WF_pad->                      Scale(Gcorr) ;
           h1f_WF_cluster->                  Add(h1f_WF_pad) ;
           v_trashbin.                       push_back(h1f_WF_pad) ;
 
           // Track computations (impact parameter, angle, length in pad)
           std::vector<float> loc_par      = local_params(pPad, pTrack) ;
-          float trk_len_pad               = loc_par[2];             // in m
-          if(trk_len_pad <= 1e-6)           continue ;
-          trk_len_clus                   += trk_len_pad ;
+          trk_len_clus                   += loc_par[2]; 
+
         }
 
         if(trk_len_clus > 0) h2f_WFvsLength->Fill(trk_len_clus*1000, h1f_WF_cluster->GetMaximum()) ;
         delete h1f_WF_cluster ;
       }
 
-      for(int i = 0 ; i < (int)v_trashbin.size() ; i++)       {delete v_trashbin[i]       ; v_trashbin[i]       = 0 ; }
+      for(int i = 0 ; i < (int)v_trashbin.size() ; i++) {delete v_trashbin[i] ; v_trashbin[i] = 0 ; }
       v_trashbin.                           clear() ;
     }
-    delete                                  pEvent ;
+    delete pEvent ;
     n_events++ ;
-  }  
+  }
   mean_phi /= n_events ;
-  std::cout << "mean_phi = " << mean_phi << std::endl ;
+  std::cout << std::setprecision(2) << "mean_phi = " << mean_phi*180/M_PI << std::endl ;
   aJFL_Selector.PrintStat() ;
   delete tf1_PRF ;
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////
   // Fitting 
-  // float L_phi                           = std::min({ 11.28/std::fabs(std::cos(mean_phi)), 10.19/std::fabs(std::sin(mean_phi)) }) ;
-  float L_phi                           = 11.28/fabs(cos(mean_phi)) ;
+  float L_phi                           = std::min({Lx/fabs(cos(mean_phi)), Ly/fabs(sin(mean_phi))}) ;
   std::cout << L_phi << std::endl ;
   A_corr->                                SetNameTitle("A_corr", "A_corr") ;
-  TGraph* tge_WFvsLength                = Convert_TH2_TGE_v2(h2f_WFvsLength) ;
+  TGraph* tge_WFvsLength                = Convert_TH2_TGE(h2f_WFvsLength) ;
   tge_WFvsLength->                        SetNameTitle("pTGE_A_corr", "pTGE_A_corr") ;
   tge_WFvsLength->                        Fit(A_corr,"RQ","0", 0, L_phi) ;
   ////////////////////////////////////////////////////////////////////////////////////////////////////
   // Saving
   // Checks
-  TFile* pfileROOT_corr = new TFile(TString(OutDir + "_WFmax_correction_full_err100.root"), "RECREATE") ;
+  TFile* pfileROOT_corr = new TFile(TString(OutDir + "_WFmax_correction.root"), "RECREATE") ;
   h2f_WFvsLength->                        Write() ;
   A_corr->                                Write() ;
   tge_WFvsLength->                        Write() ;

@@ -1,5 +1,5 @@
 Tag           : DESY21_ym120
-Comment       : _zcalc_PRF_4IP_Gain_WFoffdiag
+Comment       : 2000_zcalc_PRF_4IP_WF2
 EventFile     : ../Data_DESY21/yscan/Ym120_Z0_iter0.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
@@ -7,36 +7,20 @@ Data_to_Use   : 0
 OUTDirName    : OUT_Tristan/DESY21_yscan/DESY21_ym120/
 
 
-ReadRCmap::ReadRCmap Dir = GainRCMaps/RCfiles/EramName = ERAM01
 ReadRCmap::ReadRCmap m_FileName = GainRCMaps/RCfiles/ERAM01_RCdata_01.root
-
-Uploader_ReadRCmap::Uploader_ReadRCmap RCmapFile = GainRCMaps/RCfiles/ERAM01_RCdata_01.root
-Uploader_ReadRCmap::Uploader_ReadRCmap m_NberOfEntries = 1151
 
 ReadRCmap::ReadRCmap  No Data for iX=10 and  iY=16 in GainRCMaps/RCfiles/ERAM01_RCdata_01.root
 RC map: loaded
 
-ReadGainmap::ReadGainmap Dir = GainRCMaps/Gainfiles/EramName = ERAM01
 ReadGainmap::ReadGainmap m_FileName = GainRCMaps/Gainfiles/ERAM01_Gaindata_01.root
-
-Uploader_ReadGainmap::Uploader_ReadGainmap GainmapFile = GainRCMaps/Gainfiles/ERAM01_Gaindata_01.root
-Uploader_ReadGainmap::Uploader_ReadGainmap m_NberOfEntries = 1151
 
 ReadGainmap::ReadGainmap  No Data for iX=10 and  iY=16 in GainRCMaps/Gainfiles/ERAM01_Gaindata_01.root
 Gain map: loaded
+Average Gain in ERAM01 = 1947.77
 
 -------------->Predefined selection T_DESY21_Event
 Number of entries :5989
-module 0 TLeading max = 67
-module 1 TLeading max = 0
-module 2 TLeading max = 0
-module 3 TLeading max = 0
-module 4 TLeading max = 0
-module 5 TLeading max = 0
-module 6 TLeading max = 0
-module 7 TLeading max = 0
-Module whose bin is the most filled: 0
-
+TLow = 49 | THigh = 80
 
 -------------->List of selections
 Apply selection  1 -> Remove clusters in first and last columns 
@@ -74,8 +58,8 @@ cut length    = 2 mm
 
 Processing events:
 0/5989
-RC Hole in entry 184 | iX = 10 | iY = 16 | RC value reset at 129
-Gain Hole in entry 184 | iX = 10 | iY = 16 | Gain value reset at 1889
+RC hole in entry   184 | iX = 10 | iY = 16 |  RC  value reset at 129
+Gain hole in entry 184 | iX = 10 | iY = 16 | Gain value reset at 1889
 500/5989
 1000/5989
 1500/5989
@@ -100,5 +84,5 @@ Selection Statistics
     6  Stage5     4836     2377 (  -50.85)  (  -60.31)      4836     2377 (  -50.85)  (  -60.31)    159121    80818 (  -49.21)  (  -60.30)    574175   290208 (  -49.46)  (  -62.16) 
   Summary Sel     5989     2377             (  -60.31)      5989     2377             (  -60.31)    203596    80818             (  -60.30)    766923   290208             (  -62.16) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_yscan/DESY21_ym120/2_DESY21_ym120_Checks_zcalc_PRF_4IP_Gain_WFoffdiag.root
-dEdx: OUT_Tristan/DESY21_yscan/DESY21_ym120/3_DESY21_ym120_dEdx_zcalc_PRF_4IP_Gain_WFoffdiag.root
+Checks: OUT_Tristan/DESY21_yscan/DESY21_ym120/2_DESY21_ym120_Checks2000_zcalc_PRF_4IP_WF2.root
+dEdx: OUT_Tristan/DESY21_yscan/DESY21_ym120/3_DESY21_ym120_dEdx2000_zcalc_PRF_4IP_WF2.root

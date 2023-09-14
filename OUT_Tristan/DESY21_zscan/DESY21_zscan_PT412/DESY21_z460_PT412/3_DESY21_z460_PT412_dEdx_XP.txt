@@ -1,5 +1,5 @@
 Tag           : DESY21_z460_PT412
-Comment       : _zcalc_PRF_4IP_WF3corrLx
+Comment       : _zcalc_PRF_4IP_WF4
 EventFile     : ../Data_DESY21/zscan_PT412/z_360_275_412_02T_26_460_iter0.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
@@ -7,27 +7,20 @@ Data_to_Use   : 0
 OUTDirName    : OUT_Tristan/DESY21_zscan/DESY21_zscan_PT412/DESY21_z460_PT412/
 
 
-ReadRCmap::ReadRCmap Dir = GainRCMaps/RCfiles/EramName = ERAM01
 ReadRCmap::ReadRCmap m_FileName = GainRCMaps/RCfiles/ERAM01_RCdata_01.root
-
-Uploader_ReadRCmap::Uploader_ReadRCmap RCmapFile = GainRCMaps/RCfiles/ERAM01_RCdata_01.root
-Uploader_ReadRCmap::Uploader_ReadRCmap m_NberOfEntries = 1151
 
 ReadRCmap::ReadRCmap  No Data for iX=10 and  iY=16 in GainRCMaps/RCfiles/ERAM01_RCdata_01.root
 RC map: loaded
 
+ReadGainmap::ReadGainmap m_FileName = GainRCMaps/Gainfiles/ERAM01_Gaindata_01.root
+
+ReadGainmap::ReadGainmap  No Data for iX=10 and  iY=16 in GainRCMaps/Gainfiles/ERAM01_Gaindata_01.root
+Gain map: loaded
+Average Gain in ERAM01 = 1947.77
+
 -------------->Predefined selection T_DESY21_Event
 Number of entries :13454
-module 0 TLeading max = 186
-module 1 TLeading max = 0
-module 2 TLeading max = 0
-module 3 TLeading max = 0
-module 4 TLeading max = 0
-module 5 TLeading max = 0
-module 6 TLeading max = 0
-module 7 TLeading max = 0
-Module whose bin is the most filled: 0
-
+TLow = 169 | THigh = 202
 
 -------------->List of selections
 Apply selection  1 -> Remove clusters in first and last columns 
@@ -77,7 +70,8 @@ Processing events:
 5000/13454
 5500/13454
 6000/13454
-Hole in entry 6482 | iX = 10 | iY = 16 | RC value reset at 129
+RC hole in entry   6482 | iX = 10 | iY = 16 |  RC  value reset at 129
+Gain hole in entry 6482 | iX = 10 | iY = 16 | Gain value reset at 1889
 6500/13454
 7000/13454
 7500/13454
@@ -105,5 +99,5 @@ Selection Statistics
     6  Stage5    12215     7014 (  -42.58)  (  -47.87)     12215     7014 (  -42.58)  (  -47.87)    404395   238476 (  -41.03)  (  -47.85)   1432340   837061 (  -41.56)  (  -49.76) 
   Summary Sel    13454     7014             (  -47.87)     13454     7014             (  -47.87)    457279   238476             (  -47.85)   1665987   837061             (  -49.76) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT412/DESY21_z460_PT412/2_DESY21_z460_PT412_Checks_zcalc_PRF_4IP_WF3corrLx.root
-dEdx: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT412/DESY21_z460_PT412/3_DESY21_z460_PT412_dEdx_zcalc_PRF_4IP_WF3corrLx.root
+Checks: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT412/DESY21_z460_PT412/2_DESY21_z460_PT412_Checks_zcalc_PRF_4IP_WF4.root
+dEdx: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT412/DESY21_z460_PT412/3_DESY21_z460_PT412_dEdx_zcalc_PRF_4IP_WF4.root
