@@ -1,5 +1,5 @@
 Tag           : DESY21_theta-45
-Comment       : 2000_zcalc_PRF_4IP_WF2
+Comment       : _1000_zcalc_PRF_4IP_WFhatrecon
 EventFile     : ../Data_DESY21/Theta_scan/theta_m45_02T_z260_y80_iter0.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
@@ -59,7 +59,6 @@ cut length    = 2 mm
 Processing events:
 0/26640
 RC hole in entry   2 | iX = 10 | iY = 16 |  RC  value reset at 129
-Gain hole in entry 2 | iX = 10 | iY = 16 | Gain value reset at 1889
 500/26640
 1000/26640
 1500/26640
@@ -126,5 +125,5 @@ Selection Statistics
     6  Stage5    24682     6505 (  -73.64)  (  -75.58)     24682     6505 (  -73.64)  (  -75.58)    799648   221170 (  -72.34)  (  -75.57)   2670322   724297 (  -72.88)  (  -76.92) 
   Summary Sel    26640     6505             (  -75.58)     26640     6505             (  -75.58)    905312   221170             (  -75.57)   3138797   724297             (  -76.92) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_theta/DESY21_theta-45/2_DESY21_theta-45_Checks2000_zcalc_PRF_4IP_WF2.root
-dEdx: OUT_Tristan/DESY21_theta/DESY21_theta-45/3_DESY21_theta-45_dEdx2000_zcalc_PRF_4IP_WF2.root
+Checks: OUT_Tristan/DESY21_theta/DESY21_theta-45/2_DESY21_theta-45_Checks_1000_zcalc_PRF_4IP_WFhatrecon.root
+dEdx: OUT_Tristan/DESY21_theta/DESY21_theta-45/3_DESY21_theta-45_dEdx_1000_zcalc_PRF_4IP_WFhatrecon.root

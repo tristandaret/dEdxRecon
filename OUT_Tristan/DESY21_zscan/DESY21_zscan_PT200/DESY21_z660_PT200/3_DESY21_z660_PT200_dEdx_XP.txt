@@ -1,5 +1,5 @@
 Tag           : DESY21_z660_PT200
-Comment       : 2000_zcalc_PRF_4IP_WF2
+Comment       : _1000_zcalc_PRF_4IP_WFhatrecon
 EventFile     : ../Data_DESY21/zscan_PT200/z_360_275_200_02T_26_660_iter0.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
@@ -79,7 +79,6 @@ ALERT: 3 walls crossed for a pad in entry #652
 5500/12328
 6000/12328
 RC hole in entry   6235 | iX = 10 | iY = 16 |  RC  value reset at 129
-Gain hole in entry 6235 | iX = 10 | iY = 16 | Gain value reset at 1889
 6500/12328
 7000/12328
 7500/12328
@@ -105,5 +104,5 @@ Selection Statistics
     6  Stage5    11649     6848 (  -41.21)  (  -44.45)     11649     6848 (  -41.21)  (  -44.45)    386607   232832 (  -39.78)  (  -44.43)   1096843   651385 (  -40.61)  (  -46.47) 
   Summary Sel    12328     6848             (  -44.45)     12328     6848             (  -44.45)    419001   232832             (  -44.43)   1216895   651385             (  -46.47) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_z660_PT200/2_DESY21_z660_PT200_Checks2000_zcalc_PRF_4IP_WF2.root
-dEdx: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_z660_PT200/3_DESY21_z660_PT200_dEdx2000_zcalc_PRF_4IP_WF2.root
+Checks: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_z660_PT200/2_DESY21_z660_PT200_Checks_1000_zcalc_PRF_4IP_WFhatrecon.root
+dEdx: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_z660_PT200/3_DESY21_z660_PT200_dEdx_1000_zcalc_PRF_4IP_WFhatrecon.root

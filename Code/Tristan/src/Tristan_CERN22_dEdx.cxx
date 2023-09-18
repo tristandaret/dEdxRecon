@@ -208,13 +208,14 @@ void Tristan_CERN22_dEdx( const std::string& OutDir,
   TF1* A_corr                = new TF1("A_corr", "291.012 + 9.4669*x - 4.04*x*x + 1.31624*x*x*x - 0.059534*x*x*x*x", 0, 17); // values provided by Vlada (2022/10/11)
   if(Tag.find("diag") != std::string::npos){
     std::string filename = EventFile.substr(0, EventFile.length()-5) ;
-    // int angle ;
-    // if( (angle = filename.find("30"))  != (int)std::string::npos or (angle = filename.find("45"))  != (int)std::string::npos) filename.replace(angle, 2, "40") ;
-    // while( (angle = filename.find("460")) != (int)std::string::npos or (angle = filename.find("860")) != (int)std::string::npos) filename.replace(angle, 3, "m40") ;
+    int angle ;
+    if( (angle = filename.find("30"))  != (int)std::string::npos or (angle = filename.find("45"))  != (int)std::string::npos) filename.replace(angle, 2, "40") ;
+    while( (angle = filename.find("460")) != (int)std::string::npos or (angle = filename.find("860")) != (int)std::string::npos) filename.replace(angle, 3, "m40") ;
     TFile* pfile = new TFile((filename + "_WFmax_correction.root").c_str(), "READ") ;
     std::cout << (filename + "_WFmax_correction.root").c_str() << std::endl ;
     A_corr                   = pfile->Get<TF1>("A_corr") ;
-    pfile->Close() ;
+    pfile->                     Close() ;
+    A_corr->                    SetParameter(0, A_corr->GetParameter(0)-100) ;
     std::cout << std::setprecision(2) << "WF correction parameters: " << A_corr->GetParameter(0) << " | " << A_corr->GetParameter(1) << " | " << A_corr->GetParameter(2) << " | " << A_corr->GetParameter(3) << " | " << A_corr->GetParameter(4) << std::endl ;
   }
   float A_ref               = A_corr->Eval(Lx) ;
@@ -325,9 +326,9 @@ void Tristan_CERN22_dEdx( const std::string& OutDir,
         for(int iP = 0 ; iP < NPads ; iP ++){
           const Pad* pPad                 = pCluster->Get_Pad(iP) ;
           int StatusRC = 0 ;
-          int StatusG  = 0 ;
+          // int StatusG  = 0 ;
           double RC_pad                   = RCmap.GetData(pPad->Get_iX(),pPad->Get_iY(), StatusRC) ;
-          double G_pad                    = Gainmap.GetData(pPad->Get_iX(),pPad->Get_iY(), StatusG) ;
+          // double G_pad                    = Gainmap.GetData(pPad->Get_iX(),pPad->Get_iY(), StatusG) ;
           if(RC_pad == 0){
             std::cout << "RC hole in entry   " << pEvent->Get_EntryNber() << " | iX = " << pPad->Get_iX() << " | iY = " << pPad->Get_iY() ; 
             float RC_left                 = RCmap.GetData(pPad->Get_iX()-1,pPad->Get_iY(),   StatusRC) ;
@@ -338,22 +339,23 @@ void Tristan_CERN22_dEdx( const std::string& OutDir,
             RCmap.                          SetData(pPad->Get_iX(),pPad->Get_iY(), RC_pad) ;
             std::cout << " |  RC  value reset at " << RC_pad << std::endl ;
           }
-          if(G_pad == 0){
-            std::cout << "Gain hole in entry " << pEvent->Get_EntryNber() << " | iX = " << pPad->Get_iX() << " | iY = " << pPad->Get_iY() ; 
-            float G_left                  = Gainmap.GetData(pPad->Get_iX()-1,pPad->Get_iY(),   StatusG) ;
-            float G_right                 = Gainmap.GetData(pPad->Get_iX()+1,pPad->Get_iY(),   StatusG) ;
-            float G_low                   = Gainmap.GetData(pPad->Get_iX(),  pPad->Get_iY()-1, StatusG) ;
-            float G_top                   = Gainmap.GetData(pPad->Get_iX(),  pPad->Get_iY()+1, StatusG) ;
-            G_pad                         = (G_left + G_right + G_low + G_top)/4 ;
-            Gainmap.                        SetData(pPad->Get_iX(),pPad->Get_iY(), G_pad) ;
-            std::cout << " | Gain value reset at " << G_pad << std::endl ;
-          }
-          float Gcorr                     = avg_G/G_pad ;
-          float PadAmaxCorr               = Gcorr*pPad->Get_AMax() ;
+          // if(G_pad == 0){
+          //   std::cout << "Gain hole in entry " << pEvent->Get_EntryNber() << " | iX = " << pPad->Get_iX() << " | iY = " << pPad->Get_iY() ; 
+          //   float G_left                  = Gainmap.GetData(pPad->Get_iX()-1,pPad->Get_iY(),   StatusG) ;
+          //   float G_right                 = Gainmap.GetData(pPad->Get_iX()+1,pPad->Get_iY(),   StatusG) ;
+          //   float G_low                   = Gainmap.GetData(pPad->Get_iX(),  pPad->Get_iY()-1, StatusG) ;
+          //   float G_top                   = Gainmap.GetData(pPad->Get_iX(),  pPad->Get_iY()+1, StatusG) ;
+          //   G_pad                         = (G_left + G_right + G_low + G_top)/4 ;
+          //   Gainmap.                        SetData(pPad->Get_iX(),pPad->Get_iY(), G_pad) ;
+          //   std::cout << " | Gain value reset at " << G_pad << std::endl ;
+          // }
+          // float Gcorr                     = avg_G/G_pad ;
+          float PadAmaxCorr               = pPad->Get_AMax() ;
+          // float PadAmaxCorr               = Gcorr*pPad->Get_AMax() ;
 
           TH1F* h1f_WF_pad                = GiveMe_WaveFormDisplay(pPad, "main") ;
           h1f_WF_cluster->                  Add(h1f_WF_pad) ;
-          h1f_WF_pad->                      Scale(Gcorr) ;
+          // h1f_WF_pad->                      Scale(Gcorr) ;
           h1f_GWF_mod->                     Add(h1f_WF_pad) ;
           v_trashbin.                       push_back(h1f_WF_pad) ;
           

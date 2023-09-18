@@ -492,7 +492,7 @@ void DrawOut_Checks(const std::string& OutDir, const std::string EvtFile, const 
     A_corr                   = pfile->Get<TF1>("A_corr") ;
     pfile->Close() ;
   }
-  TF1* A_corr_Vlada             = new TF1("A_corr_Vlada", "291.012 + 9.4669*x - 4.04*x*x + 1.31624*x*x*x - 0.059534*x*x*x*x", 0, 17); // values provided by Vlada (2022/10/11)
+  TF1* A_corr_HATRecon             = new TF1("A_corr_Vlada", "291.012 + 9.4669*x - 4.04*x*x + 1.31624*x*x*x - 0.059534*x*x*x*x", 0, 17); // values provided by Vlada (2022/10/11)
   TH1F* h1f_WFoLength           = pTFile_Checks->Get<TH1F>("h1f_WFoLength") ;
   TH2F* h2f_lenVSd              = pTFile_Checks->Get<TH2F>("h2f_lenVSd") ;
 
@@ -613,9 +613,9 @@ void DrawOut_Checks(const std::string& OutDir, const std::string EvtFile, const 
   if(Tag.find("diag") != std::string::npos){
     A_corr->                      SetLineWidth(4) ;
     A_corr->                      Draw("same") ;
-    A_corr_Vlada->                SetLineWidth(4) ;
-    A_corr_Vlada->                SetLineColor(kBlack) ;
-    A_corr_Vlada->                Draw("same") ;
+    // A_corr_HATRecon->                SetLineWidth(4) ;
+    // A_corr_HATRecon->                SetLineColor(kBlack) ;
+    // A_corr_HATRecon->                Draw("same") ;
   }
   h2f_WFvsLength->                GetYaxis()->SetRangeUser(0, 2000) ;
   gPad->                          Update() ;
@@ -626,9 +626,9 @@ void DrawOut_Checks(const std::string& OutDir, const std::string EvtFile, const 
   if(Tag.find("diag") != std::string::npos){
     A_corr->                      SetLineWidth(4) ;
     A_corr->                      Draw("same") ;
-    A_corr_Vlada->                SetLineWidth(4) ;
-    A_corr_Vlada->                SetLineColor(kBlack) ;
-    A_corr_Vlada->                Draw("same") ;
+    // A_corr_HATRecon->                SetLineWidth(4) ;
+    // A_corr_HATRecon->                SetLineColor(kBlack) ;
+    // A_corr_HATRecon->                Draw("same") ;
   }
   h2f_WFtruncvsLength->           GetYaxis()->SetRangeUser(0, 2000) ;
   gPad->                          Update() ;
@@ -3466,8 +3466,8 @@ void DrawOut_Phiscan_Z(const std::string& inputDir, const std::string& Comment)
   int nphi                = 8 ;
   gStyle->                      SetPadTickX(1);
   gStyle->                      SetPadTickY(1);
-  // std::string Comment2 = "_zcalc_PRF_4IP_Gain_ref" ;
-  std::string Comment2 = Comment ;
+  std::string Comment2 = "_zcalc_PRF_4IP_ref" ;
+  // std::string Comment2 = Comment ;
 
   // Vectors of TFiles & TH1Fs & TF1s & 
   std::vector<TFile*>       v_pTFile_5 ;
@@ -3976,8 +3976,8 @@ void DrawOut_corrections(){
   v_filename.push_back("../Data_DESY21/Phi_scan_z460/phi_200_45_z460_ym60_diag_iter0_WFmax_correction.root") ;
   v_filename.push_back("../Data_DESY21/Phi_scan_z860/phi_200_45_z860_ym60_diag_iter0_WFmax_correction.root") ;
 
-  TF1* F_Vlada                = new TF1("F_Vlada", "291.012 + 9.4669*x - 4.04*x*x + 1.31624*x*x*x - 0.059534*x*x*x*x", 0, 17); // values provided by Vlada (2022/10/11)
-  v_tf1.push_back(F_Vlada) ;
+  TF1* F_HATRecon                = new TF1("F_Vlada", "291.012 + 9.4669*x - 4.04*x*x + 1.31624*x*x*x - 0.059534*x*x*x*x", 0, 17); // values provided by Vlada (2022/10/11)
+  v_tf1.push_back(F_HATRecon) ;
   for(int i = 0 ; i < (int)v_filename.size() ; i++){
     TFile* pfile = new TFile(v_filename[i].c_str(), "READ") ;
     v_tf1.push_back(pfile->Get<TF1>("A_corr")) ;
@@ -3989,7 +3989,7 @@ void DrawOut_corrections(){
   std::string OutputFile_Beg    = OutputFile + "(" ;
   std::string OutputFile_End    = OutputFile + ")" ;
 
-  std::string z[]               = {"50", "550", "950"} ;
+  int z[]                       = {5, 55, 95} ;
   TCanvas* pTCanvas             = new TCanvas("pTCanvas", "pTCanvas", 2700, 1800) ;
   TLegend* leg                  = new TLegend(0.85,0.8,0.99,0.99) ;
   pTCanvas->                      cd() ;
@@ -3998,13 +3998,13 @@ void DrawOut_corrections(){
   v_tf1[0]->                      GetYaxis()->SetRangeUser(0, 1500) ;
   
   v_tf1[0]->                      SetTitle("Correction functions 30#circ;L_{cluster} (mm);WF_{sum} (ADC count)") ;
-  leg->                           AddEntry(v_tf1[0], "Vlada" , "l") ;
+  leg->                           AddEntry(v_tf1[0], "HATRecon" , "l") ;
   for (int i = 1 ; i < 4 ; i++){
     v_tf1[0]->                    Draw() ;
     v_tf1[i]->                    SetLineColor(kGreen+2*(i-1)) ;
     v_tf1[i]->                    SetLineWidth(4) ;
     v_tf1[i]->                    SetLineStyle((i-1)%3+1) ;
-    leg->                         AddEntry(v_tf1[i], Form("%s mm", z[i-1].c_str()), "l") ;
+    leg->                         AddEntry(v_tf1[i], Form("%i cm", z[i-1]), "l") ;
   }
   for (int i = 1 ; i < 4 ; i++)v_tf1[i]->Draw("same") ;
   leg->                           Draw() ;
@@ -4013,13 +4013,13 @@ void DrawOut_corrections(){
   pTCanvas->                      Clear() ;
   
   v_tf1[0]->                      SetTitle("Correction functions 40#circ;L_{cluster} (mm);WF_{sum} (ADC count)") ;
-  leg->                           AddEntry(v_tf1[0], "Vlada" , "l") ;
+  leg->                           AddEntry(v_tf1[0], "HATRecon" , "l") ;
   for(int i = 4 ; i < 7 ; i++){ 
     v_tf1[0]->                    Draw() ;
     v_tf1[i]->                    SetLineColor(kBlue+2*(i-4)) ;
     v_tf1[i]->                    SetLineWidth(4) ;
     v_tf1[i]->                    SetLineStyle((i-1)%3+1) ;
-    leg->                         AddEntry(v_tf1[i], Form("%s mm", z[i-4].c_str()), "l") ;
+    leg->                         AddEntry(v_tf1[i], Form("%i cm", z[i-4]), "l") ;
   }
   for (int i = 4 ; i < 7 ; i++)v_tf1[i]->Draw("same") ;
   leg->                           Draw() ;
@@ -4028,13 +4028,13 @@ void DrawOut_corrections(){
   pTCanvas->                      Clear() ;
   
   v_tf1[0]->                      SetTitle("Correction functions 45#circ;L_{cluster} (mm);WF_{sum} (ADC count)") ;
-  leg->                           AddEntry(v_tf1[0], "Vlada" , "l") ;
+  leg->                           AddEntry(v_tf1[0], "HATRecon" , "l") ;
   for(int i = 7 ; i < 10; i++){ 
     v_tf1[0]->                    Draw() ;
     v_tf1[i]->                    SetLineColor(kRed+2*(i-7)) ;
     v_tf1[i]->                    SetLineWidth(4) ;
     v_tf1[i]->                    SetLineStyle((i-1)%3+1) ;
-    leg->                         AddEntry(v_tf1[i], Form("%s mm", z[i-7].c_str()), "l") ;
+    leg->                         AddEntry(v_tf1[i], Form("%i cm", z[i-7]), "l") ;
   }
   for (int i = 7 ; i < 10 ; i++)v_tf1[i]->Draw("same") ;
   leg->                           Draw() ;
@@ -4042,15 +4042,40 @@ void DrawOut_corrections(){
   leg->                           Clear() ;
   pTCanvas->                      Clear() ;
   
-  TLegend* legAll               = new TLegend(0.85,0.65,0.99,0.99) ;
-  v_tf1[0]->                      SetTitle("Correction functions;L_{cluster} (mm);WF_{sum} (ADC count)") ;
-  legAll->                        AddEntry(v_tf1[0], "Vlada" , "l") ;
+  TLegend* legAll               = new TLegend(0.86,0.65,0.99,0.99) ;
+  int angle[]                   = {30, 40, 45} ;
+  v_tf1[1]->                      SetTitle("Correction functions;L_{cluster} (mm);WF_{sum} (ADC count)") ;
+  v_tf1[1]->                      GetYaxis()->SetRangeUser(0, 1500) ;
+  v_tf1[1]->                      GetXaxis()->SetRangeUser(0, 17) ;
+  // legAll->                        AddEntry(v_tf1[0], "HATRecon" , "l") ;
   for(int i = 1 ; i < 10; i++){ 
-    v_tf1[0]->                    Draw() ;
-    v_tf1[i]->                    Draw("same") ;
-    legAll->                      AddEntry(v_tf1[i], Form("%s mm", z[(i-1)%3].c_str()), "l") ;
+    v_tf1[1]->                    Draw() ;
+    // if(i>1)v_tf1[i]->             Draw("same") ;
+    legAll->                      AddEntry(v_tf1[i], Form("%i#circ %i cm", angle[(i-1)/3], z[(i-1)%3]), "l") ;
   }
   for (int i = 1 ; i < 10 ; i++)v_tf1[i]->Draw("same") ;
+  legAll->                        Draw() ;
+  pTCanvas->                      SaveAs(OutputFile.c_str()) ;
+  pTCanvas->                      Clear() ;
+  
+  float ref                     =   v_tf1[4]->Eval(11.28) ;
+  for(int i = 1 ; i < 10; i++){ 
+    TGraph* tg                  = new TGraph() ;
+    tg->SetMaximum(1500) ;
+    tg->SetMinimum(0) ;
+    tg->SetTitle("F(L_{cluster})*F_{ref}(11.28)/F_{ref}(L_{cluster});L_{cluster} (mm);F(L_{cluster})*F_{ref}(11.28)/F_{ref}(L_{cluster}) (ADC count)") ;
+    for(int j = 0 ; j < 100 ; j++){
+    tg->SetPoint(j, j/100.*17., v_tf1[i]->Eval(j/100.*17.)*ref/v_tf1[4]->Eval(j/100.*17.)) ;
+    if(i>=1 && i<4) tg->      SetLineColor(kGreen+2*(i-1)) ;
+    if(i>=4 && i<7) tg->      SetLineColor(kBlue +2*(i-4)) ;
+    if(i>=7 && i<10)tg->      SetLineColor(kRed  +2*(i-7)) ;
+    tg->                      SetLineWidth(4) ;
+    tg->                      SetLineStyle((i-1)%3+1) ;
+    tg->GetXaxis()->SetLimits(0, 17) ;
+    if(i==1)tg->              DrawClone("AL") ;
+    else    tg->              DrawClone("L same") ;
+    }
+  }
   legAll->                        Draw() ;
   pTCanvas->                      SaveAs(OutputFile_End.c_str()) ;
   delete pTCanvas ;

@@ -15,6 +15,7 @@
 
 void Tristan_CERN22_Monitoring()
 {
+  gErrorIgnoreLevel = kInfo ;
   std::string SelectionSet ;
 
   int intUploader ;
@@ -30,7 +31,7 @@ void Tristan_CERN22_Monitoring()
   int nRC = 21 ; 
 
   std::string Tag    ; 
-  std::string Comment = "_zcalc_PRF_4IP_WF4" ; 
+  std::string Comment = "_zcalc_PRF_4IP_WF4_40_5_m100" ; 
   std::string prtcle ; 
   std::string EvtFile ;
   std::string OutDir  = "OUT_Tristan/";  
@@ -43,7 +44,7 @@ void Tristan_CERN22_Monitoring()
   int prototype       = 0 ;
   int DESY_zscan      = 0 ; 
   int DESY_yscan      = 0 ; 
-  int DESY_phi        = 1 ; 
+  int DESY_phi        = 0 ; 
   int DESY_theta      = 0 ; 
 
   // Computations
@@ -54,10 +55,11 @@ void Tristan_CERN22_Monitoring()
   // DrawOuts
   int DO_Displayer    = 0 ;
   int DO_Control      = 0 ;
-  int DO_Checks       = 1 ;
+  int DO_Checks       = 0 ;
   int DO_Methods      = 0 ;
   int DO_Resolution   = 0 ;
   int DO_Global       = 0 ;
+  int DO_Scans        = 0 ;
   int DO_Separation   = 0 ;
 
   // Energy scan using the prototype (ERAM 18)
@@ -169,7 +171,7 @@ void Tristan_CERN22_Monitoring()
       const char* z             = z_arr[iz].c_str() ;
       OutDir                    = Form("OUT_Tristan/DESY21_phi/DESY21_phi_z%s/", z) ;  
       MyMakeDir(OutDir) ; 
-      for (int ifile = 0 ; ifile < (int)std::size(phi_arr) ; ifile++){
+      for (int ifile = 5 ; ifile < (int)std::size(phi_arr) ; ifile++){
         int phi                 = phi_arr[ifile] ;
         if(ifile < 5) {EvtFile  = Form("../Data_DESY21/Phi_scan_z%s/phi_200_%i_z%s_ym60_iter0.root", z, phi, z) ; Tag = Form("DESY21_phi%i_z%s", phi, z) ; prtcle = Form("electron_phi%i_z%s", phi, z) ; }
         else          {EvtFile  = Form("../Data_DESY21/Phi_scan_z%s/phi_200_%i_z%s_ym60_diag_iter0.root", z, phi, z) ; Tag = Form("DESY21_phi%i_diag_z%s", phi, z) ; prtcle = Form("electron_phi%i_diag_z%s", phi, z) ; }
@@ -216,10 +218,10 @@ void Tristan_CERN22_Monitoring()
 
 
 
-  // DrawOut_Scans("OUT_Tristan", Comment);
+  if(DO_Scans) DrawOut_Scans("OUT_Tristan", Comment);
   // DrawOut_Versions("OUT_Tristan/", "XP", "_zcalc_PRF_4IP_WF1", "_zcalc_PRF_4IP_Gain_WFoffdiag") ;
   // DrawOut_verif("OUT_Tristan/DESY21_phi/DESY21_phi_", Comment) ;
-    // DrawOut_corrections() ;
+    DrawOut_corrections() ;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

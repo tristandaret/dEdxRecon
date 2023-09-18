@@ -1,5 +1,5 @@
 Tag           : DESY21_z560_PT200
-Comment       : 2000_zcalc_PRF_4IP_WF2
+Comment       : _1000_zcalc_PRF_4IP_WFhatrecon
 EventFile     : ../Data_DESY21/zscan_PT200/z_360_275_200_02T_26_560_iter0.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
@@ -60,7 +60,6 @@ Processing events:
 0/11791
 500/11791
 RC hole in entry   614 | iX = 10 | iY = 16 |  RC  value reset at 129
-Gain hole in entry 614 | iX = 10 | iY = 16 | Gain value reset at 1889
 1000/11791
 1500/11791
 2000/11791
@@ -96,5 +95,5 @@ Selection Statistics
     6  Stage5    11144     6378 (  -42.77)  (  -45.91)     11144     6378 (  -42.77)  (  -45.91)    369646   216852 (  -41.34)  (  -45.89)   1047201   606159 (  -42.12)  (  -47.82) 
   Summary Sel    11791     6378             (  -45.91)     11791     6378             (  -45.91)    400740   216852             (  -45.89)   1161674   606159             (  -47.82) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_z560_PT200/2_DESY21_z560_PT200_Checks2000_zcalc_PRF_4IP_WF2.root
-dEdx: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_z560_PT200/3_DESY21_z560_PT200_dEdx2000_zcalc_PRF_4IP_WF2.root
+Checks: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_z560_PT200/2_DESY21_z560_PT200_Checks_1000_zcalc_PRF_4IP_WFhatrecon.root
+dEdx: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_z560_PT200/3_DESY21_z560_PT200_dEdx_1000_zcalc_PRF_4IP_WFhatrecon.root

@@ -1,5 +1,5 @@
 Tag           : DESY21_y20
-Comment       : 2000_zcalc_PRF_4IP_WF2
+Comment       : _1000_zcalc_PRF_4IP_WFhatrecon
 EventFile     : ../Data_DESY21/yscan/Y20_Z0_iter0.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
@@ -61,7 +61,6 @@ Processing events:
 500/5219
 1000/5219
 RC hole in entry   1476 | iX = 10 | iY = 16 |  RC  value reset at 129
-Gain hole in entry 1476 | iX = 10 | iY = 16 | Gain value reset at 1889
 1500/5219
 2000/5219
 2500/5219
@@ -83,5 +82,5 @@ Selection Statistics
     6  Stage5     4149     1940 (  -53.24)  (  -62.83)      4149     1940 (  -53.24)  (  -62.83)    136078    65960 (  -51.53)  (  -62.81)    484604   233459 (  -51.82)  (  -64.73) 
   Summary Sel     5219     1940             (  -62.83)      5219     1940             (  -62.83)    177370    65960             (  -62.81)    661904   233459             (  -64.73) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_yscan/DESY21_y20/2_DESY21_y20_Checks2000_zcalc_PRF_4IP_WF2.root
-dEdx: OUT_Tristan/DESY21_yscan/DESY21_y20/3_DESY21_y20_dEdx2000_zcalc_PRF_4IP_WF2.root
+Checks: OUT_Tristan/DESY21_yscan/DESY21_y20/2_DESY21_y20_Checks_1000_zcalc_PRF_4IP_WFhatrecon.root
+dEdx: OUT_Tristan/DESY21_yscan/DESY21_y20/3_DESY21_y20_dEdx_1000_zcalc_PRF_4IP_WFhatrecon.root
