@@ -97,17 +97,32 @@ void Tristan_CERN22_dEdx( const std::string& OutDir,
   ReadGainmap Gainmap(eram_num) ;
   std::cout << "Gain map: loaded" << std::endl ;
 
+
+  TH2F* h2f_GainMap  = new TH2F("h2f_GainMap", Form("Gain map of %s;X (pad column);Y (pad row)", eram_num.c_str()), 36, -0.5, 35.5, 32, -0.5, 31.5) ;
   int   status  = 0 ;
   float avg_G   = 0 ;
   float n_pads  = 0 ;
+  float lowest  = 9999 ;
   for(int iX = 0 ; iX < 36 ; iX++){
     for(int iY = 0 ; iY < 32 ; iY++){
       avg_G += Gainmap.GetData(iX, iY, status) ;
       if(Gainmap.GetData(iX, iY, status) != 0) n_pads++ ;
+      if(Gainmap.GetData(iX, iY, status) != 0) h2f_GainMap->Fill(iX, iY, Gainmap.GetData(iX, iY, status)) ;
+      if(Gainmap.GetData(iX, iY, status) < lowest and Gainmap.GetData(iX, iY, status) > 0) lowest = Gainmap.GetData(iX, iY, status) ;
     }
   }
   avg_G /= n_pads ;
   std::cout << "Average Gain in " << eram_num << " = " << avg_G << std::endl ;
+
+  // Draw out
+  h2f_GainMap->SetMinimum(lowest) ;
+  std::string OutputFile      = "ERAM01_Gain.png" ;
+  gStyle->                      SetOptStat(0) ;
+  TCanvas* pTCanvas           = new TCanvas("TCanvas_Control", "TCanvas_Control", 4000, 3000) ;
+  pTCanvas->                    cd() ;
+  gStyle->                      SetPalette(kRainBow);
+  h2f_GainMap->                 Draw("colz") ;
+  pTCanvas->                    SaveAs(OutputFile.c_str()) ;
   
   /////////////////////////////////////////////////////////////////////////////////////////////////////////
   // Selection stage
@@ -326,9 +341,9 @@ void Tristan_CERN22_dEdx( const std::string& OutDir,
         for(int iP = 0 ; iP < NPads ; iP ++){
           const Pad* pPad                 = pCluster->Get_Pad(iP) ;
           int StatusRC = 0 ;
-          // int StatusG  = 0 ;
+          int StatusG  = 0 ;
           double RC_pad                   = RCmap.GetData(pPad->Get_iX(),pPad->Get_iY(), StatusRC) ;
-          // double G_pad                    = Gainmap.GetData(pPad->Get_iX(),pPad->Get_iY(), StatusG) ;
+          double G_pad                    = Gainmap.GetData(pPad->Get_iX(),pPad->Get_iY(), StatusG) ;
           if(RC_pad == 0){
             std::cout << "RC hole in entry   " << pEvent->Get_EntryNber() << " | iX = " << pPad->Get_iX() << " | iY = " << pPad->Get_iY() ; 
             float RC_left                 = RCmap.GetData(pPad->Get_iX()-1,pPad->Get_iY(),   StatusRC) ;
@@ -339,27 +354,27 @@ void Tristan_CERN22_dEdx( const std::string& OutDir,
             RCmap.                          SetData(pPad->Get_iX(),pPad->Get_iY(), RC_pad) ;
             std::cout << " |  RC  value reset at " << RC_pad << std::endl ;
           }
-          // if(G_pad == 0){
-          //   std::cout << "Gain hole in entry " << pEvent->Get_EntryNber() << " | iX = " << pPad->Get_iX() << " | iY = " << pPad->Get_iY() ; 
-          //   float G_left                  = Gainmap.GetData(pPad->Get_iX()-1,pPad->Get_iY(),   StatusG) ;
-          //   float G_right                 = Gainmap.GetData(pPad->Get_iX()+1,pPad->Get_iY(),   StatusG) ;
-          //   float G_low                   = Gainmap.GetData(pPad->Get_iX(),  pPad->Get_iY()-1, StatusG) ;
-          //   float G_top                   = Gainmap.GetData(pPad->Get_iX(),  pPad->Get_iY()+1, StatusG) ;
-          //   G_pad                         = (G_left + G_right + G_low + G_top)/4 ;
-          //   Gainmap.                        SetData(pPad->Get_iX(),pPad->Get_iY(), G_pad) ;
-          //   std::cout << " | Gain value reset at " << G_pad << std::endl ;
-          // }
-          // float Gcorr                     = avg_G/G_pad ;
-          float PadAmaxCorr               = pPad->Get_AMax() ;
-          // float PadAmaxCorr               = Gcorr*pPad->Get_AMax() ;
+          if(G_pad == 0){
+            std::cout << "Gain hole in entry " << pEvent->Get_EntryNber() << " | iX = " << pPad->Get_iX() << " | iY = " << pPad->Get_iY() ; 
+            float G_left                  = Gainmap.GetData(pPad->Get_iX()-1,pPad->Get_iY(),   StatusG) ;
+            float G_right                 = Gainmap.GetData(pPad->Get_iX()+1,pPad->Get_iY(),   StatusG) ;
+            float G_low                   = Gainmap.GetData(pPad->Get_iX(),  pPad->Get_iY()-1, StatusG) ;
+            float G_top                   = Gainmap.GetData(pPad->Get_iX(),  pPad->Get_iY()+1, StatusG) ;
+            G_pad                         = (G_left + G_right + G_low + G_top)/4 ;
+            Gainmap.                        SetData(pPad->Get_iX(),pPad->Get_iY(), G_pad) ;
+            std::cout << " | Gain value reset at " << G_pad << std::endl ;
+          }
+          float Gcorr                     = avg_G/G_pad ;
+          // float PadAmaxCorr               = pPad->Get_AMax() ;
+          float PadAmaxCorr               = Gcorr*pPad->Get_AMax() ;
 
           TH1F* h1f_WF_pad                = GiveMe_WaveFormDisplay(pPad, "main") ;
+          h1f_WF_pad->                      Scale(Gcorr) ;
           h1f_WF_cluster->                  Add(h1f_WF_pad) ;
-          // h1f_WF_pad->                      Scale(Gcorr) ;
           h1f_GWF_mod->                     Add(h1f_WF_pad) ;
           v_trashbin.                       push_back(h1f_WF_pad) ;
           
-          // WF & GPv3: List of pads to truncate (leading pads wrt ADC_max)
+          // GPv3: List of pads to truncate (leading pads wrt ADC_max)
           if(pPad == pCluster->Get_LeadingPad()){
             RankedValue rank_iC ;  
             rank_iC.Rank                  = iC ; 

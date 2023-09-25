@@ -1,5 +1,5 @@
 Tag           : DESY21_phi45_diag_zm40
-Comment       : _zcalc_PRF_4IP_WF4_40_5_m100
+Comment       : _zcalc_PRF_4IP_Gain2_WF4
 EventFile     : ../Data_DESY21/Phi_scan_zm40/phi_200_45_zm40_ym60_diag_iter0.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
@@ -61,6 +61,7 @@ WF correction parameters: 283.98 | -10.30 | 2.25 | 0.81 | -0.05
 Processing events:
 0/9326
 RC hole in entry   444 | iX = 10 | iY = 16 |  RC  value reset at 129.29
+Gain hole in entry 444 | iX = 10 | iY = 16 | Gain value reset at 1889.24
 500/9326
 1000/9326
 1500/9326
@@ -92,5 +93,5 @@ Selection Statistics
     6  Stage5     8979     7449 (  -17.04)  (  -20.13)      8979     7449 (  -17.04)  (  -20.13)    461216   395465 (  -14.26)  (  -21.61)    895018   762215 (  -14.84)  (  -24.32) 
   Summary Sel     9326     7449             (  -20.13)      9326     7449             (  -20.13)    504456   395465             (  -21.61)   1007162   762215             (  -24.32) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_phi/DESY21_phi_zm40/DESY21_phi45_diag_zm40/2_DESY21_phi45_diag_zm40_Checks_zcalc_PRF_4IP_WF4_40_5_m100.root
-dEdx: OUT_Tristan/DESY21_phi/DESY21_phi_zm40/DESY21_phi45_diag_zm40/3_DESY21_phi45_diag_zm40_dEdx_zcalc_PRF_4IP_WF4_40_5_m100.root
+Checks: OUT_Tristan/DESY21_phi/DESY21_phi_zm40/DESY21_phi45_diag_zm40/2_DESY21_phi45_diag_zm40_Checks_zcalc_PRF_4IP_Gain2_WF4.root
+dEdx: OUT_Tristan/DESY21_phi/DESY21_phi_zm40/DESY21_phi45_diag_zm40/3_DESY21_phi45_diag_zm40_dEdx_zcalc_PRF_4IP_Gain2_WF4.root

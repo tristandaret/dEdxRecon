@@ -1,5 +1,5 @@
 Tag           : CERN22_ERAM18_mu+_1GeV
-Comment       : _zcalc_PRF_4IP
+Comment       : _zcalc_PRF_4IP_Gain_WF4
 EventFile     : ../Data_CERN22_vD/ERAM18_350V_412ns_mu+_1GeV_iter0.root
 SelectionSet  : T2_CERN22_Event
 NbrOfMod      : -1
@@ -7,25 +7,16 @@ Data_to_Use   : 0
 OUTDirName    : OUT_Tristan/CERN22_ERAM18/CERN22_ERAM18_mu+_1GeV/
 
 
-ReadRCmap::ReadRCmap Dir = GainRCMaps/RCfiles/EramName = ERAM18
 ReadRCmap::ReadRCmap m_FileName = GainRCMaps/RCfiles/ERAM18_RCdata_14.root
-
-Uploader_ReadRCmap::Uploader_ReadRCmap RCmapFile = GainRCMaps/RCfiles/ERAM18_RCdata_14.root
-Uploader_ReadRCmap::Uploader_ReadRCmap m_NberOfEntries = 1152
 RC map: loaded
+
+ReadGainmap::ReadGainmap m_FileName = GainRCMaps/Gainfiles/ERAM18_Gaindata_14.root
+Gain map: loaded
+Average Gain in ERAM18 = 1283.03
 
 -------------->Predefined selection T2_CERN22_Event
 Number of entries :9618
-module 0 TLeading max = 183
-module 1 TLeading max = 0
-module 2 TLeading max = 0
-module 3 TLeading max = 0
-module 4 TLeading max = 0
-module 5 TLeading max = 0
-module 6 TLeading max = 0
-module 7 TLeading max = 0
-Module whose bin is the most filled: 0
-
+TLow = 158 | THigh = 194
 
 -------------->List of selections
 Apply selection  1 -> Remove clusters in first and last columns 
@@ -86,3 +77,5 @@ Selection Statistics
     4  Stage5     2548     1517 (  -40.46)  (  -84.23)      2548     1517 (  -40.46)  (  -84.23)     81358    51578 (  -36.60)  (  -84.96)    232192   147643 (  -36.41)  (  -84.93) 
   Summary Sel     9618     1517             (  -84.23)      9618     1517             (  -84.23)    343040    51578             (  -84.96)    979800   147643             (  -84.93) 
 Fitting: Started... done!
+Checks: OUT_Tristan/CERN22_ERAM18/CERN22_ERAM18_mu+_1GeV/2_CERN22_ERAM18_mu+_1GeV_Checks_zcalc_PRF_4IP_Gain_WF4.root
+dEdx: OUT_Tristan/CERN22_ERAM18/CERN22_ERAM18_mu+_1GeV/3_CERN22_ERAM18_mu+_1GeV_dEdx_zcalc_PRF_4IP_Gain_WF4.root

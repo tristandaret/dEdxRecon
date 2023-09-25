@@ -1,5 +1,5 @@
 Tag           : DESY21_phi20_z460
-Comment       : _zcalc_PRF_4IP_ref
+Comment       : _zcalc_PRF_4IP_Gain2_WF4
 EventFile     : ../Data_DESY21/Phi_scan_z460/phi_200_20_z460_ym60_iter0.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
@@ -59,6 +59,7 @@ cut length    = 2 mm
 Processing events:
 0/8728
 RC hole in entry   37 | iX = 10 | iY = 16 |  RC  value reset at 129
+Gain hole in entry 37 | iX = 10 | iY = 16 | Gain value reset at 1889
 500/8728
 1000/8728
 1500/8728
@@ -97,5 +98,5 @@ Selection Statistics
     6  Stage5     8334     4710 (  -43.48)  (  -46.04)      8334     4710 (  -43.48)  (  -46.04)    276243   160140 (  -42.03)  (  -46.02)    852094   487746 (  -42.76)  (  -47.66) 
   Summary Sel     8728     4710             (  -46.04)      8728     4710             (  -46.04)    296647   160140             (  -46.02)    931805   487746             (  -47.66) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_phi/DESY21_phi_z460/DESY21_phi20_z460/2_DESY21_phi20_z460_Checks_zcalc_PRF_4IP_ref.root
-dEdx: OUT_Tristan/DESY21_phi/DESY21_phi_z460/DESY21_phi20_z460/3_DESY21_phi20_z460_dEdx_zcalc_PRF_4IP_ref.root
+Checks: OUT_Tristan/DESY21_phi/DESY21_phi_z460/DESY21_phi20_z460/2_DESY21_phi20_z460_Checks_zcalc_PRF_4IP_Gain2_WF4.root
+dEdx: OUT_Tristan/DESY21_phi/DESY21_phi_z460/DESY21_phi20_z460/3_DESY21_phi20_z460_dEdx_zcalc_PRF_4IP_Gain2_WF4.root

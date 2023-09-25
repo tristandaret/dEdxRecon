@@ -485,14 +485,16 @@ void DrawOut_Checks(const std::string& OutDir, const std::string EvtFile, const 
   TH2F* h2f_WFtruncvsLength     = pTFile_Checks->Get<TH2F>("h2f_WFtruncvsLength") ;
   TH2F* h2f_WFstarvsLen         = pTFile_Checks->Get<TH2F>("h2f_WFstarvsLen") ;
   TH2F* h2f_WFstartrcvsLen      = pTFile_Checks->Get<TH2F>("h2f_WFstartrcvsLen") ;
-  TF1* A_corr                    = new TF1 ;
-    if(Tag.find("diag") != std::string::npos){
-    std::string filename = EvtFile.substr(0, EvtFile.length()-5) ;
-    TFile* pfile = new TFile((filename + "_WFmax_correction.root").c_str(), "READ") ;
-    A_corr                   = pfile->Get<TF1>("A_corr") ;
-    pfile->Close() ;
-  }
-  TF1* A_corr_HATRecon             = new TF1("A_corr_Vlada", "291.012 + 9.4669*x - 4.04*x*x + 1.31624*x*x*x - 0.059534*x*x*x*x", 0, 17); // values provided by Vlada (2022/10/11)
+  TF1* A_corr                   = new TF1 ;
+  //   if(Tag.find("diag") != std::string::npos){
+  //   std::string filename = EvtFile.substr(0, EvtFile.length()-5) ;
+  //   TFile* pfile = new TFile((filename + "_WFmax_correction.root").c_str(), "READ") ;
+  //   A_corr                      = pfile->Get<TF1>("A_corr") ;
+  //   pfile->Close() ;
+  // }
+  float pivot                   = 0 ;
+  // float pivot                   = A_corr->Eval(11.28) ;
+  TF1* A_corr_HATRecon          = new TF1("A_corr_Vlada", "291.012 + 9.4669*x - 4.04*x*x + 1.31624*x*x*x - 0.059534*x*x*x*x", 0, 17); // values provided by Vlada (2022/10/11)
   TH1F* h1f_WFoLength           = pTFile_Checks->Get<TH1F>("h1f_WFoLength") ;
   TH2F* h2f_lenVSd              = pTFile_Checks->Get<TH2F>("h2f_lenVSd") ;
 
@@ -579,8 +581,8 @@ void DrawOut_Checks(const std::string& OutDir, const std::string EvtFile, const 
   pTCanvas->                      SetLogy(0) ;  
 
   pTCanvas->                      Clear() ;
-  h1f_LallVScl->                 SetLineWidth(4) ;
-  h1f_LallVScl->                 Draw() ;
+  h1f_LallVScl->                  SetLineWidth(4) ;
+  h1f_LallVScl->                  Draw() ;
   pTCanvas->                      SaveAs(OutputFile.c_str()) ;
   pTCanvas->                      SetLogy(0) ;  
 
@@ -613,9 +615,9 @@ void DrawOut_Checks(const std::string& OutDir, const std::string EvtFile, const 
   if(Tag.find("diag") != std::string::npos){
     A_corr->                      SetLineWidth(4) ;
     A_corr->                      Draw("same") ;
-    // A_corr_HATRecon->                SetLineWidth(4) ;
-    // A_corr_HATRecon->                SetLineColor(kBlack) ;
-    // A_corr_HATRecon->                Draw("same") ;
+    A_corr_HATRecon->                SetLineWidth(4) ;
+    A_corr_HATRecon->                SetLineColor(kBlack) ;
+    A_corr_HATRecon->                Draw("same") ;
   }
   h2f_WFvsLength->                GetYaxis()->SetRangeUser(0, 2000) ;
   gPad->                          Update() ;
@@ -638,12 +640,18 @@ void DrawOut_Checks(const std::string& OutDir, const std::string EvtFile, const 
   h2f_WFstarvsLen->               Draw("colz") ;
   h2f_WFstarvsLen->               GetYaxis()->SetRangeUser(0, 2000) ;
   gPad->                          Update() ;
+  TLine *pline                  = new TLine(pTCanvas->GetUxmin(), pivot, pTCanvas->GetUxmax(), pivot) ;
+  pline->                         SetLineStyle(9) ;
+  pline->                         SetLineWidth(4) ;
+  pline->                         SetLineColor(kRed) ;
+  pline->                         Draw("same") ;
   pTCanvas->                      SaveAs(OutputFile.c_str()) ;
 
   pTCanvas->                      Clear() ;
   h2f_WFstartrcvsLen->            Draw("colz") ;
   h2f_WFstartrcvsLen->            GetYaxis()->SetRangeUser(0, 2000) ;
   gPad->                          Update() ;
+  pline->                         Draw("same") ;
   pTCanvas->                      SaveAs(OutputFile.c_str()) ;
 
   pTCanvas->                      SetLogy(1) ;  
@@ -3466,8 +3474,8 @@ void DrawOut_Phiscan_Z(const std::string& inputDir, const std::string& Comment)
   int nphi                = 8 ;
   gStyle->                      SetPadTickX(1);
   gStyle->                      SetPadTickY(1);
-  std::string Comment2 = "_zcalc_PRF_4IP_ref" ;
-  // std::string Comment2 = Comment ;
+  // std::string Comment2 = "_zcalc_PRF_4IP_ref" ;
+  std::string Comment2 = Comment ;
 
   // Vectors of TFiles & TH1Fs & TF1s & 
   std::vector<TFile*>       v_pTFile_5 ;
@@ -4042,6 +4050,7 @@ void DrawOut_corrections(){
   leg->                           Clear() ;
   pTCanvas->                      Clear() ;
   
+
   TLegend* legAll               = new TLegend(0.86,0.65,0.99,0.99) ;
   int angle[]                   = {30, 40, 45} ;
   v_tf1[1]->                      SetTitle("Correction functions;L_{cluster} (mm);WF_{sum} (ADC count)") ;
@@ -4058,14 +4067,14 @@ void DrawOut_corrections(){
   pTCanvas->                      SaveAs(OutputFile.c_str()) ;
   pTCanvas->                      Clear() ;
   
+
   float ref                     =   v_tf1[4]->Eval(11.28) ;
   for(int i = 1 ; i < 10; i++){ 
     TGraph* tg                  = new TGraph() ;
     tg->SetMaximum(1500) ;
     tg->SetMinimum(0) ;
     tg->SetTitle("F(L_{cluster})*F_{ref}(11.28)/F_{ref}(L_{cluster});L_{cluster} (mm);F(L_{cluster})*F_{ref}(11.28)/F_{ref}(L_{cluster}) (ADC count)") ;
-    for(int j = 0 ; j < 100 ; j++){
-    tg->SetPoint(j, j/100.*17., v_tf1[i]->Eval(j/100.*17.)*ref/v_tf1[4]->Eval(j/100.*17.)) ;
+    for(int j = 0 ; j < 100 ; j++) tg->SetPoint(j, j/100.*17., v_tf1[i]->Eval(j/100.*17.)*ref/v_tf1[4]->Eval(j/100.*17.)) ;
     if(i>=1 && i<4) tg->      SetLineColor(kGreen+2*(i-1)) ;
     if(i>=4 && i<7) tg->      SetLineColor(kBlue +2*(i-4)) ;
     if(i>=7 && i<10)tg->      SetLineColor(kRed  +2*(i-7)) ;
@@ -4074,9 +4083,32 @@ void DrawOut_corrections(){
     tg->GetXaxis()->SetLimits(0, 17) ;
     if(i==1)tg->              DrawClone("AL") ;
     else    tg->              DrawClone("L same") ;
-    }
   }
   legAll->                        Draw() ;
+  pTCanvas->                      SaveAs(OutputFile.c_str()) ;
+  pTCanvas->                      Clear() ;
+  legAll->                        Clear() ;
+  
+
+  TLegend* legRatio             = new TLegend(0.75,0.6,0.99,0.94) ;
+  Color_t col[]                 = {kRed-9, kRed-7, kRed, kRed+2, kRed+4} ;
+  v_tf1[4]->                      SetParameter(0, v_tf1[4]->GetParameter(0)-200) ;
+  for(int i = 0 ; i < 5; i++){ 
+    TGraph* tg                  = new TGraph() ;
+    tg->                          SetMaximum(4) ;
+    tg->                          SetMinimum(0) ;
+    tg->                          SetTitle("F_{ref}(11.28)/F_{ref}(L_{cluster}) with F_{ref} shifted;L_{cluster} (mm);ratio") ;
+    v_tf1[4]->                    SetParameter(0, v_tf1[4]->GetParameter(0)+i*100) ;
+    ref                         = v_tf1[4]->Eval(11.28) ;
+    for(int j = 0 ; j < 100 ; j++) tg->SetPoint(j, j/100.*17., ref/v_tf1[4]->Eval(j/100.*17.)) ;
+    tg->                          SetLineColor(col[i]) ;
+    tg->                          SetLineWidth(4) ;
+    tg->GetXaxis()->              SetLimits(0, 17) ;
+    if(i==0)tg->                  DrawClone("AL") ;
+    else    tg->                  DrawClone("L same") ;
+    legRatio->                    AddEntry(tg, Form("%i ADC counts", i*100-200), "l") ;
+  }
+  legRatio->                      Draw() ;
   pTCanvas->                      SaveAs(OutputFile_End.c_str()) ;
   delete pTCanvas ;
 }
