@@ -19,6 +19,32 @@
 #include "TLegendEntry.h"
 #include "TFile.h"
 
+// Draw gain map
+void DrawOut_GainMap(const std::string& eram_id, ReadGainmap* Gainmap){
+  TH2F* h2f_GainMap           = new TH2F("h2f_GainMap", Form("Gain map of %s;X (pad column);Y (pad row)", eram_id.c_str()), 36, -0.5, 35.5, 32, -0.5, 31.5) ;
+  int init_style              = gStyle->GetOptStat();
+  gStyle->                      SetOptStat(0) ;
+  TCanvas* pTCanvas           = new TCanvas("TCanvas_Control", "TCanvas_Control", 4000, 3000) ;
+  int status                  = 0 ;
+  int lowest                  = 9999 ;
+  for(int iX = 0 ; iX < 36 ; iX++){
+    for(int iY = 0 ; iY < 32 ; iY++){
+      if(Gainmap->GetData(iX, iY, status) != 0) h2f_GainMap->Fill(iX, iY, Gainmap->GetData(iX, iY, status)) ;
+      if(Gainmap->GetData(iX, iY, status) < lowest and Gainmap->GetData(iX, iY, status) > 0) lowest = Gainmap->GetData(iX, iY, status) ;
+    }
+  }
+  std::string OutputFile      = eram_id + "_GainMap.png" ;
+  h2f_GainMap->                 SetMinimum(lowest) ;
+  pTCanvas->                    cd() ;
+  pTCanvas->                    SetRightMargin(0.13);
+  gStyle->                      SetPalette(kRainBow);
+  h2f_GainMap->                 Draw("colz") ;
+  pTCanvas->                    SaveAs(OutputFile.c_str()) ;
+  gStyle->                      SetOptStat(init_style) ;
+  delete h2f_GainMap;
+  delete pTCanvas;
+}
+
 
 //Output event display of an event  with tagging string TAG, placed in OUTDIR dir
 void DrawOut_EventDisplay(Event* pEvent, const int& ModuleNber ,const std::string& OUTDIR,const std::string& TAG)

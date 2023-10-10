@@ -31,7 +31,7 @@ void Tristan_CERN22_Monitoring()
   int nRC = 21 ; 
 
   std::string Tag    ; 
-  std::string Comment = "_zcalc_PRF_4IP_Gain2_WF4" ; 
+  std::string Comment = "_zcalc_PRF_4IP_Gain2_WF4_test" ; 
   std::string prtcle ; 
   std::string EvtFile ;
   std::string OutDir  = "OUT_Tristan/";  
@@ -41,10 +41,10 @@ void Tristan_CERN22_Monitoring()
   gStyle->                SetPadTickY(1);
 
   // Files to use
-  int prototype       = 0 ;
+  int prototype       = 1 ;
   int DESY_zscan      = 0 ; 
   int DESY_yscan      = 0 ; 
-  int DESY_phi        = 1 ; 
+  int DESY_phi        = 0 ; 
   int DESY_theta      = 0 ; 
 
   // Computations
@@ -55,8 +55,8 @@ void Tristan_CERN22_Monitoring()
   // DrawOuts
   int DO_Displayer    = 0 ;
   int DO_Control      = 0 ;
-  int DO_Checks       = 0 ;
-  int DO_Methods      = 0 ;
+  int DO_Checks       = 1 ;
+  int DO_Methods      = 1 ;
   int DO_Resolution   = 0 ;
   int DO_Global       = 0 ;
   int DO_Scans        = 0 ;
@@ -66,21 +66,24 @@ void Tristan_CERN22_Monitoring()
   if(prototype){
     SelectionSet          = "T2_CERN22_Event" ;
     std::string OutDir    = "OUT_Tristan/CERN22_ERAM18/" ;  
+    std::string version   = "vD" ;    // vD v6_iter0 v6_iter4
+    std::string iter      = "_iter0"; // 0  0        4
     MyMakeDir(OutDir) ;
     intUploader     =  3 ;
     NbrOfMod        = -1 ;
     PT              = 412 ; Dt = 350 ; zdrift = 415 ; TB = 40 ;
     Uploader* pUpld ; Interpol4 LUT ;
     if (Control or dEdx) LUT = GiveMe_LUT(Form("/home/td263283/Documents/Python/LUT_XP/LUT_Dt%i_PT%i_nphi200_nd200/", Dt, PT), nZ, nRC) ;
-    int part_arr[] = {1,2,5,6} ;
+    // int part_arr[] = {1,2,5,6} ;
+    int part_arr[] = {1} ;
     for (int iFile : part_arr) {
-      if (iFile == 0) { EvtFile = "../Data_CERN22_vD/ERAM18_350V_412ns_e+_0p5GeV_iter0.root" ;    Tag = "CERN22_ERAM18_e+_0p5GeV" ;    prtcle = "e^{+} 0.5GeV_" ;   }
-      if (iFile == 1) { EvtFile = "../Data_CERN22_vD/ERAM18_350V_412ns_e+_1GeV_iter0.root" ;      Tag = "CERN22_ERAM18_e+_1GeV" ;      prtcle = "e^{+} 1GeV_" ;     }
-      if (iFile == 2) { EvtFile = "../Data_CERN22_vD/ERAM18_350V_412ns_p_1GeV_iter0.root" ;       Tag = "CERN22_ERAM18_p_1GeV" ;       prtcle = "protons 1GeV_" ;   } 
-      if (iFile == 3) { EvtFile = "../Data_CERN22_vD/ERAM18_350V_412ns_mu-_1GeV_iter0.root" ;     Tag = "CERN22_ERAM18_mu-_1GeV" ;     prtcle = "#mu^{-} 1GeV_" ;   }
-      if (iFile == 4) { EvtFile = "../Data_CERN22_vD/ERAM18_350V_412ns_mu+_0p75GeV_iter0.root" ;  Tag = "CERN22_ERAM18_mu+_0p75GeV" ;  prtcle = "#mu^{+} 0.75GeV_" ;}
-      if (iFile == 5) { EvtFile = "../Data_CERN22_vD/ERAM18_350V_412ns_mu+_1GeV_iter0.root" ;     Tag = "CERN22_ERAM18_mu+_1GeV" ;     prtcle = "#mu^{+} 1GeV_" ;   }
-      if (iFile == 6) { EvtFile = "../Data_CERN22_vD/ERAM18_350V_412ns_pi+_0p5GeV_iter0.root" ;   Tag = "CERN22_ERAM18_pi+_0p5GeV" ;   prtcle = "#pi^{+} 0.5GeV_" ; }
+      if (iFile == 0) { EvtFile = "../Data_CERN22_" + version + iter +"/ERAM18_350V_412ns_e+_0p5GeV" + iter + ".root" ;    Tag = "CERN22_ERAM18_e+_0p5GeV_" + version + iter ;    prtcle = "e^{+} 0.5GeV_" ;   }
+      if (iFile == 1) { EvtFile = "../Data_CERN22_" + version + iter +"/ERAM18_350V_412ns_e+_1GeV" + iter + ".root" ;      Tag = "CERN22_ERAM18_e+_1GeV_" + version + iter ;      prtcle = "e^{+} 1GeV_" ;     }
+      if (iFile == 2) { EvtFile = "../Data_CERN22_" + version + iter +"/ERAM18_350V_412ns_p_1GeV" + iter + ".root" ;       Tag = "CERN22_ERAM18_p_1GeV_" + version + iter ;       prtcle = "protons 1GeV_" ;   } 
+      if (iFile == 3) { EvtFile = "../Data_CERN22_" + version + iter +"/ERAM18_350V_412ns_mu-_1GeV" + iter + ".root" ;     Tag = "CERN22_ERAM18_mu-_1GeV_" + version + iter ;     prtcle = "#mu^{-} 1GeV_" ;   }
+      if (iFile == 4) { EvtFile = "../Data_CERN22_" + version + iter +"/ERAM18_350V_412ns_mu+_0p75GeV" + iter + ".root" ;  Tag = "CERN22_ERAM18_mu+_0p75GeV_" + version + iter ;  prtcle = "#mu^{+} 0.75GeV_" ;}
+      if (iFile == 5) { EvtFile = "../Data_CERN22_" + version + iter +"/ERAM18_350V_412ns_mu+_1GeV" + iter + ".root" ;     Tag = "CERN22_ERAM18_mu+_1GeV_" + version + iter ;     prtcle = "#mu^{+} 1GeV_" ;   }
+      if (iFile == 6) { EvtFile = "../Data_CERN22_" + version + iter +"/ERAM18_350V_412ns_pi+_0p5GeV" + iter + ".root" ;   Tag = "CERN22_ERAM18_pi+_0p5GeV_" + version + iter ;   prtcle = "#pi^{+} 0.5GeV_" ; }
       if (Control or dEdx) pUpld = GiveMe_Uploader (intUploader, EvtFile) ;
       if (Control)      Tristan_CERN22_Control    (OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, Data_to_Use, PT, TB, prtcle) ;
       if (DO_Control)   DrawOut_Control           (OutDir, Tag, Comment, SelectionSet, 1) ;
@@ -110,8 +113,10 @@ void Tristan_CERN22_Monitoring()
       if (Control or dEdx) LUT = GiveMe_LUT(Form("/home/td263283/Documents/Python/LUT_XP/LUT_Dt%i_PT%i_nphi200_nd200/", Dt, PT), nZ, nRC) ;
       // int         z_val[]   = {50, 150, 250, 350, 450, 550, 650, 750, 850, 950} ;
       // std::string z_arr[]   = {"m40", "060", "160", "260", "360", "460", "560", "660", "760", "860"} ;
-      int         z_val[]   = {50, 550, 950} ;
-      std::string z_arr[]   = {"m40", "460", "860"} ;
+      // int         z_val[]   = {50, 550, 950} ;
+      // std::string z_arr[]   = {"m40", "460", "860"} ;
+      int         z_val[]   = {50, 150} ;
+      std::string z_arr[]   = {"m40", "060"} ;
       for (int iz = 0 ; iz < (int)std::size(z_arr) ; iz++){
         const char* z       = z_arr[iz].c_str() ;
         EvtFile             = Form("../Data_DESY21/zscan_PT%i/z_360_275_%i_02T_26_%s_iter0.root", PT, PT, z) ; Tag = Form("DESY21_z%s_PT%i", z, PT) ; prtcle = Form("electron_z%s", z) ;
@@ -119,8 +124,9 @@ void Tristan_CERN22_Monitoring()
         if (Control)      Tristan_CERN22_Control    (OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, Data_to_Use, PT, TB, prtcle) ;
         if (DO_Control)   DrawOut_Control           (OutDir, Tag, Comment, SelectionSet, 1) ;
         if (dEdx)         Tristan_CERN22_dEdx       (OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, Data_to_Use, LUT, PT, TB, z_val[iz]) ;
-        if (DO_Checks)     DrawOut_Checks            (OutDir, EvtFile, Tag, Comment) ;
-        if (DO_Methods)  DrawOut_Methods        (OutDir, Tag, Comment, 1, prtcle) ;
+        std::cout << "beacon 1" << std::endl ;
+        if (DO_Checks)    DrawOut_Checks            (OutDir, EvtFile, Tag, Comment) ;
+        if (DO_Methods)   DrawOut_Methods           (OutDir, Tag, Comment, 1, prtcle) ;
         // DrawOut_systematics(OutDir, EvtFile, Tag, Comment) ;
       }
       if(DO_Resolution)   DrawOut_Zscan  (Form("OUT_Tristan/DESY21_zscan/DESY21_zscan_PT%i", PT), Comment, PT) ;
@@ -331,20 +337,20 @@ void Tristan_CERN22_Monitoring()
     if (Control or dEdx) LUT = GiveMe_LUT(Form("/home/td263283/Documents/Python/LUT_XP/LUT_Dt%i_PT%i_nphi200_nd200/", Dt, PT), nZ, nRC) ;
     int NFiles = 14 ;
     for (int iFile = 0 ; iFile < NFiles ; iFile++){
-      if (iFile == 0)  { EvtFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_e+_0p5GeV_25V_z415_y2pad_iter0.root" ;       Tag = "CERN22_Mockup_Energy_e+_0p5GeV" ;  prtcle = "e^{+} 0p5GeV" ;}
-      if (iFile == 1)  { EvtFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_e+_0p75GeV_25V_z415_y2pad_iter0.root" ;      Tag = "CERN22_Mockup_Energy_e+_0p75GeV" ; prtcle = "e^{+} 0p75GeV" ;}
-      if (iFile == 2)  { EvtFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_e+_1GeV_25V_z415p1_y2pad_iter0.root" ;       Tag = "CERN22_Mockup_Energy_e+_1GeV" ;    prtcle = "e^{+} 1GeV" ;}  
-      if (iFile == 3)  { EvtFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_e+_1p25GeV_25V_z415p1_y2pad_1_iter0.root" ;  Tag = "CERN22_Mockup_Energy_e+_1p25GeV" ; prtcle = "e^{+} 1p25GeV" ;}
-      if (iFile == 4)  { EvtFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_e+_1p5GeV_25V_z415p1_y2pad_iter0.root" ;     Tag = "CERN22_Mockup_Energy_e+_1p5GeV" ;  prtcle = "e^{+} 1p5GeV" ;}
-      if (iFile == 5)  { EvtFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_mu+_0p75GeV_25V_z415_y2pad_iter0.root" ;     Tag = "CERN22_Mockup_Energy_mu_0p75GeV" ; prtcle = "#mu^{+} 0p75GeV" ;}
-      if (iFile == 6)  { EvtFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_mu+_1GeV_25V_z415p1_y2pad_iter0.root" ;      Tag = "CERN22_Mockup_Energy_mu_1GeV" ;    prtcle = "#mu^{+} 1GeV" ;}
-      if (iFile == 7)  { EvtFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_mu+_1p5GeV_25V_z415p1_y2pad_iter0.root" ;    Tag = "CERN22_Mockup_Energy_mu_1p5GeV" ;  prtcle = "#mu^{+} 1p5GeV" ;}
-      if (iFile == 8)  { EvtFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_pi+_0p75GeV_25V_z415_y2pad_iter0.root" ;     Tag = "CERN22_Mockup_Energy_pi_0p75GeV" ; prtcle = "#pi^{+} 0p75GeV" ;}
-      if (iFile == 9)  { EvtFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_pi+_1p25GeV_25V_z415p1_y2pad_2_iter0.root" ; Tag = "CERN22_Mockup_Energy_pi_1p25GeV" ; prtcle = "#pi^{+} 1p25GeV" ;}
-      if (iFile == 10) { EvtFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_pi+_1p5GeV_25V_z415p1_y2pad_iter0.root" ;    Tag = "CERN22_Mockup_Energy_pi_1p5GeV" ;  prtcle = "#pi^{+} 1p5GeV" ;}
-      if (iFile == 11) { EvtFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_p_1GeV_25V_z415p1_y2pad_iter0.root" ;        Tag = "CERN22_Mockup_Energy_p+_1GeV" ;    prtcle = "protons 1GeV" ;}
-      if (iFile == 12) { EvtFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_p_1p25GeV_25V_z415p1_y2pad_iter0.root" ;     Tag = "CERN22_Mockup_Energy_p+_1p25GeV" ; prtcle = "protons 1p25GeV" ;}
-      if (iFile == 13) { EvtFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_p_1p5GeV_25V_z415_y2pad_2_iter0.root" ;      Tag = "CERN22_Mockup_Energy_p+_1p5GeV" ;  prtcle = "protons 1p5GeV" ;}
+      if (iFile == 0)  { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_e+_0p5GeV_25V_z415_y2pad_iter0.root" ;       Tag = "CERN22_Mockup_Energy_e+_0p5GeV" ;  prtcle = "e^{+} 0p5GeV" ;}
+      if (iFile == 1)  { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_e+_0p75GeV_25V_z415_y2pad_iter0.root" ;      Tag = "CERN22_Mockup_Energy_e+_0p75GeV" ; prtcle = "e^{+} 0p75GeV" ;}
+      if (iFile == 2)  { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_e+_1GeV_25V_z415p1_y2pad_iter0.root" ;       Tag = "CERN22_Mockup_Energy_e+_1GeV" ;    prtcle = "e^{+} 1GeV" ;}  
+      if (iFile == 3)  { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_e+_1p25GeV_25V_z415p1_y2pad_1_iter0.root" ;  Tag = "CERN22_Mockup_Energy_e+_1p25GeV" ; prtcle = "e^{+} 1p25GeV" ;}
+      if (iFile == 4)  { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_e+_1p5GeV_25V_z415p1_y2pad_iter0.root" ;     Tag = "CERN22_Mockup_Energy_e+_1p5GeV" ;  prtcle = "e^{+} 1p5GeV" ;}
+      if (iFile == 5)  { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_mu+_0p75GeV_25V_z415_y2pad_iter0.root" ;     Tag = "CERN22_Mockup_Energy_mu_0p75GeV" ; prtcle = "#mu^{+} 0p75GeV" ;}
+      if (iFile == 6)  { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_mu+_1GeV_25V_z415p1_y2pad_iter0.root" ;      Tag = "CERN22_Mockup_Energy_mu_1GeV" ;    prtcle = "#mu^{+} 1GeV" ;}
+      if (iFile == 7)  { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_mu+_1p5GeV_25V_z415p1_y2pad_iter0.root" ;    Tag = "CERN22_Mockup_Energy_mu_1p5GeV" ;  prtcle = "#mu^{+} 1p5GeV" ;}
+      if (iFile == 8)  { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_pi+_0p75GeV_25V_z415_y2pad_iter0.root" ;     Tag = "CERN22_Mockup_Energy_pi_0p75GeV" ; prtcle = "#pi^{+} 0p75GeV" ;}
+      if (iFile == 9)  { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_pi+_1p25GeV_25V_z415p1_y2pad_2_iter0.root" ; Tag = "CERN22_Mockup_Energy_pi_1p25GeV" ; prtcle = "#pi^{+} 1p25GeV" ;}
+      if (iFile == 10) { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_pi+_1p5GeV_25V_z415p1_y2pad_iter0.root" ;    Tag = "CERN22_Mockup_Energy_pi_1p5GeV" ;  prtcle = "#pi^{+} 1p5GeV" ;}
+      if (iFile == 11) { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_p_1GeV_25V_z415p1_y2pad_iter0.root" ;        Tag = "CERN22_Mockup_Energy_p+_1GeV" ;    prtcle = "protons 1GeV" ;}
+      if (iFile == 12) { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_p_1p25GeV_25V_z415p1_y2pad_iter0.root" ;     Tag = "CERN22_Mockup_Energy_p+_1p25GeV" ; prtcle = "protons 1p25GeV" ;}
+      if (iFile == 13) { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_p_1p5GeV_25V_z415_y2pad_2_iter0.root" ;      Tag = "CERN22_Mockup_Energy_p+_1p5GeV" ;  prtcle = "protons 1p5GeV" ;}
       if(Control or dEdx) pUpld = GiveMe_Uploader (intUploader, EvtFile) ;
       if (Control)      Tristan_CERN22_Control    (OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, Data_to_Use, PT, TB, prtcle) ;
       if (DO_Control)   DrawOut_Control           (OutDir, Tag, Comment, SelectionSet, 1) ;
@@ -366,15 +372,15 @@ void Tristan_CERN22_Monitoring()
 
     int NFiles = 10 ;
     for (int iFile = 0 ; iFile < NFiles ; iFile++){
-      if (iFile == 0) { EvtFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_e+_0p5GeV_14V_z60_iter0.root" ;       Tag = "CERN22_Mockup_e+_14V_z060" ;}
-      if (iFile == 1) { EvtFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_e+_0p5GeV_14V_z218p5_1_iter0.root" ;  Tag = "CERN22_Mockup_e+_14V_z218" ;}
-      if (iFile == 2) { EvtFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_e+_0p5GeV_14V_z415_iter0.root" ;      Tag = "CERN22_Mockup_e+_14V_z415" ;}
-      if (iFile == 3) { EvtFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_e+_0p5GeV_14V_z572_iter0.root" ;      Tag = "CERN22_Mockup_e+_14V_z572" ;}
-      if (iFile == 5) { EvtFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_e+_0p5GeV_25V_z60_iter0.root" ;       Tag = "CERN22_Mockup_e+_25V_z060" ;}
-      if (iFile == 6) { EvtFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_e+_0p5GeV_25V_z218p5_iter0.root" ;    Tag = "CERN22_Mockup_e+_25V_z218" ;}
-      if (iFile == 7) { EvtFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_e+_0p5GeV_25V_z415_iter0.root" ;      Tag = "CERN22_Mockup_e+_25V_z415" ;}
-      if (iFile == 8) { EvtFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_e+_0p5GeV_25V_z572_iter0.root" ;      Tag = "CERN22_Mockup_e+_25V_z572" ;}
-      if (iFile == 9) { EvtFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_e+_0p5GeV_25V_z925_iter0.root" ;      Tag = "CERN22_Mockup_e+_25V_z925" ;}
+      if (iFile == 0) { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_e+_0p5GeV_14V_z60_iter0.root" ;       Tag = "CERN22_Mockup_e+_14V_z060" ;}
+      if (iFile == 1) { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_e+_0p5GeV_14V_z218p5_1_iter0.root" ;  Tag = "CERN22_Mockup_e+_14V_z218" ;}
+      if (iFile == 2) { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_e+_0p5GeV_14V_z415_iter0.root" ;      Tag = "CERN22_Mockup_e+_14V_z415" ;}
+      if (iFile == 3) { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_e+_0p5GeV_14V_z572_iter0.root" ;      Tag = "CERN22_Mockup_e+_14V_z572" ;}
+      if (iFile == 5) { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_e+_0p5GeV_25V_z60_iter0.root" ;       Tag = "CERN22_Mockup_e+_25V_z060" ;}
+      if (iFile == 6) { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_e+_0p5GeV_25V_z218p5_iter0.root" ;    Tag = "CERN22_Mockup_e+_25V_z218" ;}
+      if (iFile == 7) { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_e+_0p5GeV_25V_z415_iter0.root" ;      Tag = "CERN22_Mockup_e+_25V_z415" ;}
+      if (iFile == 8) { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_e+_0p5GeV_25V_z572_iter0.root" ;      Tag = "CERN22_Mockup_e+_25V_z572" ;}
+      if (iFile == 9) { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_e+_0p5GeV_25V_z925_iter0.root" ;      Tag = "CERN22_Mockup_e+_25V_z925" ;}
       if (DO_Control)   DrawOut_Control           (OutDir, Tag, Comment, SelectionSet, 8) ;
     }
   }
@@ -413,7 +419,7 @@ void Tristan_CERN22_Monitoring()
   OutDir = "OUT_Tristan/CERN22_ERAM18" ;
   if(DO_Displayer){
     SelectionSet          = "T2_CERN22_Event" ;
-    EvtFile                = "../Data_CERN22_vD/ERAM18_350V_412ns_e+_1GeV_iter0.root" ; Tag = "CERN22_ERAM18_e+_1GeV" ; prtcle = "e^{+} 1GeV" ;
+    EvtFile                = "../Data_CERN22_vD_iter0/ERAM18_350V_412ns_e+_1GeV_iter0.root" ; Tag = "CERN22_ERAM18_e+_1GeV" ; prtcle = "e^{+} 1GeV" ;
     Uploader* pUpld       = GiveMe_Uploader(intUploader, EvtFile) ; 
     Tristan_Displayer(OutDir, Tag, SelectionSet, pUpld, 0, Data_to_Use, prtcle) ;
     delete                  pUpld ;

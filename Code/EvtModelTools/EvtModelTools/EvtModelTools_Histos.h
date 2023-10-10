@@ -4,8 +4,13 @@
 #include "EvtModel/Event.h"
 #include "EvtModel/Pad.h"
 
+#include "SampleTools/ReadGainmap.h"
+
 #include "TH1F.h"
 #include "TH2D.h"
+
+// Draw gain map
+void DrawOut_GainMap(const std::string& eram_id, ReadGainmap* Gainmap);
 
 //------------------------Event Display
 //Output event display of an event  with tagging string TAG, placed in OUTDIR dir

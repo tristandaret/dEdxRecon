@@ -2,6 +2,11 @@
 
 #include "SampleTools/Uploader_ReadGainmap.h"
 
+ReadGainmap::ReadGainmap()
+{
+  // Default constructor  
+}
+
 ReadGainmap::ReadGainmap(std::string EramName)
 {
 //

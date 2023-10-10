@@ -976,73 +976,40 @@ void DrawOut_Methods(const std::string& OutDir, const std::string& Tag, const st
   // Get histograms
   TFile* pTFile_dEdx            = TFile::Open(TString(OutDir + Tag + "/3_" + Tag + "_dEdx" + Comment + ".root")) ;
 
-  std::vector<TH1F*>                v_h1f_Qtrunc ;
   std::vector<TH1F*>                v_h1f_WFtrunc ;
-  std::vector<TH1F*>                v_h1f_GPv3 ;
-  std::vector<TH1F*>                v_h1f_GPv6 ;
   std::vector<TH1F*>                v_h1f_XP ;
-  std::vector<TH1F*>                v_h1f_GPsel ;
-  std::vector<TF1*>                 v_tf1_Qtrunc ;
   std::vector<TF1*>                 v_tf1_WFtrunc ;
-  std::vector<TF1*>                 v_tf1_GPsel ;
-  std::vector<TF1*>                 v_tf1_GPv3 ;
-  std::vector<TF1*>                 v_tf1_GPv6 ;
   std::vector<TF1*>                 v_tf1_XP ;
-  std::vector<TH2F*>                v_h2f_XPvsWF ;
-  std::vector<TH2F*>                v_h2f_WFmWFvsWF ;
 
   for (int iMod = 0 ; iMod < nMod ; iMod++){
-    v_h1f_GPsel.                    push_back(pTFile_dEdx->Get<TH1F>(Form("h1f_GPsel_%i", iMod))) ;
-    v_h1f_Qtrunc.                   push_back(pTFile_dEdx->Get<TH1F>(Form("h1f_Qtrunc_%i", iMod))) ;
-    v_h1f_WFtrunc.                  push_back(pTFile_dEdx->Get<TH1F>(Form("h1f_WFtrunc_%i", iMod))) ;
-    v_h1f_GPv3.                     push_back(pTFile_dEdx->Get<TH1F>(Form("h1f_GPv3_%i", iMod))) ;
-    v_h1f_GPv6.                     push_back(pTFile_dEdx->Get<TH1F>(Form("h1f_GPv6_%i", iMod))) ;
-    v_h1f_XP.                      push_back(pTFile_dEdx->Get<TH1F>(Form("h1f_XP_%i", iMod))) ;
-    v_tf1_GPsel.                    push_back(v_h1f_GPsel[iMod]->GetFunction(Form("tf1_GPsel_%i", iMod))) ;
-    v_tf1_Qtrunc.                   push_back(pTFile_dEdx->Get<TF1> (Form("tf1_Qtrunc_%i", iMod))) ;
-    v_tf1_WFtrunc.                  push_back(pTFile_dEdx->Get<TF1> (Form("tf1_WFtrunc_%i", iMod))) ;
-    v_tf1_GPv3.                     push_back(pTFile_dEdx->Get<TF1> (Form("tf1_GPv3_%i", iMod))) ;
-    v_tf1_GPv6.                     push_back(pTFile_dEdx->Get<TF1> (Form("tf1_GPv6_%i", iMod))) ;
-    v_tf1_XP.                      push_back(pTFile_dEdx->Get<TF1> (Form("tf1_XP_%i", iMod))) ;
-    v_h2f_XPvsWF.                   push_back(pTFile_dEdx->Get<TH2F>(Form("h2f_XPvsWF_%i", iMod))) ;
-    v_h2f_WFmWFvsWF.                push_back(pTFile_dEdx->Get<TH2F>(Form("h2f_WFmWFvsWF_%i", iMod))) ;
+    v_h1f_WFtrunc.                  push_back(pTFile_dEdx->Get<TH1F>("h1f_WFtrunc")) ;
+    v_h1f_XP.                      push_back(pTFile_dEdx->Get<TH1F>("h1f_XP")) ;
+    v_tf1_WFtrunc.                  push_back(pTFile_dEdx->Get<TF1> ("tf1_WFtrunc")) ;
+    v_tf1_XP.                      push_back(pTFile_dEdx->Get<TF1> ("tf1_XP")) ;
 
     // Set Display
     v_h1f_WFtrunc[iMod]->         SetTitle(std::string("Mean dE/dx with " + prtcle + ";mean dE/dx of each event;Counts").c_str()) ;
     // Set line color
     v_h1f_WFtrunc[iMod]->         SetLineColor(kCyan+2) ;
-    v_h1f_GPv3[iMod]->            SetLineColor(kMagenta+3) ;
-    v_h1f_GPv6[iMod]->            SetLineColor(kOrange+2) ;
     v_h1f_XP[iMod]->             SetLineColor(kMagenta+2) ;
     v_tf1_WFtrunc[iMod]->         SetLineColor(kCyan-3) ;
-    v_tf1_GPv3[iMod]->            SetLineColor(kMagenta) ;
-    v_tf1_GPv6[iMod]->            SetLineColor(kOrange-3) ;
     v_tf1_XP[iMod]->             SetLineColor(kMagenta+1) ;
     // Set line width
     v_h1f_WFtrunc[iMod]->         SetLineWidth(2) ;
-    v_h1f_GPv3[iMod]->            SetLineWidth(2) ;
-    v_h1f_GPv6[iMod]->            SetLineWidth(2) ;
     v_h1f_XP[iMod]->             SetLineWidth(2) ;
     v_tf1_WFtrunc[iMod]->         SetLineWidth(2) ;
-    v_tf1_GPv3[iMod]->            SetLineWidth(2) ;
-    v_tf1_GPv6[iMod]->            SetLineWidth(2) ;
     v_tf1_XP[iMod]->             SetLineWidth(2) ;
   }
 
   // Make canvas
   std::string OutputFile          = OutDir + Tag + "/3_" + Tag + "_Comparison" + Comment + ".pdf" ;
-  std::string OutputFile_Beg      = OutputFile + "(" ;
-  std::string OutputFile_End      = OutputFile + ")" ;
   TCanvas* pTCanvas               = new TCanvas("pTCanvas", "pTCanvas", 1800, 1200) ;
 
   //  Draw
   TPaveStats* pStat_WF ;
-  // TPaveStats* pStat_GPv3 ;
   TPaveStats* pStat_XP ;
   for(int iMod = 0 ; iMod < nMod ; iMod++){
     int WFtruncMax                    = v_h1f_WFtrunc[iMod]->GetMaximum() ;
-    // int GPv3Max                       = v_h1f_GPv3[iMod]->GetMaximum() ;
-    // int GPv6Max                       = v_h1f_XP[iMod]->GetMaximum() ;
     int XPMax                        = v_h1f_XP[iMod]->GetMaximum() ;
     v_h1f_WFtrunc[iMod]->SetAxisRange(0, 1.1 * std::max({WFtruncMax, XPMax}),  "Y") ;
 
@@ -1053,26 +1020,12 @@ void DrawOut_Methods(const std::string& OutDir, const std::string& Tag, const st
     gStyle->                            SetOptStat(11) ;
     gStyle->                            SetOptFit(111) ;  
 
-    v_h1f_WFtrunc[iMod]->             Draw("HIST ") ;
-    v_tf1_WFtrunc[iMod]->              Draw("same") ;
+    v_h1f_WFtrunc[iMod]->               Draw("HIST") ;
+    v_tf1_WFtrunc[iMod]->               Draw("same") ;
     gPad->                              Update() ;
     SetStatBoxPosition(v_h1f_WFtrunc[iMod], 0.76, 0.99, 0.52, 0.72) ;
     pStat_WF                          = (TPaveStats*)v_h1f_WFtrunc[iMod]->FindObject("stats") ;
     pStat_WF->                          SetTextColor(kCyan+2) ;
-
-    // v_h1f_GPv3[iMod]->          Draw("HIST sames") ;
-    // v_tf1_GPv3[iMod]->           Draw("same") ;
-    // gPad->                              Update() ;
-    // SetStatBoxPosition(v_h1f_GPv3[iMod], 0.76, 0.99, 0.32, 0.52) ;  
-    // pStat_GPv3                       = (TPaveStats*)v_h1f_GPv3[iMod]->FindObject("stats");
-    // pStat_GPv3->                       SetTextColor(kMagenta+3) ;
-
-    // v_h1f_GPv6[iMod]->          Draw("HIST sames") ;
-    // v_tf1_GPv6[iMod]->           Draw("same") ;
-    // gPad->                              Update() ;
-    // SetStatBoxPosition(v_h1f_GPv6[iMod], 0.76, 0.99, 0.52, 0.72) ;  
-    // pStat_GPv6                       = (TPaveStats*)v_h1f_GPv6[iMod]->FindObject("stats");
-    // pStat_GPv6->                       SetTextColor(kOrange+2) ;
 
     v_h1f_XP[iMod]->          Draw("HIST sames") ;
     v_tf1_XP[iMod]->           Draw("same") ;
@@ -1081,57 +1034,17 @@ void DrawOut_Methods(const std::string& OutDir, const std::string& Tag, const st
     pStat_XP                       = (TPaveStats*)v_h1f_XP[iMod]->FindObject("stats");
     pStat_XP->                       SetTextColor(kMagenta+2) ;
 
-    // PrintResolution(v_tf1_GPv3[iMod],    pTCanvas, 0.8-inv, 0.75, kMagenta+3, "GPv3") ;
-    // PrintResolution(v_tf1_GPv6[iMod],    pTCanvas, 0.8-inv, 0.85, kOrange+2, "GPv6") ;
     PrintResolution(v_tf1_XP[iMod],     pTCanvas, 0.8-inv, 0.95, kMagenta+2, "XP") ;
     PrintResolution(v_tf1_WFtrunc[iMod], pTCanvas, 0.8-inv, 0.85, kCyan+2, "WF_{clus}") ;
 
   }
-  pTCanvas->                        SaveAs(OutputFile_Beg.c_str()) ;
-  pTCanvas->                                Clear() ;
-
-
-  gStyle->                            SetOptStat(111111) ;
-  gStyle->                          SetStatX(0.89) ;
-  gStyle->                          SetStatY(0.5) ;
-  // XP vs WF
-  if (nMod != 1) pTCanvas->   Divide(4,2) ;
-  for(int iMod = 0 ; iMod < nMod ; iMod++){
-    pTCanvas->cd(iMod+1) ;
-    v_h2f_XPvsWF[iMod]->    DrawClone("colz") ;
-    gPad->                    Update() ;
-    delete                    v_h2f_XPvsWF[iMod] ; 
-    v_h2f_XPvsWF[iMod]      = 0 ;
-  }
   pTCanvas->                  SaveAs(OutputFile.c_str()) ;
-  pTCanvas->                  Clear() ;
-
-
-  gStyle->                          SetStatY(0.5) ;
-  // WFsel-WFtrunc vs WFsel
-  if (nMod != 1) pTCanvas->   Divide(4,2) ;
-  for(int iMod = 0 ; iMod < nMod ; iMod++){
-    pTCanvas->cd(iMod+1) ;
-    v_h2f_WFmWFvsWF[iMod]->  DrawClone("colz") ;
-    gPad->                    Update() ;
-    delete                    v_h2f_WFmWFvsWF[iMod] ; 
-    v_h2f_WFmWFvsWF[iMod]   = 0 ;
-  }
-  pTCanvas->                  SaveAs(OutputFile_End.c_str()) ;
 
   delete                      pTCanvas ;
-  v_h1f_Qtrunc.               clear() ;
   v_h1f_WFtrunc.              clear() ;
-  v_h1f_GPv3.                 clear() ;
-  v_h1f_GPv6.                 clear() ;
   v_h1f_XP.                 clear() ;
-  v_tf1_Qtrunc.               clear() ;
   v_tf1_WFtrunc.              clear() ;
-  v_tf1_GPv3.                 clear() ;
-  v_tf1_GPv6.                 clear() ;
   v_tf1_XP.                 clear() ;
-  v_h2f_XPvsWF.               clear() ;
-  v_h2f_WFmWFvsWF.            clear() ;
   delete                      pTFile_dEdx ;
   gStyle->                    SetStatX(statXin) ;
   gStyle->                    SetStatY(statYin) ;
@@ -1821,11 +1734,10 @@ void DrawOut_Separation(const std::string& inputDir, const std::string& Comment)
 
   // Get input files
   std::vector<TFile*>       v_pTFile_dEdx ;
-  v_pTFile_dEdx  .                 push_back(TFile::Open(TString(inputDir + "CERN22_ERAM18/CERN22_ERAM18_e+_1GeV"     + "/" + "3_CERN22_ERAM18_e+_1GeV"     + "_dEdx" + Comment + ".root"))) ;
-  v_pTFile_dEdx  .                 push_back(TFile::Open(TString(inputDir + "CERN22_ERAM18/CERN22_ERAM18_p_1GeV"      + "/" + "3_CERN22_ERAM18_p_1GeV"      + "_dEdx" + Comment + ".root"))) ;
-  v_pTFile_dEdx  .                 push_back(TFile::Open(TString(inputDir + "CERN22_ERAM18/CERN22_ERAM18_mu+_1GeV"    + "/" + "3_CERN22_ERAM18_mu+_1GeV"    + "_dEdx" + Comment + ".root"))) ;
-  v_pTFile_dEdx  .                 push_back(TFile::Open(TString(inputDir + "CERN22_ERAM18/CERN22_ERAM18_pi+_0p5GeV"  + "/" + "3_CERN22_ERAM18_pi+_0p5GeV"  + "_dEdx" + Comment + ".root"))) ;
-
+  v_pTFile_dEdx  .                 push_back(TFile::Open(TString(inputDir + "CERN22_ERAM18_e+_1GeV"     + "/" + "3_CERN22_ERAM18_e+_1GeV"     + "_dEdx" + Comment + ".root"))) ;
+  v_pTFile_dEdx  .                 push_back(TFile::Open(TString(inputDir + "CERN22_ERAM18_p_1GeV"      + "/" + "3_CERN22_ERAM18_p_1GeV"      + "_dEdx" + Comment + ".root"))) ;
+  v_pTFile_dEdx  .                 push_back(TFile::Open(TString(inputDir + "CERN22_ERAM18_mu+_1GeV"    + "/" + "3_CERN22_ERAM18_mu+_1GeV"    + "_dEdx" + Comment + ".root"))) ;
+  v_pTFile_dEdx  .                 push_back(TFile::Open(TString(inputDir + "CERN22_ERAM18_pi+_0p5GeV"  + "/" + "3_CERN22_ERAM18_pi+_0p5GeV"  + "_dEdx" + Comment + ".root"))) ;
 
   // Get functions
   std::vector<TH1F*>        v_h1f_Qtrunc ;
@@ -1929,7 +1841,7 @@ void DrawOut_Separation(const std::string& inputDir, const std::string& Comment)
   }
 
   // Draw
-  std::string OutputFile      = inputDir + "CERN22_ERAM18/Separation_power" + Comment +".pdf" ;
+  std::string OutputFile      = inputDir + "Separation_power" + Comment +".pdf" ;
   std::string OutputFile_Beg  = OutputFile + "(" ;
   std::string OutputFile_End  = OutputFile + ")" ;
   TCanvas* pTCanvas           = new TCanvas("TCanvas", "TCanvas", 1800, 1200) ;
@@ -1949,45 +1861,45 @@ void DrawOut_Separation(const std::string& inputDir, const std::string& Comment)
   h2_err_separation->         SetBarOffset(-0.25) ;
   h2_err_separation->         Draw("text same") ;
   pTCanvas->                    SaveAs(OutputFile_Beg.c_str()) ;
+  pTCanvas->                    Clear() ;
 
     // Comparing particles dE/dx method by method
-  pTCanvas->                    Clear() ;
   gStyle->                      SetOptStat(11) ;
   gStyle->                      SetOptFit(111) ;
-  v_h1f_Qtrunc[0]->           SetName("positrons e^{+} 1GeV") ;
-  v_h1f_Qtrunc[0]->           Scale(1/v_h1f_Qtrunc[0]->GetEntries()) ;
-  v_tf1_Qtrunc[0]->            SetRange(0, 1500) ;
-  v_tf1_Qtrunc[0]->            SetParameter(0, v_tf1_Qtrunc[0]->Integral(0, 1500)/v_h1f_Qtrunc[0]->GetEntries()) ;
-  v_h1f_Qtrunc[0]->           SetLineColor(kBlue+3) ;
-  v_h1f_Qtrunc[0]->           SetLineWidth(2) ;
-  v_tf1_Qtrunc[0]->            SetLineColor(kBlue-6) ;
-  v_tf1_Qtrunc[0]->            SetLineWidth(2) ;
-  v_h1f_Qtrunc[2]->           SetName("muons #mu^{+} 1GeV") ;
-  v_h1f_Qtrunc[2]->           Scale(1/v_h1f_Qtrunc[2]->GetEntries()) ;
-  v_tf1_Qtrunc[2]->            SetRange(0, 1500) ;
-  v_tf1_Qtrunc[2]->            SetParameter(0, v_tf1_Qtrunc[2]->Integral(0, 1500)/v_h1f_Qtrunc[2]->GetEntries()) ;
-  v_h1f_Qtrunc[2]->           SetLineColor(kBlue+3) ;
-  v_h1f_Qtrunc[2]->           SetLineWidth(2) ;
-  v_h1f_Qtrunc[2]->           SetLineStyle(2) ;
-  v_tf1_Qtrunc[2]->            SetLineColor(kBlue-6) ;
-  v_tf1_Qtrunc[2]->            SetLineWidth(2) ;
-  if(v_h1f_Qtrunc[0]->GetMaximum() < v_h1f_Qtrunc[2]->GetMaximum()) v_h1f_Qtrunc[0]->SetAxisRange(0, 1.1*v_h1f_Qtrunc[2]->GetMaximum(),  "Y") ;
-  v_h1f_Qtrunc[0]->           Draw("hist") ;
-  v_tf1_Qtrunc[0]->            Draw("same") ;
-  gPad->                        Update() ;
-  SetStatBoxPosition(v_h1f_Qtrunc[0], 0.64, 0.89, 0.34,  0.32) ;  
-  v_h1f_Qtrunc[2]->           Draw("hist sames") ;
-  v_tf1_Qtrunc[2]->            Draw("same") ;
-  gPad->                        Update() ;
-  SetStatBoxPosition(v_h1f_Qtrunc[2], 0.64, 0.89, 0.64,  0.89) ;  
-  pTCanvas->                    Update() ;
-  leg->                         AddEntry(v_h1f_Qtrunc[2], "#mu^{+} 1GeV ", "l") ;  
-  leg->                         AddEntry(v_h1f_Qtrunc[0], "e^{+} 1GeV ", "l") ;  
-  leg->                         DrawClone() ;
-  pTCanvas->                    SaveAs(OutputFile.c_str()) ;
+  // v_h1f_Qtrunc[0]->           SetName("positrons e^{+} 1GeV") ;
+  // v_h1f_Qtrunc[0]->           Scale(1/v_h1f_Qtrunc[0]->GetEntries()) ;
+  // v_tf1_Qtrunc[0]->            SetRange(0, 1500) ;
+  // v_tf1_Qtrunc[0]->            SetParameter(0, v_tf1_Qtrunc[0]->Integral(0, 1500)/v_h1f_Qtrunc[0]->GetEntries()) ;
+  // v_h1f_Qtrunc[0]->           SetLineColor(kBlue+3) ;
+  // v_h1f_Qtrunc[0]->           SetLineWidth(2) ;
+  // v_tf1_Qtrunc[0]->            SetLineColor(kBlue-6) ;
+  // v_tf1_Qtrunc[0]->            SetLineWidth(2) ;
+  // v_h1f_Qtrunc[2]->           SetName("muons #mu^{+} 1GeV") ;
+  // v_h1f_Qtrunc[2]->           Scale(1/v_h1f_Qtrunc[2]->GetEntries()) ;
+  // v_tf1_Qtrunc[2]->            SetRange(0, 1500) ;
+  // v_tf1_Qtrunc[2]->            SetParameter(0, v_tf1_Qtrunc[2]->Integral(0, 1500)/v_h1f_Qtrunc[2]->GetEntries()) ;
+  // v_h1f_Qtrunc[2]->           SetLineColor(kBlue+3) ;
+  // v_h1f_Qtrunc[2]->           SetLineWidth(2) ;
+  // v_h1f_Qtrunc[2]->           SetLineStyle(2) ;
+  // v_tf1_Qtrunc[2]->            SetLineColor(kBlue-6) ;
+  // v_tf1_Qtrunc[2]->            SetLineWidth(2) ;
+  // if(v_h1f_Qtrunc[0]->GetMaximum() < v_h1f_Qtrunc[2]->GetMaximum()) v_h1f_Qtrunc[0]->SetAxisRange(0, 1.1*v_h1f_Qtrunc[2]->GetMaximum(),  "Y") ;
+  // v_h1f_Qtrunc[0]->           Draw("hist") ;
+  // v_tf1_Qtrunc[0]->            Draw("same") ;
+  // gPad->                        Update() ;
+  // SetStatBoxPosition(v_h1f_Qtrunc[0], 0.64, 0.89, 0.34,  0.32) ;  
+  // v_h1f_Qtrunc[2]->           Draw("hist sames") ;
+  // v_tf1_Qtrunc[2]->            Draw("same") ;
+  // gPad->                        Update() ;
+  // SetStatBoxPosition(v_h1f_Qtrunc[2], 0.64, 0.89, 0.64,  0.89) ;  
+  // pTCanvas->                    Update() ;
+  // leg->                         AddEntry(v_h1f_Qtrunc[2], "#mu^{+} 1GeV ", "l") ;  
+  // leg->                         AddEntry(v_h1f_Qtrunc[0], "e^{+} 1GeV ", "l") ;  
+  // leg->                         DrawClone() ;
+  // pTCanvas->                    SaveAs(OutputFile.c_str()) ;
+  // pTCanvas->                    Clear() ;
+  // leg->                         Clear() ;
 
-  pTCanvas->                    Clear() ;
-  leg->                         Clear() ;
   v_h1f_WFtrunc[0]->           SetName("positrons e^{+} 1GeV") ;
   v_h1f_WFtrunc[0]->           Scale(1/v_h1f_WFtrunc[0]->GetEntries()) ;
   v_tf1_WFtrunc[0]->            SetRange(0, 1500) ;
@@ -2029,77 +1941,77 @@ void DrawOut_Separation(const std::string& inputDir, const std::string& Comment)
   ptText->DrawClone() ;
   delete ptText ;
   pTCanvas->                    SaveAs(OutputFile.c_str()) ;
-
   pTCanvas->                    Clear() ;
   leg->                         Clear() ;
-  v_h1f_GPv3[0]->           SetName("positrons e^{+} 1GeV") ;
-  v_h1f_GPv3[0]->           Scale(1/v_h1f_GPv3[0]->GetEntries()) ;
-  v_tf1_GPv3[0]->            SetRange(0, 1500) ;
-  v_tf1_GPv3[0]->            SetParameter(0, v_tf1_GPv3[0]->Integral(0, 1500)/v_h1f_GPv3[0]->GetEntries()) ;
-  v_h1f_GPv3[0]->           SetLineColor(kMagenta+3) ;
-  v_h1f_GPv3[0]->           SetLineWidth(2) ;
-  v_tf1_GPv3[0]->            SetLineColor(kMagenta-6) ;
-  v_tf1_GPv3[0]->            SetLineWidth(2) ;
-  v_h1f_GPv3[2]->           SetName("muons #mu^{+} 1GeV") ;
-  v_h1f_GPv3[2]->           Scale(1/v_h1f_GPv3[2]->GetEntries()) ;
-  v_tf1_GPv3[2]->            SetRange(0, 1500) ;
-  v_tf1_GPv3[2]->            SetParameter(0, v_tf1_GPv3[2]->Integral(0, 1500)/v_h1f_GPv3[2]->GetEntries()) ;
-  v_h1f_GPv3[2]->           SetLineColor(kMagenta+3) ;
-  v_h1f_GPv3[2]->           SetLineWidth(2) ;
-  v_h1f_GPv3[2]->           SetLineStyle(2) ;
-  v_tf1_GPv3[2]->            SetLineColor(kMagenta-6) ;
-  v_tf1_GPv3[2]->            SetLineWidth(2) ;
-  if(v_h1f_GPv3[0]->GetMaximum() < v_h1f_GPv3[2]->GetMaximum()) v_h1f_GPv3[0]->SetAxisRange(0, 1.1*v_h1f_GPv3[2]->GetMaximum(),  "Y") ;
-  v_h1f_GPv3[0]->           Draw("hist") ;
-  v_tf1_GPv3[0]->            Draw("same") ;
-  gPad->                        Update() ;
-  SetStatBoxPosition(v_h1f_GPv3[0], 0.64, 0.89, 0.34,  0.32) ;  
-  v_h1f_GPv3[2]->           Draw("hist sames") ;
-  v_tf1_GPv3[2]->            Draw("same") ;
-  gPad->                        Update() ;
-  SetStatBoxPosition(v_h1f_GPv3[2], 0.64, 0.89, 0.64,  0.89) ;  
-  pTCanvas->                    Update() ;
-  leg->                         AddEntry(v_h1f_GPv3[2], "#mu^{+} 1GeV ", "l") ;  
-  leg->                         AddEntry(v_h1f_GPv3[0], "e^{+} 1GeV ", "l") ;  
-  leg->                         DrawClone() ;
-  pTCanvas->                    SaveAs(OutputFile.c_str()) ;
 
-  pTCanvas->                    Clear() ;
-  leg->                         Clear() ;
-  v_h1f_GPv6[0]->           SetName("positrons e^{+} 1GeV") ;
-  v_h1f_GPv6[0]->           Scale(1/v_h1f_GPv6[0]->GetEntries()) ;
-  v_tf1_GPv6[0]->            SetRange(0, 1500) ;
-  v_tf1_GPv6[0]->            SetParameter(0, v_tf1_GPv6[0]->Integral(0, 1500)/v_h1f_GPv6[0]->GetEntries()) ;
-  v_h1f_GPv6[0]->           SetLineColor(kGreen-2) ;
-  v_h1f_GPv6[0]->           SetLineWidth(2) ;
-  v_tf1_GPv6[0]->            SetLineColor(kGreen+2) ;
-  v_tf1_GPv6[0]->            SetLineWidth(2) ;
-  v_h1f_GPv6[2]->           SetName("muons #mu^{+} 1GeV") ;
-  v_h1f_GPv6[2]->           Scale(1/v_h1f_GPv6[2]->GetEntries()) ;
-  v_tf1_GPv6[2]->            SetRange(0, 1500) ;
-  v_tf1_GPv6[2]->            SetParameter(0, v_tf1_GPv6[2]->Integral(0, 1500)/v_h1f_GPv6[2]->GetEntries()) ;
-  v_h1f_GPv6[2]->           SetLineColor(kGreen-2) ;
-  v_h1f_GPv6[2]->           SetLineWidth(2) ;
-  v_h1f_GPv6[2]->           SetLineStyle(2) ;
-  v_tf1_GPv6[2]->            SetLineColor(kGreen+2) ;
-  v_tf1_GPv6[2]->            SetLineWidth(2) ;
-  if(v_h1f_GPv6[0]->GetMaximum() < v_h1f_GPv6[2]->GetMaximum()) v_h1f_GPv6[0]->SetAxisRange(0, 1.1*v_h1f_GPv6[2]->GetMaximum(),  "Y") ;
-  v_h1f_GPv6[0]->           Draw("hist") ;
-  v_tf1_GPv6[0]->            Draw("same") ;
-  gPad->                        Update() ;
-  SetStatBoxPosition(v_h1f_GPv6[0], 0.64, 0.89, 0.34,  0.32) ;  
-  v_h1f_GPv6[2]->           Draw("hist sames") ;
-  v_tf1_GPv6[2]->            Draw("same") ;
-  gPad->                        Update() ;
-  SetStatBoxPosition(v_h1f_GPv6[2], 0.64, 0.89, 0.64,  0.89) ;  
-  pTCanvas->                    Update() ;
-  leg->                         AddEntry(v_h1f_GPv6[2], "#mu^{+} 1GeV ", "l") ;  
-  leg->                         AddEntry(v_h1f_GPv6[0], "e^{+} 1GeV ", "l") ;  
-  leg->                         DrawClone() ;
-  pTCanvas->                    SaveAs(OutputFile.c_str()) ;
+  // v_h1f_GPv3[0]->           SetName("positrons e^{+} 1GeV") ;
+  // v_h1f_GPv3[0]->           Scale(1/v_h1f_GPv3[0]->GetEntries()) ;
+  // v_tf1_GPv3[0]->            SetRange(0, 1500) ;
+  // v_tf1_GPv3[0]->            SetParameter(0, v_tf1_GPv3[0]->Integral(0, 1500)/v_h1f_GPv3[0]->GetEntries()) ;
+  // v_h1f_GPv3[0]->           SetLineColor(kMagenta+3) ;
+  // v_h1f_GPv3[0]->           SetLineWidth(2) ;
+  // v_tf1_GPv3[0]->            SetLineColor(kMagenta-6) ;
+  // v_tf1_GPv3[0]->            SetLineWidth(2) ;
+  // v_h1f_GPv3[2]->           SetName("muons #mu^{+} 1GeV") ;
+  // v_h1f_GPv3[2]->           Scale(1/v_h1f_GPv3[2]->GetEntries()) ;
+  // v_tf1_GPv3[2]->            SetRange(0, 1500) ;
+  // v_tf1_GPv3[2]->            SetParameter(0, v_tf1_GPv3[2]->Integral(0, 1500)/v_h1f_GPv3[2]->GetEntries()) ;
+  // v_h1f_GPv3[2]->           SetLineColor(kMagenta+3) ;
+  // v_h1f_GPv3[2]->           SetLineWidth(2) ;
+  // v_h1f_GPv3[2]->           SetLineStyle(2) ;
+  // v_tf1_GPv3[2]->            SetLineColor(kMagenta-6) ;
+  // v_tf1_GPv3[2]->            SetLineWidth(2) ;
+  // if(v_h1f_GPv3[0]->GetMaximum() < v_h1f_GPv3[2]->GetMaximum()) v_h1f_GPv3[0]->SetAxisRange(0, 1.1*v_h1f_GPv3[2]->GetMaximum(),  "Y") ;
+  // v_h1f_GPv3[0]->           Draw("hist") ;
+  // v_tf1_GPv3[0]->            Draw("same") ;
+  // gPad->                        Update() ;
+  // SetStatBoxPosition(v_h1f_GPv3[0], 0.64, 0.89, 0.34,  0.32) ;  
+  // v_h1f_GPv3[2]->           Draw("hist sames") ;
+  // v_tf1_GPv3[2]->            Draw("same") ;
+  // gPad->                        Update() ;
+  // SetStatBoxPosition(v_h1f_GPv3[2], 0.64, 0.89, 0.64,  0.89) ;  
+  // pTCanvas->                    Update() ;
+  // leg->                         AddEntry(v_h1f_GPv3[2], "#mu^{+} 1GeV ", "l") ;  
+  // leg->                         AddEntry(v_h1f_GPv3[0], "e^{+} 1GeV ", "l") ;  
+  // leg->                         DrawClone() ;
+  // pTCanvas->                    SaveAs(OutputFile.c_str()) ;
+  // pTCanvas->                    Clear() ;
+  // leg->                         Clear() ;
 
-  pTCanvas->                    Clear() ;
-  leg->                         Clear() ;
+  // v_h1f_GPv6[0]->           SetName("positrons e^{+} 1GeV") ;
+  // v_h1f_GPv6[0]->           Scale(1/v_h1f_GPv6[0]->GetEntries()) ;
+  // v_tf1_GPv6[0]->            SetRange(0, 1500) ;
+  // v_tf1_GPv6[0]->            SetParameter(0, v_tf1_GPv6[0]->Integral(0, 1500)/v_h1f_GPv6[0]->GetEntries()) ;
+  // v_h1f_GPv6[0]->           SetLineColor(kGreen-2) ;
+  // v_h1f_GPv6[0]->           SetLineWidth(2) ;
+  // v_tf1_GPv6[0]->            SetLineColor(kGreen+2) ;
+  // v_tf1_GPv6[0]->            SetLineWidth(2) ;
+  // v_h1f_GPv6[2]->           SetName("muons #mu^{+} 1GeV") ;
+  // v_h1f_GPv6[2]->           Scale(1/v_h1f_GPv6[2]->GetEntries()) ;
+  // v_tf1_GPv6[2]->            SetRange(0, 1500) ;
+  // v_tf1_GPv6[2]->            SetParameter(0, v_tf1_GPv6[2]->Integral(0, 1500)/v_h1f_GPv6[2]->GetEntries()) ;
+  // v_h1f_GPv6[2]->           SetLineColor(kGreen-2) ;
+  // v_h1f_GPv6[2]->           SetLineWidth(2) ;
+  // v_h1f_GPv6[2]->           SetLineStyle(2) ;
+  // v_tf1_GPv6[2]->            SetLineColor(kGreen+2) ;
+  // v_tf1_GPv6[2]->            SetLineWidth(2) ;
+  // if(v_h1f_GPv6[0]->GetMaximum() < v_h1f_GPv6[2]->GetMaximum()) v_h1f_GPv6[0]->SetAxisRange(0, 1.1*v_h1f_GPv6[2]->GetMaximum(),  "Y") ;
+  // v_h1f_GPv6[0]->           Draw("hist") ;
+  // v_tf1_GPv6[0]->            Draw("same") ;
+  // gPad->                        Update() ;
+  // SetStatBoxPosition(v_h1f_GPv6[0], 0.64, 0.89, 0.34,  0.32) ;  
+  // v_h1f_GPv6[2]->           Draw("hist sames") ;
+  // v_tf1_GPv6[2]->            Draw("same") ;
+  // gPad->                        Update() ;
+  // SetStatBoxPosition(v_h1f_GPv6[2], 0.64, 0.89, 0.64,  0.89) ;  
+  // pTCanvas->                    Update() ;
+  // leg->                         AddEntry(v_h1f_GPv6[2], "#mu^{+} 1GeV ", "l") ;  
+  // leg->                         AddEntry(v_h1f_GPv6[0], "e^{+} 1GeV ", "l") ;  
+  // leg->                         DrawClone() ;
+  // pTCanvas->                    SaveAs(OutputFile.c_str()) ;
+  // pTCanvas->                    Clear() ;
+  // leg->                         Clear() ;
+
   v_h1f_XP[0]->           SetName("positrons e^{+} 1GeV") ;
   v_h1f_XP[0]->           Scale(1/v_h1f_XP[0]->GetEntries()) ;
   v_tf1_XP[0]->            SetRange(0, 1500) ;
@@ -2142,21 +2054,21 @@ void DrawOut_Separation(const std::string& inputDir, const std::string& Comment)
   pTCanvas->                    SaveAs(OutputFile_End.c_str()) ;
 
 
-  // Delete
-  delete                        h2_separation ;
-  delete                        pTCanvas   ;
-  delete leg ;
+  // // Delete
+  // delete                        h2_separation ;
+  // delete                        pTCanvas   ;
+  // delete leg ;
   
-  v_h1f_Qtrunc.clear() ;
-  v_h1f_WFtrunc.clear() ;
-  v_h1f_GPv3.clear() ;
-  v_h1f_GPv6.clear() ;
-  v_h1f_XP.clear() ;
-  v_tf1_Qtrunc.clear() ;
-  v_tf1_WFtrunc.clear() ;
-  v_tf1_GPv3.clear() ;
-  v_tf1_GPv6.clear() ;
-  v_tf1_XP.clear() ;
+  // v_h1f_Qtrunc.clear() ;
+  // v_h1f_WFtrunc.clear() ;
+  // v_h1f_GPv3.clear() ;
+  // v_h1f_GPv6.clear() ;
+  // v_h1f_XP.clear() ;
+  // v_tf1_Qtrunc.clear() ;
+  // v_tf1_WFtrunc.clear() ;
+  // v_tf1_GPv3.clear() ;
+  // v_tf1_GPv6.clear() ;
+  // v_tf1_XP.clear() ;
 }
 
 
@@ -2214,8 +2126,8 @@ void DrawOut_Separation_Reduced(const std::string& inputDir, const std::string& 
   }
 
   // Do the table
-  TH2F* h2_separation       = new TH2F("h2_separation",     "Separation power",         6, -0.5, 5.5, 6, -0.5, 5.5) ;
-  TH2F* h2_err_separation   = new TH2F("h2_err_separation", "Error on separation power", 6, -0.5, 5.5, 6, -0.5, 5.5) ;
+  TH2F* h2_separation         = new TH2F("h2_separation",     "Separation power",         6, -0.5, 5.5, 6, -0.5, 5.5) ;
+  TH2F* h2_err_separation     = new TH2F("h2_err_separation", "Error on separation power", 6, -0.5, 5.5, 6, -0.5, 5.5) ;
   const char* particles[6]    = {"e^{+}-p","e^{+}-#mu^{+}","e^{+}-#pi^{+}", "p-#mu^{+}", "p-#pi^{+}", "#mu^{+}-#pi^{+}"} ;
   const char* methods[2]      = {"WF", "XP"} ;
   

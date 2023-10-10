@@ -7,6 +7,7 @@
 class ReadGainmap {
 public:
    /** Constructor */
+   ReadGainmap();
    ReadGainmap(std::string EramName);
    ReadGainmap(std::string Dir,std::string EramName);
    virtual ~ReadGainmap();

@@ -7,6 +7,8 @@
 #include <vector>
 #include <string>
 
+
+// FILE HANDLING /////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Read CSV file
 std::vector<std::vector<float>> readCSV(std::string filename) {
   std::vector<std::vector<float>> data;
@@ -23,9 +25,6 @@ std::vector<std::vector<float>> readCSV(std::string filename) {
   }
   return data;
 }
-
-
-
 
 
 // Function to search for a word in a CSV file
@@ -72,6 +71,18 @@ void Set120_CSV(const std::string& filename, const std::string& targetWord, int 
 }
 
 
+// General Math //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Mean of vector
+float mean(const std::vector<float>& values) {
+    float sum = 0.0;
+    for (const float& value : values) {
+        sum += value;
+    }
+
+    return sum / values.size();
+}
+
 
 
 // Heaviside
@@ -83,6 +94,7 @@ float Heaviside(const float& t, const float& t_0){
 }
 
 
+// Specific Math //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Dirac Pulse Response function
 TH1F* DPR(std::string name, const float& tmin, float const& tmax, const float& t_0, const int& nbins, const int& iC, const float& PT, const float& TB){
@@ -338,6 +350,8 @@ TF1* Fit2Gauss(TH1F* h1F, const float& x1min, const float& x1max, const float& x
   tf1->SetParName(5, "#sigma_2") ;
   return tf1 ;
 }
+
+// ROOT /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 // From TH1 get TGraph
