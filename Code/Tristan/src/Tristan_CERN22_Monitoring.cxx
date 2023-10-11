@@ -31,7 +31,7 @@ void Tristan_CERN22_Monitoring()
   int nRC = 21 ; 
 
   std::string Tag    ; 
-  std::string Comment = "_zcalc_PRF_4IP_Gain2_WF4_test" ; 
+  std::string Comment = "_zfile_PRF_4IP_Gain2_WF4_4Mod" ; 
   std::string prtcle ; 
   std::string EvtFile ;
   std::string OutDir  = "OUT_Tristan/";  
@@ -41,22 +41,24 @@ void Tristan_CERN22_Monitoring()
   gStyle->                SetPadTickY(1);
 
   // Files to use
-  int prototype       = 1 ;
+  int prototype       = 0 ;
+  int CERN_Escan      = 1 ; 
+
   int DESY_zscan      = 0 ; 
   int DESY_yscan      = 0 ; 
   int DESY_phi        = 0 ; 
   int DESY_theta      = 0 ; 
 
   // Computations
-  int Control         = 0 ;
-  int dEdx            = 1 ;
+  int Control         = 1 ;
+  int dEdx            = 0 ;
   int WFcorr          = 0 ;
 
   // DrawOuts
   int DO_Displayer    = 0 ;
-  int DO_Control      = 0 ;
-  int DO_Checks       = 1 ;
-  int DO_Methods      = 1 ;
+  int DO_Control      = 1 ;
+  int DO_Checks       = 0 ;
+  int DO_Methods      = 0 ;
   int DO_Resolution   = 0 ;
   int DO_Global       = 0 ;
   int DO_Scans        = 0 ;
@@ -74,8 +76,8 @@ void Tristan_CERN22_Monitoring()
     PT              = 412 ; Dt = 350 ; zdrift = 415 ; TB = 40 ;
     Uploader* pUpld ; Interpol4 LUT ;
     if (Control or dEdx) LUT = GiveMe_LUT(Form("/home/td263283/Documents/Python/LUT_XP/LUT_Dt%i_PT%i_nphi200_nd200/", Dt, PT), nZ, nRC) ;
-    // int part_arr[] = {1,2,5,6} ;
-    int part_arr[] = {1} ;
+    int part_arr[] = {1,2,5,6} ;
+    // int part_arr[] = {1} ;
     for (int iFile : part_arr) {
       if (iFile == 0) { EvtFile = "../Data_CERN22_" + version + iter +"/ERAM18_350V_412ns_e+_0p5GeV" + iter + ".root" ;    Tag = "CERN22_ERAM18_e+_0p5GeV_" + version + iter ;    prtcle = "e^{+} 0.5GeV_" ;   }
       if (iFile == 1) { EvtFile = "../Data_CERN22_" + version + iter +"/ERAM18_350V_412ns_e+_1GeV" + iter + ".root" ;      Tag = "CERN22_ERAM18_e+_1GeV_" + version + iter ;      prtcle = "e^{+} 1GeV_" ;     }
@@ -94,6 +96,47 @@ void Tristan_CERN22_Monitoring()
     } 
     // if(DO_Separation)         DrawOut_Separation(OutDir, Comment) ;
     if(DO_Separation)         DrawOut_Separation_Reduced(OutDir, Comment) ;
+  }
+
+
+
+  // Energy scan using the mockup
+  if(CERN_Escan){
+    SelectionSet    = "T2_CERN22_Event" ;
+    OutDir          = "OUT_Tristan/CERN22_Energy_Scan/" ; 
+    std::string version   = "vD" ;    // vD v6_iter0 v6_iter4
+    std::string iter      = "_iter0"; // 0  0        4  
+    MyMakeDir(OutDir) ;
+    intUploader     =  5 ;
+    NbrOfMod        = -1 ;
+    PT              = 412 ; Dt = 350 ; zdrift = 415 ; TB = 40 ;
+
+    Uploader* pUpld ; Interpol4 LUT ;
+    if (Control or dEdx) LUT = GiveMe_LUT(Form("/home/td263283/Documents/Python/LUT_XP/LUT_Dt%i_PT%i_nphi200_nd200/", Dt, PT), nZ, nRC) ;
+    int NFiles = 14 ;
+    for (int iFile = 1 ; iFile < NFiles ; iFile++){
+      if (iFile == 0)  { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_e+_0p5GeV_25V_z415_y2pad_iter0.root" ;       Tag = "CERN22_Escan_e+_0p5GeV" ;  prtcle = "e^{+} 0p5GeV" ;}
+      if (iFile == 1)  { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_e+_0p75GeV_25V_z415_y2pad_iter0.root" ;      Tag = "CERN22_Escan_e+_0p75GeV" ; prtcle = "e^{+} 0p75GeV" ;}
+      if (iFile == 2)  { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_e+_1GeV_25V_z415p1_y2pad_iter0.root" ;       Tag = "CERN22_Escan_e+_1GeV" ;    prtcle = "e^{+} 1GeV" ;}  
+      if (iFile == 3)  { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_e+_1p25GeV_25V_z415p1_y2pad_1_iter0.root" ;  Tag = "CERN22_Escan_e+_1p25GeV" ; prtcle = "e^{+} 1p25GeV" ;}
+      if (iFile == 4)  { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_e+_1p5GeV_25V_z415p1_y2pad_iter0.root" ;     Tag = "CERN22_Escan_e+_1p5GeV" ;  prtcle = "e^{+} 1p5GeV" ;}
+      if (iFile == 5)  { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_mu+_0p75GeV_25V_z415_y2pad_iter0.root" ;     Tag = "CERN22_Escan_mu_0p75GeV" ; prtcle = "#mu^{+} 0p75GeV" ;}
+      if (iFile == 6)  { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_mu+_1GeV_25V_z415p1_y2pad_iter0.root" ;      Tag = "CERN22_Escan_mu_1GeV" ;    prtcle = "#mu^{+} 1GeV" ;}
+      if (iFile == 7)  { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_mu+_1p5GeV_25V_z415p1_y2pad_iter0.root" ;    Tag = "CERN22_Escan_mu_1p5GeV" ;  prtcle = "#mu^{+} 1p5GeV" ;}
+      if (iFile == 8)  { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_pi+_0p75GeV_25V_z415_y2pad_iter0.root" ;     Tag = "CERN22_Escan_pi_0p75GeV" ; prtcle = "#pi^{+} 0p75GeV" ;}
+      if (iFile == 9)  { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_pi+_1p25GeV_25V_z415p1_y2pad_2_iter0.root" ; Tag = "CERN22_Escan_pi_1p25GeV" ; prtcle = "#pi^{+} 1p25GeV" ;}
+      if (iFile == 10) { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_pi+_1p5GeV_25V_z415p1_y2pad_iter0.root" ;    Tag = "CERN22_Escan_pi_1p5GeV" ;  prtcle = "#pi^{+} 1p5GeV" ;}
+      if (iFile == 11) { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_p_1GeV_25V_z415p1_y2pad_iter0.root" ;        Tag = "CERN22_Escan_p+_1GeV" ;    prtcle = "protons 1GeV" ;}
+      if (iFile == 12) { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_p_1p25GeV_25V_z415p1_y2pad_iter0.root" ;     Tag = "CERN22_Escan_p+_1p25GeV" ; prtcle = "protons 1p25GeV" ;}
+      if (iFile == 13) { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_p_1p5GeV_25V_z415_y2pad_2_iter0.root" ;      Tag = "CERN22_Escan_p+_1p5GeV" ;  prtcle = "protons 1p5GeV" ;}
+      if(Control or dEdx) pUpld = GiveMe_Uploader (intUploader, EvtFile) ;
+      if (Control)      Tristan_CERN22_Control    (OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, Data_to_Use, PT, TB, prtcle) ;
+      if (DO_Control)   DrawOut_Control           (OutDir, Tag, Comment, SelectionSet, 4) ;
+      if (dEdx)         Tristan_CERN22_dEdx       (OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, Data_to_Use, LUT, PT, TB, zdrift) ;
+      if (DO_Checks)     DrawOut_Checks            (OutDir, EvtFile, Tag, Comment) ;
+      if (DO_Methods)  DrawOut_Methods        (OutDir, Tag, Comment, 1, prtcle) ;
+      delete pUpld ;
+    }
   }
   
 
@@ -238,7 +281,6 @@ void Tristan_CERN22_Monitoring()
   int MC_zscan        = 0 ; 
   int DESY19_phi      = 0 ; 
   int DESY_mag        = 0 ;
-  int MockUp_energy   = 0 ; 
   int MockUp_zdist    = 0 ; 
   int DESY_zscan_139V = 0 ; 
 
@@ -319,44 +361,6 @@ void Tristan_CERN22_Monitoring()
       if (DO_Control)   DrawOut_Control           (OutDir, Tag, Comment, SelectionSet, 1) ;
       if (dEdx)         Tristan_CERN22_dEdx       (OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, Data_to_Use, LUT, PT, TB, zdrift) ;
       if (DO_Methods)  DrawOut_Methods        (OutDir, Tag, Comment, 1, prtcle) ;
-    }
-  }
-
-
-
-  // Energy scan using the mockup
-  if(MockUp_energy){
-    SelectionSet    = "T2_CERN22_Event" ;
-    OutDir          = "OUT_Tristan/CERN22_Energy_Scan/" ;  
-    MyMakeDir(OutDir) ;
-    intUploader     =  3 ;
-    NbrOfMod        = -1 ;
-    PT              = 412 ; Dt = 350 ; zdrift = 415 ; TB = 40 ;
-
-    Uploader* pUpld ; Interpol4 LUT ;
-    if (Control or dEdx) LUT = GiveMe_LUT(Form("/home/td263283/Documents/Python/LUT_XP/LUT_Dt%i_PT%i_nphi200_nd200/", Dt, PT), nZ, nRC) ;
-    int NFiles = 14 ;
-    for (int iFile = 0 ; iFile < NFiles ; iFile++){
-      if (iFile == 0)  { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_e+_0p5GeV_25V_z415_y2pad_iter0.root" ;       Tag = "CERN22_Mockup_Energy_e+_0p5GeV" ;  prtcle = "e^{+} 0p5GeV" ;}
-      if (iFile == 1)  { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_e+_0p75GeV_25V_z415_y2pad_iter0.root" ;      Tag = "CERN22_Mockup_Energy_e+_0p75GeV" ; prtcle = "e^{+} 0p75GeV" ;}
-      if (iFile == 2)  { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_e+_1GeV_25V_z415p1_y2pad_iter0.root" ;       Tag = "CERN22_Mockup_Energy_e+_1GeV" ;    prtcle = "e^{+} 1GeV" ;}  
-      if (iFile == 3)  { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_e+_1p25GeV_25V_z415p1_y2pad_1_iter0.root" ;  Tag = "CERN22_Mockup_Energy_e+_1p25GeV" ; prtcle = "e^{+} 1p25GeV" ;}
-      if (iFile == 4)  { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_e+_1p5GeV_25V_z415p1_y2pad_iter0.root" ;     Tag = "CERN22_Mockup_Energy_e+_1p5GeV" ;  prtcle = "e^{+} 1p5GeV" ;}
-      if (iFile == 5)  { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_mu+_0p75GeV_25V_z415_y2pad_iter0.root" ;     Tag = "CERN22_Mockup_Energy_mu_0p75GeV" ; prtcle = "#mu^{+} 0p75GeV" ;}
-      if (iFile == 6)  { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_mu+_1GeV_25V_z415p1_y2pad_iter0.root" ;      Tag = "CERN22_Mockup_Energy_mu_1GeV" ;    prtcle = "#mu^{+} 1GeV" ;}
-      if (iFile == 7)  { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_mu+_1p5GeV_25V_z415p1_y2pad_iter0.root" ;    Tag = "CERN22_Mockup_Energy_mu_1p5GeV" ;  prtcle = "#mu^{+} 1p5GeV" ;}
-      if (iFile == 8)  { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_pi+_0p75GeV_25V_z415_y2pad_iter0.root" ;     Tag = "CERN22_Mockup_Energy_pi_0p75GeV" ; prtcle = "#pi^{+} 0p75GeV" ;}
-      if (iFile == 9)  { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_pi+_1p25GeV_25V_z415p1_y2pad_2_iter0.root" ; Tag = "CERN22_Mockup_Energy_pi_1p25GeV" ; prtcle = "#pi^{+} 1p25GeV" ;}
-      if (iFile == 10) { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_pi+_1p5GeV_25V_z415p1_y2pad_iter0.root" ;    Tag = "CERN22_Mockup_Energy_pi_1p5GeV" ;  prtcle = "#pi^{+} 1p5GeV" ;}
-      if (iFile == 11) { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_p_1GeV_25V_z415p1_y2pad_iter0.root" ;        Tag = "CERN22_Mockup_Energy_p+_1GeV" ;    prtcle = "protons 1GeV" ;}
-      if (iFile == 12) { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_p_1p25GeV_25V_z415p1_y2pad_iter0.root" ;     Tag = "CERN22_Mockup_Energy_p+_1p25GeV" ; prtcle = "protons 1p25GeV" ;}
-      if (iFile == 13) { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_p_1p5GeV_25V_z415_y2pad_2_iter0.root" ;      Tag = "CERN22_Mockup_Energy_p+_1p5GeV" ;  prtcle = "protons 1p5GeV" ;}
-      if(Control or dEdx) pUpld = GiveMe_Uploader (intUploader, EvtFile) ;
-      if (Control)      Tristan_CERN22_Control    (OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, Data_to_Use, PT, TB, prtcle) ;
-      if (DO_Control)   DrawOut_Control           (OutDir, Tag, Comment, SelectionSet, 1) ;
-      if (dEdx)         Tristan_CERN22_dEdx       (OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, Data_to_Use, LUT, PT, TB, zdrift) ;
-      if (DO_Methods)  DrawOut_Methods        (OutDir, Tag, Comment, 1, prtcle) ;
-      delete pUpld ;
     }
   }
   

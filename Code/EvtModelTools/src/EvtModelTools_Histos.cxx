@@ -252,6 +252,7 @@ TH1F* GiveMe_WaveFormDisplay(const Pad* pPad,const std::string& TAG)
   namestring << std::setiosflags(std::ios::fixed) ;
   namestring << " pTH1_WF_Evt_"  ;
   namestring << pPad->Get_EventNber() ;
+  namestring << "_Mod" << pPad->Get_ModuleNber();
   namestring << "_iX" << pPad->Get_iX();
   namestring << "_iY" << pPad->Get_iY();
   std::string Name =  namestring.str() ;
@@ -541,18 +542,18 @@ void DrawOut_GWF(Event* pEvent, const int& ModuleNber,const std::string& OUTDIR,
 
   // GPv3
   std::sort(v_GWF.begin(), v_GWF.end()) ;
-  TH1F* pTH1F_GWFtrunc          = new TH1F("pTH1F_GWFtrunc", "pTH1F_GWFtrunc", 510, -0.5, 509.5) ;
-  pTH1F_GWFtrunc->                 Add(pTH1F_GWF) ;
+  TH1F* pTH1F_GWFsum          = new TH1F("pTH1F_GWFsum", "pTH1F_GWFsum", 510, -0.5, 509.5) ;
+  pTH1F_GWFsum->                 Add(pTH1F_GWF) ;
   for(int iC = (int)NClus_trunc ; iC < NClusters ; iC++){
-    pTH1F_GWFtrunc->               Add(v_pTH1F_WF_DPRcluster[v_GWF[iC].Rank], -1) ;
+    pTH1F_GWFsum->               Add(v_pTH1F_WF_DPRcluster[v_GWF[iC].Rank], -1) ;
   }
 
   int TmaxGWF                     = pTH1F_GWF->GetMaximumBin() ;
-  int TmaxGWFtrunc                = pTH1F_GWFtrunc->GetMaximumBin() ;
+  int TmaxGWFsum                = pTH1F_GWFsum->GetMaximumBin() ;
   float maxGP                     = pTH1F_GWF->GetMaximum() ;
-  float maxGPtrunc                = pTH1F_GWFtrunc->GetMaximum() ;
+  float maxGPtrunc                = pTH1F_GWFsum->GetMaximum() ;
 
-  TH1F* pTH1F_DPR               = DPR("pTH1F_DPR", -0.5, 509.5, TmaxGWFtrunc-PT/TB, 510, 999, PT, TB) ;
+  TH1F* pTH1F_DPR               = DPR("pTH1F_DPR", -0.5, 509.5, TmaxGWFsum-PT/TB, 510, 999, PT, TB) ;
   pTH1F_DPR->                     Scale(maxGPtrunc) ;
 
   // Drawing the GWF ------------------------------------------------------------------------------------------------------------
@@ -565,9 +566,9 @@ void DrawOut_GWF(Event* pEvent, const int& ModuleNber,const std::string& OUTDIR,
   pTH1F_GWF->                     SetLineColor(kGreen+2) ;
   pTH1F_GWF->                     Draw() ;
   pTH1F_GWF->                     SetAxisRange(pTH1F_GWF->GetMaximumBin()-20, pTH1F_GWF->GetMaximumBin()+75, "X") ;
-  pTH1F_GWFtrunc->                SetLineWidth(7) ;
-  pTH1F_GWFtrunc->                SetLineColor(kMagenta+3) ;
-  pTH1F_GWFtrunc->                Draw("same hist") ;
+  pTH1F_GWFsum->                SetLineWidth(7) ;
+  pTH1F_GWFsum->                SetLineColor(kMagenta+3) ;
+  pTH1F_GWFsum->                Draw("same hist") ;
   pTH1F_DPR->                     SetLineWidth(4) ;
   pTH1F_DPR->                     SetLineColor(kOrange+7) ;
   pTH1F_DPR->                     Draw("same hist") ;
@@ -584,11 +585,11 @@ void DrawOut_GWF(Event* pEvent, const int& ModuleNber,const std::string& OUTDIR,
   pTLine_TmaxGWF->                 SetLineColor(kGreen+2) ; 
   pTLine_TmaxGWF->                 Draw() ;  
   
-  TLine* pTLine_TmaxGWFtrunc          = new TLine(TmaxGWFtrunc-1, Ymin, TmaxGWFtrunc-1, Ymax) ;
-  pTLine_TmaxGWFtrunc->                 SetLineStyle(1); 
-  pTLine_TmaxGWFtrunc->                 SetLineWidth(4); 
-  pTLine_TmaxGWFtrunc->                 SetLineColor(kMagenta+3) ; 
-  pTLine_TmaxGWFtrunc->                 Draw() ;  
+  TLine* pTLine_TmaxGWFsum          = new TLine(TmaxGWFsum-1, Ymin, TmaxGWFsum-1, Ymax) ;
+  pTLine_TmaxGWFsum->                 SetLineStyle(1); 
+  pTLine_TmaxGWFsum->                 SetLineWidth(4); 
+  pTLine_TmaxGWFsum->                 SetLineColor(kMagenta+3) ; 
+  pTLine_TmaxGWFsum->                 Draw() ;  
 
   TLine* pTLine_maxGP           = new TLine(tmin, maxGP, tmax, maxGP) ;
   pTLine_maxGP->                  SetLineStyle(1); 
@@ -604,7 +605,7 @@ void DrawOut_GWF(Event* pEvent, const int& ModuleNber,const std::string& OUTDIR,
   
   TLegend* leg                  = new TLegend(0.55,0.7,0.95,0.9) ; 
   leg->                           AddEntry(pTH1F_GWF, "GWF_{total} ", "l") ;
-  leg->                           AddEntry(pTH1F_GWFtrunc, "GWF_{truncated} ", "l") ;
+  leg->                           AddEntry(pTH1F_GWFsum, "GWF_{truncated} ", "l") ;
   leg->                           AddEntry(pTH1F_DPR, "Dirac Pulse Response (DPR) ", "l") ;
   leg->                           Draw() ;
   pTCanGP->                       Update()    ;
@@ -627,7 +628,7 @@ void DrawOut_GWF(Event* pEvent, const int& ModuleNber,const std::string& OUTDIR,
   pTCanGP->                       SaveAs(OutputFile.c_str());
 
   delete                          pTH1F_GWF ;
-  delete                          pTH1F_GWFtrunc ;
+  delete                          pTH1F_GWFsum ;
   delete                          pTH1F_DPR ;
   delete                          pTCanGP ;
   delete                          leg ;

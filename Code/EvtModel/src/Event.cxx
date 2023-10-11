@@ -346,12 +346,9 @@ int  Event::Validity_ForThisModule (const int& ModuleNber) const
   if ( pModule ){
     return ( pModule->IsValid() ) ;
   }else{
-    std::cout << "WARNING from Event::Validity_ForThisModule" 
-              << " The Module ModuleNber=" << ModuleNber 
-              << " does not exist"
-              << std::endl ;
+    // std::cout << "WARNING from Event::Validity_ForThisModule: Module #" << ModuleNber << " does not exist" << std::endl ;
+    return 0; 
   }
-  return 0; 
 }
 void Event::Validate_ThisModule    (const int& ModuleNber)
 {
@@ -359,12 +356,10 @@ void Event::Validate_ThisModule    (const int& ModuleNber)
   if ( pModule ){
     Validate() ;
     return pModule->Validate() ;
-  }else{
-    std::cout << "WARNING from Event::Validate_ThisModule" 
-              << " The Module ModuleNber=" << ModuleNber 
-              << " does not exist"
-              << std::endl ;
   }
+  // else{
+  //   std::cout << "WARNING from Event::Validate_ThisModule: Module #" << ModuleNber << " does not exist" << std::endl ;
+  // }
 }
 void Event::Invalidate_ThisModule  (const int& ModuleNber)
 {
@@ -378,12 +373,10 @@ void Event::Invalidate_ThisModule  (const int& ModuleNber)
       if (pModule->IsValid()==1) IOK = 1 ;
     }
     if (IOK==0) Invalidate() ; // If all modules are invalid, invalidate the event
-  }else{
-    std::cout << "WARNING from Event::Invalidate_ThisModule" 
-              << " The Module ModuleNber=" << ModuleNber 
-              << " does not exist"
-              << std::endl ;
   }
+  // else{
+  //   std::cout << "WARNING from Event::Invalidate_ThisModule: Module #" << ModuleNber << " does not exist" << std::endl ;
+  // }
 }
 
 

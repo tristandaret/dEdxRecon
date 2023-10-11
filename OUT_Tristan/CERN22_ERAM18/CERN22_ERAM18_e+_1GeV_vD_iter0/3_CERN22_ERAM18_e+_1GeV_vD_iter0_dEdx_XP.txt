@@ -1,5 +1,5 @@
 Tag           : CERN22_ERAM18_e+_1GeV_vD_iter0
-Comment       : _zcalc_PRF_4IP_Gain2_WF4_test
+Comment       : _zfile_PRF_4IP_Gain2_WF4
 EventFile     : ../Data_CERN22_vD_iter0/ERAM18_350V_412ns_e+_1GeV_iter0.root
 SelectionSet  : T2_CERN22_Event
 NbrOfMod      : -1
@@ -41,7 +41,7 @@ PT            = 412 ns
 TB            = 40 ns/time bin
 PT/TB         = 10 time bins
 Track fitting : PRF
-z method      : zcalc
+z method      : zfile
 cut length    = 2 mm
 
 Processing events:
@@ -88,5 +88,5 @@ Selection Statistics
     4  Stage5     3579     2322 (  -35.12)  (  -80.49)      3579     2322 (  -35.12)  (  -80.49)    114915    78948 (  -31.30)  (  -81.40)    367003   254309 (  -30.71)  (  -80.21) 
   Summary Sel    11899     2322             (  -80.49)     11899     2322             (  -80.49)    424446    78948             (  -81.40)   1285240   254309             (  -80.21) 
 Fitting: Started... done!
-Checks: OUT_Tristan/CERN22_ERAM18/CERN22_ERAM18_e+_1GeV_vD_iter0/2_CERN22_ERAM18_e+_1GeV_vD_iter0_Checks_zcalc_PRF_4IP_Gain2_WF4_test.root
-dEdx: OUT_Tristan/CERN22_ERAM18/CERN22_ERAM18_e+_1GeV_vD_iter0/3_CERN22_ERAM18_e+_1GeV_vD_iter0_dEdx_zcalc_PRF_4IP_Gain2_WF4_test.root
+Checks: OUT_Tristan/CERN22_ERAM18/CERN22_ERAM18_e+_1GeV_vD_iter0/2_CERN22_ERAM18_e+_1GeV_vD_iter0_Checks_zfile_PRF_4IP_Gain2_WF4.root
+dEdx: OUT_Tristan/CERN22_ERAM18/CERN22_ERAM18_e+_1GeV_vD_iter0/3_CERN22_ERAM18_e+_1GeV_vD_iter0_dEdx_zfile_PRF_4IP_Gain2_WF4.root

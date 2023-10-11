@@ -199,7 +199,7 @@ Event* Uploader_David::GiveMe_Event(
 //                 << "  "
 //                 << "  Before Wf_DoClosure"
 //                 << std::endl; 
-      pPad->Wf_DoClosure() ;
+      if(CloseWF == 1) pPad->Wf_DoClosure() ;
       
 //       std::cout << " Uploader_David::GiveMe_Event "
 //                 << "  "

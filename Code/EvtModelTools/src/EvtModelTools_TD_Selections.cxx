@@ -22,76 +22,88 @@ std::vector<int> SetStage120Cuts(Uploader* pUploader, const int& NbrOfMod, const
 {
   std::vector<int>                        v_TCut ;
 
-  std::vector<TH1F*>                      v_pTH1_TLeadCut ;
-  for (int iMod = 0 ; iMod < 8 ; iMod++){
-    TH1F* pTH1_TLead_Cut                = new TH1F(Form("pTH1_TLeadAfter_%i", iMod),  Form("T_{leading} after selection and truncation: Module %i", iMod), 511,  -0.5 , 510.5 );
-    v_pTH1_TLeadCut.                      push_back(pTH1_TLead_Cut);
-  }
+  TH1F* h1f_TLead                       = new TH1F("h1f_TLead",  "T_{leading}", 511,  -0.5 , 510.5 );
 
   int NEvent                            = pUploader->Get_NberOfEvent() ;
   int TLow                              = 0 ;
   int THigh                             = 0 ;
-    for (int iEvent = 0 ; iEvent < NEvent ; iEvent++){
-      Event*  pEvent                    = pUploader->GiveMe_Event(iEvent, NbrOfMod, Data_to_Use, 0) ;
-      if (!pEvent)                        continue ;
-      if (pEvent->IsValid() == 1){ // Valid events only
-        //  Loop On Modules
-        int NberOfModule                = pEvent->Get_NberOfModule() ;
-        for (int iMod = 0; iMod < NberOfModule; iMod++){
-          Module* pModule               = pEvent->Get_Module_InArray(iMod) ;
-          if (pEvent->Validity_ForThisModule(iMod) == 0) continue ; // Valid modules only
-          // Loop On Clusters
-          int NClusters                 = pModule->Get_NberOfCluster() ;
-          for (int iC = 0; iC < NClusters; iC++){
-            Cluster* pCluster           = pModule->Get_Cluster(iC) ;
-            double TLeading             = pCluster->Get_TMaxLeading() ;
-            if (TLeading>5.) v_pTH1_TLeadCut[iMod]->Fill( TLeading ) ;
-          }
-        }
-      }
-      delete pEvent ;
-    }
-    std::vector<double> v_MaxTLead ;
-    for (int iMod = 0; iMod < 8; iMod++){
-      v_MaxTLead.                         push_back(v_pTH1_TLeadCut[iMod]->GetMaximum()) ;
-    }
+  for (int iEvent = 0 ; iEvent < NEvent ; iEvent++){
+    if(iEvent % 1000 == 0 or iEvent == NEvent-1) std::cout << iEvent << "/" << NEvent << std::endl ;
+    Event*  pEvent                    = pUploader->GiveMe_Event(iEvent, NbrOfMod, Data_to_Use, 0) ;
+    if (!pEvent)                        continue ;
+    if (pEvent->IsValid() == 0)         continue;
 
-    int module_max                      = std::max_element(v_MaxTLead.begin(),v_MaxTLead.end()) - v_MaxTLead.begin() ; // module with biggest peak
-    int nbin_max                        = v_pTH1_TLeadCut[module_max]->GetMaximumBin() ;                               // bin of the highest peak
-    int iDeltaBinP                      = 10 ;                                                                         // initialization of increments
+    int nMod                  = pEvent->Get_NberOfModule() ;
+    if(nMod < 4) continue;
+    for (int iMod = 0; iMod < nMod ; iMod++){
+      Module* pModule                 = pEvent->Get_Module_InArray(iMod) ;
+      if (pEvent->Validity_ForThisModule(iMod) == 0) continue;
+
+      int NClusters                   = pModule->Get_NberOfCluster() ;
+      for (int iC = 0; iC < NClusters; iC++){
+        Cluster* pCluster             = pModule->Get_Cluster(iC) ;
+        double TL               = pCluster->Get_TMaxLeading() ;
+        if (TL>5. and TL < 509.) h1f_TLead->Fill( TL ) ;
+      }
+    }
+    delete pEvent ;
+  }
+
+  double MaxTLead = h1f_TLead->GetMaximum();
+  std::cout << MaxTLead << std::endl;
+  int nbin_max                        = h1f_TLead->GetMaximumBin() ;        
+  std::cout << nbin_max << std::endl;                       // bin of the highest peak
+
+  std::string OutputFile      = "h1f_test_timing.pdf" ;
+  TCanvas* pTCanvas           = new TCanvas("TCanvas_timing", "TCanvas_timing", 1800, 1200) ;
+  pTCanvas->                    cd();
+  pTCanvas->                    SetLogy(1);
+  h1f_TLead->                   SetLineWidth(2) ;
+  h1f_TLead->                   Draw();
+  pTCanvas->                    SaveAs(OutputFile.c_str());
+  delete pTCanvas;
+
+  if(nbin_max <= 0 or nbin_max >= 510){
+    std::cout << "Bug with nbin_max: value out of time range | Set cuts to  [0, 510]" << std::endl;
+    v_TCut.push_back(0);
+    v_TCut.push_back(510);
+  }
+  else{
+    int iDeltaBinP                      = 10 ;                                                            // initialization of increments
     int iDeltaBinM                      = 10 ;
-    float y_init                        = v_pTH1_TLeadCut[module_max]->GetBinContent(nbin_max) ;                       // value of the peak
-    float y_0                           = v_pTH1_TLeadCut[module_max]->GetBinContent(nbin_max) ;                       // value of the peak
-    float y_minus1                      = v_pTH1_TLeadCut[module_max]->GetBinContent(nbin_max-10) ;                    // value of the previous bin
-    float y_plus1                       = v_pTH1_TLeadCut[module_max]->GetBinContent(nbin_max+10) ;                    // value of the next bin
+    float y_init                        = h1f_TLead->GetBinContent(nbin_max) ;                       // value of the peak
+    float y_0                           = h1f_TLead->GetBinContent(nbin_max) ;                       // value of the peak
+    float y_minus1                      = h1f_TLead->GetBinContent(nbin_max-10) ;                    // value of the previous bin
+    float y_plus1                       = h1f_TLead->GetBinContent(nbin_max+10) ;                    // value of the next bin
     // Find the lower boundary
-    while(y_minus1 - y_0 < y_init/2500 and y_minus1 > 0.001*y_init){
+    while(y_minus1 - y_0 < y_init/2500 and y_minus1 > 0.001*y_init and iDeltaBinM < 509){
       iDeltaBinM++ ;
-      y_0                               = v_pTH1_TLeadCut[module_max]->GetBinContent(nbin_max-iDeltaBinM) ;
-      y_minus1                          = v_pTH1_TLeadCut[module_max]->GetBinContent(nbin_max-iDeltaBinM-1) ;
+      y_0                               = h1f_TLead->GetBinContent(nbin_max-iDeltaBinM) ;
+      y_minus1                          = h1f_TLead->GetBinContent(nbin_max-iDeltaBinM-1) ;
     }
     // Find the higher boundary
-    y_0                                 = v_pTH1_TLeadCut[module_max]->GetBinContent(nbin_max) ;                       // reboot y_0 to maximum value peak
-    while(y_plus1 - y_0 < y_init/2500 and y_minus1 > 0.001*y_init){
+    y_0                                 = h1f_TLead->GetBinContent(nbin_max) ;                       // reboot y_0 to maximum value peak
+    while(y_plus1 - y_0 < y_init/2500 and y_minus1 > 0.001*y_init and iDeltaBinP < 509){
       iDeltaBinP++ ;
-      y_0                               = v_pTH1_TLeadCut[module_max]->GetBinContent(nbin_max+iDeltaBinP) ;
-      y_plus1                           = v_pTH1_TLeadCut[module_max]->GetBinContent(nbin_max+iDeltaBinP+1) ;
+      y_0                               = h1f_TLead->GetBinContent(nbin_max+iDeltaBinP) ;
+      y_plus1                           = h1f_TLead->GetBinContent(nbin_max+iDeltaBinP+1) ;
     }
 
-    TLow                                = v_pTH1_TLeadCut[std::max_element(v_MaxTLead.begin(),v_MaxTLead.end()) - v_MaxTLead.begin()]->GetMaximumBin() - 1 - iDeltaBinM ;
-    THigh                               = v_pTH1_TLeadCut[std::max_element(v_MaxTLead.begin(),v_MaxTLead.end()) - v_MaxTLead.begin()]->GetMaximumBin() - 1 + iDeltaBinP ;
+    TLow                                = nbin_max - 1 - iDeltaBinM ;
+    THigh                               = nbin_max - 1 + iDeltaBinP ;
+    if(TLow < 0 or TLow > 510){
+      std::cout << "Bug with TLow = " << TLow << ": value out of time range | ";
+      TLow = 0;
+      std::cout << "Reset to " << TLow << std::endl;
+    }
+    if(THigh < 0 or THigh > 510){
+      std::cout << "Bug with THigh = " << THigh << ": value out of time range | ";
+      THigh = 510;
+      std::cout << "Reset to " << THigh << std::endl;
+    }
     v_TCut.                               push_back(TLow) ;
     v_TCut.                               push_back(THigh) ;
-
-    std::cout << "Module whose bin is the most filled: " << std::max_element(v_MaxTLead.begin(),v_MaxTLead.end()) - v_MaxTLead.begin() << std::endl ; std::cout << std::endl ;
-    v_MaxTLead.                           clear() ;
-
-  int nmodmax                           = v_pTH1_TLeadCut.size() ;
-  for (int iMod = 0 ; iMod < nmodmax ; iMod++){
-    delete                                v_pTH1_TLeadCut[iMod] ;
-    v_pTH1_TLeadCut[iMod]               = 0 ;
   }
-  v_pTH1_TLeadCut.                        clear() ;
 
   return v_TCut ;
 }

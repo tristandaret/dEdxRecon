@@ -12,7 +12,7 @@ void DrawOut_Zscan_MC(const std::string& inputDir, const std::string& Comment)
 
   for(int iz = 0 ; iz < nz ; iz++){
     TFile* pTFile           = TFile::Open(TString(inputDir + "/CERN23_MC_z" + (iz+1) + "00/3_CERN23_MC_z" + (iz+1) + "00_dEdx" + Comment + ".root")) ;
-    v_tf1_WF.                 push_back(pTFile->Get<TF1>("tf1_WFtrunc_0")) ;
+    v_tf1_WF.                 push_back(pTFile->Get<TF1>("tf1_WFsum_0")) ;
     v_tf1_XP.                 push_back(pTFile->Get<TF1>("tf1_XP_0")) ;
   }
 
@@ -846,7 +846,7 @@ void DrawOut_Alpha(const std::string& inputDir, const std::string& Comment)
 
   for(int i = 0 ; i < nalpha ; i++){
     v_pTF1_XP.push_back(v_TFile[i]->Get<TF1>("tf1_XP_0")) ;
-    v_pTF1_WF.push_back(v_TFile[i]->Get<TF1>("tf1_WFtrunc_0")) ;
+    v_pTF1_WF.push_back(v_TFile[i]->Get<TF1>("tf1_WFsum_0")) ;
   }
 
   for(int i = 0 ; i < nalpha ; i++){

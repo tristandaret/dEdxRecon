@@ -1,10 +1,11 @@
 #include "Tristan/Tristan_CERN22_Control.h"
 #include "Tristan/Tristan_Displayer.h"
-#include "EvtModelTools/EvtModelTools_TD_Selections.h"
+#include "Tristan/Tristan_Misc_Functions.h"
+
 #include "Misc/Util.h"
 
 #include "EvtModelTools/JFL_Selector.h"
-
+#include "EvtModelTools/EvtModelTools_TD_Selections.h"
 #include "EvtModelTools/EvtModelTools_Histos.h"
 
 void Tristan_CERN22_Control(
@@ -38,7 +39,7 @@ void Tristan_CERN22_Control(
   std::cout << "Tag           : " << Tag                << std::endl ;
   std::cout << "EventFile     : " << EventFile          << std::endl ;
   std::cout << "SelectionSet  : " << SelectionSet       << std::endl ;
-  std::cout << "iMod    : " << NbrOfMod        << std::endl ;
+  std::cout << "iMod          : " << NbrOfMod        << std::endl ;
   std::cout << "Data_to_Use   : " << Data_to_Use        << std::endl ;
   std::cout << "OUTDirName    : " << OUTDirName         << std::endl ;
   std::cout <<                                             std::endl ;
@@ -104,8 +105,8 @@ void Tristan_CERN22_Control(
     TH1F* h1f_Eff_Sel                 = new TH1F(Form("h1f_Eff_Sel_%i", iMod),  Form("Efficiency : final fraction of events Cut (Mod %i);N_{cluster} minimum;Fraction of events kept (%%)", iMod), 37, -0.5, 36.5) ;
     TH2F* h2f_LeadPos_Raw             = new TH2F(Form("h2f_LeadPos_Raw_%i", iMod), Form("Position of leading pads in ERAM (Mod %i);iX;iY", iMod), 36, -0.5, 35.5, 32, -0.5, 31.5) ;
     TH2F* h2f_LeadPos_Sel             = new TH2F(Form("h2f_LeadPos_Sel_%i", iMod), Form("Position of leading pads in ERAM (Mod %i);iX;iY", iMod), 36, -0.5, 35.5, 32, -0.5, 31.5) ;
-    TH2F* h2f_Theta_Raw             = new TH2F(Form("h2f_Theta_Raw_%i", iMod), Form("Track inclination along #theta angle(Mod %i);Pad row (iX);Drift distance (mm)", iMod), 36, -0.5, 35.5, 80, 0, 1010) ;
-    TH2F* h2f_Theta_Sel             = new TH2F(Form("h2f_Theta_Sel_%i", iMod), Form("Track inclination along #theta angle(Mod %i);Pad row (iX);Drift distance (mm)", iMod), 36, -0.5, 35.5, 80, 0, 1010) ;
+    TH2F* h2f_Theta_Raw               = new TH2F(Form("h2f_Theta_Raw_%i", iMod), Form("Track inclination along #theta angle(Mod %i);Pad row (iX);Drift distance (mm)", iMod), 36, -0.5, 35.5, 80, 0, 1010) ;
+    TH2F* h2f_Theta_Sel               = new TH2F(Form("h2f_Theta_Sel_%i", iMod), Form("Track inclination along #theta angle(Mod %i);Pad row (iX);Drift distance (mm)", iMod), 36, -0.5, 35.5, 80, 0, 1010) ;
     v_h1f_TL_Raw.                       push_back(h1f_TL_Raw) ;
     v_h1f_TL_Sel.                       push_back(h1f_TL_Sel) ;
     v_h1f_PM_Raw.                       push_back(h1f_PM_Raw) ;
@@ -126,72 +127,75 @@ void Tristan_CERN22_Control(
     v_h1f_CM_Sel.                       push_back(h1f_CM_Sel) ;
     v_h1f_Eff_Raw.                      push_back(h1f_Eff_Raw) ;
     v_h1f_Eff_Sel.                      push_back(h1f_Eff_Sel) ;
-    v_h2f_LeadPos_Raw.                   push_back(h2f_LeadPos_Raw) ;
-    v_h2f_LeadPos_Sel.                   push_back(h2f_LeadPos_Sel) ;
-    v_h2f_Theta_Raw.                   push_back(h2f_Theta_Raw) ;
-    v_h2f_Theta_Sel.                   push_back(h2f_Theta_Sel) ;
+    v_h2f_LeadPos_Raw.                  push_back(h2f_LeadPos_Raw) ;
+    v_h2f_LeadPos_Sel.                  push_back(h2f_LeadPos_Sel) ;
+    v_h2f_Theta_Raw.                    push_back(h2f_Theta_Raw) ;
+    v_h2f_Theta_Sel.                    push_back(h2f_Theta_Sel) ;
   }
 
   
   /////////////////////////////////////////////////////////////////////////////////////////////////////////
-  // Selection
+  // Selection stage
   JFL_Selector aJFL_Selector(SelectionSet) ;
   int NEvent = pUploader->Get_NberOfEvent() ;
+  std::cout << "Number of entries :" << NEvent << std::endl ;
+
   // Get the correct cut on TLeading
   if(SelectionSet == "T2_CERN22_Event" or SelectionSet == "T_DESY21_Event"){
-    int TLow                      = 0 ;
-    int THigh                     = 0 ;
-    if(particle == "e^{+} 1GeV")    {TLow = 160 ; THigh = 201 ; }
-    else if(particle == "#mu^{+} 1GeV")  {TLow = 158 ; THigh = 194 ; }
-    else if(particle == "protons 1GeV")  {TLow = 152 ; THigh = 207 ; }
-    else if(particle == "#pi^{-} 0.5GeV"){TLow = 153 ; THigh = 195 ; }
+    int TLow = 0, THigh = 0 ;
+    if(Get120_CSV("../Data_DESY21/Stage120_Cuts.csv", Tag, TLow, THigh)) std::cout << "TLow = " << TLow << " | THigh = " << THigh << std::endl ;
     else{
-      std::vector<int> v_TCut             = SetStage120Cuts(pUploader, NbrOfMod, Data_to_Use, 0) ;
-      TLow                                = v_TCut[0] ;
-      THigh                               = v_TCut[1] ;
-      std::cout << TLow << " " << THigh << std::endl ;
+      std::cout << "No Stage120 cuts found in CSV. Getting them now..." << std::endl ;
+      std::vector<int> v_TCut           = SetStage120Cuts(pUploader, NbrOfMod, Data_to_Use, 0) ;
+      TLow                              = v_TCut[0] ;
+      THigh                             = v_TCut[1] ;
+      Set120_CSV("../Data_DESY21/Stage120_Cuts.csv", Tag, TLow, THigh) ;
+      std::cout << "Stage120 cuts are " << TLow << " to " << THigh << ". Values added to CSV file." << std::endl ;
     }
     aJFL_Selector.Set_Cut_Stage120_TLow (TLow) ;
     aJFL_Selector.Set_Cut_Stage120_THigh(THigh) ;
   }
+
   // Selection for DESY21 phi diagonal clustering
   if(Tag.find("diag") != std::string::npos){
     aJFL_Selector.Set_Cut_Stage5_NCluster_Low(50) ;
     aJFL_Selector.Set_Cut_StageT15_APM_Low(1) ;
     aJFL_Selector.Set_Cut_StageT15_APM_High(3.5) ;
   }
+
   // Selection for DESY21 theta
   if(Tag.find("theta") != std::string::npos){
     aJFL_Selector.Set_Cut_Stage120_TLow(0) ;
     aJFL_Selector.Set_Cut_Stage120_THigh(510) ;
     aJFL_Selector.Set_Cut_Stage11_EventBased(200) ;
   }
-  aJFL_Selector.Reset_StatCounters() ;
+    
   aJFL_Selector.Tell_Selection() ;
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////
   //Loop On Events
+  int nEvt_raw4mod = 0;
+  int nEvt_sel4mod = 0;
   aJFL_Selector.Reset_StatCounters() ;
   std::cout << "Processing events:" << std::endl ;
   for(int iEvent = 0 ; iEvent < NEvent ; iEvent++){
-    if(iEvent % 500 == 0 or iEvent == NEvent-1) std::cout << iEvent << "/" << NEvent << std::endl ;
+    if(iEvent % 1000 == 0 or iEvent == NEvent-1) std::cout << iEvent << "/" << NEvent << std::endl ;
     Event*  pEvent                      = pUploader->GiveMe_Event(iEvent, NbrOfMod, Data_to_Use, 0) ;
     if (!pEvent)                            continue ;
-    
+
     //  Raw Selection
-    if (pEvent->IsValid() != 1)           continue ;
+    if (pEvent->IsValid() == 0)           continue ;
     //  Loop On Modules
     int nMod                            = pEvent->Get_NberOfModule() ;
+    if(nMod < 4) continue;
+    nEvt_raw4mod++;
 
     for(int iMod = 0 ; iMod < nMod ; iMod++){
       Module* pModule                   = pEvent->Get_Module_InArray(iMod) ;
-      if (pEvent->Validity_ForThisModule(iMod) == 0) continue ;
+      // if (pEvent->Validity_ForThisModule(iMod) == 0) continue ;
       float avrg_padmutl                = 0 ;
-      float avg_TL                      = 0 ;
       int NClusters                     = pModule->Get_NberOfCluster() ;
       v_h1f_CM_Raw[iMod]->                Fill(NClusters) ;
-      for(int iC = 0 ; iC < NClusters ; iC++) avg_TL += pModule->Get_Cluster(iC)->Get_TMaxLeading() ;
-      avg_TL                           /= NClusters ;
 
       for(int iC = 0 ; iC < NClusters ; iC++){
         Cluster* pCluster               = pModule->Get_Cluster(iC) ;
@@ -200,7 +204,7 @@ void Tristan_CERN22_Control(
         int NPads                       = pCluster->Get_NberOfPads() ;
         float TL                        = pCluster->Get_TMaxLeading() ;
         avrg_padmutl                   += (float)NPads ;
-        if(TL>5) v_h1f_TL_Raw[iMod]->     Fill(TL) ;
+        if(TL>5 and TL < 509) v_h1f_TL_Raw[iMod]->     Fill(TL) ;
         v_h1f_PM_Raw[iMod]->              Fill(NPads) ;
         v_h1f_Qclus_Raw[iMod]->           Fill(pCluster->Get_Acluster()) ;
         TH1F* h1f_clus                  = new TH1F("h1f_WF_cluster", "h1f_WF_cluster", 510, -0.5, 509.5) ;
@@ -239,17 +243,15 @@ void Tristan_CERN22_Control(
 
     //  Selection
     if (pEvent->IsValid() != 1)           continue ;
+    nEvt_sel4mod++;
     //  Loop On Modules
 
     for(int iMod = 0 ; iMod < nMod ; iMod++){
       Module* pModule                   = pEvent->Get_Module_InArray(iMod) ;
-      if (pEvent->Validity_ForThisModule(iMod) == 0) continue ;
+      // if (pEvent->Validity_ForThisModule(iMod) == 0) continue ;
       float avrg_padmutl                = 0 ;
-      float avg_TL                      = 0 ;
       int NClusters                     = pModule->Get_NberOfCluster() ;
       v_h1f_CM_Sel[iMod]->              Fill(NClusters) ;
-      for(int iC = 0 ; iC < NClusters ; iC++) avg_TL += pModule->Get_Cluster(iC)->Get_TMaxLeading() ;
-      avg_TL                           /= NClusters ;
 
       for(int iC = 0 ; iC < NClusters ; iC++){
         Cluster* pCluster               = pModule->Get_Cluster(iC) ;
@@ -258,7 +260,7 @@ void Tristan_CERN22_Control(
         int NPads                       = pCluster->Get_NberOfPads() ;
         float TL                        = pCluster->Get_TMaxLeading() ;
         avrg_padmutl                   += (float)NPads ;
-        if(TL>5) v_h1f_TL_Sel[iMod]->     Fill(TL) ;
+        v_h1f_TL_Sel[iMod]->              Fill(TL) ;
         v_h1f_PM_Sel[iMod]->              Fill(NPads) ;
         v_h1f_Qclus_Sel[iMod]->           Fill(pCluster->Get_Acluster()) ;
         TH1F* h1f_clus                  = new TH1F("h1f_WF_cluster", "h1f_WF_cluster", 510, -0.5, 509.5) ;
@@ -315,15 +317,15 @@ void Tristan_CERN22_Control(
   }
   
   std::cout << "Nber Of Entries :" << NEvent << std::endl ;
+  std::cout << "Raw      events with at least 4 modules: " << nEvt_raw4mod << std::endl;
+  std::cout << "Selected events with at least 4 modules: " << nEvt_sel4mod << std::endl;
   aJFL_Selector.PrintStat() ;
   
   ////////////////////////////////////////////////////////////////////////////////////////////////////
   // Saving //
-  // Get number of modules in this run (prototype or mockup?) 
-  Event*  pEvent = pUploader->GiveMe_Event(0, NbrOfMod, Data_to_Use, 0) ;
-  int nMod = pEvent->Get_NberOfModule() ;
-  if (nMod != 1) nMod = 8 ;
-  delete pEvent ;
+  int nMod;
+  if(EventFile.find("All_ERAMS") != std::string::npos) nMod = 8;
+  else nMod = 1;
 
   TFile* pfileROOT = new TFile(TString(OUTDirName + "1_" + Tag + "_Control" + Comment + ".root"), "RECREATE") ;
   for(int iMod = 0 ; iMod < nMod ; iMod++){

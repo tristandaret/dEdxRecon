@@ -770,7 +770,7 @@ void JFL_Selector::SetStat_Before(Sample& aSample, const int& ModuleNber,const i
   int NberOfPads        = 0 ;
   for (int iE = 0 ; iE< NberOfEvents; iE++){
     Event* pEvent =  aSample.Get_Event(iE) ;
-    if (pEvent->Validity_ForThisModule(ModuleNber) == 0) continue ; 
+    // if (pEvent->Validity_ForThisModule(ModuleNber) == 0) continue ; 
     NberOfValidEvents += 1 ;
     
     std::vector < Cluster* >ClusterSet = pEvent->GiveMe_Clusters_ForThisModule (ModuleNber) ;   
@@ -799,7 +799,7 @@ void JFL_Selector::SetStat_After(Sample& aSample, const int& ModuleNber,const in
   int NberOfPads        = 0 ;
   for (int iE = 0 ; iE< NberOfEvents; iE++){
     Event* pEvent =  aSample.Get_Event(iE) ;
-    if (pEvent->Validity_ForThisModule(ModuleNber) == 0) continue ; 
+    // if (pEvent->Validity_ForThisModule(ModuleNber) == 0) continue ; 
     NberOfValidEvents += 1 ;
     
     std::vector < Cluster* >ClusterSet = pEvent->GiveMe_Clusters_ForThisModule (ModuleNber) ;   
@@ -832,7 +832,7 @@ void JFL_Selector::ApplySelection(Event*  pEvent)
     for (int iModule = 0 ; iModule< NberOfModule ; iModule++){   
       Module* pModule = pEvent->Get_Module_InArray(iModule) ;
       int ModuleNber = pModule->Get_ModuleNber() ;
-      if (pEvent->Validity_ForThisModule(ModuleNber) == 0) continue ;
+      // if (pEvent->Validity_ForThisModule(ModuleNber) == 0) continue ;
       Apply_ASelection(pEvent,ModuleNber,iTem) ;
     }
   
@@ -885,7 +885,7 @@ void JFL_Selector::SetStat_Before(Event*  pEvent , const int& iTem)
   for (int iModule = 0 ; iModule< NberOfModule ; iModule++){   
     Module* pModule = pEvent->Get_Module_InArray(iModule) ;
     int ModuleNber = pModule->Get_ModuleNber() ;
-    if (pEvent->Validity_ForThisModule(ModuleNber) == 0) continue ;
+    // if (pEvent->Validity_ForThisModule(ModuleNber) == 0) continue ;
     
     NberOfModules +=1 ;
     
@@ -918,7 +918,7 @@ void JFL_Selector::SetStat_After(Event*  pEvent , const int& iTem)
   for (int iModule = 0 ; iModule< NberOfModule ; iModule++){   
     Module* pModule = pEvent->Get_Module_InArray(iModule) ;
     int ModuleNber = pModule->Get_ModuleNber() ;
-    if (pEvent->Validity_ForThisModule(ModuleNber) == 0) continue ;
+    // if (pEvent->Validity_ForThisModule(ModuleNber) == 0) continue ;
     
     NberOfModules +=1 ;
 
@@ -1004,7 +1004,7 @@ void JFL_Selector::Stage1(Event* pEvent, const int& ModuleNber)
   int iXFirst = 0 ;
   int iXLast  = pModel_ReadOutGeometry->Get_Nx() - 1 ;
 
-    if (pEvent->Validity_ForThisModule(ModuleNber) == 0) return ;
+    // if (pEvent->Validity_ForThisModule(ModuleNber) == 0) return ;
     std::vector<Cluster*> V_pCluster ;
 
     std::vector < Cluster* >ClusterSet = pEvent->GiveMe_Clusters_ForThisModule (ModuleNber) ;   
@@ -1045,7 +1045,7 @@ void JFL_Selector::Stage2(Sample& aSample, const int& ModuleNber)
 }
 void JFL_Selector::Stage2(Event* pEvent, const int& ModuleNber)
 {
-  if (pEvent->Validity_ForThisModule(ModuleNber) == 0) return ;
+  // if (pEvent->Validity_ForThisModule(ModuleNber) == 0) return ;
   std::vector<Cluster*> V_pCluster ;
 
   std::vector < Cluster* >ClusterSet = pEvent->GiveMe_Clusters_ForThisModule (ModuleNber) ;   
@@ -1083,7 +1083,7 @@ void JFL_Selector::Stage3(Sample& aSample, const int& ModuleNber)
 }
 void JFL_Selector::Stage3(Event* pEvent, const int& ModuleNber)
 {
-  if (pEvent->Validity_ForThisModule(ModuleNber) == 0) return ;
+  // if (pEvent->Validity_ForThisModule(ModuleNber) == 0) return ;
   std::vector<Cluster*> V_pCluster ;
 
   std::vector < Cluster* >ClusterSet = pEvent->GiveMe_Clusters_ForThisModule (ModuleNber) ;   
@@ -1128,7 +1128,7 @@ void JFL_Selector::Stage4(Sample& aSample, const int& ModuleNber)
 }
 void JFL_Selector::Stage4(Event* pEvent, const int& ModuleNber)
 {
-  if (pEvent->Validity_ForThisModule(ModuleNber) == 0) return ;
+  // if (pEvent->Validity_ForThisModule(ModuleNber) == 0) return ;
   std::vector<Cluster*> V_pCluster ;
 
   std::vector < Cluster* >ClusterSet = pEvent->GiveMe_Clusters_ForThisModule (ModuleNber) ;   
@@ -1180,7 +1180,7 @@ void JFL_Selector::Stage5(Sample& aSample, const int& ModuleNber)
 }
 void JFL_Selector::Stage5(Event* pEvent, const int& ModuleNber)
 {
-  if (pEvent->Validity_ForThisModule(ModuleNber) == 0) return ;
+  // if (pEvent->Validity_ForThisModule(ModuleNber) == 0) return ;
 
   std::vector < Cluster* > ClusterSet = pEvent->GiveMe_Clusters_ForThisModule (ModuleNber) ;   
   int NClusters = ClusterSet.size() ;
@@ -1211,7 +1211,7 @@ void JFL_Selector::Stage6(Sample& aSample, const int& ModuleNber)
 }
 void JFL_Selector::Stage6(Event* pEvent, const int& ModuleNber)
 {
-  if (pEvent->Validity_ForThisModule(ModuleNber) == 0) return ;
+  // if (pEvent->Validity_ForThisModule(ModuleNber) == 0) return ;
   std::vector<Cluster*> V_pCluster ;
   
   std::vector < Cluster* >ClusterSet = pEvent->GiveMe_Clusters_ForThisModule (ModuleNber) ;   
@@ -1308,7 +1308,7 @@ void JFL_Selector::Stage6(Event* pEvent, const int& ModuleNber)
   pEvent->Replace_Clusters_ForThisModule(V_pCluster, ModuleNber) ;
 
 //
-  if (pEvent->Validity_ForThisModule(ModuleNber) == 0) return ;
+  // if (pEvent->Validity_ForThisModule(ModuleNber) == 0) return ;
   std::vector<Cluster*> V_pCluster2 ;
   
   std::vector < Cluster* >ClusterSet2 = pEvent->GiveMe_Clusters_ForThisModule (ModuleNber) ;   
@@ -1386,7 +1386,7 @@ void JFL_Selector::Stage7(Sample& aSample, const int& ModuleNber)
 }
 void JFL_Selector::Stage7(Event*  pEvent, const int& ModuleNber)
 {
-  if (pEvent->Validity_ForThisModule(ModuleNber) == 0) return ;  
+  // if (pEvent->Validity_ForThisModule(ModuleNber) == 0) return ;  
   std::vector<Cluster*> V_pCluster ;
    
   std::vector < Cluster* >ClusterSet = pEvent->GiveMe_Clusters_ForThisModule (ModuleNber) ;   
@@ -1475,7 +1475,7 @@ void JFL_Selector::Stage8(Sample& aSample, const int& ModuleNber)
 }
 void JFL_Selector::Stage8(Event*  pEvent , const int& ModuleNber)
 {
-  if (pEvent->Validity_ForThisModule(ModuleNber) == 0) return ;  
+  // if (pEvent->Validity_ForThisModule(ModuleNber) == 0) return ;  
   std::vector<Cluster*> V_pCluster ;
    
   std::vector < Cluster* >ClusterSet = pEvent->GiveMe_Clusters_ForThisModule (ModuleNber) ;   
@@ -1547,7 +1547,7 @@ void JFL_Selector::Stage9(Sample& aSample, const int& ModuleNber)
 }
 void JFL_Selector::Stage9(Event*  pEvent, const int& ModuleNber)
 {
-  if (pEvent->Validity_ForThisModule(ModuleNber) == 0) return ;
+  // if (pEvent->Validity_ForThisModule(ModuleNber) == 0) return ;
   std::vector<Cluster*> V_pCluster ;
 
   std::vector < Cluster* >ClusterSet = pEvent->GiveMe_Clusters_ForThisModule (ModuleNber) ;   
@@ -1587,7 +1587,7 @@ void JFL_Selector::Stage10(Sample& aSample, const int& ModuleNber)
 }
 void JFL_Selector::Stage10(Event*  pEvent, const int& ModuleNber)
 {
-  if (pEvent->Validity_ForThisModule(ModuleNber) == 0) return ;
+  // if (pEvent->Validity_ForThisModule(ModuleNber) == 0) return ;
   std::vector<Cluster*> V_pCluster ;
 
   std::vector < Cluster* >ClusterSet = pEvent->GiveMe_Clusters_ForThisModule (ModuleNber) ;   
@@ -1674,7 +1674,7 @@ void JFL_Selector::Stage12(Sample& aSample, const int& ModuleNber)
   
   for (int iE = 0 ; iE < NberOfEvents ; iE++){
     Event* pEvent = aSample.Get_Event(iE) ;
-    if (pEvent->Validity_ForThisModule(ModuleNber) == 0) continue ;
+    // if (pEvent->Validity_ForThisModule(ModuleNber) == 0) continue ;
     
     std::vector < Cluster* >ClusterSet = pEvent->GiveMe_Clusters_ForThisModule (ModuleNber) ;   
     int NClusters = ClusterSet.size() ;
@@ -1693,7 +1693,7 @@ void JFL_Selector::Stage12(Sample& aSample, const int& ModuleNber)
   
   for (int iE = 0 ; iE < NberOfEvents ; iE++){
     Event* pEvent = aSample.Get_Event(iE) ;
-    if (pEvent->Validity_ForThisModule(ModuleNber) == 0) continue ;
+    // if (pEvent->Validity_ForThisModule(ModuleNber) == 0) continue ;
     std::vector<Cluster*> V_pCluster ;
     
     std::vector < Cluster* >ClusterSet = pEvent->GiveMe_Clusters_ForThisModule (ModuleNber) ;   
@@ -1738,7 +1738,7 @@ void JFL_Selector::Stage120(Sample& aSample, const int& ModuleNber)
 }
 void JFL_Selector::Stage120(Event*  pEvent , const int& ModuleNber)
 {  
-  if (pEvent->Validity_ForThisModule(ModuleNber) == 0) return ;
+  // if (pEvent->Validity_ForThisModule(ModuleNber) == 0) return ;
   std::vector<Cluster*> V_pCluster ;
   
   std::vector < Cluster* >ClusterSet = pEvent->GiveMe_Clusters_ForThisModule (ModuleNber) ;   
@@ -1778,7 +1778,7 @@ void JFL_Selector::Stage13(Sample& aSample, const int& ModuleNber)
 }
 void JFL_Selector::Stage13(Event*  pEvent , const int& ModuleNber)
 {
-  if (pEvent->Validity_ForThisModule(ModuleNber) == 0) return ;  
+  // if (pEvent->Validity_ForThisModule(ModuleNber) == 0) return ;  
   std::vector<Cluster*> V_pCluster ;
    
   std::vector < Cluster* >ClusterSet = pEvent->GiveMe_Clusters_ForThisModule (ModuleNber) ;   
@@ -1834,7 +1834,7 @@ void JFL_Selector::Stage14(Sample& aSample, const int& ModuleNber)
 }
 void JFL_Selector::Stage14(Event*  pEvent , const int& ModuleNber)
 {
-  if (pEvent->Validity_ForThisModule(ModuleNber) == 0) return ;
+  // if (pEvent->Validity_ForThisModule(ModuleNber) == 0) return ;
   
   std::vector<Cluster*> V_pCluster ;
 
@@ -1887,7 +1887,7 @@ void JFL_Selector::StageT15(Sample& aSample, const int& ModuleNber)
 }
 void JFL_Selector::StageT15(Event*  pEvent , const int& ModuleNber)
 {
-  if (pEvent->Validity_ForThisModule(ModuleNber) == 0) return ;  
+  // if (pEvent->Validity_ForThisModule(ModuleNber) == 0) return ;  
    
   std::vector<Cluster*>ClusterSet = pEvent->GiveMe_Clusters_ForThisModule (ModuleNber) ;   
   float NClusters = ClusterSet.size() ;
@@ -1921,7 +1921,7 @@ void JFL_Selector::StageT16(Sample& aSample, const int& ModuleNber)
 }
 void JFL_Selector::StageT16(Event*  pEvent , const int& ModuleNber)
 {
-  if (pEvent->Validity_ForThisModule(ModuleNber) == 0) return ;
+  // if (pEvent->Validity_ForThisModule(ModuleNber) == 0) return ;
   
   std::vector<Cluster*> V_pCluster ;
 
@@ -1961,7 +1961,7 @@ void JFL_Selector::StageT17(Sample& aSample, const int& ModuleNber)
 }
 void JFL_Selector::StageT17(Event*  pEvent , const int& ModuleNber)
 {
-  if (pEvent->Validity_ForThisModule(ModuleNber) == 0) return ;
+  // if (pEvent->Validity_ForThisModule(ModuleNber) == 0) return ;
   
   std::vector<Cluster*> V_pCluster ;
 
@@ -2008,7 +2008,7 @@ void JFL_Selector::StageT18(Sample& aSample, const int& ModuleNber)
 }
 void JFL_Selector::StageT18(Event* pEvent, const int& ModuleNber)
 {
-  if (pEvent->Validity_ForThisModule(ModuleNber) == 0) return ;
+  // if (pEvent->Validity_ForThisModule(ModuleNber) == 0) return ;
   std::vector<Cluster*> V_pCluster ;
   std::vector<Cluster*> ClusterSet = pEvent->GiveMe_Clusters_ForThisModule (ModuleNber) ;  
 
@@ -2089,7 +2089,7 @@ void JFL_Selector::StageT19(Sample& aSample, const int& ModuleNber)
 }
 void JFL_Selector::StageT19(Event*  pEvent , const int& ModuleNber)
 {
-  if (pEvent->Validity_ForThisModule(ModuleNber) == 0) return ;
+  // if (pEvent->Validity_ForThisModule(ModuleNber) == 0) return ;
   
   std::vector<Cluster*> V_pCluster ;
 
@@ -2148,7 +2148,7 @@ void JFL_Selector::StageT20(Sample& aSample, const int& ModuleNber)
 }
 void JFL_Selector::StageT20(Event*  pEvent , const int& ModuleNber)
 {
-  if (pEvent->Validity_ForThisModule(ModuleNber) == 0) return ;
+  // if (pEvent->Validity_ForThisModule(ModuleNber) == 0) return ;
   Module* pModule                 = pEvent->Get_Module_InArray(ModuleNber) ;
   std::vector<Cluster*> V_pCluster ;
   std::vector<Cluster*> ClusterSet = pEvent->GiveMe_Clusters_ForThisModule (ModuleNber) ;   
@@ -2210,7 +2210,7 @@ void JFL_Selector::StageT21(Sample& aSample, const int& ModuleNber)
 }
 void JFL_Selector::StageT21(Event*  pEvent , const int& ModuleNber)
 {
-  if (pEvent->Validity_ForThisModule(ModuleNber) == 0) return ;
+  // if (pEvent->Validity_ForThisModule(ModuleNber) == 0) return ;
   
   std::vector<Cluster*> V_pCluster ;
 
@@ -2303,7 +2303,7 @@ void JFL_Selector::Stage15(Sample& aSample, const int& ModuleNber)
 }
 void JFL_Selector::Stage15(Event*  pEvent , const int& ModuleNber)
 {
-  if (pEvent->Validity_ForThisModule(ModuleNber) == 0) return ;
+  // if (pEvent->Validity_ForThisModule(ModuleNber) == 0) return ;
   
   double CutSlopeXY = pEvent->GiveMe_CutSlopeXY_ForThisModule(ModuleNber) ;  
   if(CutSlopeXY < m_Cut_Stage15_CutSlopeXY_Low) pEvent->Invalidate_ThisModule(ModuleNber) ; 
@@ -2335,7 +2335,7 @@ void JFL_Selector::Stage16(Sample& aSample, const int& ModuleNber)
 }
 void JFL_Selector::Stage16(Event*  pEvent , const int& ModuleNber)
 {
-  if (pEvent->Validity_ForThisModule(ModuleNber) == 0) return ;
+  // if (pEvent->Validity_ForThisModule(ModuleNber) == 0) return ;
   
   double CutSlopeXZ = pEvent->GiveMe_CutSlopeXZ_ForThisModule(ModuleNber) ;  
   if(CutSlopeXZ < m_Cut_Stage16_CutSlopeXZ_Low) pEvent->Invalidate_ThisModule(ModuleNber) ; 
@@ -2367,7 +2367,7 @@ void JFL_Selector::Stage17(Sample& aSample, const int& ModuleNber)
 }
 void JFL_Selector::Stage17(Event*  pEvent , const int& ModuleNber)
 {
-  if (pEvent->Validity_ForThisModule(ModuleNber) == 0) return ;
+  // if (pEvent->Validity_ForThisModule(ModuleNber) == 0) return ;
   
   double CutInterCeptXZ = pEvent->GiveMe_CutInterCeptXZ_ForThisModule(ModuleNber) ;  
   if(CutInterCeptXZ < m_Cut_Stage17_CutInterCeptXZ_Low) pEvent->Invalidate_ThisModule(ModuleNber) ; 
@@ -2401,7 +2401,7 @@ void JFL_Selector::Stage18(Sample& aSample, const int& ModuleNber)
 }
 void JFL_Selector::Stage18(Event*  pEvent , const int& ModuleNber)
 {
-  if (pEvent->Validity_ForThisModule(ModuleNber) == 0) return ;
+  // if (pEvent->Validity_ForThisModule(ModuleNber) == 0) return ;
   
   std::vector <double> CutSlopeXYZ = pEvent->GiveMe_CutSlopeXYZ_ForThisModule(ModuleNber) ;
 
