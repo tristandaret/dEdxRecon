@@ -1,0 +1,88 @@
+Tristan_CERN22_Control_zfile_PRF_4IP_Gain2_WF4_4Mod
+Tag           : CERN22_Escan_mu_0p75GeV
+EventFile     : ../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_mu+_0p75GeV_25V_z415_y2pad_iter0.root
+SelectionSet  : T2_CERN22_Event
+iMod          : -1
+Data_to_Use   : 0
+OUTDirName    : OUT_Tristan/CERN22_Energy_Scan/CERN22_Escan_mu_0p75GeV/
+
+
+-------------->Predefined selection T2_CERN22_Event
+Number of entries :18309
+No Stage120 cuts found in CSV. Getting them now...
+0/18309
+1000/18309
+2000/18309
+3000/18309
+4000/18309
+5000/18309
+6000/18309
+7000/18309
+8000/18309
+9000/18309
+10000/18309
+11000/18309
+12000/18309
+13000/18309
+14000/18309
+15000/18309
+16000/18309
+17000/18309
+18000/18309
+18308/18309
+2456.00
+183
+Stage120 cuts are 170 to 200. Values added to CSV file.
+
+-------------->List of selections
+Apply selection  1 -> Remove clusters in first and last columns 
+
+Apply selection 11 -> Remove clusters out of time (Event Based) 
+                      |TLeading -TLeadingMeanOverEvent| <= m_Cut_Stage11_EventBased (=     3)
+
+Apply selection 120 -> Remove clusters out of time  
+                      m_Cut_Stage120_TLow <= TLeading <= m_Cut_Stage120_THigh 
+                      m_Cut_Stage120_TLow  =  170
+                      m_Cut_Stage120_THigh =  200
+
+Apply selection 15 -> Remove Events with an average pad multiplicity too high or too low 
+                      Pad Multiplicity >  m_Cut_StageT15_APM_Low  (=  2.0)
+                      Pad Multiplicity <= m_Cut_StageT15_APM_High (=  4.0)
+
+Apply selection  5 -> Reject Events with too few clusters
+                      NClusters >= m_Cut_Stage5_NCluster_Low (=   34)
+
+
+Processing events:
+0/18309
+1000/18309
+2000/18309
+3000/18309
+4000/18309
+5000/18309
+6000/18309
+7000/18309
+8000/18309
+9000/18309
+10000/18309
+11000/18309
+12000/18309
+13000/18309
+14000/18309
+15000/18309
+16000/18309
+17000/18309
+18000/18309
+18308/18309
+Nber Of Entries :18309
+Raw      events with at least 4 modules: 831
+Selected events with at least 4 modules: 281
+
+Selection Statistics 
+ #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
+    0  Stage1      831      831 (    0.00)  (    0.00)      3329     3329 (    0.00)  (    0.00)    114462   108195 (   -5.48)  (   -5.48)    314822   298876 (   -5.07)  (   -5.07) 
+    1 Stage11      831      827 (   -0.48)  (   -0.48)      3329     3313 (   -0.48)  (   -0.48)    108195    90555 (  -16.30)  (  -20.89)    298876   245041 (  -18.01)  (  -22.17) 
+    2Stage120      827      363 (  -56.11)  (  -56.32)      3313     1452 (  -56.17)  (  -56.38)     90555    39071 (  -56.85)  (  -65.87)    245041   104791 (  -57.24)  (  -66.71) 
+    3StageT15      363      342 (   -5.79)  (  -58.84)      1452     1368 (   -5.79)  (  -58.91)     39071    35430 (   -9.32)  (  -69.05)    104791    95993 (   -8.40)  (  -69.51) 
+    4  Stage5      342      281 (  -17.84)  (  -66.19)      1368     1124 (  -17.84)  (  -66.24)     35430    26010 (  -26.59)  (  -77.28)     95993    69769 (  -27.32)  (  -77.84) 
+  Summary Sel      831      281             (  -66.19)      3329     1124             (  -66.24)    114462    26010             (  -77.28)    314822    69769             (  -77.84) 

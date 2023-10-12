@@ -1,0 +1,286 @@
+Tag           : CERN22_Escan_e+_1p5GeV
+Comment       : _zfile_PRF_4IP_Gain2_WF4_4Mod
+EventFile     : ../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_e+_1p5GeV_25V_z415p1_y2pad_iter0.root
+SelectionSet  : T2_CERN22_Event
+NbrOfMod      : -1
+Data_to_Use   : 0
+OUTDirName    : OUT_Tristan/CERN22_Energy_Scan/CERN22_Escan_e+_1p5GeV/
+
+
+ReadRCmap::ReadRCmap m_FileName = GainRCMaps/RCfiles/ERAM02_RCdata_02.root
+
+ReadRCmap::ReadRCmap  No Data for iX=29 and  iY=21 in GainRCMaps/RCfiles/ERAM02_RCdata_02.root
+
+ReadGainmap::ReadGainmap m_FileName = GainRCMaps/Gainfiles/ERAM02_Gaindata_02.root
+
+ReadGainmap::ReadGainmap  No Data for iX=29 and  iY=21 in GainRCMaps/Gainfiles/ERAM02_Gaindata_02.root
+
+ReadRCmap::ReadRCmap m_FileName = GainRCMaps/RCfiles/ERAM23_RCdata_18.root
+
+ReadGainmap::ReadGainmap m_FileName = GainRCMaps/Gainfiles/ERAM23_Gaindata_18.root
+
+ReadRCmap::ReadRCmap m_FileName = GainRCMaps/RCfiles/ERAM01_RCdata_01.root
+
+ReadRCmap::ReadRCmap  No Data for iX=10 and  iY=16 in GainRCMaps/RCfiles/ERAM01_RCdata_01.root
+
+ReadGainmap::ReadGainmap m_FileName = GainRCMaps/Gainfiles/ERAM01_Gaindata_01.root
+
+ReadGainmap::ReadGainmap  No Data for iX=10 and  iY=16 in GainRCMaps/Gainfiles/ERAM01_Gaindata_01.root
+
+ReadRCmap::ReadRCmap m_FileName = GainRCMaps/RCfiles/ERAM07_RCdata_04.root
+
+ReadRCmap::ReadRCmap  No Data for iX=34 and  iY=25 in GainRCMaps/RCfiles/ERAM07_RCdata_04.root
+
+ReadGainmap::ReadGainmap m_FileName = GainRCMaps/Gainfiles/ERAM07_Gaindata_04.root
+
+ReadGainmap::ReadGainmap  No Data for iX=34 and  iY=25 in GainRCMaps/Gainfiles/ERAM07_Gaindata_04.root
+
+ReadRCmap::ReadRCmap m_FileName = GainRCMaps/RCfiles/ERAM12_RCdata_08.root
+
+ReadGainmap::ReadGainmap m_FileName = GainRCMaps/Gainfiles/ERAM12_Gaindata_08.root
+
+ReadRCmap::ReadRCmap m_FileName = GainRCMaps/RCfiles/ERAM10_RCdata_06.root
+
+ReadGainmap::ReadGainmap m_FileName = GainRCMaps/Gainfiles/ERAM10_Gaindata_06.root
+
+ReadRCmap::ReadRCmap m_FileName = GainRCMaps/RCfiles/ERAM15_RCdata_11.root
+
+ReadGainmap::ReadGainmap m_FileName = GainRCMaps/Gainfiles/ERAM15_Gaindata_11.root
+
+ReadRCmap::ReadRCmap m_FileName = GainRCMaps/RCfiles/ERAM16_RCdata_12.root
+
+ReadGainmap::ReadGainmap m_FileName = GainRCMaps/Gainfiles/ERAM16_Gaindata_12.root
+Gain & RC maps: loaded
+Average Gain in ERAM02 = 1722.72
+Average Gain in ERAM23 = 1393.41
+Average Gain in ERAM01 = 1947.77
+Average Gain in ERAM07 = 1902.72
+Average Gain in ERAM12 = 1639.03
+Average Gain in ERAM10 = 1700.44
+Average Gain in ERAM15 = 1628.50
+Average Gain in ERAM16 = 1695.31
+Average Gain accross 4 modules = 1703.74
+ERAM02: RC   hole in  iX = 29 | iY = 21 | value reset at 111.08
+ERAM02: Gain hole in  iX = 29 | iY = 21 | value reset at 1771.84
+ERAM01: RC   hole in  iX = 10 | iY = 16 | value reset at 129.29
+ERAM01: Gain hole in  iX = 10 | iY = 16 | value reset at 1889.24
+ERAM07: RC   hole in  iX = 34 | iY = 25 | value reset at 113.26
+ERAM07: Gain hole in  iX = 34 | iY = 25 | value reset at 1836.84
+
+-------------->Predefined selection T2_CERN22_Event
+Number of entries :171631
+TLow = 171 | THigh = 205
+
+-------------->List of selections
+Apply selection  1 -> Remove clusters in first and last columns 
+
+Apply selection 11 -> Remove clusters out of time (Event Based) 
+                      |TLeading -TLeadingMeanOverEvent| <= m_Cut_Stage11_EventBased (=     3)
+
+Apply selection 120 -> Remove clusters out of time  
+                      m_Cut_Stage120_TLow <= TLeading <= m_Cut_Stage120_THigh 
+                      m_Cut_Stage120_TLow  =  171
+                      m_Cut_Stage120_THigh =  205
+
+Apply selection 15 -> Remove Events with an average pad multiplicity too high or too low 
+                      Pad Multiplicity >  m_Cut_StageT15_APM_Low  (=  2.0)
+                      Pad Multiplicity <= m_Cut_StageT15_APM_High (=  4.0)
+
+Apply selection  5 -> Reject Events with too few clusters
+                      NClusters >= m_Cut_Stage5_NCluster_Low (=   34)
+
+
+zdrift        = 415 mm
+PT            = 412 ns
+TB            = 40 ns/time bin
+PT/TB         = 10 time bins
+Track fitting : PRF
+z method      : zfile
+cut length    = 2 mm
+
+Processing events:
+0/171631
+1000/171631
+2000/171631
+3000/171631
+4000/171631
+5000/171631
+6000/171631
+7000/171631
+8000/171631
+9000/171631
+10000/171631
+11000/171631
+12000/171631
+13000/171631
+14000/171631
+15000/171631
+16000/171631
+17000/171631
+18000/171631
+19000/171631
+20000/171631
+21000/171631
+22000/171631
+23000/171631
+24000/171631
+25000/171631
+26000/171631
+27000/171631
+28000/171631
+29000/171631
+30000/171631
+31000/171631
+32000/171631
+33000/171631
+34000/171631
+35000/171631
+36000/171631
+37000/171631
+38000/171631
+39000/171631
+40000/171631
+41000/171631
+42000/171631
+43000/171631
+44000/171631
+45000/171631
+46000/171631
+47000/171631
+48000/171631
+49000/171631
+50000/171631
+51000/171631
+52000/171631
+53000/171631
+54000/171631
+55000/171631
+56000/171631
+57000/171631
+58000/171631
+59000/171631
+60000/171631
+61000/171631
+62000/171631
+63000/171631
+64000/171631
+65000/171631
+66000/171631
+67000/171631
+68000/171631
+69000/171631
+70000/171631
+71000/171631
+72000/171631
+73000/171631
+74000/171631
+75000/171631
+76000/171631
+77000/171631
+78000/171631
+79000/171631
+80000/171631
+81000/171631
+82000/171631
+83000/171631
+84000/171631
+85000/171631
+86000/171631
+87000/171631
+88000/171631
+89000/171631
+90000/171631
+91000/171631
+92000/171631
+93000/171631
+94000/171631
+95000/171631
+96000/171631
+97000/171631
+98000/171631
+99000/171631
+100000/171631
+101000/171631
+102000/171631
+103000/171631
+104000/171631
+105000/171631
+106000/171631
+107000/171631
+108000/171631
+109000/171631
+110000/171631
+111000/171631
+112000/171631
+113000/171631
+114000/171631
+115000/171631
+116000/171631
+117000/171631
+118000/171631
+119000/171631
+120000/171631
+121000/171631
+122000/171631
+123000/171631
+124000/171631
+125000/171631
+126000/171631
+127000/171631
+128000/171631
+129000/171631
+130000/171631
+131000/171631
+132000/171631
+133000/171631
+134000/171631
+135000/171631
+136000/171631
+137000/171631
+138000/171631
+139000/171631
+140000/171631
+141000/171631
+142000/171631
+143000/171631
+144000/171631
+145000/171631
+146000/171631
+147000/171631
+148000/171631
+149000/171631
+150000/171631
+151000/171631
+152000/171631
+153000/171631
+154000/171631
+155000/171631
+156000/171631
+157000/171631
+158000/171631
+159000/171631
+160000/171631
+161000/171631
+162000/171631
+163000/171631
+164000/171631
+165000/171631
+166000/171631
+167000/171631
+168000/171631
+169000/171631
+170000/171631
+171000/171631
+171630/171631
+
+Selection Statistics 
+ #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
+    0  Stage1    35677    35677 (    0.00)  (    0.00)     79202    79202 (    0.00)  (    0.00)   2642222  2500447 (   -5.37)  (   -5.37)   6870744  6525213 (   -5.03)  (   -5.03) 
+    1 Stage11    35677    35096 (   -1.63)  (   -1.63)     79202    78092 (   -1.40)  (   -1.40)   2500447  1918191 (  -23.29)  (  -27.40)   6525213  4855588 (  -25.59)  (  -29.33) 
+    2Stage120    35096     8828 (  -74.85)  (  -75.26)     78092    24669 (  -68.41)  (  -68.85)   1918191   614598 (  -67.96)  (  -76.74)   4855588  1691955 (  -65.15)  (  -75.37) 
+    3StageT15     8828     7154 (  -18.96)  (  -79.95)     24669    20758 (  -15.85)  (  -73.79)    614598   507938 (  -17.35)  (  -80.78)   1691955  1474742 (  -12.84)  (  -78.54) 
+    4  Stage5     7154     4661 (  -34.85)  (  -86.94)     20758    15018 (  -27.65)  (  -81.04)    507938   362746 (  -28.58)  (  -86.27)   1474742  1056107 (  -28.39)  (  -84.63) 
+  Summary Sel    35677     4661             (  -86.94)     79202    15018             (  -81.04)   2642222   362746             (  -86.27)   6870744  1056107             (  -84.63) 
+Fitting: Started... done!
+Checks: OUT_Tristan/CERN22_Energy_Scan/CERN22_Escan_e+_1p5GeV/2_CERN22_Escan_e+_1p5GeV_Checks_zfile_PRF_4IP_Gain2_WF4_4Mod.root
+dEdx: OUT_Tristan/CERN22_Energy_Scan/CERN22_Escan_e+_1p5GeV/3_CERN22_Escan_e+_1p5GeV_dEdx_zfile_PRF_4IP_Gain2_WF4_4Mod.root

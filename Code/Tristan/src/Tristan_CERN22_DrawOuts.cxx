@@ -3646,6 +3646,233 @@ void DrawOut_Phiscan_Z(const std::string& inputDir, const std::string& Comment)
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// Draw Energy scan
+void DrawOut_Escan(const std::string& inputDir, const std::string& Comment)
+{
+  gStyle->            SetPadTickX(1);
+  gStyle->            SetPadTickY(1);
+  int npoint          = 14 ;
+  std::string Tag[]   = { "CERN22_Escan_e+_0p5GeV",   "CERN22_Escan_e+_0p75GeV",  "CERN22_Escan_e+_1GeV",   "CERN22_Escan_e+_1p25GeV", "CERN22_Escan_e+_1p5GeV",
+                          "CERN22_Escan_mu_0p75GeV",  "CERN22_Escan_mu_1GeV",     "CERN22_Escan_mu_1p5GeV",
+                          "CERN22_Escan_pi_0p75GeV",  "CERN22_Escan_pi_1p25GeV",  "CERN22_Escan_pi_1p5GeV", 
+                          "CERN22_Escan_p+_1GeV",     "CERN22_Escan_p+_1p25GeV",  "CERN22_Escan_p+_1p5GeV"} ;
+
+  float E_arr[]       = { 0.5,  0.75, 1,  1.25, 1.5,
+                          0.75, 1,    1.5,
+                          0.75, 1.25, 1.5,
+                          1,    1.25, 1.5} ;
+
+  int n[]             = { 0,1,2,3,4,
+                          0,1,2,
+                          0,1,2,
+                          0,1,2,} ;
+
+  std::vector<TF1*>         v_tf1_WF ;
+  std::vector<TF1*>         v_tf1_XP ;
+
+  for(int iE = 0 ; iE < npoint ; iE++){
+    TFile* ptfile           = new TFile((inputDir + Tag[iE] + "/3_" + Tag[iE] + "_dEdx" + Comment + ".root").c_str()) ;
+    v_tf1_WF.                 push_back(ptfile->Get<TF1>("tf1_WFsum")) ;
+    v_tf1_XP.                 push_back(ptfile->Get<TF1>("tf1_XP")) ;
+    delete ptfile;
+  }
+
+  std::string particles[] = {"positrons", "muons", "pions", "protons"};
+  std::vector<TGraphErrors*> v_pTGE_reso_WF;
+  std::vector<TGraphErrors*> v_pTGE_reso_XP;
+  std::vector<TGraphErrors*> v_pTGE_mean_WF;
+  std::vector<TGraphErrors*> v_pTGE_mean_XP;
+  std::vector<TGraphErrors*> v_pTGE_std_WF;
+  std::vector<TGraphErrors*> v_pTGE_std_XP;
+
+  for(std::string type : particles){
+    v_pTGE_reso_WF.push_back(new TGraphErrors());
+    v_pTGE_reso_XP.push_back(new TGraphErrors());
+    v_pTGE_mean_WF.push_back(new TGraphErrors());
+    v_pTGE_mean_XP.push_back(new TGraphErrors());
+    v_pTGE_std_WF.push_back(new TGraphErrors());
+    v_pTGE_std_XP.push_back(new TGraphErrors());
+
+    // TGraphErrors* pTGE_reso_WF    = new TGraphErrors() ;
+    // TGraphErrors* pTGE_reso_XP    = new TGraphErrors() ;
+
+    // TGraphErrors* pTGE_mean_WF    = new TGraphErrors() ;
+    // TGraphErrors* pTGE_mean_XP    = new TGraphErrors() ;
+
+    // TGraphErrors* pTGE_std_WF     = new TGraphErrors() ;
+    // TGraphErrors* pTGE_std_XP     = new TGraphErrors() ;
+  }
+
+
+  // Get mean & std
+  float mean_WF[npoint] ;
+  float mean_XP[npoint] ;
+  float dmean_WF[npoint] ;
+  float dmean_XP[npoint] ;
+  float std_WF[npoint] ;
+  float std_XP[npoint] ;
+  float dstd_WF[npoint] ;
+  float dstd_XP[npoint] ;
+
+  int index;
+  for(int iE = 0 ; iE < npoint ; iE++){
+    if(iE < 5)        index = 0;
+    else if(iE < 8)   index = 1;
+    else if(iE < 11)  index = 2;
+    else if(iE < 14)  index = 3;
+
+    mean_WF[iE]                 = v_tf1_WF[iE]->    GetParameter(1) ;
+    mean_XP[iE]                 = v_tf1_XP[iE]->    GetParameter(1) ;
+    std_WF[iE]                  = v_tf1_WF[iE]->    GetParameter(2) ;
+    std_XP[iE]                  = v_tf1_XP[iE]->    GetParameter(2) ;
+    dmean_WF[iE]                = v_tf1_WF[iE]->    GetParError(1) ;
+    dmean_XP[iE]                = v_tf1_XP[iE]->    GetParError(1) ;
+    dstd_WF[iE]                 = v_tf1_WF[iE]->    GetParError(2) ;
+    dstd_XP[iE]                 = v_tf1_XP[iE]->    GetParError(2) ;
+
+    v_pTGE_reso_WF[index]-> SetPoint      (n[iE], E_arr[iE], std_WF[iE]/mean_WF[iE]*100) ;
+    v_pTGE_reso_XP[index]-> SetPoint      (n[iE], E_arr[iE], std_XP[iE]/mean_XP[iE]*100) ;
+    v_pTGE_reso_WF[index]-> SetPointError (n[iE], 0,           GetResoError(v_tf1_WF[iE])) ;
+    v_pTGE_reso_XP[index]-> SetPointError (n[iE], 0,           GetResoError(v_tf1_XP[iE])) ;
+
+    v_pTGE_mean_WF[index]-> SetPoint      (n[iE], E_arr[iE], mean_WF[iE]) ;
+    v_pTGE_mean_XP[index]-> SetPoint      (n[iE], E_arr[iE], mean_XP[iE]) ;
+    v_pTGE_mean_WF[index]-> SetPointError (n[iE], 0,           dmean_WF[iE]) ;
+    v_pTGE_mean_XP[index]-> SetPointError (n[iE], 0,           dmean_XP[iE]) ;
+
+    v_pTGE_std_WF[index]->  SetPoint      (n[iE], E_arr[iE], std_WF[iE]) ;
+    v_pTGE_std_XP[index]->  SetPoint      (n[iE], E_arr[iE], std_XP[iE]) ;
+    v_pTGE_std_WF[index]->  SetPointError (n[iE], 0,           dstd_WF[iE]) ;
+    v_pTGE_std_XP[index]->  SetPointError (n[iE], 0,           dstd_XP[iE]) ;
+  }
+
+
+  // Draw
+  std::string OutputFile        = inputDir + "/CERN22_Escan" + Comment + ".pdf" ;
+  std::string OutputFile_Beg    = OutputFile + "(" ;
+  std::string OutputFile_End    = OutputFile + ")" ;
+  TCanvas* pTCanvas           = new TCanvas("TCanvas", "TCanvas", 1800, 1200) ;
+  gStyle->                      SetPadTickX(1);
+  gStyle->                      SetPadTickY(1);
+  gStyle->                      SetOptStat(0) ;
+  gStyle->                      SetGridStyle(1) ;
+  pTCanvas->                    cd() ;
+  TLegend* leg                = new TLegend(0.8,0.75,0.98,0.95) ;
+
+  Color_t colors[] = {kMagenta+1, kBlue, kGreen+1, kRed};
+  // Resolution
+  v_pTGE_reso_WF[0]->                GetXaxis()->SetLimits(0.45, 1.55) ;
+  v_pTGE_reso_WF[0]->                SetMinimum(4) ;
+  v_pTGE_reso_WF[0]->                SetMaximum(13) ;
+  v_pTGE_reso_WF[0]->                SetNameTitle("pTGE_reso_WF", "Resolution vs energy with WF_{sum} method;Energy (GeV);resolution (%)") ;
+  for(int i = 0 ; i < 4 ; i++){
+    Graphic_setup(v_pTGE_reso_WF[i], 3, 20+i, colors[i], 1, colors[i]) ;
+    if(i == 0) v_pTGE_reso_WF[i]->    Draw("apl") ;
+    else v_pTGE_reso_WF[i]->          Draw("pl same") ;
+    leg->                             AddEntry(v_pTGE_reso_WF[i], particles[i].c_str(), "ep") ;  
+  }
+  leg->                               Draw() ;
+  pTCanvas->                          SaveAs(OutputFile_Beg.c_str()) ;
+
+  pTCanvas->                          Clear();
+  v_pTGE_reso_XP[0]->                 GetXaxis()->SetLimits(0.45, 1.55) ;
+  v_pTGE_reso_XP[0]->                 SetMinimum(4) ;
+  v_pTGE_reso_XP[0]->                 SetMaximum(13) ;
+  v_pTGE_reso_XP[0]->                 SetNameTitle("pTGE_reso_XP", "Resolution vs energy with XP method;Energy (GeV);resolution (%)") ;
+  for(int i = 0 ; i < 4 ; i++){
+    Graphic_setup(v_pTGE_reso_XP[i], 3, 20+i, colors[i], 1, colors[i]) ;
+    if(i == 0) v_pTGE_reso_XP[i]->    Draw("apl") ;
+    else v_pTGE_reso_XP[i]->          Draw("pl same") ;
+  }
+  leg->                               Draw() ;
+  pTCanvas->                          SaveAs(OutputFile.c_str()) ;
+
+
+  // Mean
+  pTCanvas->                          Clear();
+  v_pTGE_mean_WF[0]->                 GetXaxis()->SetLimits(0.45, 1.55) ;
+  v_pTGE_mean_WF[0]->                 SetMinimum(300) ;
+  v_pTGE_mean_WF[0]->                 SetMaximum(800) ;
+  v_pTGE_mean_WF[0]->                 SetNameTitle("pTGE_mean_WF", "Mean vs energy with WF_{sum} method;Energy (GeV);mean (ADC counts)") ;
+  for(int i = 0 ; i < 4 ; i++){
+    Graphic_setup(v_pTGE_mean_WF[i], 3, 20+i, colors[i], 1, colors[i]) ;
+    if(i == 0) v_pTGE_mean_WF[i]->    Draw("apl") ;
+    else v_pTGE_mean_WF[i]->          Draw("pl same") ;
+  }
+  leg->                               Draw() ;
+  pTCanvas->                          SaveAs(OutputFile_Beg.c_str()) ;
+
+  pTCanvas->                          Clear();
+  v_pTGE_mean_XP[0]->                GetXaxis()->SetLimits(0.45, 1.55) ;
+  v_pTGE_mean_XP[0]->                SetMinimum(300) ;
+  v_pTGE_mean_XP[0]->                SetMaximum(800) ;
+  v_pTGE_mean_XP[0]->                SetNameTitle("pTGE_mean_XP", "Mean vs energy with XP method;Energy (GeV);mean (ADC counts)") ;
+  for(int i = 0 ; i < 4 ; i++){
+    Graphic_setup(v_pTGE_mean_XP[i], 3, 20+i, colors[i], 1, colors[i]) ;
+    if(i == 0) v_pTGE_mean_XP[i]->    Draw("apl") ;
+    else v_pTGE_mean_XP[i]->          Draw("pl same") ;
+  }
+  leg->                               Draw() ;
+  pTCanvas->                          SaveAs(OutputFile.c_str()) ;
+
+
+
+  // Std
+  pTCanvas->                          Clear();
+  v_pTGE_std_WF[0]->                  GetXaxis()->SetLimits(0.45, 1.55) ;
+  v_pTGE_std_WF[0]->                  SetMinimum(20) ;
+  v_pTGE_std_WF[0]->                  SetMaximum(80) ;
+  v_pTGE_std_WF[0]->                  SetNameTitle("pTGE_std_WF", "Std vs energy with WF_{sum} method;Energy (GeV);std (ADC counts)") ;
+  for(int i = 0 ; i < 4 ; i++){
+    Graphic_setup(v_pTGE_std_WF[i], 3, 20+i, colors[i], 1, colors[i]) ;
+    if(i == 0) v_pTGE_std_WF[i]->    Draw("apl") ;
+    else v_pTGE_std_WF[i]->          Draw("pl same") ;
+  }
+  leg->                               Draw() ;
+  pTCanvas->                          SaveAs(OutputFile_Beg.c_str()) ;
+
+  pTCanvas->                          Clear();
+  v_pTGE_std_XP[0]->                  GetXaxis()->SetLimits(0.45, 1.55) ;
+  v_pTGE_std_XP[0]->                  SetMinimum(20) ;
+  v_pTGE_std_XP[0]->                  SetMaximum(80) ;
+  v_pTGE_std_XP[0]->                  SetNameTitle("pTGE_std_XP", "Std vs energy with XP method;Energy (GeV);std (ADC counts)") ;
+  for(int i = 0 ; i < 4 ; i++){
+    Graphic_setup(v_pTGE_std_XP[i], 3, 20+i, colors[i], 1, colors[i]) ;
+    if(i == 0) v_pTGE_std_XP[i]->     Draw("apl") ;
+    else v_pTGE_std_XP[i]->           Draw("pl same") ;
+  }
+  leg->                               Draw() ;
+  pTCanvas->                          SaveAs(OutputFile_End.c_str()) ;
+
+
+  // Delete
+  delete                        pTCanvas   ;
+  delete                        leg ;
+
+  for(int i = 0 ; i < (int)v_pTGE_mean_WF.size() ; i++){
+    delete v_pTGE_reso_WF[i]; v_pTGE_reso_WF[i] = 0 ;
+    delete v_pTGE_reso_XP[i]; v_pTGE_reso_XP[i] = 0 ;
+    delete v_pTGE_mean_WF[i]; v_pTGE_mean_WF[i] = 0 ;
+    delete v_pTGE_mean_XP[i]; v_pTGE_mean_XP[i] = 0 ;
+    delete v_pTGE_std_WF[i]; v_pTGE_std_WF[i] = 0 ;
+    delete v_pTGE_std_XP[i]; v_pTGE_std_XP[i] = 0 ;
+  }
+  v_pTGE_reso_WF.               clear();
+  v_pTGE_reso_XP.               clear();
+  v_pTGE_mean_WF.               clear();
+  v_pTGE_mean_XP.               clear();
+  v_pTGE_std_WF.                clear();
+  v_pTGE_std_XP.                clear();
+
+  v_tf1_WF.                     clear() ;
+  v_tf1_XP.                     clear() ;
+}
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

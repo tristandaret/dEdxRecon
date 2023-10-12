@@ -181,13 +181,16 @@ void Tristan_CERN22_Control(
   for(int iEvent = 0 ; iEvent < NEvent ; iEvent++){
     if(iEvent % 1000 == 0 or iEvent == NEvent-1) std::cout << iEvent << "/" << NEvent << std::endl ;
     Event*  pEvent                      = pUploader->GiveMe_Event(iEvent, NbrOfMod, Data_to_Use, 0) ;
-    if (!pEvent)                            continue ;
-
-    //  Raw Selection
-    if (pEvent->IsValid() == 0)           continue ;
+    if (!pEvent or pEvent->IsValid() == 0){
+      delete pEvent;
+      continue ;
+    }
     //  Loop On Modules
     int nMod                            = pEvent->Get_NberOfModule() ;
-    if(nMod < 4) continue;
+    if(nMod < 4){
+      delete pEvent;
+      continue ;
+    }
     nEvt_raw4mod++;
 
     for(int iMod = 0 ; iMod < nMod ; iMod++){
@@ -240,12 +243,14 @@ void Tristan_CERN22_Control(
 
     //  Apply Selection
     aJFL_Selector.ApplySelection(pEvent) ;
+    if (pEvent->IsValid() == 0){
+      delete pEvent;
+      continue ;
+    }
 
-    //  Selection
-    if (pEvent->IsValid() != 1)           continue ;
     nEvt_sel4mod++;
-    //  Loop On Modules
 
+    //  Loop On Modules
     for(int iMod = 0 ; iMod < nMod ; iMod++){
       Module* pModule                   = pEvent->Get_Module_InArray(iMod) ;
       // if (pEvent->Validity_ForThisModule(iMod) == 0) continue ;

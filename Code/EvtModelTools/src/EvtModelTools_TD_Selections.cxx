@@ -30,11 +30,13 @@ std::vector<int> SetStage120Cuts(Uploader* pUploader, const int& NbrOfMod, const
   for (int iEvent = 0 ; iEvent < NEvent ; iEvent++){
     if(iEvent % 1000 == 0 or iEvent == NEvent-1) std::cout << iEvent << "/" << NEvent << std::endl ;
     Event*  pEvent                    = pUploader->GiveMe_Event(iEvent, NbrOfMod, Data_to_Use, 0) ;
-    if (!pEvent)                        continue ;
-    if (pEvent->IsValid() == 0)         continue;
+    if (!pEvent or pEvent->IsValid() == 0){
+      delete pEvent;
+      continue;
+    }  
 
     int nMod                  = pEvent->Get_NberOfModule() ;
-    if(nMod < 4) continue;
+    if(nMod < 4){ delete pEvent; continue;}
     for (int iMod = 0; iMod < nMod ; iMod++){
       Module* pModule                 = pEvent->Get_Module_InArray(iMod) ;
       if (pEvent->Validity_ForThisModule(iMod) == 0) continue;
@@ -104,7 +106,7 @@ std::vector<int> SetStage120Cuts(Uploader* pUploader, const int& NbrOfMod, const
     v_TCut.                               push_back(TLow) ;
     v_TCut.                               push_back(THigh) ;
   }
-
+  delete h1f_TLead;
   return v_TCut ;
 }
 
