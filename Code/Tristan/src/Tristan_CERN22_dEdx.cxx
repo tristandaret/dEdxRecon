@@ -89,11 +89,14 @@ void Tristan_CERN22_dEdx( const std::string& OutDir,
   std::cout <<                                       std::endl ;
 
   // Get ERAM ID
-  std::vector<std::string> eram_id ;
+  std::vector<std::string>  eram_id ;
+  std::vector<double>       eram_number ;
   if(Tag.find("DESY") != std::string::npos) eram_id.push_back("ERAM01");
   if(EventFile.find("ERAM18") != std::string::npos) eram_id.push_back("ERAM18");
-  if(EventFile.find("All_ERAMS") != std::string::npos) eram_id = {"ERAM02", "ERAM23", "ERAM01", "ERAM07", "ERAM12", "ERAM10", "ERAM15", "ERAM16"};
-
+  if(EventFile.find("All_ERAMS") != std::string::npos){
+    eram_id     = {"ERAM02", "ERAM23", "ERAM01", "ERAM07", "ERAM12", "ERAM10", "ERAM15", "ERAM16"};
+    eram_number = {2, 23, 1, 7, 12, 10, 15, 16};
+  }
   // Get Gain & RC maps
   std::vector<ReadRCmap*> RCmaps;
   std::vector<ReadGainmap*> Gainmaps;
@@ -296,11 +299,17 @@ void Tristan_CERN22_dEdx( const std::string& OutDir,
     std::vector<float>                    v_ratio_Evt ; 
 
     // Loop On Modules
-    int nMod                      = pEvent->Get_NberOfModule() ;
-    if(EventFile.find("All_ERAMS") != std::string::npos and nMod < 4){
+    int nMod                              = pEvent->Get_NberOfModule() ;
+
+    // Check if there are is a track in 4 ERAMs that are aligned
+    std::vector<double> eram_list;
+    for (int iMod = 0 ; iMod < nMod ; iMod++) eram_list.push_back(eram_number[pEvent->Get_Module_InArray(iMod)->Get_ModuleNber()]) ;
+    if(   !(is_in(eram_list,  7) and is_in(eram_list,  1) and is_in(eram_list, 23) and is_in(eram_list,  2))
+      and !(is_in(eram_list, 16) and is_in(eram_list, 15) and is_in(eram_list, 10) and is_in(eram_list, 12))){
       delete pEvent;
       continue;
     }
+
     for (int iMod = 0 ; iMod < nMod ; iMod++){
       Module* pModule                     = pEvent->Get_Module_InArray(iMod) ;
       int ModuleNber                      = pModule->Get_ModuleNber() ;
@@ -545,6 +554,7 @@ void Tristan_CERN22_dEdx( const std::string& OutDir,
     v_ratio_Evt.clear() ; 
     v_len_cross_Evt.clear() ; 
     v_len_clust_Evt.clear() ; 
+    eram_list.clear();
     delete                                  pEvent ;
   }
   aJFL_Selector.PrintStat() ;

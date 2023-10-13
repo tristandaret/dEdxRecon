@@ -29,6 +29,9 @@ float Heaviside(const float& t, const float& t_0);
 float mean(const std::vector<float>& values);
 
 
+/* GENERAL FUNCTIONS*/
+// Find if a value is in a vector
+bool is_in(std::vector<double> v, double val);
 
 /* SPECIFIC MATH*/
 // impact parameter d (in m) & track angle phi (in degrees) computed locally at the level of the pad
