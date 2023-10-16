@@ -979,8 +979,8 @@ void DrawOut_Methods(const std::string& OutDir, const std::string& Tag, const st
     pStat_XP                       = (TPaveStats*)v_h1f_XP[iMod]->FindObject("stats");
     pStat_XP->                       SetTextColor(kMagenta+2) ;
 
-    PrintResolution(v_tf1_XP[iMod],     pTCanvas, 0.8-inv, 0.95, kMagenta+2, "XP") ;
-    PrintResolution(v_tf1_WFsum[iMod], pTCanvas, 0.8-inv, 0.85, kCyan+2, "WF_{clus}") ;
+    PrintResolution(v_tf1_XP[iMod],     pTCanvas, 0.8-inv, 0.93, kMagenta+2, "XP") ;
+    PrintResolution(v_tf1_WFsum[iMod], pTCanvas, 0.8-inv, 0.83, kCyan+2, "WF") ;
 
   }
   pTCanvas->                  SaveAs(OutputFile.c_str()) ;

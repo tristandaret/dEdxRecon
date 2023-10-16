@@ -57,8 +57,6 @@ void Tristan_CERN22_dEdx( const std::string& OutDir,
   // Parameters for the dE/dx procedure and for selections
   std::string z_method  = "zfile" ;                             // method to get z ("zcalc" to recompute, "zfile" to use value from ntuple)
   std::string fitting ;                                         // type of track fitting, either yw or PRF
-  if(Comment.find("yw") != std::string::npos)  fitting = "yw" ;
-  if(Comment.find("PRF") != std::string::npos) fitting = "PRF" ;
   float alpha           = 70 ;                                  // truncation value in %
   float n_param_trk     = 3 ;                                   // 2 if there is not magnetic field
   float len_cut         = 0.002 ;                               // minimum length in pad to be considered truncable (m)
@@ -94,8 +92,8 @@ void Tristan_CERN22_dEdx( const std::string& OutDir,
   if(Tag.find("DESY") != std::string::npos) eram_id.push_back("ERAM01");
   if(EventFile.find("ERAM18") != std::string::npos) eram_id.push_back("ERAM18");
   if(EventFile.find("All_ERAMS") != std::string::npos){
-    eram_id     = {"ERAM02", "ERAM23", "ERAM01", "ERAM07", "ERAM12", "ERAM10", "ERAM15", "ERAM16"};
-    eram_number = {2, 23, 1, 7, 12, 10, 15, 16};
+    eram_id     = {"ERAM07", "ERAM01", "ERAM23", "ERAM02", "ERAM16", "ERAM15", "ERAM10", "ERAM12"};
+    eram_number = {7, 1, 23, 2, 16, 15, 10, 12};
   }
   // Get Gain & RC maps
   std::vector<ReadRCmap*> RCmaps;
@@ -140,7 +138,7 @@ void Tristan_CERN22_dEdx( const std::string& OutDir,
     std::cout << "Average Gain in " << eram_id[i] << " = " << avg_G << std::endl ;
   }
   avg_G = mean(v_avg_G);
-  if(EventFile.find("All_ERAMS") != std::string::npos) std::cout << "Average Gain accross 4 modules = " << avg_G << std::endl ;
+  if(EventFile.find("All_ERAMS") != std::string::npos) std::cout << "Average gain in Mockup = " << avg_G << std::endl ;
 
 
   // Fill holes in maps
@@ -281,10 +279,12 @@ void Tristan_CERN22_dEdx( const std::string& OutDir,
   // Compute dE/dx
   aJFL_Selector.                          Reset_StatCounters() ;
   std::cout << "Processing events:" << std::endl ;
+  int n_real_evt = 0 ;
   for (int iEvent = 0 ; iEvent < NEvent ; iEvent++){
     if(iEvent % 1000 == 0 or iEvent == NEvent-1) std::cout << iEvent << "/" << NEvent << std::endl ;
     Event*  pEvent                        = pUploader->GiveMe_Event(iEvent, NbrOfMod, Data_to_Use, 0) ;
     if (!pEvent)                            continue ;
+    n_real_evt++;
     aJFL_Selector.                          ApplySelection(pEvent) ;
     if (pEvent->IsValid() != 1)             continue ;
 
@@ -314,26 +314,22 @@ void Tristan_CERN22_dEdx( const std::string& OutDir,
       Module* pModule                     = pEvent->Get_Module_InArray(iMod) ;
       int ModuleNber                      = pModule->Get_ModuleNber() ;
       if (pEvent->Validity_ForThisModule(ModuleNber) == 0) continue ;
-      // Initialize module variables
+      // if(eram_number[ModuleNber] != 2) continue;
       float N_clus                        = pModule->Get_NberOfCluster() ;
       if(N_clus == 0) continue;
 
-      // Track fitting (barycenter or PRF)
-      int reco ;
-      if(fitting == "yw") reco            = DoTracksReconstruction_Event(aTheFitterTrack, pEvent, ModuleNber, n_param_trk) ;
-      if(fitting == "PRF"){
-        // PRF procedure & track evaluation
-        if(Tag.find("diag") == std::string::npos){
-          TheFitterCluster_PV0_PV1            aTheFitterCluster_PV0_PV1("Minuit") ;
-          Do_ClusterFit_PV0_PV1_Event(pEvent, ModuleNber, tf1_PRF, Kounter_Fit, Kounter_Fail, aTheFitterCluster_PV0_PV1) ;
-        }
-        else{
-          TheFitterCluster_PV0_Diag aTheFitterCluster_PV0_Diag("Minuit") ;
-          Do_ClusterFit_PV0_Diag_Event(-(M_PI_2-(phi_max*M_PI/180)), pEvent, ModuleNber, tf1_PRF, Kounter_Fit, Kounter_Fail, aTheFitterCluster_PV0_Diag) ;
-        }
-        TheFitterTrack                      aTheFitterTrack("Minuit", n_param_trk) ;
-        reco                              = DoTracksReconstruction_Event(aTheFitterTrack, pEvent, ModuleNber, n_param_trk) ;
+      // Track fitting
+      if(Tag.find("diag") == std::string::npos){
+        TheFitterCluster_PV0_PV1            aTheFitterCluster_PV0_PV1("Minuit") ;
+        Do_ClusterFit_PV0_PV1_Event(pEvent, ModuleNber, tf1_PRF, Kounter_Fit, Kounter_Fail, aTheFitterCluster_PV0_PV1) ;
       }
+      else{
+        TheFitterCluster_PV0_Diag aTheFitterCluster_PV0_Diag("Minuit") ;
+        Do_ClusterFit_PV0_Diag_Event(-(M_PI_2-(phi_max*M_PI/180)), pEvent, ModuleNber, tf1_PRF, Kounter_Fit, Kounter_Fail, aTheFitterCluster_PV0_Diag) ;
+      }
+      TheFitterTrack                      aTheFitterTrack("Minuit", n_param_trk) ;
+      DoTracksReconstruction_Event(aTheFitterTrack, pEvent, ModuleNber, n_param_trk) ;
+
 
       // Track details
       const Track* pTrack                 = pEvent->GiveMe_Track_ForThisModule(ModuleNber) ;
@@ -421,8 +417,8 @@ void Tristan_CERN22_dEdx( const std::string& OutDir,
           h2f_LUTvsLength->                 Fill(trk_len_pad*1000, ratio) ;
           h2f_lenVSd->                      Fill(trk_len_pad*1000, d) ;
           if(trk_len_pad <= len_cut)        continue ;
-          v_WF_cross_Evt.                 push_back(h1f_WF_pad) ;
-          v_ratio_Evt.                          push_back(ratio) ;
+          v_WF_cross_Evt.                   push_back(h1f_WF_pad) ;
+          v_ratio_Evt.                      push_back(ratio) ;
           v_len_cross.                      push_back(trk_len_pad) ;
           v_len_cross_Evt.                  push_back(trk_len_pad) ;
 
@@ -557,6 +553,7 @@ void Tristan_CERN22_dEdx( const std::string& OutDir,
     eram_list.clear();
     delete                                  pEvent ;
   }
+  std::cout << n_real_evt << " real events" << std::endl;
   aJFL_Selector.PrintStat() ;
   delete tf1_PRF ;
 

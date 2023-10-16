@@ -32,9 +32,6 @@ void ReadRCmap::ConstructorEnd()
 //
   p_V_Data = 0 ;
   p_V_HasBeenSet = 0 ;
-
-//
-  std::cout << std::endl ;
   
 
   m_FileName = "BIDON" ;
@@ -70,8 +67,8 @@ void ReadRCmap::ConstructorEnd()
       abort();
   }
   
-  std::cout << "ReadRCmap::ReadRCmap "  
-    << "m_FileName = " << m_FileName << std::endl ;
+  // std::cout << "ReadRCmap::ReadRCmap "  
+  //   << "m_FileName = " << m_FileName << std::endl ;
 
   Uploader_ReadRCmap aUploader_ReadRCmap(m_FileName);
 
@@ -98,14 +95,14 @@ void ReadRCmap::ConstructorEnd()
     int iY_Max = 32 ;
     for (int iY=0; iY<iY_Max;iY++) {
       int Status  = HasBeenSet( iX, iY) ;
-      if (Status==0){
-        std::cout << std::endl ;
-        std::cout 
-          << "ReadRCmap::ReadRCmap "
-          << " No Data for iX=" << iX << " and " << " iY=" << iY 
-          << " in " << m_FileName 
-          << std::endl ;
-      }
+      // if (Status==0){
+      //   std::cout << std::endl ;
+      //   std::cout 
+      //     << "ReadRCmap::ReadRCmap "
+      //     << " No Data for iX=" << iX << " and " << " iY=" << iY 
+      //     << " in " << m_FileName 
+      //     << std::endl ;
+      // }
     }
   }
   
