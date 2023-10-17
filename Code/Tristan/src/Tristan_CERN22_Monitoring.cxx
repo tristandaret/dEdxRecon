@@ -57,7 +57,7 @@ void Tristan_CERN22_Monitoring()
   // DrawOuts
   int DO_Displayer    = 0 ;
   int DO_Control      = 0 ;
-  int DO_Checks       = 1 ;
+  int DO_Checks       = 0 ;
   int DO_Methods      = 0 ;
   int DO_Resolution   = 0 ;
   int DO_Global       = 0 ;

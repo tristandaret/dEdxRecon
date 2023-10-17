@@ -3679,7 +3679,7 @@ void DrawOut_Escan(const std::string& inputDir, const std::string& Comment)
     delete ptfile;
   }
 
-  std::string particles[] = {"positrons", "muons", "pions", "protons"};
+  std::string particles[] = {" e^{+}", " #mu^{+}", " #pi^{+}", " p"};
   std::vector<TGraphErrors*> v_pTGE_reso_WF;
   std::vector<TGraphErrors*> v_pTGE_reso_XP;
   std::vector<TGraphErrors*> v_pTGE_mean_WF;
@@ -3687,23 +3687,20 @@ void DrawOut_Escan(const std::string& inputDir, const std::string& Comment)
   std::vector<TGraphErrors*> v_pTGE_std_WF;
   std::vector<TGraphErrors*> v_pTGE_std_XP;
 
-  for(std::string type : particles){
-    v_pTGE_reso_WF.push_back(new TGraphErrors());
-    v_pTGE_reso_XP.push_back(new TGraphErrors());
-    v_pTGE_mean_WF.push_back(new TGraphErrors());
-    v_pTGE_mean_XP.push_back(new TGraphErrors());
-    v_pTGE_std_WF.push_back(new TGraphErrors());
-    v_pTGE_std_XP.push_back(new TGraphErrors());
+  std::vector<float>         v_mass{0.511, 105.658, 139.570, 938.272};
+  std::vector<TF1*>          v_bethebloch;
 
-    // TGraphErrors* pTGE_reso_WF    = new TGraphErrors() ;
-    // TGraphErrors* pTGE_reso_XP    = new TGraphErrors() ;
 
-    // TGraphErrors* pTGE_mean_WF    = new TGraphErrors() ;
-    // TGraphErrors* pTGE_mean_XP    = new TGraphErrors() ;
-
-    // TGraphErrors* pTGE_std_WF     = new TGraphErrors() ;
-    // TGraphErrors* pTGE_std_XP     = new TGraphErrors() ;
+  for(int i = 0 ; i < 4 ; i++){
+    v_pTGE_reso_WF. push_back(new TGraphErrors());
+    v_pTGE_reso_XP. push_back(new TGraphErrors());
+    v_pTGE_mean_WF. push_back(new TGraphErrors());
+    v_pTGE_mean_XP. push_back(new TGraphErrors());
+    v_pTGE_std_WF.  push_back(new TGraphErrors());
+    v_pTGE_std_XP.  push_back(new TGraphErrors());
+    v_bethebloch.   push_back(BetheBloch(0, 2, v_mass[i]/1e3, particles[i]));
   }
+  for(int i = 0 ; i < 4 ; i++) std::cout << "Bethe-Bloch for " << particles[i] << " at 1GeV = " << v_bethebloch[i]->Eval(1) << " keV/cm" << std::endl;
 
 
   // Get mean & std
@@ -3715,6 +3712,8 @@ void DrawOut_Escan(const std::string& inputDir, const std::string& Comment)
   float std_XP[npoint] ;
   float dstd_WF[npoint] ;
   float dstd_XP[npoint] ;
+
+  float keV                     = 5.9/(224*1703.74/183); // 5.9 Fe peak energy | 1703 mean MockUp gain | 224 e- created with 5.9keV | 183 e- for 1 ADC
 
   int index;
   for(int iE = 0 ; iE < npoint ; iE++){
@@ -3734,18 +3733,18 @@ void DrawOut_Escan(const std::string& inputDir, const std::string& Comment)
 
     v_pTGE_reso_WF[index]-> SetPoint      (n[iE], E_arr[iE], std_WF[iE]/mean_WF[iE]*100) ;
     v_pTGE_reso_XP[index]-> SetPoint      (n[iE], E_arr[iE], std_XP[iE]/mean_XP[iE]*100) ;
-    v_pTGE_reso_WF[index]-> SetPointError (n[iE], 0,           GetResoError(v_tf1_WF[iE])) ;
-    v_pTGE_reso_XP[index]-> SetPointError (n[iE], 0,           GetResoError(v_tf1_XP[iE])) ;
+    v_pTGE_reso_WF[index]-> SetPointError (n[iE], 0,         GetResoError(v_tf1_WF[iE])) ;
+    v_pTGE_reso_XP[index]-> SetPointError (n[iE], 0,         GetResoError(v_tf1_XP[iE])) ;
 
-    v_pTGE_mean_WF[index]-> SetPoint      (n[iE], E_arr[iE], mean_WF[iE]) ;
-    v_pTGE_mean_XP[index]-> SetPoint      (n[iE], E_arr[iE], mean_XP[iE]) ;
-    v_pTGE_mean_WF[index]-> SetPointError (n[iE], 0,           dmean_WF[iE]) ;
-    v_pTGE_mean_XP[index]-> SetPointError (n[iE], 0,           dmean_XP[iE]) ;
+    v_pTGE_mean_WF[index]-> SetPoint      (n[iE], E_arr[iE], mean_WF[iE]*keV) ;
+    v_pTGE_mean_XP[index]-> SetPoint      (n[iE], E_arr[iE], mean_XP[iE]*keV) ;
+    v_pTGE_mean_WF[index]-> SetPointError (n[iE], 0,         dmean_WF[iE]*keV) ;
+    v_pTGE_mean_XP[index]-> SetPointError (n[iE], 0,         dmean_XP[iE]*keV) ;
 
-    v_pTGE_std_WF[index]->  SetPoint      (n[iE], E_arr[iE], std_WF[iE]) ;
-    v_pTGE_std_XP[index]->  SetPoint      (n[iE], E_arr[iE], std_XP[iE]) ;
-    v_pTGE_std_WF[index]->  SetPointError (n[iE], 0,           dstd_WF[iE]) ;
-    v_pTGE_std_XP[index]->  SetPointError (n[iE], 0,           dstd_XP[iE]) ;
+    v_pTGE_std_WF[index]->  SetPoint      (n[iE], E_arr[iE], std_WF[iE]*keV) ;
+    v_pTGE_std_XP[index]->  SetPoint      (n[iE], E_arr[iE], std_XP[iE]*keV) ;
+    v_pTGE_std_WF[index]->  SetPointError (n[iE], 0,         dstd_WF[iE]*keV) ;
+    v_pTGE_std_XP[index]->  SetPointError (n[iE], 0,         dstd_XP[iE]*keV) ;
   }
 
 
@@ -3759,62 +3758,78 @@ void DrawOut_Escan(const std::string& inputDir, const std::string& Comment)
   gStyle->                      SetOptStat(0) ;
   gStyle->                      SetGridStyle(1) ;
   pTCanvas->                    cd() ;
-  TLegend* leg                = new TLegend(0.8,0.75,0.98,0.95) ;
+  pTCanvas->                    SetRightMargin(0.05);
+  float x_leg                 = 0.77;
+  float y_leg                 = 0.73;
+  float dx_leg                = 0.09;
+  float dy_leg                = 0.145;
+  TLegend* leg1               = new TLegend(x_leg, y_leg, x_leg+dx_leg, y_leg+dy_leg) ;
+  leg1->                        SetBorderSize(0);
+  leg1->                        SetFillStyle(0);
+  TLegend* leg2               = new TLegend(x_leg+dx_leg, y_leg, x_leg+2*dx_leg, y_leg+dy_leg) ;
+  leg2->                        SetBorderSize(0);
+  leg2->                        SetFillStyle(0);
 
-  Color_t colors[] = {kMagenta+1, kBlue, kGreen+1, kRed};
+  Color_t colors[]  = {kMagenta+1, kBlue, kGreen+1, kRed};
+  int     markers[] = {20, 21, 24, 25}; 
   // Resolution
   v_pTGE_reso_WF[0]->                GetXaxis()->SetLimits(0.45, 1.55) ;
   v_pTGE_reso_WF[0]->                SetMinimum(4) ;
-  v_pTGE_reso_WF[0]->                SetMaximum(13) ;
-  v_pTGE_reso_WF[0]->                SetNameTitle("pTGE_reso_WF", "Resolution vs energy with WF_{sum} method;Energy (GeV);resolution (%)") ;
+  v_pTGE_reso_WF[0]->                SetMaximum(10) ;
+  v_pTGE_reso_WF[0]->                SetNameTitle("pTGE_reso_WF", "Resolution vs energy with WF method;Energy (GeV);resolution (%)") ;
   for(int i = 0 ; i < 4 ; i++){
-    Graphic_setup(v_pTGE_reso_WF[i], 3, 20+i, colors[i], 1, colors[i]) ;
-    if(i == 0) v_pTGE_reso_WF[i]->    Draw("apl") ;
-    else v_pTGE_reso_WF[i]->          Draw("pl same") ;
-    leg->                             AddEntry(v_pTGE_reso_WF[i], particles[i].c_str(), "ep") ;  
+    Graphic_setup(v_pTGE_reso_WF[i], 3, markers[i], colors[i], 1, colors[i]) ;
+    if(i == 0) v_pTGE_reso_WF[i]->    Draw("ap") ;
+    else v_pTGE_reso_WF[i]->          Draw("p same") ;
+    if(i<2) leg1->                    AddEntry(v_pTGE_reso_WF[i], particles[i].c_str(), "ep") ;  
+    else    leg2->                    AddEntry(v_pTGE_reso_WF[i], particles[i].c_str(), "ep") ;  
   }
-  leg->                               Draw() ;
+  leg1->                               Draw() ;
+  leg2->                               Draw() ;
   pTCanvas->                          SaveAs(OutputFile_Beg.c_str()) ;
 
   pTCanvas->                          Clear();
   v_pTGE_reso_XP[0]->                 GetXaxis()->SetLimits(0.45, 1.55) ;
   v_pTGE_reso_XP[0]->                 SetMinimum(4) ;
-  v_pTGE_reso_XP[0]->                 SetMaximum(13) ;
+  v_pTGE_reso_XP[0]->                 SetMaximum(10) ;
   v_pTGE_reso_XP[0]->                 SetNameTitle("pTGE_reso_XP", "Resolution vs energy with XP method;Energy (GeV);resolution (%)") ;
   for(int i = 0 ; i < 4 ; i++){
-    Graphic_setup(v_pTGE_reso_XP[i], 3, 20+i, colors[i], 1, colors[i]) ;
-    if(i == 0) v_pTGE_reso_XP[i]->    Draw("apl") ;
-    else v_pTGE_reso_XP[i]->          Draw("pl same") ;
+    Graphic_setup(v_pTGE_reso_XP[i], 3, markers[i], colors[i], 1, colors[i]) ;
+    if(i == 0) v_pTGE_reso_XP[i]->    Draw("ap") ;
+    else v_pTGE_reso_XP[i]->          Draw("p same") ;
   }
-  leg->                               Draw() ;
+  leg1->                               Draw() ;
+  leg2->                               Draw() ;
   pTCanvas->                          SaveAs(OutputFile.c_str()) ;
 
 
   // Mean
   pTCanvas->                          Clear();
   v_pTGE_mean_WF[0]->                 GetXaxis()->SetLimits(0.45, 1.55) ;
-  v_pTGE_mean_WF[0]->                 SetMinimum(300) ;
-  v_pTGE_mean_WF[0]->                 SetMaximum(800) ;
-  v_pTGE_mean_WF[0]->                 SetNameTitle("pTGE_mean_WF", "Mean vs energy with WF_{sum} method;Energy (GeV);mean (ADC counts)") ;
+  v_pTGE_mean_WF[0]->                 SetMinimum(0.75) ;
+  v_pTGE_mean_WF[0]->                 SetMaximum(2.25) ;
+  v_pTGE_mean_WF[0]->                 SetNameTitle("pTGE_mean_WF", "Mean vs energy with WF method;Energy (GeV);mean (keV)") ;
   for(int i = 0 ; i < 4 ; i++){
-    Graphic_setup(v_pTGE_mean_WF[i], 3, 20+i, colors[i], 1, colors[i]) ;
-    if(i == 0) v_pTGE_mean_WF[i]->    Draw("apl") ;
-    else v_pTGE_mean_WF[i]->          Draw("pl same") ;
+    Graphic_setup(v_pTGE_mean_WF[i], 3, markers[i], colors[i], 1, colors[i]) ;
+    if(i == 0) v_pTGE_mean_WF[i]->    Draw("ap") ;
+    else v_pTGE_mean_WF[i]->          Draw("p same") ;
   }
-  leg->                               Draw() ;
+  leg1->                               Draw() ;
+  leg2->                               Draw() ;
   pTCanvas->                          SaveAs(OutputFile_Beg.c_str()) ;
 
   pTCanvas->                          Clear();
   v_pTGE_mean_XP[0]->                GetXaxis()->SetLimits(0.45, 1.55) ;
-  v_pTGE_mean_XP[0]->                SetMinimum(300) ;
-  v_pTGE_mean_XP[0]->                SetMaximum(800) ;
-  v_pTGE_mean_XP[0]->                SetNameTitle("pTGE_mean_XP", "Mean vs energy with XP method;Energy (GeV);mean (ADC counts)") ;
+  v_pTGE_mean_XP[0]->                SetMinimum(0.75) ;
+  v_pTGE_mean_XP[0]->                SetMaximum(2.25) ;
+  v_pTGE_mean_XP[0]->                SetNameTitle("pTGE_mean_XP", "Mean vs energy with XP method;Energy (GeV);mean (keV)") ;
   for(int i = 0 ; i < 4 ; i++){
-    Graphic_setup(v_pTGE_mean_XP[i], 3, 20+i, colors[i], 1, colors[i]) ;
-    if(i == 0) v_pTGE_mean_XP[i]->    Draw("apl") ;
-    else v_pTGE_mean_XP[i]->          Draw("pl same") ;
+    Graphic_setup(v_pTGE_mean_XP[i], 3, markers[i], colors[i], 1, colors[i]) ;
+    if(i == 0) v_pTGE_mean_XP[i]->    Draw("ap") ;
+    else v_pTGE_mean_XP[i]->          Draw("p same") ;
   }
-  leg->                               Draw() ;
+  leg1->                               Draw() ;
+  leg2->                               Draw() ;
   pTCanvas->                          SaveAs(OutputFile.c_str()) ;
 
 
@@ -3822,34 +3837,37 @@ void DrawOut_Escan(const std::string& inputDir, const std::string& Comment)
   // Std
   pTCanvas->                          Clear();
   v_pTGE_std_WF[0]->                  GetXaxis()->SetLimits(0.45, 1.55) ;
-  v_pTGE_std_WF[0]->                  SetMinimum(20) ;
-  v_pTGE_std_WF[0]->                  SetMaximum(80) ;
-  v_pTGE_std_WF[0]->                  SetNameTitle("pTGE_std_WF", "Std vs energy with WF_{sum} method;Energy (GeV);std (ADC counts)") ;
+  v_pTGE_std_WF[0]->                  SetMinimum(0.05) ;
+  v_pTGE_std_WF[0]->                  SetMaximum(0.17) ;
+  v_pTGE_std_WF[0]->                  SetNameTitle("pTGE_std_WF", "Std vs energy with WF method;Energy (GeV);std (keV)") ;
   for(int i = 0 ; i < 4 ; i++){
-    Graphic_setup(v_pTGE_std_WF[i], 3, 20+i, colors[i], 1, colors[i]) ;
-    if(i == 0) v_pTGE_std_WF[i]->    Draw("apl") ;
-    else v_pTGE_std_WF[i]->          Draw("pl same") ;
+    Graphic_setup(v_pTGE_std_WF[i], 3, markers[i], colors[i], 1, colors[i]) ;
+    if(i == 0) v_pTGE_std_WF[i]->    Draw("ap") ;
+    else v_pTGE_std_WF[i]->          Draw("p same") ;
   }
-  leg->                               Draw() ;
+  leg1->                               Draw() ;
+  leg2->                               Draw() ;
   pTCanvas->                          SaveAs(OutputFile_Beg.c_str()) ;
 
   pTCanvas->                          Clear();
   v_pTGE_std_XP[0]->                  GetXaxis()->SetLimits(0.45, 1.55) ;
-  v_pTGE_std_XP[0]->                  SetMinimum(20) ;
-  v_pTGE_std_XP[0]->                  SetMaximum(80) ;
-  v_pTGE_std_XP[0]->                  SetNameTitle("pTGE_std_XP", "Std vs energy with XP method;Energy (GeV);std (ADC counts)") ;
+  v_pTGE_std_XP[0]->                  SetMinimum(0.05) ;
+  v_pTGE_std_XP[0]->                  SetMaximum(0.17) ;
+  v_pTGE_std_XP[0]->                  SetNameTitle("pTGE_std_XP", "Std vs energy with XP method;Energy (GeV);std (keV)") ;
   for(int i = 0 ; i < 4 ; i++){
-    Graphic_setup(v_pTGE_std_XP[i], 3, 20+i, colors[i], 1, colors[i]) ;
-    if(i == 0) v_pTGE_std_XP[i]->     Draw("apl") ;
-    else v_pTGE_std_XP[i]->           Draw("pl same") ;
+    Graphic_setup(v_pTGE_std_XP[i], 3, markers[i], colors[i], 1, colors[i]) ;
+    if(i == 0) v_pTGE_std_XP[i]->     Draw("ap") ;
+    else v_pTGE_std_XP[i]->           Draw("p same") ;
   }
-  leg->                               Draw() ;
+  leg1->                               Draw() ;
+  leg2->                               Draw() ;
   pTCanvas->                          SaveAs(OutputFile_End.c_str()) ;
 
 
   // Delete
   delete                        pTCanvas   ;
-  delete                        leg ;
+  delete                        leg1 ;
+  delete                        leg2 ;
 
   for(int i = 0 ; i < (int)v_pTGE_mean_WF.size() ; i++){
     delete v_pTGE_reso_WF[i]; v_pTGE_reso_WF[i] = 0 ;
@@ -3922,7 +3940,7 @@ void DrawOut_TGE_WFsum_L(const std::string& inputDir, const std::string& Comment
   // pTGE_reso_PRF->                 SetMinimum(4) ;
 
   v_TGE_z50[0]->                 SetMaximum(1800) ;
-  v_TGE_z50[0]->                    SetNameTitle("TGE_z50", "max of WF_{sum} vs L_{cluster} for Z_{drift} = 50 mm;length in cluster L (mm);A_{max} (ADC counts)") ;
+  v_TGE_z50[0]->                    SetNameTitle("TGE_z50", "max of WF vs L_{cluster} for Z_{drift} = 50 mm;length in cluster L (mm);A_{max} (ADC counts)") ;
   Graphic_setup(v_TGE_z50[0], 3, 20, kBlack, 1, kBlack) ;
   Graphic_setup(v_TGE_z50[1], 3, 21, kBlue, 1, kBlack) ;
   Graphic_setup(v_TGE_z50[2], 3, 22, kRed, 1, kBlack) ;
@@ -3937,7 +3955,7 @@ void DrawOut_TGE_WFsum_L(const std::string& inputDir, const std::string& Comment
   leg->                             Clear() ;
 
   v_TGE_z550[0]->                 SetMaximum(1800) ;
-  v_TGE_z550[0]->                    SetNameTitle("TGE_z550", "max of WF_{sum} vs L_{cluster} for Z_{drift} = 550 mm;length in cluster L (mm);A_{max} (ADC counts)") ;
+  v_TGE_z550[0]->                    SetNameTitle("TGE_z550", "max of WF vs L_{cluster} for Z_{drift} = 550 mm;length in cluster L (mm);A_{max} (ADC counts)") ;
   Graphic_setup(v_TGE_z550[0], 3, 20, kBlack, 1, kBlack) ;
   Graphic_setup(v_TGE_z550[1], 3, 21, kBlue, 1, kBlack) ;
   Graphic_setup(v_TGE_z550[2], 3, 22, kRed, 1, kBlack) ;
@@ -3952,7 +3970,7 @@ void DrawOut_TGE_WFsum_L(const std::string& inputDir, const std::string& Comment
   leg->                             Clear() ;
 
   v_TGE_z950[0]->                 SetMaximum(1800) ;
-  v_TGE_z950[0]->                    SetNameTitle("TGE_z950", "max of WF_{sum} vs L_{cluster} for Z_{drift} = 950 mm;length in cluster L (mm);A_{max} (ADC counts)") ;
+  v_TGE_z950[0]->                    SetNameTitle("TGE_z950", "max of WF vs L_{cluster} for Z_{drift} = 950 mm;length in cluster L (mm);A_{max} (ADC counts)") ;
   Graphic_setup(v_TGE_z950[0], 3, 20, kBlack, 1, kBlack) ;
   Graphic_setup(v_TGE_z950[1], 3, 21, kBlue, 1, kBlack) ;
   Graphic_setup(v_TGE_z950[2], 3, 22, kRed, 1, kBlack) ;
@@ -4006,8 +4024,8 @@ void DrawOut_verif(const std::string& OutDir, const std::string& Comment){
   std::string ztrue[]           = {"50", "550", "950"} ;
   for(int i = 0 ; i < (int)v_TFile.size() ; i++){
     pTCanvas->                      Clear() ;
-    if(i%2 == 0) v_TH2F[i]->        SetTitle(("30#circ vertical " + ztrue[i/2] + "mm: WF_{sum} VS length in cluster;Length in cluster (mm);WF_{sum} (ADC count)").c_str()) ;
-    else v_TH2F[i]->                SetTitle(("30#circ diagonal " + ztrue[i/2] + "mm: WF_{sum} VS length in cluster;Length in cluster (mm);WF_{sum} (ADC count)").c_str()) ;
+    if(i%2 == 0) v_TH2F[i]->        SetTitle(("30#circ vertical " + ztrue[i/2] + "mm: WF VS length in cluster;Length in cluster (mm);WF (ADC count)").c_str()) ;
+    else v_TH2F[i]->                SetTitle(("30#circ diagonal " + ztrue[i/2] + "mm: WF VS length in cluster;Length in cluster (mm);WF (ADC count)").c_str()) ;
     v_TH2F[i]->                     Draw("colz") ;
     // if(i%2 == 1) v_tf1[i]->         SetLineWidth(4) ;
     // if(i%2 == 1) v_tf1[i]->         Draw("same") ;
@@ -4028,7 +4046,7 @@ void DrawOut_verif(const std::string& OutDir, const std::string& Comment){
     pTCanvas->                      Clear() ;
     Graphic_setup                   (v_TH2F[2*i],   1, 1, kBlue) ;
     Graphic_setup                   (v_TH2F[2*i+1], 1, 1, kRed) ;
-    v_TH2F[2*i+1]->                 SetTitle(("30#circ " + ztrue[i] + "mm: WF_{sum} VS length in cluster;Length in cluster (mm);WF_{sum} (ADC count)").c_str()) ;
+    v_TH2F[2*i+1]->                 SetTitle(("30#circ " + ztrue[i] + "mm: WF VS length in cluster;Length in cluster (mm);WF (ADC count)").c_str()) ;
     v_TH2F[2*i+1]->                 Draw() ;
     v_TH2F[2*i+1]->                 GetYaxis()->SetRangeUser(0, 2000) ;
     v_TH2F[2*i]->                   Draw("same") ;
@@ -4089,7 +4107,7 @@ void DrawOut_corrections(){
   v_tf1[0]->                      SetLineWidth(4) ; 
   v_tf1[0]->                      GetYaxis()->SetRangeUser(0, 1500) ;
   
-  v_tf1[0]->                      SetTitle("Correction functions 30#circ;L_{cluster} (mm);WF_{sum} (ADC count)") ;
+  v_tf1[0]->                      SetTitle("Correction functions 30#circ;L_{cluster} (mm);WF (ADC count)") ;
   leg->                           AddEntry(v_tf1[0], "HATRecon" , "l") ;
   for (int i = 1 ; i < 4 ; i++){
     v_tf1[0]->                    Draw() ;
@@ -4104,7 +4122,7 @@ void DrawOut_corrections(){
   leg->                           Clear() ;
   pTCanvas->                      Clear() ;
   
-  v_tf1[0]->                      SetTitle("Correction functions 40#circ;L_{cluster} (mm);WF_{sum} (ADC count)") ;
+  v_tf1[0]->                      SetTitle("Correction functions 40#circ;L_{cluster} (mm);WF (ADC count)") ;
   leg->                           AddEntry(v_tf1[0], "HATRecon" , "l") ;
   for(int i = 4 ; i < 7 ; i++){ 
     v_tf1[0]->                    Draw() ;
@@ -4119,7 +4137,7 @@ void DrawOut_corrections(){
   leg->                           Clear() ;
   pTCanvas->                      Clear() ;
   
-  v_tf1[0]->                      SetTitle("Correction functions 45#circ;L_{cluster} (mm);WF_{sum} (ADC count)") ;
+  v_tf1[0]->                      SetTitle("Correction functions 45#circ;L_{cluster} (mm);WF (ADC count)") ;
   leg->                           AddEntry(v_tf1[0], "HATRecon" , "l") ;
   for(int i = 7 ; i < 10; i++){ 
     v_tf1[0]->                    Draw() ;
@@ -4137,7 +4155,7 @@ void DrawOut_corrections(){
 
   TLegend* legAll               = new TLegend(0.86,0.65,0.99,0.99) ;
   int angle[]                   = {30, 40, 45} ;
-  v_tf1[1]->                      SetTitle("Correction functions;L_{cluster} (mm);WF_{sum} (ADC count)") ;
+  v_tf1[1]->                      SetTitle("Correction functions;L_{cluster} (mm);WF (ADC count)") ;
   v_tf1[1]->                      GetYaxis()->SetRangeUser(0, 1500) ;
   v_tf1[1]->                      GetXaxis()->SetRangeUser(0, 17) ;
   // legAll->                        AddEntry(v_tf1[0], "HATRecon" , "l") ;

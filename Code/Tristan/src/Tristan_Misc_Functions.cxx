@@ -105,6 +105,108 @@ float Heaviside(const float& t, const float& t_0){
 }
 
 
+
+TF1* Fit1Gauss(TH1F* h1F){   
+  return Fit1Gauss(h1F, 2) ;
+}
+TF1* Fit1Gauss(TH1F* h1F, float range){   
+    TF1* gausn    = new TF1("gausn", "gausn") ;
+    float mean    = h1F->GetBinCenter(h1F->GetMaximumBin()) ;
+    float std     = h1F->GetRMS() ;
+    float max     = mean + 1.8*std ;
+    float min     = mean - 1.8*std ;
+    h1F->Fit("gausn","RQ","0", min, max) ;
+
+    TF1* g1       = h1F->GetFunction("gausn") ;
+    mean          = g1->GetParameter(1) ;
+    std           = g1->GetParameter(2) ;
+    max           = mean + 1.7*std ;
+    min           = mean - 1.7*std ;
+    h1F->Fit("gausn","RQ","0", min, max) ;
+
+    TF1* g2       = h1F->GetFunction("gausn") ;
+    mean          = g2->GetParameter(1) ;
+    std           = g2->GetParameter(2) ;
+    max           = mean + 1.6*std ;
+    min           = mean - 1.6*std ;
+    h1F->Fit("gausn","RQ","0", min, max) ;
+
+    TF1* g3       = h1F->GetFunction("gausn") ;
+    mean          = g3->GetParameter(1) ;
+    std           = g3->GetParameter(2) ;
+    max           = mean + range*std ;
+    min           = mean - range*std ;
+    h1F->Fit("gausn","RQ","0", min, max) ;
+
+    TF1* tf1     = h1F->GetFunction("gausn") ;
+    delete gausn ;
+
+    return tf1 ;
+} 
+
+
+
+
+TF1* Fit2Gauss(TH1F* h1F){
+ return Fit2Gauss(h1F, -5, 1, -1, 2) ;
+}
+TF1* Fit2Gauss(TH1F* h1F, const float& x1min, const float& x1max, const float& x2min, const float& x2max){
+  double par[6] ; 
+  float min1 = h1F->GetMean() + x1min*h1F->GetStdDev() ;
+  float max1 = h1F->GetMean() + x1max*h1F->GetStdDev() ;
+  float min2 = h1F->GetMean() + x2min*h1F->GetStdDev() ;
+  float max2 = h1F->GetMean() + x2max*h1F->GetStdDev() ;
+
+  TF1* g1 = new TF1("g1", "gausn") ;
+  h1F->Fit(g1, "QR", "0", min1, max1) ;
+  g1->GetParameters(&par[0]) ;
+  delete g1 ;
+
+  TF1* g2 = new TF1("g2", "gausn") ;
+  h1F->Fit(g2, "QR", "0", min2, max2) ; 
+  g2->GetParameters(&par[3]) ;
+  delete g2 ;
+
+  TF1* g3 = new TF1("g3", "gausn(0)+gausn(3)") ;
+  g3->SetParameters(par) ;
+  h1F->Fit(g3, "QRS", "0", min1, max2) ;
+
+  TF1* tf1 = h1F->GetFunction("g3") ;
+  tf1->SetParName(0, "A_1") ;
+  tf1->SetParName(1, "#mu_1") ;
+  tf1->SetParName(2, "#sigma_1") ;
+  tf1->SetParName(3, "A_2") ;
+  tf1->SetParName(4, "#mu_2") ;
+  tf1->SetParName(5, "#sigma_2") ;
+  return tf1 ;
+}
+
+
+
+// General Physics ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+TF1* BetheBloch(const float& Emin, const float& Emax, const float& m, const std::string& particle){
+  /*  Input: GeV mol g cm | mass GeV 
+      Output: keV/cm */
+  // float n                         = 5.357e20;
+  // float alpha2                    = pow(1/137, 2);
+  // float hbar2c2                   = pow(1.973e-14, 2) ; // in (GeV cm)^2
+  double coeff                    = 1.396e-10; // 4 pi n alpha^2 hbar^2 c^2 
+  double I                        = 200-9;
+
+  double beta2                    = TMath::Power(sqrt(TMath::Power(1,2) - m*m)/1, 2);
+  double ln                       = log((2*m*TMath::Power(sqrt(TMath::Power(1,2) - m*m)/1, 2))/(I*(1-TMath::Power(sqrt(TMath::Power(1,2) - m*m)/1, 2))));
+  std::cout << ln << " - " << beta2 << " = " << ln-beta2 << std::endl;
+  const char* formula             = "-1e6*[0] / (511e-6*TMath::Power(sqrt(TMath::Power(x,2) - [1]*[1])/x, 2)) * (log((2*511e-6*TMath::Power(sqrt(TMath::Power(x,2) - [1]*[1])/x, 2))/([2]*(1-TMath::Power(sqrt(TMath::Power(x,2) - [1]*[1])/x, 2)))) - TMath::Power(sqrt(TMath::Power(x,2) - [1]*[1])/x, 2))";
+  TF1* dEdx                       = new TF1(Form("dEdx_%s", particle), formula, Emin, Emax, "RQ");
+  dEdx->SetParameters(coeff, m, I);
+  
+  return dEdx ; // keV/cm
+}
+
+
+
+
 // Specific Math //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Dirac Pulse Response function
@@ -236,6 +338,36 @@ float trk_len(Module* pModule, const Track* pTrack){
 
 
 
+// ROOT /////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// From TH1 get TGraph
+TGraph* hist_to_graph(TH1 *h1){
+  TGraph *gr                   = new TGraph(h1);
+  Int_t nbins                  = gr->GetN();
+  Double_t x,y;
+  for (int n=0;n<nbins;++n) {
+    gr->GetPoint(n,x,y);
+    gr->SetPoint(n,x,y);
+  }
+  return gr;
+}
+
+
+
+// From TH1 get swapped TGraph (transpose x and y)
+TGraph* Swapped_graph(TH1 *h1){
+  TGraph *gr                   = new TGraph(h1);
+  Int_t nbins                  = gr->GetN();
+  Double_t x,y;
+  for (int n=0;n<nbins;++n) {
+    gr->GetPoint(n,x,y);
+    gr->SetPoint(n,y,x);
+  }
+  return gr;
+}
+
+
+
 
 double GetResoError(TF1* tf1){
   return GetResoError(tf1, 1, 2) ;
@@ -266,46 +398,6 @@ double GetSeparationError(const float& mean1, const float& std1, const float& dm
 
 
 
-TF1* Fit1Gauss(TH1F* h1F){   
-  return Fit1Gauss(h1F, 2) ;
-}
-TF1* Fit1Gauss(TH1F* h1F, float range){   
-    TF1* gausn    = new TF1("gausn", "gausn") ;
-    float mean    = h1F->GetBinCenter(h1F->GetMaximumBin()) ;
-    float std     = h1F->GetRMS() ;
-    float max     = mean + 1.8*std ;
-    float min     = mean - 1.8*std ;
-    h1F->Fit("gausn","RQ","0", min, max) ;
-
-    TF1* g1       = h1F->GetFunction("gausn") ;
-    mean          = g1->GetParameter(1) ;
-    std           = g1->GetParameter(2) ;
-    max           = mean + 1.7*std ;
-    min           = mean - 1.7*std ;
-    h1F->Fit("gausn","RQ","0", min, max) ;
-
-    TF1* g2       = h1F->GetFunction("gausn") ;
-    mean          = g2->GetParameter(1) ;
-    std           = g2->GetParameter(2) ;
-    max           = mean + 1.6*std ;
-    min           = mean - 1.6*std ;
-    h1F->Fit("gausn","RQ","0", min, max) ;
-
-    TF1* g3       = h1F->GetFunction("gausn") ;
-    mean          = g3->GetParameter(1) ;
-    std           = g3->GetParameter(2) ;
-    max           = mean + range*std ;
-    min           = mean - range*std ;
-    h1F->Fit("gausn","RQ","0", min, max) ;
-
-    TF1* tf1     = h1F->GetFunction("gausn") ;
-    delete gausn ;
-
-    return tf1 ;
-} 
-
-
-
 
 void PrintResolution(TF1* tf1, TCanvas* pCanvas){
   return PrintResolution(tf1, pCanvas, 0.05, 0.7, kBlack, " ") ;
@@ -323,69 +415,4 @@ void PrintResolution(TF1* tf1, TCanvas* pCanvas, float NDCx, float NDCy, Color_t
   ptText->SetTextColor(color) ;
   ptText->DrawClone() ;
   delete ptText ;
-}
-
-
-
-
-TF1* Fit2Gauss(TH1F* h1F){
- return Fit2Gauss(h1F, -5, 1, -1, 2) ;
-}
-TF1* Fit2Gauss(TH1F* h1F, const float& x1min, const float& x1max, const float& x2min, const float& x2max){
-  double par[6] ; 
-  float min1 = h1F->GetMean() + x1min*h1F->GetStdDev() ;
-  float max1 = h1F->GetMean() + x1max*h1F->GetStdDev() ;
-  float min2 = h1F->GetMean() + x2min*h1F->GetStdDev() ;
-  float max2 = h1F->GetMean() + x2max*h1F->GetStdDev() ;
-
-  TF1* g1 = new TF1("g1", "gausn") ;
-  h1F->Fit(g1, "QR", "0", min1, max1) ;
-  g1->GetParameters(&par[0]) ;
-  delete g1 ;
-
-  TF1* g2 = new TF1("g2", "gausn") ;
-  h1F->Fit(g2, "QR", "0", min2, max2) ; 
-  g2->GetParameters(&par[3]) ;
-  delete g2 ;
-
-  TF1* g3 = new TF1("g3", "gausn(0)+gausn(3)") ;
-  g3->SetParameters(par) ;
-  h1F->Fit(g3, "QRS", "0", min1, max2) ;
-
-  TF1* tf1 = h1F->GetFunction("g3") ;
-  tf1->SetParName(0, "A_1") ;
-  tf1->SetParName(1, "#mu_1") ;
-  tf1->SetParName(2, "#sigma_1") ;
-  tf1->SetParName(3, "A_2") ;
-  tf1->SetParName(4, "#mu_2") ;
-  tf1->SetParName(5, "#sigma_2") ;
-  return tf1 ;
-}
-
-// ROOT /////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-// From TH1 get TGraph
-TGraph* hist_to_graph(TH1 *h1){
-  TGraph *gr                   = new TGraph(h1);
-  Int_t nbins                  = gr->GetN();
-  Double_t x,y;
-  for (int n=0;n<nbins;++n) {
-    gr->GetPoint(n,x,y);
-    gr->SetPoint(n,x,y);
-  }
-  return gr;
-}
-
-
-// From TH1 get swapped TGraph (transpose x and y)
-TGraph* Swapped_graph(TH1 *h1){
-  TGraph *gr                   = new TGraph(h1);
-  Int_t nbins                  = gr->GetN();
-  Double_t x,y;
-  for (int n=0;n<nbins;++n) {
-    gr->GetPoint(n,x,y);
-    gr->SetPoint(n,y,x);
-  }
-  return gr;
 }
