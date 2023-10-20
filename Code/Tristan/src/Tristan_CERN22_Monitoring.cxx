@@ -31,7 +31,7 @@ void Tristan_CERN22_Monitoring()
   int nRC = 21 ; 
 
   std::string Tag    ; 
-  std::string Comment = "_zfile_G2_WF4_4Mod" ; 
+  std::string Comment = "_zfile_G2_WF4_02" ; 
   std::string prtcle ; 
   std::string EvtFile ;
   std::string OutDir  = "OUT_Tristan/";  
@@ -51,19 +51,19 @@ void Tristan_CERN22_Monitoring()
 
   // Computations
   int Control         = 0 ;
-  int dEdx            = 0 ;
+  int dEdx            = 1 ;
   int WFcorr          = 0 ;
 
   // DrawOuts
   int DO_Displayer    = 0 ;
   int DO_Control      = 0 ;
   int DO_Checks       = 0 ;
-  int DO_Methods      = 0 ;
+  int DO_Methods      = 1 ;
   int DO_Resolution   = 0 ;
   int DO_Global       = 0 ;
   int DO_Scans        = 0 ;
   int DO_Separation   = 0 ;
-  int DO_Escan        = 1 ;
+  int DO_Escan        = 0 ;
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -111,9 +111,9 @@ void Tristan_CERN22_Monitoring()
     Uploader* pUpld ; Interpol4 LUT ;
     if (Control or dEdx) LUT = GiveMe_LUT(Form("/home/td263283/Documents/Python/LUT_XP/LUT_Dt%i_PT%i_nphi200_nd200/", Dt, PT), nZ, nRC) ;
     int NFiles = 14 ;
-    for (int iFile = 0 ; iFile < NFiles ; iFile++){
-    // int part_arr[] = {4} ;
-    // for (int iFile : part_arr) {
+    // for (int iFile = 0 ; iFile < NFiles ; iFile++){
+    int part_arr[] = {2} ;
+    for (int iFile : part_arr) {
       if (iFile == 0)  { EvtFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_e+_0p5GeV_25V_z415_y2pad_iter0.root" ;       Tag = "CERN22_Escan_e+_0p5GeV" ;  prtcle = "e^{+} 0p5GeV (Mockup)" ;}
       if (iFile == 1)  { EvtFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_e+_0p75GeV_25V_z415_y2pad_iter0.root" ;      Tag = "CERN22_Escan_e+_0p75GeV" ; prtcle = "e^{+} 0p75GeV (Mockup)" ;}
       if (iFile == 2)  { EvtFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_e+_1GeV_25V_z415p1_y2pad_iter0.root" ;       Tag = "CERN22_Escan_e+_1GeV" ;    prtcle = "e^{+} 1GeV (Mockup)" ;}  

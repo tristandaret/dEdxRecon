@@ -185,25 +185,48 @@ TF1* Fit2Gauss(TH1F* h1F, const float& x1min, const float& x1max, const float& x
 
 // General Physics ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-TF1* BetheBloch(const float& Emin, const float& Emax, const float& m, const std::string& particle){
-  /*  Input: GeV mol g cm | mass GeV 
+// Bethe-Bloch relativistic for heavy charged particles
+TF1* BetheBloch(const float& Pmin, const float& Pmax, const double& m, const std::string& particle){
+  /*  Input: Pmin & Pmax GeV | m GeV 
       Output: keV/cm */
-  // float n                         = 5.357e20;
+  // float n                         = 5.357e20; e/cm^3
   // float alpha2                    = pow(1/137, 2);
-  // float hbar2c2                   = pow(1.973e-14, 2) ; // in (GeV cm)^2
-  double coeff                    = 1.396e-10; // 4 pi n alpha^2 hbar^2 c^2 
-  double I                        = 200-9;
+  // float hbar2c2                   = pow(1.973e-14, 2) (GeV cm)^2
+  double coeff                    = 0.2723; // 4 pi n alpha^2 hbar^2 c^2 / (m_e c^2) (keV^2/cm)
+  double me                       = 511e-6; // GeV
+  double M2                       = pow(m,2); // GeV^2
+  double I                        = 188e-9; // GeV
 
-  double beta2                    = TMath::Power(sqrt(TMath::Power(1,2) - m*m)/1, 2);
-  double ln                       = log((2*m*TMath::Power(sqrt(TMath::Power(1,2) - m*m)/1, 2))/(I*(1-TMath::Power(sqrt(TMath::Power(1,2) - m*m)/1, 2))));
-  std::cout << ln << " - " << beta2 << " = " << ln-beta2 << std::endl;
-  const char* formula             = "-1e6*[0] / (511e-6*TMath::Power(sqrt(TMath::Power(x,2) - [1]*[1])/x, 2)) * (log((2*511e-6*TMath::Power(sqrt(TMath::Power(x,2) - [1]*[1])/x, 2))/([2]*(1-TMath::Power(sqrt(TMath::Power(x,2) - [1]*[1])/x, 2)))) - TMath::Power(sqrt(TMath::Power(x,2) - [1]*[1])/x, 2))";
-  TF1* dEdx                       = new TF1(Form("dEdx_%s", particle), formula, Emin, Emax, "RQ");
-  dEdx->SetParameters(coeff, m, I);
-  
+  // PDG general
+  const char* formula             = "[0]/(x*x)*(x*x+[2]) * (log(2*[1]/[3]*x*x/[2]) - 0.5*log(1 + 2*sqrt(x*x+[2])/[2] + [1]*[1]/[2]) - x*x/(x*x+[2]))" ;
+  TF1* dEdx                       = new TF1(Form("dEdx_%s", particle.c_str()), formula, Pmin, Pmax, "");
+  dEdx->                            SetParameters(coeff, me, M2, I);
+
+  dEdx->                            SetTitle(Form("Bethe-Bloch for %s;Energy (GeV);mean (keV/cm)", particle.c_str()));
   return dEdx ; // keV/cm
 }
 
+
+// Bethe-Bloch relativistic for positrons with Bhabha scattering
+TF1* BetheBlochBhabha(const float& Pmin, const float& Pmax, const double& m, const std::string& particle){
+  /*  Input: Pmin & Pmax GeV | M GeV 
+      Output: keV/cm */
+  // float n                         = 5.357e20; e/cm^3
+  // float alpha2                    = pow(1/137, 2);
+  // float hbar2c2                   = pow(1.973e-14, 2) (GeV cm)^2
+  double coeff                    = 0.2723; // 4 pi n alpha^2 hbar^2 c^2 / (m_e c^2) (keV^2/cm)
+  double me                       = 511e-6; // GeV
+  double M2                       = pow(m,2); // GeV^2
+  double I                        = 188e-9; // GeV
+
+  // PDG Bhabha
+  const char* formula             = "[0]/(x*x)*(x*x+[2]) * (log(2*[1]/[3]*x*x/[2]) - 0.5*log(1 + 2*sqrt(x*x+[2])/[2] + [1]*[1]/[2]) - x*x/(x*x+[2])/24. * (23 + 14/(sqrt(x*x+[2])/[2]-1) + 10/pow(sqrt(x*x+[2])/[2]-1, 2) + 4/pow(sqrt(x*x+[2])/[2]-1, 3)) )" ;
+  TF1* dEdx                       = new TF1(Form("dEdx_%s", particle.c_str()), formula, Pmin, Pmax, "");
+  dEdx->                            SetParameters(coeff, me, M2, I);
+
+  dEdx->                            SetTitle(Form("Bethe-Bloch with Bhabha Xsec for %s;Energy (GeV);mean (keV/cm)", particle.c_str()));
+  return dEdx ; // keV/cm
+}
 
 
 

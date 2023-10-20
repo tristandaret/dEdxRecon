@@ -293,7 +293,7 @@ void Tristan_CERN22_dEdx( const std::string& OutDir,
     int                                   WFsel = 0,        WFsum = 0;
     int                                   N_cross_Evt = 0,  N_cross_trc_Evt = 0,  N_clust_Evt = 0,    N_clust_trc_Evt = 0,  N_cross_clust_Evt = 0,  N_cross_clust_trc_Evt = 0;
     std::vector<float>                    v_len_cross_Evt,  v_len_clust_Evt;
-    float                                 len_track_Evt ;
+    float                                 len_track_Evt = 0;
     std::vector<float>                    v_WF,             v_WFmax ; 
     std::vector<RankedValue>              v_rank_WF,        v_rank_Cross ;
     std::vector<float>                    v_ratio_Evt ; 
@@ -303,18 +303,37 @@ void Tristan_CERN22_dEdx( const std::string& OutDir,
 
     // Check if there are is a track in 4 ERAMs that are aligned
     std::vector<double> eram_list;
-    for (int iMod = 0 ; iMod < nMod ; iMod++) eram_list.push_back(eram_number[pEvent->Get_Module_InArray(iMod)->Get_ModuleNber()]) ;
-    if(   !(is_in(eram_list,  7) and is_in(eram_list,  1) and is_in(eram_list, 23) and is_in(eram_list,  2))
-      and !(is_in(eram_list, 16) and is_in(eram_list, 15) and is_in(eram_list, 10) and is_in(eram_list, 12))){
+    for (int iMod = 0 ; iMod < nMod ; iMod++){
+      int ModuleNber                      = pEvent->Get_Module_InArray(iMod)->Get_ModuleNber();
+      if (pEvent->Validity_ForThisModule(ModuleNber)!=0) eram_list.push_back(eram_number[pEvent->Get_Module_InArray(iMod)->Get_ModuleNber()]) ;
+    } 
+
+    // 4 ERAMs
+    // if(   !(is_in(eram_list,  7) and is_in(eram_list,  1) and is_in(eram_list, 23) and is_in(eram_list,  2))
+    //   and !(is_in(eram_list, 16) and is_in(eram_list, 15) and is_in(eram_list, 10) and is_in(eram_list, 12))){
+    //   delete pEvent;
+    //   continue;
+    // }
+
+    // 2 ERAMs
+    if(!(is_in(eram_list, 7) and is_in(eram_list, 1)) and !(is_in(eram_list, 16) and is_in(eram_list, 10))){
       delete pEvent;
       continue;
     }
 
+    // 1 ERAM
+    int nber = 2;
+    if(!is_in(eram_list, nber)){
+      delete pEvent;
+      continue;
+    }
     for (int iMod = 0 ; iMod < nMod ; iMod++){
       Module* pModule                     = pEvent->Get_Module_InArray(iMod) ;
       int ModuleNber                      = pModule->Get_ModuleNber() ;
       if (pEvent->Validity_ForThisModule(ModuleNber) == 0) continue ;
-      // if(eram_number[ModuleNber] != 2) continue;
+      // 2 ERAMs
+      // if(eram_number[ModuleNber] != 7 and eram_number[ModuleNber] != 1 and eram_number[ModuleNber] != 16 and eram_number[ModuleNber] != 10) continue;
+      if(eram_number[ModuleNber] != nber) continue;
       float N_clus                        = pModule->Get_NberOfCluster() ;
       if(N_clus == 0) continue;
 
@@ -443,7 +462,7 @@ void Tristan_CERN22_dEdx( const std::string& OutDir,
           h1f_WFoLength->                   Fill(h1f_WF_cluster->GetMaximum()/(trk_len_clus*1000)) ;
         }
 
-        WFsel                            += h1f_WF_cluster->GetMaximum()/len_track ;
+        WFsel                            += h1f_WF_cluster->GetMaximum() ;
 
         // // WF v1: Sum(WFmax)/track length
         // v_WF.                               push_back(h1f_WF_cluster->GetMaximum()) ;
@@ -499,7 +518,7 @@ void Tristan_CERN22_dEdx( const std::string& OutDir,
       // Filling dE/dx histograms for each method
 
       // WFsel
-      h1f_WFsel->                   Fill(WFsel) ;
+      h1f_WFsel->                   Fill(WFsel/len_track_Evt) ;
 
       // // WF v1: Sum(WFmax)/track length
       // std::sort(v_WF.begin(), v_WF.end()) ;

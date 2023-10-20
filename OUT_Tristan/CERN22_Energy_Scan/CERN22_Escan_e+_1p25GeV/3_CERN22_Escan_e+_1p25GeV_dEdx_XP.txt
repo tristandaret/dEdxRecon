@@ -1,5 +1,5 @@
 Tag           : CERN22_Escan_e+_1p25GeV
-Comment       : _zfile_G2_WF4_4Mod
+Comment       : _zfile_G2_WF4_2Mod
 EventFile     : ../Data_CERN22_vD/All_ERAMS_350V_412ns_e+_1p25GeV_25V_z415p1_y2pad_1_iter0.root
 SelectionSet  : T2_CERN22_Event
 NbrOfMod      : -1
@@ -208,5 +208,5 @@ Selection Statistics
     4  Stage5     6044     3981 (  -34.13)  (  -86.33)     17420    12793 (  -26.56)  (  -80.23)    433195   311950 (  -27.99)  (  -85.56)   1255974   907304 (  -27.76)  (  -83.89) 
   Summary Sel    29120     3981             (  -86.33)     64703    12793             (  -80.23)   2160095   311950             (  -85.56)   5631859   907304             (  -83.89) 
 Fitting: Started... done!
-Checks: OUT_Tristan/CERN22_Energy_Scan/CERN22_Escan_e+_1p25GeV/2_CERN22_Escan_e+_1p25GeV_Checks_zfile_G2_WF4_4Mod.root
-dEdx: OUT_Tristan/CERN22_Energy_Scan/CERN22_Escan_e+_1p25GeV/3_CERN22_Escan_e+_1p25GeV_dEdx_zfile_G2_WF4_4Mod.root
+Checks: OUT_Tristan/CERN22_Energy_Scan/CERN22_Escan_e+_1p25GeV/2_CERN22_Escan_e+_1p25GeV_Checks_zfile_G2_WF4_2Mod.root
+dEdx: OUT_Tristan/CERN22_Energy_Scan/CERN22_Escan_e+_1p25GeV/3_CERN22_Escan_e+_1p25GeV_dEdx_zfile_G2_WF4_2Mod.root

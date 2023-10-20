@@ -250,11 +250,13 @@ TH1F* GiveMe_WaveFormDisplay(const Pad* pPad,const std::string& TAG)
 
   std::ostringstream namestring ;
   namestring << std::setiosflags(std::ios::fixed) ;
-  namestring << " pTH1_WF_Evt_"  ;
-  namestring << pPad->Get_EventNber() ;
-  namestring << "_Mod" << pPad->Get_ModuleNber();
-  namestring << "_iX" << pPad->Get_iX();
-  namestring << "_iY" << pPad->Get_iY();
+  namestring << " pTH1_WF_"  ;
+  namestring << "Entry" << pPad->Get_EntryNber() ;
+  namestring << "_Evt"  << pPad->Get_EventNber() ;
+  namestring << "_Mod"  << pPad->Get_ModuleNber();
+  namestring << "_iX"   << pPad->Get_iX();
+  namestring << "_iY"   << pPad->Get_iY();
+  namestring <<            pPad->Get_AMax();
   std::string Name =  namestring.str() ;
 
   TH1F* ToBeReturned = new TH1F(Name.c_str(), Title.c_str(),510,-0.5,509.5);

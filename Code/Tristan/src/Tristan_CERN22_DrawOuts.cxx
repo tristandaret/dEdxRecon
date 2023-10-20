@@ -3687,21 +3687,22 @@ void DrawOut_Escan(const std::string& inputDir, const std::string& Comment)
   std::vector<TGraphErrors*> v_pTGE_std_WF;
   std::vector<TGraphErrors*> v_pTGE_std_XP;
 
-  std::vector<float>         v_mass{0.511, 105.658, 139.570, 938.272};
+  std::vector<double>        v_mass{0.511e-3, 105.658e-3, 139.570e-3, 938.272e-3}; // GeV
   std::vector<TF1*>          v_bethebloch;
 
 
   for(int i = 0 ; i < 4 ; i++){
-    v_pTGE_reso_WF. push_back(new TGraphErrors());
-    v_pTGE_reso_XP. push_back(new TGraphErrors());
-    v_pTGE_mean_WF. push_back(new TGraphErrors());
-    v_pTGE_mean_XP. push_back(new TGraphErrors());
-    v_pTGE_std_WF.  push_back(new TGraphErrors());
-    v_pTGE_std_XP.  push_back(new TGraphErrors());
-    v_bethebloch.   push_back(BetheBloch(0, 2, v_mass[i]/1e3, particles[i]));
+    v_pTGE_reso_WF.         push_back(new TGraphErrors());
+    v_pTGE_reso_XP.         push_back(new TGraphErrors());
+    v_pTGE_mean_WF.         push_back(new TGraphErrors());
+    v_pTGE_mean_XP.         push_back(new TGraphErrors());
+    v_pTGE_std_WF.          push_back(new TGraphErrors());
+    v_pTGE_std_XP.          push_back(new TGraphErrors());
+    // v_bethebloch.          push_back(BetheBloch(0, 2, v_mass[i], particles[i])); // m & P range in GeV
+    if(i==0) v_bethebloch.  push_back(BetheBlochBhabha(0, 2, v_mass[i], particles[i]));
+    else v_bethebloch.      push_back(BetheBloch(0, 2, v_mass[i], particles[i]));
   }
-  for(int i = 0 ; i < 4 ; i++) std::cout << "Bethe-Bloch for " << particles[i] << " at 1GeV = " << v_bethebloch[i]->Eval(1) << " keV/cm" << std::endl;
-
+  std::cout << v_bethebloch[0]->Eval(0.5) << std::endl;
 
   // Get mean & std
   float mean_WF[npoint] ;
@@ -3713,7 +3714,7 @@ void DrawOut_Escan(const std::string& inputDir, const std::string& Comment)
   float dstd_WF[npoint] ;
   float dstd_XP[npoint] ;
 
-  float keV                     = 5.9/(224*1703.74/183); // 5.9 Fe peak energy | 1703 mean MockUp gain | 224 e- created with 5.9keV | 183 e- for 1 ADC
+  float keV                     = 5.9/(224*1703.74/183)*2.23; // 5.9 Fe peak energy | 1703 mean MockUp gain | 224 e- created with 5.9keV | 183 e- for 1 ADC | 2.23 scaling correction (to be understood)
 
   int index;
   for(int iE = 0 ; iE < npoint ; iE++){
@@ -3746,7 +3747,6 @@ void DrawOut_Escan(const std::string& inputDir, const std::string& Comment)
     v_pTGE_std_WF[index]->  SetPointError (n[iE], 0,         dstd_WF[iE]*keV) ;
     v_pTGE_std_XP[index]->  SetPointError (n[iE], 0,         dstd_XP[iE]*keV) ;
   }
-
 
   // Draw
   std::string OutputFile        = inputDir + "/CERN22_Escan" + Comment + ".pdf" ;
@@ -3806,27 +3806,30 @@ void DrawOut_Escan(const std::string& inputDir, const std::string& Comment)
   // Mean
   pTCanvas->                          Clear();
   v_pTGE_mean_WF[0]->                 GetXaxis()->SetLimits(0.45, 1.55) ;
-  v_pTGE_mean_WF[0]->                 SetMinimum(0.75) ;
-  v_pTGE_mean_WF[0]->                 SetMaximum(2.25) ;
-  v_pTGE_mean_WF[0]->                 SetNameTitle("pTGE_mean_WF", "Mean vs energy with WF method;Energy (GeV);mean (keV)") ;
+  v_pTGE_mean_WF[0]->                 SetMinimum(2) ;
+  v_pTGE_mean_WF[0]->                 SetMaximum(5) ;
+  v_pTGE_mean_WF[0]->                 SetNameTitle("pTGE_mean_WF", "Mean vs energy with WF method;Energy (GeV);mean (keV/cm)") ;
   for(int i = 0 ; i < 4 ; i++){
     Graphic_setup(v_pTGE_mean_WF[i], 3, markers[i], colors[i], 1, colors[i]) ;
     if(i == 0) v_pTGE_mean_WF[i]->    Draw("ap") ;
     else v_pTGE_mean_WF[i]->          Draw("p same") ;
+    v_bethebloch[i]->                 SetLineColor(colors[i]);
+    v_bethebloch[i]->                 Draw("same");
   }
   leg1->                               Draw() ;
   leg2->                               Draw() ;
   pTCanvas->                          SaveAs(OutputFile_Beg.c_str()) ;
 
   pTCanvas->                          Clear();
-  v_pTGE_mean_XP[0]->                GetXaxis()->SetLimits(0.45, 1.55) ;
-  v_pTGE_mean_XP[0]->                SetMinimum(0.75) ;
-  v_pTGE_mean_XP[0]->                SetMaximum(2.25) ;
-  v_pTGE_mean_XP[0]->                SetNameTitle("pTGE_mean_XP", "Mean vs energy with XP method;Energy (GeV);mean (keV)") ;
+  v_pTGE_mean_XP[0]->                 GetXaxis()->SetLimits(0.45, 1.55) ;
+  v_pTGE_mean_XP[0]->                 SetMinimum(2) ;
+  v_pTGE_mean_XP[0]->                 SetMaximum(5) ;
+  v_pTGE_mean_XP[0]->                SetNameTitle("pTGE_mean_XP", "Mean vs energy with XP method;Energy (GeV);mean (keV/cm)") ;
   for(int i = 0 ; i < 4 ; i++){
     Graphic_setup(v_pTGE_mean_XP[i], 3, markers[i], colors[i], 1, colors[i]) ;
     if(i == 0) v_pTGE_mean_XP[i]->    Draw("ap") ;
     else v_pTGE_mean_XP[i]->          Draw("p same") ;
+    v_bethebloch[i]->                 Draw("same");
   }
   leg1->                               Draw() ;
   leg2->                               Draw() ;
@@ -3834,12 +3837,25 @@ void DrawOut_Escan(const std::string& inputDir, const std::string& Comment)
 
 
 
+  // Bethe-Bloch
+  pTCanvas->                          Clear();
+  v_bethebloch[0]->                   SetMinimum(0) ;
+  v_bethebloch[0]->                   SetMaximum(15) ;
+  v_bethebloch[0]->                   SetTitle("Bethe-Bloch for different particles;Energy (GeV);mean (keV/cm)") ;
+  v_bethebloch[0]->                   Draw() ;
+  for(int i = 1 ; i < 4 ; i++)v_bethebloch[i]-> Draw("same") ; 
+  leg1->                              Draw() ;
+  leg2->                              Draw() ;
+  pTCanvas->                          SaveAs(OutputFile.c_str()) ;
+
+
+
   // Std
   pTCanvas->                          Clear();
   v_pTGE_std_WF[0]->                  GetXaxis()->SetLimits(0.45, 1.55) ;
-  v_pTGE_std_WF[0]->                  SetMinimum(0.05) ;
-  v_pTGE_std_WF[0]->                  SetMaximum(0.17) ;
-  v_pTGE_std_WF[0]->                  SetNameTitle("pTGE_std_WF", "Std vs energy with WF method;Energy (GeV);std (keV)") ;
+  v_pTGE_std_WF[0]->                  SetMinimum(0.1) ;
+  v_pTGE_std_WF[0]->                  SetMaximum(0.35) ;
+  v_pTGE_std_WF[0]->                  SetNameTitle("pTGE_std_WF", "Std vs energy with WF method;Energy (GeV);std (keV/cm)") ;
   for(int i = 0 ; i < 4 ; i++){
     Graphic_setup(v_pTGE_std_WF[i], 3, markers[i], colors[i], 1, colors[i]) ;
     if(i == 0) v_pTGE_std_WF[i]->    Draw("ap") ;
@@ -3851,9 +3867,9 @@ void DrawOut_Escan(const std::string& inputDir, const std::string& Comment)
 
   pTCanvas->                          Clear();
   v_pTGE_std_XP[0]->                  GetXaxis()->SetLimits(0.45, 1.55) ;
-  v_pTGE_std_XP[0]->                  SetMinimum(0.05) ;
-  v_pTGE_std_XP[0]->                  SetMaximum(0.17) ;
-  v_pTGE_std_XP[0]->                  SetNameTitle("pTGE_std_XP", "Std vs energy with XP method;Energy (GeV);std (keV)") ;
+  v_pTGE_std_XP[0]->                  SetMinimum(0.1) ;
+  v_pTGE_std_XP[0]->                  SetMaximum(0.35) ;
+  v_pTGE_std_XP[0]->                  SetNameTitle("pTGE_std_XP", "Std vs energy with XP method;Energy (GeV);std (keV/cm)") ;
   for(int i = 0 ; i < 4 ; i++){
     Graphic_setup(v_pTGE_std_XP[i], 3, markers[i], colors[i], 1, colors[i]) ;
     if(i == 0) v_pTGE_std_XP[i]->     Draw("ap") ;
@@ -3876,6 +3892,7 @@ void DrawOut_Escan(const std::string& inputDir, const std::string& Comment)
     delete v_pTGE_mean_XP[i]; v_pTGE_mean_XP[i] = 0 ;
     delete v_pTGE_std_WF[i]; v_pTGE_std_WF[i] = 0 ;
     delete v_pTGE_std_XP[i]; v_pTGE_std_XP[i] = 0 ;
+    delete v_bethebloch[i] ; v_bethebloch[i] = 0 ;
   }
   v_pTGE_reso_WF.               clear();
   v_pTGE_reso_XP.               clear();
@@ -3883,6 +3900,7 @@ void DrawOut_Escan(const std::string& inputDir, const std::string& Comment)
   v_pTGE_mean_XP.               clear();
   v_pTGE_std_WF.                clear();
   v_pTGE_std_XP.                clear();
+  v_bethebloch.                 clear();
 
   v_tf1_WF.                     clear() ;
   v_tf1_XP.                     clear() ;
