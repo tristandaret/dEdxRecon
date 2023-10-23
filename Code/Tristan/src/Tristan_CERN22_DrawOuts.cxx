@@ -2035,10 +2035,14 @@ void DrawOut_Separation_Reduced(const std::string& inputDir, const std::string& 
 
   // Get input files
   std::vector<TFile*>       v_pTFile_dEdx ;
-  v_pTFile_dEdx  .                 push_back(TFile::Open(TString(inputDir + "CERN22_ERAM18_e+_1GeV_vD_iter0/3_CERN22_ERAM18_e+_1GeV_vD_iter0"     + "_dEdx" + Comment + ".root"))) ;
-  v_pTFile_dEdx  .                 push_back(TFile::Open(TString(inputDir + "CERN22_ERAM18_p_1GeV_vD_iter0/3_CERN22_ERAM18_p_1GeV_vD_iter0"      + "_dEdx" + Comment + ".root"))) ;
-  v_pTFile_dEdx  .                 push_back(TFile::Open(TString(inputDir + "CERN22_ERAM18_mu+_1GeV_vD_iter0/3_CERN22_ERAM18_mu+_1GeV_vD_iter0"    + "_dEdx" + Comment + ".root"))) ;
-  v_pTFile_dEdx  .                 push_back(TFile::Open(TString(inputDir + "CERN22_ERAM18_pi+_0p5GeV_vD_iter0/3_CERN22_ERAM18_pi+_0p5GeV_vD_iter0"  + "_dEdx" + Comment + ".root"))) ;
+  // v_pTFile_dEdx.                 push_back(TFile::Open(TString(inputDir + "CERN22_ERAM18_e+_1GeV_vD_iter0/3_CERN22_ERAM18_e+_1GeV_vD_iter0"     + "_dEdx" + Comment + ".root"))) ;
+  // v_pTFile_dEdx.                 push_back(TFile::Open(TString(inputDir + "CERN22_ERAM18_p_1GeV_vD_iter0/3_CERN22_ERAM18_p_1GeV_vD_iter0"      + "_dEdx" + Comment + ".root"))) ;
+  // v_pTFile_dEdx.                 push_back(TFile::Open(TString(inputDir + "CERN22_ERAM18_mu+_1GeV_vD_iter0/3_CERN22_ERAM18_mu+_1GeV_vD_iter0"    + "_dEdx" + Comment + ".root"))) ;
+  // v_pTFile_dEdx.                 push_back(TFile::Open(TString(inputDir + "CERN22_ERAM18_pi+_0p5GeV_vD_iter0/3_CERN22_ERAM18_pi+_0p5GeV_vD_iter0"  + "_dEdx" + Comment + ".root"))) ;
+  v_pTFile_dEdx.                 push_back(TFile::Open(TString(inputDir + "CERN22_Escan_e+_1p5GeV/3_CERN22_Escan_e+_1p5GeV_dEdx" + Comment + ".root"))) ;
+  v_pTFile_dEdx.                 push_back(TFile::Open(TString(inputDir + "CERN22_Escan_p+_1p5GeV/3_CERN22_Escan_p+_1p5GeV_dEdx" + Comment + ".root"))) ;
+  v_pTFile_dEdx.                 push_back(TFile::Open(TString(inputDir + "CERN22_Escan_mu_1p5GeV/3_CERN22_Escan_mu_1p5GeV_dEdx" + Comment + ".root"))) ;
+  v_pTFile_dEdx.                 push_back(TFile::Open(TString(inputDir + "CERN22_Escan_pi_1p5GeV/3_CERN22_Escan_pi_1p5GeV_dEdx" + Comment + ".root"))) ;
 
 
   // Get functions
@@ -3702,7 +3706,6 @@ void DrawOut_Escan(const std::string& inputDir, const std::string& Comment)
     if(i==0) v_bethebloch.  push_back(BetheBlochBhabha(0, 2, v_mass[i], particles[i]));
     else v_bethebloch.      push_back(BetheBloch(0, 2, v_mass[i], particles[i]));
   }
-  std::cout << v_bethebloch[0]->Eval(0.5) << std::endl;
 
   // Get mean & std
   float mean_WF[npoint] ;
@@ -3714,7 +3717,7 @@ void DrawOut_Escan(const std::string& inputDir, const std::string& Comment)
   float dstd_WF[npoint] ;
   float dstd_XP[npoint] ;
 
-  float keV                     = 5.9/(224*1703.74/183)*2.23; // 5.9 Fe peak energy | 1703 mean MockUp gain | 224 e- created with 5.9keV | 183 e- for 1 ADC | 2.23 scaling correction (to be understood)
+  float keV                     = 5.9/(224*1703.74/183); // 5.9 Fe peak energy | 1703 mean MockUp gain | 224 e- created with 5.9keV | 183 e- for 1 ADC | 2.23 scaling correction (to be understood)
 
   int index;
   for(int iE = 0 ; iE < npoint ; iE++){
@@ -3806,7 +3809,7 @@ void DrawOut_Escan(const std::string& inputDir, const std::string& Comment)
   // Mean
   pTCanvas->                          Clear();
   v_pTGE_mean_WF[0]->                 GetXaxis()->SetLimits(0.45, 1.55) ;
-  v_pTGE_mean_WF[0]->                 SetMinimum(2) ;
+  v_pTGE_mean_WF[0]->                 SetMinimum(0) ;
   v_pTGE_mean_WF[0]->                 SetMaximum(5) ;
   v_pTGE_mean_WF[0]->                 SetNameTitle("pTGE_mean_WF", "Mean vs energy with WF method;Energy (GeV);mean (keV/cm)") ;
   for(int i = 0 ; i < 4 ; i++){
@@ -3822,7 +3825,7 @@ void DrawOut_Escan(const std::string& inputDir, const std::string& Comment)
 
   pTCanvas->                          Clear();
   v_pTGE_mean_XP[0]->                 GetXaxis()->SetLimits(0.45, 1.55) ;
-  v_pTGE_mean_XP[0]->                 SetMinimum(2) ;
+  v_pTGE_mean_XP[0]->                 SetMinimum(0) ;
   v_pTGE_mean_XP[0]->                 SetMaximum(5) ;
   v_pTGE_mean_XP[0]->                SetNameTitle("pTGE_mean_XP", "Mean vs energy with XP method;Energy (GeV);mean (keV/cm)") ;
   for(int i = 0 ; i < 4 ; i++){

@@ -316,24 +316,24 @@ void Tristan_CERN22_dEdx( const std::string& OutDir,
     // }
 
     // 2 ERAMs
-    if(!(is_in(eram_list, 7) and is_in(eram_list, 1)) and !(is_in(eram_list, 16) and is_in(eram_list, 10))){
+    if(!(is_in(eram_list, 7) and is_in(eram_list, 1)) and !(is_in(eram_list, 12) and is_in(eram_list, 10))){
       delete pEvent;
       continue;
     }
 
-    // 1 ERAM
-    int nber = 2;
-    if(!is_in(eram_list, nber)){
-      delete pEvent;
-      continue;
-    }
+    // // 1 ERAM
+    // int nber = 12;
+    // if(!is_in(eram_list, nber)){
+    //   delete pEvent;
+    //   continue;
+    // }
     for (int iMod = 0 ; iMod < nMod ; iMod++){
       Module* pModule                     = pEvent->Get_Module_InArray(iMod) ;
       int ModuleNber                      = pModule->Get_ModuleNber() ;
       if (pEvent->Validity_ForThisModule(ModuleNber) == 0) continue ;
       // 2 ERAMs
-      // if(eram_number[ModuleNber] != 7 and eram_number[ModuleNber] != 1 and eram_number[ModuleNber] != 16 and eram_number[ModuleNber] != 10) continue;
-      if(eram_number[ModuleNber] != nber) continue;
+      if(eram_number[ModuleNber] != 7 and eram_number[ModuleNber] != 1 and eram_number[ModuleNber] != 12 and eram_number[ModuleNber] != 10) continue;
+      // if(eram_number[ModuleNber] != nber) continue;
       float N_clus                        = pModule->Get_NberOfCluster() ;
       if(N_clus == 0) continue;
 

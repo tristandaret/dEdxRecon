@@ -192,13 +192,13 @@ TF1* BetheBloch(const float& Pmin, const float& Pmax, const double& m, const std
   // float n                         = 5.357e20; e/cm^3
   // float alpha2                    = pow(1/137, 2);
   // float hbar2c2                   = pow(1.973e-14, 2) (GeV cm)^2
-  double coeff                    = 0.2723; // 4 pi n alpha^2 hbar^2 c^2 / (m_e c^2) (keV^2/cm)
+  double coeff                    = 0.2723/2.5; // 4 pi n alpha^2 hbar^2 c^2 / (m_e c^2) (keV^2/cm)
   double me                       = 511e-6; // GeV
   double M2                       = pow(m,2); // GeV^2
   double I                        = 188e-9; // GeV
 
   // PDG general
-  const char* formula             = "[0]/(x*x)*(x*x+[2]) * (log(2*[1]/[3]*x*x/[2]) - 0.5*log(1 + 2*sqrt(x*x+[2])/[2] + [1]*[1]/[2]) - x*x/(x*x+[2]))" ;
+  const char* formula             = "[0]/(x*x)*(x*x+[2]) * (log(2*[1]/[3]*x*x/[2]) - 0.5*log(1 + 2*sqrt(x*x+[2])/[2]*[1]/sqrt([2]) + [1]*[1]/[2]) - x*x/(x*x+[2]))" ;
   TF1* dEdx                       = new TF1(Form("dEdx_%s", particle.c_str()), formula, Pmin, Pmax, "");
   dEdx->                            SetParameters(coeff, me, M2, I);
 
@@ -214,13 +214,13 @@ TF1* BetheBlochBhabha(const float& Pmin, const float& Pmax, const double& m, con
   // float n                         = 5.357e20; e/cm^3
   // float alpha2                    = pow(1/137, 2);
   // float hbar2c2                   = pow(1.973e-14, 2) (GeV cm)^2
-  double coeff                    = 0.2723; // 4 pi n alpha^2 hbar^2 c^2 / (m_e c^2) (keV^2/cm)
+  double coeff                    = 0.2723/2.5; // 4 pi n alpha^2 hbar^2 c^2 / (m_e c^2) (keV^2/cm)
   double me                       = 511e-6; // GeV
   double M2                       = pow(m,2); // GeV^2
   double I                        = 188e-9; // GeV
 
   // PDG Bhabha
-  const char* formula             = "[0]/(x*x)*(x*x+[2]) * (log(2*[1]/[3]*x*x/[2]) - 0.5*log(1 + 2*sqrt(x*x+[2])/[2] + [1]*[1]/[2]) - x*x/(x*x+[2])/24. * (23 + 14/(sqrt(x*x+[2])/[2]-1) + 10/pow(sqrt(x*x+[2])/[2]-1, 2) + 4/pow(sqrt(x*x+[2])/[2]-1, 3)) )" ;
+  const char* formula             = "[0]/(x*x)*(x*x+[2]) * (log(2*[1]/[3]*x*x/[2]) - 0.5*log(1 + 2*sqrt(x*x+[2])/[2]*[1]/sqrt([2]) + [1]*[1]/[2]) - x*x/(x*x+[2])/24. * (23 + 14/(sqrt(x*x+[2])/[2]-1) + 10/pow(sqrt(x*x+[2])/[2]-1, 2) + 4/pow(sqrt(x*x+[2])/[2]-1, 3)) )" ;
   TF1* dEdx                       = new TF1(Form("dEdx_%s", particle.c_str()), formula, Pmin, Pmax, "");
   dEdx->                            SetParameters(coeff, me, M2, I);
 
