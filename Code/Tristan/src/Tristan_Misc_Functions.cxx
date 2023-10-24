@@ -192,7 +192,7 @@ TF1* BetheBloch(const float& Pmin, const float& Pmax, const double& m, const std
   // float n                         = 5.357e20; e/cm^3
   // float alpha2                    = pow(1/137, 2);
   // float hbar2c2                   = pow(1.973e-14, 2) (GeV cm)^2
-  double coeff                    = 0.2723/2.5; // 4 pi n alpha^2 hbar^2 c^2 / (m_e c^2) (keV^2/cm)
+  double coeff                    = 0.2723; // 4 pi n alpha^2 hbar^2 c^2 / (m_e c^2) (keV^2/cm)
   double me                       = 511e-6; // GeV
   double M2                       = pow(m,2); // GeV^2
   double I                        = 188e-9; // GeV
@@ -202,9 +202,10 @@ TF1* BetheBloch(const float& Pmin, const float& Pmax, const double& m, const std
   TF1* dEdx                       = new TF1(Form("dEdx_%s", particle.c_str()), formula, Pmin, Pmax, "");
   dEdx->                            SetParameters(coeff, me, M2, I);
 
-  dEdx->                            SetTitle(Form("Bethe-Bloch for %s;Energy (GeV);mean (keV/cm)", particle.c_str()));
+  dEdx->                            SetTitle(Form("Bethe-Bloch for%s;Energy (GeV);mean (keV/cm)", particle.c_str()));
   return dEdx ; // keV/cm
 }
+
 
 
 // Bethe-Bloch relativistic for positrons with Bhabha scattering
@@ -214,7 +215,7 @@ TF1* BetheBlochBhabha(const float& Pmin, const float& Pmax, const double& m, con
   // float n                         = 5.357e20; e/cm^3
   // float alpha2                    = pow(1/137, 2);
   // float hbar2c2                   = pow(1.973e-14, 2) (GeV cm)^2
-  double coeff                    = 0.2723/2.5; // 4 pi n alpha^2 hbar^2 c^2 / (m_e c^2) (keV^2/cm)
+  double coeff                    = 0.2723; // 4 pi n alpha^2 hbar^2 c^2 / (m_e c^2) (keV^2/cm)
   double me                       = 511e-6; // GeV
   double M2                       = pow(m,2); // GeV^2
   double I                        = 188e-9; // GeV
@@ -224,7 +225,26 @@ TF1* BetheBlochBhabha(const float& Pmin, const float& Pmax, const double& m, con
   TF1* dEdx                       = new TF1(Form("dEdx_%s", particle.c_str()), formula, Pmin, Pmax, "");
   dEdx->                            SetParameters(coeff, me, M2, I);
 
-  dEdx->                            SetTitle(Form("Bethe-Bloch with Bhabha Xsec for %s;Energy (GeV);mean (keV/cm)", particle.c_str()));
+  dEdx->                            SetTitle(Form("Bethe-Bloch with Bhabha Xsec for%s;Energy (GeV);mean (keV/cm)", particle.c_str()));
+  return dEdx ; // keV/cm
+}
+
+
+
+// Bethe-Bloch with experimental parametrisation
+TF1* BetheBlochExp(const float& Pmin, const float& Pmax, const double& M, const std::string& particle){
+  /*  Input: Pmin & Pmax GeV | m GeV 
+      Output: keV/cm */
+  double M2                       = pow(M,2); // GeV^2
+  double par[] = {1.65179e+02, 3.62857e+00, 3.18209e-02, 2.07081e+00, -7.14413e-01};
+
+
+  const char* formula             = "[1]/pow(x/sqrt(x*x+[0]),[4]) * ( [2] - pow(x/sqrt(x*x+[0]),[4]) - log([3]+ pow(x*x/[0], [5])) )" ;
+  TF1* dEdx                       = new TF1(Form("dEdx_%s", particle.c_str()), formula, Pmin, Pmax, "");
+  dEdx->                            SetParameters(M2, par[0], par[1], par[2], par[3], par[4]);
+  dEdx->                            FixParameter(0, M2);
+
+  dEdx->                            SetTitle(Form("Experimental Bethe-Bloch for%s;Energy (GeV);mean (keV/cm)", particle.c_str()));
   return dEdx ; // keV/cm
 }
 

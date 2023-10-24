@@ -2035,10 +2035,10 @@ void DrawOut_Separation_Reduced(const std::string& inputDir, const std::string& 
 
   // Get input files
   std::vector<TFile*>       v_pTFile_dEdx ;
-  // v_pTFile_dEdx.                 push_back(TFile::Open(TString(inputDir + "CERN22_ERAM18_e+_1GeV_vD_iter0/3_CERN22_ERAM18_e+_1GeV_vD_iter0"     + "_dEdx" + Comment + ".root"))) ;
-  // v_pTFile_dEdx.                 push_back(TFile::Open(TString(inputDir + "CERN22_ERAM18_p_1GeV_vD_iter0/3_CERN22_ERAM18_p_1GeV_vD_iter0"      + "_dEdx" + Comment + ".root"))) ;
-  // v_pTFile_dEdx.                 push_back(TFile::Open(TString(inputDir + "CERN22_ERAM18_mu+_1GeV_vD_iter0/3_CERN22_ERAM18_mu+_1GeV_vD_iter0"    + "_dEdx" + Comment + ".root"))) ;
-  // v_pTFile_dEdx.                 push_back(TFile::Open(TString(inputDir + "CERN22_ERAM18_pi+_0p5GeV_vD_iter0/3_CERN22_ERAM18_pi+_0p5GeV_vD_iter0"  + "_dEdx" + Comment + ".root"))) ;
+  // v_pTFile_dEdx.                 push_back(TFile::Open(TString(inputDir + "CERN22_ERAM18_e+_1GeV/3_CERN22_ERAM18_e+_1GeV_vD"     + "_dEdx" + Comment + ".root"))) ;
+  // v_pTFile_dEdx.                 push_back(TFile::Open(TString(inputDir + "CERN22_ERAM18_p_1GeV/3_CERN22_ERAM18_p_1GeV_vD"      + "_dEdx" + Comment + ".root"))) ;
+  // v_pTFile_dEdx.                 push_back(TFile::Open(TString(inputDir + "CERN22_ERAM18_mu+_1GeV/3_CERN22_ERAM18_mu+_1GeV_vD"    + "_dEdx" + Comment + ".root"))) ;
+  // v_pTFile_dEdx.                 push_back(TFile::Open(TString(inputDir + "CERN22_ERAM18_pi+_0p5GeV/3_CERN22_ERAM18_pi+_0p5GeV_vD"  + "_dEdx" + Comment + ".root"))) ;
   v_pTFile_dEdx.                 push_back(TFile::Open(TString(inputDir + "CERN22_Escan_e+_1p5GeV/3_CERN22_Escan_e+_1p5GeV_dEdx" + Comment + ".root"))) ;
   v_pTFile_dEdx.                 push_back(TFile::Open(TString(inputDir + "CERN22_Escan_p+_1p5GeV/3_CERN22_Escan_p+_1p5GeV_dEdx" + Comment + ".root"))) ;
   v_pTFile_dEdx.                 push_back(TFile::Open(TString(inputDir + "CERN22_Escan_mu_1p5GeV/3_CERN22_Escan_mu_1p5GeV_dEdx" + Comment + ".root"))) ;
@@ -2048,7 +2048,11 @@ void DrawOut_Separation_Reduced(const std::string& inputDir, const std::string& 
   // Get functions
   std::vector<TF1*>         v_tf1_WFsum ;
   std::vector<TF1*>         v_tf1_XP ;
+  std::vector<TH1F*>         v_th1_WFsum ;
+  std::vector<TH1F*>         v_th1_XP ;
   for(int iPar = 0 ; iPar < nParticles ; iPar++){
+    v_th1_WFsum.            push_back(v_pTFile_dEdx[iPar]->Get<TH1F>("h1f_WFsum")) ;
+    v_th1_XP.               push_back(v_pTFile_dEdx[iPar]->Get<TH1F>("h1f_XP")) ;
     v_tf1_WFsum.            push_back(v_pTFile_dEdx[iPar]->Get<TF1>("tf1_WFsum")) ;
     v_tf1_XP.               push_back(v_pTFile_dEdx[iPar]->Get<TF1>("tf1_XP")) ;
   }
@@ -2123,10 +2127,116 @@ void DrawOut_Separation_Reduced(const std::string& inputDir, const std::string& 
   pTCanvas->                  SaveAs(OutputFile.c_str()) ;
 
 
+
+
+  std::string OutputFile2      = inputDir + "Separation_power_emu" + Comment +".pdf" ;
+  std::string OutputFile2_Beg  = OutputFile2 + "(" ;
+  std::string OutputFile2_End  = OutputFile2 + ")" ;
+  TCanvas* pTCanvas2           = new TCanvas("TCanvas2", "TCanvas2", 1800, 1200) ;
+  TLegend* leg                = new TLegend(0.64,0.15,0.84,0.29) ; 
+  pTCanvas2->                    cd() ;
+  gStyle->                      SetOptStat(0) ;
+
+    // Comparing particles dE/dx method by method
+  gStyle->                      SetOptStat(11) ;
+  gStyle->                      SetOptFit(111) ;
+
+
+  v_th1_WFsum[0]->           SetName("positrons e^{+} 1.5GeV") ;
+  v_th1_WFsum[0]->           SetTitle("<dE/dx> 1.5GeV with WF") ;
+  v_th1_WFsum[0]->           Scale(1/v_th1_WFsum[0]->GetEntries()) ;
+  v_tf1_WFsum[0]->            SetRange(0, 1500) ;
+  v_tf1_WFsum[0]->            SetParameter(0, v_tf1_WFsum[0]->Integral(0, 1500)/v_th1_WFsum[0]->GetEntries()) ;
+  v_th1_WFsum[0]->           SetLineColor(kCyan+2) ;
+  v_th1_WFsum[0]->           SetLineWidth(2) ;
+  v_tf1_WFsum[0]->            SetLineColor(kCyan+1) ;
+  v_tf1_WFsum[0]->            SetLineWidth(2) ;
+  v_th1_WFsum[2]->           SetName("muons #mu^{+} 1GeV") ;
+  v_th1_WFsum[2]->           Scale(1/v_th1_WFsum[2]->GetEntries()) ;
+  v_tf1_WFsum[2]->            SetRange(0, 1500) ;
+  v_tf1_WFsum[2]->            SetParameter(0, v_tf1_WFsum[2]->Integral(0, 1500)/v_th1_WFsum[2]->GetEntries()) ;
+  v_th1_WFsum[2]->           SetLineColor(kCyan+2) ;
+  v_th1_WFsum[2]->           SetLineWidth(2) ;
+  v_th1_WFsum[2]->           SetLineStyle(2) ;
+  v_tf1_WFsum[2]->            SetLineColor(kCyan+1) ;
+  v_tf1_WFsum[2]->            SetLineWidth(2) ;
+  if(v_th1_WFsum[0]->GetMaximum() < v_th1_WFsum[2]->GetMaximum()) v_th1_WFsum[0]->SetAxisRange(0, 1.1*v_th1_WFsum[2]->GetMaximum(),  "Y") ;
+  v_th1_WFsum[0]->           Draw("hist") ;
+  v_tf1_WFsum[0]->            Draw("same") ;
+  gPad->                        Update() ;
+  SetStatBoxPosition(v_th1_WFsum[0], 0.64, 0.89, 0.64,  0.89) ;  
+  v_th1_WFsum[2]->           Draw("hist sames") ;
+  v_tf1_WFsum[2]->            Draw("same") ;
+  gPad->                        Update() ;
+  SetStatBoxPosition(v_th1_WFsum[2], 0.64, 0.89, 0.39,  0.64) ;  
+  pTCanvas2->                    Update() ;
+  leg->                         AddEntry(v_th1_WFsum[2], "#mu^{+} 1GeV ", "l") ;  
+  leg->                         AddEntry(v_th1_WFsum[0], "e^{+} 1GeV ", "l") ;  
+  leg->                         DrawClone() ;
+  TLatex* ptText        = new TLatex ;
+  ptText->SetTextSize(0.05) ;
+  ptText->SetTextFont(42) ;
+  ptText->SetTextAlign(31) ;
+  float sepa            = GetSeparation(mean_WFsum[0],     std_WFsum[0],      mean_WFsum[2],     std_WFsum[2]) ;
+  float dsepa           = GetSeparationError(mean_WFsum[0], std_WFsum[0], dmean_WFsum[0], dstd_WFsum[0], mean_WFsum[2], std_WFsum[2], dmean_WFsum[2], dstd_WFsum[2]) ;
+  ptText->SetText(1200, 0.28, Form("S(e^{+} #mu^{+}) = %.2f #pm %.2f #sigma", sepa, dsepa)) ;
+  ptText->SetTextColor(kCyan+2) ;
+  ptText->DrawClone() ;
+  delete ptText ;
+  pTCanvas2->                    SaveAs(OutputFile2_Beg.c_str()) ;
+  pTCanvas2->                    Clear() ;
+  leg->                         Clear() ;
+
+  v_th1_XP[0]->           SetName("positrons e^{+} 1GeV") ;
+  v_th1_XP[0]->           SetTitle("<dE/dx> 1.5GeV with XP") ;
+  v_th1_XP[0]->           Scale(1/v_th1_XP[0]->GetEntries()) ;
+  v_tf1_XP[0]->            SetRange(0, 1500) ;
+  v_tf1_XP[0]->            SetParameter(0, v_tf1_XP[0]->Integral(0, 1500)/v_th1_XP[0]->GetEntries()) ;
+  v_th1_XP[0]->           SetLineColor(kMagenta+2) ;
+  v_th1_XP[0]->           SetLineWidth(2) ;
+  v_tf1_XP[0]->            SetLineColor(kMagenta+1) ;
+  v_tf1_XP[0]->            SetLineWidth(2) ;
+  v_th1_XP[2]->           SetName("muons #mu^{+} 1GeV") ;
+  v_th1_XP[2]->           Scale(1/v_th1_XP[2]->GetEntries()) ;
+  v_tf1_XP[2]->            SetRange(0, 1500) ;
+  v_tf1_XP[2]->            SetParameter(0, v_tf1_XP[2]->Integral(0, 1500)/v_th1_XP[2]->GetEntries()) ;
+  v_th1_XP[2]->           SetLineColor(kMagenta+2) ;
+  v_th1_XP[2]->           SetLineWidth(2) ;
+  v_th1_XP[2]->           SetLineStyle(2) ;
+  v_tf1_XP[2]->            SetLineColor(kMagenta+1) ;
+  v_tf1_XP[2]->            SetLineWidth(2) ;
+  if(v_th1_XP[0]->GetMaximum() < v_th1_XP[2]->GetMaximum()) v_th1_XP[0]->SetAxisRange(0, 1.1*v_th1_XP[2]->GetMaximum(),  "Y") ;
+  v_th1_XP[0]->           Draw("hist") ;
+  v_tf1_XP[0]->            Draw("same") ;
+  gPad->                        Update() ;
+  SetStatBoxPosition(v_th1_XP[0], 0.64, 0.89, 0.64,  0.89) ;  
+  v_th1_XP[2]->           Draw("hist sames") ;
+  v_tf1_XP[2]->            Draw("same") ;
+  gPad->                        Update() ;
+  SetStatBoxPosition(v_th1_XP[2], 0.64, 0.89, 0.39,  0.64) ;  
+  pTCanvas2->                    Update() ;
+  leg->                         AddEntry(v_th1_XP[2], "#mu^{+} 1GeV ", "l") ;  
+  leg->                         AddEntry(v_th1_XP[0], "e^{+} 1GeV ", "l") ;  
+  leg->                         DrawClone() ;
+  TLatex* ptText2        = new TLatex ;
+  ptText2->SetTextSize(0.05) ;
+  ptText2->SetTextFont(42) ;
+  ptText2->SetTextAlign(31) ;
+   sepa            = GetSeparation(mean_XP[0],     std_XP[0],      mean_XP[2],     std_XP[2]) ;
+   dsepa           = GetSeparationError(mean_XP[0], std_XP[0], dmean_XP[0], dstd_XP[0], mean_XP[2], std_XP[2], dmean_XP[2], dstd_XP[2]) ;
+  ptText2->SetText(1200, 0.33, Form("S(e^{+} #mu^{+}) = %.2f #pm %.2f #sigma", sepa, dsepa)) ;
+  ptText2->SetTextColor(kMagenta+2) ;
+  ptText2->DrawClone() ;
+  delete ptText2 ;
+  pTCanvas2->                    SaveAs(OutputFile2_End.c_str()) ;
+
+
+
   // Delete
   delete                      h2_separation ;
   delete                      h2_err_separation ;
   delete                      pTCanvas   ;
+  delete                      pTCanvas2   ;
   v_tf1_WFsum.clear() ;
   v_tf1_XP.clear() ;
 }
@@ -3702,9 +3812,10 @@ void DrawOut_Escan(const std::string& inputDir, const std::string& Comment)
     v_pTGE_mean_XP.         push_back(new TGraphErrors());
     v_pTGE_std_WF.          push_back(new TGraphErrors());
     v_pTGE_std_XP.          push_back(new TGraphErrors());
+    v_bethebloch.          push_back(BetheBlochExp(0.45, 1.55, v_mass[i], particles[i])); // m & P range in GeV
     // v_bethebloch.          push_back(BetheBloch(0, 2, v_mass[i], particles[i])); // m & P range in GeV
-    if(i==0) v_bethebloch.  push_back(BetheBlochBhabha(0, 2, v_mass[i], particles[i]));
-    else v_bethebloch.      push_back(BetheBloch(0, 2, v_mass[i], particles[i]));
+    // if(i==0) v_bethebloch.  push_back(BetheBlochBhabha(0, 2, v_mass[i], particles[i]));
+    // else v_bethebloch.      push_back(BetheBloch(0, 2, v_mass[i], particles[i]));
   }
 
   // Get mean & std
@@ -3751,8 +3862,11 @@ void DrawOut_Escan(const std::string& inputDir, const std::string& Comment)
     v_pTGE_std_XP[index]->  SetPointError (n[iE], 0,         dstd_XP[iE]*keV) ;
   }
 
+  for(int i = 0 ; i < 4 ; i++) v_pTGE_mean_XP[i]->Fit(v_bethebloch[i], "R", "", 0.45, 1.55);
+
+
   // Draw
-  std::string OutputFile        = inputDir + "/CERN22_Escan" + Comment + ".pdf" ;
+  std::string OutputFile        = inputDir + "CERN22_Escan" + Comment + ".pdf" ;
   std::string OutputFile_Beg    = OutputFile + "(" ;
   std::string OutputFile_End    = OutputFile + ")" ;
   TCanvas* pTCanvas           = new TCanvas("TCanvas", "TCanvas", 1800, 1200) ;
@@ -3809,7 +3923,7 @@ void DrawOut_Escan(const std::string& inputDir, const std::string& Comment)
   // Mean
   pTCanvas->                          Clear();
   v_pTGE_mean_WF[0]->                 GetXaxis()->SetLimits(0.45, 1.55) ;
-  v_pTGE_mean_WF[0]->                 SetMinimum(0) ;
+  v_pTGE_mean_WF[0]->                 SetMinimum(0.5) ;
   v_pTGE_mean_WF[0]->                 SetMaximum(5) ;
   v_pTGE_mean_WF[0]->                 SetNameTitle("pTGE_mean_WF", "Mean vs energy with WF method;Energy (GeV);mean (keV/cm)") ;
   for(int i = 0 ; i < 4 ; i++){
@@ -3825,7 +3939,7 @@ void DrawOut_Escan(const std::string& inputDir, const std::string& Comment)
 
   pTCanvas->                          Clear();
   v_pTGE_mean_XP[0]->                 GetXaxis()->SetLimits(0.45, 1.55) ;
-  v_pTGE_mean_XP[0]->                 SetMinimum(0) ;
+  v_pTGE_mean_XP[0]->                 SetMinimum(0.5) ;
   v_pTGE_mean_XP[0]->                 SetMaximum(5) ;
   v_pTGE_mean_XP[0]->                SetNameTitle("pTGE_mean_XP", "Mean vs energy with XP method;Energy (GeV);mean (keV/cm)") ;
   for(int i = 0 ; i < 4 ; i++){
@@ -3842,8 +3956,8 @@ void DrawOut_Escan(const std::string& inputDir, const std::string& Comment)
 
   // Bethe-Bloch
   pTCanvas->                          Clear();
-  v_bethebloch[0]->                   SetMinimum(0) ;
-  v_bethebloch[0]->                   SetMaximum(15) ;
+  v_bethebloch[0]->                   SetMinimum(0.5) ;
+  v_bethebloch[0]->                   SetMaximum(5) ;
   v_bethebloch[0]->                   SetTitle("Bethe-Bloch for different particles;Energy (GeV);mean (keV/cm)") ;
   v_bethebloch[0]->                   Draw() ;
   for(int i = 1 ; i < 4 ; i++)v_bethebloch[i]-> Draw("same") ; 
@@ -3856,8 +3970,8 @@ void DrawOut_Escan(const std::string& inputDir, const std::string& Comment)
   // Std
   pTCanvas->                          Clear();
   v_pTGE_std_WF[0]->                  GetXaxis()->SetLimits(0.45, 1.55) ;
-  v_pTGE_std_WF[0]->                  SetMinimum(0.1) ;
-  v_pTGE_std_WF[0]->                  SetMaximum(0.35) ;
+  v_pTGE_std_WF[0]->                  SetMinimum(0.05) ;
+  v_pTGE_std_WF[0]->                  SetMaximum(0.15) ;
   v_pTGE_std_WF[0]->                  SetNameTitle("pTGE_std_WF", "Std vs energy with WF method;Energy (GeV);std (keV/cm)") ;
   for(int i = 0 ; i < 4 ; i++){
     Graphic_setup(v_pTGE_std_WF[i], 3, markers[i], colors[i], 1, colors[i]) ;
@@ -3866,12 +3980,12 @@ void DrawOut_Escan(const std::string& inputDir, const std::string& Comment)
   }
   leg1->                               Draw() ;
   leg2->                               Draw() ;
-  pTCanvas->                          SaveAs(OutputFile_Beg.c_str()) ;
+  pTCanvas->                          SaveAs(OutputFile.c_str()) ;
 
   pTCanvas->                          Clear();
   v_pTGE_std_XP[0]->                  GetXaxis()->SetLimits(0.45, 1.55) ;
-  v_pTGE_std_XP[0]->                  SetMinimum(0.1) ;
-  v_pTGE_std_XP[0]->                  SetMaximum(0.35) ;
+  v_pTGE_std_XP[0]->                  SetMinimum(0.05) ;
+  v_pTGE_std_XP[0]->                  SetMaximum(0.15) ;
   v_pTGE_std_XP[0]->                  SetNameTitle("pTGE_std_XP", "Std vs energy with XP method;Energy (GeV);std (keV/cm)") ;
   for(int i = 0 ; i < 4 ; i++){
     Graphic_setup(v_pTGE_std_XP[i], 3, markers[i], colors[i], 1, colors[i]) ;

@@ -31,9 +31,11 @@ bool is_in(std::vector<double> v, double val);
 // Bethe-Bloch function
 TF1* BetheBloch(const float& Emin, const float& Emax, const double& m, const std::string& particle);
 
-
 // Bethe-Bloch relativistic for positrons with Bhabha scattering
 TF1* BetheBlochBhabha(const float& Pmin, const float& Pmax, const double& m, const std::string& particle);
+
+// Bethe-Bloch with experimental parametrisation
+TF1* BetheBlochExp(const float& Pmin, const float& Pmax, const double& M, const std::string& particle);
 
 
 
