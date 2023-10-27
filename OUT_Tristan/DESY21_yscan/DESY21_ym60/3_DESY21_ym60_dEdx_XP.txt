@@ -1,22 +1,15 @@
 Tag           : DESY21_ym60
-Comment       : _1000_zcalc_PRF_4IP_WFhatrecon
-EventFile     : ../Data_DESY21/yscan/Ym60_Z0_iter0.root
+Comment       : _zcalc_G0_WF4
+FileName     : ../Data_DESY21/yscan/Ym60_Z0_iter0.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
 Data_to_Use   : 0
 OUTDirName    : OUT_Tristan/DESY21_yscan/DESY21_ym60/
 
-
-ReadRCmap::ReadRCmap m_FileName = GainRCMaps/RCfiles/ERAM01_RCdata_01.root
-
-ReadRCmap::ReadRCmap  No Data for iX=10 and  iY=16 in GainRCMaps/RCfiles/ERAM01_RCdata_01.root
-RC map: loaded
-
-ReadGainmap::ReadGainmap m_FileName = GainRCMaps/Gainfiles/ERAM01_Gaindata_01.root
-
-ReadGainmap::ReadGainmap  No Data for iX=10 and  iY=16 in GainRCMaps/Gainfiles/ERAM01_Gaindata_01.root
-Gain map: loaded
+Gain & RC maps: loaded
 Average Gain in ERAM01 = 1947.77
+ERAM01: RC   hole in  iX = 10 | iY = 16 | value reset at 129.29
+ERAM01: Gain hole in  iX = 10 | iY = 16 | value reset at 1889.24
 
 -------------->Predefined selection T_DESY21_Event
 Number of entries :9741
@@ -52,33 +45,22 @@ zdrift        = 90 mm
 PT            = 412 ns
 TB            = 50 ns/time bin
 PT/TB         = 8 time bins
-Track fitting : PRF
 z method      : zcalc
 cut length    = 2 mm
 
 Processing events:
 0/9741
-RC hole in entry   12 | iX = 10 | iY = 16 |  RC  value reset at 129
-500/9741
 1000/9741
-1500/9741
 2000/9741
-2500/9741
 3000/9741
-3500/9741
 4000/9741
-4500/9741
 5000/9741
-5500/9741
 6000/9741
-6500/9741
 7000/9741
-7500/9741
 8000/9741
-8500/9741
 9000/9741
-9500/9741
 9740/9741
+9741 real events
 
 Selection Statistics 
  #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
@@ -91,5 +73,5 @@ Selection Statistics
     6  Stage5     8038     3743 (  -53.43)  (  -61.57)      8038     3743 (  -53.43)  (  -61.57)    263999   127262 (  -51.79)  (  -61.56)    933734   446213 (  -52.21)  (  -63.49) 
   Summary Sel     9741     3743             (  -61.57)      9741     3743             (  -61.57)    331065   127262             (  -61.56)   1222187   446213             (  -63.49) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_yscan/DESY21_ym60/2_DESY21_ym60_Checks_1000_zcalc_PRF_4IP_WFhatrecon.root
-dEdx: OUT_Tristan/DESY21_yscan/DESY21_ym60/3_DESY21_ym60_dEdx_1000_zcalc_PRF_4IP_WFhatrecon.root
+Checks: OUT_Tristan/DESY21_yscan/DESY21_ym60/2_DESY21_ym60_Checks_zcalc_G0_WF4.root
+dEdx: OUT_Tristan/DESY21_yscan/DESY21_ym60/3_DESY21_ym60_dEdx_zcalc_G0_WF4.root

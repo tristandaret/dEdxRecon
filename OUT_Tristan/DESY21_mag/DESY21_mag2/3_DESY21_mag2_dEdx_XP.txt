@@ -1,5 +1,5 @@
 Tag           : DESY21_mag2
-Comment       : _zfile_G2_WF4_2Mod
+Comment       : _zfile_G2_WF4
 FileName     : ../Data_DESY21/Mag_scan/mag_2_200_ym60_iter0.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
@@ -75,5 +75,5 @@ Selection Statistics
     6  Stage5    10188     6245 (  -38.70)  (  -43.49)     10188     6245 (  -38.70)  (  -43.49)    337785   212330 (  -37.14)  (  -43.48)    946767   584345 (  -38.28)  (  -46.78) 
   Summary Sel    11051     6245             (  -43.49)     11051     6245             (  -43.49)    375645   212330             (  -43.48)   1097923   584345             (  -46.78) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_mag/DESY21_mag2/2_DESY21_mag2_Checks_zfile_G2_WF4_2Mod.root
-dEdx: OUT_Tristan/DESY21_mag/DESY21_mag2/3_DESY21_mag2_dEdx_zfile_G2_WF4_2Mod.root
+Checks: OUT_Tristan/DESY21_mag/DESY21_mag2/2_DESY21_mag2_Checks_zfile_G2_WF4.root
+dEdx: OUT_Tristan/DESY21_mag/DESY21_mag2/3_DESY21_mag2_dEdx_zfile_G2_WF4.root

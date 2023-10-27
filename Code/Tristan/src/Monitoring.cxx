@@ -31,7 +31,7 @@ void Monitoring()
   int nRC = 21 ; 
 
   std::string Tag    ; 
-  std::string Comment = "_zfile_G2_WF4" ; 
+  std::string Comment = "_zcalc_G0_WF4" ; 
   std::string prtcle ; 
   std::string EvtFile ;
   std::string OutDir  = "OUT_Tristan/";  
@@ -45,7 +45,7 @@ void Monitoring()
   int CERN_Escan      = 0 ; 
 
   int DESY_zscan      = 0 ; 
-  int DESY_yscan      = 0 ; 
+  int DESY_yscan      = 1 ; 
   int DESY_phi        = 0 ; 
   int DESY_theta      = 0 ; 
 
@@ -57,7 +57,7 @@ void Monitoring()
   // DrawOuts
   int DO_Displayer    = 0 ;
   int DO_control      = 0 ;
-  int DO_Checks       = 1 ;
+  int DO_Checks       = 0 ;
   int DO_Methods      = 1 ;
   int DO_Resolution   = 0 ;
   int DO_Global       = 0 ;
@@ -110,9 +110,9 @@ void Monitoring()
     Uploader* pUpld ; Interpol4 LUT ;
     if (control or dedx) LUT = GiveMe_LUT(Form("/home/td263283/Documents/Python/LUT_XP/LUT_Dt%i_PT%i_nphi200_nd200/", Dt, PT), nZ, nRC) ;
     int NFiles = 14 ;
-    for (int iFile = 0 ; iFile < NFiles ; iFile++){
-    // int part_arr[] = {0} ;
-    // for (int iFile : part_arr) {
+    // for (int iFile = 0 ; iFile < NFiles ; iFile++){
+    int part_arr[] = {2} ;
+    for (int iFile : part_arr) {
       if (iFile == 0)  { EvtFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_e+_0p5GeV_25V_z415_y2pad_iter0.root" ;       Tag = "CERN22_Escan_e+_0p5GeV" ;  prtcle = "e^{+} 0p5GeV (Mockup)" ;}
       if (iFile == 1)  { EvtFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_e+_0p75GeV_25V_z415_y2pad_iter0.root" ;      Tag = "CERN22_Escan_e+_0p75GeV" ; prtcle = "e^{+} 0p75GeV (Mockup)" ;}
       if (iFile == 2)  { EvtFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_e+_1GeV_25V_z415p1_y2pad_iter0.root" ;       Tag = "CERN22_Escan_e+_1GeV" ;    prtcle = "e^{+} 1GeV (Mockup)" ;}  
@@ -193,7 +193,7 @@ void Monitoring()
     if (control or dedx) LUT = GiveMe_LUT(Form("/home/td263283/Documents/Python/LUT_XP/LUT_Dt%i_PT%i_nphi200_nd200/", Dt, PT), nZ, nRC) ;
     int NFiles      = 12 ;
     std::string Y_arr[] = {"m150", "m140", "m120", "m100", "m80", "m60", "m40", "0", "20", "40", "60", "80"} ;
-    for (int y = 0 ; y < NFiles ; y++){
+    for (int y = 5 ; y < 6 ; y++){
       EvtFile  = Form("../Data_DESY21/yscan/Y%s_Z0_iter0.root", Y_arr[y].c_str()) ; Tag = Form("DESY21_y%s", Y_arr[y].c_str()) ; prtcle = Form("electron_y%s", Y_arr[y].c_str()) ; 
       if(control or dedx) pUpld = GiveMe_Uploader (intUploader, EvtFile) ;
       if (control)      Control       (OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, Data_to_Use, PT, TB, prtcle) ;
@@ -282,7 +282,7 @@ void Monitoring()
 
   int MC_zscan        = 0 ; 
   int DESY19_phi      = 0 ; 
-  int DESY_mag        = 1 ;
+  int DESY_mag        = 0 ;
   int MockUp_zdist    = 0 ; 
   int DESY_zscan_139V = 0 ; 
 
@@ -355,7 +355,7 @@ void Monitoring()
     Uploader* pUpld ; Interpol4 LUT ;
     if (control or dedx) LUT = GiveMe_LUT(Form("/home/td263283/Documents/Python/LUT_XP/LUT_Dt%i_PT%i_nphi200_nd200/", Dt, PT), nZ, nRC) ;
     // int mag_arr[] = {0, 2, 4, 10} ;
-    int mag_arr[] = {10} ;
+    int mag_arr[] = {0,2,4} ;
     for (int mag : mag_arr){
       EvtFile                    = Form            ("../Data_DESY21/Mag_scan/mag_%i_200_ym60_iter0.root", mag) ; Tag = Form("DESY21_mag%i", mag) ; prtcle = Form("electron_mag%i", mag) ;
       if(control or dedx) pUpld = GiveMe_Uploader (intUploader, EvtFile) ;

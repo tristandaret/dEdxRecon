@@ -56,11 +56,11 @@ void dEdx( const std::string& OutDir,
   float phi_max         = std::atan(Ly/Lx)*180/M_PI ;           // (°) angle of the diagonal
 
   // Parameters for the dE/dx procedure and for selections
-  std::string z_method  = "zfile" ;                             // method to get z ("zcalc" to recompute, "zfile" to use value from ntuple)
+  std::string z_method  = "zcalc" ;                             // method to get z ("zcalc" to recompute, "zfile" to use value from ntuple)
   float alpha           = 70 ;                                  // truncation value in %
   float n_param_trk     = 3 ;                                   // 2 if there is not magnetic field
   float len_cut         = 0.002 ;                               // minimum length in pad to be considered truncable (m)
-  int gain_corr         = 1 ;                                   // apply XP gain correction
+  int gain_corr         = 0 ;                                   // apply XP gain correction
 
   // Parameters for the LUT
   int   size            = 200 ;                                 // LUT definition along d & phi
@@ -409,7 +409,9 @@ void dEdx( const std::string& OutDir,
         delete                              h1f_WF_cluster ;
       } // Cluster
 
+      if(iEvent < 50) DrawOut_EventDisplay(pModule, OUTDIR_Evt_Display, Tag, "amplitude", pTrack->Get_ParameterValue(2), pTrack->Get_ParameterValue(1), pTrack->Get_ParameterValue(0)) ;
     } // Module
+
     if(N_cross_Evt > 0){
       h1f_Ncross->                            Fill(N_cross_Evt) ;
 
@@ -460,7 +462,6 @@ void dEdx( const std::string& OutDir,
       h1f_XP->                               Fill(XP) ;
     }
 
-    // if(iEvent < 50) DrawOut_EventDisplay(pModule, OUTDIR_Evt_Display, Tag, "amplitude", pTrack->Get_ParameterValue(2), pTrack->Get_ParameterValue(1), pTrack->Get_ParameterValue(0)) ;
 
     for(int i = 0 ; i < (int)v_trashbin.size() ; i++)       {delete v_trashbin[i]       ; v_trashbin[i]       = 0 ; }
     v_trashbin.                           clear() ;

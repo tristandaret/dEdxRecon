@@ -1,4 +1,5 @@
 #include "Tristan/Control.h"
+#include "Tristan/dEdx_func.h"
 #include "Tristan/Displayer.h"
 #include "Tristan/Misc_Functions.h"
 
@@ -140,35 +141,7 @@ void Control(
   int NEvent = pUploader->Get_NberOfEvent() ;
   std::cout << "Number of entries :" << NEvent << std::endl ;
 
-  // Get the correct cut on TLeading
-  if(SelectionSet == "T2_CERN22_Event" or SelectionSet == "T_DESY21_Event"){
-    int TLow = 0, THigh = 0 ;
-    if(Get120_CSV("../Stage120_Cuts.csv", Tag, TLow, THigh)) std::cout << "TLow = " << TLow << " | THigh = " << THigh << std::endl ;
-    else{
-      std::cout << "No Stage120 cuts found in CSV. Getting them now..." << std::endl ;
-      std::vector<int> v_TCut           = Comp120_Cut(pUploader, NbrOfMod, Data_to_Use, 0) ;
-      TLow                              = v_TCut[0] ;
-      THigh                             = v_TCut[1] ;
-      Set120_CSV("../Stage120_Cuts.csv", Tag, TLow, THigh) ;
-      std::cout << "Stage120 cuts are " << TLow << " to " << THigh << ". Values added to CSV file." << std::endl ;
-    }
-    aJFL_Selector.Set_Cut_Stage120_TLow (TLow) ;
-    aJFL_Selector.Set_Cut_Stage120_THigh(THigh) ;
-  }
-
-  // Selection for DESY21 phi diagonal clustering
-  if(Tag.find("diag") != std::string::npos){
-    aJFL_Selector.Set_Cut_Stage5_NCluster_Low(50) ;
-    aJFL_Selector.Set_Cut_StageT15_APM_Low(1) ;
-    aJFL_Selector.Set_Cut_StageT15_APM_High(3.5) ;
-  }
-
-  // Selection for DESY21 theta
-  if(Tag.find("theta") != std::string::npos){
-    aJFL_Selector.Set_Cut_Stage120_TLow(0) ;
-    aJFL_Selector.Set_Cut_Stage120_THigh(510) ;
-    aJFL_Selector.Set_Cut_Stage11_EventBased(200) ;
-  }
+  Init_selection(SelectionSet, aJFL_Selector, Tag, pUploader, NbrOfMod, Data_to_Use);
     
   aJFL_Selector.Tell_Selection() ;
 
@@ -187,15 +160,16 @@ void Control(
     }
     //  Loop On Modules
     int nMod                            = pEvent->Get_NberOfModule() ;
-    if(nMod < 4){
-      delete pEvent;
-      continue ;
-    }
+    // if(nMod < 4){
+    //   delete pEvent;
+    //   continue ;
+    // }
     nEvt_raw4mod++;
 
     for(int iMod = 0 ; iMod < nMod ; iMod++){
       Module* pModule                   = pEvent->Get_Module_InArray(iMod) ;
-      // if (pEvent->Validity_ForThisModule(iMod) == 0) continue ;
+      int ModuleNber                    = pModule->Get_ModuleNber();
+      if (pEvent->Validity_ForThisModule(ModuleNber) == 0) continue ;
       float avrg_padmutl                = 0 ;
       int NClusters                     = pModule->Get_NberOfCluster() ;
       v_h1f_CM_Raw[iMod]->                Fill(NClusters) ;
@@ -253,7 +227,8 @@ void Control(
     //  Loop On Modules
     for(int iMod = 0 ; iMod < nMod ; iMod++){
       Module* pModule                   = pEvent->Get_Module_InArray(iMod) ;
-      // if (pEvent->Validity_ForThisModule(iMod) == 0) continue ;
+      int ModuleNber                    = pModule->Get_ModuleNber();
+      if (pEvent->Validity_ForThisModule(ModuleNber) == 0) continue ;
       float avrg_padmutl                = 0 ;
       int NClusters                     = pModule->Get_NberOfCluster() ;
       v_h1f_CM_Sel[iMod]->              Fill(NClusters) ;
@@ -322,8 +297,10 @@ void Control(
   }
   
   std::cout << "Nber Of Entries :" << NEvent << std::endl ;
-  std::cout << "Raw      events with at least 4 modules: " << nEvt_raw4mod << std::endl;
-  std::cout << "Selected events with at least 4 modules: " << nEvt_sel4mod << std::endl;
+  if(EventFile.find("All_ERAMS") != std::string::npos){
+    std::cout << "Raw      events with at least 4 modules: " << nEvt_raw4mod << std::endl;
+    std::cout << "Selected events with at least 4 modules: " << nEvt_sel4mod << std::endl;
+  }
   aJFL_Selector.PrintStat() ;
   
   ////////////////////////////////////////////////////////////////////////////////////////////////////

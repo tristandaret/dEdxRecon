@@ -1,22 +1,15 @@
 Tag           : DESY21_ym40
-Comment       : _1000_zcalc_PRF_4IP_WFhatrecon
-EventFile     : ../Data_DESY21/yscan/Ym40_Z0_iter0.root
+Comment       : _zcalc_G0_WF4
+FileName     : ../Data_DESY21/yscan/Ym40_Z0_iter0.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
 Data_to_Use   : 0
 OUTDirName    : OUT_Tristan/DESY21_yscan/DESY21_ym40/
 
-
-ReadRCmap::ReadRCmap m_FileName = GainRCMaps/RCfiles/ERAM01_RCdata_01.root
-
-ReadRCmap::ReadRCmap  No Data for iX=10 and  iY=16 in GainRCMaps/RCfiles/ERAM01_RCdata_01.root
-RC map: loaded
-
-ReadGainmap::ReadGainmap m_FileName = GainRCMaps/Gainfiles/ERAM01_Gaindata_01.root
-
-ReadGainmap::ReadGainmap  No Data for iX=10 and  iY=16 in GainRCMaps/Gainfiles/ERAM01_Gaindata_01.root
-Gain map: loaded
+Gain & RC maps: loaded
 Average Gain in ERAM01 = 1947.77
+ERAM01: RC   hole in  iX = 10 | iY = 16 | value reset at 129.29
+ERAM01: Gain hole in  iX = 10 | iY = 16 | value reset at 1889.24
 
 -------------->Predefined selection T_DESY21_Event
 Number of entries :10211
@@ -52,30 +45,19 @@ zdrift        = 90 mm
 PT            = 412 ns
 TB            = 50 ns/time bin
 PT/TB         = 8 time bins
-Track fitting : PRF
 z method      : zcalc
 cut length    = 2 mm
 
 Processing events:
 0/10211
-RC hole in entry   5 | iX = 10 | iY = 16 |  RC  value reset at 129
-500/10211
 1000/10211
-1500/10211
 2000/10211
-2500/10211
 3000/10211
-3500/10211
 4000/10211
-4500/10211
 5000/10211
-5500/10211
 6000/10211
-6500/10211
 7000/10211
-7500/10211
 8000/10211
-8500/10211
 ALERT: 3 walls crossed for a pad in entry #8655
 20 21 17 18
 21 -nan 17 17
@@ -85,9 +67,9 @@ ALERT: 1 walls crossed for a pad in entry #8655
 21 -nan 17 17
 18 -0 -0
 9000/10211
-9500/10211
 10000/10211
 10210/10211
+10211 real events
 
 Selection Statistics 
  #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
@@ -100,5 +82,5 @@ Selection Statistics
     6  Stage5     9007     3473 (  -61.44)  (  -65.99)      9007     3473 (  -61.44)  (  -65.99)    294255   118082 (  -59.87)  (  -65.98)   1016686   401710 (  -60.49)  (  -67.77) 
   Summary Sel    10211     3473             (  -65.99)     10211     3473             (  -65.99)    347075   118082             (  -65.98)   1246574   401710             (  -67.77) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_yscan/DESY21_ym40/2_DESY21_ym40_Checks_1000_zcalc_PRF_4IP_WFhatrecon.root
-dEdx: OUT_Tristan/DESY21_yscan/DESY21_ym40/3_DESY21_ym40_dEdx_1000_zcalc_PRF_4IP_WFhatrecon.root
+Checks: OUT_Tristan/DESY21_yscan/DESY21_ym40/2_DESY21_ym40_Checks_zcalc_G0_WF4.root
+dEdx: OUT_Tristan/DESY21_yscan/DESY21_ym40/3_DESY21_ym40_dEdx_zcalc_G0_WF4.root
