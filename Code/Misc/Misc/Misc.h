@@ -13,5 +13,6 @@
 #include <cctype>
 #include <stdio.h>
 #include <cstring>
+#include <numeric>
 
 #endif

@@ -1,14 +1,15 @@
 # Source files to compile (without suffix)
 
 FILES := src/Tristan
-FILES += src/Tristan_Misc_Functions
-FILES += src/Tristan_Displayer
-FILES += src/Tristan_CERN22_Monitoring
-FILES += src/Tristan_CERN22_Control
-FILES += src/Tristan_CERN22_dEdx
-FILES += src/Tristan_CERN22_DrawOuts
-FILES += src/Tristan_ReadLUT
-FILES += src/Tristan_CERN22_corr
+FILES += src/Misc_Functions
+FILES += src/Displayer
+FILES += src/Monitoring
+FILES += src/Control
+FILES += src/dEdx
+FILES += src/dEdx_func
+FILES += src/DrawOuts
+FILES += src/ReadLUT
+FILES += src/corr
 
 # Header files to use for dictionary generation
 DICTFILES :=

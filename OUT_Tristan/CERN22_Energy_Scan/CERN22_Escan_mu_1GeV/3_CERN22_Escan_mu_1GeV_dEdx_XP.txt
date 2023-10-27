@@ -1,6 +1,6 @@
 Tag           : CERN22_Escan_mu_1GeV
-Comment       : _zfile_G2_WF4_2Mod
-EventFile     : ../Data_CERN22_vD/All_ERAMS_350V_412ns_mu+_1GeV_25V_z415p1_y2pad_iter0.root
+Comment       : _zfile_G0_WF4_2Mod
+FileName     : ../Data_CERN22_vD/All_ERAMS_350V_412ns_mu+_1GeV_25V_z415p1_y2pad_iter0.root
 SelectionSet  : T2_CERN22_Event
 NbrOfMod      : -1
 Data_to_Use   : 0
@@ -50,7 +50,6 @@ zdrift        = 415 mm
 PT            = 412 ns
 TB            = 40 ns/time bin
 PT/TB         = 10 time bins
-Track fitting : 
 z method      : zfile
 cut length    = 2 mm
 
@@ -245,5 +244,5 @@ Selection Statistics
     4  Stage5     8011     5277 (  -34.13)  (  -85.87)     21443    15186 (  -29.18)  (  -81.51)    510348   357680 (  -29.91)  (  -86.94)   1352573   938762 (  -30.59)  (  -86.60) 
   Summary Sel    37339     5277             (  -85.87)     82142    15186             (  -81.51)   2737759   357680             (  -86.94)   7003943   938762             (  -86.60) 
 Fitting: Started... done!
-Checks: OUT_Tristan/CERN22_Energy_Scan/CERN22_Escan_mu_1GeV/2_CERN22_Escan_mu_1GeV_Checks_zfile_G2_WF4_2Mod.root
-dEdx: OUT_Tristan/CERN22_Energy_Scan/CERN22_Escan_mu_1GeV/3_CERN22_Escan_mu_1GeV_dEdx_zfile_G2_WF4_2Mod.root
+Checks: OUT_Tristan/CERN22_Energy_Scan/CERN22_Escan_mu_1GeV/2_CERN22_Escan_mu_1GeV_Checks_zfile_G0_WF4_2Mod.root
+dEdx: OUT_Tristan/CERN22_Energy_Scan/CERN22_Escan_mu_1GeV/3_CERN22_Escan_mu_1GeV_dEdx_zfile_G0_WF4_2Mod.root

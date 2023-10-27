@@ -1,7 +1,7 @@
 #include "EvtModelTools/EvtModelTools_TD_Selections.h"
 #include "EvtModelTools/EvtModelTools_TD_Histos.h"
 #include "EvtModelTools/EvtModelTools_Histos.h"
-#include "Tristan_DESY21/Tristan_DESY21_Fits.h"
+#include "Tristan_DESY21/DESY21_Fits.h"
 #include "Misc/Util.h"
 
 
@@ -18,7 +18,7 @@
 #include "TGraphErrors.h"
 
 // CERN22; Get cut values for the time selection (run based)
-std::vector<int> SetStage120Cuts(Uploader* pUploader, const int& NbrOfMod, const int& Data_to_Use, const int& CloseWF)
+std::vector<int> Comp120_Cut(Uploader* pUploader, const int& NbrOfMod, const int& Data_to_Use, const int& CloseWF)
 {
   std::vector<int>                        v_TCut ;
 
@@ -36,7 +36,7 @@ std::vector<int> SetStage120Cuts(Uploader* pUploader, const int& NbrOfMod, const
     }  
 
     int nMod                  = pEvent->Get_NberOfModule() ;
-    if(nMod < 4){ delete pEvent; continue;}
+    // if(nMod < 4){ delete pEvent; continue;}
     for (int iMod = 0; iMod < nMod ; iMod++){
       Module* pModule                 = pEvent->Get_Module_InArray(iMod) ;
       if (pEvent->Validity_ForThisModule(iMod) == 0) continue;
@@ -169,7 +169,7 @@ void Selection_TD_TrackAlignement (Sample& aSample, const int& ModuleNber, const
       //   pTH2D_Evt_displayF->DrawClone("colz") ;
       //   ptgr_EvtF->DrawClone("same") ;
       //   ptf1_Evt_fitF->DrawClone("same") ;
-      //   pCanvasEvt->SaveAs(TString("OUT_Tristan_pt412/z" + std::to_string(zdrift) + "/Cut_Events/Event_" + std::to_string(pEvent->Get_EventNber()) + ".png")) ;
+      //   pCanvasEvt->SaveAs(TString("OUT_pt412/z" + std::to_string(zdrift) + "/Cut_Events/Event_" + std::to_string(pEvent->Get_EventNber()) + ".png")) ;
       //   delete pCanvasEvt ;
       //   nEvtPrint ++ ;
       // }

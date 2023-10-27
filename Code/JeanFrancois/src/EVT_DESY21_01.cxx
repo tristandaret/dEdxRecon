@@ -33,7 +33,7 @@ void EVT_DESY21_01()
     if(ISAMPLE==0){
       Tag = "EVT_DESY21_01" ;  
       
-      Stg120_L = -1. ; Stg120_H = 1000. ; EvtFil = "../Real_Data/DESY21/ZSCAN_412/z_360_275_412_02T_26_60_iter0.root";
+      Stg120_L = -1. ; Stg120_H = 1000. ; EvtFil = "../Real_Data/Tristan_DESY21/ZSCAN_412/z_360_275_412_02T_26_60_iter0.root";
       
       EVT_01_BASE(
                          iOptQuiet ,

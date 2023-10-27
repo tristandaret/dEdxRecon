@@ -2,12 +2,9 @@
 
 #include "Studies/Studies.h"
 
-#include "Samira/Samira.h"
 #include "Tristan/Tristan.h"
 #include "JeanFrancois/JeanFrancois.h"
 
-#include "Analysis_SH/Analysis_SH.h"
-#include "Analysis_TD/Analysis_TD.h"
 #include "Analysis_JF/Analysis_JF.h"
 
 #include "GenerateShape/GenerateShapeFunction.h"

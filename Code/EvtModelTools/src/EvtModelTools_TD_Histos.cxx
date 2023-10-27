@@ -2,7 +2,7 @@
 #include "Misc/Util.h"
 
 #include "EvtModelTools/EvtModelTools_Histos.h"
-#include "Tristan_DESY21/Tristan_DESY21_Fits.h"
+#include "Tristan_DESY21/DESY21_Fits.h"
 
 #include "TCanvas.h"
 #include "TGraph.h"

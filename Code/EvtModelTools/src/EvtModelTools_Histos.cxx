@@ -1,5 +1,5 @@
 #include "EvtModelTools/EvtModelTools_Histos.h"
-#include "Tristan/Tristan_Misc_Functions.h"
+#include "Tristan/Misc_Functions.h"
 #include "Misc/Util.h"
 #include "Misc/ParabolaFunction.h"
 #include "Misc/ParabolaFunctionNG.h"

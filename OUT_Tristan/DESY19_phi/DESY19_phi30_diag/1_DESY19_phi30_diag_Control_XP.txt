@@ -1,4 +1,4 @@
-Tristan_CERN22_Control_XP_normsel_cut2mm_zcalc_PRF_4IP_311ang2
+Control_XP_normsel_cut2mm_zcalc_PRF_4IP_311ang2
 Tag           : DESY19_phi30_diag
 EventFile     : ../Data_DESY19/Phi_scan/phi_412_30_diag_iter0.root
 SelectionSet  : T_DESY21_Event

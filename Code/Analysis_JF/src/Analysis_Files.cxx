@@ -8,7 +8,7 @@ Analysis_Files::Analysis_Files(const std::string& SampleSet)
   
 //----------------------------------------------------------------------------------------------//
   if ( m_SampleSet == "D21_ZSCAN_200" ){
-    m_FilesDir = "OUT_Prod/DESY21/ZSCAN_200/" ; 
+    m_FilesDir = "OUT_Prod/Tristan_DESY21/ZSCAN_200/" ; 
     m_NberOfFiles = 10 ;
     for (int iFl = 0 ; iFl< m_NberOfFiles; iFl++){
        std::string EvtFil = "BIDON" ;
@@ -52,7 +52,7 @@ Analysis_Files::Analysis_Files(const std::string& SampleSet)
 
 //----------------------------------------------------------------------------------------------//
   if ( m_SampleSet == "D21_ZSCAN" ){
-    m_FilesDir = "OUT_Prod/DESY21/ZSCAN/" ; 
+    m_FilesDir = "OUT_Prod/Tristan_DESY21/ZSCAN/" ; 
     m_NberOfFiles = 10 ;
     for (int iFl = 0 ; iFl< m_NberOfFiles; iFl++){
        std::string EvtFil = "BIDON" ;

@@ -1,10 +1,10 @@
 #include "Tristan/Tristan.h"
 #include "Misc/Util.h"
 
-#include "Tristan/Tristan_CERN22_Monitoring.h"
+#include "Tristan/Monitoring.h"
 
 void Tristan()
 {
-  // Tristan_DESY21_Monitoring() ;
-  Tristan_CERN22_Monitoring() ;
+  // DESY21_Monitoring() ;
+  Monitoring() ;
 }

@@ -1,4 +1,4 @@
-Tristan_CERN22_Control_zfile_PRF_4IP_Gain2_WF4_4Mod
+Control_zfile_PRF_4IP_Gain2_WF4_4Mod
 Tag           : CERN22_Escan_e+_1GeV
 EventFile     : ../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_e+_1GeV_25V_z415p1_y2pad_iter0.root
 SelectionSet  : T2_CERN22_Event
