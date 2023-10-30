@@ -35,7 +35,7 @@ void DIA_CERN22_01()
 
     std::string OUTDirName = "OUT_JeanFrancois/Dir_" + base_EventFile + "_" + AnalyseName + "/";
 
-    MyMakeDir(OUTDirName) ;
+    MakeMyDir(OUTDirName) ;
     std::cout << "      OUTDirName   : " << OUTDirName  << std::endl ;
     std::cout << std::endl ;
 

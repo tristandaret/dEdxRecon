@@ -10,6 +10,7 @@ FILES += src/dEdx_func
 FILES += src/DrawOuts
 FILES += src/ReadLUT
 FILES += src/corr
+FILES += src/CombinedFit
 
 # Header files to use for dictionary generation
 DICTFILES :=

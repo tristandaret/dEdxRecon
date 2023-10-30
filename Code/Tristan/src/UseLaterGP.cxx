@@ -39,11 +39,11 @@ void dEdx( const std::string& OutDir,
 
 { 
   std::string OUTDirName                    = OutDir + Tag + "/" ;
-  MyMakeDir(OUTDirName) ;
+  MakeMyDir(OUTDirName) ;
   std::string OUTDIR_Evt_Display            = OUTDirName + "Evt_Display/" ;
-  MyMakeDir(OUTDIR_Evt_Display) ;
+  MakeMyDir(OUTDIR_Evt_Display) ;
   std::string OUTDIR_WF_Display             = OUTDirName + "WF_Display/" ;
-  MyMakeDir(OUTDIR_WF_Display) ;
+  MakeMyDir(OUTDIR_WF_Display) ;
 
   // int nZ = 22 ;
   // Interpol3 LUT3(Form("/home/td263283/Documents/Python/LUT_XP/LUT_Dt%i_PT%i_nphi200_nd200/LUT_RC115/", 310, PT), nZ ) ;

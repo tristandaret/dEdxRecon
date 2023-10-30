@@ -32,7 +32,7 @@ void CERN22_01_RC_ESCAN_01()
 {
   std::string SampleSet = "C22_ESCAN" ;
   std::string OUTDirName  = "OUT_JeanFrancois/P_Synthesis/" + SampleSet + "/" ;
-  MyMakeDir(OUTDirName) ;
+  MakeMyDir(OUTDirName) ;
 //
   gROOT->ForceStyle();
   gStyle->SetOptStat(111111) ;
@@ -200,7 +200,7 @@ void CERN22_01_RESO_ESCAN_01()
 {
   std::string SampleSet = "C22_ESCAN" ;
   std::string OUTDirName  = "OUT_JeanFrancois/P_Synthesis/" + SampleSet + "/" ;
-  MyMakeDir(OUTDirName) ;
+  MakeMyDir(OUTDirName) ;
 //
   gROOT->ForceStyle();
   gStyle->SetOptStat(111111) ;

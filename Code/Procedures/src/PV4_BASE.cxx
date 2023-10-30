@@ -106,7 +106,7 @@ void PV4_BASE(
   if (iOptQuiet==1) return ;
 
 //
-  MyMakeDir(OUTDirName) ;
+  MakeMyDir(OUTDirName) ;
     
 //Redirect Output
   std::cout << std::endl ;

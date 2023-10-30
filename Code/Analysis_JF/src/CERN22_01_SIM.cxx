@@ -46,7 +46,7 @@ void CERN22_01_SIM_PV3_RC_ZSCAN_01()
 {
   std::string SampleSet = "ZScan_SIM" ;
   std::string OUTDirName  = "OUT_JeanFrancois/P_Synthesis/" + SampleSet + "/" ;
-  MyMakeDir(OUTDirName) ;
+  MakeMyDir(OUTDirName) ;
 //
   gROOT->ForceStyle();
   gStyle->SetOptStat(111111) ;
@@ -288,7 +288,7 @@ void CERN22_01_SIM_PV3_RESO_ZSCAN_01()
 {
   std::string SampleSet = "ZScan_SIM" ;
   std::string OUTDirName  = "OUT_JeanFrancois/P_Synthesis/" + SampleSet + "/" ;
-  MyMakeDir(OUTDirName) ;
+  MakeMyDir(OUTDirName) ;
 //
   gROOT->ForceStyle();
   gStyle->SetOptStat(111111) ;
@@ -799,7 +799,7 @@ void CERN22_01_SIM_PV2_RC_ZSCAN_01()
 {
   std::string SampleSet = "ZScan_SIM" ;
   std::string OUTDirName  = "OUT_JeanFrancois/P_Synthesis/" + SampleSet + "/" ;
-  MyMakeDir(OUTDirName) ;
+  MakeMyDir(OUTDirName) ;
 //
   gROOT->ForceStyle();
   gStyle->SetOptStat(111111) ;
@@ -1038,7 +1038,7 @@ void CERN22_01_SIM_PV2_RESO_ZSCAN_01()
 {
   std::string SampleSet = "ZScan_SIM" ;
   std::string OUTDirName  = "OUT_JeanFrancois/P_Synthesis/" + SampleSet + "/" ;
-  MyMakeDir(OUTDirName) ;
+  MakeMyDir(OUTDirName) ;
 //
   gROOT->ForceStyle();
   gStyle->SetOptStat(111111) ;
@@ -1546,7 +1546,7 @@ void CERN22_01_SIM_RcUnknown_PV2_RC_ZSCAN_01()
 {
   std::string SampleSet = "ZScan_SIM" ;
   std::string OUTDirName  = "OUT_JeanFrancois/P_Synthesis/" + SampleSet + "/" ;
-  MyMakeDir(OUTDirName) ;
+  MakeMyDir(OUTDirName) ;
 //
   gROOT->ForceStyle();
   gStyle->SetOptStat(111111) ;
@@ -1785,7 +1785,7 @@ void CERN22_01_SIM_RcUnknown_PV2_RESO_ZSCAN_01()
 {
   std::string SampleSet = "ZScan_SIM" ;
   std::string OUTDirName  = "OUT_JeanFrancois/P_Synthesis/" + SampleSet + "/" ;
-  MyMakeDir(OUTDirName) ;
+  MakeMyDir(OUTDirName) ;
 //
   gROOT->ForceStyle();
   gStyle->SetOptStat(111111) ;
@@ -2294,7 +2294,7 @@ void CERN22_01_SIM_RcUnknown_PV3_RC_ZSCAN_01()
 {
   std::string SampleSet = "ZScan_SIM" ;
   std::string OUTDirName  = "OUT_JeanFrancois/P_Synthesis/" + SampleSet + "/" ;
-  MyMakeDir(OUTDirName) ;
+  MakeMyDir(OUTDirName) ;
 //
   gROOT->ForceStyle();
   gStyle->SetOptStat(111111) ;
@@ -2533,7 +2533,7 @@ void CERN22_01_SIM_RcUnknown_PV3_RESO_ZSCAN_01()
 {
   std::string SampleSet = "ZScan_SIM" ;
   std::string OUTDirName  = "OUT_JeanFrancois/P_Synthesis/" + SampleSet + "/" ;
-  MyMakeDir(OUTDirName) ;
+  MakeMyDir(OUTDirName) ;
 //
   gROOT->ForceStyle();
   gStyle->SetOptStat(111111) ;

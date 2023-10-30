@@ -1,5 +1,7 @@
 #include "Tristan/DrawOuts.h"
 #include "Tristan/Misc_Functions.h"
+#include "Tristan/CombinedFit.h"
+
 #include "Misc/Util.h"
 #include <cmath>
 #include <numeric>
@@ -467,11 +469,13 @@ void DrawOut_Checks(const std::string& OutDir, const std::string EvtFile, const 
   TH1F* h1f_dist                = pTFile_Checks->Get<TH1F>("h1f_dist") ;
   TH1F* h1f_dist_clus           = pTFile_Checks->Get<TH1F>("h1f_dist_clus") ;
   TH1F* h1f_WFcorr              = pTFile_Checks->Get<TH1F>("h1f_WFcorr") ;
+  TH1F* h1f_Gcorr               = pTFile_Checks->Get<TH1F>("h1f_Gcorr") ;
+  TH2F* h2f_dEdx_Y              = pTFile_Checks->Get<TH2F>("h2f_dEdx_Y") ;
   TH2F* h2f_ratiodiffZ          = pTFile_Checks->Get<TH2F>("h2f_ratiodiffZ") ;
   TH2F* h2f_AmaxvsLength        = pTFile_Checks->Get<TH2F>("h2f_AmaxvsLength") ;
   TH2F* h2f_LUTvsLength         = pTFile_Checks->Get<TH2F>("h2f_LUTvsLength") ;
   TH2F* h2f_WFvsLength          = pTFile_Checks->Get<TH2F>("h2f_WFvsLength") ;
-  TH2F* h2f_WFsumvsLength     = pTFile_Checks->Get<TH2F>("h2f_WFsumvsLength") ;
+  TH2F* h2f_WFsumvsLength       = pTFile_Checks->Get<TH2F>("h2f_WFsumvsLength") ;
   TH2F* h2f_WFstarvsLen         = pTFile_Checks->Get<TH2F>("h2f_WFstarvsLen") ;
   TH2F* h2f_WFstartrcvsLen      = pTFile_Checks->Get<TH2F>("h2f_WFstartrcvsLen") ;
   TF1* A_corr                   = new TF1 ;
@@ -544,11 +548,24 @@ void DrawOut_Checks(const std::string& OutDir, const std::string EvtFile, const 
   pTCanvas->                      SaveAs(OutputFile.c_str()) ;
   pTCanvas->                      SetLogy(0) ;  
 
+  gStyle->                        SetStatX(0.89) ;
+  gStyle->                        SetStatY(0.89) ;
+
   pTCanvas->                      Clear() ;
   h1f_WFcorr->                    SetLineWidth(4) ;
   h1f_WFcorr->                    Draw() ;
   pTCanvas->                      SaveAs(OutputFile.c_str()) ;
   pTCanvas->                      SetLogy(0) ; 
+
+  pTCanvas->                      Clear() ;
+  h1f_Gcorr->                     SetLineWidth(4) ;
+  h1f_Gcorr->                     Draw() ;
+  pTCanvas->                      SaveAs(OutputFile.c_str()) ;
+
+  pTCanvas->                      Clear() ;
+  h2f_dEdx_Y->                    Draw("colz") ;
+  pTCanvas->                      SaveAs(OutputFile.c_str()) ;
+
   pTCanvas->                      Clear() ;
   h2f_ratiodiffZ->                Draw("colz") ;
   pTCanvas->                      SaveAs(OutputFile.c_str()) ;
@@ -664,6 +681,9 @@ void DrawOut_Checks(const std::string& OutDir, const std::string EvtFile, const 
   delete h1f_Lnorm ;
   delete h1f_dnorm ;
   delete h1f_dist ;
+  delete h1f_WFcorr ;
+  delete h1f_Gcorr ;
+  delete h2f_dEdx_Y ;
   delete h2f_ratiodiffZ ;
   delete h2f_AmaxvsLength ;
   delete h2f_LUTvsLength ;
@@ -3861,6 +3881,8 @@ void DrawOut_Escan(const std::string& inputDir, const std::string& Comment)
     v_pTGE_std_WF[index]->  SetPointError (n[iE], 0,         dstd_WF[iE]*keV) ;
     v_pTGE_std_XP[index]->  SetPointError (n[iE], 0,         dstd_XP[iE]*keV) ;
   }
+
+  combinedFit(v_pTGE_mean_XP);
 
   for(int i = 0 ; i < 4 ; i++) v_pTGE_mean_XP[i]->Fit(v_bethebloch[i], "R", "", 0.45, 1.55);
 

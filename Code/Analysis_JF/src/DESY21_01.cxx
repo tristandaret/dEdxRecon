@@ -42,7 +42,7 @@ void DESY21_01_RC_PV3_ZSCAN_01()
 {
   std::string SampleSet = "D21_ZSCAN" ;
   std::string OUTDirName  = "OUT_JeanFrancois/P_Synthesis/" + SampleSet + "/" ;
-  MyMakeDir(OUTDirName) ;
+  MakeMyDir(OUTDirName) ;
 //
   gROOT->ForceStyle();
   gStyle->SetOptStat(111111) ;
@@ -459,7 +459,7 @@ void DESY21_01_RC_ZSCAN_01()
 {
   std::string SampleSet = "D21_ZSCAN" ;
   std::string OUTDirName  = "OUT_JeanFrancois/P_Synthesis/" + SampleSet + "/" ;
-  MyMakeDir(OUTDirName) ;
+  MakeMyDir(OUTDirName) ;
 //
   gROOT->ForceStyle();
   gStyle->SetOptStat(111111) ;
@@ -874,7 +874,7 @@ void DESY21_01_RESO_ZSCAN_01()
 {
   std::string SampleSet = "D21_ZSCAN" ;
   std::string OUTDirName  = "OUT_JeanFrancois/P_Synthesis/" + SampleSet + "/" ;
-  MyMakeDir(OUTDirName) ;
+  MakeMyDir(OUTDirName) ;
 //
   gROOT->ForceStyle();
   gStyle->SetOptStat(111111) ;
@@ -1374,7 +1374,7 @@ void DESY21_01_RC_ZSCAN_200_01()
 {
   std::string SampleSet = "D21_ZSCAN" ;
   std::string OUTDirName  = "OUT_JeanFrancois/P_Synthesis/" + SampleSet + "/" ;
-  MyMakeDir(OUTDirName) ;
+  MakeMyDir(OUTDirName) ;
 //
   gROOT->ForceStyle();
   gStyle->SetOptStat(111111) ;
@@ -1792,7 +1792,7 @@ void DESY21_01_RESO_ZSCAN_200_01()
 {
   std::string SampleSet = "D21_ZSCAN" ;
   std::string OUTDirName  = "OUT_JeanFrancois/P_Synthesis/" + SampleSet + "/" ;
-  MyMakeDir(OUTDirName) ;
+  MakeMyDir(OUTDirName) ;
 //
   gROOT->ForceStyle();
   gStyle->SetOptStat(111111) ;

@@ -23,11 +23,11 @@ void Control(
                         const std::string& particle)
 { 
   std::string OUTDirName = OutDir + Tag + "/" ;
-  MyMakeDir(OUTDirName) ;  
+  MakeMyDir(OUTDirName) ;  
   std::string OUTDIR_Evt_Display = OUTDirName + "/Evt_Display/" ;
-  MyMakeDir(OUTDIR_Evt_Display) ;
+  MakeMyDir(OUTDIR_Evt_Display) ;
   std::string OUTDIR_WF_Display = OUTDirName + "/WF_Display/" ;
-  MyMakeDir(OUTDIR_WF_Display) ;
+  MakeMyDir(OUTDIR_WF_Display) ;
 
   // Redirect Output
   std::string OutPut_Analysis = OUTDirName + "1_" + Tag + "_Control_XP.txt" ;

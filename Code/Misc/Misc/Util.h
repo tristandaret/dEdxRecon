@@ -15,7 +15,7 @@
 #include "TLegend.h"
 #include "TGraphErrors.h"
 
-int MyMakeDir(const std::string& DirName);
+int MakeMyDir(const std::string& DirName);
 
 int ListDir(std::string DirName, std::vector < std::string >& VectorOfStrings);
 

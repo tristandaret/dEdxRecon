@@ -48,7 +48,7 @@ void DIA_DiagNoDiag()
     aostringstream_OutPutDir << "OUT_JeanFrancois/Dir_" << IsVertical << "_" << base_EventFile << "_" << AnalyseName << "/";
     std::string OUTDirName = aostringstream_OutPutDir.str() ;
 
-    MyMakeDir(OUTDirName) ;
+    MakeMyDir(OUTDirName) ;
     std::cout << "      OUTDirName   : " << OUTDirName  << std::endl ;
     std::cout << std::endl ;
 

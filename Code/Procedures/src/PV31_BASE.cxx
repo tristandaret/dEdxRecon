@@ -92,9 +92,9 @@ void PV31_BASE(
   std::string OUTDirName = aostringstream_OUTDirName.str() ;  ;
   
   std::string OUTDIR_DBG_PadFit = OUTDirName + "/DBG_PadFit/" ;
-  MyMakeDir(OUTDIR_DBG_PadFit        ) ;
+  MakeMyDir(OUTDIR_DBG_PadFit        ) ;
   std::string OUTDIR_DBG_PadFit_Cluster = OUTDIR_DBG_PadFit + "/Cluster/" ;
-  MyMakeDir(OUTDIR_DBG_PadFit_Cluster) ;
+  MakeMyDir(OUTDIR_DBG_PadFit_Cluster) ;
   int Kounter_DrawOut_JF_WaveFormDisplay     = 0 ;
   int Kounter_DrawOut_JF_WaveFormDisplay_Max =10 ;
 
@@ -118,7 +118,7 @@ void PV31_BASE(
   if (iOptQuiet==1) return ;
 
 //
-  MyMakeDir(OUTDirName) ;
+  MakeMyDir(OUTDirName) ;
     
 //Redirect Output
   std::cout << std::endl ;

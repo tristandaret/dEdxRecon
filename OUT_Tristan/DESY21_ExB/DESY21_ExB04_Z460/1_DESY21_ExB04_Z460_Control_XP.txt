@@ -1,0 +1,57 @@
+Control_zcalc_G2_WF4_iter0
+Tag           : DESY21_ExB04_Z460
+EventFile     : ../Data_DESY21/ExB_scan/ExB_360_phim3_200ns_B04_ym60_z460_iter0.root
+SelectionSet  : T_DESY21_Event
+iMod          : 0
+Data_to_Use   : 0
+OUTDirName    : OUT_Tristan/DESY21_ExB/DESY21_ExB04_Z460/
+
+
+-------------->Predefined selection T_DESY21_Event
+Number of entries :3559
+TLow = 190 | THigh = 218
+
+-------------->List of selections
+Apply selection  1 -> Remove clusters in first and last columns 
+
+Apply selection 11 -> Remove clusters out of time (Event Based) 
+                      |TLeading -TLeadingMeanOverEvent| <= m_Cut_Stage11_EventBased (=     3)
+
+Apply selection 120 -> Remove clusters out of time  
+                      m_Cut_Stage120_TLow <= TLeading <= m_Cut_Stage120_THigh 
+                      m_Cut_Stage120_TLow  =  190
+                      m_Cut_Stage120_THigh =  218
+
+Apply selection 15 -> Remove Events with an average pad multiplicity too high or too low 
+                      Pad Multiplicity >  m_Cut_StageT15_APM_Low  (=  2.0)
+                      Pad Multiplicity <= m_Cut_StageT15_APM_High (=  4.0)
+
+Apply selection 10 -> Remove clusters with too many pads 
+                      Npads <= m_Cut_Stage10_Npads_Hig (=   5)
+
+Apply selection 14 -> Remove Clusters with a too high APad 
+                      APad >= m_Cut_Stage14_Amax_Low (=     0)
+                      APad <= m_Cut_Stage14_Amax_Hig (=  3700)
+
+Apply selection  5 -> Reject Events with too few clusters
+                      NClusters >= m_Cut_Stage5_NCluster_Low (=   34)
+
+
+Processing events:
+0/3559
+1000/3559
+2000/3559
+3000/3559
+3558/3559
+Nber Of Entries :3559
+
+Selection Statistics 
+ #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
+    0  Stage1     3559     3559 (    0.00)  (    0.00)      3559     3559 (    0.00)  (    0.00)    120977   120977 (    0.00)  (    0.00)    356443   356443 (    0.00)  (    0.00) 
+    1 Stage11     3559     3504 (   -1.55)  (   -1.55)      3559     3504 (   -1.55)  (   -1.55)    120977   112248 (   -7.22)  (   -7.22)    356443   325766 (   -8.61)  (   -8.61) 
+    2Stage120     3504     3452 (   -1.48)  (   -3.01)      3504     3452 (   -1.48)  (   -3.01)    112248   110642 (   -1.43)  (   -8.54)    325766   321533 (   -1.30)  (   -9.79) 
+    3StageT15     3452     3343 (   -3.16)  (   -6.07)      3452     3343 (   -3.16)  (   -6.07)    110642   107898 (   -2.48)  (  -10.81)    321533   309836 (   -3.64)  (  -13.08) 
+    4 Stage10     3343     3343 (    0.00)  (   -6.07)      3343     3343 (    0.00)  (   -6.07)    107898   107580 (   -0.29)  (  -11.07)    309836   307855 (   -0.64)  (  -13.63) 
+    5 Stage14     3343     3343 (    0.00)  (   -6.07)      3343     3343 (    0.00)  (   -6.07)    107580   106159 (   -1.32)  (  -12.25)    307855   302247 (   -1.82)  (  -15.20) 
+    6  Stage5     3343      914 (  -72.66)  (  -74.32)      3343      914 (  -72.66)  (  -74.32)    106159    31076 (  -70.73)  (  -74.31)    302247    86380 (  -71.42)  (  -75.77) 
+  Summary Sel     3559      914             (  -74.32)      3559      914             (  -74.32)    120977    31076             (  -74.31)    356443    86380             (  -75.77) 

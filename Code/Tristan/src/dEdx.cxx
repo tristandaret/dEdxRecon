@@ -40,11 +40,11 @@ void dEdx( const std::string& OutDir,
 
 { 
   std::string OUTDirName                    = OutDir + Tag + "/" ;
-  MyMakeDir(OUTDirName) ;
+  MakeMyDir(OUTDirName) ;
   std::string OUTDIR_Evt_Display            = OUTDirName + "Evt_Display/" ;
-  MyMakeDir(OUTDIR_Evt_Display) ;
+  MakeMyDir(OUTDIR_Evt_Display) ;
   std::string OUTDIR_WF_Display             = OUTDirName + "WF_Display/" ;
-  MyMakeDir(OUTDIR_WF_Display) ;
+  MakeMyDir(OUTDIR_WF_Display) ;
 
   // int nZ = 22 ;
   // Interpol3 LUT3(Form("/home/td263283/Documents/Python/LUT_XP/LUT_Dt%i_PT%i_nphi200_nd200/LUT_RC115/", 310, PT), nZ ) ;
@@ -60,7 +60,7 @@ void dEdx( const std::string& OutDir,
   float alpha           = 70 ;                                  // truncation value in %
   float n_param_trk     = 3 ;                                   // 2 if there is not magnetic field
   float len_cut         = 0.002 ;                               // minimum length in pad to be considered truncable (m)
-  int gain_corr         = 0 ;                                   // apply XP gain correction
+  int gain_corr         = 1 ;                                   // apply XP gain correction
 
   // Parameters for the LUT
   int   size            = 200 ;                                 // LUT definition along d & phi
@@ -139,7 +139,9 @@ void dEdx( const std::string& OutDir,
   TH1F* h1f_Tcross          = new TH1F("h1f_Tcross",          "T_{max} of crossed pads;T (timbebin);Count", 511, -0.5, 510.5) ;
   TH1F* h1f_Ncross          = new TH1F("h1f_Ncross",          "Number of crossed pads;# of crossed pads;Count", 45, 15, 60) ;
   TH1F* h1f_angle           = new TH1F("h1f_angle",           "Angle #varphi in each pad;#varphi (#circ);Count", 66, -55, 10) ;
+  TH1F* h1f_Gcorr           = new TH1F("h1f_Gcorr",           "Gain correction ratio;ratio;Count", 80, 0, 2) ;
   TH1F* h1f_WFcorr          = new TH1F("h1f_WFcorr",          "Correction A_{max} ratio;ratio;Count", 80, 0, 3) ;
+  TH2F* h2f_dEdx_Y          = new TH2F("h2f_dEdx_Y",          "Y position VS dE/dx;dE/dx (ADC counts);Y position (cm)", 160, 0, 2000, 80, 0, 10) ;
   TH2F* h2f_ratiodiffZ      = new TH2F("h2f_ratiodiffZ",      "LUT(z_{file}) vs LUT(z_{calc});LUT(z_{calc});LUT(z_{file})", 80, 0, 2.1, 80, 0, 2.1) ;
   TH2F* h2f_AmaxvsLength    = new TH2F("h2f_AmaxvsLength",    "ADC_{max} VS length in pad (before length cut);Length in pad (mm);ADC_{max}", 80, -0.1, 16, 80, 0, 4100) ;
   TH2F* h2f_QvsLength       = new TH2F("h2f_QvsLength",       "Q^{anode} VS length in pad (before length cut);Length in pad (mm);Q^{anode}", 80, -0.1, 16, 80, 0, 4100) ;
@@ -192,6 +194,7 @@ void dEdx( const std::string& OutDir,
     std::vector<float>                    v_WF,             v_WFmax ; 
     std::vector<RankedValue>              v_rank_WF,        v_rank_Cross ;
     std::vector<float>                    v_ratio_Evt ; 
+    std::vector<float>                    v_ordo_origin ; 
 
     // Loop On Modules
     int nMod                              = pEvent->Get_NberOfModule() ;
@@ -203,19 +206,20 @@ void dEdx( const std::string& OutDir,
       if (pEvent->Validity_ForThisModule(ModuleNber)!=0) eram_list.push_back(eram_number[ModuleNber]) ;
     } 
 
+    int nber ;
     if(FileName.find("All_ERAMS") != std::string::npos){
-      // // 1 ERAM
-      // int nber = 1;
-      // if(!is_in(eram_list, nber)){
-      //   delete pEvent;
-      //   continue;
-      // }
-
-      // 2 ERAMs
-      if(!(is_in(eram_list, 7) and is_in(eram_list, 1)) and !(is_in(eram_list, 16) and is_in(eram_list, 10))){
+      // 1 ERAM
+      nber = 23;
+      if(!is_in(eram_list, nber)){
         delete pEvent;
         continue;
       }
+
+      // // 2 ERAMs
+      // if(!(is_in(eram_list, 7) and is_in(eram_list, 1)) and !(is_in(eram_list, 16) and is_in(eram_list, 10))){
+      //   delete pEvent;
+      //   continue;
+      // }
 
       // // 4 ERAMs
       // if(   !(is_in(eram_list,  7) and is_in(eram_list,  1) and is_in(eram_list, 23) and is_in(eram_list,  2))
@@ -230,8 +234,8 @@ void dEdx( const std::string& OutDir,
       int ModuleNber                      = pModule->Get_ModuleNber() ;
       if (pEvent->Validity_ForThisModule(ModuleNber) == 0) continue ;
       if(FileName.find("All_ERAMS") != std::string::npos){
-        // if(eram_number[ModuleNber] != nber) continue; // 1 ERAM
-        if(eram_number[ModuleNber] != 7 and eram_number[ModuleNber] != 1 and eram_number[ModuleNber] != 16 and eram_number[ModuleNber] != 10) continue; // 2 ERAMs
+        if(eram_number[ModuleNber] != nber) continue; // 1 ERAM
+        // if(eram_number[ModuleNber] != 7 and eram_number[ModuleNber] != 1 and eram_number[ModuleNber] != 16 and eram_number[ModuleNber] != 10) continue; // 2 ERAMs
       }
       float N_clus                        = pModule->Get_NberOfCluster() ;
       if(N_clus == 0) continue;
@@ -256,6 +260,7 @@ void dEdx( const std::string& OutDir,
       std::vector<float>                    v_len_clust ; 
       float len_track                     = trk_len(pModule, pTrack)*100 ; // in cm from left side  of cluster #0 to right side of last cluster
       len_track_Evt                      += len_track;
+      v_ordo_origin.                        push_back(pTrack->Get_ParameterValue(0)*100);
 
       // Loop On Clusters
       for (int iC = 0 ; iC < N_clus ; iC++){
@@ -274,6 +279,7 @@ void dEdx( const std::string& OutDir,
           if(gain_corr){
             double G_pad                  = Gainmaps[ModuleNber]->GetData(pPad->Get_iX(),pPad->Get_iY(), StatusG) ;
             float Gcorr                   = avg_G/G_pad ;
+            h1f_Gcorr->                     Fill(Gcorr);
             A_pad                         = Gcorr*pPad->Get_AMax() ;
             h1f_WF_pad->                    Scale(Gcorr) ;
           }
@@ -409,7 +415,7 @@ void dEdx( const std::string& OutDir,
         delete                              h1f_WF_cluster ;
       } // Cluster
 
-      if(iEvent < 50) DrawOut_EventDisplay(pModule, OUTDIR_Evt_Display, Tag, "amplitude", pTrack->Get_ParameterValue(2), pTrack->Get_ParameterValue(1), pTrack->Get_ParameterValue(0)) ;
+      // if(iEvent < 50) DrawOut_EventDisplay(pModule, OUTDIR_Evt_Display, Tag, "amplitude", pTrack->Get_ParameterValue(2), pTrack->Get_ParameterValue(1), pTrack->Get_ParameterValue(0)) ;
     } // Module
 
     if(N_cross_Evt > 0){
@@ -460,6 +466,8 @@ void dEdx( const std::string& OutDir,
       }
       XP                                 /= track_len_trc_XP ;
       h1f_XP->                               Fill(XP) ;
+
+      for(int i = 0 ; i<(int)v_ordo_origin.size();i++) h2f_dEdx_Y->Fill(XP, v_ordo_origin[i]);
     }
 
 
@@ -511,6 +519,8 @@ void dEdx( const std::string& OutDir,
   h1f_dist->                                Write() ;
   h1f_dist_clus->                           Write() ;
   h1f_WFcorr->                              Write() ;
+  h1f_Gcorr->                               Write() ;
+  h2f_dEdx_Y->                              Write() ;
   h2f_ratiodiffZ->                          Write() ;
   h2f_AmaxvsLength->                        Write() ;
   h2f_QvsLength->                           Write() ;
@@ -547,6 +557,8 @@ void dEdx( const std::string& OutDir,
   delete h1f_dist ;
   delete h1f_dist_clus ;
   delete h1f_WFcorr ;
+  delete h1f_Gcorr ;
+  delete h2f_dEdx_Y ;
   delete h2f_ratiodiffZ ;
   delete h2f_AmaxvsLength ;
   delete h2f_QvsLength ;

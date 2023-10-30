@@ -26,7 +26,7 @@
 void PerSample(const std::string& SampleSet)
 {
   std::string OUTDirName  = "OUT_JeanFrancois/P_Synthesis/" + SampleSet ;
-  MyMakeDir(OUTDirName) ;
+  MakeMyDir(OUTDirName) ;
 
   gROOT->ForceStyle();
   gStyle->SetOptStat(111111) ;
@@ -72,7 +72,7 @@ void PerRun(
    const std::string& AnalyseName)
 {
   std::string OUTDirName  = OUTDirNameIN + "/" + AnalyseName + "/" + base_EventFile + "/" ;
-  MyMakeDir(OUTDirName) ;
+  MakeMyDir(OUTDirName) ;
 
   gStyle->SetOptStat(0);
 

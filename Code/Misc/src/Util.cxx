@@ -6,7 +6,7 @@
 #include <sys/types.h>
 #include <dirent.h>
 
-int MyMakeDir(const std::string& DirName)
+int MakeMyDir(const std::string& DirName)
 {
  std::string MakeCommand = "mkdir -p " + DirName ;
  return system(MakeCommand.c_str()) ;

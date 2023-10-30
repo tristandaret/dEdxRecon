@@ -1,0 +1,93 @@
+Tag           : DESY21_ExB04_Z60
+Comment       : _zcalc_G2_WF4_iter0
+FileName     : ../Data_DESY21/ExB_scan/ExB_360_phim3_200ns_B04_ym60_z60_iter0.root
+SelectionSet  : T_DESY21_Event
+NbrOfMod      : 0
+Data_to_Use   : 0
+OUTDirName    : OUT_Tristan/DESY21_ExB/DESY21_ExB04_Z60/
+
+Gain & RC maps: loaded
+Average Gain in ERAM01 = 1947.77
+ERAM01: RC   hole in  iX = 10 | iY = 16 | value reset at 129.29
+ERAM01: Gain hole in  iX = 10 | iY = 16 | value reset at 1889.24
+
+-------------->Predefined selection T_DESY21_Event
+Number of entries :6518
+No Stage120 cuts found in CSV. Getting them now...
+0/6518
+1000/6518
+2000/6518
+3000/6518
+4000/6518
+5000/6518
+6000/6518
+6517/6518
+29939.00
+84
+Stage120 cuts are 69 to 107. Values added to CSV file.
+
+-------------->List of selections
+Apply selection  1 -> Remove clusters in first and last columns 
+
+Apply selection 11 -> Remove clusters out of time (Event Based) 
+                      |TLeading -TLeadingMeanOverEvent| <= m_Cut_Stage11_EventBased (=     3)
+
+Apply selection 120 -> Remove clusters out of time  
+                      m_Cut_Stage120_TLow <= TLeading <= m_Cut_Stage120_THigh 
+                      m_Cut_Stage120_TLow  =   69
+                      m_Cut_Stage120_THigh =  107
+
+Apply selection 15 -> Remove Events with an average pad multiplicity too high or too low 
+                      Pad Multiplicity >  m_Cut_StageT15_APM_Low  (=  2.0)
+                      Pad Multiplicity <= m_Cut_StageT15_APM_High (=  4.0)
+
+Apply selection 10 -> Remove clusters with too many pads 
+                      Npads <= m_Cut_Stage10_Npads_Hig (=   5)
+
+Apply selection 14 -> Remove Clusters with a too high APad 
+                      APad >= m_Cut_Stage14_Amax_Low (=     0)
+                      APad <= m_Cut_Stage14_Amax_Hig (=  3700)
+
+Apply selection  5 -> Reject Events with too few clusters
+                      NClusters >= m_Cut_Stage5_NCluster_Low (=   34)
+
+
+zdrift        = 150 mm
+PT            = 200 ns
+TB            = 40 ns/time bin
+PT/TB         = 5 time bins
+z method      : zcalc
+cut length    = 2 mm
+
+Processing events:
+0/6518
+1000/6518
+2000/6518
+3000/6518
+4000/6518
+5000/6518
+ALERT: 3 walls crossed for a pad in entry #5898
+5 6 20 21
+6 -15 20 20
+21 -0 0
+ALERT: 1 walls crossed for a pad in entry #5898
+6 7 20 21
+6 -15 20 20
+21 -0 0
+6000/6518
+6517/6518
+6518 real events
+
+Selection Statistics 
+ #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
+    0  Stage1     6518     6518 (    0.00)  (    0.00)      6518     6518 (    0.00)  (    0.00)    221538   221538 (    0.00)  (    0.00)    653306   653306 (    0.00)  (    0.00) 
+    1 Stage11     6518     6416 (   -1.56)  (   -1.56)      6518     6416 (   -1.56)  (   -1.56)    221538   206672 (   -6.71)  (   -6.71)    653306   600260 (   -8.12)  (   -8.12) 
+    2Stage120     6416     6328 (   -1.37)  (   -2.92)      6416     6328 (   -1.37)  (   -2.92)    206672   203705 (   -1.44)  (   -8.05)    600260   592931 (   -1.22)  (   -9.24) 
+    3StageT15     6328     6129 (   -3.14)  (   -5.97)      6328     6129 (   -3.14)  (   -5.97)    203705   198402 (   -2.60)  (  -10.44)    592931   571103 (   -3.68)  (  -12.58) 
+    4 Stage10     6129     6129 (    0.00)  (   -5.97)      6129     6129 (    0.00)  (   -5.97)    198402   197830 (   -0.29)  (  -10.70)    571103   567527 (   -0.63)  (  -13.13) 
+    5 Stage14     6129     6129 (    0.00)  (   -5.97)      6129     6129 (    0.00)  (   -5.97)    197830   194102 (   -1.88)  (  -12.38)    567527   553255 (   -2.51)  (  -15.31) 
+    6  Stage5     6129     1379 (  -77.50)  (  -78.84)      6129     1379 (  -77.50)  (  -78.84)    194102    46886 (  -75.84)  (  -78.84)    553255   130215 (  -76.46)  (  -80.07) 
+  Summary Sel     6518     1379             (  -78.84)      6518     1379             (  -78.84)    221538    46886             (  -78.84)    653306   130215             (  -80.07) 
+Fitting: Started... done!
+Checks: OUT_Tristan/DESY21_ExB/DESY21_ExB04_Z60/2_DESY21_ExB04_Z60_Checks_zcalc_G2_WF4_iter0.root
+dEdx: OUT_Tristan/DESY21_ExB/DESY21_ExB04_Z60/3_DESY21_ExB04_Z60_dEdx_zcalc_G2_WF4_iter0.root

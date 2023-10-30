@@ -32,7 +32,7 @@ void JF_SelectionValidation()
   std::cout << " OUTDirName              = " << OUTDirName  << std::endl ;
   
 //
-  MyMakeDir(OUTDirName) ;
+  MakeMyDir(OUTDirName) ;
     
 //Redirect Output
   std::cout << std::endl ;

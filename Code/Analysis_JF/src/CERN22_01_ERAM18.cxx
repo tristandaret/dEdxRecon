@@ -30,7 +30,7 @@ void CERN22_01_RESO_ERAM18_HS_01()
 { 
   std::string SampleSet = "C22_ERAM18_HS" ;
   std::string OUTDirName  = "OUT_JeanFrancois/P_Synthesis/" + SampleSet + "/" ;
-  MyMakeDir(OUTDirName) ;
+  MakeMyDir(OUTDirName) ;
 
 //
   gROOT->ForceStyle();
@@ -475,7 +475,7 @@ void CERN22_01_RC_ERAM18_HS_01()
 { 
   std::string SampleSet = "C22_ERAM18_HS" ;
   std::string OUTDirName  = "OUT_JeanFrancois/P_Synthesis/" + SampleSet + "/" ;
-  MyMakeDir(OUTDirName) ;
+  MakeMyDir(OUTDirName) ;
 
 //
   gROOT->ForceStyle();

@@ -60,7 +60,7 @@ void JF_SpotStrangeThings()
   std::cout << " OUTDirName              = " << OUTDirName  << std::endl ;
   
 //
-  MyMakeDir(OUTDirName) ;
+  MakeMyDir(OUTDirName) ;
     
 //Redirect Output
   std::cout << std::endl ;
@@ -130,8 +130,8 @@ void JF_SpotStrangeThings()
     int KounterMax = 200 ;
     std::string OUTDIR_DBG_PadFit_A         = OUTDirName + "/DBG_PadFit_A/" ;
     std::string OUTDIR_DBG_PadFit_A_Cluster = OUTDIR_DBG_PadFit_A + "/Cluster/" ;
-    MyMakeDir(OUTDIR_DBG_PadFit_A        ) ;
-    MyMakeDir(OUTDIR_DBG_PadFit_A_Cluster) ;
+    MakeMyDir(OUTDIR_DBG_PadFit_A        ) ;
+    MakeMyDir(OUTDIR_DBG_PadFit_A_Cluster) ;
     
     int Kounter = 0 ;
     for (int iE = 0 ; iE< NberOfEvents; iE++){
@@ -169,8 +169,8 @@ void JF_SpotStrangeThings()
     int KounterMax = 200 ;
     std::string OUTDIR_DBG_PadFit_B         = OUTDirName + "/DBG_PadFit_B/" ;
     std::string OUTDIR_DBG_PadFit_B_Cluster = OUTDIR_DBG_PadFit_B + "/Cluster/" ;
-    MyMakeDir(OUTDIR_DBG_PadFit_B        ) ;
-    MyMakeDir(OUTDIR_DBG_PadFit_B_Cluster) ;
+    MakeMyDir(OUTDIR_DBG_PadFit_B        ) ;
+    MakeMyDir(OUTDIR_DBG_PadFit_B_Cluster) ;
     
     int Kounter = 0 ;
     for (int iE = 0 ; iE< NberOfEvents; iE++){
@@ -208,8 +208,8 @@ void JF_SpotStrangeThings()
     int KounterMax = 200 ;
     std::string OUTDIR_DBG_PadFit_C         = OUTDirName + "/DBG_PadFit_C/" ;
     std::string OUTDIR_DBG_PadFit_C_Cluster = OUTDIR_DBG_PadFit_C + "/Cluster/" ;
-    MyMakeDir(OUTDIR_DBG_PadFit_C        ) ;
-    MyMakeDir(OUTDIR_DBG_PadFit_C_Cluster) ;
+    MakeMyDir(OUTDIR_DBG_PadFit_C        ) ;
+    MakeMyDir(OUTDIR_DBG_PadFit_C_Cluster) ;
     
     int Kounter = 0 ;
     for (int iE = 0 ; iE< NberOfEvents; iE++){
@@ -246,8 +246,8 @@ void JF_SpotStrangeThings()
     int KounterMax = 200 ;
     std::string OUTDIR_DBG_PadFit_D         = OUTDirName + "/DBG_PadFit_D/" ;
     std::string OUTDIR_DBG_PadFit_D_Cluster = OUTDIR_DBG_PadFit_D + "/Cluster/" ;
-    MyMakeDir(OUTDIR_DBG_PadFit_D        ) ;
-    MyMakeDir(OUTDIR_DBG_PadFit_D_Cluster) ;
+    MakeMyDir(OUTDIR_DBG_PadFit_D        ) ;
+    MakeMyDir(OUTDIR_DBG_PadFit_D_Cluster) ;
     
     int Kounter = 0 ;
     for (int iE = 0 ; iE< NberOfEvents; iE++){

@@ -20,7 +20,7 @@
 //Output waveform of a pad  with tagging string TAG, placed in OUTDIR dir
 void DrawOut_JF_WaveFormDisplay(const Pad* pPad,const std::string& OUTDIR,const std::string& TAG,const int& Opt)
 {
-  MyMakeDir(OUTDIR) ;
+  MakeMyDir(OUTDIR) ;
 
   std::ostringstream aostringstream ;
   aostringstream << std::setiosflags(std::ios::fixed) ;

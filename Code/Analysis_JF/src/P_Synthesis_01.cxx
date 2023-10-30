@@ -75,7 +75,7 @@ void P_Synthesis_02(const std::string& SampleSet)
 void P_Synthesis_YTYPAD_Iter_01(const std::string& SampleSet)
 {
   std::string OUTDirName  = "OUT_JeanFrancois/P_Synthesis/" + SampleSet + "/" ;
-  MyMakeDir(OUTDirName) ;
+  MakeMyDir(OUTDirName) ;
 
   gROOT->ForceStyle();
   gStyle->SetOptStat(111111) ;
@@ -245,7 +245,7 @@ void P_Synthesis_YTYPAD_Iter_01(const std::string& SampleSet)
 void P_Synthesis_YTYPAD_Final_01(const std::string& SampleSet)
 {
   std::string OUTDirName  = "OUT_JeanFrancois/P_Synthesis/" + SampleSet + "/" ;
-  MyMakeDir(OUTDirName) ;
+  MakeMyDir(OUTDirName) ;
 
   gROOT->ForceStyle();
   gStyle->SetOptStat(111111) ;
@@ -352,7 +352,7 @@ void P_Synthesis_YTYPAD_Final_01(const std::string& SampleSet)
 void P_Synthesis_ParamPRFLike_Iter_01(const std::string& SampleSet)
 {
   std::string OUTDirName  = "OUT_JeanFrancois/P_Synthesis/" + SampleSet + "/" ;
-  MyMakeDir(OUTDirName) ;
+  MakeMyDir(OUTDirName) ;
 
 //
   TCanvas* pTCanvas = 0 ;
@@ -531,7 +531,7 @@ void P_Synthesis_ParamPRFLike_Iter_01(const std::string& SampleSet)
 void P_Synthesis_DumpPRFparameters_01(const std::string& SampleSet)
 {
   std::string OUTDirName  = "OUT_JeanFrancois/P_Synthesis/" + SampleSet + "/" ;
-  MyMakeDir(OUTDirName) ;
+  MakeMyDir(OUTDirName) ;
 
 //Redirect Output
   std::cout << std::endl ;
@@ -623,7 +623,7 @@ void P_Synthesis_DumpPRFparameters_01(const std::string& SampleSet)
 void P_Synthesis_YTYPAD_Input_Final_01(const std::string& SampleSet)
 {
   std::string OUTDirName  = "OUT_JeanFrancois/P_Synthesis/" + SampleSet + "/" ;
-  MyMakeDir(OUTDirName) ;
+  MakeMyDir(OUTDirName) ;
 
   gROOT->ForceStyle();
   gStyle->SetOptStat(111111) ;
@@ -798,7 +798,7 @@ void P_Synthesis_YTYPAD_Input_Final_01(const std::string& SampleSet)
 void P_Synthesis_RESO_01(const std::string& SampleSet)
 {
   std::string OUTDirName  = "OUT_JeanFrancois/P_Synthesis/" + SampleSet + "/" ;
-  MyMakeDir(OUTDirName) ;
+  MakeMyDir(OUTDirName) ;
 
   gROOT->ForceStyle();
   gStyle->SetOptStat(111111) ;
@@ -1287,7 +1287,7 @@ void P_Synthesis_RESO_01(const std::string& SampleSet)
 void P_Synthesis_RCvsZZ_01(const std::string& SampleSet)
 {
   std::string OUTDirName  = "OUT_JeanFrancois/P_Synthesis/" + SampleSet + "/" ;
-  MyMakeDir(OUTDirName) ;
+  MakeMyDir(OUTDirName) ;
 
 //
   TCanvas* pTCanvas = 0 ;
@@ -1469,7 +1469,7 @@ void P_Synthesis_RCvsZZ_01(const std::string& SampleSet)
 void P_Synthesis_PULL_01(const std::string& SampleSet)
 {
   std::string OUTDirName  = "OUT_JeanFrancois/P_Synthesis/" + SampleSet + "/" ;
-  MyMakeDir(OUTDirName) ;
+  MakeMyDir(OUTDirName) ;
 
   gROOT->ForceStyle();
   gStyle->SetOptStat(111111) ;
@@ -1840,7 +1840,7 @@ void P_Synthesis_PULL_01(const std::string& SampleSet)
 void P_Synthesis_QUALITY_01(const std::string& SampleSet)
 {
   std::string OUTDirName  = "OUT_JeanFrancois/P_Synthesis/" + SampleSet + "/" ;
-  MyMakeDir(OUTDirName) ;
+  MakeMyDir(OUTDirName) ;
 
   gROOT->ForceStyle();
 //gStyle->SetOptStat(111111) ;
@@ -1975,7 +1975,7 @@ void P_Synthesis_QUALITY_01(const std::string& SampleSet)
 void P_Synthesis_Sp01()
 {
   std::string OUTDirName  = "OUT_JeanFrancois/P_Synthesis/" ;
-  MyMakeDir(OUTDirName) ;
+  MakeMyDir(OUTDirName) ;
 
 //
   TCanvas* pTCanvas = 0 ;
@@ -2149,7 +2149,7 @@ void P_Synthesis_Sp01()
 void P_Synthesis_CHI2_01(const std::string& SampleSet)
 {
   std::string OUTDirName  = "OUT_JeanFrancois/P_Synthesis/" + SampleSet + "/" ;
-  MyMakeDir(OUTDirName) ;
+  MakeMyDir(OUTDirName) ;
 
   gROOT->ForceStyle();
   gStyle->SetOptStat(111111) ;
@@ -2519,7 +2519,7 @@ void P_Synthesis_CHI2_01(const std::string& SampleSet)
 void P_Synthesis_BEAMPROFILE_01(const std::string& SampleSet)
 {
   std::string OUTDirName  = "OUT_JeanFrancois/P_Synthesis/" + SampleSet + "/" ;
-  MyMakeDir(OUTDirName) ;
+  MakeMyDir(OUTDirName) ;
 
   gROOT->ForceStyle();
   gStyle->SetOptStat(1111) ;
@@ -3133,7 +3133,7 @@ void P_Synthesis_BEAMPROFILE_01(const std::string& SampleSet)
 void P_Synthesis_DDvsZZ_01(const std::string& SampleSet)
 {
   std::string OUTDirName  = "OUT_JeanFrancois/P_Synthesis/" + SampleSet + "/" ;
-  MyMakeDir(OUTDirName) ;
+  MakeMyDir(OUTDirName) ;
 
 //
   TCanvas* pTCanvas = 0 ;

@@ -54,7 +54,7 @@ void EVT_01_BASE(
   if (iOptQuiet==1) return ;
 
 //
-  MyMakeDir(OUTDirName) ;
+  MakeMyDir(OUTDirName) ;
   
 //Redirect Output
   std::cout << std::endl ;
@@ -438,7 +438,7 @@ void EVT_01_BASE(
   int Kounter_Display     =   0 ;
   int Kounter_Display_Max = 500 ;
   std::string OUTDIR_Display_Cluster = OUTDirName + "/Display_Cluster/" ;
-  MyMakeDir(OUTDIR_Display_Cluster) ;
+  MakeMyDir(OUTDIR_Display_Cluster) ;
   
 //Loop On Events
   aJFL_Selector.Reset_StatCounters();
