@@ -3822,7 +3822,7 @@ void DrawOut_Escan(const std::string& inputDir, const std::string& Comment)
   std::vector<TGraphErrors*> v_pTGE_std_XP;
 
   std::vector<double>        v_mass{0.511e-3, 105.658e-3, 139.570e-3, 938.272e-3}; // GeV
-  std::vector<TF1*>          v_bethebloch;
+  std::vector<TF1*>          v_tf1_BB;
 
 
   for(int i = 0 ; i < 4 ; i++){
@@ -3832,11 +3832,11 @@ void DrawOut_Escan(const std::string& inputDir, const std::string& Comment)
     v_pTGE_mean_XP.         push_back(new TGraphErrors());
     v_pTGE_std_WF.          push_back(new TGraphErrors());
     v_pTGE_std_XP.          push_back(new TGraphErrors());
-    v_bethebloch.          push_back(BetheBlochExp(0.45, 1.55, v_mass[i], particles[i])); // m & P range in GeV
-    // v_bethebloch.          push_back(BetheBloch(0, 2, v_mass[i], particles[i])); // m & P range in GeV
-    // if(i==0) v_bethebloch.  push_back(BetheBlochBhabha(0, 2, v_mass[i], particles[i]));
-    // else v_bethebloch.      push_back(BetheBloch(0, 2, v_mass[i], particles[i]));
+    v_tf1_BB.               push_back(BetheBlochExp(0.25, 2, v_mass[i], particles[i])); // m & P range in
+    // if(i==0) v_tf1_BB.      push_back(BetheBlochExp(0.25, 2, v_mass[i], particles[i])); // m & P range in GeV GeV
+    // else     v_tf1_BB.      push_back(BetheBloch(0.25, 2, v_mass[i], particles[i])); // m & P range in GeV
   }
+  v_tf1_BB[0]->SetParameters(511e-6, 1.65179e+02, 3.62857e+00, 3.18209e-02, 2.07081e+00, -7.14413e-01);
 
   // Get mean & std
   float mean_WF[npoint] ;
@@ -3882,13 +3882,13 @@ void DrawOut_Escan(const std::string& inputDir, const std::string& Comment)
     v_pTGE_std_XP[index]->  SetPointError (n[iE], 0,         dstd_XP[iE]*keV) ;
   }
 
-  combinedFit(v_pTGE_mean_XP);
+  // combinedFit(v_pTGE_mean_XP, v_tf1_BB);
 
-  for(int i = 0 ; i < 4 ; i++) v_pTGE_mean_XP[i]->Fit(v_bethebloch[i], "R", "", 0.45, 1.55);
+  for(int i = 0 ; i < 4 ; i++) v_pTGE_mean_XP[i]->Fit(v_tf1_BB[i], "R", "", 0, 2);
 
 
   // Draw
-  std::string OutputFile        = inputDir + "CERN22_Escan" + Comment + ".pdf" ;
+  std::string OutputFile        = inputDir + "CERN22_Escan" + Comment + "_aprBB_indep.pdf" ;
   std::string OutputFile_Beg    = OutputFile + "(" ;
   std::string OutputFile_End    = OutputFile + ")" ;
   TCanvas* pTCanvas           = new TCanvas("TCanvas", "TCanvas", 1800, 1200) ;
@@ -3952,8 +3952,8 @@ void DrawOut_Escan(const std::string& inputDir, const std::string& Comment)
     Graphic_setup(v_pTGE_mean_WF[i], 3, markers[i], colors[i], 1, colors[i]) ;
     if(i == 0) v_pTGE_mean_WF[i]->    Draw("ap") ;
     else v_pTGE_mean_WF[i]->          Draw("p same") ;
-    v_bethebloch[i]->                 SetLineColor(colors[i]);
-    v_bethebloch[i]->                 Draw("same");
+    v_tf1_BB[i]->                 SetLineColor(colors[i]);
+    v_tf1_BB[i]->                 Draw("same");
   }
   leg1->                               Draw() ;
   leg2->                               Draw() ;
@@ -3968,7 +3968,7 @@ void DrawOut_Escan(const std::string& inputDir, const std::string& Comment)
     Graphic_setup(v_pTGE_mean_XP[i], 3, markers[i], colors[i], 1, colors[i]) ;
     if(i == 0) v_pTGE_mean_XP[i]->    Draw("ap") ;
     else v_pTGE_mean_XP[i]->          Draw("p same") ;
-    v_bethebloch[i]->                 Draw("same");
+    v_tf1_BB[i]->                 Draw("same");
   }
   leg1->                               Draw() ;
   leg2->                               Draw() ;
@@ -3978,11 +3978,11 @@ void DrawOut_Escan(const std::string& inputDir, const std::string& Comment)
 
   // Bethe-Bloch
   pTCanvas->                          Clear();
-  v_bethebloch[0]->                   SetMinimum(0.5) ;
-  v_bethebloch[0]->                   SetMaximum(5) ;
-  v_bethebloch[0]->                   SetTitle("Bethe-Bloch for different particles;Energy (GeV);mean (keV/cm)") ;
-  v_bethebloch[0]->                   Draw() ;
-  for(int i = 1 ; i < 4 ; i++)v_bethebloch[i]-> Draw("same") ; 
+  v_tf1_BB[0]->                   SetMinimum(0.5) ;
+  v_tf1_BB[0]->                   SetMaximum(5) ;
+  v_tf1_BB[0]->                   SetTitle("Bethe-Bloch for different particles;Energy (GeV);mean (keV/cm)") ;
+  v_tf1_BB[0]->                   Draw() ;
+  for(int i = 1 ; i < 4 ; i++)v_tf1_BB[i]-> Draw("same") ; 
   leg1->                              Draw() ;
   leg2->                              Draw() ;
   pTCanvas->                          SaveAs(OutputFile.c_str()) ;
@@ -4031,7 +4031,7 @@ void DrawOut_Escan(const std::string& inputDir, const std::string& Comment)
     delete v_pTGE_mean_XP[i]; v_pTGE_mean_XP[i] = 0 ;
     delete v_pTGE_std_WF[i]; v_pTGE_std_WF[i] = 0 ;
     delete v_pTGE_std_XP[i]; v_pTGE_std_XP[i] = 0 ;
-    delete v_bethebloch[i] ; v_bethebloch[i] = 0 ;
+    delete v_tf1_BB[i] ; v_tf1_BB[i] = 0 ;
   }
   v_pTGE_reso_WF.               clear();
   v_pTGE_reso_XP.               clear();
@@ -4039,7 +4039,7 @@ void DrawOut_Escan(const std::string& inputDir, const std::string& Comment)
   v_pTGE_mean_XP.               clear();
   v_pTGE_std_WF.                clear();
   v_pTGE_std_XP.                clear();
-  v_bethebloch.                 clear();
+  v_tf1_BB.                 clear();
 
   v_tf1_WF.                     clear() ;
   v_tf1_XP.                     clear() ;

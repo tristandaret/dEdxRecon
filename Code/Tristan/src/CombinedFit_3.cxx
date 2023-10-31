@@ -1,10 +1,11 @@
 #include "Tristan/CombinedFit.h"
 #include "Tristan/Misc_Functions.h"
  
-int npar = 4;
-int iparmuon[]      = {0, 3, 4, 5};
-int iparpion[]      = {1, 3, 4, 5};
-int iparproton[]    = {2, 3, 4, 5};
+// definition of parameters (0 to 4 shared, last one is particle mass)
+int npar = 6;
+int iparmuon[]      = {0, 1, 2, 3, 4, 5};
+int iparpion[]      = {0, 1, 2, 3, 4, 6};
+int iparproton[]    = {0, 1, 2, 3, 4, 7};
  
 // Create the GlobalCHi2 structure
 struct GlobalChi2_3 {
@@ -34,17 +35,18 @@ struct GlobalChi2_3 {
 
 void combinedFit(std::vector<TGraphErrors*>& v_tge, std::vector<TF1*>& v_tf1)
 {
-   int Npar = 6;
-   double par0[Npar] = {105.658e-3, 139.570e-3, 938.272e-3, 0.5, 0.511e-3, 188e-9};
+   int Npar = 9;
+  //  double par0[Npar] = {1.65179e+02, 3.62857e+00, 3.18209e-02, 2.07081e+00, -7.14413e-01, 105.658e-3, 139.570e-3, 938.272e-3, 0.511e-3};
+   double par0[Npar] = {-1., 3., 10., 2., -2., 105.658e-3, 139.570e-3, 938.272e-3, 0.511e-3};
  
 
-   v_tf1[1]->               SetParameters(par0[0], par0[3], par0[4], par0[5]);
+   v_tf1[1]->               SetParameters(par0[5], par0[0], par0[1], par0[2], par0[3], par0[4]);
    v_tf1[1]->               FixParameter(0, 105.658e-3);
 
-   v_tf1[2]->               SetParameters(par0[1], par0[3], par0[4], par0[5]);
+   v_tf1[2]->               SetParameters(par0[6], par0[0], par0[1], par0[2], par0[3], par0[4]);
    v_tf1[2]->               FixParameter(0, 105.658e-3);
 
-   v_tf1[3]->               SetParameters(par0[2], par0[3], par0[4], par0[5]);
+   v_tf1[3]->               SetParameters(par0[7], par0[0], par0[1], par0[2], par0[3], par0[4]);
    v_tf1[3]->               FixParameter(0, 938.272e-3);
 
    v_tge[0]->               Fit(v_tf1[0], "R", "", 0, 2);
@@ -83,20 +85,20 @@ void combinedFit(std::vector<TGraphErrors*>& v_tge, std::vector<TF1*>& v_tf1)
    ROOT::Fit::Fitter fitter;
  
    // create before the parameter settings in order to fix or set range on them
-   fitter.Config().SetParamsSettings(6, par0);
+   fitter.Config().SetParamsSettings(8, par0);
    // fix parameters
-   fitter.Config().ParSettings(0).Fix();
-   fitter.Config().ParSettings(1).Fix();
-   fitter.Config().ParSettings(2).Fix();
-  //  fitter.Config().ParSettings(3).SetLimits(0, 10);
-   fitter.Config().ParSettings(4).Fix();
-   fitter.Config().ParSettings(5).SetLimits(180e-9, 200e-9); 
+   fitter.Config().ParSettings(0).SetLimits(0, 1e3);
+   fitter.Config().ParSettings(3).SetLimits(1.5, 2.5);
+   fitter.Config().ParSettings(4).SetLimits(-5, 0);
+   fitter.Config().ParSettings(5).Fix();
+   fitter.Config().ParSettings(6).Fix();
+   fitter.Config().ParSettings(7).Fix();
    fitter.Config().MinimizerOptions().SetPrintLevel(1);
    fitter.Config().SetMinimizer("Minuit2", "Migrad");
  
    // fit FCN function directly
    // (specify optionally data size and flag to indicate that is a chi2 fit)
-   fitter.FitFCN(6, globalChi2_3, 0, datamuon.Size() + datapion.Size() + dataproton.Size(), true);
+   fitter.FitFCN(8, globalChi2_3, 0, datamuon.Size() + datapion.Size() + dataproton.Size(), true);
    ROOT::Fit::FitResult result = fitter.Result();
    result.Print(std::cout);
  
@@ -132,5 +134,5 @@ void combinedFit(std::vector<TGraphErrors*>& v_tge, std::vector<TF1*>& v_tf1)
    v_tge[0]->Draw("p same");
    v_tf1[0]->Draw("same");
    
-   c1->SaveAs("Test_Simultaneous_fit_3_BB.pdf");
+   c1->SaveAs("Test_Simultaneous_fit_3.pdf");
 }

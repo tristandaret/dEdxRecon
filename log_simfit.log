@@ -1,0 +1,81 @@
+ Independent fit with LPNHE initialization values
+
+ FCN=73.5131 FROM MIGRAD    STATUS=CONVERGED     995 CALLS         996 TOTAL
+                     EDM=1.32831e-06    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  p0           5.11000e-04     fixed    
+   2  p1          -1.81235e+00   1.59862e-03   6.73802e-06   2.41458e-01
+   3  p2           2.41680e+01   1.41408e+00   2.39864e+01   6.99951e-05
+   4  p3           9.02707e+03   1.41408e+00   2.44153e+01  -1.16410e-14
+   5  p4          -2.82922e+08   1.41408e+00   1.34908e+02   1.61799e-12
+   6  p5           1.48869e+00   1.41421e+00   5.04638e+00  -1.11763e-03
+
+ FCN=2.23903e-07 FROM HESSE     STATUS=NOT POSDEF     31 CALLS         618 TOTAL
+                     EDM=3.18987e-07    STRATEGY= 1      ERR MATRIX NOT POS-DEF
+  EXT PARAMETER                APPROXIMATE        STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  p0           1.05658e-01     fixed    
+   2  p1          -1.21736e+00   1.17850e-02   2.90241e-07   1.92256e-01
+   3  p2           3.06834e+00   6.77319e-02   7.31549e-07   2.39339e-02
+   4  p3           1.57281e+01   1.60596e+00   1.26344e-05  -1.24298e-03
+   5  p4          -3.09603e+02   1.82260e+02   1.62876e-03   2.14557e-06
+   6  p5           4.12659e-01   3.42278e-02   2.81022e-07  -9.50530e-03
+
+ FCN=2.0767e-08 FROM HESSE     STATUS=NOT POSDEF     31 CALLS        1085 TOTAL
+                     EDM=4.06805e-08    STRATEGY= 1      ERR MATRIX NOT POS-DEF
+  EXT PARAMETER                APPROXIMATE        STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  p0           1.39570e-01     fixed    
+   2  p1          -1.13592e+00   1.17216e-02   2.70824e-07   8.91814e-03
+   3  p2           2.97921e+00   4.77294e-02   7.10299e-07   3.53464e-02
+   4  p3           2.31273e+01   1.18674e+00   9.59083e-06  -1.41859e-03
+   5  p4          -1.33627e+02   2.80733e+01   3.15646e-04  -1.48525e-05
+   6  p5           1.16249e-01   1.31700e-01   1.19798e-06  -1.26413e-02
+
+ FCN=0.239299 FROM MIGRAD    STATUS=CONVERGED     721 CALLS         722 TOTAL
+                     EDM=1.21806e-07    STRATEGY= 1  ERROR MATRIX UNCERTAINTY   5.1 per cent
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  p0           9.38272e-01     fixed    
+   2  p1          -7.20121e-02   2.06215e-02   3.35194e-05   5.19864e+00
+   3  p2          -1.33707e+01   3.78220e+00  -6.08932e-03  -1.13419e-01
+   4  p3           1.17425e+00   1.84425e-01   2.96342e-04   1.26496e+00
+   5  p4           1.60458e+00   9.14576e-02   1.61802e-04  -5.50556e-02
+   6  p5          -4.33291e+00   2.70609e+00  -4.35681e-03   2.82517e-01
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+Independent fit with double par[] = {160, 3, 10, 2, -2};
+
+    FCN=27.0872 FROM MIGRAD    STATUS=CALL LIMIT   1793 CALLS        1794 TOTAL
+                     EDM=0.00487328    STRATEGY= 1      ERR MATRIX NOT POS-DEF
+  EXT PARAMETER                APPROXIMATE        STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  p0           1.05658e-01     fixed    
+   2  p1           3.99734e-01   6.11602e-02  -1.37712e-05  -6.37163e+00
+   3  p2           3.21118e+00   1.66075e-02   7.53175e-06  -9.87006e-01
+   4  p3           3.19208e-01   1.59304e-01   7.38000e-05   3.09203e+00
+   5  p4          -1.17193e+01   8.97986e-01   3.57488e-03  -8.60995e-02
+   6  p5          -1.04308e+01   3.59367e-10  -2.23610e-13   5.28789e+05
+Warning in <Fit>: Abnormal termination of minimization.
+ FCN=10.165 FROM MIGRAD    STATUS=CALL LIMIT   1793 CALLS        1794 TOTAL
+                     EDM=0.000302903    STRATEGY= 1      ERR MATRIX NOT POS-DEF
+  EXT PARAMETER                APPROXIMATE        STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  p0           1.39570e-01     fixed    
+   2  p1           5.16176e-01   9.05658e-02  -9.56795e-04   3.63469e+01
+   3  p2           3.10896e+00   7.79848e-03  -7.90851e-05   7.26418e+00
+   4  p3           6.34060e-01   2.92051e-01  -3.08667e-03  -1.14566e+01
+   5  p4          -5.44351e+00   3.24302e-01  -3.24564e-03   4.94588e-02
+   6  p5          -9.46241e+00   6.45730e-02  -6.20648e-04   2.12063e-11
+ FCN=2.4828e-09 FROM HESSE     STATUS=NOT POSDEF     31 CALLS        1074 TOTAL
+                     EDM=3.64331e-09    STRATEGY= 1      ERR MATRIX NOT POS-DEF
+  EXT PARAMETER                APPROXIMATE        STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  p0           9.38272e-01     fixed    
+   2  p1          -3.03922e+00   5.56151e-02   7.24607e-07   1.25807e-02
+   3  p2           2.93811e+00   1.16518e-02   7.00500e-07   6.58263e-02
+   4  p3           9.56434e+00   1.06380e-01   2.28032e-06  -6.80768e-03
+   5  p4          -1.18876e+00   8.92681e-02   6.85689e-07   8.07428e-03
+   6  p5          -4.56576e+00   1.38227e+00   2.45133e-05  -1.31619e-04

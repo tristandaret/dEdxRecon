@@ -186,7 +186,7 @@ TF1* Fit2Gauss(TH1F* h1F, const float& x1min, const float& x1max, const float& x
 // General Physics ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Bethe-Bloch relativistic for heavy charged particles
-TF1* BetheBloch(const float& Pmin, const float& Pmax, const double& m, const std::string& particle){
+TF1* BetheBloch(const float& Pmin, const float& Pmax, const double& M, const std::string& particle){
   /*  Input: Pmin & Pmax GeV | m GeV 
       Output: keV/cm */
   // float n                         = 5.357e20; e/cm^3
@@ -194,13 +194,15 @@ TF1* BetheBloch(const float& Pmin, const float& Pmax, const double& m, const std
   // float hbar2c2                   = pow(1.973e-14, 2) (GeV cm)^2
   double coeff                    = 0.2723; // 4 pi n alpha^2 hbar^2 c^2 / (m_e c^2) (keV^2/cm)
   double me                       = 511e-6; // GeV
-  double M2                       = pow(m,2); // GeV^2
   double I                        = 188e-9; // GeV
 
   // PDG general
-  const char* formula             = "[0]/(x*x)*(x*x+[2]) * (log(2*[1]/[3]*x*x/[2]) - 0.5*log(1 + 2*sqrt(x*x+[2])/[2]*[1]/sqrt([2]) + [1]*[1]/[2]) - x*x/(x*x+[2]))" ;
+  const char* formula             = "[1]/(x*x)*(x*x+[0]*[0]) * (log(2*[2]/[3]*x*x/([0]*[0])) - 0.5*log(1 + 2*sqrt(x*x+[0]*[0])/([0]*[0])*[2]/[0] + [2]*[2]/([0]*[0])) - x*x/(x*x+[0]*[0]))" ;
   TF1* dEdx                       = new TF1(Form("dEdx_%s", particle.c_str()), formula, Pmin, Pmax, "");
-  dEdx->                            SetParameters(coeff, me, M2, I);
+  dEdx->                            SetParameters(M, coeff, me, I);
+  dEdx->                            FixParameter(0, M);
+  dEdx->                            FixParameter(2, me);
+  dEdx->                            FixParameter(3, I);
 
   dEdx->                            SetTitle(Form("Bethe-Bloch for%s;Energy (GeV);mean (keV/cm)", particle.c_str()));
   return dEdx ; // keV/cm
@@ -235,14 +237,16 @@ TF1* BetheBlochBhabha(const float& Pmin, const float& Pmax, const double& m, con
 TF1* BetheBlochExp(const float& Pmin, const float& Pmax, const double& M, const std::string& particle){
   /*  Input: Pmin & Pmax GeV | m GeV 
       Output: keV/cm */
-  double M2                       = pow(M,2); // GeV^2
-  double par[] = {1.65179e+02, 3.62857e+00, 3.18209e-02, 2.07081e+00, -7.14413e-01};
+  // double par[] = {1.65179e+02, 3.62857e+00, 3.18209e-02, 2.07081e+00, -7.14413e-01};
+  double par[] = {160, 3, 10, 2, -2};
 
 
-  const char* formula             = "[1]/pow(x/sqrt(x*x+[0]),[4]) * ( [2] - pow(x/sqrt(x*x+[0]),[4]) - log([3]+ pow(x*x/[0], [5])) )" ;
+  const char* formula             = "[1]/pow(x/sqrt(x*x+[0]*[0]),[4]) * ( [2] - pow(x/sqrt(x*x+[0]*[0]),[4]) - log([3]+ pow(x*x/([0]*[0]), [5])) )" ;
   TF1* dEdx                       = new TF1(Form("dEdx_%s", particle.c_str()), formula, Pmin, Pmax, "");
-  dEdx->                            SetParameters(M2, par[0], par[1], par[2], par[3], par[4]);
-  dEdx->                            FixParameter(0, M2);
+  dEdx->                            SetParameters(M, par[0], par[1], par[2], par[3], par[4]);
+  dEdx->                            FixParameter(0, M);
+  // dEdx->                            SetParLimits(1, 0, 100);
+  // dEdx->                            SetParLimits(4, 0, 5);
 
   dEdx->                            SetTitle(Form("Experimental Bethe-Bloch for%s;Energy (GeV);mean (keV/cm)", particle.c_str()));
   return dEdx ; // keV/cm
