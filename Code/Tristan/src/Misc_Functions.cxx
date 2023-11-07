@@ -237,16 +237,10 @@ TF1* BetheBlochBhabha(const float& Pmin, const float& Pmax, const double& m, con
 TF1* BetheBlochExp(const float& Pmin, const float& Pmax, const double& M, const std::string& particle){
   /*  Input: Pmin & Pmax GeV | m GeV 
       Output: keV/cm */
-  // double par[] = {1.65179e+02, 3.62857e+00, 3.18209e-02, 2.07081e+00, -7.14413e-01};
-  double par[] = {160, 3, 10, 2, -2};
 
-
-  const char* formula             = "[1]/pow(x/sqrt(x*x+[0]*[0]),[4]) * ( [2] - pow(x/sqrt(x*x+[0]*[0]),[4]) - log([3]+ pow(x*x/([0]*[0]), [5])) )" ;
+  const char* formula             = "[1]/pow(x/sqrt(x*x+[0]*[0]),[4]) * ( [2] - pow(x/sqrt(x*x+[0]*[0]),[4]) - log([3]+ pow(x/[0], [5])) )" ;
   TF1* dEdx                       = new TF1(Form("dEdx_%s", particle.c_str()), formula, Pmin, Pmax, "");
-  dEdx->                            SetParameters(M, par[0], par[1], par[2], par[3], par[4]);
   dEdx->                            FixParameter(0, M);
-  // dEdx->                            SetParLimits(1, 0, 100);
-  // dEdx->                            SetParLimits(4, 0, 5);
 
   dEdx->                            SetTitle(Form("Experimental Bethe-Bloch for%s;Energy (GeV);mean (keV/cm)", particle.c_str()));
   return dEdx ; // keV/cm
