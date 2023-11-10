@@ -326,13 +326,11 @@ void dEdx( const std::string& OutDir,
           if(d >  L/2) d                  =  L/2 ;
           float dconv                     = (d+L/2)/d_step ;  // +L/2 shift because LUT indices have to be > 0 but d can be < 0
           // Interpolation Z
-          z_calc                         += 100;
           if(z_calc < 0)    z_calc        = 0 ;
           if(z_calc > 1000) z_calc        = 1e3 ;
           float zfile                     = zdrift/z_step ;
           float zconv                     = z_calc/z_step ;
           // Interpolation RC
-          // RC_pad                         *= 1.25;
           if(RC_pad < 50)  RC_pad         = 50 ;
           if(RC_pad > 150) RC_pad         = 150 ;
           float RCconv                    = (RC_pad-50)/RC_step ;
@@ -421,7 +419,7 @@ void dEdx( const std::string& OutDir,
           else                                      h2f_WFstarvsLen->Fill(trk_len_clus*1000, h1f_WF_cluster->GetMaximum()/(trk_len_clus*100)) ;
         }
 
-        // if(pEvent->Get_EntryNber() == 25) DrawOut_ClusterWFDisplay(pCluster, OUTDIR_WF_Display, Tag, 1, PT, TB) ;
+        // if(pEvent->Get_EntryNber() < 25) DrawOut_ClusterWFDisplay(pCluster, OUTDIR_WF_Display, Tag, 1, PT, TB) ;
         delete                              h1f_WF_cluster ;
       } // Cluster
 

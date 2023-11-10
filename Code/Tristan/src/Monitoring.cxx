@@ -46,24 +46,24 @@ void Monitoring()
 
   int DESY_zscan      = 1 ; 
   int DESY_yscan      = 0 ; 
-  int DESY_phi        = 1 ; 
+  int DESY_phi        = 0 ; 
   int DESY_theta      = 0 ; 
 
   // Computations
-  int control         = 0 ;
+  int control         = 1 ;
   int dedx            = 0 ;
   int WFcorr          = 0 ;
 
   // DrawOuts
   int DO_Displayer    = 0 ;
-  int DO_control      = 0 ;
+  int DO_control      = 1 ;
   int DO_Checks       = 0 ;
   int DO_Methods      = 0 ;
   int DO_Resolution   = 0 ;
   int DO_Global       = 0 ;
   int DO_Scans        = 0 ;
   int DO_Separation   = 0 ;
-  int DO_Systematics  = 1 ;
+  int DO_Systematics  = 0 ;
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -157,10 +157,10 @@ void Monitoring()
       MakeMyDir(OutDir) ; 
       Uploader* pUpld ; Interpol4 LUT ;
       if (control or dedx) LUT = GiveMe_LUT(Form("/home/td263283/Documents/Python/LUT_XP/LUT_Dt%i_PT%i_nphi200_nd200/", Dt, PT), nZ, nRC) ;
-      int         z_val[]   = {50, 150, 250, 350, 450, 550, 650, 750, 850, 950} ;
-      std::string z_arr[]   = {"m40", "060", "160", "260", "360", "460", "560", "660", "760", "860"} ;
-      // int         z_val[]   = {50, 550, 950} ;
-      // std::string z_arr[]   = {"m40", "460", "860"}
+      // int         z_val[]   = {50, 150, 250, 350, 450, 550, 650, 750, 850, 950} ;
+      // std::string z_arr[]   = {"m40", "060", "160", "260", "360", "460", "560", "660", "760", "860"} ;
+      int         z_val[]   = {50, 550, 950} ;
+      std::string z_arr[]   = {"m40", "460", "860"};
       // int         z_val[]   = {550} ;
       // std::string z_arr[]   = {"460"} ;
       for (int iz = 0 ; iz < (int)std::size(z_arr) ; iz++){

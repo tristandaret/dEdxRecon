@@ -82,6 +82,9 @@ void Control(
   // Efficiency
   std::vector<TH1F*>          v_h1f_Eff_Raw ;
   std::vector<TH1F*>          v_h1f_Eff_Sel ;
+  // Theta angle
+  std::vector<TH2F*>          v_h2f_rho_DT_Raw ;
+  std::vector<TH2F*>          v_h2f_rho_DT_Sel ;
 
   for(int iMod = 0 ; iMod < 8 ; iMod++){
     TH1F* h1f_TL_Raw                  = new TH1F(Form("h1f_TL_Raw_%i", iMod),  Form("T_{Leading} Raw (Mod %i);Time bin;Count", iMod), 511, -0.5, 510.5) ;
@@ -108,6 +111,8 @@ void Control(
     TH2F* h2f_LeadPos_Sel             = new TH2F(Form("h2f_LeadPos_Sel_%i", iMod), Form("Position of leading pads in ERAM (Mod %i);iX;iY", iMod), 36, -0.5, 35.5, 32, -0.5, 31.5) ;
     TH2F* h2f_Theta_Raw               = new TH2F(Form("h2f_Theta_Raw_%i", iMod), Form("Track inclination along #theta angle(Mod %i);Pad row (iX);Drift distance (mm)", iMod), 36, -0.5, 35.5, 80, 0, 1010) ;
     TH2F* h2f_Theta_Sel               = new TH2F(Form("h2f_Theta_Sel_%i", iMod), Form("Track inclination along #theta angle(Mod %i);Pad row (iX);Drift distance (mm)", iMod), 36, -0.5, 35.5, 80, 0, 1010) ;
+    TH2F* h2f_rho_DT_Raw            = new TH2F(Form("h2f_rho_DT_Raw_%i", iMod), Form("A_{1st neighbour} / A_{leading} vs T_{1st neighbour} - T_{leading} (Mod %i);T_{1st neighbour} - T_{leading};A_{1st neighbour} / A_{leading}", iMod), 101, -20, 80, 200, 0, 1) ;
+    TH2F* h2f_rho_DT_Sel            = new TH2F(Form("h2f_rho_DT_Sel_%i", iMod), Form("A_{1st neighbour} / A_{leading} vs T_{1st neighbour} - T_{leading} (Mod %i);T_{1st neighbour} - T_{leading};A_{1st neighbour} / A_{leading}", iMod), 101, -20, 80, 200, 0, 1) ;
     v_h1f_TL_Raw.                       push_back(h1f_TL_Raw) ;
     v_h1f_TL_Sel.                       push_back(h1f_TL_Sel) ;
     v_h1f_PM_Raw.                       push_back(h1f_PM_Raw) ;
@@ -132,6 +137,8 @@ void Control(
     v_h2f_LeadPos_Sel.                  push_back(h2f_LeadPos_Sel) ;
     v_h2f_Theta_Raw.                    push_back(h2f_Theta_Raw) ;
     v_h2f_Theta_Sel.                    push_back(h2f_Theta_Sel) ;
+    v_h2f_rho_DT_Raw.                   push_back(h2f_rho_DT_Raw) ;
+    v_h2f_rho_DT_Sel.                   push_back(h2f_rho_DT_Sel) ;
   }
 
   
@@ -172,29 +179,30 @@ void Control(
       if (pEvent->Validity_ForThisModule(ModuleNber) == 0) continue ;
       float avrg_padmutl                = 0 ;
       int NClusters                     = pModule->Get_NberOfCluster() ;
-      v_h1f_CM_Raw[iMod]->                Fill(NClusters) ;
+      v_h1f_CM_Raw[ModuleNber]->                Fill(NClusters) ;
 
       for(int iC = 0 ; iC < NClusters ; iC++){
         Cluster* pCluster               = pModule->Get_Cluster(iC) ;
         const Pad* pLead                = pCluster->Get_LeadingPad() ;
-        v_h2f_LeadPos_Raw[iMod]->         Fill(pLead->Get_iX(), pLead->Get_iY()) ;
+        v_h2f_LeadPos_Raw[ModuleNber]->         Fill(pLead->Get_iX(), pLead->Get_iY()) ;
         int NPads                       = pCluster->Get_NberOfPads() ;
         float TL                        = pCluster->Get_TMaxLeading() ;
         avrg_padmutl                   += (float)NPads ;
-        if(TL>5 and TL < 509) v_h1f_TL_Raw[iMod]->     Fill(TL) ;
-        v_h1f_PM_Raw[iMod]->              Fill(NPads) ;
-        v_h1f_Qclus_Raw[iMod]->           Fill(pCluster->Get_Acluster()) ;
+        if(TL>5 and TL < 509) v_h1f_TL_Raw[ModuleNber]->     Fill(TL) ;
+        v_h1f_PM_Raw[ModuleNber]->              Fill(NPads) ;
+        v_h1f_Qclus_Raw[ModuleNber]->           Fill(pCluster->Get_Acluster()) ;
         TH1F* h1f_clus                  = new TH1F("h1f_WF_cluster", "h1f_WF_cluster", 510, -0.5, 509.5) ;
 
-        float Tmax                      = pCluster->Get_LeadingPad()->Get_TMax() ;
+        if(NPads > 1) v_h2f_rho_DT_Raw[ModuleNber]->Fill(pCluster->Get_Pad(NPads-2)->Get_TMax()-TL, pCluster->Get_Pad(NPads-2)->Get_AMax()/pCluster->Get_AMaxLeading());
+
         float z_calc = 0;
         float T0 ;
-        if      (PT == 412 and TB == 50){ T0 = 45 ; z_calc = 3.90*(Tmax-T0) ; } // 45 = 37(time shift) +  8(PT) from David
-        else if (PT == 412 and TB == 40){ T0 = 56 ; z_calc = 3.12*(Tmax-T0) ; } // 56 = 46(time shift) + 10(PT)
-        else if (PT == 200 and TB == 50){ T0 = 39 ; z_calc = 3.90*(Tmax-T0) ; } // 39 = 35(time shift) +  4(PT) own computation
-        else if (PT == 200 and TB == 40){ T0 = 48 ; z_calc = 3.12*(Tmax-T0) ; } // 48 = 44(time shift) +  5(PT)
+        if      (PT == 412 and TB == 50){ T0 = 45 ; z_calc = 3.90*(TL-T0) ; } // 45 = 37(time shift) +  8(PT) from David
+        else if (PT == 412 and TB == 40){ T0 = 56 ; z_calc = 3.12*(TL-T0) ; } // 56 = 46(time shift) + 10(PT)
+        else if (PT == 200 and TB == 50){ T0 = 39 ; z_calc = 3.90*(TL-T0) ; } // 39 = 35(time shift) +  4(PT) own computation
+        else if (PT == 200 and TB == 40){ T0 = 48 ; z_calc = 3.12*(TL-T0) ; } // 48 = 44(time shift) +  5(PT)
         if(z_calc < 0) z_calc           = 0 ;
-        v_h2f_Theta_Raw[iMod]->Fill(pLead->Get_iX(), z_calc) ;
+        v_h2f_Theta_Raw[ModuleNber]->Fill(pLead->Get_iX(), z_calc) ;
 
         for(int iP = 0 ; iP < NPads ; iP++){
           const Pad* pPad               = pCluster->Get_Pad(iP) ;
@@ -202,17 +210,17 @@ void Control(
           h1f_clus->                      Add(h1f_WF) ;
           float AP                      = pPad->Get_AMax() ;
           float pad_integral            = h1f_WF->Integral() ;
-          if(iP == NPads-1) v_h1f_Qlead_Raw[iMod]-> Fill(AP) ;
-          else v_h1f_Qneigh_Raw[iMod]->   Fill(AP) ;
-          v_h1f_Qpad_Raw[iMod]->          Fill(AP) ;
+          if(iP == NPads-1) v_h1f_Qlead_Raw[ModuleNber]-> Fill(AP) ;
+          else v_h1f_Qneigh_Raw[ModuleNber]->   Fill(AP) ;
+          v_h1f_Qpad_Raw[ModuleNber]->          Fill(AP) ;
           float avg_pad_int            = pad_integral/510 ;
-          v_h1f_API_Raw[iMod]->           Fill(avg_pad_int) ;
+          v_h1f_API_Raw[ModuleNber]->           Fill(avg_pad_int) ;
           delete                          h1f_WF ;
         }
         delete h1f_clus ;
       }
       avrg_padmutl                     /= (float)NClusters ;
-      v_h1f_APM_Raw[iMod]->               Fill(avrg_padmutl) ;
+      v_h1f_APM_Raw[ModuleNber]->               Fill(avrg_padmutl) ;
     }
 
     //  Apply Selection
@@ -231,29 +239,30 @@ void Control(
       if (pEvent->Validity_ForThisModule(ModuleNber) == 0) continue ;
       float avrg_padmutl                = 0 ;
       int NClusters                     = pModule->Get_NberOfCluster() ;
-      v_h1f_CM_Sel[iMod]->              Fill(NClusters) ;
+      v_h1f_CM_Sel[ModuleNber]->              Fill(NClusters) ;
 
       for(int iC = 0 ; iC < NClusters ; iC++){
         Cluster* pCluster               = pModule->Get_Cluster(iC) ;
         const Pad* pLead                = pCluster->Get_LeadingPad() ;
-        v_h2f_LeadPos_Sel[iMod]->         Fill(pLead->Get_iX(), pLead->Get_iY()) ;
+        v_h2f_LeadPos_Sel[ModuleNber]->         Fill(pLead->Get_iX(), pLead->Get_iY()) ;
         int NPads                       = pCluster->Get_NberOfPads() ;
         float TL                        = pCluster->Get_TMaxLeading() ;
         avrg_padmutl                   += (float)NPads ;
-        v_h1f_TL_Sel[iMod]->              Fill(TL) ;
-        v_h1f_PM_Sel[iMod]->              Fill(NPads) ;
-        v_h1f_Qclus_Sel[iMod]->           Fill(pCluster->Get_Acluster()) ;
+        v_h1f_TL_Sel[ModuleNber]->              Fill(TL) ;
+        v_h1f_PM_Sel[ModuleNber]->              Fill(NPads) ;
+        v_h1f_Qclus_Sel[ModuleNber]->           Fill(pCluster->Get_Acluster()) ;
         TH1F* h1f_clus                  = new TH1F("h1f_WF_cluster", "h1f_WF_cluster", 510, -0.5, 509.5) ;
 
-        float Tmax                      = pCluster->Get_LeadingPad()->Get_TMax() ;
+        if(NPads > 1) v_h2f_rho_DT_Sel[ModuleNber]->Fill(pCluster->Get_Pad(NPads-2)->Get_TMax()-TL, pCluster->Get_Pad(NPads-2)->Get_AMax()/pCluster->Get_AMaxLeading());
+
         float z_calc = 0;
         float T0 ;
-        if      (PT == 412 and TB == 50){ T0 = 45 ; z_calc = 3.90*(Tmax-T0) ; } // 45 = 37(time shift) +  8(PT) from David
-        else if (PT == 412 and TB == 40){ T0 = 56 ; z_calc = 3.12*(Tmax-T0) ; } // 56 = 46(time shift) + 10(PT)
-        else if (PT == 200 and TB == 50){ T0 = 39 ; z_calc = 3.90*(Tmax-T0) ; } // 39 = 35(time shift) +  4(PT) own computation
-        else if (PT == 200 and TB == 40){ T0 = 48 ; z_calc = 3.12*(Tmax-T0) ; } // 48 = 44(time shift) +  5(PT)
+        if      (PT == 412 and TB == 50){ T0 = 45 ; z_calc = 3.90*(TL-T0) ; } // 45 = 37(time shift) +  8(PT) from David
+        else if (PT == 412 and TB == 40){ T0 = 56 ; z_calc = 3.12*(TL-T0) ; } // 56 = 46(time shift) + 10(PT)
+        else if (PT == 200 and TB == 50){ T0 = 39 ; z_calc = 3.90*(TL-T0) ; } // 39 = 35(time shift) +  4(PT) own computation
+        else if (PT == 200 and TB == 40){ T0 = 48 ; z_calc = 3.12*(TL-T0) ; } // 48 = 44(time shift) +  5(PT)
         if(z_calc < 0) z_calc           = 0 ;
-        v_h2f_Theta_Sel[iMod]->Fill(pLead->Get_iX(), z_calc) ;
+        v_h2f_Theta_Sel[ModuleNber]->Fill(pLead->Get_iX(), z_calc) ;
 
         for(int iP = 0 ; iP < NPads ; iP++){
           const Pad* pPad               = pCluster->Get_Pad(iP) ;
@@ -261,17 +270,17 @@ void Control(
           h1f_clus->                      Add(h1f_WF) ;
           float AP                      = pPad->Get_AMax() ;
           float pad_integral            = h1f_WF->Integral() ;
-          if(iP == NPads-1) v_h1f_Qlead_Sel[iMod]-> Fill(AP) ;
-          else v_h1f_Qneigh_Sel[iMod]->   Fill(AP) ;
-          v_h1f_Qpad_Sel[iMod]->          Fill(AP) ;
+          if(iP == NPads-1) v_h1f_Qlead_Sel[ModuleNber]-> Fill(AP) ;
+          else v_h1f_Qneigh_Sel[ModuleNber]->   Fill(AP) ;
+          v_h1f_Qpad_Sel[ModuleNber]->          Fill(AP) ;
           float avg_pad_int            = pad_integral/510 ;
-          v_h1f_API_Sel[iMod]->           Fill(avg_pad_int) ;
+          v_h1f_API_Sel[ModuleNber]->           Fill(avg_pad_int) ;
           delete                          h1f_WF ;
         }
         delete h1f_clus ;
       }
       avrg_padmutl                     /= (float)NClusters ;
-      v_h1f_APM_Sel[iMod]->               Fill(avrg_padmutl) ;
+      v_h1f_APM_Sel[ModuleNber]->               Fill(avrg_padmutl) ;
     }
     delete pEvent ;
   }
@@ -335,6 +344,8 @@ void Control(
     v_h2f_LeadPos_Sel[iMod]->   Write() ; 
     v_h2f_Theta_Raw[iMod]->  Write() ; 
     v_h2f_Theta_Sel[iMod]->   Write() ; 
+    v_h2f_rho_DT_Raw[iMod]->  Write() ; 
+    v_h2f_rho_DT_Sel[iMod]->   Write() ; 
   }
   pfileROOT->Close() ;
 
@@ -365,6 +376,8 @@ void Control(
     delete v_h2f_LeadPos_Sel[iMod] ;      v_h2f_LeadPos_Sel[iMod]   = 0 ;
     delete v_h2f_Theta_Raw[iMod] ;     v_h2f_Theta_Raw[iMod]  = 0 ;
     delete v_h2f_Theta_Sel[iMod] ;      v_h2f_Theta_Sel[iMod]   = 0 ;
+    delete v_h2f_rho_DT_Raw[iMod] ;     v_h2f_rho_DT_Raw[iMod]  = 0 ;
+    delete v_h2f_rho_DT_Sel[iMod] ;      v_h2f_rho_DT_Sel[iMod]   = 0 ;
   }
   v_h1f_TL_Raw     .clear() ;
   v_h1f_TL_Sel      .clear() ;
@@ -390,6 +403,8 @@ void Control(
   v_h2f_LeadPos_Sel     .clear() ;
   v_h2f_Theta_Raw    .clear() ;
   v_h2f_Theta_Sel     .clear() ;
+  v_h2f_rho_DT_Raw    .clear() ;
+  v_h2f_rho_DT_Sel     .clear() ;
 
   std::cout.rdbuf(coutbuf) ; // Reset to standard output again
 }

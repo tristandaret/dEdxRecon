@@ -43,6 +43,8 @@ void DrawOut_Control(const std::string& inputDir, const std::string& Tag, const 
   std::vector<TH2F*>          v_h2f_LeadPos_Sel ;
   std::vector<TH2F*>          v_h2f_Theta_Raw ;
   std::vector<TH2F*>          v_h2f_Theta_Sel ;
+  std::vector<TH2F*>          v_h2f_rho_DT_Raw ;
+  std::vector<TH2F*>          v_h2f_rho_DT_Sel ;
 
   for (int iMod = 0 ; iMod < nMod ; iMod++){
     v_h1f_TL_Raw.           push_back(pTFile_Control->Get<TH1F>(Form("h1f_TL_Raw_%i", iMod))) ;
@@ -67,6 +69,8 @@ void DrawOut_Control(const std::string& inputDir, const std::string& Tag, const 
     v_h2f_LeadPos_Sel.      push_back(pTFile_Control->Get<TH2F>(Form("h2f_LeadPos_Sel_%i", iMod))) ;
     v_h2f_Theta_Raw.        push_back(pTFile_Control->Get<TH2F>(Form("h2f_Theta_Raw_%i", iMod))) ;
     v_h2f_Theta_Sel.        push_back(pTFile_Control->Get<TH2F>(Form("h2f_Theta_Sel_%i", iMod))) ;
+    v_h2f_rho_DT_Raw.        push_back(pTFile_Control->Get<TH2F>(Form("h2f_rho_DT_Raw_%i", iMod))) ;
+    v_h2f_rho_DT_Sel.        push_back(pTFile_Control->Get<TH2F>(Form("h2f_rho_DT_Sel_%i", iMod))) ;
   }
 
   // Draw out
@@ -104,21 +108,14 @@ void DrawOut_Control(const std::string& inputDir, const std::string& Tag, const 
     pTGraph_2->Draw("l") ;  
 
     pTCanvas->Update() ;
-  }
-  pTCanvas->SaveAs(OutputFile_Beg.c_str()) ;
 
-  // Page 2 TL Cut
-  pTCanvas->Clear() ;
-  if (nMod != 1) pTCanvas->Divide(2,2) ; 
-
-  for (int iMod = 0 ; iMod < nMod ; iMod++) {
     pTCanvas->cd(iMod+1) ;
-    pTCanvas->cd(iMod+1)->SetLogy(1) ;
     v_h1f_TL_Sel[iMod]->SetLineWidth(2) ;
-    v_h1f_TL_Sel[iMod]->Draw("HIST") ;
+    v_h1f_TL_Sel[iMod]->SetLineColor(kRed) ;
+    v_h1f_TL_Sel[iMod]->Draw("HIST same") ;
     pTCanvas->Update() ;
   }
-  pTCanvas->SaveAs(OutputFile.c_str()) ;
+  pTCanvas->SaveAs(OutputFile_Beg.c_str()) ;
 
   // Page 3 Pad Multiplicity in Clusters Raw
   pTCanvas->Clear() ;
@@ -131,18 +128,11 @@ void DrawOut_Control(const std::string& inputDir, const std::string& Tag, const 
     v_h1f_PM_Raw[iMod]->SetLineWidth(2) ;
     v_h1f_PM_Raw[iMod]->Draw("HIST") ;
     pTCanvas->Update() ;
-  }
-  pTCanvas->SaveAs(OutputFile.c_str()) ;
 
-  // Page 4 Pad Multiplicity in Clusters Cut
-  pTCanvas->Clear() ;
-  if (nMod != 1) pTCanvas->Divide(2,2) ; 
-
-  for (int iMod = 0 ; iMod < nMod ; iMod++) {
     pTCanvas->cd(iMod+1) ;
-    pTCanvas->cd(iMod+1)->SetLogy(1) ;
     v_h1f_PM_Sel[iMod]->SetLineWidth(2) ;
-    v_h1f_PM_Sel[iMod]->Draw("HIST") ;
+    v_h1f_PM_Sel[iMod]->SetLineColor(kRed) ;
+    v_h1f_PM_Sel[iMod]->Draw("HIST same") ;
     pTCanvas->Update() ;
   }
   pTCanvas->SaveAs(OutputFile.c_str()) ;
@@ -157,18 +147,10 @@ void DrawOut_Control(const std::string& inputDir, const std::string& Tag, const 
     v_h1f_APM_Raw[iMod]->SetLineWidth(2) ;
     v_h1f_APM_Raw[iMod]->Draw("HIST") ;
     pTCanvas->Update() ;
-  }
-  pTCanvas->SaveAs(OutputFile.c_str()) ;
 
-  // Page 6 Average Pad Multiplicity in Events (per module) Cut
-  pTCanvas->Clear() ;
-  if (nMod != 1) pTCanvas->Divide(2,2) ; 
-
-  for (int iMod = 0 ; iMod < nMod ; iMod++) {
-    pTCanvas->cd(iMod+1) ;
-    pTCanvas->cd(iMod+1)->SetLogy(1) ;
     v_h1f_APM_Sel[iMod]->SetLineWidth(2) ;
-    v_h1f_APM_Sel[iMod]->Draw("HIST") ;
+    v_h1f_APM_Sel[iMod]->SetLineColor(kRed) ;
+    v_h1f_APM_Sel[iMod]->Draw("HIST same") ;
     pTCanvas->Update() ;
   }
   pTCanvas->SaveAs(OutputFile.c_str()) ;
@@ -183,18 +165,10 @@ void DrawOut_Control(const std::string& inputDir, const std::string& Tag, const 
     v_h1f_API_Raw[iMod]->SetLineWidth(2) ;
     v_h1f_API_Raw[iMod]->Draw("HIST") ;
     pTCanvas->Update() ;
-  }
-  pTCanvas->SaveAs(OutputFile.c_str()) ;
-
-  // Page 10 Average Pad Integral Cut
-  pTCanvas->Clear() ;
-  if (nMod != 1) pTCanvas->Divide(2,2) ; 
-
-  for (int iMod = 0 ; iMod < nMod ; iMod++) {
-    pTCanvas->cd(iMod+1) ;
-    pTCanvas->cd(iMod+1)->SetLogy(1) ;
+    
     v_h1f_API_Sel[iMod]->SetLineWidth(2) ;
-    v_h1f_API_Sel[iMod]->Draw("HIST") ;
+    v_h1f_API_Sel[iMod]->SetLineColor(kRed) ;
+    v_h1f_API_Sel[iMod]->Draw("HIST same") ;
     pTCanvas->Update() ;
   }
   pTCanvas->SaveAs(OutputFile.c_str()) ;
@@ -209,18 +183,10 @@ void DrawOut_Control(const std::string& inputDir, const std::string& Tag, const 
     v_h1f_Qlead_Raw[iMod]->SetLineWidth(2) ;
     v_h1f_Qlead_Raw[iMod]->Draw("HIST") ;
     pTCanvas->Update() ;
-  }
-  pTCanvas->SaveAs(OutputFile.c_str()) ;
-
-  // Page 12 Maximum ampitude for leading pad Cut
-  pTCanvas->Clear() ;
-  if (nMod != 1) pTCanvas->Divide(2,2) ; 
-
-  for (int iMod = 0 ; iMod < nMod ; iMod++) {
-    pTCanvas->cd(iMod+1) ;
-    pTCanvas->cd(iMod+1)->SetLogy(0) ;
+    
     v_h1f_Qlead_Sel[iMod]->SetLineWidth(2) ;
-    v_h1f_Qlead_Sel[iMod]->Draw("HIST") ;
+    v_h1f_Qlead_Sel[iMod]->SetLineColor(kRed) ;
+    v_h1f_Qlead_Sel[iMod]->Draw("HIST same") ;
     pTCanvas->Update() ;
   }
   pTCanvas->SaveAs(OutputFile.c_str()) ;
@@ -235,18 +201,10 @@ void DrawOut_Control(const std::string& inputDir, const std::string& Tag, const 
     v_h1f_Qneigh_Raw[iMod]->SetLineWidth(2) ;
     v_h1f_Qneigh_Raw[iMod]->Draw("HIST") ;
     pTCanvas->Update() ;
-  }
-  pTCanvas->SaveAs(OutputFile.c_str()) ;
-
-  // Page 12 Maximum ampitude for neighbour pads Cut
-  pTCanvas->Clear() ;
-  if (nMod != 1) pTCanvas->Divide(2,2) ; 
-
-  for (int iMod = 0 ; iMod < nMod ; iMod++) {
-    pTCanvas->cd(iMod+1) ;
-    pTCanvas->cd(iMod+1)->SetLogy(1) ;
+    
     v_h1f_Qneigh_Sel[iMod]->SetLineWidth(2) ;
-    v_h1f_Qneigh_Sel[iMod]->Draw("HIST") ;
+    v_h1f_Qneigh_Sel[iMod]->SetLineColor(kRed) ;
+    v_h1f_Qneigh_Sel[iMod]->Draw("HIST same") ;
     pTCanvas->Update() ;
   }
   pTCanvas->SaveAs(OutputFile.c_str()) ;
@@ -261,18 +219,10 @@ void DrawOut_Control(const std::string& inputDir, const std::string& Tag, const 
     v_h1f_Qpad_Raw[iMod]->SetLineWidth(2) ;
     v_h1f_Qpad_Raw[iMod]->Draw("HIST") ;
     pTCanvas->Update() ;
-  }
-  pTCanvas->SaveAs(OutputFile.c_str()) ;
-
-  // Page 12 Maximum ampitude for each pad Cut
-  pTCanvas->Clear() ;
-  if (nMod != 1) pTCanvas->Divide(2,2) ; 
-
-  for (int iMod = 0 ; iMod < nMod ; iMod++) {
-    pTCanvas->cd(iMod+1) ;
-    pTCanvas->cd(iMod+1)->SetLogy(1) ;
+    
     v_h1f_Qpad_Sel[iMod]->SetLineWidth(2) ;
-    v_h1f_Qpad_Sel[iMod]->Draw("HIST") ;
+    v_h1f_Qpad_Sel[iMod]->SetLineColor(kRed) ;
+    v_h1f_Qpad_Sel[iMod]->Draw("HIST same") ;
     pTCanvas->Update() ;
   }
   pTCanvas->SaveAs(OutputFile.c_str()) ;
@@ -289,20 +239,12 @@ void DrawOut_Control(const std::string& inputDir, const std::string& Tag, const 
     pTCanvas->Update() ;
     SetStatBoxPosition(v_h1f_CM_Raw[iMod], 0.15, 0.35, 0.6, 0.85) ;
     pTCanvas->Update() ;
-  }
-  pTCanvas->SaveAs(OutputFile.c_str()) ;
-
-  // Page 12 Cluster multipicity Cut
-  pTCanvas->Clear() ;
-  if (nMod != 1) pTCanvas->Divide(2,2) ; 
-
-  for (int iMod = 0 ; iMod < nMod ; iMod++) {
-    pTCanvas->cd(iMod+1) ;
-    pTCanvas->cd(iMod+1)->SetLogy(1) ;
+    
     v_h1f_CM_Sel[iMod]->SetLineWidth(2) ;
-    v_h1f_CM_Sel[iMod]->Draw("HIST") ;
+    v_h1f_CM_Sel[iMod]->SetLineColor(kRed) ;
+    v_h1f_CM_Sel[iMod]->Draw("HIST same") ;
     pTCanvas->Update() ;
-    SetStatBoxPosition(v_h1f_CM_Sel[iMod], 0.15, 0.35, 0.6, 0.85) ;
+    // SetStatBoxPosition(v_h1f_CM_Sel[iMod], 0.15, 0.35, 0.6, 0.85) ;
     pTCanvas->Update() ;
   }
 
@@ -320,20 +262,12 @@ void DrawOut_Control(const std::string& inputDir, const std::string& Tag, const 
     pTCanvas->Update() ;
     SetStatBoxPosition(v_h1f_Eff_Raw[iMod], 0.15, 0.35, 0.3, 0.55) ;
     pTCanvas->Update() ;
-  }
-  pTCanvas->SaveAs(OutputFile.c_str()) ;
-
-  // Page 14 Cluster efficiency Cut
-  pTCanvas->Clear() ;
-  if (nMod != 1) pTCanvas->Divide(2,2) ; 
-
-  for (int iMod = 0 ; iMod < nMod ; iMod++) {
-    pTCanvas->cd(iMod+1) ;
-    pTCanvas->cd(iMod+1)->SetLogy(0) ;
+    
     v_h1f_Eff_Sel[iMod]->SetLineWidth(2) ;
-    v_h1f_Eff_Sel[iMod]->Draw("HIST") ;
+    v_h1f_Eff_Sel[iMod]->SetLineColor(kRed) ;
+    v_h1f_Eff_Sel[iMod]->Draw("HIST same") ;
     pTCanvas->Update() ;
-    SetStatBoxPosition(v_h1f_Eff_Sel[iMod], 0.15, 0.35, 0.3, 0.55) ;
+    // SetStatBoxPosition(v_h1f_Eff_Sel[iMod], 0.15, 0.35, 0.3, 0.55) ;
     pTCanvas->Update() ;
   }
   pTCanvas->SaveAs(OutputFile.c_str()) ;
@@ -380,6 +314,28 @@ void DrawOut_Control(const std::string& inputDir, const std::string& Tag, const 
     v_h2f_Theta_Sel[iMod]->Draw("colz") ;
     pTCanvas->Update() ;
   }
+  pTCanvas->SaveAs(OutputFile.c_str()) ;
+
+  // 
+  pTCanvas->Clear() ;
+  if (nMod != 1) pTCanvas->Divide(2,2) ; 
+
+  for (int iMod = 0 ; iMod < nMod ; iMod++) {
+    pTCanvas->cd(iMod+1) ;
+    v_h2f_rho_DT_Raw[iMod]->Draw("colz") ;
+    pTCanvas->Update() ;
+  }
+  pTCanvas->SaveAs(OutputFile.c_str()) ;
+
+  // 
+  pTCanvas->Clear() ;
+  if (nMod != 1) pTCanvas->Divide(2,2) ; 
+
+  for (int iMod = 0 ; iMod < nMod ; iMod++) {
+    pTCanvas->cd(iMod+1) ;
+    v_h2f_rho_DT_Sel[iMod]->Draw("colz") ;
+    pTCanvas->Update() ;
+  }
   pTCanvas->SaveAs(OutputFile_End.c_str()) ;
   delete pTCanvas ;
 
@@ -406,6 +362,8 @@ void DrawOut_Control(const std::string& inputDir, const std::string& Tag, const 
     delete v_h2f_LeadPos_Sel[iMod] ;    v_h2f_LeadPos_Sel[iMod] = 0 ;
     delete v_h2f_Theta_Raw[iMod] ;    v_h2f_Theta_Raw[iMod] = 0 ;
     delete v_h2f_Theta_Sel[iMod] ;    v_h2f_Theta_Sel[iMod] = 0 ;
+    delete v_h2f_rho_DT_Raw[iMod] ;    v_h2f_rho_DT_Raw[iMod] = 0 ;
+    delete v_h2f_rho_DT_Sel[iMod] ;    v_h2f_rho_DT_Sel[iMod] = 0 ;
   }
   v_h1f_TL_Raw.                         clear() ;
   v_h1f_TL_Sel.                         clear() ;
@@ -429,6 +387,8 @@ void DrawOut_Control(const std::string& inputDir, const std::string& Tag, const 
   v_h2f_LeadPos_Sel.                    clear() ;
   v_h2f_Theta_Raw.                    clear() ;
   v_h2f_Theta_Sel.                    clear() ;
+  v_h2f_rho_DT_Raw.                    clear() ;
+  v_h2f_rho_DT_Sel.                    clear() ;
 }
 
 
