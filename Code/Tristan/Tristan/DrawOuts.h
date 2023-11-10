@@ -55,3 +55,7 @@ void DrawOut_TGE_WFsum_L(const std::string& inputDir, const std::string& Comment
 void DrawOut_verif(const std::string& OutDir, const std::string& Comment);
 
 void DrawOut_corrections();
+
+
+// DrawOut dE/dx systematics with Z scan
+void DrawOut_Systematics(const std::string& inputDir, const std::string& Comment, const std::string& scan);

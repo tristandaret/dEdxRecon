@@ -7,6 +7,7 @@
 #include <numeric>
 #include <fstream>
 #include <string>
+#include <random>
 
 #include "TH2.h"
 #include "TGraphErrors.h"
@@ -314,15 +315,24 @@ void dEdx( const std::string& OutDir,
           if(phi >  90) phi               =  90-2e-6 ;
           float phiconv                   = fabs(phi)/phi_step ;
           // Interpolation d
+
+          // std::random_device                rand_dev;
+          // std::mt19937                      generator(rand_dev());
+          // std::uniform_real_distribution<float> distr(-1, 1);
+          // Double_t shift                  = distr(generator);
+          // d                              += shift;
+
           if(d < -L/2) d                  = -L/2 ;
           if(d >  L/2) d                  =  L/2 ;
           float dconv                     = (d+L/2)/d_step ;  // +L/2 shift because LUT indices have to be > 0 but d can be < 0
           // Interpolation Z
+          z_calc                         += 100;
           if(z_calc < 0)    z_calc        = 0 ;
           if(z_calc > 1000) z_calc        = 1e3 ;
           float zfile                     = zdrift/z_step ;
           float zconv                     = z_calc/z_step ;
           // Interpolation RC
+          // RC_pad                         *= 1.25;
           if(RC_pad < 50)  RC_pad         = 50 ;
           if(RC_pad > 150) RC_pad         = 150 ;
           float RCconv                    = (RC_pad-50)/RC_step ;

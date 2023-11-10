@@ -1,22 +1,15 @@
 Tag           : DESY21_z360_PT412
-Comment       : _1000_zcalc_PRF_4IP_WFhatrecon
-EventFile     : ../Data_DESY21/zscan_PT412/z_360_275_412_02T_26_360_iter0.root
+Comment       : _zcalc_G2_WF4_Zp10cm
+FileName     : ../Data_DESY21/zscan_PT412/z_360_275_412_02T_26_360_iter0.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
 Data_to_Use   : 0
 OUTDirName    : OUT_Tristan/DESY21_zscan/DESY21_zscan_PT412/DESY21_z360_PT412/
 
-
-ReadRCmap::ReadRCmap m_FileName = GainRCMaps/RCfiles/ERAM01_RCdata_01.root
-
-ReadRCmap::ReadRCmap  No Data for iX=10 and  iY=16 in GainRCMaps/RCfiles/ERAM01_RCdata_01.root
-RC map: loaded
-
-ReadGainmap::ReadGainmap m_FileName = GainRCMaps/Gainfiles/ERAM01_Gaindata_01.root
-
-ReadGainmap::ReadGainmap  No Data for iX=10 and  iY=16 in GainRCMaps/Gainfiles/ERAM01_Gaindata_01.root
-Gain map: loaded
+Gain & RC maps: loaded
 Average Gain in ERAM01 = 1947.77
+ERAM01: RC   hole in  iX = 10 | iY = 16 | value reset at 129.29
+ERAM01: Gain hole in  iX = 10 | iY = 16 | value reset at 1889.24
 
 -------------->Predefined selection T_DESY21_Event
 Number of entries :13564
@@ -52,22 +45,15 @@ zdrift        = 450 mm
 PT            = 412 ns
 TB            = 50 ns/time bin
 PT/TB         = 8 time bins
-Track fitting : PRF
 z method      : zcalc
 cut length    = 2 mm
 
 Processing events:
 0/13564
-500/13564
-RC hole in entry   619 | iX = 10 | iY = 16 |  RC  value reset at 129
 1000/13564
-1500/13564
 2000/13564
-2500/13564
 3000/13564
-3500/13564
 4000/13564
-4500/13564
 ALERT: 1 walls crossed for a pad in entry #4810
 30 32 6 7
 48 32 7 7
@@ -77,11 +63,8 @@ ALERT: 3 walls crossed for a pad in entry #4810
 48 32 7 7
 9 -0 -0
 5000/13564
-5500/13564
 6000/13564
-6500/13564
 7000/13564
-7500/13564
 ALERT: 1 walls crossed for a pad in entry #7633
 15 16 8 9
 15 -nan 8 8
@@ -91,11 +74,8 @@ ALERT: 3 walls crossed for a pad in entry #7633
 50 15 8 8
 8 0 -0
 8000/13564
-8500/13564
 9000/13564
-9500/13564
 10000/13564
-10500/13564
 ALERT: 1 walls crossed for a pad in entry #10865
 14 15 9 10
 29 15 10 10
@@ -105,9 +85,7 @@ ALERT: 3 walls crossed for a pad in entry #10865
 29 15 10 10
 11 -0 -0
 11000/13564
-11500/13564
 12000/13564
-12500/13564
 ALERT: 1 walls crossed for a pad in entry #12680
 11 12 10 11
 27 12 11 11
@@ -117,8 +95,8 @@ ALERT: 3 walls crossed for a pad in entry #12680
 27 12 11 11
 12 -0 -0
 13000/13564
-13500/13564
 13563/13564
+13564 real events
 
 Selection Statistics 
  #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
@@ -131,5 +109,5 @@ Selection Statistics
     6  Stage5    12278     6919 (  -43.65)  (  -48.99)     12278     6919 (  -43.65)  (  -48.99)    406311   235246 (  -42.10)  (  -48.97)   1439215   826139 (  -42.60)  (  -50.91) 
   Summary Sel    13564     6919             (  -48.99)     13564     6919             (  -48.99)    461034   235246             (  -48.97)   1682848   826139             (  -50.91) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT412/DESY21_z360_PT412/2_DESY21_z360_PT412_Checks_1000_zcalc_PRF_4IP_WFhatrecon.root
-dEdx: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT412/DESY21_z360_PT412/3_DESY21_z360_PT412_dEdx_1000_zcalc_PRF_4IP_WFhatrecon.root
+Checks: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT412/DESY21_z360_PT412/2_DESY21_z360_PT412_Checks_zcalc_G2_WF4_Zp10cm.root
+dEdx: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT412/DESY21_z360_PT412/3_DESY21_z360_PT412_dEdx_zcalc_G2_WF4_Zp10cm.root

@@ -1046,7 +1046,7 @@ void DrawOut_Versions(const std::string& inputDir, const std::string& Method, co
     kAfter  = kOrange-3 ;
   }
   if(Method == "XP"){
-    method = "tf1_XP_0" ;
+    method = "tf1_XP" ;
     kBefore = kGreen+3 ;
     kAfter  = kMagenta+2 ;
   }
@@ -1143,7 +1143,7 @@ void DrawOut_Versions(const std::string& inputDir, const std::string& Method, co
   // Mean
   v_mean1[0]->                GetXaxis()->SetLimits(-0.5, 31.5) ;
   v_mean1[0]->                SetMinimum(600) ;
-  v_mean1[0]->                SetMaximum(1210) ;
+  v_mean1[0]->                SetMaximum(1200) ;
   v_mean1[0]->                SetNameTitle("v_mean1[0]", "Mean vs Y position;Pad row;Mean (ADC count)") ;
   Graphic_setup(v_mean1[0], 3, 21, kBefore, 1, kBlack) ;
   Graphic_setup(v_mean2[0], 3, 20, kAfter,    1, kBlack) ;
@@ -1154,7 +1154,7 @@ void DrawOut_Versions(const std::string& inputDir, const std::string& Method, co
 
   // Std
   v_std1[0]->                GetXaxis()->SetLimits(-0.5, 31.5) ;
-  v_std1[0]->                SetMinimum(42) ;
+  v_std1[0]->                SetMinimum(40) ;
   v_std1[0]->                SetMaximum(121) ;
   v_std1[0]->                SetNameTitle("v_std1[0]", "Std vs Y position;Pad row;std (ADC count)") ;
   Graphic_setup(v_std1[0], 3, 21, kBefore, 1, kBlack) ;
@@ -1245,7 +1245,7 @@ void DrawOut_Versions(const std::string& inputDir, const std::string& Method, co
   // Mean
   v_mean1[1]->                GetXaxis()->SetLimits(0, 1000) ;
   v_mean1[1]->                SetMinimum(600) ;
-  v_mean1[1]->                SetMaximum(1210) ;
+  v_mean1[1]->                SetMaximum(1200) ;
   v_mean1[1]->                SetNameTitle("v_mean1[1]", "Mean vs Z_{drift} (200 ns);Z_{drift} (mm);Mean (ADC count)") ;
   Graphic_setup(v_mean1[1], 3, 21, kBefore, 1, kBlack) ;
   Graphic_setup(v_mean2[1], 3, 20, kAfter,    1, kBlack) ;
@@ -1256,7 +1256,7 @@ void DrawOut_Versions(const std::string& inputDir, const std::string& Method, co
 
   // Std
   v_std1[1]->                GetXaxis()->SetLimits(0, 1000) ;
-  v_std1[1]->                SetMinimum(42) ;
+  v_std1[1]->                SetMinimum(40) ;
   v_std1[1]->                SetMaximum(121) ;
   v_std1[1]->                SetNameTitle("v_std1[1]", "Std vs Z_{drift} (200 ns);Z_{drift} (mm);std (ADC count)") ;
   Graphic_setup(v_std1[1], 3, 21, kBefore, 1, kBlack) ;
@@ -1348,7 +1348,7 @@ void DrawOut_Versions(const std::string& inputDir, const std::string& Method, co
   // Mean
   v_mean1[2]->                GetXaxis()->SetLimits(0, 1000) ;
   v_mean1[2]->                SetMinimum(600) ;
-  v_mean1[2]->                SetMaximum(1210) ;
+  v_mean1[2]->                SetMaximum(1200) ;
   v_mean1[2]->                SetNameTitle("v_mean1[2]", "Mean vs Z_{drift} (412 ns);Z_{drift} (mm);Mean (ADC count)") ;
   Graphic_setup(v_mean1[2], 3, 21, kBefore, 1, kBlack) ;
   Graphic_setup(v_mean2[2], 3, 20, kAfter,    1, kBlack) ;
@@ -1359,7 +1359,7 @@ void DrawOut_Versions(const std::string& inputDir, const std::string& Method, co
 
   // Std
   v_std1[2]->                GetXaxis()->SetLimits(0, 1000) ;
-  v_std1[2]->                SetMinimum(42) ;
+  v_std1[2]->                SetMinimum(40) ;
   v_std1[2]->                SetMaximum(121) ;
   v_std1[2]->                SetNameTitle("v_std1[2]", "Std vs Z_{drift} (412 ns);Z_{drift} (mm);std (ADC count)") ;
   Graphic_setup(v_std1[2], 3, 21, kBefore, 1, kBlack) ;
@@ -1451,7 +1451,7 @@ void DrawOut_Versions(const std::string& inputDir, const std::string& Method, co
   // Mean
   v_mean1[3]->                GetXaxis()->SetLimits(-3, 48) ;
   v_mean1[3]->                SetMinimum(600) ;
-  v_mean1[3]->                SetMaximum(1210) ;
+  v_mean1[3]->                SetMaximum(1200) ;
   v_mean1[3]->                SetNameTitle("v_mean1[3]", "Mean vs #varphi angle (Z_{drift} = 50 mm);#varphi angle (#circ);Mean (ADC count)") ;
   Graphic_setup(v_mean1[3], 3, 21, kBefore, 1, kBlack) ;
   Graphic_setup(v_mean2[3], 3, 20, kAfter,    1, kBlack) ;
@@ -1462,7 +1462,7 @@ void DrawOut_Versions(const std::string& inputDir, const std::string& Method, co
 
   // Std
   v_std1[3]->                GetXaxis()->SetLimits(-3, 48) ;
-  v_std1[3]->                SetMinimum(42) ;
+  v_std1[3]->                SetMinimum(40) ;
   v_std1[3]->                SetMaximum(121) ;
   v_std1[3]->                SetNameTitle("v_std1[3]", "Std vs #varphi angle (Z_{drift} = 50 mm);#varphi angle (#circ);std (ADC count)") ;
   Graphic_setup(v_std1[3], 3, 21, kBefore, 1, kBlack) ;
@@ -1553,7 +1553,7 @@ void DrawOut_Versions(const std::string& inputDir, const std::string& Method, co
   // Mean
   v_mean1[4]->                GetXaxis()->SetLimits(-3, 48) ;
   v_mean1[4]->                SetMinimum(600) ;
-  v_mean1[4]->                SetMaximum(1210) ;
+  v_mean1[4]->                SetMaximum(1200) ;
   v_mean1[4]->                SetNameTitle("v_mean1[4]", "Mean vs #varphi angle (Z_{drift} = 550 mm);#varphi angle (#circ);Mean (ADC count)") ;
   Graphic_setup(v_mean1[4], 3, 21, kBefore, 1, kBlack) ;
   Graphic_setup(v_mean2[4], 3, 20, kAfter,    1, kBlack) ;
@@ -1655,7 +1655,7 @@ void DrawOut_Versions(const std::string& inputDir, const std::string& Method, co
   // Mean
   v_mean1[5]->                GetXaxis()->SetLimits(-3, 48) ;
   v_mean1[5]->                SetMinimum(600) ;
-  v_mean1[5]->                SetMaximum(1210) ;
+  v_mean1[5]->                SetMaximum(1200) ;
   v_mean1[5]->                SetNameTitle("v_mean1[5]", "Mean vs #varphi angle (Z_{drift} = 950 mm);#varphi angle (#circ);Mean (ADC count)") ;
   Graphic_setup(v_mean1[5], 3, 21, kBefore, 1, kBlack) ;
   Graphic_setup(v_mean2[5], 3, 20, kAfter,    1, kBlack) ;
@@ -1725,7 +1725,7 @@ void DrawOut_Separation(const std::string& inputDir, const std::string& Comment)
     v_tf1_WFsum          .push_back(v_h1f_WFsum[iPar]->GetFunction("tf1_WFsum_0")) ;
     v_tf1_GPv3          .push_back(v_h1f_GPv3[iPar]->GetFunction("tf1_GPv3_0")) ;
     v_tf1_GPv6          .push_back(v_h1f_GPv6[iPar]->GetFunction("tf1_GPv6_0")) ;
-    v_tf1_XP          .push_back(v_h1f_XP[iPar]->GetFunction("tf1_XP_0")) ;
+    v_tf1_XP          .push_back(v_h1f_XP[iPar]->GetFunction("tf1_XP")) ;
   }
 
 
@@ -2342,7 +2342,7 @@ void DrawOut_Scans(const std::string& inputDir, const std::string& Comment)
       if(iz == 0) pTFile     = TFile::Open(TString(inputDir + "/DESY21_zscan/DESY21_zscan_PT" + PT + "/DESY21_zm40_PT" + PT + "/3_DESY21_zm40_PT" + PT + "_dEdx" + Comment + ".root")) ;
       else         pTFile     = TFile::Open(TString(inputDir + "/DESY21_zscan/DESY21_zscan_PT" + PT + "/DESY21_z" + std::to_string(iz-1) + "60_PT" + PT + "/3_DESY21_z" + std::to_string(iz-1) + "60_PT" + PT + "_dEdx" + Comment + ".root")) ;
       v_tf1_WF.                 push_back(pTFile->Get<TF1>("tf1_WFsum_0")) ;
-      v_tf1_XP.                 push_back(pTFile->Get<TF1>("tf1_XP_0")) ;
+      v_tf1_XP.                 push_back(pTFile->Get<TF1>("tf1_XP")) ;
       pTFile->                  Clear() ;
       Xlabel.                   push_back("PT" + std::to_string(PT) + "_Z" + std::to_string(iz*10+5) + "_Y8_#varphi0_#theta0") ;
       npoint++ ;
@@ -2356,7 +2356,7 @@ void DrawOut_Scans(const std::string& inputDir, const std::string& Comment)
   for(int iy = 0 ; iy < ny ; iy++){
     pTFile                    = TFile::Open(TString(inputDir + "/DESY21_yscan/DESY21_y" + Y_arr[iy] + "/3_DESY21_y" + Y_arr[iy] + "_dEdx" + Comment + ".root")) ;
     v_tf1_WF.                   push_back(pTFile->Get<TF1>("tf1_WFsum_0")) ;
-    v_tf1_XP.                   push_back(pTFile->Get<TF1>("tf1_XP_0")) ;
+    v_tf1_XP.                   push_back(pTFile->Get<TF1>("tf1_XP")) ;
     pTFile->                    Clear() ;
     Xlabel.                     push_back("PT412_Z9_Y" + std::to_string(Row_arr[iy]) + "_#varphi0_#theta0") ;
     npoint++ ;
@@ -2372,7 +2372,7 @@ void DrawOut_Scans(const std::string& inputDir, const std::string& Comment)
       if(iphi < 5) pTFile     = TFile::Open(TString(inputDir + "/DESY21_phi/DESY21_phi_z" + Z_arr[iz] + "/DESY21_phi" + phi_arr[iphi] + "_z" + Z_arr[iz] + "/3_DESY21_phi" + phi_arr[iphi] + "_z" + Z_arr[iz] + "_dEdx" + Comment + ".root")) ;
       else         pTFile     = TFile::Open(TString(inputDir + "/DESY21_phi/DESY21_phi_z" + Z_arr[iz] + "/DESY21_phi" + phi_arr[iphi] + "_diag_z" + Z_arr[iz] + "/3_DESY21_phi" + phi_arr[iphi] + "_diag_z" + Z_arr[iz] + "_dEdx" + Comment2 + ".root")) ;
       v_tf1_WF.                 push_back(pTFile->Get<TF1>("tf1_WFsum_0")) ;
-      v_tf1_XP.                 push_back(pTFile->Get<TF1>("tf1_XP_0")) ;
+      v_tf1_XP.                 push_back(pTFile->Get<TF1>("tf1_XP")) ;
       pTFile->                  Clear() ;
       if(iphi < 5) Xlabel.      push_back("PT200_Z" + std::to_string(Ztrue_arr[iz]/10) + "_Y4_#varphi" + std::to_string(phi_arr[iphi]) + "_#theta0") ;
       else Xlabel.              push_back("PT200_Z" + std::to_string(Ztrue_arr[iz]/10) + "_Y4_#varphi" + std::to_string(phi_arr[iphi]) + "d_#theta0") ;
@@ -2386,7 +2386,7 @@ void DrawOut_Scans(const std::string& inputDir, const std::string& Comment)
   for(int itheta = 0 ; itheta < ntheta ; itheta++){
     pTFile                    = TFile::Open(TString(inputDir + "/DESY21_theta/DESY21_theta" + theta_arr[itheta] + "/3_DESY21_theta" + theta_arr[itheta] + "_dEdx" + Comment + ".root")) ;
     v_tf1_WF.                   push_back(pTFile->Get<TF1>("tf1_WFsum_0")) ;
-    v_tf1_XP.                   push_back(pTFile->Get<TF1>("tf1_XP_0")) ;
+    v_tf1_XP.                   push_back(pTFile->Get<TF1>("tf1_XP")) ;
     pTFile->                    Clear() ;
     Xlabel.                     push_back("PT200_Z35_Y8_#varphi0_#theta" + std::to_string(theta_arr[itheta])) ;
     npoint++ ;
@@ -2484,8 +2484,8 @@ void DrawOut_Scans(const std::string& inputDir, const std::string& Comment)
 
   // Standard deviation
   pTCanvas->                    Clear() ;
-  ph1_std_XP->                 SetMinimum(42) ;
-  ph1_std_XP->                 SetMaximum(102) ;
+  ph1_std_XP->                 SetMinimum(40) ;
+  ph1_std_XP->                 SetMaximum(100) ;
   ph1_std_XP->                 SetNameTitle("ph1_std_XP", "dE/dx: Standard deviation;;std (ADC count)") ;
   Graphic_setup(ph1_std_WF,   3, 20, kCyan+2,    1, kBlack) ;
   Graphic_setup(ph1_std_XP,   3, 21, kMagenta+2, 1, kBlack) ;
@@ -2524,100 +2524,64 @@ void DrawOut_Scans(const std::string& inputDir, const std::string& Comment)
 void DrawOut_Zscan(const std::string& inputDir, const std::string& Comment, const int& PT)
 {
   int ipoint              = 0 ;
-  int nz                  = 9 ;
+  int nz                  = 10 ;
 
   // Vectors of TFiles & TH1Fs & TF1s & TGEs
   TFile* pTFile ;
   std::vector<TF1*>         v_tf1_WF ;
-  std::vector<TF1*>         v_tf1_GPv3 ;
-  std::vector<TF1*>         v_tf1_GPv6 ;
   std::vector<TF1*>         v_tf1_XP ;
 
-  for(int iz = -1 ; iz < nz ; iz++){
-    if(iz == -1) pTFile     = TFile::Open(TString(inputDir + "/DESY21_zm40_PT" + PT + "/3_DESY21_zm40_PT" + PT + "_dEdx" + Comment + ".root")) ;
-    else         pTFile     = TFile::Open(TString(inputDir + "/DESY21_z" + iz + "60_PT" + PT + "/3_DESY21_z" + iz + "60_PT" + PT + "_dEdx" + Comment + ".root")) ;
-    v_tf1_WF.                 push_back(pTFile->   Get<TF1>("tf1_WFsum_0")) ;
-    v_tf1_GPv3.               push_back(pTFile->   Get<TF1>("tf1_GPv3_0")) ;
-    v_tf1_GPv6.               push_back(pTFile->   Get<TF1>("tf1_GPv6_0")) ;
-    v_tf1_XP.                 push_back(pTFile->   Get<TF1>("tf1_XP_0")) ;
+  int         z_val[]   = {50, 150, 250, 350, 450, 550, 650, 750, 850, 950} ;
+  std::string z_arr[]   = {"m40", "060", "160", "260", "360", "460", "560", "660", "760", "860"} ;
+
+  for(int iz = 0 ; iz < int(std::size(z_arr)) ; iz++){
+    pTFile                  = TFile::Open(TString(inputDir + "/DESY21_z" + z_arr[iz] + "_PT" + PT + "/3_DESY21_z" + z_arr[iz] + "_PT" + PT + "_dEdx" + Comment + ".root")) ;
+    v_tf1_WF.                 push_back(pTFile->   Get<TF1>("tf1_WFsum")) ;
+    v_tf1_XP.                 push_back(pTFile->   Get<TF1>("tf1_XP")) ;
     pTFile->                  Clear() ;
   }
 
   TGraphErrors* pTGE_reso_WF    = new TGraphErrors() ;
-  TGraphErrors* pTGE_reso_GPv3  = new TGraphErrors() ;
-  TGraphErrors* pTGE_reso_GPv6  = new TGraphErrors() ;
   TGraphErrors* pTGE_reso_XP    = new TGraphErrors() ;
 
   TGraphErrors* pTGE_mean_WF    = new TGraphErrors() ;
-  TGraphErrors* pTGE_mean_GPv3  = new TGraphErrors() ;
-  TGraphErrors* pTGE_mean_GPv6  = new TGraphErrors() ;
   TGraphErrors* pTGE_mean_XP    = new TGraphErrors() ;
 
   TGraphErrors* pTGE_std_WF     = new TGraphErrors() ;
-  TGraphErrors* pTGE_std_GPv3   = new TGraphErrors() ;
-  TGraphErrors* pTGE_std_GPv6   = new TGraphErrors() ;
   TGraphErrors* pTGE_std_XP     = new TGraphErrors() ;
 
   // Get mean & std
   float mean_WF[nz] ;
-  float mean_GPv3[nz] ;
-  float mean_GPv6[nz] ;
   float mean_XP[nz] ;
   float dmean_WF[nz] ;
-  float dmean_GPv3[nz] ;
-  float dmean_GPv6[nz] ;
   float dmean_XP[nz] ;
   float std_WF[nz] ;
-  float std_GPv3[nz] ;
-  float std_GPv6[nz] ;
   float std_XP[nz] ;
   float dstd_WF[nz] ;
-  float dstd_GPv3[nz] ;
-  float dstd_GPv6[nz] ;
   float dstd_XP[nz] ;
-  for(int iz = 0 ; iz <= nz ; iz++){
+  for(int iz = 0 ; iz < nz ; iz++){
     mean_WF[iz]                 = v_tf1_WF[iz]->    GetParameter(1) ;
-    mean_GPv3[iz]               = v_tf1_GPv3[iz]->  GetParameter(1) ;
-    mean_GPv6[iz]               = v_tf1_GPv6[iz]->  GetParameter(1) ;
     mean_XP[iz]                 = v_tf1_XP[iz]->    GetParameter(1) ;
     std_WF[iz]                  = v_tf1_WF[iz]->    GetParameter(2) ;
-    std_GPv3[iz]                = v_tf1_GPv3[iz]->  GetParameter(2) ;
-    std_GPv6[iz]                = v_tf1_GPv6[iz]->  GetParameter(2) ;
     std_XP[iz]                  = v_tf1_XP[iz]->    GetParameter(2) ;
     dmean_WF[iz]                = v_tf1_WF[iz]->    GetParError(1) ;
-    dmean_GPv3[iz]              = v_tf1_GPv3[iz]->  GetParError(1) ;
-    dmean_GPv6[iz]              = v_tf1_GPv6[iz]->  GetParError(1) ;
     dmean_XP[iz]                = v_tf1_XP[iz]->    GetParError(1) ;
     dstd_WF[iz]                 = v_tf1_WF[iz]->    GetParError(2) ;
-    dstd_GPv3[iz]               = v_tf1_GPv3[iz]->  GetParError(2) ;
-    dstd_GPv6[iz]               = v_tf1_GPv6[iz]->  GetParError(2) ;
     dstd_XP[iz]                 = v_tf1_XP[iz]->    GetParError(2) ;
 
-    pTGE_reso_WF->  SetPoint      (ipoint, iz*100+50, std_WF[iz]/mean_WF[iz]*100) ;
-    pTGE_reso_GPv3->SetPoint      (ipoint, iz*100+50, std_GPv3[iz]/mean_GPv3[iz]*100) ;
-    pTGE_reso_GPv6->SetPoint      (ipoint, iz*100+50, std_GPv6[iz]/mean_GPv6[iz]*100) ;
-    pTGE_reso_XP->  SetPoint      (ipoint, iz*100+50, std_XP[iz]/mean_XP[iz]*100) ;
+    pTGE_reso_WF->  SetPoint      (ipoint, z_val[iz], std_WF[iz]/mean_WF[iz]*100) ;
+    pTGE_reso_XP->  SetPoint      (ipoint, z_val[iz], std_XP[iz]/mean_XP[iz]*100) ;
     pTGE_reso_WF->  SetPointError (ipoint, 0,         GetResoError(v_tf1_WF[iz])) ;
-    pTGE_reso_GPv3->SetPointError (ipoint, 0,         GetResoError(v_tf1_GPv3[iz])) ;
-    pTGE_reso_GPv6->SetPointError (ipoint, 0,         GetResoError(v_tf1_GPv6[iz])) ;
     pTGE_reso_XP->  SetPointError (ipoint, 0,         GetResoError(v_tf1_XP[iz])) ;
 
-    pTGE_mean_WF->  SetPoint      (ipoint, iz*100+50, mean_WF[iz]) ;
-    pTGE_mean_GPv3->SetPoint      (ipoint, iz*100+50, mean_GPv3[iz]) ;
-    pTGE_mean_GPv6->SetPoint      (ipoint, iz*100+50, mean_GPv6[iz]) ;
-    pTGE_mean_XP->  SetPoint      (ipoint, iz*100+50, mean_XP[iz]) ;
+    pTGE_mean_WF->  SetPoint      (ipoint, z_val[iz], mean_WF[iz]) ;
+    pTGE_mean_XP->  SetPoint      (ipoint, z_val[iz], mean_XP[iz]) ;
     pTGE_mean_WF->  SetPointError (ipoint, 0,         dmean_WF[iz]) ;
-    pTGE_mean_GPv3->SetPointError (ipoint, 0,         dmean_GPv3[iz]) ;
-    pTGE_mean_GPv6->SetPointError (ipoint, 0,         dmean_GPv6[iz]) ;
     pTGE_mean_XP->  SetPointError (ipoint, 0,         dmean_XP[iz]) ;
 
-    pTGE_std_WF->  SetPoint       (ipoint, iz*100+50, std_WF[iz]) ;
-    pTGE_std_GPv3->SetPoint       (ipoint, iz*100+50, std_GPv3[iz]) ;
-    pTGE_std_GPv6->SetPoint       (ipoint, iz*100+50, std_GPv6[iz]) ;
-    pTGE_std_XP->  SetPoint       (ipoint, iz*100+50, std_XP[iz]) ;
+    pTGE_std_WF->  SetPoint       (ipoint, z_val[iz], std_WF[iz]) ;
+    pTGE_std_XP->  SetPoint       (ipoint, z_val[iz], std_XP[iz]) ;
     pTGE_std_WF->  SetPointError  (ipoint, 0,         dstd_WF[iz]) ;
-    pTGE_std_GPv3->SetPointError  (ipoint, 0,         dstd_GPv3[iz]) ;
-    pTGE_std_GPv6->SetPointError  (ipoint, 0,         dstd_GPv6[iz]) ;
     pTGE_std_XP->  SetPointError  (ipoint, 0,         dstd_XP[iz]) ;
 
     ipoint++ ;
@@ -2643,16 +2607,10 @@ void DrawOut_Zscan(const std::string& inputDir, const std::string& Comment, cons
   pTGE_reso_WF->                SetMaximum(12) ;
   pTGE_reso_WF->                SetNameTitle("pTGE_reso_WF", "Resolution vs drift distance;drift distance z (mm);resolution (%)") ;
   Graphic_setup(pTGE_reso_WF,   3, 20, kCyan+2,    1, kBlack) ;
-  Graphic_setup(pTGE_reso_GPv3, 3, 22, kGreen+2,   1, kBlack) ;
-  Graphic_setup(pTGE_reso_GPv6, 3, 23, kRed+2,     1, kBlack) ;
   Graphic_setup(pTGE_reso_XP,   3, 21, kMagenta+2, 1, kBlack) ;
   pTGE_reso_WF->                Draw("ap") ;
-  // pTGE_reso_GPv3->              Draw("p same") ;
-  // pTGE_reso_GPv6->              Draw("p same") ;
   pTGE_reso_XP->                Draw("p same") ;
-  leg->                         AddEntry(pTGE_reso_WF, "WF ", "ep") ;  
-  // leg->                         AddEntry(pTGE_reso_GPv3, "GPv3 ", "ep") ;  
-  // leg->                         AddEntry(pTGE_reso_GPv6, "GPv6 ", "ep") ;  
+  leg->                         AddEntry(pTGE_reso_WF, "WF ", "ep") ; 
   leg->                         AddEntry(pTGE_reso_XP, "XP ", "ep") ;  
   leg->                         Draw() ;
   pTCanvas->                    SaveAs(OutputFile_Beg.c_str()) ;
@@ -2663,28 +2621,20 @@ void DrawOut_Zscan(const std::string& inputDir, const std::string& Comment, cons
   pTGE_mean_WF->                SetMaximum(1200) ;
   pTGE_mean_WF->                SetNameTitle("pTGE_mean_WF", "Mean vs drift distance;drift distance z (mm);Mean (ADC count)") ;
   Graphic_setup(pTGE_mean_WF,   3, 20, kCyan+2,    1, kBlack) ;
-  Graphic_setup(pTGE_mean_GPv3, 3, 22, kGreen+2,   1, kBlack) ;
-  Graphic_setup(pTGE_mean_GPv6, 3, 23, kRed+2,     1, kBlack) ;
   Graphic_setup(pTGE_mean_XP,   3, 21, kMagenta+2, 1, kBlack) ;
   pTGE_mean_WF->                Draw("ap") ;
-  // pTGE_mean_GPv3->              Draw("p same") ;
-  // pTGE_mean_GPv6->              Draw("p same") ;
   pTGE_mean_XP->                Draw("p same") ;
   leg->                         Draw() ;
   pTCanvas->                    SaveAs(OutputFile.c_str()) ;
 
   // Standard deviation
   pTCanvas->                    Clear() ;
-  pTGE_std_WF->                 SetMinimum(42) ;
-  pTGE_std_WF->                 SetMaximum(102) ;
+  pTGE_std_WF->                 SetMinimum(40) ;
+  pTGE_std_WF->                 SetMaximum(100)  ;
   pTGE_std_WF->                 SetNameTitle("pTGE_std_WF", "std vs drift distance;drift distance z (mm);std (ADC count)") ;
   Graphic_setup(pTGE_std_WF,   3, 20, kCyan+2,    1, kBlack) ;
-  Graphic_setup(pTGE_std_GPv3, 3, 22, kGreen+2,   1, kBlack) ;
-  Graphic_setup(pTGE_std_GPv6, 3, 23, kRed+2,     1, kBlack) ;
   Graphic_setup(pTGE_std_XP,   3, 21, kMagenta+2, 1, kBlack) ;
   pTGE_std_WF->                 Draw("ap") ;
-  // pTGE_std_GPv3->               Draw("p same") ;
-  // pTGE_std_GPv6->               Draw("p same") ;
   pTGE_std_XP->                 Draw("p same") ;
   leg->                         Draw() ;
   pTCanvas->                    SaveAs(OutputFile_End.c_str()) ;
@@ -2693,8 +2643,6 @@ void DrawOut_Zscan(const std::string& inputDir, const std::string& Comment, cons
   delete                        pTCanvas   ;
   delete                        leg ;
   v_tf1_WF.                     clear() ;
-  v_tf1_GPv3.                   clear() ;
-  v_tf1_GPv6.                   clear() ;
   v_tf1_XP.                     clear() ;
 }
 
@@ -2733,7 +2681,7 @@ void DrawOut_Yscan(const std::string& inputDir, const std::string& Comment)
     v_tf1_WF.                 push_back(v_h1f_WF[iy]->   GetFunction("tf1_WFsum_0")) ;
     v_tf1_GPv3.               push_back(v_h1f_GPv3[iy]-> GetFunction("tf1_GPv3_0")) ;
     v_tf1_GPv6.               push_back(v_h1f_GPv6[iy]-> GetFunction("tf1_GPv6_0")) ;
-    v_tf1_XP.                 push_back(v_h1f_XP[iy]->   GetFunction("tf1_XP_0")) ;
+    v_tf1_XP.                 push_back(v_h1f_XP[iy]->   GetFunction("tf1_XP")) ;
   }
 
   TGraphErrors* pTGE_reso_WF    = new TGraphErrors() ;
@@ -2818,7 +2766,7 @@ void DrawOut_Yscan(const std::string& inputDir, const std::string& Comment)
   pTCanvas->                    Clear() ;
   pTGE_mean_XP->                GetXaxis()->SetLimits(-0.5, 31.5) ;
   pTGE_mean_XP->                SetMinimum(600) ;
-  pTGE_mean_XP->                SetMaximum(1210) ;
+  pTGE_mean_XP->                SetMaximum(1200) ;
   pTGE_mean_XP->                SetNameTitle("pTGE_mean_XP", "Mean vs Y position;Pad row;Mean (ADC count)") ;
   Graphic_setup(pTGE_mean_WF, 3, 20, kCyan+2,    1, kBlack) ;
   Graphic_setup(pTGE_mean_XP, 3, 21, kMagenta+2, 1, kBlack) ;
@@ -2830,7 +2778,7 @@ void DrawOut_Yscan(const std::string& inputDir, const std::string& Comment)
   // Standard deviation
   pTCanvas->                    Clear() ;
   pTGE_std_XP->                 GetXaxis()->SetLimits(-0.5, 31.5) ;
-  pTGE_std_XP->                 SetMinimum(42) ;
+  pTGE_std_XP->                 SetMinimum(40) ;
   pTGE_std_XP->                 SetMaximum(121) ;
   pTGE_std_XP->                 SetNameTitle("pTGE_std_XP", "std vs Y position;Pad row;std (ADC count)") ;
   Graphic_setup(pTGE_std_WF, 3, 20, kCyan+2,    1, kBlack) ;
@@ -2882,8 +2830,8 @@ void DrawOut_Phiscan(const std::string& inputDir, const std::string& Comment, co
     if(iphi == 0)     v_pTFile. push_back(TFile::Open(TString("OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_z" + zdrift + "_PT200/3_DESY21_z" + zdrift + "_PT200_dEdx" + Comment2 + ".root"))) ;
     else if(iphi < 5) v_pTFile. push_back(TFile::Open(TString(inputDir + "/DESY21_phi" + phi_arr[iphi] + "_z" + zdrift + "/3_DESY21_phi" + phi_arr[iphi] + "_z" + zdrift + "_dEdx" + Comment2 + ".root"))) ;
     else          v_pTFile.   push_back(TFile::Open(TString(inputDir + "/DESY21_phi" + phi_arr[iphi] + "_diag_z" + zdrift + "/3_DESY21_phi" + phi_arr[iphi] + "_diag_z" + zdrift + "_dEdx" + Comment + ".root"))) ;
-    v_tf1_WF.                 push_back(v_pTFile[iphi]->   Get<TF1>("tf1_WFsum_0")) ;
-    v_tf1_XP.                 push_back(v_pTFile[iphi]->   Get<TF1>("tf1_XP_0")) ;
+    v_tf1_WF.                 push_back(v_pTFile[iphi]->   Get<TF1>("tf1_WFsum")) ;
+    v_tf1_XP.                 push_back(v_pTFile[iphi]->   Get<TF1>("tf1_XP")) ;
   }
 
   TGraphErrors* pTGE_reso_WF    = new TGraphErrors() ;
@@ -2982,8 +2930,8 @@ void DrawOut_Phiscan(const std::string& inputDir, const std::string& Comment, co
   pTCanvas->                    Clear() ;
   leg->                         Clear() ;
   pTGE_std_WF->                 GetXaxis()->SetLimits(-3, 48) ;
-  pTGE_std_WF->                 SetMinimum(42) ;
-  pTGE_std_WF->                 SetMaximum(102) ;
+  pTGE_std_WF->                 SetMinimum(40) ;
+  pTGE_std_WF->                 SetMaximum(100)  ;
   pTGE_std_WF->                 SetNameTitle("pTGE_std_WF", "Standard deviation vs #varphi angle;#varphi angle (#circ);standard deviation (ADC count)") ;
   Graphic_setup(pTGE_std_WF,   3, 20, kCyan+2,    1, kBlack) ;
   Graphic_setup(pTGE_std_XP,   3, 21, kMagenta+2, 1, kBlack) ;
@@ -3035,7 +2983,7 @@ void DrawOut_Thetascan(const std::string& inputDir, const std::string& Comment)
     v_tf1_WF.                 push_back(v_h1f_WF[itheta]->   GetFunction("tf1_WFsum_0")) ;
     v_tf1_GPv3.               push_back(v_h1f_GPv3[itheta]-> GetFunction("tf1_GPv3_0")) ;
     v_tf1_GPv6.               push_back(v_h1f_GPv6[itheta]-> GetFunction("tf1_GPv6_0")) ;
-    v_tf1_XP.                 push_back(v_h1f_XP[itheta]->   GetFunction("tf1_XP_0")) ;
+    v_tf1_XP.                 push_back(v_h1f_XP[itheta]->   GetFunction("tf1_XP")) ;
   }
 
   TGraphErrors* pTGE_reso_WF    = new TGraphErrors() ;
@@ -3181,8 +3129,8 @@ void DrawOut_Thetascan(const std::string& inputDir, const std::string& Comment)
   pTCanvas->                    Clear() ;
   leg->                         Clear() ;
   pTGE_std_WF->                 GetXaxis()->SetLimits(-48, 23) ;
-  pTGE_std_WF->                 SetMinimum(42) ;
-  pTGE_std_WF->                 SetMaximum(102) ;
+  pTGE_std_WF->                 SetMinimum(40) ;
+  pTGE_std_WF->                 SetMaximum(100)  ;
   pTGE_std_WF->                 SetNameTitle("pTGE_std_WF", "Standard deviation vs #theta angle;#theta angle (#circ);standard deviation (ADC count)") ;
   pTGE_mean_WF->                SetNameTitle("pTGE_mean_WF", "Mean vs #varphi angle;#varphi angle (#circ);mean (ADC count)") ;
   Graphic_setup(pTGE_std_WF,   3, 20, kCyan+2,    1, kBlack) ;
@@ -3269,23 +3217,20 @@ void DrawOut_Zscan_PT(const std::string& inputDir, const std::string& Comment)
   std::vector<TF1*>         v_tf1_XP_412 ;
   std::vector<TF1*>         v_tf1_WF_412 ;
 
-  for(int iz = -1 ; iz < nz ; iz++){
-    if(iz == -1){
-      v_pTFile_200.         push_back(TFile::Open(TString(inputDir + "/DESY21_zscan_PT200/DESY21_zm40_PT200/3_DESY21_zm40_PT200_dEdx" + Comment + ".root"))) ;
-      v_pTFile_412.         push_back(TFile::Open(TString(inputDir + "/DESY21_zscan_PT412/DESY21_zm40_PT412/3_DESY21_zm40_PT412_dEdx" + Comment + ".root"))) ;
-    }
-    else{
-      v_pTFile_200.         push_back(TFile::Open(TString(inputDir + "/DESY21_zscan_PT200/DESY21_z" + iz + "60_PT200/3_DESY21_z" + iz + "60_PT200_dEdx" + Comment + ".root"))) ;
-      v_pTFile_412.         push_back(TFile::Open(TString(inputDir + "/DESY21_zscan_PT412/DESY21_z" + iz + "60_PT412/3_DESY21_z" + iz + "60_PT412_dEdx" + Comment + ".root"))) ;
-    }
-    v_h1f_WF_200.           push_back(v_pTFile_200[iz+1]->  Get<TH1F>("h1f_WFsum_0")) ;
-    v_h1f_WF_412.           push_back(v_pTFile_412[iz+1]->  Get<TH1F>("h1f_WFsum_0")) ;
-    v_h1f_XP_200.           push_back(v_pTFile_200[iz+1]->  Get<TH1F>("h1f_XP_0")) ;
-    v_h1f_XP_412.           push_back(v_pTFile_412[iz+1]->  Get<TH1F>("h1f_XP_0")) ;
-    v_tf1_WF_200.           push_back(v_h1f_WF_200[iz+1]->  GetFunction("tf1_WFsum_0")) ;
-    v_tf1_WF_412.           push_back(v_h1f_WF_412[iz+1]->  GetFunction("tf1_WFsum_0")) ;
-    v_tf1_XP_200.           push_back(v_h1f_XP_200[iz+1]->  GetFunction("tf1_XP_0")) ;
-    v_tf1_XP_412.           push_back(v_h1f_XP_412[iz+1]->  GetFunction("tf1_XP_0")) ;
+  int         z_val[]   = {50, 150, 250, 350, 450, 550, 650, 750, 850, 950} ;
+  std::string z_arr[]   = {"m40", "060", "160", "260", "360", "460", "560", "660", "760", "860"} ;
+
+  for(int iz = 0 ; iz < (int)std::size(z_arr) ; iz++){
+    v_pTFile_200.         push_back(TFile::Open(TString(inputDir + "/DESY21_zscan_PT200/DESY21_z" + z_arr[iz] + "_PT200/3_DESY21_z" + z_arr[iz] + "_PT200_dEdx" + Comment + ".root"))) ;
+    v_pTFile_412.         push_back(TFile::Open(TString(inputDir + "/DESY21_zscan_PT412/DESY21_z" + z_arr[iz] + "_PT412/3_DESY21_z" + z_arr[iz] + "_PT412_dEdx" + Comment + ".root"))) ;
+    v_h1f_WF_200.           push_back(v_pTFile_200[iz]->  Get<TH1F>("h1f_WFsum_0")) ;
+    v_h1f_WF_412.           push_back(v_pTFile_412[iz]->  Get<TH1F>("h1f_WFsum_0")) ;
+    v_h1f_XP_200.           push_back(v_pTFile_200[iz]->  Get<TH1F>("h1f_XP_0")) ;
+    v_h1f_XP_412.           push_back(v_pTFile_412[iz]->  Get<TH1F>("h1f_XP_0")) ;
+    v_tf1_WF_200.           push_back(v_h1f_WF_200[iz]->  GetFunction("tf1_WFsum_0")) ;
+    v_tf1_WF_412.           push_back(v_h1f_WF_412[iz]->  GetFunction("tf1_WFsum_0")) ;
+    v_tf1_XP_200.           push_back(v_h1f_XP_200[iz]->  GetFunction("tf1_XP")) ;
+    v_tf1_XP_412.           push_back(v_h1f_XP_412[iz]->  GetFunction("tf1_XP")) ;
   }
 
   TGraphErrors* pTGE_reso_WF_200    = new TGraphErrors() ;
@@ -3338,28 +3283,28 @@ void DrawOut_Zscan_PT(const std::string& inputDir, const std::string& Comment)
     dstd_WF_412[iz]               = v_tf1_WF_412[iz]->  GetParError(2) ;
     dstd_XP_412[iz]                 = v_tf1_XP_412[iz]->    GetParError(2) ;
 
-    pTGE_reso_WF_200->  SetPoint      (ipoint, iz*100+50, std_WF_200[iz]/mean_WF_200[iz]*100) ;
-    pTGE_reso_XP_200->SetPoint      (ipoint, iz*100+50, std_XP_200[iz]/mean_XP_200[iz]*100) ;
-    pTGE_reso_WF_412->SetPoint      (ipoint, iz*100+50, std_WF_412[iz]/mean_WF_412[iz]*100) ;
-    pTGE_reso_XP_412->  SetPoint      (ipoint, iz*100+50, std_XP_412[iz]/mean_XP_412[iz]*100) ;
+    pTGE_reso_WF_200->  SetPoint      (ipoint, z_val[iz], std_WF_200[iz]/mean_WF_200[iz]*100) ;
+    pTGE_reso_XP_200->SetPoint      (ipoint, z_val[iz], std_XP_200[iz]/mean_XP_200[iz]*100) ;
+    pTGE_reso_WF_412->SetPoint      (ipoint, z_val[iz], std_WF_412[iz]/mean_WF_412[iz]*100) ;
+    pTGE_reso_XP_412->  SetPoint      (ipoint, z_val[iz], std_XP_412[iz]/mean_XP_412[iz]*100) ;
     pTGE_reso_WF_200->  SetPointError (ipoint, 0,         GetResoError(v_tf1_WF_200[iz])) ;
     pTGE_reso_XP_200->SetPointError (ipoint, 0,         GetResoError(v_tf1_XP_200[iz])) ;
     pTGE_reso_WF_412->SetPointError (ipoint, 0,         GetResoError(v_tf1_WF_412[iz])) ;
     pTGE_reso_XP_412->  SetPointError (ipoint, 0,         GetResoError(v_tf1_XP_412[iz])) ;
 
-    pTGE_mean_WF_200->  SetPoint      (ipoint, iz*100+50, mean_WF_200[iz]) ;
-    pTGE_mean_XP_200->SetPoint      (ipoint, iz*100+50, mean_XP_200[iz]) ;
-    pTGE_mean_WF_412->SetPoint      (ipoint, iz*100+50, mean_WF_412[iz]) ;
-    pTGE_mean_XP_412->  SetPoint      (ipoint, iz*100+50, mean_XP_412[iz]) ;
+    pTGE_mean_WF_200->  SetPoint      (ipoint, z_val[iz], mean_WF_200[iz]) ;
+    pTGE_mean_XP_200->SetPoint      (ipoint, z_val[iz], mean_XP_200[iz]) ;
+    pTGE_mean_WF_412->SetPoint      (ipoint, z_val[iz], mean_WF_412[iz]) ;
+    pTGE_mean_XP_412->  SetPoint      (ipoint, z_val[iz], mean_XP_412[iz]) ;
     pTGE_mean_WF_200->  SetPointError (ipoint, 0,         dmean_WF_200[iz]) ;
     pTGE_mean_XP_200->SetPointError (ipoint, 0,         dmean_XP_200[iz]) ;
     pTGE_mean_WF_412->SetPointError (ipoint, 0,         dmean_WF_412[iz]) ;
     pTGE_mean_XP_412->  SetPointError (ipoint, 0,         dmean_XP_412[iz]) ;
 
-    pTGE_std_WF_200->  SetPoint       (ipoint, iz*100+50, std_WF_200[iz]) ;
-    pTGE_std_XP_200->SetPoint       (ipoint, iz*100+50, std_XP_200[iz]) ;
-    pTGE_std_WF_412->SetPoint       (ipoint, iz*100+50, std_WF_412[iz]) ;
-    pTGE_std_XP_412->  SetPoint       (ipoint, iz*100+50, std_XP_412[iz]) ;
+    pTGE_std_WF_200->  SetPoint       (ipoint, z_val[iz], std_WF_200[iz]) ;
+    pTGE_std_XP_200->SetPoint       (ipoint, z_val[iz], std_XP_200[iz]) ;
+    pTGE_std_WF_412->SetPoint       (ipoint, z_val[iz], std_WF_412[iz]) ;
+    pTGE_std_XP_412->  SetPoint       (ipoint, z_val[iz], std_XP_412[iz]) ;
     pTGE_std_WF_200->  SetPointError  (ipoint, 0,         dstd_WF_200[iz]) ;
     pTGE_std_XP_200->SetPointError  (ipoint, 0,         dstd_XP_200[iz]) ;
     pTGE_std_WF_412->SetPointError  (ipoint, 0,         dstd_WF_412[iz]) ;
@@ -3422,8 +3367,8 @@ void DrawOut_Zscan_PT(const std::string& inputDir, const std::string& Comment)
   // Standard deviation
   pTCanvas->                    Clear() ;
   pTGE_std_XP_200->                 GetXaxis()->SetLimits(0, 1000) ;
-  pTGE_std_XP_200->                 SetMinimum(42) ;
-  pTGE_std_XP_200->                 SetMaximum(102) ;
+  pTGE_std_XP_200->                 SetMinimum(40) ;
+  pTGE_std_XP_200->                 SetMaximum(100)  ;
   pTGE_std_XP_200->                 SetNameTitle("pTGE_std_XP", "std vs drift distance;drift distance z (mm);std (ADC count)") ;
   Graphic_setup(pTGE_std_WF_200, 3, 20, kCyan+2,    1, kBlack) ;
   Graphic_setup(pTGE_std_XP_200, 3, 21, kGreen+3,   1, kBlack) ;
@@ -3514,9 +3459,9 @@ void DrawOut_Phiscan_Z(const std::string& inputDir, const std::string& Comment)
     v_tf1_WF_5.             push_back(v_h1f_WF_5[iphi]->    GetFunction("tf1_WFsum_0")) ;
     v_tf1_WF_55.            push_back(v_h1f_WF_55[iphi]->   GetFunction("tf1_WFsum_0")) ;
     v_tf1_WF_95.            push_back(v_h1f_WF_95[iphi]->   GetFunction("tf1_WFsum_0")) ;
-    v_tf1_XP_5.             push_back(v_h1f_XP_5[iphi]->    GetFunction("tf1_XP_0")) ;
-    v_tf1_XP_55.            push_back(v_h1f_XP_55[iphi]->   GetFunction("tf1_XP_0")) ;
-    v_tf1_XP_95.            push_back(v_h1f_XP_95[iphi]->   GetFunction("tf1_XP_0")) ;
+    v_tf1_XP_5.             push_back(v_h1f_XP_5[iphi]->    GetFunction("tf1_XP")) ;
+    v_tf1_XP_55.            push_back(v_h1f_XP_55[iphi]->   GetFunction("tf1_XP")) ;
+    v_tf1_XP_95.            push_back(v_h1f_XP_95[iphi]->   GetFunction("tf1_XP")) ;
   }
 
   TGraphErrors* pTGE_reso_WF_5    = new TGraphErrors() ;
@@ -3728,8 +3673,8 @@ void DrawOut_Phiscan_Z(const std::string& inputDir, const std::string& Comment)
   pTCanvas->                    Clear() ;
   leg->                         Clear() ;
   pTGE_std_WF_55->                GetXaxis()->SetLimits(-3, 48) ;
-  pTGE_std_WF_55->                SetMinimum(42) ;
-  pTGE_std_WF_55->                SetMaximum(102) ;
+  pTGE_std_WF_55->                SetMinimum(40) ;
+  pTGE_std_WF_55->                SetMaximum(100)  ;
   pTGE_std_WF_55->                SetNameTitle("pTGE_std_WF_55", "Std vs #varphi angle;#varphi angle (#circ);std (ADC count)") ;
   Graphic_setup(pTGE_std_WF_5,   3, 20, kCyan+2,    1, kBlack) ;
   Graphic_setup(pTGE_std_WF_55,  3, 21, kOrange-3,  1, kBlack) ;
@@ -3748,8 +3693,8 @@ void DrawOut_Phiscan_Z(const std::string& inputDir, const std::string& Comment)
   pTCanvas->                    Clear() ;
   leg->                         Clear() ;
   pTGE_std_XP_55->                GetXaxis()->SetLimits(-3, 48) ;
-  pTGE_std_XP_55->                SetMinimum(42) ;
-  pTGE_std_XP_55->                SetMaximum(102) ;
+  pTGE_std_XP_55->                SetMinimum(40) ;
+  pTGE_std_XP_55->                SetMaximum(100)  ;
   pTGE_std_XP_55->                SetNameTitle("pTGE_std_XP_5", "Std vs #varphi angle;#varphi angle (#circ);std (ADC count)") ;
   pTGE_std_XP_55->                Draw("ap") ;
   pTGE_std_XP_5->              Draw("p same") ;
@@ -4224,7 +4169,7 @@ void DrawOut_verif(const std::string& OutDir, const std::string& Comment){
 
 
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -4373,4 +4318,389 @@ void DrawOut_corrections(){
   legRatio->                      Draw() ;
   pTCanvas->                      SaveAs(OutputFile_End.c_str()) ;
   delete pTCanvas ;
+}
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+// DrawOut dE/dx systematics with Z scan
+void DrawOut_Systematics(const std::string& inputDir, const std::string& Comment, const std::string& scan)
+{
+  int sys_RC              = 1 ;
+  int sys_Z               = 1 ;
+  int sys_d               = 1 ;
+
+  // Draw
+  std::string OutputFile        = inputDir + "Systematics_" + scan + "scan" + Comment ;
+  if(sys_RC == 1) OutputFile    = OutputFile + "_RC" ;
+  if(sys_Z  == 1) OutputFile    = OutputFile + "_Z" ;
+  if(sys_d == 1) OutputFile     = OutputFile + "_d" ;
+  OutputFile                    = OutputFile + ".pdf" ;
+  std::string OutputFile_Beg    = OutputFile + "(" ;
+  std::string OutputFile_End    = OutputFile + ")" ;
+  TCanvas* pTCanvas             = new TCanvas("TCanvas", "TCanvas", 1800, 1200) ;
+  gStyle->                        SetPadTickX(1);
+  gStyle->                        SetPadTickY(1);
+  gStyle->                        SetOptStat(0) ;
+  // gStyle->                        SetGridStyle(1) ;
+  pTCanvas->                      cd() ;
+  TLegend* leg                  = new TLegend(0.67,0.65,0.90,0.89) ;
+  leg->                           SetBorderSize(0);
+  leg->                           SetFillStyle(0);
+
+
+  // Reference
+  TFile* pTFile_XP ;
+  TGraphErrors* pTGE_reso_XP  = new TGraphErrors();
+  TGraphErrors* pTGE_mean_XP  = new TGraphErrors();
+  TGraphErrors* pTGE_std_XP   = new TGraphErrors();
+
+  std::vector<int>          val;
+  std::vector<std::string>  arr;
+  int                       xmin, xmax;
+  if(scan == "Z"){
+    val = {50, 150, 250, 350, 450, 550, 650, 750, 850, 950} ;
+    arr = {"m40", "060", "160", "260", "360", "460", "560", "660", "760", "860"} ;
+    xmin = 0;
+    xmax = 1000;
+  }
+  if(scan == "phi"){
+    val = {0, 5, 10, 20, 29, 31, 40, 45} ;
+    arr = {"0", "5", "10", "20", "30", "30_diag", "40_diag", "45_diag"} ;
+    xmin = -3;
+    xmax = 48;
+  }
+
+  std::vector<std::string>  file;
+  for(std::string tag: arr){
+    if(scan == "Z")   file.push_back((inputDir + "DESY21_z"   + tag + "_PT412/3_DESY21_z" + tag + "_PT412_dEdx").c_str());
+    if(scan == "phi") file.push_back((inputDir + "DESY21_phi" + tag + "_z460/3_DESY21_phi" + tag + "_z460_dEdx").c_str());
+  }
+  if(scan=="phi") file[0] = "OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_z460_PT200/3_DESY21_z460_PT200_dEdx";
+
+  for(int i = 0 ; i < (int)file.size() ; i++){
+    pTFile_XP                   = TFile::Open(TString(file[i] + Comment + ".root")) ;
+    TF1* tf1_XP                 = pTFile_XP->Get<TF1>("tf1_XP_0") ;
+    pTGE_reso_XP->                SetPoint(     i,val[i], tf1_XP->GetParameter(2)/tf1_XP->GetParameter(1)*100) ;
+    pTGE_reso_XP->                SetPointError(i,0,         GetResoError(tf1_XP)) ;
+    pTGE_mean_XP->                SetPoint(     i,val[i], tf1_XP->GetParameter(1)) ;
+    pTGE_mean_XP->                SetPointError(i,0,         tf1_XP->GetParError(1)) ;
+    pTGE_std_XP->                 SetPoint(     i,val[i], tf1_XP->GetParameter(2)) ;
+    pTGE_std_XP->                 SetPointError(i,0,         tf1_XP->GetParError(2)) ;
+  }
+
+
+
+  // RC
+  if(sys_RC){
+    TFile* pTFile_RCm25 ;
+    std::vector<TF1*> v_tf1_RCm25 ;
+    TGraphErrors* pTGE_reso_RCm25  = new TGraphErrors();
+    TGraphErrors* pTGE_mean_RCm25  = new TGraphErrors();
+    TGraphErrors* pTGE_std_RCm25   = new TGraphErrors();
+
+    TFile* pTFile_RCp25 ;
+    std::vector<TF1*> v_tf1_RCp25 ;
+    TGraphErrors* pTGE_reso_RCp25   = new TGraphErrors();
+    TGraphErrors* pTGE_mean_RCp25   = new TGraphErrors();
+    TGraphErrors* pTGE_std_RCp25  = new TGraphErrors();
+
+    TFile* pTFile_RCpm25 ;
+    std::vector<TF1*> v_tf1_RCpm25 ;
+    TGraphErrors* pTGE_reso_RCpm25   = new TGraphErrors();
+    TGraphErrors* pTGE_mean_RCpm25   = new TGraphErrors();
+    TGraphErrors* pTGE_std_RCpm25  = new TGraphErrors();
+
+  for(int i = 0 ; i < (int)file.size() ; i++){
+      pTFile_RCm25                  = TFile::Open(TString(file[i] + Comment + "_RCm25%.root")) ;
+      TF1* tf1_RCm25                = pTFile_RCm25->Get<TF1>("tf1_XP") ;
+      pTGE_reso_RCm25->                SetPoint(     i,val[i], tf1_RCm25->GetParameter(2)/tf1_RCm25->GetParameter(1)*100) ;
+      pTGE_reso_RCm25->                SetPointError(i,0,         GetResoError(tf1_RCm25)) ;
+      pTGE_mean_RCm25->                SetPoint(     i,val[i], tf1_RCm25->GetParameter(1)) ;
+      pTGE_mean_RCm25->                SetPointError(i,0,         tf1_RCm25->GetParError(1)) ;
+      pTGE_std_RCm25->                 SetPoint(     i,val[i], tf1_RCm25->GetParameter(2)) ;
+      pTGE_std_RCm25->                 SetPointError(i,0,         tf1_RCm25->GetParError(2)) ;
+      
+      pTFile_RCp25                  = TFile::Open(TString(file[i] + Comment + "_RCp25%.root")) ;
+      TF1* tf1_RCp25                = pTFile_RCp25->Get<TF1>("tf1_XP") ;
+      pTGE_reso_RCp25->                SetPoint(     i,val[i], tf1_RCp25->GetParameter(2)/tf1_RCp25->GetParameter(1)*100) ;
+      pTGE_reso_RCp25->                SetPointError(i,0,         GetResoError(tf1_RCp25)) ;
+      pTGE_mean_RCp25->                SetPoint(     i,val[i], tf1_RCp25->GetParameter(1)) ;
+      pTGE_mean_RCp25->                SetPointError(i,0,         tf1_RCp25->GetParError(1)) ;
+      pTGE_std_RCp25->                 SetPoint(     i,val[i], tf1_RCp25->GetParameter(2)) ;
+      pTGE_std_RCp25->                 SetPointError(i,0,         tf1_RCp25->GetParError(2)) ;
+      
+      pTFile_RCpm25                  = TFile::Open(TString(file[i] + Comment + "_RCpm25%.root")) ;
+      TF1* tf1_RCpm25                = pTFile_RCpm25->Get<TF1>("tf1_XP") ;
+      pTGE_reso_RCpm25->                SetPoint(     i,val[i], tf1_RCpm25->GetParameter(2)/tf1_RCpm25->GetParameter(1)*100) ;
+      pTGE_reso_RCpm25->                SetPointError(i,0,         GetResoError(tf1_RCpm25)) ;
+      pTGE_mean_RCpm25->                SetPoint(     i,val[i], tf1_RCpm25->GetParameter(1)) ;
+      pTGE_mean_RCpm25->                SetPointError(i,0,         tf1_RCpm25->GetParError(1)) ;
+      pTGE_std_RCpm25->                 SetPoint(     i,val[i], tf1_RCpm25->GetParameter(2)) ;
+      pTGE_std_RCpm25->                 SetPointError(i,0,         tf1_RCpm25->GetParError(2)) ;
+    }
+    // Resolution
+    pTGE_reso_RCm25->                   GetXaxis()->SetLimits(xmin, xmax) ;
+    pTGE_reso_RCm25->                   SetMinimum(4) ;
+    pTGE_reso_RCm25->                   SetMaximum(12) ;
+    if(scan == "Z") pTGE_reso_RCm25->   SetNameTitle("pTGE_reso_RCm25", "Z scan systematics | RC | Resolution; distance z (mm);resolution (%)") ;
+    if(scan == "phi") pTGE_reso_RCm25-> SetNameTitle("pTGE_reso_RCm25", "#phi scan systematics | RC | Resolution;#phi angle (#circ);resolution (%)") ;
+    Graphic_setup(pTGE_reso_RCm25, 3, 23, kBlue+1, 1, kBlack) ;
+    Graphic_setup(pTGE_reso_XP, 3, 21, kMagenta+1, 1, kBlack) ;
+    Graphic_setup(pTGE_reso_RCp25, 3, 22, kRed+1, 1, kBlack) ;
+    Graphic_setup(pTGE_reso_RCpm25, 3, 20, kGreen+1, 1, kBlack) ;
+    pTGE_reso_RCm25->                   Draw("ap") ;
+    pTGE_reso_XP->                      Draw("p same") ;
+    pTGE_reso_RCp25->                   Draw("p same") ;
+    pTGE_reso_RCpm25->                  Draw("p same") ;
+    leg->                               AddEntry(pTGE_reso_RCp25, "RC + 25%", "ep") ;  
+    leg->                               AddEntry(pTGE_reso_XP, "RC reference", "ep") ;  
+    leg->                               AddEntry(pTGE_reso_RCm25, "RC - 25%", "ep") ;  
+    leg->                               AddEntry(pTGE_reso_RCpm25, "RC #pm 25%", "ep") ;  
+    leg->                               Draw() ;
+    pTCanvas->                          SaveAs(OutputFile_Beg.c_str()) ;
+    // Mean
+    pTCanvas->                      Clear() ;
+    pTGE_mean_RCm25->                GetXaxis()->SetLimits(xmin, xmax) ;
+    pTGE_mean_RCm25->                SetMinimum(600) ;
+    pTGE_mean_RCm25->                SetMaximum(1200) ;
+    if(scan == "Z") pTGE_mean_RCm25-> SetNameTitle("pTGE_mean_RCm25", "Z scan systematics | RC | Mean; distance z (mm);mean (ADC count)") ;
+    if(scan == "phi") pTGE_mean_RCm25-> SetNameTitle("pTGE_mean_RCm25", "#phi scan systematics | RC | Mean;#phi angle (#circ);mean (ADC count)") ;
+    Graphic_setup(pTGE_mean_RCm25, 3, 23, kBlue+1, 1, kBlack) ;
+    Graphic_setup(pTGE_mean_XP, 3, 21, kMagenta+1, 1, kBlack) ;
+    Graphic_setup(pTGE_mean_RCp25, 3, 22, kRed+1, 1, kBlack) ;
+    Graphic_setup(pTGE_mean_RCpm25, 3, 20, kGreen+1, 1, kBlack) ;
+    pTGE_mean_RCm25->                Draw("ap") ;
+    pTGE_mean_XP->                  Draw("p same") ;
+    pTGE_mean_RCp25->               Draw("p same") ; 
+    pTGE_mean_RCpm25->               Draw("p same") ; 
+    leg->                           Draw() ;
+    pTCanvas->                      SaveAs(OutputFile.c_str()) ;
+    // Std
+    pTCanvas->                      Clear() ;
+    pTGE_std_RCm25->                GetXaxis()->SetLimits(xmin, xmax) ;
+    pTGE_std_RCm25->                SetMinimum(40) ;
+    pTGE_std_RCm25->                SetMaximum(100) ;
+    if(scan == "Z") pTGE_std_RCm25->                SetNameTitle("pTGE_std_RCm25", "Z scan systematics | RC | Std; distance z (mm);standard deviation (ADC count)") ;
+    if(scan == "phi") pTGE_std_RCm25->                SetNameTitle("pTGE_std_RCm25", "#phi scan systematics | RC | Std;#phi angle (#circ);standard deviation (ADC count)") ;
+    Graphic_setup(pTGE_std_RCm25, 3, 23, kBlue+1, 1, kBlack) ;
+    Graphic_setup(pTGE_std_XP, 3, 21, kMagenta+1, 1, kBlack) ;
+    Graphic_setup(pTGE_std_RCp25, 3, 22, kRed+1, 1, kBlack) ;
+    Graphic_setup(pTGE_std_RCpm25, 3, 20, kGreen+1, 1, kBlack) ;
+    pTGE_std_RCm25->                Draw("ap") ;
+    pTGE_std_XP->                  Draw("p same") ;
+    pTGE_std_RCp25->               Draw("p same") ; 
+    pTGE_std_RCpm25->               Draw("p same") ; 
+    leg->                           Draw() ;
+    if(!sys_Z and !sys_d) pTCanvas->SaveAs(OutputFile_End.c_str()) ;
+    else                  pTCanvas->SaveAs(OutputFile.c_str()) ;
+  }
+
+
+
+  // Z drift
+  if(sys_Z){
+    TFile* pTFile_Zm10 ;
+    std::vector<TF1*> v_tf1_Zm10 ;
+    TGraphErrors* pTGE_reso_Zm10    = new TGraphErrors();
+    TGraphErrors* pTGE_mean_Zm10    = new TGraphErrors();
+    TGraphErrors* pTGE_std_Zm10     = new TGraphErrors();
+
+    TFile* pTFile_Zp10 ;
+    std::vector<TF1*> v_tf1_Zp10 ;
+    TGraphErrors* pTGE_reso_Zp10    = new TGraphErrors();
+    TGraphErrors* pTGE_mean_Zp10    = new TGraphErrors();
+    TGraphErrors* pTGE_std_Zp10     = new TGraphErrors();
+
+    TFile* pTFile_Zpm10 ;
+    std::vector<TF1*> v_tf1_Zpm10 ;
+    TGraphErrors* pTGE_reso_Zpm10    = new TGraphErrors();
+    TGraphErrors* pTGE_mean_Zpm10    = new TGraphErrors();
+    TGraphErrors* pTGE_std_Zpm10     = new TGraphErrors();
+
+
+  for(int i = 0 ; i < (int)file.size() ; i++){
+    pTFile_Zm10                 = TFile::Open(TString(file[i] + Comment + "_Zm10cm.root")) ;
+    TF1* tf1_Zm10               = pTFile_Zm10->Get<TF1>("tf1_XP") ;
+    pTGE_reso_Zm10->              SetPoint(     i,val[i], tf1_Zm10->GetParameter(2)/tf1_Zm10->GetParameter(1)*100) ;
+    pTGE_reso_Zm10->              SetPointError(i,0,         GetResoError(tf1_Zm10)) ;
+    pTGE_mean_Zm10->              SetPoint(     i,val[i], tf1_Zm10->GetParameter(1)) ;
+    pTGE_mean_Zm10->              SetPointError(i,0,         tf1_Zm10->GetParError(1)) ;
+    pTGE_std_Zm10->               SetPoint(     i,val[i], tf1_Zm10->GetParameter(2)) ;
+    pTGE_std_Zm10->               SetPointError(i,0,         tf1_Zm10->GetParError(2)) ;
+
+    pTFile_Zp10                 = TFile::Open(TString(file[i] + Comment + "_Zp10cm.root")) ;
+    TF1* tf1_Zp10               = pTFile_Zp10->Get<TF1>("tf1_XP") ;
+    pTGE_reso_Zp10->              SetPoint(     i,val[i], tf1_Zp10->GetParameter(2)/tf1_Zp10->GetParameter(1)*100) ;
+    pTGE_reso_Zp10->              SetPointError(i,0,         GetResoError(tf1_Zp10)) ;
+    pTGE_mean_Zp10->              SetPoint(     i,val[i], tf1_Zp10->GetParameter(1)) ;
+    pTGE_mean_Zp10->              SetPointError(i,0,         tf1_Zp10->GetParError(1)) ;
+    pTGE_std_Zp10->               SetPoint(     i,val[i], tf1_Zp10->GetParameter(2)) ;
+    pTGE_std_Zp10->               SetPointError(i,0,         tf1_Zp10->GetParError(2)) ;
+
+    pTFile_Zpm10                 = TFile::Open(TString(file[i] + Comment + "_Zpm10cm.root")) ;
+    TF1* tf1_Zpm10               = pTFile_Zpm10->Get<TF1>("tf1_XP") ;
+    pTGE_reso_Zpm10->              SetPoint(     i,val[i], tf1_Zpm10->GetParameter(2)/tf1_Zpm10->GetParameter(1)*100) ;
+    pTGE_reso_Zpm10->              SetPointError(i,0,         GetResoError(tf1_Zpm10)) ;
+    pTGE_mean_Zpm10->              SetPoint(     i,val[i], tf1_Zpm10->GetParameter(1)) ;
+    pTGE_mean_Zpm10->              SetPointError(i,0,         tf1_Zpm10->GetParError(1)) ;
+    pTGE_std_Zpm10->               SetPoint(     i,val[i], tf1_Zpm10->GetParameter(2)) ;
+    pTGE_std_Zpm10->               SetPointError(i,0,         tf1_Zpm10->GetParError(2)) ;
+  }
+    pTCanvas->                      Clear() ;
+    leg->                           Clear() ;
+    // Resolution
+    pTGE_reso_Zm10->                GetXaxis()->SetLimits(xmin, xmax) ;
+    pTGE_reso_Zm10->                SetMinimum(4) ;
+    pTGE_reso_Zm10->                SetMaximum(12) ;
+    if(scan == "Z") pTGE_reso_Zm10->                SetNameTitle("pTGE_reso_Zm10", "Z scan systematics | Z_{drift} | Resolution; systematics;drift distance z (mm);resolution (%)") ;
+    if(scan == "phi") pTGE_reso_Zm10->                SetNameTitle("pTGE_reso_Zm10", "#phi scan systematics | Z_{drift} | Resolution;#phi angle (#circ);resolution (%)") ;
+    Graphic_setup(pTGE_reso_Zm10, 3, 23, kBlue+1, 1, kBlack) ;
+    Graphic_setup(pTGE_reso_XP, 3, 21, kMagenta+1, 1, kBlack) ;
+    Graphic_setup(pTGE_reso_Zp10, 3, 22, kRed+1, 1, kBlack) ;
+    Graphic_setup(pTGE_reso_Zpm10, 3, 20, kGreen+1, 1, kBlack) ;
+    pTGE_reso_Zm10->                Draw("ap") ;
+    pTGE_reso_XP->                  Draw("p same") ;
+    pTGE_reso_Zp10->                Draw("p same") ;
+    pTGE_reso_Zpm10->                Draw("p same") ;
+    leg->                           AddEntry(pTGE_reso_Zp10, "Z + 10 cm", "ep") ;  
+    leg->                           AddEntry(pTGE_reso_XP, "Z true", "ep") ;  
+    leg->                           AddEntry(pTGE_reso_Zm10, "Z - 10 cm", "ep") ;  
+    leg->                           AddEntry(pTGE_reso_Zpm10, "Z #pm 10 cm", "ep") ;  
+    leg->                           Draw() ;
+    if(!sys_RC) pTCanvas->          SaveAs(OutputFile_Beg.c_str()) ;
+    else        pTCanvas->          SaveAs(OutputFile.c_str()) ;
+    // Mean
+    pTCanvas->                      Clear() ;
+    pTGE_mean_Zm10->                GetXaxis()->SetLimits(xmin, xmax) ;
+    pTGE_mean_Zm10->                SetMinimum(600) ;
+    pTGE_mean_Zm10->                SetMaximum(1200) ;
+    if(scan == "Z") pTGE_mean_Zm10->                SetNameTitle("pTGE_mean_Zm10", "Z scan systematics | Z_{drift} | Mean; systematics;drift distance z (mm);mean (ADC count)") ;
+    if(scan == "phi") pTGE_mean_Zm10->                SetNameTitle("pTGE_mean_Zm10", "#phi scan systematics | Z_{drift} | Mean;#phi angle (#circ);mean (ADC count)") ;
+    Graphic_setup(pTGE_mean_Zm10, 3, 23, kBlue+1, 1, kBlack) ;
+    Graphic_setup(pTGE_mean_XP, 3, 21, kMagenta+1, 1, kBlack) ;
+    Graphic_setup(pTGE_mean_Zp10, 3, 22, kRed+1, 1, kBlack) ;
+    Graphic_setup(pTGE_mean_Zpm10, 3, 20, kGreen+1, 1, kBlack) ;
+    pTGE_mean_Zm10->                Draw("ap") ;
+    pTGE_mean_XP->                  Draw("p same") ;
+    pTGE_mean_Zp10->               Draw("p same") ; 
+    pTGE_mean_Zpm10->               Draw("p same") ; 
+    leg->                           Draw() ;
+    pTCanvas->                      SaveAs(OutputFile.c_str()) ;
+    // Std
+    pTCanvas->                      Clear() ;
+    pTGE_std_Zm10->                GetXaxis()->SetLimits(xmin, xmax) ;
+    pTGE_std_Zm10->                SetMinimum(40) ;
+    pTGE_std_Zm10->                SetMaximum(100) ;
+    if(scan == "Z") pTGE_std_Zm10->                SetNameTitle("pTGE_std_Zm10", "Z scan systematics | Z_{drift} | Std; systematics;drift distance z (mm);standard deviation (ADC count)") ;
+    if(scan == "phi") pTGE_std_Zm10->                SetNameTitle("pTGE_std_Zm10", "#phi scan systematics | Z_{drift} | Std;#phi angle (#circ);standard deviation (ADC count)") ;
+    Graphic_setup(pTGE_std_Zm10, 3, 23, kBlue+1, 1, kBlack) ;
+    Graphic_setup(pTGE_std_XP, 3, 21, kMagenta+1, 1, kBlack) ;
+    Graphic_setup(pTGE_std_Zp10, 3, 22, kRed+1, 1, kBlack) ;
+    Graphic_setup(pTGE_std_Zpm10, 3, 20, kGreen+1, 1, kBlack) ;
+    pTGE_std_Zm10->                 Draw("ap") ;
+    pTGE_std_XP->                   Draw("p same") ;
+    pTGE_std_Zp10->                 Draw("p same") ; 
+    pTGE_std_Zpm10->                Draw("p same") ; 
+    leg->                           Draw() ;
+    if(!sys_d)  pTCanvas->          SaveAs(OutputFile_End.c_str()) ;
+    else        pTCanvas->          SaveAs(OutputFile.c_str()) ;
+  }
+
+
+
+  // Impact parameter
+  if(sys_d){
+    TFile* pTFile_dp1 ;
+    TGraphErrors* pTGE_reso_dp1  = new TGraphErrors();
+    TGraphErrors* pTGE_mean_dp1  = new TGraphErrors();
+    TGraphErrors* pTGE_std_dp1   = new TGraphErrors();
+
+    TFile* pTFile_dpm1 ;
+    TGraphErrors* pTGE_reso_dpm1  = new TGraphErrors();
+    TGraphErrors* pTGE_mean_dpm1  = new TGraphErrors();
+    TGraphErrors* pTGE_std_dpm1   = new TGraphErrors();
+
+
+  for(int i = 0 ; i < (int)file.size() ; i++){
+      pTFile_dp1                  = TFile::Open(TString(file[i] + Comment + "_dp1mm.root")) ;
+      TF1* tf1_dp1                 = pTFile_dp1->Get<TF1>("tf1_XP") ;
+      pTGE_reso_dp1->                SetPoint(     i,val[i], tf1_dp1->GetParameter(2)/tf1_dp1->GetParameter(1)*100) ;
+      pTGE_reso_dp1->                SetPointError(i,0,         GetResoError(tf1_dp1)) ;
+      pTGE_mean_dp1->                SetPoint(     i,val[i], tf1_dp1->GetParameter(1)) ;
+      pTGE_mean_dp1->                SetPointError(i,0,         tf1_dp1->GetParError(1)) ;
+      pTGE_std_dp1->                 SetPoint(     i,val[i], tf1_dp1->GetParameter(2)) ;
+      pTGE_std_dp1->                 SetPointError(i,0,         tf1_dp1->GetParError(2)) ;
+
+      pTFile_dpm1                  = TFile::Open(TString(file[i] + Comment + "_dpm1mm.root")) ;
+      TF1* tf1_dpm1                 = pTFile_dpm1->Get<TF1>("tf1_XP") ;
+      pTGE_reso_dpm1->                SetPoint(     i,val[i], tf1_dpm1->GetParameter(2)/tf1_dpm1->GetParameter(1)*100) ;
+      pTGE_reso_dpm1->                SetPointError(i,0,         GetResoError(tf1_dpm1)) ;
+      pTGE_mean_dpm1->                SetPoint(     i,val[i], tf1_dpm1->GetParameter(1)) ;
+      pTGE_mean_dpm1->                SetPointError(i,0,         tf1_dpm1->GetParError(1)) ;
+      pTGE_std_dpm1->                 SetPoint(     i,val[i], tf1_dpm1->GetParameter(2)) ;
+      pTGE_std_dpm1->                 SetPointError(i,0,         tf1_dpm1->GetParError(2)) ;
+    }
+    
+    leg->                           Clear() ;
+    pTCanvas->                      Clear() ;
+    // Resolution
+    TLegend* legPRF               = new TLegend(0.67,0.7,0.90,0.89) ;
+    legPRF->                        SetBorderSize(0);
+    legPRF->                        SetFillStyle(0);
+    pTGE_reso_dp1->                 GetXaxis()->SetLimits(xmin, xmax) ;
+    pTGE_reso_dp1->                 SetMinimum(4) ;
+    pTGE_reso_dp1->                 SetMaximum(12) ;
+    if(scan == "Z") pTGE_reso_dp1->                 SetNameTitle("pTGE_reso_dp1", "Z scan systematics | impact parameter d | Resolution;drift distance z (mm);resolution (%)") ;
+    if(scan == "phi") pTGE_reso_dp1->                 SetNameTitle("pTGE_reso_dp1", "#phi scan systematics | impact parameter d | Resolution;#phi angle (#circ);resolution (%)") ;
+    Graphic_setup(pTGE_reso_XP, 3, 21, kMagenta+1, 1, kBlack) ;
+    Graphic_setup(pTGE_reso_dp1, 3, 22, kRed+1, 1, kBlack) ;
+    Graphic_setup(pTGE_reso_dpm1, 3, 20, kGreen+1, 1, kBlack) ;
+    pTGE_reso_dp1->                 Draw("ap") ;
+    pTGE_reso_XP->                  Draw("p same") ;
+    pTGE_reso_dpm1->                  Draw("p same") ;
+    legPRF->                        AddEntry(pTGE_reso_dp1, "d + 1mm", "ep") ;  
+    legPRF->                        AddEntry(pTGE_reso_XP, "d reference", "ep") ; 
+    legPRF->                        AddEntry(pTGE_reso_dpm1, "d #pm 1mm", "ep") ;  
+    legPRF->                        Draw() ;
+    if(!sys_RC and !sys_Z) pTCanvas->SaveAs(OutputFile_Beg.c_str()) ;
+    else                   pTCanvas->SaveAs(OutputFile.c_str()) ;
+    // Mean
+    pTCanvas->                      Clear() ;
+    pTGE_mean_dp1->                 GetXaxis()->SetLimits(xmin, xmax) ;
+    pTGE_mean_dp1->                 SetMinimum(600) ;
+    pTGE_mean_dp1->                 SetMaximum(1200) ;
+    if(scan == "Z") pTGE_mean_dp1->                 SetNameTitle("pTGE_mean_dp1", "Z scan systematics | impact parameter d | Mean;drift distance z (mm);mean (ADC count)") ;
+    if(scan == "phi") pTGE_mean_dp1->                 SetNameTitle("pTGE_mean_dp1", "#phi scan systematics | impact parameter d | Mean;#phi angle (#circ);mean (ADC count)") ;
+    Graphic_setup(pTGE_mean_XP, 3, 21, kMagenta+1, 1, kBlack) ;
+    Graphic_setup(pTGE_mean_dp1, 3, 22, kRed+1, 1, kBlack) ;
+    Graphic_setup(pTGE_mean_dpm1, 3, 20, kGreen+1, 1, kBlack) ;
+    pTGE_mean_dp1->                 Draw("ap") ;
+    pTGE_mean_XP->                  Draw("p same") ;
+    pTGE_mean_dpm1->                  Draw("p same") ;
+    legPRF->                        Draw() ;
+    pTCanvas->                      SaveAs(OutputFile.c_str()) ;
+    // Std
+    pTCanvas->                      Clear() ;
+    pTGE_std_dp1->                  GetXaxis()->SetLimits(xmin, xmax) ;
+    pTGE_std_dp1->                  SetMinimum(40) ;
+    pTGE_std_dp1->                  SetMaximum(100) ;
+    if(scan == "Z") pTGE_std_dp1->                  SetNameTitle("pTGE_std_dp1", "Z scan systematics | impact parameter d | Std;drift distance z (mm);standard deviation (ADC count)") ;
+    if(scan == "phi") pTGE_std_dp1->                  SetNameTitle("pTGE_std_dp1", "#phi scan systematics | impact parameter d | Std;#phi angle (#circ);standard deviation (ADC count)") ;
+    Graphic_setup(pTGE_std_XP, 3, 21, kMagenta+1, 1, kBlack) ;
+    Graphic_setup(pTGE_std_dp1, 3, 22, kRed+1, 1, kBlack) ;
+    Graphic_setup(pTGE_std_dpm1, 3, 20, kGreen+1, 1, kBlack) ;
+    pTGE_std_dp1->                  Draw("ap") ;
+    pTGE_std_XP->                   Draw("p same") ;
+    pTGE_std_dpm1->                   Draw("p same") ;
+    legPRF->                        Draw() ;
+    pTCanvas->                      SaveAs(OutputFile_End.c_str()) ;
+    delete                          legPRF ;
+  }
+
+  delete                        pTCanvas   ;
+  delete                        leg ;
 }

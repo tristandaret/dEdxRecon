@@ -1,5 +1,5 @@
 Tag           : DESY21_ExB06_Z460
-Comment       : _zcalc_G2_WF4_iter0
+Comment       : _zcalc_G2_WF4_Zpm10
 FileName     : ../Data_DESY21/ExB_scan/ExB_360_phim3_200ns_B06_ym60_z460_iter0.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
@@ -13,15 +13,7 @@ ERAM01: Gain hole in  iX = 10 | iY = 16 | value reset at 1889.24
 
 -------------->Predefined selection T_DESY21_Event
 Number of entries :3734
-No Stage120 cuts found in CSV. Getting them now...
-0/3734
-1000/3734
-2000/3734
-3000/3734
-3733/3734
-16594.00
-209
-Stage120 cuts are 194 to 227. Values added to CSV file.
+TLow = 194 | THigh = 227
 
 -------------->List of selections
 Apply selection  1 -> Remove clusters in first and last columns 
@@ -60,20 +52,3 @@ Processing events:
 0/3734
 1000/3734
 2000/3734
-3000/3734
-3733/3734
-3734 real events
-
-Selection Statistics 
- #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
-    0  Stage1     3734     3734 (    0.00)  (    0.00)      3734     3734 (    0.00)  (    0.00)    126910   126910 (    0.00)  (    0.00)    368862   368862 (    0.00)  (    0.00) 
-    1 Stage11     3734     3660 (   -1.98)  (   -1.98)      3734     3660 (   -1.98)  (   -1.98)    126910   117165 (   -7.68)  (   -7.68)    368862   335027 (   -9.17)  (   -9.17) 
-    2Stage120     3660     3605 (   -1.50)  (   -3.45)      3660     3605 (   -1.50)  (   -3.45)    117165   115208 (   -1.67)  (   -9.22)    335027   330093 (   -1.47)  (  -10.51) 
-    3StageT15     3605     3506 (   -2.75)  (   -6.11)      3605     3506 (   -2.75)  (   -6.11)    115208   112927 (   -1.98)  (  -11.02)    330093   320695 (   -2.85)  (  -13.06) 
-    4 Stage10     3506     3506 (    0.00)  (   -6.11)      3506     3506 (    0.00)  (   -6.11)    112927   112602 (   -0.29)  (  -11.27)    320695   318676 (   -0.63)  (  -13.61) 
-    5 Stage14     3506     3506 (    0.00)  (   -6.11)      3506     3506 (    0.00)  (   -6.11)    112602   111010 (   -1.41)  (  -12.53)    318676   312483 (   -1.94)  (  -15.28) 
-    6  Stage5     3506      840 (  -76.04)  (  -77.50)      3506      840 (  -76.04)  (  -77.50)    111010    28560 (  -74.27)  (  -77.50)    312483    78604 (  -74.85)  (  -78.69) 
-  Summary Sel     3734      840             (  -77.50)      3734      840             (  -77.50)    126910    28560             (  -77.50)    368862    78604             (  -78.69) 
-Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_ExB/DESY21_ExB06_Z460/2_DESY21_ExB06_Z460_Checks_zcalc_G2_WF4_iter0.root
-dEdx: OUT_Tristan/DESY21_ExB/DESY21_ExB06_Z460/3_DESY21_ExB06_Z460_dEdx_zcalc_G2_WF4_iter0.root

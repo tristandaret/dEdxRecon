@@ -1,22 +1,15 @@
 Tag           : DESY21_phi40_diag_z460
-Comment       : _zcalc_PRF_4IP_Gain2_WF4
-EventFile     : ../Data_DESY21/Phi_scan_z460/phi_200_40_z460_ym60_diag_iter0.root
+Comment       : _zcalc_G2_WF4_Zp10cm
+FileName     : ../Data_DESY21/Phi_scan_z460/phi_200_40_z460_ym60_diag_iter0.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
 Data_to_Use   : 0
 OUTDirName    : OUT_Tristan/DESY21_phi/DESY21_phi_z460/DESY21_phi40_diag_z460/
 
-
-ReadRCmap::ReadRCmap m_FileName = GainRCMaps/RCfiles/ERAM01_RCdata_01.root
-
-ReadRCmap::ReadRCmap  No Data for iX=10 and  iY=16 in GainRCMaps/RCfiles/ERAM01_RCdata_01.root
-RC map: loaded
-
-ReadGainmap::ReadGainmap m_FileName = GainRCMaps/Gainfiles/ERAM01_Gaindata_01.root
-
-ReadGainmap::ReadGainmap  No Data for iX=10 and  iY=16 in GainRCMaps/Gainfiles/ERAM01_Gaindata_01.root
-Gain map: loaded
+Gain & RC maps: loaded
 Average Gain in ERAM01 = 1947.77
+ERAM01: RC   hole in  iX = 10 | iY = 16 | value reset at 129.29
+ERAM01: Gain hole in  iX = 10 | iY = 16 | value reset at 1889.24
 
 -------------->Predefined selection T_DESY21_Event
 Number of entries :14526
@@ -52,46 +45,28 @@ zdrift        = 550 mm
 PT            = 200 ns
 TB            = 40 ns/time bin
 PT/TB         = 5 time bins
-Track fitting : PRF
 z method      : zcalc
 cut length    = 2 mm
 
-../Data_DESY21/Phi_scan_zm40/phi_200_40_zm40_ym60_diag_iter0_WFmax_correction.root
 WF correction parameters: 283.98 | -10.30 | 2.25 | 0.81 | -0.05
 Processing events:
 0/14526
-RC hole in entry   63 | iX = 10 | iY = 16 |  RC  value reset at 129.29
-Gain hole in entry 63 | iX = 10 | iY = 16 | Gain value reset at 1889.24
-500/14526
 1000/14526
-1500/14526
 2000/14526
-2500/14526
 3000/14526
-3500/14526
 4000/14526
-4500/14526
 5000/14526
-5500/14526
 6000/14526
-6500/14526
 7000/14526
-7500/14526
 8000/14526
-8500/14526
 9000/14526
-9500/14526
 10000/14526
-10500/14526
 11000/14526
-11500/14526
 12000/14526
-12500/14526
 13000/14526
-13500/14526
 14000/14526
-14500/14526
 14525/14526
+14526 real events
 
 Selection Statistics 
  #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
@@ -104,5 +79,5 @@ Selection Statistics
     6  Stage5    13986    12464 (  -10.88)  (  -14.20)     13986    12464 (  -10.88)  (  -14.20)    740032   674600 (   -8.84)  (  -14.73)   1434644  1301655 (   -9.27)  (  -16.94) 
   Summary Sel    14526    12464             (  -14.20)     14526    12464             (  -14.20)    791177   674600             (  -14.73)   1567194  1301655             (  -16.94) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_phi/DESY21_phi_z460/DESY21_phi40_diag_z460/2_DESY21_phi40_diag_z460_Checks_zcalc_PRF_4IP_Gain2_WF4.root
-dEdx: OUT_Tristan/DESY21_phi/DESY21_phi_z460/DESY21_phi40_diag_z460/3_DESY21_phi40_diag_z460_dEdx_zcalc_PRF_4IP_Gain2_WF4.root
+Checks: OUT_Tristan/DESY21_phi/DESY21_phi_z460/DESY21_phi40_diag_z460/2_DESY21_phi40_diag_z460_Checks_zcalc_G2_WF4_Zp10cm.root
+dEdx: OUT_Tristan/DESY21_phi/DESY21_phi_z460/DESY21_phi40_diag_z460/3_DESY21_phi40_diag_z460_dEdx_zcalc_G2_WF4_Zp10cm.root

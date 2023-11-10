@@ -31,7 +31,7 @@ void Monitoring()
   int nRC = 21 ; 
 
   std::string Tag    ; 
-  std::string Comment = "_zfile_G2_WF4_4Mod" ; // z method | gain_corr | eram nber
+  std::string Comment = "_zcalc_G2_WF4" ; // z method | gain_corr | eram nber
   std::string prtcle ; 
   std::string EvtFile ;
   std::string OutDir  = "OUT_Tristan/";  
@@ -42,11 +42,11 @@ void Monitoring()
 
   // Files to use
   int prototype       = 0 ;
-  int CERN_Escan      = 1 ; 
+  int CERN_Escan      = 0 ; 
 
-  int DESY_zscan      = 0 ; 
+  int DESY_zscan      = 1 ; 
   int DESY_yscan      = 0 ; 
-  int DESY_phi        = 0 ; 
+  int DESY_phi        = 1 ; 
   int DESY_theta      = 0 ; 
 
   // Computations
@@ -59,10 +59,11 @@ void Monitoring()
   int DO_control      = 0 ;
   int DO_Checks       = 0 ;
   int DO_Methods      = 0 ;
-  int DO_Resolution   = 1 ;
+  int DO_Resolution   = 0 ;
   int DO_Global       = 0 ;
   int DO_Scans        = 0 ;
   int DO_Separation   = 0 ;
+  int DO_Systematics  = 1 ;
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -150,18 +151,18 @@ void Monitoring()
     NbrOfMod        =  0 ; 
     Dt              = 310 ; TB = 50 ;
     // int PT_arr[] = {200, 412} ;
-    int PT_arr[] = {200} ;
+    int PT_arr[] = {412} ;
     for (int PT : PT_arr){
       OutDir        = Form("OUT_Tristan/DESY21_zscan/DESY21_zscan_PT%i/", PT) ; 
       MakeMyDir(OutDir) ; 
       Uploader* pUpld ; Interpol4 LUT ;
       if (control or dedx) LUT = GiveMe_LUT(Form("/home/td263283/Documents/Python/LUT_XP/LUT_Dt%i_PT%i_nphi200_nd200/", Dt, PT), nZ, nRC) ;
-      // int         z_val[]   = {50, 150, 250, 350, 450, 550, 650, 750, 850, 950} ;
-      // std::string z_arr[]   = {"m40", "060", "160", "260", "360", "460", "560", "660", "760", "860"} ;
+      int         z_val[]   = {50, 150, 250, 350, 450, 550, 650, 750, 850, 950} ;
+      std::string z_arr[]   = {"m40", "060", "160", "260", "360", "460", "560", "660", "760", "860"} ;
       // int         z_val[]   = {50, 550, 950} ;
-      // std::string z_arr[]   = {"m40", "460", "860"} ;
-      int         z_val[]   = {50, 150} ;
-      std::string z_arr[]   = {"m40", "060"} ;
+      // std::string z_arr[]   = {"m40", "460", "860"}
+      // int         z_val[]   = {550} ;
+      // std::string z_arr[]   = {"460"} ;
       for (int iz = 0 ; iz < (int)std::size(z_arr) ; iz++){
         const char* z       = z_arr[iz].c_str() ;
         EvtFile             = Form("../Data_DESY21/zscan_PT%i/z_360_275_%i_02T_26_%s_iter0.root", PT, PT, z) ; Tag = Form("DESY21_z%s_PT%i", z, PT) ; prtcle = Form("electron_z%s", z) ;
@@ -169,11 +170,10 @@ void Monitoring()
         if (control)      Control       (OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, Data_to_Use, PT, TB, prtcle) ;
         if (DO_control)   DrawOut_Control           (OutDir, Tag, Comment, SelectionSet, 1) ;
         if (dedx)         dEdx       (OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, Data_to_Use, LUT, PT, TB, z_val[iz]) ;
-        std::cout << "beacon 1" << std::endl ;
         if (DO_Checks)    DrawOut_Checks            (OutDir, EvtFile, Tag, Comment) ;
         if (DO_Methods)   DrawOut_Methods           (OutDir, Tag, Comment, 1, prtcle) ;
-        // DrawOut_systematics(OutDir, EvtFile, Tag, Comment) ;
       }
+      if(DO_Systematics)  DrawOut_Systematics(OutDir, Comment, "Z") ;
       if(DO_Resolution)   DrawOut_Zscan  (Form("OUT_Tristan/DESY21_zscan/DESY21_zscan_PT%i", PT), Comment, PT) ;
     }
     if(DO_Global) DrawOut_Zscan_PT("OUT_Tristan/DESY21_zscan", Comment) ;
@@ -215,15 +215,17 @@ void Monitoring()
     PT                          = 200 ; Dt = 310 ; TB = 40 ;
     Uploader* pUpld ; Interpol4 LUT ;
     if (control or dedx) LUT = GiveMe_LUT(Form("/home/td263283/Documents/Python/LUT_XP/LUT_Dt%i_PT%i_nphi200_nd200/", Dt, PT), nZ, nRC) ;
-    int         z_val[]         = {50, 550, 950} ;
-    std::string z_arr[]         = {"m40", "460", "860"} ;
-    int         phi_arr[]       = {0, 5, 10, 20, 30, 30, 40, 45} ;
+    // int         z_val[]         = {50, 550, 950} ;
+    // std::string z_arr[]         = {"m40", "460", "860"} ;
+    int         z_val[]         = {550} ;
+    std::string z_arr[]         = {"460"} ;
+    int         phi_val[]       = {0, 5, 10, 20, 30, 30, 40, 45} ;
     for (int iz = 0 ; iz < (int)std::size(z_arr) ; iz++){
       const char* z             = z_arr[iz].c_str() ;
       OutDir                    = Form("OUT_Tristan/DESY21_phi/DESY21_phi_z%s/", z) ;  
       MakeMyDir(OutDir) ; 
-      for (int ifile = 0 ; ifile < (int)std::size(phi_arr) ; ifile++){
-        int phi                 = phi_arr[ifile] ;
+      for (int ifile = 0 ; ifile < (int)std::size(phi_val) ; ifile++){
+        int phi                 = phi_val[ifile] ;
         if(ifile < 5) {EvtFile  = Form("../Data_DESY21/Phi_scan_z%s/phi_200_%i_z%s_ym60_iter0.root", z, phi, z) ; Tag = Form("DESY21_phi%i_z%s", phi, z) ; prtcle = Form("electron_phi%i_z%s", phi, z) ; }
         else          {EvtFile  = Form("../Data_DESY21/Phi_scan_z%s/phi_200_%i_z%s_ym60_diag_iter0.root", z, phi, z) ; Tag = Form("DESY21_phi%i_diag_z%s", phi, z) ; prtcle = Form("electron_phi%i_diag_z%s", phi, z) ; }
 
@@ -236,6 +238,7 @@ void Monitoring()
         delete pUpld ;
       }
       if(DO_Resolution)   DrawOut_Phiscan (Form("OUT_Tristan/DESY21_phi/DESY21_phi_z%s", z), Comment, z) ;
+      if(DO_Systematics)  DrawOut_Systematics(OutDir, Comment, "phi") ;
     }
     // DrawOut_TGE_WFsum_L("OUT_Tristan/DESY21_phi/", Comment) ;
     if(DO_Global) DrawOut_Phiscan_Z("OUT_Tristan/DESY21_phi", Comment) ;
@@ -285,7 +288,7 @@ void Monitoring()
 
 
   int DESY_mag        = 0 ;
-  int DESY_ExB        = 1 ;
+  int DESY_ExB        = 0 ;
   int DESY_zscan_139V = 0 ; 
   int MC_zscan        = 0 ; 
   int DESY19_phi      = 0 ; 
@@ -361,12 +364,12 @@ void Monitoring()
     PT              = 412 ; Dt = 310 ; TB = 40 ; zdrift = 430 ;
     Uploader* pUpld ; Interpol4 LUT ;
     if (control or dedx) LUT = GiveMe_LUT(Form("/home/td263283/Documents/Python/LUT_XP/LUT_Dt%i_PT%i_nphi200_nd200/", Dt, PT), nZ, nRC) ;
-    int phi_arr[]   = {0, 10, 20, 30, 40, 45} ;
+    int phi_val[]   = {0, 10, 20, 30, 40, 45} ;
     int NFiles      = 6 ;
     OutDir          = "OUT_Tristan/DESY19_phi/" ;
     MakeMyDir(OutDir) ; 
     for (int ifile = 3 ; ifile < NFiles ; ifile++){
-      int phi                   = phi_arr[ifile] ;
+      int phi                   = phi_val[ifile] ;
       if(ifile < 3) { EvtFile  = Form("../Data_DESY19/Phi_scan/phi_412_%i_iter0.root", phi) ;       Tag = Form("DESY19_phi%i", phi) ;      prtcle = Form("electron_phi%i", phi) ; }
       else          { EvtFile  = Form("../Data_DESY19/Phi_scan/phi_412_%i_diag_iter0.root", phi) ;  Tag = Form("DESY19_phi%i_diag", phi) ; prtcle = Form("electron_phi%i_diag", phi) ; }
       if(control or dedx) pUpld = GiveMe_Uploader (intUploader, EvtFile) ;
@@ -488,11 +491,11 @@ void Monitoring()
     intUploader           =  2 ;
     NbrOfMod              =  0 ;
     std::string z_index[] = {"m40", "460", "860"} ;
-    int phi_arr[]         = {30, 40, 45} ;
+    int phi_val[]         = {30, 40, 45} ;
     for (int iz = 0 ; iz < (int)std::size(z_index) ; iz++){
-      for (int iphi = 0 ; iphi < (int)std::size(phi_arr) ; iphi++){
-        OutDir            = Form("../Data_DESY21/Phi_scan_z%s/phi_200_%i_z%s_ym60_diag_iter0", z_index[iz].c_str(), phi_arr[iphi], z_index[iz].c_str()) ; 
-        Tag               = Form("DESY21_phi%i_diag_z%s", phi_arr[iphi], z_index[iz].c_str()) ;
+      for (int iphi = 0 ; iphi < (int)std::size(phi_val) ; iphi++){
+        OutDir            = Form("../Data_DESY21/Phi_scan_z%s/phi_200_%i_z%s_ym60_diag_iter0", z_index[iz].c_str(), phi_val[iphi], z_index[iz].c_str()) ; 
+        Tag               = Form("DESY21_phi%i_diag_z%s", phi_val[iphi], z_index[iz].c_str()) ;
         Uploader* pUpld   = GiveMe_Uploader (intUploader, OutDir+".root") ;  
         corr(OutDir, Tag, SelectionSet, pUpld, NbrOfMod, Data_to_Use) ;
         delete pUpld ;

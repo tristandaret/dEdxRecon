@@ -1,5 +1,5 @@
 Tag           : DESY21_ExB04_Z60
-Comment       : _zcalc_G2_WF4_iter0
+Comment       : _zcalc_G2_WF4_Zpm10
 FileName     : ../Data_DESY21/ExB_scan/ExB_360_phim3_200ns_B04_ym60_z60_iter0.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
@@ -13,18 +13,7 @@ ERAM01: Gain hole in  iX = 10 | iY = 16 | value reset at 1889.24
 
 -------------->Predefined selection T_DESY21_Event
 Number of entries :6518
-No Stage120 cuts found in CSV. Getting them now...
-0/6518
-1000/6518
-2000/6518
-3000/6518
-4000/6518
-5000/6518
-6000/6518
-6517/6518
-29939.00
-84
-Stage120 cuts are 69 to 107. Values added to CSV file.
+TLow = 69 | THigh = 107
 
 -------------->List of selections
 Apply selection  1 -> Remove clusters in first and last columns 
@@ -89,5 +78,5 @@ Selection Statistics
     6  Stage5     6129     1379 (  -77.50)  (  -78.84)      6129     1379 (  -77.50)  (  -78.84)    194102    46886 (  -75.84)  (  -78.84)    553255   130215 (  -76.46)  (  -80.07) 
   Summary Sel     6518     1379             (  -78.84)      6518     1379             (  -78.84)    221538    46886             (  -78.84)    653306   130215             (  -80.07) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_ExB/DESY21_ExB04_Z60/2_DESY21_ExB04_Z60_Checks_zcalc_G2_WF4_iter0.root
-dEdx: OUT_Tristan/DESY21_ExB/DESY21_ExB04_Z60/3_DESY21_ExB04_Z60_dEdx_zcalc_G2_WF4_iter0.root
+Checks: OUT_Tristan/DESY21_ExB/DESY21_ExB04_Z60/2_DESY21_ExB04_Z60_Checks_zcalc_G2_WF4_Zpm10.root
+dEdx: OUT_Tristan/DESY21_ExB/DESY21_ExB04_Z60/3_DESY21_ExB04_Z60_dEdx_zcalc_G2_WF4_Zpm10.root

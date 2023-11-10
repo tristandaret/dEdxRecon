@@ -137,8 +137,7 @@ TF1* corr_func(const std::string &EventFile, const std::string &Tag){
     if(    (angle = filename.find("30"))  != (int)std::string::npos or (angle = filename.find("45"))  != (int)std::string::npos) filename.replace(angle, 2, "40") ;
     while( (angle = filename.find("460")) != (int)std::string::npos or (angle = filename.find("860")) != (int)std::string::npos) filename.replace(angle, 3, "m40") ;
     TFile* pfile              = new TFile((filename + "_WFmax_correction.root").c_str(), "READ") ;
-    std::cout << (filename + "_WFmax_correction.root").c_str() << std::endl ;
-    corr_func                    = pfile->Get<TF1>("corr_func") ;
+    corr_func                    = pfile->Get<TF1>("A_corr") ;
     pfile->                     Close() ;
     delete                      pfile;
     corr_func->                    SetParameter(0, corr_func->GetParameter(0)-100) ;

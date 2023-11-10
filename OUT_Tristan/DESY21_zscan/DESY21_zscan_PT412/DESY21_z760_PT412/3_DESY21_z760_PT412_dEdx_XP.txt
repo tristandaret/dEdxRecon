@@ -1,22 +1,15 @@
 Tag           : DESY21_z760_PT412
-Comment       : _1000_zcalc_PRF_4IP_WFhatrecon
-EventFile     : ../Data_DESY21/zscan_PT412/z_360_275_412_02T_26_760_iter0.root
+Comment       : _zcalc_G2_WF4_Zp10cm
+FileName     : ../Data_DESY21/zscan_PT412/z_360_275_412_02T_26_760_iter0.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
 Data_to_Use   : 0
 OUTDirName    : OUT_Tristan/DESY21_zscan/DESY21_zscan_PT412/DESY21_z760_PT412/
 
-
-ReadRCmap::ReadRCmap m_FileName = GainRCMaps/RCfiles/ERAM01_RCdata_01.root
-
-ReadRCmap::ReadRCmap  No Data for iX=10 and  iY=16 in GainRCMaps/RCfiles/ERAM01_RCdata_01.root
-RC map: loaded
-
-ReadGainmap::ReadGainmap m_FileName = GainRCMaps/Gainfiles/ERAM01_Gaindata_01.root
-
-ReadGainmap::ReadGainmap  No Data for iX=10 and  iY=16 in GainRCMaps/Gainfiles/ERAM01_Gaindata_01.root
-Gain map: loaded
+Gain & RC maps: loaded
 Average Gain in ERAM01 = 1947.77
+ERAM01: RC   hole in  iX = 10 | iY = 16 | value reset at 129.29
+ERAM01: Gain hole in  iX = 10 | iY = 16 | value reset at 1889.24
 
 -------------->Predefined selection T_DESY21_Event
 Number of entries :11536
@@ -52,37 +45,24 @@ zdrift        = 850 mm
 PT            = 412 ns
 TB            = 50 ns/time bin
 PT/TB         = 8 time bins
-Track fitting : PRF
 z method      : zcalc
 cut length    = 2 mm
 
 Processing events:
 0/11536
-500/11536
-RC hole in entry   946 | iX = 10 | iY = 16 |  RC  value reset at 129
 1000/11536
-1500/11536
 2000/11536
-2500/11536
 3000/11536
-3500/11536
 4000/11536
-4500/11536
 5000/11536
-5500/11536
 6000/11536
-6500/11536
 7000/11536
-7500/11536
 8000/11536
-8500/11536
 9000/11536
-9500/11536
 10000/11536
-10500/11536
 11000/11536
-11500/11536
 11535/11536
+11536 real events
 
 Selection Statistics 
  #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
@@ -95,5 +75,5 @@ Selection Statistics
     6  Stage5    10482     6386 (  -39.08)  (  -44.64)     10482     6386 (  -39.08)  (  -44.64)    347564   217124 (  -37.53)  (  -44.63)   1228770   762373 (  -37.96)  (  -46.54) 
   Summary Sel    11536     6386             (  -44.64)     11536     6386             (  -44.64)    392101   217124             (  -44.63)   1425953   762373             (  -46.54) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT412/DESY21_z760_PT412/2_DESY21_z760_PT412_Checks_1000_zcalc_PRF_4IP_WFhatrecon.root
-dEdx: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT412/DESY21_z760_PT412/3_DESY21_z760_PT412_dEdx_1000_zcalc_PRF_4IP_WFhatrecon.root
+Checks: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT412/DESY21_z760_PT412/2_DESY21_z760_PT412_Checks_zcalc_G2_WF4_Zp10cm.root
+dEdx: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT412/DESY21_z760_PT412/3_DESY21_z760_PT412_dEdx_zcalc_G2_WF4_Zp10cm.root
