@@ -4288,8 +4288,8 @@ void DrawOut_corrections(){
 // DrawOut dE/dx systematics with Z scan
 void DrawOut_Systematics(const std::string& inputDir, const std::string& Comment, const std::string& scan)
 {
-  int sys_RC              = 0 ;
-  int sys_Z               = 0 ;
+  int sys_RC              = 1 ;
+  int sys_Z               = 1 ;
   int sys_d               = 1 ;
 
   // Draw
@@ -4342,7 +4342,7 @@ void DrawOut_Systematics(const std::string& inputDir, const std::string& Comment
 
   for(int i = 0 ; i < (int)file.size() ; i++){
     pTFile_XP                   = TFile::Open(TString(file[i] + Comment + ".root")) ;
-    TF1* tf1_XP                 = pTFile_XP->Get<TF1>("tf1_XP_0") ;
+    TF1* tf1_XP                 = pTFile_XP->Get<TF1>("tf1_XP") ;
     pTGE_reso_XP->                SetPoint(     i,val[i], tf1_XP->GetParameter(2)/tf1_XP->GetParameter(1)*100) ;
     pTGE_reso_XP->                SetPointError(i,0,         GetResoError(tf1_XP)) ;
     pTGE_mean_XP->                SetPoint(     i,val[i], tf1_XP->GetParameter(1)) ;
@@ -4374,7 +4374,7 @@ void DrawOut_Systematics(const std::string& inputDir, const std::string& Comment
     // TGraphErrors* pTGE_std_RCpm  = new TGraphErrors();
 
   for(int i = 0 ; i < (int)file.size() ; i++){
-      pTFile_RCm                  = TFile::Open(TString(file[i] + Comment + "_RCm%.root")) ;
+      pTFile_RCm                  = TFile::Open(TString(file[i] + Comment + "_RCm2%.root")) ;
       TF1* tf1_RCm                = pTFile_RCm->Get<TF1>("tf1_XP") ;
       pTGE_reso_RCm->                SetPoint(     i,val[i], tf1_RCm->GetParameter(2)/tf1_RCm->GetParameter(1)*100) ;
       pTGE_reso_RCm->                SetPointError(i,0,         GetResoError(tf1_RCm)) ;
@@ -4383,7 +4383,7 @@ void DrawOut_Systematics(const std::string& inputDir, const std::string& Comment
       pTGE_std_RCm->                 SetPoint(     i,val[i], tf1_RCm->GetParameter(2)) ;
       pTGE_std_RCm->                 SetPointError(i,0,         tf1_RCm->GetParError(2)) ;
       
-      pTFile_RCp                  = TFile::Open(TString(file[i] + Comment + "_RCp%.root")) ;
+      pTFile_RCp                  = TFile::Open(TString(file[i] + Comment + "_RCp2%.root")) ;
       TF1* tf1_RCp                = pTFile_RCp->Get<TF1>("tf1_XP") ;
       pTGE_reso_RCp->                SetPoint(     i,val[i], tf1_RCp->GetParameter(2)/tf1_RCp->GetParameter(1)*100) ;
       pTGE_reso_RCp->                SetPointError(i,0,         GetResoError(tf1_RCp)) ;
@@ -4482,7 +4482,7 @@ void DrawOut_Systematics(const std::string& inputDir, const std::string& Comment
 
 
   for(int i = 0 ; i < (int)file.size() ; i++){
-    pTFile_Zm                 = TFile::Open(TString(file[i] + Comment + "_Zmcm.root")) ;
+    pTFile_Zm                 = TFile::Open(TString(file[i] + Comment + "_Zm15mm.root")) ;
     TF1* tf1_Zm               = pTFile_Zm->Get<TF1>("tf1_XP") ;
     pTGE_reso_Zm->              SetPoint(     i,val[i], tf1_Zm->GetParameter(2)/tf1_Zm->GetParameter(1)*100) ;
     pTGE_reso_Zm->              SetPointError(i,0,         GetResoError(tf1_Zm)) ;
@@ -4491,7 +4491,7 @@ void DrawOut_Systematics(const std::string& inputDir, const std::string& Comment
     pTGE_std_Zm->               SetPoint(     i,val[i], tf1_Zm->GetParameter(2)) ;
     pTGE_std_Zm->               SetPointError(i,0,         tf1_Zm->GetParError(2)) ;
 
-    pTFile_Zp                 = TFile::Open(TString(file[i] + Comment + "_Zpcm.root")) ;
+    pTFile_Zp                 = TFile::Open(TString(file[i] + Comment + "_Zp15mm.root")) ;
     TF1* tf1_Zp               = pTFile_Zp->Get<TF1>("tf1_XP") ;
     pTGE_reso_Zp->              SetPoint(     i,val[i], tf1_Zp->GetParameter(2)/tf1_Zp->GetParameter(1)*100) ;
     pTGE_reso_Zp->              SetPointError(i,0,         GetResoError(tf1_Zp)) ;
@@ -4585,7 +4585,7 @@ void DrawOut_Systematics(const std::string& inputDir, const std::string& Comment
 
 
   for(int i = 0 ; i < (int)file.size() ; i++){
-      pTFile_dperr                  = TFile::Open(TString(file[i] + Comment + "_dperr.root")) ;
+      pTFile_dperr                  = TFile::Open(TString(file[i] + Comment + "_dabs_perr.root")) ;
       TF1* tf1_dperr                 = pTFile_dperr->Get<TF1>("tf1_XP") ;
       pTGE_reso_dperr->                SetPoint(     i,val[i], tf1_dperr->GetParameter(2)/tf1_dperr->GetParameter(1)*100) ;
       pTGE_reso_dperr->                SetPointError(i,0,         GetResoError(tf1_dperr)) ;
@@ -4594,7 +4594,7 @@ void DrawOut_Systematics(const std::string& inputDir, const std::string& Comment
       pTGE_std_dperr->                 SetPoint(     i,val[i], tf1_dperr->GetParameter(2)) ;
       pTGE_std_dperr->                 SetPointError(i,0,         tf1_dperr->GetParError(2)) ;
 
-      pTFile_dmerr                  = TFile::Open(TString(file[i] + Comment + "_dmerr.root")) ;
+      pTFile_dmerr                  = TFile::Open(TString(file[i] + Comment + "_dabs_merr.root")) ;
       TF1* tf1_dmerr                 = pTFile_dmerr->Get<TF1>("tf1_XP") ;
       pTGE_reso_dmerr->                SetPoint(     i,val[i], tf1_dmerr->GetParameter(2)/tf1_dmerr->GetParameter(1)*100) ;
       pTGE_reso_dmerr->                SetPointError(i,0,         GetResoError(tf1_dmerr)) ;

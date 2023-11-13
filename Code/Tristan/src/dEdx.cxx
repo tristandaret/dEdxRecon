@@ -315,13 +315,13 @@ void dEdx( const std::string& OutDir,
           if(phi >  90) phi               =  90-2e-6 ;
           float phiconv                   = fabs(phi)/phi_step ;
           // Interpolation d
-          if(d<0) d                      -= pTrack->Get_ParameterError(1)*1000;
-          else    d                      += pTrack->Get_ParameterError(1)*1000;
+          // if(d<0) d                      += pTrack->Get_ParameterError(1)*1000;
+          // else    d                      -= pTrack->Get_ParameterError(1)*1000;
           if(d < -L/2) d                  = -L/2 ;
           if(d >  L/2) d                  =  L/2 ;
           float dconv                     = (d+L/2)/d_step ;  // +L/2 shift because LUT indices have to be > 0 but d can be < 0
           // Interpolation Z
-          // z_calc                         += 15;
+          z_calc                         -= 15;
           if(z_calc < 0)    z_calc        = 0 ;
           if(z_calc > 1000) z_calc        = 1e3 ;
           float zfile                     = zdrift/z_step ;
