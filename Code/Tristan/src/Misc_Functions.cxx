@@ -273,8 +273,7 @@ TH1F* DPR(std::string name, const float& tmin, float const& tmax, const float& t
 
 
 // impact parameter d (in m) & track angle phi (in degrees) computed locally at the level of the pad
-std::vector<float> local_params(const Pad* pPad, const Track* pTrack){
-  std::vector<float>          v_loc_par ;
+void local_params(const Pad* pPad, const Track* pTrack, float& d, float& dd, float& phi, float& trk_len_pad){
   // Get geometry of pad
   float xc                  = pPad->Get_XPad() ;              // in m
   float yc                  = pPad->Get_YPad() ;              // in m
@@ -289,6 +288,13 @@ std::vector<float> local_params(const Pad* pPad, const Track* pTrack){
   float x_y1                = (y1-a)/b ;                      // in meters
   float y_x0                = b*x0+a ;                        // in meters
   float y_x1                = b*x1+a ;                        // in meters
+
+  double da                  = pTrack->Get_ParameterError(0) ; // in meters    (intercept)
+  double db                  = pTrack->Get_ParameterError(1) ; // no dimension (slope)
+  float dx_y0                = sqrt(1/b*b * da*da + pow((y0-a)/b*b, 2) * db*db) ; // in meters
+  float dx_y1                = sqrt(1/b*b * da*da + pow((y1-a)/b*b, 2) * db*db) ; // in meters
+  float dy_x0                = sqrt(da*da + x0*x0*db*db) ;                        // in meters
+  float dy_x1                = sqrt(da*da + x1*x1*db*db) ;                        // in meters
 
   if(pTrack->GetNberOfParameters() == 3){ // Magnetic Field is On
     float x_pad             = pPad->Get_XPad() ;
@@ -309,26 +315,36 @@ std::vector<float> local_params(const Pad* pPad, const Track* pTrack){
   int   wall                = 0 ; // count how many walls were crossed
   float x[3]                = {0} ;
   float y[3]                = {0} ;
+  float dx[3]               = {0} ;
+  float dy[3]               = {0} ;
 
   // Determine which walls were crossed
   if(y0 <= y_x0 && y_x0 <= y1){   // left
     x[wall]                 = x0 ;
     y[wall]                 = y_x0 ; 
+    dx[wall]                = 0 ;
+    dy[wall]                = dy_x0 ; 
     wall++ ;
   }
   if(y0 <= y_x1 && y_x1 <= y1){   // right
     x[wall]                 = x1 ;
     y[wall]                 = y_x1 ;
+    dx[wall]                = 0 ;
+    dy[wall]                = dy_x1 ;
     wall++ ;
   }
   if(x0 <= x_y1 && x_y1 <= x1){   // top
     x[wall]                 = x_y1 ;
     y[wall]                 = y1 ;
+    dx[wall]                = dx_y1 ;
+    dy[wall]                = 0 ;
     wall++ ;
   }
   if(x0 <= x_y0 && x_y0 <= x1){   // bottom
     x[wall]                 = x_y0 ;
     y[wall]                 = y0 ;
+    dx[wall]                = dx_y0 ;
+    dy[wall]                = 0 ;
     wall++ ;
   }
 
@@ -339,16 +355,28 @@ std::vector<float> local_params(const Pad* pPad, const Track* pTrack){
     std::cout << a*100 << " " << b << " " << pTrack->Get_ParameterValue(2)/100 << std::endl ;
   }
 
-  float intercept           = (y[0]*x[1] - y[1]*x[0]) / (x[1] - x[0]) ;
-  float slope               = (y[1] - y[0]) / (x[1] - x[0]) ;
-  float angle               = TMath::ATan(slope)/TMath::Pi()*180 ;
-  float impact_param        = (slope*xc - yc + intercept) / sqrt(pow(slope,2) + 1) ; // in m
-  float r                   = sqrt(pow(y[1]-y[0],2) + pow(x[1]-x[0],2)) ; // in meters (track length in the pad)
+  float intercept           = (y[0]*x[1]-y[1]*x[0]) / (x[1]-x[0]) ;
+  float dx0_a               =  x[1]*(y[0]-y[1])/pow(x[1]-x[0],2);
+  float dx1_a               =  x[0]*(y[1]-y[0])/pow(x[1]-x[0],2);
+  float dy0_a               =  x[1]/(x[1]-x[0]);
+  float dy1_a               = -x[0]/(x[1]-x[0]);
+  float dintercept          = sqrt(dx0_a*dx0_a*dx[0]*dx[0] + dx1_a*dx1_a*dx[1]*dx[1] + dy0_a*dy0_a*dy[0]*dy[0] + dy1_a*dy1_a*dy[1]*dy[1]);
+
+  float slope               = (y[1]-y[0]) / (x[1]-x[0]) ;
+  float dx0_b               =  1/pow(x[1]-x[0],2);
+  float dx1_b               = -1/pow(x[1]-x[0],2);
+  float dy0_b               = -1/(x[1]-x[0]);
+  float dy1_b               =  1/(x[1]-x[0]);
+  float dslope              = sqrt(dx0_b*dx0_b*dx[0]*dx[0] + dx1_b*dx1_b*dx[1]*dx[1] + dy0_b*dy0_b*dy[0]*dy[0] + dy1_b*dy1_b*dy[1]*dy[1]);
+
+  phi                       = TMath::ATan(slope)/TMath::Pi()*180 ;
+  trk_len_pad               = sqrt(pow(y[1]-y[0],2) + pow(x[1]-x[0],2)) ; // in meters (track length in the pad)
+
+  d                         = (slope*xc - yc + intercept) / sqrt(pow(slope,2) + 1) ; // in m
+  float da_d                = 1/sqrt(slope*slope+1);
+  float db_d                = (xc*sqrt(slope*slope+1) - (slope*xc-yc+intercept)*slope/sqrt(slope*slope+1)) / (slope*slope+1);
+  dd                        = sqrt(da_d*da_d * da*da + db_d*db_d * db*db);
   
-  v_loc_par.push_back(impact_param) ;
-  v_loc_par.push_back(angle) ;
-  v_loc_par.push_back(r) ;
-  return v_loc_par ; // (d, phi, length in pad) in (meters, degrees, meters)
 }
 
 

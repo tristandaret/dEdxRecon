@@ -51,7 +51,7 @@ void Monitoring()
 
   // Computations
   int control         = 0 ;
-  int dedx            = 0 ;
+  int dedx            = 1 ;
   int WFcorr          = 0 ;
 
   // DrawOuts
@@ -63,7 +63,7 @@ void Monitoring()
   int DO_Global       = 0 ;
   int DO_Scans        = 0 ;
   int DO_Separation   = 0 ;
-  int DO_Systematics  = 1 ;
+  int DO_Systematics  = 0 ;
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -151,18 +151,18 @@ void Monitoring()
     NbrOfMod        =  0 ; 
     Dt              = 310 ; TB = 50 ;
     // int PT_arr[] = {200, 412} ;
-    int PT_arr[] = {200} ;
+    int PT_arr[] = {412} ;
     for (int PT : PT_arr){
       OutDir        = Form("OUT_Tristan/DESY21_zscan/DESY21_zscan_PT%i/", PT) ; 
       MakeMyDir(OutDir) ; 
       Uploader* pUpld ; Interpol4 LUT ;
       if (control or dedx) LUT = GiveMe_LUT(Form("/home/td263283/Documents/Python/LUT_XP/LUT_Dt%i_PT%i_nphi200_nd200/", Dt, PT), nZ, nRC) ;
-      // int         z_val[]   = {50, 150, 250, 350, 450, 550, 650, 750, 850, 950} ;
-      // std::string z_arr[]   = {"m40", "060", "160", "260", "360", "460", "560", "660", "760", "860"} ;
+      int         z_val[]   = {50, 150, 250, 350, 450, 550, 650, 750, 850, 950} ;
+      std::string z_arr[]   = {"m40", "060", "160", "260", "360", "460", "560", "660", "760", "860"} ;
       // int         z_val[]   = {50, 550, 950} ;
       // std::string z_arr[]   = {"m40", "460", "860"};
-      int         z_val[]   = {550} ;
-      std::string z_arr[]   = {"460"} ;
+      // int         z_val[]   = {550} ;
+      // std::string z_arr[]   = {"460"} ;
       for (int iz = 0 ; iz < (int)std::size(z_arr) ; iz++){
         const char* z       = z_arr[iz].c_str() ;
         EvtFile             = Form("../Data_DESY21/zscan_PT%i/z_360_275_%i_02T_26_%s_iter0.root", PT, PT, z) ; Tag = Form("DESY21_z%s_PT%i", z, PT) ; prtcle = Form("electron_z%s", z) ;

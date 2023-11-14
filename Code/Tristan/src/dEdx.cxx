@@ -132,6 +132,7 @@ void dEdx( const std::string& OutDir,
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   // Check histograms
+  TH1F* h1f_errslope        = new TH1F("h1f_errslope",        "Error on slope;error (#mum);", 100, -1000, 1000) ;
   TH1F* h1f_dnorm           = new TH1F("h1f_dnorm",           "Normalized impact parameter d/d_{max};d/d_{max};", 100, -1.1, 1.1) ;
   TH1F* h1f_dist            = new TH1F("h1f_dist",            "distance of track in pad;distance (mm);", 100, 0, 17) ;
   TH1F* h1f_dist_clus       = new TH1F("h1f_dist_clus",       "Distance of track in cluster;distance (mm);", 100, 0, 17) ;
@@ -165,7 +166,7 @@ void dEdx( const std::string& OutDir,
   float A_ref                 = A_corr->Eval(Lx) ;
 
   TheFitterTrack aTheFitterTrack("Minuit", n_param_trk) ;
-  PRF_param                     aPRF_param  ;
+  PRF_param                     aPRF_param;
   TF1* tf1_PRF                = new TF1("tf1_PRF",aPRF_param, -2.5*1.128, 2.5*1.128, 5) ;
   tf1_PRF->                     SetParameters(pUploader->Get_Norm(), pUploader->Get_a2(), pUploader->Get_a4(), pUploader->Get_b2(), pUploader->Get_b4()) ;
   int Kounter_Fit             = 0 ;
@@ -256,7 +257,7 @@ void dEdx( const std::string& OutDir,
 
       // Track details
       const Track* pTrack                 = pEvent->GiveMe_Track_ForThisModule(ModuleNber) ;
-      double phi                          = std::atan(pTrack->Get_ParameterValue(1))/M_PI*180 ;
+      float phi                           = std::atan(pTrack->Get_ParameterValue(1))/M_PI*180 ;
       std::vector<float>                    v_len_cross ; 
       std::vector<float>                    v_len_clust ; 
       float len_track                     = trk_len(pModule, pTrack)*100 ; // in cm from left side  of cluster #0 to right side of last cluster
@@ -289,12 +290,16 @@ void dEdx( const std::string& OutDir,
           h1f_WF_cluster->                  Add(h1f_WF_pad) ;
           v_trashbin.                       push_back(h1f_WF_pad) ;
 
-          // Track computations (impact parameter, angle, length in pad)
-          std::vector<float> loc_par      = local_params(pPad, pTrack) ;
-          float d                         = loc_par[0]*1000 ;       // in mm
-          if(pTrack->GetNberOfParameters() > 2) phi = loc_par[1] ;  // in degrees, recompute only for curved tracks
-          float trk_len_pad               = loc_par[2];             // in m
-          if(trk_len_pad <= 1e-6)           continue ;
+          // Track computations (impact parameter in m, angle in degrees, length in pad in m)
+          float d, dd, trk_len_pad;
+          local_params(pPad, pTrack, d, dd, phi, trk_len_pad);
+          d                              *= 1000 ; // in mm
+          dd                             *= 1000 ; // in mm
+          if(trk_len_pad <= 1e-6)           continue ;  // ignore non-but-almost-zero tracks 
+
+          // h1f_errslope->Fill(pTrack->Y_Position(pCluster->Get_XTrack())*1e6-pCluster->Get_YTrack()*1e6);
+          // h1f_errslope->Fill(pTrack->Y_Position(pCluster->Get_eYTrack()*1e6));
+          h1f_errslope->Fill(dd*1e3);
           
           float L_phi                     = std::min({ 11.28/std::fabs(std::cos(phi*M_PI/180)), 10.19/std::fabs(std::sin(phi*M_PI/180)) }) ;
           float LNorm                     = trk_len_pad*1000/L_phi ;
@@ -317,6 +322,8 @@ void dEdx( const std::string& OutDir,
           // Interpolation d
           // if(d<0) d                      += pTrack->Get_ParameterError(1)*1000;
           // else    d                      -= pTrack->Get_ParameterError(1)*1000;
+          // if(d<0) d                      -= fabs((pTrack->Y_Position(pCluster->Get_XTrack())-pCluster->Get_YTrack())*1e6);
+          // else    d                      += fabs((pTrack->Y_Position(pCluster->Get_XTrack())-pCluster->Get_YTrack())*1e6);
           if(d < -L/2) d                  = -L/2 ;
           if(d >  L/2) d                  =  L/2 ;
           float dconv                     = (d+L/2)/d_step ;  // +L/2 shift because LUT indices have to be > 0 but d can be < 0
@@ -496,7 +503,12 @@ void dEdx( const std::string& OutDir,
   aJFL_Selector.PrintStat() ;
   delete tf1_PRF ;
 
-
+  TCanvas* c1 = new TCanvas("c1", "c1", 1800, 1200);
+  c1->cd();
+  h1f_errslope->SetLineWidth(4);
+  h1f_errslope->Draw();
+  c1->SaveAs((OUTDirName + "Fit_Error_slope.png").c_str());
+  delete c1;
 
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////

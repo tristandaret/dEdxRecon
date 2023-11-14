@@ -170,8 +170,9 @@ void corr( const std::string& OutDir,
           v_trashbin.                       push_back(h1f_WF_pad) ;
 
           // Track computations (impact parameter, angle, length in pad)
-          std::vector<float> loc_par      = local_params(pPad, pTrack) ;
-          trk_len_clus                   += loc_par[2]; 
+          float d, dd, phi, trk_len_pad;
+          local_params(pPad, pTrack, d, dd, phi, trk_len_pad) ;
+          trk_len_clus                   += trk_len_pad; 
 
         }
 
