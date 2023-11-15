@@ -150,4 +150,5 @@ void combinedFit(std::vector<TGraphErrors*>& v_tge, std::vector<TF1*>& v_tf1)
    v_tf1[0]->Draw("same");
    
    c1->SaveAs("Test_Simultaneous_fit_4approx.pdf");
+   delete c1;
 }

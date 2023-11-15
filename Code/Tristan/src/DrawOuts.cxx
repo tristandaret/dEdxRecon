@@ -4416,7 +4416,7 @@ void DrawOut_Systematics(const std::string& inputDir, const std::string& Comment
     pTGE_reso_RCp->                   Draw("p same") ;
     // pTGE_reso_RCpm->                  Draw("p same") ;
     leg->                               AddEntry(pTGE_reso_RCp, "RC + 2%", "ep") ;  
-    leg->                               AddEntry(pTGE_reso_XP, "RC reference", "ep") ;  
+    leg->                               AddEntry(pTGE_reso_XP, "RC true", "ep") ;  
     leg->                               AddEntry(pTGE_reso_RCm, "RC - 2%", "ep") ;  
     // leg->                               AddEntry(pTGE_reso_RCpm, "RC #pm 25%", "ep") ;  
     leg->                               Draw() ;
@@ -4573,58 +4573,55 @@ void DrawOut_Systematics(const std::string& inputDir, const std::string& Comment
 
   // Impact parameter
   if(sys_d){
-    TFile* pTFile_dperr ;
-    TGraphErrors* pTGE_reso_dperr  = new TGraphErrors();
-    TGraphErrors* pTGE_mean_dperr  = new TGraphErrors();
-    TGraphErrors* pTGE_std_dperr   = new TGraphErrors();
+    TFile* pTFile_dpdd ;
+    TGraphErrors* pTGE_reso_dpdd  = new TGraphErrors();
+    TGraphErrors* pTGE_mean_dpdd  = new TGraphErrors();
+    TGraphErrors* pTGE_std_dpdd   = new TGraphErrors();
 
-    TFile* pTFile_dmerr ;
-    TGraphErrors* pTGE_reso_dmerr  = new TGraphErrors();
-    TGraphErrors* pTGE_mean_dmerr  = new TGraphErrors();
-    TGraphErrors* pTGE_std_dmerr   = new TGraphErrors();
+    TFile* pTFile_dmdd ;
+    TGraphErrors* pTGE_reso_dmdd  = new TGraphErrors();
+    TGraphErrors* pTGE_mean_dmdd  = new TGraphErrors();
+    TGraphErrors* pTGE_std_dmdd   = new TGraphErrors();
 
 
   for(int i = 0 ; i < (int)file.size() ; i++){
-      pTFile_dperr                  = TFile::Open(TString(file[i] + Comment + "_dabs_perr.root")) ;
-      TF1* tf1_dperr                 = pTFile_dperr->Get<TF1>("tf1_XP") ;
-      pTGE_reso_dperr->                SetPoint(     i,val[i], tf1_dperr->GetParameter(2)/tf1_dperr->GetParameter(1)*100) ;
-      pTGE_reso_dperr->                SetPointError(i,0,         GetResoError(tf1_dperr)) ;
-      pTGE_mean_dperr->                SetPoint(     i,val[i], tf1_dperr->GetParameter(1)) ;
-      pTGE_mean_dperr->                SetPointError(i,0,         tf1_dperr->GetParError(1)) ;
-      pTGE_std_dperr->                 SetPoint(     i,val[i], tf1_dperr->GetParameter(2)) ;
-      pTGE_std_dperr->                 SetPointError(i,0,         tf1_dperr->GetParError(2)) ;
+      pTFile_dpdd                  = TFile::Open(TString(file[i] + Comment + "_dpdd.root")) ;
+      TF1* tf1_dpdd                 = pTFile_dpdd->Get<TF1>("tf1_XP") ;
+      pTGE_reso_dpdd->                SetPoint(     i,val[i], tf1_dpdd->GetParameter(2)/tf1_dpdd->GetParameter(1)*100) ;
+      pTGE_reso_dpdd->                SetPointError(i,0,         GetResoError(tf1_dpdd)) ;
+      pTGE_mean_dpdd->                SetPoint(     i,val[i], tf1_dpdd->GetParameter(1)) ;
+      pTGE_mean_dpdd->                SetPointError(i,0,         tf1_dpdd->GetParError(1)) ;
+      pTGE_std_dpdd->                 SetPoint(     i,val[i], tf1_dpdd->GetParameter(2)) ;
+      pTGE_std_dpdd->                 SetPointError(i,0,         tf1_dpdd->GetParError(2)) ;
 
-      pTFile_dmerr                  = TFile::Open(TString(file[i] + Comment + "_dabs_merr.root")) ;
-      TF1* tf1_dmerr                 = pTFile_dmerr->Get<TF1>("tf1_XP") ;
-      pTGE_reso_dmerr->                SetPoint(     i,val[i], tf1_dmerr->GetParameter(2)/tf1_dmerr->GetParameter(1)*100) ;
-      pTGE_reso_dmerr->                SetPointError(i,0,         GetResoError(tf1_dmerr)) ;
-      pTGE_mean_dmerr->                SetPoint(     i,val[i], tf1_dmerr->GetParameter(1)) ;
-      pTGE_mean_dmerr->                SetPointError(i,0,         tf1_dmerr->GetParError(1)) ;
-      pTGE_std_dmerr->                 SetPoint(     i,val[i], tf1_dmerr->GetParameter(2)) ;
-      pTGE_std_dmerr->                 SetPointError(i,0,         tf1_dmerr->GetParError(2)) ;
+      pTFile_dmdd                  = TFile::Open(TString(file[i] + Comment + "_dmdd.root")) ;
+      TF1* tf1_dmdd                 = pTFile_dmdd->Get<TF1>("tf1_XP") ;
+      pTGE_reso_dmdd->                SetPoint(     i,val[i], tf1_dmdd->GetParameter(2)/tf1_dmdd->GetParameter(1)*100) ;
+      pTGE_reso_dmdd->                SetPointError(i,0,         GetResoError(tf1_dmdd)) ;
+      pTGE_mean_dmdd->                SetPoint(     i,val[i], tf1_dmdd->GetParameter(1)) ;
+      pTGE_mean_dmdd->                SetPointError(i,0,         tf1_dmdd->GetParError(1)) ;
+      pTGE_std_dmdd->                 SetPoint(     i,val[i], tf1_dmdd->GetParameter(2)) ;
+      pTGE_std_dmdd->                 SetPointError(i,0,         tf1_dmdd->GetParError(2)) ;
     }
     
     leg->                           Clear() ;
     pTCanvas->                      Clear() ;
     // Resolution
-    TLegend* legPRF               = new TLegend(0.67,0.7,0.90,0.89) ;
-    legPRF->                        SetBorderSize(0);
-    legPRF->                        SetFillStyle(0);
     pTGE_reso_XP->                 GetXaxis()->SetLimits(xmin, xmax) ;
     pTGE_reso_XP->                 SetMinimum(4) ;
     pTGE_reso_XP->                 SetMaximum(12) ;
     if(scan == "Z") pTGE_reso_XP->                 SetNameTitle("pTGE_reso_XP", "Z scan systematics | impact parameter d | Resolution;drift distance (mm);resolution (%)") ;
     if(scan == "phi") pTGE_reso_XP->                 SetNameTitle("pTGE_reso_XP", "#phi scan systematics | impact parameter d | Resolution;#phi angle (#circ);resolution (%)") ;
     Graphic_setup(pTGE_reso_XP, 3, 21, kMagenta+1, 1, kBlack) ;
-    Graphic_setup(pTGE_reso_dperr, 3, 22, kRed+1, 1, kBlack) ;
-    Graphic_setup(pTGE_reso_dmerr, 3, 23, kBlue+1, 1, kBlack) ;
+    Graphic_setup(pTGE_reso_dpdd, 3, 22, kRed+1, 1, kBlack) ;
+    Graphic_setup(pTGE_reso_dmdd, 3, 23, kBlue+1, 1, kBlack) ;
     pTGE_reso_XP->                 Draw("ap") ;
-    pTGE_reso_dperr->                  Draw("p same") ;
-    pTGE_reso_dmerr->                  Draw("p same") ;
-    legPRF->                        AddEntry(pTGE_reso_dperr, "d + fit error", "ep") ;  
-    legPRF->                        AddEntry(pTGE_reso_XP, "d reference", "ep") ; 
-    legPRF->                        AddEntry(pTGE_reso_dmerr, "d - fit error", "ep") ;  
-    legPRF->                        Draw() ;
+    pTGE_reso_dpdd->                  Draw("p same") ;
+    pTGE_reso_dmdd->                  Draw("p same") ;
+    leg->                        AddEntry(pTGE_reso_dpdd, "d + #Deltad", "ep") ;  
+    leg->                        AddEntry(pTGE_reso_XP, "d true", "ep") ; 
+    leg->                        AddEntry(pTGE_reso_dmdd, "d - #Deltad", "ep") ;  
+    leg->                        Draw() ;
     if(!sys_RC and !sys_Z) pTCanvas->SaveAs(OutputFile_Beg.c_str()) ;
     else                   pTCanvas->SaveAs(OutputFile.c_str()) ;
     // Mean
@@ -4635,12 +4632,12 @@ void DrawOut_Systematics(const std::string& inputDir, const std::string& Comment
     if(scan == "Z") pTGE_mean_XP->                 SetNameTitle("pTGE_mean_XP", "Z scan systematics | impact parameter d | Mean;drift distance (mm);mean (ADC count)") ;
     if(scan == "phi") pTGE_mean_XP->                 SetNameTitle("pTGE_mean_XP", "#phi scan systematics | impact parameter d | Mean;#phi angle (#circ);mean (ADC count)") ;
     Graphic_setup(pTGE_mean_XP, 3, 21, kMagenta+1, 1, kBlack) ;
-    Graphic_setup(pTGE_mean_dperr, 3, 22, kRed+1, 1, kBlack) ;
-    Graphic_setup(pTGE_mean_dmerr, 3, 23, kBlue+1, 1, kBlack) ;
+    Graphic_setup(pTGE_mean_dpdd, 3, 22, kRed+1, 1, kBlack) ;
+    Graphic_setup(pTGE_mean_dmdd, 3, 23, kBlue+1, 1, kBlack) ;
     pTGE_mean_XP->                 Draw("ap") ;
-    pTGE_mean_dperr->                  Draw("p same") ;
-    pTGE_mean_dmerr->                  Draw("p same") ;
-    legPRF->                        Draw() ;
+    pTGE_mean_dpdd->                  Draw("p same") ;
+    pTGE_mean_dmdd->                  Draw("p same") ;
+    leg->                        Draw() ;
     pTCanvas->                      SaveAs(OutputFile.c_str()) ;
     // Std
     pTCanvas->                      Clear() ;
@@ -4650,14 +4647,13 @@ void DrawOut_Systematics(const std::string& inputDir, const std::string& Comment
     if(scan == "Z") pTGE_std_XP->                  SetNameTitle("pTGE_std_XP", "Z scan systematics | impact parameter d | Std;drift distance (mm);standard deviation (ADC count)") ;
     if(scan == "phi") pTGE_std_XP->                  SetNameTitle("pTGE_std_XP", "#phi scan systematics | impact parameter d | Std;#phi angle (#circ);standard deviation (ADC count)") ;
     Graphic_setup(pTGE_std_XP, 3, 21, kMagenta+1, 1, kBlack) ;
-    Graphic_setup(pTGE_std_dperr, 3, 22, kRed+1, 1, kBlack) ;
-    Graphic_setup(pTGE_std_dmerr, 3, 23, kBlue+1, 1, kBlack) ;
+    Graphic_setup(pTGE_std_dpdd, 3, 22, kRed+1, 1, kBlack) ;
+    Graphic_setup(pTGE_std_dmdd, 3, 23, kBlue+1, 1, kBlack) ;
     pTGE_std_XP->                  Draw("ap") ;
-    pTGE_std_dperr->                   Draw("p same") ;
-    pTGE_std_dmerr->                   Draw("p same") ;
-    legPRF->                        Draw() ;
+    pTGE_std_dpdd->                   Draw("p same") ;
+    pTGE_std_dmdd->                   Draw("p same") ;
+    leg->                        Draw() ;
     pTCanvas->                      SaveAs(OutputFile_End.c_str()) ;
-    delete                          legPRF ;
   }
 
   delete                        pTCanvas   ;

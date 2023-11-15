@@ -1,5 +1,5 @@
 Tag           : DESY21_z860_PT412
-Comment       : _zcalc_G2_WF4
+Comment       : _zcalc_G2_WF4_dpdd
 FileName     : ../Data_DESY21/zscan_PT412/z_360_275_412_02T_26_860_iter0.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
@@ -73,5 +73,5 @@ Selection Statistics
     6  Stage5     8343     5119 (  -38.64)  (  -44.57)      8343     5119 (  -38.64)  (  -44.57)    276423   174046 (  -37.04)  (  -44.55)    978424   611536 (  -37.50)  (  -46.53) 
   Summary Sel     9235     5119             (  -44.57)      9235     5119             (  -44.57)    313871   174046             (  -44.55)   1143674   611536             (  -46.53) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT412/DESY21_z860_PT412/2_DESY21_z860_PT412_Checks_zcalc_G2_WF4.root
-dEdx: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT412/DESY21_z860_PT412/3_DESY21_z860_PT412_dEdx_zcalc_G2_WF4.root
+Checks: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT412/DESY21_z860_PT412/2_DESY21_z860_PT412_Checks_zcalc_G2_WF4_dpdd.root
+dEdx: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT412/DESY21_z860_PT412/3_DESY21_z860_PT412_dEdx_zcalc_G2_WF4_dpdd.root

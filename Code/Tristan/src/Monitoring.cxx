@@ -44,14 +44,14 @@ void Monitoring()
   int prototype       = 0 ;
   int CERN_Escan      = 0 ; 
 
-  int DESY_zscan      = 0 ; 
+  int DESY_zscan      = 1 ; 
   int DESY_yscan      = 0 ; 
   int DESY_phi        = 1 ; 
   int DESY_theta      = 0 ; 
 
   // Computations
   int control         = 0 ;
-  int dedx            = 1 ;
+  int dedx            = 0 ;
   int WFcorr          = 0 ;
 
   // DrawOuts
@@ -63,7 +63,7 @@ void Monitoring()
   int DO_Global       = 0 ;
   int DO_Scans        = 0 ;
   int DO_Separation   = 0 ;
-  int DO_Systematics  = 0 ;
+  int DO_Systematics  = 1 ;
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -226,8 +226,10 @@ void Monitoring()
       MakeMyDir(OutDir) ; 
       for (int ifile = 0 ; ifile < (int)std::size(phi_val) ; ifile++){
         int phi                 = phi_val[ifile] ;
-        if(ifile < 5) {EvtFile  = Form("../Data_DESY21/Phi_scan_z%s/phi_200_%i_z%s_ym60_iter0.root", z, phi, z) ; Tag = Form("DESY21_phi%i_z%s", phi, z) ; prtcle = Form("electron_phi%i_z%s", phi, z) ; }
-        else          {EvtFile  = Form("../Data_DESY21/Phi_scan_z%s/phi_200_%i_z%s_ym60_diag_iter0.root", z, phi, z) ; Tag = Form("DESY21_phi%i_diag_z%s", phi, z) ; prtcle = Form("electron_phi%i_diag_z%s", phi, z) ; }
+        if(ifile==0){       OutDir   = "OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/"; 
+                            EvtFile  = Form("../Data_DESY21/zscan_PT200/z_360_275_200_02T_26_%s_iter0.root", z) ; Tag = Form("DESY21_z%s_PT200", z) ; prtcle = Form("electron_z%s", z) ; }
+        else if(ifile < 5) {EvtFile  = Form("../Data_DESY21/Phi_scan_z%s/phi_200_%i_z%s_ym60_iter0.root", z, phi, z) ;            Tag = Form("DESY21_phi%i_z%s", phi, z) ; prtcle = Form("electron_phi%i_z%s", phi, z) ; }
+        else               {EvtFile  = Form("../Data_DESY21/Phi_scan_z%s/phi_200_%i_z%s_ym60_diag_iter0.root", z, phi, z) ;       Tag = Form("DESY21_phi%i_diag_z%s", phi, z) ; prtcle = Form("electron_phi%i_diag_z%s", phi, z) ; }
 
         if(control or dedx) pUpld = GiveMe_Uploader (intUploader, EvtFile) ;
         if (control)      Control       (OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, Data_to_Use, PT, TB, prtcle) ;
@@ -236,6 +238,7 @@ void Monitoring()
         if (DO_Checks)    DrawOut_Checks            (OutDir, EvtFile, Tag, Comment) ;
         if (DO_Methods)   DrawOut_Methods           (OutDir, Tag, Comment, 1, prtcle) ;
         delete pUpld ;
+        if(ifile==0)OutDir      = Form("OUT_Tristan/DESY21_phi/DESY21_phi_z%s/", z) ; 
       }
       if(DO_Resolution)   DrawOut_Phiscan (Form("OUT_Tristan/DESY21_phi/DESY21_phi_z%s", z), Comment, z) ;
       if(DO_Systematics)  DrawOut_Systematics(OutDir, Comment, "phi") ;

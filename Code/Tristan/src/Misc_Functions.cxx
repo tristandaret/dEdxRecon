@@ -356,7 +356,7 @@ void local_params(const Pad* pPad, const Track* pTrack, float& d, float& dd, flo
   }
 
   float intercept           = (y[0]*x[1]-y[1]*x[0]) / (x[1]-x[0]) ;
-  float dx0_a               =  x[1]*(y[0]-y[1])/pow(x[1]-x[0],2);
+  float dx0_a               = -x[1]*(y[1]-y[0])/pow(x[1]-x[0],2);
   float dx1_a               =  x[0]*(y[1]-y[0])/pow(x[1]-x[0],2);
   float dy0_a               =  x[1]/(x[1]-x[0]);
   float dy1_a               = -x[0]/(x[1]-x[0]);
@@ -367,7 +367,7 @@ void local_params(const Pad* pPad, const Track* pTrack, float& d, float& dd, flo
   float dx1_b               = -1/pow(x[1]-x[0],2);
   float dy0_b               = -1/(x[1]-x[0]);
   float dy1_b               =  1/(x[1]-x[0]);
-  float dslope              = sqrt(dx0_b*dx0_b*dx[0]*dx[0] + dx1_b*dx1_b*dx[1]*dx[1] + dy0_b*dy0_b*dy[0]*dy[0] + dy1_b*dy1_b*dy[1]*dy[1]);
+  float dslope              = sqrt(dx0_b*dx0_bx[0]*dx[0] + dx1_b*dx1_b*dx[1]*dx[1] + dy0_b*dy0_b*dy[0]*dy[0] + dy1_b*dy1_b*dy[1]*dy[1]);
 
   phi                       = TMath::ATan(slope)/TMath::Pi()*180 ;
   trk_len_pad               = sqrt(pow(y[1]-y[0],2) + pow(x[1]-x[0],2)) ; // in meters (track length in the pad)

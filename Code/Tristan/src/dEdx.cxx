@@ -324,6 +324,9 @@ void dEdx( const std::string& OutDir,
           // else    d                      -= pTrack->Get_ParameterError(1)*1000;
           // if(d<0) d                      -= fabs((pTrack->Y_Position(pCluster->Get_XTrack())-pCluster->Get_YTrack())*1e6);
           // else    d                      += fabs((pTrack->Y_Position(pCluster->Get_XTrack())-pCluster->Get_YTrack())*1e6);
+          // if(d>0) d                      -= dd;
+          // else    d                      += dd;
+          d                              -= dd;
           if(d < -L/2) d                  = -L/2 ;
           if(d >  L/2) d                  =  L/2 ;
           float dconv                     = (d+L/2)/d_step ;  // +L/2 shift because LUT indices have to be > 0 but d can be < 0
