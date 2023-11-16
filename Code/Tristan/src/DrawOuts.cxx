@@ -4515,7 +4515,7 @@ void DrawOut_Systematics(const std::string& inputDir, const std::string& Comment
     pTGE_reso_XP->                GetXaxis()->SetLimits(xmin, xmax) ;
     pTGE_reso_XP->                SetMinimum(4) ;
     pTGE_reso_XP->                SetMaximum(12) ;
-    if(scan == "Z") pTGE_reso_XP->                SetNameTitle("pTGE_reso_XP", "Z scan systematics | Z_{drift} | Resolution;drift distance (mm);drift distance (mm);resolution (%)") ;
+    if(scan == "Z") pTGE_reso_XP->                SetNameTitle("pTGE_reso_XP", "Z scan systematics | Z_{drift} | Resolution;drift distance (mm);resolution (%)") ;
     if(scan == "phi") pTGE_reso_XP->                SetNameTitle("pTGE_reso_XP", "#phi scan systematics | Z_{drift} | Resolution;#phi angle (#circ);resolution (%)") ;
     Graphic_setup(pTGE_reso_Zm, 3, 23, kBlue+1, 1, kBlack) ;
     Graphic_setup(pTGE_reso_XP, 3, 21, kMagenta+1, 1, kBlack) ;
@@ -4537,7 +4537,7 @@ void DrawOut_Systematics(const std::string& inputDir, const std::string& Comment
     pTGE_mean_XP->                GetXaxis()->SetLimits(xmin, xmax) ;
     pTGE_mean_XP->                SetMinimum(600) ;
     pTGE_mean_XP->                SetMaximum(1200) ;
-    if(scan == "Z") pTGE_mean_XP->                SetNameTitle("pTGE_mean_XP", "Z scan systematics | Z_{drift} | Mean;drift distance (mm);drift distance (mm);mean (ADC count)") ;
+    if(scan == "Z") pTGE_mean_XP->                SetNameTitle("pTGE_mean_XP", "Z scan systematics | Z_{drift} | Mean;drift distance (mm);mean (ADC count)") ;
     if(scan == "phi") pTGE_mean_XP->                SetNameTitle("pTGE_mean_XP", "#phi scan systematics | Z_{drift} | Mean;#phi angle (#circ);mean (ADC count)") ;
     Graphic_setup(pTGE_mean_Zm, 3, 23, kBlue+1, 1, kBlack) ;
     Graphic_setup(pTGE_mean_XP, 3, 21, kMagenta+1, 1, kBlack) ;
@@ -4554,7 +4554,7 @@ void DrawOut_Systematics(const std::string& inputDir, const std::string& Comment
     pTGE_std_XP->                GetXaxis()->SetLimits(xmin, xmax) ;
     pTGE_std_XP->                SetMinimum(40) ;
     pTGE_std_XP->                SetMaximum(100) ;
-    if(scan == "Z") pTGE_std_XP->                SetNameTitle("pTGE_std_XP", "Z scan systematics | Z_{drift} | Std;drift distance (mm);drift distance (mm);standard deviation (ADC count)") ;
+    if(scan == "Z") pTGE_std_XP->                SetNameTitle("pTGE_std_XP", "Z scan systematics | Z_{drift} | Std;drift distance (mm);standard deviation (ADC count)") ;
     if(scan == "phi") pTGE_std_XP->                SetNameTitle("pTGE_std_XP", "#phi scan systematics | Z_{drift} | Std;#phi angle (#circ);standard deviation (ADC count)") ;
     Graphic_setup(pTGE_std_Zm, 3, 23, kBlue+1, 1, kBlack) ;
     Graphic_setup(pTGE_std_XP, 3, 21, kMagenta+1, 1, kBlack) ;

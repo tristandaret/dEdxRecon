@@ -31,7 +31,7 @@ void Monitoring()
   int nRC = 21 ; 
 
   std::string Tag    ; 
-  std::string Comment = "_zcalc_G2_WF4" ; // z method | gain_corr | WF method
+  std::string Comment = "_zcalc_G2_WF4_dmddv2" ; // z method | gain_corr | WF method
   std::string prtcle ; 
   std::string EvtFile ;
   std::string OutDir  = "OUT_Tristan/";  
@@ -51,19 +51,19 @@ void Monitoring()
 
   // Computations
   int control         = 0 ;
-  int dedx            = 0 ;
+  int dedx            = 1 ;
   int WFcorr          = 0 ;
 
   // DrawOuts
   int DO_Displayer    = 0 ;
   int DO_control      = 0 ;
   int DO_Checks       = 0 ;
-  int DO_Methods      = 0 ;
-  int DO_Resolution   = 0 ;
+  int DO_Methods      = 1 ;
+  int DO_Resolution   = 1 ;
   int DO_Global       = 0 ;
   int DO_Scans        = 0 ;
   int DO_Separation   = 0 ;
-  int DO_Systematics  = 1 ;
+  int DO_Systematics  = 0 ;
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

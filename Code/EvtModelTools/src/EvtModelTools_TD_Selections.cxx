@@ -56,15 +56,6 @@ std::vector<int> Comp120_Cut(Uploader* pUploader, const int& NbrOfMod, const int
   int nbin_max                        = h1f_TLead->GetMaximumBin() ;        
   std::cout << nbin_max << std::endl;                       // bin of the highest peak
 
-  std::string OutputFile      = "h1f_test_timing.pdf" ;
-  TCanvas* pTCanvas           = new TCanvas("TCanvas_timing", "TCanvas_timing", 1800, 1200) ;
-  pTCanvas->                    cd();
-  pTCanvas->                    SetLogy(1);
-  h1f_TLead->                   SetLineWidth(2) ;
-  h1f_TLead->                   Draw();
-  pTCanvas->                    SaveAs(OutputFile.c_str());
-  delete pTCanvas;
-
   if(nbin_max <= 0 or nbin_max >= 510){
     std::cout << "Bug with nbin_max: value out of time range | Set cuts to  [0, 510]" << std::endl;
     v_TCut.push_back(0);

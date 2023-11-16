@@ -291,7 +291,7 @@ void dEdx( const std::string& OutDir,
           v_trashbin.                       push_back(h1f_WF_pad) ;
 
           // Track computations (impact parameter in m, angle in degrees, length in pad in m)
-          float d, dd, trk_len_pad;
+          float d=0, dd=0, trk_len_pad=0;
           local_params(pPad, pTrack, d, dd, phi, trk_len_pad);
           d                              *= 1000 ; // in mm
           dd                             *= 1000 ; // in mm

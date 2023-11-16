@@ -274,42 +274,92 @@ TH1F* DPR(std::string name, const float& tmin, float const& tmax, const float& t
 
 // impact parameter d (in m) & track angle phi (in degrees) computed locally at the level of the pad
 void local_params(const Pad* pPad, const Track* pTrack, float& d, float& dd, float& phi, float& trk_len_pad){
+
   // Get geometry of pad
-  float xc                  = pPad->Get_XPad() ;              // in m
-  float yc                  = pPad->Get_YPad() ;              // in m
   float x0                  = pPad->Get_XL() ;                // in meters
+  float xc                  = pPad->Get_XPad() ;              // in meters
   float x1                  = pPad->Get_XH() ;                // in meters
   float y0                  = pPad->Get_YL() ;                // in meters
+  float yc                  = pPad->Get_YPad() ;              // in meters
   float y1                  = pPad->Get_YH() ;                // in meters
 
+  // Parameters of the fitted Track
   double a                  = pTrack->Get_ParameterValue(0) ; // in meters    (intercept)
+  double da                 = pTrack->Get_ParameterError(0) ; // in meters    (intercept)
   double b                  = pTrack->Get_ParameterValue(1) ; // no dimension (slope)
+  double db                 = pTrack->Get_ParameterError(1) ; // no dimension (slope)
+
+  phi                       = TMath::ATan(b)/TMath::Pi()*180 ;
+
+  // Impact parameter in the pad
+  d                         = (b*xc - yc + a) / sqrt(pow(b,2) + 1) ; // if pTrack is a line, then get d from it directly
+  float da_d                = 1/sqrt(b*b+1);
+  float db_d                = (xc*sqrt(b*b+1) - (b*xc-yc+a)*b/sqrt(b*b+1)) / (b*b+1);
+  dd                        = sqrt(da_d*da_d * da*da + db_d*db_d * db*db);
+
+  // Y position of the track at the left & right borders of the pad and X position at top and bottom borders
   float x_y0                = (y0-a)/b ;                      // in meters
   float x_y1                = (y1-a)/b ;                      // in meters
   float y_x0                = b*x0+a ;                        // in meters
   float y_x1                = b*x1+a ;                        // in meters
 
-  double da                  = pTrack->Get_ParameterError(0) ; // in meters    (intercept)
-  double db                  = pTrack->Get_ParameterError(1) ; // no dimension (slope)
   float dx_y0                = sqrt(1/b*b * da*da + pow((y0-a)/b*b, 2) * db*db) ; // in meters
   float dx_y1                = sqrt(1/b*b * da*da + pow((y1-a)/b*b, 2) * db*db) ; // in meters
   float dy_x0                = sqrt(da*da + x0*x0*db*db) ;                        // in meters
   float dy_x1                = sqrt(da*da + x1*x1*db*db) ;                        // in meters
 
-  if(pTrack->GetNberOfParameters() == 3){ // Magnetic Field is On
-    float x_pad             = pPad->Get_XPad() ;
-    double c                = pTrack->Get_ParameterValue(2) ; // in 1/meters  (curvature)
-    float xroot1_y0         = (-b-sqrt(b*b-4*c*(a-y0)))/(2*c) ;
-    float xroot2_y0         = (-b+sqrt(b*b-4*c*(a-y0)))/(2*c) ;
-    float xroot1_y1         = (-b-sqrt(b*b-4*c*(a-y1)))/(2*c) ;
-    float xroot2_y1         = (-b+sqrt(b*b-4*c*(a-y1)))/(2*c) ;
 
-    if(fabs(xroot1_y0-x_pad) < fabs((xroot2_y0-x_pad))) x_y0 = xroot1_y0 ;
-    else                                                x_y0 = xroot2_y0 ;
-    if(fabs(xroot1_y1-x_pad) < fabs((xroot2_y1-x_pad))) x_y1 = xroot1_y1 ;
-    else                                                x_y1 = xroot2_y1 ;
+  // If parabolic fit <=> Magnetic field
+  if(pTrack->GetNberOfParameters() == 3){
+    double c                = pTrack->Get_ParameterValue(2) ; // in 1/meters  (curvature)
+    double dc               = pTrack->Get_ParameterError(2) ; // in 1/meters  (curvature)
+
+    float Delta_y0          = sqrt(b*b-4*(a-y0)*c);
+    float Delta_y1          = sqrt(b*b-4*(a-y1)*c);
+    
+    // Roots of Pol2 to get X position of track at top and bottom borders of the pad (with parabolic track)
+    float xroot1_y0         = (-b-Delta_y0)/(2*c) ;
+    float da_xroot1_y0      = 1/Delta_y0;
+    float db_xroot1_y0      = 1/(2*c)*(-b/Delta_y0-1);
+    float dc_xroot1_y0      = (a-y0)/(c*Delta_y0) + (b+Delta_y0)/(2*c*c);
+    float dxroot1_y0        = sqrt(da_xroot1_y0*da_xroot1_y0*da*da +  db_xroot1_y0*db_xroot1_y0*db*db + dc_xroot1_y0*dc_xroot1_y0*dc*dc);
+
+    float xroot2_y0         = (-b+Delta_y0)/(2*c) ;
+    float da_xroot2_y0      = -1/Delta_y0;
+    float db_xroot2_y0      = 1/(2*c)*(+b/Delta_y0-1);
+    float dc_xroot2_y0      = -(a-y0)/(c*Delta_y0) + (b-Delta_y0)/(2*c*c);
+    float dxroot2_y0        = sqrt(da_xroot2_y0*da_xroot2_y0*da*da +  db_xroot2_y0*db_xroot2_y0*db*db + dc_xroot2_y0*dc_xroot2_y0*dc*dc);
+
+    float xroot1_y1         = (-b-Delta_y1)/(2*c) ;
+    float da_xroot1_y1      = 1/Delta_y1;
+    float db_xroot1_y1      = 1/(2*c)*(-b/Delta_y1-1);
+    float dc_xroot1_y1      = (a-y1)/(c*Delta_y1) + (b+Delta_y1)/(2*c*c);
+    float dxroot1_y1        = sqrt(da_xroot1_y1*da_xroot1_y1*da*da +  db_xroot1_y1*db_xroot1_y1*db*db + dc_xroot1_y1*dc_xroot1_y1*dc*dc);
+
+    float xroot2_y1         = (-b+Delta_y1)/(2*c) ;
+    float da_xroot2_y1      = -1/Delta_y1;
+    float db_xroot2_y1      = 1/(2*c)*(+b/Delta_y1-1);
+    float dc_xroot2_y1      = -(a-y1)/(c*Delta_y1) + (b-Delta_y1)/(2*c*c);
+    float dxroot2_y1        = sqrt(da_xroot2_y1*da_xroot2_y1*da*da +  db_xroot2_y1*db_xroot2_y1*db*db + dc_xroot2_y1*dc_xroot2_y1*dc*dc);
+
+    // Select correct root = closest to the center of the pad
+    if(fabs(xroot1_y0-xc) < fabs((xroot2_y0-xc))){x_y0 = xroot1_y0 ; dx_y0 = dxroot1_y0 ;}
+    else                                         {x_y0 = xroot2_y0 ; dx_y0 = dxroot2_y0 ;}
+    if(fabs(xroot1_y1-xc) < fabs((xroot2_y1-xc))){x_y1 = xroot1_y1 ; dx_y1 = dxroot1_y1 ;}
+    else                                         {x_y1 = xroot2_y1 ; dx_y1 = dxroot2_y1 ;}
+
+    // Y position of the track at level of left & right borders of the pad (with parabolic track)
     y_x0                    = a + b*x0 + c*x0*x0 ;
+    float da_y_x0           = 1.;
+    float db_y_x0           = x0;
+    float dc_y_x0           = x0*x0;
+    dy_x0                   = sqrt(da_y_x0*da_y_x0*da*da + db_y_x0*db_y_x0*db*db + dc_y_x0*dc_y_x0*dc*dc);
+
     y_x1                    = a + b*x1 + c*x1*x1 ;
+    float da_y_x1           = 1.;
+    float db_y_x1           = x1;
+    float dc_y_x1           = x1*x1;
+    dy_x1                   = sqrt(da_y_x1*da_y_x1*da*da + db_y_x1*db_y_x1*db*db + dc_y_x1*dc_y_x1*dc*dc);
   }
 
   int   wall                = 0 ; // count how many walls were crossed
@@ -355,27 +405,53 @@ void local_params(const Pad* pPad, const Track* pTrack, float& d, float& dd, flo
     std::cout << a*100 << " " << b << " " << pTrack->Get_ParameterValue(2)/100 << std::endl ;
   }
 
-  float intercept           = (y[0]*x[1]-y[1]*x[0]) / (x[1]-x[0]) ;
-  float dx0_a               = -x[1]*(y[1]-y[0])/pow(x[1]-x[0],2);
-  float dx1_a               =  x[0]*(y[1]-y[0])/pow(x[1]-x[0],2);
-  float dy0_a               =  x[1]/(x[1]-x[0]);
-  float dy1_a               = -x[0]/(x[1]-x[0]);
-  float dintercept          = sqrt(dx0_a*dx0_a*dx[0]*dx[0] + dx1_a*dx1_a*dx[1]*dx[1] + dy0_a*dy0_a*dy[0]*dy[0] + dy1_a*dy1_a*dy[1]*dy[1]);
-
-  float slope               = (y[1]-y[0]) / (x[1]-x[0]) ;
-  float dx0_b               =  1/pow(x[1]-x[0],2);
-  float dx1_b               = -1/pow(x[1]-x[0],2);
-  float dy0_b               = -1/(x[1]-x[0]);
-  float dy1_b               =  1/(x[1]-x[0]);
-  float dslope              = sqrt(dx0_b*dx0_bx[0]*dx[0] + dx1_b*dx1_b*dx[1]*dx[1] + dy0_b*dy0_b*dy[0]*dy[0] + dy1_b*dy1_b*dy[1]*dy[1]);
-
-  phi                       = TMath::ATan(slope)/TMath::Pi()*180 ;
   trk_len_pad               = sqrt(pow(y[1]-y[0],2) + pow(x[1]-x[0],2)) ; // in meters (track length in the pad)
 
-  d                         = (slope*xc - yc + intercept) / sqrt(pow(slope,2) + 1) ; // in m
-  float da_d                = 1/sqrt(slope*slope+1);
-  float db_d                = (xc*sqrt(slope*slope+1) - (slope*xc-yc+intercept)*slope/sqrt(slope*slope+1)) / (slope*slope+1);
-  dd                        = sqrt(da_d*da_d * da*da + db_d*db_d * db*db);
+  // If parabolic fit <=> Magnetic field
+  if(pTrack->GetNberOfParameters() == 3){ 
+    // Get intercept from entrance & exit points
+    float q                   = (y[0]*x[1]-y[1]*x[0]) / (x[1]-x[0]) ;
+    float dx0_q               = -x[1]*y[1]/pow(x[1]-x[0],2);
+    float dx1_q               =  x[0]*y[0]/pow(x[1]-x[0],2);
+    float dy0_q               =  x[1]/(x[1]-x[0]);
+    float dy1_q               = -x[0]/(x[1]-x[0]);
+    float dq                  = sqrt(dx0_q*dx0_q*dx[0]*dx[0] + dx1_q*dx1_q*dx[1]*dx[1] + dy0_q*dy0_q*dy[0]*dy[0] + dy1_q*dy1_q*dy[1]*dy[1]);
+
+    // Get slope from entrance & exit points
+    float m                   =  (y[1]-y[0]) / (x[1]-x[0]) ;
+    float dx0_m               =  (y[1]-y[0])/pow(x[1]-x[0],2);
+    float dx1_m               = -(y[1]-y[0])/pow(x[1]-x[0],2);
+    float dy0_m               = -1/(x[1]-x[0]);
+    float dy1_m               =  1/(x[1]-x[0]);
+    float dm                  = sqrt(dx0_m*dx0_m*dx[0]*dx[0] + dx1_m*dx1_m*dx[1]*dx[1] + dy0_m*dy0_m*dy[0]*dy[0] + dy1_m*dy1_m*dy[1]*dy[1]);
+
+    if(x[0]){ 
+      std::cout << std::setprecision(3) << "dm = sqrt(" << dx0_m << "² * " << dx[0]*1000 << "² " <<
+                                                   "+ " << dx1_m << "² * " << dx[1]*1000 << "² " <<
+                                                   "+ " << dy0_m << "² * " << dy[0]*1000 << "² " <<
+                                                   "+ " << dy1_m << "² * " << dy[1]*1000 << "²)" <<
+                                                   " = " << dm*1000 << std::endl;
+    }
+
+    // Partial derivatives of the impact parameter to get its error
+    float dq_d                = 1/sqrt(m*m+1);
+    float dm_d                = (xc*sqrt(m*m+1) - (m*xc-yc+q)*m/sqrt(m*m+1)) / (m*m+1);
+
+    phi                       = TMath::ATan(m)/TMath::Pi()*180 ;              // in degrees
+    trk_len_pad               = sqrt(pow(y[1]-y[0],2) + pow(x[1]-x[0],2)) ;   // in meters
+    d                         = (m*xc - yc + q) / sqrt(pow(m,2) + 1) ;        // in meters
+    dd                        = sqrt(dq_d*dq_d * dq*dq + dm_d*dm_d * dm*dm);  // in meters
+
+    // if(x[0]){ 
+    //   std::cout << std::setprecision(3) << "x0: " << x[0]*1000 << " +- " << dx[0]*1000 << " | ";
+    //   std::cout << std::setprecision(3) << "x1: " << y[0]*1000 << " +- " << dy[0]*1000 << " | ";
+    //   std::cout << std::setprecision(3) << "y0: " << x[1]*1000 << " +- " << dx[1]*1000 << " | ";
+    //   std::cout << std::setprecision(3) << "y1: " << y[1]*1000 << " +- " << dy[1]*1000 << " | ";
+    //   std::cout << std::setprecision(3) << "q: " << q*1000     << " +- " << dq*1000    << " | ";
+    //   std::cout << std::setprecision(3) << "m: " << m          << " +- " << dm         << " | ";
+    //   std::cout << std::setprecision(3) << "d: " << d*1000     << " +- " << dd*1000    << std::endl;
+    // }
+  }
   
 }
 
