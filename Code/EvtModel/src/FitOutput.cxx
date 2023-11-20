@@ -286,8 +286,11 @@ void FitOutput::SetResults(TVirtualFitter* pTVirtualFitter)
     for (int ipar = 0 ; ipar<m_NberOfModelParameters ; ipar++) {
       for (int jpar = 0 ; jpar<m_NberOfModelParameters ; jpar++) {
         p_CovMatrix[ipar + jpar*m_NberOfModelParameters] = aTMatrixD(ipar,jpar) ;
+        // std::cout << std::setprecision(4) << aTMatrixD(ipar,jpar) << " ";
       }
+      // std::cout << std::endl;
     }
+    // std::cout << std::endl;
   }else{
     std::cout << "===> FitOutput::SetResults "
               << "covariance matrix returned is 0; No covarance matrix available "

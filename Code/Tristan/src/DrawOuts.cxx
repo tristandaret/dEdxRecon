@@ -3693,10 +3693,10 @@ void DrawOut_Escan(const std::string& inputDir, const std::string& Comment)
   gStyle->            SetPadTickX(1);
   gStyle->            SetPadTickY(1);
   int npoint          = 14 ;
-  std::string Tag[]   = { "CERN22_Escan_e+_0p5GeV",   "CERN22_Escan_e+_0p75GeV",  "CERN22_Escan_e+_1GeV",   "CERN22_Escan_e+_1pGeV", "CERN22_Escan_e+_1p5GeV",
+  std::string Tag[]   = { "CERN22_Escan_e+_0p5GeV",   "CERN22_Escan_e+_0p75GeV",  "CERN22_Escan_e+_1GeV",   "CERN22_Escan_e+_1p25GeV", "CERN22_Escan_e+_1p5GeV",
                           "CERN22_Escan_mu_0p75GeV",  "CERN22_Escan_mu_1GeV",     "CERN22_Escan_mu_1p5GeV",
-                          "CERN22_Escan_pi_0p75GeV",  "CERN22_Escan_pi_1pGeV",  "CERN22_Escan_pi_1p5GeV", 
-                          "CERN22_Escan_p+_1GeV",     "CERN22_Escan_p+_1pGeV",  "CERN22_Escan_p+_1p5GeV"} ;
+                          "CERN22_Escan_pi_0p75GeV",  "CERN22_Escan_pi_1p25GeV",  "CERN22_Escan_pi_1p5GeV", 
+                          "CERN22_Escan_p+_1GeV",     "CERN22_Escan_p+_1p25GeV",  "CERN22_Escan_p+_1p5GeV"} ;
 
   float E_arr[]       = { 0.5,  0.75, 1,  1.25, 1.5,
                           0.75, 1,    1.5,
@@ -3728,6 +3728,8 @@ void DrawOut_Escan(const std::string& inputDir, const std::string& Comment)
 
   std::vector<double>        v_mass{0.511e-3, 105.658e-3, 139.570e-3, 938.272e-3}; // GeV
   std::vector<TF1*>          v_tf1_BB;
+  std::vector<TF1*>          v_tf1_BB_Claudio;
+  std::vector<TF1*>          v_tf1_BB_THATPID;
 
 
   for(int i = 0 ; i < 4 ; i++){
@@ -3738,6 +3740,8 @@ void DrawOut_Escan(const std::string& inputDir, const std::string& Comment)
     v_pTGE_std_WF.          push_back(new TGraphErrors());
     v_pTGE_std_XP.          push_back(new TGraphErrors());
     v_tf1_BB.               push_back(BetheBlochExp(0.25, 20, v_mass[i], particles[i])); // m & P range in
+    v_tf1_BB_Claudio.       push_back(BetheBlochExp(0.25, 20, v_mass[i], particles[i])); // m & P range in
+    v_tf1_BB_THATPID.       push_back(BetheBlochExp(0.25, 20, v_mass[i], particles[i])); // m & P range in
     // if(i==0) v_tf1_BB.      push_back(BetheBlochExp(0.25, 2, v_mass[i], particles[i])); // m & P range in GeV GeV
     // else     v_tf1_BB.      push_back(BetheBloch(0.25, 2, v_mass[i], particles[i])); // m & P range in GeV
   }
@@ -3789,7 +3793,17 @@ void DrawOut_Escan(const std::string& inputDir, const std::string& Comment)
 
 
   combinedFit(v_pTGE_mean_XP, v_tf1_BB);
-
+  
+  //  double paramTHATPID[5] = {0.301580, 3.62857e+00, 3.18209e-02, 2.07081e+00, -7.14413e-01}; // THATPID raw normalized
+   double paramTHATPID[5] = {0.186543, 5.382656,    0.004234,    2.028548,    -0.994807};    // THATPID fit
+  //  double paramClaudio[5] = {0.148800, 6.047,       0.00064,     2.308,       -1.359};       // Claudio raw normalized
+   double paramClaudio[5] = {0.186524, 5.382954,    0.004232,    2.028659,    -0.994959};    // Claudio fit
+  for(int ipart = 0 ; ipart < (int)v_tf1_BB_Claudio.size(); ipart++){
+    for(int iparam = 1; iparam < (int)v_tf1_BB_Claudio[0]->GetNpar() ; iparam++){
+      v_tf1_BB_Claudio[ipart]->SetParameter(iparam, paramClaudio[iparam-1]);
+      v_tf1_BB_THATPID[ipart]->SetParameter(iparam, paramTHATPID[iparam-1]);
+    }
+  }
 
   // Draw
   std::string OutputFile        = inputDir + "CERN22_Escan" + Comment + "_aprBB4.pdf" ;
@@ -3857,7 +3871,13 @@ void DrawOut_Escan(const std::string& inputDir, const std::string& Comment)
     if(i == 0) v_pTGE_mean_WF[i]->    Draw("ap") ;
     else v_pTGE_mean_WF[i]->          Draw("p same") ;
     v_tf1_BB[i]->                 SetLineColor(colors[i]);
+    v_tf1_BB_Claudio[i]->                 SetLineColor(colors[i]);
+    v_tf1_BB_Claudio[i]->                 SetLineStyle(2);
+    v_tf1_BB_THATPID[i]->                 SetLineColor(colors[i]);
+    v_tf1_BB_THATPID[i]->                 SetLineStyle(3);
     v_tf1_BB[i]->                 Draw("same");
+    v_tf1_BB_Claudio[i]->                 Draw("same");
+    v_tf1_BB_THATPID[i]->                 Draw("same");
   }
   leg1->                               Draw() ;
   leg2->                               Draw() ;
@@ -3873,6 +3893,8 @@ void DrawOut_Escan(const std::string& inputDir, const std::string& Comment)
     if(i == 0) v_pTGE_mean_XP[i]->    Draw("ap") ;
     else v_pTGE_mean_XP[i]->          Draw("p same") ;
     v_tf1_BB[i]->                 Draw("same");
+    v_tf1_BB_Claudio[i]->                 Draw("same");
+    v_tf1_BB_THATPID[i]->                 Draw("same");
   }
   leg1->                               Draw() ;
   leg2->                               Draw() ;
@@ -3888,7 +3910,11 @@ void DrawOut_Escan(const std::string& inputDir, const std::string& Comment)
   v_tf1_BB[0]->                   SetMaximum(5) ;
   v_tf1_BB[0]->                   SetTitle("Bethe-Bloch for different particles;Energy (GeV);mean (keV/cm)") ;
   v_tf1_BB[0]->                   Draw() ;
-  for(int i = 1 ; i < 4 ; i++)v_tf1_BB[i]-> Draw("same") ; 
+  for(int i = 1 ; i < 4 ; i++)v_tf1_BB[i]-> Draw("same") ;
+  for(int i = 0 ; i < 4 ; i++){
+    v_tf1_BB_Claudio[i]-> Draw("same") ; 
+    v_tf1_BB_THATPID[i]-> Draw("same") ; 
+  }
   leg1->                              Draw() ;
   leg2->                              Draw() ;
   pTCanvas->                          SaveAs(OutputFile.c_str()) ;
@@ -3940,6 +3966,8 @@ void DrawOut_Escan(const std::string& inputDir, const std::string& Comment)
     delete v_pTGE_std_WF[i]; v_pTGE_std_WF[i] = 0 ;
     delete v_pTGE_std_XP[i]; v_pTGE_std_XP[i] = 0 ;
     delete v_tf1_BB[i] ; v_tf1_BB[i] = 0 ;
+    delete v_tf1_BB_Claudio[i] ; v_tf1_BB_Claudio[i] = 0 ;
+    delete v_tf1_BB_THATPID[i] ; v_tf1_BB_THATPID[i] = 0 ;
   }
   v_pTGE_reso_WF.               clear();
   v_pTGE_reso_XP.               clear();
@@ -3948,6 +3976,8 @@ void DrawOut_Escan(const std::string& inputDir, const std::string& Comment)
   v_pTGE_std_WF.                clear();
   v_pTGE_std_XP.                clear();
   v_tf1_BB.                     clear();
+  v_tf1_BB_Claudio.                     clear();
+  v_tf1_BB_THATPID.                     clear();
   v_tf1_WF.                     clear() ;
   v_tf1_XP.                     clear() ;
 }

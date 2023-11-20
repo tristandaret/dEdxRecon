@@ -83,17 +83,16 @@ public:
 
 //-----------------------------Track Fit Stuff----------------------//   
 private:
-   double m_Chi2Min ;
+   double   m_Chi2Min ;
+   TMatrixD m_covmatrix;
 
 public:
-   double Get_Chi2Min () const ;
-
-//-----------------------------Track Fit Stuff----------------------//   
-public:              
-   int    SetParameter          (TVirtualFitter* pTVirtualFitter) ;
-   void   SetResults            (TVirtualFitter* pTVirtualFitter) ;
-   double Chi2                  (double par[])                    ;
-   void   SetParameters_Internal(double par[])                    ;
+   double Get_Chi2Min            () const ;
+   int    SetParameter           (TVirtualFitter* pTVirtualFitter) ;
+   void   SetResults             (TVirtualFitter* pTVirtualFitter) ;
+   double Chi2                   (double par[])                    ;
+   void   SetParameters_Internal (double par[])                    ;
+   TMatrixD Get_CovMatrix        () const;
    
 private:
    FitOutput* p_FitOutput ;

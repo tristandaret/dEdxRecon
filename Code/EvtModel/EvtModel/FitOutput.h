@@ -5,6 +5,7 @@
 
 #include "TCanvas.h"
 #include "TVirtualFitter.h"
+#include "TMatrixD.h"
 
 /////////////////////////////////////////////////////////////
 class FitOutput {

@@ -1,3 +1,13 @@
+// Random generator of uniform distribution
+  std::random_device                rand_dev;
+  std::mt19937                      generator(rand_dev());
+  std::uniform_real_distribution<float> distr(0.98, 1.02);
+  Double_t shift                  = distr(generator);
+
+
+
+
+
 // Draw resolution as function of MC NoOpt Z scan
 void DrawOut_Zscan_MC(const std::string& inputDir, const std::string& Comment)
 {

@@ -198,7 +198,8 @@ void Track::DumpRec() const
 
 
 //--------------------------------------------------------------------------//   
-double Track::Get_Chi2Min () const{ return m_Chi2Min   ; }
+double Track::Get_Chi2Min     () const{ return m_Chi2Min   ; }
+TMatrixD Track::Get_CovMatrix () const{ return m_covmatrix ; }
 
 //---------------------------------------
 int Track::SetParameter(TVirtualFitter* pTVirtualFitter)
@@ -227,6 +228,12 @@ void Track::SetResults(TVirtualFitter* pTVirtualFitter)
   }
 
   m_Chi2Min = Chi2(p_FitOutput->p_par) ;
+  m_covmatrix.ResizeTo(m_NberOfParam, m_NberOfParam);
+  for (int irow = 0 ; irow<m_NberOfParam ; irow++) {
+    for (int icol = 0 ; icol<m_NberOfParam ; icol++) {
+      m_covmatrix(irow,icol) = p_FitOutput->p_CovMatrix[irow + icol*m_NberOfParam] ;
+    }
+  }
 
 //
   V_Residual.clear() ;

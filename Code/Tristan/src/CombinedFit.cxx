@@ -41,10 +41,17 @@ struct GlobalChi2_4 {
 void combinedFit(std::vector<TGraphErrors*>& v_tge, std::vector<TF1*>& v_tf1)
 {
    int Npar = 9;
-   // double par0[Npar] = {1.65179e+02, 3.62857e+00, 3.18209e-02, 2.07081e+00, -7.14413e-01, 105.658e-3, 139.570e-3, 938.272e-3, 0.511e-3};
-   // double par0[Npar] = {6.617700, 2.930541, 5.360655, 0.479517, -0.444534, 105.658e-3, 139.570e-3, 938.272e-3, 0.511e-3}; 
-   double par0[Npar] = {7, 3, 5, 0.5, -0.5, 105.658e-3, 139.570e-3, 938.272e-3, 0.511e-3}; 
-   // double par0[Npar] = {8.001897, 2.916423, 5.291697, 0.377516, -0.274286, 105.658e-3, 139.570e-3, 938.272e-3, 0.511e-3}; 
+   // double par0[Npar] = {1.65179e+02, 3.62857e+00, 3.18209e-02, 2.07081e+00, -7.14413e-01, 105.658e-3, 139.570e-3, 938.272e-3, 0.511e-3}; // THATPID raw
+   // double par0[Npar] = {0.301580,    3.62857e+00, 3.18209e-02, 2.07081e+00, -7.14413e-01, 105.658e-3, 139.570e-3, 938.272e-3, 0.511e-3}; // THATPID raw normalized
+   // double par0[Npar] = {0.186543, 5.382656, 0.004234, 2.028548, -0.994807, 105.658e-3, 139.570e-3, 938.272e-3, 0.511e-3}; // THATPID fit
+
+   // double par0[Npar] = {785,      6.047, 0.00064, 2.308, -1.359, 105.658e-3, 139.570e-3, 938.272e-3, 0.511e-3}; // Claudio raw
+   // double par0[Npar] = {0.148800, 6.047, 0.00064, 2.308, -1.359, 105.658e-3, 139.570e-3, 938.272e-3, 0.511e-3}; // Claudio raw normalized
+   // double par0[Npar] = {1, 6, 0.0005, 2, -1.5, 105.658e-3, 139.570e-3, 938.272e-3, 0.511e-3}; // Claudio init
+   // double par0[Npar] = {0.186524, 5.382954, 0.004232, 2.028659, -0.994959, 105.658e-3, 139.570e-3, 938.272e-3, 0.511e-3}; // Claudio fit
+
+   double par0[Npar] = {7, 3, 5, 0.5, -0.5, 105.658e-3, 139.570e-3, 938.272e-3, 0.511e-3}; // Tristan init
+   // double par0[Npar] = {8.001897, 2.916423, 5.291697, 0.377516, -0.274286, 105.658e-3, 139.570e-3, 938.272e-3, 0.511e-3}; // Tristan fit
 
    v_tf1[1]->               SetParameters(par0[5], par0[0], par0[1], par0[2], par0[3], par0[4]);
    v_tf1[1]->               FixParameter(0, par0[5]);
@@ -102,6 +109,10 @@ void combinedFit(std::vector<TGraphErrors*>& v_tge, std::vector<TF1*>& v_tf1)
    fitter.Config().SetParamsSettings(9, par0);
 
    // fitter.Config().ParSettings(0).SetLimits(-0.5, -0.2);
+   // fitter.Config().ParSettings(1).Fix();
+   // fitter.Config().ParSettings(2).Fix();
+   // fitter.Config().ParSettings(3).Fix();
+   // fitter.Config().ParSettings(4).Fix();
    fitter.Config().ParSettings(5).Fix();
    fitter.Config().ParSettings(6).Fix();
    fitter.Config().ParSettings(7).Fix();
