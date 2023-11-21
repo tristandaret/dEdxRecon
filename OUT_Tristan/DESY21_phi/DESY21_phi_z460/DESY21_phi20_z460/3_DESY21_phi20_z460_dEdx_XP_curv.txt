@@ -1,0 +1,92 @@
+Tag           : DESY21_phi20_z460
+Comment       : _zcalc_G2_WF4_dmdd
+FileName     : ../Data_DESY21/Phi_scan_z460/phi_200_20_z460_ym60_iter0.root
+SelectionSet  : T_DESY21_Event
+NbrOfMod      : 0
+Data_to_Use   : 0
+OUTDirName    : OUT_Tristan/DESY21_phi/DESY21_phi_z460/DESY21_phi20_z460/
+
+Gain & RC maps: loaded
+Average Gain in ERAM01 = 1947.77
+ERAM01: RC   hole in  iX = 10 | iY = 16 | value reset at 129.29
+ERAM01: Gain hole in  iX = 10 | iY = 16 | value reset at 1889.24
+
+-------------->Predefined selection T_DESY21_Event
+Number of entries :8728
+TLow = 190 | THigh = 224
+
+-------------->List of selections
+Apply selection  1 -> Remove clusters in first and last columns 
+
+Apply selection 11 -> Remove clusters out of time (Event Based) 
+                      |TLeading -TLeadingMeanOverEvent| <= m_Cut_Stage11_EventBased (=     3)
+
+Apply selection 120 -> Remove clusters out of time  
+                      m_Cut_Stage120_TLow <= TLeading <= m_Cut_Stage120_THigh 
+                      m_Cut_Stage120_TLow  =  190
+                      m_Cut_Stage120_THigh =  224
+
+Apply selection 15 -> Remove Events with an average pad multiplicity too high or too low 
+                      Pad Multiplicity >  m_Cut_StageT15_APM_Low  (=  2.0)
+                      Pad Multiplicity <= m_Cut_StageT15_APM_High (=  4.0)
+
+Apply selection 10 -> Remove clusters with too many pads 
+                      Npads <= m_Cut_Stage10_Npads_Hig (=   5)
+
+Apply selection 14 -> Remove Clusters with a too high APad 
+                      APad >= m_Cut_Stage14_Amax_Low (=     0)
+                      APad <= m_Cut_Stage14_Amax_Hig (=  3700)
+
+Apply selection  5 -> Reject Events with too few clusters
+                      NClusters >= m_Cut_Stage5_NCluster_Low (=   34)
+
+
+zdrift        = 550 mm
+PT            = 200 ns
+TB            = 40 ns/time bin
+PT/TB         = 5 time bins
+z method      : zcalc
+cut length    = 2 mm
+
+Processing events:
+0/8728
+1000/8728
+ALERT: 1 walls crossed for a pad in entry #1735
+26 27 18 19
+26 24 18 18
+30 -0 -0
+ALERT: 3 walls crossed for a pad in entry #1735
+26 27 17 18
+28 26 18 18
+30 -0 -0
+2000/8728
+3000/8728
+4000/8728
+ALERT: 3 walls crossed for a pad in entry #4584
+20 21 20 21
+21 19 21 20
+30 -0 -0
+ALERT: 1 walls crossed for a pad in entry #4584
+21 23 20 21
+21 19 20 20
+30 -0 -0
+5000/8728
+6000/8728
+7000/8728
+8000/8728
+8727/8728
+8728 real events
+
+Selection Statistics 
+ #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
+    0  Stage1     8728     8728 (    0.00)  (    0.00)      8728     8728 (    0.00)  (    0.00)    296647   296647 (    0.00)  (    0.00)    931805   931805 (    0.00)  (    0.00) 
+    1 Stage11     8728     8607 (   -1.39)  (   -1.39)      8728     8607 (   -1.39)  (   -1.39)    296647   288704 (   -2.68)  (   -2.68)    931805   899266 (   -3.49)  (   -3.49) 
+    2Stage120     8607     8474 (   -1.55)  (   -2.91)      8607     8474 (   -1.55)  (   -2.91)    288704   284513 (   -1.45)  (   -4.09)    899266   888182 (   -1.23)  (   -4.68) 
+    3StageT15     8474     8335 (   -1.64)  (   -4.50)      8474     8335 (   -1.64)  (   -4.50)    284513   280790 (   -1.31)  (   -5.35)    888182   872386 (   -1.78)  (   -6.38) 
+    4 Stage10     8335     8335 (    0.00)  (   -4.50)      8335     8335 (    0.00)  (   -4.50)    280790   280063 (   -0.26)  (   -5.59)    872386   867796 (   -0.53)  (   -6.87) 
+    5 Stage14     8335     8334 (   -0.01)  (   -4.51)      8335     8334 (   -0.01)  (   -4.51)    280063   276243 (   -1.36)  (   -6.88)    867796   852094 (   -1.81)  (   -8.55) 
+    6  Stage5     8334     4710 (  -43.48)  (  -46.04)      8334     4710 (  -43.48)  (  -46.04)    276243   160140 (  -42.03)  (  -46.02)    852094   487746 (  -42.76)  (  -47.66) 
+  Summary Sel     8728     4710             (  -46.04)      8728     4710             (  -46.04)    296647   160140             (  -46.02)    931805   487746             (  -47.66) 
+Fitting: Started... done!
+Checks: OUT_Tristan/DESY21_phi/DESY21_phi_z460/DESY21_phi20_z460/2_DESY21_phi20_z460_Checks_zcalc_G2_WF4_dmdd.root
+dEdx: OUT_Tristan/DESY21_phi/DESY21_phi_z460/DESY21_phi20_z460/3_DESY21_phi20_z460_dEdx_zcalc_G2_WF4_dmdd.root

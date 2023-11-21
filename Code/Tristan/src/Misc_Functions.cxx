@@ -288,6 +288,8 @@ void local_params(const Pad* pPad, const Track* pTrack, float& d, float& dd, flo
   double da                 = pTrack->Get_ParameterError(0) ; // in meters    (intercept)
   double b                  = pTrack->Get_ParameterValue(1) ; // no dimension (slope)
   double db                 = pTrack->Get_ParameterError(1) ; // no dimension (slope)
+  double c;
+  double dc;
 
   phi                       = TMath::ATan(b)/TMath::Pi()*180 ;
 
@@ -311,8 +313,8 @@ void local_params(const Pad* pPad, const Track* pTrack, float& d, float& dd, flo
 
   // If parabolic fit <=> Magnetic field
   if(pTrack->GetNberOfParameters() == 3){
-    double c                = pTrack->Get_ParameterValue(2) ; // in 1/meters  (curvature)
-    double dc               = pTrack->Get_ParameterError(2) ; // in 1/meters  (curvature)
+    c                       = pTrack->Get_ParameterValue(2) ; // in 1/meters  (curvature)
+    dc                      = pTrack->Get_ParameterError(2) ; // in 1/meters  (curvature)
 
     float Delta_y0          = sqrt(b*b-4*(a-y0)*c);
     float Delta_y1          = sqrt(b*b-4*(a-y1)*c);
@@ -342,11 +344,6 @@ void local_params(const Pad* pPad, const Track* pTrack, float& d, float& dd, flo
     float dc_xroot2_y1      = -(a-y1)/(c*Delta_y1) + (b-Delta_y1)/(2*c*c);
     float dxroot2_y1        = sqrt(da_xroot2_y1*da_xroot2_y1*da*da +  db_xroot2_y1*db_xroot2_y1*db*db + dc_xroot2_y1*dc_xroot2_y1*dc*dc);
 
-    // std::cout << std::setprecision(3) << "xroot1_y0 = " << xroot1_y0*1000 << "+-" << dxroot1_y0*1000 << " mm | |xroot1_y0-xc| = " << fabs(xroot1_y0-xc)*1000 << std::endl;
-    // std::cout << std::setprecision(3) << "xroot2_y0 = " << xroot2_y0*1000 << "+-" << dxroot2_y0*1000 << " mm | |xroot2_y0-xc| = " << fabs(xroot2_y0-xc)*1000 << std::endl;
-    // std::cout << std::setprecision(3) << "xroot1_y1 = " << xroot1_y1*1000 << "+-" << dxroot1_y1*1000 << " mm | |xroot1_y1-xc| = " << fabs(xroot1_y1-xc)*1000 << std::endl;
-    // std::cout << std::setprecision(3) << "xroot2_y1 = " << xroot2_y1*1000 << "+-" << dxroot2_y1*1000 << " mm | |xroot2_y1-xc| = " << fabs(xroot2_y1-xc)*1000 << std::endl;
-
     // Select correct root = closest to the center of the pad
     if(fabs(xroot1_y0-xc) < fabs((xroot2_y0-xc))){x_y0 = xroot1_y0 ; dx_y0 = dxroot1_y0 ;}
     else                                         {x_y0 = xroot2_y0 ; dx_y0 = dxroot2_y0 ;}
@@ -358,14 +355,14 @@ void local_params(const Pad* pPad, const Track* pTrack, float& d, float& dd, flo
     float da_y_x0           = 1.;
     float db_y_x0           = x0;
     float dc_y_x0           = x0*x0;
-    // dy_x0                   = sqrt(da_y_x0*da_y_x0*da*da + db_y_x0*db_y_x0*db*db + dc_y_x0*dc_y_x0*dc*dc);
 
     y_x1                    = a + b*x1 + c*x1*x1 ;
     float da_y_x1           = 1.;
     float db_y_x1           = x1;
     float dc_y_x1           = x1*x1;
-    // dy_x1                   = sqrt(da_y_x1*da_y_x1*da*da + db_y_x1*db_y_x1*db*db + dc_y_x1*dc_y_x1*dc*dc);
 
+
+    // Get error on Y
     std::vector<double> errorsy_x0 = {da_y_x0, db_y_x0, dc_y_x0};
     std::vector<double> errorsy_x1 = {da_y_x1, db_y_x1, dc_y_x1};
 
@@ -380,7 +377,6 @@ void local_params(const Pad* pPad, const Track* pTrack, float& d, float& dd, flo
     }
     dy_x0 = sqrt(cov_dy_x0);
     dy_x1 = sqrt(cov_dy_x1);
-    // std::cout << "dy_x0 = " << dy_x0*1000 << " | dy_x1 = " << dy_x1*1000 << std::endl;
   }
 
   int   wall                = 0 ; // count how many walls were crossed
@@ -428,47 +424,63 @@ void local_params(const Pad* pPad, const Track* pTrack, float& d, float& dd, flo
 
   trk_len_pad               = sqrt(pow(y[1]-y[0],2) + pow(x[1]-x[0],2)) ; // in meters (track length in the pad)
 
-  float m=0, q=0, dm=0, dq=0;
+  float m=0, q=0;
+  // float dm=0, dq=0;
   // If parabolic fit <=> Magnetic field
   if(pTrack->GetNberOfParameters() == 3){ 
+    TMatrixD pCovMat          = pTrack->Get_CovMatrix();
     // Get intercept from entrance & exit points
-    q                         = (y[0]*x[1]-y[1]*x[0]) / (x[1]-x[0]) ;
-    float dx0_q               = -x[1]*y[1]/pow(x[1]-x[0],2);
-    float dx1_q               =  x[0]*y[0]/pow(x[1]-x[0],2);
-    float dy0_q               =  x[1]/(x[1]-x[0]);
-    float dy1_q               = -x[0]/(x[1]-x[0]);
-    dq                        = sqrt(dx0_q*dx0_q*dx[0]*dx[0] + dx1_q*dx1_q*dx[1]*dx[1] + dy0_q*dy0_q*dy[0]*dy[0] + dy1_q*dy1_q*dy[1]*dy[1]);
+    // q                         = (y[0]*x[1]-y[1]*x[0]) / (x[1]-x[0]) ;
+    q                         = a-c*x[0]*x[1];
+    // float da_q                = 1;
+    // float db_q                = 0;
+    float dc_q                = -x[0]*x[1];
+    // double errorsq[]          = {da_q, db_q, dc_q};
 
     // Get slope from entrance & exit points
-    m                         =  (y[1]-y[0]) / (x[1]-x[0]) ;
-    float dx0_m               =  (y[1]-y[0])/pow(x[1]-x[0],2);
-    float dx1_m               = -(y[1]-y[0])/pow(x[1]-x[0],2);
-    float dy0_m               = -1/(x[1]-x[0]);
-    float dy1_m               =  1/(x[1]-x[0]);
-    dm                        = sqrt(dx0_m*dx0_m*dx[0]*dx[0] + dx1_m*dx1_m*dx[1]*dx[1] + dy0_m*dy0_m*dy[0]*dy[0] + dy1_m*dy1_m*dy[1]*dy[1]);
+    // m                         =  (y[1]-y[0]) / (x[1]-x[0]) ;
+    m                         = b+c*(x[1]+x[0]);
+    // float da_m                = 0;
+    // float db_m                = 1;
+    float dc_m                = x[1]+x[0];
+    // double errorsm[]          = {da_m, db_m, dc_m};
 
-    // Partial derivatives of the impact parameter to get its error
-    float dq_d                = 1/sqrt(m*m+1);
-    float dm_d                = (xc*sqrt(m*m+1) - (m*xc-yc+q)*m/sqrt(m*m+1)) / (m*m+1);
+    // Get impact parameter from entrance & exit points
+    float da_d                = 1/sqrt(m*m+1);
+    float db_d                = xc/sqrt(m*m+1) - (m*xc+q-yc)*m/pow(m*m+1, 1.5);
+    float dc_d                = (dc_m*xc+dc_q)/sqrt(m*m+1) - (m*xc+q-yc)*dc_m*m/pow(m*m+1, 1.5);
+    double errorsd[]          = {da_d, db_d, dc_d};
+
+    TMatrixD row_err_d(1, 3, errorsd);
+    TMatrixD d_mat_temp       = row_err_d * pCovMat;
+    TMatrixD dd_matrix        = d_mat_temp * row_err_d.Transpose(row_err_d);
+
+    // TMatrixD row_err_q(1, 3, errorsq);
+    // d_mat_temp                = row_err_q * pCovMat;
+    // TMatrixD dq_matrix        = d_mat_temp * row_err_q.Transpose(row_err_q);
+
+    // TMatrixD row_err_m(1, 3, errorsm);
+    // d_mat_temp                = row_err_m * pCovMat;
+    // TMatrixD dm_matrix        = d_mat_temp * row_err_m.Transpose(row_err_m);
 
     phi                       = TMath::ATan(m)/TMath::Pi()*180 ;              // in degrees
     trk_len_pad               = sqrt(pow(y[1]-y[0],2) + pow(x[1]-x[0],2)) ;   // in meters
     d                         = (m*xc - yc + q) / sqrt(pow(m,2) + 1) ;        // in meters
-    dd                        = sqrt(dq_d*dq_d * dq*dq + dm_d*dm_d * dm*dm);  // in meters
+    dd                        = sqrt(dd_matrix(0,0)); // in meters
 
+    // dq                        = sqrt(dq_matrix(0,0)); // in meters
+    // dm                        = sqrt(dm_matrix(0,0)); // no dimension
   }
   
-  if(pTrack->GetNberOfParameters() < 3){m=b; q=a; dm=db; dq=da;}
-  if(x[0]){ 
-    std::cout << std::setprecision(3) << "x_in: "  << x[0]*1000 << " +- " << dx[0]*1000 << " | ";
-    std::cout << std::setprecision(3) << "y_in: "  << y[0]*1000 << " +- " << dy[0]*1000 << " | ";
-    std::cout << std::setprecision(3) << "x_out: " << x[1]*1000 << " +- " << dx[1]*1000 << " | ";
-    std::cout << std::setprecision(3) << "y_out: " << y[1]*1000 << " +- " << dy[1]*1000 << " | ";
-    std::cout << std::setprecision(3) << "q: " << q*1000     << " +- " << dq*1000    << " | ";
-    std::cout << std::setprecision(3) << "m: " << m          << " +- " << dm         << " | ";
-    std::cout << std::setprecision(3) << "d: " << d*1000     << " +- " << dd*1000    << std::endl;
-  }  
-  // std::cout << std::endl;
+  // if(x[0]){ 
+  //   std::cout << std::setprecision(3) << "x_in: "  << x[0]*1000 << " +- " << dx[0]*1000 << " | ";
+  //   std::cout << std::setprecision(3) << "y_in: "  << y[0]*1000 << " +- " << dy[0]*1000 << " | ";
+  //   std::cout << std::setprecision(3) << "x_out: " << x[1]*1000 << " +- " << dx[1]*1000 << " | ";
+  //   std::cout << std::setprecision(3) << "y_out: " << y[1]*1000 << " +- " << dy[1]*1000 << " | ";
+  //   std::cout << std::setprecision(3) << "q: "     << q*1000    << " +- " << dq*1000    << " | ";
+  //   std::cout << std::setprecision(3) << "m: "     << m         << " +- " << dm         << " | ";
+  //   std::cout << std::setprecision(3) << "d: "     << d*1000    << " +- " << dd*1000    << std::endl;
+  // }  
 }
 
 

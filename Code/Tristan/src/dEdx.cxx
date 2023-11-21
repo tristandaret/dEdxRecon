@@ -71,7 +71,7 @@ void dEdx( const std::string& OutDir,
   int   RC_step         = 5 ;                                   // RC  increment between LUTs
 
   // Redirect Output
-  std::string     OutPut_Analysis = OUTDirName + "3_" + Tag + "_dEdx_XP_curv.txt" ;
+  std::string     OutPut_Analysis = OUTDirName + "3_" + Tag + "_dEdx_XP.txt" ;
   std::cout <<    OutPut_Analysis       << std::endl ;
   std::cout <<    std::setprecision(2)  << std::fixed ;
   std::cout <<    std::endl ;
@@ -321,7 +321,7 @@ void dEdx( const std::string& OutDir,
           if(phi >  90) phi               =  90-2e-6 ;
           float phiconv                   = fabs(phi)/phi_step ;
           // Interpolation d
-          // d                              -= dd;
+          d                              += dd;
           if(d < -L/2) d                  = -L/2 ;
           if(d >  L/2) d                  =  L/2 ;
           float dconv                     = (d+L/2)/d_step ;  // +L/2 shift because LUT indices have to be > 0 but d can be < 0

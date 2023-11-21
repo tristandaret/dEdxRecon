@@ -31,7 +31,7 @@ void Monitoring()
   int nRC = 21 ; 
 
   std::string Tag    ; 
-  std::string Comment = "_zcalc_G2_WF4_v9i0" ; // z method | gain_corr | WF method
+  std::string Comment = "_zcalc_G2_WF4_dpdd" ; // z method | gain_corr | WF method
   std::string prtcle ; 
   std::string EvtFile ;
   std::string OutDir  = "OUT_Tristan/";  
@@ -46,7 +46,7 @@ void Monitoring()
 
   int DESY_zscan      = 1 ; 
   int DESY_yscan      = 0 ; 
-  int DESY_phi        = 0 ; 
+  int DESY_phi        = 1 ; 
   int DESY_theta      = 0 ; 
 
   // Computations
@@ -153,7 +153,7 @@ void Monitoring()
     // int PT_arr[] = {200, 412} ;
     int PT_arr[] = {412} ;
     for (int PT : PT_arr){
-      OutDir        = Form("OUT_Tristan/DESY21_zscan/DESY21_dev_v9i0_zscan_PT%i/", PT) ; 
+      OutDir        = Form("OUT_Tristan/DESY21_zscan/DESY21_dev_v9i9_zscan_PT%i/", PT) ; 
       MakeMyDir(OutDir) ; 
       Uploader* pUpld ; Interpol4 LUT ;
       if (control or dedx) LUT = GiveMe_LUT(Form("/home/td263283/Documents/Python/LUT_XP/LUT_Dt%i_PT%i_nphi200_nd200/", Dt, PT), nZ, nRC) ;
@@ -165,7 +165,7 @@ void Monitoring()
       // std::string z_arr[]   = {"460"} ;
       for (int iz = 0 ; iz < (int)std::size(z_arr) ; iz++){
         const char* z       = z_arr[iz].c_str() ;
-        EvtFile             = Form("../Data_DESY21_dev_v9/zscan_PT%i/z_360_275_%i_02T_26_%s_iter0.root", PT, PT, z) ; Tag = Form("DESY21_z%s_PT%i", z, PT) ; prtcle = Form("electron_z%s", z) ;
+        EvtFile             = Form("../Data_DESY21_dev_v9/zscan_PT%i/z_360_275_%i_02T_26_%s_iter9.root", PT, PT, z) ; Tag = Form("DESY21_z%s_PT%i", z, PT) ; prtcle = Form("electron_z%s", z) ;
         if(control or dedx) pUpld = GiveMe_Uploader (intUploader, EvtFile) ;
         if (control)      Control       (OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, Data_to_Use, PT, TB, prtcle) ;
         if (DO_control)   DrawOut_Control           (OutDir, Tag, Comment, SelectionSet, 1) ;
@@ -174,7 +174,7 @@ void Monitoring()
         if (DO_Methods)   DrawOut_Methods           (OutDir, Tag, Comment, 1, prtcle) ;
       }
       if(DO_Systematics)  DrawOut_Systematics(OutDir, Comment, "Z") ;
-      if(DO_Resolution)   DrawOut_Zscan  (Form("OUT_Tristan/DESY21_zscan/DESY21_dev_v9i0_zscan_PT%i", PT), Comment, PT) ;
+      if(DO_Resolution)   DrawOut_Zscan  (Form("OUT_Tristan/DESY21_zscan/DESY21_dev_v9i9_zscan_PT%i", PT), Comment, PT) ;
     }
     if(DO_Global) DrawOut_Zscan_PT("OUT_Tristan/DESY21_zscan", Comment) ;
   }

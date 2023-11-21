@@ -1,5 +1,5 @@
 Tag           : DESY21_phi30_z460
-Comment       : _zcalc_G2_WF4_dmdd
+Comment       : _zcalc_G2_WF4_dpdd
 FileName     : ../Data_DESY21/Phi_scan_z460/phi_200_30_z460_ym60_iter0.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
@@ -51,3 +51,26 @@ cut length    = 2 mm
 Processing events:
 0/8162
 1000/8162
+2000/8162
+3000/8162
+4000/8162
+5000/8162
+6000/8162
+7000/8162
+8000/8162
+8161/8162
+8162 real events
+
+Selection Statistics 
+ #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
+    0  Stage1     8162     8162 (    0.00)  (    0.00)      8162     8162 (    0.00)  (    0.00)    272294   272294 (    0.00)  (    0.00)    894856   894856 (    0.00)  (    0.00) 
+    1 Stage11     8162     8082 (   -0.98)  (   -0.98)      8162     8082 (   -0.98)  (   -0.98)    272294   263966 (   -3.06)  (   -3.06)    894856   868174 (   -2.98)  (   -2.98) 
+    2Stage120     8082     7962 (   -1.48)  (   -2.45)      8082     7962 (   -1.48)  (   -2.45)    263966   260380 (   -1.36)  (   -4.38)    868174   858581 (   -1.10)  (   -4.05) 
+    3StageT15     7962     7831 (   -1.65)  (   -4.06)      7962     7831 (   -1.65)  (   -4.06)    260380   256519 (   -1.48)  (   -5.79)    858581   841476 (   -1.99)  (   -5.97) 
+    4 Stage10     7831     7831 (    0.00)  (   -4.06)      7831     7831 (    0.00)  (   -4.06)    256519   255755 (   -0.30)  (   -6.07)    841476   836676 (   -0.57)  (   -6.50) 
+    5 Stage14     7831     7831 (    0.00)  (   -4.06)      7831     7831 (    0.00)  (   -4.06)    255755   252183 (   -1.40)  (   -7.39)    836676   821745 (   -1.78)  (   -8.17) 
+    6  Stage5     7831     2457 (  -68.62)  (  -69.90)      7831     2457 (  -68.62)  (  -69.90)    252183    83538 (  -66.87)  (  -69.32)    821745   268871 (  -67.28)  (  -69.95) 
+  Summary Sel     8162     2457             (  -69.90)      8162     2457             (  -69.90)    272294    83538             (  -69.32)    894856   268871             (  -69.95) 
+Fitting: Started... done!
+Checks: OUT_Tristan/DESY21_phi/DESY21_phi_z460/DESY21_phi30_z460/2_DESY21_phi30_z460_Checks_zcalc_G2_WF4_dpdd.root
+dEdx: OUT_Tristan/DESY21_phi/DESY21_phi_z460/DESY21_phi30_z460/3_DESY21_phi30_z460_dEdx_zcalc_G2_WF4_dpdd.root

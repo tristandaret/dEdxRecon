@@ -1,0 +1,214 @@
+Tag           : DESY21_phi10_z460
+Comment       : _zcalc_G2_WF4_dmdd
+FileName     : ../Data_DESY21/Phi_scan_z460/phi_200_10_z460_ym60_iter0.root
+SelectionSet  : T_DESY21_Event
+NbrOfMod      : 0
+Data_to_Use   : 0
+OUTDirName    : OUT_Tristan/DESY21_phi/DESY21_phi_z460/DESY21_phi10_z460/
+
+Gain & RC maps: loaded
+Average Gain in ERAM01 = 1947.77
+ERAM01: RC   hole in  iX = 10 | iY = 16 | value reset at 129.29
+ERAM01: Gain hole in  iX = 10 | iY = 16 | value reset at 1889.24
+
+-------------->Predefined selection T_DESY21_Event
+Number of entries :10009
+TLow = 201 | THigh = 230
+
+-------------->List of selections
+Apply selection  1 -> Remove clusters in first and last columns 
+
+Apply selection 11 -> Remove clusters out of time (Event Based) 
+                      |TLeading -TLeadingMeanOverEvent| <= m_Cut_Stage11_EventBased (=     3)
+
+Apply selection 120 -> Remove clusters out of time  
+                      m_Cut_Stage120_TLow <= TLeading <= m_Cut_Stage120_THigh 
+                      m_Cut_Stage120_TLow  =  201
+                      m_Cut_Stage120_THigh =  230
+
+Apply selection 15 -> Remove Events with an average pad multiplicity too high or too low 
+                      Pad Multiplicity >  m_Cut_StageT15_APM_Low  (=  2.0)
+                      Pad Multiplicity <= m_Cut_StageT15_APM_High (=  4.0)
+
+Apply selection 10 -> Remove clusters with too many pads 
+                      Npads <= m_Cut_Stage10_Npads_Hig (=   5)
+
+Apply selection 14 -> Remove Clusters with a too high APad 
+                      APad >= m_Cut_Stage14_Amax_Low (=     0)
+                      APad <= m_Cut_Stage14_Amax_Hig (=  3700)
+
+Apply selection  5 -> Reject Events with too few clusters
+                      NClusters >= m_Cut_Stage5_NCluster_Low (=   34)
+
+
+zdrift        = 550 mm
+PT            = 200 ns
+TB            = 40 ns/time bin
+PT/TB         = 5 time bins
+z method      : zcalc
+cut length    = 2 mm
+
+Processing events:
+0/10009
+ALERT: 1 walls crossed for a pad in entry #940
+2 3 22 23
+7 3 24 23
+24 -0 0
+ALERT: 1 walls crossed for a pad in entry #940
+2 3 23 24
+3 -0 24 23
+24 -0 0
+ALERT: 1 walls crossed for a pad in entry #940
+3 5 23 24
+3 -0 23 23
+24 -0 0
+ALERT: 3 walls crossed for a pad in entry #940
+3 5 22 23
+7 3 23 23
+24 -0 0
+ALERT: 1 walls crossed for a pad in entry #940
+10 11 20 21
+15 11 22 21
+24 -0 0
+ALERT: 3 walls crossed for a pad in entry #940
+10 11 21 22
+11 7 22 21
+24 -0 0
+ALERT: 1 walls crossed for a pad in entry #940
+11 12 21 22
+11 7 21 21
+24 -0 0
+ALERT: 1 walls crossed for a pad in entry #940
+11 12 20 21
+15 11 21 21
+24 -0 0
+ALERT: 1 walls crossed for a pad in entry #940
+35 36 14 15
+41 36 16 15
+24 -0 0
+ALERT: 3 walls crossed for a pad in entry #940
+35 36 15 16
+36 32 16 15
+24 -0 0
+ALERT: 1 walls crossed for a pad in entry #940
+36 37 15 16
+36 32 15 15
+24 -0 0
+ALERT: 1 walls crossed for a pad in entry #940
+36 37 14 15
+41 36 15 15
+24 -0 0
+1000/10009
+2000/10009
+3000/10009
+ALERT: 1 walls crossed for a pad in entry #3743
+8 9 20 21
+13 9 22 21
+23 -0 -0
+ALERT: 1 walls crossed for a pad in entry #3743
+8 9 21 22
+9 5 22 21
+23 -0 -0
+ALERT: 1 walls crossed for a pad in entry #3743
+9 10 21 22
+9 5 21 21
+23 -0 -0
+ALERT: 3 walls crossed for a pad in entry #3743
+9 10 20 21
+13 9 21 21
+23 -0 -0
+4000/10009
+ALERT: 1 walls crossed for a pad in entry #4268
+12 14 20 21
+18 13 22 21
+25 -0 0
+ALERT: 3 walls crossed for a pad in entry #4268
+12 14 21 22
+13 9 22 21
+25 -0 0
+ALERT: 1 walls crossed for a pad in entry #4268
+14 15 21 22
+13 9 21 21
+25 -0 0
+ALERT: 1 walls crossed for a pad in entry #4268
+14 15 20 21
+18 13 21 21
+25 -0 0
+5000/10009
+6000/10009
+ALERT: 1 walls crossed for a pad in entry #6474
+36 37 13 14
+41 37 15 14
+24 -0 -0
+ALERT: 1 walls crossed for a pad in entry #6474
+36 37 14 15
+37 33 15 14
+24 -0 -0
+ALERT: 1 walls crossed for a pad in entry #6474
+37 38 14 15
+37 33 14 14
+24 -0 -0
+ALERT: 3 walls crossed for a pad in entry #6474
+37 38 13 14
+41 37 14 14
+24 -0 -0
+7000/10009
+ALERT: 1 walls crossed for a pad in entry #7814
+21 23 16 17
+27 23 18 17
+23 -0 -0
+ALERT: 1 walls crossed for a pad in entry #7814
+21 23 17 18
+23 18 18 17
+23 -0 -0
+ALERT: 1 walls crossed for a pad in entry #7814
+23 24 17 18
+23 18 17 17
+23 -0 -0
+ALERT: 3 walls crossed for a pad in entry #7814
+23 24 16 17
+27 23 17 17
+23 -0 -0
+8000/10009
+ALERT: 1 walls crossed for a pad in entry #8759
+1 2 24 25
+1 -3 24 24
+25 -0 -0
+ALERT: 3 walls crossed for a pad in entry #8759
+1 2 23 24
+5 1 24 24
+25 -0 -0
+ALERT: 1 walls crossed for a pad in entry #8759
+20 21 18 19
+26 21 20 19
+25 -0 -0
+ALERT: 3 walls crossed for a pad in entry #8759
+20 21 19 20
+21 17 20 19
+25 -0 -0
+ALERT: 1 walls crossed for a pad in entry #8759
+21 23 19 20
+21 17 19 19
+25 -0 -0
+ALERT: 1 walls crossed for a pad in entry #8759
+21 23 18 19
+26 21 19 19
+25 -0 -0
+9000/10009
+10000/10009
+10008/10009
+10009 real events
+
+Selection Statistics 
+ #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
+    0  Stage1    10009    10009 (    0.00)  (    0.00)     10009    10009 (    0.00)  (    0.00)    340195   340195 (    0.00)  (    0.00)   1013943  1013943 (    0.00)  (    0.00) 
+    1 Stage11    10009     9833 (   -1.76)  (   -1.76)     10009     9833 (   -1.76)  (   -1.76)    340195   329440 (   -3.16)  (   -3.16)   1013943   970866 (   -4.25)  (   -4.25) 
+    2Stage120     9833     9661 (   -1.75)  (   -3.48)      9833     9661 (   -1.75)  (   -3.48)    329440   323812 (   -1.71)  (   -4.82)    970866   956154 (   -1.52)  (   -5.70) 
+    3StageT15     9661     9432 (   -2.37)  (   -5.76)      9661     9432 (   -2.37)  (   -5.76)    323812   317456 (   -1.96)  (   -6.68)    956154   930461 (   -2.69)  (   -8.23) 
+    4 Stage10     9432     9432 (    0.00)  (   -5.76)      9432     9432 (    0.00)  (   -5.76)    317456   316705 (   -0.24)  (   -6.90)    930461   925742 (   -0.51)  (   -8.70) 
+    5 Stage14     9432     9430 (   -0.02)  (   -5.78)      9432     9430 (   -0.02)  (   -5.78)    316705   312247 (   -1.41)  (   -8.22)    925742   907734 (   -1.95)  (  -10.47) 
+    6  Stage5     9430     5400 (  -42.74)  (  -46.05)      9430     5400 (  -42.74)  (  -46.05)    312247   183600 (  -41.20)  (  -46.03)    907734   524999 (  -42.16)  (  -48.22) 
+  Summary Sel    10009     5400             (  -46.05)     10009     5400             (  -46.05)    340195   183600             (  -46.03)   1013943   524999             (  -48.22) 
+Fitting: Started... done!
+Checks: OUT_Tristan/DESY21_phi/DESY21_phi_z460/DESY21_phi10_z460/2_DESY21_phi10_z460_Checks_zcalc_G2_WF4_dmdd.root
+dEdx: OUT_Tristan/DESY21_phi/DESY21_phi_z460/DESY21_phi10_z460/3_DESY21_phi10_z460_dEdx_zcalc_G2_WF4_dmdd.root
