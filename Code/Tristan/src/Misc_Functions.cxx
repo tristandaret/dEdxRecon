@@ -275,6 +275,8 @@ TH1F* DPR(std::string name, const float& tmin, float const& tmax, const float& t
 // impact parameter d (in m) & track angle phi (in degrees) computed locally at the level of the pad
 void local_params(const Pad* pPad, const Track* pTrack, float& d, float& dd, float& phi, float& trk_len_pad){
 
+  int dd_compute = 1; // compute error on impact parameter, involve matrix => slow
+
   // Get geometry of pad
   float x0                  = pPad->Get_XL() ;                // in meters
   float xc                  = pPad->Get_XPad() ;              // in meters
@@ -425,54 +427,57 @@ void local_params(const Pad* pPad, const Track* pTrack, float& d, float& dd, flo
   trk_len_pad               = sqrt(pow(y[1]-y[0],2) + pow(x[1]-x[0],2)) ; // in meters (track length in the pad)
 
   float m=0, q=0;
-  // float dm=0, dq=0;
+  float dm=0, dq=0;
   // If parabolic fit <=> Magnetic field
   if(pTrack->GetNberOfParameters() == 3){ 
     TMatrixD pCovMat          = pTrack->Get_CovMatrix();
-    // Get intercept from entrance & exit points
-    // q                         = (y[0]*x[1]-y[1]*x[0]) / (x[1]-x[0]) ;
+    // Get intercept & slope from entrance & exit points
+    // q                      = (y[0]*x[1]-y[1]*x[0]) / (x[1]-x[0]) ;
+    // m                      =  (y[1]-y[0]) / (x[1]-x[0]) ;
     q                         = a-c*x[0]*x[1];
-    // float da_q                = 1;
-    // float db_q                = 0;
-    float dc_q                = -x[0]*x[1];
-    // double errorsq[]          = {da_q, db_q, dc_q};
-
-    // Get slope from entrance & exit points
-    // m                         =  (y[1]-y[0]) / (x[1]-x[0]) ;
     m                         = b+c*(x[1]+x[0]);
-    // float da_m                = 0;
-    // float db_m                = 1;
-    float dc_m                = x[1]+x[0];
-    // double errorsm[]          = {da_m, db_m, dc_m};
 
-    // Get impact parameter from entrance & exit points
-    float da_d                = 1/sqrt(m*m+1);
-    float db_d                = xc/sqrt(m*m+1) - (m*xc+q-yc)*m/pow(m*m+1, 1.5);
-    float dc_d                = (dc_m*xc+dc_q)/sqrt(m*m+1) - (m*xc+q-yc)*dc_m*m/pow(m*m+1, 1.5);
-    double errorsd[]          = {da_d, db_d, dc_d};
+    if(dd_compute){
+      // float da_q              = 1;
+      // float db_q              = 0;
+      float dc_q              = -x[0]*x[1];
+      // double errorsq[]        = {da_q, db_q, dc_q};
 
-    TMatrixD row_err_d(1, 3, errorsd);
-    TMatrixD d_mat_temp       = row_err_d * pCovMat;
-    TMatrixD dd_matrix        = d_mat_temp * row_err_d.Transpose(row_err_d);
+      // Get slope from entrance & exit points
+      // float da_m              = 0;
+      // float db_m              = 1;
+      float dc_m              = x[1]+x[0];
+      // double errorsm[]        = {da_m, db_m, dc_m};
 
-    // TMatrixD row_err_q(1, 3, errorsq);
-    // d_mat_temp                = row_err_q * pCovMat;
-    // TMatrixD dq_matrix        = d_mat_temp * row_err_q.Transpose(row_err_q);
+      // Get impact parameter from entrance & exit points
+      float da_d              = 1/sqrt(m*m+1);
+      float db_d              = xc/sqrt(m*m+1) - (m*xc+q-yc)*m/pow(m*m+1, 1.5);
+      float dc_d              = (dc_m*xc+dc_q)/sqrt(m*m+1) - (m*xc+q-yc)*dc_m*m/pow(m*m+1, 1.5);
+      double errorsd[]        = {da_d, db_d, dc_d};
 
-    // TMatrixD row_err_m(1, 3, errorsm);
-    // d_mat_temp                = row_err_m * pCovMat;
-    // TMatrixD dm_matrix        = d_mat_temp * row_err_m.Transpose(row_err_m);
+      TMatrixD row_err_d(1, 3, errorsd);
+      TMatrixD d_mat_temp     = row_err_d * pCovMat;
+      TMatrixD dd_matrix      = d_mat_temp * row_err_d.Transpose(row_err_d);
+
+      // TMatrixD row_err_q(1, 3, errorsq);
+      // d_mat_temp              = row_err_q * pCovMat;
+      // TMatrixD dq_matrix      = d_mat_temp * row_err_q.Transpose(row_err_q);
+
+      // TMatrixD row_err_m(1, 3, errorsm);
+      // d_mat_temp              = row_err_m * pCovMat;
+      // TMatrixD dm_matrix      = d_mat_temp * row_err_m.Transpose(row_err_m);
+
+      // dd                      = sqrt(dd_matrix(0,0)); // in meters
+      // dq                      = sqrt(dq_matrix(0,0)); // in meters
+      // dm                      = sqrt(dm_matrix(0,0)); // no dimension
+    }
 
     phi                       = TMath::ATan(m)/TMath::Pi()*180 ;              // in degrees
     trk_len_pad               = sqrt(pow(y[1]-y[0],2) + pow(x[1]-x[0],2)) ;   // in meters
     d                         = (m*xc - yc + q) / sqrt(pow(m,2) + 1) ;        // in meters
-    dd                        = sqrt(dd_matrix(0,0)); // in meters
-
-    // dq                        = sqrt(dq_matrix(0,0)); // in meters
-    // dm                        = sqrt(dm_matrix(0,0)); // no dimension
   }
   
-  // if(x[0]){ 
+  // if(x[0] and dd_compute){ 
   //   std::cout << std::setprecision(3) << "x_in: "  << x[0]*1000 << " +- " << dx[0]*1000 << " | ";
   //   std::cout << std::setprecision(3) << "y_in: "  << y[0]*1000 << " +- " << dy[0]*1000 << " | ";
   //   std::cout << std::setprecision(3) << "x_out: " << x[1]*1000 << " +- " << dx[1]*1000 << " | ";

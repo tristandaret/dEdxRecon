@@ -132,7 +132,6 @@ void dEdx( const std::string& OutDir,
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   // Check histograms
-  TH1F* h1f_errslope        = new TH1F("h1f_errslope",        "Error on slope;error (#mum);", 100, -1000, 1000) ;
   TH1F* h1f_dnorm           = new TH1F("h1f_dnorm",           "Normalized impact parameter d/d_{max};d/d_{max};", 100, -1.1, 1.1) ;
   TH1F* h1f_dist            = new TH1F("h1f_dist",            "distance of track in pad;distance (mm);", 100, 0, 17) ;
   TH1F* h1f_dist_clus       = new TH1F("h1f_dist_clus",       "Distance of track in cluster;distance (mm);", 100, 0, 17) ;
@@ -296,11 +295,7 @@ void dEdx( const std::string& OutDir,
           local_params(pPad, pTrack, d, dd, phi, trk_len_pad);
           d                              *= 1000 ; // in mm
           dd                             *= 1000 ; // in mm
-          if(trk_len_pad <= 1e-6)           continue ;  // ignore non-but-almost-zero tracks 
-
-          // h1f_errslope->Fill(pTrack->Y_Position(pCluster->Get_XTrack())*1e6-pCluster->Get_YTrack()*1e6);
-          // h1f_errslope->Fill(pTrack->Y_Position(pCluster->Get_eYTrack()*1e6));
-          h1f_errslope->Fill(dd*1e3);
+          if(trk_len_pad <= 1e-6)           continue ;  // ignore non-but-almost-zero tracks
           
           float L_phi                     = std::min({ 11.28/std::fabs(std::cos(phi*M_PI/180)), 10.19/std::fabs(std::sin(phi*M_PI/180)) }) ;
           float LNorm                     = trk_len_pad*1000/L_phi ;
@@ -326,7 +321,7 @@ void dEdx( const std::string& OutDir,
           if(d >  L/2) d                  =  L/2 ;
           float dconv                     = (d+L/2)/d_step ;  // +L/2 shift because LUT indices have to be > 0 but d can be < 0
           // Interpolation Z
-          // z_calc                         -= 15;
+          z_calc                         += 15;
           if(z_calc < 0)    z_calc        = 0 ;
           if(z_calc > 1000) z_calc        = 1e3 ;
           float zfile                     = zdrift/z_step ;
@@ -496,13 +491,6 @@ void dEdx( const std::string& OutDir,
   std::cout << n_real_evt << " real events" << std::endl;
   aJFL_Selector.PrintStat() ;
   delete tf1_PRF ;
-
-  TCanvas* c1 = new TCanvas("c1", "c1", 1800, 1200);
-  c1->cd();
-  h1f_errslope->SetLineWidth(4);
-  h1f_errslope->Draw();
-  c1->SaveAs((OUTDirName + "Fit_Error_slope.png").c_str());
-  delete c1;
 
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////

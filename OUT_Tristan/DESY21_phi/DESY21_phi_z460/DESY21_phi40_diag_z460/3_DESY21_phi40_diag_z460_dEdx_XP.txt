@@ -1,5 +1,5 @@
 Tag           : DESY21_phi40_diag_z460
-Comment       : _zcalc_G2_WF4_dpdd
+Comment       : _zcalc_G2_WF4_RCm2%
 FileName     : ../Data_DESY21/Phi_scan_z460/phi_200_40_z460_ym60_diag_iter0.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
@@ -119,5 +119,5 @@ Selection Statistics
     6  Stage5    13986    12464 (  -10.88)  (  -14.20)     13986    12464 (  -10.88)  (  -14.20)    740032   674600 (   -8.84)  (  -14.73)   1434644  1301655 (   -9.27)  (  -16.94) 
   Summary Sel    14526    12464             (  -14.20)     14526    12464             (  -14.20)    791177   674600             (  -14.73)   1567194  1301655             (  -16.94) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_phi/DESY21_phi_z460/DESY21_phi40_diag_z460/2_DESY21_phi40_diag_z460_Checks_zcalc_G2_WF4_dpdd.root
-dEdx: OUT_Tristan/DESY21_phi/DESY21_phi_z460/DESY21_phi40_diag_z460/3_DESY21_phi40_diag_z460_dEdx_zcalc_G2_WF4_dpdd.root
+Checks: OUT_Tristan/DESY21_phi/DESY21_phi_z460/DESY21_phi40_diag_z460/2_DESY21_phi40_diag_z460_Checks_zcalc_G2_WF4_RCm2%.root
+dEdx: OUT_Tristan/DESY21_phi/DESY21_phi_z460/DESY21_phi40_diag_z460/3_DESY21_phi40_diag_z460_dEdx_zcalc_G2_WF4_RCm2%.root

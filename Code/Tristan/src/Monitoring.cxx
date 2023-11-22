@@ -31,7 +31,7 @@ void Monitoring()
   int nRC = 21 ; 
 
   std::string Tag    ; 
-  std::string Comment = "_zcalc_G2_WF4_dpdd" ; // z method | gain_corr | WF method
+  std::string Comment = "_zcalc_G2_WF4" ; // z method | gain_corr | WF method
   std::string prtcle ; 
   std::string EvtFile ;
   std::string OutDir  = "OUT_Tristan/";  
@@ -51,19 +51,19 @@ void Monitoring()
 
   // Computations
   int control         = 0 ;
-  int dedx            = 1 ;
+  int dedx            = 0 ;
   int WFcorr          = 0 ;
 
   // DrawOuts
   int DO_Displayer    = 0 ;
   int DO_control      = 0 ;
   int DO_Checks       = 0 ;
-  int DO_Methods      = 1 ;
-  int DO_Resolution   = 1 ;
+  int DO_Methods      = 0 ;
+  int DO_Resolution   = 0 ;
   int DO_Global       = 0 ;
   int DO_Scans        = 0 ;
   int DO_Separation   = 0 ;
-  int DO_Systematics  = 0 ;
+  int DO_Systematics  = 1 ;
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -153,7 +153,7 @@ void Monitoring()
     // int PT_arr[] = {200, 412} ;
     int PT_arr[] = {412} ;
     for (int PT : PT_arr){
-      OutDir        = Form("OUT_Tristan/DESY21_zscan/DESY21_dev_v9i9_zscan_PT%i/", PT) ; 
+      OutDir        = Form("OUT_Tristan/DESY21_zscan/DESY21_zscan_PT%i_dev_v9i9/", PT) ; 
       MakeMyDir(OutDir) ; 
       Uploader* pUpld ; Interpol4 LUT ;
       if (control or dedx) LUT = GiveMe_LUT(Form("/home/td263283/Documents/Python/LUT_XP/LUT_Dt%i_PT%i_nphi200_nd200/", Dt, PT), nZ, nRC) ;
@@ -174,7 +174,7 @@ void Monitoring()
         if (DO_Methods)   DrawOut_Methods           (OutDir, Tag, Comment, 1, prtcle) ;
       }
       if(DO_Systematics)  DrawOut_Systematics(OutDir, Comment, "Z") ;
-      if(DO_Resolution)   DrawOut_Zscan  (Form("OUT_Tristan/DESY21_zscan/DESY21_dev_v9i9_zscan_PT%i", PT), Comment, PT) ;
+      if(DO_Resolution)   DrawOut_Zscan  (Form("OUT_Tristan/DESY21_zscan/DESY21_zscan_PT%i_dev_v9i9", PT), Comment, PT) ;
     }
     if(DO_Global) DrawOut_Zscan_PT("OUT_Tristan/DESY21_zscan", Comment) ;
   }
@@ -222,7 +222,7 @@ void Monitoring()
     int         phi_val[]       = {0, 5, 10, 20, 30, 30, 40, 45} ;
     for (int iz = 0 ; iz < (int)std::size(z_arr) ; iz++){
       const char* z             = z_arr[iz].c_str() ;
-      OutDir                    = Form("OUT_Tristan/DESY21_phi/DESY21_phi_z%s/", z) ;  
+      OutDir                    = Form("OUT_Tristan/DESY21_phi/DESY21_phi_z%s_dev_v9i9/", z) ;  
       MakeMyDir(OutDir) ; 
       for (int ifile = 0 ; ifile < (int)std::size(phi_val) ; ifile++){
         int phi                 = phi_val[ifile] ;
@@ -238,9 +238,9 @@ void Monitoring()
         if (DO_Checks)    DrawOut_Checks            (OutDir, EvtFile, Tag, Comment) ;
         if (DO_Methods)   DrawOut_Methods           (OutDir, Tag, Comment, 1, prtcle) ;
         delete pUpld ;
-        if(ifile==0)OutDir      = Form("OUT_Tristan/DESY21_phi/DESY21_phi_z%s/", z) ; 
+        if(ifile==0)OutDir      = Form("OUT_Tristan/DESY21_phi/DESY21_phi_z%s_dev_v9i9/", z) ; 
       }
-      if(DO_Resolution)   DrawOut_Phiscan (Form("OUT_Tristan/DESY21_phi/DESY21_phi_z%s", z), Comment, z) ;
+      if(DO_Resolution)   DrawOut_Phiscan (Form("OUT_Tristan/DESY21_phi/DESY21_phi_z%s_dev_v9i9", z), Comment, z) ;
       if(DO_Systematics)  DrawOut_Systematics(OutDir, Comment, "phi") ;
     }
     // DrawOut_TGE_WFsum_L("OUT_Tristan/DESY21_phi/", Comment) ;
