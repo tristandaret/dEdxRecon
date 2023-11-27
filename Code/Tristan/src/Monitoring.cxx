@@ -6,10 +6,11 @@
 #include "Tristan/dEdx.h"
 #include "Tristan/DrawOuts.h"
 #include "Tristan/Displayer.h"
+#include "Tristan/Misc_Functions.h"
+
 #include "EvtModelTools/EvtModelTools_Histos.h"
-
-
 #include "EvtModelTools/JFL_Selector.h"
+
 #include "SampleTools/Uploader.h"
 #include "SampleTools/GiveMe_Uploader.h"
 
@@ -44,14 +45,14 @@ void Monitoring()
   int prototype       = 0 ;
   int CERN_Escan      = 0 ; 
 
-  int DESY_zscan      = 1 ; 
+  int DESY_zscan      = 0 ; 
   int DESY_yscan      = 0 ; 
   int DESY_phi        = 1 ; 
   int DESY_theta      = 0 ; 
 
   // Computations
   int control         = 0 ;
-  int dedx            = 0 ;
+  int dedx            = 1 ;
   int WFcorr          = 0 ;
 
   // DrawOuts
@@ -63,7 +64,19 @@ void Monitoring()
   int DO_Global       = 0 ;
   int DO_Scans        = 0 ;
   int DO_Separation   = 0 ;
-  int DO_Systematics  = 1 ;
+  int DO_Systematics  = 0 ;
+
+  // Interpol4 LUT ;
+  // std::string LUT_folder = "/home/td263283/Documents/Python/LUT_XP/LUT_Dt310_PT412_nphi200_nd200/";
+  // LUT = GiveMe_LUT(LUT_folder, nZ, nRC) ;
+  // for(int iRC = 0 ; iRC < nRC ; iRC++){
+  //   std::string LUT_RC_folder = "LUT_RC" + std::to_string(iRC*5+50) + "/";
+  //   MakeMyDir("../" + LUT_RC_folder);
+  //   for(int iZ = 0 ; iZ < nZ ; iZ++){
+  //     std::string LUT_Z_file = "LUT_z" + std::to_string(iZ*50);
+  //     std::vector<std::vector<float>> data = readCSV(LUT_folder + LUT_RC_folder + LUT_Z_file + ".csv") ;
+  //   }
+  // }
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -157,12 +170,12 @@ void Monitoring()
       MakeMyDir(OutDir) ; 
       Uploader* pUpld ; Interpol4 LUT ;
       if (control or dedx) LUT = GiveMe_LUT(Form("/home/td263283/Documents/Python/LUT_XP/LUT_Dt%i_PT%i_nphi200_nd200/", Dt, PT), nZ, nRC) ;
-      int         z_val[]   = {50, 150, 250, 350, 450, 550, 650, 750, 850, 950} ;
-      std::string z_arr[]   = {"m40", "060", "160", "260", "360", "460", "560", "660", "760", "860"} ;
+      // int         z_val[]   = {50, 150, 250, 350, 450, 550, 650, 750, 850, 950} ;
+      // std::string z_arr[]   = {"m40", "060", "160", "260", "360", "460", "560", "660", "760", "860"} ;
       // int         z_val[]   = {50, 550, 950} ;
       // std::string z_arr[]   = {"m40", "460", "860"};
-      // int         z_val[]   = {550} ;
-      // std::string z_arr[]   = {"460"} ;
+      int         z_val[]   = {550} ;
+      std::string z_arr[]   = {"460"} ;
       for (int iz = 0 ; iz < (int)std::size(z_arr) ; iz++){
         const char* z       = z_arr[iz].c_str() ;
         EvtFile             = Form("../Data_DESY21_dev_v9/zscan_PT%i/z_360_275_%i_02T_26_%s_iter9.root", PT, PT, z) ; Tag = Form("DESY21_z%s_PT%i", z, PT) ; prtcle = Form("electron_z%s", z) ;
@@ -224,7 +237,7 @@ void Monitoring()
       const char* z             = z_arr[iz].c_str() ;
       OutDir                    = Form("OUT_Tristan/DESY21_phi/DESY21_phi_z%s_dev_v9i9/", z) ;  
       MakeMyDir(OutDir) ; 
-      for (int ifile = 0 ; ifile < (int)std::size(phi_val) ; ifile++){
+      for (int ifile = 6 ; ifile < (int)std::size(phi_val) ; ifile++){
         int phi                 = phi_val[ifile] ;
         if(ifile==0){       OutDir   = "OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/"; 
                             EvtFile  = Form("../Data_DESY21/zscan_PT200/z_360_275_200_02T_26_%s_iter0.root", z) ; Tag = Form("DESY21_z%s_PT200", z) ; prtcle = Form("electron_z%s", z) ; }

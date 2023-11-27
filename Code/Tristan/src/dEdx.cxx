@@ -268,6 +268,7 @@ void dEdx( const std::string& OutDir,
         TH1F* h1f_WF_cluster              = new TH1F("h1f_WF_cluster", "h1f_WF_cluster", 510, -0.5, 509.5) ; // Store this cluster's WFs
         Cluster* pCluster                 = pModule->Get_Cluster(iC) ;
         float trk_len_clus                = 0 ; // in meters
+        if(iEvent < 50) DrawOut_ClusterWFDisplay(pCluster, OUTDIR_WF_Display, Tag, 1, PT, TB);
 
         // Loop On Pads
         int NPads                         = pCluster->Get_NberOfPads() ;
@@ -316,12 +317,12 @@ void dEdx( const std::string& OutDir,
           if(phi >  90) phi               =  90-2e-6 ;
           float phiconv                   = fabs(phi)/phi_step ;
           // Interpolation d
-          d                              += dd;
+          // d                              += dd;
           if(d < -L/2) d                  = -L/2 ;
           if(d >  L/2) d                  =  L/2 ;
           float dconv                     = (d+L/2)/d_step ;  // +L/2 shift because LUT indices have to be > 0 but d can be < 0
           // Interpolation Z
-          z_calc                         += 15;
+          // z_calc                         += 15;
           if(z_calc < 0)    z_calc        = 0 ;
           if(z_calc > 1000) z_calc        = 1e3 ;
           float zfile                     = zdrift/z_step ;
@@ -420,7 +421,7 @@ void dEdx( const std::string& OutDir,
         delete                              h1f_WF_cluster ;
       } // Cluster
 
-      // if(iEvent < 50) DrawOut_EventDisplay(pModule, OUTDIR_Evt_Display, Tag, "amplitude", pTrack->Get_ParameterValue(2), pTrack->Get_ParameterValue(1), pTrack->Get_ParameterValue(0)) ;
+      if(iEvent < 50) DrawOut_EventDisplay(pModule, OUTDIR_Evt_Display, Tag, "amplitude", pTrack->Get_ParameterValue(2), pTrack->Get_ParameterValue(1), pTrack->Get_ParameterValue(0)) ;
     } // Module
 
     if(N_cross_Evt > 0){
