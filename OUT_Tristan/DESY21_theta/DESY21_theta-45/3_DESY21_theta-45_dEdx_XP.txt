@@ -1,22 +1,15 @@
 Tag           : DESY21_theta-45
-Comment       : _1000_zcalc_PRF_4IP_WFhatrecon
-EventFile     : ../Data_DESY21/Theta_scan/theta_m45_02T_z260_y80_iter0.root
+Comment       : _zcalc_G2_WF4_thetacorr
+FileName     : ../Data_DESY21/Theta_scan/theta_m45_02T_z260_y80_iter0.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
 Data_to_Use   : 0
 OUTDirName    : OUT_Tristan/DESY21_theta/DESY21_theta-45/
 
-
-ReadRCmap::ReadRCmap m_FileName = GainRCMaps/RCfiles/ERAM01_RCdata_01.root
-
-ReadRCmap::ReadRCmap  No Data for iX=10 and  iY=16 in GainRCMaps/RCfiles/ERAM01_RCdata_01.root
-RC map: loaded
-
-ReadGainmap::ReadGainmap m_FileName = GainRCMaps/Gainfiles/ERAM01_Gaindata_01.root
-
-ReadGainmap::ReadGainmap  No Data for iX=10 and  iY=16 in GainRCMaps/Gainfiles/ERAM01_Gaindata_01.root
-Gain map: loaded
+Gain & RC maps: loaded
 Average Gain in ERAM01 = 1947.77
+ERAM01: RC   hole in  iX = 10 | iY = 16 | value reset at 129.29
+ERAM01: Gain hole in  iX = 10 | iY = 16 | value reset at 1889.24
 
 -------------->Predefined selection T_DESY21_Event
 Number of entries :26640
@@ -52,67 +45,39 @@ zdrift        = 350 mm
 PT            = 200 ns
 TB            = 40 ns/time bin
 PT/TB         = 5 time bins
-Track fitting : PRF
 z method      : zcalc
 cut length    = 2 mm
 
 Processing events:
 0/26640
-RC hole in entry   2 | iX = 10 | iY = 16 |  RC  value reset at 129
-500/26640
 1000/26640
-1500/26640
 2000/26640
-2500/26640
 3000/26640
-3500/26640
 4000/26640
-4500/26640
 5000/26640
-5500/26640
 6000/26640
-6500/26640
 7000/26640
-7500/26640
 8000/26640
-8500/26640
 9000/26640
-9500/26640
 10000/26640
-10500/26640
 11000/26640
-11500/26640
 12000/26640
-12500/26640
 13000/26640
-13500/26640
 14000/26640
-14500/26640
 15000/26640
-15500/26640
 16000/26640
-16500/26640
 17000/26640
-17500/26640
 18000/26640
-18500/26640
 19000/26640
-19500/26640
 20000/26640
-20500/26640
 21000/26640
-21500/26640
 22000/26640
-22500/26640
 23000/26640
-23500/26640
 24000/26640
-24500/26640
 25000/26640
-25500/26640
 26000/26640
-26500/26640
 26639/26640
+26640 real events
 
 Selection Statistics 
  #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
@@ -125,5 +90,5 @@ Selection Statistics
     6  Stage5    24682     6505 (  -73.64)  (  -75.58)     24682     6505 (  -73.64)  (  -75.58)    799648   221170 (  -72.34)  (  -75.57)   2670322   724297 (  -72.88)  (  -76.92) 
   Summary Sel    26640     6505             (  -75.58)     26640     6505             (  -75.58)    905312   221170             (  -75.57)   3138797   724297             (  -76.92) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_theta/DESY21_theta-45/2_DESY21_theta-45_Checks_1000_zcalc_PRF_4IP_WFhatrecon.root
-dEdx: OUT_Tristan/DESY21_theta/DESY21_theta-45/3_DESY21_theta-45_dEdx_1000_zcalc_PRF_4IP_WFhatrecon.root
+Checks: OUT_Tristan/DESY21_theta/DESY21_theta-45/2_DESY21_theta-45_Checks_zcalc_G2_WF4_thetacorr.root
+dEdx: OUT_Tristan/DESY21_theta/DESY21_theta-45/3_DESY21_theta-45_dEdx_zcalc_G2_WF4_thetacorr.root

@@ -1,22 +1,15 @@
 Tag           : DESY21_theta-20
-Comment       : _1000_zcalc_PRF_4IP_WFhatrecon
-EventFile     : ../Data_DESY21/Theta_scan/theta_m20_02T_z260_y80_iter0.root
+Comment       : _zcalc_G2_WF4_thetacorr
+FileName     : ../Data_DESY21/Theta_scan/theta_m20_02T_z260_y80_iter0.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
 Data_to_Use   : 0
 OUTDirName    : OUT_Tristan/DESY21_theta/DESY21_theta-20/
 
-
-ReadRCmap::ReadRCmap m_FileName = GainRCMaps/RCfiles/ERAM01_RCdata_01.root
-
-ReadRCmap::ReadRCmap  No Data for iX=10 and  iY=16 in GainRCMaps/RCfiles/ERAM01_RCdata_01.root
-RC map: loaded
-
-ReadGainmap::ReadGainmap m_FileName = GainRCMaps/Gainfiles/ERAM01_Gaindata_01.root
-
-ReadGainmap::ReadGainmap  No Data for iX=10 and  iY=16 in GainRCMaps/Gainfiles/ERAM01_Gaindata_01.root
-Gain map: loaded
+Gain & RC maps: loaded
 Average Gain in ERAM01 = 1947.77
+ERAM01: RC   hole in  iX = 10 | iY = 16 | value reset at 129.29
+ERAM01: Gain hole in  iX = 10 | iY = 16 | value reset at 1889.24
 
 -------------->Predefined selection T_DESY21_Event
 Number of entries :11838
@@ -52,37 +45,24 @@ zdrift        = 350 mm
 PT            = 200 ns
 TB            = 40 ns/time bin
 PT/TB         = 5 time bins
-Track fitting : PRF
 z method      : zcalc
 cut length    = 2 mm
 
 Processing events:
 0/11838
-500/11838
 1000/11838
-1500/11838
 2000/11838
-2500/11838
 3000/11838
-3500/11838
 4000/11838
-4500/11838
 5000/11838
-5500/11838
-RC hole in entry   5501 | iX = 10 | iY = 16 |  RC  value reset at 129
 6000/11838
-6500/11838
 7000/11838
-7500/11838
 8000/11838
-8500/11838
 9000/11838
-9500/11838
 10000/11838
-10500/11838
 11000/11838
-11500/11838
 11837/11838
+11838 real events
 
 Selection Statistics 
  #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
@@ -95,5 +75,5 @@ Selection Statistics
     6  Stage5    10948     2197 (  -79.93)  (  -81.44)     10948     2197 (  -79.93)  (  -81.44)    351824    74698 (  -78.77)  (  -81.43)   1114394   230279 (  -79.34)  (  -82.63) 
   Summary Sel    11838     2197             (  -81.44)     11838     2197             (  -81.44)    402330    74698             (  -81.43)   1326018   230279             (  -82.63) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_theta/DESY21_theta-20/2_DESY21_theta-20_Checks_1000_zcalc_PRF_4IP_WFhatrecon.root
-dEdx: OUT_Tristan/DESY21_theta/DESY21_theta-20/3_DESY21_theta-20_dEdx_1000_zcalc_PRF_4IP_WFhatrecon.root
+Checks: OUT_Tristan/DESY21_theta/DESY21_theta-20/2_DESY21_theta-20_Checks_zcalc_G2_WF4_thetacorr.root
+dEdx: OUT_Tristan/DESY21_theta/DESY21_theta-20/3_DESY21_theta-20_dEdx_zcalc_G2_WF4_thetacorr.root

@@ -57,7 +57,7 @@ void dEdx( const std::string& OutDir,
   float phi_max         = std::atan(Ly/Lx)*180/M_PI ;           // (°) angle of the diagonal
 
   // Parameters for the dE/dx procedure and for selections
-  std::string z_method  = "zcalc" ;                             // method to get z ("zcalc" to recompute, "zfile" to use value from ntuple)
+  std::string z_method  = "zfile" ;                             // method to get z ("zcalc" to recompute, "zfile" to use value from ntuple)
   float alpha           = 70 ;                                  // truncation value in %
   float n_param_trk     = 3 ;                                   // 2 if there is not magnetic field
   float len_cut         = 0.002 ;                               // minimum length in pad to be considered truncable (m)
@@ -109,8 +109,10 @@ void dEdx( const std::string& OutDir,
   // Fill holes in maps
   Fill_Maps(RCmaps, Gainmaps, eram_id);
 
+  float costheta = 1;
+  int theta_arr[] = {-45, -20, 20} ;
+  for (int theta_file : theta_arr) if(Tag.find("theta") != std::string::npos and Tag.find(std::to_string(theta_file)) != std::string::npos) costheta = fabs(cos((float)theta_file/180*M_PI));
 
-  
   /////////////////////////////////////////////////////////////////////////////////////////////////////////
   // Selection stage
   JFL_Selector aJFL_Selector(SelectionSet) ;
@@ -210,7 +212,7 @@ void dEdx( const std::string& OutDir,
     int nber ;
     if(FileName.find("All_ERAMS") != std::string::npos){
       // 1 ERAM
-      nber = 23;
+      nber = 2;
       if(!is_in(eram_list, nber)){
         delete pEvent;
         continue;
@@ -253,13 +255,12 @@ void dEdx( const std::string& OutDir,
       TheFitterTrack                      aTheFitterTrack("Minuit", n_param_trk) ;
       DoTracksReconstruction_Event(aTheFitterTrack, pEvent, ModuleNber, n_param_trk) ;
 
-      // std::cout << "Event " << pEvent->Get_EventNber() << " Entry " << pEvent->Get_EntryNber() << std::endl;
       // Track details
       const Track* pTrack                 = pEvent->GiveMe_Track_ForThisModule(ModuleNber) ;
       float phi                           = std::atan(pTrack->Get_ParameterValue(1))/M_PI*180 ;
       std::vector<float>                    v_len_cross ; 
       std::vector<float>                    v_len_clust ; 
-      float len_track                     = trk_len(pModule, pTrack)*100 ; // in cm from left side  of cluster #0 to right side of last cluster
+      float len_track                     = trk_len(pModule, pTrack)*100/costheta ; // in cm from left side  of cluster #0 to right side of last cluster
       len_track_Evt                      += len_track;
       v_ordo_origin.                        push_back(pTrack->Get_ParameterValue(0)*100);
 
@@ -268,13 +269,11 @@ void dEdx( const std::string& OutDir,
         TH1F* h1f_WF_cluster              = new TH1F("h1f_WF_cluster", "h1f_WF_cluster", 510, -0.5, 509.5) ; // Store this cluster's WFs
         Cluster* pCluster                 = pModule->Get_Cluster(iC) ;
         float trk_len_clus                = 0 ; // in meters
-        if(iEvent < 50) DrawOut_ClusterWFDisplay(pCluster, OUTDIR_WF_Display, Tag, 1, PT, TB);
 
         // Loop On Pads
         int NPads                         = pCluster->Get_NberOfPads() ;
         for(int iP = 0 ; iP < NPads ; iP ++){
           const Pad* pPad                 = pCluster->Get_Pad(iP) ;
-          // std::cout << "PadX = " << pPad->Get_iX() << " PadY = " << pPad->Get_iY() <<std::endl;
           TH1F* h1f_WF_pad                = GiveMe_WaveFormDisplay(pPad, "main") ;
           float A_pad;
           int StatusRC = 0, StatusG  = 0 ;
@@ -297,6 +296,7 @@ void dEdx( const std::string& OutDir,
           d                              *= 1000 ; // in mm
           dd                             *= 1000 ; // in mm
           if(trk_len_pad <= 1e-6)           continue ;  // ignore non-but-almost-zero tracks
+          trk_len_pad                    /= costheta;
           
           float L_phi                     = std::min({ 11.28/std::fabs(std::cos(phi*M_PI/180)), 10.19/std::fabs(std::sin(phi*M_PI/180)) }) ;
           float LNorm                     = trk_len_pad*1000/L_phi ;
@@ -421,7 +421,7 @@ void dEdx( const std::string& OutDir,
         delete                              h1f_WF_cluster ;
       } // Cluster
 
-      if(iEvent < 50) DrawOut_EventDisplay(pModule, OUTDIR_Evt_Display, Tag, "amplitude", pTrack->Get_ParameterValue(2), pTrack->Get_ParameterValue(1), pTrack->Get_ParameterValue(0)) ;
+      // if(iEvent < 50) DrawOut_EventDisplay(pModule, OUTDIR_Evt_Display, Tag, "amplitude", pTrack->Get_ParameterValue(2), pTrack->Get_ParameterValue(1), pTrack->Get_ParameterValue(0)) ;
     } // Module
 
     if(N_cross_Evt > 0){

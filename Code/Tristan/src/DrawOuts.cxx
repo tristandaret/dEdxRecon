@@ -1861,7 +1861,7 @@ void DrawOut_Separation(const std::string& inputDir, const std::string& Comment)
   ptText->SetTextAlign(31) ;
   float sepa            = GetSeparation(mean_WFsum[0],     std_WFsum[0],      mean_WFsum[2],     std_WFsum[2]) ;
   float dsepa           = GetSeparationError(mean_WFsum[0], std_WFsum[0], dmean_WFsum[0], dstd_WFsum[0], mean_WFsum[2], std_WFsum[2], dmean_WFsum[2], dstd_WFsum[2]) ;
-  ptText->SetText(1200, 0.19, Form("S(e^{+} #mu^{+}) = %.2f #pm %.2f #sigma", sepa, dsepa)) ;
+  ptText->SetText(1200, 0.19, Form("S(e^{+} | #mu^{+}) = %.2f #pm %.2f #sigma", sepa, dsepa)) ;
   ptText->SetTextColor(kCyan+2) ;
   ptText->DrawClone() ;
   delete ptText ;
@@ -1972,7 +1972,7 @@ void DrawOut_Separation(const std::string& inputDir, const std::string& Comment)
   ptText->SetTextAlign(31) ;
    sepa            = GetSeparation(mean_XP[0],     std_XP[0],      mean_XP[2],     std_XP[2]) ;
    dsepa           = GetSeparationError(mean_XP[0], std_XP[0], dmean_XP[0], dstd_XP[0], mean_XP[2], std_XP[2], dmean_XP[2], dstd_XP[2]) ;
-  ptText->SetText(1200, 0.19, Form("S(e^{+} #mu^{+}) = %.2f #pm %.2f #sigma", sepa, dsepa)) ;
+  ptText->SetText(1200, 0.19, Form("S(e^{+} | #mu^{+}) = %.2f #pm %.2f #sigma", sepa, dsepa)) ;
   ptText->SetTextColor(kMagenta+2) ;
   ptText->DrawClone() ;
   delete ptText ;
@@ -2009,7 +2009,7 @@ void DrawOut_Separation(const std::string& inputDir, const std::string& Comment)
 
 
 
-void DrawOut_Separation_Reduced(const std::string& inputDir, const std::string& Comment)
+void DrawOut_Separation_Reduced(const std::string& inputDir, const std::string& Comment, std::string Energy)
 {
   int nParticles              = 4 ;
 
@@ -2019,10 +2019,10 @@ void DrawOut_Separation_Reduced(const std::string& inputDir, const std::string& 
   // v_pTFile_dEdx.                 push_back(TFile::Open(TString(inputDir + "CERN22_ERAM18_p_1GeV/3_CERN22_ERAM18_p_1GeV_vD"      + "_dEdx" + Comment + ".root"))) ;
   // v_pTFile_dEdx.                 push_back(TFile::Open(TString(inputDir + "CERN22_ERAM18_mu+_1GeV/3_CERN22_ERAM18_mu+_1GeV_vD"    + "_dEdx" + Comment + ".root"))) ;
   // v_pTFile_dEdx.                 push_back(TFile::Open(TString(inputDir + "CERN22_ERAM18_pi+_0p5GeV/3_CERN22_ERAM18_pi+_0p5GeV_vD"  + "_dEdx" + Comment + ".root"))) ;
-  v_pTFile_dEdx.                 push_back(TFile::Open(TString(inputDir + "CERN22_Escan_e+_1p5GeV/3_CERN22_Escan_e+_1p5GeV_dEdx" + Comment + ".root"))) ;
-  v_pTFile_dEdx.                 push_back(TFile::Open(TString(inputDir + "CERN22_Escan_p+_1p5GeV/3_CERN22_Escan_p+_1p5GeV_dEdx" + Comment + ".root"))) ;
-  v_pTFile_dEdx.                 push_back(TFile::Open(TString(inputDir + "CERN22_Escan_mu_1p5GeV/3_CERN22_Escan_mu_1p5GeV_dEdx" + Comment + ".root"))) ;
-  v_pTFile_dEdx.                 push_back(TFile::Open(TString(inputDir + "CERN22_Escan_pi_1p5GeV/3_CERN22_Escan_pi_1p5GeV_dEdx" + Comment + ".root"))) ;
+  v_pTFile_dEdx.                 push_back(TFile::Open(TString(inputDir + "CERN22_Escan_e+_" + Energy + "GeV/3_CERN22_Escan_e+_" + Energy + "GeV_dEdx" + Comment + ".root"))) ;
+  v_pTFile_dEdx.                 push_back(TFile::Open(TString(inputDir + "CERN22_Escan_p+_" + Energy + "GeV/3_CERN22_Escan_p+_" + Energy + "GeV_dEdx" + Comment + ".root"))) ;
+  v_pTFile_dEdx.                 push_back(TFile::Open(TString(inputDir + "CERN22_Escan_mu_" + Energy + "GeV/3_CERN22_Escan_mu_" + Energy + "GeV_dEdx" + Comment + ".root"))) ;
+  v_pTFile_dEdx.                 push_back(TFile::Open(TString(inputDir + "CERN22_Escan_pi_" + Energy + "GeV/3_CERN22_Escan_pi_" + Energy + "GeV_dEdx" + Comment + ".root"))) ;
 
 
   // Get functions
@@ -2036,7 +2036,8 @@ void DrawOut_Separation_Reduced(const std::string& inputDir, const std::string& 
     v_tf1_WFsum.            push_back(v_pTFile_dEdx[iPar]->Get<TF1>("tf1_WFsum")) ;
     v_tf1_XP.               push_back(v_pTFile_dEdx[iPar]->Get<TF1>("tf1_XP")) ;
   }
-
+  int p;
+  if((p = Energy.find("p"))  != (int)std::string::npos) Energy.replace(p, 1, ".") ;
 
   // Get mean & std
   float mean_WFsum[4] ;
@@ -2113,32 +2114,33 @@ void DrawOut_Separation_Reduced(const std::string& inputDir, const std::string& 
   std::string OutputFile2_Beg  = OutputFile2 + "(" ;
   std::string OutputFile2_End  = OutputFile2 + ")" ;
   TCanvas* pTCanvas2           = new TCanvas("TCanvas2", "TCanvas2", 1800, 1200) ;
-  TLegend* leg                = new TLegend(0.64,0.15,0.84,0.29) ; 
+  TLegend* leg                = new TLegend(0.64,0.22,0.89,0.39) ; 
   pTCanvas2->                    cd() ;
-  gStyle->                      SetOptStat(0) ;
 
     // Comparing particles dE/dx method by method
+  gStyle->                      SetTitleSize(0.07, "t") ;
   gStyle->                      SetOptStat(11) ;
   gStyle->                      SetOptFit(111) ;
 
 
-  v_th1_WFsum[0]->           SetName("positrons e^{+} 1.5GeV") ;
-  v_th1_WFsum[0]->           SetTitle("<dE/dx> 1.5GeV with WF") ;
+  v_th1_WFsum[0]->           SetName(TString("positrons e^{+} " + Energy + "GeV")) ;
+  v_th1_WFsum[0]->           SetTitle(TString("dE/dx " + Energy + "GeV with WF")) ;
   v_th1_WFsum[0]->           Scale(1/v_th1_WFsum[0]->GetEntries()) ;
-  v_tf1_WFsum[0]->            SetRange(0, 1500) ;
-  v_tf1_WFsum[0]->            SetParameter(0, v_tf1_WFsum[0]->Integral(0, 1500)/v_th1_WFsum[0]->GetEntries()) ;
+  v_th1_WFsum[2]->           Scale(1/v_th1_WFsum[2]->GetEntries()) ;
+  v_th1_WFsum[0]->           SetMaximum(std::max({v_th1_WFsum[0]->GetMaximum(), v_th1_WFsum[2]->GetMaximum()})*1.2) ;
+  v_tf1_WFsum[0]->            SetRange(0, 1800) ;
+  v_tf1_WFsum[0]->           SetParameter(0, v_tf1_WFsum[0]->Integral(0, 1500)/v_th1_WFsum[0]->GetEntries()) ;
   v_th1_WFsum[0]->           SetLineColor(kCyan+2) ;
   v_th1_WFsum[0]->           SetLineWidth(2) ;
-  v_tf1_WFsum[0]->            SetLineColor(kCyan+1) ;
+  v_tf1_WFsum[0]->            SetLineColor(kCyan) ;
   v_tf1_WFsum[0]->            SetLineWidth(2) ;
-  v_th1_WFsum[2]->           SetName("muons #mu^{+} 1.5GeV") ;
-  v_th1_WFsum[2]->           Scale(1/v_th1_WFsum[2]->GetEntries()) ;
-  v_tf1_WFsum[2]->            SetRange(0, 1500) ;
+  v_th1_WFsum[2]->           SetName(TString("muons #mu^{+} " + Energy + "GeV")) ;
+  v_tf1_WFsum[2]->            SetRange(0, 1800) ;
   v_tf1_WFsum[2]->            SetParameter(0, v_tf1_WFsum[2]->Integral(0, 1500)/v_th1_WFsum[2]->GetEntries()) ;
   v_th1_WFsum[2]->           SetLineColor(kCyan+2) ;
   v_th1_WFsum[2]->           SetLineWidth(2) ;
   v_th1_WFsum[2]->           SetLineStyle(2) ;
-  v_tf1_WFsum[2]->            SetLineColor(kCyan+1) ;
+  v_tf1_WFsum[2]->            SetLineColor(kCyan) ;
   v_tf1_WFsum[2]->            SetLineWidth(2) ;
   if(v_th1_WFsum[0]->GetMaximum() < v_th1_WFsum[2]->GetMaximum()) v_th1_WFsum[0]->SetAxisRange(0, 1.1*v_th1_WFsum[2]->GetMaximum(),  "Y") ;
   v_th1_WFsum[0]->           Draw("hist") ;
@@ -2150,8 +2152,8 @@ void DrawOut_Separation_Reduced(const std::string& inputDir, const std::string& 
   gPad->                        Update() ;
   SetStatBoxPosition(v_th1_WFsum[2], 0.64, 0.89, 0.39,  0.64) ;  
   pTCanvas2->                    Update() ;
-  leg->                         AddEntry(v_th1_WFsum[2], "#mu^{+} 1.5GeV ", "l") ;  
-  leg->                         AddEntry(v_th1_WFsum[0], "e^{+} 1.5GeV ", "l") ;  
+  leg->                         AddEntry(v_th1_WFsum[2], TString("#mu^{+} " + Energy + "GeV "), "l") ;  
+  leg->                         AddEntry(v_th1_WFsum[0], TString("e^{+} " + Energy + "GeV "), "l") ;  
   leg->                         DrawClone() ;
   TLatex* ptText        = new TLatex ;
   ptText->SetTextSize(0.05) ;
@@ -2159,7 +2161,7 @@ void DrawOut_Separation_Reduced(const std::string& inputDir, const std::string& 
   ptText->SetTextAlign(31) ;
   float sepa            = GetSeparation(mean_WFsum[0],     std_WFsum[0],      mean_WFsum[2],     std_WFsum[2]) ;
   float dsepa           = GetSeparationError(mean_WFsum[0], std_WFsum[0], dmean_WFsum[0], dstd_WFsum[0], mean_WFsum[2], std_WFsum[2], dmean_WFsum[2], dstd_WFsum[2]) ;
-  ptText->SetText(1200, 0.28, Form("S(e^{+} #mu^{+}) = %.2f #pm %.2f #sigma", sepa, dsepa)) ;
+  ptText->SetText(1200, gPad->GetUymin()+(gPad->GetUymax()-gPad->GetUymin())*0.9, Form("S(e^{+} | #mu^{+}) = %.2f #pm %.2f #sigma", sepa, dsepa)) ;
   ptText->SetTextColor(kCyan+2) ;
   ptText->DrawClone() ;
   delete ptText ;
@@ -2167,23 +2169,24 @@ void DrawOut_Separation_Reduced(const std::string& inputDir, const std::string& 
   pTCanvas2->                    Clear() ;
   leg->                         Clear() ;
 
-  v_th1_XP[0]->           SetName("positrons e^{+} 1GeV") ;
-  v_th1_XP[0]->           SetTitle("<dE/dx> 1.5GeV with XP") ;
+  v_th1_XP[0]->           SetName(TString("positrons e^{+} " + Energy + "GeV")) ;
+  v_th1_XP[0]->           SetTitle(TString("dE/dx " + Energy + "GeV with XP")) ;
   v_th1_XP[0]->           Scale(1/v_th1_XP[0]->GetEntries()) ;
-  v_tf1_XP[0]->            SetRange(0, 1500) ;
+  v_th1_XP[2]->           Scale(1/v_th1_XP[2]->GetEntries()) ;
+  v_th1_XP[0]->           SetMaximum(std::max({v_th1_XP[0]->GetMaximum(), v_th1_XP[2]->GetMaximum()})*1.2) ;
+  v_tf1_XP[0]->            SetRange(0, 1800) ;
   v_tf1_XP[0]->            SetParameter(0, v_tf1_XP[0]->Integral(0, 1500)/v_th1_XP[0]->GetEntries()) ;
   v_th1_XP[0]->           SetLineColor(kMagenta+2) ;
   v_th1_XP[0]->           SetLineWidth(2) ;
-  v_tf1_XP[0]->            SetLineColor(kMagenta+1) ;
+  v_tf1_XP[0]->            SetLineColor(kMagenta) ;
   v_tf1_XP[0]->            SetLineWidth(2) ;
-  v_th1_XP[2]->           SetName("muons #mu^{+} 1GeV") ;
-  v_th1_XP[2]->           Scale(1/v_th1_XP[2]->GetEntries()) ;
-  v_tf1_XP[2]->            SetRange(0, 1500) ;
+  v_th1_XP[2]->           SetName(TString("muons #mu^{+} " + Energy + "GeV")) ;
+  v_tf1_XP[2]->            SetRange(0, 1800) ;
   v_tf1_XP[2]->            SetParameter(0, v_tf1_XP[2]->Integral(0, 1500)/v_th1_XP[2]->GetEntries()) ;
   v_th1_XP[2]->           SetLineColor(kMagenta+2) ;
   v_th1_XP[2]->           SetLineWidth(2) ;
   v_th1_XP[2]->           SetLineStyle(2) ;
-  v_tf1_XP[2]->            SetLineColor(kMagenta+1) ;
+  v_tf1_XP[2]->            SetLineColor(kMagenta) ;
   v_tf1_XP[2]->            SetLineWidth(2) ;
   if(v_th1_XP[0]->GetMaximum() < v_th1_XP[2]->GetMaximum()) v_th1_XP[0]->SetAxisRange(0, 1.1*v_th1_XP[2]->GetMaximum(),  "Y") ;
   v_th1_XP[0]->           Draw("hist") ;
@@ -2195,8 +2198,8 @@ void DrawOut_Separation_Reduced(const std::string& inputDir, const std::string& 
   gPad->                        Update() ;
   SetStatBoxPosition(v_th1_XP[2], 0.64, 0.89, 0.39,  0.64) ;  
   pTCanvas2->                    Update() ;
-  leg->                         AddEntry(v_th1_XP[2], "#mu^{+} 1GeV ", "l") ;  
-  leg->                         AddEntry(v_th1_XP[0], "e^{+} 1GeV ", "l") ;  
+  leg->                         AddEntry(v_th1_XP[2], TString("#mu^{+} " + Energy + "GeV "), "l") ;  
+  leg->                         AddEntry(v_th1_XP[0], TString("e^{+} " + Energy + "GeV "), "l") ;  
   leg->                         DrawClone() ;
   TLatex* ptText2        = new TLatex ;
   ptText2->SetTextSize(0.05) ;
@@ -2204,7 +2207,7 @@ void DrawOut_Separation_Reduced(const std::string& inputDir, const std::string& 
   ptText2->SetTextAlign(31) ;
    sepa            = GetSeparation(mean_XP[0],     std_XP[0],      mean_XP[2],     std_XP[2]) ;
    dsepa           = GetSeparationError(mean_XP[0], std_XP[0], dmean_XP[0], dstd_XP[0], mean_XP[2], std_XP[2], dmean_XP[2], dstd_XP[2]) ;
-  ptText2->SetText(1200, 0.33, Form("S(e^{+} #mu^{+}) = %.2f #pm %.2f #sigma", sepa, dsepa)) ;
+  ptText2->SetText(1200, gPad->GetUymin()+(gPad->GetUymax()-gPad->GetUymin())*0.9, Form("S(e^{+} | #mu^{+}) = %.2f #pm %.2f #sigma", sepa, dsepa)) ;
   ptText2->SetTextColor(kMagenta+2) ;
   ptText2->DrawClone() ;
   delete ptText2 ;
@@ -2618,29 +2621,21 @@ void DrawOut_Yscan(const std::string& inputDir, const std::string& Comment)
   gStyle->                      SetPadTickY(1);
   int ipoint              = 0 ;
   int ny                  = 11 ;
-  std::string Y_arr[]   = {"m140", "m120", "m0", "m80", "m60", "m40", "0", "20", "40", "60", "80"} ;
+  std::string Y_arr[]   = {"m140", "m120", "m100", "m80", "m60", "m40", "0", "20", "40", "60", "80"} ;
   int         Row_arr[] = {27, 26, 24, 22, 20, 18, 12, 10, 8, 6, 4} ;
 
   // Vectors of TFiles & TH1Fs & TF1s & TGEs
   std::vector<TFile*>       v_pTFile ;
   std::vector<TH1F*>        v_h1f_WF ;
-  std::vector<TH1F*>        v_h1f_GPv3 ;
-  std::vector<TH1F*>        v_h1f_GPv6 ;
   std::vector<TH1F*>        v_h1f_XP ;
   std::vector<TF1*>         v_tf1_WF ;
-  std::vector<TF1*>         v_tf1_GPv3 ;
-  std::vector<TF1*>         v_tf1_GPv6 ;
   std::vector<TF1*>         v_tf1_XP ;
 
   for(int iy = 0 ; iy < ny ; iy++){
     v_pTFile.                 push_back(TFile::Open(TString(inputDir + "/DESY21_y" + Y_arr[iy] + "/3_DESY21_y" + Y_arr[iy] + "_dEdx" + Comment + ".root"))) ;
-    v_h1f_WF.                 push_back(v_pTFile[iy]->   Get<TH1F>("h1f_WFsum_0")) ;
-    v_h1f_GPv3.               push_back(v_pTFile[iy]->   Get<TH1F>("h1f_GPv3_0")) ;
-    v_h1f_GPv6.               push_back(v_pTFile[iy]->   Get<TH1F>("h1f_GPv6_0")) ;
-    v_h1f_XP.                 push_back(v_pTFile[iy]->   Get<TH1F>("h1f_XP_0")) ;
-    v_tf1_WF.                 push_back(v_h1f_WF[iy]->   GetFunction("tf1_WFsum_0")) ;
-    v_tf1_GPv3.               push_back(v_h1f_GPv3[iy]-> GetFunction("tf1_GPv3_0")) ;
-    v_tf1_GPv6.               push_back(v_h1f_GPv6[iy]-> GetFunction("tf1_GPv6_0")) ;
+    v_h1f_WF.                 push_back(v_pTFile[iy]->   Get<TH1F>("h1f_WFsum")) ;
+    v_h1f_XP.                 push_back(v_pTFile[iy]->   Get<TH1F>("h1f_XP")) ;
+    v_tf1_WF.                 push_back(v_h1f_WF[iy]->   GetFunction("tf1_WFsum")) ;
     v_tf1_XP.                 push_back(v_h1f_XP[iy]->   GetFunction("tf1_XP")) ;
   }
 
@@ -2754,12 +2749,8 @@ void DrawOut_Yscan(const std::string& inputDir, const std::string& Comment)
 
   v_pTFile.                     clear() ;
   v_h1f_WF.                     clear() ;
-  v_h1f_GPv3.                   clear() ;
-  v_h1f_GPv6.                   clear() ;
   v_h1f_XP.                     clear() ;
   v_tf1_WF.                     clear() ;
-  v_tf1_GPv3.                   clear() ;
-  v_tf1_GPv6.                   clear() ;
   v_tf1_XP.                     clear() ;
 }
 
@@ -2925,103 +2916,61 @@ void DrawOut_Thetascan(const std::string& inputDir, const std::string& Comment)
   // Vectors of TFiles & TH1Fs & TF1s & TGEs
   std::vector<TFile*>       v_pTFile ;
   std::vector<TH1F*>        v_h1f_WF ;
-  std::vector<TH1F*>        v_h1f_GPv3 ;
-  std::vector<TH1F*>        v_h1f_GPv6 ;
   std::vector<TH1F*>        v_h1f_XP ;
   std::vector<TF1*>         v_tf1_WF ;
-  std::vector<TF1*>         v_tf1_GPv3 ;
-  std::vector<TF1*>         v_tf1_GPv6 ;
   std::vector<TF1*>         v_tf1_XP ;
 
   int theta_arr[] = {-45, -20, 20} ;
   for(int itheta = 0 ; itheta < ntheta ; itheta++){
     v_pTFile.                 push_back(TFile::Open(TString(inputDir + "/DESY21_theta" + theta_arr[itheta] + "/3_DESY21_theta" + theta_arr[itheta] + "_dEdx" + Comment + ".root"))) ;
-    v_h1f_WF.                 push_back(v_pTFile[itheta]->   Get<TH1F>("h1f_WFsum_0")) ;
-    v_h1f_GPv3.               push_back(v_pTFile[itheta]->   Get<TH1F>("h1f_GPv3_0")) ;
-    v_h1f_GPv6.               push_back(v_pTFile[itheta]->   Get<TH1F>("h1f_GPv6_0")) ;
-    v_h1f_XP.                 push_back(v_pTFile[itheta]->   Get<TH1F>("h1f_XP_0")) ;
-    v_tf1_WF.                 push_back(v_h1f_WF[itheta]->   GetFunction("tf1_WFsum_0")) ;
-    v_tf1_GPv3.               push_back(v_h1f_GPv3[itheta]-> GetFunction("tf1_GPv3_0")) ;
-    v_tf1_GPv6.               push_back(v_h1f_GPv6[itheta]-> GetFunction("tf1_GPv6_0")) ;
+    v_h1f_WF.                 push_back(v_pTFile[itheta]->   Get<TH1F>("h1f_WFsum")) ;
+    v_h1f_XP.                 push_back(v_pTFile[itheta]->   Get<TH1F>("h1f_XP")) ;
+    v_tf1_WF.                 push_back(v_h1f_WF[itheta]->   GetFunction("tf1_WFsum")) ;
     v_tf1_XP.                 push_back(v_h1f_XP[itheta]->   GetFunction("tf1_XP")) ;
   }
 
   TGraphErrors* pTGE_reso_WF    = new TGraphErrors() ;
-  TGraphErrors* pTGE_reso_GPv3  = new TGraphErrors() ;
-  TGraphErrors* pTGE_reso_GPv6  = new TGraphErrors() ;
   TGraphErrors* pTGE_reso_XP    = new TGraphErrors() ;
 
   TGraphErrors* pTGE_mean_WF    = new TGraphErrors() ;
-  TGraphErrors* pTGE_mean_GPv3  = new TGraphErrors() ;
-  TGraphErrors* pTGE_mean_GPv6  = new TGraphErrors() ;
   TGraphErrors* pTGE_mean_XP    = new TGraphErrors() ;
 
   TGraphErrors* pTGE_std_WF     = new TGraphErrors() ;
-  TGraphErrors* pTGE_std_GPv3   = new TGraphErrors() ;
-  TGraphErrors* pTGE_std_GPv6   = new TGraphErrors() ;
   TGraphErrors* pTGE_std_XP     = new TGraphErrors() ;
 
   // Get mean & std
   float mean_WF[ntheta] ;
-  float mean_GPv3[ntheta] ;
-  float mean_GPv6[ntheta] ;
   float mean_XP[ntheta] ;
   float dmean_WF[ntheta] ;
-  float dmean_GPv3[ntheta] ;
-  float dmean_GPv6[ntheta] ;
   float dmean_XP[ntheta] ;
   float std_WF[ntheta] ;
-  float std_GPv3[ntheta] ;
-  float std_GPv6[ntheta] ;
   float std_XP[ntheta] ;
   float dstd_WF[ntheta] ;
-  float dstd_GPv3[ntheta] ;
-  float dstd_GPv6[ntheta] ;
   float dstd_XP[ntheta] ;
 
   for(int itheta = 0 ; itheta < ntheta ; itheta++){
     mean_WF[itheta]                 = v_tf1_WF[itheta]->    GetParameter(1) ;
-    mean_GPv3[itheta]               = v_tf1_GPv3[itheta]->  GetParameter(1) ;
-    mean_GPv6[itheta]               = v_tf1_GPv6[itheta]->  GetParameter(1) ;
     mean_XP[itheta]                 = v_tf1_XP[itheta]->    GetParameter(1) ;
     std_WF[itheta]                  = v_tf1_WF[itheta]->    GetParameter(2) ;
-    std_GPv3[itheta]                = v_tf1_GPv3[itheta]->  GetParameter(2) ;
-    std_GPv6[itheta]                = v_tf1_GPv6[itheta]->  GetParameter(2) ;
     std_XP[itheta]                  = v_tf1_XP[itheta]->    GetParameter(2) ;
     dmean_WF[itheta]                = v_tf1_WF[itheta]->    GetParError(1) ;
-    dmean_GPv3[itheta]              = v_tf1_GPv3[itheta]->  GetParError(1) ;
-    dmean_GPv6[itheta]              = v_tf1_GPv6[itheta]->  GetParError(1) ;
     dmean_XP[itheta]                = v_tf1_XP[itheta]->    GetParError(1) ;
     dstd_WF[itheta]                 = v_tf1_WF[itheta]->    GetParError(2) ;
-    dstd_GPv3[itheta]               = v_tf1_GPv3[itheta]->  GetParError(2) ;
-    dstd_GPv6[itheta]               = v_tf1_GPv6[itheta]->  GetParError(2) ;
     dstd_XP[itheta]                 = v_tf1_XP[itheta]->    GetParError(2) ;
 
     pTGE_reso_WF->  SetPoint      (ipoint, theta_arr[itheta], std_WF[itheta]/mean_WF[itheta]*100) ;
-    pTGE_reso_GPv3->SetPoint      (ipoint, theta_arr[itheta], std_GPv3[itheta]/mean_GPv3[itheta]*100) ;
-    pTGE_reso_GPv6->SetPoint      (ipoint, theta_arr[itheta], std_GPv6[itheta]/mean_GPv6[itheta]*100) ;
     pTGE_reso_XP->  SetPoint      (ipoint, theta_arr[itheta], std_XP[itheta]/mean_XP[itheta]*100) ;
     pTGE_reso_WF->  SetPointError (ipoint, 0,         GetResoError(v_tf1_WF[itheta])) ;
-    pTGE_reso_GPv3->SetPointError (ipoint, 0,         GetResoError(v_tf1_GPv3[itheta])) ;
-    pTGE_reso_GPv6->SetPointError (ipoint, 0,         GetResoError(v_tf1_GPv6[itheta])) ;
     pTGE_reso_XP->  SetPointError (ipoint, 0,         GetResoError(v_tf1_XP[itheta])) ;
 
     pTGE_mean_WF->  SetPoint      (ipoint, theta_arr[itheta], mean_WF[itheta]) ;
-    pTGE_mean_GPv3->SetPoint      (ipoint, theta_arr[itheta], mean_GPv3[itheta]) ;
-    pTGE_mean_GPv6->SetPoint      (ipoint, theta_arr[itheta], mean_GPv6[itheta]) ;
     pTGE_mean_XP->  SetPoint      (ipoint, theta_arr[itheta], mean_XP[itheta]) ;
     pTGE_mean_WF->  SetPointError (ipoint, 0,         dmean_WF[itheta]) ;
-    pTGE_mean_GPv3->SetPointError (ipoint, 0,         dmean_GPv3[itheta]) ;
-    pTGE_mean_GPv6->SetPointError (ipoint, 0,         dmean_GPv6[itheta]) ;
     pTGE_mean_XP->  SetPointError (ipoint, 0,         dmean_XP[itheta]) ;
 
     pTGE_std_WF->  SetPoint       (ipoint, theta_arr[itheta], std_WF[itheta]) ;
-    pTGE_std_GPv3->SetPoint       (ipoint, theta_arr[itheta], std_GPv3[itheta]) ;
-    pTGE_std_GPv6->SetPoint       (ipoint, theta_arr[itheta], std_GPv6[itheta]) ;
     pTGE_std_XP->  SetPoint       (ipoint, theta_arr[itheta], std_XP[itheta]) ;
     pTGE_std_WF->  SetPointError  (ipoint, 0,         dstd_WF[itheta]) ;
-    pTGE_std_GPv3->SetPointError  (ipoint, 0,         dstd_GPv3[itheta]) ;
-    pTGE_std_GPv6->SetPointError  (ipoint, 0,         dstd_GPv6[itheta]) ;
     pTGE_std_XP->  SetPointError  (ipoint, 0,         dstd_XP[itheta]) ;
 
     ipoint++ ;
@@ -3046,18 +2995,11 @@ void DrawOut_Thetascan(const std::string& inputDir, const std::string& Comment)
   pTGE_reso_WF->                SetMinimum(4) ;
   pTGE_reso_WF->                SetMaximum(12) ;
   pTGE_reso_WF->                SetNameTitle("pTGE_reso_WF", "Resolution vs #theta angle;#theta angle (#circ);resolution (%)") ;
-  pTGE_mean_WF->                SetNameTitle("pTGE_mean_WF", "Mean vs #varphi angle;#varphi angle (#circ);mean (ADC count)") ;
   Graphic_setup(pTGE_reso_WF,   3, 20, kCyan+2,    1, kBlack) ;
-  Graphic_setup(pTGE_reso_GPv3, 3, 22, kGreen+3,   1, kBlack) ;
-  Graphic_setup(pTGE_reso_GPv6, 3, 23, kOrange-3,  1, kBlack) ;
   Graphic_setup(pTGE_reso_XP,   3, 21, kMagenta+2, 1, kBlack) ;
   pTGE_reso_WF->                Draw("ap") ;
-  pTGE_reso_GPv3->              Draw("p same") ;
-  pTGE_reso_GPv6->              Draw("p same") ;
   pTGE_reso_XP->                Draw("p same") ;
   leg->                         AddEntry(pTGE_reso_WF, "WF ", "ep") ;  
-  leg->                         AddEntry(pTGE_reso_GPv3, "GPv3 ", "ep") ;  
-  leg->                         AddEntry(pTGE_reso_GPv6, "GPv6 ", "ep") ;  
   leg->                         AddEntry(pTGE_reso_XP, "XP ", "ep") ;  
   leg->                         Draw() ;
   pTCanvas->                    SaveAs(OutputFile_Beg.c_str()) ;
@@ -3069,18 +3011,11 @@ void DrawOut_Thetascan(const std::string& inputDir, const std::string& Comment)
   pTGE_mean_WF->                SetMinimum(600) ;
   pTGE_mean_WF->                SetMaximum(1200) ;
   pTGE_mean_WF->                SetNameTitle("pTGE_mean_WF", "Mean vs #theta angle;#theta angle (#circ);mean (ADC count)") ;
-  pTGE_mean_WF->                SetNameTitle("pTGE_mean_WF", "Mean vs #varphi angle;#varphi angle (#circ);mean (ADC count)") ;
   Graphic_setup(pTGE_mean_WF,   3, 20, kCyan+2,    1, kBlack) ;
-  Graphic_setup(pTGE_mean_GPv3, 3, 22, kGreen+3,   1, kBlack) ;
-  Graphic_setup(pTGE_mean_GPv6, 3, 23, kOrange-3,  1, kBlack) ;
   Graphic_setup(pTGE_mean_XP,   3, 21, kMagenta+2, 1, kBlack) ;
   pTGE_mean_WF->                Draw("ap") ;
-  pTGE_mean_GPv3->              Draw("p same") ;
-  pTGE_mean_GPv6->              Draw("p same") ;
   pTGE_mean_XP->                Draw("p same") ;
   leg->                         AddEntry(pTGE_mean_WF, "WF ", "ep") ;  
-  leg->                         AddEntry(pTGE_mean_GPv3, "GPv3 ", "ep") ;  
-  leg->                         AddEntry(pTGE_mean_GPv6, "GPv6 ", "ep") ;  
   leg->                         AddEntry(pTGE_mean_XP, "XP ", "ep") ;  
   leg->                         Draw() ;
   pTCanvas->                    SaveAs(OutputFile.c_str()) ;
@@ -3092,18 +3027,11 @@ void DrawOut_Thetascan(const std::string& inputDir, const std::string& Comment)
   pTGE_std_WF->                 SetMinimum(40) ;
   pTGE_std_WF->                 SetMaximum(100)  ;
   pTGE_std_WF->                 SetNameTitle("pTGE_std_WF", "Standard deviation vs #theta angle;#theta angle (#circ);standard deviation (ADC count)") ;
-  pTGE_mean_WF->                SetNameTitle("pTGE_mean_WF", "Mean vs #varphi angle;#varphi angle (#circ);mean (ADC count)") ;
   Graphic_setup(pTGE_std_WF,   3, 20, kCyan+2,    1, kBlack) ;
-  Graphic_setup(pTGE_std_GPv3, 3, 22, kGreen+3,   1, kBlack) ;
-  Graphic_setup(pTGE_std_GPv6, 3, 23, kOrange-3,  1, kBlack) ;
   Graphic_setup(pTGE_std_XP,   3, 21, kMagenta+2, 1, kBlack) ;
   pTGE_std_WF->                 Draw("ap") ;
-  pTGE_std_GPv3->               Draw("p same") ;
-  pTGE_std_GPv6->               Draw("p same") ;
   pTGE_std_XP->                 Draw("p same") ;
   leg->                         AddEntry(pTGE_std_WF, "WF ", "ep") ;  
-  leg->                         AddEntry(pTGE_std_GPv3, "GPv3 ", "ep") ;  
-  leg->                         AddEntry(pTGE_std_GPv6, "GPv6 ", "ep") ;  
   leg->                         AddEntry(pTGE_std_XP, "XP ", "ep") ;  
   leg->                         Draw() ;
   pTCanvas->                    SaveAs(OutputFile_End.c_str()) ;
@@ -3115,23 +3043,15 @@ void DrawOut_Thetascan(const std::string& inputDir, const std::string& Comment)
   // for(int itheta = 0 ; itheta < ntheta ; itheta++){
   //   delete                      v_pTFile[itheta] ;   v_pTFile[itheta]  = 0 ;
   //   delete                      v_h1f_WF[itheta] ;   v_h1f_WF[itheta]    = 0 ;
-  //   delete                      v_h1f_GPv3[itheta] ; v_h1f_GPv3[itheta]  = 0 ;
-  //   delete                      v_h1f_GPv6[itheta] ; v_h1f_GPv6[itheta]  = 0 ;
   //   delete                      v_h1f_XP[itheta] ;   v_h1f_XP[itheta]    = 0 ;
   //   delete                      v_tf1_WF[itheta] ;   v_tf1_WF[itheta]    = 0 ;
-  //   delete                      v_tf1_GPv3[itheta] ; v_tf1_GPv3[itheta]  = 0 ;
-  //   delete                      v_tf1_GPv6[itheta] ; v_tf1_GPv6[itheta]  = 0 ;
   //   delete                      v_tf1_XP[itheta] ;   v_tf1_XP[itheta]    = 0 ;
   // }
 
   v_pTFile.                     clear() ;
   v_h1f_WF.                     clear() ;
-  v_h1f_GPv3.                   clear() ;
-  v_h1f_GPv6.                   clear() ;
   v_h1f_XP.                     clear() ;
   v_tf1_WF.                     clear() ;
-  v_tf1_GPv3.                   clear() ;
-  v_tf1_GPv6.                   clear() ;
   v_tf1_XP.                     clear() ;
 }
 

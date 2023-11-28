@@ -17,11 +17,10 @@ void DrawOut_Versions(const std::string& inputDir, const std::string& Method, co
 
 
 // Draw separation power histograms for all methods and particles
-void s(const std::string& inputDir, const std::string& Comment);
+void DrawOut_Separation(const std::string& inputDir, const std::string& Comment);
 
 // Draw separation power histograms for all methods and particles only for WF & XP
-void DrawOut_Separation_Reduced(const std::string& inputDir, const std::string& Comment);
-
+void DrawOut_Separation_Reduced(const std::string& inputDir, const std::string& Comment, std::string Energy);
 
 // Draw all scans together
 void DrawOut_Scans(const std::string& inputDir, const std::string& Comment);

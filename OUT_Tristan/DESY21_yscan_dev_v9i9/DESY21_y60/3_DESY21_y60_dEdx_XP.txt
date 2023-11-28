@@ -1,0 +1,87 @@
+Tag           : DESY21_y60
+Comment       : _zcalc_G2_WF4
+FileName     : ../Data_DESY21_dev_v9/yscan/Y60_Z0_iter9.root
+SelectionSet  : T_DESY21_Event
+NbrOfMod      : 0
+Data_to_Use   : 0
+OUTDirName    : OUT_Tristan/DESY21_yscan_dev_v9i9/DESY21_y60/
+
+Gain & RC maps: loaded
+Average Gain in ERAM01 = 1947.77
+ERAM01: RC   hole in  iX = 10 | iY = 16 | value reset at 129.29
+ERAM01: Gain hole in  iX = 10 | iY = 16 | value reset at 1889.24
+
+-------------->Predefined selection T_DESY21_Event
+Number of entries :11846
+TLow = 51 | THigh = 86
+
+-------------->List of selections
+Apply selection  1 -> Remove clusters in first and last columns 
+
+Apply selection 11 -> Remove clusters out of time (Event Based) 
+                      |TLeading -TLeadingMeanOverEvent| <= m_Cut_Stage11_EventBased (=     3)
+
+Apply selection 120 -> Remove clusters out of time  
+                      m_Cut_Stage120_TLow <= TLeading <= m_Cut_Stage120_THigh 
+                      m_Cut_Stage120_TLow  =   51
+                      m_Cut_Stage120_THigh =   86
+
+Apply selection 15 -> Remove Events with an average pad multiplicity too high or too low 
+                      Pad Multiplicity >  m_Cut_StageT15_APM_Low  (=  2.0)
+                      Pad Multiplicity <= m_Cut_StageT15_APM_High (=  4.0)
+
+Apply selection 10 -> Remove clusters with too many pads 
+                      Npads <= m_Cut_Stage10_Npads_Hig (=   5)
+
+Apply selection 14 -> Remove Clusters with a too high APad 
+                      APad >= m_Cut_Stage14_Amax_Low (=     0)
+                      APad <= m_Cut_Stage14_Amax_Hig (=  3700)
+
+Apply selection  5 -> Reject Events with too few clusters
+                      NClusters >= m_Cut_Stage5_NCluster_Low (=   34)
+
+
+zdrift        = 90 mm
+PT            = 412 ns
+TB            = 50 ns/time bin
+PT/TB         = 8 time bins
+z method      : zcalc
+cut length    = 2 mm
+
+Processing events:
+0/11846
+ALERT: 1 walls crossed for a pad in entry #355
+38 39 7 8
+39 -nan 7 7
+6 0 -0
+ALERT: 3 walls crossed for a pad in entry #355
+38 39 6 7
+78 39 7 7
+6 0 -0
+1000/11846
+2000/11846
+3000/11846
+4000/11846
+5000/11846
+6000/11846
+7000/11846
+8000/11846
+9000/11846
+10000/11846
+11000/11846
+11845/11846
+11846 real events
+
+Selection Statistics 
+ #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
+    0  Stage1    11846    11846 (    0.00)  (    0.00)     11846    11846 (    0.00)  (    0.00)    402603   402603 (    0.00)  (    0.00)   1473556  1473556 (    0.00)  (    0.00) 
+    1 Stage11    11846    11664 (   -1.54)  (   -1.54)     11846    11664 (   -1.54)  (   -1.54)    402603   388115 (   -3.60)  (   -3.60)   1473556  1405606 (   -4.61)  (   -4.61) 
+    2Stage120    11664    11455 (   -1.79)  (   -3.30)     11664    11455 (   -1.79)  (   -3.30)    388115   381275 (   -1.76)  (   -5.30)   1405606  1386364 (   -1.37)  (   -5.92) 
+    3StageT15    11455    10317 (   -9.93)  (  -12.91)     11455    10317 (   -9.93)  (  -12.91)    381275   345395 (   -9.41)  (  -14.21)   1386364  1231182 (  -11.19)  (  -16.45) 
+    4 Stage10    10317    10317 (    0.00)  (  -12.91)     10317    10317 (    0.00)  (  -12.91)    345395   342307 (   -0.89)  (  -14.98)   1231182  1212064 (   -1.55)  (  -17.75) 
+    5 Stage14    10317    10317 (    0.00)  (  -12.91)     10317    10317 (    0.00)  (  -12.91)    342307   338802 (   -1.02)  (  -15.85)   1212064  1195930 (   -1.33)  (  -18.84) 
+    6  Stage5    10317     4839 (  -53.10)  (  -59.15)     10317     4839 (  -53.10)  (  -59.15)    338802   164526 (  -51.44)  (  -59.13)   1195930   575264 (  -51.90)  (  -60.96) 
+  Summary Sel    11846     4839             (  -59.15)     11846     4839             (  -59.15)    402603   164526             (  -59.13)   1473556   575264             (  -60.96) 
+Fitting: Started... done!
+Checks: OUT_Tristan/DESY21_yscan_dev_v9i9/DESY21_y60/2_DESY21_y60_Checks_zcalc_G2_WF4.root
+dEdx: OUT_Tristan/DESY21_yscan_dev_v9i9/DESY21_y60/3_DESY21_y60_dEdx_zcalc_G2_WF4.root
