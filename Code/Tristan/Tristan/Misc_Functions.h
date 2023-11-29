@@ -26,6 +26,10 @@ void Set120_CSV(const std::string& filename, const std::string& targetWord, int 
 bool is_in(std::vector<double> v, double val);
 
 
+// Equivalent of numpy linspace (npoints uniformly spaced between start and end)
+std::vector<double> linspace(double start, double end, int numPoints);
+
+
 
 /* GENERAL PHYSICS */
 // Bethe-Bloch function

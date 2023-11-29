@@ -1,5 +1,5 @@
 Tag           : DESY21_z460_PT412
-Comment       : _zcalc_G2_WF4
+Comment       : _zfile_G2_WF4_test_LUTvROOT
 FileName     : ../Data_DESY21_dev_v9/zscan_PT412/z_360_275_412_02T_26_460_iter9.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
@@ -45,9 +45,9 @@ zdrift        = 550 mm
 PT            = 412 ns
 TB            = 50 ns/time bin
 PT/TB         = 8 time bins
-z method      : zcalc
+z method      : zfile
 cut length    = 2 mm
 
 Processing events:
 0/13454
-1000/13454
+LUT_2D_RC100_Z550

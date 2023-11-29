@@ -1,7 +1,7 @@
 #include "Tristan/dEdx.h"
 #include "Tristan/dEdx_func.h"
 #include "Tristan/Misc_Functions.h"
-#include "Tristan/ReadLUT.h"
+#include "Tristan/ReadLUT_vROOT.h"
 
 #include <cmath>
 #include <numeric>
@@ -34,7 +34,7 @@ void dEdx( const std::string& OutDir,
                           Uploader*          pUploader,
                           int         const& NbrOfMod,
                           int         const& Data_to_Use,
-                          Interpol4          LUT,
+                          LUT4               LUT,
                           int         const& PT,
                           int         const& TB,
                           float       const& zdrift)
@@ -64,9 +64,10 @@ void dEdx( const std::string& OutDir,
   int gain_corr         = 1 ;                                   // apply XP gain correction
 
   // Parameters for the LUT
-  int   size            = 200 ;                                 // LUT definition along d & phi
-  float d_step          = L/(size-1) ;                          // d   increment between LUTs
-  float phi_step        = (90-2e-6)/(size-1) ;                  // phi increment between LUTs
+  int   dsize           = 100 ;                                 // LUT definition along d
+  int   phisize         = 200 ;                                 // LUT definition along phi
+  float d_step          = L/(dsize-1) ;                          // d   increment between LUTs
+  float phi_step        = (90-2e-6)/(phisize-1) ;                  // phi increment between LUTs
   int   z_step          = 50 ;                                  // z   increment between LUTs
   int   RC_step         = 5 ;                                   // RC  increment between LUTs
 
@@ -318,7 +319,6 @@ void dEdx( const std::string& OutDir,
           float phiconv                   = fabs(phi)/phi_step ;
           // Interpolation d
           // d                              += dd;
-          if(d < -L/2) d                  = -L/2 ;
           if(d >  L/2) d                  =  L/2 ;
           float dconv                     = (d+L/2)/d_step ;  // +L/2 shift because LUT indices have to be > 0 but d can be < 0
           // Interpolation Z
@@ -333,10 +333,10 @@ void dEdx( const std::string& OutDir,
           if(RC_pad > 150) RC_pad         = 150 ;
           float RCconv                    = (RC_pad-50)/RC_step ;
 
-          float ratio_zfile               = LUT.Interpolated(dconv, phiconv, zfile, RCconv) ;
-          float ratio_zcalc               = LUT.Interpolated(dconv, phiconv, zconv, RCconv) ;
-          // float ratio_zfile               = LUT3.Interpolated(dconv, phiconv, zfile) ;
-          // float ratio_zcalc               = LUT3.Interpolated(dconv, phiconv, zconv) ;
+          float ratio_zfile               = LUT.Interpolate(dconv, phiconv, zfile, RCconv) ;
+          float ratio_zcalc               = LUT.Interpolate(dconv, phiconv, zconv, RCconv) ;
+          // float ratio_zfile               = LUT3.Interpolate(dconv, phiconv, zfile) ;
+          // float ratio_zcalc               = LUT3.Interpolate(dconv, phiconv, zconv) ;
 
           float ratio ;
           if(z_method == "zcalc") ratio   = ratio_zcalc ;
@@ -363,9 +363,9 @@ void dEdx( const std::string& OutDir,
 
           // XP: List of pads to truncate (crossed pads wrt to DPR_max)
           RankedValue rank_Qanode ;  
-          rank_Qanode.Rank                   = N_cross_Evt ; 
-          rank_Qanode.Value                  = A_pad*ratio/trk_len_pad ;  // DPR amplitude divided by track length in pad
-          v_rank_Cross.                            push_back(rank_Qanode) ;
+          rank_Qanode.Rank                = N_cross_Evt ; 
+          rank_Qanode.Value               = A_pad*ratio/trk_len_pad ;  // DPR amplitude divided by track length in pad
+          v_rank_Cross.                     push_back(rank_Qanode) ;
 
           N_cross_Evt++ ;
         }
@@ -463,9 +463,9 @@ void dEdx( const std::string& OutDir,
       for(int i=0; i<N_cross_clust_trc_Evt; i++)  h2f_WFstartrcvsLen->Fill(v_len_clust_Evt[v_rank_WF[i].Rank]*1000,  v_rank_WF[v_rank_WF[i].Rank].Value) ;
 
       // XP
-      std::sort(v_rank_Cross.begin(), v_rank_Cross.end()) ;
       float track_len_trc_XP              = 0 ;
       float XP                            = 0 ;
+      std::sort(v_rank_Cross.begin(), v_rank_Cross.end()) ;
       for(int iP = 0 ; iP < (int)N_cross_trc_Evt ; iP++){
         track_len_trc_XP                 += v_len_cross_Evt[v_rank_Cross[iP].Rank]*100 ;
         XP                               += v_WF_cross_Evt[v_rank_Cross[iP].Rank]->GetMaximum()*v_ratio_Evt[v_rank_Cross[iP].Rank] ;

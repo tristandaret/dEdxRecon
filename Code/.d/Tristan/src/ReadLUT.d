@@ -1,12 +1,7 @@
-.o/Tristan/src/dEdx_func.o .d/Tristan/src/dEdx_func.d : Tristan/src/dEdx_func.cxx Tristan/Tristan/dEdx_func.h \
- SampleTools/SampleTools/Uploader.h Misc/Misc/Misc.h \
- EvtModel/EvtModel/Event.h EvtModel/EvtModel/Pad.h \
- SignalModel/SignalModel/Model_ReadOutGeometry.h \
- SignalModel/SignalModel/Model_Electronics.h \
- SignalModel/SignalModel/Model_ChargeI.h EvtModel/EvtModel/Cluster.h \
- EvtModel/EvtModel/FitOutput.h /home/td263283/root/include/TCanvas.h \
- /home/td263283/root/include/TPad.h \
- /home/td263283/root/include/TVirtualPad.h \
+.o/Tristan/src/ReadLUT.o .d/Tristan/src/ReadLUT.d : Tristan/src/ReadLUT.cxx Tristan/Tristan/ReadLUT_vROOT.h \
+ Misc/Misc/Misc.h Tristan/Tristan/Misc_Functions.h Misc/Misc/Util.h \
+ /home/td263283/root/include/TGraph.h \
+ /home/td263283/root/include/TNamed.h \
  /home/td263283/root/include/TObject.h \
  /home/td263283/root/include/Rtypes.h \
  /home/td263283/root/include/RtypesCore.h \
@@ -24,18 +19,37 @@
  /home/td263283/root/include/TStorage.h \
  /home/td263283/root/include/TVersionCheck.h \
  /home/td263283/root/include/RVersion.h \
+ /home/td263283/root/include/TString.h \
+ /home/td263283/root/include/TMathBase.h \
+ /home/td263283/root/include/ROOT/RStringView.hxx \
+ /home/td263283/root/include/ROOT/TypeTraits.hxx \
  /home/td263283/root/include/TAttLine.h \
  /home/td263283/root/include/TAttFill.h \
+ /home/td263283/root/include/TAttMarker.h \
+ /home/td263283/root/include/TVectorFfwd.h \
+ /home/td263283/root/include/TVectorDfwd.h \
+ /home/td263283/root/include/TFitResultPtr.h \
+ /home/td263283/root/include/TH2F.h /home/td263283/root/include/TH2.h \
+ /home/td263283/root/include/TH1.h /home/td263283/root/include/TAxis.h \
+ /home/td263283/root/include/TAttAxis.h \
+ /home/td263283/root/include/TArrayD.h \
+ /home/td263283/root/include/TArray.h \
+ /home/td263283/root/include/TArrayC.h \
+ /home/td263283/root/include/TArrayS.h \
+ /home/td263283/root/include/TArrayI.h \
+ /home/td263283/root/include/TArrayF.h \
+ /home/td263283/root/include/Foption.h \
+ /home/td263283/root/include/ROOT/EExecutionPolicy.hxx \
+ /home/td263283/root/include/TMatrixFBasefwd.h \
+ /home/td263283/root/include/TMatrixDBasefwd.h \
+ /home/td263283/root/include/TCanvas.h /home/td263283/root/include/TPad.h \
+ /home/td263283/root/include/TVirtualPad.h \
  /home/td263283/root/include/TAttPad.h \
  /home/td263283/root/include/TQObject.h \
  /home/td263283/root/include/TList.h \
  /home/td263283/root/include/TSeqCollection.h \
  /home/td263283/root/include/TCollection.h \
  /home/td263283/root/include/TIterator.h \
- /home/td263283/root/include/TString.h \
- /home/td263283/root/include/TMathBase.h \
- /home/td263283/root/include/ROOT/RStringView.hxx \
- /home/td263283/root/include/ROOT/TypeTraits.hxx \
  /home/td263283/root/include/TVirtualRWMutex.h \
  /home/td263283/root/include/TVirtualMutex.h \
  /home/td263283/root/include/ROOT/RRangeCast.hxx \
@@ -45,36 +59,22 @@
  /home/td263283/root/include/TInterpreter.h \
  /home/td263283/root/include/TDataType.h \
  /home/td263283/root/include/TDictionary.h \
- /home/td263283/root/include/TNamed.h \
  /home/td263283/root/include/ESTLType.h \
  /home/td263283/root/include/TInterpreterValue.h \
  /home/td263283/root/include/GuiTypes.h \
  /home/td263283/root/include/Buttons.h \
  /home/td263283/root/include/TAttBBox2D.h \
  /home/td263283/root/include/TAttCanvas.h \
- /home/td263283/root/include/TVirtualFitter.h \
- /home/td263283/root/include/TMethodCall.h \
- /home/td263283/root/include/Foption.h \
- /home/td263283/root/include/ROOT/EExecutionPolicy.hxx \
- /home/td263283/root/include/TMatrixD.h \
- /home/td263283/root/include/TMatrixT.h \
- /home/td263283/root/include/TMatrixTBase.h \
- /home/td263283/root/include/TError.h \
- /home/td263283/root/include/DllImport.h \
- /home/td263283/root/include/TMatrixFBasefwd.h \
- /home/td263283/root/include/TMatrixDBasefwd.h \
- /home/td263283/root/include/TVectorFfwd.h \
- /home/td263283/root/include/TVectorDfwd.h \
- /home/td263283/root/include/TMatrixTUtils.h \
- /home/td263283/root/include/TMatrixDfwd.h \
- /home/td263283/root/include/TMatrixDUtils.h \
- /home/td263283/root/include/TMatrixDUtilsfwd.h \
- SignalShape/SignalShape/SC_VS_x_rc_dd_SET_rc_dd.h \
- SignalShape/SignalShape/SC_VS_x_rc_dd.h \
- SignalShape/SignalShape/SC_1D_VS_x_rc_dd_I.h \
- SignalShape/SignalShape/SC_VS_x_rc_FIX_dd.h \
- SignalShape/SignalShape/SC_VS_x_FIX_rc_dd.h \
- /home/td263283/root/include/TF1.h \
+ /home/td263283/root/include/TStyle.h \
+ /home/td263283/root/include/TAttText.h \
+ /home/td263283/root/include/TColor.h \
+ /home/td263283/root/include/TLegend.h \
+ /home/td263283/root/include/TPave.h /home/td263283/root/include/TBox.h \
+ /home/td263283/root/include/TLine.h /home/td263283/root/include/TLatex.h \
+ /home/td263283/root/include/TText.h \
+ /home/td263283/root/include/TMultiGraph.h \
+ /home/td263283/root/include/TGraphErrors.h \
+ /home/td263283/root/include/TGraph.h /home/td263283/root/include/TF1.h \
  /home/td263283/root/include/RConfigure.h \
  /home/td263283/root/include/TFormula.h \
  /home/td263283/root/include/TBits.h \
@@ -307,61 +307,29 @@
  /home/td263283/root/include/VecCore/Limits.h \
  /home/td263283/root/include/VecCore/VecMath.h \
  /home/td263283/root/include/VecCore/Utilities.h \
- /home/td263283/root/include/TAttMarker.h \
+ /home/td263283/root/include/TMethodCall.h \
  /home/td263283/root/include/TF1AbsComposition.h \
- /home/td263283/root/include/TMath.h \
+ /home/td263283/root/include/TMath.h /home/td263283/root/include/TError.h \
+ /home/td263283/root/include/DllImport.h \
  /home/td263283/root/include/Math/Types.h \
  /home/td263283/root/include/Math/ParamFunctor.h \
- /home/td263283/root/include/RtypesCore.h EvtModel/EvtModel/Track.h \
- EvtModel/EvtModel/Module.h EvtModel/EvtModel/ROBoard.h \
- SignalModel/SignalModel/Model_Charge1D.h \
- /home/td263283/root/include/TFile.h \
- /home/td263283/root/include/Compression.h \
- /home/td263283/root/include/TDirectoryFile.h \
- /home/td263283/root/include/TDirectory.h \
- /home/td263283/root/include/TClass.h \
- /home/td263283/root/include/TObjArray.h \
- /home/td263283/root/include/TUUID.h \
- /home/td263283/root/include/TBuffer.h \
- /home/td263283/root/include/Bytes.h \
- /home/td263283/root/include/Byteswap.h \
- /home/td263283/root/include/TDatime.h /home/td263283/root/include/TUrl.h \
- /home/td263283/root/include/ROOT/RConcurrentHashColl.hxx \
- /home/td263283/root/include/Rtypes.h \
- /home/td263283/root/include/ROOT/TRWSpinLock.hxx \
- /home/td263283/root/include/ROOT/TSpinMutex.hxx \
- /home/td263283/root/include/TTree.h \
- /home/td263283/root/include/ROOT/TIOFeatures.hxx \
- /home/td263283/root/include/TArrayD.h \
- /home/td263283/root/include/TArray.h \
- /home/td263283/root/include/TArrayI.h \
- /home/td263283/root/include/TVirtualTreePlayer.h \
- /home/td263283/root/include/TBranch.h \
- /home/td263283/root/include/TBranchCacheInfo.h \
- SampleTools/SampleTools/GiveMe_Uploader.h \
- SampleTools/SampleTools/ReadRCmap.h \
- SampleTools/SampleTools/ReadGainmap.h Tristan/Tristan/ReadLUT_vROOT.h \
- /home/td263283/root/include/TH2.h /home/td263283/root/include/TH1.h \
- /home/td263283/root/include/TAxis.h \
- /home/td263283/root/include/TAttAxis.h \
- /home/td263283/root/include/TArrayC.h \
- /home/td263283/root/include/TArrayS.h \
- /home/td263283/root/include/TArrayF.h \
- /home/td263283/root/include/TFitResultPtr.h \
- EvtModelTools/EvtModelTools/JFL_Selector.h EvtModel/EvtModel/Sample.h \
- EvtModel/EvtModel/SetOfTracks.h /home/td263283/root/include/TH1F.h \
- SignalShape/SignalShape/SC_VS_x_rc_dd_SET_dd.h \
- Tristan/Tristan/Misc_Functions.h Misc/Misc/Util.h \
- /home/td263283/root/include/TGraph.h /home/td263283/root/include/TH2F.h \
- /home/td263283/root/include/TH2.h /home/td263283/root/include/TStyle.h \
- /home/td263283/root/include/TAttText.h \
- /home/td263283/root/include/TColor.h \
- /home/td263283/root/include/TLegend.h \
- /home/td263283/root/include/TPave.h /home/td263283/root/include/TBox.h \
- /home/td263283/root/include/TLine.h /home/td263283/root/include/TLatex.h \
- /home/td263283/root/include/TText.h \
- /home/td263283/root/include/TMultiGraph.h \
- /home/td263283/root/include/TGraphErrors.h \
- /home/td263283/root/include/TGraph.h \
- EvtModelTools/EvtModelTools/EvtModelTools_TD_Selections.h \
- /home/td263283/root/include/TH2D.h
+ /home/td263283/root/include/RtypesCore.h \
+ /home/td263283/root/include/TH1F.h EvtModel/EvtModel/Pad.h \
+ SignalModel/SignalModel/Model_ReadOutGeometry.h \
+ SignalModel/SignalModel/Model_Electronics.h \
+ SignalModel/SignalModel/Model_ChargeI.h EvtModel/EvtModel/Track.h \
+ EvtModel/EvtModel/Cluster.h EvtModel/EvtModel/FitOutput.h \
+ /home/td263283/root/include/TVirtualFitter.h \
+ /home/td263283/root/include/TMatrixD.h \
+ /home/td263283/root/include/TMatrixT.h \
+ /home/td263283/root/include/TMatrixTBase.h \
+ /home/td263283/root/include/TMatrixTUtils.h \
+ /home/td263283/root/include/TMatrixDfwd.h \
+ /home/td263283/root/include/TMatrixDUtils.h \
+ /home/td263283/root/include/TMatrixDUtilsfwd.h \
+ SignalShape/SignalShape/SC_VS_x_rc_dd_SET_rc_dd.h \
+ SignalShape/SignalShape/SC_VS_x_rc_dd.h \
+ SignalShape/SignalShape/SC_1D_VS_x_rc_dd_I.h \
+ SignalShape/SignalShape/SC_VS_x_rc_FIX_dd.h \
+ SignalShape/SignalShape/SC_VS_x_FIX_rc_dd.h EvtModel/EvtModel/Module.h \
+ EvtModel/EvtModel/ROBoard.h

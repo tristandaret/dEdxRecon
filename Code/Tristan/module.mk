@@ -8,7 +8,7 @@ FILES += src/Control
 FILES += src/dEdx
 FILES += src/dEdx_func
 FILES += src/DrawOuts
-FILES += src/ReadLUT
+FILES += src/ReadLUT_vROOT
 FILES += src/corr
 FILES += src/CombinedFit
 

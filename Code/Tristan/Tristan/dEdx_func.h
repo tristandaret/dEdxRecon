@@ -2,7 +2,7 @@
 #include "SampleTools/GiveMe_Uploader.h"
 #include "SampleTools/ReadRCmap.h"
 #include "SampleTools/ReadGainmap.h"
-#include "Tristan/ReadLUT.h"
+#include "Tristan/ReadLUT_vROOT.h"
 #include "EvtModelTools/JFL_Selector.h"
 
 

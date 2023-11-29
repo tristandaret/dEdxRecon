@@ -1,6 +1,6 @@
 #include "Tristan/dEdx.h"
 #include "Tristan/Misc_Functions.h"
-#include "Tristan/ReadLUT.h"
+#include "Tristan/ReadLUT_vROOT.h"
 
 #include <cmath>
 #include <numeric>

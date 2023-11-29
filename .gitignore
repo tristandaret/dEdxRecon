@@ -207,7 +207,7 @@ Code/.d/Tristan/src/DrawOuts.d
 Code/.d/Tristan/src/Monitoring.d
 Code/.d/Tristan/src/Displayer.d
 Code/.d/Tristan/src/Misc_Functions.d
-Code/.d/Tristan/src/ReadLUT.d
+Code/.d/Tristan/src/ReadLUT_vROOT.d
 Code/.d/Tristan/src/Tristan.d
 Code/.d/Tristan_DESY21/src/DESY21_DrawOut_PRF.d
 Code/.d/Tristan_DESY21/src/DESY21_DrawOut_Residuals.d
@@ -424,7 +424,7 @@ Code/.o/Tristan/src/DrawOuts.o
 Code/.o/Tristan/src/Monitoring.o
 Code/.o/Tristan/src/Displayer.o
 Code/.o/Tristan/src/Misc_Functions.o
-Code/.o/Tristan/src/ReadLUT.o
+Code/.o/Tristan/src/ReadLUT_vROOT.o
 Code/.o/Tristan/src/Tristan.o
 Code/.o/Tristan_DESY21/src/DESY21_DrawOut_PRF.o
 Code/.o/Tristan_DESY21/src/DESY21_DrawOut_Residuals.o

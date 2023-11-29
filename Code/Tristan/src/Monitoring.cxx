@@ -34,7 +34,7 @@ void Monitoring()
   int nRC = 21 ; 
 
   std::string Tag    ; 
-  std::string Comment = "_zfile_G2_WF4" ; // z method | gain_corr | WF method
+  std::string Comment = "_zfile_G2_WF4_test_LUTvROOT" ; // z method | gain_corr | WF method
   std::string prtcle ; 
   std::string EvtFile ;
   std::string OutDir  = "OUT_Tristan/";  
@@ -47,53 +47,26 @@ void Monitoring()
   int prototype       = 0 ;
   int CERN_Escan      = 0 ; 
 
-  int DESY_zscan      = 0 ; 
+  int DESY_zscan      = 1 ; 
   int DESY_yscan      = 0 ; 
   int DESY_phi        = 0 ; 
   int DESY_theta      = 0 ; 
 
   // Computations
   int control         = 0 ;
-  int dedx            = 0 ;
+  int dedx            = 1 ;
   int WFcorr          = 0 ;
 
   // DrawOuts
   int DO_Displayer    = 0 ;
   int DO_control      = 0 ;
   int DO_Checks       = 0 ;
-  int DO_Methods      = 0 ;
+  int DO_Methods      = 1 ;
   int DO_Resolution   = 0 ;
   int DO_Global       = 0 ;
   int DO_Scans        = 0 ;
   int DO_Separation   = 0 ;
   int DO_Systematics  = 0 ;
-
-  Interpol4 LUT ;
-  std::string LUT_folder = "/home/td263283/Documents/Python/LUT_XP/LUT_Dt310_PT412_nphi200_nd200/";
-  LUT = GiveMe_LUT(LUT_folder, nZ, nRC) ;
-  TH2D* LUT_2D;
-  TCanvas* ptCanvas = new TCanvas("c1", "c1", 1800, 1200);
-  ptCanvas->cd();
-  gStyle->SetOptStat(0);
-  for(int iRC = 0 ; iRC < nRC ; iRC++){
-    std::string LUT_RC_folder = "LUT_RC" + std::to_string(iRC*5+50) + "/";
-    MakeMyDir("../LUT/" + LUT_RC_folder);
-    for(int iZ = 0 ; iZ < nZ ; iZ++){
-      std::string LUT_Z_file = "LUT_z" + std::to_string(iZ*50);
-      std::vector<std::vector<float>> data = readCSV(LUT_folder + LUT_RC_folder + LUT_Z_file + ".csv") ;
-      int nsize = data.size();
-      LUT_2D = new TH2D(Form("LUT_RC%i_z%i", iRC*5+50, iZ*50), Form("LUT_RC%i_z%i", iRC*5+50, iZ*50), nsize, 0, nsize-1, nsize, 0, nsize-1);
-      for(int id = 0; id < nsize; id++){
-        for(int iphi = 0; iphi < nsize; iphi++){
-          LUT_2D->Fill(iphi, id, data[id][iphi]);
-        }
-      }
-      LUT_2D->SetMaximum(2.1) ;
-      LUT_2D->Draw("colz");
-      ptCanvas->SaveAs(TString("../LUT/" + LUT_RC_folder + LUT_Z_file + ".png"));
-    }
-  }
-  delete LUT_2D;
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -105,8 +78,8 @@ void Monitoring()
     intUploader     =  3 ;
     NbrOfMod        = -1 ;
     PT              = 412 ; Dt = 350 ; zdrift = 415 ; TB = 40 ;
-    Uploader* pUpld ; Interpol4 LUT ;
-    if (control or dedx) LUT = GiveMe_LUT(Form("/home/td263283/Documents/Python/LUT_XP/LUT_Dt%i_PT%i_nphi200_nd200/", Dt, PT), nZ, nRC) ;
+    Uploader* pUpld ; LUT4 LUT ;
+    if (control or dedx) LUT = GiveMe_LUT(Form("/home/td263283/Documents/Python/LUT_Dt%i_PT%i_nphi200_nd200.root", Dt, PT), nZ, nRC) ;
     int part_arr[] = {1,2,5,6} ;
     // int part_arr[] = {1} ;
     for (int iFile : part_arr) {
@@ -138,8 +111,8 @@ void Monitoring()
     NbrOfMod        = -1 ;
     PT              = 412 ; Dt = 350 ; zdrift = 415 ; TB = 40 ;
 
-    Uploader* pUpld ; Interpol4 LUT ;
-    if (control or dedx) LUT = GiveMe_LUT(Form("/home/td263283/Documents/Python/LUT_XP/LUT_Dt%i_PT%i_nphi200_nd200/", Dt, PT), nZ, nRC) ;
+    Uploader* pUpld ; LUT4 LUT ;
+    if (control or dedx) LUT = GiveMe_LUT(Form("/home/td263283/Documents/Python/LUT_Dt%i_PT%i_nphi200_nd200.root", Dt, PT), nZ, nRC) ;
     // int NFiles = 14 ;
     // for (int iFile = 0 ; iFile < NFiles ; iFile++){
     int part_arr[] = {4, 7, 10, 13} ;
@@ -185,8 +158,8 @@ void Monitoring()
     for (int PT : PT_arr){
       OutDir        = Form("OUT_Tristan/DESY21_zscan/DESY21_zscan_PT%i_dev_v9i9/", PT) ; 
       MakeMyDir(OutDir) ; 
-      Uploader* pUpld ; Interpol4 LUT ;
-      if (control or dedx) LUT = GiveMe_LUT(Form("/home/td263283/Documents/Python/LUT_XP/LUT_Dt%i_PT%i_nphi200_nd200/", Dt, PT), nZ, nRC) ;
+      Uploader* pUpld ; LUT4 LUT ;
+      if (control or dedx) LUT = GiveMe_LUT(Form("/home/td263283/Documents/Python/LUT_Dt%i_PT%i_nphi200_nd200.root", Dt, PT), nZ, nRC) ;
       // int         z_val[]   = {50, 150, 250, 350, 450, 550, 650, 750, 850, 950} ;
       // std::string z_arr[]   = {"m40", "060", "160", "260", "360", "460", "560", "660", "760", "860"} ;
       // int         z_val[]   = {50, 550, 950} ;
@@ -219,12 +192,12 @@ void Monitoring()
     Dt              = 310 ; TB = 50 ; PT = 412 ; zdrift = 90 ;
     OutDir          = "OUT_Tristan/DESY21_yscan_dev_v9i9/" ; 
     MakeMyDir(OutDir) ; 
-    Uploader* pUpld ; Interpol4 LUT ;
-    if (control or dedx) LUT = GiveMe_LUT(Form("/home/td263283/Documents/Python/LUT_XP/LUT_Dt%i_PT%i_nphi200_nd200/", Dt, PT), nZ, nRC) ;
+    Uploader* pUpld ; LUT4 LUT ;
+    if (control or dedx) LUT = GiveMe_LUT(Form("/home/td263283/Documents/Python/LUT_Dt%i_PT%i_nphi200_nd200.root", Dt, PT), nZ, nRC) ;
     // std::string Y_arr[] = {"m150", "m140", "m120", "m100", "m80", "m60", "m40", "0", "20", "40", "60", "80"} ;
     std::string Y_arr[] = {"m140", "m120", "m100", "m80", "m60", "m40", "0", "20", "40", "60", "80"} ;
     // for (int y = 0 ; y < (int)std::size(Y_arr) ; y++){
-    for (int y = 1 ; y < 2 ; y++){
+    for (int y = 0 ; y < (int)std::size(Y_arr) ; y++){
       EvtFile  = Form("../Data_DESY21_dev_v9/yscan/Y%s_Z0_iter9.root", Y_arr[y].c_str()) ; Tag = Form("DESY21_y%s", Y_arr[y].c_str()) ; prtcle = Form("electron_y%s", Y_arr[y].c_str()) ; 
       if(control or dedx) pUpld = GiveMe_Uploader (intUploader, EvtFile) ;
       if (control)      Control       (OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, Data_to_Use, PT, TB, prtcle) ;
@@ -244,8 +217,8 @@ void Monitoring()
     intUploader                 =  2 ;
     NbrOfMod                    =  0 ;
     PT                          = 200 ; Dt = 310 ; TB = 40 ;
-    Uploader* pUpld ; Interpol4 LUT ;
-    if (control or dedx) LUT = GiveMe_LUT(Form("/home/td263283/Documents/Python/LUT_XP/LUT_Dt%i_PT%i_nphi200_nd200/", Dt, PT), nZ, nRC) ;
+    Uploader* pUpld ; LUT4 LUT ;
+    if (control or dedx) LUT = GiveMe_LUT(Form("/home/td263283/Documents/Python/LUT_Dt%i_PT%i_nphi200_nd200.root", Dt, PT), nZ, nRC) ;
     // int         z_val[]         = {50, 550, 950} ;
     // std::string z_arr[]         = {"m40", "460", "860"} ;
     int         z_val[]         = {550} ;
@@ -288,8 +261,8 @@ void Monitoring()
     intUploader     =  2 ;
     NbrOfMod        =  0 ;
     PT              = 200 ; Dt = 310 ; zdrift = 350 ; TB = 40 ;
-    Uploader* pUpld ; Interpol4 LUT ;
-    if (control or dedx) LUT    = GiveMe_LUT(Form("/home/td263283/Documents/Python/LUT_XP/LUT_Dt%i_PT%i_nphi200_nd200/", Dt, PT), nZ, nRC) ;
+    Uploader* pUpld ; LUT4 LUT ;
+    if (control or dedx) LUT    = GiveMe_LUT(Form("/home/td263283/Documents/Python/LUT_Dt%i_PT%i_nphi200_nd200.root", Dt, PT), nZ, nRC) ;
     std::string theta_arr[]     = {"m45", "m20", "20"} ;
     for (std::string theta : theta_arr){
       EvtFile                   = Form("../Data_DESY21/Theta_scan/theta_m%s_02T_z260_y80_iter0.root", theta.c_str()) ; Tag = Form("DESY21_theta%s", theta.c_str()) ; prtcle = Form("electron_theta%s", theta.c_str()) ;
@@ -337,8 +310,8 @@ void Monitoring()
     NbrOfMod        =  0 ;
     PT              = 200 ; Dt = 310 ; zdrift = 950 ; TB = 40 ;
 
-    Uploader* pUpld ; Interpol4 LUT ;
-    if (control or dedx) LUT = GiveMe_LUT(Form("/home/td263283/Documents/Python/LUT_XP/LUT_Dt%i_PT%i_nphi200_nd200/", Dt, PT), nZ, nRC) ;
+    Uploader* pUpld ; LUT4 LUT ;
+    if (control or dedx) LUT = GiveMe_LUT(Form("/home/td263283/Documents/Python/LUT_Dt%i_PT%i_nphi200_nd200.root", Dt, PT), nZ, nRC) ;
     // int mag_arr[] = {0, 2, 4, 10} ;
     int mag_arr[] = {0,2,4} ;
     for (int mag : mag_arr){
@@ -364,8 +337,8 @@ void Monitoring()
     intUploader     =  2 ;
     NbrOfMod        =  0 ;
     PT              = 200 ; Dt = 310 ; ; TB = 40 ;
-    Uploader* pUpld ; Interpol4 LUT ;
-    if (control or dedx) LUT      = GiveMe_LUT(Form("/home/td263283/Documents/Python/LUT_XP/LUT_Dt%i_PT%i_nphi200_nd200/", Dt, PT), nZ, nRC) ;
+    Uploader* pUpld ; LUT4 LUT ;
+    if (control or dedx) LUT      = GiveMe_LUT(Form("/home/td263283/Documents/Python/LUT_Dt%i_PT%i_nphi200_nd200.root", Dt, PT), nZ, nRC) ;
     std::string B_arr[]           = {"0", "04", "06"} ;
     std::string Z_arr[]           = {"60", "460", "860"} ;
     int Z_val[]                   = {150, 550, 950} ;
@@ -395,8 +368,8 @@ void Monitoring()
     intUploader     =  2 ;
     NbrOfMod        =  0 ;
     PT              = 412 ; Dt = 310 ; TB = 40 ; zdrift = 430 ;
-    Uploader* pUpld ; Interpol4 LUT ;
-    if (control or dedx) LUT = GiveMe_LUT(Form("/home/td263283/Documents/Python/LUT_XP/LUT_Dt%i_PT%i_nphi200_nd200/", Dt, PT), nZ, nRC) ;
+    Uploader* pUpld ; LUT4 LUT ;
+    if (control or dedx) LUT = GiveMe_LUT(Form("/home/td263283/Documents/Python/LUT_Dt%i_PT%i_nphi200_nd200.root", Dt, PT), nZ, nRC) ;
     int phi_val[]   = {0, 10, 20, 30, 40, 45} ;
     int NFiles      = 6 ;
     OutDir          = "OUT_Tristan/DESY19_phi/" ;
@@ -426,8 +399,8 @@ void Monitoring()
     intUploader     =  3 ;
     NbrOfMod        = -1 ;
     PT              = 412 ; Dt = 286 ; TB = 40 ; // PT = 400 actually
-    Uploader* pUpld ; Interpol4 LUT ;
-    if (control or dedx) LUT = GiveMe_LUT(Form("/home/td263283/Documents/Python/LUT_XP/LUT_Dt%i_PT%i_nphi200_nd200/", Dt, PT), nZ, nRC) ;
+    Uploader* pUpld ; LUT4 LUT ;
+    if (control or dedx) LUT = GiveMe_LUT(Form("/home/td263283/Documents/Python/LUT_Dt%i_PT%i_nphi200_nd200.root", Dt, PT), nZ, nRC) ;
     int zmax = 9 ;
     for (int zDrift = 0 ; zDrift < zmax ; zDrift++){
       // EvtFile = Form("../Data_MC/MC_zscan/z_400_nomDrift_%i0cm_MD_RC100_v2_iter4.root", zDrift+1) ; Tag = Form("CERN23_MC_z%i00", zDrift+1) ; prtcle = Form("MC %i0cm", zDrift+1) ;      
@@ -481,8 +454,8 @@ void Monitoring()
     for (int PT : PT_arr){
       OutDir        = Form("OUT_Tristan/DESY21_zscan/DESY21_zscan_PT%i_139V/", PT) ; 
       MakeMyDir(OutDir) ; 
-      Uploader* pUpld ; Interpol4 LUT ;
-    if (control or dedx) LUT = GiveMe_LUT(Form("/home/td263283/Documents/Python/LUT_XP/LUT_Dt%i_PT%i_nphi200_nd200/", Dt, PT), nZ, nRC) ;
+      Uploader* pUpld ; LUT4 LUT ;
+    if (control or dedx) LUT = GiveMe_LUT(Form("/home/td263283/Documents/Python/LUT_Dt%i_PT%i_nphi200_nd200.root", Dt, PT), nZ, nRC) ;
       int NFiles = 9 ;
       for (int zDrift = -1 ; zDrift < NFiles ; zDrift++){
         if(zDrift == -1) {EvtFile  = Form("../Data_DESY21/zscan_PT%i_139V/z_360_139_%i_02T_26_m40_iter0.root", PT, PT) ;          Tag = Form("DESY21_zm40_PT%i", PT) ;          prtcle = "electron_z-40" ; }

@@ -10,6 +10,7 @@
 
 // FILE HANDLING /////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Read CSV file
+// probably rotates by 90° the original CSV file
 std::vector<std::vector<float>> readCSV(std::string filename) {
   std::vector<std::vector<float>> data;
   std::ifstream file(filename);
@@ -78,6 +79,17 @@ void Set120_CSV(const std::string& filename, const std::string& targetWord, int 
 bool is_in(std::vector<double> v, double val){
   if(std::find(v.begin(), v.end(), val) != v.end()) return true;
   else return false;
+}
+
+// Equivalent of numpy linspace (npoints uniformly spaced between start and end)
+std::vector<double> linspace(double start, double end, int numPoints) {
+  std::vector<double> result(numPoints);
+  double step = (end - start) / (numPoints - 1);
+  
+  for (int i = 0; i < numPoints; ++i) {
+      result[i] = start + i * step;
+  }
+  return result;
 }
 
 
@@ -296,7 +308,7 @@ void local_params(const Pad* pPad, const Track* pTrack, float& d, float& dd, flo
   phi                       = TMath::ATan(b)/TMath::Pi()*180 ;
 
   // Impact parameter in the pad
-  d                         = (b*xc - yc + a) / sqrt(pow(b,2) + 1) ; // if pTrack is a line, then get d from it directly
+  d                         = fabs((b*xc - yc + a) / sqrt(pow(b,2) + 1)) ; // if pTrack is a line, then get d from it directly
   float da_d                = 1/sqrt(b*b+1);
   float db_d                = (xc*sqrt(b*b+1) - (b*xc-yc+a)*b/sqrt(b*b+1)) / (b*b+1);
   dd                        = sqrt(da_d*da_d * da*da + db_d*db_d * db*db);
@@ -474,7 +486,7 @@ void local_params(const Pad* pPad, const Track* pTrack, float& d, float& dd, flo
 
     phi                       = TMath::ATan(m)/TMath::Pi()*180 ;              // in degrees
     trk_len_pad               = sqrt(pow(y[1]-y[0],2) + pow(x[1]-x[0],2)) ;   // in meters
-    d                         = (m*xc - yc + q) / sqrt(pow(m,2) + 1) ;        // in meters
+    d                         = fabs((m*xc - yc + q) / sqrt(pow(m,2) + 1)) ;        // in meters
   }
   
   // if(x[0] and dd_compute){ 

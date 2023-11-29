@@ -1,0 +1,125 @@
+#include "Tristan/ReadLUT_vROOT.h"
+#include "Tristan/Misc_Functions.h"
+#include "Misc/Util.h"
+
+
+
+LUT2::LUT2(TFile* pTFile_LUT, const std::string& file_name)
+{
+  Load(pTFile_LUT, file_name) ;
+}
+LUT2::~LUT2()
+{}
+
+void LUT2::Load(TFile* pTFile_LUT, const std::string& file_name)
+{
+  h2        = pTFile_LUT->Get<TH2F>(file_name.c_str());
+}
+
+float LUT2::Interpolate(TFile* pTFile_LUT, float& dconv, float& phiconv, int& iz, int& iRC)
+{
+  std::cout << Form("LUT_2D_RC%i_Z%i", iRC*5+50, iz*50) << std::endl;
+
+  TIter nextkey(pTFile_LUT->GetListOfKeys());
+  TKey *key;
+  while ((key = (TKey*)nextkey())) {
+      TObject* obj = key->ReadObj();
+      if (obj) {
+          std::cout << "Object name: " << obj->GetName() << std::endl;
+          delete obj;
+      }
+  }
+
+  h2          = pTFile_LUT->Get<TH2F>(Form("LUT_2D_RC%i_Z%i", iRC*5+50, iz*50));
+  std::cout << Form("LUT_2D_RC%i_Z%i", iRC*5+50, iz*50) << std::endl;
+  int phi0    = (int)floor(phiconv) ;
+  int phi1    = (int)ceil(phiconv) ;
+  if(phi0 == 199) phi1 = phi0 ;
+  int d0      = (int)floor(dconv) ;
+  int d1      = (int)ceil(dconv) ;
+  if(d0 == 199) d1 = d0 ;
+  float IP0   = h2->GetBinContent(phi0, d0) + (phiconv-phi0)*(h2->GetBinContent(phi1, d0) - h2->GetBinContent(phi0, d0)) ;
+  float IP1   = h2->GetBinContent(phi0, d1) + (phiconv-phi0)*(h2->GetBinContent(phi1, d1) - h2->GetBinContent(phi0, d1)) ;
+
+  return IP0 + (dconv-d0)*(IP1 - IP0) ;  
+  delete h2;
+}
+
+
+
+/////////////////////////////////////////////////////////////
+
+
+
+LUT3::LUT3(TFile* pTFile_LUT, const std::string& th2_name, int& nZ)
+{
+  Load(pTFile_LUT, th2_name, nZ) ;
+}
+LUT3::~LUT3()
+{}
+
+void LUT3::Load(TFile* pTFile_LUT, const std::string& th2_name, int& nZ)
+{
+  for(int iZ = 0 ; iZ < nZ ; iZ++) v_th2_name.push_back(th2_name + "Z" + std::to_string(iZ*50)) ;
+  for(int iFile = 0 ; iFile < nZ; iFile++) V_pLUT2.push_back(new LUT2(pTFile_LUT, v_th2_name[iFile])) ;
+}
+
+float LUT3::Interpolate(TFile* pTFile_LUT, float& dconv, float& phiconv, float& zconv, int& iRC)
+{
+  int z0      = (int)floor(zconv) ;
+  int z1      = (int)ceil(zconv) ;
+  if(z0 == 21) z1 = z0 ;
+  float IP0  = V_pLUT2[z0]->Interpolate(pTFile_LUT, dconv, phiconv, z0, iRC) ;
+  float IP1  = V_pLUT2[z1]->Interpolate(pTFile_LUT, dconv, phiconv, z1, iRC) ;
+
+  return IP0 + (zconv-z0)*(IP1 - IP0) ; 
+}
+
+LUT3 GiveMe_LUT3(TFile* pTFile_LUT, const std::string& th2_name, int& nZ){
+  LUT3 LUT(pTFile_LUT, th2_name, nZ) ;
+  return LUT ;
+}
+
+
+
+/////////////////////////////////////////////////////////////
+
+
+
+LUT4::LUT4()
+{
+  // Default constructor
+}
+LUT4::LUT4(const std::string& filename, int& nZ, int& nRC)
+{
+  std::cout << "LUT: LOADING" << filename << std::endl ;
+  Load(filename, nZ, nRC) ;
+  std::cout << "LUT: LOADED" << std::endl ;
+}
+LUT4::~LUT4()
+{}
+
+void LUT4::Load(const std::string& filename, int& nZ, int& nRC)
+{
+  TFile* pTFile_LUT            = TFile::Open(filename.c_str()) ;
+  for(int iRC = 0 ; iRC < nRC ; iRC++) v_th2_nameRC.push_back("LUT_2D_RC" + std::to_string(iRC*5+50) + "_") ;
+  for(int iFile = 0 ; iFile < nRC; iFile++) V_pLUT3.push_back(new LUT3(pTFile_LUT, v_th2_nameRC[iFile], nRC)) ;
+  pTFile_LUT->Close();
+  delete pTFile_LUT;
+}
+
+float LUT4::Interpolate(float& dconv, float& phiconv, float& zconv, float& RCconv)
+{
+  int RC0     = (int)floor(RCconv) ;
+  int RC1     = (int)ceil(RCconv) ;
+  if(RC0 == 20) RC1 = RC0 ;
+  float IP0  = V_pLUT3[RC0]->Interpolate(pTFile_LUT, dconv, phiconv, zconv, RC0) ;
+  float IP1  = V_pLUT3[RC1]->Interpolate(pTFile_LUT, dconv, phiconv, zconv, RC1) ;
+
+  return IP0 + (RCconv-RC0)*(IP1 - IP0) ; 
+}
+
+LUT4 GiveMe_LUT(const std::string& filename, int& nZ, int& nRC){
+  LUT4 LUT(filename.c_str(), nZ, nRC) ;
+  return LUT ;
+}
