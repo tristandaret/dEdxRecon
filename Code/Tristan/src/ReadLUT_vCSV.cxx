@@ -1,4 +1,4 @@
-#include "Tristan/ReadLUT_vROOT.h"
+#include "Tristan/ReadLUT_vCSV.h"
 #include "Tristan/Misc_Functions.h"
 #include "Misc/Util.h"
 
@@ -88,7 +88,7 @@ Interpol4::~Interpol4()
 void Interpol4::Load(const std::string& folder_name, int& nZ, int& nRC)
 {
   for(int iRC = 0 ; iRC < nRC ; iRC++) v_FileRC.push_back(folder_name + "LUT_RC" + std::to_string(iRC*5+50) + "/") ;
-  for(int iFile = 0 ; iFile < nRC; iFile++) V_pInterpol3.push_back(new Interpol3(v_FileRC[iFile], nRC)) ;
+  for(int iFile = 0 ; iFile < nRC; iFile++) V_pInterpol3.push_back(new Interpol3(v_FileRC[iFile], nZ)) ;
 }
 
 float Interpol4::Interpolated(float& dconv, float& phiconv, float& zconv, float& RCconv)

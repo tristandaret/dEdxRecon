@@ -47,7 +47,7 @@ void dEdx( const std::string& OutDir,
   std::string OUTDIR_WF_Display             = OUTDirName + "WF_Display/" ;
   MakeMyDir(OUTDIR_WF_Display) ;
 
-  // int nZ = 22 ;
+  // int nZ = 21 ;
   // Interpol3 LUT3(Form("/home/td263283/Documents/Python/LUT_XP/LUT_Dt%i_PT%i_nphi200_nd200/LUT_RC115/", 310, PT), nZ ) ;
 
   // Geometry
@@ -64,7 +64,7 @@ void dEdx( const std::string& OutDir,
   int gain_corr         = 1 ;                                   // apply XP gain correction
 
   // Parameters for the LUT
-  int   dsize           = 100 ;                                 // LUT definition along d
+  int   dsize           = 200 ;                                 // LUT definition along d
   int   phisize         = 200 ;                                 // LUT definition along phi
   float d_step          = L/(dsize-1) ;                          // d   increment between LUTs
   float phi_step        = (90-2e-6)/(phisize-1) ;                  // phi increment between LUTs
@@ -320,7 +320,9 @@ void dEdx( const std::string& OutDir,
           // Interpolation d
           // d                              += dd;
           if(d >  L/2) d                  =  L/2 ;
-          float dconv                     = (d+L/2)/d_step ;  // +L/2 shift because LUT indices have to be > 0 but d can be < 0
+          if(d < -L/2) d                  = -L/2 ;
+          // float dconv                     = (d+L/2)/d_step ;  // +L/2 shift because LUT indices have to be > 0 but d can be < 0
+          float dconv                     = fabs(d)/d_step ;
           // Interpolation Z
           // z_calc                         += 15;
           if(z_calc < 0)    z_calc        = 0 ;

@@ -308,7 +308,7 @@ void local_params(const Pad* pPad, const Track* pTrack, float& d, float& dd, flo
   phi                       = TMath::ATan(b)/TMath::Pi()*180 ;
 
   // Impact parameter in the pad
-  d                         = fabs((b*xc - yc + a) / sqrt(pow(b,2) + 1)) ; // if pTrack is a line, then get d from it directly
+  d                         = (b*xc - yc + a) / sqrt(pow(b,2) + 1) ; // if pTrack is a line, then get d from it directly
   float da_d                = 1/sqrt(b*b+1);
   float db_d                = (xc*sqrt(b*b+1) - (b*xc-yc+a)*b/sqrt(b*b+1)) / (b*b+1);
   dd                        = sqrt(da_d*da_d * da*da + db_d*db_d * db*db);
@@ -486,7 +486,7 @@ void local_params(const Pad* pPad, const Track* pTrack, float& d, float& dd, flo
 
     phi                       = TMath::ATan(m)/TMath::Pi()*180 ;              // in degrees
     trk_len_pad               = sqrt(pow(y[1]-y[0],2) + pow(x[1]-x[0],2)) ;   // in meters
-    d                         = fabs((m*xc - yc + q) / sqrt(pow(m,2) + 1)) ;        // in meters
+    d                         = (m*xc - yc + q) / sqrt(pow(m,2) + 1) ;        // in meters
   }
   
   // if(x[0] and dd_compute){ 
@@ -530,6 +530,30 @@ float trk_len(Module* pModule, const Track* pTrack){
 
 
 // ROOT /////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Draw TH1
+void DrawTH1(const std::string& OutDir, TH1* h1){
+  TCanvas* pCanTH1              = new TCanvas("pCanTH1", "pCanTH1", 1800, 1200);
+  pCanTH1->cd();
+  h1->SetLineWidth(4);
+  h1->Draw("hist");
+  pCanTH1->SaveAs(OutDir.c_str());
+  delete pCanTH1;
+}
+
+
+
+// Draw TH2
+void DrawTH2(const std::string& OutDir, TH2* h2){
+  TCanvas* pCanTH2              = new TCanvas("pCanTH2", "pCanTH2", 1800, 1200);
+  pCanTH2->cd();
+  h2->SetMaximum(2.1);
+  h2->Draw("colz");
+  pCanTH2->SaveAs(TString(OutDir + h2->GetName() + ".png"));
+  delete pCanTH2;
+}
+
+
 
 // From TH1 get TGraph
 TGraph* hist_to_graph(TH1 *h1){

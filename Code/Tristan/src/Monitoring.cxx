@@ -30,7 +30,7 @@ void Monitoring()
   int Dt ;      // Transverse diffusion coefficient (µm/sqrt(cm))
   int zdrift ;  // drift distance (mm)
   int TB ;      // timebin length (ns)
-  int nZ  = 22 ; 
+  int nZ  = 21 ; 
   int nRC = 21 ; 
 
   std::string Tag    ; 

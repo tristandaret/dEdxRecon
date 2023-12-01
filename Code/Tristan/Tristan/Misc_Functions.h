@@ -90,4 +90,13 @@ TGraph* hist_to_graph(TH1 *h1);
 // From TH1 get swapped TGraph (transpose x and y)
 TGraph* Swapped_graph(TH1 *h1);
 
+/* ROOT */
+
+// Draw TH1
+void DrawTH1(const std::string& OutDir, TH1* h1);
+
+// Draw TH2
+void DrawTH2(const std::string& OutDir, TH2* h2);
+
+
 #endif // MISC_T_H
