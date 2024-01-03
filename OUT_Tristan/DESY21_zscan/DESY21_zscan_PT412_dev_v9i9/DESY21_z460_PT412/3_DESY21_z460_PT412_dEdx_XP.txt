@@ -1,5 +1,5 @@
 Tag           : DESY21_z460_PT412
-Comment       : _zfile_G2_WF4_test_LUTvROOT
+Comment       : _zcalc_G2_WF4_test_LUTvROOT_nd100
 FileName     : ../Data_DESY21_dev_v9/zscan_PT412/z_360_275_412_02T_26_460_iter9.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
@@ -45,7 +45,7 @@ zdrift        = 550 mm
 PT            = 412 ns
 TB            = 50 ns/time bin
 PT/TB         = 8 time bins
-z method      : zfile
+z method      : zcalc
 cut length    = 2 mm
 
 Processing events:
@@ -77,5 +77,5 @@ Selection Statistics
     6  Stage5    12215     7014 (  -42.58)  (  -47.87)     12215     7014 (  -42.58)  (  -47.87)    404395   238476 (  -41.03)  (  -47.85)   1432340   837061 (  -41.56)  (  -49.76) 
   Summary Sel    13454     7014             (  -47.87)     13454     7014             (  -47.87)    457279   238476             (  -47.85)   1665987   837061             (  -49.76) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT412_dev_v9i9/DESY21_z460_PT412/2_DESY21_z460_PT412_Checks_zfile_G2_WF4_test_LUTvROOT.root
-dEdx: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT412_dev_v9i9/DESY21_z460_PT412/3_DESY21_z460_PT412_dEdx_zfile_G2_WF4_test_LUTvROOT.root
+Checks: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT412_dev_v9i9/DESY21_z460_PT412/2_DESY21_z460_PT412_Checks_zcalc_G2_WF4_test_LUTvROOT_nd100.root
+dEdx: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT412_dev_v9i9/DESY21_z460_PT412/3_DESY21_z460_PT412_dEdx_zcalc_G2_WF4_test_LUTvROOT_nd100.root

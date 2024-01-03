@@ -12,7 +12,7 @@ public:
    LUT2(TFile* pTFile_LUT, const std::string& FileIn);
    virtual ~LUT2();
 
-   float Interpolate(float& dconv, float& phiconv) ;
+   float Interpolate(const float& dconv, const float& phiconv) ;
    
 private:
 //
@@ -31,7 +31,7 @@ public:
    LUT3(TFile* pTFile_LUT, const std::string& FileIn, int& nZ) ;
    virtual ~LUT3();
 
-   float Interpolate(float& dconv, float& phiconv, float& zconv) ;
+   float Interpolate(const float& dconv, const float& phiconv, const float& zconv) ;
 
 private:
 //
@@ -54,7 +54,7 @@ public:
    LUT4(const std::string& FileIn, int& nZ, int& nRC);
    virtual ~LUT4();
 
-   float Interpolate(float& dconv, float& phiconv, float& zconv, float& RCconv) ;
+   float Interpolate(const float& dconv, const float& phiconv, const float& zconv, const float& RCconv) ;
 
 private:
 //

@@ -57,7 +57,7 @@ void dEdx( const std::string& OutDir,
   float phi_max         = std::atan(Ly/Lx)*180/M_PI ;           // (°) angle of the diagonal
 
   // Parameters for the dE/dx procedure and for selections
-  std::string z_method  = "zfile" ;                             // method to get z ("zcalc" to recompute, "zfile" to use value from ntuple)
+  std::string z_method  = "zcalc" ;                             // method to get z ("zcalc" to recompute, "zfile" to use value from ntuple)
   float alpha           = 70 ;                                  // truncation value in %
   float n_param_trk     = 3 ;                                   // 2 if there is not magnetic field
   float len_cut         = 0.002 ;                               // minimum length in pad to be considered truncable (m)
@@ -322,7 +322,7 @@ void dEdx( const std::string& OutDir,
           if(d >  L/2) d                  =  L/2 ;
           if(d < -L/2) d                  = -L/2 ;
           // float dconv                     = (d+L/2)/d_step ;  // +L/2 shift because LUT indices have to be > 0 but d can be < 0
-          float dconv                     = fabs(d)/d_step ;
+          float absd                      = fabs(d) ;
           // Interpolation Z
           // z_calc                         += 15;
           if(z_calc < 0)    z_calc        = 0 ;
@@ -335,8 +335,9 @@ void dEdx( const std::string& OutDir,
           if(RC_pad > 150) RC_pad         = 150 ;
           float RCconv                    = (RC_pad-50)/RC_step ;
 
-          float ratio_zfile               = LUT.Interpolate(dconv, phiconv, zfile, RCconv) ;
-          float ratio_zcalc               = LUT.Interpolate(dconv, phiconv, zconv, RCconv) ;
+          float absphi                    = fabs(phi);
+          float ratio_zcalc               = LUT.Interpolate(absd, absphi, zconv, RCconv) ;
+          float ratio_zfile               = LUT.Interpolate(absd, absphi, zfile, RCconv) ;
           // float ratio_zfile               = LUT3.Interpolate(dconv, phiconv, zfile) ;
           // float ratio_zcalc               = LUT3.Interpolate(dconv, phiconv, zconv) ;
 

@@ -34,7 +34,7 @@ void Monitoring()
   int nRC = 21 ; 
 
   std::string Tag    ; 
-  std::string Comment = "_zfile_G2_WF4_test_LUTvROOT" ; // z method | gain_corr | WF method
+  std::string Comment = "_zcalc_G2_WF4_LUTvROOT_nphi200_nd200" ; // z method | gain_corr | WF method
   std::string prtcle ; 
   std::string EvtFile ;
   std::string OutDir  = "OUT_Tristan/";  
@@ -47,9 +47,9 @@ void Monitoring()
   int prototype       = 0 ;
   int CERN_Escan      = 0 ; 
 
-  int DESY_zscan      = 1 ; 
+  int DESY_zscan      = 0 ; 
   int DESY_yscan      = 0 ; 
-  int DESY_phi        = 0 ; 
+  int DESY_phi        = 1 ; 
   int DESY_theta      = 0 ; 
 
   // Computations
@@ -62,7 +62,7 @@ void Monitoring()
   int DO_control      = 0 ;
   int DO_Checks       = 0 ;
   int DO_Methods      = 1 ;
-  int DO_Resolution   = 0 ;
+  int DO_Resolution   = 1 ;
   int DO_Global       = 0 ;
   int DO_Scans        = 0 ;
   int DO_Separation   = 0 ;
