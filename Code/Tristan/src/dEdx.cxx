@@ -64,15 +64,15 @@ void dEdx( const std::string& OutDir,
   int gain_corr         = 1 ;                                   // apply XP gain correction
 
   // Parameters for the LUT
-  int   dsize           = 200 ;                                 // LUT definition along d
-  int   phisize         = 200 ;                                 // LUT definition along phi
-  float d_step          = L/(dsize-1) ;                          // d   increment between LUTs
-  float phi_step        = (90-2e-6)/(phisize-1) ;                  // phi increment between LUTs
+  // int   dsize           = 200 ;                                 // LUT definition along d
+  // int   phisize         = 200 ;                                 // LUT definition along phi
+  // float d_step          = L/(dsize-1) ;                          // d   increment between LUTs
+  // float phi_step        = (90-2e-6)/(phisize-1) ;                  // phi increment between LUTs
   int   z_step          = 50 ;                                  // z   increment between LUTs
   int   RC_step         = 5 ;                                   // RC  increment between LUTs
 
   // Redirect Output
-  std::string     OutPut_Analysis = OUTDirName + "3_" + Tag + "_dEdx_XP.txt" ;
+  std::string     OutPut_Analysis = OUTDirName + "3_" + Tag + "_dEdx_XP.log" ;
   std::cout <<    OutPut_Analysis       << std::endl ;
   std::cout <<    std::setprecision(2)  << std::fixed ;
   std::cout <<    std::endl ;
@@ -316,7 +316,7 @@ void dEdx( const std::string& OutDir,
           // Interpolation phi
           if(phi < -90) phi               = -90-2e+6 ;
           if(phi >  90) phi               =  90-2e-6 ;
-          float phiconv                   = fabs(phi)/phi_step ;
+          // float phiconv                   = fabs(phi)/phi_step ;
           // Interpolation d
           // d                              += dd;
           if(d >  L/2) d                  =  L/2 ;
@@ -403,7 +403,8 @@ void dEdx( const std::string& OutDir,
 
         // WFoff & WF4: Mean(WFmax*ratio_corr) (difference between off & v4: correction function)
         if(trk_len_clus > len_cut){
-          float ratio_corr                = A_ref / A_corr->Eval(trk_len_clus*1000) ;
+          // float ratio_corr                = A_ref / A_corr->Eval(trk_len_clus*1000) ;
+          float ratio_corr                = 1 ;
           h1f_WFcorr->                      Fill(ratio_corr) ;
           if(Tag.find("diag") != std::string::npos) v_WF.push_back(h1f_WF_cluster->GetMaximum()*ratio_corr/Lx*10) ;
           else                                      v_WF.push_back(h1f_WF_cluster->GetMaximum()/(trk_len_clus*100)) ;

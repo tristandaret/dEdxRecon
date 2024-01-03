@@ -6,6 +6,7 @@ FILES += src/Displayer
 FILES += src/Monitoring
 FILES += src/Control
 FILES += src/dEdx
+FILES += src/dEdx_XP
 FILES += src/dEdx_func
 FILES += src/DrawOuts
 FILES += src/ReadLUT_vROOT

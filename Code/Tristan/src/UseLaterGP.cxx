@@ -72,7 +72,7 @@ void dEdx( const std::string& OutDir,
   int   RC_step         = 5 ;                                   // RC  increment between LUTs
 
   // Redirect Output
-  std::string     OutPut_Analysis = OUTDirName + "3_" + Tag + "_dEdx_XP.txt" ;
+  std::string     OutPut_Analysis = OUTDirName + "3_" + Tag + "_dEdx_XP.log" ;
   std::cout <<    OutPut_Analysis       << std::endl ;
   std::cout <<    std::setprecision(2)  << std::fixed ;
   std::cout <<    std::endl ;

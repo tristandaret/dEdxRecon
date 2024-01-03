@@ -29,7 +29,7 @@ void corr( const std::string& OutDir,
                           int         const& Data_to_Use)
 { 
   // Redirect Output
-  std::string     OutPut_Analysis = OutDir + "_corr.txt" ;
+  std::string     OutPut_Analysis = OutDir + "_corr.log" ;
   std::cout <<    OutPut_Analysis       << std::endl ;
   std::cout <<    std::endl ;
   std::streambuf* coutbuf = std::cout.rdbuf() ;     // Save old buf

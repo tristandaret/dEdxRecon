@@ -899,7 +899,7 @@ void DrawOut_Methods(const std::string& OutDir, const std::string& Tag, const st
   int statYin                 = gStyle->GetStatY() ;
 
   // Get histograms
-  TFile* pTFile_dEdx            = TFile::Open(TString(OutDir + Tag + "/3_" + Tag + "_dEdx" + Comment + ".root")) ;
+  TFile* pTFile_dEdx            = TFile::Open(TString(OutDir + Tag + "/3_" + Tag + "_dEdx_XP" + Comment + ".root")) ;
 
   std::vector<TH1F*>                v_h1f_WFsum ;
   std::vector<TH1F*>                v_h1f_XP ;
@@ -927,7 +927,7 @@ void DrawOut_Methods(const std::string& OutDir, const std::string& Tag, const st
   }
 
   // Make canvas
-  std::string OutputFile          = OutDir + Tag + "/3_" + Tag + "_Comparison" + Comment + ".pdf" ;
+  std::string OutputFile          = OutDir + Tag + "/3_" + Tag + "_Comparison_XPonly" + Comment + ".pdf" ;
   TCanvas* pTCanvas               = new TCanvas("pTCanvas", "pTCanvas", 1800, 1200) ;
 
   //  Draw

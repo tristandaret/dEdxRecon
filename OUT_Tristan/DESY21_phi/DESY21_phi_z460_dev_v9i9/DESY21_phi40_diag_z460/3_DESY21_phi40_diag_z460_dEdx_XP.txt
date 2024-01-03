@@ -1,5 +1,5 @@
 Tag           : DESY21_phi40_diag_z460
-Comment       : _zcalc_G2_WF4_LUTvROOT_nphi200_nd200
+Comment       : _zcalc_G2_WF0_LUTvROOT_200_100
 FileName     : ../Data_DESY21/Phi_scan_z460/phi_200_40_z460_ym60_diag_iter0.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
@@ -48,7 +48,6 @@ PT/TB         = 5 time bins
 z method      : zcalc
 cut length    = 2 mm
 
-WF correction parameters: 283.98 | -10.30 | 2.25 | 0.81 | -0.05
 Processing events:
 0/14526
 1000/14526
@@ -56,51 +55,51 @@ Processing events:
 3000/14526
 4000/14526
 ALERT: 1 walls crossed for a pad in entry #4155
-38.35 39.48 4.08 5.09
-39.48 38.42 5.16 4.08
-41.67 -0.94 -0.00
+38 39 4 5
+39 38 5 4
+42 -1 -0
 5000/14526
 ALERT: 1 walls crossed for a pad in entry #5041
-9.02 10.15 30.57 31.59
-10.15 9.05 31.61 30.57
-39.91 -0.91 -0.00
+9 10 31 32
+10 9 32 31
+40 -1 -0
 ALERT: 1 walls crossed for a pad in entry #5041
-9.02 10.15 29.55 30.57
-11.25 10.15 31.61 30.57
-39.91 -0.91 -0.00
+9 10 30 31
+11 10 32 31
+40 -1 -0
 ALERT: 1 walls crossed for a pad in entry #5041
-10.15 11.28 30.57 31.59
-10.15 9.05 30.57 29.52
-39.91 -0.91 -0.00
+10 11 31 32
+10 9 31 30
+40 -1 -0
 ALERT: 3 walls crossed for a pad in entry #5041
-10.15 11.28 29.55 30.57
-11.25 10.15 30.57 29.52
-39.91 -0.91 -0.00
+10 11 30 31
+11 10 31 30
+40 -1 -0
 6000/14526
 ALERT: 1 walls crossed for a pad in entry #6916
-38.35 39.48 4.08 5.09
-39.48 38.42 5.16 4.08
-41.33 -0.92 -0.00
+38 39 4 5
+39 38 5 4
+41 -1 -0
 7000/14526
 8000/14526
 9000/14526
 10000/14526
 ALERT: 3 walls crossed for a pad in entry #10658
-37.22 38.35 3.06 4.08
-38.35 37.28 4.13 3.06
-39.07 -0.93 -0.00
+37 38 3 4
+38 37 4 3
+39 -1 -0
 ALERT: 1 walls crossed for a pad in entry #10658
-37.22 38.35 2.04 3.06
-39.43 38.35 4.13 3.06
-39.07 -0.93 -0.00
+37 38 2 3
+39 38 4 3
+39 -1 -0
 ALERT: 1 walls crossed for a pad in entry #10658
-38.35 39.48 3.06 4.08
-38.35 37.28 3.06 1.99
-39.07 -0.93 -0.00
+38 39 3 4
+38 37 3 2
+39 -1 -0
 ALERT: 1 walls crossed for a pad in entry #10658
-38.35 39.48 2.04 3.06
-39.43 38.35 3.06 1.99
-39.07 -0.93 -0.00
+38 39 2 3
+39 38 3 2
+39 -1 -0
 11000/14526
 12000/14526
 13000/14526
@@ -119,5 +118,5 @@ Selection Statistics
     6  Stage5    13986    12464 (  -10.88)  (  -14.20)     13986    12464 (  -10.88)  (  -14.20)    740032   674600 (   -8.84)  (  -14.73)   1434644  1301655 (   -9.27)  (  -16.94) 
   Summary Sel    14526    12464             (  -14.20)     14526    12464             (  -14.20)    791177   674600             (  -14.73)   1567194  1301655             (  -16.94) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_phi/DESY21_phi_z460_dev_v9i9/DESY21_phi40_diag_z460/2_DESY21_phi40_diag_z460_Checks_zcalc_G2_WF4_LUTvROOT_nphi200_nd200.root
-dEdx: OUT_Tristan/DESY21_phi/DESY21_phi_z460_dev_v9i9/DESY21_phi40_diag_z460/3_DESY21_phi40_diag_z460_dEdx_zcalc_G2_WF4_LUTvROOT_nphi200_nd200.root
+Checks: OUT_Tristan/DESY21_phi/DESY21_phi_z460_dev_v9i9/DESY21_phi40_diag_z460/2_DESY21_phi40_diag_z460_Checks_zcalc_G2_WF0_LUTvROOT_200_100.root
+dEdx: OUT_Tristan/DESY21_phi/DESY21_phi_z460_dev_v9i9/DESY21_phi40_diag_z460/3_DESY21_phi40_diag_z460_dEdx_zcalc_G2_WF0_LUTvROOT_200_100.root

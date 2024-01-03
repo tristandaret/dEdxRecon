@@ -30,7 +30,7 @@ void Control(
   MakeMyDir(OUTDIR_WF_Display) ;
 
   // Redirect Output
-  std::string OutPut_Analysis = OUTDirName + "1_" + Tag + "_Control_XP.txt" ;
+  std::string OutPut_Analysis = OUTDirName + "1_" + Tag + "_Control_XP.log" ;
   std::cout <<    OutPut_Analysis       << std::endl ;
   std::streambuf *coutbuf = std::cout.rdbuf() ;           // Save old buf
   std::ofstream OUT_DataFile(OutPut_Analysis.c_str()) ; // Set output file
