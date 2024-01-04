@@ -147,10 +147,9 @@ void dEdx_XPonly( const std::string& OutDir,
     if (pEvent->IsValid() != 1)             continue ;
 
     // Initialize event variables
-    int                                   N_cross_Evt = 0,  N_cross_trc_Evt = 0;
-    std::vector<float>                    v_length_in_pad;
-    std::vector<RankedValue>              v_rank_dEdx ;
-    std::vector<float>                    v_dE ;
+    int                                   N_crossed = 0,  N_crossed_trc = 0;
+    std::vector<float>                    v_dx, v_dE;
+    std::vector<RankedValue>              v_dEdx_ranked ;
 
     // Loop On Modules
     int nMod                              = pEvent->Get_NberOfModule() ;
@@ -274,35 +273,35 @@ void dEdx_XPonly( const std::string& OutDir,
 
           if(length_in_pad <= len_cut)        continue ;
           v_dE.                             push_back(A_pad*ratio);
-          v_length_in_pad.                  push_back(length_in_pad) ;
+          v_dx.                  push_back(length_in_pad) ;
 
           RankedValue rank_dEdx ;  
-          rank_dEdx.Rank                  = N_cross_Evt ; 
+          rank_dEdx.Rank                  = N_crossed ; 
           rank_dEdx.Value                 = A_pad*ratio/length_in_pad ;
-          v_rank_dEdx.                     push_back(rank_dEdx) ;
+          v_dEdx_ranked.                     push_back(rank_dEdx) ;
 
-          N_cross_Evt++ ;
+          N_crossed++ ;
         }
       } // Cluster
     } // Module
 
-    if(N_cross_Evt > 0){
-      N_cross_trc_Evt                     = int(floor(N_cross_Evt * (alpha/100))) ; 
+    if(N_crossed > 0){
+      N_crossed_trc                     = int(floor(N_crossed * (alpha/100))) ; 
 
       // XP
-      float track_length_trunc            = 0 ;
+      float dx_trunc            = 0 ;
       float XP                            = 0 ;
-      std::sort(v_rank_dEdx.begin(), v_rank_dEdx.end()) ;
-      for(int iP = 0 ; iP < (int)N_cross_trc_Evt ; iP++){
-        track_length_trunc               += v_length_in_pad[v_rank_dEdx[iP].Rank]*100 ;
-        XP                               += v_dE[v_rank_dEdx[iP].Rank] ;
+      std::sort(v_dEdx_ranked.begin(), v_dEdx_ranked.end()) ;
+      for(int iP = 0 ; iP < (int)N_crossed_trc ; iP++){
+        dx_trunc               += v_dx[v_dEdx_ranked[iP].Rank]*100 ;
+        XP                               += v_dE[v_dEdx_ranked[iP].Rank] ;
       }
-      XP                                 /= track_length_trunc ;
+      XP                                 /= dx_trunc ;
       h1f_XP->                              Fill(XP) ;
     }
 
-    v_rank_dEdx.clear() ;
-    v_length_in_pad.clear() ; 
+    v_dEdx_ranked.clear() ;
+    v_dx.clear() ; 
     eram_list.clear();
     delete                                  pEvent ;
   }
