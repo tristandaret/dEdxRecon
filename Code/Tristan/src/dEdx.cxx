@@ -22,7 +22,7 @@
 #include "Misc/Util.h"
 #include "SampleTools/Uploader.h"
 #include "SampleTools/GiveMe_Uploader.h"
-#include "SampleTools/ReadRCmap.h"
+// #include "SampleTools/THATERAMMaps.h"
 #include "SampleTools/ReadGainmap.h"
 #include "SignalShape/PRF_param.h"
 
@@ -101,14 +101,15 @@ void dEdx( const std::string& OutDir,
   // Get Gain & RC maps
   std::vector<ReadRCmap*> RCmaps;
   std::vector<ReadGainmap*> Gainmaps;
-  LoadMaps(FileName, RCmaps, Gainmaps, eram_id);
+  // LoadMaps(FileName, RCmaps, Gainmaps, eram_id);
 
   // Get average gain value
-  float avg_G = avg_Gain(FileName, eram_id, Gainmaps);
+  // float avg_G = avg_Gain(Gainmaps);
+  float avg_G;
 
 
   // Fill holes in maps
-  Fill_Maps(RCmaps, Gainmaps, eram_id);
+  // Fill_Maps(RCmaps, Gainmaps, eram_id);
 
   float costheta = 1;
   int theta_arr[] = {-45, -20, 20} ;

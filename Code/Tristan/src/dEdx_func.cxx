@@ -5,6 +5,7 @@
 #include "Misc/Misc.h"
 
 #include "EvtModelTools/EvtModelTools_TD_Selections.h"
+// #include "SampleTools/THATERAMMaps.h"
 #include "SampleTools/Uploader.h"
 #include "SampleTools/GiveMe_Uploader.h"
 
@@ -30,68 +31,65 @@ void LoadMaps(const std::string &EventFile, std::vector<ReadRCmap*>& RCmaps, std
 
 
 
-float avg_Gain(const std::string &EventFile, const std::vector<std::string>& eram_id, std::vector<ReadGainmap*>& Gainmaps){
+float avg_Gain(std::vector<ERAM_map*>& Gainmaps){
   std::vector<float> v_avg_G;
-  int lowest, status;
+  int lowest;
   float avg_G, n_pads;
-  for(int i = 0; i < (int)eram_id.size(); i++){
-    status        = 0 ;
+  for(int i = 0; i < (int)Gainmaps.size(); i++){
     n_pads        = 0 ;
     avg_G         = 0 ;
     lowest        = 9999 ;
     for(int iX = 0 ; iX < 36 ; iX++){
       for(int iY = 0 ; iY < 32 ; iY++){
-        if(Gainmaps[i]->GetData(iX, iY, status) != 0){
-          avg_G        += Gainmaps[i]->GetData(iX, iY, status) ;
+        if(Gainmaps[i]->GetData(iX, iY) != 0){
+          avg_G        += Gainmaps[i]->GetData(iX, iY) ;
           n_pads++ ;
         } 
-        if(Gainmaps[i]->GetData(iX, iY, status) < lowest and Gainmaps[i]->GetData(iX, iY, status) > 0) lowest = Gainmaps[i]->GetData(iX, iY, status) ;
+        if(Gainmaps[i]->GetData(iX, iY) < lowest and Gainmaps[i]->GetData(iX, iY) > 0) lowest = Gainmaps[i]->GetData(iX, iY) ;
       }
     }
-    // DrawOut_GainMap(eram_id[i], Gainmaps[i]);
+    // DrawOut_GainMap(Gainmaps[i]->Get_iD(), Gainmaps[i]);
     avg_G /= n_pads ;
     v_avg_G.push_back(avg_G);
-    std::cout << "Average Gain in " << eram_id[i] << " = " << avg_G << std::endl ;
+    std::cout << "Average Gain in " << Gainmaps[i]->Get_iD() << " = " << avg_G << std::endl ;
   }
   avg_G = mean(v_avg_G);
-  if(EventFile.find("All_ERAMS") != std::string::npos) std::cout << "Average gain in Mockup = " << avg_G << std::endl ;
-
   return avg_G;
 }
 
 
 
-void Fill_Maps(std::vector<ReadRCmap*>& RCmaps, std::vector<ReadGainmap*>& Gainmaps, const std::vector<std::string>& eram_id){
-  int status = 0;
-  for(int i = 0; i < (int)eram_id.size(); i++){
-    for(int iX = 0 ; iX < 36 ; iX++){
-      for(int iY = 0 ; iY < 32 ; iY++){
-        double RC_pad                   = RCmaps[i]->GetData(iX,iY, status) ;
-        double G_pad                    = Gainmaps[i]->GetData(iX,iY, status) ;
-        if(RC_pad == 0){
-          std::cout << eram_id[i] << ": RC   hole in " <<  " iX = " << iX << " | iY = " << iY ; 
-          float RC_left                 = RCmaps[i]->GetData(iX-1,iY,   status) ;
-          float RC_right                = RCmaps[i]->GetData(iX+1,iY,   status) ;
-          float RC_low                  = RCmaps[i]->GetData(iX,  iY-1, status) ;
-          float RC_top                  = RCmaps[i]->GetData(iX,  iY+1, status) ;
-          RC_pad                        = (RC_left + RC_right + RC_low + RC_top)/4 ;
-          RCmaps[i]->                          SetData(iX,iY, RC_pad) ;
-          std::cout << " | value reset at " << RC_pad << std::endl ;
-        }
-        if(G_pad == 0){
-          std::cout << eram_id[i] << ": Gain hole in " << " iX = " << iX << " | iY = " << iY ; 
-          float G_left                  = Gainmaps[i]->GetData(iX-1,iY,   status) ;
-          float G_right                 = Gainmaps[i]->GetData(iX+1,iY,   status) ;
-          float G_low                   = Gainmaps[i]->GetData(iX,  iY-1, status) ;
-          float G_top                   = Gainmaps[i]->GetData(iX,  iY+1, status) ;
-          G_pad                         = (G_left + G_right + G_low + G_top)/4 ;
-          Gainmaps[i]->                        SetData(iX,iY, G_pad) ;
-          std::cout << " | value reset at " << G_pad << std::endl ;
-        }
-      }
-    }
-  }
-}
+// void Fill_Maps(std::vector<ReadRCmap*>& RCmaps, std::vector<ReadGainmap*>& Gainmaps, const std::vector<std::string>& eram_id){
+//   int status = 0;
+//   for(int i = 0; i < (int)eram_id.size(); i++){
+//     for(int iX = 0 ; iX < 36 ; iX++){
+//       for(int iY = 0 ; iY < 32 ; iY++){
+//         double RC_pad                   = RCmaps[i]->GetData(iX,iY) ;
+//         double G_pad                    = Gainmaps[i]->GetData(iX,iY) ;
+//         if(RC_pad == 0){
+//           std::cout << eram_id[i] << ": RC   hole in " <<  " iX = " << iX << " | iY = " << iY ; 
+//           float RC_left                 = RCmaps[i]->GetData(iX-1,iY,   status) ;
+//           float RC_right                = RCmaps[i]->GetData(iX+1,iY,   status) ;
+//           float RC_low                  = RCmaps[i]->GetData(iX,  iY-1) ;
+//           float RC_top                  = RCmaps[i]->GetData(iX,  iY+1) ;
+//           RC_pad                        = (RC_left + RC_right + RC_low + RC_top)/4 ;
+//           RCmaps[i]->                          SetData(iX,iY, RC_pad) ;
+//           std::cout << " | value reset at " << RC_pad << std::endl ;
+//         }
+//         if(G_pad == 0){
+//           std::cout << eram_id[i] << ": Gain hole in " << " iX = " << iX << " | iY = " << iY ; 
+//           float G_left                  = Gainmaps[i]->GetData(iX-1,iY,   status) ;
+//           float G_right                 = Gainmaps[i]->GetData(iX+1,iY,   status) ;
+//           float G_low                   = Gainmaps[i]->GetData(iX,  iY-1) ;
+//           float G_top                   = Gainmaps[i]->GetData(iX,  iY+1) ;
+//           G_pad                         = (G_left + G_right + G_low + G_top)/4 ;
+//           Gainmaps[i]->                        SetData(iX,iY, G_pad) ;
+//           std::cout << " | value reset at " << G_pad << std::endl ;
+//         }
+//       }
+//     }
+//   }
+// }
 
 
 

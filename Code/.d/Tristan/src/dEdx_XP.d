@@ -347,6 +347,8 @@
  SampleTools/SampleTools/GiveMe_Uploader.h Tristan/Tristan/dEdx_func.h \
  SampleTools/SampleTools/ReadRCmap.h \
  SampleTools/SampleTools/ReadGainmap.h \
+ SampleTools/SampleTools/THATERAMMaps.h \
+ /home/td263283/root/include/TBranch.h \
  EvtModelTools/EvtModelTools/JFL_Selector.h EvtModel/EvtModel/Sample.h \
  EvtModel/EvtModel/SetOfTracks.h /home/td263283/root/include/TH1F.h \
  SignalShape/SignalShape/SC_VS_x_rc_dd_SET_dd.h \

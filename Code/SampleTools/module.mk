@@ -15,6 +15,7 @@ FILES += src/ReadRCmap
 FILES += src/ReadGainmap
 FILES += src/Uploader_ReadRCmap
 FILES += src/Uploader_ReadGainmap
+FILES += src/THATERAMMaps
 
 # Header files to use for dictionary generation
 DICTFILES :=  SampleTools/LinkDef

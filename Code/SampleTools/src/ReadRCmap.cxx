@@ -1,5 +1,4 @@
 #include "SampleTools/ReadRCmap.h"
-
 #include "SampleTools/Uploader_ReadRCmap.h"
 
 ReadRCmap::ReadRCmap()

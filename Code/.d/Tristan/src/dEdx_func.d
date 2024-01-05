@@ -340,7 +340,9 @@
  /home/td263283/root/include/TBranchCacheInfo.h \
  SampleTools/SampleTools/GiveMe_Uploader.h \
  SampleTools/SampleTools/ReadRCmap.h \
- SampleTools/SampleTools/ReadGainmap.h Tristan/Tristan/ReadLUT_vROOT.h \
+ SampleTools/SampleTools/ReadGainmap.h \
+ SampleTools/SampleTools/THATERAMMaps.h \
+ /home/td263283/root/include/TBranch.h Tristan/Tristan/ReadLUT_vROOT.h \
  /home/td263283/root/include/TH2.h /home/td263283/root/include/TH1.h \
  /home/td263283/root/include/TAxis.h \
  /home/td263283/root/include/TAttAxis.h \

@@ -22,7 +22,7 @@
 #include "Misc/Util.h"
 #include "SampleTools/Uploader.h"
 #include "SampleTools/GiveMe_Uploader.h"
-#include "SampleTools/ReadRCmap.h"
+// #include "SampleTools/THATERAMMaps.h"
 #include "SampleTools/ReadGainmap.h"
 #include "SignalShape/PRF_param.h"
 
@@ -75,7 +75,7 @@ void dEdx_XPonly( const std::string& OutDir,
 
   std::cout << "Tag           : " << Tag          << std::endl ;
   std::cout << "Comment       : " << Comment      << std::endl ;
-  std::cout << "FileName     : " << FileName    << std::endl ;
+  std::cout << "FileName      : " << FileName    << std::endl ;
   std::cout << "SelectionSet  : " << SelectionSet << std::endl ;
   std::cout << "NbrOfMod      : " << NbrOfMod     << std::endl ;
   std::cout << "Data_to_Use   : " << Data_to_Use  << std::endl ;
@@ -83,25 +83,37 @@ void dEdx_XPonly( const std::string& OutDir,
   std::cout <<                                       std::endl ;
 
   // Get ERAM ID
-  std::vector<std::string>  eram_id ;
-  std::vector<double>       eram_number ;
-  if(Tag.find("DESY") != std::string::npos){        eram_id.push_back("ERAM01"); eram_number.push_back(1); }
-  if(FileName.find("ERAM18") != std::string::npos){ eram_id.push_back("ERAM18"); eram_number.push_back(18);}
+  std::vector<std::string>  ERAMS_iD ;
+  if(Tag.find("DESY") != std::string::npos)         ERAMS_iD.push_back("01");
+  if(FileName.find("ERAM18") != std::string::npos)  ERAMS_iD.push_back("18");
   if(FileName.find("All_ERAMS") != std::string::npos){
-    eram_id     = {"ERAM07", "ERAM01", "ERAM23", "ERAM02", "ERAM16", "ERAM15", "ERAM10", "ERAM12"};
-    eram_number = {7, 1, 23, 2, 16, 15, 10, 12};
+    ERAMS_iD     = {"07", "01", "23", "02", "16", "15", "10", "12"}; // MockUp CERN22
   }
+  // ERAMS_iD = {"24", "30", "28", "19", "21", "13", "09", "02", "29", "23", "17", "26", "03", "11", "10", "01"}; // bottom HATPC
+
   // Get Gain & RC maps
-  std::vector<ReadRCmap*> RCmaps;
-  std::vector<ReadGainmap*> Gainmaps;
-  LoadMaps(FileName, RCmaps, Gainmaps, eram_id);
-
+  std::vector<ERAM_map*> RCmaps;
+  std::vector<ERAM_map*> Gainmaps;
+  for(std::string eram_id : ERAMS_iD){
+    // ERAM_map *RC_map   = new ERAM_map(eram_id, "RC");
+    // ERAM_map *Gain_map = new ERAM_map(eram_id, "Gain");
+    // ERAM_map *Gain_map = Get_Map(eram_id, "Gain");
+    // ERAM_map *RC_map   = Get_Map(eram_id, "RC");
+    // Gainmaps.push_back(Get_Map(eram_id, "Gain"));
+    // RCmaps.push_back(Get_Map(eram_id, "RC"));
+    Gainmaps. push_back(new ERAM_map(eram_id, "Gain"));
+    RCmaps.   push_back(new ERAM_map(eram_id, "RC"));
+  }
+  std::cout << "dEdx_XP dir " << Gainmaps[0]->Get_iD_public() << std::endl;
+  std::cout << "dEdx_XP GetData " << Gainmaps[0]->GetData(0,0) << std::endl;
   // Get average gain value
-  float avg_G = avg_Gain(FileName, eram_id, Gainmaps);
+
+  float avg_G = avg_Gain(Gainmaps);
+  std::cout << "Average gain in bottom HATPC: " << avg_G << std::endl;
 
 
-  // Fill holes in maps
-  Fill_Maps(RCmaps, Gainmaps, eram_id);
+  // // Fill holes in maps
+  // Fill_Maps(RCmaps, Gainmaps, ERAMS_iD);
 
   float costheta = 1;
   int theta_arr[] = {-45, -20, 20} ;
@@ -158,7 +170,7 @@ void dEdx_XPonly( const std::string& OutDir,
     std::vector<double> eram_list;
     for (int iMod = 0 ; iMod < nMod ; iMod++){
       int ModuleNber                      = pEvent->Get_Module_InArray(iMod)->Get_ModuleNber();
-      if (pEvent->Validity_ForThisModule(ModuleNber)!=0) eram_list.push_back(eram_number[ModuleNber]) ;
+      if (pEvent->Validity_ForThisModule(ModuleNber)!=0) eram_list.push_back(Gainmaps[ModuleNber]->Get_iD()[ModuleNber]) ;
     } 
 
     int nber ;
@@ -189,8 +201,8 @@ void dEdx_XPonly( const std::string& OutDir,
       int ModuleNber                      = pModule->Get_ModuleNber() ;
       if (pEvent->Validity_ForThisModule(ModuleNber) == 0) continue ;
       if(FileName.find("All_ERAMS") != std::string::npos){
-        if(eram_number[ModuleNber] != nber) continue; // 1 ERAM
-        // if(eram_number[ModuleNber] != 7 and eram_number[ModuleNber] != 1 and eram_number[ModuleNber] != 16 and eram_number[ModuleNber] != 10) continue; // 2 ERAMs
+        if(Gainmaps[ModuleNber]->Get_iD()[ModuleNber] != nber) continue; // 1 ERAM
+        // if(Gainmaps[ModuleNber]->Get_iD()[ModuleNber] != 7 and Gainmaps[ModuleNber]->Get_iD()[ModuleNber] != 1 and Gainmaps[ModuleNber]->Get_iD()[ModuleNber] != 16 and Gainmaps[ModuleNber]->Get_iD()[ModuleNber] != 10) continue; // 2 ERAMs
       }
       float N_clus                        = pModule->Get_NberOfCluster() ;
       if(N_clus == 0) continue;
@@ -220,10 +232,9 @@ void dEdx_XPonly( const std::string& OutDir,
         for(int iP = 0 ; iP < NPads ; iP ++){
           const Pad* pPad                 = pCluster->Get_Pad(iP) ;
           float A_pad;
-          int StatusRC = 0, StatusG  = 0 ;
-          double RC_pad                   = RCmaps[ModuleNber]->GetData(pPad->Get_iX(),pPad->Get_iY(), StatusRC) ;
+          double RC_pad                   = RCmaps[ModuleNber]->GetData(pPad->Get_iX(),pPad->Get_iY()) ;
           if(gain_corr){
-            double G_pad                  = Gainmaps[ModuleNber]->GetData(pPad->Get_iX(),pPad->Get_iY(), StatusG) ;
+            double G_pad                  = Gainmaps[ModuleNber]->GetData(pPad->Get_iX(),pPad->Get_iY()) ;
             float Gcorr                   = avg_G/G_pad ;
             A_pad                         = Gcorr*pPad->Get_AMax() ;
           }
