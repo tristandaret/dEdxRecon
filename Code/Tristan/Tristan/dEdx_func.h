@@ -10,7 +10,7 @@
 // void LoadMaps(const std::string &EventFile, std::vector<ReadRCmap*> &RCmaps, std::vector<ReadGainmap*> &Gainmaps, const std::vector<std::string> &eram_id) ;
 
 
-float avg_Gain(std::vector<ERAM_map*>& Gainmaps);
+float avg_Gain(const std::vector<ERAM_map*>& Gainmaps);
 
 
 // void Fill_Maps(std::vector<ReadRCmap*> &RCmaps, std::vector<ReadGainmap*> &Gainmaps, const std::vector<std::string> &eram_id);

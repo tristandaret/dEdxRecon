@@ -1,3 +1,6 @@
+#ifndef erammap_H
+#define erammap_H
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -9,17 +12,14 @@ class ERAM_map {
 public:
    /** Constructor */
    ERAM_map();
-   ERAM_map(const std::string& ERAM_id, std::string type);
-   ERAM_map(std::string Dir, const std::string& ERAM_id, std::string type);
+   ERAM_map(const std::string& ERAM_id, const std::string& type);
+   ERAM_map(const std::string& Dir, const std::string& ERAM_id, const std::string& type);
    virtual ~ERAM_map();
    
    double GetData(const int& iX, const int& iY);
-   void SetData(const int& iX, const int& iY, const double& Data) ;
 
    std::string Get_iD(); // ERAM identification number
-   std::string Get_iD_public();
 
-public:
    std::string id;
 
 private:
@@ -28,11 +28,11 @@ private:
   std::string m_type     ;
   std::string m_FileName ;
 
-  std::vector<double>* p_V_Data;
-  std::vector<int>*    p_V_HasBeenSet;
+  float value[36][32] = {0};
 
-  int GetLinear(const int& iX, const int& iY);
-  int HasBeenSet(const int& iX, const int& iY);
+  void Initialize();
+  void SetData(const int& iX, const int& iY, const double& Data) ;
+  void FillHoles();
 
 };
 
@@ -81,7 +81,4 @@ public:
 
 };
 
-
-
-
-ERAM_map* Get_Map(const std::string& eram_id, const std::string& type);
+#endif

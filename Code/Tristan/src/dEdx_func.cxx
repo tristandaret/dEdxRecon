@@ -5,7 +5,6 @@
 #include "Misc/Misc.h"
 
 #include "EvtModelTools/EvtModelTools_TD_Selections.h"
-// #include "SampleTools/THATERAMMaps.h"
 #include "SampleTools/Uploader.h"
 #include "SampleTools/GiveMe_Uploader.h"
 
@@ -31,7 +30,7 @@ void LoadMaps(const std::string &EventFile, std::vector<ReadRCmap*>& RCmaps, std
 
 
 
-float avg_Gain(std::vector<ERAM_map*>& Gainmaps){
+float avg_Gain(const std::vector<ERAM_map*>& Gainmaps){
   std::vector<float> v_avg_G;
   int lowest;
   float avg_G, n_pads;

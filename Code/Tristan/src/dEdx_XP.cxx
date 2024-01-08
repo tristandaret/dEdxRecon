@@ -22,7 +22,7 @@
 #include "Misc/Util.h"
 #include "SampleTools/Uploader.h"
 #include "SampleTools/GiveMe_Uploader.h"
-// #include "SampleTools/THATERAMMaps.h"
+#include "SampleTools/THATERAMMaps.h"
 #include "SampleTools/ReadGainmap.h"
 #include "SignalShape/PRF_param.h"
 
@@ -95,18 +95,9 @@ void dEdx_XPonly( const std::string& OutDir,
   std::vector<ERAM_map*> RCmaps;
   std::vector<ERAM_map*> Gainmaps;
   for(std::string eram_id : ERAMS_iD){
-    // ERAM_map *RC_map   = new ERAM_map(eram_id, "RC");
-    // ERAM_map *Gain_map = new ERAM_map(eram_id, "Gain");
-    // ERAM_map *Gain_map = Get_Map(eram_id, "Gain");
-    // ERAM_map *RC_map   = Get_Map(eram_id, "RC");
-    // Gainmaps.push_back(Get_Map(eram_id, "Gain"));
-    // RCmaps.push_back(Get_Map(eram_id, "RC"));
     Gainmaps. push_back(new ERAM_map(eram_id, "Gain"));
     RCmaps.   push_back(new ERAM_map(eram_id, "RC"));
   }
-  std::cout << "dEdx_XP dir " << Gainmaps[0]->Get_iD_public() << std::endl;
-  std::cout << "dEdx_XP GetData " << Gainmaps[0]->GetData(0,0) << std::endl;
-  // Get average gain value
 
   float avg_G = avg_Gain(Gainmaps);
   std::cout << "Average gain in bottom HATPC: " << avg_G << std::endl;
@@ -326,8 +317,8 @@ void dEdx_XPonly( const std::string& OutDir,
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////
   // Saving //
-  TFile* pfileROOT_status       = new TFile(TString(OUTDirName + "3_" + Tag + "_dEdx_XPonly" + Comment + ".root"), "RECREATE") ;
-  std::cout << "dEdx: " << OUTDirName + "3_" + Tag + "_dEdx_XPonly" + Comment + ".root" << std::endl ;
+  TFile* pfileROOT_status       = new TFile(TString(OUTDirName + "3_" + Tag + "_dEdx" + Comment + "_XPonly.root"), "RECREATE") ;
+  std::cout << "dEdx: " << OUTDirName + "3_" + Tag + "_dEdx" + Comment + "_XPonly.root" << std::endl ;
   tf1_XP->                        Write() ;
   h1f_XP->                        Write() ;
   pfileROOT_status->              Close() ;

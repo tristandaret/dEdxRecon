@@ -1,42 +1,6 @@
 #include "SampleTools/THATERAMMaps.h"
 
 
-//******************************************************************************
-ERAM_map* Get_Map(const std::string& eram_id, const std::string& type){
-//******************************************************************************
-
-  ERAM_map *map = new ERAM_map(eram_id, type);
-
-  for(int iX = 0 ; iX < 36 ; iX++){
-      for(int iY = 0 ; iY < 32 ; iY++){
-        double val                    = map->GetData(iX,iY) ; // loading here
-
-        // Fill holes of maps if there is any
-        std::vector<float> v_sides;
-        if(val == 0){
-          std::cout << eram_id << ": Gain hole in " << " iX = " << iX << " | iY = " << iY ; 
-          v_sides.push_back(map->GetData(iX-1,iY  )) ;
-          v_sides.push_back(map->GetData(iX+1,iY  )) ;
-          v_sides.push_back(map->GetData(iX,  iY-1)) ;
-          v_sides.push_back(map->GetData(iX,  iY+1)) ;
-          float n_sides = 0;
-          for(int i = 0; i<4; i++) if (v_sides[i]!=0){ // additionnal step to discard empty neighbours
-            val += v_sides[i];
-            n_sides++;
-          }
-          val /= n_sides;
-          std::cout << " | value reset at " << val << std::endl ;
-        }
-        v_sides.clear();
-        
-      } // iY
-    } // iX
-  std::cout << "ERAM " << eram_id << " loaded" << std::endl;
-
-  return map;
-}
-
-
 
 
 
@@ -44,25 +8,40 @@ ERAM_map* Get_Map(const std::string& eram_id, const std::string& type){
 ERAM_map::ERAM_map(){}
 //******************************************************************************
 
-ERAM_map::ERAM_map(const std::string& ERAM_id, std::string type)
+
+ERAM_map::ERAM_map(const std::string& ERAM_id, const std::string& type)
 {
   // m_Dir = "..GainRCMaps/" + type + "files/" ;
   m_Dir = "GainRCMaps/" + type + "files/" ;
-  ERAM_map(m_Dir, ERAM_id, type);
+  m_ERAM_id = ERAM_id ;
+  m_type    = type;
+
+  Initialize();
 }
 
 
-ERAM_map::ERAM_map(std::string Dir, const std::string& ERAM_id, std::string type)
+ERAM_map::ERAM_map(const std::string& Dir, const std::string& ERAM_id, const std::string& type)
 {
   m_Dir     = Dir ;
   m_ERAM_id = ERAM_id ;
   m_type    = type;
+
+  Initialize();
+}
+
+
+ERAM_map::~ERAM_map()
+{
+  for(int i=0;i<36;i++) for(int j=0;j<32;j++) value[i][j] = 0;
+}
+
+
+void ERAM_map::Initialize()
+{
   
-  p_V_Data = 0 ;
-  p_V_HasBeenSet = 0 ;
-  
-  std::vector<std::string> maps = {"01" ,"02" ,"03" ,"07" ,"09" ,"10" ,"11" ,"12" ,"13" ,"14" ,"15" ,"16" ,"17" ,"18" ,"19" ,"20" ,"21" ,"23" ,"24" ,"26" ,"28" ,"29" ,"30"};
-  // ERAM missing: 4 5 6 8 22 25 27 >30
+  std::vector<std::string> maps = { "01", "02", "03",                   "07",       "09", "10",
+                                    "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
+                                    "21",       "23", "24",       "26",       "28", "29", "30"};
   if (std::find(maps.begin(), maps.end(), m_ERAM_id) != maps.end()) m_FileName = m_Dir + "ERAM" + m_ERAM_id + "_" + m_type + "data_" + m_ERAM_id + ".root" ;
   else {
     std::cout << "ERAM_map::ERAM_map ERROR -> No map for ERAM " << m_ERAM_id << std::endl ;
@@ -70,33 +49,17 @@ ERAM_map::ERAM_map(std::string Dir, const std::string& ERAM_id, std::string type
   }
 
   Load_ERAM_map aLoad_ERAM_map(m_FileName, m_type);
-
-  p_V_Data       = new std::vector<double>(100*100,0.) ;
-  p_V_HasBeenSet = new std::vector<int>   (100*100,0 ) ;
   
   int iEntry_Max = aLoad_ERAM_map.Get_NberOfEntries() ;
   for (int iEntry=0; iEntry<iEntry_Max;iEntry++) {
-     aLoad_ERAM_map.GiveMe_Entry(iEntry);
-     int    iX   = aLoad_ERAM_map.Get_iX()  ;
-     int    iY   = aLoad_ERAM_map.Get_iY()  ;
-     double Data = aLoad_ERAM_map.Get_Data();
-     SetData(iX,iY,Data);
+    aLoad_ERAM_map.GiveMe_Entry(iEntry);
+    int    iX   = aLoad_ERAM_map.Get_iX()  ;
+    int    iY   = aLoad_ERAM_map.Get_iY()  ;
+    double Data = aLoad_ERAM_map.Get_Data();
+    SetData(iX,iY,Data);
   }
-}
 
-
-ERAM_map::~ERAM_map()
-{
-  delete p_V_Data ;
-  p_V_Data = 0 ;
-  delete p_V_HasBeenSet ;
-  p_V_HasBeenSet = 0 ;
-}
-
-
-std::string ERAM_map::Get_iD_public()
-{
-  return id;
+  FillHoles();
 }
 
 
@@ -108,32 +71,44 @@ std::string ERAM_map::Get_iD()
 
 double ERAM_map::GetData(const int& iX, const int& iY)
 {
-  int Linear = GetLinear(iX,iY);
-  if (HasBeenSet(iX,iY)==0) return 0 ;
-  return (*p_V_Data)[Linear] ;
-  
+  return value[iX][iY] ;
 }
 
 
 void ERAM_map::SetData(const int& iX, const int& iY, const double& Data)
 {
-  int Linear = GetLinear(iX,iY);
-  (*p_V_Data)[Linear] = Data ;
-  (*p_V_HasBeenSet)[Linear] = 1    ;
+  value[iX][iY] = Data ;
 }
 
 
-int ERAM_map::HasBeenSet(const int& iX, const int& iY)
+void ERAM_map::FillHoles()
 {
-  int Linear = GetLinear(iX,iY);
-  return (*p_V_HasBeenSet)[Linear] ;
+  for(int iX = 0 ; iX < 36 ; iX++){
+    for(int iY = 0 ; iY < 32 ; iY++){
+      double val                    = GetData(iX,iY) ; // loading here
+
+      // Fill holes of maps if there is any
+      std::vector<float> v_sides;
+      if(val == 0){
+        std::cout << "Gain hole in " << " iX = " << iX << " | iY = " << iY ; 
+        if(iX>0)  v_sides.push_back(GetData(iX-1,iY  )) ;
+        if(iX<35) v_sides.push_back(GetData(iX+1,iY  )) ;
+        if(iY>0)  v_sides.push_back(GetData(iX,  iY-1)) ;
+        if(iY<31) v_sides.push_back(GetData(iX,  iY+1)) ;
+        float n_sides = 0;
+        for(int i = 0; i<4; i++) if (v_sides[i]!=0){ // additionnal step to discard empty neighbours
+          val += v_sides[i];
+          n_sides++;
+        }
+        val /= n_sides;
+        SetData(iX, iY, val);
+        std::cout << " | value reset at " << val << std::endl ;
+      }
+      v_sides.clear();
+    } // iY
+  } // iX
 }
 
-
-int ERAM_map::GetLinear(const int& iX, const int& iY)
-{
-  return ( iX + 100* iY) ;
-}
 
 
 
@@ -174,6 +149,7 @@ void Load_ERAM_map::GiveMe_Entry(const int& iEntry){
   p_TTree->GetEntry(iEntry);
  
 }
+
 
 int    Load_ERAM_map::Get_iX()   { return Xpad  ; }
 int    Load_ERAM_map::Get_iY()   { return Ypad  ; }
