@@ -48,7 +48,7 @@ void dEdx( const std::string& OutDir,
   MakeMyDir(OUTDIR_WF_Display) ;
 
   // int nZ = 21 ;
-  // Interpol3 LUT3(Form("/home/td263283/Documents/Python/LUT_XP/LUT_Dt%i_PT%i_nphi200_nd200/LUT_RC115/", 310, PT), nZ ) ;
+  // Interpol3 LUT3(Form("~/Documents/Python/LUT_XP/LUT_Dt%i_PT%i_nphi200_nd200/LUT_RC115/", 310, PT), nZ ) ;
 
   // Geometry
   float Lx              = 11.28 ;                               // Length of pad (mm)

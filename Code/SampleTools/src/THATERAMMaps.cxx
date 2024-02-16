@@ -42,7 +42,7 @@ void ERAM_map::Initialize()
   std::vector<std::string> maps = { "01", "02", "03",                   "07",       "09", "10",
                                     "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
                                     "21",       "23", "24",       "26",       "28", "29", "30"};
-  if (std::find(maps.begin(), maps.end(), m_ERAM_id) != maps.end()) m_FileName = m_Dir + "ERAM" + m_ERAM_id + "_" + m_type + "data_" + m_ERAM_id + ".root" ;
+  if (std::find(maps.begin(), maps.end(), m_ERAM_id) != maps.end()) m_FileName = m_Dir + "ERAM" + m_ERAM_id + "_" + m_type + "data.root" ;
   else {
     std::cout << "ERAM_map::ERAM_map ERROR -> No map for ERAM " << m_ERAM_id << std::endl ;
     abort();

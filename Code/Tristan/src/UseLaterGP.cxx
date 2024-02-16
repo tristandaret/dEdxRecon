@@ -46,7 +46,7 @@ void dEdx( const std::string& OutDir,
   MakeMyDir(OUTDIR_WF_Display) ;
 
   // int nZ = 22 ;
-  // Interpol3 LUT3(Form("/home/td263283/Documents/Python/LUT_XP/LUT_Dt%i_PT%i_nphi200_nd200/LUT_RC115/", 310, PT), nZ ) ;
+  // Interpol3 LUT3(Form("~/Documents/Python/LUT_XP/LUT_Dt%i_PT%i_nphi200_nd200/LUT_RC115/", 310, PT), nZ ) ;
 
   // Geometry
   float Lx              = 11.28 ;                               // Length of pad (mm)
@@ -132,7 +132,7 @@ void dEdx( const std::string& OutDir,
         if(Gainmaps[i]->GetData(iX, iY, status) < lowest and Gainmaps[i]->GetData(iX, iY, status) > 0) lowest = Gainmaps[i]->GetData(iX, iY, status) ;
       }
     }
-    // DrawOut_GainMap(eram_id[i], Gainmaps[i]);
+    // DrawOut_ERAMmaps(eram_id[i], Gainmaps[i]);
     avg_G /= n_pads ;
     v_avg_G.push_back(avg_G);
     std::cout << "Average Gain in " << eram_id[i] << " = " << avg_G << std::endl ;

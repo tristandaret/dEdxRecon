@@ -1029,8 +1029,8 @@ void DrawOut_v_drift(const std::string& inputDir, const std::string& Comment, co
   TH2F* h2f_LUT[nZ][nRC] ;
   for(int iZ = 0 ; iZ < nZ ; iZ++){
     for(int iRC = 0 ; iRC < nRC ; iRC++){
-      // LUT_name[iZ][iRC] = Form("/home/td263283/Documents/Python/Ratio_2D_LUT/Ratio_2D_nphi%i_nd%i_PT%i_Dt%i_theo/Ratio_2D_nphi%i_nd%i_RC%i_zscan_PT%i_Dt%i_theo/Ratio_2D_nphi%i_nd%i_RC%i_z%i_PT%i_Dt%i_theo.csv", size, size, PT, Dt, size, size, 50+iRC*5, PT, Dt, size, size, 50+iRC*5, iZ*50, PT, Dt) ;
-      LUT_name[iZ][iRC] = (Form("/home/td263283/Documents/Python/LUT_XP/LUT_Dt%i_PT%i_nphi%i_nd%i/LUT_RC%i/LUT_z%i.csv", Dt, PT, size, size, 50+iRC*5, iZ*50)) ;
+      // LUT_name[iZ][iRC] = Form("~/Documents/Python/Ratio_2D_LUT/Ratio_2D_nphi%i_nd%i_PT%i_Dt%i_theo/Ratio_2D_nphi%i_nd%i_RC%i_zscan_PT%i_Dt%i_theo/Ratio_2D_nphi%i_nd%i_RC%i_z%i_PT%i_Dt%i_theo.csv", size, size, PT, Dt, size, size, 50+iRC*5, PT, Dt, size, size, 50+iRC*5, iZ*50, PT, Dt) ;
+      LUT_name[iZ][iRC] = (Form("~/Documents/Python/LUT_XP/LUT_Dt%i_PT%i_nphi%i_nd%i/LUT_RC%i/LUT_z%i.csv", Dt, PT, size, size, 50+iRC*5, iZ*50)) ;
       std::vector<std::vector<float>> data  = readCSV(LUT_name[iZ][iRC]) ;
       h2f_LUT[iZ][iRC]                      = new TH2F(Form("h2f_LUT_z%i_RC%i", iZ*50, 50+iRC*5), Form("h2f_LUT_z%i_RC%i", iZ*50, 50+iRC*5), data.size(), 0, data.size(), data[0].size(), 0, data[0].size());
       // Fill the histogram with data from the data vector

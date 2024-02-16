@@ -3,6 +3,8 @@
 #include "Misc/Util.h"
 #include "Misc/ParabolaFunction.h"
 #include "Misc/ParabolaFunctionNG.h"
+#include "SampleTools/THATERAMMaps.h"
+
 #include <typeinfo>
 
 #include "TCanvas.h"
@@ -19,29 +21,36 @@
 #include "TLegendEntry.h"
 #include "TFile.h"
 
-// Draw gain map
-void DrawOut_GainMap(const std::string& eram_id, ReadGainmap* Gainmap){
-  TH2F* h2f_GainMap           = new TH2F("h2f_GainMap", Form("Gain map of %s;X (pad column);Y (pad row)", eram_id.c_str()), 36, -0.5, 35.5, 32, -0.5, 31.5) ;
+// Draw maps
+void DrawOut_ERAMmaps(const std::string& eram_id, ERAM_map* Gainmap, ERAM_map* RCmap){
+  TH2F* h2f_GainMap           = new TH2F("h2f_GainMap", Form("Gain map of ERAM %s;X (pad column);Y (pad row)", eram_id.c_str()), 36, -0.5, 35.5, 32, -0.5, 31.5) ;
+  TH2F* h2f_RCMap             = new TH2F("h2f_RCMap", Form("RC map of ERAM %s;X (pad column);Y (pad row)", eram_id.c_str()), 36, -0.5, 35.5, 32, -0.5, 31.5) ;
   int init_style              = gStyle->GetOptStat();
   gStyle->                      SetOptStat(0) ;
   TCanvas* pTCanvas           = new TCanvas("TCanvas_Control", "TCanvas_Control", 4000, 3000) ;
-  int status                  = 0 ;
-  int lowest                  = 9999 ;
+  int lowestG                 = 9999 ;
+  int lowestRC                = 9999 ;
   for(int iX = 0 ; iX < 36 ; iX++){
     for(int iY = 0 ; iY < 32 ; iY++){
-      if(Gainmap->GetData(iX, iY, status) != 0) h2f_GainMap->Fill(iX, iY, Gainmap->GetData(iX, iY, status)) ;
-      if(Gainmap->GetData(iX, iY, status) < lowest and Gainmap->GetData(iX, iY, status) > 0) lowest = Gainmap->GetData(iX, iY, status) ;
+      if(Gainmap->GetData(iX, iY) != 0) h2f_GainMap->Fill(iX, iY, Gainmap->GetData(iX, iY)) ;
+      if(Gainmap->GetData(iX, iY) < lowestG and Gainmap->GetData(iX, iY) > 0) lowestG = Gainmap->GetData(iX, iY) ;
+      if(RCmap->GetData(iX, iY) != 0) h2f_RCMap->Fill(iX, iY, RCmap->GetData(iX, iY)) ;
+      if(RCmap->GetData(iX, iY) < lowestRC and RCmap->GetData(iX, iY) > 0) lowestRC = RCmap->GetData(iX, iY) ;
     }
   }
-  std::string OutputFile      = eram_id + "_GainMap.png" ;
-  h2f_GainMap->                 SetMinimum(lowest) ;
+  h2f_GainMap->                 SetMinimum(lowestG) ;
+  h2f_RCMap->                   SetMinimum(lowestRC) ;
   pTCanvas->                    cd() ;
   pTCanvas->                    SetRightMargin(0.13);
   gStyle->                      SetPalette(kRainBow);
   h2f_GainMap->                 Draw("colz") ;
-  pTCanvas->                    SaveAs(OutputFile.c_str()) ;
+  pTCanvas->                    SaveAs(("GainRCMaps/Gainfiles/ERAM" + eram_id + "_GainMap.png").c_str()) ;
+  pTCanvas->                    Clear();
+  h2f_RCMap->                   Draw("colz") ;
+  pTCanvas->                    SaveAs(("GainRCMaps/RCfiles/ERAM" + eram_id + "_RCMap.png").c_str()) ;
   gStyle->                      SetOptStat(init_style) ;
   delete h2f_GainMap;
+  delete h2f_RCMap;
   delete pTCanvas;
 }
 
@@ -60,7 +69,7 @@ void DrawOut_EventDisplay(Module* pModule, const std::string& OUTDIR,const std::
   TH2D* pTH2D = new TH2D ;
   if(type == "amplitude"){
     pTH2D = GiveMe_EvtDisplay(pModule, TAG) ;
-    pTH2D->SetMaximum(3800) ;
+    pTH2D->SetMaximum(4096) ;
     OutputFile  = OUTDIR + "Event_Display_Entry_" + std::to_string(pModule->Get_EntryNber()) + "_Evt_" + std::to_string(pModule->Get_EventNber()) + "_Mod_" + std::to_string(pModule->Get_ModuleNber()) + ".png" ;
   }
   if(type == "time"){

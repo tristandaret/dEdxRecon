@@ -145,7 +145,9 @@ void dEdx_XPonly( const std::string& OutDir,
   for (int iEvent = 0 ; iEvent < NEvent ; iEvent++){
     if(iEvent % 1000 == 0 or iEvent == NEvent-1) std::cout << iEvent << "/" << NEvent << std::endl ;
     Event*  pEvent                        = pUploader->GiveMe_Event(iEvent, NbrOfMod, Data_to_Use, 0) ;
+    std::cout << "Entry " << pEvent->Get_EntryNber() << " Event " << pEvent->Get_EventNber() <<  ": ";
     if (!pEvent)                            continue ;
+    std::cout << "VALID" << std::endl;
     aJFL_Selector.                          ApplySelection(pEvent) ;
     if (pEvent->IsValid() != 1)             continue ;
 
@@ -277,14 +279,15 @@ void dEdx_XPonly( const std::string& OutDir,
           v_dE.                             push_back(A_pad*ratio);
           v_dx.                  push_back(length_in_pad) ;
 
-          RankedValue rank_dEdx ;  
-          rank_dEdx.Rank                  = N_crossed ; 
-          rank_dEdx.Value                 = A_pad*ratio/length_in_pad ;
-          v_dEdx_ranked.                     push_back(rank_dEdx) ;
+          RankedValue dEdx_ranked ;  
+          dEdx_ranked.Rank                  = N_crossed ; 
+          dEdx_ranked.Value                 = A_pad*ratio/length_in_pad ;
+          v_dEdx_ranked.                     push_back(dEdx_ranked) ;
 
           N_crossed++ ;
         }
       } // Cluster
+      if(iEvent < 1000) DrawOut_EventDisplay(pModule, OUTDIR_Evt_Display, Tag, "amplitude", pTrack->Get_ParameterValue(2), pTrack->Get_ParameterValue(1), pTrack->Get_ParameterValue(0)) ;
     } // Module
 
     if(N_crossed > 0){

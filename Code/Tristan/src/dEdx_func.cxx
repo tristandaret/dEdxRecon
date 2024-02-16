@@ -47,7 +47,7 @@ float avg_Gain(const std::vector<ERAM_map*>& Gainmaps){
         if(Gainmaps[i]->GetData(iX, iY) < lowest and Gainmaps[i]->GetData(iX, iY) > 0) lowest = Gainmaps[i]->GetData(iX, iY) ;
       }
     }
-    // DrawOut_GainMap(Gainmaps[i]->Get_iD(), Gainmaps[i]);
+    // DrawOut_ERAMmaps(Gainmaps[i]->Get_iD(), Gainmaps[i]);
     avg_G /= n_pads ;
     v_avg_G.push_back(avg_G);
     std::cout << "Average Gain in " << Gainmaps[i]->Get_iD() << " = " << avg_G << std::endl ;
