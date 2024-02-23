@@ -35,7 +35,7 @@ void Monitoring()
   int nRC = 21 ; 
 
   std::string Tag    ; 
-  std::string Comment = "_zcalc" ; // z method | gain_corr
+  std::string Comment = "_zcalc_trash" ; // z method | gain_corr
   std::string prtcle ; 
   std::string EvtFile ;
   std::string OutDir  = "OUT_Tristan/";  

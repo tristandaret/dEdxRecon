@@ -89,8 +89,10 @@ void dEdx_XPonly( const std::string& OutDir,
   if(FileName.find("All_ERAMS") != std::string::npos){
     ERAMS_iD     = {"07", "01", "23", "02", "16", "15", "10", "12"}; // MockUp CERN22
   }
-  // ERAMS_iD = {"24", "30", "28", "19", "21", "13", "09", "02", "29", "23", "17", "26", "03", "11", "10", "01"}; // bottom HATPC
-
+  ERAMS_iD = {"24", "30", "28", "19", "21", "13", "09", "02", "29", "23", "17", "26", "03", "11", "10", "01"}; // bottom HATPC
+  ERAMS_iD = {"01", "02", "03",                   "07",       "09", "10",
+              "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
+              "21",       "23", "24",       "26",       "28", "29", "30"}; // All ERAMs scanned
   // Get Gain & RC maps
   std::vector<ERAM_map*> RCmaps;
   std::vector<ERAM_map*> Gainmaps;
@@ -128,7 +130,8 @@ void dEdx_XPonly( const std::string& OutDir,
   std::cout << "cut length    = " << len_cut*1e3 << " mm"     << std::endl ;
   std::cout <<                                                   std::endl ;
 
-  TH1F* h1f_XP              = new TH1F("h1f_XP", "<dE/dx> with XP (module %i);<dE/dx> (ADC count);Number of events", 90, 0, 1800) ;
+  TH1F* h1f_XP              = new TH1F("h1f_XP", "<dE/dx> with XP;<dE/dx> (ADC count);Number of events", 90, 0, 1800) ;
+  TH1F* h1f_ratio           = new TH1F("h1f_ratio", "mean ratio per event;mean ratio;Number of events", 90, 0, 2) ;
 
   // Track fit initializations
   TheFitterTrack aTheFitterTrack("Minuit", n_param_trk) ;
@@ -147,9 +150,9 @@ void dEdx_XPonly( const std::string& OutDir,
     Event*  pEvent                        = pUploader->GiveMe_Event(iEvent, NbrOfMod, Data_to_Use, 0) ;
     std::cout << "Entry " << pEvent->Get_EntryNber() << " Event " << pEvent->Get_EventNber() <<  ": ";
     if (!pEvent)                            continue ;
-    std::cout << "VALID" << std::endl;
     aJFL_Selector.                          ApplySelection(pEvent) ;
     if (pEvent->IsValid() != 1)             continue ;
+    // std::cout << "Event " << pEvent->Get_EventNber() << std::endl;
 
     // Initialize event variables
     int                                   N_crossed = 0,  N_crossed_trc = 0;
@@ -189,6 +192,7 @@ void dEdx_XPonly( const std::string& OutDir,
       // }
     }
 
+    float avg_ratio = 0;
     for (int iMod = 0 ; iMod < nMod ; iMod++){
       Module* pModule                     = pEvent->Get_Module_InArray(iMod) ;
       int ModuleNber                      = pModule->Get_ModuleNber() ;
@@ -275,6 +279,9 @@ void dEdx_XPonly( const std::string& OutDir,
           if(z_method == "zcalc") ratio   = ratio_zcalc ;
           if(z_method == "zfile") ratio   = ratio_zfile ;
 
+          std::cout << "row = " << pPad->Get_iY() << " | col = " << pPad->Get_iX() << " : ";
+          std::cout << std::setprecision(3) << "(RC, drift, d, phi, L, ratio) = (" << RC_pad << ", " << z_calc << ", " << d << ", " << phi << ", " << length_in_pad*1000  << ", " << ratio << ")" << std::endl;
+
           if(length_in_pad <= len_cut)        continue ;
           v_dE.                             push_back(A_pad*ratio);
           v_dx.                  push_back(length_in_pad) ;
@@ -283,14 +290,17 @@ void dEdx_XPonly( const std::string& OutDir,
           dEdx_ranked.Rank                  = N_crossed ; 
           dEdx_ranked.Value                 = A_pad*ratio/length_in_pad ;
           v_dEdx_ranked.                     push_back(dEdx_ranked) ;
+          avg_ratio += ratio;
 
           N_crossed++ ;
         }
       } // Cluster
-      if(iEvent < 1000) DrawOut_EventDisplay(pModule, OUTDIR_Evt_Display, Tag, "amplitude", pTrack->Get_ParameterValue(2), pTrack->Get_ParameterValue(1), pTrack->Get_ParameterValue(0)) ;
+      // if(iEvent < 1000) DrawOut_EventDisplay(pModule, OUTDIR_Evt_Display, Tag, "amplitude", pTrack->Get_ParameterValue(2), pTrack->Get_ParameterValue(1), pTrack->Get_ParameterValue(0)) ;
     } // Module
 
     if(N_crossed > 0){
+      avg_ratio /= N_crossed;
+      h1f_ratio->Fill(avg_ratio);
       N_crossed_trc                     = int(floor(N_crossed * (alpha/100))) ; 
 
       // XP
@@ -324,6 +334,7 @@ void dEdx_XPonly( const std::string& OutDir,
   std::cout << "dEdx: " << OUTDirName + "3_" + Tag + "_dEdx" + Comment + "_XPonly.root" << std::endl ;
   tf1_XP->                        Write() ;
   h1f_XP->                        Write() ;
+  h1f_ratio->                        Write() ;
   pfileROOT_status->              Close() ;
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////

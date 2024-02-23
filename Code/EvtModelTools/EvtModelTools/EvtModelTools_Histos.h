@@ -11,7 +11,8 @@
 #include "TH2D.h"
 
 // Draw gain map
-void DrawOut_ERAMmaps(const std::string& eram_id, ERAM_map* Gainmap, ERAM_map* RCmap);
+void DrawOut_ERAMmaps(ERAM_map* map, const std::string& eram_id, const std::string& type);
+// void DrawOut_ERAMmaps(const std::string& eram_id, ERAM_map* Gainmap, ERAM_map* RCmap);
 
 //------------------------Event Display
 //Output event display of an event  with tagging string TAG, placed in OUTDIR dir

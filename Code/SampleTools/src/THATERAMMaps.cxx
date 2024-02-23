@@ -1,5 +1,5 @@
 #include "SampleTools/THATERAMMaps.h"
-
+#include "EvtModelTools/EvtModelTools_Histos.h"
 
 
 
@@ -50,6 +50,8 @@ void ERAM_map::Initialize()
 
   Load_ERAM_map aLoad_ERAM_map(m_FileName, m_type);
   
+  for(int i=0;i<36;i++) for(int j=0;j<32;j++) SetData(i,j,0);
+  
   int iEntry_Max = aLoad_ERAM_map.Get_NberOfEntries() ;
   for (int iEntry=0; iEntry<iEntry_Max;iEntry++) {
     aLoad_ERAM_map.GiveMe_Entry(iEntry);
@@ -58,6 +60,8 @@ void ERAM_map::Initialize()
     double Data = aLoad_ERAM_map.Get_Data();
     SetData(iX,iY,Data);
   }
+
+  DrawOut_ERAMmaps(this, m_ERAM_id, m_type);
 
   FillHoles();
 }
@@ -90,7 +94,7 @@ void ERAM_map::FillHoles()
       // Fill holes of maps if there is any
       std::vector<float> v_sides;
       if(val == 0){
-        std::cout << "Gain hole in " << " iX = " << iX << " | iY = " << iY ; 
+        std::cout << "ERAM#" << m_ERAM_id << ": " << std::setw(4) << m_type << " hole in (iX,iY) = (" << iX << "," << iY << ") | "; 
         if(iX>0)  v_sides.push_back(GetData(iX-1,iY  )) ;
         if(iX<35) v_sides.push_back(GetData(iX+1,iY  )) ;
         if(iY>0)  v_sides.push_back(GetData(iX,  iY-1)) ;
@@ -102,7 +106,7 @@ void ERAM_map::FillHoles()
         }
         val /= n_sides;
         SetData(iX, iY, val);
-        std::cout << " | value reset at " << val << std::endl ;
+        std::cout << "value reset at " << val << std::endl ;
       }
       v_sides.clear();
     } // iY

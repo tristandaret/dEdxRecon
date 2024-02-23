@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include <string>
-#include <vector>
 #include <TFile.h>
 #include <TTree.h>
 #include <TBranch.h>
@@ -28,7 +27,8 @@ private:
   std::string m_type     ;
   std::string m_FileName ;
 
-  float value[36][32] = {0};
+// float value[36][32] = {0};
+   float value[36][32];
 
   void Initialize();
   void SetData(const int& iX, const int& iY, const double& Data) ;
