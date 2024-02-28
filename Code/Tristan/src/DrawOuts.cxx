@@ -899,7 +899,7 @@ void DrawOut_Methods(const std::string& OutDir, const std::string& Tag, const st
   int statYin                 = gStyle->GetStatY() ;
 
   // Get histograms
-  TFile* pTFile_dEdx            = TFile::Open(TString(OutDir + Tag + "/3_" + Tag + "_dEdx_XP" + Comment + ".root")) ;
+  TFile* pTFile_dEdx            = TFile::Open(TString(OutDir + Tag + "/3_" + Tag + "_dEdx" + Comment + ".root")) ;
 
   std::vector<TH1F*>                v_h1f_WFsum ;
   std::vector<TH1F*>                v_h1f_XP ;
@@ -927,7 +927,7 @@ void DrawOut_Methods(const std::string& OutDir, const std::string& Tag, const st
   }
 
   // Make canvas
-  std::string OutputFile          = OutDir + Tag + "/3_" + Tag + "_Comparison_XPonly" + Comment + ".pdf" ;
+  std::string OutputFile          = OutDir + Tag + "/3_" + Tag + "_Comparison" + Comment + ".pdf" ;
   TCanvas* pTCanvas               = new TCanvas("pTCanvas", "pTCanvas", 1800, 1200) ;
 
   //  Draw
@@ -1001,7 +1001,7 @@ void DrawOut_Versions(const std::string& inputDir, const std::string& Method, co
   Color_t kBefore ;
   Color_t kAfter ;
   if(Method == "WF"){
-    method = "tf1_WFsum_0" ;
+    method = "tf1_WFsum" ;
     kBefore = kCyan+2 ;
     kAfter  = kOrange-3 ;
   }
@@ -1677,12 +1677,12 @@ void DrawOut_Separation(const std::string& inputDir, const std::string& Comment)
   std::vector<TF1*>         v_tf1_XP ;
   for(int iPar = 0 ; iPar < nParticles ; iPar++){
     v_h1f_Qtrunc          .push_back(v_pTFile_dEdx[iPar]->Get<TH1F>("h1f_Qtrunc_0")) ;
-    v_h1f_WFsum         .push_back(v_pTFile_dEdx[iPar]->Get<TH1F>("h1f_WFsum_0")) ;
+    v_h1f_WFsum         .push_back(v_pTFile_dEdx[iPar]->Get<TH1F>("h1f_WFsum")) ;
     v_h1f_GPv3         .push_back(v_pTFile_dEdx[iPar]->Get<TH1F>("h1f_GPv3_0")) ;
     v_h1f_GPv6         .push_back(v_pTFile_dEdx[iPar]->Get<TH1F>("h1f_GPv6_0")) ;
     v_h1f_XP         .push_back(v_pTFile_dEdx[iPar]->Get<TH1F>("h1f_XP_0")) ;
     v_tf1_Qtrunc           .push_back(v_h1f_Qtrunc[iPar]->GetFunction("tf1_Qtrunc_0")) ;
-    v_tf1_WFsum          .push_back(v_h1f_WFsum[iPar]->GetFunction("tf1_WFsum_0")) ;
+    v_tf1_WFsum          .push_back(v_h1f_WFsum[iPar]->GetFunction("tf1_WFsum")) ;
     v_tf1_GPv3          .push_back(v_h1f_GPv3[iPar]->GetFunction("tf1_GPv3_0")) ;
     v_tf1_GPv6          .push_back(v_h1f_GPv6[iPar]->GetFunction("tf1_GPv6_0")) ;
     v_tf1_XP          .push_back(v_h1f_XP[iPar]->GetFunction("tf1_XP")) ;
@@ -2255,11 +2255,10 @@ void DrawOut_Separation_Reduced(const std::string& inputDir, const std::string& 
 
 
 // Draw all scans together
-void DrawOut_Scans(const std::string& inputDir, const std::string& Comment)
+void DrawOut_Scans(const std::string& inputDir, const std::string& Comment, const std::string& WFversion)
 {
   // std::string Comment2 = "_zcalc_PRF_4IP_Gain_WFhatrecon" ;
-  std::string Comment2 = Comment ;
-  std::string OutputFile        = inputDir + "/Scans" + Comment2 + ".pdf" ;
+  std::string OutputFile        = inputDir + "/Scans" + Comment + WFversion + ".pdf" ;
   std::string OutputFile_Beg    = OutputFile + "(" ;
   std::string OutputFile_End    = OutputFile + ")" ;
   gStyle->                      SetPadTickX(1);
@@ -2304,7 +2303,7 @@ void DrawOut_Scans(const std::string& inputDir, const std::string& Comment)
     for(int iz = 0 ; iz < nz ; iz++){
       if(iz == 0) pTFile     = TFile::Open(TString(inputDir + "/DESY21_zscan/DESY21_zscan_PT" + PT + "/DESY21_zm40_PT" + PT + "/3_DESY21_zm40_PT" + PT + "_dEdx" + Comment + ".root")) ;
       else         pTFile     = TFile::Open(TString(inputDir + "/DESY21_zscan/DESY21_zscan_PT" + PT + "/DESY21_z" + std::to_string(iz-1) + "60_PT" + PT + "/3_DESY21_z" + std::to_string(iz-1) + "60_PT" + PT + "_dEdx" + Comment + ".root")) ;
-      v_tf1_WF.                 push_back(pTFile->Get<TF1>("tf1_WFsum_0")) ;
+      v_tf1_WF.                 push_back(pTFile->Get<TF1>("tf1_WFsum")) ;
       v_tf1_XP.                 push_back(pTFile->Get<TF1>("tf1_XP")) ;
       pTFile->                  Clear() ;
       Xlabel.                   push_back("PT" + std::to_string(PT) + "_Z" + std::to_string(iz*10+5) + "_Y8_#varphi0_#theta0") ;
@@ -2314,11 +2313,11 @@ void DrawOut_Scans(const std::string& inputDir, const std::string& Comment)
   }
 
   // Y scan
-  std::string Y_arr[]         = {"80", "60", "40", "20", "0", "m40", "m60", "m80", "m0", "m120", "m140"} ;
+  std::string Y_arr[]         = {"80", "60", "40", "20", "0", "m40", "m60", "m80", "m100", "m120", "m140"} ;
   int         Row_arr[]       = {4, 6, 8, 10, 12, 18, 20, 22, 24, 26, 27} ;
   for(int iy = 0 ; iy < ny ; iy++){
     pTFile                    = TFile::Open(TString(inputDir + "/DESY21_yscan/DESY21_y" + Y_arr[iy] + "/3_DESY21_y" + Y_arr[iy] + "_dEdx" + Comment + ".root")) ;
-    v_tf1_WF.                   push_back(pTFile->Get<TF1>("tf1_WFsum_0")) ;
+    v_tf1_WF.                   push_back(pTFile->Get<TF1>("tf1_WFsum")) ;
     v_tf1_XP.                   push_back(pTFile->Get<TF1>("tf1_XP")) ;
     pTFile->                    Clear() ;
     Xlabel.                     push_back("PT412_Z9_Y" + std::to_string(Row_arr[iy]) + "_#varphi0_#theta0") ;
@@ -2333,8 +2332,8 @@ void DrawOut_Scans(const std::string& inputDir, const std::string& Comment)
   for (int iz = 0 ; iz < 3 ; iz++){
     for(int iphi = 0 ; iphi < nphi ; iphi++){
       if(iphi < 5) pTFile     = TFile::Open(TString(inputDir + "/DESY21_phi/DESY21_phi_z" + Z_arr[iz] + "/DESY21_phi" + phi_arr[iphi] + "_z" + Z_arr[iz] + "/3_DESY21_phi" + phi_arr[iphi] + "_z" + Z_arr[iz] + "_dEdx" + Comment + ".root")) ;
-      else         pTFile     = TFile::Open(TString(inputDir + "/DESY21_phi/DESY21_phi_z" + Z_arr[iz] + "/DESY21_phi" + phi_arr[iphi] + "_diag_z" + Z_arr[iz] + "/3_DESY21_phi" + phi_arr[iphi] + "_diag_z" + Z_arr[iz] + "_dEdx" + Comment2 + ".root")) ;
-      v_tf1_WF.                 push_back(pTFile->Get<TF1>("tf1_WFsum_0")) ;
+      else         pTFile     = TFile::Open(TString(inputDir + "/DESY21_phi/DESY21_phi_z" + Z_arr[iz] + "/DESY21_phi" + phi_arr[iphi] + "_diag_z" + Z_arr[iz] + "/3_DESY21_phi" + phi_arr[iphi] + "_diag_z" + Z_arr[iz] + "_dEdx" + Comment + WFversion + ".root")) ;
+      v_tf1_WF.                 push_back(pTFile->Get<TF1>("tf1_WFsum")) ;
       v_tf1_XP.                 push_back(pTFile->Get<TF1>("tf1_XP")) ;
       pTFile->                  Clear() ;
       if(iphi < 5) Xlabel.      push_back("PT200_Z" + std::to_string(Ztrue_arr[iz]/10) + "_Y4_#varphi" + std::to_string(phi_arr[iphi]) + "_#theta0") ;
@@ -2346,12 +2345,13 @@ void DrawOut_Scans(const std::string& inputDir, const std::string& Comment)
 
   // Theta scan
   int theta_arr[] = {-45, -20, 20} ;
+  std::string theta_index[] = {"m45", "m20", "20"} ;
   for(int itheta = 0 ; itheta < ntheta ; itheta++){
-    pTFile                    = TFile::Open(TString(inputDir + "/DESY21_theta/DESY21_theta" + theta_arr[itheta] + "/3_DESY21_theta" + theta_arr[itheta] + "_dEdx" + Comment + ".root")) ;
-    v_tf1_WF.                   push_back(pTFile->Get<TF1>("tf1_WFsum_0")) ;
+    pTFile                    = TFile::Open(TString(inputDir + "/DESY21_theta/DESY21_theta" + theta_index[itheta] + "/3_DESY21_theta" + theta_index[itheta] + "_dEdx" + Comment + ".root")) ;
+    v_tf1_WF.                   push_back(pTFile->Get<TF1>("tf1_WFsum")) ;
     v_tf1_XP.                   push_back(pTFile->Get<TF1>("tf1_XP")) ;
     pTFile->                    Clear() ;
-    Xlabel.                     push_back("PT200_Z35_Y8_#varphi0_#theta" + std::to_string(theta_arr[itheta])) ;
+    Xlabel.                     push_back("PT200_Z45_Y8_#varphi0_#theta" + std::to_string(theta_arr[itheta])) ;
     npoint++ ;
   }
 
@@ -2761,29 +2761,28 @@ void DrawOut_Yscan(const std::string& inputDir, const std::string& Comment)
 
 
 // Draw resolution as function of phi scan
-void DrawOut_Phiscan(const std::string& inputDir, const std::string& Comment, const std::string& zdrift)
+void DrawOut_Phiscan(const std::string& inputDir, const std::string& Comment, const std::string& WFversion, const std::string& zdrift)
 {
   int ipoint              = 0 ;
   int nphi                = 8 ;
   gStyle->                      SetPadTickX(1);
   gStyle->                      SetPadTickY(1);
 
-  // std::string Comment2 = "_zcalc_PRF_4IP_Gain_ref" ;
-  std::string Comment2 = Comment ;
 
   // Vectors of TFiles & TH1Fs & TF1s & TGEs
-  std::vector<TFile*>       v_pTFile ;
   std::vector<TF1*>         v_tf1_WF ;
   std::vector<TF1*>         v_tf1_XP ;
+  TFile* pFile;
 
   int phi_arr[] = {0, 5, 10, 20, 30, 30, 40 ,45} ;
   for(int iphi = 0 ; iphi < nphi ; iphi++){
-    if(iphi == 0)     v_pTFile. push_back(TFile::Open(TString("OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_z" + zdrift + "_PT200/3_DESY21_z" + zdrift + "_PT200_dEdx" + Comment2 + ".root"))) ;
-    else if(iphi < 5) v_pTFile. push_back(TFile::Open(TString(inputDir + "/DESY21_phi" + phi_arr[iphi] + "_z" + zdrift + "/3_DESY21_phi" + phi_arr[iphi] + "_z" + zdrift + "_dEdx" + Comment2 + ".root"))) ;
-    else          v_pTFile.   push_back(TFile::Open(TString(inputDir + "/DESY21_phi" + phi_arr[iphi] + "_diag_z" + zdrift + "/3_DESY21_phi" + phi_arr[iphi] + "_diag_z" + zdrift + "_dEdx" + Comment + ".root"))) ;
-    v_tf1_WF.                 push_back(v_pTFile[iphi]->   Get<TF1>("tf1_WFsum")) ;
-    v_tf1_XP.                 push_back(v_pTFile[iphi]->   Get<TF1>("tf1_XP")) ;
+    if(iphi == 0)     pFile = TFile::Open(TString("OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_z" + zdrift + "_PT200/3_DESY21_z" + zdrift + "_PT200_dEdx" + Comment + ".root"));
+    else if(iphi < 5) pFile = TFile::Open(TString(inputDir + "/DESY21_phi" + phi_arr[iphi] + "_z" + zdrift + "/3_DESY21_phi" + phi_arr[iphi] + "_z" + zdrift + "_dEdx" + Comment + ".root")) ;
+    else              pFile = TFile::Open(TString(inputDir + "/DESY21_phi" + phi_arr[iphi] + "_diag_z" + zdrift + "/3_DESY21_phi" + phi_arr[iphi] + "_diag_z" + zdrift + "_dEdx" + Comment + WFversion + ".root")) ;
+    v_tf1_WF.                 push_back(pFile->   Get<TF1>("tf1_WFsum")) ;
+    v_tf1_XP.                 push_back(pFile->   Get<TF1>("tf1_XP")) ;
   }
+  delete pFile;
 
   TGraphErrors* pTGE_reso_WF    = new TGraphErrors() ;
   TGraphErrors* pTGE_reso_XP    = new TGraphErrors() ;
@@ -2835,7 +2834,7 @@ void DrawOut_Phiscan(const std::string& inputDir, const std::string& Comment, co
 
 
   // Draw
-  std::string OutputFile        = inputDir + "/Phiscan_Resolution" + Comment + ".pdf" ;
+  std::string OutputFile        = inputDir + "/Phiscan_Resolution" + Comment + WFversion + ".pdf" ;
   std::string OutputFile_Beg    = OutputFile + "(" ;
   std::string OutputFile_End    = OutputFile + ")" ;
   TCanvas* pTCanvas           = new TCanvas("TCanvas", "TCanvas", 1800, 1200) ;
@@ -2921,8 +2920,9 @@ void DrawOut_Thetascan(const std::string& inputDir, const std::string& Comment)
   std::vector<TF1*>         v_tf1_XP ;
 
   int theta_arr[] = {-45, -20, 20} ;
+  std::string theta_index[] = {"m45", "m20", "20"} ;
   for(int itheta = 0 ; itheta < ntheta ; itheta++){
-    v_pTFile.                 push_back(TFile::Open(TString(inputDir + "/DESY21_theta" + theta_arr[itheta] + "/3_DESY21_theta" + theta_arr[itheta] + "_dEdx" + Comment + ".root"))) ;
+    v_pTFile.                 push_back(TFile::Open(TString(inputDir + "/DESY21_theta" + theta_index[itheta] + "/3_DESY21_theta" + theta_index[itheta] + "_dEdx" + Comment + ".root"))) ;
     v_h1f_WF.                 push_back(v_pTFile[itheta]->   Get<TH1F>("h1f_WFsum")) ;
     v_h1f_XP.                 push_back(v_pTFile[itheta]->   Get<TH1F>("h1f_XP")) ;
     v_tf1_WF.                 push_back(v_h1f_WF[itheta]->   GetFunction("tf1_WFsum")) ;
@@ -3103,12 +3103,12 @@ void DrawOut_Zscan_PT(const std::string& inputDir, const std::string& Comment)
   for(int iz = 0 ; iz < (int)std::size(z_arr) ; iz++){
     v_pTFile_200.         push_back(TFile::Open(TString(inputDir + "/DESY21_zscan_PT200/DESY21_z" + z_arr[iz] + "_PT200/3_DESY21_z" + z_arr[iz] + "_PT200_dEdx" + Comment + ".root"))) ;
     v_pTFile_412.         push_back(TFile::Open(TString(inputDir + "/DESY21_zscan_PT412/DESY21_z" + z_arr[iz] + "_PT412/3_DESY21_z" + z_arr[iz] + "_PT412_dEdx" + Comment + ".root"))) ;
-    v_h1f_WF_200.           push_back(v_pTFile_200[iz]->  Get<TH1F>("h1f_WFsum_0")) ;
-    v_h1f_WF_412.           push_back(v_pTFile_412[iz]->  Get<TH1F>("h1f_WFsum_0")) ;
-    v_h1f_XP_200.           push_back(v_pTFile_200[iz]->  Get<TH1F>("h1f_XP_0")) ;
-    v_h1f_XP_412.           push_back(v_pTFile_412[iz]->  Get<TH1F>("h1f_XP_0")) ;
-    v_tf1_WF_200.           push_back(v_h1f_WF_200[iz]->  GetFunction("tf1_WFsum_0")) ;
-    v_tf1_WF_412.           push_back(v_h1f_WF_412[iz]->  GetFunction("tf1_WFsum_0")) ;
+    v_h1f_WF_200.           push_back(v_pTFile_200[iz]->  Get<TH1F>("h1f_WFsum")) ;
+    v_h1f_WF_412.           push_back(v_pTFile_412[iz]->  Get<TH1F>("h1f_WFsum")) ;
+    v_h1f_XP_200.           push_back(v_pTFile_200[iz]->  Get<TH1F>("h1f_XP")) ;
+    v_h1f_XP_412.           push_back(v_pTFile_412[iz]->  Get<TH1F>("h1f_XP")) ;
+    v_tf1_WF_200.           push_back(v_h1f_WF_200[iz]->  GetFunction("tf1_WFsum")) ;
+    v_tf1_WF_412.           push_back(v_h1f_WF_412[iz]->  GetFunction("tf1_WFsum")) ;
     v_tf1_XP_200.           push_back(v_h1f_XP_200[iz]->  GetFunction("tf1_XP")) ;
     v_tf1_XP_412.           push_back(v_h1f_XP_412[iz]->  GetFunction("tf1_XP")) ;
   }
@@ -3284,19 +3284,17 @@ void DrawOut_Zscan_PT(const std::string& inputDir, const std::string& Comment)
 
 
 // Draw resolution as function of phi scan for different drift distances
-void DrawOut_Phiscan_Z(const std::string& inputDir, const std::string& Comment)
+void DrawOut_Phiscan_Z(const std::string& inputDir, const std::string& Comment, const std::string& WFversion)
 {
   int ipoint              = 0 ;
   int nphi                = 8 ;
   gStyle->                      SetPadTickX(1);
   gStyle->                      SetPadTickY(1);
-  // std::string Comment2 = "_zcalc_PRF_4IP_ref" ;
-  std::string Comment2 = Comment ;
 
   // Vectors of TFiles & TH1Fs & TF1s & 
-  std::vector<TFile*>       v_pTFile_5 ;
-  std::vector<TFile*>       v_pTFile_55 ;
-  std::vector<TFile*>       v_pTFile_95 ;
+  TFile*                    pTFile_5 ;
+  TFile*                    pTFile_55 ;
+  TFile*                    pTFile_95 ;
   std::vector<TH1F*>        v_h1f_WF_5 ;
   std::vector<TH1F*>        v_h1f_WF_55 ;
   std::vector<TH1F*>        v_h1f_WF_95 ;
@@ -3313,32 +3311,32 @@ void DrawOut_Phiscan_Z(const std::string& inputDir, const std::string& Comment)
   int phi_arr[] = {0, 5, 10, 20, 30, 30, 40, 45} ;
   for(int iphi = 0 ; iphi < nphi ; iphi++){
     if(iphi == 0){
-      v_pTFile_5.           push_back(TFile::Open(TString("OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_zm40_PT200/3_DESY21_zm40_PT200_dEdx" + Comment2 + ".root"))) ;
-      v_pTFile_55.          push_back(TFile::Open(TString("OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_z460_PT200/3_DESY21_z460_PT200_dEdx" + Comment2 + ".root"))) ;
-      v_pTFile_95.          push_back(TFile::Open(TString("OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_z860_PT200/3_DESY21_z860_PT200_dEdx" + Comment2 + ".root"))) ;
-      // v_pTFile_5.           push_back(TFile::Open(TString(inputDir + "/DESY21_phi_zm40/DESY21_phi" + phi_arr[iphi] + "_zm40/3_DESY21_phi" + phi_arr[iphi] + "_zm40_dEdx" + Comment2 + ".root"))) ;
-      // v_pTFile_55.          push_back(TFile::Open(TString(inputDir + "/DESY21_phi_z460/DESY21_phi" + phi_arr[iphi] + "_z460/3_DESY21_phi" + phi_arr[iphi] + "_z460_dEdx" + Comment2 + ".root"))) ;
-      // v_pTFile_95.          push_back(TFile::Open(TString(inputDir + "/DESY21_phi_z860/DESY21_phi" + phi_arr[iphi] + "_z860/3_DESY21_phi" + phi_arr[iphi] + "_z860_dEdx" + Comment2 + ".root"))) ;
+      pTFile_5 = TFile::Open(TString("OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_zm40_PT200/3_DESY21_zm40_PT200_dEdx" + Comment + ".root")) ;
+      pTFile_55 = TFile::Open(TString("OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_z460_PT200/3_DESY21_z460_PT200_dEdx" + Comment + ".root")) ;
+      pTFile_95 = TFile::Open(TString("OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_z860_PT200/3_DESY21_z860_PT200_dEdx" + Comment + ".root")) ;
+      // v_pTFile_5.           push_back(TFile::Open(TString(inputDir + "/DESY21_phi_zm40/DESY21_phi" + phi_arr[iphi] + "_zm40/3_DESY21_phi" + phi_arr[iphi] + "_zm40_dEdx" + Comment + ".root"))) ;
+      // v_pTFile_55.          push_back(TFile::Open(TString(inputDir + "/DESY21_phi_z460/DESY21_phi" + phi_arr[iphi] + "_z460/3_DESY21_phi" + phi_arr[iphi] + "_z460_dEdx" + Comment + ".root"))) ;
+      // v_pTFile_95.          push_back(TFile::Open(TString(inputDir + "/DESY21_phi_z860/DESY21_phi" + phi_arr[iphi] + "_z860/3_DESY21_phi" + phi_arr[iphi] + "_z860_dEdx" + Comment + ".root"))) ;
     }
     else if(iphi < 5){
-      v_pTFile_5.           push_back(TFile::Open(TString(inputDir + "/DESY21_phi_zm40/DESY21_phi" + phi_arr[iphi] + "_zm40/3_DESY21_phi" + phi_arr[iphi] + "_zm40_dEdx" + Comment2 + ".root"))) ;
-      v_pTFile_55.          push_back(TFile::Open(TString(inputDir + "/DESY21_phi_z460/DESY21_phi" + phi_arr[iphi] + "_z460/3_DESY21_phi" + phi_arr[iphi] + "_z460_dEdx" + Comment2 + ".root"))) ;
-      v_pTFile_95.          push_back(TFile::Open(TString(inputDir + "/DESY21_phi_z860/DESY21_phi" + phi_arr[iphi] + "_z860/3_DESY21_phi" + phi_arr[iphi] + "_z860_dEdx" + Comment2 + ".root"))) ;
+      pTFile_5 = TFile::Open(TString(inputDir + "/DESY21_phi_zm40/DESY21_phi" + phi_arr[iphi] + "_zm40/3_DESY21_phi" + phi_arr[iphi] + "_zm40_dEdx" + Comment + ".root")) ;
+      pTFile_55 = TFile::Open(TString(inputDir + "/DESY21_phi_z460/DESY21_phi" + phi_arr[iphi] + "_z460/3_DESY21_phi" + phi_arr[iphi] + "_z460_dEdx" + Comment + ".root")) ;
+      pTFile_95 = TFile::Open(TString(inputDir + "/DESY21_phi_z860/DESY21_phi" + phi_arr[iphi] + "_z860/3_DESY21_phi" + phi_arr[iphi] + "_z860_dEdx" + Comment + ".root")) ;
     }
     else{
-      v_pTFile_5.           push_back(TFile::Open(TString(inputDir + "/DESY21_phi_zm40/DESY21_phi" + phi_arr[iphi] + "_diag_zm40/3_DESY21_phi" + phi_arr[iphi] + "_diag_zm40_dEdx" + Comment + ".root"))) ;
-      v_pTFile_55.          push_back(TFile::Open(TString(inputDir + "/DESY21_phi_z460/DESY21_phi" + phi_arr[iphi] + "_diag_z460/3_DESY21_phi" + phi_arr[iphi] + "_diag_z460_dEdx" + Comment + ".root"))) ;
-      v_pTFile_95.          push_back(TFile::Open(TString(inputDir + "/DESY21_phi_z860/DESY21_phi" + phi_arr[iphi] + "_diag_z860/3_DESY21_phi" + phi_arr[iphi] + "_diag_z860_dEdx" + Comment + ".root"))) ;
+      pTFile_5 = TFile::Open(TString(inputDir + "/DESY21_phi_zm40/DESY21_phi" + phi_arr[iphi] + "_diag_zm40/3_DESY21_phi" + phi_arr[iphi] + "_diag_zm40_dEdx" + Comment + WFversion + ".root")) ;
+      pTFile_55 = TFile::Open(TString(inputDir + "/DESY21_phi_z460/DESY21_phi" + phi_arr[iphi] + "_diag_z460/3_DESY21_phi" + phi_arr[iphi] + "_diag_z460_dEdx" + Comment + WFversion + ".root")) ;
+      pTFile_95 = TFile::Open(TString(inputDir + "/DESY21_phi_z860/DESY21_phi" + phi_arr[iphi] + "_diag_z860/3_DESY21_phi" + phi_arr[iphi] + "_diag_z860_dEdx" + Comment + WFversion + ".root")) ;
     }
-    v_h1f_WF_5.             push_back(v_pTFile_5[iphi]->    Get<TH1F>("h1f_WFsum_0")) ;
-    v_h1f_WF_55.            push_back(v_pTFile_55[iphi]->   Get<TH1F>("h1f_WFsum_0")) ;
-    v_h1f_WF_95.            push_back(v_pTFile_95[iphi]->   Get<TH1F>("h1f_WFsum_0")) ;
-    v_h1f_XP_5.             push_back(v_pTFile_5[iphi]->    Get<TH1F>("h1f_XP_0")) ;
-    v_h1f_XP_55.            push_back(v_pTFile_55[iphi]->   Get<TH1F>("h1f_XP_0")) ;
-    v_h1f_XP_95.            push_back(v_pTFile_95[iphi]->   Get<TH1F>("h1f_XP_0")) ;
-    v_tf1_WF_5.             push_back(v_h1f_WF_5[iphi]->    GetFunction("tf1_WFsum_0")) ;
-    v_tf1_WF_55.            push_back(v_h1f_WF_55[iphi]->   GetFunction("tf1_WFsum_0")) ;
-    v_tf1_WF_95.            push_back(v_h1f_WF_95[iphi]->   GetFunction("tf1_WFsum_0")) ;
+    v_h1f_WF_5.             push_back(pTFile_5->            Get<TH1F>("h1f_WFsum")) ;
+    v_h1f_WF_55.            push_back(pTFile_55->           Get<TH1F>("h1f_WFsum")) ;
+    v_h1f_WF_95.            push_back(pTFile_95->           Get<TH1F>("h1f_WFsum")) ;
+    v_h1f_XP_5.             push_back(pTFile_5->            Get<TH1F>("h1f_XP")) ;
+    v_h1f_XP_55.            push_back(pTFile_55->           Get<TH1F>("h1f_XP")) ;
+    v_h1f_XP_95.            push_back(pTFile_95->           Get<TH1F>("h1f_XP")) ;
+    v_tf1_WF_5.             push_back(v_h1f_WF_5[iphi]->    GetFunction("tf1_WFsum")) ;
+    v_tf1_WF_55.            push_back(v_h1f_WF_55[iphi]->   GetFunction("tf1_WFsum")) ;
+    v_tf1_WF_95.            push_back(v_h1f_WF_95[iphi]->   GetFunction("tf1_WFsum")) ;
     v_tf1_XP_5.             push_back(v_h1f_XP_5[iphi]->    GetFunction("tf1_XP")) ;
     v_tf1_XP_55.            push_back(v_h1f_XP_55[iphi]->   GetFunction("tf1_XP")) ;
     v_tf1_XP_95.            push_back(v_h1f_XP_95[iphi]->   GetFunction("tf1_XP")) ;
@@ -3464,7 +3462,7 @@ void DrawOut_Phiscan_Z(const std::string& inputDir, const std::string& Comment)
 
 
   // Draw
-  std::string OutputFile_WF        = inputDir + "/Phiscan_Resolution_Z" + Comment + "_WF.pdf" ;
+  std::string OutputFile_WF        = inputDir + "/Phiscan_Resolution_Z" + Comment + WFversion + ".pdf" ;
   std::string OutputFile_WF_Beg    = OutputFile_WF + "(" ;
   std::string OutputFile_WF_End    = OutputFile_WF + ")" ;
   std::string OutputFile_XP        = inputDir + "/Phiscan_Resolution_Z" + Comment + "_XP.pdf" ;
@@ -3588,8 +3586,10 @@ void DrawOut_Phiscan_Z(const std::string& inputDir, const std::string& Comment)
   // Delete
   delete                        pTCanvas   ;
   delete                        leg ;
+  delete pTFile_5;
+  delete pTFile_55;
+  delete pTFile_95;
 
-  v_pTFile_5.                     clear() ;
   v_h1f_WF_5.                     clear() ;
   v_h1f_WF_55.                   clear() ;
   v_h1f_WF_95.                   clear() ;

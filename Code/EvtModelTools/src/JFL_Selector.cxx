@@ -52,6 +52,7 @@ JFL_Selector::JFL_Selector(const std::string DefSelection
   if (DefSelection=="BN_COSMICS23_Sample" ) { Set_BN_COSMICS23_Sample() ; }
   
   if (DefSelection=="T_DESY21_Event"  ) { Set_T_DESY21_Event()  ; }
+  if (DefSelection=="T_DESY21theta_Event"  ) { Set_T_DESY21theta_Event()  ; }
   if (DefSelection=="T2_CERN22_Event"  ) { Set_T2_CERN22_Event()  ; }
   if (DefSelection=="TMC_CERN22_Event"  ) { Set_TMC_CERN22_Event()  ; }
 
@@ -74,6 +75,7 @@ JFL_Selector::JFL_Selector(const std::string DefSelection
     &&DefSelection!="AN_DESY21_200_Sample" 
     &&DefSelection!="BN_COSMICS23_Sample"  
     &&DefSelection!="T_DESY21_Event"  
+    &&DefSelection!="T_DESY21theta_Event"  
     &&DefSelection!="T2_CERN22_Event" 
     &&DefSelection!="TMC_CERN22_Event"
   ) { 
@@ -211,6 +213,22 @@ void JFL_Selector::Set_T_DESY21_Event()
   Add_Selection( "Stage1"   );  // border clusters
   Add_Selection( "Stage11"  );  // time sync event based
   Add_Selection( "Stage120" );  // time sync run based
+  Add_Selection( "StageT15"  );  // average pad multiplicity
+  Add_Selection( "Stage10"  );  // maximum number of pads
+  Add_Selection( "Stage14"  );  // min & max amplitude
+  Add_Selection( "Stage5"   );  // number of clusters
+}
+
+
+void JFL_Selector::Set_T_DESY21theta_Event()
+{
+  Reset_Selection() ;
+
+  std::cout << std::endl ;
+  std::cout << "-------------->Predefined selection T_DESY21theta_Event" << std::endl ;
+  ListOfSelectionName.clear();
+// 1+11+15+5
+  Add_Selection( "Stage1"   );  // border clusters
   Add_Selection( "StageT15"  );  // average pad multiplicity
   Add_Selection( "Stage10"  );  // maximum number of pads
   Add_Selection( "Stage14"  );  // min & max amplitude

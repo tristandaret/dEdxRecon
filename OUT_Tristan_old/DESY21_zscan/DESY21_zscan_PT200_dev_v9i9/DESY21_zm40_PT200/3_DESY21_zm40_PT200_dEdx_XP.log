@@ -1,0 +1,77 @@
+Tag           : DESY21_zm40_PT200
+Comment       : _zcalc_G2_WF1
+FileName      : ../Data_DESY21_dev_v9/zscan_PT200/z_360_275_200_02T_26_m40_iter9.root
+SelectionSet  : T_DESY21_Event
+NbrOfMod      : 0
+Data_to_Use   : 0
+OUTDirName    : OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200_dev_v9i9/DESY21_zm40_PT200/
+
+ERAM#01: Gain hole in (iX,iY) = (10,16) | value reset at 1889.24
+ERAM#01:   RC hole in (iX,iY) = (10,16) | value reset at 129.29
+Number of pads in 01 = 1152.00
+Average gain in   01 = 1947.72
+
+Average gain in bottom HATPC: 1947.00
+
+-------------->Predefined selection T_DESY21_Event
+Number of entries :8941
+TLow = 39 | THigh = 63
+
+-------------->List of selections
+Apply selection  1 -> Remove clusters in first and last columns 
+
+Apply selection 11 -> Remove clusters out of time (Event Based) 
+                      |TLeading -TLeadingMeanOverEvent| <= m_Cut_Stage11_EventBased (=     3)
+
+Apply selection 120 -> Remove clusters out of time  
+                      m_Cut_Stage120_TLow <= TLeading <= m_Cut_Stage120_THigh 
+                      m_Cut_Stage120_TLow  =   39
+                      m_Cut_Stage120_THigh =   63
+
+Apply selection 15 -> Remove Events with an average pad multiplicity too high or too low 
+                      Pad Multiplicity >  m_Cut_StageT15_APM_Low  (=  2.0)
+                      Pad Multiplicity <= m_Cut_StageT15_APM_High (=  4.0)
+
+Apply selection 10 -> Remove clusters with too many pads 
+                      Npads <= m_Cut_Stage10_Npads_Hig (=   5)
+
+Apply selection 14 -> Remove Clusters with a too high APad 
+                      APad >= m_Cut_Stage14_Amax_Low (=     0)
+                      APad <= m_Cut_Stage14_Amax_Hig (=  3700)
+
+Apply selection  5 -> Reject Events with too few clusters
+                      NClusters >= m_Cut_Stage5_NCluster_Low (=   34)
+
+
+zdrift        = 50 mm
+PT            = 200 ns
+TB            = 40 ns/time bin
+PT/TB         = 5 time bins
+z method      : zcalc
+cut length    = 2 mm
+
+Processing events:
+0/8941
+1000/8941
+2000/8941
+3000/8941
+4000/8941
+5000/8941
+6000/8941
+7000/8941
+8000/8941
+8940/8941
+
+Selection Statistics 
+ #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
+    0  Stage1     8941     8941 (    0.00)  (    0.00)      8941     8941 (    0.00)  (    0.00)    303816   303816 (    0.00)  (    0.00)    884469   884469 (    0.00)  (    0.00) 
+    1 Stage11     8941     8852 (   -1.00)  (   -1.00)      8941     8852 (   -1.00)  (   -1.00)    303816   296501 (   -2.41)  (   -2.41)    884469   855418 (   -3.28)  (   -3.28) 
+    2Stage120     8852     8715 (   -1.55)  (   -2.53)      8852     8715 (   -1.55)  (   -2.53)    296501   292001 (   -1.52)  (   -3.89)    855418   844353 (   -1.29)  (   -4.54) 
+    3StageT15     8715     8495 (   -2.52)  (   -4.99)      8715     8495 (   -2.52)  (   -4.99)    292001   285641 (   -2.18)  (   -5.98)    844353   820069 (   -2.88)  (   -7.28) 
+    4 Stage10     8495     8495 (    0.00)  (   -4.99)      8495     8495 (    0.00)  (   -4.99)    285641   284638 (   -0.35)  (   -6.31)    820069   813649 (   -0.78)  (   -8.01) 
+    5 Stage14     8495     8492 (   -0.04)  (   -5.02)      8495     8492 (   -0.04)  (   -5.02)    284638   277518 (   -2.50)  (   -8.66)    813649   785606 (   -3.45)  (  -11.18) 
+    6  Stage5     8492     3386 (  -60.13)  (  -62.13)      8492     3386 (  -60.13)  (  -62.13)    277518   115124 (  -58.52)  (  -62.11)    785606   317624 (  -59.57)  (  -64.09) 
+  Summary Sel     8941     3386             (  -62.13)      8941     3386             (  -62.13)    303816   115124             (  -62.11)    884469   317624             (  -64.09) 
+Fitting: Started... done!
+Checks: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200_dev_v9i9/DESY21_zm40_PT200/2_DESY21_zm40_PT200_Checks_zcalc_G2_WF1.root
+dEdx: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200_dev_v9i9/DESY21_zm40_PT200/3_DESY21_zm40_PT200_dEdx_zcalc_G2_WF1.root

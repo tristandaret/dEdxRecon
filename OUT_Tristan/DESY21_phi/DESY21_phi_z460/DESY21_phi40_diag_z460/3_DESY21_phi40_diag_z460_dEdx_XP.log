@@ -1,15 +1,17 @@
 Tag           : DESY21_phi40_diag_z460
-Comment       : _zcalc_G2_WF4_RCm2%
-FileName     : ../Data_DESY21/Phi_scan_z460/phi_200_40_z460_ym60_diag_iter0.root
+Comment       : _zcalc_G2_WF2
+FileName      : ../Data_DESY21_dev_v9/Phi_scan_z460/phi_200_40_z460_ym60_diag_iter9.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
 Data_to_Use   : 0
 OUTDirName    : OUT_Tristan/DESY21_phi/DESY21_phi_z460/DESY21_phi40_diag_z460/
 
-Gain & RC maps: loaded
-Average Gain in ERAM01 = 1947.77
-ERAM01: RC   hole in  iX = 10 | iY = 16 | value reset at 129.29
-ERAM01: Gain hole in  iX = 10 | iY = 16 | value reset at 1889.24
+ERAM#01: Gain hole in (iX,iY) = (10,16) | value reset at 1889.24
+ERAM#01:   RC hole in (iX,iY) = (10,16) | value reset at 129.29
+Number of pads in 01 = 1152.00
+Average gain in   01 = 1947.72
+
+Average gain in bottom HATPC: 1947.00
 
 -------------->Predefined selection T_DESY21_Event
 Number of entries :14526
@@ -48,65 +50,157 @@ PT/TB         = 5 time bins
 z method      : zcalc
 cut length    = 2 mm
 
-WF correction parameters: 283.98 | -10.30 | 2.25 | 0.81 | -0.05
+correction function: ../Data_DESY21_dev_v9/Phi_scan_zm40/phi_200_40_zm40_ym60_diag_iter9_WFmax_correction_v9i9.root
+WF correction parameters: 407.23 | -58.10 | 19.88 | -1.30 | 0.03
 Processing events:
 0/14526
 1000/14526
 2000/14526
+ALERT: 1 walls crossed for a pad in entry #2051
+24.82 25.94 15.28 16.30
+25.94 24.85 16.34 15.28
+39.11 -0.90 -0.00
+ALERT: 1 walls crossed for a pad in entry #2051
+24.82 25.94 14.27 15.28
+27.03 25.94 16.34 15.28
+39.11 -0.90 -0.00
+ALERT: 1 walls crossed for a pad in entry #2051
+25.94 27.07 15.28 16.30
+25.94 24.85 15.28 14.23
+39.11 -0.90 -0.00
+ALERT: 3 walls crossed for a pad in entry #2051
+25.94 27.07 14.27 15.28
+27.03 25.94 15.28 14.23
+39.11 -0.90 -0.00
 3000/14526
+ALERT: 3 walls crossed for a pad in entry #3512
+38.35 39.48 2.04 3.06
+39.48 38.42 3.13 2.04
+39.61 -0.94 -0.00
 4000/14526
-ALERT: 1 walls crossed for a pad in entry #4155
-38.35 39.48 4.08 5.09
-39.48 38.42 5.16 4.08
-41.67 -0.94 -0.00
 5000/14526
-ALERT: 1 walls crossed for a pad in entry #5041
-9.02 10.15 30.57 31.59
-10.15 9.05 31.61 30.57
-39.91 -0.91 -0.00
-ALERT: 1 walls crossed for a pad in entry #5041
-9.02 10.15 29.55 30.57
-11.25 10.15 31.61 30.57
-39.91 -0.91 -0.00
-ALERT: 1 walls crossed for a pad in entry #5041
-10.15 11.28 30.57 31.59
-10.15 9.05 30.57 29.52
-39.91 -0.91 -0.00
-ALERT: 3 walls crossed for a pad in entry #5041
-10.15 11.28 29.55 30.57
-11.25 10.15 30.57 29.52
-39.91 -0.91 -0.00
+ALERT: 3 walls crossed for a pad in entry #5190
+18.05 19.18 21.40 22.42
+19.16 18.27 22.53 21.46
+39.62 -0.95 0.00
+ALERT: 1 walls crossed for a pad in entry #5190
+18.05 19.18 20.38 21.40
+20.51 19.16 22.53 21.46
+39.62 -0.95 0.00
+ALERT: 1 walls crossed for a pad in entry #5190
+19.18 20.30 21.40 22.42
+19.16 18.27 21.46 20.39
+39.62 -0.95 0.00
+ALERT: 1 walls crossed for a pad in entry #5190
+19.18 20.30 20.38 21.40
+20.51 19.16 21.46 20.39
+39.62 -0.95 0.00
 6000/14526
-ALERT: 1 walls crossed for a pad in entry #6916
-38.35 39.48 4.08 5.09
-39.48 38.42 5.16 4.08
-41.33 -0.92 -0.00
 7000/14526
 8000/14526
 9000/14526
+ALERT: 3 walls crossed for a pad in entry #9901
+31.58 32.71 8.15 9.17
+32.69 31.62 9.24 8.20
+38.41 -0.92 0.00
+ALERT: 1 walls crossed for a pad in entry #9901
+32.71 33.84 8.15 9.17
+32.69 31.62 8.20 7.15
+38.41 -0.92 0.00
+ALERT: 1 walls crossed for a pad in entry #9901
+31.58 32.71 7.13 8.15
+33.76 32.69 9.24 8.20
+38.41 -0.92 0.00
+ALERT: 1 walls crossed for a pad in entry #9901
+32.71 33.84 6.11 7.13
+35.05 33.76 8.20 7.15
+38.41 -0.92 0.00
+ALERT: 1 walls crossed for a pad in entry #9901
+33.84 34.97 7.13 8.15
+33.76 32.69 7.15 6.11
+38.41 -0.92 0.00
+ALERT: 1 walls crossed for a pad in entry #9901
+34.97 36.10 6.11 7.13
+35.05 33.76 6.11 5.07
+38.41 -0.92 0.00
+ALERT: 1 walls crossed for a pad in entry #9901
+33.84 34.97 5.09 6.11
+36.12 35.05 7.15 6.11
+38.41 -0.92 0.00
+ALERT: 1 walls crossed for a pad in entry #9901
+36.10 37.22 5.09 6.11
+36.12 35.05 5.07 4.03
+38.41 -0.92 0.00
+ALERT: 1 walls crossed for a pad in entry #9901
+34.97 36.10 4.08 5.09
+37.20 36.12 6.11 5.07
+38.41 -0.92 0.00
+ALERT: 3 walls crossed for a pad in entry #9901
+36.10 37.22 4.08 5.09
+37.20 36.12 5.07 4.03
+38.41 -0.92 0.00
 10000/14526
-ALERT: 3 walls crossed for a pad in entry #10658
-37.22 38.35 3.06 4.08
-38.35 37.28 4.13 3.06
-39.07 -0.93 -0.00
-ALERT: 1 walls crossed for a pad in entry #10658
-37.22 38.35 2.04 3.06
-39.43 38.35 4.13 3.06
-39.07 -0.93 -0.00
-ALERT: 1 walls crossed for a pad in entry #10658
-38.35 39.48 3.06 4.08
-38.35 37.28 3.06 1.99
-39.07 -0.93 -0.00
-ALERT: 1 walls crossed for a pad in entry #10658
-38.35 39.48 2.04 3.06
-39.43 38.35 3.06 1.99
-39.07 -0.93 -0.00
+ALERT: 3 walls crossed for a pad in entry #10977
+36.10 37.22 5.09 6.11
+37.22 36.19 6.18 5.10
+40.66 -0.96 0.00
+ALERT: 1 walls crossed for a pad in entry #10977
+36.10 37.22 4.08 5.09
+38.30 37.22 6.18 5.10
+40.66 -0.96 0.00
+ALERT: 1 walls crossed for a pad in entry #10977
+37.22 38.35 5.09 6.11
+37.22 36.19 5.10 4.02
+40.66 -0.96 0.00
+ALERT: 1 walls crossed for a pad in entry #10977
+37.22 38.35 4.08 5.09
+38.30 37.22 5.10 4.02
+40.66 -0.96 0.00
 11000/14526
 12000/14526
+ALERT: 3 walls crossed for a pad in entry #12217
+18.05 19.18 22.42 23.44
+19.15 18.24 23.51 22.43
+40.76 -0.96 0.00
+ALERT: 1 walls crossed for a pad in entry #12217
+19.18 20.30 22.42 23.44
+19.15 18.24 22.43 21.35
+40.76 -0.96 0.00
+ALERT: 1 walls crossed for a pad in entry #12217
+18.05 19.18 21.40 22.42
+20.38 19.15 23.51 22.43
+40.76 -0.96 0.00
+ALERT: 1 walls crossed for a pad in entry #12217
+20.30 21.43 21.40 22.42
+20.38 19.15 21.35 20.27
+40.76 -0.96 0.00
+ALERT: 1 walls crossed for a pad in entry #12217
+19.18 20.30 20.38 21.40
+21.30 20.38 22.43 21.35
+40.76 -0.96 0.00
+ALERT: 3 walls crossed for a pad in entry #12217
+20.30 21.43 20.38 21.40
+21.30 20.38 21.35 20.27
+40.76 -0.96 0.00
+ALERT: 3 walls crossed for a pad in entry #12217
+36.10 37.22 5.09 6.11
+37.20 36.28 6.25 5.18
+40.76 -0.96 0.00
+ALERT: 1 walls crossed for a pad in entry #12217
+36.10 37.22 4.08 5.09
+38.42 37.20 6.25 5.18
+40.76 -0.96 0.00
+ALERT: 1 walls crossed for a pad in entry #12217
+37.22 38.35 5.09 6.11
+37.20 36.28 5.18 4.10
+40.76 -0.96 0.00
+ALERT: 1 walls crossed for a pad in entry #12217
+37.22 38.35 4.08 5.09
+38.42 37.20 5.18 4.10
+40.76 -0.96 0.00
 13000/14526
 14000/14526
 14525/14526
-14526 real events
 
 Selection Statistics 
  #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
@@ -119,5 +213,5 @@ Selection Statistics
     6  Stage5    13986    12464 (  -10.88)  (  -14.20)     13986    12464 (  -10.88)  (  -14.20)    740032   674600 (   -8.84)  (  -14.73)   1434644  1301655 (   -9.27)  (  -16.94) 
   Summary Sel    14526    12464             (  -14.20)     14526    12464             (  -14.20)    791177   674600             (  -14.73)   1567194  1301655             (  -16.94) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_phi/DESY21_phi_z460/DESY21_phi40_diag_z460/2_DESY21_phi40_diag_z460_Checks_zcalc_G2_WF4_RCm2%.root
-dEdx: OUT_Tristan/DESY21_phi/DESY21_phi_z460/DESY21_phi40_diag_z460/3_DESY21_phi40_diag_z460_dEdx_zcalc_G2_WF4_RCm2%.root
+Checks: OUT_Tristan/DESY21_phi/DESY21_phi_z460/DESY21_phi40_diag_z460/2_DESY21_phi40_diag_z460_Checks_zcalc_G2_WF2.root
+dEdx: OUT_Tristan/DESY21_phi/DESY21_phi_z460/DESY21_phi40_diag_z460/3_DESY21_phi40_diag_z460_dEdx_zcalc_G2_WF2.root

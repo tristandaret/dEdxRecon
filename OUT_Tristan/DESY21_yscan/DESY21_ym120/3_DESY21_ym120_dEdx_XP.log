@@ -1,15 +1,17 @@
 Tag           : DESY21_ym120
-Comment       : _zcalc_G2_WF4_test_rmcostheta
-FileName     : ../Data_DESY21/yscan/Ym120_Z0_iter0.root
+Comment       : _zcalc_G2
+FileName      : ../Data_DESY21_dev_v9/yscan/Ym120_Z0_iter9.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
 Data_to_Use   : 0
 OUTDirName    : OUT_Tristan/DESY21_yscan/DESY21_ym120/
 
-Gain & RC maps: loaded
-Average Gain in ERAM01 = 1947.77
-ERAM01: RC   hole in  iX = 10 | iY = 16 | value reset at 129.29
-ERAM01: Gain hole in  iX = 10 | iY = 16 | value reset at 1889.24
+ERAM#01: Gain hole in (iX,iY) = (10,16) | value reset at 1889.24
+ERAM#01:   RC hole in (iX,iY) = (10,16) | value reset at 129.29
+Number of pads in 01 = 1152.00
+Average gain in   01 = 1947.72
+
+Average gain in bottom HATPC: 1947.00
 
 -------------->Predefined selection T_DESY21_Event
 Number of entries :5989
@@ -56,7 +58,6 @@ Processing events:
 4000/5989
 5000/5989
 5988/5989
-5989 real events
 
 Selection Statistics 
  #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
@@ -69,5 +70,5 @@ Selection Statistics
     6  Stage5     4836     2377 (  -50.85)  (  -60.31)      4836     2377 (  -50.85)  (  -60.31)    159121    80818 (  -49.21)  (  -60.30)    574175   290208 (  -49.46)  (  -62.16) 
   Summary Sel     5989     2377             (  -60.31)      5989     2377             (  -60.31)    203596    80818             (  -60.30)    766923   290208             (  -62.16) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_yscan/DESY21_ym120/2_DESY21_ym120_Checks_zcalc_G2_WF4_test_rmcostheta.root
-dEdx: OUT_Tristan/DESY21_yscan/DESY21_ym120/3_DESY21_ym120_dEdx_zcalc_G2_WF4_test_rmcostheta.root
+Checks: OUT_Tristan/DESY21_yscan/DESY21_ym120/2_DESY21_ym120_Checks_zcalc_G2.root
+dEdx: OUT_Tristan/DESY21_yscan/DESY21_ym120/3_DESY21_ym120_dEdx_zcalc_G2.root

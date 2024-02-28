@@ -1,0 +1,56 @@
+Control_zcalc_G2
+Tag           : DESY21_theta20
+EventFile     : ../Data_DESY21_dev_v9/Theta_scan/theta_20_02T_z460_ym60_iter9.root
+SelectionSet  : T_DESY21theta_Event
+iMod          : 0
+Data_to_Use   : 0
+OUTDirName    : OUT_Tristan/DESY21_theta460/DESY21_theta20/
+
+
+-------------->Predefined selection T_DESY21theta_Event
+Number of entries :13292
+
+-------------->List of selections
+Apply selection  1 -> Remove clusters in first and last columns 
+
+Apply selection 15 -> Remove Events with an average pad multiplicity too high or too low 
+                      Pad Multiplicity >  m_Cut_StageT15_APM_Low  (=  2.0)
+                      Pad Multiplicity <= m_Cut_StageT15_APM_High (=  4.0)
+
+Apply selection 10 -> Remove clusters with too many pads 
+                      Npads <= m_Cut_Stage10_Npads_Hig (=   5)
+
+Apply selection 14 -> Remove Clusters with a too high APad 
+                      APad >= m_Cut_Stage14_Amax_Low (=     0)
+                      APad <= m_Cut_Stage14_Amax_Hig (=  3700)
+
+Apply selection  5 -> Reject Events with too few clusters
+                      NClusters >= m_Cut_Stage5_NCluster_Low (=   34)
+
+
+Processing events:
+0/13292
+1000/13292
+2000/13292
+3000/13292
+4000/13292
+5000/13292
+6000/13292
+7000/13292
+8000/13292
+9000/13292
+10000/13292
+11000/13292
+12000/13292
+13000/13292
+13291/13292
+Nber Of Entries :13292
+
+Selection Statistics 
+ #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
+    0  Stage1    13292    13292 (    0.00)  (    0.00)     13292    13292 (    0.00)  (    0.00)    451852   451852 (    0.00)  (    0.00)   1374968  1374968 (    0.00)  (    0.00) 
+    1StageT15    13292    12585 (   -5.32)  (   -5.32)     13292    12585 (   -5.32)  (   -5.32)    451852   427835 (   -5.32)  (   -5.32)   1374968  1272789 (   -7.43)  (   -7.43) 
+    2 Stage10    12585    12585 (    0.00)  (   -5.32)     12585    12585 (    0.00)  (   -5.32)    427835   425423 (   -0.56)  (   -5.85)   1272789  1257198 (   -1.22)  (   -8.57) 
+    3 Stage14    12585    12585 (    0.00)  (   -5.32)     12585    12585 (    0.00)  (   -5.32)    425423   416125 (   -2.19)  (   -7.91)   1257198  1220093 (   -2.95)  (  -11.26) 
+    4  Stage5    12585     6004 (  -52.29)  (  -54.83)     12585     6004 (  -52.29)  (  -54.83)    416125   204136 (  -50.94)  (  -54.82)   1220093   587307 (  -51.86)  (  -57.29) 
+  Summary Sel    13292     6004             (  -54.83)     13292     6004             (  -54.83)    451852   204136             (  -54.82)   1374968   587307             (  -57.29) 

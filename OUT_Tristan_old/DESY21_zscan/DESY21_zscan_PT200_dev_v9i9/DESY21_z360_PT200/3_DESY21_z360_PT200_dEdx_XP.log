@@ -1,0 +1,96 @@
+Tag           : DESY21_z360_PT200
+Comment       : _zcalc_G2_WF2
+FileName      : ../Data_DESY21_dev_v9/zscan_PT200/z_360_275_200_02T_26_360_iter9.root
+SelectionSet  : T_DESY21_Event
+NbrOfMod      : 0
+Data_to_Use   : 0
+OUTDirName    : OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200_dev_v9i9/DESY21_z360_PT200/
+
+ERAM#01: Gain hole in (iX,iY) = (10,16) | value reset at 1889.24
+ERAM#01:   RC hole in (iX,iY) = (10,16) | value reset at 129.29
+Number of pads in 01 = 1152.00
+Average gain in   01 = 1947.72
+
+Average gain in bottom HATPC: 1947.00
+
+-------------->Predefined selection T_DESY21_Event
+Number of entries :11063
+TLow = 142 | THigh = 171
+
+-------------->List of selections
+Apply selection  1 -> Remove clusters in first and last columns 
+
+Apply selection 11 -> Remove clusters out of time (Event Based) 
+                      |TLeading -TLeadingMeanOverEvent| <= m_Cut_Stage11_EventBased (=     3)
+
+Apply selection 120 -> Remove clusters out of time  
+                      m_Cut_Stage120_TLow <= TLeading <= m_Cut_Stage120_THigh 
+                      m_Cut_Stage120_TLow  =  142
+                      m_Cut_Stage120_THigh =  171
+
+Apply selection 15 -> Remove Events with an average pad multiplicity too high or too low 
+                      Pad Multiplicity >  m_Cut_StageT15_APM_Low  (=  2.0)
+                      Pad Multiplicity <= m_Cut_StageT15_APM_High (=  4.0)
+
+Apply selection 10 -> Remove clusters with too many pads 
+                      Npads <= m_Cut_Stage10_Npads_Hig (=   5)
+
+Apply selection 14 -> Remove Clusters with a too high APad 
+                      APad >= m_Cut_Stage14_Amax_Low (=     0)
+                      APad <= m_Cut_Stage14_Amax_Hig (=  3700)
+
+Apply selection  5 -> Reject Events with too few clusters
+                      NClusters >= m_Cut_Stage5_NCluster_Low (=   34)
+
+
+zdrift        = 450 mm
+PT            = 200 ns
+TB            = 50 ns/time bin
+PT/TB         = 4 time bins
+z method      : zcalc
+cut length    = 2 mm
+
+Processing events:
+0/11063
+1000/11063
+2000/11063
+3000/11063
+4000/11063
+5000/11063
+6000/11063
+7000/11063
+8000/11063
+ALERT: 1 walls crossed for a pad in entry #8052
+3 5 8 9
+19 5 9 9
+9 -0 0
+ALERT: 3 walls crossed for a pad in entry #8052
+3 5 9 10
+5 -10 9 9
+9 -0 0
+ALERT: 1 walls crossed for a pad in entry #8052
+5 6 9 10
+5 -10 9 9
+9 -0 0
+ALERT: 1 walls crossed for a pad in entry #8052
+5 6 8 9
+19 5 9 9
+9 -0 0
+9000/11063
+10000/11063
+11000/11063
+11062/11063
+
+Selection Statistics 
+ #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
+    0  Stage1    11063    11063 (    0.00)  (    0.00)     11063    11063 (    0.00)  (    0.00)    375999   375999 (    0.00)  (    0.00)   1088110  1088110 (    0.00)  (    0.00) 
+    1 Stage11    11063    10881 (   -1.65)  (   -1.65)     11063    10881 (   -1.65)  (   -1.65)    375999   365115 (   -2.89)  (   -2.89)   1088110  1044849 (   -3.98)  (   -3.98) 
+    2Stage120    10881    10660 (   -2.03)  (   -3.64)     10881    10660 (   -2.03)  (   -3.64)    365115   358005 (   -1.95)  (   -4.79)   1044849  1027980 (   -1.61)  (   -5.53) 
+    3StageT15    10660    10411 (   -2.34)  (   -5.89)     10660    10411 (   -2.34)  (   -5.89)    358005   351251 (   -1.89)  (   -6.58)   1027980  1003219 (   -2.41)  (   -7.80) 
+    4 Stage10    10411    10411 (    0.00)  (   -5.89)     10411    10411 (    0.00)  (   -5.89)    351251   350241 (   -0.29)  (   -6.85)   1003219   996831 (   -0.64)  (   -8.39) 
+    5 Stage14    10411    10408 (   -0.03)  (   -5.92)     10411    10408 (   -0.03)  (   -5.92)    350241   344548 (   -1.63)  (   -8.36)    996831   973917 (   -2.30)  (  -10.49) 
+    6  Stage5    10408     5623 (  -45.97)  (  -49.17)     10408     5623 (  -45.97)  (  -49.17)    344548   191182 (  -44.51)  (  -49.15)    973917   532589 (  -45.31)  (  -51.05) 
+  Summary Sel    11063     5623             (  -49.17)     11063     5623             (  -49.17)    375999   191182             (  -49.15)   1088110   532589             (  -51.05) 
+Fitting: Started... done!
+Checks: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200_dev_v9i9/DESY21_z360_PT200/2_DESY21_z360_PT200_Checks_zcalc_G2_WF2.root
+dEdx: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200_dev_v9i9/DESY21_z360_PT200/3_DESY21_z360_PT200_dEdx_zcalc_G2_WF2.root

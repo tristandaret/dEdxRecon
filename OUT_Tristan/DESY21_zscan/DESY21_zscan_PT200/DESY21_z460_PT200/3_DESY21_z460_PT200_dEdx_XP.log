@@ -1,15 +1,17 @@
 Tag           : DESY21_z460_PT200
-Comment       : _zcalc_G1_n600
-FileName      : ../Data_DESY21/zscan_PT200/z_360_275_200_02T_26_460_iter0.root
+Comment       : _zcalc_G2
+FileName      : ../Data_DESY21_dev_v9/zscan_PT200/z_360_275_200_02T_26_460_iter9.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
 Data_to_Use   : 0
 OUTDirName    : OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_z460_PT200/
 
-Gain hole in  iX = 10 | iY = 16 | value reset at 1889.24
-Gain hole in  iX = 10 | iY = 16 | value reset at 129.29
-Average Gain in 01 = 1947.72
-Average gain in bottom HATPC: 1947.72
+ERAM#01: Gain hole in (iX,iY) = (10,16) | value reset at 1889.24
+ERAM#01:   RC hole in (iX,iY) = (10,16) | value reset at 129.29
+Number of pads in 01 = 1152.00
+Average gain in   01 = 1947.72
+
+Average gain in bottom HATPC: 1947.00
 
 -------------->Predefined selection T_DESY21_Event
 Number of entries :12109
@@ -45,20 +47,43 @@ zdrift        = 550 mm
 PT            = 200 ns
 TB            = 40 ns/time bin
 PT/TB         = 5 time bins
-z method      : zfile
+z method      : zcalc
 cut length    = 2 mm
 
 Processing events:
 0/12109
+1000/12109
+2000/12109
+3000/12109
+4000/12109
+5000/12109
+6000/12109
+7000/12109
+8000/12109
+ALERT: 3 walls crossed for a pad in entry #8607
+12 14 9 10
+14 -3 9 9
+10 -0 -0
+ALERT: 1 walls crossed for a pad in entry #8607
+14 15 9 10
+14 -3 9 9
+10 -0 -0
+9000/12109
+10000/12109
+11000/12109
+12000/12109
+12108/12109
 
 Selection Statistics 
  #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
-    0  Stage1      600      600 (    0.00)  (    0.00)       600      600 (    0.00)  (    0.00)     20393    20393 (    0.00)  (    0.00)     58878    58878 (    0.00)  (    0.00) 
-    1 Stage11      600      591 (   -1.50)  (   -1.50)       600      591 (   -1.50)  (   -1.50)     20393    19911 (   -2.36)  (   -2.36)     58878    56949 (   -3.28)  (   -3.28) 
-    2Stage120      591      581 (   -1.69)  (   -3.17)       591      581 (   -1.69)  (   -3.17)     19911    19512 (   -2.00)  (   -4.32)     56949    56049 (   -1.58)  (   -4.80) 
-    3StageT15      581      562 (   -3.27)  (   -6.33)       581      562 (   -3.27)  (   -6.33)     19512    18966 (   -2.80)  (   -7.00)     56049    54049 (   -3.57)  (   -8.20) 
-    4 Stage10      562      562 (    0.00)  (   -6.33)       562      562 (    0.00)  (   -6.33)     18966    18913 (   -0.28)  (   -7.26)     54049    53710 (   -0.63)  (   -8.78) 
-    5 Stage14      562      562 (    0.00)  (   -6.33)       562      562 (    0.00)  (   -6.33)     18913    18637 (   -1.46)  (   -8.61)     53710    52591 (   -2.08)  (  -10.68) 
-    6  Stage5      562      320 (  -43.06)  (  -46.67)       562      320 (  -43.06)  (  -46.67)     18637    10880 (  -41.62)  (  -46.65)     52591    30368 (  -42.26)  (  -48.42) 
-  Summary Sel      600      320             (  -46.67)       600      320             (  -46.67)     20393    10880             (  -46.65)     58878    30368             (  -48.42) 
-dEdx: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_z460_PT200/3_DESY21_z460_PT200_dEdx_zcalc_G1_n600_XPonly.root
+    0  Stage1    12109    12109 (    0.00)  (    0.00)     12109    12109 (    0.00)  (    0.00)    411535   411535 (    0.00)  (    0.00)   1189459  1189459 (    0.00)  (    0.00) 
+    1 Stage11    12109    11895 (   -1.77)  (   -1.77)     12109    11895 (   -1.77)  (   -1.77)    411535   399883 (   -2.83)  (   -2.83)   1189459  1143006 (   -3.91)  (   -3.91) 
+    2Stage120    11895    11667 (   -1.92)  (   -3.65)     11895    11667 (   -1.92)  (   -3.65)    399883   392310 (   -1.89)  (   -4.67)   1143006  1125291 (   -1.55)  (   -5.39) 
+    3StageT15    11667    11411 (   -2.19)  (   -5.76)     11667    11411 (   -2.19)  (   -5.76)    392310   385158 (   -1.82)  (   -6.41)   1125291  1099324 (   -2.31)  (   -7.58) 
+    4 Stage10    11411    11411 (    0.00)  (   -5.76)     11411    11411 (    0.00)  (   -5.76)    385158   384028 (   -0.29)  (   -6.68)   1099324  1092155 (   -0.65)  (   -8.18) 
+    5 Stage14    11411    11409 (   -0.02)  (   -5.78)     11411    11409 (   -0.02)  (   -5.78)    384028   378320 (   -1.49)  (   -8.07)   1092155  1069076 (   -2.11)  (  -10.12) 
+    6  Stage5    11409     6508 (  -42.96)  (  -46.25)     11409     6508 (  -42.96)  (  -46.25)    378320   221272 (  -41.51)  (  -46.23)   1069076   616893 (  -42.30)  (  -48.14) 
+  Summary Sel    12109     6508             (  -46.25)     12109     6508             (  -46.25)    411535   221272             (  -46.23)   1189459   616893             (  -48.14) 
+Fitting: Started... done!
+Checks: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_z460_PT200/2_DESY21_z460_PT200_Checks_zcalc_G2.root
+dEdx: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_z460_PT200/3_DESY21_z460_PT200_dEdx_zcalc_G2.root

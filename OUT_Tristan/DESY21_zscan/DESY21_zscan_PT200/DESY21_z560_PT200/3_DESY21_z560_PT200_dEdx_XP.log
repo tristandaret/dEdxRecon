@@ -1,22 +1,17 @@
 Tag           : DESY21_z560_PT200
-Comment       : _1000_zcalc_PRF_4IP_WFhatrecon
-EventFile     : ../Data_DESY21/zscan_PT200/z_360_275_200_02T_26_560_iter0.root
+Comment       : _zcalc_G2
+FileName      : ../Data_DESY21_dev_v9/zscan_PT200/z_360_275_200_02T_26_560_iter9.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
 Data_to_Use   : 0
 OUTDirName    : OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_z560_PT200/
 
+ERAM#01: Gain hole in (iX,iY) = (10,16) | value reset at 1889.24
+ERAM#01:   RC hole in (iX,iY) = (10,16) | value reset at 129.29
+Number of pads in 01 = 1152.00
+Average gain in   01 = 1947.72
 
-ReadRCmap::ReadRCmap m_FileName = GainRCMaps/RCfiles/ERAM01_RCdata_01.root
-
-ReadRCmap::ReadRCmap  No Data for iX=10 and  iY=16 in GainRCMaps/RCfiles/ERAM01_RCdata_01.root
-RC map: loaded
-
-ReadGainmap::ReadGainmap m_FileName = GainRCMaps/Gainfiles/ERAM01_Gaindata_01.root
-
-ReadGainmap::ReadGainmap  No Data for iX=10 and  iY=16 in GainRCMaps/Gainfiles/ERAM01_Gaindata_01.root
-Gain map: loaded
-Average Gain in ERAM01 = 1947.77
+Average gain in bottom HATPC: 1947.00
 
 -------------->Predefined selection T_DESY21_Event
 Number of entries :11791
@@ -52,36 +47,22 @@ zdrift        = 650 mm
 PT            = 200 ns
 TB            = 50 ns/time bin
 PT/TB         = 4 time bins
-Track fitting : PRF
 z method      : zcalc
 cut length    = 2 mm
 
 Processing events:
 0/11791
-500/11791
-RC hole in entry   614 | iX = 10 | iY = 16 |  RC  value reset at 129
 1000/11791
-1500/11791
 2000/11791
-2500/11791
 3000/11791
-3500/11791
 4000/11791
-4500/11791
 5000/11791
-5500/11791
 6000/11791
-6500/11791
 7000/11791
-7500/11791
 8000/11791
-8500/11791
 9000/11791
-9500/11791
 10000/11791
-10500/11791
 11000/11791
-11500/11791
 11790/11791
 
 Selection Statistics 
@@ -95,5 +76,5 @@ Selection Statistics
     6  Stage5    11144     6378 (  -42.77)  (  -45.91)     11144     6378 (  -42.77)  (  -45.91)    369646   216852 (  -41.34)  (  -45.89)   1047201   606159 (  -42.12)  (  -47.82) 
   Summary Sel    11791     6378             (  -45.91)     11791     6378             (  -45.91)    400740   216852             (  -45.89)   1161674   606159             (  -47.82) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_z560_PT200/2_DESY21_z560_PT200_Checks_1000_zcalc_PRF_4IP_WFhatrecon.root
-dEdx: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_z560_PT200/3_DESY21_z560_PT200_dEdx_1000_zcalc_PRF_4IP_WFhatrecon.root
+Checks: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_z560_PT200/2_DESY21_z560_PT200_Checks_zcalc_G2.root
+dEdx: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_z560_PT200/3_DESY21_z560_PT200_dEdx_zcalc_G2.root

@@ -1,22 +1,17 @@
 Tag           : DESY21_z660_PT200
-Comment       : _1000_zcalc_PRF_4IP_WFhatrecon
-EventFile     : ../Data_DESY21/zscan_PT200/z_360_275_200_02T_26_660_iter0.root
+Comment       : _zcalc_G2
+FileName      : ../Data_DESY21_dev_v9/zscan_PT200/z_360_275_200_02T_26_660_iter9.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
 Data_to_Use   : 0
 OUTDirName    : OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_z660_PT200/
 
+ERAM#01: Gain hole in (iX,iY) = (10,16) | value reset at 1889.24
+ERAM#01:   RC hole in (iX,iY) = (10,16) | value reset at 129.29
+Number of pads in 01 = 1152.00
+Average gain in   01 = 1947.72
 
-ReadRCmap::ReadRCmap m_FileName = GainRCMaps/RCfiles/ERAM01_RCdata_01.root
-
-ReadRCmap::ReadRCmap  No Data for iX=10 and  iY=16 in GainRCMaps/RCfiles/ERAM01_RCdata_01.root
-RC map: loaded
-
-ReadGainmap::ReadGainmap m_FileName = GainRCMaps/Gainfiles/ERAM01_Gaindata_01.root
-
-ReadGainmap::ReadGainmap  No Data for iX=10 and  iY=16 in GainRCMaps/Gainfiles/ERAM01_Gaindata_01.root
-Gain map: loaded
-Average Gain in ERAM01 = 1947.77
+Average gain in bottom HATPC: 1947.00
 
 -------------->Predefined selection T_DESY21_Event
 Number of entries :12328
@@ -52,44 +47,22 @@ zdrift        = 750 mm
 PT            = 200 ns
 TB            = 50 ns/time bin
 PT/TB         = 4 time bins
-Track fitting : PRF
 z method      : zcalc
 cut length    = 2 mm
 
 Processing events:
 0/12328
-500/12328
-ALERT: 1 walls crossed for a pad in entry #652
-33 34 7 8
-50 34 8 8
-10 -0 -0
-ALERT: 3 walls crossed for a pad in entry #652
-34 35 7 8
-50 34 8 8
-10 -0 -0
 1000/12328
-1500/12328
 2000/12328
-2500/12328
 3000/12328
-3500/12328
 4000/12328
-4500/12328
 5000/12328
-5500/12328
 6000/12328
-RC hole in entry   6235 | iX = 10 | iY = 16 |  RC  value reset at 129
-6500/12328
 7000/12328
-7500/12328
 8000/12328
-8500/12328
 9000/12328
-9500/12328
 10000/12328
-10500/12328
 11000/12328
-11500/12328
 12000/12328
 12327/12328
 
@@ -104,5 +77,5 @@ Selection Statistics
     6  Stage5    11649     6848 (  -41.21)  (  -44.45)     11649     6848 (  -41.21)  (  -44.45)    386607   232832 (  -39.78)  (  -44.43)   1096843   651385 (  -40.61)  (  -46.47) 
   Summary Sel    12328     6848             (  -44.45)     12328     6848             (  -44.45)    419001   232832             (  -44.43)   1216895   651385             (  -46.47) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_z660_PT200/2_DESY21_z660_PT200_Checks_1000_zcalc_PRF_4IP_WFhatrecon.root
-dEdx: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_z660_PT200/3_DESY21_z660_PT200_dEdx_1000_zcalc_PRF_4IP_WFhatrecon.root
+Checks: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_z660_PT200/2_DESY21_z660_PT200_Checks_zcalc_G2.root
+dEdx: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_z660_PT200/3_DESY21_z660_PT200_dEdx_zcalc_G2.root

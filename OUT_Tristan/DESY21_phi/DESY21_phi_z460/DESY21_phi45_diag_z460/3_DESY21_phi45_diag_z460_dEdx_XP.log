@@ -1,15 +1,17 @@
 Tag           : DESY21_phi45_diag_z460
-Comment       : _zcalc_G2_WF4_RCm2%
-FileName     : ../Data_DESY21/Phi_scan_z460/phi_200_45_z460_ym60_diag_iter0.root
+Comment       : _zcalc_G2_WF2
+FileName      : ../Data_DESY21_dev_v9/Phi_scan_z460/phi_200_45_z460_ym60_diag_iter9.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
 Data_to_Use   : 0
 OUTDirName    : OUT_Tristan/DESY21_phi/DESY21_phi_z460/DESY21_phi45_diag_z460/
 
-Gain & RC maps: loaded
-Average Gain in ERAM01 = 1947.77
-ERAM01: RC   hole in  iX = 10 | iY = 16 | value reset at 129.29
-ERAM01: Gain hole in  iX = 10 | iY = 16 | value reset at 1889.24
+ERAM#01: Gain hole in (iX,iY) = (10,16) | value reset at 1889.24
+ERAM#01:   RC hole in (iX,iY) = (10,16) | value reset at 129.29
+Number of pads in 01 = 1152.00
+Average gain in   01 = 1947.72
+
+Average gain in bottom HATPC: 1947.00
 
 -------------->Predefined selection T_DESY21_Event
 Number of entries :13277
@@ -48,452 +50,320 @@ PT/TB         = 5 time bins
 z method      : zcalc
 cut length    = 2 mm
 
-WF correction parameters: 283.98 | -10.30 | 2.25 | 0.81 | -0.05
+correction function: ../Data_DESY21_dev_v9/Phi_scan_zm40/phi_200_40_zm40_ym60_diag_iter9_WFmax_correction_v9i9.root
+WF correction parameters: 407.23 | -58.10 | 19.88 | -1.30 | 0.03
 Processing events:
 0/13277
-ALERT: 3 walls crossed for a pad in entry #75
-37.22 38.35 2.04 3.06
-38.35 37.46 3.33 2.04
-45.78 -1.14 0.00
-ALERT: 1 walls crossed for a pad in entry #75
-37.22 38.35 1.02 2.04
-39.24 38.35 3.33 2.04
-45.78 -1.14 0.00
-ALERT: 1 walls crossed for a pad in entry #75
-38.35 39.48 2.04 3.06
-38.35 37.46 2.04 0.76
-45.78 -1.14 0.00
-ALERT: 1 walls crossed for a pad in entry #651
-18.05 19.18 25.48 26.49
-19.18 18.29 26.77 25.47
-47.46 -1.15 -0.00
-ALERT: 1 walls crossed for a pad in entry #651
-19.18 20.30 25.48 26.49
-19.18 18.29 25.47 24.18
-47.46 -1.15 -0.00
-ALERT: 1 walls crossed for a pad in entry #651
-18.05 19.18 24.46 25.48
-20.06 19.18 26.77 25.47
-47.46 -1.15 -0.00
-ALERT: 3 walls crossed for a pad in entry #651
-19.18 20.30 24.46 25.48
-20.06 19.18 25.47 24.18
-47.46 -1.15 -0.00
+ALERT: 1 walls crossed for a pad in entry #766
+29.33 30.46 11.21 12.23
+30.46 29.56 12.49 11.21
+45.44 -1.11 -0.00
+ALERT: 1 walls crossed for a pad in entry #766
+30.46 31.58 11.21 12.23
+30.46 29.56 11.21 9.93
+45.44 -1.11 -0.00
+ALERT: 1 walls crossed for a pad in entry #766
+29.33 30.46 10.19 11.21
+31.35 30.46 12.49 11.21
+45.44 -1.11 -0.00
+ALERT: 3 walls crossed for a pad in entry #766
+30.46 31.58 10.19 11.21
+31.35 30.46 11.21 9.93
+45.44 -1.11 -0.00
 1000/13277
-ALERT: 1 walls crossed for a pad in entry #1468
-30.46 31.58 9.17 10.19
-30.46 29.56 9.17 7.89
-43.71 -1.13 -0.00
-ALERT: 1 walls crossed for a pad in entry #1468
-29.33 30.46 8.15 9.17
-31.35 30.46 10.45 9.17
-43.71 -1.13 -0.00
-ALERT: 1 walls crossed for a pad in entry #1468
-30.46 31.58 8.15 9.17
-31.35 30.46 9.17 7.89
-43.71 -1.13 -0.00
-2000/13277
-ALERT: 1 walls crossed for a pad in entry #2589
-11.28 12.41 30.57 31.59
-8.90 8.90 31.53 30.24
-44.46 -1.15 0.00
-ALERT: 1 walls crossed for a pad in entry #2589
-11.28 12.41 29.55 30.57
-15.79 8.90 31.53 30.24
-44.46 -1.15 0.00
-ALERT: 1 walls crossed for a pad in entry #2589
-12.41 13.54 29.55 30.57
-15.79 8.90 30.24 28.95
-44.46 -1.15 0.00
-ALERT: 1 walls crossed for a pad in entry #2589
-12.41 13.54 28.53 29.55
-15.79 15.79 30.24 28.95
-44.46 -1.15 0.00
-ALERT: 1 walls crossed for a pad in entry #2589
-13.54 14.66 28.53 29.55
-15.79 15.79 28.95 27.66
-44.46 -1.15 0.00
-ALERT: 1 walls crossed for a pad in entry #2589
-13.54 14.66 27.51 28.53
-15.79 15.79 28.95 27.66
-44.46 -1.15 0.00
-ALERT: 1 walls crossed for a pad in entry #2589
-14.66 15.79 27.51 28.53
-15.79 15.79 27.66 26.36
-44.46 -1.15 0.00
-ALERT: 1 walls crossed for a pad in entry #2589
-14.66 15.79 25.48 26.49
-15.79 15.79 27.66 26.36
-44.46 -1.15 0.00
-ALERT: 3 walls crossed for a pad in entry #2589
-15.79 16.92 25.48 26.49
-15.79 15.79 26.36 25.07
-44.46 -1.15 0.00
-ALERT: 3 walls crossed for a pad in entry #2589
-15.79 16.92 24.46 25.48
-15.79 15.79 26.36 25.07
-44.46 -1.15 0.00
-ALERT: 1 walls crossed for a pad in entry #2589
-16.92 18.05 24.46 25.48
-15.79 15.79 25.07 23.78
-44.46 -1.15 0.00
-ALERT: 1 walls crossed for a pad in entry #2589
-16.92 18.05 23.44 24.46
-15.79 15.79 25.07 23.78
-44.46 -1.15 0.00
-ALERT: 1 walls crossed for a pad in entry #2589
-18.05 19.18 23.44 24.46
-15.79 15.79 23.78 22.49
-44.46 -1.15 0.00
-ALERT: 1 walls crossed for a pad in entry #2589
-18.05 19.18 22.42 23.44
-15.79 15.79 23.78 22.49
-44.46 -1.15 0.00
-ALERT: 1 walls crossed for a pad in entry #2589
-19.18 20.30 22.42 23.44
-15.79 15.79 22.49 21.19
-44.46 -1.15 0.00
-ALERT: 1 walls crossed for a pad in entry #2589
-19.18 20.30 20.38 21.40
-22.69 22.69 22.49 21.19
-44.46 -1.15 0.00
-ALERT: 1 walls crossed for a pad in entry #2589
-20.30 21.43 20.38 21.40
-22.69 22.69 21.19 19.90
-44.46 -1.15 0.00
-ALERT: 1 walls crossed for a pad in entry #2589
-20.30 21.43 19.36 20.38
-22.69 22.69 21.19 19.90
-44.46 -1.15 0.00
-ALERT: 1 walls crossed for a pad in entry #2589
-21.43 22.56 19.36 20.38
-22.69 22.69 19.90 18.61
-44.46 -1.15 0.00
-ALERT: 1 walls crossed for a pad in entry #2589
-21.43 22.56 18.34 19.36
-22.69 22.69 19.90 18.61
-44.46 -1.15 0.00
-ALERT: 3 walls crossed for a pad in entry #2589
-22.56 23.69 18.34 19.36
-22.69 22.69 18.61 17.32
-44.46 -1.15 0.00
-ALERT: 3 walls crossed for a pad in entry #2589
-22.56 23.69 16.30 17.32
-22.69 22.69 18.61 17.32
-44.46 -1.15 0.00
-ALERT: 1 walls crossed for a pad in entry #2589
-23.69 24.82 16.30 17.32
-22.69 22.69 17.32 16.03
-44.46 -1.15 0.00
-ALERT: 1 walls crossed for a pad in entry #2589
-23.69 24.82 15.28 16.30
-22.69 22.69 17.32 16.03
-44.46 -1.15 0.00
-ALERT: 1 walls crossed for a pad in entry #2589
-24.82 25.94 15.28 16.30
-22.69 22.69 16.03 14.73
-44.46 -1.15 0.00
-ALERT: 1 walls crossed for a pad in entry #2589
-24.82 25.94 14.27 15.28
-29.59 22.69 16.03 14.73
-44.46 -1.15 0.00
-ALERT: 1 walls crossed for a pad in entry #2589
-25.94 27.07 14.27 15.28
-29.59 22.69 14.73 13.44
-44.46 -1.15 0.00
-ALERT: 1 walls crossed for a pad in entry #2589
-25.94 27.07 13.25 14.27
-29.59 29.59 14.73 13.44
-44.46 -1.15 0.00
-ALERT: 1 walls crossed for a pad in entry #2589
-27.07 28.20 13.25 14.27
-29.59 29.59 13.44 12.15
-44.46 -1.15 0.00
-ALERT: 1 walls crossed for a pad in entry #2589
-27.07 28.20 11.21 12.23
-29.59 29.59 13.44 12.15
-44.46 -1.15 0.00
-ALERT: 1 walls crossed for a pad in entry #2589
-28.20 29.33 11.21 12.23
-29.59 29.59 12.15 10.86
-44.46 -1.15 0.00
-ALERT: 3 walls crossed for a pad in entry #2589
-29.33 30.46 9.17 10.19
-29.59 29.59 10.86 9.56
-44.46 -1.15 0.00
-ALERT: 1 walls crossed for a pad in entry #2589
-30.46 31.58 9.17 10.19
-29.59 29.59 9.56 8.27
-44.46 -1.15 0.00
-ALERT: 1 walls crossed for a pad in entry #2589
-30.46 31.58 8.15 9.17
-29.59 29.59 9.56 8.27
-44.46 -1.15 0.00
-ALERT: 1 walls crossed for a pad in entry #2589
+ALERT: 1 walls crossed for a pad in entry #1090
 31.58 32.71 8.15 9.17
-29.59 29.59 8.27 6.98
-44.46 -1.15 0.00
-ALERT: 1 walls crossed for a pad in entry #2589
-31.58 32.71 6.11 7.13
-36.48 29.59 8.27 6.98
-44.46 -1.15 0.00
-ALERT: 1 walls crossed for a pad in entry #2589
-32.71 33.84 6.11 7.13
-36.48 29.59 6.98 5.69
-44.46 -1.15 0.00
-ALERT: 1 walls crossed for a pad in entry #2589
-32.71 33.84 5.09 6.11
-36.48 36.48 6.98 5.69
-44.46 -1.15 0.00
-ALERT: 1 walls crossed for a pad in entry #2589
-33.84 34.97 5.09 6.11
-36.48 36.48 5.69 4.39
-44.46 -1.15 0.00
-ALERT: 1 walls crossed for a pad in entry #2589
-33.84 34.97 4.08 5.09
-36.48 36.48 5.69 4.39
-44.46 -1.15 0.00
-ALERT: 1 walls crossed for a pad in entry #2589
-34.97 36.10 4.08 5.09
-36.48 36.48 4.39 3.10
-44.46 -1.15 0.00
-ALERT: 1 walls crossed for a pad in entry #2589
-34.97 36.10 3.06 4.08
-36.48 36.48 4.39 3.10
-44.46 -1.15 0.00
-ALERT: 3 walls crossed for a pad in entry #2589
+32.71 31.83 9.45 8.15
+45.17 -1.11 -0.00
+ALERT: 1 walls crossed for a pad in entry #1090
+31.58 32.71 7.13 8.15
+33.60 32.71 9.45 8.15
+45.17 -1.11 -0.00
+ALERT: 1 walls crossed for a pad in entry #1090
+32.71 33.84 8.15 9.17
+32.71 31.83 8.15 6.85
+45.17 -1.11 -0.00
+ALERT: 3 walls crossed for a pad in entry #1090
+32.71 33.84 7.13 8.15
+33.60 32.71 8.15 6.85
+45.17 -1.11 -0.00
+ALERT: 3 walls crossed for a pad in entry #1336
 36.10 37.22 3.06 4.08
-36.48 36.48 3.10 1.81
-44.46 -1.15 0.00
-ALERT: 3 walls crossed for a pad in entry #2589
-36.10 37.22 1.02 2.04
-36.48 36.48 3.10 1.81
-44.46 -1.15 0.00
-ALERT: 1 walls crossed for a pad in entry #2589
-37.22 38.35 1.02 2.04
-36.48 36.48 1.81 0.52
-44.46 -1.15 0.00
+37.21 36.31 4.34 3.06
+45.37 -1.14 0.00
+ALERT: 1 walls crossed for a pad in entry #1336
+37.22 38.35 3.06 4.08
+37.21 36.31 3.06 1.78
+45.37 -1.14 0.00
+ALERT: 1 walls crossed for a pad in entry #1336
+36.10 37.22 2.04 3.06
+38.10 37.21 4.34 3.06
+45.37 -1.14 0.00
+ALERT: 1 walls crossed for a pad in entry #1336
+37.22 38.35 2.04 3.06
+38.10 37.21 3.06 1.78
+45.37 -1.14 0.00
+2000/13277
 3000/13277
 4000/13277
-ALERT: 1 walls crossed for a pad in entry #4977
-30.46 31.58 8.15 9.17
-31.58 30.71 9.46 8.15
-42.98 -1.04 -0.00
-ALERT: 1 walls crossed for a pad in entry #4977
-31.58 32.71 8.15 9.17
-31.58 30.71 8.15 6.84
-42.98 -1.04 -0.00
-ALERT: 1 walls crossed for a pad in entry #4977
-30.46 31.58 7.13 8.15
-32.46 31.58 9.46 8.15
-42.98 -1.04 -0.00
-ALERT: 3 walls crossed for a pad in entry #4977
-31.58 32.71 7.13 8.15
-32.46 31.58 8.15 6.84
-42.98 -1.04 -0.00
-5000/13277
-6000/13277
-ALERT: 1 walls crossed for a pad in entry #6283
-29.33 30.46 13.25 14.27
-30.46 29.58 14.56 13.25
-47.22 -1.07 -0.00
-ALERT: 1 walls crossed for a pad in entry #6283
-30.46 31.58 13.25 14.27
-30.46 29.58 13.25 11.93
-47.22 -1.07 -0.00
-ALERT: 1 walls crossed for a pad in entry #6283
-29.33 30.46 12.23 13.25
-31.33 30.46 14.56 13.25
-47.22 -1.07 -0.00
-ALERT: 3 walls crossed for a pad in entry #6283
-30.46 31.58 12.23 13.25
-31.33 30.46 13.25 11.93
-47.22 -1.07 -0.00
-ALERT: 1 walls crossed for a pad in entry #6387
-29.33 30.46 10.19 11.21
-30.46 29.56 11.48 10.19
-44.81 -1.13 -0.00
-ALERT: 1 walls crossed for a pad in entry #6387
-30.46 31.58 10.19 11.21
-30.46 29.56 10.19 8.90
-44.81 -1.13 -0.00
-ALERT: 1 walls crossed for a pad in entry #6387
-29.33 30.46 9.17 10.19
-31.35 30.46 11.48 10.19
-44.81 -1.13 -0.00
-ALERT: 3 walls crossed for a pad in entry #6387
-30.46 31.58 9.17 10.19
-31.35 30.46 10.19 8.90
-44.81 -1.13 -0.00
-7000/13277
-ALERT: 3 walls crossed for a pad in entry #7589
-13.54 14.66 26.49 27.51
-14.59 14.07 27.90 26.62
-43.26 -1.13 -0.00
-ALERT: 1 walls crossed for a pad in entry #7589
-13.54 14.66 25.48 26.49
-15.61 14.59 27.90 26.62
-43.26 -1.13 -0.00
-ALERT: 1 walls crossed for a pad in entry #7589
-14.66 15.79 26.49 27.51
-14.59 14.07 26.62 25.34
-43.26 -1.13 -0.00
-ALERT: 1 walls crossed for a pad in entry #7589
-14.66 15.79 25.48 26.49
-15.61 14.59 26.62 25.34
-43.26 -1.13 -0.00
-ALERT: 1 walls crossed for a pad in entry #7589
-23.69 24.82 15.28 16.30
-24.86 23.83 16.38 15.10
-43.26 -1.13 -0.00
-ALERT: 1 walls crossed for a pad in entry #7589
-24.82 25.94 15.28 16.30
-24.86 23.83 15.10 13.82
-43.26 -1.13 -0.00
-ALERT: 1 walls crossed for a pad in entry #7589
-23.69 24.82 14.27 15.28
-25.37 24.86 16.38 15.10
-43.26 -1.13 -0.00
-ALERT: 3 walls crossed for a pad in entry #7589
-24.82 25.94 14.27 15.28
-25.37 24.86 15.10 13.82
-43.26 -1.13 -0.00
-ALERT: 3 walls crossed for a pad in entry #7589
-31.58 32.71 6.11 7.13
-32.56 32.05 7.41 6.13
-43.26 -1.13 -0.00
-ALERT: 1 walls crossed for a pad in entry #7589
-31.58 32.71 5.09 6.11
-33.59 32.56 7.41 6.13
-43.26 -1.13 -0.00
-ALERT: 1 walls crossed for a pad in entry #7589
-32.71 33.84 6.11 7.13
-32.56 32.05 6.13 4.85
-43.26 -1.13 -0.00
-ALERT: 1 walls crossed for a pad in entry #7589
-32.71 33.84 5.09 6.11
-33.59 32.56 6.13 4.85
-43.26 -1.13 -0.00
-8000/13277
-9000/13277
-ALERT: 3 walls crossed for a pad in entry #9700
-31.58 32.71 8.15 9.17
-32.71 31.82 9.44 8.15
-45.51 -1.14 -0.00
-ALERT: 1 walls crossed for a pad in entry #9700
-32.71 33.84 8.15 9.17
-32.71 31.82 8.15 6.86
-45.51 -1.14 -0.00
-ALERT: 1 walls crossed for a pad in entry #9700
-31.58 32.71 7.13 8.15
-33.60 32.71 9.44 8.15
-45.51 -1.14 -0.00
-ALERT: 1 walls crossed for a pad in entry #9700
-32.71 33.84 7.13 8.15
-33.60 32.71 8.15 6.86
-45.51 -1.14 -0.00
-10000/13277
-11000/13277
-ALERT: 3 walls crossed for a pad in entry #11719
-29.33 30.46 11.21 12.23
-30.46 29.57 12.50 11.21
-45.80 -1.12 -0.00
-ALERT: 1 walls crossed for a pad in entry #11719
-30.46 31.58 11.21 12.23
-30.46 29.57 11.21 9.91
-45.80 -1.12 -0.00
-ALERT: 1 walls crossed for a pad in entry #11719
-29.33 30.46 10.19 11.21
-31.34 30.46 12.50 11.21
-45.80 -1.12 -0.00
-ALERT: 1 walls crossed for a pad in entry #11719
-30.46 31.58 10.19 11.21
-31.34 30.46 11.21 9.91
-45.80 -1.12 -0.00
-12000/13277
-ALERT: 3 walls crossed for a pad in entry #12141
-24.82 25.94 17.32 18.34
-25.94 25.05 18.60 17.32
-46.27 -1.09 -0.00
-ALERT: 1 walls crossed for a pad in entry #12141
-24.82 25.94 16.30 17.32
-26.84 25.94 18.60 17.32
-46.27 -1.09 -0.00
-ALERT: 1 walls crossed for a pad in entry #12141
-25.94 27.07 17.32 18.34
-25.94 25.05 17.32 16.04
-46.27 -1.09 -0.00
-ALERT: 1 walls crossed for a pad in entry #12141
-25.94 27.07 16.30 17.32
-26.84 25.94 17.32 16.04
-46.27 -1.09 -0.00
-ALERT: 3 walls crossed for a pad in entry #12515
-20.30 21.43 22.42 23.44
-21.43 20.54 23.71 22.42
-46.88 -1.14 -0.00
-ALERT: 1 walls crossed for a pad in entry #12515
-20.30 21.43 21.40 22.42
-22.32 21.43 23.71 22.42
-46.88 -1.14 -0.00
-ALERT: 1 walls crossed for a pad in entry #12515
-21.43 22.56 22.42 23.44
-21.43 20.54 22.42 21.12
-46.88 -1.14 -0.00
-ALERT: 1 walls crossed for a pad in entry #12515
-21.43 22.56 21.40 22.42
-22.32 21.43 22.42 21.12
-46.88 -1.14 -0.00
-ALERT: 3 walls crossed for a pad in entry #12524
-23.69 24.82 15.28 16.30
-24.82 23.92 16.57 15.29
-43.32 -1.12 -0.00
-ALERT: 1 walls crossed for a pad in entry #12524
-24.82 25.94 15.28 16.30
-24.82 23.92 15.29 14.00
-43.32 -1.12 -0.00
-ALERT: 1 walls crossed for a pad in entry #12524
-23.69 24.82 14.27 15.28
-25.71 24.82 16.57 15.29
-43.32 -1.12 -0.00
-ALERT: 1 walls crossed for a pad in entry #12524
-24.82 25.94 14.27 15.28
-25.71 24.82 15.29 14.00
-43.32 -1.12 -0.00
-ALERT: 1 walls crossed for a pad in entry #12714
-31.58 32.71 8.15 9.17
-32.71 31.83 9.46 8.15
-44.72 -1.08 -0.00
-ALERT: 1 walls crossed for a pad in entry #12714
-32.71 33.84 8.15 9.17
-32.71 31.83 8.15 6.84
-44.72 -1.08 -0.00
-ALERT: 1 walls crossed for a pad in entry #12714
-31.58 32.71 7.13 8.15
-33.59 32.71 9.46 8.15
-44.72 -1.08 -0.00
-ALERT: 3 walls crossed for a pad in entry #12714
-32.71 33.84 7.13 8.15
-33.59 32.71 8.15 6.84
-44.72 -1.08 -0.00
-13000/13277
-ALERT: 3 walls crossed for a pad in entry #13174
+ALERT: 3 walls crossed for a pad in entry #4200
 28.20 29.33 12.23 13.25
-29.33 28.44 13.52 12.23
-45.91 -1.15 0.00
-ALERT: 1 walls crossed for a pad in entry #13174
-28.20 29.33 11.21 12.23
-30.22 29.33 13.52 12.23
-45.91 -1.15 0.00
-ALERT: 1 walls crossed for a pad in entry #13174
+29.32 28.43 13.52 12.23
+45.67 -1.14 0.00
+ALERT: 1 walls crossed for a pad in entry #4200
 29.33 30.46 12.23 13.25
-29.33 28.44 12.23 10.93
-45.91 -1.15 0.00
-ALERT: 1 walls crossed for a pad in entry #13174
+29.32 28.43 12.23 10.95
+45.67 -1.14 0.00
+ALERT: 1 walls crossed for a pad in entry #4200
+28.20 29.33 11.21 12.23
+30.24 29.32 13.52 12.23
+45.67 -1.14 0.00
+ALERT: 1 walls crossed for a pad in entry #4200
 29.33 30.46 11.21 12.23
-30.22 29.33 12.23 10.93
-45.91 -1.15 0.00
+30.24 29.32 12.23 10.95
+45.67 -1.14 0.00
+5000/13277
+ALERT: 3 walls crossed for a pad in entry #5016
+23.69 24.82 16.30 17.32
+24.78 23.86 17.60 16.32
+44.52 -1.14 0.00
+ALERT: 1 walls crossed for a pad in entry #5016
+23.69 24.82 15.28 16.30
+25.70 24.78 17.60 16.32
+44.52 -1.14 0.00
+ALERT: 1 walls crossed for a pad in entry #5016
+24.82 25.94 16.30 17.32
+24.78 23.86 16.32 15.04
+44.52 -1.14 0.00
+ALERT: 1 walls crossed for a pad in entry #5016
+24.82 25.94 15.28 16.30
+25.70 24.78 16.32 15.04
+44.52 -1.14 0.00
+ALERT: 1 walls crossed for a pad in entry #5016
+28.20 29.33 11.21 12.23
+29.38 28.46 12.48 11.19
+44.52 -1.14 0.00
+ALERT: 1 walls crossed for a pad in entry #5016
+29.33 30.46 11.21 12.23
+29.38 28.46 11.19 9.91
+44.52 -1.14 0.00
+ALERT: 1 walls crossed for a pad in entry #5016
+28.20 29.33 10.19 11.21
+30.30 29.38 12.48 11.19
+44.52 -1.14 0.00
+ALERT: 3 walls crossed for a pad in entry #5016
+29.33 30.46 10.19 11.21
+30.30 29.38 11.19 9.91
+44.52 -1.14 0.00
+ALERT: 3 walls crossed for a pad in entry #5616
+21.43 22.56 18.34 19.36
+22.56 21.58 19.51 18.34
+41.08 -0.98 -0.00
+ALERT: 1 walls crossed for a pad in entry #5616
+22.56 23.69 18.34 19.36
+22.56 21.58 18.34 17.17
+41.08 -0.98 -0.00
+ALERT: 1 walls crossed for a pad in entry #5616
+21.43 22.56 17.32 18.34
+23.54 22.56 19.51 18.34
+41.08 -0.98 -0.00
+ALERT: 1 walls crossed for a pad in entry #5616
+22.56 23.69 17.32 18.34
+23.54 22.56 18.34 17.17
+41.08 -0.98 -0.00
+6000/13277
+ALERT: 1 walls crossed for a pad in entry #6497
+30.46 31.58 9.17 10.19
+31.59 30.69 10.47 9.17
+45.43 -1.15 -0.00
+ALERT: 1 walls crossed for a pad in entry #6497
+31.58 32.71 9.17 10.19
+31.59 30.69 9.17 7.88
+45.43 -1.15 -0.00
+ALERT: 1 walls crossed for a pad in entry #6497
+30.46 31.58 8.15 9.17
+32.47 31.59 10.47 9.17
+45.43 -1.15 -0.00
+ALERT: 3 walls crossed for a pad in entry #6497
+31.58 32.71 8.15 9.17
+32.47 31.59 9.17 7.88
+45.43 -1.15 -0.00
+ALERT: 1 walls crossed for a pad in entry #6846
+36.10 37.22 3.06 4.08
+36.10 35.21 3.06 1.77
+44.35 -1.14 -0.00
+ALERT: 1 walls crossed for a pad in entry #6846
+34.97 36.10 2.04 3.06
+36.99 36.10 4.35 3.06
+44.35 -1.14 -0.00
+ALERT: 1 walls crossed for a pad in entry #6846
+36.10 37.22 2.04 3.06
+36.99 36.10 3.06 1.77
+44.35 -1.14 -0.00
+7000/13277
+ALERT: 3 walls crossed for a pad in entry #7486
+33.84 34.97 5.09 6.11
+34.97 34.08 6.39 5.10
+44.49 -1.11 -0.00
+ALERT: 1 walls crossed for a pad in entry #7486
+33.84 34.97 4.08 5.09
+35.86 34.97 6.39 5.10
+44.49 -1.11 -0.00
+ALERT: 1 walls crossed for a pad in entry #7486
+34.97 36.10 5.09 6.11
+34.97 34.08 5.10 3.80
+44.49 -1.11 -0.00
+ALERT: 1 walls crossed for a pad in entry #7486
+34.97 36.10 4.08 5.09
+35.86 34.97 5.10 3.80
+44.49 -1.11 -0.00
+ALERT: 3 walls crossed for a pad in entry #7568
+27.07 28.20 14.27 15.28
+28.20 27.28 15.52 14.27
+44.90 -1.06 -0.00
+ALERT: 1 walls crossed for a pad in entry #7568
+28.20 29.33 14.27 15.28
+28.20 27.28 14.27 13.01
+44.90 -1.06 -0.00
+ALERT: 1 walls crossed for a pad in entry #7568
+27.07 28.20 13.25 14.27
+29.12 28.20 15.52 14.27
+44.90 -1.06 -0.00
+8000/13277
+ALERT: 1 walls crossed for a pad in entry #8070
+33.84 34.97 7.13 8.15
+33.84 32.96 7.13 5.83
+45.08 -1.09 -0.00
+ALERT: 3 walls crossed for a pad in entry #8070
+33.84 34.97 6.11 7.13
+34.72 33.84 7.13 5.83
+45.08 -1.09 -0.00
+ALERT: 3 walls crossed for a pad in entry #8561
+13.54 14.66 30.57 31.59
+14.44 13.54 31.59 30.31
+46.72 -1.11 -0.00
+ALERT: 1 walls crossed for a pad in entry #8727
+37.22 38.35 1.02 2.04
+38.35 37.44 2.27 1.02
+43.53 -1.10 -0.00
+9000/13277
+ALERT: 3 walls crossed for a pad in entry #9939
+37.22 38.35 3.06 4.08
+38.35 37.47 4.35 3.06
+46.98 -1.15 -0.00
+ALERT: 1 walls crossed for a pad in entry #9939
+37.22 38.35 2.04 3.06
+39.24 38.35 4.35 3.06
+46.98 -1.15 -0.00
+ALERT: 1 walls crossed for a pad in entry #9939
+38.35 39.48 3.06 4.08
+38.35 37.47 3.06 1.77
+46.98 -1.15 -0.00
+ALERT: 1 walls crossed for a pad in entry #9939
+38.35 39.48 2.04 3.06
+39.24 38.35 3.06 1.77
+46.98 -1.15 -0.00
+10000/13277
+ALERT: 3 walls crossed for a pad in entry #10148
+21.43 22.56 19.36 20.38
+22.56 21.67 20.65 19.36
+44.98 -1.13 -0.00
+ALERT: 1 walls crossed for a pad in entry #10148
+22.56 23.69 19.36 20.38
+22.56 21.67 19.36 18.07
+44.98 -1.13 -0.00
+ALERT: 1 walls crossed for a pad in entry #10148
+21.43 22.56 18.34 19.36
+23.45 22.56 20.65 19.36
+44.98 -1.13 -0.00
+ALERT: 1 walls crossed for a pad in entry #10148
+22.56 23.69 18.34 19.36
+23.45 22.56 19.36 18.07
+44.98 -1.13 -0.00
+ALERT: 3 walls crossed for a pad in entry #10684
+24.82 25.94 17.32 18.34
+25.94 25.05 18.62 17.32
+46.64 -1.11 -0.00
+ALERT: 1 walls crossed for a pad in entry #10684
+25.94 27.07 17.32 18.34
+25.94 25.05 17.32 16.03
+46.64 -1.11 -0.00
+ALERT: 1 walls crossed for a pad in entry #10684
+24.82 25.94 16.30 17.32
+26.83 25.94 18.62 17.32
+46.64 -1.11 -0.00
+ALERT: 1 walls crossed for a pad in entry #10684
+25.94 27.07 16.30 17.32
+26.83 25.94 17.32 16.03
+46.64 -1.11 -0.00
+11000/13277
+ALERT: 1 walls crossed for a pad in entry #11185
+18.05 19.18 25.48 26.49
+19.18 18.28 26.76 25.47
+47.18 -1.12 -0.00
+ALERT: 1 walls crossed for a pad in entry #11185
+18.05 19.18 24.46 25.48
+20.07 19.18 26.76 25.47
+47.18 -1.12 -0.00
+ALERT: 1 walls crossed for a pad in entry #11185
+19.18 20.30 25.48 26.49
+19.18 18.28 25.47 24.19
+47.18 -1.12 -0.00
+ALERT: 3 walls crossed for a pad in entry #11185
+19.18 20.30 24.46 25.48
+20.07 19.18 25.47 24.19
+47.18 -1.12 -0.00
+ALERT: 3 walls crossed for a pad in entry #11784
+27.07 28.20 14.27 15.28
+28.20 27.32 15.57 14.27
+46.84 -1.15 -0.00
+ALERT: 1 walls crossed for a pad in entry #11784
+27.07 28.20 13.25 14.27
+29.08 28.20 15.57 14.27
+46.84 -1.15 -0.00
+ALERT: 1 walls crossed for a pad in entry #11784
+28.20 29.33 14.27 15.28
+28.20 27.32 14.27 12.96
+46.84 -1.15 -0.00
+ALERT: 1 walls crossed for a pad in entry #11784
+28.20 29.33 13.25 14.27
+29.08 28.20 14.27 12.96
+46.84 -1.15 -0.00
+12000/13277
+ALERT: 1 walls crossed for a pad in entry #12104
+15.79 16.92 25.48 26.49
+16.92 16.01 26.74 25.47
+44.24 -1.09 -0.00
+ALERT: 1 walls crossed for a pad in entry #12104
+16.92 18.05 25.48 26.49
+16.92 16.01 25.47 24.21
+44.24 -1.09 -0.00
+ALERT: 1 walls crossed for a pad in entry #12104
+15.79 16.92 24.46 25.48
+17.83 16.92 26.74 25.47
+44.24 -1.09 -0.00
+ALERT: 3 walls crossed for a pad in entry #12104
+16.92 18.05 24.46 25.48
+17.83 16.92 25.47 24.21
+44.24 -1.09 -0.00
+ALERT: 3 walls crossed for a pad in entry #12557
+32.71 33.84 5.09 6.11
+33.84 32.95 6.38 5.10
+42.81 -1.09 -0.00
+ALERT: 1 walls crossed for a pad in entry #12557
+33.84 34.97 5.09 6.11
+33.84 32.95 5.10 3.80
+42.81 -1.09 -0.00
+ALERT: 1 walls crossed for a pad in entry #12557
+32.71 33.84 4.08 5.09
+34.73 33.84 6.38 5.10
+42.81 -1.09 -0.00
+ALERT: 1 walls crossed for a pad in entry #12557
+33.84 34.97 4.08 5.09
+34.73 33.84 5.10 3.80
+42.81 -1.09 -0.00
+13000/13277
 13276/13277
-13277 real events
 
 Selection Statistics 
  #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
@@ -506,5 +376,5 @@ Selection Statistics
     6  Stage5    12703    11363 (  -10.55)  (  -14.42)     12703    11363 (  -10.55)  (  -14.42)    651228   593811 (   -8.82)  (  -15.17)   1265991  1146057 (   -9.47)  (  -17.82) 
   Summary Sel    13277    11363             (  -14.42)     13277    11363             (  -14.42)    700021   593811             (  -15.17)   1394604  1146057             (  -17.82) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_phi/DESY21_phi_z460/DESY21_phi45_diag_z460/2_DESY21_phi45_diag_z460_Checks_zcalc_G2_WF4_RCm2%.root
-dEdx: OUT_Tristan/DESY21_phi/DESY21_phi_z460/DESY21_phi45_diag_z460/3_DESY21_phi45_diag_z460_dEdx_zcalc_G2_WF4_RCm2%.root
+Checks: OUT_Tristan/DESY21_phi/DESY21_phi_z460/DESY21_phi45_diag_z460/2_DESY21_phi45_diag_z460_Checks_zcalc_G2_WF2.root
+dEdx: OUT_Tristan/DESY21_phi/DESY21_phi_z460/DESY21_phi45_diag_z460/3_DESY21_phi45_diag_z460_dEdx_zcalc_G2_WF2.root

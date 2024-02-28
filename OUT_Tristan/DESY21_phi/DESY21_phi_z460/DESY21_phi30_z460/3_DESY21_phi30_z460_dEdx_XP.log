@@ -1,15 +1,17 @@
 Tag           : DESY21_phi30_z460
-Comment       : _zcalc_G2_WF4_RCm2%
-FileName     : ../Data_DESY21/Phi_scan_z460/phi_200_30_z460_ym60_iter0.root
+Comment       : _zcalc_G2
+FileName      : ../Data_DESY21_dev_v9/Phi_scan_z460/phi_200_30_z460_ym60_iter9.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
 Data_to_Use   : 0
 OUTDirName    : OUT_Tristan/DESY21_phi/DESY21_phi_z460/DESY21_phi30_z460/
 
-Gain & RC maps: loaded
-Average Gain in ERAM01 = 1947.77
-ERAM01: RC   hole in  iX = 10 | iY = 16 | value reset at 129.29
-ERAM01: Gain hole in  iX = 10 | iY = 16 | value reset at 1889.24
+ERAM#01: Gain hole in (iX,iY) = (10,16) | value reset at 1889.24
+ERAM#01:   RC hole in (iX,iY) = (10,16) | value reset at 129.29
+Number of pads in 01 = 1152.00
+Average gain in   01 = 1947.72
+
+Average gain in bottom HATPC: 1947.00
 
 -------------->Predefined selection T_DESY21_Event
 Number of entries :8162
@@ -59,7 +61,6 @@ Processing events:
 7000/8162
 8000/8162
 8161/8162
-8162 real events
 
 Selection Statistics 
  #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
@@ -72,5 +73,5 @@ Selection Statistics
     6  Stage5     7831     2457 (  -68.62)  (  -69.90)      7831     2457 (  -68.62)  (  -69.90)    252183    83538 (  -66.87)  (  -69.32)    821745   268871 (  -67.28)  (  -69.95) 
   Summary Sel     8162     2457             (  -69.90)      8162     2457             (  -69.90)    272294    83538             (  -69.32)    894856   268871             (  -69.95) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_phi/DESY21_phi_z460/DESY21_phi30_z460/2_DESY21_phi30_z460_Checks_zcalc_G2_WF4_RCm2%.root
-dEdx: OUT_Tristan/DESY21_phi/DESY21_phi_z460/DESY21_phi30_z460/3_DESY21_phi30_z460_dEdx_zcalc_G2_WF4_RCm2%.root
+Checks: OUT_Tristan/DESY21_phi/DESY21_phi_z460/DESY21_phi30_z460/2_DESY21_phi30_z460_Checks_zcalc_G2.root
+dEdx: OUT_Tristan/DESY21_phi/DESY21_phi_z460/DESY21_phi30_z460/3_DESY21_phi30_z460_dEdx_zcalc_G2.root

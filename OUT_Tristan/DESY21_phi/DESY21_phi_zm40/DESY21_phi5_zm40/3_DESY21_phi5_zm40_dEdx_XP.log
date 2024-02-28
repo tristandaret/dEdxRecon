@@ -1,22 +1,17 @@
 Tag           : DESY21_phi5_zm40
-Comment       : _zcalc_PRF_4IP_Gain2_WF4
-EventFile     : ../Data_DESY21/Phi_scan_zm40/phi_200_5_zm40_ym60_iter0.root
+Comment       : _zcalc_G2
+FileName      : ../Data_DESY21_dev_v9/Phi_scan_zm40/phi_200_5_zm40_ym60_iter9.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
 Data_to_Use   : 0
 OUTDirName    : OUT_Tristan/DESY21_phi/DESY21_phi_zm40/DESY21_phi5_zm40/
 
+ERAM#01: Gain hole in (iX,iY) = (10,16) | value reset at 1889.24
+ERAM#01:   RC hole in (iX,iY) = (10,16) | value reset at 129.29
+Number of pads in 01 = 1152.00
+Average gain in   01 = 1947.72
 
-ReadRCmap::ReadRCmap m_FileName = GainRCMaps/RCfiles/ERAM01_RCdata_01.root
-
-ReadRCmap::ReadRCmap  No Data for iX=10 and  iY=16 in GainRCMaps/RCfiles/ERAM01_RCdata_01.root
-RC map: loaded
-
-ReadGainmap::ReadGainmap m_FileName = GainRCMaps/Gainfiles/ERAM01_Gaindata_01.root
-
-ReadGainmap::ReadGainmap  No Data for iX=10 and  iY=16 in GainRCMaps/Gainfiles/ERAM01_Gaindata_01.root
-Gain map: loaded
-Average Gain in ERAM01 = 1947.77
+Average gain in bottom HATPC: 1947.00
 
 -------------->Predefined selection T_DESY21_Event
 Number of entries :8849
@@ -52,31 +47,43 @@ zdrift        = 50 mm
 PT            = 200 ns
 TB            = 40 ns/time bin
 PT/TB         = 5 time bins
-Track fitting : PRF
 z method      : zcalc
 cut length    = 2 mm
 
 Processing events:
 0/8849
-RC hole in entry   45 | iX = 10 | iY = 16 |  RC  value reset at 129
-Gain hole in entry 45 | iX = 10 | iY = 16 | Gain value reset at 1889
-500/8849
+ALERT: 1 walls crossed for a pad in entry #995
+35 36 16 17
+46 36 17 17
+21 -0 -0
+ALERT: 1 walls crossed for a pad in entry #995
+35 36 17 18
+36 26 17 17
+21 -0 -0
+ALERT: 1 walls crossed for a pad in entry #995
+36 37 17 18
+36 26 17 17
+21 -0 -0
+ALERT: 3 walls crossed for a pad in entry #995
+36 37 16 17
+46 36 17 17
+21 -0 -0
 1000/8849
-1500/8849
 2000/8849
-2500/8849
 3000/8849
-3500/8849
+ALERT: 1 walls crossed for a pad in entry #3482
+3 5 20 21
+22 5 21 21
+22 -0 -0
+ALERT: 3 walls crossed for a pad in entry #3482
+5 6 20 21
+22 5 21 21
+22 -0 -0
 4000/8849
-4500/8849
 5000/8849
-5500/8849
 6000/8849
-6500/8849
 7000/8849
-7500/8849
 8000/8849
-8500/8849
 8848/8849
 
 Selection Statistics 
@@ -90,5 +97,5 @@ Selection Statistics
     6  Stage5     8114     3462 (  -57.33)  (  -60.88)      8114     3462 (  -57.33)  (  -60.88)    265052   117708 (  -55.59)  (  -60.86)    751207   325579 (  -56.66)  (  -63.57) 
   Summary Sel     8849     3462             (  -60.88)      8849     3462             (  -60.88)    300748   117708             (  -60.86)    893780   325579             (  -63.57) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_phi/DESY21_phi_zm40/DESY21_phi5_zm40/2_DESY21_phi5_zm40_Checks_zcalc_PRF_4IP_Gain2_WF4.root
-dEdx: OUT_Tristan/DESY21_phi/DESY21_phi_zm40/DESY21_phi5_zm40/3_DESY21_phi5_zm40_dEdx_zcalc_PRF_4IP_Gain2_WF4.root
+Checks: OUT_Tristan/DESY21_phi/DESY21_phi_zm40/DESY21_phi5_zm40/2_DESY21_phi5_zm40_Checks_zcalc_G2.root
+dEdx: OUT_Tristan/DESY21_phi/DESY21_phi_zm40/DESY21_phi5_zm40/3_DESY21_phi5_zm40_dEdx_zcalc_G2.root

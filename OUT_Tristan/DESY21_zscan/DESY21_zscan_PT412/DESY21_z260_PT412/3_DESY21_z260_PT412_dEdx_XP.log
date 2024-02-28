@@ -1,15 +1,17 @@
 Tag           : DESY21_z260_PT412
-Comment       : _zcalc_G2_WF4_dpdd
-FileName     : ../Data_DESY21/zscan_PT412/z_360_275_412_02T_26_260_iter0.root
+Comment       : _zcalc_G2
+FileName      : ../Data_DESY21_dev_v9/zscan_PT412/z_360_275_412_02T_26_260_iter9.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
 Data_to_Use   : 0
 OUTDirName    : OUT_Tristan/DESY21_zscan/DESY21_zscan_PT412/DESY21_z260_PT412/
 
-Gain & RC maps: loaded
-Average Gain in ERAM01 = 1947.77
-ERAM01: RC   hole in  iX = 10 | iY = 16 | value reset at 129.29
-ERAM01: Gain hole in  iX = 10 | iY = 16 | value reset at 1889.24
+ERAM#01: Gain hole in (iX,iY) = (10,16) | value reset at 1889.24
+ERAM#01:   RC hole in (iX,iY) = (10,16) | value reset at 129.29
+Number of pads in 01 = 1152.00
+Average gain in   01 = 1947.72
+
+Average gain in bottom HATPC: 1947.00
 
 -------------->Predefined selection T_DESY21_Event
 Number of entries :13216
@@ -58,21 +60,28 @@ Processing events:
 6000/13216
 7000/13216
 8000/13216
+ALERT: 1 walls crossed for a pad in entry #8955
+28 29 7 8
+45 29 8 8
+10 -0 -0
+ALERT: 1 walls crossed for a pad in entry #8955
+28 29 8 9
+29 13 8 8
+10 -0 -0
+ALERT: 1 walls crossed for a pad in entry #8955
+29 30 8 9
+29 13 8 8
+10 -0 -0
+ALERT: 3 walls crossed for a pad in entry #8955
+29 30 7 8
+45 29 8 8
+10 -0 -0
 9000/13216
 10000/13216
-ALERT: 1 walls crossed for a pad in entry #10871
-2 3 10 11
-20 3 11 11
-11 -0 -0
-ALERT: 3 walls crossed for a pad in entry #10871
-3 5 10 11
-20 3 11 11
-11 -0 -0
 11000/13216
 12000/13216
 13000/13216
 13215/13216
-13216 real events
 
 Selection Statistics 
  #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
@@ -85,5 +94,5 @@ Selection Statistics
     6  Stage5    11875     6547 (  -44.87)  (  -50.46)     11875     6547 (  -44.87)  (  -50.46)    392891   222598 (  -43.34)  (  -50.45)   1393346   782513 (  -43.84)  (  -52.33) 
   Summary Sel    13216     6547             (  -50.46)     13216     6547             (  -50.46)    449234   222598             (  -50.45)   1641391   782513             (  -52.33) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT412/DESY21_z260_PT412/2_DESY21_z260_PT412_Checks_zcalc_G2_WF4_dpdd.root
-dEdx: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT412/DESY21_z260_PT412/3_DESY21_z260_PT412_dEdx_zcalc_G2_WF4_dpdd.root
+Checks: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT412/DESY21_z260_PT412/2_DESY21_z260_PT412_Checks_zcalc_G2.root
+dEdx: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT412/DESY21_z260_PT412/3_DESY21_z260_PT412_dEdx_zcalc_G2.root

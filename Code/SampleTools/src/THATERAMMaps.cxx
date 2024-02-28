@@ -61,7 +61,7 @@ void ERAM_map::Initialize()
     SetData(iX,iY,Data);
   }
 
-  DrawOut_ERAMmaps(this, m_ERAM_id, m_type);
+  // DrawOut_ERAMmaps(this, m_ERAM_id, m_type);
 
   FillHoles();
 }

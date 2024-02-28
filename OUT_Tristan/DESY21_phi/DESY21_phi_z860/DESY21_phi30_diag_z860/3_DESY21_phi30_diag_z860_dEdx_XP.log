@@ -1,22 +1,17 @@
 Tag           : DESY21_phi30_diag_z860
-Comment       : _zcalc_PRF_4IP_Gain2_WF4
-EventFile     : ../Data_DESY21/Phi_scan_z860/phi_200_30_z860_ym60_diag_iter0.root
+Comment       : _zcalc_G2_WF2
+FileName      : ../Data_DESY21_dev_v9/Phi_scan_z860/phi_200_30_z860_ym60_diag_iter9.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
 Data_to_Use   : 0
 OUTDirName    : OUT_Tristan/DESY21_phi/DESY21_phi_z860/DESY21_phi30_diag_z860/
 
+ERAM#01: Gain hole in (iX,iY) = (10,16) | value reset at 1889.24
+ERAM#01:   RC hole in (iX,iY) = (10,16) | value reset at 129.29
+Number of pads in 01 = 1152.00
+Average gain in   01 = 1947.72
 
-ReadRCmap::ReadRCmap m_FileName = GainRCMaps/RCfiles/ERAM01_RCdata_01.root
-
-ReadRCmap::ReadRCmap  No Data for iX=10 and  iY=16 in GainRCMaps/RCfiles/ERAM01_RCdata_01.root
-RC map: loaded
-
-ReadGainmap::ReadGainmap m_FileName = GainRCMaps/Gainfiles/ERAM01_Gaindata_01.root
-
-ReadGainmap::ReadGainmap  No Data for iX=10 and  iY=16 in GainRCMaps/Gainfiles/ERAM01_Gaindata_01.root
-Gain map: loaded
-Average Gain in ERAM01 = 1947.77
+Average gain in bottom HATPC: 1947.00
 
 -------------->Predefined selection T_DESY21_Event
 Number of entries :10295
@@ -52,43 +47,70 @@ zdrift        = 950 mm
 PT            = 200 ns
 TB            = 40 ns/time bin
 PT/TB         = 5 time bins
-Track fitting : PRF
 z method      : zcalc
 cut length    = 2 mm
 
-../Data_DESY21/Phi_scan_zm40/phi_200_40_zm40_ym60_diag_iter0_WFmax_correction.root
-WF correction parameters: 283.98 | -10.30 | 2.25 | 0.81 | -0.05
+correction function: ../Data_DESY21_dev_v9/Phi_scan_zm40/phi_200_40_zm40_ym60_diag_iter9_WFmax_correction_v9i9.root
+WF correction parameters: 407.23 | -58.10 | 19.88 | -1.30 | 0.03
 Processing events:
 0/10295
-RC hole in entry   461 | iX = 10 | iY = 16 |  RC  value reset at 129.29
-Gain hole in entry 461 | iX = 10 | iY = 16 | Gain value reset at 1889.24
-500/10295
 1000/10295
-1500/10295
 2000/10295
-2500/10295
 3000/10295
-3500/10295
+ALERT: 1 walls crossed for a pad in entry #3957
+6.77 7.90 28.53 29.55
+7.90 6.34 29.26 28.52
+33.70 -0.66 0.00
+ALERT: 1 walls crossed for a pad in entry #3957
+6.77 7.90 27.51 28.53
+9.42 7.90 29.26 28.52
+33.70 -0.66 0.00
+ALERT: 1 walls crossed for a pad in entry #3957
+7.90 9.02 28.53 29.55
+7.90 6.34 28.52 27.79
+33.70 -0.66 0.00
+ALERT: 3 walls crossed for a pad in entry #3957
+7.90 9.02 27.51 28.53
+9.42 7.90 28.52 27.79
+33.70 -0.66 0.00
 4000/10295
-4500/10295
 5000/10295
-5500/10295
 6000/10295
-6500/10295
 7000/10295
-7500/10295
 8000/10295
-ALERT: 3 walls crossed for a pad in entry #8405
-4.51 5.64 28.53 29.55
-5.64 4.00 29.23 28.53
-32.03 -0.62 -0.00
-ALERT: 1 walls crossed for a pad in entry #8405
-5.64 6.77 28.53 29.55
-5.64 4.00 28.53 27.83
-32.03 -0.62 -0.00
-8500/10295
+ALERT: 3 walls crossed for a pad in entry #8447
+25.94 27.07 15.28 16.30
+27.07 25.54 16.03 15.29
+33.00 -0.64 -0.00
+ALERT: 1 walls crossed for a pad in entry #8447
+27.07 28.20 15.28 16.30
+27.07 25.54 15.29 14.54
+33.00 -0.64 -0.00
+ALERT: 1 walls crossed for a pad in entry #8447
+25.94 27.07 14.27 15.28
+28.61 27.07 16.03 15.29
+33.00 -0.64 -0.00
+ALERT: 1 walls crossed for a pad in entry #8447
+27.07 28.20 14.27 15.28
+28.61 27.07 15.29 14.54
+33.00 -0.64 -0.00
 9000/10295
-9500/10295
+ALERT: 3 walls crossed for a pad in entry #9881
+23.69 24.82 16.30 17.32
+24.82 23.28 17.05 16.30
+32.66 -0.65 -0.00
+ALERT: 1 walls crossed for a pad in entry #9881
+24.82 25.94 16.30 17.32
+24.82 23.28 16.30 15.55
+32.66 -0.65 -0.00
+ALERT: 1 walls crossed for a pad in entry #9881
+23.69 24.82 15.28 16.30
+26.35 24.82 17.05 16.30
+32.66 -0.65 -0.00
+ALERT: 1 walls crossed for a pad in entry #9881
+24.82 25.94 15.28 16.30
+26.35 24.82 16.30 15.55
+32.66 -0.65 -0.00
 10000/10295
 10294/10295
 
@@ -103,5 +125,5 @@ Selection Statistics
     6  Stage5     9989     9294 (   -6.96)  (   -9.72)      9989     9294 (   -6.96)  (   -9.72)    534754   505844 (   -5.41)  (  -10.65)   1075328  1011983 (   -5.89)  (  -12.77) 
   Summary Sel    10295     9294             (   -9.72)     10295     9294             (   -9.72)    566128   505844             (  -10.65)   1160128  1011983             (  -12.77) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_phi/DESY21_phi_z860/DESY21_phi30_diag_z860/2_DESY21_phi30_diag_z860_Checks_zcalc_PRF_4IP_Gain2_WF4.root
-dEdx: OUT_Tristan/DESY21_phi/DESY21_phi_z860/DESY21_phi30_diag_z860/3_DESY21_phi30_diag_z860_dEdx_zcalc_PRF_4IP_Gain2_WF4.root
+Checks: OUT_Tristan/DESY21_phi/DESY21_phi_z860/DESY21_phi30_diag_z860/2_DESY21_phi30_diag_z860_Checks_zcalc_G2_WF2.root
+dEdx: OUT_Tristan/DESY21_phi/DESY21_phi_z860/DESY21_phi30_diag_z860/3_DESY21_phi30_diag_z860_dEdx_zcalc_G2_WF2.root

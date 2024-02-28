@@ -1,30 +1,23 @@
 Tag           : DESY21_theta20
-Comment       : _zcalc_G2_WF4_thetacorr
-FileName     : ../Data_DESY21/Theta_scan/theta_20_02T_z360_y80_iter0.root
-SelectionSet  : T_DESY21_Event
+Comment       : _zcalc_G2
+FileName      : ../Data_DESY21_dev_v9/Theta_scan/theta_20_02T_z460_ym60_iter9.root
+SelectionSet  : T_DESY21theta_Event
 NbrOfMod      : 0
 Data_to_Use   : 0
-OUTDirName    : OUT_Tristan/DESY21_theta/DESY21_theta20/
+OUTDirName    : OUT_Tristan/DESY21_theta460/DESY21_theta20/
 
-Gain & RC maps: loaded
-Average Gain in ERAM01 = 1947.77
-ERAM01: RC   hole in  iX = 10 | iY = 16 | value reset at 129.29
-ERAM01: Gain hole in  iX = 10 | iY = 16 | value reset at 1889.24
+ERAM#01: Gain hole in (iX,iY) = (10,16) | value reset at 1889.24
+ERAM#01:   RC hole in (iX,iY) = (10,16) | value reset at 129.29
+Number of pads in 01 = 1152.00
+Average gain in   01 = 1947.72
 
--------------->Predefined selection T_DESY21_Event
-Number of entries :9290
-TLow = 128 | THigh = 171
+Average gain in bottom HATPC: 1947.00
+
+-------------->Predefined selection T_DESY21theta_Event
+Number of entries :13292
 
 -------------->List of selections
 Apply selection  1 -> Remove clusters in first and last columns 
-
-Apply selection 11 -> Remove clusters out of time (Event Based) 
-                      |TLeading -TLeadingMeanOverEvent| <= m_Cut_Stage11_EventBased (=   200)
-
-Apply selection 120 -> Remove clusters out of time  
-                      m_Cut_Stage120_TLow <= TLeading <= m_Cut_Stage120_THigh 
-                      m_Cut_Stage120_TLow  =    0
-                      m_Cut_Stage120_THigh =  510
 
 Apply selection 15 -> Remove Events with an average pad multiplicity too high or too low 
                       Pad Multiplicity >  m_Cut_StageT15_APM_Low  (=  2.0)
@@ -49,29 +42,30 @@ z method      : zcalc
 cut length    = 2 mm
 
 Processing events:
-0/9290
-1000/9290
-2000/9290
-3000/9290
-4000/9290
-5000/9290
-6000/9290
-7000/9290
-8000/9290
-9000/9290
-9289/9290
-9290 real events
+0/13292
+1000/13292
+2000/13292
+3000/13292
+4000/13292
+5000/13292
+6000/13292
+7000/13292
+8000/13292
+9000/13292
+10000/13292
+11000/13292
+12000/13292
+13000/13292
+13291/13292
 
 Selection Statistics 
  #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
-    0  Stage1     9290     9290 (    0.00)  (    0.00)      9290     9290 (    0.00)  (    0.00)    315691   315691 (    0.00)  (    0.00)    881381   881381 (    0.00)  (    0.00) 
-    1 Stage11     9290     9290 (    0.00)  (    0.00)      9290     9290 (    0.00)  (    0.00)    315691   315691 (    0.00)  (    0.00)    881381   881381 (    0.00)  (    0.00) 
-    2Stage120     9290     9290 (    0.00)  (    0.00)      9290     9290 (    0.00)  (    0.00)    315691   315691 (    0.00)  (    0.00)    881381   881381 (    0.00)  (    0.00) 
-    3StageT15     9290     8752 (   -5.79)  (   -5.79)      9290     8752 (   -5.79)  (   -5.79)    315691   297477 (   -5.77)  (   -5.77)    881381   814700 (   -7.57)  (   -7.57) 
-    4 Stage10     8752     8752 (    0.00)  (   -5.79)      8752     8752 (    0.00)  (   -5.79)    297477   296609 (   -0.29)  (   -6.04)    814700   809177 (   -0.68)  (   -8.19) 
-    5 Stage14     8752     8752 (    0.00)  (   -5.79)      8752     8752 (    0.00)  (   -5.79)    296609   291202 (   -1.82)  (   -7.76)    809177   787879 (   -2.63)  (  -10.61) 
-    6  Stage5     8752     4952 (  -43.42)  (  -46.70)      8752     4952 (  -43.42)  (  -46.70)    291202   168368 (  -42.18)  (  -46.67)    787879   445034 (  -43.51)  (  -49.51) 
-  Summary Sel     9290     4952             (  -46.70)      9290     4952             (  -46.70)    315691   168368             (  -46.67)    881381   445034             (  -49.51) 
+    0  Stage1    13292    13292 (    0.00)  (    0.00)     13292    13292 (    0.00)  (    0.00)    451852   451852 (    0.00)  (    0.00)   1374968  1374968 (    0.00)  (    0.00) 
+    1StageT15    13292    12585 (   -5.32)  (   -5.32)     13292    12585 (   -5.32)  (   -5.32)    451852   427835 (   -5.32)  (   -5.32)   1374968  1272789 (   -7.43)  (   -7.43) 
+    2 Stage10    12585    12585 (    0.00)  (   -5.32)     12585    12585 (    0.00)  (   -5.32)    427835   425423 (   -0.56)  (   -5.85)   1272789  1257198 (   -1.22)  (   -8.57) 
+    3 Stage14    12585    12585 (    0.00)  (   -5.32)     12585    12585 (    0.00)  (   -5.32)    425423   416125 (   -2.19)  (   -7.91)   1257198  1220093 (   -2.95)  (  -11.26) 
+    4  Stage5    12585     6004 (  -52.29)  (  -54.83)     12585     6004 (  -52.29)  (  -54.83)    416125   204136 (  -50.94)  (  -54.82)   1220093   587307 (  -51.86)  (  -57.29) 
+  Summary Sel    13292     6004             (  -54.83)     13292     6004             (  -54.83)    451852   204136             (  -54.82)   1374968   587307             (  -57.29) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_theta/DESY21_theta20/2_DESY21_theta20_Checks_zcalc_G2_WF4_thetacorr.root
-dEdx: OUT_Tristan/DESY21_theta/DESY21_theta20/3_DESY21_theta20_dEdx_zcalc_G2_WF4_thetacorr.root
+Checks: OUT_Tristan/DESY21_theta460/DESY21_theta20/2_DESY21_theta20_Checks_zcalc_G2.root
+dEdx: OUT_Tristan/DESY21_theta460/DESY21_theta20/3_DESY21_theta20_dEdx_zcalc_G2.root

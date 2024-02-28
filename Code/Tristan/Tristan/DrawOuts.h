@@ -23,7 +23,7 @@ void DrawOut_Separation(const std::string& inputDir, const std::string& Comment)
 void DrawOut_Separation_Reduced(const std::string& inputDir, const std::string& Comment, std::string Energy);
 
 // Draw all scans together
-void DrawOut_Scans(const std::string& inputDir, const std::string& Comment);
+void DrawOut_Scans(const std::string& inputDir, const std::string& Comment, const std::string& WFversion);
 
 // Draw resolution as function of Z scan
 void DrawOut_Zscan(const std::string& inputDir, const std::string& Comment, const int& PT); 
@@ -32,7 +32,7 @@ void DrawOut_Zscan(const std::string& inputDir, const std::string& Comment, cons
 void DrawOut_Yscan(const std::string& inputDir, const std::string& Comment);
 
 // Draw resolution as function of phi scan
-void DrawOut_Phiscan(const std::string& inputDir, const std::string& Comment, const std::string& zdrift);
+void DrawOut_Phiscan(const std::string& inputDir, const std::string& Comment, const std::string& WFversion, const std::string& zdrift);
 
 // Draw resolution as function of theta scan
 void DrawOut_Thetascan(const std::string& inputDir, const std::string& Comment);
@@ -42,7 +42,7 @@ void DrawOut_Thetascan(const std::string& inputDir, const std::string& Comment);
 void DrawOut_Zscan_PT(const std::string& inputDir, const std::string& Comment);
 
 // Draw resolution as function of phi scan for different drift distances
-void DrawOut_Phiscan_Z(const std::string& inputDir, const std::string& Comment);
+void DrawOut_Phiscan_Z(const std::string& inputDir, const std::string& Comment, const std::string& WFversion);
 
 // Draw Energy scan
 void DrawOut_Escan(const std::string& inputDir, const std::string& Comment);

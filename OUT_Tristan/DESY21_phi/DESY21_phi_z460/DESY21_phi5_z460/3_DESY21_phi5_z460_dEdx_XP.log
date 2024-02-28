@@ -1,15 +1,17 @@
 Tag           : DESY21_phi5_z460
-Comment       : _zcalc_G2_WF4_RCm2%
-FileName     : ../Data_DESY21/Phi_scan_z460/phi_200_5_z460_ym60_iter0.root
+Comment       : _zcalc_G2
+FileName      : ../Data_DESY21_dev_v9/Phi_scan_z460/phi_200_5_z460_ym60_iter9.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
 Data_to_Use   : 0
 OUTDirName    : OUT_Tristan/DESY21_phi/DESY21_phi_z460/DESY21_phi5_z460/
 
-Gain & RC maps: loaded
-Average Gain in ERAM01 = 1947.77
-ERAM01: RC   hole in  iX = 10 | iY = 16 | value reset at 129.29
-ERAM01: Gain hole in  iX = 10 | iY = 16 | value reset at 1889.24
+ERAM#01: Gain hole in (iX,iY) = (10,16) | value reset at 1889.24
+ERAM#01:   RC hole in (iX,iY) = (10,16) | value reset at 129.29
+Number of pads in 01 = 1152.00
+Average gain in   01 = 1947.72
+
+Average gain in bottom HATPC: 1947.00
 
 -------------->Predefined selection T_DESY21_Event
 Number of entries :11132
@@ -51,10 +53,122 @@ cut length    = 2 mm
 Processing events:
 0/11132
 1000/11132
+ALERT: 1 walls crossed for a pad in entry #1856
+8 9 19 20
+16 9 21 20
+22 -0 -0
+ALERT: 3 walls crossed for a pad in entry #1856
+8 9 20 21
+9 3 21 20
+22 -0 -0
+ALERT: 1 walls crossed for a pad in entry #1856
+9 10 20 21
+9 3 20 20
+22 -0 -0
+ALERT: 1 walls crossed for a pad in entry #1856
+9 10 19 20
+16 9 20 20
+22 -0 -0
+ALERT: 1 walls crossed for a pad in entry #1856
+15 16 18 19
+22 16 20 19
+22 -0 -0
+ALERT: 1 walls crossed for a pad in entry #1856
+15 16 19 20
+16 9 20 19
+22 -0 -0
+ALERT: 1 walls crossed for a pad in entry #1856
+16 17 19 20
+16 9 19 19
+22 -0 -0
+ALERT: 3 walls crossed for a pad in entry #1856
+16 17 18 19
+22 16 19 19
+22 -0 -0
+ALERT: 1 walls crossed for a pad in entry #1856
+27 28 16 17
+35 28 18 17
+22 -0 -0
+ALERT: 3 walls crossed for a pad in entry #1856
+27 28 17 18
+28 22 18 17
+22 -0 -0
+ALERT: 1 walls crossed for a pad in entry #1856
+28 29 17 18
+28 22 17 17
+22 -0 -0
+ALERT: 1 walls crossed for a pad in entry #1856
+28 29 16 17
+35 28 17 17
+22 -0 -0
+ALERT: 1 walls crossed for a pad in entry #1856
+34 35 15 16
+41 35 16 16
+22 -0 -0
+ALERT: 1 walls crossed for a pad in entry #1856
+34 35 16 17
+35 28 16 16
+22 -0 -0
+ALERT: 1 walls crossed for a pad in entry #1856
+35 36 16 17
+35 28 16 16
+22 -0 -0
+ALERT: 3 walls crossed for a pad in entry #1856
+35 36 15 16
+41 35 16 16
+22 -0 -0
 2000/11132
 3000/11132
 4000/11132
 5000/11132
+ALERT: 1 walls crossed for a pad in entry #5562
+5 6 20 21
+11 6 22 21
+22 -0 -0
+ALERT: 1 walls crossed for a pad in entry #5562
+5 6 21 22
+6 -1 22 21
+22 -0 -0
+ALERT: 1 walls crossed for a pad in entry #5562
+6 7 21 22
+6 -1 21 21
+22 -0 -0
+ALERT: 3 walls crossed for a pad in entry #5562
+6 7 20 21
+11 6 21 21
+22 -0 -0
+ALERT: 1 walls crossed for a pad in entry #5562
+17 18 18 19
+24 18 20 19
+22 -0 -0
+ALERT: 3 walls crossed for a pad in entry #5562
+17 18 19 20
+18 11 20 19
+22 -0 -0
+ALERT: 1 walls crossed for a pad in entry #5562
+18 19 19 20
+18 11 19 19
+22 -0 -0
+ALERT: 1 walls crossed for a pad in entry #5562
+18 19 18 19
+24 18 19 19
+22 -0 -0
+ALERT: 1 walls crossed for a pad in entry #5562
+36 37 15 16
+44 37 16 16
+22 -0 -0
+ALERT: 1 walls crossed for a pad in entry #5562
+36 37 16 17
+37 31 16 16
+22 -0 -0
+ALERT: 1 walls crossed for a pad in entry #5562
+37 38 16 17
+37 31 16 16
+22 -0 -0
+ALERT: 3 walls crossed for a pad in entry #5562
+37 38 15 16
+44 37 16 16
+22 -0 -0
 6000/11132
 7000/11132
 8000/11132
@@ -62,7 +176,6 @@ Processing events:
 10000/11132
 11000/11132
 11131/11132
-11132 real events
 
 Selection Statistics 
  #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
@@ -75,5 +188,5 @@ Selection Statistics
     6  Stage5    10316     5760 (  -44.16)  (  -48.26)     10316     5760 (  -44.16)  (  -48.26)    341051   195840 (  -42.58)  (  -48.25)    974587   549460 (  -43.62)  (  -50.89) 
   Summary Sel    11132     5760             (  -48.26)     11132     5760             (  -48.26)    378403   195840             (  -48.25)   1118755   549460             (  -50.89) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_phi/DESY21_phi_z460/DESY21_phi5_z460/2_DESY21_phi5_z460_Checks_zcalc_G2_WF4_RCm2%.root
-dEdx: OUT_Tristan/DESY21_phi/DESY21_phi_z460/DESY21_phi5_z460/3_DESY21_phi5_z460_dEdx_zcalc_G2_WF4_RCm2%.root
+Checks: OUT_Tristan/DESY21_phi/DESY21_phi_z460/DESY21_phi5_z460/2_DESY21_phi5_z460_Checks_zcalc_G2.root
+dEdx: OUT_Tristan/DESY21_phi/DESY21_phi_z460/DESY21_phi5_z460/3_DESY21_phi5_z460_dEdx_zcalc_G2.root

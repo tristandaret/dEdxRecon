@@ -1,22 +1,17 @@
 Tag           : DESY21_phi0_z860
-Comment       : _zcalc_PRF_4IP_Gain2_WF4
-EventFile     : ../Data_DESY21/Phi_scan_z860/phi_200_0_z860_ym60_iter0.root
+Comment       : _zcalc_G2
+FileName      : ../Data_DESY21_dev_v9/Phi_scan_z860/phi_200_0_z860_ym60_iter9.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
 Data_to_Use   : 0
 OUTDirName    : OUT_Tristan/DESY21_phi/DESY21_phi_z860/DESY21_phi0_z860/
 
+ERAM#01: Gain hole in (iX,iY) = (10,16) | value reset at 1889.24
+ERAM#01:   RC hole in (iX,iY) = (10,16) | value reset at 129.29
+Number of pads in 01 = 1152.00
+Average gain in   01 = 1947.72
 
-ReadRCmap::ReadRCmap m_FileName = GainRCMaps/RCfiles/ERAM01_RCdata_01.root
-
-ReadRCmap::ReadRCmap  No Data for iX=10 and  iY=16 in GainRCMaps/RCfiles/ERAM01_RCdata_01.root
-RC map: loaded
-
-ReadGainmap::ReadGainmap m_FileName = GainRCMaps/Gainfiles/ERAM01_Gaindata_01.root
-
-ReadGainmap::ReadGainmap  No Data for iX=10 and  iY=16 in GainRCMaps/Gainfiles/ERAM01_Gaindata_01.root
-Gain map: loaded
-Average Gain in ERAM01 = 1947.77
+Average gain in bottom HATPC: 1947.00
 
 -------------->Predefined selection T_DESY21_Event
 Number of entries :21374
@@ -52,55 +47,31 @@ zdrift        = 950 mm
 PT            = 200 ns
 TB            = 40 ns/time bin
 PT/TB         = 5 time bins
-Track fitting : PRF
 z method      : zcalc
 cut length    = 2 mm
 
 Processing events:
 0/21374
-RC hole in entry   47 | iX = 10 | iY = 16 |  RC  value reset at 129
-Gain hole in entry 47 | iX = 10 | iY = 16 | Gain value reset at 1889
-500/21374
 1000/21374
-1500/21374
 2000/21374
-2500/21374
 3000/21374
-3500/21374
 4000/21374
-4500/21374
 5000/21374
-5500/21374
 6000/21374
-6500/21374
 7000/21374
-7500/21374
 8000/21374
-8500/21374
 9000/21374
-9500/21374
 10000/21374
-10500/21374
 11000/21374
-11500/21374
 12000/21374
-12500/21374
 13000/21374
-13500/21374
 14000/21374
-14500/21374
 15000/21374
-15500/21374
 16000/21374
-16500/21374
 17000/21374
-17500/21374
 18000/21374
-18500/21374
 19000/21374
-19500/21374
 20000/21374
-20500/21374
 21000/21374
 21373/21374
 
@@ -115,5 +86,5 @@ Selection Statistics
     6  Stage5    19912    13647 (  -31.46)  (  -36.15)     19912    13647 (  -31.46)  (  -36.15)    662871   463998 (  -30.00)  (  -36.13)   1722552  1181865 (  -31.39)  (  -39.91) 
   Summary Sel    21374    13647             (  -36.15)     21374    13647             (  -36.15)    726512   463998             (  -36.13)   1966955  1181865             (  -39.91) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_phi/DESY21_phi_z860/DESY21_phi0_z860/2_DESY21_phi0_z860_Checks_zcalc_PRF_4IP_Gain2_WF4.root
-dEdx: OUT_Tristan/DESY21_phi/DESY21_phi_z860/DESY21_phi0_z860/3_DESY21_phi0_z860_dEdx_zcalc_PRF_4IP_Gain2_WF4.root
+Checks: OUT_Tristan/DESY21_phi/DESY21_phi_z860/DESY21_phi0_z860/2_DESY21_phi0_z860_Checks_zcalc_G2.root
+dEdx: OUT_Tristan/DESY21_phi/DESY21_phi_z860/DESY21_phi0_z860/3_DESY21_phi0_z860_dEdx_zcalc_G2.root

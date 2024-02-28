@@ -1,4 +1,5 @@
 #include "Tristan/corr.h"
+#include "Tristan/dEdx_func.h"
 #include "Tristan/Misc_Functions.h"
 
 #include <cmath>
@@ -18,8 +19,9 @@
 #include "Misc/Util.h"
 #include "SampleTools/Uploader.h"
 #include "SampleTools/GiveMe_Uploader.h"
-#include "SignalShape/PRF_param.h"
+#include "SampleTools/THATERAMMaps.h"
 #include "SampleTools/ReadGainmap.h"
+#include "SignalShape/PRF_param.h"
 
 void corr( const std::string& OutDir,
                           std::string const& Tag,
@@ -45,23 +47,20 @@ void corr( const std::string& OutDir,
   std::cout << OutDir << ".root" << std::endl ;
   std::cout << SelectionSet << std::endl ;
   
-  std::string eram_num ;
-  if(Tag.find("DESY") != std::string::npos) eram_num = "ERAM01";
-  if(Tag.find("CERN22") != std::string::npos) eram_num = "ERAM18";
-  ReadGainmap Gainmap(eram_num) ;
-  std::cout << "Gain map: loaded" << std::endl ;
+  // Get ERAM ID
+  std::vector<std::string>  ERAMS_iD;
+  if(Tag.find("DESY") != std::string::npos)         ERAMS_iD.push_back("01");
+  if(Tag.find("ERAM18") != std::string::npos)  ERAMS_iD.push_back("18");
 
-  int   status  = 0 ;
-  float avg_G   = 0 ;
-  float n_pads  = 0 ;
-  for(int iX = 0 ; iX < 36 ; iX++){
-    for(int iY = 0 ; iY < 32 ; iY++){
-      avg_G += Gainmap.GetData(iX, iY, status) ;
-      if(Gainmap.GetData(iX, iY, status) != 0) n_pads++ ;
-    }
+  // Get Gain & RC maps
+  std::vector<ERAM_map*> RCmaps;
+  std::vector<ERAM_map*> Gainmaps;
+  for(std::string eram_id : ERAMS_iD){
+    Gainmaps. push_back(new ERAM_map(eram_id, "Gain"));
+    RCmaps.   push_back(new ERAM_map(eram_id, "RC"));
   }
-  avg_G /= n_pads ;
-  std::cout << "Average Gain in " << eram_num << " = " << avg_G << std::endl ;
+
+  float avg_G = avg_Gain(Gainmaps);
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////
   // Selection stage
@@ -150,18 +149,7 @@ void corr( const std::string& OutDir,
         int NPads                         = pCluster->Get_NberOfPads() ;
         for(int iP = 0 ; iP < NPads ; iP ++){
           const Pad* pPad                 = pCluster->Get_Pad(iP) ;
-          int StatusG  = 0 ;
-          double G_pad                    = Gainmap.GetData(pPad->Get_iX(),pPad->Get_iY(), StatusG) ;
-          if(G_pad == 0){
-            std::cout << "Gain hole in entry " << pEvent->Get_EntryNber() << " | iX = " << pPad->Get_iX() << " | iY = " << pPad->Get_iY() ; 
-            float G_left                  = Gainmap.GetData(pPad->Get_iX()-1,pPad->Get_iY(),   StatusG) ;
-            float G_right                 = Gainmap.GetData(pPad->Get_iX()+1,pPad->Get_iY(),   StatusG) ;
-            float G_low                   = Gainmap.GetData(pPad->Get_iX(),  pPad->Get_iY()-1, StatusG) ;
-            float G_top                   = Gainmap.GetData(pPad->Get_iX(),  pPad->Get_iY()+1, StatusG) ;
-            G_pad                         = (G_left + G_right + G_low + G_top)/4 ;
-            Gainmap.                        SetData(pPad->Get_iX(),pPad->Get_iY(), G_pad) ;
-            std::cout << " | Gain value reset at " << G_pad << std::endl ;
-          }
+          double G_pad                    = Gainmaps[0]->GetData(pPad->Get_iX(),pPad->Get_iY()) ;
           float Gcorr                     = avg_G/G_pad ;
 
           TH1F* h1f_WF_pad                = GiveMe_WaveFormDisplay(pPad, "main") ;
@@ -194,7 +182,6 @@ void corr( const std::string& OutDir,
   /////////////////////////////////////////////////////////////////////////////////////////////////////
   // Fitting 
   float L_phi                           = std::min({Lx/fabs(cos(mean_phi)), Ly/fabs(sin(mean_phi))}) ;
-  std::cout << L_phi << std::endl ;
   A_corr->                                SetNameTitle("A_corr", "A_corr") ;
   TGraph* tge_WFvsLength                = Convert_TH2_TGE(h2f_WFvsLength) ;
   tge_WFvsLength->                        SetNameTitle("pTGE_A_corr", "pTGE_A_corr") ;
@@ -202,7 +189,7 @@ void corr( const std::string& OutDir,
   ////////////////////////////////////////////////////////////////////////////////////////////////////
   // Saving
   // Checks
-  TFile* pfileROOT_corr = new TFile(TString(OutDir + "_WFmax_correction.root"), "RECREATE") ;
+  TFile* pfileROOT_corr = new TFile(TString(OutDir + "_WFmax_correction_v9i9.root"), "RECREATE") ;
   h2f_WFvsLength->                        Write() ;
   A_corr->                                Write() ;
   tge_WFvsLength->                        Write() ;

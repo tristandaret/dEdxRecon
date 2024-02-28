@@ -1,0 +1,113 @@
+Tag           : DESY21_phi40_diag_z860
+Comment       : _zcalc_G2_WF2
+FileName      : ../Data_DESY21_dev_v9/Phi_scan_z860/phi_200_40_z860_ym60_diag_iter9.root
+SelectionSet  : T_DESY21_Event
+NbrOfMod      : 0
+Data_to_Use   : 0
+OUTDirName    : OUT_Tristan/DESY21_phi/DESY21_phi_z860_dev_v9i9/DESY21_phi40_diag_z860/
+
+ERAM#01: Gain hole in (iX,iY) = (10,16) | value reset at 1889.24
+ERAM#01:   RC hole in (iX,iY) = (10,16) | value reset at 129.29
+Number of pads in 01 = 1152.00
+Average gain in   01 = 1947.72
+
+Average gain in bottom HATPC: 1947.00
+
+-------------->Predefined selection T_DESY21_Event
+Number of entries :10295
+TLow = 332 | THigh = 365
+
+-------------->List of selections
+Apply selection  1 -> Remove clusters in first and last columns 
+
+Apply selection 11 -> Remove clusters out of time (Event Based) 
+                      |TLeading -TLeadingMeanOverEvent| <= m_Cut_Stage11_EventBased (=     3)
+
+Apply selection 120 -> Remove clusters out of time  
+                      m_Cut_Stage120_TLow <= TLeading <= m_Cut_Stage120_THigh 
+                      m_Cut_Stage120_TLow  =  332
+                      m_Cut_Stage120_THigh =  365
+
+Apply selection 15 -> Remove Events with an average pad multiplicity too high or too low 
+                      Pad Multiplicity >  m_Cut_StageT15_APM_Low  (=  1.0)
+                      Pad Multiplicity <= m_Cut_StageT15_APM_High (=  3.5)
+
+Apply selection 10 -> Remove clusters with too many pads 
+                      Npads <= m_Cut_Stage10_Npads_Hig (=   5)
+
+Apply selection 14 -> Remove Clusters with a too high APad 
+                      APad >= m_Cut_Stage14_Amax_Low (=     0)
+                      APad <= m_Cut_Stage14_Amax_Hig (=  3700)
+
+Apply selection  5 -> Reject Events with too few clusters
+                      NClusters >= m_Cut_Stage5_NCluster_Low (=   50)
+
+
+zdrift        = 950 mm
+PT            = 200 ns
+TB            = 40 ns/time bin
+PT/TB         = 5 time bins
+z method      : zcalc
+cut length    = 2 mm
+
+correction function: ../Data_DESY21_dev_v9/Phi_scan_zm40/phi_200_40_zm40_ym60_diag_iter9_WFmax_correction_v9i9.root
+WF correction parameters: 407.23 | -58.10 | 19.88 | -1.30 | 0.03
+Processing events:
+0/10295
+1000/10295
+2000/10295
+3000/10295
+4000/10295
+ALERT: 3 walls crossed for a pad in entry #4113
+32.71 33.84 8.15 9.17
+33.84 32.77 9.22 8.15
+39.12 -0.88 -0.00
+ALERT: 1 walls crossed for a pad in entry #4113
+32.71 33.84 7.13 8.15
+34.91 33.84 9.22 8.15
+39.12 -0.88 -0.00
+ALERT: 1 walls crossed for a pad in entry #4113
+33.84 34.97 8.15 9.17
+33.84 32.77 8.15 7.08
+39.12 -0.88 -0.00
+ALERT: 1 walls crossed for a pad in entry #4113
+33.84 34.97 7.13 8.15
+34.91 33.84 8.15 7.08
+39.12 -0.88 -0.00
+5000/10295
+6000/10295
+7000/10295
+8000/10295
+ALERT: 3 walls crossed for a pad in entry #8059
+34.97 36.10 8.15 9.17
+36.10 35.05 9.25 8.15
+41.46 -0.87 -0.00
+ALERT: 1 walls crossed for a pad in entry #8059
+34.97 36.10 7.13 8.15
+37.14 36.10 9.25 8.15
+41.46 -0.87 -0.00
+ALERT: 1 walls crossed for a pad in entry #8059
+36.10 37.22 8.15 9.17
+36.10 35.05 8.15 7.05
+41.46 -0.87 -0.00
+ALERT: 1 walls crossed for a pad in entry #8059
+36.10 37.22 7.13 8.15
+37.14 36.10 8.15 7.05
+41.46 -0.87 -0.00
+9000/10295
+10000/10295
+10294/10295
+
+Selection Statistics 
+ #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
+    0  Stage1    10295    10295 (    0.00)  (    0.00)     10295    10295 (    0.00)  (    0.00)    562060   562060 (    0.00)  (    0.00)   1132192  1132192 (    0.00)  (    0.00) 
+    1 Stage11    10295    10148 (   -1.43)  (   -1.43)     10295    10148 (   -1.43)  (   -1.43)    562060   543076 (   -3.38)  (   -3.38)   1132192  1081503 (   -4.48)  (   -4.48) 
+    2Stage120    10148     9997 (   -1.49)  (   -2.89)     10148     9997 (   -1.49)  (   -2.89)    543076   535353 (   -1.42)  (   -4.75)   1081503  1067552 (   -1.29)  (   -5.71) 
+    3StageT15     9997     9937 (   -0.60)  (   -3.48)      9997     9937 (   -0.60)  (   -3.48)    535353   532763 (   -0.48)  (   -5.21)   1067552  1057871 (   -0.91)  (   -6.56) 
+    4 Stage10     9937     9937 (    0.00)  (   -3.48)      9937     9937 (    0.00)  (   -3.48)    532763   532683 (   -0.02)  (   -5.23)   1057871  1057359 (   -0.05)  (   -6.61) 
+    5 Stage14     9937     9932 (   -0.05)  (   -3.53)      9937     9932 (   -0.05)  (   -3.53)    532683   527881 (   -0.90)  (   -6.08)   1057359  1043106 (   -1.35)  (   -7.87) 
+    6  Stage5     9932     9088 (   -8.50)  (  -11.72)      9932     9088 (   -8.50)  (  -11.72)    527881   492182 (   -6.76)  (  -12.43)   1043106   968044 (   -7.20)  (  -14.50) 
+  Summary Sel    10295     9088             (  -11.72)     10295     9088             (  -11.72)    562060   492182             (  -12.43)   1132192   968044             (  -14.50) 
+Fitting: Started... done!
+Checks: OUT_Tristan/DESY21_phi/DESY21_phi_z860_dev_v9i9/DESY21_phi40_diag_z860/2_DESY21_phi40_diag_z860_Checks_zcalc_G2_WF2.root
+dEdx: OUT_Tristan/DESY21_phi/DESY21_phi_z860_dev_v9i9/DESY21_phi40_diag_z860/3_DESY21_phi40_diag_z860_dEdx_zcalc_G2_WF2.root

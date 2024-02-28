@@ -1,0 +1,104 @@
+Tag           : DESY21_phi30_diag_zm40
+Comment       : _zcalc_PRF_4IP_Gain2_WF4
+EventFile     : ../Data_DESY21/Phi_scan_zm40/phi_200_30_zm40_ym60_diag_iter0.root
+SelectionSet  : T_DESY21_Event
+NbrOfMod      : 0
+Data_to_Use   : 0
+OUTDirName    : OUT_Tristan/DESY21_phi/DESY21_phi_zm40/DESY21_phi30_diag_zm40/
+
+
+ReadRCmap::ReadRCmap m_FileName = GainRCMaps/RCfiles/ERAM01_RCdata_01.root
+
+ReadRCmap::ReadRCmap  No Data for iX=10 and  iY=16 in GainRCMaps/RCfiles/ERAM01_RCdata_01.root
+RC map: loaded
+
+ReadGainmap::ReadGainmap m_FileName = GainRCMaps/Gainfiles/ERAM01_Gaindata_01.root
+
+ReadGainmap::ReadGainmap  No Data for iX=10 and  iY=16 in GainRCMaps/Gainfiles/ERAM01_Gaindata_01.root
+Gain map: loaded
+Average Gain in ERAM01 = 1947.77
+
+-------------->Predefined selection T_DESY21_Event
+Number of entries :8719
+TLow = 35 | THigh = 64
+
+-------------->List of selections
+Apply selection  1 -> Remove clusters in first and last columns 
+
+Apply selection 11 -> Remove clusters out of time (Event Based) 
+                      |TLeading -TLeadingMeanOverEvent| <= m_Cut_Stage11_EventBased (=     3)
+
+Apply selection 120 -> Remove clusters out of time  
+                      m_Cut_Stage120_TLow <= TLeading <= m_Cut_Stage120_THigh 
+                      m_Cut_Stage120_TLow  =   35
+                      m_Cut_Stage120_THigh =   64
+
+Apply selection 15 -> Remove Events with an average pad multiplicity too high or too low 
+                      Pad Multiplicity >  m_Cut_StageT15_APM_Low  (=  1.0)
+                      Pad Multiplicity <= m_Cut_StageT15_APM_High (=  3.5)
+
+Apply selection 10 -> Remove clusters with too many pads 
+                      Npads <= m_Cut_Stage10_Npads_Hig (=   5)
+
+Apply selection 14 -> Remove Clusters with a too high APad 
+                      APad >= m_Cut_Stage14_Amax_Low (=     0)
+                      APad <= m_Cut_Stage14_Amax_Hig (=  3700)
+
+Apply selection  5 -> Reject Events with too few clusters
+                      NClusters >= m_Cut_Stage5_NCluster_Low (=   50)
+
+
+zdrift        = 50 mm
+PT            = 200 ns
+TB            = 40 ns/time bin
+PT/TB         = 5 time bins
+Track fitting : PRF
+z method      : zcalc
+cut length    = 2 mm
+
+../Data_DESY21/Phi_scan_zm40/phi_200_40_zm40_ym60_diag_iter0_WFmax_correction.root
+WF correction parameters: 283.98 | -10.30 | 2.25 | 0.81 | -0.05
+Processing events:
+0/8719
+RC hole in entry   467 | iX = 10 | iY = 16 |  RC  value reset at 129.29
+Gain hole in entry 467 | iX = 10 | iY = 16 | Gain value reset at 1889.24
+500/8719
+1000/8719
+1500/8719
+2000/8719
+2500/8719
+3000/8719
+3500/8719
+4000/8719
+4500/8719
+5000/8719
+5500/8719
+6000/8719
+6500/8719
+7000/8719
+7500/8719
+8000/8719
+ALERT: 1 walls crossed for a pad in entry #8047
+32.71 33.84 11.21 12.23
+32.71 30.74 11.21 10.62
+27.60 -0.48 -0.00
+ALERT: 3 walls crossed for a pad in entry #8047
+32.71 33.84 10.19 11.21
+34.68 32.71 11.21 10.62
+27.60 -0.48 -0.00
+8500/8719
+8718/8719
+
+Selection Statistics 
+ #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
+    0  Stage1     8719     8719 (    0.00)  (    0.00)      8719     8719 (    0.00)  (    0.00)    472605   472605 (    0.00)  (    0.00)    983999   983999 (    0.00)  (    0.00) 
+    1 Stage11     8719     8624 (   -1.09)  (   -1.09)      8719     8624 (   -1.09)  (   -1.09)    472605   447340 (   -5.35)  (   -5.35)    983999   918803 (   -6.63)  (   -6.63) 
+    2Stage120     8624     8504 (   -1.39)  (   -2.47)      8624     8504 (   -1.39)  (   -2.47)    447340   441717 (   -1.26)  (   -6.54)    918803   908348 (   -1.14)  (   -7.69) 
+    3StageT15     8504     8400 (   -1.22)  (   -3.66)      8504     8400 (   -1.22)  (   -3.66)    441717   437606 (   -0.93)  (   -7.41)    908348   892498 (   -1.74)  (   -9.30) 
+    4 Stage10     8400     8400 (    0.00)  (   -3.66)      8400     8400 (    0.00)  (   -3.66)    437606   437522 (   -0.02)  (   -7.42)    892498   891985 (   -0.06)  (   -9.35) 
+    5 Stage14     8400     8393 (   -0.08)  (   -3.74)      8400     8393 (   -0.08)  (   -3.74)    437522   430786 (   -1.54)  (   -8.85)    891985   872156 (   -2.22)  (  -11.37) 
+    6  Stage5     8393     7149 (  -14.82)  (  -18.01)      8393     7149 (  -14.82)  (  -18.01)    430786   378035 (  -12.25)  (  -20.01)    872156   758439 (  -13.04)  (  -22.92) 
+  Summary Sel     8719     7149             (  -18.01)      8719     7149             (  -18.01)    472605   378035             (  -20.01)    983999   758439             (  -22.92) 
+Fitting: Started... done!
+Checks: OUT_Tristan/DESY21_phi/DESY21_phi_zm40/DESY21_phi30_diag_zm40/2_DESY21_phi30_diag_zm40_Checks_zcalc_PRF_4IP_Gain2_WF4.root
+dEdx: OUT_Tristan/DESY21_phi/DESY21_phi_zm40/DESY21_phi30_diag_zm40/3_DESY21_phi30_diag_zm40_dEdx_zcalc_PRF_4IP_Gain2_WF4.root

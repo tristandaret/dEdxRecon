@@ -1,0 +1,89 @@
+Tag           : DESY21_z260_PT412
+Comment       : _zcalc_G2_WF4_dpdd
+FileName     : ../Data_DESY21/zscan_PT412/z_360_275_412_02T_26_260_iter0.root
+SelectionSet  : T_DESY21_Event
+NbrOfMod      : 0
+Data_to_Use   : 0
+OUTDirName    : OUT_Tristan/DESY21_zscan/DESY21_zscan_PT412/DESY21_z260_PT412/
+
+Gain & RC maps: loaded
+Average Gain in ERAM01 = 1947.77
+ERAM01: RC   hole in  iX = 10 | iY = 16 | value reset at 129.29
+ERAM01: Gain hole in  iX = 10 | iY = 16 | value reset at 1889.24
+
+-------------->Predefined selection T_DESY21_Event
+Number of entries :13216
+TLow = 112 | THigh = 144
+
+-------------->List of selections
+Apply selection  1 -> Remove clusters in first and last columns 
+
+Apply selection 11 -> Remove clusters out of time (Event Based) 
+                      |TLeading -TLeadingMeanOverEvent| <= m_Cut_Stage11_EventBased (=     3)
+
+Apply selection 120 -> Remove clusters out of time  
+                      m_Cut_Stage120_TLow <= TLeading <= m_Cut_Stage120_THigh 
+                      m_Cut_Stage120_TLow  =  112
+                      m_Cut_Stage120_THigh =  144
+
+Apply selection 15 -> Remove Events with an average pad multiplicity too high or too low 
+                      Pad Multiplicity >  m_Cut_StageT15_APM_Low  (=  2.0)
+                      Pad Multiplicity <= m_Cut_StageT15_APM_High (=  4.0)
+
+Apply selection 10 -> Remove clusters with too many pads 
+                      Npads <= m_Cut_Stage10_Npads_Hig (=   5)
+
+Apply selection 14 -> Remove Clusters with a too high APad 
+                      APad >= m_Cut_Stage14_Amax_Low (=     0)
+                      APad <= m_Cut_Stage14_Amax_Hig (=  3700)
+
+Apply selection  5 -> Reject Events with too few clusters
+                      NClusters >= m_Cut_Stage5_NCluster_Low (=   34)
+
+
+zdrift        = 350 mm
+PT            = 412 ns
+TB            = 50 ns/time bin
+PT/TB         = 8 time bins
+z method      : zcalc
+cut length    = 2 mm
+
+Processing events:
+0/13216
+1000/13216
+2000/13216
+3000/13216
+4000/13216
+5000/13216
+6000/13216
+7000/13216
+8000/13216
+9000/13216
+10000/13216
+ALERT: 1 walls crossed for a pad in entry #10871
+2 3 10 11
+20 3 11 11
+11 -0 -0
+ALERT: 3 walls crossed for a pad in entry #10871
+3 5 10 11
+20 3 11 11
+11 -0 -0
+11000/13216
+12000/13216
+13000/13216
+13215/13216
+13216 real events
+
+Selection Statistics 
+ #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
+    0  Stage1    13216    13216 (    0.00)  (    0.00)     13216    13216 (    0.00)  (    0.00)    449234   449234 (    0.00)  (    0.00)   1641391  1641391 (    0.00)  (    0.00) 
+    1 Stage11    13216    13037 (   -1.35)  (   -1.35)     13216    13037 (   -1.35)  (   -1.35)    449234   436411 (   -2.85)  (   -2.85)   1641391  1579951 (   -3.74)  (   -3.74) 
+    2Stage120    13037    12859 (   -1.37)  (   -2.70)     13037    12859 (   -1.37)  (   -2.70)    436411   430681 (   -1.31)  (   -4.13)   1579951  1563317 (   -1.05)  (   -4.76) 
+    3StageT15    12859    11876 (   -7.64)  (  -10.14)     12859    11876 (   -7.64)  (  -10.14)    430681   399656 (   -7.20)  (  -11.04)   1563317  1430923 (   -8.47)  (  -12.82) 
+    4 Stage10    11876    11876 (    0.00)  (  -10.14)     11876    11876 (    0.00)  (  -10.14)    399656   395819 (   -0.96)  (  -11.89)   1430923  1407135 (   -1.66)  (  -14.27) 
+    5 Stage14    11876    11875 (   -0.01)  (  -10.15)     11876    11875 (   -0.01)  (  -10.15)    395819   392891 (   -0.74)  (  -12.54)   1407135  1393346 (   -0.98)  (  -15.11) 
+    6  Stage5    11875     6547 (  -44.87)  (  -50.46)     11875     6547 (  -44.87)  (  -50.46)    392891   222598 (  -43.34)  (  -50.45)   1393346   782513 (  -43.84)  (  -52.33) 
+  Summary Sel    13216     6547             (  -50.46)     13216     6547             (  -50.46)    449234   222598             (  -50.45)   1641391   782513             (  -52.33) 
+Fitting: Started... done!
+Checks: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT412/DESY21_z260_PT412/2_DESY21_z260_PT412_Checks_zcalc_G2_WF4_dpdd.root
+dEdx: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT412/DESY21_z260_PT412/3_DESY21_z260_PT412_dEdx_zcalc_G2_WF4_dpdd.root

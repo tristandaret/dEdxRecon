@@ -1,0 +1,75 @@
+Tag           : DESY21_y40
+Comment       : _zcalc_G2_WF2
+FileName      : ../Data_DESY21_dev_v9/yscan/Y40_Z0_iter9.root
+SelectionSet  : T_DESY21_Event
+NbrOfMod      : 0
+Data_to_Use   : 0
+OUTDirName    : OUT_Tristan/DESY21_yscan_dev_v9i9/DESY21_y40/
+
+ERAM#01: Gain hole in (iX,iY) = (10,16) | value reset at 1889.24
+ERAM#01:   RC hole in (iX,iY) = (10,16) | value reset at 129.29
+Number of pads in 01 = 1152.00
+Average gain in   01 = 1947.72
+
+Average gain in bottom HATPC: 1947.00
+
+-------------->Predefined selection T_DESY21_Event
+Number of entries :6487
+TLow = 50 | THigh = 101
+
+-------------->List of selections
+Apply selection  1 -> Remove clusters in first and last columns 
+
+Apply selection 11 -> Remove clusters out of time (Event Based) 
+                      |TLeading -TLeadingMeanOverEvent| <= m_Cut_Stage11_EventBased (=     3)
+
+Apply selection 120 -> Remove clusters out of time  
+                      m_Cut_Stage120_TLow <= TLeading <= m_Cut_Stage120_THigh 
+                      m_Cut_Stage120_TLow  =   50
+                      m_Cut_Stage120_THigh =  101
+
+Apply selection 15 -> Remove Events with an average pad multiplicity too high or too low 
+                      Pad Multiplicity >  m_Cut_StageT15_APM_Low  (=  2.0)
+                      Pad Multiplicity <= m_Cut_StageT15_APM_High (=  4.0)
+
+Apply selection 10 -> Remove clusters with too many pads 
+                      Npads <= m_Cut_Stage10_Npads_Hig (=   5)
+
+Apply selection 14 -> Remove Clusters with a too high APad 
+                      APad >= m_Cut_Stage14_Amax_Low (=     0)
+                      APad <= m_Cut_Stage14_Amax_Hig (=  3700)
+
+Apply selection  5 -> Reject Events with too few clusters
+                      NClusters >= m_Cut_Stage5_NCluster_Low (=   34)
+
+
+zdrift        = 90 mm
+PT            = 412 ns
+TB            = 50 ns/time bin
+PT/TB         = 8 time bins
+z method      : zcalc
+cut length    = 2 mm
+
+Processing events:
+0/6487
+1000/6487
+2000/6487
+3000/6487
+4000/6487
+5000/6487
+6000/6487
+6486/6487
+
+Selection Statistics 
+ #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
+    0  Stage1     6487     6487 (    0.00)  (    0.00)      6487     6487 (    0.00)  (    0.00)    220471   220471 (    0.00)  (    0.00)    805859   805859 (    0.00)  (    0.00) 
+    1 Stage11     6487     6409 (   -1.20)  (   -1.20)      6487     6409 (   -1.20)  (   -1.20)    220471   213437 (   -3.19)  (   -3.19)    805859   773171 (   -4.06)  (   -4.06) 
+    2Stage120     6409     6271 (   -2.15)  (   -3.33)      6409     6271 (   -2.15)  (   -3.33)    213437   209028 (   -2.07)  (   -5.19)    773171   761144 (   -1.56)  (   -5.55) 
+    3StageT15     6271     5594 (  -10.80)  (  -13.77)      6271     5594 (  -10.80)  (  -13.77)    209028   187335 (  -10.38)  (  -15.03)    761144   669015 (  -12.10)  (  -16.98) 
+    4 Stage10     5594     5594 (    0.00)  (  -13.77)      5594     5594 (    0.00)  (  -13.77)    187335   185492 (   -0.98)  (  -15.87)    669015   657496 (   -1.72)  (  -18.41) 
+    5 Stage14     5594     5594 (    0.00)  (  -13.77)      5594     5594 (    0.00)  (  -13.77)    185492   183682 (   -0.98)  (  -16.69)    657496   649193 (   -1.26)  (  -19.44) 
+    6  Stage5     5594     2613 (  -53.29)  (  -59.72)      5594     2613 (  -53.29)  (  -59.72)    183682    88842 (  -51.63)  (  -59.70)    649193   311679 (  -51.99)  (  -61.32) 
+  Summary Sel     6487     2613             (  -59.72)      6487     2613             (  -59.72)    220471    88842             (  -59.70)    805859   311679             (  -61.32) 
+Fitting: Started... done!
+Checks: OUT_Tristan/DESY21_yscan_dev_v9i9/DESY21_y40/2_DESY21_y40_Checks_zcalc_G2_WF2.root
+dEdx: OUT_Tristan/DESY21_yscan_dev_v9i9/DESY21_y40/3_DESY21_y40_dEdx_zcalc_G2_WF2.root

@@ -1,22 +1,17 @@
 Tag           : DESY21_z160_PT200
-Comment       : _1000_zcalc_PRF_4IP_WFhatrecon
-EventFile     : ../Data_DESY21/zscan_PT200/z_360_275_200_02T_26_160_iter0.root
+Comment       : _zcalc_G2
+FileName      : ../Data_DESY21_dev_v9/zscan_PT200/z_360_275_200_02T_26_160_iter9.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
 Data_to_Use   : 0
 OUTDirName    : OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_z160_PT200/
 
+ERAM#01: Gain hole in (iX,iY) = (10,16) | value reset at 1889.24
+ERAM#01:   RC hole in (iX,iY) = (10,16) | value reset at 129.29
+Number of pads in 01 = 1152.00
+Average gain in   01 = 1947.72
 
-ReadRCmap::ReadRCmap m_FileName = GainRCMaps/RCfiles/ERAM01_RCdata_01.root
-
-ReadRCmap::ReadRCmap  No Data for iX=10 and  iY=16 in GainRCMaps/RCfiles/ERAM01_RCdata_01.root
-RC map: loaded
-
-ReadGainmap::ReadGainmap m_FileName = GainRCMaps/Gainfiles/ERAM01_Gaindata_01.root
-
-ReadGainmap::ReadGainmap  No Data for iX=10 and  iY=16 in GainRCMaps/Gainfiles/ERAM01_Gaindata_01.root
-Gain map: loaded
-Average Gain in ERAM01 = 1947.77
+Average gain in bottom HATPC: 1947.00
 
 -------------->Predefined selection T_DESY21_Event
 Number of entries :11331
@@ -52,34 +47,37 @@ zdrift        = 250 mm
 PT            = 200 ns
 TB            = 50 ns/time bin
 PT/TB         = 4 time bins
-Track fitting : PRF
 z method      : zcalc
 cut length    = 2 mm
 
 Processing events:
 0/11331
-500/11331
 1000/11331
-1500/11331
 2000/11331
-2500/11331
 3000/11331
-RC hole in entry   3335 | iX = 10 | iY = 16 |  RC  value reset at 129
-3500/11331
 4000/11331
-4500/11331
 5000/11331
-5500/11331
+ALERT: 1 walls crossed for a pad in entry #5237
+1 2 8 9
+19 2 9 9
+9 -0 -0
+ALERT: 3 walls crossed for a pad in entry #5237
+1 2 9 10
+2 -15 9 9
+9 -0 -0
+ALERT: 1 walls crossed for a pad in entry #5237
+2 3 9 10
+2 -15 9 9
+9 -0 -0
+ALERT: 1 walls crossed for a pad in entry #5237
+2 3 8 9
+19 2 9 9
+9 -0 -0
 6000/11331
-6500/11331
 7000/11331
-7500/11331
 8000/11331
-8500/11331
 9000/11331
-9500/11331
 10000/11331
-10500/11331
 11000/11331
 11330/11331
 
@@ -94,5 +92,5 @@ Selection Statistics
     6  Stage5    10684     5250 (  -50.86)  (  -53.67)     10684     5250 (  -50.86)  (  -53.67)    352596   178500 (  -49.38)  (  -53.64)    995737   495916 (  -50.20)  (  -55.42) 
   Summary Sel    11331     5250             (  -53.67)     11331     5250             (  -53.67)    385063   178500             (  -53.64)   1112531   495916             (  -55.42) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_z160_PT200/2_DESY21_z160_PT200_Checks_1000_zcalc_PRF_4IP_WFhatrecon.root
-dEdx: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_z160_PT200/3_DESY21_z160_PT200_dEdx_1000_zcalc_PRF_4IP_WFhatrecon.root
+Checks: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_z160_PT200/2_DESY21_z160_PT200_Checks_zcalc_G2.root
+dEdx: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_z160_PT200/3_DESY21_z160_PT200_dEdx_zcalc_G2.root
