@@ -240,6 +240,7 @@
  /local/home/td263283/root/include/RtypesCore.h \
  /local/home/td263283/root/include/ROOT/RConfig.hxx \
  /local/home/td263283/root/include/ROOT/../RVersion.h \
+ /local/home/td263283/root/include/ROOT/../ROOT/RVersion.hxx \
  /local/home/td263283/root/include/DllImport.h \
  /local/home/td263283/root/include/Math/Util.h \
  /local/home/td263283/root/include/Fit/UnBinData.h \
@@ -264,6 +265,7 @@
  /local/home/td263283/root/include/ROOT/TThreadExecutor.hxx \
  /local/home/td263283/root/include/ROOT/TExecutorCRTP.hxx \
  /local/home/td263283/root/include/ROOT/TSeq.hxx \
+ /local/home/td263283/root/include/ROOT/TypeTraits.hxx \
  /local/home/td263283/root/include/TList.h \
  /local/home/td263283/root/include/TSeqCollection.h \
  /local/home/td263283/root/include/TCollection.h \

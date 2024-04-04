@@ -75,7 +75,7 @@ LUT4::LUT4()
 }
 LUT4::LUT4(const std::string& filename, int& nZ, int& nRC)
 {
-  std::cout << "LUT: LOADING" << filename << std::endl ;
+  std::cout << "LUT: LOADING " << filename << std::endl ;
   Load(filename, nZ, nRC) ;
   std::cout << "LUT: LOADED" << std::endl ;
 }

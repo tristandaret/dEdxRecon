@@ -1,17 +1,158 @@
 Tag           : DESY21_zm40_PT200
-Comment       : _zcalc_G2
+Comment       : _trash
 FileName      : ../Data_DESY21_dev_v9/zscan_PT200/z_360_275_200_02T_26_m40_iter9.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
 Data_to_Use   : 0
 OUTDirName    : OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_zm40_PT200/
 
+ERAM#24: Gain hole in (iX,iY) = (33,28) | value reset at 1179.85
+ERAM#24: Gain hole in (iX,iY) = (34,19) | value reset at 1148.41
+ERAM#24:   RC hole in (iX,iY) = (33,28) | value reset at 112.77
+ERAM#24:   RC hole in (iX,iY) = (34,19) | value reset at 115.90
+ERAM#21: Gain hole in (iX,iY) = (25,28) | value reset at 1848.21
+ERAM#21:   RC hole in (iX,iY) = (25,28) | value reset at 102.75
+ERAM#09: Gain hole in (iX,iY) = (18,29) | value reset at 1434.90
+ERAM#09: Gain hole in (iX,iY) = (19,29) | value reset at 1362.05
+ERAM#09: Gain hole in (iX,iY) = (20,30) | value reset at 1436.12
+ERAM#09: Gain hole in (iX,iY) = (21,30) | value reset at 1384.65
+ERAM#09: Gain hole in (iX,iY) = (23,30) | value reset at 1458.56
+ERAM#09: Gain hole in (iX,iY) = (24,30) | value reset at 1408.71
+ERAM#09: Gain hole in (iX,iY) = (25,30) | value reset at 1368.79
+ERAM#09: Gain hole in (iX,iY) = (26,30) | value reset at 1416.86
+ERAM#09: Gain hole in (iX,iY) = (27,16) | value reset at 1539.40
+ERAM#09:   RC hole in (iX,iY) = (18,29) | value reset at 133.00
+ERAM#09:   RC hole in (iX,iY) = (19,29) | value reset at 133.49
+ERAM#09:   RC hole in (iX,iY) = (20,30) | value reset at 135.77
+ERAM#09:   RC hole in (iX,iY) = (21,30) | value reset at 135.66
+ERAM#09:   RC hole in (iX,iY) = (23,30) | value reset at 135.52
+ERAM#09:   RC hole in (iX,iY) = (24,30) | value reset at 135.25
+ERAM#09:   RC hole in (iX,iY) = (25,30) | value reset at 136.56
+ERAM#09:   RC hole in (iX,iY) = (26,30) | value reset at 139.30
+ERAM#09:   RC hole in (iX,iY) = (27,16) | value reset at 124.48
+ERAM#02: Gain hole in (iX,iY) = (29,21) | value reset at 1771.84
+ERAM#02:   RC hole in (iX,iY) = (29,21) | value reset at 111.08
 ERAM#01: Gain hole in (iX,iY) = (10,16) | value reset at 1889.24
 ERAM#01:   RC hole in (iX,iY) = (10,16) | value reset at 129.29
+ERAM#47: Gain hole in (iX,iY) = (34,5) | value reset at 1373.07
+ERAM#47:   RC hole in (iX,iY) = (34,5) | value reset at 165.09
+ERAM#14: Gain hole in (iX,iY) = (35,31) | value reset at 1114.79
+ERAM#14:   RC hole in (iX,iY) = (35,31) | value reset at 102.94
+ERAM#42: Gain hole in (iX,iY) = (5,23) | value reset at 1468.36
+ERAM#42:   RC hole in (iX,iY) = (5,23) | value reset at 166.41
+ERAM#45: Gain hole in (iX,iY) = (0,0) | value reset at 1601.87
+ERAM#45: Gain hole in (iX,iY) = (1,0) | value reset at 1492.33
+ERAM#45:   RC hole in (iX,iY) = (0,0) | value reset at 156.66
+ERAM#45:   RC hole in (iX,iY) = (1,0) | value reset at 154.01
+ERAM#37: Gain hole in (iX,iY) = (17,8) | value reset at 1767.60
+ERAM#37:   RC hole in (iX,iY) = (17,8) | value reset at 114.92
+ERAM#36: Gain hole in (iX,iY) = (27,24) | value reset at 1537.67
+ERAM#36:   RC hole in (iX,iY) = (27,24) | value reset at 122.98
+ERAM#07: Gain hole in (iX,iY) = (34,25) | value reset at 1836.84
+ERAM#07:   RC hole in (iX,iY) = (34,25) | value reset at 113.26
+ERAM#39: Gain hole in (iX,iY) = (32,27) | value reset at 1557.16
+ERAM#39:   RC hole in (iX,iY) = (32,27) | value reset at 139.62
+ERAM#41: Gain hole in (iX,iY) = (0,0) | value reset at 1349.24
+ERAM#41: Gain hole in (iX,iY) = (1,27) | value reset at 1394.48
+ERAM#41:   RC hole in (iX,iY) = (0,0) | value reset at 182.65
+ERAM#41:   RC hole in (iX,iY) = (1,27) | value reset at 147.26
+Number of pads in 24 = 1152.00
+Average gain in   24 = 1224.04
+
+Number of pads in 30 = 1152.00
+Average gain in   30 = 1160.23
+
+Number of pads in 28 = 1152.00
+Average gain in   28 = 1157.88
+
+Number of pads in 19 = 1152.00
+Average gain in   19 = 1316.88
+
+Number of pads in 21 = 1152.00
+Average gain in   21 = 1906.77
+
+Number of pads in 13 = 1152.00
+Average gain in   13 = 1714.63
+
+Number of pads in 09 = 1152.00
+Average gain in   09 = 1495.95
+
+Number of pads in 02 = 1152.00
+Average gain in   02 = 1722.77
+
+Number of pads in 29 = 1152.00
+Average gain in   29 = 1318.82
+
+Number of pads in 23 = 1152.00
+Average gain in   23 = 1393.41
+
+Number of pads in 17 = 1152.00
+Average gain in   17 = 1078.74
+
+Number of pads in 26 = 1152.00
+Average gain in   26 = 1202.23
+
+Number of pads in 03 = 1152.00
+Average gain in   03 = 1984.39
+
+Number of pads in 11 = 1152.00
+Average gain in   11 = 1576.75
+
+Number of pads in 10 = 1152.00
+Average gain in   10 = 1700.44
+
 Number of pads in 01 = 1152.00
 Average gain in   01 = 1947.72
 
-Average gain in bottom HATPC: 1947.00
+Number of pads in 47 = 1152.00
+Average gain in   47 = 1464.93
+
+Number of pads in 16 = 1152.00
+Average gain in   16 = 1695.31
+
+Number of pads in 14 = 1152.00
+Average gain in   14 = 1243.70
+
+Number of pads in 15 = 1152.00
+Average gain in   15 = 1628.50
+
+Number of pads in 42 = 1152.00
+Average gain in   42 = 1439.87
+
+Number of pads in 45 = 1152.00
+Average gain in   45 = 1542.99
+
+Number of pads in 37 = 1152.00
+Average gain in   37 = 1680.69
+
+Number of pads in 36 = 1152.00
+Average gain in   36 = 1610.16
+
+Number of pads in 20 = 1152.00
+Average gain in   20 = 1315.40
+
+Number of pads in 38 = 1152.00
+Average gain in   38 = 1524.21
+
+Number of pads in 07 = 1152.00
+Average gain in   07 = 1902.66
+
+Number of pads in 44 = 1152.00
+Average gain in   44 = 1488.49
+
+Number of pads in 43 = 1152.00
+Average gain in   43 = 1376.37
+
+Number of pads in 39 = 1152.00
+Average gain in   39 = 1648.62
+
+Number of pads in 41 = 1152.00
+Average gain in   41 = 1392.64
+
+Number of pads in 46 = 1152.00
+Average gain in   46 = 1522.57
+
+Average gain in bottom HATPC: 1511.00
 
 -------------->Predefined selection T_DESY21_Event
 Number of entries :8941
@@ -45,33 +186,10 @@ Apply selection  5 -> Reject Events with too few clusters
 
 zdrift        = 50 mm
 PT            = 200 ns
-TB            = 40 ns/time bin
-PT/TB         = 5 time bins
+TB            = 50 ns/time bin
+PT/TB         = 4 time bins
 z method      : zcalc
 cut length    = 2 mm
 
 Processing events:
 0/8941
-1000/8941
-2000/8941
-3000/8941
-4000/8941
-5000/8941
-6000/8941
-7000/8941
-8000/8941
-8940/8941
-
-Selection Statistics 
- #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
-    0  Stage1     8941     8941 (    0.00)  (    0.00)      8941     8941 (    0.00)  (    0.00)    303816   303816 (    0.00)  (    0.00)    884469   884469 (    0.00)  (    0.00) 
-    1 Stage11     8941     8852 (   -1.00)  (   -1.00)      8941     8852 (   -1.00)  (   -1.00)    303816   296501 (   -2.41)  (   -2.41)    884469   855418 (   -3.28)  (   -3.28) 
-    2Stage120     8852     8715 (   -1.55)  (   -2.53)      8852     8715 (   -1.55)  (   -2.53)    296501   292001 (   -1.52)  (   -3.89)    855418   844353 (   -1.29)  (   -4.54) 
-    3StageT15     8715     8495 (   -2.52)  (   -4.99)      8715     8495 (   -2.52)  (   -4.99)    292001   285641 (   -2.18)  (   -5.98)    844353   820069 (   -2.88)  (   -7.28) 
-    4 Stage10     8495     8495 (    0.00)  (   -4.99)      8495     8495 (    0.00)  (   -4.99)    285641   284638 (   -0.35)  (   -6.31)    820069   813649 (   -0.78)  (   -8.01) 
-    5 Stage14     8495     8492 (   -0.04)  (   -5.02)      8495     8492 (   -0.04)  (   -5.02)    284638   277518 (   -2.50)  (   -8.66)    813649   785606 (   -3.45)  (  -11.18) 
-    6  Stage5     8492     3386 (  -60.13)  (  -62.13)      8492     3386 (  -60.13)  (  -62.13)    277518   115124 (  -58.52)  (  -62.11)    785606   317624 (  -59.57)  (  -64.09) 
-  Summary Sel     8941     3386             (  -62.13)      8941     3386             (  -62.13)    303816   115124             (  -62.11)    884469   317624             (  -64.09) 
-Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_zm40_PT200/2_DESY21_zm40_PT200_Checks_zcalc_G2.root
-dEdx: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_zm40_PT200/3_DESY21_zm40_PT200_dEdx_zcalc_G2.root

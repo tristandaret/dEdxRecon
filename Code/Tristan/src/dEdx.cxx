@@ -90,16 +90,18 @@ void dEdx( const std::string& OutDir,
   if(FileName.find("All_ERAMS") != std::string::npos){
     ERAMS_iD     = {"07", "01", "23", "02", "16", "15", "10", "12"}; // MockUp CERN22
   }
+  // ERAMS_iD = {"24", "30", "28", "19", "21", "13", "09", "02", "26", "17", "23", "29", "01", "10", "11", "03",  /*bottom HATPC*/ 
+  //             "47", "16", "14", "15", "42", "45", "37", "36", "20", "38", "07", "44", "43", "39", "41", "46"}; /*top    HATPC*/
   // Get Gain & RC maps
   std::vector<ERAM_map*> RCmaps;
   std::vector<ERAM_map*> Gainmaps;
   for(std::string eram_id : ERAMS_iD){
     Gainmaps. push_back(new ERAM_map(eram_id, "Gain"));
     RCmaps.   push_back(new ERAM_map(eram_id, "RC"));
-  }
+  } 
 
   float avg_G = avg_Gain(Gainmaps);
-  std::cout << "Average gain in bottom HATPC: " << avg_G << std::endl;
+  std::cout << "Average gain in HATPCs: " << avg_G << std::endl;
 
   float costheta = 1;
   int theta_arr[] = {-45, -20, 20};

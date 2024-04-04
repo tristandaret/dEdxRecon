@@ -49,9 +49,7 @@ float avg_Gain(const std::vector<ERAM_map*>& Gainmaps){
     }
     avg_G /= n_pads ;
     v_avg_G.push_back(avg_G);
-    std::cout << "Number of pads in " << Gainmaps[i]->Get_iD() << " = " << n_pads << std::endl ;
     std::cout << "Average gain in   " << Gainmaps[i]->Get_iD() << " = " << avg_G << std::endl ;
-    std::cout << std::endl;
   }
   avg_G = std::accumulate(v_avg_G.begin(), v_avg_G.end(), 0)/Gainmaps.size();
   return avg_G;

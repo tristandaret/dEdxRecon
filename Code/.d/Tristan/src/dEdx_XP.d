@@ -5,6 +5,7 @@
  /local/home/td263283/root/include/RtypesCore.h \
  /local/home/td263283/root/include/ROOT/RConfig.hxx \
  /local/home/td263283/root/include/ROOT/../RVersion.h \
+ /local/home/td263283/root/include/ROOT/../ROOT/RVersion.hxx \
  /local/home/td263283/root/include/RConfigure.h \
  /local/home/td263283/root/include/DllImport.h \
  /local/home/td263283/root/include/TDirectoryFile.h \
