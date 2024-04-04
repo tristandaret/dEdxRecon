@@ -1,7 +1,7 @@
 #include "Tristan/dEdx.h"
 #include "Tristan/dEdx_func.h"
 #include "Tristan/Misc_Functions.h"
-#include "Tristan/ReadLUT_vROOT.h"
+#include "Tristan/ReadLUT_vTTree.h"
 
 #include <cmath>
 #include <numeric>
@@ -34,7 +34,7 @@ void dEdx( const std::string& OutDir,
                           Uploader*          pUploader,
                           int         const& NbrOfMod,
                           int         const& Data_to_Use,
-                          LUT4               LUT,
+                          LUT*               p_lut,
                           int         const& PT,
                           int         const& TB,
                           float       const& zdrift)
@@ -61,7 +61,7 @@ void dEdx( const std::string& OutDir,
   int gain_corr         = 1;                                   // apply XP gain correction
   int nERAMs            = 1;                                    // number of ERAMs to use (CERN22)
 
-  // Parameters for the LUT
+  // Parameters for the p_lut
   int   z_step          = 50;                                  // z   increment between LUTs
   int   RC_step         = 5;                                   // RC  increment between LUTs
 
@@ -139,7 +139,7 @@ void dEdx( const std::string& OutDir,
   TH1F* h1f_Gcorr           = new TH1F("h1f_Gcorr",           "Gain correction ratio;ratio;Count", 80, 0, 2);
   TH1F* h1f_WFcorr          = new TH1F("h1f_WFcorr",          "Correction A_{max} ratio;ratio;Count", 80, 0, 3);
   TH2F* h2f_dEdx_Y          = new TH2F("h2f_dEdx_Y",          "Y position VS dE/dx;dE/dx (ADC counts);Y position (cm)", 160, 0, 2000, 80, 0, 10);
-  TH2F* h2f_ratiodiffZ      = new TH2F("h2f_ratiodiffZ",      "LUT(z_{file}) vs LUT(z_{calc});LUT(z_{calc});LUT(z_{file})", 80, 0, 2.1, 80, 0, 2.1);
+  TH2F* h2f_ratiodiffZ      = new TH2F("h2f_ratiodiffZ",      "p_lut(z_{file}) vs p_lut(z_{calc});p_lut(z_{calc});p_lut(z_{file})", 80, 0, 2.1, 80, 0, 2.1);
   TH2F* h2f_AmaxvsLength    = new TH2F("h2f_AmaxvsLength",    "ADC_{max} VS length in pad (before length cut);Length in pad (mm);ADC_{max}", 80, -0.1, 16, 80, 0, 4100);
   TH2F* h2f_QvsLength       = new TH2F("h2f_QvsLength",       "Q^{anode} VS length in pad (before length cut);Length in pad (mm);Q^{anode}", 80, -0.1, 16, 80, 0, 4100);
   TH2F* h2f_LUTvsLength     = new TH2F("h2f_LUTvsLength",     "Q^{anode}/ADC_{max} VS length in pad (before length cut);Length in pad (mm);Q^{anode}/ADC_{max}", 80, -0.1, 16, 80, -0.1, 2.1);
@@ -302,29 +302,8 @@ void dEdx( const std::string& OutDir,
 
           if(length_in_pad <= len_cut)      continue;
           
-          // Interpolation phi
-          if(phi < -90) phi               = -90-2e+6;
-          if(phi >  90) phi               =  90-2e-6;
-          // Interpolation d
-          // d                              += dd;
-          if(d >  L/2) d                  =  L/2;
-          if(d < -L/2) d                  = -L/2;
-          float absd                      = fabs(d);
-          // Interpolation Z
-          // z_calc                         += 15;
-          if(z_calc < 0)    z_calc        = 0;
-          if(z_calc > 1000) z_calc        = 1e3;
-          float zfile                     = zdrift/z_step;
-          float zconv                     = z_calc/z_step;
-          // Interpolation RC
-          // RC_pad                         *= 1.02;
-          if(RC_pad < 50)  RC_pad         = 50;
-          if(RC_pad > 150) RC_pad         = 150;
-          float RCconv                    = (RC_pad-50)/RC_step;
-
-          float absphi                    = fabs(phi);
-          float ratio_zcalc               = LUT.Interpolate(absd, absphi, zconv, RCconv);
-          float ratio_zfile               = LUT.Interpolate(absd, absphi, zfile, RCconv);
+          float ratio_zcalc               = p_lut->ratio(fabs(phi), fabs(d), z_calc, RC_pad);
+          float ratio_zfile               = p_lut->ratio(fabs(phi), fabs(d), zdrift, RC_pad);
 
           float ratio;
           if(z_method == "zcalc") ratio   = ratio_zcalc;

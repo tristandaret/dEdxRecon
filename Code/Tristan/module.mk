@@ -9,7 +9,7 @@ FILES += src/dEdx
 FILES += src/dEdx_XP
 FILES += src/dEdx_func
 FILES += src/DrawOuts
-FILES += src/ReadLUT_vROOT
+FILES += src/ReadLUT_vTTree
 FILES += src/corr
 FILES += src/CombinedFit
 

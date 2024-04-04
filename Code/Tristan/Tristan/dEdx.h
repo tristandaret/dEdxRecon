@@ -3,6 +3,7 @@
 #include "Tristan/ReadLUT_vROOT.h"
 #include "SampleTools/Uploader.h"
 #include "SampleTools/GiveMe_Uploader.h"
+#include "Tristan/ReadLUT_vTTree.h"
 
 
 void dEdx( const std::string& OutDir,
@@ -13,7 +14,7 @@ void dEdx( const std::string& OutDir,
                           Uploader*          pUploader,
                           int         const& NbrOfMod,
                           int         const& Data_to_Use,
-                          LUT4               LUT,
+                          LUT*               p_lut,
                           int         const& PT,
                           int         const& TB,
                           float       const& zdrift) ;
