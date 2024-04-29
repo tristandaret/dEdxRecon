@@ -1,5 +1,5 @@
 Tag           : DESY21_z360_PT412
-Comment       : _zcalc_G2
+Comment       : _trash_LUTttree
 FileName      : ../Data_DESY21_dev_v9/zscan_PT412/z_360_275_412_02T_26_360_iter9.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
@@ -8,10 +8,8 @@ OUTDirName    : OUT_Tristan/DESY21_zscan/DESY21_zscan_PT412/DESY21_z360_PT412/
 
 ERAM#01: Gain hole in (iX,iY) = (10,16) | value reset at 1889.24
 ERAM#01:   RC hole in (iX,iY) = (10,16) | value reset at 129.29
-Number of pads in 01 = 1152.00
 Average gain in   01 = 1947.72
-
-Average gain in bottom HATPC: 1947.00
+Average gain in HATPCs: 1947.00
 
 -------------->Predefined selection T_DESY21_Event
 Number of entries :13564
@@ -63,20 +61,3 @@ Processing events:
 9000/13564
 10000/13564
 11000/13564
-12000/13564
-13000/13564
-13563/13564
-
-Selection Statistics 
- #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
-    0  Stage1    13564    13564 (    0.00)  (    0.00)     13564    13564 (    0.00)  (    0.00)    461034   461034 (    0.00)  (    0.00)   1682848  1682848 (    0.00)  (    0.00) 
-    1 Stage11    13564    13386 (   -1.31)  (   -1.31)     13564    13386 (   -1.31)  (   -1.31)    461034   448356 (   -2.75)  (   -2.75)   1682848  1621564 (   -3.64)  (   -3.64) 
-    2Stage120    13386    13240 (   -1.09)  (   -2.39)     13386    13240 (   -1.09)  (   -2.39)    448356   443638 (   -1.05)  (   -3.77)   1621564  1607770 (   -0.85)  (   -4.46) 
-    3StageT15    13240    12278 (   -7.27)  (   -9.48)     13240    12278 (   -7.27)  (   -9.48)    443638   413187 (   -6.86)  (  -10.38)   1607770  1477714 (   -8.09)  (  -12.19) 
-    4 Stage10    12278    12278 (    0.00)  (   -9.48)     12278    12278 (    0.00)  (   -9.48)    413187   409168 (   -0.97)  (  -11.25)   1477714  1452710 (   -1.69)  (  -13.68) 
-    5 Stage14    12278    12278 (    0.00)  (   -9.48)     12278    12278 (    0.00)  (   -9.48)    409168   406311 (   -0.70)  (  -11.87)   1452710  1439215 (   -0.93)  (  -14.48) 
-    6  Stage5    12278     6919 (  -43.65)  (  -48.99)     12278     6919 (  -43.65)  (  -48.99)    406311   235246 (  -42.10)  (  -48.97)   1439215   826139 (  -42.60)  (  -50.91) 
-  Summary Sel    13564     6919             (  -48.99)     13564     6919             (  -48.99)    461034   235246             (  -48.97)   1682848   826139             (  -50.91) 
-Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT412/DESY21_z360_PT412/2_DESY21_z360_PT412_Checks_zcalc_G2.root
-dEdx: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT412/DESY21_z360_PT412/3_DESY21_z360_PT412_dEdx_zcalc_G2.root

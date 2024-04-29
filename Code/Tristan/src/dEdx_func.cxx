@@ -125,9 +125,9 @@ void Init_selection(const std::string &SelectionSet, JFL_Selector &aJFL_Selector
 
 
 
-TF1* corr_func(const std::string &EventFile, const std::string &Tag, const int& mode){
+TF1* corr_func(const std::string &EventFile, const std::string &Tag, const bool &updated){
   TF1* corr_func = new TF1("corr_func", "291.012 + 9.4669*x - 4.04*x*x + 1.31624*x*x*x - 0.059534*x*x*x*x", 0, 17); // values provided by Vlada (2022/10/11)
-  if(mode == 2){
+  if(updated){
   if(Tag.find("diag") != std::string::npos){
     std::string filename      = EventFile.substr(0, EventFile.length()-5) ;
     int angle ;

@@ -19,4 +19,4 @@ float avg_Gain(const std::vector<ERAM_map*>& Gainmaps);
 void Init_selection(const std::string &SelectionSet, JFL_Selector &aJFL_Selector, const std::string &Tag, Uploader *pUploader, const int &NbrOfMod, const int &Data_to_Use);
 
 
-TF1* corr_func(const std::string &EventFile, const std::string &Tag, const int& mode) ;
+TF1* corr_func(const std::string &EventFile, const std::string &Tag, const bool &updated) ;

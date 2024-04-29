@@ -25,7 +25,6 @@ void Monitoring()
 
   int intUploader ;
   int NbrOfMod ;
-  int Data_to_Use     =  0 ; // no WF fit = 0       WF fit = 3 needs DoClosure
 
   // Run variables
   int PT ;      // Peaking time (ns)
@@ -36,7 +35,7 @@ void Monitoring()
   int nRC = 21 ; 
 
   std::string Tag    ; 
-  std::string Comment   = "_trash_LUTttree" ; // z method | gain_corr
+  std::string Comment   = "_trash_LUTttree150_150" ; // z method | gain_corr
   std::string WFversion = "_WF1";
   std::string prtcle ; 
   std::string EvtFile ;
@@ -84,7 +83,7 @@ void Monitoring()
     NbrOfMod        = -1 ;
     PT              = 412 ; Dt = 350 ; zdrift = 415 ; TB = 40 ;
     Uploader* pUpld ; LUT* p_lut ;
-    if (control or dedx) p_lut = new LUT(Form("~/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi200_nd100.root", Dt, PT)) ;
+    if (control or dedx) p_lut = new LUT(Form("~/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi150_nd150_nRC41_nZ21.root", Dt, PT)) ;
     int part_arr[] = {1,2,5,6} ;
     // int part_arr[] = {1} ;
     for (int iFile : part_arr) {
@@ -96,9 +95,9 @@ void Monitoring()
       if (iFile == 5) { EvtFile = "../Data_CERN22_vD/ERAM18_350V_412ns_mu+_1GeV_iter0.root" ;     Tag = "CERN22_ERAM18_mu+_1GeV" ;     prtcle = "#mu^{+} 1GeV" ;   }
       if (iFile == 6) { EvtFile = "../Data_CERN22_vD/ERAM18_350V_412ns_pi+_0p5GeV_iter0.root" ;   Tag = "CERN22_ERAM18_pi+_0p5GeV" ;   prtcle = "#pi^{+} 0.5GeV" ; }
       if (control or dedx) pUpld = GiveMe_Uploader (intUploader, EvtFile) ;
-      if (control)      Control       (OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, Data_to_Use, PT, TB, prtcle) ;
+      if (control)      Control       (OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, 0, PT, TB, prtcle) ;
       if (DO_control)   DrawOut_Control           (OutDir, Tag, Comment, SelectionSet, 1) ;
-      if (dedx)         dEdx       (OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, Data_to_Use, p_lut, PT, TB, zdrift) ;
+      if (dedx)         dEdx       (OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, 0, p_lut, PT, TB, zdrift) ;
       if (DO_Checks)     DrawOut_Checks            (OutDir, EvtFile, Tag, Comment) ;
       if (DO_Methods)  DrawOut_Methods        (OutDir, Tag, Comment, 1, prtcle) ;
       delete pUpld ;
@@ -117,7 +116,7 @@ void Monitoring()
     PT              = 412 ; Dt = 350 ; zdrift = 415 ; TB = 40 ;
 
     Uploader* pUpld ; LUT* p_lut ;
-    if (control or dedx) p_lut = new LUT(Form("~/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi200_nd100.root", Dt, PT)) ;
+    if (control or dedx) p_lut = new LUT(Form("~/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi150_nd150_nRC41_nZ21.root", Dt, PT)) ;
     // int NFiles = 14 ;
     // for (int iFile = 0 ; iFile < NFiles ; iFile++){
     int part_arr[] = {4, 7, 10, 13} ;
@@ -137,9 +136,9 @@ void Monitoring()
       if (iFile == 12) { EvtFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_p_1p25GeV_25V_z415p1_y2pad_iter0.root" ;     Tag = "CERN22_Escan_p+_1p25GeV" ; prtcle = "protons 1p25GeV (Mockup)" ;}
       if (iFile == 13) { EvtFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_p_1p5GeV_25V_z415_y2pad_2_iter0.root" ;      Tag = "CERN22_Escan_p+_1p5GeV" ;  prtcle = "protons 1p5GeV (Mockup)" ;}
       if(control or dedx) pUpld = GiveMe_Uploader (intUploader, EvtFile) ;
-      if (control)      Control       (OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, Data_to_Use, PT, TB, prtcle) ;
+      if (control)      Control       (OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, 0, PT, TB, prtcle) ;
       if (DO_control)   DrawOut_Control           (OutDir, Tag, Comment, SelectionSet, 4) ;
-      if (dedx)         dEdx       (OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, Data_to_Use, p_lut, PT, TB, zdrift) ;
+      if (dedx)         dEdx       (OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, 0, p_lut, PT, TB, zdrift) ;
       if (DO_Checks)     DrawOut_Checks            (OutDir, EvtFile, Tag, Comment) ;
       if (DO_Methods)  DrawOut_Methods        (OutDir, Tag, Comment, 1, prtcle) ;
       delete pUpld ;
@@ -164,20 +163,20 @@ void Monitoring()
       OutDir        = Form("OUT_Tristan/DESY21_zscan/DESY21_zscan_PT%i/", PT) ; 
       MakeMyDir(OutDir) ; 
       Uploader* pUpld ; LUT* p_lut ;
-      if (control or dedx) p_lut = new LUT(Form("~/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi200_nd100.root", Dt, PT)) ;
+      if (control or dedx) p_lut = new LUT(Form("~/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi150_nd150_nRC41_nZ21.root", Dt, PT)) ;
       // int         z_val[]   = {50, 150, 250, 350, 450, 550, 650, 750, 850, 950} ;
       // std::string z_arr[]   = {"m40", "060", "160", "260", "360", "460", "560", "660", "760", "860"} ;
       // int         z_val[]   = {50, 550, 950} ;
       // std::string z_arr[]   = {"m40", "460", "860"};
-      int         z_val[]   = {150} ;
-      std::string z_arr[]   = {"060"} ;
+      int         z_val[]   = {50} ;
+      std::string z_arr[]   = {"m40"} ;
       for (int iz = 0 ; iz < (int)std::size(z_arr) ; iz++){
         const char* z       = z_arr[iz].c_str() ;
         EvtFile             = Form("../Data_DESY21_dev_v9/zscan_PT%i/z_360_275_%i_02T_26_%s_iter9.root", PT, PT, z) ; Tag = Form("DESY21_z%s_PT%i", z, PT) ; prtcle = Form("electron_z%s", z) ;
         if(control or dedx) pUpld = GiveMe_Uploader (intUploader, EvtFile) ;
-        if (control)      Control       (OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, Data_to_Use, PT, TB, prtcle) ;
+        if (control)      Control       (OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, 0, PT, TB, prtcle) ;
         if (DO_control)   DrawOut_Control           (OutDir, Tag, Comment, SelectionSet, 1) ;
-        if (dedx)         dEdx       (OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, Data_to_Use, p_lut, PT, TB, z_val[iz]) ;
+        if (dedx)         dEdx       (OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, 0, p_lut, PT, TB, z_val[iz]) ;
         if (DO_Checks)    DrawOut_Checks            (OutDir, EvtFile, Tag, Comment) ;
         if (DO_Methods)   DrawOut_Methods           (OutDir, Tag, Comment, 1, prtcle) ;
       }
@@ -198,14 +197,14 @@ void Monitoring()
     OutDir          = "OUT_Tristan/DESY21_yscan/" ; 
     MakeMyDir(OutDir) ; 
     Uploader* pUpld ; LUT* p_lut ;
-    if (control or dedx) p_lut = new LUT(Form("~/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi200_nd100.root", Dt, PT)) ;
+    if (control or dedx) p_lut = new LUT(Form("~/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi150_nd150_nRC41_nZ21.root", Dt, PT)) ;
     std::string Y_arr[] = {"m140", "m120", "m100", "m80", "m60", "m40", "0", "20", "40", "60", "80"} ;
     for (int y = 0 ; y < (int)std::size(Y_arr) ; y++){
       EvtFile  = Form("../Data_DESY21_dev_v9/yscan/Y%s_Z0_iter9.root", Y_arr[y].c_str()) ; Tag = Form("DESY21_y%s", Y_arr[y].c_str()) ; prtcle = Form("electron_y%s", Y_arr[y].c_str()) ; 
       if(control or dedx) pUpld = GiveMe_Uploader (intUploader, EvtFile) ;
-      if (control)      Control       (OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, Data_to_Use, PT, TB, prtcle) ;
+      if (control)      Control       (OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, 0, PT, TB, prtcle) ;
       if (DO_control)   DrawOut_Control           (OutDir, Tag, Comment, SelectionSet, 1) ;
-      if (dedx)         dEdx       (OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, Data_to_Use, p_lut, PT, TB, zdrift) ;
+      if (dedx)         dEdx       (OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, 0, p_lut, PT, TB, zdrift) ;
       if (DO_Checks)     DrawOut_Checks            (OutDir, EvtFile, Tag, Comment) ;
       if (DO_Methods)  DrawOut_Methods        (OutDir, Tag, Comment, 1, prtcle) ;
     }
@@ -221,7 +220,7 @@ void Monitoring()
     NbrOfMod                    =  0 ;
     PT                          = 200 ; Dt = 310 ; TB = 40 ;
     Uploader* pUpld ; LUT* p_lut ;
-    if (control or dedx) p_lut = new LUT(Form("~/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi200_nd100.root", Dt, PT)) ;
+    if (control or dedx) p_lut = new LUT(Form("~/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi150_nd150_nRC41_nZ21.root", Dt, PT)) ;
     int         z_val[]         = {50, 550, 950} ;
     std::string z_arr[]         = {"m40", "460", "860"} ;
     // int         z_val[]         = {950} ;
@@ -242,9 +241,9 @@ void Monitoring()
                             Comment_phi = Comment + WFversion;}
 
         if(control or dedx) pUpld = GiveMe_Uploader (intUploader, EvtFile) ;
-        if (control)      Control                   (OutDir, Tag, Comment_phi, EvtFile, SelectionSet, pUpld, NbrOfMod, Data_to_Use, PT, TB, prtcle) ;
+        if (control)      Control                   (OutDir, Tag, Comment_phi, EvtFile, SelectionSet, pUpld, NbrOfMod, 0, PT, TB, prtcle) ;
         if (DO_control)   DrawOut_Control           (OutDir, Tag, Comment_phi, SelectionSet, 1) ;
-        if (dedx)         dEdx                      (OutDir, Tag, Comment_phi, EvtFile, SelectionSet, pUpld, NbrOfMod, Data_to_Use, p_lut, PT, TB, z_val[iz]) ;
+        if (dedx)         dEdx                      (OutDir, Tag, Comment_phi, EvtFile, SelectionSet, pUpld, NbrOfMod, 0, p_lut, PT, TB, z_val[iz]) ;
         if (DO_Checks)    DrawOut_Checks            (OutDir, EvtFile, Tag, Comment) ;
         if (DO_Methods)   DrawOut_Methods           (OutDir, Tag, Comment_phi, 1, prtcle) ;
         delete pUpld ;
@@ -268,14 +267,14 @@ void Monitoring()
     NbrOfMod        =  0 ;
     PT              = 200 ; Dt = 310 ; zdrift = 350 ; TB = 40 ;
     Uploader* pUpld ; LUT* p_lut ;
-    if (control or dedx) p_lut    = new LUT(Form("~/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi200_nd100.root", Dt, PT)) ;
+    if (control or dedx) p_lut    = new LUT(Form("~/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi150_nd150_nRC41_nZ21.root", Dt, PT)) ;
     std::string theta_arr[]     = {"m45", "m20", "20"} ;
     for (std::string theta : theta_arr){
       EvtFile                   = Form("../Data_DESY21_dev_v9/Theta_scan/theta_%s_02T_z460_ym60_iter9.root", theta.c_str()) ; Tag = Form("DESY21_theta%s", theta.c_str()) ; prtcle = Form("electron_theta%s", theta.c_str()) ;
       if(control or dedx) pUpld = GiveMe_Uploader (intUploader, EvtFile) ;
-      if (control)                Control(OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, Data_to_Use, PT, TB, prtcle) ;
+      if (control)                Control(OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, 0, PT, TB, prtcle) ;
       if (DO_control)             DrawOut_Control(OutDir, Tag, Comment, SelectionSet, 1) ;
-      if (dedx)                   dEdx(OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, Data_to_Use, p_lut, PT, TB, zdrift) ;
+      if (dedx)                   dEdx(OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, 0, p_lut, PT, TB, zdrift) ;
       if (DO_Checks)              DrawOut_Checks(OutDir, EvtFile, Tag, Comment) ;
       if (DO_Methods)             DrawOut_Methods(OutDir, Tag, Comment, 1, prtcle) ;
     }
@@ -317,15 +316,15 @@ void Monitoring()
     PT              = 200 ; Dt = 310 ; zdrift = 950 ; TB = 40 ;
 
     Uploader* pUpld ; LUT* p_lut ;
-    if (control or dedx) p_lut = new LUT(Form("~/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi200_nd100.root", Dt, PT)) ;
+    if (control or dedx) p_lut = new LUT(Form("~/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi150_nd150_nRC41_nZ21.root", Dt, PT)) ;
     // int mag_arr[] = {0, 2, 4, 10} ;
     int mag_arr[] = {0,2,4} ;
     for (int mag : mag_arr){
       EvtFile                    = Form            ("../Data_DESY21_dev_v9/Mag_scan/mag_%i_200_ym60_iter0.root", mag) ; Tag = Form("DESY21_mag%i", mag) ; prtcle = Form("electron_mag%i", mag) ;
       if(control or dedx) pUpld = GiveMe_Uploader (intUploader, EvtFile) ;
-      if (control)      Control       (OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, Data_to_Use, PT, TB, prtcle) ;
+      if (control)      Control       (OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, 0, PT, TB, prtcle) ;
       if (DO_control)   DrawOut_Control           (OutDir, Tag, Comment, SelectionSet, 1) ;
-      if (dedx)         dEdx       (OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, Data_to_Use, p_lut, PT, TB, zdrift) ;
+      if (dedx)         dEdx       (OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, 0, p_lut, PT, TB, zdrift) ;
       if (DO_Methods)  DrawOut_Methods        (OutDir, Tag, Comment, 1, prtcle) ;
       if (DO_Checks)     DrawOut_Checks            (OutDir, EvtFile, Tag, Comment) ;
     }
@@ -344,7 +343,7 @@ void Monitoring()
     NbrOfMod        =  0 ;
     PT              = 200 ; Dt = 310 ; ; TB = 40 ;
     Uploader* pUpld ; LUT* p_lut ;
-    if (control or dedx) p_lut      = new LUT(Form("~/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi200_nd100.root", Dt, PT)) ;
+    if (control or dedx) p_lut      = new LUT(Form("~/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi150_nd150_nRC41_nZ21.root", Dt, PT)) ;
     std::string B_arr[]           = {"0", "04", "06"} ;
     std::string Z_arr[]           = {"60", "460", "860"} ;
     int Z_val[]                   = {150, 550, 950} ;
@@ -355,9 +354,9 @@ void Monitoring()
         // EvtFile                  = Form            ("../Data_DESY21_dev_v9/ExB_scan/ExB_360_412ns_B02_ym10_z%s_iter9.root", z) ; Tag = Form("DESY21_ExB02_Z%s", z) ; prtcle = Form("electron_ExB02_Z%s", z) ;
         EvtFile                   = Form            ("../Data_DESY21_dev_v9/ExB_scan/ExB_360_phim3_200ns_B%s_ym60_z%s_iter0.root", B, z) ; Tag = Form("DESY21_ExB%s_Z%s", B, z) ; prtcle = Form("electron_ExB%s_Z%s", B, z) ;
         if(control or dedx) pUpld = GiveMe_Uploader (intUploader, EvtFile) ;
-        if (control)                Control (OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, Data_to_Use, PT, TB, prtcle) ;
+        if (control)                Control (OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, 0, PT, TB, prtcle) ;
         if (DO_control)             DrawOut_Control (OutDir, Tag, Comment, SelectionSet, 1) ;
-        if (dedx)                   dEdx (OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, Data_to_Use, p_lut, PT, TB, Z_val[i]) ;
+        if (dedx)                   dEdx (OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, 0, p_lut, PT, TB, Z_val[i]) ;
         if (DO_Methods)             DrawOut_Methods (OutDir, Tag, Comment, 1, prtcle) ;
         if (DO_Checks)              DrawOut_Checks (OutDir, EvtFile, Tag, Comment) ;
       }
@@ -375,7 +374,7 @@ void Monitoring()
     NbrOfMod        =  0 ;
     PT              = 412 ; Dt = 310 ; TB = 40 ; zdrift = 430 ;
     Uploader* pUpld ; LUT* p_lut ;
-    if (control or dedx) p_lut = new LUT(Form("~/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi200_nd100.root", Dt, PT)) ;
+    if (control or dedx) p_lut = new LUT(Form("~/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi150_nd150_nRC41_nZ21.root", Dt, PT)) ;
     int phi_val[]   = {0, 10, 20, 30, 40, 45} ;
     int NFiles      = 6 ;
     OutDir          = "OUT_Tristan/DESY19_phi/" ;
@@ -385,9 +384,9 @@ void Monitoring()
       if(ifile < 3) { EvtFile  = Form("../Data_DESY19/Phi_scan/phi_412_%i_iter0.root", phi) ;       Tag = Form("DESY19_phi%i", phi) ;      prtcle = Form("electron_phi%i", phi) ; }
       else          { EvtFile  = Form("../Data_DESY19/Phi_scan/phi_412_%i_diag_iter0.root", phi) ;  Tag = Form("DESY19_phi%i_diag", phi) ; prtcle = Form("electron_phi%i_diag", phi) ; }
       if(control or dedx) pUpld = GiveMe_Uploader (intUploader, EvtFile) ;
-      if (control)      Control       (OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, Data_to_Use, PT, TB, prtcle) ;
+      if (control)      Control       (OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, 0, PT, TB, prtcle) ;
       if (DO_control)   DrawOut_Control           (OutDir, Tag, Comment, SelectionSet, 1) ;
-      if (dedx)         dEdx       (OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, Data_to_Use, p_lut, PT, TB, zdrift) ;
+      if (dedx)         dEdx       (OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, 0, p_lut, PT, TB, zdrift) ;
       if (DO_Checks)     DrawOut_Checks            (OutDir, EvtFile, Tag, Comment) ;
       if (DO_Methods)  DrawOut_Methods        (OutDir, Tag, Comment, 1, prtcle) ;
       delete pUpld ;
@@ -406,16 +405,16 @@ void Monitoring()
     NbrOfMod        = -1 ;
     PT              = 412 ; Dt = 286 ; TB = 40 ; // PT = 400 actually
     Uploader* pUpld ; LUT* p_lut ;
-    if (control or dedx) p_lut = new LUT(Form("~/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi200_nd100.root", Dt, PT)) ;
+    if (control or dedx) p_lut = new LUT(Form("~/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi150_nd150_nRC41_nZ21.root", Dt, PT)) ;
     int zmax = 9 ;
     for (int zDrift = 0 ; zDrift < zmax ; zDrift++){
       // EvtFile = Form("../Data_MC/MC_zscan/z_400_nomDrift_%i0cm_MD_RC100_v2_iter4.root", zDrift+1) ; Tag = Form("CERN23_MC_z%i00", zDrift+1) ; prtcle = Form("MC %i0cm", zDrift+1) ;      
       EvtFile = Form("../Data_MC/MC_zscan/z_400_nomDrift_%i0cm_NoOpt_iter4.root", zDrift+1) ; Tag = Form("CERN23_MC_z%i00", zDrift+1) ; prtcle = Form("MC %i0cm NoOpt", zDrift+1) ;      
       // EvtFile = Form("../Data_MC/MC_zscan/z_400_nomDrift_%i0cm_RC100_iter4.root", zDrift+1) ; Tag = Form("CERN23_MC_z%i00_old", zDrift+1) ; prtcle = Form("MC %i0cm old", zDrift+1) ;      
       if(control or dedx) pUpld = GiveMe_Uploader (intUploader, EvtFile) ;
-      if (control)      Control       (OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, Data_to_Use, PT, TB, prtcle) ;
+      if (control)      Control       (OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, 0, PT, TB, prtcle) ;
       if (DO_control)   DrawOut_Control           (OutDir, Tag, Comment, SelectionSet, 1) ;
-      if (dedx)         dEdx       (OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, Data_to_Use, p_lut, PT, TB, (zDrift+1)*100) ;
+      if (dedx)         dEdx       (OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, 0, p_lut, PT, TB, (zDrift+1)*100) ;
       if (DO_Checks)     DrawOut_Checks            (OutDir, EvtFile, Tag, Comment) ;
       if (DO_Methods)  DrawOut_Methods        (OutDir, Tag, Comment, 1, prtcle) ;
     }
@@ -461,15 +460,15 @@ void Monitoring()
       OutDir        = Form("OUT_Tristan/DESY21_zscan/DESY21_zscan_PT%i_139V/", PT) ; 
       MakeMyDir(OutDir) ; 
       Uploader* pUpld ; LUT* p_lut ;
-    if (control or dedx) p_lut = new LUT(Form("~/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi200_nd100.root", Dt, PT)) ;
+    if (control or dedx) p_lut = new LUT(Form("~/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi150_nd150_nRC41_nZ21.root", Dt, PT)) ;
       int NFiles = 9 ;
       for (int zDrift = -1 ; zDrift < NFiles ; zDrift++){
         if(zDrift == -1) {EvtFile  = Form("../Data_DESY21_dev_v9/zscan_PT%i_139V/z_360_139_%i_02T_26_m40_iter0.root", PT, PT) ;          Tag = Form("DESY21_zm40_PT%i", PT) ;          prtcle = "electron_z-40" ; }
         else {EvtFile              = Form("../Data_DESY21_dev_v9/zscan_PT%i_139V/z_360_139_%i_02T_26_%i60_iter0.root", PT, PT, zDrift) ; Tag = Form("DESY21_z%i60_PT%i", zDrift, PT) ; prtcle = Form("electron_z%i60", zDrift) ; }
         if(control or dedx) pUpld = GiveMe_Uploader (intUploader, EvtFile) ;
-        if (control)      Control       (OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, Data_to_Use, PT, TB, prtcle) ;
+        if (control)      Control       (OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, 0, PT, TB, prtcle) ;
         if (DO_control)   DrawOut_Control           (OutDir, Tag, Comment, SelectionSet, 1) ;
-        if (dedx)         dEdx       (OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, Data_to_Use, p_lut, PT, TB, zdrift*100+150) ;
+        if (dedx)         dEdx       (OutDir, Tag, Comment, EvtFile, SelectionSet, pUpld, NbrOfMod, 0, p_lut, PT, TB, zdrift*100+150) ;
         if (DO_Methods)  DrawOut_Methods        (OutDir, Tag, Comment, 1, prtcle) ;
       }
       if(DO_Resolution)   DrawOut_Zscan  (Form("OUT_Tristan/DESY21_zscan/DESY21_zscan_PT%i_139V", PT), Comment, PT) ;
@@ -494,7 +493,7 @@ void Monitoring()
     SelectionSet          = "T2_CERN22_Event" ;
     EvtFile                = "../Data_CERN22_vD_iter0/ERAM18_350V_412ns_e+_1GeV_iter0.root" ; Tag = "CERN22_ERAM18_e+_1GeV" ; prtcle = "e^{+} 1GeV" ;
     Uploader* pUpld       = GiveMe_Uploader(intUploader, EvtFile) ; 
-    Displayer(OutDir, Tag, SelectionSet, pUpld, 0, Data_to_Use, prtcle) ;
+    Displayer(OutDir, Tag, SelectionSet, pUpld, 0, 0, prtcle) ;
     delete                  pUpld ;
   }
 
@@ -509,7 +508,7 @@ void Monitoring()
         OutDir            = Form("../Data_DESY21_dev_v9/Phi_scan_z%s/phi_200_%i_z%s_ym60_diag_iter9", z_index[iz].c_str(), phi_val[iphi], z_index[iz].c_str()) ; 
         Tag               = Form("DESY21_phi%i_diag_z%s", phi_val[iphi], z_index[iz].c_str()) ;
         Uploader* pUpld   = GiveMe_Uploader (intUploader, OutDir+".root") ;  
-        corr(OutDir, Tag, SelectionSet, pUpld, NbrOfMod, Data_to_Use) ;
+        corr(OutDir, Tag, SelectionSet, pUpld, NbrOfMod, 0) ;
         delete pUpld ;
       }
     }

@@ -1,7 +1,7 @@
 #include "Tristan/dEdx.h"
+#include "Tristan/THATdEdx.hxx"
 #include "Tristan/dEdx_func.h"
 #include "Tristan/Misc_Functions.h"
-#include "Tristan/ReadLUT_vTTree.h"
 
 #include <cmath>
 #include <numeric>
@@ -13,8 +13,8 @@
 #include "TGraphErrors.h"
 #include "TPaveStats.h"
 
-#include "AnalysisTools/DoTracksReconstruction.h"
 #include "EvtModelTools/JFL_Selector.h"
+#include "AnalysisTools/DoTracksReconstruction.h"
 #include "EvtModelTools/EvtModelTools_Histos.h"
 #include "EvtModelTools/EvtModelTools_TD_Selections.h"
 #include "EvtModelTools/JFL_Do_ClusterFit.h"
@@ -26,19 +26,7 @@
 #include "SampleTools/ReadGainmap.h"
 #include "SignalShape/PRF_param.h"
 
-void dEdx( const std::string& OutDir,
-                          std::string const& Tag,
-                          std::string const& Comment,
-                          std::string const& FileName,
-                          std::string const& SelectionSet,
-                          Uploader*          pUploader,
-                          int         const& NbrOfMod,
-                          int         const& Data_to_Use,
-                          LUT*               p_lut,
-                          int         const& PT,
-                          int         const& TB,
-                          float       const& zdrift)
-
+void dEdx()
 { 
   std::string OUTDirName                    = OutDir + Tag + "/";
   MakeMyDir(OUTDirName);
@@ -76,10 +64,10 @@ void dEdx( const std::string& OutDir,
 
   std::cout << "Tag           : " << Tag          << std::endl;
   std::cout << "Comment       : " << Comment      << std::endl;
-  std::cout << "FileName      : " << FileName    << std::endl;
+  std::cout << "FileName      : " << FileName     << std::endl;
   std::cout << "SelectionSet  : " << SelectionSet << std::endl;
   std::cout << "NbrOfMod      : " << NbrOfMod     << std::endl;
-  std::cout << "Data_to_Use   : " << Data_to_Use  << std::endl;
+  std::cout << "0   : " << 0  << std::endl;
   std::cout << "OUTDirName    : " << OUTDirName   << std::endl;
   std::cout <<                                       std::endl;
 
@@ -113,7 +101,7 @@ void dEdx( const std::string& OutDir,
   int NEvent = pUploader->Get_NberOfEvent();
   std::cout << "Number of entries :" << NEvent << std::endl;
 
-  Init_selection(SelectionSet, aJFL_Selector, Tag, pUploader, NbrOfMod, Data_to_Use);
+  Init_selection(SelectionSet, aJFL_Selector, Tag, pUploader, NbrOfMod, 0);
     
   aJFL_Selector.Tell_Selection();
 
@@ -173,7 +161,7 @@ void dEdx( const std::string& OutDir,
   std::cout << "Processing events:" << std::endl;
   for (int iEvent = 0; iEvent < NEvent; iEvent++){
     if(iEvent % 1000 == 0 or iEvent == NEvent-1) std::cout << iEvent << "/" << NEvent << std::endl;
-    Event*  pEvent                        = pUploader->GiveMe_Event(iEvent, NbrOfMod, Data_to_Use, 0);
+    Event*  pEvent                        = pUploader->GiveMe_Event(iEvent, NbrOfMod, 0, 0);
     if (!pEvent)                            continue;
     aJFL_Selector.                          ApplySelection(pEvent);
     if (pEvent->IsValid() != 1)             continue;
@@ -302,8 +290,8 @@ void dEdx( const std::string& OutDir,
 
           if(length_in_pad <= len_cut)      continue;
           
-          float ratio_zcalc               = p_lut->ratio(fabs(phi), fabs(d), z_calc, RC_pad);
-          float ratio_zfile               = p_lut->ratio(fabs(phi), fabs(d), zdrift, RC_pad);
+          float ratio_zcalc               = p_lut->ratio(fabs(phi), fabs(d), RC_pad, z_calc);
+          float ratio_zfile               = p_lut->ratio(fabs(phi), fabs(d), RC_pad, zdrift);
 
           float ratio;
           if(z_method == "zcalc") ratio   = ratio_zcalc;
