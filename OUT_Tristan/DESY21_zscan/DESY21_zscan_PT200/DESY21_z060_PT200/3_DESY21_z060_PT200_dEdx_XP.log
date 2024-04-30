@@ -4,7 +4,7 @@ FileName      : ../Data_DESY21_dev_v9/zscan_PT200/z_360_275_200_02T_26_060_iter9
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
 Data_to_Use   : 0
-OUTDirName    : OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_z060_PT200/
+OUTDirName    : OUT_PID/DESY21_zscan/DESY21_zscan_PT200/DESY21_z060_PT200/
 
 ERAM#01: Gain hole in (iX,iY) = (10,16) | value reset at 1889.24
 ERAM#01:   RC hole in (iX,iY) = (10,16) | value reset at 129.29
@@ -83,5 +83,5 @@ Selection Statistics
     6  Stage5     9606     4420 (  -53.99)  (  -56.24)      9606     4420 (  -53.99)  (  -56.24)    316147   150280 (  -52.47)  (  -56.22)    893376   416552 (  -53.37)  (  -58.06) 
   Summary Sel    10101     4420             (  -56.24)     10101     4420             (  -56.24)    343292   150280             (  -56.22)    993319   416552             (  -58.06) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_z060_PT200/2_DESY21_z060_PT200_Checks_zcalc_G2.root
-dEdx: OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_z060_PT200/3_DESY21_z060_PT200_dEdx_zcalc_G2.root
+Checks: OUT_PID/DESY21_zscan/DESY21_zscan_PT200/DESY21_z060_PT200/2_DESY21_z060_PT200_Checks_zcalc_G2.root
+dEdx: OUT_PID/DESY21_zscan/DESY21_zscan_PT200/DESY21_z060_PT200/3_DESY21_z060_PT200_dEdx_zcalc_G2.root

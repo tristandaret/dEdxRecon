@@ -1039,6 +1039,92 @@ USEWILDCARD :=
 PROGRAMS :=
 SKIP_THISMODULE :=
 
+THISMODULE := PID
+
+# including the module.mk file
+-include $(patsubst %, %/module.mk,PID)
+-include $(patsubst %, %/pfgct/module.mk,PID)
+
+ifndef SKIP_THISMODULE
+
+ifdef USEWILDCARD
+  FILES := $(patsubst PID/%,%,$(basename $(wildcard $(patsubst %,PID/%,$(FILES)))))
+endif
+
+# appending the values found in FILES to the variable SRC
+SRC += $(patsubst %,PID/%,$(FILES))
+
+# all subdirectories for this given set of FILES
+SUBDIRS := $(sort PID/ $(dir $(patsubst %,PID/%,$(FILES))))
+
+# put these subdirectories in the INCLUDEFLAGS
+INCLUDEFLAGS += $(patsubst %, -I%, $(SUBDIRS))
+
+## appending the values found in DICTFILES to DICTHEADERS or DICTH_modulename
+ifeq ($(BUILDCOMMONDICT),no)
+  DICTH_PID := $(foreach i, $(patsubst %,PID/%,$(DICTFILES)), $(wildcard $(i).h) $(wildcard $(i).hh) $(wildcard $(i)))
+  # if dict header files exist, append to variable SRC
+  ifneq ($(DICTH_PID),)
+  SRC += PID/dict_PID
+  endif
+else
+  DICTHEADERS += $(foreach i, $(patsubst %,PID/%,$(DICTFILES)), $(wildcard $(i).h) $(wildcard $(i).hh) $(wildcard $(i)))
+endif
+
+# appending the values found in REFLEXFILES to REFLEXH_modulename
+REFLEXH_PID := $(foreach i, $(patsubst %,PID/%,$(REFLEXFILES)), $(wildcard $(i).h) $(wildcard $(i).hh) $(wildcard $(i)))
+SELECTIONXML_PID := $(filter %selection.xml,$(REFLEXH_PID))
+REFLEXH_PID := $(filter-out %selection.xml,$(REFLEXH_PID))
+# if reflex header files exist, append to variable SRC
+ifneq ($(REFLEXH_PID),)
+ifeq ($(SELECTIONXML_PID),)
+$(error No selection.xml file specified in the REFLEXFILES of module PID)
+endif
+ifneq ($(BUILDCOMMONDICT),no)
+$(error Module PID : common dictionary building is not implemented for REFLEX.)
+endif
+SRC += PID/reflexdict_PID
+ADDDEPS += ${DEPDIR}/PID/reflexdict_PID.gendict.d
+endif
+
+PROG += $(patsubst %,$(BINDIR)/%,$(notdir $(PROGRAMS)))
+
+# appending the values found in FILES to the variable SRC
+PROGSRC += $(patsubst %,PID/%,$(PROGRAMS))
+
+PID_PROGDIRS := $(sort $(dir $(PROGRAMS)))
+
+# a couple of rules to copy executable files correctly
+$(BINDIR)/%: ${OBJDIR}/PID/%.bin
+	cp $^ $@
+
+$(BINDIR)/%: PID/%
+	cp $^ $@
+
+$(BINDIR)/%: PID/bin/%
+	cp $^ $@
+
+define PID_PROGRAM_template
+$(BINDIR)/%: ${OBJDIR}/PID/$(1)/%.bin
+	cp $$^ $$@
+endef
+
+$(foreach sd,$(PID_PROGDIRS),$(eval $(call PID_PROGRAM_template,$(sd))))
+
+PID/%SK.cc PID/%.hh: PID/idl/%.idl
+	omniidl $(OMNICORBAFLAGS) -CPID -bcxx $^
+
+endif
+
+
+# module.mk appends to FILES and DICTFILES
+FILES :=
+DICTFILES :=
+REFLEXFILES :=
+USEWILDCARD := 
+PROGRAMS :=
+SKIP_THISMODULE :=
+
 THISMODULE := Procedures
 
 # including the module.mk file
@@ -1629,92 +1715,6 @@ $(foreach sd,$(Tristan_DESY21_PROGDIRS),$(eval $(call Tristan_DESY21_PROGRAM_tem
 
 Tristan_DESY21/%SK.cc Tristan_DESY21/%.hh: Tristan_DESY21/idl/%.idl
 	omniidl $(OMNICORBAFLAGS) -CTristan_DESY21 -bcxx $^
-
-endif
-
-
-# module.mk appends to FILES and DICTFILES
-FILES :=
-DICTFILES :=
-REFLEXFILES :=
-USEWILDCARD := 
-PROGRAMS :=
-SKIP_THISMODULE :=
-
-THISMODULE := Tristan
-
-# including the module.mk file
--include $(patsubst %, %/module.mk,Tristan)
--include $(patsubst %, %/pfgct/module.mk,Tristan)
-
-ifndef SKIP_THISMODULE
-
-ifdef USEWILDCARD
-  FILES := $(patsubst Tristan/%,%,$(basename $(wildcard $(patsubst %,Tristan/%,$(FILES)))))
-endif
-
-# appending the values found in FILES to the variable SRC
-SRC += $(patsubst %,Tristan/%,$(FILES))
-
-# all subdirectories for this given set of FILES
-SUBDIRS := $(sort Tristan/ $(dir $(patsubst %,Tristan/%,$(FILES))))
-
-# put these subdirectories in the INCLUDEFLAGS
-INCLUDEFLAGS += $(patsubst %, -I%, $(SUBDIRS))
-
-## appending the values found in DICTFILES to DICTHEADERS or DICTH_modulename
-ifeq ($(BUILDCOMMONDICT),no)
-  DICTH_Tristan := $(foreach i, $(patsubst %,Tristan/%,$(DICTFILES)), $(wildcard $(i).h) $(wildcard $(i).hh) $(wildcard $(i)))
-  # if dict header files exist, append to variable SRC
-  ifneq ($(DICTH_Tristan),)
-  SRC += Tristan/dict_Tristan
-  endif
-else
-  DICTHEADERS += $(foreach i, $(patsubst %,Tristan/%,$(DICTFILES)), $(wildcard $(i).h) $(wildcard $(i).hh) $(wildcard $(i)))
-endif
-
-# appending the values found in REFLEXFILES to REFLEXH_modulename
-REFLEXH_Tristan := $(foreach i, $(patsubst %,Tristan/%,$(REFLEXFILES)), $(wildcard $(i).h) $(wildcard $(i).hh) $(wildcard $(i)))
-SELECTIONXML_Tristan := $(filter %selection.xml,$(REFLEXH_Tristan))
-REFLEXH_Tristan := $(filter-out %selection.xml,$(REFLEXH_Tristan))
-# if reflex header files exist, append to variable SRC
-ifneq ($(REFLEXH_Tristan),)
-ifeq ($(SELECTIONXML_Tristan),)
-$(error No selection.xml file specified in the REFLEXFILES of module Tristan)
-endif
-ifneq ($(BUILDCOMMONDICT),no)
-$(error Module Tristan : common dictionary building is not implemented for REFLEX.)
-endif
-SRC += Tristan/reflexdict_Tristan
-ADDDEPS += ${DEPDIR}/Tristan/reflexdict_Tristan.gendict.d
-endif
-
-PROG += $(patsubst %,$(BINDIR)/%,$(notdir $(PROGRAMS)))
-
-# appending the values found in FILES to the variable SRC
-PROGSRC += $(patsubst %,Tristan/%,$(PROGRAMS))
-
-Tristan_PROGDIRS := $(sort $(dir $(PROGRAMS)))
-
-# a couple of rules to copy executable files correctly
-$(BINDIR)/%: ${OBJDIR}/Tristan/%.bin
-	cp $^ $@
-
-$(BINDIR)/%: Tristan/%
-	cp $^ $@
-
-$(BINDIR)/%: Tristan/bin/%
-	cp $^ $@
-
-define Tristan_PROGRAM_template
-$(BINDIR)/%: ${OBJDIR}/Tristan/$(1)/%.bin
-	cp $$^ $$@
-endef
-
-$(foreach sd,$(Tristan_PROGDIRS),$(eval $(call Tristan_PROGRAM_template,$(sd))))
-
-Tristan/%SK.cc Tristan/%.hh: Tristan/idl/%.idl
-	omniidl $(OMNICORBAFLAGS) -CTristan -bcxx $^
 
 endif
 

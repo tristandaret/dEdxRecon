@@ -4,7 +4,7 @@ FileName      : ../Data_DESY21_dev_v9/zscan_PT200/z_360_275_200_02T_26_m40_iter9
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
 Data_to_Use   : 0
-OUTDirName    : OUT_Tristan/DESY21_zscan/DESY21_zscan_PT200/DESY21_zm40_PT200/
+OUTDirName    : OUT_PID/DESY21_zscan/DESY21_zscan_PT200/DESY21_zm40_PT200/
 
 ERAM#24: Gain hole in (iX,iY) = (33,28) | value reset at 1179.85
 ERAM#24: Gain hole in (iX,iY) = (34,19) | value reset at 1148.41

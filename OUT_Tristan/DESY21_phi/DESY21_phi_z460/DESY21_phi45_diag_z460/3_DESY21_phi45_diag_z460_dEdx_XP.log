@@ -4,7 +4,7 @@ FileName      : ../Data_DESY21_dev_v9/Phi_scan_z460/phi_200_45_z460_ym60_diag_it
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
 Data_to_Use   : 0
-OUTDirName    : OUT_Tristan/DESY21_phi/DESY21_phi_z460/DESY21_phi45_diag_z460/
+OUTDirName    : OUT_PID/DESY21_phi/DESY21_phi_z460/DESY21_phi45_diag_z460/
 
 ERAM#01: Gain hole in (iX,iY) = (10,16) | value reset at 1889.24
 ERAM#01:   RC hole in (iX,iY) = (10,16) | value reset at 129.29
@@ -376,5 +376,5 @@ Selection Statistics
     6  Stage5    12703    11363 (  -10.55)  (  -14.42)     12703    11363 (  -10.55)  (  -14.42)    651228   593811 (   -8.82)  (  -15.17)   1265991  1146057 (   -9.47)  (  -17.82) 
   Summary Sel    13277    11363             (  -14.42)     13277    11363             (  -14.42)    700021   593811             (  -15.17)   1394604  1146057             (  -17.82) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_phi/DESY21_phi_z460/DESY21_phi45_diag_z460/2_DESY21_phi45_diag_z460_Checks_zcalc_G2_WF2.root
-dEdx: OUT_Tristan/DESY21_phi/DESY21_phi_z460/DESY21_phi45_diag_z460/3_DESY21_phi45_diag_z460_dEdx_zcalc_G2_WF2.root
+Checks: OUT_PID/DESY21_phi/DESY21_phi_z460/DESY21_phi45_diag_z460/2_DESY21_phi45_diag_z460_Checks_zcalc_G2_WF2.root
+dEdx: OUT_PID/DESY21_phi/DESY21_phi_z460/DESY21_phi45_diag_z460/3_DESY21_phi45_diag_z460_dEdx_zcalc_G2_WF2.root

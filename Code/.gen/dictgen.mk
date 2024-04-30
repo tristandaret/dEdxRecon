@@ -142,6 +142,18 @@ MTools/reflexdict_MTools.hh: $(REFLEXH_MTools)
 MTools/reflexdict_MTools.cc: MTools/reflexdict_MTools.hh $(SELECTIONXML_MTools) ${DEPDIR}/MTools/reflexdict_MTools.gendict.d
 	@echo "Generating reflex dictionary $@..."
 	@$(GENREFLEX) $< --fail_on_warnings --quiet --multiDict -l $(SOLIBD) -s $(SELECTIONXML_MTools) -o $@ $(filter -I% -D%,$(CXXFLAGS))
+PID/dict_PID.cc: $(DICTH_PID)
+	@echo "Generating dictionary $@..."
+	@$(ROOTCINT) -f $@ -c -p -multiDict -s $(SOLIBD) $(filter -I% -D%,$(CXXFLAGS)) $^
+PID/reflexdict_PID.hh: $(REFLEXH_PID)
+	@echo "Generating reflex header $@..."
+	@echo "#ifndef PID_REFLEXDICT_PID_HH" > $@
+	@echo "#define PID_REFLEXDICT_PID_HH" >> $@
+	@for i in $^; do echo '#include "'$${i}'"' >> $@; done
+	@echo "#endif" >> $@
+PID/reflexdict_PID.cc: PID/reflexdict_PID.hh $(SELECTIONXML_PID) ${DEPDIR}/PID/reflexdict_PID.gendict.d
+	@echo "Generating reflex dictionary $@..."
+	@$(GENREFLEX) $< --fail_on_warnings --quiet --multiDict -l $(SOLIBD) -s $(SELECTIONXML_PID) -o $@ $(filter -I% -D%,$(CXXFLAGS))
 Procedures/dict_Procedures.cc: $(DICTH_Procedures)
 	@echo "Generating dictionary $@..."
 	@$(ROOTCINT) -f $@ -c -p -multiDict -s $(SOLIBD) $(filter -I% -D%,$(CXXFLAGS)) $^
@@ -226,15 +238,3 @@ Tristan_DESY21/reflexdict_Tristan_DESY21.hh: $(REFLEXH_Tristan_DESY21)
 Tristan_DESY21/reflexdict_Tristan_DESY21.cc: Tristan_DESY21/reflexdict_Tristan_DESY21.hh $(SELECTIONXML_Tristan_DESY21) ${DEPDIR}/Tristan_DESY21/reflexdict_Tristan_DESY21.gendict.d
 	@echo "Generating reflex dictionary $@..."
 	@$(GENREFLEX) $< --fail_on_warnings --quiet --multiDict -l $(SOLIBD) -s $(SELECTIONXML_Tristan_DESY21) -o $@ $(filter -I% -D%,$(CXXFLAGS))
-Tristan/dict_Tristan.cc: $(DICTH_Tristan)
-	@echo "Generating dictionary $@..."
-	@$(ROOTCINT) -f $@ -c -p -multiDict -s $(SOLIBD) $(filter -I% -D%,$(CXXFLAGS)) $^
-Tristan/reflexdict_Tristan.hh: $(REFLEXH_Tristan)
-	@echo "Generating reflex header $@..."
-	@echo "#ifndef TRISTAN_REFLEXDICT_TRISTAN_HH" > $@
-	@echo "#define TRISTAN_REFLEXDICT_TRISTAN_HH" >> $@
-	@for i in $^; do echo '#include "'$${i}'"' >> $@; done
-	@echo "#endif" >> $@
-Tristan/reflexdict_Tristan.cc: Tristan/reflexdict_Tristan.hh $(SELECTIONXML_Tristan) ${DEPDIR}/Tristan/reflexdict_Tristan.gendict.d
-	@echo "Generating reflex dictionary $@..."
-	@$(GENREFLEX) $< --fail_on_warnings --quiet --multiDict -l $(SOLIBD) -s $(SELECTIONXML_Tristan) -o $@ $(filter -I% -D%,$(CXXFLAGS))

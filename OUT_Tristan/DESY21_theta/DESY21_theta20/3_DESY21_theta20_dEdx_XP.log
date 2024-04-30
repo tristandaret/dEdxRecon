@@ -4,7 +4,7 @@ FileName      : ../Data_DESY21_dev_v9/Theta_scan/theta_20_02T_z460_ym60_iter9.ro
 SelectionSet  : T_DESY21theta_Event
 NbrOfMod      : 0
 Data_to_Use   : 0
-OUTDirName    : OUT_Tristan/DESY21_theta460/DESY21_theta20/
+OUTDirName    : OUT_PID/DESY21_theta460/DESY21_theta20/
 
 ERAM#01: Gain hole in (iX,iY) = (10,16) | value reset at 1889.24
 ERAM#01:   RC hole in (iX,iY) = (10,16) | value reset at 129.29
@@ -67,5 +67,5 @@ Selection Statistics
     4  Stage5    12585     6004 (  -52.29)  (  -54.83)     12585     6004 (  -52.29)  (  -54.83)    416125   204136 (  -50.94)  (  -54.82)   1220093   587307 (  -51.86)  (  -57.29) 
   Summary Sel    13292     6004             (  -54.83)     13292     6004             (  -54.83)    451852   204136             (  -54.82)   1374968   587307             (  -57.29) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_theta460/DESY21_theta20/2_DESY21_theta20_Checks_zcalc_G2.root
-dEdx: OUT_Tristan/DESY21_theta460/DESY21_theta20/3_DESY21_theta20_dEdx_zcalc_G2.root
+Checks: OUT_PID/DESY21_theta460/DESY21_theta20/2_DESY21_theta20_Checks_zcalc_G2.root
+dEdx: OUT_PID/DESY21_theta460/DESY21_theta20/3_DESY21_theta20_dEdx_zcalc_G2.root

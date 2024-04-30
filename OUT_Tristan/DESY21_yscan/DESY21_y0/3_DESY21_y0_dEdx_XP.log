@@ -4,7 +4,7 @@ FileName      : ../Data_DESY21_dev_v9/yscan/Y0_Z0_iter9.root
 SelectionSet  : T_DESY21_Event
 NbrOfMod      : 0
 Data_to_Use   : 0
-OUTDirName    : OUT_Tristan/DESY21_yscan/DESY21_y0/
+OUTDirName    : OUT_PID/DESY21_yscan/DESY21_y0/
 
 ERAM#01: Gain hole in (iX,iY) = (10,16) | value reset at 1889.24
 ERAM#01:   RC hole in (iX,iY) = (10,16) | value reset at 129.29
@@ -71,5 +71,5 @@ Selection Statistics
     6  Stage5     5290     2462 (  -53.46)  (  -60.69)      5290     2462 (  -53.46)  (  -60.69)    173774    83708 (  -51.83)  (  -60.67)    611757   291603 (  -52.33)  (  -62.70) 
   Summary Sel     6263     2462             (  -60.69)      6263     2462             (  -60.69)    212856    83708             (  -60.67)    781879   291603             (  -62.70) 
 Fitting: Started... done!
-Checks: OUT_Tristan/DESY21_yscan/DESY21_y0/2_DESY21_y0_Checks_zcalc_G2.root
-dEdx: OUT_Tristan/DESY21_yscan/DESY21_y0/3_DESY21_y0_dEdx_zcalc_G2.root
+Checks: OUT_PID/DESY21_yscan/DESY21_y0/2_DESY21_y0_Checks_zcalc_G2.root
+dEdx: OUT_PID/DESY21_yscan/DESY21_y0/3_DESY21_y0_dEdx_zcalc_G2.root

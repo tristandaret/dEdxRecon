@@ -4,7 +4,7 @@ EventFile     : ../Data_DESY21_dev_v9/Theta_scan/theta_20_02T_z460_ym60_iter9.ro
 SelectionSet  : T_DESY21theta_Event
 iMod          : 0
 Data_to_Use   : 0
-OUTDirName    : OUT_Tristan/DESY21_theta460/DESY21_theta20/
+OUTDirName    : OUT_PID/DESY21_theta460/DESY21_theta20/
 
 
 -------------->Predefined selection T_DESY21theta_Event
