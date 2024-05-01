@@ -127,19 +127,17 @@ void Init_selection(const std::string &SelectionSet, JFL_Selector &aJFL_Selector
 
 TF1* corr_func(const std::string &EventFile, const std::string &Tag, const bool &updated){
   TF1* corr_func = new TF1("corr_func", "291.012 + 9.4669*x - 4.04*x*x + 1.31624*x*x*x - 0.059534*x*x*x*x", 0, 17); // values provided by Vlada (2022/10/11)
-  if(updated){
-  if(Tag.find("diag") != std::string::npos){
-    std::string filename      = EventFile.substr(0, EventFile.length()-5) ;
-    int angle ;
-    if(    (angle = filename.find("30"))  != (int)std::string::npos or (angle = filename.find("45"))  != (int)std::string::npos) filename.replace(angle, 2, "40") ;
-    while( (angle = filename.find("460")) != (int)std::string::npos or (angle = filename.find("860")) != (int)std::string::npos) filename.replace(angle, 3, "m40") ;
-    std::cout << "correction function: " << filename << "_WFmax_correction_v9i9.root" << std::endl;
-    TFile* pfile              = new TFile((filename + "_WFmax_correction_v9i9.root").c_str(), "READ") ;
-    corr_func                    = pfile->Get<TF1>("A_corr") ;
-    pfile->                     Close() ;
-    delete                      pfile;
-    std::cout << std::setprecision(2) << "WF correction parameters: " << corr_func->GetParameter(0) << " | " << corr_func->GetParameter(1) << " | " << corr_func->GetParameter(2) << " | " << corr_func->GetParameter(3) << " | " << corr_func->GetParameter(4) << std::endl ;
-  }
+  if(updated and Tag.find("diag") != std::string::npos){
+      std::string filename      = EventFile.substr(0, EventFile.length()-5) ;
+      int angle ;
+      if(    (angle = filename.find("30"))  != (int)std::string::npos or (angle = filename.find("45"))  != (int)std::string::npos) filename.replace(angle, 2, "40") ;
+      while( (angle = filename.find("460")) != (int)std::string::npos or (angle = filename.find("860")) != (int)std::string::npos) filename.replace(angle, 3, "m40") ;
+      std::cout << "correction function: " << filename << "_WFmax_correction_v9i9.root" << std::endl;
+      TFile* pfile              = new TFile((filename + "_WFmax_correction_v9i9.root").c_str(), "READ") ;
+      corr_func                    = pfile->Get<TF1>("A_corr") ;
+      pfile->                     Close() ;
+      delete                      pfile;
+      std::cout << std::setprecision(2) << "WF correction parameters: " << corr_func->GetParameter(0) << " | " << corr_func->GetParameter(1) << " | " << corr_func->GetParameter(2) << " | " << corr_func->GetParameter(3) << " | " << corr_func->GetParameter(4) << std::endl ;
   }
   return corr_func;
 }

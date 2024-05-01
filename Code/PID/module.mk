@@ -1,8 +1,9 @@
 # Source files to compile (without suffix)
 
 FILES := src/Monitoring
-FILES += src/dEdx
 FILES += src/Tools
+FILES += src/Variables
+FILES += src/dEdx
 FILES += src/LUTs
 FILES += src/Misc_Functions
 FILES += src/Displayer

@@ -11,7 +11,7 @@
 // Default constructor
 PID::ERAMMaps::ERAMMaps()
 {
-    fFile = "$HOME/Docuements/Code/CPP_projects/Read_ERAM_MAP/ERAMinfo.root";
+    fFile = "$HOME/Documents/Code/CPP_projects/Read_ERAM_MAP/ERAMinfo.root";
 
 	std::cout << "ERAM maps: LOADING " << fFile << std::endl;
 	Load();

@@ -1,7 +1,7 @@
-#include "PID/Monitoring.h"
 #include "PID/dEdx.h"
-#include "PID/Tools.h"
 #include "PID/LUTs.hxx"
+#include "PID/Tools.h"
+#include "PID/Variables.h"
 
 #include "PID/Misc_Functions.h"
 #include "PID/dEdx_func.h"
@@ -23,6 +23,12 @@
 #include "SampleTools/GiveMe_Uploader.h"
 #include "EvtModelTools/JFL_Selector.h"
 
+PID::dEdx::dEdx(){
+}
+
+PID::dEdx::~dEdx(){
+}
+
 void PID::dEdx::Reconstruction(){
   std::string OUTDirName                = outDir + tag + "/";
   MakeMyDir(OUTDirName);
@@ -32,7 +38,7 @@ void PID::dEdx::Reconstruction(){
   MakeMyDir(OUTDIR_WF_Display);
 
   // Redirect Output
-  std::string     OutPut_Analysis       = OUTDirName + "3_" + tag + "_dEdx_XP.log";
+  std::string     OutPut_Analysis       = OUTDirName + "2_" + tag + "_dEdx_XP.log";
   std::cout <<    OutPut_Analysis       << std::endl;
   std::cout <<    std::setprecision(2)  << std::fixed;
   std::cout <<    std::endl;
@@ -40,27 +46,40 @@ void PID::dEdx::Reconstruction(){
   std::ofstream   OUT_DataFile( OutPut_Analysis.c_str() );    // Set output file
   std::cout.      rdbuf(OUT_DataFile.rdbuf());                // Redirect to output file
 
-  std::cout << "tag              : " << tag          << std::endl;
-  std::cout << "comment          : " << comment      << std::endl;
-  std::cout << "dataFile         : " << dataFile     << std::endl;
-  std::cout << "selectionSet     : " << selectionSet << std::endl;
-  std::cout << "OUTDirName       : " << OUTDirName   << std::endl;
-  std::cout <<                                          std::endl;
+  std::cout << "dataFile         : " << dataFile        << std::endl;
+  std::cout << "OUTDirName       : " << OUTDirName      << std::endl;
+  std::cout << "tag              : " << tag             << std::endl;
+  std::cout << "comment          : " << comment         << std::endl;
+  std::cout << "selectionSet     : " << selectionSet    << std::endl;
+  std::cout << "prtcle           : " << prtcle          << std::endl;
+  std::cout << "driftMethod      : " << driftMethod     << std::endl;
+  std::cout << "WF updated       : " << WFupdated       << std::endl;
+  std::cout << "Gain correction  : " << fgainCorrection << std::endl;
+  std::cout <<                                             std::endl;
 
   // Get ERAM ID
+  std::vector<int> fERAMs_iD;
+  std::vector<int> fERAMs_pos;
   if(tag.find("DESY") != std::string::npos)         {fERAMs_iD.push_back(1);  fERAMs_pos.push_back(12);}
   if(dataFile.find("ERAM18") != std::string::npos)  {fERAMs_iD.push_back(18); fERAMs_pos.push_back(18);} // 14 in position #18 because 18 is not mounted but they are similar
   if(dataFile.find("All_ERAMS") != std::string::npos){fERAMs_iD = {7, 1, 23, 2, 16, 15, 10, 12}; fERAMs_pos = {26, 7, 12, 10, 7, 17, 19, 13, 14};} // 12 replace with 11 in pos #14
 
+  float costheta    = 1;
+  int theta_arr[3]  = {-45, -20, 20};
   for (int theta_file : theta_arr) if(tag.find("theta") != std::string::npos and tag.find(std::to_string(theta_file)) != std::string::npos) costheta = fabs(cos((float)theta_file/180*M_PI));
+  PID::ERAMMaps *pERAMMaps = new PID::ERAMMaps();
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // Output
+  TFile *pFile_dEdx   = new TFile((outDir + "2_" + tag + "_dEdx" + comment + ".root").c_str(), "RECREATE");
+  TTree *pTree   = new TTree("dEdx_tree", "dEdx TTree");
+
   // Selection stage
   JFL_Selector aJFL_Selector(selectionSet);
-  int NEvent = pUploader->Get_NberOfEvent();
+  int NEvent = p_uploader->Get_NberOfEvent();
   std::cout << "Number of entries :" << NEvent << std::endl;
 
-  Init_selection(selectionSet, aJFL_Selector, tag, pUploader, moduleCase, 0);
+  Init_selection(selectionSet, aJFL_Selector, tag, p_uploader, moduleCase, 0);
     
   aJFL_Selector.Tell_Selection();
 
@@ -72,45 +91,44 @@ void PID::dEdx::Reconstruction(){
   std::cout << "minimal length : " << fminLength*1e3  << " mm"        << std::endl;
   std::cout <<                                                           std::endl;
 
-  /////////////////////////////////////////////////////////////////////////////////////////////////////////
-  // Output
-  pFile = new TFile((OUTDirName + "2_" + tag + "_dEdx" + comment + ".root").c_str(), "RECREATE");
-  pTree = new TTree("dEdx_tree", "dEdx TTree");
-  pFile->cd();
-  pTree->Branch("tevent", &tevent);
-
-  /////////////////////////////////////////////////////////////////////////////////////////////////////////
   // Track fit initializations
-  if(comment.find("WF2")     != std::string::npos) WFupdated = true;
-  pcorrFunctionWF             = corr_func(dataFile, tag, WFupdated);
-  fAref                       = pcorrFunctionWF->Eval(10.19);
+  TF1 *pcorrFunctionWF             = corr_func(dataFile, tag, WFupdated);
+  float fAref                       = pcorrFunctionWF->Eval(10.19);
 
   TheFitterTrack aTheFitterTrack("Minuit", fnParamsTrack);
   PRF_param                     aPRF_param;
-  ptf1PRF                     = new TF1("ptf1PRF",aPRF_param, -2.5*1.128, 2.5*1.128, 5);
-  ptf1PRF->                     SetParameters(pUploader->Get_Norm(), pUploader->Get_a2(), pUploader->Get_a4(), pUploader->Get_b2(), pUploader->Get_b4());
-  fcounterFail                = 0;
-  fcounterFit                 = 0;
+  TF1 *ptf1PRF                     = new TF1("ptf1PRF",aPRF_param, -2.5*1.128, 2.5*1.128, 5);
+  ptf1PRF->                     SetParameters(p_uploader->Get_Norm(), p_uploader->Get_a2(), p_uploader->Get_a4(), p_uploader->Get_b2(), p_uploader->Get_b4());
+  int fcounterFail                = 0;
+  int fcounterFit                 = 0;
 
+  std::vector<float> v_dx;
+  std::vector<float> v_dE;
+  std::vector<float> v_dEdxXP;
+  std::vector<float> v_dEdxWF;
+  TH1F *ph1f_WF = new TH1F("ph1f_WF", "<dE/dx> with WF;<dE/dx> (ADC count);Number of events", 90, 0, 1800);
+  TH1F *ph1f_XP = new TH1F("ph1f_XP", "<dE/dx> with XP;<dE/dx> (ADC count);Number of events", 90, 0, 1800);
   /////////////////////////////////////////////////////////////////////////////////////////////////////////
   // Compute dE/dx
   aJFL_Selector.                Reset_StatCounters();
   std::cout << "Processing events:" << std::endl;
-  for (int iEvent = 0; iEvent < NEvent; iEvent++){
+  for (int iEvent = 0; iEvent < 100; iEvent++){
     if(iEvent % 1000 == 0 or iEvent == NEvent-1) std::cout << iEvent << "/" << NEvent << std::endl;
-    pEvent->                    Clear_Modules();
+    // pEvent->                    Clear_Modules();
 
-    pEvent                    = pUploader->GiveMe_Event(iEvent, moduleCase, 0, 0);
+    Event* pEvent                    = p_uploader->GiveMe_Event(iEvent, moduleCase, 0, 0);
     if (!pEvent)                continue;
 
     aJFL_Selector.              ApplySelection(pEvent);
     if (pEvent->IsValid() != 1) continue;
 
-    tevent = PID::TEvent();
+    TEvent tevent = PID::TEvent();
     tevent.eventNbr = iEvent;
 
     tevent.numberOfModules          = pEvent->Get_NberOfModule();
 
+    float fmodID;
+    std::vector<double> v_erams;
     // Check if there is a track in 4 ERAMs that are aligned
     for (int iMod = 0; iMod < tevent.numberOfModules; iMod++){
       fmodID                 = pEvent->Get_Module_InArray(iMod)->Get_ModuleNber();
@@ -148,7 +166,7 @@ void PID::dEdx::Reconstruction(){
       //   if(fnERAMs == 2 and Gainmaps[fmodID]->Get_iD()[fmodID] != 7 and Gainmaps[fmodID]->Get_iD()[fmodID] != 1 and Gainmaps[fmodID]->Get_iD()[fmodID] != 16 and Gainmaps[fmodID]->Get_iD()[fmodID] != 10) continue; // 2 ERAMs
       // }
 
-      NC                  = pModule->Get_NberOfCluster();
+      int NC                  = pModule->Get_NberOfCluster();
       if(NC == 0) continue;
 
       PID::TModule tmodule;
@@ -183,6 +201,7 @@ void PID::dEdx::Reconstruction(){
       for (int iC = 0; iC < NC; iC++){
         Cluster* pCluster           = pModule->Get_Cluster(iC);
         PID::TCluster tcluster;
+        tcluster.ph1f_WF_cluster->SetName(Form("ph1f_WF_cluster_%d_%d_%d", iEvent, iMod, iC));
 
         // Loop On Pads
         int NPads                   = pCluster->Get_NberOfPads();
@@ -208,6 +227,7 @@ void PID::dEdx::Reconstruction(){
           tpad.dd              *= 1000; // in mm
           if(tpad.length <= 1e-6) continue;  // ignore non-but-almost-zero tracks
           tpad.length          /= costheta;
+
           tcluster.length      += tpad.length;
 
           // Compute Z
@@ -227,7 +247,7 @@ void PID::dEdx::Reconstruction(){
 
           v_dE.                   push_back(tpad.ADC*tpad.ratio);
           v_dx.                   push_back(tpad.length);
-          v_dEdxXP.               push_back(tpad.ADC*tpad.ratio/tpad.length*10); // mm to cm
+          v_dEdxXP.               push_back(tpad.ADC*tpad.ratio/(tpad.length*100)); // m to cm
 
           tevent.NCrossedPads++;
           tcluster.v_pads.push_back(tpad);
@@ -254,12 +274,13 @@ void PID::dEdx::Reconstruction(){
       ph1f_XP->                       Fill(tevent.dEdxXP);
     }
 
-    pTree->                     Fill();
+    // pTree->                     Fill();
     v_erams.                    clear();
     v_dE.                       clear();
     v_dx.                       clear();
     v_dEdxXP.                   clear();
     v_dEdxWF.                   clear();
+    delete pEvent;
   } // Events
 
   aJFL_Selector.PrintStat();
@@ -267,31 +288,27 @@ void PID::dEdx::Reconstruction(){
   /////////////////////////////////////////////////////////////////////////////////////////////////////////
   // Fitting //
   std::cout << "Fitting: Started... "; 
-  ptf1_WF                     = Fit1Gauss(ph1f_WF, 2);
+  TF1 *ptf1_WF                     = Fit1Gauss(ph1f_WF, 2);
   ptf1_WF->                     SetNameTitle("ptf1_WF", "ptf1_WF");
 
-  ptf1_XP                     = Fit1Gauss(ph1f_XP, 2);
+  TF1 *ptf1_XP                     = Fit1Gauss(ph1f_XP, 2);
   ptf1_XP->                     SetNameTitle("ptf1_XP", "ptf1_XP");
   std::cout << "done!" << std::endl; 
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////
   // Methods
+  pFile_dEdx->                       cd();
   ptf1_WF->                     Write();
   ptf1_XP->                     Write();
   ph1f_WF->                     Write();
   ph1f_XP->                     Write();
-  pFile->                       Close();
+  pFile_dEdx->                       Close();
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////
   // Deleting
-  delete pFile;
+  // delete pFile_dEdx;
   delete pcorrFunctionWF;
-  delete ptf1_WF;
-  delete ptf1_XP;
-  delete ph1f_WF;
-  delete ph1f_XP;
   delete pERAMMaps;
-  delete pEvent;
   delete ptf1PRF;
   std::cout.rdbuf(coutbuf); // Reset to standard output
 }
@@ -322,11 +339,10 @@ float PID::dEdx::ComputedEdxXP(const std::vector<float>& v_dEdx, const std::vect
     std::vector<float> v_dx_sort(v_dEdx.size());
     for (int i = 0; i < (int)v_dEdx.size(); ++i) {
         v_dE_sort[i] = v_dE[indices[i]];
-        v_dx_sort[i] = v_dx[indices[i]];
+        v_dx_sort[i] = v_dx[indices[i]]*100; // m->cm normalization
     }
 
     float DE            = std::accumulate(v_dE_sort.begin(),v_dE_sort.begin()+NCrossedTrunc, 0);
     float DX            = std::accumulate(v_dx_sort.begin(),v_dx_sort.begin()+NCrossedTrunc, 0);
-    return DE/DX*10; // mm->cm normalization
+    return DE/DX;
 }
-

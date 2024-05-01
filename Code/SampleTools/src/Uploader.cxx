@@ -30,6 +30,7 @@ Uploader::Uploader(
               <<std::endl;
     abort() ;
   }
+  std::cout << "number of entries in the tree: " << p_TTree->GetEntries() << std::endl ;
   m_NberOfEvent = (int) p_TTree->GetEntries();
 
 //

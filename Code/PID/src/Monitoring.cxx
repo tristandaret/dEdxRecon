@@ -1,7 +1,11 @@
 #include "Misc/Util.h"
+#include "Misc/Misc.h"
 
 #include "PID/Monitoring.h"
 #include "PID/Tools.h"
+#include "PID/Variables.h"
+#include "PID/LUTs.hxx"
+#include "PID/dEdx.h"
 
 #include "PID/Control.h"
 #include "PID/DrawOuts.h"
@@ -12,6 +16,12 @@
 #include "SampleTools/Uploader.h"
 #include "SampleTools/GiveMe_Uploader.h"
 
+namespace PID{
+  PID::dEdx *p_dEdx;
+  PID::LUT  *p_lut;
+  Uploader  *p_uploader;
+}
+
 void PID::Monitoring()
 {
   gErrorIgnoreLevel = kInfo;
@@ -21,8 +31,11 @@ void PID::Monitoring()
   gStyle->                SetPadTickX(1);
   gStyle->                SetPadTickY(1);
 
-  WFupdated = true;
+  WFupdated = false;
+  if(WFupdated) WFversion = 1;
+  else WFversion = 0;
 
+  
   // Files to use
   int prototype       = 0;
   int CERN_Escan      = 0; 
@@ -61,18 +74,18 @@ void PID::Monitoring()
     int part_arr[] = {1,2,5,6};
     // int part_arr[] = {1};
     for (int iFile : part_arr) {
-      if (iFile == 0) { EvtFile = "../Data_CERN22_vD/ERAM18_350V_412ns_e+_0p5GeV_iter0.root";    tag = "CERN22_ERAM18_e+_0p5GeV";    prtcle = "e^{+} 0.5GeV";   }
-      if (iFile == 1) { EvtFile = "../Data_CERN22_vD/ERAM18_350V_412ns_e+_1GeV_iter0.root";      tag = "CERN22_ERAM18_e+_1GeV";      prtcle = "e^{+} 1GeV";     }
-      if (iFile == 2) { EvtFile = "../Data_CERN22_vD/ERAM18_350V_412ns_p_1GeV_iter0.root";       tag = "CERN22_ERAM18_p_1GeV";       prtcle = "protons 1GeV";   } 
-      if (iFile == 3) { EvtFile = "../Data_CERN22_vD/ERAM18_350V_412ns_mu-_1GeV_iter0.root";     tag = "CERN22_ERAM18_mu-_1GeV";     prtcle = "#mu^{-} 1GeV";   }
-      if (iFile == 4) { EvtFile = "../Data_CERN22_vD/ERAM18_350V_412ns_mu+_0p75GeV_iter0.root";  tag = "CERN22_ERAM18_mu+_0p75GeV";  prtcle = "#mu^{+} 0.75GeV";}
-      if (iFile == 5) { EvtFile = "../Data_CERN22_vD/ERAM18_350V_412ns_mu+_1GeV_iter0.root";     tag = "CERN22_ERAM18_mu+_1GeV";     prtcle = "#mu^{+} 1GeV";   }
-      if (iFile == 6) { EvtFile = "../Data_CERN22_vD/ERAM18_350V_412ns_pi+_0p5GeV_iter0.root";   tag = "CERN22_ERAM18_pi+_0p5GeV";   prtcle = "#pi^{+} 0.5GeV"; }
-      if (control or dedx) p_uploader = GiveMe_Uploader (intUploader, EvtFile);
-      if (control)      Control       (outDir, tag, comment, EvtFile, selectionSet, p_uploader, moduleCase, 0, PT, TB, prtcle);
+      if (iFile == 0) { dataFile = "../Data_CERN22_vD/ERAM18_350V_412ns_e+_0p5GeV_iter0.root";    tag = "CERN22_ERAM18_e+_0p5GeV";    prtcle = "e^{+} 0.5GeV";   }
+      if (iFile == 1) { dataFile = "../Data_CERN22_vD/ERAM18_350V_412ns_e+_1GeV_iter0.root";      tag = "CERN22_ERAM18_e+_1GeV";      prtcle = "e^{+} 1GeV";     }
+      if (iFile == 2) { dataFile = "../Data_CERN22_vD/ERAM18_350V_412ns_p_1GeV_iter0.root";       tag = "CERN22_ERAM18_p_1GeV";       prtcle = "protons 1GeV";   } 
+      if (iFile == 3) { dataFile = "../Data_CERN22_vD/ERAM18_350V_412ns_mu-_1GeV_iter0.root";     tag = "CERN22_ERAM18_mu-_1GeV";     prtcle = "#mu^{-} 1GeV";   }
+      if (iFile == 4) { dataFile = "../Data_CERN22_vD/ERAM18_350V_412ns_mu+_0p75GeV_iter0.root";  tag = "CERN22_ERAM18_mu+_0p75GeV";  prtcle = "#mu^{+} 0.75GeV";}
+      if (iFile == 5) { dataFile = "../Data_CERN22_vD/ERAM18_350V_412ns_mu+_1GeV_iter0.root";     tag = "CERN22_ERAM18_mu+_1GeV";     prtcle = "#mu^{+} 1GeV";   }
+      if (iFile == 6) { dataFile = "../Data_CERN22_vD/ERAM18_350V_412ns_pi+_0p5GeV_iter0.root";   tag = "CERN22_ERAM18_pi+_0p5GeV";   prtcle = "#pi^{+} 0.5GeV"; }
+      if (control or dedx) p_uploader = GiveMe_Uploader (intUploader, dataFile);
+      if (control)      Control       (outDir, tag, comment, dataFile, selectionSet, p_uploader, moduleCase, 0, PT, TB, prtcle);
       if (DO_control)   DrawOut_Control           (outDir, tag, comment, selectionSet, 1);
       if (dedx)         p_dEdx->Reconstruction();
-      if (DO_Checks)     DrawOut_Checks            (outDir, EvtFile, tag, comment);
+      if (DO_Checks)     DrawOut_Checks            (outDir, dataFile, tag, comment);
       if (DO_Methods)  DrawOut_Methods        (outDir, tag, comment, 1, prtcle);
       delete p_uploader;
     } 
@@ -94,25 +107,25 @@ void PID::Monitoring()
     // for (int iFile = 0; iFile < NFiles; iFile++){
     int part_arr[] = {4, 7, 10, 13};
     for (int iFile : part_arr) {
-      if (iFile == 0)  { EvtFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_e+_0p5GeV_25V_z415_y2pad_iter0.root";       tag = "CERN22_Escan_e+_0p5GeV";  prtcle = "e^{+} 0p5GeV (Mockup)";}
-      if (iFile == 1)  { EvtFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_e+_0p75GeV_25V_z415_y2pad_iter0.root";      tag = "CERN22_Escan_e+_0p75GeV"; prtcle = "e^{+} 0p75GeV (Mockup)";}
-      if (iFile == 2)  { EvtFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_e+_1GeV_25V_z415p1_y2pad_iter0.root";       tag = "CERN22_Escan_e+_1GeV";    prtcle = "e^{+} 1GeV (Mockup)";}  
-      if (iFile == 3)  { EvtFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_e+_1p25GeV_25V_z415p1_y2pad_1_iter0.root";  tag = "CERN22_Escan_e+_1p25GeV"; prtcle = "e^{+} 1p25GeV (Mockup)";}
-      if (iFile == 4)  { EvtFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_e+_1p5GeV_25V_z415p1_y2pad_iter0.root";     tag = "CERN22_Escan_e+_1p5GeV";  prtcle = "e^{+} 1p5GeV (Mockup)";}
-      if (iFile == 5)  { EvtFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_mu+_0p75GeV_25V_z415_y2pad_iter0.root";     tag = "CERN22_Escan_mu_0p75GeV"; prtcle = "#mu^{+} 0p75GeV (Mockup)";}
-      if (iFile == 6)  { EvtFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_mu+_1GeV_25V_z415p1_y2pad_iter0.root";      tag = "CERN22_Escan_mu_1GeV";    prtcle = "#mu^{+} 1GeV (Mockup)";}
-      if (iFile == 7)  { EvtFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_mu+_1p5GeV_25V_z415p1_y2pad_iter0.root";    tag = "CERN22_Escan_mu_1p5GeV";  prtcle = "#mu^{+} 1p5GeV (Mockup)";}
-      if (iFile == 8)  { EvtFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_pi+_0p75GeV_25V_z415_y2pad_iter0.root";     tag = "CERN22_Escan_pi_0p75GeV"; prtcle = "#pi^{+} 0p75GeV (Mockup)";}
-      if (iFile == 9)  { EvtFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_pi+_1p25GeV_25V_z415p1_y2pad_2_iter0.root"; tag = "CERN22_Escan_pi_1p25GeV"; prtcle = "#pi^{+} 1p25GeV (Mockup)";}
-      if (iFile == 10) { EvtFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_pi+_1p5GeV_25V_z415p1_y2pad_iter0.root";    tag = "CERN22_Escan_pi_1p5GeV";  prtcle = "#pi^{+} 1p5GeV (Mockup)";}
-      if (iFile == 11) { EvtFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_p_1GeV_25V_z415p1_y2pad_iter0.root";        tag = "CERN22_Escan_p+_1GeV";    prtcle = "protons 1GeV (Mockup)";}
-      if (iFile == 12) { EvtFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_p_1p25GeV_25V_z415p1_y2pad_iter0.root";     tag = "CERN22_Escan_p+_1p25GeV"; prtcle = "protons 1p25GeV (Mockup)";}
-      if (iFile == 13) { EvtFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_p_1p5GeV_25V_z415_y2pad_2_iter0.root";      tag = "CERN22_Escan_p+_1p5GeV";  prtcle = "protons 1p5GeV (Mockup)";}
-      if(control or dedx) p_uploader = GiveMe_Uploader (intUploader, EvtFile);
-      if (control)      Control       (outDir, tag, comment, EvtFile, selectionSet, p_uploader, moduleCase, 0, PT, TB, prtcle);
+      if (iFile == 0)  { dataFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_e+_0p5GeV_25V_z415_y2pad_iter0.root";       tag = "CERN22_Escan_e+_0p5GeV";  prtcle = "e^{+} 0p5GeV (Mockup)";}
+      if (iFile == 1)  { dataFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_e+_0p75GeV_25V_z415_y2pad_iter0.root";      tag = "CERN22_Escan_e+_0p75GeV"; prtcle = "e^{+} 0p75GeV (Mockup)";}
+      if (iFile == 2)  { dataFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_e+_1GeV_25V_z415p1_y2pad_iter0.root";       tag = "CERN22_Escan_e+_1GeV";    prtcle = "e^{+} 1GeV (Mockup)";}  
+      if (iFile == 3)  { dataFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_e+_1p25GeV_25V_z415p1_y2pad_1_iter0.root";  tag = "CERN22_Escan_e+_1p25GeV"; prtcle = "e^{+} 1p25GeV (Mockup)";}
+      if (iFile == 4)  { dataFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_e+_1p5GeV_25V_z415p1_y2pad_iter0.root";     tag = "CERN22_Escan_e+_1p5GeV";  prtcle = "e^{+} 1p5GeV (Mockup)";}
+      if (iFile == 5)  { dataFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_mu+_0p75GeV_25V_z415_y2pad_iter0.root";     tag = "CERN22_Escan_mu_0p75GeV"; prtcle = "#mu^{+} 0p75GeV (Mockup)";}
+      if (iFile == 6)  { dataFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_mu+_1GeV_25V_z415p1_y2pad_iter0.root";      tag = "CERN22_Escan_mu_1GeV";    prtcle = "#mu^{+} 1GeV (Mockup)";}
+      if (iFile == 7)  { dataFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_mu+_1p5GeV_25V_z415p1_y2pad_iter0.root";    tag = "CERN22_Escan_mu_1p5GeV";  prtcle = "#mu^{+} 1p5GeV (Mockup)";}
+      if (iFile == 8)  { dataFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_pi+_0p75GeV_25V_z415_y2pad_iter0.root";     tag = "CERN22_Escan_pi_0p75GeV"; prtcle = "#pi^{+} 0p75GeV (Mockup)";}
+      if (iFile == 9)  { dataFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_pi+_1p25GeV_25V_z415p1_y2pad_2_iter0.root"; tag = "CERN22_Escan_pi_1p25GeV"; prtcle = "#pi^{+} 1p25GeV (Mockup)";}
+      if (iFile == 10) { dataFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_pi+_1p5GeV_25V_z415p1_y2pad_iter0.root";    tag = "CERN22_Escan_pi_1p5GeV";  prtcle = "#pi^{+} 1p5GeV (Mockup)";}
+      if (iFile == 11) { dataFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_p_1GeV_25V_z415p1_y2pad_iter0.root";        tag = "CERN22_Escan_p+_1GeV";    prtcle = "protons 1GeV (Mockup)";}
+      if (iFile == 12) { dataFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_p_1p25GeV_25V_z415p1_y2pad_iter0.root";     tag = "CERN22_Escan_p+_1p25GeV"; prtcle = "protons 1p25GeV (Mockup)";}
+      if (iFile == 13) { dataFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_p_1p5GeV_25V_z415_y2pad_2_iter0.root";      tag = "CERN22_Escan_p+_1p5GeV";  prtcle = "protons 1p5GeV (Mockup)";}
+      if(control or dedx) p_uploader = GiveMe_Uploader (intUploader, dataFile);
+      if (control)      Control       (outDir, tag, comment, dataFile, selectionSet, p_uploader, moduleCase, 0, PT, TB, prtcle);
       if (DO_control)   DrawOut_Control           (outDir, tag, comment, selectionSet, 4);
       if (dedx)          p_dEdx->Reconstruction();
-      if (DO_Checks)     DrawOut_Checks            (outDir, EvtFile, tag, comment);
+      if (DO_Checks)     DrawOut_Checks            (outDir, dataFile, tag, comment);
       if (DO_Methods)  DrawOut_Methods        (outDir, tag, comment, 1, prtcle);
       delete p_uploader;
     }
@@ -132,10 +145,11 @@ void PID::Monitoring()
     Dt              = 310; TB = 50;
     // int PT_arr[] = {200, 412};
     int PT_arr[] = {412};
-    for (int PT : PT_arr){
-      outDir        = Form("OUT_PID/DESY21_zscan/DESY21_zscan_PT%i/", PT); 
+    for (int iPT : PT_arr){
+      PT = iPT;
+      outDir        = Form("OUT_PID/DESY21_zscan/DESY21_zscan_PT%i/", iPT); 
       MakeMyDir(outDir); 
-      if (control or dedx) p_lut = new LUT(Form("~/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi150_nd150_nRC41_nZ21.root", Dt, PT));
+      if (control or dedx) p_lut = new LUT(Form("~/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi150_nd150_nRC41_nZ21.root", Dt, iPT));
       // int         z_val[]   = {50, 150, 250, 350, 450, 550, 650, 750, 850, 950};
       // std::string z_arr[]   = {"m40", "060", "160", "260", "360", "460", "560", "660", "760", "860"};
       // int         z_val[]   = {50, 550, 950};
@@ -145,16 +159,18 @@ void PID::Monitoring()
       for (int iz = 0; iz < (int)std::size(z_arr); iz++){
         const char* z       = z_arr[iz].c_str();
         driftDist           = z_val[iz];
-        EvtFile             = Form("../Data_DESY21_dev_v9/zscan_PT%i/z_360_275_%i_02T_26_%s_iter9.root", PT, PT, z); tag = Form("DESY21_z%s_PT%i", z, PT); prtcle = Form("electron_z%s", z);
-        if(control or dedx) p_uploader = GiveMe_Uploader (intUploader, EvtFile);
-        if (control)      Control       (outDir, tag, comment, EvtFile, selectionSet, p_uploader, moduleCase, 0, PT, TB, prtcle);
+        dataFile             = Form("../Data_DESY21_dev_v9/zscan_PT%i/z_360_275_%i_02T_26_%s_iter9.root", iPT, iPT, z); tag = Form("DESY21_z%s_PT%i", z, iPT); prtcle = Form("electron_z%s", z);
+        if(control or dedx) p_uploader = GiveMe_Uploader (intUploader, dataFile);
+        if (control)      Control       (outDir, tag, comment, dataFile, selectionSet, p_uploader, moduleCase, 0, iPT, TB, prtcle);
         if (DO_control)   DrawOut_Control           (outDir, tag, comment, selectionSet, 1);
+        std::cout << "memory address of uploader: " << p_uploader << std::endl;
+        std::cout << "number of events: " << p_uploader->Get_NberOfEvent() << std::endl;
         if (dedx)          p_dEdx->Reconstruction();
-        if (DO_Checks)    DrawOut_Checks            (outDir, EvtFile, tag, comment);
+        if (DO_Checks)    DrawOut_Checks            (outDir, dataFile, tag, comment);
         if (DO_Methods)   DrawOut_Methods           (outDir, tag, comment, 1, prtcle);
       }
       if(DO_Systematics)  DrawOut_Systematics(outDir, comment, "Z");
-      if(DO_Resolution)   DrawOut_Zscan  (Form("OUT_PID/DESY21_zscan/DESY21_zscan_PT%i", PT), comment, PT);
+      if(DO_Resolution)   DrawOut_Zscan  (Form("OUT_PID/DESY21_zscan/DESY21_zscan_PT%i", iPT), comment, iPT);
     }
     if(DO_Global) DrawOut_Zscan_PT("OUT_PID/DESY21_zscan", comment);
   }
@@ -172,12 +188,12 @@ void PID::Monitoring()
     if (control or dedx) p_lut = new LUT(Form("~/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi150_nd150_nRC41_nZ21.root", Dt, PT));
     std::string Y_arr[] = {"m140", "m120", "m100", "m80", "m60", "m40", "0", "20", "40", "60", "80"};
     for (int y = 0; y < (int)std::size(Y_arr); y++){
-      EvtFile  = Form("../Data_DESY21_dev_v9/yscan/Y%s_Z0_iter9.root", Y_arr[y].c_str()); tag = Form("DESY21_y%s", Y_arr[y].c_str()); prtcle = Form("electron_y%s", Y_arr[y].c_str()); 
-      if(control or dedx) p_uploader = GiveMe_Uploader (intUploader, EvtFile);
-      if (control)      Control       (outDir, tag, comment, EvtFile, selectionSet, p_uploader, moduleCase, 0, PT, TB, prtcle);
+      dataFile  = Form("../Data_DESY21_dev_v9/yscan/Y%s_Z0_iter9.root", Y_arr[y].c_str()); tag = Form("DESY21_y%s", Y_arr[y].c_str()); prtcle = Form("electron_y%s", Y_arr[y].c_str()); 
+      if(control or dedx) p_uploader = GiveMe_Uploader (intUploader, dataFile);
+      if (control)      Control       (outDir, tag, comment, dataFile, selectionSet, p_uploader, moduleCase, 0, PT, TB, prtcle);
       if (DO_control)   DrawOut_Control           (outDir, tag, comment, selectionSet, 1);
       if (dedx)          p_dEdx->Reconstruction();
-      if (DO_Checks)     DrawOut_Checks            (outDir, EvtFile, tag, comment);
+      if (DO_Checks)     DrawOut_Checks            (outDir, dataFile, tag, comment);
       if (DO_Methods)  DrawOut_Methods        (outDir, tag, comment, 1, prtcle);
     }
     if(DO_Resolution)   DrawOut_Yscan  ("OUT_PID/DESY21_yscan", comment);
@@ -208,16 +224,16 @@ void PID::Monitoring()
       for (int ifile = 5; ifile < 8; ifile++){
         int phi                 = phi_val[ifile];
         // if(ifile==0){       outDir   = "OUT_PID/DESY21_zscan/DESY21_zscan_PT200/"; 
-        //                     EvtFile  = Form("../Data_DESY21_dev_v9/zscan_PT200/z_360_275_200_02T_26_%s_iter9.root", z); tag = Form("DESY21_z%s_PT200", z); prtcle = Form("electron_z%s", z); }
-        if(ifile < 5) {EvtFile  = Form("../Data_DESY21_dev_v9/Phi_scan_z%s/phi_200_%i_z%s_ym60_iter9.root", z, phi, z);            tag = Form("DESY21_phi%i_z%s", phi, z); prtcle = Form("electron_phi%i_z%s", phi, z); }
-        else               {EvtFile  = Form("../Data_DESY21_dev_v9/Phi_scan_z%s/phi_200_%i_z%s_ym60_diag_iter9.root", z, phi, z);       tag = Form("DESY21_phi%i_diag_z%s", phi, z); prtcle = Form("electron_phi%i_diag_z%s", phi, z);
+        //                     dataFile  = Form("../Data_DESY21_dev_v9/zscan_PT200/z_360_275_200_02T_26_%s_iter9.root", z); tag = Form("DESY21_z%s_PT200", z); prtcle = Form("electron_z%s", z); }
+        if(ifile < 5) {dataFile  = Form("../Data_DESY21_dev_v9/Phi_scan_z%s/phi_200_%i_z%s_ym60_iter9.root", z, phi, z);            tag = Form("DESY21_phi%i_z%s", phi, z); prtcle = Form("electron_phi%i_z%s", phi, z); }
+        else               {dataFile  = Form("../Data_DESY21_dev_v9/Phi_scan_z%s/phi_200_%i_z%s_ym60_diag_iter9.root", z, phi, z);       tag = Form("DESY21_phi%i_diag_z%s", phi, z); prtcle = Form("electron_phi%i_diag_z%s", phi, z);
                             comment_phi = comment + "_WF" + WFversion;}
 
-        if(control or dedx) p_uploader = GiveMe_Uploader (intUploader, EvtFile);
-        if (control)      Control                   (outDir, tag, comment_phi, EvtFile, selectionSet, p_uploader, moduleCase, 0, PT, TB, prtcle);
+        if(control or dedx) p_uploader = GiveMe_Uploader (intUploader, dataFile);
+        if (control)      Control                   (outDir, tag, comment_phi, dataFile, selectionSet, p_uploader, moduleCase, 0, PT, TB, prtcle);
         if (DO_control)   DrawOut_Control           (outDir, tag, comment_phi, selectionSet, 1);
         if (dedx)          p_dEdx->Reconstruction();
-        if (DO_Checks)    DrawOut_Checks            (outDir, EvtFile, tag, comment);
+        if (DO_Checks)    DrawOut_Checks            (outDir, dataFile, tag, comment);
         if (DO_Methods)   DrawOut_Methods           (outDir, tag, comment_phi, 1, prtcle);
         delete p_uploader;
         if(ifile==0)outDir      = Form("OUT_PID/DESY21_phi/DESY21_phi_z%s/", z); 
@@ -242,12 +258,12 @@ void PID::Monitoring()
     if (control or dedx) p_lut    = new LUT(Form("~/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi150_nd150_nRC41_nZ21.root", Dt, PT));
     std::string theta_arr[]     = {"m45", "m20", "20"};
     for (std::string theta : theta_arr){
-      EvtFile                   = Form("../Data_DESY21_dev_v9/Theta_scan/theta_%s_02T_z460_ym60_iter9.root", theta.c_str()); tag = Form("DESY21_theta%s", theta.c_str()); prtcle = Form("electron_theta%s", theta.c_str());
-      if(control or dedx) p_uploader = GiveMe_Uploader (intUploader, EvtFile);
-      if (control)                Control(outDir, tag, comment, EvtFile, selectionSet, p_uploader, moduleCase, 0, PT, TB, prtcle);
+      dataFile                   = Form("../Data_DESY21_dev_v9/Theta_scan/theta_%s_02T_z460_ym60_iter9.root", theta.c_str()); tag = Form("DESY21_theta%s", theta.c_str()); prtcle = Form("electron_theta%s", theta.c_str());
+      if(control or dedx) p_uploader = GiveMe_Uploader (intUploader, dataFile);
+      if (control)                Control(outDir, tag, comment, dataFile, selectionSet, p_uploader, moduleCase, 0, PT, TB, prtcle);
       if (DO_control)             DrawOut_Control(outDir, tag, comment, selectionSet, 1);
       if (dedx)                    p_dEdx->Reconstruction();
-      if (DO_Checks)              DrawOut_Checks(outDir, EvtFile, tag, comment);
+      if (DO_Checks)              DrawOut_Checks(outDir, dataFile, tag, comment);
       if (DO_Methods)             DrawOut_Methods(outDir, tag, comment, 1, prtcle);
     }
     if(DO_Resolution)             DrawOut_Thetascan ("OUT_PID/DESY21_theta",   comment);
@@ -291,13 +307,13 @@ void PID::Monitoring()
     // int mag_arr[] = {0, 2, 4, 10};
     int mag_arr[] = {0,2,4};
     for (int mag : mag_arr){
-      EvtFile                    = Form            ("../Data_DESY21_dev_v9/Mag_scan/mag_%i_200_ym60_iter0.root", mag); tag = Form("DESY21_mag%i", mag); prtcle = Form("electron_mag%i", mag);
-      if(control or dedx) p_uploader = GiveMe_Uploader (intUploader, EvtFile);
-      if (control)      Control       (outDir, tag, comment, EvtFile, selectionSet, p_uploader, moduleCase, 0, PT, TB, prtcle);
+      dataFile                    = Form            ("../Data_DESY21_dev_v9/Mag_scan/mag_%i_200_ym60_iter0.root", mag); tag = Form("DESY21_mag%i", mag); prtcle = Form("electron_mag%i", mag);
+      if(control or dedx) p_uploader = GiveMe_Uploader (intUploader, dataFile);
+      if (control)      Control       (outDir, tag, comment, dataFile, selectionSet, p_uploader, moduleCase, 0, PT, TB, prtcle);
       if (DO_control)   DrawOut_Control           (outDir, tag, comment, selectionSet, 1);
       if (dedx)          p_dEdx->Reconstruction();
       if (DO_Methods)  DrawOut_Methods        (outDir, tag, comment, 1, prtcle);
-      if (DO_Checks)     DrawOut_Checks            (outDir, EvtFile, tag, comment);
+      if (DO_Checks)     DrawOut_Checks            (outDir, dataFile, tag, comment);
     }
   }
 
@@ -322,14 +338,14 @@ void PID::Monitoring()
       for(int i = 0; i < 3; i++){
         const char* z             = Z_arr[i].c_str();
         driftDist           = z_val[i];
-        // EvtFile                  = Form            ("../Data_DESY21_dev_v9/ExB_scan/ExB_360_412ns_B02_ym10_z%s_iter9.root", z); tag = Form("DESY21_ExB02_Z%s", z); prtcle = Form("electron_ExB02_Z%s", z);
-        EvtFile                   = Form            ("../Data_DESY21_dev_v9/ExB_scan/ExB_360_phim3_200ns_B%s_ym60_z%s_iter0.root", B, z); tag = Form("DESY21_ExB%s_Z%s", B, z); prtcle = Form("electron_ExB%s_Z%s", B, z);
-        if(control or dedx) p_uploader = GiveMe_Uploader (intUploader, EvtFile);
-        if (control)                Control (outDir, tag, comment, EvtFile, selectionSet, p_uploader, moduleCase, 0, PT, TB, prtcle);
+        // dataFile                  = Form            ("../Data_DESY21_dev_v9/ExB_scan/ExB_360_412ns_B02_ym10_z%s_iter9.root", z); tag = Form("DESY21_ExB02_Z%s", z); prtcle = Form("electron_ExB02_Z%s", z);
+        dataFile                   = Form            ("../Data_DESY21_dev_v9/ExB_scan/ExB_360_phim3_200ns_B%s_ym60_z%s_iter0.root", B, z); tag = Form("DESY21_ExB%s_Z%s", B, z); prtcle = Form("electron_ExB%s_Z%s", B, z);
+        if(control or dedx) p_uploader = GiveMe_Uploader (intUploader, dataFile);
+        if (control)                Control (outDir, tag, comment, dataFile, selectionSet, p_uploader, moduleCase, 0, PT, TB, prtcle);
         if (DO_control)             DrawOut_Control (outDir, tag, comment, selectionSet, 1);
         if (dedx)                    p_dEdx->Reconstruction();
         if (DO_Methods)             DrawOut_Methods (outDir, tag, comment, 1, prtcle);
-        if (DO_Checks)              DrawOut_Checks (outDir, EvtFile, tag, comment);
+        if (DO_Checks)              DrawOut_Checks (outDir, dataFile, tag, comment);
       }
     }
   }
@@ -351,13 +367,13 @@ void PID::Monitoring()
     MakeMyDir(outDir); 
     for (int ifile = 3; ifile < NFiles; ifile++){
       int phi                   = phi_val[ifile];
-      if(ifile < 3) { EvtFile  = Form("../Data_DESY19/Phi_scan/phi_412_%i_iter0.root", phi);       tag = Form("DESY19_phi%i", phi);      prtcle = Form("electron_phi%i", phi); }
-      else          { EvtFile  = Form("../Data_DESY19/Phi_scan/phi_412_%i_diag_iter0.root", phi);  tag = Form("DESY19_phi%i_diag", phi); prtcle = Form("electron_phi%i_diag", phi); }
-      if(control or dedx) p_uploader = GiveMe_Uploader (intUploader, EvtFile);
-      if (control)      Control       (outDir, tag, comment, EvtFile, selectionSet, p_uploader, moduleCase, 0, PT, TB, prtcle);
+      if(ifile < 3) { dataFile  = Form("../Data_DESY19/Phi_scan/phi_412_%i_iter0.root", phi);       tag = Form("DESY19_phi%i", phi);      prtcle = Form("electron_phi%i", phi); }
+      else          { dataFile  = Form("../Data_DESY19/Phi_scan/phi_412_%i_diag_iter0.root", phi);  tag = Form("DESY19_phi%i_diag", phi); prtcle = Form("electron_phi%i_diag", phi); }
+      if(control or dedx) p_uploader = GiveMe_Uploader (intUploader, dataFile);
+      if (control)      Control       (outDir, tag, comment, dataFile, selectionSet, p_uploader, moduleCase, 0, PT, TB, prtcle);
       if (DO_control)   DrawOut_Control           (outDir, tag, comment, selectionSet, 1);
       if (dedx)          p_dEdx->Reconstruction();
-      if (DO_Checks)     DrawOut_Checks            (outDir, EvtFile, tag, comment);
+      if (DO_Checks)     DrawOut_Checks            (outDir, dataFile, tag, comment);
       if (DO_Methods)  DrawOut_Methods        (outDir, tag, comment, 1, prtcle);
       delete p_uploader;
     }
@@ -377,14 +393,14 @@ void PID::Monitoring()
     if (control or dedx) p_lut = new LUT(Form("~/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi150_nd150_nRC41_nZ21.root", Dt, PT));
     int zmax = 9;
     for (int zDrift = 0; zDrift < zmax; zDrift++){
-      // EvtFile = Form("../Data_MC/MC_zscan/z_400_nomDrift_%i0cm_MD_RC100_v2_iter4.root", zDrift+1); tag = Form("CERN23_MC_z%i00", zDrift+1); prtcle = Form("MC %i0cm", zDrift+1);      
-      EvtFile = Form("../Data_MC/MC_zscan/z_400_nomDrift_%i0cm_NoOpt_iter4.root", zDrift+1); tag = Form("CERN23_MC_z%i00", zDrift+1); prtcle = Form("MC %i0cm NoOpt", zDrift+1);      
-      // EvtFile = Form("../Data_MC/MC_zscan/z_400_nomDrift_%i0cm_RC100_iter4.root", zDrift+1); tag = Form("CERN23_MC_z%i00_old", zDrift+1); prtcle = Form("MC %i0cm old", zDrift+1);      
-      if(control or dedx) p_uploader = GiveMe_Uploader (intUploader, EvtFile);
-      if (control)      Control       (outDir, tag, comment, EvtFile, selectionSet, p_uploader, moduleCase, 0, PT, TB, prtcle);
+      // dataFile = Form("../Data_MC/MC_zscan/z_400_nomDrift_%i0cm_MD_RC100_v2_iter4.root", zDrift+1); tag = Form("CERN23_MC_z%i00", zDrift+1); prtcle = Form("MC %i0cm", zDrift+1);      
+      dataFile = Form("../Data_MC/MC_zscan/z_400_nomDrift_%i0cm_NoOpt_iter4.root", zDrift+1); tag = Form("CERN23_MC_z%i00", zDrift+1); prtcle = Form("MC %i0cm NoOpt", zDrift+1);      
+      // dataFile = Form("../Data_MC/MC_zscan/z_400_nomDrift_%i0cm_RC100_iter4.root", zDrift+1); tag = Form("CERN23_MC_z%i00_old", zDrift+1); prtcle = Form("MC %i0cm old", zDrift+1);      
+      if(control or dedx) p_uploader = GiveMe_Uploader (intUploader, dataFile);
+      if (control)      Control       (outDir, tag, comment, dataFile, selectionSet, p_uploader, moduleCase, 0, PT, TB, prtcle);
       if (DO_control)   DrawOut_Control           (outDir, tag, comment, selectionSet, 1);
       if (dedx)          p_dEdx->Reconstruction();
-      if (DO_Checks)     DrawOut_Checks            (outDir, EvtFile, tag, comment);
+      if (DO_Checks)     DrawOut_Checks            (outDir, dataFile, tag, comment);
       if (DO_Methods)  DrawOut_Methods        (outDir, tag, comment, 1, prtcle);
     }
   }
@@ -403,15 +419,15 @@ void PID::Monitoring()
 
     int NFiles = 10;
     for (int iFile = 0; iFile < NFiles; iFile++){
-      if (iFile == 0) { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_e+_0p5GeV_14V_z60_iter0.root";       tag = "CERN22_Mockup_e+_14V_z060";}
-      if (iFile == 1) { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_e+_0p5GeV_14V_z218p5_1_iter0.root";  tag = "CERN22_Mockup_e+_14V_z218";}
-      if (iFile == 2) { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_e+_0p5GeV_14V_z415_iter0.root";      tag = "CERN22_Mockup_e+_14V_z415";}
-      if (iFile == 3) { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_e+_0p5GeV_14V_z572_iter0.root";      tag = "CERN22_Mockup_e+_14V_z572";}
-      if (iFile == 5) { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_e+_0p5GeV_25V_z60_iter0.root";       tag = "CERN22_Mockup_e+_25V_z060";}
-      if (iFile == 6) { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_e+_0p5GeV_25V_z218p5_iter0.root";    tag = "CERN22_Mockup_e+_25V_z218";}
-      if (iFile == 7) { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_e+_0p5GeV_25V_z415_iter0.root";      tag = "CERN22_Mockup_e+_25V_z415";}
-      if (iFile == 8) { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_e+_0p5GeV_25V_z572_iter0.root";      tag = "CERN22_Mockup_e+_25V_z572";}
-      if (iFile == 9) { EvtFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_e+_0p5GeV_25V_z925_iter0.root";      tag = "CERN22_Mockup_e+_25V_z925";}
+      if (iFile == 0) { dataFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_e+_0p5GeV_14V_z60_iter0.root";       tag = "CERN22_Mockup_e+_14V_z060";}
+      if (iFile == 1) { dataFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_e+_0p5GeV_14V_z218p5_1_iter0.root";  tag = "CERN22_Mockup_e+_14V_z218";}
+      if (iFile == 2) { dataFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_e+_0p5GeV_14V_z415_iter0.root";      tag = "CERN22_Mockup_e+_14V_z415";}
+      if (iFile == 3) { dataFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_e+_0p5GeV_14V_z572_iter0.root";      tag = "CERN22_Mockup_e+_14V_z572";}
+      if (iFile == 5) { dataFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_e+_0p5GeV_25V_z60_iter0.root";       tag = "CERN22_Mockup_e+_25V_z060";}
+      if (iFile == 6) { dataFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_e+_0p5GeV_25V_z218p5_iter0.root";    tag = "CERN22_Mockup_e+_25V_z218";}
+      if (iFile == 7) { dataFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_e+_0p5GeV_25V_z415_iter0.root";      tag = "CERN22_Mockup_e+_25V_z415";}
+      if (iFile == 8) { dataFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_e+_0p5GeV_25V_z572_iter0.root";      tag = "CERN22_Mockup_e+_25V_z572";}
+      if (iFile == 9) { dataFile = "../Data_CERN22_vD_iter0/All_ERAMS_350V_412ns_e+_0p5GeV_25V_z925_iter0.root";      tag = "CERN22_Mockup_e+_25V_z925";}
       if (DO_control)   DrawOut_Control           (outDir, tag, comment, selectionSet, 8);
     }
   }
@@ -431,10 +447,10 @@ void PID::Monitoring()
     if (control or dedx) p_lut = new LUT(Form("~/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi150_nd150_nRC41_nZ21.root", Dt, PT));
       int NFiles = 9;
       for (int zDrift = -1; zDrift < NFiles; zDrift++){
-        if(zDrift == -1) {EvtFile  = Form("../Data_DESY21_dev_v9/zscan_PT%i_139V/z_360_139_%i_02T_26_m40_iter0.root", PT, PT);          tag = Form("DESY21_zm40_PT%i", PT);          prtcle = "electron_z-40"; }
-        else {EvtFile              = Form("../Data_DESY21_dev_v9/zscan_PT%i_139V/z_360_139_%i_02T_26_%i60_iter0.root", PT, PT, zDrift); tag = Form("DESY21_z%i60_PT%i", zDrift, PT); prtcle = Form("electron_z%i60", zDrift); }
-        if(control or dedx) p_uploader = GiveMe_Uploader (intUploader, EvtFile);
-        if (control)      Control       (outDir, tag, comment, EvtFile, selectionSet, p_uploader, moduleCase, 0, PT, TB, prtcle);
+        if(zDrift == -1) {dataFile  = Form("../Data_DESY21_dev_v9/zscan_PT%i_139V/z_360_139_%i_02T_26_m40_iter0.root", PT, PT);          tag = Form("DESY21_zm40_PT%i", PT);          prtcle = "electron_z-40"; }
+        else {dataFile              = Form("../Data_DESY21_dev_v9/zscan_PT%i_139V/z_360_139_%i_02T_26_%i60_iter0.root", PT, PT, zDrift); tag = Form("DESY21_z%i60_PT%i", zDrift, PT); prtcle = Form("electron_z%i60", zDrift); }
+        if(control or dedx) p_uploader = GiveMe_Uploader (intUploader, dataFile);
+        if (control)      Control       (outDir, tag, comment, dataFile, selectionSet, p_uploader, moduleCase, 0, PT, TB, prtcle);
         if (DO_control)   DrawOut_Control           (outDir, tag, comment, selectionSet, 1);
         if (dedx)          p_dEdx->Reconstruction();
         if (DO_Methods)  DrawOut_Methods        (outDir, tag, comment, 1, prtcle);
@@ -459,8 +475,8 @@ void PID::Monitoring()
 //   outDir = "OUT_PID/CERN22_ERAM18";
 //   if(DO_Displayer){
 //     selectionSet          = "T2_CERN22_Event";
-//     EvtFile                = "../Data_CERN22_vD_iter0/ERAM18_350V_412ns_e+_1GeV_iter0.root"; tag = "CERN22_ERAM18_e+_1GeV"; prtcle = "e^{+} 1GeV";
-//     Uploader* p_uploader       = GiveMe_Uploader(intUploader, EvtFile); 
+//     dataFile                = "../Data_CERN22_vD_iter0/ERAM18_350V_412ns_e+_1GeV_iter0.root"; tag = "CERN22_ERAM18_e+_1GeV"; prtcle = "e^{+} 1GeV";
+//     Uploader* p_uploader       = GiveMe_Uploader(intUploader, dataFile); 
 //     Displayer(outDir, tag, selectionSet, p_uploader, 0, 0, prtcle);
 //     delete                  p_uploader;
 //   }
