@@ -1,5 +1,5 @@
 #include "PID/dEdx.h"
-#include "PID/Misc_Functions.h"
+#include "PID/Tools.h"
 #include "PID/ReadLUT_vROOT.h"
 
 #include <cmath>
@@ -11,18 +11,18 @@
 #include "TGraphErrors.h"
 #include "TPaveStats.h"
 
-#include "AnalysisTools/DoTracksReconstruction.h"
+#include "Fitters/DoTracksReconstruction.h"
 #include "EvtModelTools/JFL_Selector.h"
 #include "EvtModelTools/EvtModelTools_Histos.h"
 #include "EvtModelTools/EvtModelTools_TD_Selections.h"
 #include "EvtModelTools/JFL_Do_ClusterFit.h"
-#include "Fitters_Track/TheFitterTrack.h"
+#include "Fitters/TheFitterTrack.h"
 #include "Misc/Util.h"
 #include "SampleTools/Uploader.h"
 #include "SampleTools/GiveMe_Uploader.h"
 #include "SampleTools/ReadRCmap.h"
 #include "SampleTools/ReadGainmap.h"
-#include "SignalShape/PRF_param.h"
+#include "Fitters/PRF_param.h"
 
 void dEdx( const std::string& OutDir,
                           std::string const& Tag,

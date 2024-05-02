@@ -5,7 +5,6 @@
 #include "EvtModel/Pad.h"
 
 #include "EvtModel/FitOutput.h"
-#include "SignalShape/SC_VS_x_rc_dd_SET_rc_dd.h"
 
 #include "TVirtualFitter.h"
 #include "TMatrixD.h"
@@ -152,130 +151,6 @@ private:
 
    FitOutput* p_FitOutput_PV0_PV1 ;
    
-   
-//---------------------PV2-----------------------------//
-public: 
-   int    StatusFit_PV2();  // 0: OK ; 1: Failed
-   void   SetEval_PV2(SC_VS_x_rc_dd_SET_rc_dd* pSC_VS_x_rc_dd_SET_rc_dd)    ;
-   double Eval_PV2    (const double& Xin );
-   int    SetParameter_PV2          (TVirtualFitter* pTVirtualFitter) ;
-   void   SetResults_PV2            (TVirtualFitter* pTVirtualFitter) ;
-   void   SetResults_FailledFit_PV2 (const int& Verbose ) ;
-   double Chi2_PV2                  (double par[])                    ;
-   
-   int        FitRes_PV2_Get_NberOfTermsInChi2()            const ;
-   const Pad* FitRes_PV2_Get_Pad      (const int& Index1D) const ;
-   double     FitRes_PV2_Get_Residual (const int& Index1D) const ;
-   double     FitRes_PV2_Get_Pull     (const int& Index1D) const ;
-
-private:
-   void   Beg_PV2() ;
-   void   End_PV2() ;
-   void   SetParameters_Internal_PV2(double par[])                    ;
-
-   SC_VS_x_rc_dd_SET_rc_dd* p_PV2_SC_VS_x_rc_dd_SET_rc_dd ;
-   bool m_StatusFit_PV2 ; // True: fit failed  ; False: Fit OK
-   short int m_NberOf_V_FitRes_PV2_Pad ;
-   std::vector < const Pad* > V_FitRes_PV2_Pad      ;
-   std::vector < double >     V_FitRes_PV2_Residual ;
-   std::vector < double >     V_FitRes_PV2_Pull     ;
-  
-   FitOutput* p_FitOutput_PV2 ;
-   
-   
-//---------------------PV3-----------------------------//
-public: 
-   int    StatusFit_PV3();  // 0: OK ; 1: Failed
-   void   SetEval_PV3(SC_VS_x_rc_dd_SET_rc_dd* pSC_VS_x_rc_dd_SET_rc_dd)    ;
-   double Eval_Alpha_PV3            (const double& Xin)               ;
-   double Eval_Tau_PV3              (const double& Xin)               ;
-   int    SetParameter_PV3          (TVirtualFitter* pTVirtualFitter) ;
-   void   SetResults_PV3            (TVirtualFitter* pTVirtualFitter) ;
-   void   SetResults_FailledFit_PV3 (const int& Verbose,TVirtualFitter* pTVirtualFitter ) ;
-   double Chi2_PV3                  (double par[])                    ;
-   
-   int        FitRes_PV3_Get_NberOfTermsInChi2()            const ;
-   const Pad* FitRes_PV3_Get_Pad      (const int& Index1D) const ;
-   double     FitRes_PV3_Get_Residual (const int& Index1D) const ;
-   double     FitRes_PV3_Get_Pull     (const int& Index1D) const ;
-
-private:
-   void   Beg_PV3() ;
-   void   End_PV3() ;
-   void   SetParameters_Internal_PV3(double par[])                    ;
-
-   SC_VS_x_rc_dd_SET_rc_dd* p_PV3_SC_VS_x_rc_dd_SET_rc_dd ;
-   bool m_StatusFit_PV3 ; // True: fit failed  ; False: Fit OK
-   short int m_NberOf_V_FitRes_PV3_Pad ;
-   std::vector < const Pad* > V_FitRes_PV3_Pad      ;
-   std::vector < double >     V_FitRes_PV3_Residual ;
-   std::vector < double >     V_FitRes_PV3_Pull     ;
-  
-   FitOutput* p_FitOutput_PV3 ;
-   
-   
-//---------------------PV4-----------------------------//
-public: 
-   int    StatusFit_PV4();  // 0: OK ; 1: Failed
-   void   SetEval_PV4    (TF1* pTF1 );
-   double Eval_PV4    (const double& Xin );
-   int    SetParameter_PV4          (TVirtualFitter* pTVirtualFitter) ;
-   void   SetResults_PV4            (TVirtualFitter* pTVirtualFitter) ;
-   void   SetResults_FailledFit_PV4 (const int& Verbose ) ;
-   double Chi2_PV4                  (double par[])                    ;
-   
-   int        FitRes_PV4_Get_NberOfTermsInChi2()            const ;
-   const Pad* FitRes_PV4_Get_Pad      (const int& Index1D) const ;
-   double     FitRes_PV4_Get_Residual (const int& Index1D) const ;
-   double     FitRes_PV4_Get_Pull     (const int& Index1D) const ;
-
-private:
-   void   Beg_PV4() ;
-   void   End_PV4() ;
-   void   SetParameters_Internal_PV4(double par[])                    ;
-
-   TF1* p_TF1_PV4     ;
-   bool m_StatusFit_PV4 ; // True: fit failed  ; False: Fit OK
-   short int m_NberOf_V_FitRes_PV4_Pad ;
-   std::vector < const Pad* > V_FitRes_PV4_Pad      ;
-   std::vector < double >     V_FitRes_PV4_Residual ;
-   std::vector < double >     V_FitRes_PV4_Pull     ;
-  
-   FitOutput* p_FitOutput_PV4 ;
-
-//---------------------PV31-----------------------------//
-public: 
-   int    StatusFit_PV31();  // 0: OK ; 1: Failed
-   void   SetEval_PV31(SC_VS_x_rc_dd_SET_rc_dd* pSC_VS_x_rc_dd_SET_rc_dd)    ;
-   double Eval_Alpha_PV31            (const double& Xin)               ;
-   double Eval_Tau_PV31              (const double& Xin)               ;
-   int    SetParameter_PV31          (TVirtualFitter* pTVirtualFitter) ;
-   void   SetResults_PV31            (TVirtualFitter* pTVirtualFitter) ;
-   void   SetResults_FailledFit_PV31 (const int& Verbose,TVirtualFitter* pTVirtualFitter ) ;
-   double Chi2_PV31                  (double par[])                    ;
-   
-   int        FitRes_PV31_Get_NberOfTermsInChi2()            const ;
-   const Pad* FitRes_PV31_Get_Pad      (const int& Index1D) const ;
-   double     FitRes_PV31_Get_Residual (const int& Index1D) const ;
-   double     FitRes_PV31_Get_Pull     (const int& Index1D) const ;
-
-private:
-   void   Beg_PV31() ;
-   void   End_PV31() ;
-   void   SetParameters_Internal_PV31(double par[])                    ;
-
-   SC_VS_x_rc_dd_SET_rc_dd* p_PV31_SC_VS_x_rc_dd_SET_rc_dd ;
-   bool m_StatusFit_PV31 ; // True: fit failed  ; False: Fit OK
-   short int m_NberOf_V_FitRes_PV31_Pad ;
-   std::vector < const Pad* > V_FitRes_PV31_Pad      ;
-   std::vector < double >     V_FitRes_PV31_Residual ;
-   std::vector < double >     V_FitRes_PV31_Pull     ;
-  
-   FitOutput* p_FitOutput_PV31 ;
-   
-   int m_PV31_AddTime_Leading         ;
-   int m_PV31_AddTime_NextLeading     ;
-   int m_PV31_AddTime_NextNextLeading ;
    
 //---------------------PV0_Diag-----------------------------//
 public:

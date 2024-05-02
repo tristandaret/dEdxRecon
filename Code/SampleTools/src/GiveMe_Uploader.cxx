@@ -9,7 +9,6 @@
 #include "SampleTools/Uploader_CERN22.h"
 #include "SampleTools/Uploader_CERN22_V4.h"
 #include "SampleTools/Uploader_David.h"
-#include "SampleTools/Uploader_Simulation.h"
 
 Uploader* GiveMe_Uploader(
                           const int& intUploader,
@@ -93,19 +92,5 @@ Uploader* GiveMe_Uploader(
     pUploader_David->Setwap_XY(1) ;                                                    
     ToBeReturned = pUploader_David;
   }
-  if ( intUploader == 100 ) ToBeReturned = new Uploader_Simulation(
-                                                         SampleFile             ,
-                                                         pModel_ReadOutGeometry ,
-                                                         pModel_Electronics     ,
-                                                         pModel_Charge1D        
-                                                        );
-
-  if (!ToBeReturned){
-    std::cout  << "GiveMe_Uploader: " << std::endl ;
-    std::cout  << "  ToBeReturned=0 " << std::endl ;
-    std::cout  << "  for intUploader = " << intUploader << std::endl ;
-    abort();
-  }
-  
   return ToBeReturned ;
 }

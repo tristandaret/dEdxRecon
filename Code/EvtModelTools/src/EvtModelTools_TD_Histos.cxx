@@ -2,7 +2,6 @@
 #include "Misc/Util.h"
 
 #include "EvtModelTools/EvtModelTools_Histos.h"
-#include "Tristan_DESY21/DESY21_Fits.h"
 
 #include "TCanvas.h"
 #include "TGraph.h"
@@ -569,40 +568,6 @@ TH1D* GiveMe_AclusNPads (Sample& aSample, const int& ModuleNber, const std::stri
 
 
 
-// Discard clusters misaligned with the tendency of the track
-TH1D* GiveMe_TrackAlignResiduals (Sample& aSample, const int& ModuleNber, const std::string& TAG, const std::string Stage, const int& iIter)
-{
-  std::string Title         = TAG + ": Residuals of track alignment selection;Residuals (#mum);Count" ;
-  TH1D* pth1_trackalignresi = new TH1D (TString(TAG + "pth1_trackalignresi" + Stage),Title.c_str(), 100, -7000, 7000) ;
-
-  int NEvents = aSample.Get_NberOfEvents() ;
-  for (int iE = 0 ; iE < NEvents; iE++){
-    Event* pEvent           = aSample.Get_Event(iE) ;
-    if (pEvent->Validity_ForThisModule(ModuleNber) == 0) continue ;
-
-    TH2D* pTH2D_Evt_display = GiveMe_EvtDisplay(pEvent, ModuleNber ,std::string(TAG + std::to_string(iIter))) ;
-    TGraphErrors* ptge_Evt  = TH2_to_TGE(pTH2D_Evt_display); // gets Yw out of the EvtDisp
-    TF1* ptf1_Evt_fit       = GiveMe_FitYwforSelection(ptge_Evt) ;
-    
-    std::vector < Cluster* >ClusterSet = pEvent->GiveMe_Clusters_ForThisModule (ModuleNber) ;   
-    int NClusters = ClusterSet.size() ;
-    for (int iC = 0 ; iC< NClusters; iC++){
-      Cluster* pCluster = ClusterSet[iC];
-      
-      int iX                = pCluster->Get_LeadingPad()->Get_iX() ;
-      double fresidual      = ptge_Evt->GetPointY(iC) - ptf1_Evt_fit->Eval(iX) ;
-      pth1_trackalignresi->Fill(fresidual*10000) ;
-    }
-    delete pTH2D_Evt_display ;
-    delete ptge_Evt ;
-    delete ptf1_Evt_fit ;
-  }
-  return pth1_trackalignresi ;
-}
-
-
-
-
 ///////////////////////////////////////////////// TH2I /////////////////////////////////////////////////////////////////////////////
 
 // 2D DeltaT VS Tmax Leading  (Y vs X)
@@ -756,40 +721,6 @@ TH2D* GiveMe_2D_Rho_YT(Sample& aSample, const int& ModuleNber, const std::string
 
 
 
-// 2D: rho* = Ai/A(leading) vs y_{T} for PV2 procedure
-TH2D* GiveMe_2D_RhoPV2_YT (Sample& aSample, const int& ModuleNber, const std::string& TAG)
-{
-  return GiveMe_2D_RhoPV2_YT(aSample, ModuleNber , TAG, 1700, 0, 17, 120, -0.1, 1.1) ;
-}
-TH2D* GiveMe_2D_RhoPV2_YT(Sample& aSample, const int& ModuleNber, const std::string& TAG, const int& NYbins, const double& Ymin, const double& Ymax, const int& rhobin, const double& rhomin, const double& rhomax)
-{
-  string Title            = TAG + ": #rho_{PV2} = A_{i} / A_{leading} VS y_{T};y_{T} (cm);#rho" ;
-  TH2D* pth2d_RhoPV2_YT  = new TH2D("pth2d_RhoPV2_YT",Title.c_str(), NYbins, Ymin, Ymax, rhobin, rhomin, rhomax) ;
-  
-  int NberOfEvents        = aSample.Get_NberOfEvents() ;
-  for (int iE = 0 ; iE < NberOfEvents ; iE++){
-    Event* pEvent         =  aSample.Get_Event(iE) ;
-    if (pEvent->Validity_ForThisModule(ModuleNber) == 0) continue ;
-
-    std::vector < Cluster* >ClusterSet = pEvent->GiveMe_Clusters_ForThisModule (ModuleNber) ;   
-    int NClusters = ClusterSet.size() ;
-    for (int iC = 0 ; iC< NClusters; iC++){
-      Cluster* pCluster = ClusterSet[iC];
-      
-      double YT           = pCluster->Get_YTrack()*100 ;
-
-      int NPads           = pCluster->Get_NberOfPads() ;
-      for (int iP = 0 ; iP < NPads ; iP++){
-        const Pad* pPad         = pCluster->Get_Pad(iP) ;          
-        double rhoPV2        = pPad->Get_AMax() / pCluster->Get_LeadingPad()->Get_AMax() ;
-        pth2d_RhoPV2_YT->Fill(YT,rhoPV2) ;
-      }  
-    }
-  }
-  return pth2d_RhoPV2_YT ;
-}
-
-
 
 // 2D: rho vs y_{T} - y_{pad}
 TH2D* GiveMe_2D_Rho_YTYpad (Sample& aSample, const int& ModuleNber, const std::string& TAG, const int PV)
@@ -826,43 +757,6 @@ TH2D* GiveMe_2D_Rho_YTYpad (Sample& aSample, const int& ModuleNber, const std::s
   }
   return pth2d_Rho_YTYpad ;
 }
-
-
-
-// 2D: rho* = Ai/A(leading) vs y_{T} - y_{pad} for PV2 procedure
-TH2D* GiveMe_2D_RhoPV2_YTYpad (Sample& aSample, const int& ModuleNber, const std::string& TAG)
-{
-  return GiveMe_2D_RhoPV2_YTYpad(aSample, ModuleNber , TAG, 100, -1.5*1.019, 1.5*1.019, 120, -0.1, 1.1) ;
-}
-TH2D* GiveMe_2D_RhoPV2_YTYpad (Sample& aSample, const int& ModuleNber, const std::string& TAG, const int& Ybins, const double& Ymin, const double& Ymax, const int& rhobin, const double& rhomin, const double& rhomax)
-{
-  std::string Title       = TAG + ": #rho = A_{i}/A_{leading} VS y_{T} - y_{pad};y_{T} - y_{pad} (cm);#rho" ;
-  TH2D* pth2d_RhoPV2_YTYpad = new TH2D("pth2d_RhoPV2_YTYpad",Title.c_str(), Ybins, Ymin, Ymax, rhobin, rhomin, rhomax) ;
-  
-  int NberOfEvents        = aSample.Get_NberOfEvents() ;
-  for (int iE = 0 ; iE < NberOfEvents ; iE++){
-    Event* pEvent         =  aSample.Get_Event(iE) ;
-    if (pEvent->Validity_ForThisModule(ModuleNber) == 0) continue ;
-
-    std::vector < Cluster* >ClusterSet = pEvent->GiveMe_Clusters_ForThisModule (ModuleNber) ;   
-    int NClusters = ClusterSet.size() ;
-    for (int iC = 0 ; iC< NClusters; iC++){
-      Cluster* pCluster = ClusterSet[iC];
-      
-      double YT           = pCluster->Get_YTrack()*100 ;
-
-      int NPads           = pCluster->Get_NberOfPads() ;
-      for (int iP = 0 ; iP < NPads ; iP++){
-        const Pad* pPad   = pCluster->Get_Pad(iP) ;          
-        double YTYpad     = YT - pPad->Get_YPad()*100 ;
-        double rho        = pPad->Get_AMax() / pCluster->Get_LeadingPad()->Get_AMax() ;
-        pth2d_RhoPV2_YTYpad->Fill(YTYpad,rho) ;
-      }  
-    }
-  }
-  return pth2d_RhoPV2_YTYpad ;
-}
-
 
 
 // 2D: DeltaYT VS Y_T - Y_pad
@@ -1028,42 +922,6 @@ TProfile* GiveMe_Rho_YT(Sample& aSample, const int& ModuleNber, const std::strin
 }
 
 
-
-// TPROFILE rhoPV2 vs y_{T}
-TProfile* GiveMe_RhoPV2_YT (Sample& aSample, const int& ModuleNber, const std::string& TAG)
-{
-  return GiveMe_RhoPV2_YT(aSample, ModuleNber , TAG, 1700, 0, 17, -0.1, 1.1) ;
-}
-TProfile* GiveMe_RhoPV2_YT(Sample& aSample, const int& ModuleNber, const std::string& TAG, const int& NYbins, const double& Ymin, const double& Ymax, const double& rhomin, const double& rhomax)
-{
-  string Title            = TAG + ": #rhoPV2 VS y_{T};y_{T} (cm);#rho" ;
-  TProfile* pth2d_RhoPV2_YT  = new TProfile("pth2d_RhoPV2_YT",Title.c_str(), NYbins, Ymin, Ymax, rhomin, rhomax) ;
-  
-  int NberOfEvents        = aSample.Get_NberOfEvents() ;
-  for (int iE = 0 ; iE < NberOfEvents ; iE++){
-    Event* pEvent         =  aSample.Get_Event(iE) ;
-    if (pEvent->Validity_ForThisModule(ModuleNber) == 0) continue ;
-
-    std::vector < Cluster* >ClusterSet = pEvent->GiveMe_Clusters_ForThisModule (ModuleNber) ;   
-    int NClusters = ClusterSet.size() ;
-    for (int iC = 0 ; iC< NClusters; iC++){
-      Cluster* pCluster = ClusterSet[iC];
-      
-      double YT           = pCluster->Get_YTrack()*100 ;
-
-      int NPads           = pCluster->Get_NberOfPads() ;
-      for (int iP = 0 ; iP < NPads ; iP++){
-        const Pad* pPad         = pCluster->Get_Pad(iP) ;          
-        double rhoPV2        = pPad->Get_AMax() / pCluster->Get_LeadingPad()->Get_AMax() ;
-        pth2d_RhoPV2_YT->Fill(YT,rhoPV2) ;
-      }  
-    }
-  }
-  return pth2d_RhoPV2_YT ;
-}
-
-
-
 // TPROFILE rho vs y_{T} - y_{pad}
 TProfile* GiveMe_Rho_YTYpad (Sample& aSample, const int& ModuleNber, const std::string& TAG)
 {
@@ -1097,43 +955,6 @@ TProfile* GiveMe_Rho_YTYpad (Sample& aSample, const int& ModuleNber, const std::
   }
   return tpRho_YTYpad ;
 }
-
-
-
-// TPROFILE rhoPV2 vs y_{T} - y_{pad}
-TProfile* GiveMe_RhoPV2_YTYpad (Sample& aSample, const int& ModuleNber, const std::string& TAG)
-{
-  return GiveMe_RhoPV2_YTYpad(aSample, ModuleNber , TAG, 250, -1.5*1.019, 1.5*1.019, -0.1, 1.1) ;
-}
-TProfile* GiveMe_RhoPV2_YTYpad (Sample& aSample, const int& ModuleNber, const std::string& TAG, const int& NYbins, const double& Ymin, const double& Ymax, const double& rhomin, const double& rhomax)
-{
-  string Title            = TAG + ": #rho = A_{i}/A_{leading} VS y_{T} - y_{pad};y_{T} - y_{pad} (cm);#rho" ;
-  TProfile* tpRhoPV2_YTYpad  = new TProfile("pth2d_RhoPV2_YT-Ypad",Title.c_str(), NYbins, Ymin, Ymax, rhomin, rhomax) ;
-  
-  int NberOfEvents        = aSample.Get_NberOfEvents() ;
-  for (int iE = 0 ; iE < NberOfEvents ; iE++){
-    Event* pEvent         =  aSample.Get_Event(iE) ;
-    if (pEvent->Validity_ForThisModule(ModuleNber) == 0) continue ;
-
-    std::vector < Cluster* >ClusterSet = pEvent->GiveMe_Clusters_ForThisModule (ModuleNber) ;   
-    int NClusters = ClusterSet.size() ;
-    for (int iC = 0 ; iC< NClusters; iC++){
-      Cluster* pCluster = ClusterSet[iC];
-      
-      double YT           = pCluster->Get_YTrack()*100 ;
-
-      int NPads           = pCluster->Get_NberOfPads() ;
-      for (int iP = 0 ; iP < NPads ; iP++){
-        const Pad* pPad         = pCluster->Get_Pad(iP) ;          
-        double YTYpad     = YT - pPad->Get_YPad()*100 ;
-        double rhoPV2        = pPad->Get_AMax() / pCluster->Get_LeadingPad()->Get_AMax() ;
-        tpRhoPV2_YTYpad->Fill(YTYpad,rhoPV2) ;
-      }  
-    }
-  }
-  return tpRhoPV2_YTYpad ;
-}
-
 
 
 // TPROFILE rho vs Delta_T

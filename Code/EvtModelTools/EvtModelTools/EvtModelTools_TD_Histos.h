@@ -84,9 +84,6 @@ TH1D* GiveMe_DeltaYT                (Sample& aSample, const int& ModuleNber, con
 TH1D* GiveMe_AclusNPads             (Sample& aSample, const int& ModuleNber, const std::string& TAG, std::string Stage) ;
 TH1D* GiveMe_AclusNPads             (Sample& aSample, const int& ModuleNber, const std::string& TAG, std::string Stage, const int& nbins, const int& Xmin, const int& Xmax) ;
 
-// Discard clusters misaligned with the tendency of the track
-TH1D* GiveMe_TrackAlignResiduals    (Sample& aSample, const int& ModuleNber, const std::string& TAG, const std::string Stage, const int& iIter) ;
-
 
 //////////////////////////////////////////////////// TH2I /////////////////////////////////////////////////////
 
@@ -110,17 +107,9 @@ TH2F* GiveMe_2D_Rho_DeltaT          (Sample& aSample, const int& ModuleNber, con
 TH2D* GiveMe_2D_Rho_YT              (Sample& aSample, const int& ModuleNber, const std::string& TAG) ;
 TH2D* GiveMe_2D_Rho_YT              (Sample& aSample, const int& ModuleNber, const std::string& TAG, const int& NYbins, const double& Ymin, const double& Ymax, const int& rhobin, const double& rhomin, const double& rhomax) ;
 
-// 2D: rho VS YT for PV2 (rho = A_i / A_leading)
-TH2D* GiveMe_2D_RhoPV2_YT           (Sample& aSample, const int& ModuleNber, const std::string& TAG) ;
-TH2D* GiveMe_2D_RhoPV2_YT           (Sample& aSample, const int& ModuleNber, const std::string& TAG, const int& NYbins, const double& Ymin, const double& Ymax, const int& rhobin, const double& rhomin, const double& rhomax) ;
-
 // 2D: rho VS YTYpad
 TH2D* GiveMe_2D_Rho_YTYpad          (Sample& aSample, const int& ModuleNber, const std::string& TAG, const int PV) ;
 TH2D* GiveMe_2D_Rho_YTYpad          (Sample& aSample, const int& ModuleNber, const std::string& TAG, const int& Ybins, const double& Ymin, const double& Ymax, const int& rhobin, const double& rhomin, const double& rhomax) ;
-
-// 2D: rho VS YTYpad for PV2 (rho = A_i / A_leading)
-TH2D* GiveMe_2D_RhoPV2_YTYpad       (Sample& aSample, const int& ModuleNber, const std::string& TAG) ;
-TH2D* GiveMe_2D_RhoPV2_YTYpad       (Sample& aSample, const int& ModuleNber, const std::string& TAG, const int& Ybins, const double& Ymin, const double& Ymax, const int& rhobin, const double& rhomin, const double& rhomax) ;
 
 // 2D: DeltaYT VS Y_T - Y-pad
 TH2D* GiveMe_2D_DeltaY_YTYpad       (Sample& aSample, const int& ModuleNber, const std::string& TAG, const int& ytypadbin, const double& ytypadmin, const double& ytypadmax, const int& DYbins, const double& DYmin, const double& DYmax) ;
@@ -144,17 +133,9 @@ TH2D* GiveMe_2D_A21vsA31            (Sample& aSample, const int& ModuleNber, con
 TProfile* GiveMe_Rho_YT             (Sample& aSample, const int& ModuleNber, const std::string& TAG) ;
 TProfile* GiveMe_Rho_YT             (Sample& aSample, const int& ModuleNber, const std::string& TAG, const int& NYbins, const double& Ymin, const double& Ymax, const double& rhomin, const double& rhomax) ;
 
-// Rho VS YTYpad for PV2 (rho = A_i / A_leading)
-TProfile* GiveMe_RhoPV2_YT          (Sample& aSample, const int& ModuleNber, const std::string& TAG) ;
-TProfile* GiveMe_RhoPV2_YT          (Sample& aSample, const int& ModuleNber, const std::string& TAG, const int& NYbins, const double& Ymin, const double& Ymax, const double& rhomin, const double& rhomax) ;
-
 // Rho VS YT - Ypad
 TProfile* GiveMe_Rho_YTYpad         (Sample& aSample, const int& ModuleNber, const std::string& TAG) ;
 TProfile* GiveMe_Rho_YTYpad         (Sample& aSample, const int& ModuleNber, const std::string& TAG, const int& NYbins, const double& Ymin, const double& Ymax, const double& rhomin, const double& rhomax) ;
-
-// Rho VS YTYpad for PV2 (rho = A_i / A_leading)
-TProfile* GiveMe_RhoPV2_YTYpad      (Sample& aSample, const int& ModuleNber, const std::string& TAG) ;
-TProfile* GiveMe_RhoPV2_YTYpad      (Sample& aSample, const int& ModuleNber, const std::string& TAG, const int& NYbins, const double& Ymin, const double& Ymax, const double& rhomin, const double& rhomax) ;
 
 // Rho VS DeltaT
 TProfile* GiveMe_Rho_DeltaT         (Sample& aSample, const int& ModuleNber, const std::string& TAG, const std::string& Procedure) ;

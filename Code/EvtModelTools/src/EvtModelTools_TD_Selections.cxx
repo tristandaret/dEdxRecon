@@ -1,7 +1,6 @@
 #include "EvtModelTools/EvtModelTools_TD_Selections.h"
 #include "EvtModelTools/EvtModelTools_TD_Histos.h"
 #include "EvtModelTools/EvtModelTools_Histos.h"
-#include "Tristan_DESY21/DESY21_Fits.h"
 #include "Misc/Util.h"
 
 
@@ -99,76 +98,4 @@ std::vector<int> Comp120_Cut(Uploader* pUploader, const int& NbrOfMod, const int
   }
   delete h1f_TLead;
   return v_TCut ;
-}
-
-
-
-
-
-
-
-// 5: Discard clusters misaligned with the tendency of the track
-void Selection_TD_TrackAlignement (Sample& aSample, const int& ModuleNber, const std::string& TAG, const float& cutoff, const int& zdrift)
-{
-  std::cout << std::endl << "Selection Track Alignement: Discard clusters misaligned with the tendency of the track" << std::endl ;
-
-  for(float idy = cutoff+1 ; idy >= cutoff-0.01 ; idy--){
-    // std::vector<int> v_NCluster_start ; // List of all clusters in each event before making selection
-    int NEvents = aSample.Get_NberOfEvents() ;
-    for (int iE = 0 ; iE < NEvents; iE++){
-      Event* pEvent           = aSample.Get_Event(iE) ;
-      if (pEvent->Validity_ForThisModule(ModuleNber) == 0) continue ;
-
-      std::vector < Cluster* >ClusterSet = pEvent->GiveMe_Clusters_ForThisModule (ModuleNber) ;   
-      int NClusters = ClusterSet.size() ;
-
-      if(NClusters < 20) pEvent->Invalidate_ThisModule(ModuleNber) ; 
-      
-      if (pEvent->Validity_ForThisModule(ModuleNber) == 0) continue ;
-
-      TH2D* pTH2D_Evt_display = GiveMe_EvtDisplay(pEvent, ModuleNber , TAG) ;
-      TGraphErrors* ptge_Evt  = TH2_to_TGE(pTH2D_Evt_display);
-      TF1* ptf1_Evt_fit       = GiveMe_FitYwforSelection(ptge_Evt) ;
-      
-      // v_NCluster_start.push_back(NClusters) ;
-      
-      std::vector<Cluster*> v_newCluster ; // vector of the clusters kept => is going to become the reconstructed Event
-      
-      for (int iC = 0 ; iC< NClusters; iC++){
-        Cluster* pCluster = ClusterSet[iC];
-        
-        int iX                = pCluster->Get_LeadingPad()->Get_iX() ;
-        float fresidual       = ptge_Evt->GetPointY(iC) - ptf1_Evt_fit->Eval(iX) ;
-        if(std::fabs(fresidual) < idy){
-          Cluster* pClusnew   = pEvent->Get_Cluster_Copy(pCluster) ;
-          v_newCluster.push_back(pClusnew) ;
-        }
-      }
-      pEvent->Replace_Clusters_ForThisModule(v_newCluster, ModuleNber) ;
-
-      // int nEvtPrint = 0 ;
-      // if(idy == cutoff and v_NCluster_start[iE] - pEvent->Get_NberOfCluster() != 0 and nEvtPrint < 200){
-      //   TH2D* pTH2D_Evt_displayF = GiveMe_EvtDisplay(pEvent, TAG) ;
-      //   TGraphErrors* ptgr_EvtF  = TH2_to_TGE(pTH2D_Evt_displayF);
-      //   TF1* ptf1_Evt_fitF       = new TF1("ptf1_Evt_fitF", "[0]*std::pow(x,2)+[1]*x+[2]", 0, 35) ;      
-      //   ptf1_Evt_fitF->SetParameter(0, -0.0005) ;
-      //   ptf1_Evt_fitF->SetParameter(1, -0.05) ;
-      //   ptf1_Evt_fitF->SetParameter(2, 8) ;
-      //   ptgr_EvtF->Fit(ptf1_Evt_fitF, "RQ") ;
-      //   TCanvas* pCanvasEvt     = new TCanvas(TString("pCanvasEvt_" + pEvent->Get_EventNber()), TString("pCanvasEvt_" + pEvent->Get_EventNber()), 1200, 900) ;
-      //   pCanvasEvt->cd() ;
-      //   pTH2D_Evt_displayF->DrawClone("colz") ;
-      //   ptgr_EvtF->DrawClone("same") ;
-      //   ptf1_Evt_fitF->DrawClone("same") ;
-      //   pCanvasEvt->SaveAs(TString("OUT_pt412/z" + std::to_string(zdrift) + "/Cut_Events/Event_" + std::to_string(pEvent->Get_EventNber()) + ".png")) ;
-      //   delete pCanvasEvt ;
-      //   nEvtPrint ++ ;
-      // }
-      
-      delete pTH2D_Evt_display ;
-      delete ptge_Evt ;
-      delete ptf1_Evt_fit ;
-    }
-  }
-  std::cout << "Selection Track Alignement: Completed" << std::endl << std::endl ;
 }

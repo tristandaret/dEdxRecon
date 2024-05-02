@@ -1,7 +1,6 @@
 #include "PID/Control.h"
-#include "PID/dEdx_func.h"
-#include "PID/Displayer.h"
-#include "PID/Misc_Functions.h"
+#include "PID/Tools.h"
+#include "PID/Tools.h"
 
 #include "Misc/Util.h"
 

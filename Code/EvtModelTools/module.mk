@@ -1,16 +1,12 @@
 # Source files to compile (without suffix)
 
 FILES := src/EvtModelTools_Histos
-FILES += src/EvtModelTools_SH_Histos
 FILES += src/EvtModelTools_JFL_Histos
 FILES += src/EvtModelTools_TD_Histos
 FILES += src/EvtModelTools_TD_Selections
 FILES += src/JFL_Selections
-FILES += src/JFL_RecTools
 FILES += src/JFL_Do_ClusterFit
-FILES += src/JFL_Do_SampleFit
 FILES += src/JFL_Selector
-FILES += src/JeanFrancois_DrawOut_Status
 
 # Header files to use for dictionary generation
 DICTFILES :=

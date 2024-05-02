@@ -134,8 +134,6 @@ TH1F*     GiveMe_pTH1F_YwYpad  (
                             const double& Ymax  
                            ) ;
 
-TH1F*     GiveMe_ClusterTypology (Sample& aSample, const int& ModuleNber,const std::string& TAG) ;
-
 
 TH1F*     GiveMe_pTH1F_Tmax                   (Sample& aSample, const int& ModuleNber , const std::string& TAG) ;
 
@@ -194,35 +192,8 @@ TH1I* GiveMe_pTH1I_LeadingiY (Sample& aSample, const int& ModuleNber, const std:
 TProfile* GiveMe_pTProfile_Rho_YwYpad (Sample& aSample, const int& ModuleNber, const std::string& TAG) ;
 TProfile* GiveMe_pTProfile_Rho_YwYpad (Sample& aSample, const int& ModuleNber, const std::string& TAG, const int& NYbins, const double& Ymin, const double& Ymax, const double& rhomin, const double& rhomax) ;
 
-TH1F* GiveMe_pTH1F_PullFitRC_PV2 (Sample& aSample, const int& ModuleNber, const std::string& TAG) ;
-TH1F* GiveMe_pTH1F_PullFitRC_PV2 (Sample& aSample, const int& ModuleNber, const std::string& TAG, const int& NBins, const double& PullMin, const double& PullMax) ;
-
-TH1F* GiveMe_pTH1F_PullFitRC_PV3 (Sample& aSample, const int& ModuleNber, const std::string& TAG) ;
-TH1F* GiveMe_pTH1F_PullFitRC_PV3 (Sample& aSample, const int& ModuleNber, const std::string& TAG, const int& NBins, const double& PullMin, const double& PullMax) ;
-
-TH1F* GiveMe_pTH1F_PullFitRC_PV4 (Sample& aSample, const int& ModuleNber, const std::string& TAG) ;
-TH1F* GiveMe_pTH1F_PullFitRC_PV4 (Sample& aSample, const int& ModuleNber, const std::string& TAG, const int& NBins, const double& PullMin, const double& PullMax) ;
-
 TH1F* GiveMe_pTH1F_PullFitCluster_PV0_PV1 (Sample& aSample, const int& ModuleNber, const std::string& TAG) ;
 TH1F* GiveMe_pTH1F_PullFitCluster_PV0_PV1 (Sample& aSample, const int& ModuleNber, const std::string& TAG, const int& NBins, const double& PullMin, const double& PullMax) ;
-
-TH1F* GiveMe_pTH1F_PullFitCluster_PV2 (Sample& aSample, const int& ModuleNber, const std::string& TAG) ;
-TH1F* GiveMe_pTH1F_PullFitCluster_PV2 (Sample& aSample, const int& ModuleNber, const std::string& TAG, const int& NBins, const double& PullMin, const double& PullMax) ;
-
-TH1F* GiveMe_pTH1F_PullFitCluster_PV3 (Sample& aSample, const int& ModuleNber, const std::string& TAG) ;
-TH1F* GiveMe_pTH1F_PullFitCluster_PV3 (Sample& aSample, const int& ModuleNber, const std::string& TAG, const int& NBins, const double& PullMin, const double& PullMax) ;
-
-TH1F* GiveMe_pTH1F_Ch2MinFitCluster_PV2 (Sample& aSample, const int& ModuleNber, const std::string& TAG) ;
-TH1F* GiveMe_pTH1F_Ch2MinFitCluster_PV2 (Sample& aSample, const int& ModuleNber, const std::string& TAG, const int& NBins, const double& PullMin, const double& PullMax) ;
-
-TH1F* GiveMe_pTH1F_Ch2MinFitCluster_PV3 (Sample& aSample, const int& ModuleNber, const std::string& TAG) ;
-TH1F* GiveMe_pTH1F_Ch2MinFitCluster_PV3 (Sample& aSample, const int& ModuleNber, const std::string& TAG, const int& NBins, const double& PullMin, const double& PullMax) ;
-
-TH1F* GiveMe_pTH1F_Ch2MinPerDOFFitCluster_PV2 (Sample& aSample, const int& ModuleNber, const std::string& TAG) ;
-TH1F* GiveMe_pTH1F_Ch2MinPerDOFFitCluster_PV2 (Sample& aSample, const int& ModuleNber, const std::string& TAG, const int& NBins, const double& PullMin, const double& PullMax) ;
-
-TH1F* GiveMe_pTH1F_Ch2MinPerDOFFitCluster_PV3 (Sample& aSample, const int& ModuleNber, const std::string& TAG) ;
-TH1F* GiveMe_pTH1F_Ch2MinPerDOFFitCluster_PV3 (Sample& aSample, const int& ModuleNber, const std::string& TAG, const int& NBins, const double& PullMin, const double& PullMax) ;
 
 TH1F* GiveMe_pTH1F_PullFitPRF (TGraphErrors* pTGraphErrors, TF1* pTF1_rho_VS_YTrackYPad, double& Chi2Min_PRFfit, int& NODF_PRFfit , const std::string& TAG) ;
 TH1F* GiveMe_pTH1F_PullFitPRF (TGraphErrors* pTGraphErrors, TF1* pTF1_rho_VS_YTrackYPad, double& Chi2Min_PRFfit, int& NODF_PRFfit , const std::string& TAG, const int& NBins, const double& PullMin, const double& PullMax) ;
@@ -232,20 +203,6 @@ TH1F* GiveMe_pTH1F_Ch2MinFitCluster_PV0_PV1 (Sample& aSample, const int& ModuleN
 
 TH1F* GiveMe_pTH1F_Ch2MinPerDOFFitCluster_PV0_PV1 (Sample& aSample, const int& ModuleNber, const std::string& TAG) ;
 TH1F* GiveMe_pTH1F_Ch2MinPerDOFFitCluster_PV0_PV1 (Sample& aSample, const int& ModuleNber, const std::string& TAG, const int& NBins, const double& PullMin, const double& PullMax) ;
-
-
-
-TH1F* GiveMe_pTH1F_PullFitRC_PV31 (Sample& aSample, const int& ModuleNber, const std::string& TAG) ;
-TH1F* GiveMe_pTH1F_PullFitRC_PV31 (Sample& aSample, const int& ModuleNber, const std::string& TAG, const int& NBins, const double& PullMin, const double& PullMax) ;
-
-TH1F* GiveMe_pTH1F_PullFitCluster_PV31 (Sample& aSample, const int& ModuleNber, const std::string& TAG) ;
-TH1F* GiveMe_pTH1F_PullFitCluster_PV31 (Sample& aSample, const int& ModuleNber, const std::string& TAG, const int& NBins, const double& PullMin, const double& PullMax) ;
-
-TH1F* GiveMe_pTH1F_Ch2MinFitCluster_PV31 (Sample& aSample, const int& ModuleNber, const std::string& TAG) ;
-TH1F* GiveMe_pTH1F_Ch2MinFitCluster_PV31 (Sample& aSample, const int& ModuleNber, const std::string& TAG, const int& NBins, const double& PullMin, const double& PullMax) ;
-
-TH1F* GiveMe_pTH1F_Ch2MinPerDOFFitCluster_PV31 (Sample& aSample, const int& ModuleNber, const std::string& TAG) ;
-TH1F* GiveMe_pTH1F_Ch2MinPerDOFFitCluster_PV31 (Sample& aSample, const int& ModuleNber, const std::string& TAG, const int& NBins, const double& PullMin, const double& PullMax) ;
 
 
 //----------------------  Alpha2_VS_Alpha3 ----------------------//

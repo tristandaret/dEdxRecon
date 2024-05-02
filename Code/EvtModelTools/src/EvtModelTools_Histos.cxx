@@ -1,9 +1,8 @@
 #include "EvtModelTools/EvtModelTools_Histos.h"
-#include "PID/Misc_Functions.h"
+#include "PID/Tools.h"
 #include "Misc/Util.h"
 #include "Misc/ParabolaFunction.h"
 #include "Misc/ParabolaFunctionNG.h"
-#include "SampleTools/THATERAMMaps.h"
 
 #include <typeinfo>
 
@@ -20,30 +19,6 @@
 #include "TGraphErrors.h"
 #include "TLegendEntry.h"
 #include "TFile.h"
-
-// Draw maps
-void DrawOut_ERAMmaps(ERAM_map* map, const std::string& eram_id, const std::string& type){
-  TH2F* h2f_map               = new TH2F("h2f_map", Form("%s map of ERAM %s;X (pad column);Y (pad row)", type.c_str(), eram_id.c_str()), 36, -0.5, 35.5, 32, -0.5, 31.5) ;
-  int init_style              = gStyle->GetOptStat();
-  gStyle->                      SetOptStat(0) ;
-  TCanvas* pTCanvas           = new TCanvas("TCanvas_Control", "TCanvas_Control", 4000, 3000) ;
-  int low                     = 9999 ;
-  for(int iX = 0 ; iX < 36 ; iX++){
-    for(int iY = 0 ; iY < 32 ; iY++){
-      if(map->GetData(iX, iY) != 0) h2f_map->Fill(iX, iY, map->GetData(iX, iY)) ;
-      if(map->GetData(iX, iY) < low and map->GetData(iX, iY) > 0) low = map->GetData(iX, iY) ;
-    }
-  }
-  h2f_map->                     SetMinimum(low) ;
-  pTCanvas->                    cd() ;
-  pTCanvas->                    SetRightMargin(0.13);
-  gStyle->                      SetPalette(kRainBow);
-  h2f_map->                     Draw("colz") ;
-  pTCanvas->                    SaveAs(("GainRCMaps/" + type + "files/ERAM" + eram_id + "_" + type + "map_filled.png").c_str()) ;
-  gStyle->                      SetOptStat(init_style) ;
-  delete h2f_map;
-  delete pTCanvas;
-}
 
 
 //Output event display of an event  with tagging string TAG, placed in OUTDIR dir

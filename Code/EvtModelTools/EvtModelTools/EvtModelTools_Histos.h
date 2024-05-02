@@ -4,15 +4,8 @@
 #include "EvtModel/Event.h"
 #include "EvtModel/Pad.h"
 
-#include "SampleTools/THATERAMMaps.h"
-#include "SampleTools/ReadGainmap.h"
-
 #include "TH1F.h"
 #include "TH2D.h"
-
-// Draw gain map
-void DrawOut_ERAMmaps(ERAM_map* map, const std::string& eram_id, const std::string& type);
-// void DrawOut_ERAMmaps(const std::string& eram_id, ERAM_map* Gainmap, ERAM_map* RCmap);
 
 //------------------------Event Display
 //Output event display of an event  with tagging string TAG, placed in OUTDIR dir
@@ -39,8 +32,5 @@ TH1F* GiveMe_WaveFormDisplay(const Pad* pPad,const std::string& TAG) ;
 void DrawOut_ClusterWFDisplay(Cluster* pCluster,const std::string& OUTDIR,const std::string& TAG) ;
 void DrawOut_ClusterWFDisplay(Cluster* pCluster,const std::string& OUTDIR,const std::string& TAG, const int& Option, const int& PT, const int& TB) ;
 
-//------------------------WF event display
-void DrawOut_EventWFDisplay(Module* pModule,const std::string& OUTDIR,const std::string& TAG) ;
-
 // Draw Event waveform
-void DrawOut_GWF(Event* pEvent, const int& ModuleNber,const std::string& OUTDIR,const std::string& TAG, const int& PT, const float& phi_rad) ;
+void DrawOut_GWF(Event* pEvent, const int& ModuleNber,const std::string& OUTDIR,const std::string& TAG, const int& PT, const int& TB, const float& phi_rad);

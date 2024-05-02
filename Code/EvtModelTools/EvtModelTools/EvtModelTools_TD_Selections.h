@@ -10,6 +10,3 @@
 
 // CERN22; Get cut values for the time selection (run based)
 std::vector<int> Comp120_Cut(Uploader* pUploader, const int& NbrOfMod, const int& Data_to_Use, const int& CloseWF) ;
-
-// Discard clusters misaligned with the tendency of the track
-void Selection_TD_TrackAlignement   (Sample& aSample, const int& ModuleNber, const std::string& TAG, const float& cutoff, const int& zdrift) ;

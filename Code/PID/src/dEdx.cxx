@@ -3,8 +3,8 @@
 #include "PID/Tools.h"
 #include "PID/Variables.h"
 
-#include "PID/Misc_Functions.h"
-#include "PID/dEdx_func.h"
+#include "PID/Tools.h"
+#include "PID/Tools.h"
 
 #include "Misc/Util.h"
 
@@ -14,10 +14,10 @@
 #include <string>
 #include <random>
 
-#include "SignalShape/PRF_param.h"
-#include "AnalysisTools/DoTracksReconstruction.h"
+#include "Fitters/PRF_param.h"
+#include "Fitters/DoTracksReconstruction.h"
 #include "EvtModelTools/JFL_Do_ClusterFit.h"
-#include "Fitters_Track/TheFitterTrack.h"
+#include "Fitters/TheFitterTrack.h"
 #include "EvtModelTools/EvtModelTools_Histos.h"
 #include "EvtModelTools/EvtModelTools_TD_Selections.h"
 #include "SampleTools/GiveMe_Uploader.h"

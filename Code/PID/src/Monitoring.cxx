@@ -456,44 +456,4 @@ void PID::Monitoring()
       if(DO_Resolution)   DrawOut_Zscan  (Form("OUT_PID/DESY21_zscan/DESY21_zscan_PT%i_139V", PT), comment, PT);
     }
   }
-
-
-
-
-
-  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-//   outDir = "OUT_PID/CERN22_ERAM18";
-//   if(DO_Displayer){
-//     selectionSet          = "T2_CERN22_Event";
-//     dataFile                = "../Data_CERN22_vD_iter0/ERAM18_350V_412ns_e+_1GeV_iter0.root"; tag = "CERN22_ERAM18_e+_1GeV"; prtcle = "e^{+} 1GeV";
-//     Uploader* p_uploader       = GiveMe_Uploader(intUploader, dataFile); 
-//     Displayer(outDir, tag, selectionSet, p_uploader, 0, 0, prtcle);
-//     delete                  p_uploader;
-//   }
-
-//   if(WFcorr){
-//     selectionSet          = "T_DESY21_Event";
-//     intUploader           =  2;
-//     moduleCase              =  0;
-//     std::string z_index[] = {"m40", "460", "860"};
-//     int phi_val[]         = {30, 40, 45};
-//     for (int iz = 0; iz < (int)std::size(z_index); iz++){
-//       for (int iphi = 0; iphi < (int)std::size(phi_val); iphi++){
-//         outDir            = Form("../Data_DESY21_dev_v9/Phi_scan_z%s/phi_200_%i_z%s_ym60_diag_iter9", z_index[iz].c_str(), phi_val[iphi], z_index[iz].c_str()); 
-//         tag               = Form("DESY21_phi%i_diag_z%s", phi_val[iphi], z_index[iz].c_str());
-//         Uploader* p_uploader   = GiveMe_Uploader (intUploader, outDir+".root");  
-//         corr(outDir, tag, selectionSet, p_uploader, moduleCase, 0);
-//         delete p_uploader;
-//       }
-//     }
-//   }
-
 }
