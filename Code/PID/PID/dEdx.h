@@ -10,12 +10,13 @@
 #include <TTree.h>
 #include <TBranch.h>
 #include <TH1F.h>
+#include <TROOT.h>
 
 #include "SampleTools/Uploader.h"
 
 namespace PID{
 
-    class TPad {
+    class TPad : public TObject{
     public:
         virtual ~TPad();
 
@@ -36,9 +37,11 @@ namespace PID{
         float ratioDrift     = 0;
         float ratioFile      = 0;
         float ratio          = 0;
+
+        ClassDef(TPad, 1);
     };
 
-    class TCluster {
+    class TCluster : public TObject{
     public:
         virtual ~TCluster();
 
@@ -47,9 +50,11 @@ namespace PID{
         float   length          = 0;
         int     NPads           = 0;
         float   ratioCorr       = 0; 
+
+        ClassDef(TCluster, 1);
     };
 
-    class TModule {
+    class TModule : public TObject{
     public:
         virtual ~TModule();
         
@@ -59,12 +64,16 @@ namespace PID{
         int NClusters           = 0;
         float phi               = 0;
         TF1* Track              = new TF1("pTrackFit", "[0]*x+[1]+[2]*x*x", 0, 2000);
+
+        ClassDef(TModule, 1);
     };
 
-    class TEvent {
+    class TEvent : public TObject{
     public:
+        TEvent();
         virtual ~TEvent();
-        
+        void Clear();
+
         std::vector<TModule*> v_modules;
         int eventNbr          = 0;
         float dEdxXP          = 0;
@@ -74,6 +83,8 @@ namespace PID{
         float lengthXP        = 0;
         float lengthWF        = 0;
         int numberOfModules   = 0;
+
+        ClassDef(TEvent, 1);
     };
 
     class dEdx{
@@ -126,7 +137,7 @@ namespace PID{
 
         // TFile* pFile;
         // TTree* pTree;
-        // PID::TEvent *p_tevent;
+        PID::TEvent *p_tevent;
     };
 
    extern PID::LUT    *p_lut;

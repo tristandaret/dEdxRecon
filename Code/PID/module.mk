@@ -14,7 +14,7 @@ FILES += src/corr
 FILES += src/CombinedFit
 
 # Header files to use for dictionary generation
-DICTFILES :=
+DICTFILES := PID/dEdx_LinkDef
 
 # Executable files
 PROGRAMS := 

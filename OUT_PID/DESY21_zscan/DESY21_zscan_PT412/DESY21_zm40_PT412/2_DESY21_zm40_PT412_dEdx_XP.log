@@ -50,441 +50,56 @@ minimal length : 2 mm
 
 Processing events:
 0/11975
-Elapsed time: 10ms
-Elapsed time: 3ms
-Elapsed time: 2ms
-Elapsed time: 3ms
-Elapsed time: 3ms
-Elapsed time: 3ms
-Elapsed time: 3ms
-Elapsed time: 6ms
-Elapsed time: 6ms
-Elapsed time: 7ms
-Elapsed time: 7ms
-Elapsed time: 9ms
-Elapsed time: 10ms
-Elapsed time: 5ms
-Elapsed time: 4ms
-Elapsed time: 5ms
-Elapsed time: 5ms
-Elapsed time: 6ms
-Elapsed time: 5ms
-Elapsed time: 6ms
-Elapsed time: 5ms
-Elapsed time: 6ms
-Elapsed time: 7ms
-Elapsed time: 7ms
-Elapsed time: 8ms
-Elapsed time: 9ms
-Elapsed time: 8ms
-Elapsed time: 8ms
-Elapsed time: 9ms
-Elapsed time: 10ms
-Elapsed time: 9ms
-Elapsed time: 11ms
-Elapsed time: 10ms
-Elapsed time: 11ms
-Elapsed time: 13ms
-Elapsed time: 13ms
-Elapsed time: 14ms
-Elapsed time: 13ms
-Elapsed time: 14ms
-Elapsed time: 14ms
-Elapsed time: 15ms
-100/11975
-Elapsed time: 14ms
-Elapsed time: 15ms
-Elapsed time: 15ms
-Elapsed time: 17ms
-Elapsed time: 17ms
-Elapsed time: 20ms
-Elapsed time: 18ms
-Elapsed time: 19ms
-Elapsed time: 20ms
-Elapsed time: 23ms
-Elapsed time: 22ms
-Elapsed time: 20ms
-Elapsed time: 22ms
-Elapsed time: 23ms
-Elapsed time: 24ms
-Elapsed time: 30ms
-Elapsed time: 33ms
-Elapsed time: 28ms
-Elapsed time: 26ms
-Elapsed time: 26ms
-Elapsed time: 26ms
-Elapsed time: 38ms
-Elapsed time: 56ms
-Elapsed time: 64ms
-Elapsed time: 62ms
-Elapsed time: 31ms
-Elapsed time: 87ms
-Elapsed time: 47ms
-Elapsed time: 34ms
-Elapsed time: 36ms
-Elapsed time: 33ms
-Elapsed time: 34ms
-Elapsed time: 36ms
-Elapsed time: 34ms
-Elapsed time: 36ms
-Elapsed time: 40ms
-Elapsed time: 34ms
-Elapsed time: 34ms
-Elapsed time: 36ms
-Elapsed time: 43ms
-Elapsed time: 41ms
-Elapsed time: 39ms
-Elapsed time: 40ms
-Elapsed time: 40ms
-Elapsed time: 45ms
-Elapsed time: 39ms
-Elapsed time: 38ms
-Elapsed time: 42ms
-Elapsed time: 37ms
-Elapsed time: 36ms
-Elapsed time: 44ms
-Elapsed time: 44ms
-Elapsed time: 39ms
-Elapsed time: 39ms
-200/11975
-Elapsed time: 42ms
-Elapsed time: 48ms
-Elapsed time: 42ms
-Elapsed time: 56ms
-Elapsed time: 49ms
-Elapsed time: 45ms
-Elapsed time: 47ms
-Elapsed time: 43ms
-Elapsed time: 55ms
-Elapsed time: 52ms
-Elapsed time: 54ms
-Elapsed time: 50ms
-Elapsed time: 48ms
-Elapsed time: 52ms
-Elapsed time: 48ms
-Elapsed time: 56ms
-Elapsed time: 50ms
-Elapsed time: 55ms
-Elapsed time: 51ms
-Elapsed time: 54ms
-Elapsed time: 52ms
-Elapsed time: 71ms
-Elapsed time: 57ms
-Elapsed time: 60ms
-Elapsed time: 50ms
-Elapsed time: 75ms
-Elapsed time: 72ms
-Elapsed time: 63ms
-Elapsed time: 67ms
-Elapsed time: 63ms
-Elapsed time: 69ms
-Elapsed time: 95ms
-Elapsed time: 74ms
-Elapsed time: 62ms
-Elapsed time: 72ms
-Elapsed time: 105ms
-Elapsed time: 113ms
-Elapsed time: 114ms
-Elapsed time: 202ms
-Elapsed time: 74ms
-Elapsed time: 74ms
-Elapsed time: 83ms
-Elapsed time: 71ms
-Elapsed time: 87ms
-300/11975
-Elapsed time: 82ms
-Elapsed time: 83ms
-Elapsed time: 100ms
-Elapsed time: 89ms
-Elapsed time: 95ms
-Elapsed time: 112ms
-Elapsed time: 74ms
-Elapsed time: 101ms
-Elapsed time: 81ms
-Elapsed time: 84ms
-Elapsed time: 89ms
-Elapsed time: 90ms
-Elapsed time: 88ms
-Elapsed time: 87ms
-Elapsed time: 89ms
-Elapsed time: 81ms
-Elapsed time: 89ms
-Elapsed time: 89ms
-Elapsed time: 97ms
-Elapsed time: 92ms
-Elapsed time: 101ms
-Elapsed time: 93ms
-Elapsed time: 91ms
-Elapsed time: 100ms
-Elapsed time: 99ms
-Elapsed time: 98ms
-Elapsed time: 95ms
-Elapsed time: 96ms
-Elapsed time: 95ms
-Elapsed time: 97ms
-Elapsed time: 98ms
-Elapsed time: 97ms
-Elapsed time: 155ms
-Elapsed time: 81ms
-Elapsed time: 111ms
-Elapsed time: 105ms
-Elapsed time: 101ms
-Elapsed time: 106ms
-Elapsed time: 148ms
-Elapsed time: 95ms
-Elapsed time: 118ms
-Elapsed time: 173ms
-Elapsed time: 107ms
-Elapsed time: 118ms
-Elapsed time: 104ms
-Elapsed time: 106ms
-Elapsed time: 109ms
-Elapsed time: 109ms
-Elapsed time: 112ms
-Elapsed time: 110ms
-Elapsed time: 123ms
-Elapsed time: 141ms
-Elapsed time: 119ms
-Elapsed time: 112ms
-400/11975
-Elapsed time: 113ms
-Elapsed time: 112ms
-Elapsed time: 116ms
-Elapsed time: 115ms
-Elapsed time: 113ms
-Elapsed time: 116ms
-Elapsed time: 116ms
-Elapsed time: 115ms
-Elapsed time: 116ms
-Elapsed time: 118ms
-Elapsed time: 119ms
-Elapsed time: 116ms
-Elapsed time: 114ms
-Elapsed time: 113ms
-Elapsed time: 119ms
-Elapsed time: 127ms
-Elapsed time: 194ms
-Elapsed time: 127ms
-Elapsed time: 127ms
-Elapsed time: 123ms
-Elapsed time: 134ms
-Elapsed time: 177ms
-Elapsed time: 177ms
-Elapsed time: 205ms
-Elapsed time: 137ms
-Elapsed time: 121ms
-Elapsed time: 131ms
-Elapsed time: 127ms
-Elapsed time: 126ms
-Elapsed time: 129ms
-Elapsed time: 135ms
-Elapsed time: 163ms
-Elapsed time: 120ms
-Elapsed time: 133ms
-Elapsed time: 137ms
-Elapsed time: 159ms
-Elapsed time: 125ms
-Elapsed time: 165ms
-Elapsed time: 130ms
-Elapsed time: 146ms
-Elapsed time: 135ms
-Elapsed time: 153ms
-Elapsed time: 148ms
-Elapsed time: 152ms
-Elapsed time: 151ms
-Elapsed time: 149ms
-500/11975
-Elapsed time: 155ms
-Elapsed time: 153ms
-Elapsed time: 178ms
-Elapsed time: 158ms
-Elapsed time: 173ms
-Elapsed time: 151ms
-Elapsed time: 146ms
-Elapsed time: 165ms
-Elapsed time: 180ms
-Elapsed time: 422ms
-Elapsed time: 485ms
-Elapsed time: 400ms
-Elapsed time: 378ms
-Elapsed time: 296ms
-Elapsed time: 176ms
-Elapsed time: 163ms
-Elapsed time: 173ms
-Elapsed time: 158ms
-Elapsed time: 174ms
-Elapsed time: 173ms
-Elapsed time: 184ms
-Elapsed time: 171ms
-Elapsed time: 167ms
-Elapsed time: 177ms
-Elapsed time: 174ms
-Elapsed time: 169ms
-Elapsed time: 177ms
-Elapsed time: 174ms
-Elapsed time: 179ms
-Elapsed time: 182ms
-Elapsed time: 214ms
-Elapsed time: 235ms
-Elapsed time: 216ms
-Elapsed time: 285ms
-Elapsed time: 220ms
-Elapsed time: 236ms
-Elapsed time: 225ms
-Elapsed time: 191ms
-Elapsed time: 192ms
-600/11975
-Elapsed time: 438ms
-Elapsed time: 290ms
-Elapsed time: 248ms
-Elapsed time: 201ms
-Elapsed time: 197ms
-Elapsed time: 188ms
-Elapsed time: 187ms
-Elapsed time: 172ms
-Elapsed time: 187ms
-Elapsed time: 201ms
-Elapsed time: 197ms
-Elapsed time: 180ms
-Elapsed time: 169ms
-Elapsed time: 236ms
-Elapsed time: 204ms
-Elapsed time: 173ms
-Elapsed time: 187ms
-Elapsed time: 173ms
-Elapsed time: 190ms
-Elapsed time: 176ms
-Elapsed time: 178ms
-Elapsed time: 201ms
-Elapsed time: 179ms
-Elapsed time: 184ms
-Elapsed time: 195ms
-Elapsed time: 192ms
-Elapsed time: 209ms
-Elapsed time: 190ms
-Elapsed time: 183ms
-Elapsed time: 207ms
-Elapsed time: 191ms
-Elapsed time: 204ms
-Elapsed time: 196ms
-Elapsed time: 193ms
-Elapsed time: 199ms
-Elapsed time: 205ms
-Elapsed time: 212ms
-Elapsed time: 199ms
-Elapsed time: 286ms
-Elapsed time: 268ms
-Elapsed time: 203ms
-Elapsed time: 203ms
-Elapsed time: 215ms
-700/11975
-Elapsed time: 223ms
-Elapsed time: 223ms
-Elapsed time: 212ms
-Elapsed time: 214ms
-Elapsed time: 231ms
-Elapsed time: 245ms
-Elapsed time: 232ms
-Elapsed time: 223ms
-Elapsed time: 225ms
-Elapsed time: 206ms
-Elapsed time: 220ms
-Elapsed time: 214ms
-Elapsed time: 212ms
-Elapsed time: 219ms
-Elapsed time: 228ms
-Elapsed time: 219ms
-Elapsed time: 224ms
-Elapsed time: 230ms
-Elapsed time: 253ms
-Elapsed time: 224ms
-Elapsed time: 224ms
-Elapsed time: 222ms
-Elapsed time: 300ms
-Elapsed time: 288ms
-Elapsed time: 224ms
-Elapsed time: 242ms
-Elapsed time: 298ms
-Elapsed time: 245ms
-Elapsed time: 238ms
-Elapsed time: 233ms
-Elapsed time: 248ms
-Elapsed time: 320ms
-Elapsed time: 281ms
-Elapsed time: 323ms
-Elapsed time: 247ms
-Elapsed time: 247ms
-Elapsed time: 253ms
-Elapsed time: 277ms
-Elapsed time: 241ms
-Elapsed time: 247ms
-Elapsed time: 255ms
-Elapsed time: 254ms
-800/11975
-Elapsed time: 271ms
-Elapsed time: 262ms
-Elapsed time: 251ms
-Elapsed time: 277ms
-Elapsed time: 317ms
-Elapsed time: 275ms
-Elapsed time: 273ms
-Elapsed time: 273ms
-Elapsed time: 267ms
-Elapsed time: 264ms
-Elapsed time: 290ms
-Elapsed time: 266ms
-Elapsed time: 262ms
-Elapsed time: 484ms
-Elapsed time: 612ms
-Elapsed time: 505ms
-Elapsed time: 305ms
-Elapsed time: 292ms
-Elapsed time: 426ms
-Elapsed time: 466ms
-Elapsed time: 475ms
-Elapsed time: 437ms
-Elapsed time: 287ms
-Elapsed time: 297ms
-Elapsed time: 349ms
-Elapsed time: 290ms
-Elapsed time: 317ms
-Elapsed time: 335ms
-Elapsed time: 283ms
-Elapsed time: 328ms
-Elapsed time: 289ms
-Elapsed time: 320ms
-Elapsed time: 331ms
-Elapsed time: 292ms
-Elapsed time: 491ms
-Elapsed time: 379ms
-Elapsed time: 337ms
-Elapsed time: 405ms
-900/11975
-Elapsed time: 348ms
-Elapsed time: 365ms
-Elapsed time: 374ms
-Elapsed time: 330ms
-Elapsed time: 336ms
-Elapsed time: 386ms
-Elapsed time: 346ms
-Elapsed time: 434ms
-Elapsed time: 509ms
-Elapsed time: 437ms
-Elapsed time: 446ms
-Elapsed time: 399ms
-Elapsed time: 340ms
-Elapsed time: 334ms
-Elapsed time: 350ms
-Elapsed time: 365ms
-Elapsed time: 372ms
-Elapsed time: 363ms
-Elapsed time: 381ms
-Elapsed time: 425ms
-Elapsed time: 435ms
-Elapsed time: 405ms
-Elapsed time: 397ms
-Elapsed time: 390ms
-Elapsed time: 434ms
-Elapsed time: 385ms
-Elapsed time: 351ms
-Elapsed time: 474ms
+18 ms
+4 ms
+4 ms
+5 ms
+4 ms
+6 ms
+5 ms
+7 ms
+4 ms
+3 ms
+4 ms
+3 ms
+3 ms
+4 ms
+3 ms
+4 ms
+3 ms
+3 ms
+5 ms
+4 ms
+3 ms
+3 ms
+4 ms
+4 ms
+3 ms
+4 ms
+4 ms
+4 ms
+3 ms
+3 ms
+6 ms
+4 ms
+5 ms
+5 ms
+4 ms
+5 ms
+4 ms
+4 ms
+5 ms
+4 ms
+4 ms
+
+Selection Statistics 
+ #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
+    0  Stage1      100      100 (    0.00)  (    0.00)       100      100 (    0.00)  (    0.00)      3396     3396 (    0.00)  (    0.00)     12674    12674 (    0.00)  (    0.00) 
+    1 Stage11      100       98 (   -2.00)  (   -2.00)       100       98 (   -2.00)  (   -2.00)      3396     3222 (   -5.12)  (   -5.12)     12674    11834 (   -6.63)  (   -6.63) 
+    2Stage120       98       95 (   -3.06)  (   -5.00)        98       95 (   -3.06)  (   -5.00)      3222     3154 (   -2.11)  (   -7.13)     11834    11662 (   -1.45)  (   -7.98) 
+    3StageT15       95       81 (  -14.74)  (  -19.00)        95       81 (  -14.74)  (  -19.00)      3154     2713 (  -13.98)  (  -20.11)     11662     9736 (  -16.52)  (  -23.18) 
+    4 Stage10       81       81 (    0.00)  (  -19.00)        81       81 (    0.00)  (  -19.00)      2713     2694 (   -0.70)  (  -20.67)      9736     9617 (   -1.22)  (  -24.12) 
+    5 Stage14       81       81 (    0.00)  (  -19.00)        81       81 (    0.00)  (  -19.00)      2694     2669 (   -0.93)  (  -21.41)      9617     9503 (   -1.19)  (  -25.02) 
+    6  Stage5       81       41 (  -49.38)  (  -59.00)        81       41 (  -49.38)  (  -59.00)      2669     1394 (  -47.77)  (  -58.95)      9503     4950 (  -47.91)  (  -60.94) 
+  Summary Sel      100       41             (  -59.00)       100       41             (  -59.00)      3396     1394             (  -58.95)     12674     4950             (  -60.94) 
+Fitting: Started... done!

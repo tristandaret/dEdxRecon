@@ -163,8 +163,6 @@ void PID::Monitoring()
         if(control or dedx) p_uploader = GiveMe_Uploader (intUploader, dataFile);
         if (control)      Control       (outDir, tag, comment, dataFile, selectionSet, p_uploader, moduleCase, 0, iPT, TB, prtcle);
         if (DO_control)   DrawOut_Control           (outDir, tag, comment, selectionSet, 1);
-        std::cout << "memory address of uploader: " << p_uploader << std::endl;
-        std::cout << "number of events: " << p_uploader->Get_NberOfEvent() << std::endl;
         if (dedx)          p_dEdx->Reconstruction();
         if (DO_Checks)    DrawOut_Checks            (outDir, dataFile, tag, comment);
         if (DO_Methods)   DrawOut_Methods           (outDir, tag, comment, 1, prtcle);
