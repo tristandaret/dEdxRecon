@@ -72,7 +72,8 @@ void PID::dEdx::Reconstruction(){
   /////////////////////////////////////////////////////////////////////////////////////////////////////////
   // Output
   TFile *pFile_dEdx   = new TFile((outDir + "2_" + tag + "_dEdx" + comment + ".root").c_str(), "RECREATE");
-  TTree *pTree   = new TTree("dEdx_tree", "dEdx TTree");
+  TTree *pTree_dEdx   = new TTree("dEdx_tree", "dEdx TTree");
+  // pTree_dEdx->Branch("Event", &p_tevent);
 
   // Selection stage
   JFL_Selector aJFL_Selector(selectionSet);
@@ -112,8 +113,8 @@ void PID::dEdx::Reconstruction(){
   // Compute dE/dx
   aJFL_Selector.                Reset_StatCounters();
   std::cout << "Processing events:" << std::endl;
-  for (int iEvent = 0; iEvent < 100; iEvent++){
-    if(iEvent % 1000 == 0 or iEvent == NEvent-1) std::cout << iEvent << "/" << NEvent << std::endl;
+  for (int iEvent = 0; iEvent < 1000; iEvent++){
+    if(iEvent % 100 == 0 or iEvent == NEvent-1) std::cout << iEvent << "/" << NEvent << std::endl;
     // pEvent->                    Clear_Modules();
 
     Event* pEvent                    = p_uploader->GiveMe_Event(iEvent, moduleCase, 0, 0);
@@ -121,16 +122,17 @@ void PID::dEdx::Reconstruction(){
 
     aJFL_Selector.              ApplySelection(pEvent);
     if (pEvent->IsValid() != 1) continue;
+    std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
 
-    TEvent tevent = PID::TEvent();
-    tevent.eventNbr = iEvent;
+    PID::TEvent *p_tevent = new PID::TEvent();
+    p_tevent->eventNbr = iEvent;
 
-    tevent.numberOfModules          = pEvent->Get_NberOfModule();
+    p_tevent->numberOfModules          = pEvent->Get_NberOfModule();
 
     float fmodID;
     std::vector<double> v_erams;
     // Check if there is a track in 4 ERAMs that are aligned
-    for (int iMod = 0; iMod < tevent.numberOfModules; iMod++){
+    for (int iMod = 0; iMod < p_tevent->numberOfModules; iMod++){
       fmodID                 = pEvent->Get_Module_InArray(iMod)->Get_ModuleNber();
       if (pEvent->Validity_ForThisModule(fmodID)!=0) v_erams.push_back(fERAMs_iD[fmodID]);
     } 
@@ -156,7 +158,7 @@ void PID::dEdx::Reconstruction(){
     //   }
     // }
 
-    for (int iMod = 0; iMod < tevent.numberOfModules; iMod++){
+    for (int iMod = 0; iMod < p_tevent->numberOfModules; iMod++){
       Module* pModule         = pEvent->Get_Module_InArray(iMod);
       fmodID                 = pModule->Get_ModuleNber();
       if (pEvent->Validity_ForThisModule(fmodID) == 0) continue;
@@ -169,9 +171,9 @@ void PID::dEdx::Reconstruction(){
       int NC                  = pModule->Get_NberOfCluster();
       if(NC == 0) continue;
 
-      PID::TModule tmodule;
-      tmodule.position       = iMod;
-      tmodule.ID        = fmodID;
+      PID::TModule *p_tmodule = new PID::TModule();
+      p_tmodule->position        = iMod;
+      p_tmodule->ID              = fmodID;
 
       // Track fitting
       if(tag.find("diag") == std::string::npos){
@@ -187,100 +189,108 @@ void PID::dEdx::Reconstruction(){
 
       // Track details
       const Track* pTrack     = pEvent->GiveMe_Track_ForThisModule(fmodID);
-      tmodule.phi             = std::atan(pTrack->Get_ParameterValue(1))/M_PI*180;
-      tmodule.Track->SetParameters(pTrack->Get_ParameterValue(0), pTrack->Get_ParameterValue(1));
+      p_tmodule->phi             = std::atan(pTrack->Get_ParameterValue(1))/M_PI*180;
+      p_tmodule->Track->SetParameters(pTrack->Get_ParameterValue(0), pTrack->Get_ParameterValue(1));
       Double_t parErrors[2] = {pTrack->Get_ParameterError(0), pTrack->Get_ParameterError(1)};
-      tmodule.Track->SetParErrors(parErrors);
+      p_tmodule->Track->SetParErrors(parErrors);
       if(fnParamsTrack == 3){
-        tmodule.Track->SetParameter(2, pTrack->Get_ParameterValue(2));
-        tmodule.Track->SetParError(2, pTrack->Get_ParameterError(2));
+        p_tmodule->Track->SetParameter(2, pTrack->Get_ParameterValue(2));
+        p_tmodule->Track->SetParError(2, pTrack->Get_ParameterError(2));
       }
 
 
       // Loop On Clusters
       for (int iC = 0; iC < NC; iC++){
         Cluster* pCluster           = pModule->Get_Cluster(iC);
-        PID::TCluster tcluster;
-        tcluster.ph1f_WF_cluster->SetName(Form("ph1f_WF_cluster_%d_%d_%d", iEvent, iMod, iC));
+        PID::TCluster *p_tcluster = new PID::TCluster();
+        p_tcluster->ph1f_WF_cluster->SetName(Form("ph1f_WF_cluster_%d_%d_%d", iEvent, iMod, iC));
 
         // Loop On Pads
         int NPads                   = pCluster->Get_NberOfPads();
         for(int iP = 0; iP < NPads; iP ++){
           const Pad* pPad           = pCluster->Get_Pad(iP);
-          PID::TPad tpad;
-          tpad.ix                   = pPad->Get_iX();
-          tpad.iy                   = pPad->Get_iY();
-          tpad.ph1f_WF_pad          = GiveMe_WaveFormDisplay(pPad, "main");
-          tpad.RC                   = pERAMMaps->RC(fERAMs_pos[iMod], pPad->Get_iX(), pPad->Get_iY());
+          PID::TPad * p_tpad = new PID::TPad();
+          p_tpad->ix                   = pPad->Get_iX();
+          p_tpad->iy                   = pPad->Get_iY();
+          p_tpad->ph1f_WF_pad          = GiveMe_WaveFormDisplay(pPad, "main");
+          p_tpad->RC                   = pERAMMaps->RC(fERAMs_pos[iMod], pPad->Get_iX(), pPad->Get_iY());
           if(fgainCorrection){
-            tpad.gain               = pERAMMaps->Gain(fERAMs_pos[iMod], pPad->Get_iX(), pPad->Get_iY());
-            tpad.GainCorrection     = AVG_GAIN/tpad.gain;
-            tpad.ADC                = fgainCorrection*pPad->Get_AMax();
-            tpad.ph1f_WF_pad->       Scale(fgainCorrection);
+            p_tpad->gain               = pERAMMaps->Gain(fERAMs_pos[iMod], pPad->Get_iX(), pPad->Get_iY());
+            p_tpad->GainCorrection     = AVG_GAIN/p_tpad->gain;
+            p_tpad->ADC                = fgainCorrection*pPad->Get_AMax();
+            p_tpad->ph1f_WF_pad->       Scale(fgainCorrection);
           }
-          else tpad.ADC             = pPad->Get_AMax();
-          tcluster.ph1f_WF_cluster->  Add(tpad.ph1f_WF_pad);
+          else p_tpad->ADC             = pPad->Get_AMax();
+          p_tcluster->ph1f_WF_cluster->  Add(p_tpad->ph1f_WF_pad);
           
           // Track computations (impact parameter in m, angle in degrees, length in pad in m)
-          local_params(pPad, pTrack, tpad.d, tpad.dd, tpad.phi, tpad.length);
-          tpad.d               *= 1000; // in mm
-          tpad.dd              *= 1000; // in mm
-          if(tpad.length <= 1e-6) continue;  // ignore non-but-almost-zero tracks
-          tpad.length          /= costheta;
+          local_params(pPad, pTrack, p_tpad->d, p_tpad->dd, p_tpad->phi, p_tpad->length);
+          p_tpad->d               *= 1000; // in mm
+          p_tpad->dd              *= 1000; // in mm
+          if(p_tpad->length <= 1e-6) continue;  // ignore non-but-almost-zero tracks
+          p_tpad->length          /= costheta;
 
-          tcluster.length      += tpad.length;
+          p_tcluster->length      += p_tpad->length;
 
           // Compute Z
-          tpad.TMax             = pPad->Get_TMax();
-          if      (PT == 412 and TB == 50){ tpad.T0 = 45; tpad.driftDistance = 3.90*(tpad.TMax-tpad.T0); } // 45 = 37(time shift) +  8(PT) from David
-          else if (PT == 412 and TB == 40){ tpad.T0 = 56; tpad.driftDistance = 3.12*(tpad.TMax-tpad.T0); } // 56 = 46(time shift) + 10(PT)
-          else if (PT == 200 and TB == 50){ tpad.T0 = 39; tpad.driftDistance = 3.90*(tpad.TMax-tpad.T0); } // 39 = 35(time shift) +  4(PT) own computation
-          else if (PT == 200 and TB == 40){ tpad.T0 = 48; tpad.driftDistance = 3.12*(tpad.TMax-tpad.T0); } // 48 = 44(time shift) +  5(PT)
+          p_tpad->TMax             = pPad->Get_TMax();
+          if      (PT == 412 and TB == 50){ p_tpad->T0 = 45; p_tpad->driftDistance = 3.90*(p_tpad->TMax-p_tpad->T0); } // 45 = 37(time shift) +  8(PT) from David
+          else if (PT == 412 and TB == 40){ p_tpad->T0 = 56; p_tpad->driftDistance = 3.12*(p_tpad->TMax-p_tpad->T0); } // 56 = 46(time shift) + 10(PT)
+          else if (PT == 200 and TB == 50){ p_tpad->T0 = 39; p_tpad->driftDistance = 3.90*(p_tpad->TMax-p_tpad->T0); } // 39 = 35(time shift) +  4(PT) own computation
+          else if (PT == 200 and TB == 40){ p_tpad->T0 = 48; p_tpad->driftDistance = 3.12*(p_tpad->TMax-p_tpad->T0); } // 48 = 44(time shift) +  5(PT)
 
-          if(tpad.length <= fminLength) continue;
+          if(p_tpad->length <= fminLength) continue;
           
-          tpad.ratioDrift       = p_lut->getRatio(fabs(tpad.phi), fabs(tpad.d), tpad.RC, tpad.driftDistance);
-          tpad.ratioFile        = p_lut->getRatio(fabs(tpad.phi), fabs(tpad.d), tpad.RC, driftDist);
+          p_tpad->ratioDrift       = p_lut->getRatio(fabs(p_tpad->phi), fabs(p_tpad->d), p_tpad->RC, p_tpad->driftDistance);
+          p_tpad->ratioFile        = p_lut->getRatio(fabs(p_tpad->phi), fabs(p_tpad->d), p_tpad->RC, driftDist);
 
-          if(driftMethod == "zcalc") tpad.ratio  = tpad.ratioDrift;
-          if(driftMethod == "zfile") tpad.ratio  = tpad.ratioFile;
+          if(driftMethod == "zcalc") p_tpad->ratio  = p_tpad->ratioDrift;
+          if(driftMethod == "zfile") p_tpad->ratio  = p_tpad->ratioFile;
 
-          v_dE.                   push_back(tpad.ADC*tpad.ratio);
-          v_dx.                   push_back(tpad.length);
-          v_dEdxXP.               push_back(tpad.ADC*tpad.ratio/(tpad.length*100)); // m to cm
+          v_dE.                   push_back(p_tpad->ADC*p_tpad->ratio);
+          v_dx.                   push_back(p_tpad->length);
+          v_dEdxXP.               push_back(p_tpad->ADC*p_tpad->ratio/(p_tpad->length*100)); // m to cm
 
-          tevent.NCrossedPads++;
-          tcluster.v_pads.push_back(tpad);
+          p_tevent->NCrossedPads++;
+          // p_tcluster->v_pads.push_back(p_tpad);
+          delete p_tpad;
         } // Pads
 
         // WF method
-        tcluster.ratioCorr            = fAref / pcorrFunctionWF->Eval(tcluster.length*1000);
-        if(tag.find("diag") != std::string::npos) v_dEdxWF.push_back(tcluster.ph1f_WF_cluster->GetMaximum()*tcluster.ratioCorr/10.19*10);
-        else                    v_dEdxWF.push_back(tcluster.ph1f_WF_cluster->GetMaximum()/(tcluster.length*100));
-        tevent.NClusters++;
+        p_tcluster->ratioCorr            = fAref / pcorrFunctionWF->Eval(p_tcluster->length*1000);
+        if(tag.find("diag") != std::string::npos) v_dEdxWF.push_back(p_tcluster->ph1f_WF_cluster->GetMaximum()*p_tcluster->ratioCorr/10.19*10);
+        else                    v_dEdxWF.push_back(p_tcluster->ph1f_WF_cluster->GetMaximum()/(p_tcluster->length*100));
+        p_tevent->NClusters++;
         
-        tmodule.v_clusters.push_back(tcluster);
+        // p_tmodule->v_clusters.push_back(p_tcluster);
+        delete p_tcluster;
       } // Clusters
-      tevent.v_modules.push_back(tmodule);
+      // p_tevent->v_modules.push_back(p_tmodule);
+      delete p_tmodule;
     } // Modules
 
-    if(tevent.NCrossedPads > 0){
+    if(p_tevent->NCrossedPads > 0){
       // WF
-      tevent.dEdxWF                 = ComputedEdxWF(v_dEdxWF, tevent.NClusters);
-      ph1f_WF->                       Fill(tevent.dEdxWF);
+      p_tevent->dEdxWF                 = ComputedEdxWF(v_dEdxWF, p_tevent->NClusters);
+      ph1f_WF->                       Fill(p_tevent->dEdxWF);
 
       // XP
-      tevent.dEdxXP                 = ComputedEdxXP(v_dEdxXP, v_dE, v_dx, tevent.NCrossedPads);
-      ph1f_XP->                       Fill(tevent.dEdxXP);
+      p_tevent->dEdxXP                 = ComputedEdxXP(v_dEdxXP, v_dE, v_dx, p_tevent->NCrossedPads);
+      ph1f_XP->                       Fill(p_tevent->dEdxXP);
     }
 
-    // pTree->                     Fill();
+    pTree_dEdx->                     Fill();
     v_erams.                    clear();
     v_dE.                       clear();
     v_dx.                       clear();
     v_dEdxXP.                   clear();
     v_dEdxWF.                   clear();
     delete pEvent;
+    delete p_tevent;
+
+    std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+    std::chrono::duration<double> elapsed_seconds = end - begin;
+    std::cout << "Elapsed time: " << elapsed_seconds.count()*1000 << "ms" << std::endl;
   } // Events
 
   aJFL_Selector.PrintStat();
@@ -297,16 +307,16 @@ void PID::dEdx::Reconstruction(){
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////
   // Methods
-  pFile_dEdx->                       cd();
+  pFile_dEdx->                  cd();
   ptf1_WF->                     Write();
   ptf1_XP->                     Write();
   ph1f_WF->                     Write();
   ph1f_XP->                     Write();
-  pFile_dEdx->                       Close();
+  pFile_dEdx->                  Close();
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////
   // Deleting
-  // delete pFile_dEdx;
+  delete pFile_dEdx;
   delete pcorrFunctionWF;
   delete pERAMMaps;
   delete ptf1PRF;
@@ -345,4 +355,25 @@ float PID::dEdx::ComputedEdxXP(const std::vector<float>& v_dEdx, const std::vect
     float DE            = std::accumulate(v_dE_sort.begin(),v_dE_sort.begin()+NCrossedTrunc, 0);
     float DX            = std::accumulate(v_dx_sort.begin(),v_dx_sort.begin()+NCrossedTrunc, 0);
     return DE/DX;
+}
+
+PID::TPad::~TPad(){
+  delete ph1f_WF_pad;
+}
+
+PID::TCluster::~TCluster(){
+  delete ph1f_WF_cluster;
+  for (auto p_tpad : v_pads) delete p_tpad;
+  v_pads.clear();
+}
+
+PID::TModule::~TModule(){
+  delete Track;
+  for (auto p_tcluster : v_clusters) delete p_tcluster;
+  v_clusters.clear();
+}
+
+PID::TEvent::~TEvent(){
+  for (auto p_tmodule : v_modules) delete p_tmodule;
+  v_modules.clear();
 }

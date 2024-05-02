@@ -17,6 +17,8 @@ namespace PID{
 
     class TPad {
     public:
+        virtual ~TPad();
+
         TH1F* ph1f_WF_pad    = nullptr;
         int   ix             = 0;
         int   iy             = 0;
@@ -38,7 +40,9 @@ namespace PID{
 
     class TCluster {
     public:
-        std::vector<TPad> v_pads;
+        virtual ~TCluster();
+
+        std::vector<TPad*> v_pads;
         TH1F   *ph1f_WF_cluster = new TH1F("ph1f_WF_cluster", "ph1f_WF_cluster", 510, -0.5, 509.5);
         float   length          = 0;
         int     NPads           = 0;
@@ -47,7 +51,9 @@ namespace PID{
 
     class TModule {
     public:
-        std::vector<TCluster> v_clusters;
+        virtual ~TModule();
+        
+        std::vector<TCluster*> v_clusters;
         int ID                  = 0;
         int position            = 0;
         int NClusters           = 0;
@@ -57,7 +63,9 @@ namespace PID{
 
     class TEvent {
     public:
-        std::vector<TModule> v_modules;
+        virtual ~TEvent();
+        
+        std::vector<TModule*> v_modules;
         int eventNbr          = 0;
         float dEdxXP          = 0;
         float dEdxWF          = 0;
@@ -118,7 +126,7 @@ namespace PID{
 
         // TFile* pFile;
         // TTree* pTree;
-        // TEvent tevent;
+        // PID::TEvent *p_tevent;
     };
 
    extern PID::LUT    *p_lut;
