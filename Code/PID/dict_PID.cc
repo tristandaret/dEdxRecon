@@ -686,7 +686,7 @@ namespace {
 nullptr
     };
     static const char* includePaths[] = {
-"AOBt/",
+"Analysis/",
 "EvtModel/",
 "EvtModel/src/",
 "EvtModelTools/",

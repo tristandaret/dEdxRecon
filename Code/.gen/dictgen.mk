@@ -1,15 +1,15 @@
-AOBt/dict_AOBt.cc: $(DICTH_AOBt)
+Analysis/dict_Analysis.cc: $(DICTH_Analysis)
 	@echo "Generating dictionary $@..."
 	@$(ROOTCINT) -f $@ -c -p -multiDict -s $(SOLIBD) $(filter -I% -D%,$(CXXFLAGS)) $^
-AOBt/reflexdict_AOBt.hh: $(REFLEXH_AOBt)
+Analysis/reflexdict_Analysis.hh: $(REFLEXH_Analysis)
 	@echo "Generating reflex header $@..."
-	@echo "#ifndef AOBT_REFLEXDICT_AOBT_HH" > $@
-	@echo "#define AOBT_REFLEXDICT_AOBT_HH" >> $@
+	@echo "#ifndef ANALYSIS_REFLEXDICT_ANALYSIS_HH" > $@
+	@echo "#define ANALYSIS_REFLEXDICT_ANALYSIS_HH" >> $@
 	@for i in $^; do echo '#include "'$${i}'"' >> $@; done
 	@echo "#endif" >> $@
-AOBt/reflexdict_AOBt.cc: AOBt/reflexdict_AOBt.hh $(SELECTIONXML_AOBt) ${DEPDIR}/AOBt/reflexdict_AOBt.gendict.d
+Analysis/reflexdict_Analysis.cc: Analysis/reflexdict_Analysis.hh $(SELECTIONXML_Analysis) ${DEPDIR}/Analysis/reflexdict_Analysis.gendict.d
 	@echo "Generating reflex dictionary $@..."
-	@$(GENREFLEX) $< --fail_on_warnings --quiet --multiDict -l $(SOLIBD) -s $(SELECTIONXML_AOBt) -o $@ $(filter -I% -D%,$(CXXFLAGS))
+	@$(GENREFLEX) $< --fail_on_warnings --quiet --multiDict -l $(SOLIBD) -s $(SELECTIONXML_Analysis) -o $@ $(filter -I% -D%,$(CXXFLAGS))
 EvtModel/dict_EvtModel.cc: $(DICTH_EvtModel)
 	@echo "Generating dictionary $@..."
 	@$(ROOTCINT) -f $@ -c -p -multiDict -s $(SOLIBD) $(filter -I% -D%,$(CXXFLAGS)) $^

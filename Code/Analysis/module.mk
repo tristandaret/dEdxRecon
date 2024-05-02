@@ -5,7 +5,7 @@ FILES :=
 DICTFILES :=
 
 # Executable files
-PROGRAMS := src/AOBt_App
+PROGRAMS := src/Analysis
 
 NEEDS_ROOT := yes
 NEEDS_OPENGL := yes

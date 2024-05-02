@@ -276,7 +276,7 @@ std::vector <double> Event::GiveMe_CutSlopeXYZ_ForThisModule(const int& ModuleNb
   gr1.SetMaximum(36.);
     
   if(EventNber<1000)
-      xzinfo.SaveAs(TString::Format("/feynman/home/dphp/shassani/work/AOBt_3.06/OUT_JeanFrancois/plots/c_xzinfo_EventNber_%i_EntryNber_%i.png",EventNber, EntryNber));
+      xzinfo.SaveAs(TString::Format("/feynman/home/dphp/shassani/work/Analysis_3.06/OUT_JeanFrancois/plots/c_xzinfo_EventNber_%i_EntryNber_%i.png",EventNber, EntryNber));
 
   //
   params.push_back(fit->GetParameter(1));

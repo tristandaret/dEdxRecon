@@ -7,80 +7,80 @@ USEWILDCARD :=
 PROGRAMS :=
 SKIP_THISMODULE :=
 
-THISMODULE := AOBt
+THISMODULE := Analysis
 
 # including the module.mk file
--include $(patsubst %, %/module.mk,AOBt)
--include $(patsubst %, %/pfgct/module.mk,AOBt)
+-include $(patsubst %, %/module.mk,Analysis)
+-include $(patsubst %, %/pfgct/module.mk,Analysis)
 
 ifndef SKIP_THISMODULE
 
 ifdef USEWILDCARD
-  FILES := $(patsubst AOBt/%,%,$(basename $(wildcard $(patsubst %,AOBt/%,$(FILES)))))
+  FILES := $(patsubst Analysis/%,%,$(basename $(wildcard $(patsubst %,Analysis/%,$(FILES)))))
 endif
 
 # appending the values found in FILES to the variable SRC
-SRC += $(patsubst %,AOBt/%,$(FILES))
+SRC += $(patsubst %,Analysis/%,$(FILES))
 
 # all subdirectories for this given set of FILES
-SUBDIRS := $(sort AOBt/ $(dir $(patsubst %,AOBt/%,$(FILES))))
+SUBDIRS := $(sort Analysis/ $(dir $(patsubst %,Analysis/%,$(FILES))))
 
 # put these subdirectories in the INCLUDEFLAGS
 INCLUDEFLAGS += $(patsubst %, -I%, $(SUBDIRS))
 
 ## appending the values found in DICTFILES to DICTHEADERS or DICTH_modulename
 ifeq ($(BUILDCOMMONDICT),no)
-  DICTH_AOBt := $(foreach i, $(patsubst %,AOBt/%,$(DICTFILES)), $(wildcard $(i).h) $(wildcard $(i).hh) $(wildcard $(i)))
+  DICTH_Analysis := $(foreach i, $(patsubst %,Analysis/%,$(DICTFILES)), $(wildcard $(i).h) $(wildcard $(i).hh) $(wildcard $(i)))
   # if dict header files exist, append to variable SRC
-  ifneq ($(DICTH_AOBt),)
-  SRC += AOBt/dict_AOBt
+  ifneq ($(DICTH_Analysis),)
+  SRC += Analysis/dict_Analysis
   endif
 else
-  DICTHEADERS += $(foreach i, $(patsubst %,AOBt/%,$(DICTFILES)), $(wildcard $(i).h) $(wildcard $(i).hh) $(wildcard $(i)))
+  DICTHEADERS += $(foreach i, $(patsubst %,Analysis/%,$(DICTFILES)), $(wildcard $(i).h) $(wildcard $(i).hh) $(wildcard $(i)))
 endif
 
 # appending the values found in REFLEXFILES to REFLEXH_modulename
-REFLEXH_AOBt := $(foreach i, $(patsubst %,AOBt/%,$(REFLEXFILES)), $(wildcard $(i).h) $(wildcard $(i).hh) $(wildcard $(i)))
-SELECTIONXML_AOBt := $(filter %selection.xml,$(REFLEXH_AOBt))
-REFLEXH_AOBt := $(filter-out %selection.xml,$(REFLEXH_AOBt))
+REFLEXH_Analysis := $(foreach i, $(patsubst %,Analysis/%,$(REFLEXFILES)), $(wildcard $(i).h) $(wildcard $(i).hh) $(wildcard $(i)))
+SELECTIONXML_Analysis := $(filter %selection.xml,$(REFLEXH_Analysis))
+REFLEXH_Analysis := $(filter-out %selection.xml,$(REFLEXH_Analysis))
 # if reflex header files exist, append to variable SRC
-ifneq ($(REFLEXH_AOBt),)
-ifeq ($(SELECTIONXML_AOBt),)
-$(error No selection.xml file specified in the REFLEXFILES of module AOBt)
+ifneq ($(REFLEXH_Analysis),)
+ifeq ($(SELECTIONXML_Analysis),)
+$(error No selection.xml file specified in the REFLEXFILES of module Analysis)
 endif
 ifneq ($(BUILDCOMMONDICT),no)
-$(error Module AOBt : common dictionary building is not implemented for REFLEX.)
+$(error Module Analysis : common dictionary building is not implemented for REFLEX.)
 endif
-SRC += AOBt/reflexdict_AOBt
-ADDDEPS += ${DEPDIR}/AOBt/reflexdict_AOBt.gendict.d
+SRC += Analysis/reflexdict_Analysis
+ADDDEPS += ${DEPDIR}/Analysis/reflexdict_Analysis.gendict.d
 endif
 
 PROG += $(patsubst %,$(BINDIR)/%,$(notdir $(PROGRAMS)))
 
 # appending the values found in FILES to the variable SRC
-PROGSRC += $(patsubst %,AOBt/%,$(PROGRAMS))
+PROGSRC += $(patsubst %,Analysis/%,$(PROGRAMS))
 
-AOBt_PROGDIRS := $(sort $(dir $(PROGRAMS)))
+Analysis_PROGDIRS := $(sort $(dir $(PROGRAMS)))
 
 # a couple of rules to copy executable files correctly
-$(BINDIR)/%: ${OBJDIR}/AOBt/%.bin
+$(BINDIR)/%: ${OBJDIR}/Analysis/%.bin
 	cp $^ $@
 
-$(BINDIR)/%: AOBt/%
+$(BINDIR)/%: Analysis/%
 	cp $^ $@
 
-$(BINDIR)/%: AOBt/bin/%
+$(BINDIR)/%: Analysis/bin/%
 	cp $^ $@
 
-define AOBt_PROGRAM_template
-$(BINDIR)/%: ${OBJDIR}/AOBt/$(1)/%.bin
+define Analysis_PROGRAM_template
+$(BINDIR)/%: ${OBJDIR}/Analysis/$(1)/%.bin
 	cp $$^ $$@
 endef
 
-$(foreach sd,$(AOBt_PROGDIRS),$(eval $(call AOBt_PROGRAM_template,$(sd))))
+$(foreach sd,$(Analysis_PROGDIRS),$(eval $(call Analysis_PROGRAM_template,$(sd))))
 
-AOBt/%SK.cc AOBt/%.hh: AOBt/idl/%.idl
-	omniidl $(OMNICORBAFLAGS) -CAOBt -bcxx $^
+Analysis/%SK.cc Analysis/%.hh: Analysis/idl/%.idl
+	omniidl $(OMNICORBAFLAGS) -CAnalysis -bcxx $^
 
 endif
 
