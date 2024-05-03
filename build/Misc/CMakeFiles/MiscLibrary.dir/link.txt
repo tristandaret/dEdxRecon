@@ -1,0 +1,2 @@
+/usr/bin/ar qc libMiscLibrary.a CMakeFiles/MiscLibrary.dir/src/FuncFromTGraph.cxx.o CMakeFiles/MiscLibrary.dir/src/GaussFunction.cxx.o CMakeFiles/MiscLibrary.dir/src/ParabolaFunction.cxx.o CMakeFiles/MiscLibrary.dir/src/ParabolaFunctionNG.cxx.o CMakeFiles/MiscLibrary.dir/src/Util.cxx.o
+/usr/bin/ranlib libMiscLibrary.a

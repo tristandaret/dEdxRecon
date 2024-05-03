@@ -1,2 +1,0 @@
-PROGRAMS := showincludes
-

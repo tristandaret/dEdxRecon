@@ -1,0 +1,269 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8
+					],
+					"jsonFile" : "directory-.-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"projectIndex" : 0,
+					"source" : "."
+				},
+				{
+					"build" : "App",
+					"jsonFile" : "directory-App-0bdf1fd094da83e32101.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "App",
+					"targetIndexes" : 
+					[
+						0
+					]
+				},
+				{
+					"build" : "EvtModel",
+					"jsonFile" : "directory-EvtModel-91634869793963344de6.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "EvtModel",
+					"targetIndexes" : 
+					[
+						1
+					]
+				},
+				{
+					"build" : "EvtModelTools",
+					"jsonFile" : "directory-EvtModelTools-8c4dcf2a5101d92d59cb.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "EvtModelTools",
+					"targetIndexes" : 
+					[
+						2
+					]
+				},
+				{
+					"build" : "Fitters",
+					"jsonFile" : "directory-Fitters-2b3b9260fb80ee06a94b.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "Fitters",
+					"targetIndexes" : 
+					[
+						3
+					]
+				},
+				{
+					"build" : "Misc",
+					"jsonFile" : "directory-Misc-c72af09627c4850ffade.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "Misc",
+					"targetIndexes" : 
+					[
+						4
+					]
+				},
+				{
+					"build" : "Reconstruction",
+					"jsonFile" : "directory-Reconstruction-d30fcd05b97d44b10bca.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "Reconstruction",
+					"targetIndexes" : 
+					[
+						5,
+						6
+					]
+				},
+				{
+					"build" : "SampleTools",
+					"jsonFile" : "directory-SampleTools-517875d686d7bbd0c24c.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "SampleTools",
+					"targetIndexes" : 
+					[
+						7,
+						8
+					]
+				},
+				{
+					"build" : "SignalModel",
+					"jsonFile" : "directory-SignalModel-7709c9a4fa171e3c31e6.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "SignalModel",
+					"targetIndexes" : 
+					[
+						9
+					]
+				}
+			],
+			"name" : "",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8
+					],
+					"name" : "dEdxRecon",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 1,
+					"id" : "App::@4cec9bfdf5c218c89c51",
+					"jsonFile" : "target-App-f6bcf375f807b3971a36.json",
+					"name" : "App",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "EvtModelLibrary::@b1b8201c03c01bbf7644",
+					"jsonFile" : "target-EvtModelLibrary-c1da5def2b64a400e43f.json",
+					"name" : "EvtModelLibrary",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "EvtModelToolsLibrary::@ec353eba4489fca47b9d",
+					"jsonFile" : "target-EvtModelToolsLibrary-bd5209bff5487e329980.json",
+					"name" : "EvtModelToolsLibrary",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 4,
+					"id" : "FittersLibrary::@e4360f08cf9d89cfb93c",
+					"jsonFile" : "target-FittersLibrary-a1b438edec36025d0946.json",
+					"name" : "FittersLibrary",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 5,
+					"id" : "MiscLibrary::@86ec95e64090b4c7bdb4",
+					"jsonFile" : "target-MiscLibrary-b663dbf9d61d3fedd29f.json",
+					"name" : "MiscLibrary",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 6,
+					"id" : "OutPutDict::@636fd3377350f2b47d01",
+					"jsonFile" : "target-OutPutDict-2fc162351bffb3c1c9e1.json",
+					"name" : "OutPutDict",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 6,
+					"id" : "ReconstructionLibrary::@636fd3377350f2b47d01",
+					"jsonFile" : "target-ReconstructionLibrary-035dfbff2f8e6e98c265.json",
+					"name" : "ReconstructionLibrary",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 7,
+					"id" : "SampleToolsDict::@d5bd264702d3f1224144",
+					"jsonFile" : "target-SampleToolsDict-7c9d2f130d0e210f9db9.json",
+					"name" : "SampleToolsDict",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 7,
+					"id" : "SampleToolsLibrary::@d5bd264702d3f1224144",
+					"jsonFile" : "target-SampleToolsLibrary-3ffcf036fc95f65b9566.json",
+					"name" : "SampleToolsLibrary",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 8,
+					"id" : "SignalModelLibrary::@780fc9265dc7efa1dda0",
+					"jsonFile" : "target-SignalModelLibrary-6f76bc8f85dd3647b49b.json",
+					"name" : "SignalModelLibrary",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/local/home/td263283/Documents/Code/dEdx/dEdxRecon/build",
+		"source" : "/local/home/td263283/Documents/Code/dEdx/dEdxRecon"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}

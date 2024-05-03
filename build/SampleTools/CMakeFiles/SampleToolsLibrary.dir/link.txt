@@ -1,0 +1,2 @@
+/usr/bin/ar qc libSampleToolsLibrary.a CMakeFiles/SampleToolsLibrary.dir/src/GiveMe_Uploader.cxx.o CMakeFiles/SampleToolsLibrary.dir/src/SampleUploader_Data.cxx.o CMakeFiles/SampleToolsLibrary.dir/src/Uploader.cxx.o CMakeFiles/SampleToolsLibrary.dir/src/Uploader_CERN22.cxx.o CMakeFiles/SampleToolsLibrary.dir/src/Uploader_CERN22_V4.cxx.o CMakeFiles/SampleToolsLibrary.dir/src/Uploader_DESY21.cxx.o CMakeFiles/SampleToolsLibrary.dir/src/Uploader_David.cxx.o
+/usr/bin/ranlib libSampleToolsLibrary.a

@@ -1,0 +1,154 @@
+{
+	"artifacts" : 
+	[
+		{
+			"path" : "App/App"
+		}
+	],
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_executable",
+			"target_link_libraries"
+		],
+		"files" : 
+		[
+			"App/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 2,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 5,
+				"parent" : 0
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"language" : "CXX",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		}
+	],
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 2,
+			"id" : "EvtModelLibrary::@b1b8201c03c01bbf7644"
+		},
+		{
+			"backtrace" : 2,
+			"id" : "EvtModelToolsLibrary::@ec353eba4489fca47b9d"
+		},
+		{
+			"backtrace" : 2,
+			"id" : "FittersLibrary::@e4360f08cf9d89cfb93c"
+		},
+		{
+			"backtrace" : 2,
+			"id" : "MiscLibrary::@86ec95e64090b4c7bdb4"
+		},
+		{
+			"backtrace" : 2,
+			"id" : "ReconstructionLibrary::@636fd3377350f2b47d01"
+		},
+		{
+			"backtrace" : 2,
+			"id" : "SampleToolsLibrary::@d5bd264702d3f1224144"
+		},
+		{
+			"backtrace" : 2,
+			"id" : "SignalModelLibrary::@780fc9265dc7efa1dda0"
+		}
+	],
+	"id" : "App::@4cec9bfdf5c218c89c51",
+	"link" : 
+	{
+		"commandFragments" : 
+		[
+			{
+				"fragment" : "",
+				"role" : "flags"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "../EvtModel/libEvtModelLibrary.a",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "../EvtModelTools/libEvtModelToolsLibrary.a",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "../Fitters/libFittersLibrary.a",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "../Misc/libMiscLibrary.a",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "../Reconstruction/libReconstructionLibrary.a",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "../SampleTools/libSampleToolsLibrary.a",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "../SignalModel/libSignalModelLibrary.a",
+				"role" : "libraries"
+			}
+		],
+		"language" : "CXX"
+	},
+	"name" : "App",
+	"nameOnDisk" : "App",
+	"paths" : 
+	{
+		"build" : "App",
+		"source" : "App"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "App/App.cxx",
+			"sourceGroupIndex" : 0
+		}
+	],
+	"type" : "EXECUTABLE"
+}
