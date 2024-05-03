@@ -1,2 +1,0 @@
-/usr/bin/ar qc libSignalModelLibrary.a CMakeFiles/SignalModelLibrary.dir/src/Model_Charge0D.cxx.o CMakeFiles/SignalModelLibrary.dir/src/Model_Charge1D.cxx.o CMakeFiles/SignalModelLibrary.dir/src/Model_ChargeI.cxx.o CMakeFiles/SignalModelLibrary.dir/src/Model_Electronics.cxx.o CMakeFiles/SignalModelLibrary.dir/src/Model_ReadOutGeometry.cxx.o
-/usr/bin/ranlib libSignalModelLibrary.a

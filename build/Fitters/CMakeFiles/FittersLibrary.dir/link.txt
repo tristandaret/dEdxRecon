@@ -1,2 +1,0 @@
-/usr/bin/ar qc libFittersLibrary.a CMakeFiles/FittersLibrary.dir/src/DoTracksReconstruction.cxx.o CMakeFiles/FittersLibrary.dir/src/PRF_param.cxx.o CMakeFiles/FittersLibrary.dir/src/TheFitterCluster_PV0_Diag.cxx.o CMakeFiles/FittersLibrary.dir/src/TheFitterCluster_PV0_PV1.cxx.o CMakeFiles/FittersLibrary.dir/src/TheFitterTrack.cxx.o
-/usr/bin/ranlib libFittersLibrary.a
