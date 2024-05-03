@@ -1,5 +1,5 @@
-#include "Misc/Misc.h"
-#include "EvtModel/Sample.h"
+#include "Misc.h"
+#include "Sample.h"
 
 //Upload data 
 //

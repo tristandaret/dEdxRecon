@@ -1,5 +1,5 @@
 #include <vector>
-#include "Reconstruction/dEdx.h"
+#include "dEdx.h"
 #ifdef __ROOTCLING__
 #pragma link off all globals;
 #pragma link off all classes;

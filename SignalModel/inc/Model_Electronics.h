@@ -1,7 +1,7 @@
 #ifndef Model_Electronics_H
 #define Model_Electronics_H
 
-#include "Misc/Misc.h"
+#include "Misc.h"
 
 /////////////////////////////////////////////////////////////
 class Model_Electronics {

@@ -1,8 +1,8 @@
-#include "Fitters/DoTracksReconstruction.h"
+#include "DoTracksReconstruction.h"
 
-#include "EvtModel/Track.h"
-#include "EvtModel/Cluster.h"
-#include "EvtModel/Event.h"
+#include "Track.h"
+#include "Cluster.h"
+#include "Event.h"
 
 
 void DoTracksReconstruction(

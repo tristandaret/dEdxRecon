@@ -1,4 +1,4 @@
-#include "SampleTools/Uploader_CERN22.h"
+#include "Uploader_CERN22.h"
 
 Uploader_CERN22::Uploader_CERN22(
             const std::string& SampleFile                 ,

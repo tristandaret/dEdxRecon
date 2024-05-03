@@ -1,7 +1,7 @@
 #ifndef Util_H
 #define Util_H
 
-#include "Misc/Misc.h"
+#include "Misc.h"
 
 
 #include "TGraph.h"

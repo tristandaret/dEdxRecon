@@ -1,12 +1,12 @@
 #ifndef Uploader_H
 #define Uploader_H
 
-#include "Misc/Misc.h"
-#include "EvtModel/Event.h"
+#include "Misc.h"
+#include "Event.h"
 
-#include "SignalModel/Model_ReadOutGeometry.h"
-#include "SignalModel/Model_Electronics.h"
-#include "SignalModel/Model_Charge1D.h"
+#include "Model_ReadOutGeometry.h"
+#include "Model_Electronics.h"
+#include "Model_Charge1D.h"
 
 #include "TFile.h"
 #include "TTree.h"

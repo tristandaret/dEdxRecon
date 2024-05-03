@@ -1,10 +1,10 @@
 #ifndef DEDX_H
 #define DEDX_H
 
-#include "Misc/Misc.h"
+#include "Misc.h"
 
-#include "Reconstruction/Variables.h"
-#include "Reconstruction/LUTs.hxx"
+#include "Variables.h"
+#include "LUTs.hxx"
 
 #include <TFile.h>
 #include <TTree.h>
@@ -12,7 +12,7 @@
 #include <TH1F.h>
 #include <TROOT.h>
 
-#include "SampleTools/Uploader.h"
+#include "Uploader.h"
 
 namespace Reconstruction{
 

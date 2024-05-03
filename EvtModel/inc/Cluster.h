@@ -1,10 +1,10 @@
 #ifndef Cluster_H
 #define Cluster_H
 
-#include "Misc/Misc.h"
-#include "EvtModel/Pad.h"
+#include "Misc.h"
+#include "Pad.h"
 
-#include "EvtModel/FitOutput.h"
+#include "FitOutput.h"
 
 #include "TVirtualFitter.h"
 #include "TMatrixD.h"

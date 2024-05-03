@@ -1,9 +1,9 @@
-#include "EvtModelTools/EvtModelTools_JFL_Histos.h"
-#include "Misc/Util.h"
-#include "Misc/ParabolaFunction.h"
-#include "Misc/ParabolaFunctionNG.h"
+#include "EvtModelTools_JFL_Histos.h"
+#include "Util.h"
+#include "ParabolaFunction.h"
+#include "ParabolaFunctionNG.h"
 
-#include "EvtModelTools/EvtModelTools_Histos.h"
+#include "EvtModelTools_Histos.h"
 
 #include "TCanvas.h"
 #include "TGraph.h"

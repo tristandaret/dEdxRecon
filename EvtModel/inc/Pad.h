@@ -1,11 +1,11 @@
 #ifndef Pad_H
 #define Pad_H
 
-#include "Misc/Misc.h"
+#include "Misc.h"
 
-#include "SignalModel/Model_ReadOutGeometry.h"
-#include "SignalModel/Model_Electronics.h"
-#include "SignalModel/Model_ChargeI.h"
+#include "Model_ReadOutGeometry.h"
+#include "Model_Electronics.h"
+#include "Model_ChargeI.h"
 
 
 /////////////////////////////////////////////////////////////

@@ -1,7 +1,7 @@
 #ifndef GaussFunction_H
 #define GaussFunction_H
 
-#include "Misc/Misc.h"
+#include "Misc.h"
 
 /////////////////////////////////////////////////////////////
 class GaussFunction{

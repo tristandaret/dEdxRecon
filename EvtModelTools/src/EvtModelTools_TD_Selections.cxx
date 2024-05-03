@@ -1,7 +1,7 @@
-#include "EvtModelTools/EvtModelTools_TD_Selections.h"
-#include "EvtModelTools/EvtModelTools_TD_Histos.h"
-#include "EvtModelTools/EvtModelTools_Histos.h"
-#include "Misc/Util.h"
+#include "EvtModelTools_TD_Selections.h"
+#include "EvtModelTools_TD_Histos.h"
+#include "EvtModelTools_Histos.h"
+#include "Util.h"
 
 
 #include "TCanvas.h"

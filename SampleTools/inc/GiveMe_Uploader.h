@@ -1,5 +1,5 @@
-#include "Misc/Misc.h"
-#include "SampleTools/Uploader.h"
+#include "Misc.h"
+#include "Uploader.h"
 
 //
 //      intUploader =    2 ; // DESY 21

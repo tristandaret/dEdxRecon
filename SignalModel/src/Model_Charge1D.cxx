@@ -1,4 +1,4 @@
-#include "SignalModel/Model_Charge1D.h"
+#include "Model_Charge1D.h"
 
 Model_Charge1D::Model_Charge1D()
 :Model_ChargeI()

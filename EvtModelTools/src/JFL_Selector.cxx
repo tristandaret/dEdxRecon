@@ -1,9 +1,9 @@
-#include "EvtModelTools/JFL_Selector.h"
-#include "EvtModelTools/EvtModelTools_Histos.h"
-#include "Misc/Util.h"
+#include "JFL_Selector.h"
+#include "EvtModelTools_Histos.h"
+#include "Util.h"
 
-#include "EvtModel/Event.h"
-#include "EvtModel/Pad.h"
+#include "Event.h"
+#include "Pad.h"
 
 #include "TCanvas.h"
 #include "TGraph.h"

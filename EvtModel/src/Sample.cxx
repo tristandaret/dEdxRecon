@@ -1,7 +1,7 @@
-#include "EvtModel/Sample.h"
-#include "Misc/Util.h"
-#include "EvtModel/TimeError.h"
-#include "EvtModel/AmplitudeError.h"
+#include "Sample.h"
+#include "Util.h"
+#include "TimeError.h"
+#include "AmplitudeError.h"
 
 Sample::Sample()
 {

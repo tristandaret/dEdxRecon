@@ -1,6 +1,6 @@
-#include "EvtModel/Pad.h"
-#include "Misc/ParabolaFunction.h"
-#include "Misc/ParabolaFunctionNG.h"
+#include "Pad.h"
+#include "ParabolaFunction.h"
+#include "ParabolaFunctionNG.h"
 
 #include "TH1F.h"
 #include "TF1.h"

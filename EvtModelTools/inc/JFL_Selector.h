@@ -1,9 +1,9 @@
 #ifndef JFL_Selector_H
 #define JFL_Selector_H
 
-#include "Misc/Misc.h"
+#include "Misc.h"
 
-#include "EvtModel/Sample.h"
+#include "Sample.h"
 
 /////////////////////////////////////////////////////////////
 class JFL_Selector {

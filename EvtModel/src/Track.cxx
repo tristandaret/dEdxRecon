@@ -1,5 +1,5 @@
-#include "EvtModel/Track.h"
-#include "Misc/Util.h"
+#include "Track.h"
+#include "Util.h"
 
 #include "TCanvas.h"
 #include "TGraph.h"

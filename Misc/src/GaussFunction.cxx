@@ -1,4 +1,4 @@
-#include "Misc/GaussFunction.h"
+#include "GaussFunction.h"
 
 GaussFunction::GaussFunction()
 {

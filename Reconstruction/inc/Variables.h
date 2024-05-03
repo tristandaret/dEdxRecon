@@ -1,8 +1,8 @@
 #ifndef Reconstruction_VARIABLES_H
 #define Reconstruction_VARIABLES_H
 
-#include "Misc/Misc.h"
-#include "SampleTools/Uploader.h"
+#include "Misc.h"
+#include "Uploader.h"
 
 namespace Reconstruction{
     

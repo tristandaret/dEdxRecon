@@ -1,8 +1,8 @@
 #ifndef Uploader_DESY21_H
 #define Uploader_DESY21_H
 
-#include "Misc/Misc.h"
-#include "SampleTools/Uploader.h"
+#include "Misc.h"
+#include "Uploader.h"
 
 /////////////////////////////////////////////////////////////
 class Uploader_DESY21 : public Uploader  {

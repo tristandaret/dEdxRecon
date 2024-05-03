@@ -2,9 +2,6 @@
 .vscode/launch.json
 .vscode/settings.json
 .vscode/tasks.json
-Code/.d
-Code/.o
-Code/lib
-Code/bin
-Code/Makefile
+build
 OUT_Tristan_old
+OUT_Tristan

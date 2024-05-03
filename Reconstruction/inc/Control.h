@@ -1,10 +1,10 @@
 #ifndef CONTROL_H
 #define CONTROL_H
 
-#include "Misc/Misc.h"
+#include "Misc.h"
 
-#include "SampleTools/Uploader.h"
-#include "SampleTools/GiveMe_Uploader.h"
+#include "Uploader.h"
+#include "GiveMe_Uploader.h"
 
 void Control(
     const std::string& OutDir,

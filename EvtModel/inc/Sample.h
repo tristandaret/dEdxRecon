@@ -1,20 +1,20 @@
 #ifndef Sample_H
 #define Sample_H
 
-#include "Misc/Misc.h"
+#include "Misc.h"
 
-#include "SignalModel/Model_ReadOutGeometry.h"
-#include "SignalModel/Model_Electronics.h"
-#include "SignalModel/Model_ChargeI.h"
+#include "Model_ReadOutGeometry.h"
+#include "Model_Electronics.h"
+#include "Model_ChargeI.h"
 
-#include "EvtModel/Pad.h"
-#include "EvtModel/Event.h"
-#include "EvtModel/Cluster.h"
+#include "Pad.h"
+#include "Event.h"
+#include "Cluster.h"
 
-#include "EvtModel/FitOutput.h"
+#include "FitOutput.h"
 
-#include "EvtModel/Track.h"
-#include "EvtModel/SetOfTracks.h"
+#include "Track.h"
+#include "SetOfTracks.h"
 
 
 #include "TVirtualFitter.h"

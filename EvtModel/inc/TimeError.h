@@ -1,9 +1,9 @@
 #ifndef TimeError_H
 #define TimeError_H
 
-#include "Misc/Misc.h"
+#include "Misc.h"
 
-#include "EvtModel/Pad.h"
+#include "Pad.h"
 
 double TimeError(const double& DeltaT_in);
 

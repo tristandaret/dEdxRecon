@@ -1,20 +1,20 @@
-#include "Misc/Util.h"
-#include "Misc/Misc.h"
+#include "Util.h"
+#include "Misc.h"
 
-#include "Reconstruction/Monitoring.h"
-#include "Reconstruction/Tools.h"
-#include "Reconstruction/Variables.h"
-#include "Reconstruction/LUTs.hxx"
-#include "Reconstruction/dEdx.h"
+#include "Monitoring.h"
+#include "Tools.h"
+#include "Variables.h"
+#include "LUTs.hxx"
+#include "dEdx.h"
 
-#include "Reconstruction/Control.h"
-#include "Reconstruction/DrawOuts.h"
+#include "Control.h"
+#include "DrawOuts.h"
 
-#include "EvtModelTools/EvtModelTools_Histos.h"
-#include "EvtModelTools/JFL_Selector.h"
+#include "EvtModelTools_Histos.h"
+#include "JFL_Selector.h"
 
-#include "SampleTools/Uploader.h"
-#include "SampleTools/GiveMe_Uploader.h"
+#include "Uploader.h"
+#include "GiveMe_Uploader.h"
 
 namespace Reconstruction{
   Reconstruction::dEdx *p_dEdx;

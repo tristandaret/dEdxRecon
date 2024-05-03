@@ -1,10 +1,10 @@
 #ifndef Track_H
 #define Track_H
 
-#include "Misc/Misc.h"
-#include "EvtModel/Cluster.h"
+#include "Misc.h"
+#include "Cluster.h"
 
-#include "EvtModel/FitOutput.h"
+#include "FitOutput.h"
 
 
 // Track equation :  Y = Sum_(i=0,Npar-1) par_i * X^i

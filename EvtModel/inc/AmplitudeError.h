@@ -1,9 +1,9 @@
 #ifndef AmplitudeError_H
 #define AmplitudeError_H
 
-#include "Misc/Misc.h"
+#include "Misc.h"
 
-#include "EvtModel/Pad.h"
+#include "Pad.h"
 
 double AmplitudeError(
       const Pad* pPad                 ,

@@ -1,9 +1,9 @@
 #ifndef TheFitterTrack_H
 #define TheFitterTrack_H
 
-#include "Misc/Misc.h"
+#include "Misc.h"
 
-#include "EvtModel/Track.h"
+#include "Track.h"
 
 #include "TMinuit.h"
 #include "TMath.h"

@@ -1,4 +1,4 @@
-#include "SignalModel/Model_Electronics.h"
+#include "Model_Electronics.h"
 
 Model_Electronics::Model_Electronics()
 {

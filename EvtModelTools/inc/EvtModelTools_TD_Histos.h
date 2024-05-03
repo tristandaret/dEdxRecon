@@ -1,9 +1,9 @@
-#include "Misc/Misc.h"
+#include "Misc.h"
 
-#include "EvtModel/Sample.h"
-#include "EvtModel/Event.h"
-#include "EvtModel/Pad.h"
-#include "EvtModel/Cluster.h"
+#include "Sample.h"
+#include "Event.h"
+#include "Pad.h"
+#include "Cluster.h"
 
 #include "TH1D.h"
 #include "TH1F.h"

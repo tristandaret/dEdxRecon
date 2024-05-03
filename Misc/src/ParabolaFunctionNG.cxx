@@ -1,4 +1,4 @@
-#include "Misc/ParabolaFunctionNG.h"
+#include "ParabolaFunctionNG.h"
 
 ParabolaFunctionNG::ParabolaFunctionNG()
 {

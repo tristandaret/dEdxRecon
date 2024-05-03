@@ -1,7 +1,7 @@
 #ifndef Model_ChargeI_H
 #define Model_ChargeI_H
 
-#include "Misc/Misc.h"
+#include "Misc.h"
 
 /////////////////////////////////////////////////////////////
 class Model_ChargeI {

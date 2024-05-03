@@ -1,8 +1,8 @@
 #ifndef Uploader_David_H
 #define Uploader_David_H
 
-#include "Misc/Misc.h"
-#include "SampleTools/Uploader.h"
+#include "Misc.h"
+#include "Uploader.h"
 
 /////////////////////////////////////////////////////////////
 class Uploader_David : public Uploader  {

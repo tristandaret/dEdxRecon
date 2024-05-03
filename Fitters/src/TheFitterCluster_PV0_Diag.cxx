@@ -1,4 +1,4 @@
-#include "Fitters/TheFitterCluster_PV0_Diag.h"
+#include "TheFitterCluster_PV0_Diag.h"
 #include "TFitter.h"
 
 //--------------------------------------------------------------------//

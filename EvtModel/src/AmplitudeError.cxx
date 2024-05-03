@@ -1,4 +1,4 @@
-#include "EvtModel/AmplitudeError.h"
+#include "AmplitudeError.h"
 
 //
 double AmplitudeError_Leading()          ; 

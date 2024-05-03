@@ -1,7 +1,7 @@
 #ifndef ParabolaFunction_H
 #define ParabolaFunction_H
 
-#include "Misc/Misc.h"
+#include "Misc.h"
 
 // 
 //Fit parabola -std::fabs(A0) * std::pow(X0-vX,2)+ Y0 ) ;

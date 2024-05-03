@@ -1,4 +1,4 @@
-#include "Fitters/PRF_param.h"
+#include "PRF_param.h"
 
 PRF_param::PRF_param()
 {

@@ -1,17 +1,17 @@
 #ifndef Module_H
 #define Module_H
 
-#include "Misc/Misc.h"
+#include "Misc.h"
 
-#include "EvtModel/Pad.h"
-#include "EvtModel/Cluster.h"
-#include "EvtModel/Track.h"
+#include "Pad.h"
+#include "Cluster.h"
+#include "Track.h"
 
-#include "EvtModel/ROBoard.h"
+#include "ROBoard.h"
 
-#include "SignalModel/Model_ReadOutGeometry.h"
-#include "SignalModel/Model_Electronics.h"
-#include "SignalModel/Model_ChargeI.h"
+#include "Model_ReadOutGeometry.h"
+#include "Model_Electronics.h"
+#include "Model_ChargeI.h"
 
 /////////////////////////////////////////////////////////////
 class Module : public ROBoard  {

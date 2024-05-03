@@ -1,8 +1,8 @@
 #ifndef Uploader_CERN22_H
 #define Uploader_CERN22_H
 
-#include "Misc/Misc.h"
-#include "SampleTools/Uploader.h"
+#include "Misc.h"
+#include "Uploader.h"
 
 /////////////////////////////////////////////////////////////
 class Uploader_CERN22 : public Uploader  {

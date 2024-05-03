@@ -1,4 +1,4 @@
-#include "EvtModel/FitOutput.h"
+#include "FitOutput.h"
 
 #include "TLatex.h"
 #include "TMatrixD.h"

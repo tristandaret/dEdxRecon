@@ -1,9 +1,9 @@
-#include "Misc/Misc.h"
+#include "Misc.h"
 
-#include "SampleTools/Uploader.h"
-#include "EvtModel/Sample.h"
-#include "EvtModel/Event.h"
-#include "EvtModel/Pad.h"
+#include "Uploader.h"
+#include "Sample.h"
+#include "Event.h"
+#include "Pad.h"
 
 #include "TH1F.h"
 #include "TH2D.h"

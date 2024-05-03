@@ -1,5 +1,5 @@
-#include "EvtModel/SetOfTracks.h"
-#include "Misc/GaussFunction.h"
+#include "SetOfTracks.h"
+#include "GaussFunction.h"
 
 #include "TCanvas.h"
 #include "TGraph.h"

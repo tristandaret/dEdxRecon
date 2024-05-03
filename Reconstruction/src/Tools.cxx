@@ -1,12 +1,12 @@
-#include "Reconstruction/Tools.h"
-#include "Reconstruction/LUTs.hxx"
+#include "Tools.h"
+#include "LUTs.hxx"
 
-#include "EvtModelTools/EvtModelTools_TD_Selections.h"
-#include "Fitters/TheFitterTrack.h"
-#include "Fitters/PRF_param.h"
-#include "EvtModelTools/JFL_Do_ClusterFit.h"
-#include "Fitters/DoTracksReconstruction.h"
-#include "EvtModelTools/EvtModelTools_Histos.h"
+#include "EvtModelTools_TD_Selections.h"
+#include "TheFitterTrack.h"
+#include "PRF_param.h"
+#include "JFL_Do_ClusterFit.h"
+#include "DoTracksReconstruction.h"
+#include "EvtModelTools_Histos.h"
 
 /* Equivalent of numpy linspace (npoints uniformly spaced between start and end) */
 std::vector<double> linspace(double start, double end, int numPoints) {

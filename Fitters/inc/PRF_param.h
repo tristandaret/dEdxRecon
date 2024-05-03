@@ -1,7 +1,7 @@
 #ifndef PRF_param_H
 #define PRF_param_H
 
-#include "Misc/Misc.h"
+#include "Misc.h"
 
 /////////////////////////////////////////////////////////////
 class PRF_param {

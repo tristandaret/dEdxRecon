@@ -1,9 +1,9 @@
 #ifndef TheFitterCluster_PV0_PV1_H
 #define TheFitterCluster_PV0_PV1_H
 
-#include "Misc/Misc.h"
+#include "Misc.h"
 
-#include "EvtModel/Cluster.h"
+#include "Cluster.h"
 
 #include "TMinuit.h"
 #include "TMath.h"

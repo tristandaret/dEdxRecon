@@ -1,8 +1,8 @@
-#include "Misc/Misc.h"
+#include "Misc.h"
 
-#include "EvtModel/Sample.h"
+#include "Sample.h"
 
-#include "Fitters/TheFitterTrack.h"
+#include "TheFitterTrack.h"
 
 void DoTracksReconstruction(
                             Sample& aSample, const int& ModuleNber,

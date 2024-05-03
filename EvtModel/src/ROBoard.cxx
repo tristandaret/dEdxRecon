@@ -1,4 +1,4 @@
-#include "EvtModel/ROBoard.h"
+#include "ROBoard.h"
 
 ROBoard::ROBoard(
      Model_ReadOutGeometry*  pModel_ReadOutGeometry  ,

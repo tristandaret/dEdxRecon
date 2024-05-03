@@ -1,12 +1,12 @@
-#include "Reconstruction/Control.h"
-#include "Reconstruction/Tools.h"
-#include "Reconstruction/Tools.h"
+#include "Control.h"
+#include "Tools.h"
+#include "Tools.h"
 
-#include "Misc/Util.h"
+#include "Util.h"
 
-#include "EvtModelTools/JFL_Selector.h"
-#include "EvtModelTools/EvtModelTools_TD_Selections.h"
-#include "EvtModelTools/EvtModelTools_Histos.h"
+#include "JFL_Selector.h"
+#include "EvtModelTools_TD_Selections.h"
+#include "EvtModelTools_Histos.h"
 
 void Control(
                         const std::string& OutDir,

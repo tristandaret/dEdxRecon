@@ -1,7 +1,7 @@
 #ifndef DRAWOUTS_H
 #define DRAWOUTS_H
 
-#include "Misc/Misc.h"
+#include "Misc.h"
 
 // Draw Control plots
 void DrawOut_Control    (const std::string& inputDir, const std::string& Tag, const std::string& Comment, const std::string SelectionSet, const int& nMod);

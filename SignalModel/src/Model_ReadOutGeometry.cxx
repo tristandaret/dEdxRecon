@@ -1,4 +1,4 @@
-#include "SignalModel/Model_ReadOutGeometry.h"
+#include "Model_ReadOutGeometry.h"
 
 Model_ReadOutGeometry::Model_ReadOutGeometry()
 {

@@ -1,14 +1,14 @@
-#include "SampleTools/GiveMe_Uploader.h"
-#include "Misc/Util.h"
+#include "GiveMe_Uploader.h"
+#include "Util.h"
 
-#include "SignalModel/Model_ReadOutGeometry.h"
-#include "SignalModel/Model_Electronics.h"
-#include "SignalModel/Model_Charge1D.h"
+#include "Model_ReadOutGeometry.h"
+#include "Model_Electronics.h"
+#include "Model_Charge1D.h"
 
-#include "SampleTools/Uploader_DESY21.h"
-#include "SampleTools/Uploader_CERN22.h"
-#include "SampleTools/Uploader_CERN22_V4.h"
-#include "SampleTools/Uploader_David.h"
+#include "Uploader_DESY21.h"
+#include "Uploader_CERN22.h"
+#include "Uploader_CERN22_V4.h"
+#include "Uploader_David.h"
 
 Uploader* GiveMe_Uploader(
                           const int& intUploader,

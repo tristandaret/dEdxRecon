@@ -1,8 +1,8 @@
 #ifndef Model_Charge1D_H
 #define Model_Charge1D_H
 
-#include "Misc/Misc.h"
-#include "SignalModel/Model_ChargeI.h"
+#include "Misc.h"
+#include "Model_ChargeI.h"
 
 /////////////////////////////////////////////////////////////
 class Model_Charge1D : public Model_ChargeI {

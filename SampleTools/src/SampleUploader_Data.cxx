@@ -1,8 +1,8 @@
-#include "SampleTools/SampleUploader_Data.h"
-#include "Misc/Util.h"
+#include "SampleUploader_Data.h"
+#include "Util.h"
 
-#include "SampleTools/Uploader.h"
-#include "SampleTools/GiveMe_Uploader.h"
+#include "Uploader.h"
+#include "GiveMe_Uploader.h"
 
 void SampleUploader_Data( 
                          const int&         intUploader      , 

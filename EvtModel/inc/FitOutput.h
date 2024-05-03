@@ -1,7 +1,7 @@
 #ifndef FitOutput_H
 #define FitOutput_H
 
-#include "Misc/Misc.h"
+#include "Misc.h"
 
 #include "TCanvas.h"
 #include "TVirtualFitter.h"

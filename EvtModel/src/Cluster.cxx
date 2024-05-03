@@ -1,7 +1,7 @@
-#include "EvtModel/Cluster.h"
-#include "Misc/Util.h"
-#include "EvtModel/TimeError.h"
-#include "EvtModel/AmplitudeError.h"
+#include "Cluster.h"
+#include "Util.h"
+#include "TimeError.h"
+#include "AmplitudeError.h"
 
 Cluster::Cluster(
            const int& EventNber ,

@@ -1,11 +1,11 @@
-#include "Misc/Misc.h"
+#include "Misc.h"
 
-#include "EvtModel/Sample.h"
-#include "EvtModel/Event.h"
-#include "EvtModel/Cluster.h"
+#include "Sample.h"
+#include "Event.h"
+#include "Cluster.h"
 
-#include "Fitters/TheFitterCluster_PV0_PV1.h"
-#include "Fitters/TheFitterCluster_PV0_Diag.h"
+#include "TheFitterCluster_PV0_PV1.h"
+#include "TheFitterCluster_PV0_Diag.h"
 
  
 #include "TF1.h"

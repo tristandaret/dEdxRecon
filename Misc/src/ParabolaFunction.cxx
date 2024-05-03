@@ -1,4 +1,4 @@
-#include "Misc/ParabolaFunction.h"
+#include "ParabolaFunction.h"
 
 ParabolaFunction::ParabolaFunction()
 {

@@ -6,16 +6,16 @@
 #include "TF1.h"
 #include "TH1F.h"
 
-#include "Misc/Misc.h"
-#include "Misc/Util.h"
+#include "Misc.h"
+#include "Util.h"
 
-#include "EvtModel/Pad.h"
-#include "EvtModel/Track.h"
-#include "EvtModel/Module.h"
+#include "Pad.h"
+#include "Track.h"
+#include "Module.h"
 
-#include "SampleTools/Uploader.h"
-#include "SampleTools/GiveMe_Uploader.h"
-#include "EvtModelTools/JFL_Selector.h"
+#include "Uploader.h"
+#include "GiveMe_Uploader.h"
+#include "JFL_Selector.h"
 
 /* Python's numpy equivalent of linspace ----------------------------------------------- */
 std::vector<double> linspace(double start, double end, int numPoints);

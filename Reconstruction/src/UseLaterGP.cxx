@@ -1,6 +1,6 @@
-#include "Reconstruction/dEdx.h"
-#include "Reconstruction/Tools.h"
-#include "Reconstruction/ReadLUT_vROOT.h"
+#include "dEdx.h"
+#include "Tools.h"
+#include "ReadLUT_vROOT.h"
 
 #include <cmath>
 #include <numeric>
@@ -11,18 +11,18 @@
 #include "TGraphErrors.h"
 #include "TPaveStats.h"
 
-#include "Fitters/DoTracksReconstruction.h"
-#include "EvtModelTools/JFL_Selector.h"
-#include "EvtModelTools/EvtModelTools_Histos.h"
-#include "EvtModelTools/EvtModelTools_TD_Selections.h"
-#include "EvtModelTools/JFL_Do_ClusterFit.h"
-#include "Fitters/TheFitterTrack.h"
-#include "Misc/Util.h"
-#include "SampleTools/Uploader.h"
-#include "SampleTools/GiveMe_Uploader.h"
-#include "SampleTools/ReadRCmap.h"
-#include "SampleTools/ReadGainmap.h"
-#include "Fitters/PRF_param.h"
+#include "DoTracksReconstruction.h"
+#include "JFL_Selector.h"
+#include "EvtModelTools_Histos.h"
+#include "EvtModelTools_TD_Selections.h"
+#include "JFL_Do_ClusterFit.h"
+#include "TheFitterTrack.h"
+#include "Util.h"
+#include "Uploader.h"
+#include "GiveMe_Uploader.h"
+#include "ReadRCmap.h"
+#include "ReadGainmap.h"
+#include "PRF_param.h"
 
 void dEdx( const std::string& OutDir,
                           std::string const& Tag,

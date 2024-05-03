@@ -1,12 +1,12 @@
-#include "Reconstruction/dEdx.h"
-#include "Reconstruction/LUTs.hxx"
-#include "Reconstruction/Tools.h"
-#include "Reconstruction/Variables.h"
+#include "dEdx.h"
+#include "LUTs.hxx"
+#include "Tools.h"
+#include "Variables.h"
 
-#include "Reconstruction/Tools.h"
-#include "Reconstruction/Tools.h"
+#include "Tools.h"
+#include "Tools.h"
 
-#include "Misc/Util.h"
+#include "Util.h"
 
 #include <cmath>
 #include <numeric>
@@ -14,14 +14,14 @@
 #include <string>
 #include <random>
 
-#include "Fitters/PRF_param.h"
-#include "Fitters/DoTracksReconstruction.h"
-#include "EvtModelTools/JFL_Do_ClusterFit.h"
-#include "Fitters/TheFitterTrack.h"
-#include "EvtModelTools/EvtModelTools_Histos.h"
-#include "EvtModelTools/EvtModelTools_TD_Selections.h"
-#include "SampleTools/GiveMe_Uploader.h"
-#include "EvtModelTools/JFL_Selector.h"
+#include "PRF_param.h"
+#include "DoTracksReconstruction.h"
+#include "JFL_Do_ClusterFit.h"
+#include "TheFitterTrack.h"
+#include "EvtModelTools_Histos.h"
+#include "EvtModelTools_TD_Selections.h"
+#include "GiveMe_Uploader.h"
+#include "JFL_Selector.h"
 
 Reconstruction::dEdx::dEdx(){
 }

@@ -1,8 +1,8 @@
-#include "EvtModelTools/EvtModelTools_Histos.h"
-#include "Reconstruction/Tools.h"
-#include "Misc/Util.h"
-#include "Misc/ParabolaFunction.h"
-#include "Misc/ParabolaFunctionNG.h"
+#include "EvtModelTools_Histos.h"
+#include "Tools.h"
+#include "Util.h"
+#include "ParabolaFunction.h"
+#include "ParabolaFunctionNG.h"
 
 #include <typeinfo>
 

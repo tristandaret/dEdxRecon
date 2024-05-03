@@ -1,7 +1,7 @@
 #ifndef FuncFromTGraph_H
 #define FuncFromTGraph_H
 
-#include "Misc/Misc.h"
+#include "Misc.h"
 
 #include "TGraph.h"
 

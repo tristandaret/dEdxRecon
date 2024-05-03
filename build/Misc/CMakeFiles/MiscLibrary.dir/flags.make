@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/local/home/td263283/Documents/Code/dEdx/dEdxRecon/Misc/inc
+CXX_INCLUDES = -I/local/home/td263283/Documents/Code/dEdx/dEdxRecon/Misc/Misc
 
 CXX_FLAGS = 
 

@@ -1,4 +1,4 @@
-#include "Reconstruction/LUTs.hxx"
+#include "LUTs.hxx"
 
 #include <iomanip>
 #include <iostream>

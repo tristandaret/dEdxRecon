@@ -1,4 +1,4 @@
-#include "Misc/FuncFromTGraph.h"
+#include "FuncFromTGraph.h"
 
 FuncFromTGraph::FuncFromTGraph(TGraph* pTGraph)
 {

@@ -1,8 +1,8 @@
 #ifndef SetOfTracks_H
 #define SetOfTracks_H
 
-#include "Misc/Misc.h"
-#include "EvtModel/Track.h"
+#include "Misc.h"
+#include "Track.h"
 
 #include "TH1F.h"
 
