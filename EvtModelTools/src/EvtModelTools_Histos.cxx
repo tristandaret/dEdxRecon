@@ -1,5 +1,5 @@
 #include "EvtModelTools_Histos.h"
-#include "Tools.h"
+#include "SignalTools.h"
 #include "Util.h"
 #include "ParabolaFunction.h"
 #include "ParabolaFunctionNG.h"

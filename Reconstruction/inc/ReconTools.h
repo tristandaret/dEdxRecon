@@ -71,8 +71,6 @@ TF1* BetheBlochExp(const float& Pmin, const float& Pmax, const double& M, const 
 
 
 /* GENERAL MATH*/
-//Heaviside
-float Heaviside(const float& t, const float& t_0);
 
 // Mean of vector
 float mean(const std::vector<float>& values);
@@ -93,9 +91,6 @@ void local_params(const Pad* pPad, const Track* pTrack, float& d, float& dd, flo
 
 // Track length
 float trk_len(Module* pModule, const Track* pTrack);
-
-// Electronics pulse response function
-TH1F* DPR(std::string name, const float& tmin, float const& tmax, const float& t_0, const int& nbins, const int& iC, const float& PT, const float& TB);
 
 // Formula to get resolution error using a TF1
 double GetResoError(TF1* tf1);

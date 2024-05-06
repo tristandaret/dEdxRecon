@@ -1,6 +1,5 @@
 #include "Control.h"
-#include "Tools.h"
-#include "Tools.h"
+#include "ReconTools.h"
 
 #include "Util.h"
 
