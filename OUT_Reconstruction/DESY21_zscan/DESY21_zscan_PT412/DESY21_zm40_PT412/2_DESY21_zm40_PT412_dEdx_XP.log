@@ -1,0 +1,64 @@
+dataFile         : ../Data_DESY21_dev_v9/zscan_PT412/z_360_275_412_02T_26_m40_iter9.root
+OUTDirName       : OUT_Reconstruction/DESY21_zscan/DESY21_zscan_PT412/DESY21_zm40_PT412/
+tag              : DESY21_zm40_PT412
+comment          : 
+selectionSet     : T_DESY21_Event
+prtcle           : electron_zm40
+driftMethod      : zcalc
+WF updated       : 0
+Gain correction  : 1
+
+ERAM maps: LOADING $HOME/Documents/Code/CPP_projects/Read_ERAM_MAP/ERAMinfo.root
+ERAM maps: LOADED
+
+-------------->Predefined selection T_DESY21_Event
+Number of entries :11975
+TLow = 42 | THigh = 68
+
+-------------->List of selections
+Apply selection  1 -> Remove clusters in first and last columns 
+
+Apply selection 11 -> Remove clusters out of time (Event Based) 
+                      |TLeading -TLeadingMeanOverEvent| <= m_Cut_Stage11_EventBased (=     3)
+
+Apply selection 120 -> Remove clusters out of time  
+                      m_Cut_Stage120_TLow <= TLeading <= m_Cut_Stage120_THigh 
+                      m_Cut_Stage120_TLow  =   42
+                      m_Cut_Stage120_THigh =   68
+
+Apply selection 15 -> Remove Events with an average pad multiplicity too high or too low 
+                      Pad Multiplicity >  m_Cut_StageT15_APM_Low  (=  2.0)
+                      Pad Multiplicity <= m_Cut_StageT15_APM_High (=  4.0)
+
+Apply selection 10 -> Remove clusters with too many pads 
+                      Npads <= m_Cut_Stage10_Npads_Hig (=   5)
+
+Apply selection 14 -> Remove Clusters with a too high APad 
+                      APad >= m_Cut_Stage14_Amax_Low (=     0)
+                      APad <= m_Cut_Stage14_Amax_Hig (=  3700)
+
+Apply selection  5 -> Reject Events with too few clusters
+                      NClusters >= m_Cut_Stage5_NCluster_Low (=   34)
+
+
+drift distance : 50 mm
+Peaking time   : 412 ns
+Time bin length: 50 ns
+PT/TB          = 8 time bins
+drift method   : zcalc
+minimal length : 2 mm
+
+Processing events:
+0/11975
+
+Selection Statistics 
+ #Cut SelName    EvBef  EvAfter ( wrtPrev)  (wrtStart)     MdBef  MdAfter ( wrtPrev)  (wrtStart)     ClBef  ClAfter ( wrtPrev)  (wrtStart)     PdBef  PdAfter ( wrtPrev)  (wrtStart) 
+    0  Stage1      100      100 (    0.00)  (    0.00)       100      100 (    0.00)  (    0.00)      3396     3396 (    0.00)  (    0.00)     12674    12674 (    0.00)  (    0.00) 
+    1 Stage11      100       98 (   -2.00)  (   -2.00)       100       98 (   -2.00)  (   -2.00)      3396     3222 (   -5.12)  (   -5.12)     12674    11834 (   -6.63)  (   -6.63) 
+    2Stage120       98       95 (   -3.06)  (   -5.00)        98       95 (   -3.06)  (   -5.00)      3222     3154 (   -2.11)  (   -7.13)     11834    11662 (   -1.45)  (   -7.98) 
+    3StageT15       95       81 (  -14.74)  (  -19.00)        95       81 (  -14.74)  (  -19.00)      3154     2713 (  -13.98)  (  -20.11)     11662     9736 (  -16.52)  (  -23.18) 
+    4 Stage10       81       81 (    0.00)  (  -19.00)        81       81 (    0.00)  (  -19.00)      2713     2694 (   -0.70)  (  -20.67)      9736     9617 (   -1.22)  (  -24.12) 
+    5 Stage14       81       81 (    0.00)  (  -19.00)        81       81 (    0.00)  (  -19.00)      2694     2669 (   -0.93)  (  -21.41)      9617     9503 (   -1.19)  (  -25.02) 
+    6  Stage5       81       41 (  -49.38)  (  -59.00)        81       41 (  -49.38)  (  -59.00)      2669     1394 (  -47.77)  (  -58.95)      9503     4950 (  -47.91)  (  -60.94) 
+  Summary Sel      100       41             (  -59.00)       100       41             (  -59.00)      3396     1394             (  -58.95)     12674     4950             (  -60.94) 
+Fitting: Started... done!

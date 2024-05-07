@@ -1,5 +1,5 @@
 #include "dEdx.h"
-#include "LUTs.hxx"
+#include "LUTs.h"
 #include "ReconTools.h"
 #include "Variables.h"
 
@@ -19,6 +19,8 @@
 #include "EvtModelTools_TD_Selections.h"
 #include "GiveMe_Uploader.h"
 #include "JFL_Selector.h"
+
+// ClassImp(Reconstruction::TPad)
 
 Reconstruction::dEdx::dEdx(){
 }
@@ -109,9 +111,6 @@ void Reconstruction::dEdx::Reconstruction(){
 	TH1F *ph1f_XP = new TH1F("ph1f_XP", "<dE/dx> with XP;<dE/dx> (ADC count);Number of events", 90, 0, 1800);
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Compute dE/dx
-	std::chrono::steady_clock::time_point begin;
-	std::chrono::steady_clock::time_point end;
-	std::chrono::duration<double> elapsed_seconds;
 	aJFL_Selector.                Reset_StatCounters();
 	std::cout << "Processing events:" << std::endl;
 	for (int iEvent = 0; iEvent < 100; iEvent++){
@@ -123,7 +122,6 @@ void Reconstruction::dEdx::Reconstruction(){
 
 		aJFL_Selector.              ApplySelection(pEvent);
 		if (pEvent->IsValid() != 1) continue;
-		begin = std::chrono::steady_clock::now();
 
 		Reconstruction::TEvent *p_tevent = new Reconstruction::TEvent();
 		p_tevent->eventNbr = iEvent;
@@ -290,10 +288,6 @@ void Reconstruction::dEdx::Reconstruction(){
 		v_dEdxWF.                   clear();
 		delete pEvent;
 		delete p_tevent;
-
-		end = std::chrono::steady_clock::now();
-		elapsed_seconds = end - begin;
-		std::cout << elapsed_seconds.count()*1000 << " ms" << std::endl;
 	} // Events
 
 	aJFL_Selector.PrintStat();

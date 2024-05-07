@@ -1,4 +1,4 @@
-#include "LUTs.hxx"
+#include "LUTs.h"
 
 #include <iomanip>
 #include <iostream>
@@ -6,6 +6,7 @@
 #include <algorithm>  // for std::find
 #include <iterator>   // for std::begin, std::end
 
+ClassImp(EramInfo)
 
 /* ERAM MAPS READING ------------------------------------------------------------------------------------------------------------------ */
 // Default constructor

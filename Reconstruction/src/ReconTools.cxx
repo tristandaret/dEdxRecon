@@ -1,5 +1,5 @@
 #include "ReconTools.h"
-#include "LUTs.hxx"
+#include "LUTs.h"
 
 #include "EvtModelTools_TD_Selections.h"
 #include "TheFitterTrack.h"

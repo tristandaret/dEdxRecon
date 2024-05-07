@@ -6,6 +6,27 @@
 #include <TTree.h>
 #include <TBranch.h>
 
+class EramInfo : public TObject
+{
+public:
+    int Id;
+    int Position;
+    int XX;
+    int YY;
+    double RC;
+    double Gain;
+    double Resolution;
+
+    int Endplate;
+    bool InbTPC;
+    bool IntTPC;
+
+    EramInfo() {}
+    virtual ~EramInfo() {}
+
+    ClassDef(EramInfo, 2)
+};
+
 namespace Reconstruction{
    
    /* ERAM MAPS READING --------------------------------------------------------------------------------------------------------------------------- */
