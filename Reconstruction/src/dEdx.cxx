@@ -20,7 +20,10 @@
 #include "GiveMe_Uploader.h"
 #include "JFL_Selector.h"
 
-// ClassImp(Reconstruction::TPad)
+ClassImp(Reconstruction::TPad)
+ClassImp(Reconstruction::TCluster);
+ClassImp(Reconstruction::TModule)
+ClassImp(Reconstruction::TEvent)
 
 Reconstruction::dEdx::dEdx(){
 }

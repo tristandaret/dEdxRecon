@@ -39,7 +39,7 @@ namespace Reconstruction{
         float ratioFile      = 0;
         float ratio          = 0;
 
-        // ClassDef(TPad, 1);
+        ClassDef(TPad, 1);
     };
 
     class TCluster : public TObject{
@@ -52,7 +52,7 @@ namespace Reconstruction{
         int     NPads           = 0;
         float   ratioCorr       = 0; 
 
-        // ClassDef(TCluster, 1);
+        ClassDef(TCluster, 1);
     };
 
     class TModule : public TObject{
@@ -66,7 +66,7 @@ namespace Reconstruction{
         float phi               = 0;
         TF1* Track              = new TF1("pTrackFit", "[0]*x+[1]+[2]*x*x", 0, 2000);
 
-        // ClassDef(TModule, 1);
+        ClassDef(TModule, 1);
     };
 
     class TEvent : public TObject{
@@ -85,7 +85,7 @@ namespace Reconstruction{
         float lengthWF        = 0;
         int numberOfModules   = 0;
 
-        // ClassDef(TEvent, 1);
+        ClassDef(TEvent, 1);
     };
 
     class dEdx{

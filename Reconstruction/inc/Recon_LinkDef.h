@@ -6,6 +6,7 @@
 #pragma link off all classes;
 #pragma link off all functions;
 
+// For dEdx output
 #pragma link C++ namespace Reconstruction;
 
 #pragma link C++ namespace Reconstruction;
@@ -16,4 +17,7 @@
 #pragma link C++ class Reconstruction::TModule+;
 #pragma link C++ class std::vector<Reconstruction::TModule*>+;
 #pragma link C++ class Reconstruction::TEvent+;
+
+// For ERAM maps reading 
+#pragma link C++ class EramInfo+;
 #endif
