@@ -27,7 +27,7 @@ namespace Reconstruction{
     extern int         TB;         // timebin length (ns)
     extern bool        WFupdated;
     extern int         WFversion;
-    extern bool        fgainCorrection;
+    extern bool        fcorrectGain;
 }
 
 #endif

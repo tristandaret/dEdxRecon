@@ -24,6 +24,7 @@ namespace Reconstruction{
 
 void Reconstruction::Monitoring()
 {
+  comment = "";
   gErrorIgnoreLevel = kInfo;
 
   MakeMyDir(outDir);
@@ -31,7 +32,7 @@ void Reconstruction::Monitoring()
   gStyle->                SetPadTickX(1);
   gStyle->                SetPadTickY(1);
 
-  WFupdated = false;
+  WFupdated = true;
   if(WFupdated) WFversion = 1;
   else WFversion = 0;
 
@@ -152,8 +153,8 @@ void Reconstruction::Monitoring()
       // std::string z_arr[]   = {"m40", "060", "160", "260", "360", "460", "560", "660", "760", "860"};
       // int         z_val[]   = {50, 550, 950};
       // std::string z_arr[]   = {"m40", "460", "860"};
-      int         z_val[]   = {50};
-      std::string z_arr[]   = {"m40"};
+      int         z_val[]   = {550};
+      std::string z_arr[]   = {"460"};
       for (int iz = 0; iz < (int)std::size(z_arr); iz++){
         const char* z       = z_arr[iz].c_str();
         driftDist           = z_val[iz];

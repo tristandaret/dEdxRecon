@@ -19,8 +19,8 @@ namespace Reconstruction{
     int         Dt;         // Transverse diffusion coefficient (µm/sqrt(cm))
     int         driftDist;  // drift distance (mm)
     int         TB;         // timebin length (ns)
-    bool        WFupdated = true;
+    bool        WFupdated;
     int         WFversion = 0;
-    bool        fgainCorrection = true;
+    bool        fcorrectGain = true;
 
 }

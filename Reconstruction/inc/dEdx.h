@@ -106,11 +106,13 @@ namespace Reconstruction{
         std::string foutput_log;
         // std::vector<int> fERAMs_iD;
         // std::vector<int> fERAMs_pos;
-        static constexpr float  AVG_GAIN        = 1492.37; // average gain of the 32 mounted ERAMs
+        static constexpr float  AVG_GAIN        = 1947.72; // average gain of the 32 mounted ERAMs
         static constexpr float  PHIMAX          = 42.10; //std::atan(10.19/11.28)*180/M_PI;
         static constexpr float  falpha          = 0.7;
         static constexpr float  fnParamsTrack   = 3;
         static constexpr float  fminLength      = 0.002;
+        static constexpr float  XPADLENGTH      = 11.28; // mm
+        static constexpr float  YPADLENGTH      = 10.19; // mm
         static constexpr int    fnbfERAMs       = 1;
         static constexpr int    fnERAMs         = 4;
 
