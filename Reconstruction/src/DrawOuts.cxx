@@ -87,7 +87,7 @@ void DrawOut_Control(const std::string& inputDir, const std::string& Tag, const 
 
   for (int iMod = 0 ; iMod < nMod ; iMod++) {
     int TLow = 0, THigh = 0 ;
-    Get120_CSV("../Stage120_Cuts.csv", Tag, TLow, THigh);
+    GetStage3Cut_CSV("../TimeSelection_Cuts.csv", Tag, TLow, THigh);
     pTCanvas->cd(iMod+1) ;
     pTCanvas->cd(iMod+1)->SetLogy(1) ;
     v_h1f_TL_Raw[iMod]->SetLineWidth(2) ;

@@ -21,7 +21,7 @@ namespace Reconstruction{
     public:
         virtual ~TPad();
 
-        TH1F* ph1f_WF_pad    = nullptr;
+        std::vector<int> v_waveform;
         int   ix             = 0;
         int   iy             = 0;
         float ADC            = 0;
@@ -47,7 +47,7 @@ namespace Reconstruction{
         virtual ~TCluster();
 
         std::vector<TPad*> v_pads;
-        TH1F   *ph1f_WF_cluster = new TH1F("ph1f_WF_cluster", "ph1f_WF_cluster", 510, -0.5, 509.5);
+        std::vector<int> v_waveform;
         float   length          = 0;
         int     NPads           = 0;
         float   ratioCorr       = 0; 

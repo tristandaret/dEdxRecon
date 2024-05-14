@@ -3,9 +3,8 @@
 
 #include "Util.h"
 
-#include "JFL_Selector.h"
-#include "EvtModelTools_TD_Selections.h"
-#include "EvtModelTools_Histos.h"
+#include "Selector.h"
+#include "Displays.h"
 
 void Control(
                         const std::string& OutDir,
@@ -142,19 +141,19 @@ void Control(
   
   /////////////////////////////////////////////////////////////////////////////////////////////////////////
   // Selection stage
-  JFL_Selector aJFL_Selector(SelectionSet) ;
+  Selector aSelector(SelectionSet) ;
   int NEvent = pUploader->Get_NberOfEvent() ;
   std::cout << "Number of entries :" << NEvent << std::endl ;
 
-  Init_selection(SelectionSet, aJFL_Selector, Tag, pUploader, NbrOfMod, Data_to_Use);
+  Init_selection(SelectionSet, aSelector, Tag, pUploader, NbrOfMod, Data_to_Use);
     
-  aJFL_Selector.Tell_Selection() ;
+  aSelector.Tell_Selection() ;
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////
   //Loop On Events
   int nEvt_raw4mod = 0;
   int nEvt_sel4mod = 0;
-  aJFL_Selector.Reset_StatCounters() ;
+  aSelector.Reset_StatCounters() ;
   std::cout << "Processing events:" << std::endl ;
   for(int iEvent = 0 ; iEvent < NEvent ; iEvent++){
     if(iEvent % 1000 == 0 or iEvent == NEvent-1) std::cout << iEvent << "/" << NEvent << std::endl ;
@@ -222,7 +221,7 @@ void Control(
     }
 
     //  Apply Selection
-    aJFL_Selector.ApplySelection(pEvent) ;
+    aSelector.ApplySelection(pEvent) ;
     if (pEvent->IsValid() == 0){
       delete pEvent;
       continue ;
@@ -308,7 +307,7 @@ void Control(
     std::cout << "Raw      events with at least 4 modules: " << nEvt_raw4mod << std::endl;
     std::cout << "Selected events with at least 4 modules: " << nEvt_sel4mod << std::endl;
   }
-  aJFL_Selector.PrintStat() ;
+  aSelector.PrintStat() ;
   
   ////////////////////////////////////////////////////////////////////////////////////////////////////
   // Saving //

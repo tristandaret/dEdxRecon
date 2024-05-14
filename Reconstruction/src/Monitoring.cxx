@@ -10,8 +10,7 @@
 #include "Control.h"
 #include "DrawOuts.h"
 
-#include "EvtModelTools_Histos.h"
-#include "JFL_Selector.h"
+#include "Selector.h"
 
 #include "Uploader.h"
 #include "GiveMe_Uploader.h"
@@ -19,7 +18,7 @@
 namespace Reconstruction{
   Reconstruction::dEdx *p_dEdx;
   Reconstruction::LUT  *p_lut;
-  Uploader  *p_uploader;
+  Uploader             *p_uploader;
 }
 
 void Reconstruction::Monitoring()
@@ -66,9 +65,9 @@ void Reconstruction::Monitoring()
   // Energy scan using the prototype (ERAM 18)
   if(prototype){
     selectionSet          = "T2_CERN22_Event";
-    outDir    = "OUT_Reconstruction/CERN22_ERAM18/";
+    outDir    = "../OUT_Reconstruction/CERN22_ERAM18/";
     MakeMyDir(outDir);
-    intUploader     =  3;
+    intUploader = 2;
     moduleCase        = -1;
     PT              = 412; Dt = 350; driftDist = 415; TB = 40;
     if (control or dedx) p_lut = new LUT(Form("~/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi150_nd150_nRC41_nZ21.root", Dt, PT));
@@ -97,9 +96,9 @@ void Reconstruction::Monitoring()
   // Energy scan using the mockup
   if(CERN_Escan){
     selectionSet    = "T2_CERN22_Event";
-    outDir          = "OUT_Reconstruction/CERN22_Energy_Scan/";
+    outDir          = "../OUT_Reconstruction/CERN22_Energy_Scan/";
     MakeMyDir(outDir);
-    intUploader     =  5;
+    intUploader = 3;
     moduleCase        = -1;
     PT              = 412; Dt = 350; driftDist = 415; TB = 40;
 
@@ -139,14 +138,14 @@ void Reconstruction::Monitoring()
   // z scan scan with DESY21
   if(DESY_zscan){
     selectionSet    = "T_DESY21_Event";
-    intUploader     =  2;
+    intUploader = 1;
     moduleCase        =  0; 
     Dt              = 310; TB = 50;
     // int PT_arr[] = {200, 412};
     int PT_arr[] = {412};
     for (int iPT : PT_arr){
       PT = iPT;
-      outDir        = Form("OUT_Reconstruction/DESY21_zscan/DESY21_zscan_PT%i/", iPT); 
+      outDir        = Form("../OUT_Reconstruction/DESY21_zscan/DESY21_zscan_PT%i/", iPT); 
       MakeMyDir(outDir); 
       if (control or dedx) p_lut = new LUT(Form("~/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi150_nd150_nRC41_nZ21.root", Dt, iPT));
       // int         z_val[]   = {50, 150, 250, 350, 450, 550, 650, 750, 850, 950};
@@ -167,9 +166,9 @@ void Reconstruction::Monitoring()
         if (DO_Methods)   DrawOut_Methods           (outDir, tag, comment, 1, prtcle);
       }
       if(DO_Systematics)  DrawOut_Systematics(outDir, comment, "Z");
-      if(DO_Resolution)   DrawOut_Zscan  (Form("OUT_Reconstruction/DESY21_zscan/DESY21_zscan_PT%i", iPT), comment, iPT);
+      if(DO_Resolution)   DrawOut_Zscan  (Form("../OUT_Reconstruction/DESY21_zscan/DESY21_zscan_PT%i", iPT), comment, iPT);
     }
-    if(DO_Global) DrawOut_Zscan_PT("OUT_Reconstruction/DESY21_zscan", comment);
+    if(DO_Global) DrawOut_Zscan_PT("../OUT_Reconstruction/DESY21_zscan", comment);
   }
   
 
@@ -177,10 +176,10 @@ void Reconstruction::Monitoring()
   // y scan scan with DESY21
   if(DESY_yscan){
     selectionSet    = "T_DESY21_Event";
-    intUploader     =  2;
+    intUploader = 1;
     moduleCase        =  0; 
     Dt              = 310; TB = 50; PT = 412; driftDist = 90;
-    outDir          = "OUT_Reconstruction/DESY21_yscan/"; 
+    outDir          = "../OUT_Reconstruction/DESY21_yscan/"; 
     MakeMyDir(outDir); 
     if (control or dedx) p_lut = new LUT(Form("~/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi150_nd150_nRC41_nZ21.root", Dt, PT));
     std::string Y_arr[] = {"m140", "m120", "m100", "m80", "m60", "m40", "0", "20", "40", "60", "80"};
@@ -193,7 +192,7 @@ void Reconstruction::Monitoring()
       if (DO_Checks)     DrawOut_Checks            (outDir, dataFile, tag, comment);
       if (DO_Methods)  DrawOut_Methods        (outDir, tag, comment, 1, prtcle);
     }
-    if(DO_Resolution)   DrawOut_Yscan  ("OUT_Reconstruction/DESY21_yscan", comment);
+    if(DO_Resolution)   DrawOut_Yscan  ("../OUT_Reconstruction/DESY21_yscan", comment);
   }
   
 
@@ -202,7 +201,7 @@ void Reconstruction::Monitoring()
   if(WFupdated) WFversion = 1;
   if(DESY_phi){
     selectionSet                = "T_DESY21_Event";
-    intUploader                 =  2;
+    intUploader = 1;
     moduleCase                    =  0;
     PT                          = 200; Dt = 310; TB = 40;
     if (control or dedx) p_lut = new LUT(Form("~/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi150_nd150_nRC41_nZ21.root", Dt, PT));
@@ -214,13 +213,13 @@ void Reconstruction::Monitoring()
     for (int iz = 0; iz < (int)std::size(z_arr); iz++){
       const char* z             = z_arr[iz].c_str();
       driftDist           = z_val[iz];
-      outDir                    = Form("OUT_Reconstruction/DESY21_phi/DESY21_phi_z%s/", z);  
+      outDir                    = Form("../OUT_Reconstruction/DESY21_phi/DESY21_phi_z%s/", z);  
       MakeMyDir(outDir); 
       std::string comment_phi = comment;
       // for (int ifile = 0; ifile < (int)std::size(phi_val); ifile++){
       for (int ifile = 5; ifile < 8; ifile++){
         int phi                 = phi_val[ifile];
-        // if(ifile==0){       outDir   = "OUT_Reconstruction/DESY21_zscan/DESY21_zscan_PT200/"; 
+        // if(ifile==0){       outDir   = "../OUT_Reconstruction/DESY21_zscan/DESY21_zscan_PT200/"; 
         //                     dataFile  = Form("../Data_DESY21_dev_v9/zscan_PT200/z_360_275_200_02T_26_%s_iter9.root", z); tag = Form("DESY21_z%s_PT200", z); prtcle = Form("electron_z%s", z); }
         if(ifile < 5) {dataFile  = Form("../Data_DESY21_dev_v9/Phi_scan_z%s/phi_200_%i_z%s_ym60_iter9.root", z, phi, z);            tag = Form("DESY21_phi%i_z%s", phi, z); prtcle = Form("electron_phi%i_z%s", phi, z); }
         else               {dataFile  = Form("../Data_DESY21_dev_v9/Phi_scan_z%s/phi_200_%i_z%s_ym60_diag_iter9.root", z, phi, z);       tag = Form("DESY21_phi%i_diag_z%s", phi, z); prtcle = Form("electron_phi%i_diag_z%s", phi, z);
@@ -233,13 +232,13 @@ void Reconstruction::Monitoring()
         if (DO_Checks)    DrawOut_Checks            (outDir, dataFile, tag, comment);
         if (DO_Methods)   DrawOut_Methods           (outDir, tag, comment_phi, 1, prtcle);
         delete p_uploader;
-        if(ifile==0)outDir      = Form("OUT_Reconstruction/DESY21_phi/DESY21_phi_z%s/", z); 
+        if(ifile==0)outDir      = Form("../OUT_Reconstruction/DESY21_phi/DESY21_phi_z%s/", z); 
       }
-      if(DO_Resolution)   DrawOut_Phiscan (Form("OUT_Reconstruction/DESY21_phi/DESY21_phi_z%s", z), comment, "_WF" + WFversion, z);
+      if(DO_Resolution)   DrawOut_Phiscan (Form("../OUT_Reconstruction/DESY21_phi/DESY21_phi_z%s", z), comment, "_WF" + WFversion, z);
       if(DO_Systematics)  DrawOut_Systematics(outDir, comment, "phi");
     }
-    // DrawOut_TGE_WFsum_L("OUT_Reconstruction/DESY21_phi/", comment);
-    if(DO_Global) DrawOut_Phiscan_Z("OUT_Reconstruction/DESY21_phi", comment, "_WF" + WFversion);
+    // DrawOut_TGE_WFsum_L("../OUT_Reconstruction/DESY21_phi/", comment);
+    if(DO_Global) DrawOut_Phiscan_Z("../OUT_Reconstruction/DESY21_phi", comment, "_WF" + WFversion);
   }
   
 
@@ -247,9 +246,9 @@ void Reconstruction::Monitoring()
   // Theta scan with DESY21
   if(DESY_theta){
     selectionSet    = "T_DESY21theta_Event";
-    outDir          = "OUT_Reconstruction/DESY21_theta/";  
+    outDir          = "../OUT_Reconstruction/DESY21_theta/";  
     MakeMyDir(outDir); 
-    intUploader     =  2;
+    intUploader = 1;
     moduleCase        =  0;
     PT              = 200; Dt = 310; driftDist = 350; TB = 40;
     if (control or dedx) p_lut    = new LUT(Form("~/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi150_nd150_nRC41_nZ21.root", Dt, PT));
@@ -263,14 +262,14 @@ void Reconstruction::Monitoring()
       if (DO_Checks)              DrawOut_Checks(outDir, dataFile, tag, comment);
       if (DO_Methods)             DrawOut_Methods(outDir, tag, comment, 1, prtcle);
     }
-    if(DO_Resolution)             DrawOut_Thetascan ("OUT_Reconstruction/DESY21_theta",   comment);
+    if(DO_Resolution)             DrawOut_Thetascan ("../OUT_Reconstruction/DESY21_theta",   comment);
   }
 
 
 
-  if(DO_Scans) DrawOut_Scans("OUT_Reconstruction", comment, "_WF" + WFversion);
-  // DrawOut_Versions("OUT_Reconstruction/", "XP", "_zcalc_PRF_4IP_WF1", "_zcalc_PRF_4IP_Gain_WFoffdiag");
-  // DrawOut_verif("OUT_Reconstruction/DESY21_phi/DESY21_phi_", comment);
+  if(DO_Scans) DrawOut_Scans("../OUT_Reconstruction", comment, "_WF" + WFversion);
+  // DrawOut_Versions("../OUT_Reconstruction/", "XP", "_zcalc_PRF_4IP_WF1", "_zcalc_PRF_4IP_Gain_WFoffdiag");
+  // DrawOut_verif("../OUT_Reconstruction/DESY21_phi/DESY21_phi_", comment);
   // DrawOut_corrections();
 
 
@@ -294,9 +293,9 @@ void Reconstruction::Monitoring()
   // Magnetic field scan scan with DESY21
   if(DESY_mag){
     selectionSet    = "T_DESY21_Event";
-    outDir          = "OUT_Reconstruction/DESY21_mag/";  
+    outDir          = "../OUT_Reconstruction/DESY21_mag/";  
     MakeMyDir(outDir); 
-    intUploader     =  2;
+    intUploader = 1;
     moduleCase        =  0;
     PT              = 200; Dt = 310; driftDist = 950; TB = 40;
 
@@ -321,9 +320,9 @@ void Reconstruction::Monitoring()
   // ExB scan scan with DESY21
   if(DESY_ExB){
     selectionSet    = "T_DESY21_Event";
-    outDir          = "OUT_Reconstruction/DESY21_ExB/";  
+    outDir          = "../OUT_Reconstruction/DESY21_ExB/";  
     MakeMyDir(outDir); 
-    intUploader     =  2;
+    intUploader = 1;
     moduleCase        =  0;
     PT              = 200; Dt = 310;; TB = 40;
     if (control or dedx) p_lut      = new LUT(Form("~/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi150_nd150_nRC41_nZ21.root", Dt, PT));
@@ -354,13 +353,13 @@ void Reconstruction::Monitoring()
   // Phi scan with DESY19
   if(DESY19_phi){
     selectionSet    = "T_DESY21_Event";
-    intUploader     =  2;
+    intUploader = 1;
     moduleCase        =  0;
     PT              = 412; Dt = 310; TB = 40; driftDist = 430;
     if (control or dedx) p_lut = new LUT(Form("~/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi150_nd150_nRC41_nZ21.root", Dt, PT));
     int phi_val[]   = {0, 10, 20, 30, 40, 45};
     int NFiles      = 6;
-    outDir          = "OUT_Reconstruction/DESY19_phi/";
+    outDir          = "../OUT_Reconstruction/DESY19_phi/";
     MakeMyDir(outDir); 
     for (int ifile = 3; ifile < NFiles; ifile++){
       int phi                   = phi_val[ifile];
@@ -382,9 +381,9 @@ void Reconstruction::Monitoring()
   // z scan with MC
   if(MC_zscan){
     selectionSet = "TMC_CERN22_Event";
-    outDir = "OUT_Reconstruction/CERN23_MC/MC_zscan/";  
+    outDir = "../OUT_Reconstruction/CERN23_MC/MC_zscan/";  
     MakeMyDir(outDir); 
-    intUploader     =  3;
+    intUploader = 2;
     moduleCase        = -1;
     PT              = 412; Dt = 286; TB = 40; // PT = 400 actually
     if (control or dedx) p_lut = new LUT(Form("~/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi150_nd150_nRC41_nZ21.root", Dt, PT));
@@ -408,9 +407,9 @@ void Reconstruction::Monitoring()
   // z scan scan using the mockup
   if(MockUp_zdist){
     selectionSet    = "T2_CERN22_Event";
-    outDir          = "OUT_Reconstruction/CERN22_Mockup_zscan/";  
+    outDir          = "../OUT_Reconstruction/CERN22_Mockup_zscan/";  
     MakeMyDir(outDir); 
-    intUploader     =  3;
+    intUploader = 2;
     moduleCase        = -1;
     PT              = 412; Dt = 350; driftDist = 415; TB = 40;
 
@@ -434,12 +433,12 @@ void Reconstruction::Monitoring()
   // z scan scan with DESY21 at 139 V/cm
   if(DESY_zscan_139V){
     selectionSet    = "T_DESY21_Event";
-    intUploader     =  2;
+    intUploader = 1;
     moduleCase        =  0; 
     Dt              = 310; TB = 50;
     int PT_arr[] = {200};
     for (int PT : PT_arr){
-      outDir        = Form("OUT_Reconstruction/DESY21_zscan/DESY21_zscan_PT%i_139V/", PT); 
+      outDir        = Form("../OUT_Reconstruction/DESY21_zscan/DESY21_zscan_PT%i_139V/", PT); 
       MakeMyDir(outDir); 
     if (control or dedx) p_lut = new LUT(Form("~/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi150_nd150_nRC41_nZ21.root", Dt, PT));
       int NFiles = 9;
@@ -452,7 +451,7 @@ void Reconstruction::Monitoring()
         if (dedx)          p_dEdx->Reconstruction();
         if (DO_Methods)  DrawOut_Methods        (outDir, tag, comment, 1, prtcle);
       }
-      if(DO_Resolution)   DrawOut_Zscan  (Form("OUT_Reconstruction/DESY21_zscan/DESY21_zscan_PT%i_139V", PT), comment, PT);
+      if(DO_Resolution)   DrawOut_Zscan  (Form("../OUT_Reconstruction/DESY21_zscan/DESY21_zscan_PT%i_139V", PT), comment, PT);
     }
   }
 }

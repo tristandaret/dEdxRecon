@@ -15,7 +15,7 @@
 
 #include "Uploader.h"
 #include "GiveMe_Uploader.h"
-#include "JFL_Selector.h"
+#include "Selector.h"
 
 /* Python's numpy equivalent of linspace ----------------------------------------------- */
 std::vector<double> linspace(double start, double end, int numPoints);
@@ -38,7 +38,7 @@ TF1* corr_func(const std::string &EventFile, const std::string &Tag, const bool 
 
 
 /* Initialize selection stages -----------------------------------------------------------*/
-void Init_selection(const std::string &SelectionSet, JFL_Selector &aJFL_Selector, const std::string &Tag, Uploader *pUploader, const int &NbrOfMod, const int &Data_to_Use);
+void Init_selection(const std::string &SelectionSet, Selector &aSelector, const std::string &Tag, Uploader *pUploader, const int &NbrOfMod, const int &Data_to_Use);
 
 
 
@@ -46,11 +46,14 @@ void Init_selection(const std::string &SelectionSet, JFL_Selector &aJFL_Selector
 // Read CSV file
 std::vector<std::vector<float>> readCSV(std::string filename);
 
+// Determine the time cut
+std::vector<int> ComputeCutStage3_Cut(Uploader* pUploader, const int& NbrOfMod, const int& Data_to_Use, const int& CloseWF) ;
+
 // Function to search for a word in a CSV file
-bool Get120_CSV(const std::string& filename, const std::string& targetWord, int& value1, int& value2);
+bool GetStage3Cut_CSV(const std::string& filename, const std::string& targetWord, int& value1, int& value2);
 
 // Function to update a CSV file
-void Set120_CSV(const std::string& filename, const std::string& targetWord, int value1, int value2);
+void SetStage3Cut_CSV(const std::string& filename, const std::string& targetWord, int value1, int value2);
 
 
 

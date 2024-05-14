@@ -1,12 +1,11 @@
 #include "ReconTools.h"
 #include "LUTs.h"
+#include "Displays.h"
 
-#include "EvtModelTools_TD_Selections.h"
-#include "TheFitterTrack.h"
-#include "PRF_param.h"
-#include "JFL_Do_ClusterFit.h"
-#include "DoTracksReconstruction.h"
-#include "EvtModelTools_Histos.h"
+#include "TrackFitter.h"
+#include "PRFParameters.h"
+#include "ClusterFitter.h"
+#include "TrackRecon.h"
 
 /* Equivalent of numpy linspace (npoints uniformly spaced between start and end) */
 std::vector<double> linspace(double start, double end, int numPoints) {
@@ -59,38 +58,38 @@ void corr( const std::string& OutDir,
   /////////////////////////////////////////////////////////////////////////////////////////////////////////
   // Selection stage
 
-  JFL_Selector aJFL_Selector(SelectionSet) ;
+  Selector aSelector(SelectionSet) ;
   int NEvent = pUploader->Get_NberOfEvent() ;
   std::cout << "Number of entries :" << NEvent << std::endl ;
   // Get the correct cut on TLeading
   if(SelectionSet == "T2_CERN22_Event" or SelectionSet == "T_DESY21_Event"){
     int TLow  = 0 ; int THigh = 0 ;
-    if(Get120_CSV("../Stage120_Cuts.csv", Tag, TLow, THigh)) std::cout << "TLow = " << TLow << " | THigh = " << THigh << std::endl ;
+    if(GetStage3Cut_CSV("../TimeSelection_Cuts.csv", Tag, TLow, THigh)) std::cout << "TLow = " << TLow << " | THigh = " << THigh << std::endl ;
     else{
-      std::cout << "No Stage120 cuts found in CSV. Getting them now..." << std::endl ;
-      std::vector<int> v_TCut           = Comp120_Cut(pUploader, NbrOfMod, Data_to_Use, 0) ;
+      std::cout << "No Stage3 cuts found in CSV. Getting them now..." << std::endl ;
+      std::vector<int> v_TCut           = ComputeCutStage3_Cut(pUploader, NbrOfMod, Data_to_Use, 0) ;
       TLow                              = v_TCut[0] ;
       THigh                             = v_TCut[1] ;
-      Set120_CSV("../Stage120_Cuts.csv", Tag, TLow, THigh) ;
-      std::cout << "Stage120 cuts are " << TLow << " to " << THigh << ". Values added to CSV file." << std::endl ;
+      SetStage3Cut_CSV("../TimeSelection_Cuts.csv", Tag, TLow, THigh) ;
+      std::cout << "Stage3 cuts are " << TLow << " to " << THigh << ". Values added to CSV file." << std::endl ;
     }
-    aJFL_Selector.Set_Cut_Stage120_TLow (TLow) ;
-    aJFL_Selector.Set_Cut_Stage120_THigh(THigh) ;
+    aSelector.Set_Cut_Stage3_TLow (TLow) ;
+    aSelector.Set_Cut_Stage3_THigh(THigh) ;
   }
   // Selection for DESY21 phi diagonal clustering
   if(Tag.find("diag") != std::string::npos){
-    aJFL_Selector.Set_Cut_Stage5_NCluster_Low(50) ;
-    aJFL_Selector.Set_Cut_StageT15_APM_Low(1) ;
-    aJFL_Selector.Set_Cut_StageT15_APM_High(3.5) ;
+    aSelector.Set_Cut_StageFinal_NCluster_Low(50) ;
+    aSelector.Set_Cut_Stage4_APM_Low(1) ;
+    aSelector.Set_Cut_Stage4_APM_High(3.5) ;
   }
   // Selection for DESY21 theta
   if(Tag.find("theta") != std::string::npos){
-    aJFL_Selector.Set_Cut_Stage120_TLow(0) ;
-    aJFL_Selector.Set_Cut_Stage120_THigh(510) ;
-    aJFL_Selector.Set_Cut_Stage11_EventBased(200) ;
+    aSelector.Set_Cut_Stage3_TLow(0) ;
+    aSelector.Set_Cut_Stage3_THigh(510) ;
+    aSelector.Set_Cut_Stage2_EventBased(200) ;
   }
     
-  aJFL_Selector.Tell_Selection() ;
+  aSelector.Tell_Selection() ;
 
   
   TH2F* h2f_WFvsLength      = new TH2F("h2f_WFvsLength", "WF_{sum} VS length in cluster;Length in cluster (mm);WF_{sum} (ADC count)", 80, -0.1, 16, 80, 0, 4100) ;
@@ -98,20 +97,20 @@ void corr( const std::string& OutDir,
   A_corr->SetParameters(291, 9.47, -4.04, 1.32, -0.0595) ;
   // TF1* A_corr                = new TF1("A_corr", "[0] + [1]*cos([2]*x-[3])", 0, 17);
   // A_corr->SetParameters(400, 600, M_PI/16, -16) ;
-  TheFitterTrack aTheFitterTrack("Minuit", n_param_trk) ;
-  PRF_param                   aPRF_param  ;
-  TF1* tf1_PRF              = new TF1("tf1_PRF",aPRF_param, -2.5*1.128, 2.5*1.128, 5) ;
+  TrackFitter aTrackFitter("Minuit", n_param_trk) ;
+  PRFParameters                   aPRFParameters  ;
+  TF1* tf1_PRF              = new TF1("tf1_PRF",aPRFParameters, -2.5*1.128, 2.5*1.128, 5) ;
   tf1_PRF->                   SetParameters(pUploader->Get_Norm(), pUploader->Get_a2(), pUploader->Get_a4(), pUploader->Get_b2(), pUploader->Get_b4()) ;
   int Kounter_Fit           = 0 ;
   int Kounter_Fail          = 0 ;
   
-  aJFL_Selector.                          Reset_StatCounters() ;
+  aSelector.                          Reset_StatCounters() ;
   std::cout << "Processing events:" << std::endl ;
   for (int iEvent = 0 ; iEvent < NEvent ; iEvent++){
     if(iEvent % 500 == 0 or iEvent == NEvent-1) std::cout << iEvent << "/" << NEvent << std::endl ;
     Event*  pEvent                        = pUploader->GiveMe_Event(iEvent, NbrOfMod, Data_to_Use, 0) ;
     if (!pEvent)                            continue ;
-    aJFL_Selector.                          ApplySelection(pEvent) ;
+    aSelector.                          ApplySelection(pEvent) ;
     if (pEvent->IsValid() != 1)             continue ;
 
     // Loop On Modules
@@ -121,10 +120,10 @@ void corr( const std::string& OutDir,
       if (pEvent->Validity_ForThisModule(iMod) == 0) continue ;
 
       // PRF procedure & track evaluation
-      TheFitterCluster_PV0_PV1            aTheFitterCluster_PV0_PV1("Minuit") ;
-      Do_ClusterFit_PV0_PV1_Event(pEvent, iMod, tf1_PRF, Kounter_Fit, Kounter_Fail, aTheFitterCluster_PV0_PV1) ;
-      TheFitterTrack                      aTheFitterTrack("Minuit", n_param_trk) ;
-      int reco                          = DoTracksReconstruction_Event(aTheFitterTrack, pEvent, iMod, n_param_trk) ;
+      ClusterFitter_Horizontal            aClusterFitter_Horizontal("Minuit") ;
+      ClusterFit_Horizontal_Event(pEvent, iMod, tf1_PRF, Kounter_Fit, Kounter_Fail, aClusterFitter_Horizontal) ;
+      TrackFitter                      aTrackFitter("Minuit", n_param_trk) ;
+      int reco                          = TrackRecon_Event(aTrackFitter, pEvent, iMod, n_param_trk) ;
 
       // Track details
       const Track* pTrack                 = pEvent->GiveMe_Track_ForThisModule(iMod) ;
@@ -170,7 +169,7 @@ void corr( const std::string& OutDir,
   }
   mean_phi /= n_events ;
   std::cout << std::setprecision(2) << "mean_phi = " << mean_phi*180/M_PI << std::endl ;
-  aJFL_Selector.PrintStat() ;
+  aSelector.PrintStat() ;
   delete tf1_PRF ;
 
   // Fitting 
@@ -220,35 +219,35 @@ TF1* corr_func(const std::string &EventFile, const std::string &Tag, const bool 
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Init_selection(const std::string &SelectionSet, JFL_Selector &aJFL_Selector, const std::string &Tag, Uploader *pUploader, const int &NbrOfMod, const int &Data_to_Use){
+void Init_selection(const std::string &SelectionSet, Selector &aSelector, const std::string &Tag, Uploader *pUploader, const int &NbrOfMod, const int &Data_to_Use){
  // Get the correct cut on TLeading
   if(SelectionSet == "T2_CERN22_Event" or SelectionSet == "T_DESY21_Event"){
     int TLow = 0, THigh = 0 ;
-    if(Get120_CSV("../Stage120_Cuts.csv", Tag, TLow, THigh)) std::cout << "TLow = " << TLow << " | THigh = " << THigh << std::endl ;
+    if(GetStage3Cut_CSV("../TimeSelection_Cuts.csv", Tag, TLow, THigh)) std::cout << "TLow = " << TLow << " | THigh = " << THigh << std::endl ;
     else{
-      std::cout << "No Stage120 cuts found in CSV. Getting them now..." << std::endl ;
-      std::vector<int> v_TCut           = Comp120_Cut(pUploader, NbrOfMod, Data_to_Use, 0) ;
+      std::cout << "No Stage3 cuts found in CSV. Getting them now..." << std::endl ;
+      std::vector<int> v_TCut           = ComputeCutStage3_Cut(pUploader, NbrOfMod, Data_to_Use, 0) ;
       TLow                              = v_TCut[0] ;
       THigh                             = v_TCut[1] ;
-      Set120_CSV("../Stage120_Cuts.csv", Tag, TLow, THigh) ;
-      std::cout << "Stage120 cuts are " << TLow << " to " << THigh << ". Values added to CSV file." << std::endl ;
+      SetStage3Cut_CSV("../TimeSelection_Cuts.csv", Tag, TLow, THigh) ;
+      std::cout << "Stage3 cuts are " << TLow << " to " << THigh << ". Values added to CSV file." << std::endl ;
     }
-    aJFL_Selector.Set_Cut_Stage120_TLow (TLow) ;
-    aJFL_Selector.Set_Cut_Stage120_THigh(THigh) ;
+    aSelector.Set_Cut_Stage3_TLow (TLow) ;
+    aSelector.Set_Cut_Stage3_THigh(THigh) ;
   }
 
   // Selection for DESY21 phi diagonal clustering
   if(Tag.find("diag") != std::string::npos){
-    aJFL_Selector.Set_Cut_Stage5_NCluster_Low(50) ;
-    aJFL_Selector.Set_Cut_StageT15_APM_Low(1) ;
-    aJFL_Selector.Set_Cut_StageT15_APM_High(3.5) ;
+    aSelector.Set_Cut_StageFinal_NCluster_Low(50) ;
+    aSelector.Set_Cut_Stage4_APM_Low(1) ;
+    aSelector.Set_Cut_Stage4_APM_High(3.5) ;
   }
 
   // Selection for DESY21 theta
   if(Tag.find("theta") != std::string::npos){
-    aJFL_Selector.Set_Cut_Stage120_TLow(0) ;
-    aJFL_Selector.Set_Cut_Stage120_THigh(510) ;
-    aJFL_Selector.Set_Cut_Stage11_EventBased(200) ;
+    aSelector.Set_Cut_Stage3_TLow(0) ;
+    aSelector.Set_Cut_Stage3_THigh(510) ;
+    aSelector.Set_Cut_Stage2_EventBased(200) ;
   }
 }
 
@@ -280,8 +279,96 @@ std::vector<std::vector<float>> readCSV(std::string filename) {
 }
 
 
+
+
+// Get cut values for the time selection (run based)
+std::vector<int> ComputeCutStage3_Cut(Uploader* pUploader, const int& NbrOfMod, const int& Data_to_Use, const int& CloseWF)
+{
+  std::vector<int>                        v_TCut ;
+
+  TH1F* h1f_TLead                       = new TH1F("h1f_TLead",  "T_{leading}", 511,  -0.5 , 510.5 );
+
+  int NEvent                            = pUploader->Get_NberOfEvent() ;
+  int TLow                              = 0 ;
+  int THigh                             = 0 ;
+  for (int iEvent = 0 ; iEvent < NEvent ; iEvent++){
+    if(iEvent % 1000 == 0 or iEvent == NEvent-1) std::cout << iEvent << "/" << NEvent << std::endl ;
+    Event*  pEvent                    = pUploader->GiveMe_Event(iEvent, NbrOfMod, Data_to_Use, 0) ;
+    if (!pEvent or pEvent->IsValid() == 0){
+      delete pEvent;
+      continue;
+    }  
+
+    int nMod                  = pEvent->Get_NberOfModule() ;
+    // if(nMod < 4){ delete pEvent; continue;}
+    for (int iMod = 0; iMod < nMod ; iMod++){
+      Module* pModule                 = pEvent->Get_Module_InArray(iMod) ;
+      if (pEvent->Validity_ForThisModule(iMod) == 0) continue;
+
+      int NClusters                   = pModule->Get_NberOfCluster() ;
+      for (int iC = 0; iC < NClusters; iC++){
+        Cluster* pCluster             = pModule->Get_Cluster(iC) ;
+        double TL               = pCluster->Get_TMaxLeading() ;
+        if (TL>5. and TL < 509.) h1f_TLead->Fill( TL ) ;
+      }
+    }
+    delete pEvent ;
+  }
+
+  double MaxTLead = h1f_TLead->GetMaximum();
+  std::cout << MaxTLead << std::endl;
+  int nbin_max                        = h1f_TLead->GetMaximumBin() ;        
+  std::cout << nbin_max << std::endl;                       // bin of the highest peak
+
+  if(nbin_max <= 0 or nbin_max >= 510){
+    std::cout << "Bug with nbin_max: value out of time range | Set cuts to  [0, 510]" << std::endl;
+    v_TCut.push_back(0);
+    v_TCut.push_back(510);
+  }
+  else{
+    int iDeltaBinP                      = 10 ;                                                            // initialization of increments
+    int iDeltaBinM                      = 10 ;
+    float y_init                        = h1f_TLead->GetBinContent(nbin_max) ;                       // value of the peak
+    float y_0                           = h1f_TLead->GetBinContent(nbin_max) ;                       // value of the peak
+    float y_minus1                      = h1f_TLead->GetBinContent(nbin_max-10) ;                    // value of the previous bin
+    float y_plus1                       = h1f_TLead->GetBinContent(nbin_max+10) ;                    // value of the next bin
+    // Find the lower boundary
+    while(y_minus1 - y_0 < y_init/2500 and y_minus1 > 0.001*y_init and iDeltaBinM < 509){
+      iDeltaBinM++ ;
+      y_0                               = h1f_TLead->GetBinContent(nbin_max-iDeltaBinM) ;
+      y_minus1                          = h1f_TLead->GetBinContent(nbin_max-iDeltaBinM-1) ;
+    }
+    // Find the higher boundary
+    y_0                                 = h1f_TLead->GetBinContent(nbin_max) ;                       // reboot y_0 to maximum value peak
+    while(y_plus1 - y_0 < y_init/2500 and y_minus1 > 0.001*y_init and iDeltaBinP < 509){
+      iDeltaBinP++ ;
+      y_0                               = h1f_TLead->GetBinContent(nbin_max+iDeltaBinP) ;
+      y_plus1                           = h1f_TLead->GetBinContent(nbin_max+iDeltaBinP+1) ;
+    }
+
+    TLow                                = nbin_max - 1 - iDeltaBinM ;
+    THigh                               = nbin_max - 1 + iDeltaBinP ;
+    if(TLow < 0 or TLow > 510){
+      std::cout << "Bug with TLow = " << TLow << ": value out of time range | ";
+      TLow = 0;
+      std::cout << "Reset to " << TLow << std::endl;
+    }
+    if(THigh < 0 or THigh > 510){
+      std::cout << "Bug with THigh = " << THigh << ": value out of time range | ";
+      THigh = 510;
+      std::cout << "Reset to " << THigh << std::endl;
+    }
+    v_TCut.                               push_back(TLow) ;
+    v_TCut.                               push_back(THigh) ;
+  }
+  delete h1f_TLead;
+  return v_TCut ;
+}
+
+
+
 // Function to search for a word in a CSV file
-bool Get120_CSV(const std::string& filename, const std::string& targetWord, int& value1, int& value2) {
+bool GetStage3Cut_CSV(const std::string& filename, const std::string& targetWord, int& value1, int& value2) {
   std::ifstream file(filename);
   if (!file.is_open()) {
     std::cerr << "Error: Unable to open file " << filename << std::endl;
@@ -309,7 +396,7 @@ bool Get120_CSV(const std::string& filename, const std::string& targetWord, int&
 
 
 // Function to update a CSV file
-void Set120_CSV(const std::string& filename, const std::string& targetWord, int value1, int value2) {
+void SetStage3Cut_CSV(const std::string& filename, const std::string& targetWord, int value1, int value2) {
     std::ofstream file(filename, std::ios_base::app); // Open in append mode
 
     if (!file.is_open()) {

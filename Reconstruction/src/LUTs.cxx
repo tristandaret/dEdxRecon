@@ -211,9 +211,7 @@ Reconstruction::LUT::~LUT()
 // Load the LUTs
 void Reconstruction::LUT::Load()
 {  	
-	std::cout << "beacon 1" << std::endl;
 	pFile_LUT                      	= TFile::Open(fFile_LUT.c_str(),"READ");
-	std::cout << "beacon 2" << std::endl;
 	pTree_LUT                    	= (TTree*) pFile_LUT->Get("outTree");
 	pTree_LUT->                      SetBranchAddress("weight",        &fweight);
 	pTree_LUT->                      SetBranchAddress("angle",         &fphi);

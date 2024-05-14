@@ -11,14 +11,13 @@
 #include <string>
 #include <random>
 
-#include "PRF_param.h"
-#include "DoTracksReconstruction.h"
-#include "JFL_Do_ClusterFit.h"
-#include "TheFitterTrack.h"
-#include "EvtModelTools_Histos.h"
-#include "EvtModelTools_TD_Selections.h"
+#include "PRFParameters.h"
+#include "TrackRecon.h"
+#include "ClusterFitter.h"
+#include "TrackFitter.h"
+#include "Displays.h"
 #include "GiveMe_Uploader.h"
-#include "JFL_Selector.h"
+#include "Selector.h"
 
 ClassImp(Reconstruction::TPad)
 ClassImp(Reconstruction::TCluster);
@@ -44,8 +43,8 @@ void Reconstruction::dEdx::Reconstruction(){
 	std::cout <<    "logs: " << logs       << std::endl;
 	std::cout <<    std::setprecision(2)  << std::fixed;
 	std::cout <<    std::endl;
-	std::streambuf* coutbuf =                std::cout.rdbuf();  // Save old buf
-	std::ofstream   OUT_DataFile(logs.c_str() );    // Set output file
+	std::streambuf* coutbuf =                std::cout.rdbuf();	// Save old buf
+	std::ofstream   OUT_DataFile(logs.c_str() );				// Set output file
 	std::cout.      rdbuf(OUT_DataFile.rdbuf());                // Redirect to output file
 
 	std::cout << "dataFile         : " << dataFile        << std::endl;
@@ -82,18 +81,18 @@ void Reconstruction::dEdx::Reconstruction(){
 	pTree_dEdx->								Branch("eventBranch", "Reconstruction::TEvent", &p_teventRef);
 
 	// Selection stage
-	JFL_Selector aJFL_Selector(selectionSet);
+	Selector aSelector(selectionSet);
 	int NEvent =  								p_uploader->Get_NberOfEvent();
 	std::cout << "Number of entries :" << NEvent << std::endl;
-	Init_selection(selectionSet, aJFL_Selector, tag, p_uploader, moduleCase, 0);
-	aJFL_Selector.Tell_Selection();
+	Init_selection(selectionSet, aSelector, tag, p_uploader, moduleCase, 0);
+	aSelector.Tell_Selection();
 
-	std::cout << "drift distance : " << driftDist       << " mm"        << std::endl;
-	std::cout << "Peaking time   : " << PT              << " ns"        << std::endl;
+	std::cout << "drift distance:  " << driftDist       << " mm"        << std::endl;
+	std::cout << "Peaking time:    " << PT              << " ns"        << std::endl;
 	std::cout << "Time bin length: " << TB              << " ns"        << std::endl;
-	std::cout << "PT/TB =           " << PT/TB           << " time bins" << std::endl;
-	std::cout << "drift method   : " << driftMethod                     << std::endl;
-	std::cout << "minimal length : " << fminLength*1e3  << " mm"        << std::endl;
+	std::cout << "PT/TB =          " << PT/TB           << " time bins" << std::endl;
+	std::cout << "drift method:    " << driftMethod                     << std::endl;
+	std::cout << "minimal length:  " << fminLength*1e3  << " mm"        << std::endl;
 	std::cout <<                                                           std::endl;
 
 	// Correction function for WF
@@ -101,9 +100,9 @@ void Reconstruction::dEdx::Reconstruction(){
 	float fAref =                        			pcorrFunctionWF->Eval(XPADLENGTH);
 
 	// Track fit initializations
-	TheFitterTrack aTheFitterTrack("Minuit", fnParamsTrack);
-	PRF_param aPRF_param;
-	TF1 *ptf1PRF =                      			new TF1("ptf1PRF",aPRF_param, -2.5*1.128, 2.5*1.128, 5);
+	TrackFitter aTrackFitter("Minuit", fnParamsTrack);
+	PRFParameters aPRFParameters;
+	TF1 *ptf1PRF =                      			new TF1("ptf1PRF",aPRFParameters, -2.5*1.128, 2.5*1.128, 5);
 	ptf1PRF->                     					SetParameters(p_uploader->Get_Norm(), p_uploader->Get_a2(), p_uploader->Get_a4(), p_uploader->Get_b2(), p_uploader->Get_b4());
 	int fcounterFail =                 				0;
 	int fcounterFit =                  				0;
@@ -117,15 +116,15 @@ void Reconstruction::dEdx::Reconstruction(){
 	TH1F *ph1f_XP =  								new TH1F("ph1f_XP", "<dE/dx> with XP;<dE/dx> (ADC count);Number of events", 90, 0, 1800);
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Compute dE/dx
-	aJFL_Selector.                					Reset_StatCounters();
+	aSelector.                						Reset_StatCounters();
 	std::cout << "Processing events:" << std::endl;
-	for (int iEvent =  0; iEvent < 500; iEvent++){
+	for (int iEvent =  0; iEvent < NEvent; iEvent++){
 		if(iEvent % 500 ==  0 or iEvent ==  NEvent-1) std::cout << iEvent << "/" << NEvent << std::endl;
 
 		Event* pEvent =                     		p_uploader->GiveMe_Event(iEvent, moduleCase, 0, 0);
 		if (!pEvent)                				continue;
 
-		aJFL_Selector.              				ApplySelection(pEvent);
+		aSelector.              					ApplySelection(pEvent);
 		if (pEvent->IsValid() != 1) 				continue;
 
 		Reconstruction::TEvent *p_tevent =  		new Reconstruction::TEvent();
@@ -180,15 +179,15 @@ void Reconstruction::dEdx::Reconstruction(){
 
 			// Track fitting
 			if(tag.find("diag") == std::string::npos){
-				TheFitterCluster_PV0_PV1 aTheFitterCluster_PV0_PV1("Minuit");
-				Do_ClusterFit_PV0_PV1_Event(pEvent, fmodID, ptf1PRF, fcounterFit, fcounterFail, aTheFitterCluster_PV0_PV1);
+				ClusterFitter_Horizontal aClusterFitter_Horizontal("Minuit");
+				ClusterFit_Horizontal_Event(pEvent, fmodID, ptf1PRF, fcounterFit, fcounterFail, aClusterFitter_Horizontal);
 			}
 			else{
-				TheFitterCluster_PV0_Diag aTheFitterCluster_PV0_Diag("Minuit");
-				Do_ClusterFit_PV0_Diag_Event(-(M_PI_2-(PHIMAX*M_PI/180)), pEvent, fmodID, ptf1PRF, fcounterFit, fcounterFail, aTheFitterCluster_PV0_Diag);
+				ClusterFitter_Diagonal aClusterFitter_Diagonal("Minuit");
+				ClusterFit_Diagonal_Event(-(M_PI_2-(PHIMAX*M_PI/180)), pEvent, fmodID, ptf1PRF, fcounterFit, fcounterFail, aClusterFitter_Diagonal);
 			}
-			TheFitterTrack              aTheFitterTrack("Minuit", fnParamsTrack);
-			DoTracksReconstruction_Event(aTheFitterTrack, pEvent, fmodID, fnParamsTrack);
+			TrackFitter              aTrackFitter("Minuit", fnParamsTrack);
+			TrackRecon_Event(aTrackFitter, pEvent, fmodID, fnParamsTrack);
 
 			// Track details
 			const Track* pTrack =      				pEvent->GiveMe_Track_ForThisModule(fmodID);
@@ -206,25 +205,27 @@ void Reconstruction::dEdx::Reconstruction(){
 			for (int iC =  0; iC < NC; iC++){
 				Cluster* pCluster =            		pModule->Get_Cluster(iC);
 				Reconstruction::TCluster *p_tcluster = new Reconstruction::TCluster();
-				p_tcluster->ph1f_WF_cluster->SetName(Form("ph1f_WF_cluster_%d_%d_%d", iEvent, iMod, iC));
+				p_tcluster->v_waveform.assign(510, 0);
+				float fGainCorrectionLead = 0;
 
 				// Loop On Pads
 				int NPads =                   		 pCluster->Get_NberOfPads();
 				for(int iP =  0; iP < NPads; iP ++){
 					const Pad* pPad =            pCluster->Get_Pad(iP);
 					Reconstruction::TPad * p_tpad = new Reconstruction::TPad();
+					p_tpad->v_waveform = 			pPad->Get_vADC();
+					for(int i=0;i<510;i++) p_tcluster->v_waveform[i] += p_tpad->v_waveform[i]; // Gain correction wrt to leading pad's gain after pad loop
 					p_tpad->ix =                    fflipX-pPad->Get_iX();
 					p_tpad->iy =                    fflipY-pPad->Get_iY();
-					p_tpad->ph1f_WF_pad =           GiveMe_WaveFormDisplay(pPad, "main");
 					p_tpad->RC =                    pERAMMaps->RC(fERAMs_pos[iMod], fflipX-pPad->Get_iX(), fflipY-pPad->Get_iY());
 					if(fcorrectGain){
 						p_tpad->gain =              pERAMMaps->Gain(fERAMs_pos[iMod], fflipX-pPad->Get_iX(), fflipY-pPad->Get_iY());
 						p_tpad->GainCorrection =    AVG_GAIN/p_tpad->gain;
 						p_tpad->ADC =               p_tpad->GainCorrection*pPad->Get_AMax();
-						p_tpad->ph1f_WF_pad->       Scale(p_tpad->GainCorrection);
+						for(int i=0;i<510;i++) p_tpad->v_waveform[i] = round(p_tpad->v_waveform[i] * p_tpad->GainCorrection);
+						if(iP == 0) fGainCorrectionLead = p_tpad->GainCorrection;		
 					}
 					else p_tpad->ADC =              pPad->Get_AMax();
-					p_tcluster->ph1f_WF_cluster->  	Add(p_tpad->ph1f_WF_pad);
 					
 					// Track computations (impact parameter in m, angle in degrees, length in pad in m)
 					local_params(pPad, pTrack, p_tpad->d, p_tpad->dd, p_tpad->phi, p_tpad->length);
@@ -232,7 +233,7 @@ void Reconstruction::dEdx::Reconstruction(){
 					p_tpad->dd *= 					1000; // in mm
 					p_tpad->length /= 				costheta;
 					p_tcluster->length += 			p_tpad->length;
-					if(p_tpad->length*costheta <= fminLength){
+					if(p_tpad->length*costheta <= fminLength){ // cutoff defined in the ERAM's plane -> rm theta dependence
 						p_tcluster->				v_pads.push_back(p_tpad);	
 						continue;
 					}
@@ -258,10 +259,12 @@ void Reconstruction::dEdx::Reconstruction(){
 					p_tcluster->v_pads.				push_back(p_tpad);
 				} // Pads
 
+				for(int i=0;i<510;i++) p_tcluster->v_waveform[i] *= fGainCorrectionLead;
 				// WF method
+				int fAcluster =               		*std::max_element(p_tcluster->v_waveform.begin(), p_tcluster->v_waveform.end());
 				p_tcluster->ratioCorr =             fAref / pcorrFunctionWF->Eval(p_tcluster->length*1000);
-				if(tag.find("diag") != std::string::npos) v_dEdxWF.push_back(p_tcluster->ph1f_WF_cluster->GetMaximum()*p_tcluster->ratioCorr/XPADLENGTH*10);
-				else v_dEdxWF.						push_back(p_tcluster->ph1f_WF_cluster->GetMaximum()/(p_tcluster->length*100));
+				if(tag.find("diag") != std::string::npos) v_dEdxWF.push_back(fAcluster*p_tcluster->ratioCorr/XPADLENGTH*10);
+				else v_dEdxWF.						push_back(fAcluster/(p_tcluster->length*100));
 				p_tevent->							NClusters++;
 				p_tmodule->v_clusters.				push_back(p_tcluster);
 			} // Clusters
@@ -279,43 +282,43 @@ void Reconstruction::dEdx::Reconstruction(){
 			ph1f_XP->                       		Fill(p_tevent->dEdxXP);
 		}
 
-		p_teventRef =  				p_tevent;
-		pTree_dEdx->                Fill();
-		v_erams.                    clear();
-		v_dE.                       clear();
-		v_dx.                       clear();
-		v_dEdxXP.                   clear();
-		v_dEdxWF.                   clear();
-		delete pEvent;
-		delete p_tevent;
+		p_teventRef =  								p_tevent;
+		pTree_dEdx->                				Fill();
+		v_erams.                    				clear();
+		v_dE.                       				clear();
+		v_dx.                       				clear();
+		v_dEdxXP.                   				clear();
+		v_dEdxWF.                   				clear();
+		delete 										pEvent;
+		delete 										p_tevent;
 	} // Events
 
-	aJFL_Selector.PrintStat();
+	aSelector.PrintStat();
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Fitting //
 	std::cout << "Fitting: Started... "; 
-	TF1 *ptf1_WF				 = Fit1Gauss(ph1f_WF, 2);
-	ptf1_WF->					SetNameTitle("ptf1_WF", "ptf1_WF");
+	TF1 *ptf1_WF = 									Fit1Gauss(ph1f_WF, 2);
+	ptf1_WF->										SetNameTitle("ptf1_WF", "ptf1_WF");
 
-	TF1 *ptf1_XP				 = Fit1Gauss(ph1f_XP, 2);
-	ptf1_XP->					SetNameTitle("ptf1_XP", "ptf1_XP");
+	TF1 *ptf1_XP = 									Fit1Gauss(ph1f_XP, 2);
+	ptf1_XP->										SetNameTitle("ptf1_XP", "ptf1_XP");
 	std::cout << "done!" << std::endl; 
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Methods
-	ptf1_WF->                     Write();
-	ptf1_XP->                     Write();
-	ph1f_WF->                     Write();
-	ph1f_XP->                     Write();
-	pFile_dEdx->                  Close();
+	ptf1_WF->                     					Write();
+	ptf1_XP->                     					Write();
+	ph1f_WF->                     					Write();
+	ph1f_XP->                     					Write();
+	pFile_dEdx->                  					Close();
 
-	////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Deleting
-	delete pFile_dEdx;
-	delete pcorrFunctionWF;
-	delete pERAMMaps;
-	delete ptf1PRF;
+	delete 											pFile_dEdx;
+	delete 											pcorrFunctionWF;
+	delete 											pERAMMaps;
+	delete 											ptf1PRF;
 	std::cout.rdbuf(coutbuf); // Reset to standard output
 }
 
@@ -351,12 +354,12 @@ float Reconstruction::dEdx::ComputedEdxXP(const std::vector<float>& v_dEdx, cons
 
 
 Reconstruction::TPad::~TPad(){
-	delete ph1f_WF_pad;
+	v_waveform.clear();
 }
 
 
 Reconstruction::TCluster::~TCluster(){
-	delete ph1f_WF_cluster;
+	v_waveform.clear();
 	for (auto p_tpad : v_pads) delete p_tpad;
 	v_pads.clear();
 }
