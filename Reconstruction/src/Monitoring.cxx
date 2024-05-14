@@ -151,10 +151,10 @@ void Reconstruction::Monitoring()
       if (control or dedx) p_lut = new LUT(Form("~/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi150_nd150_nRC41_nZ21.root", Dt, iPT));
       // int         z_val[]   = {50, 150, 250, 350, 450, 550, 650, 750, 850, 950};
       // std::string z_arr[]   = {"m40", "060", "160", "260", "360", "460", "560", "660", "760", "860"};
-      // int         z_val[]   = {50, 550, 950};
-      // std::string z_arr[]   = {"m40", "460", "860"};
-      int         z_val[]   = {550};
-      std::string z_arr[]   = {"460"};
+      int         z_val[]   = {50, 650, 950};
+      std::string z_arr[]   = {"m40", "560", "860"};
+      // int         z_val[]   = {550};
+      // std::string z_arr[]   = {"460"};
       for (int iz = 0; iz < (int)std::size(z_arr); iz++){
         const char* z       = z_arr[iz].c_str();
         driftDist           = z_val[iz];

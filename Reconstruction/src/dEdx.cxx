@@ -81,6 +81,9 @@ void Reconstruction::dEdx::Reconstruction(){
 	int theta_arr[3] =   {-45, -20, 20};
 	for (int theta_file : theta_arr) if(tag.find("theta") != std::string::npos and tag.find(std::to_string(theta_file)) != std::string::npos) costheta =  fabs(cos((float)theta_file/180*M_PI));
 	Reconstruction::ERAMMaps *pERAMMaps =  new Reconstruction::ERAMMaps();
+	int fflipX =  0;
+	int fflipY =  0;
+	if(tag.find("DESY") != std::string::npos) fflipX = 35;
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Output
@@ -221,12 +224,12 @@ void Reconstruction::dEdx::Reconstruction(){
 				for(int iP =  0; iP < NPads; iP ++){
 					const Pad* pPad =            pCluster->Get_Pad(iP);
 					Reconstruction::TPad * p_tpad = new Reconstruction::TPad();
-					p_tpad->ix =                    pPad->Get_iX();
-					p_tpad->iy =                    pPad->Get_iY();
+					p_tpad->ix =                    fflipX-pPad->Get_iX();
+					p_tpad->iy =                    fflipY-pPad->Get_iY();
 					p_tpad->ph1f_WF_pad =           GiveMe_WaveFormDisplay(pPad, "main");
-					p_tpad->RC =                    pERAMMaps->RC(fERAMs_pos[iMod], pPad->Get_iX(), pPad->Get_iY());
+					p_tpad->RC =                    pERAMMaps->RC(fERAMs_pos[iMod], fflipX-pPad->Get_iX(), fflipY-pPad->Get_iY());
 					if(fcorrectGain){
-						p_tpad->gain =              pERAMMaps->Gain(fERAMs_pos[iMod], pPad->Get_iX(), pPad->Get_iY());
+						p_tpad->gain =              pERAMMaps->Gain(fERAMs_pos[iMod], fflipX-pPad->Get_iX(), fflipY-pPad->Get_iY());
 						p_tpad->GainCorrection =    AVG_GAIN/p_tpad->gain;
 						p_tpad->ADC =               p_tpad->GainCorrection*pPad->Get_AMax();
 						p_tpad->ph1f_WF_pad->       Scale(p_tpad->GainCorrection);
