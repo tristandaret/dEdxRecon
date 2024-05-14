@@ -185,16 +185,16 @@ void Reconstruction::ERAMMaps::FillHoles()
 /* Look Up Tables for XP method ------------------------------------------------------------------------------------------------------------------ */
 // Default constructor
 Reconstruction::LUT::LUT(const int& transDiffCoeff, const int& peakingTime){
-	fFile = Form("$HOME/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi150_nd150_nRC41_nZ21.root", transDiffCoeff, peakingTime);
-    std::cout << "dEdx LUT: LOADING " << fFile << std::endl;
+	fFile_LUT = Form("$HOME/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi150_nd150_nRC41_nZ21.root", transDiffCoeff, peakingTime);
+    std::cout << "dEdx LUT: LOADING " << fFile_LUT << std::endl;
 	Load();
 	std::cout << "dEdx LUT: LOADED" << std::endl;
 }
 
 Reconstruction::LUT::LUT(const std::string& file)
 	{
-	fFile = file;
-	std::cout << "dEdx LUT: LOADING " << fFile << std::endl;
+	fFile_LUT = file;
+	std::cout << "dEdx LUT: LOADING " << fFile_LUT << std::endl;
 	Load();
 	std::cout << "dEdx LUT: LOADED" << std::endl;
 }
@@ -202,31 +202,33 @@ Reconstruction::LUT::LUT(const std::string& file)
 // Destructor
 Reconstruction::LUT::~LUT()
 	{
-	pFile->Close();
-	delete pFile;
+	pFile_LUT->Close();
+	delete pFile_LUT;
 	for(int i=0;i<sN_PHI;i++) for(int j=0;j<sN_D;j++) for(int k=0;k<sN_RC;k++) for(int l=0;l<sN_Z;l++) fValue[i][j][k][l] = 0;
 }
 
 
-// Load the ERAM maps
+// Load the LUTs
 void Reconstruction::LUT::Load()
-{  
-	pFile                      = TFile::Open(fFile.c_str(),"READ");
-	pTree                      = (TTree*) pFile->Get("outTree");
-	pTree->                      SetBranchAddress("weight",        &fweight);
-	pTree->                      SetBranchAddress("angle",         &fphi);
-	pTree->                      SetBranchAddress("impact_param",  &fd);
-	pTree->                      SetBranchAddress("RC",            &fRC);
-	pTree->                      SetBranchAddress("drift_dist",    &fz);
+{  	
+	std::cout << "beacon 1" << std::endl;
+	pFile_LUT                      	= TFile::Open(fFile_LUT.c_str(),"READ");
+	std::cout << "beacon 2" << std::endl;
+	pTree_LUT                    	= (TTree*) pFile_LUT->Get("outTree");
+	pTree_LUT->                      SetBranchAddress("weight",        &fweight);
+	pTree_LUT->                      SetBranchAddress("angle",         &fphi);
+	pTree_LUT->                      SetBranchAddress("impact_param",  &fd);
+	pTree_LUT->                      SetBranchAddress("RC",            &fRC);
+	pTree_LUT->                      SetBranchAddress("drift_dist",    &fz);
 
 	
 	// Initializing all values to 0
 	for(int i=0;i<sN_PHI;i++) for(int j=0;j<sN_D;j++) for(int k=0;k<sN_RC;k++) for(int l=0;l<sN_Z;l++) fValue[i][j][k][l] = 0;
 
-	int nentries = pTree->GetEntries();
+	int nentries = pTree_LUT->GetEntries();
 	int id, iphi, iRC, iz;
 	for (int i=0; i<nentries;i++) {
-		pTree->                      GetEntry(i);
+		pTree_LUT->                      GetEntry(i);
 		iphi                        = (int)std::round((fphi-1e-6)/sSTEP_PHI);
 		id                          = (int)std::round(fd/sSTEP_D);
 		iRC                         = (int)std::round((fRC-50)/sSTEP_RC);

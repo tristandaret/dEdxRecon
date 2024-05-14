@@ -91,7 +91,7 @@ namespace Reconstruction{
    private:
     //   std::string fhatReconRoot;
     //   std::string fhatReconConfig;
-      std::string fFile;
+      std::string fFile_LUT;
     //   int fTransDiffCoeff   = ND::TOARuntimeParams::Get().GetParameterI("hatRecon.TransDiffCoeff");  
       int fTransDiffCoeff   = 350;  
 
@@ -114,8 +114,8 @@ namespace Reconstruction{
    
       //------------------------------Data Members-----------------------//
 
-      TFile *pFile ;
-      TTree *pTree ;
+      TFile *pFile_LUT ;
+      TTree *pTree_LUT ;
 
       // Leaves
       float         fweight;

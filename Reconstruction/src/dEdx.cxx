@@ -32,17 +32,6 @@ Reconstruction::dEdx::~dEdx(){
 }
 
 void Reconstruction::dEdx::Reconstruction(){
-	TH1F *ph1f_ratio =  					new TH1F("ph1f_ratio", "Ratio;ratio;count", 150, 0, 2);
-	TH1F *ph1f_ncross = 					new TH1F("ph1f_ncross", "Number of crossed pads;Number of crossed pads;count", 45, 0, 44);
-	TH1F *ph1f_nclusters = 					new TH1F("ph1f_nclusters", "Number of clusters;Number of clusters;count", 45, 0, 44);
-	TH1F *ph1f_angle = 						new TH1F("ph1f_angle", "Angle;Angle;count", 181, -90, 90);
-	TH1F *ph1f_padlength = 					new TH1F("ph1f_padlength", "Pad length;Pad length;count", 100, 0, 16);
-	TH1F *ph1f_clusterlength = 				new TH1F("ph1f_clusterlength", "Cluster length;Cluster length;count", 100, 0, 16);
-	TH1F *ph1f_gaincorr = 					new TH1F("ph1f_gaincorr", "Gain correction;Gain correction;count", 100, 0, 2);
-	TH2F *ph2f_ratiozcalczfile = 			new TH2F("ph2f_ratiozcalczfile", "Ratio zcalc vs zfile;ratio zfile;ratio zcalc", 80, 0, 2.1, 80, 0, 2.1);
-	TH2F *ph2f_lutvspadlength = 			new TH2F("ph2f_lutvspadlength", "LUT vs pad length;LUT;Pad length", 100, 0, 16, 100, 0, 2.1);
-	TH1F *ph1f_wfcorr = 					new TH1F("ph1f_wfcorr", "WF correction;WF correction;count", 100, 0, 2);
-	TH2F *ph2f_AmaxvsLength = 				new TH2F("h2f_AmaxvsLength", "ADC_{max} VS length in pad (before length cut);Length in pad (mm);ADC_{max}", 80, -0.1, 16, 80, 0, 4100);
 	std::string OUTDirName =                outDir + tag + "/";
 	MakeMyDir(OUTDirName);
 	std::string OUTDIR_Display =            OUTDirName + "Evt_Display/";
@@ -87,17 +76,16 @@ void Reconstruction::dEdx::Reconstruction(){
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Output
-	TFile *pFile_dEdx =    new TFile((OUTDirName + "2_" + tag + "_dEdx" + comment + ".root").c_str(), "RECREATE");
-	TTree *pTree_dEdx =    new TTree("dEdx_tree", "dEdx TTree");
-	Reconstruction::TEvent *p_teventRef =  nullptr;
-	pTree_dEdx->Branch("eventBranch", "TEvent", &p_teventRef);
+	TFile *pFile_dEdx =    						new TFile((OUTDirName + "2_" + tag + "_dEdx" + comment + ".root").c_str(), "RECREATE");
+	TTree *pTree_dEdx =    						new TTree("dEdx_tree", "dEdx TTree");
+	Reconstruction::TEvent *p_teventRef =  		nullptr;
+	pTree_dEdx->								Branch("eventBranch", "Reconstruction::TEvent", &p_teventRef);
+
 	// Selection stage
 	JFL_Selector aJFL_Selector(selectionSet);
-	int NEvent =  p_uploader->Get_NberOfEvent();
+	int NEvent =  								p_uploader->Get_NberOfEvent();
 	std::cout << "Number of entries :" << NEvent << std::endl;
-
 	Init_selection(selectionSet, aJFL_Selector, tag, p_uploader, moduleCase, 0);
-		
 	aJFL_Selector.Tell_Selection();
 
 	std::cout << "drift distance : " << driftDist       << " mm"        << std::endl;
@@ -108,10 +96,11 @@ void Reconstruction::dEdx::Reconstruction(){
 	std::cout << "minimal length : " << fminLength*1e3  << " mm"        << std::endl;
 	std::cout <<                                                           std::endl;
 
-	// Track fit initializations
+	// Correction function for WF
 	TF1 *pcorrFunctionWF =              			corr_func(dataFile, tag, WFupdated);
 	float fAref =                        			pcorrFunctionWF->Eval(XPADLENGTH);
 
+	// Track fit initializations
 	TheFitterTrack aTheFitterTrack("Minuit", fnParamsTrack);
 	PRF_param aPRF_param;
 	TF1 *ptf1PRF =                      			new TF1("ptf1PRF",aPRF_param, -2.5*1.128, 2.5*1.128, 5);
@@ -124,13 +113,13 @@ void Reconstruction::dEdx::Reconstruction(){
 	std::vector<float> v_dEdxXP;
 	std::vector<float> v_dEdxWF;
 	std::vector<double> v_erams;
-	TH1F *ph1f_WF =  new TH1F("ph1f_WF", "<dE/dx> with WF;<dE/dx> (ADC count);Number of events", 90, 0, 1800);
-	TH1F *ph1f_XP =  new TH1F("ph1f_XP", "<dE/dx> with XP;<dE/dx> (ADC count);Number of events", 90, 0, 1800);
+	TH1F *ph1f_WF =  								new TH1F("ph1f_WF", "<dE/dx> with WF;<dE/dx> (ADC count);Number of events", 90, 0, 1800);
+	TH1F *ph1f_XP =  								new TH1F("ph1f_XP", "<dE/dx> with XP;<dE/dx> (ADC count);Number of events", 90, 0, 1800);
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Compute dE/dx
 	aJFL_Selector.                					Reset_StatCounters();
 	std::cout << "Processing events:" << std::endl;
-	for (int iEvent =  0; iEvent < NEvent; iEvent++){
+	for (int iEvent =  0; iEvent < 500; iEvent++){
 		if(iEvent % 500 ==  0 or iEvent ==  NEvent-1) std::cout << iEvent << "/" << NEvent << std::endl;
 
 		Event* pEvent =                     		p_uploader->GiveMe_Event(iEvent, moduleCase, 0, 0);
@@ -233,7 +222,6 @@ void Reconstruction::dEdx::Reconstruction(){
 						p_tpad->GainCorrection =    AVG_GAIN/p_tpad->gain;
 						p_tpad->ADC =               p_tpad->GainCorrection*pPad->Get_AMax();
 						p_tpad->ph1f_WF_pad->       Scale(p_tpad->GainCorrection);
-						ph1f_gaincorr->             Fill(p_tpad->GainCorrection);
 					}
 					else p_tpad->ADC =              pPad->Get_AMax();
 					p_tcluster->ph1f_WF_cluster->  	Add(p_tpad->ph1f_WF_pad);
@@ -258,7 +246,6 @@ void Reconstruction::dEdx::Reconstruction(){
 					
 					p_tpad->ratioDrift =        	p_lut->getRatio(fabs(p_tpad->phi), fabs(p_tpad->d), p_tpad->RC, p_tpad->driftDistance);
 					p_tpad->ratioFile =         	p_lut->getRatio(fabs(p_tpad->phi), fabs(p_tpad->d), p_tpad->RC, driftDist);
-					ph2f_ratiozcalczfile->      	Fill(p_tpad->ratioFile, p_tpad->ratioDrift);
 
 					if(driftMethod ==  "zcalc") p_tpad->ratio = p_tpad->ratioDrift;
 					if(driftMethod ==  "zfile") p_tpad->ratio = p_tpad->ratioFile;
@@ -269,21 +256,14 @@ void Reconstruction::dEdx::Reconstruction(){
 
 					p_tevent->						NCrossedPads++;
 					p_tcluster->v_pads.				push_back(p_tpad);
-					ph1f_ratio->           			Fill(p_tpad->ratio);
-					ph1f_padlength->        		Fill(p_tpad->length*1000);
-					ph1f_angle->           			Fill(p_tpad->phi);
-					ph2f_lutvspadlength->   		Fill(p_tpad->length*1000, p_tpad->ratio);
-					ph2f_AmaxvsLength->      		Fill(p_tpad->length*1000, p_tpad->ADC);
 				} // Pads
 
 				// WF method
 				p_tcluster->ratioCorr =             fAref / pcorrFunctionWF->Eval(p_tcluster->length*1000);
-				ph1f_wfcorr->                       Fill(p_tcluster->ratioCorr);
 				if(tag.find("diag") != std::string::npos) v_dEdxWF.push_back(p_tcluster->ph1f_WF_cluster->GetMaximum()*p_tcluster->ratioCorr/XPADLENGTH*10);
 				else v_dEdxWF.						push_back(p_tcluster->ph1f_WF_cluster->GetMaximum()/(p_tcluster->length*100));
 				p_tevent->							NClusters++;
 				p_tmodule->v_clusters.				push_back(p_tcluster);
-				ph1f_clusterlength->        		Fill(p_tcluster->length*1000);
 			} // Clusters
 
 			p_tevent->v_modules.					push_back(p_tmodule);
@@ -299,8 +279,6 @@ void Reconstruction::dEdx::Reconstruction(){
 			ph1f_XP->                       		Fill(p_tevent->dEdxXP);
 		}
 
-		ph1f_nclusters->                Fill(p_tevent->NClusters);
-		ph1f_ncross->                   Fill(p_tevent->NCrossedPads);
 		p_teventRef =  				p_tevent;
 		pTree_dEdx->                Fill();
 		v_erams.                    clear();
@@ -326,22 +304,10 @@ void Reconstruction::dEdx::Reconstruction(){
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Methods
-	pFile_dEdx->                  cd();
 	ptf1_WF->                     Write();
 	ptf1_XP->                     Write();
 	ph1f_WF->                     Write();
 	ph1f_XP->                     Write();
-	ph1f_ratio->                  Write();
-	ph1f_ncross->                 Write();
-	ph1f_nclusters->              Write();
-	ph1f_angle->                  Write();
-	ph1f_padlength->              Write();
-	ph1f_clusterlength->          Write();
-	ph1f_gaincorr->               Write();
-	ph2f_ratiozcalczfile->        Write();
-	ph2f_lutvspadlength->         Write();
-	ph1f_wfcorr->                 Write();
-	ph2f_AmaxvsLength->           Write();
 	pFile_dEdx->                  Close();
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////
