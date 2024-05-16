@@ -2,6 +2,35 @@
 #define DRAWOUTS_H
 
 #include "Misc.h"
+#include "dEdx.h"
+
+namespace Reconstruction{
+
+    class DrawOuts{
+    public:
+
+        DrawOuts(const std::string &inputFile);
+        virtual ~DrawOuts();
+
+        void Checks();
+        void EnergyLoss();
+
+    private:
+        std::string finputFile;
+        std::string foutputDir;
+        std::string foutputFile;
+        TCanvas *fpCanvas = new TCanvas("pCanvas", "pCanvas", 1800, 1350);
+
+        TFile *fpFile;
+        TTree *fpTree;
+        TBranch *fpBranch;
+        TEvent *fpEvent;
+        int fnentries;
+
+
+        std::string fparticleType;
+    };
+}
 
 // Draw Control plots
 void DrawOut_Control    (const std::string& inputDir, const std::string& Tag, const std::string& Comment, const std::string SelectionSet, const int& nMod);

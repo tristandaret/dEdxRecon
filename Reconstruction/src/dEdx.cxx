@@ -75,7 +75,7 @@ void Reconstruction::dEdx::Reconstruction(){
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Output
-	TFile *pFile_dEdx =    						new TFile((OUTDirName + "2_" + tag + "_dEdx" + comment + ".root").c_str(), "RECREATE");
+	TFile *pFile_dEdx =    						new TFile(outFile_dEdx.c_str(), "RECREATE");
 	TTree *pTree_dEdx =    						new TTree("dEdx_tree", "dEdx TTree");
 	Reconstruction::TEvent *p_teventRef =  		nullptr;
 	pTree_dEdx->								Branch("eventBranch", "Reconstruction::TEvent", &p_teventRef);

@@ -10,6 +10,7 @@ namespace Reconstruction{
 
     // Output file variables
     extern std::string outDir;
+    extern std::string outFile_dEdx;
     extern std::string tag;
     extern std::string comment;
     extern std::string selectionSet;

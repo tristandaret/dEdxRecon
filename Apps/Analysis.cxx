@@ -1,7 +1,7 @@
 #include <iostream>
 #include <iomanip>
 
-#include "Reconstruction/inc/Monitoring.h"
+#include "Monitoring.h"
 
 int main(int argc, char *argv[])
 {

@@ -31,7 +31,12 @@ root_generate_dictionary(Event_dict     Reconstruction/inc/dEdx.h LINKDEF Recons
 root_generate_dictionary(ERAMinfo_dict  Reconstruction/inc/LUTs.h LINKDEF Reconstruction/inc/Recon_LinkDef.h MODULE dEdxReconLib)
 
 # Add executable target
-add_executable(Analysis Analysis.cxx) 
+add_executable(Analysis Apps/Analysis.cxx) 
 
 # Link library to executable
 target_link_libraries(Analysis dEdxReconLib ${ROOT_LIBRARIES})
+
+# Add more debug infomartions, including line number in case of segfault
+set(CMAKE_BUILD_TYPE "Debug")
+target_compile_options(Analysis PRIVATE -fno-omit-frame-pointer)
+target_link_options(Analysis PRIVATE -fno-omit-frame-pointer)

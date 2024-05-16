@@ -4,6 +4,7 @@ namespace Reconstruction{
 
     // Output file variables
     std::string outDir = "../OUT_Reconstruction/";
+    std::string outFile_dEdx;
     std::string tag;
     std::string comment;
     std::string selectionSet;
