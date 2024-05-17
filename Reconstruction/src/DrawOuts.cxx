@@ -14,14 +14,14 @@
 
 Reconstruction::DrawOuts::DrawOuts(const std::string &inputFile){
 	// Get Tree
-	fpFile = 						TFile::Open(inputFile.c_str());
-	fpTree = 						(TTree*)fpFile->Get("dEdx_tree");
+	fpFile = 						  TFile::Open(inputFile.c_str());
+	fpTree = 						  (TTree*)fpFile->Get("dEdx_tree");
 	fpEvent = 						new TEvent();
-	fpTree->						SetBranchAddress("eventBranch", &fpEvent);
+	fpTree->						  SetBranchAddress("eventBranch", &fpEvent);
 	fnentries = 					fpTree->GetEntries();
 
 	// Set Output
-	foutputDir = 					outDir;
+	foutputDir = 					outDir + tag + "/";
 }
 
 
@@ -36,36 +36,36 @@ Reconstruction::DrawOuts::~DrawOuts(){
 
 void Reconstruction::DrawOuts::EnergyLoss(){
 	// Set output
-	foutputFile = 					foutputDir + "EnergyLoss_" + tag + comment + ".pdf";
+	foutputFile = 					foutputDir + "dEdx_" + tag + comment + ".pdf";
 	fparticleType = 				prtcle;
 
 
 	// Prepare histograms
-	TH1F *ph1f_XP = 				new TH1F("ph1f_XP", "dEdx with XP", 100, 0, 1500);
-	TH1F *ph1f_WF = 				new TH1F("ph1f_WF", "dEdx with WF", 100, 0, 1500);
-	TH2F *ph2f_XPWF = 				new TH2F("ph2f_XPWF", "dEdx with XP vs with WF", 100, 0, 1500, 100, 0, 1500);
+	TH1F *ph1f_XP = 				new TH1F("ph1f_XP", "Energy loss with XP;dE/dx;Counts", 100, 0, 1500);
+	TH1F *ph1f_WF = 				new TH1F("ph1f_WF", "Energy loss with WF;dE/dx;Counts", 100, 0, 1500);
+	TH2F *ph2f_XPWF = 		  new TH2F("ph2f_XPWF", "Energy loss with XP vs with WF;dE/dx (WF);dE/dx (XP)", 100, 0, 1500, 100, 0, 1500);
 
 	// Get entries and fill histograms
 	for(int i=0;i<fnentries;i++){
-		fpTree->					GetEntry(i);
-		ph1f_WF->					Fill(fpEvent->dEdxWF);
-		ph1f_XP->					Fill(fpEvent->dEdxXP);
+		fpTree->					  GetEntry(i);
+		ph1f_WF->					  Fill(fpEvent->dEdxWF);
+		ph1f_XP->					  Fill(fpEvent->dEdxXP);
 		ph2f_XPWF->					Fill(fpEvent->dEdxWF, fpEvent->dEdxXP);
 	}
 
 	// Fitting
-	TF1 *ptf1_WF = 					Fit1Gauss(ph1f_WF, 2);
-	TF1 *ptf1_XP = 					Fit1Gauss(ph1f_XP, 2);
+	TF1 *ptf1_WF = 				Fit1Gauss(ph1f_WF, 2);
+	TF1 *ptf1_XP = 				Fit1Gauss(ph1f_XP, 2);
 
 	// Display settings
-	ph1f_WF->						SetLineColor(kCyan+2);
-	ph1f_WF->						SetLineWidth(2);
-	ptf1_WF->						SetLineColor(kCyan-3);
-	ptf1_WF->						SetLineWidth(2);
-	ph1f_XP->						SetLineColor(kMagenta+2);
-	ph1f_XP->						SetLineWidth(2);
-	ptf1_XP->						SetLineColor(kMagenta+1);
-	ptf1_XP->						SetLineWidth(2);
+	ph1f_WF->						  SetLineColor(kCyan+2);
+	ph1f_WF->						  SetLineWidth(2);
+	ptf1_WF->						  SetLineColor(kCyan-3);
+	ptf1_WF->						  SetLineWidth(2);
+	ph1f_XP->						  SetLineColor(kMagenta+2);
+	ph1f_XP->						  SetLineWidth(2);
+	ptf1_XP->						  SetLineColor(kMagenta+1);
+	ptf1_XP->						  SetLineWidth(2);
 
 	// Draw
 	TPaveStats* pStat_WF ;
@@ -83,25 +83,31 @@ void Reconstruction::DrawOuts::EnergyLoss(){
 	ph1f_WF->						Draw("HIST") ;
 	ptf1_WF->						Draw("same") ;
 	gPad->							Update() ;
-	SetStatBoxPosition(ph1f_WF, 0.76, 0.99, 0.52, 0.72) ;
-	pStat_WF = 						(TPaveStats*)ph1f_WF->FindObject("stats") ;
-	pStat_WF->						SetTextColor(kCyan+2) ;
+	SetStatBoxPosition(ph1f_WF, 0.68, 0.99, 0.48, 0.71) ;
+	pStat_WF =          (TPaveStats*)ph1f_WF->FindObject("stats") ;
+	pStat_WF->          SetTextColor(kCyan+2) ;
 
 	ph1f_XP->						Draw("HIST sames") ;
 	ptf1_XP->						Draw("same") ;
 	gPad->							Update() ;
-	SetStatBoxPosition(ph1f_XP, 0.76, 0.99, 0.72, 0.92) ;  
-	pStat_XP = 						(TPaveStats*)ph1f_XP->FindObject("stats");
-	pStat_XP->                       SetTextColor(kMagenta+2) ;
+	SetStatBoxPosition(ph1f_XP, 0.68, 0.99, 0.71, 0.94) ;  
+	pStat_XP = 					(TPaveStats*)ph1f_XP->FindObject("stats");
+	pStat_XP->          SetTextColor(kMagenta+2) ;
 
 	PrintResolution(ptf1_XP, fpCanvas, 0.8-inv, 0.93, kMagenta+2, "XP") ;
 	PrintResolution(ptf1_WF, fpCanvas, 0.8-inv, 0.83, kCyan+2, "WF") ;
-	fpCanvas->                  	SaveAs((foutputFile + "(").c_str()) ;
+	fpCanvas->          SaveAs((foutputFile + "(").c_str()) ;
 
-	fpCanvas->						cd();
+	fpCanvas->					cd();
 	gStyle->						SetOptStat(111111);
-	ph2f_XPWF->  					Draw("colz");
-	fpCanvas->                  	SaveAs((foutputFile + ")").c_str()) ;
+  gStyle->            SetStatX(0.32) ;
+  gStyle->            SetStatY(0.88) ;
+  gStyle->            SetStatX(0.32);
+  gStyle->            SetStatY(0.88);
+  gPad->              SetRightMargin(0.12);
+  ph2f_XPWF->  				GetYaxis()->SetTitleOffset(1.3);
+	ph2f_XPWF->  				Draw("colz");
+	fpCanvas->          SaveAs((foutputFile + ")").c_str()) ;
 
 	// Delete
 	delete ph2f_XPWF;

@@ -39,7 +39,7 @@ void Reconstruction::dEdx::Reconstruction(){
 	MakeMyDir(OUTDIR_WF_Display);
 
 	// Redirect Output
-	std::string     logs =        OUTDirName + "2_" + tag + "_dEdx_XP.log";
+	std::string     logs =        OUTDirName + "dEdx_" + tag + ".log";
 	std::cout <<    "logs: " << logs       << std::endl;
 	std::cout <<    std::setprecision(2)  << std::fixed;
 	std::cout <<    std::endl;
@@ -186,7 +186,7 @@ void Reconstruction::dEdx::Reconstruction(){
 				ClusterFitter_Diagonal aClusterFitter_Diagonal("Minuit");
 				ClusterFit_Diagonal_Event(-(M_PI_2-(PHIMAX*M_PI/180)), pEvent, fmodID, ptf1PRF, fcounterFit, fcounterFail, aClusterFitter_Diagonal);
 			}
-			TrackFitter              aTrackFitter("Minuit", fnParamsTrack);
+			TrackFitter aTrackFitter("Minuit", fnParamsTrack);
 			TrackRecon_Event(aTrackFitter, pEvent, fmodID, fnParamsTrack);
 
 			// Track details
@@ -233,6 +233,7 @@ void Reconstruction::dEdx::Reconstruction(){
 					p_tpad->dd *= 					1000; // in mm
 					p_tpad->length /= 				costheta;
 					p_tcluster->length += 			p_tpad->length;
+
 					if(p_tpad->length*costheta <= fminLength){ // cutoff defined in the ERAM's plane -> rm theta dependence
 						p_tcluster->				v_pads.push_back(p_tpad);	
 						continue;
@@ -240,7 +241,7 @@ void Reconstruction::dEdx::Reconstruction(){
 
 					// Compute Z
 					p_tpad->TMax =              	pPad->Get_TMax();
-					if      (PT ==  412 and TB ==  50){ p_tpad->T0 =  45; p_tpad->driftDistance =  3.90*(p_tpad->TMax-p_tpad->T0); } // 45 =  37(time shift) +  8(PT) from David
+					if      (PT ==  412 and TB ==  50){ p_tpad->T0 =  45; p_tpad->driftDistance =  3.90*(p_tpad->TMax-p_tpad->T0); } // 45 =  37(time shift) +  8(PT) from David Attié
 					else if (PT ==  412 and TB ==  40){ p_tpad->T0 =  56; p_tpad->driftDistance =  3.12*(p_tpad->TMax-p_tpad->T0); } // 56 =  46(time shift) + 10(PT)
 					else if (PT ==  200 and TB ==  50){ p_tpad->T0 =  39; p_tpad->driftDistance =  3.90*(p_tpad->TMax-p_tpad->T0); } // 39 =  35(time shift) +  4(PT) own computation
 					else if (PT ==  200 and TB ==  40){ p_tpad->T0 =  48; p_tpad->driftDistance =  3.12*(p_tpad->TMax-p_tpad->T0); } // 48 =  44(time shift) +  5(PT)
@@ -255,8 +256,9 @@ void Reconstruction::dEdx::Reconstruction(){
 					v_dx.                   		push_back(p_tpad->length);
 					v_dEdxXP.               		push_back(p_tpad->ADC*p_tpad->ratio/(p_tpad->length*100)); // m to cm
 
-					p_tevent->						NCrossedPads++;
 					p_tcluster->v_pads.				push_back(p_tpad);
+					p_tevent->lengthXP +=           p_tpad->length;
+					p_tevent->						NCrossedPads++;
 				} // Pads
 
 				for(int i=0;i<510;i++) p_tcluster->v_waveform[i] *= fGainCorrectionLead;
@@ -265,8 +267,9 @@ void Reconstruction::dEdx::Reconstruction(){
 				p_tcluster->ratioCorr =             fAref / pcorrFunctionWF->Eval(p_tcluster->length*1000);
 				if(tag.find("diag") != std::string::npos) v_dEdxWF.push_back(fAcluster*p_tcluster->ratioCorr/XPADLENGTH*10);
 				else v_dEdxWF.						push_back(fAcluster/(p_tcluster->length*100));
-				p_tevent->							NClusters++;
 				p_tmodule->v_clusters.				push_back(p_tcluster);
+				p_tevent->lengthWF +=               p_tcluster->length;							
+				p_tevent->							NClusters++;
 			} // Clusters
 
 			p_tevent->v_modules.					push_back(p_tmodule);

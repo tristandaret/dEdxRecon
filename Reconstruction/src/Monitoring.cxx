@@ -141,8 +141,7 @@ void Reconstruction::Monitoring()
     intUploader = 1;
     moduleCase =  0; 
     Dt = 310; TB = 50;
-    // int PT_arr[] = {200, 412};
-    int PT_arr[] = {412};
+    int PT_arr[] = {412}; // 200, 412
     for (int iPT : PT_arr){
       PT = iPT;
       outDir = Form("../OUT_Reconstruction/DESY21_zscan/DESY21_zscan_PT%i/", iPT); 
@@ -150,8 +149,6 @@ void Reconstruction::Monitoring()
       if (control or dedx) p_lut = new LUT(Form("~/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi150_nd150_nRC41_nZ21.root", Dt, iPT));
       // int         z_val[] = {50, 150, 250, 350, 450, 550, 650, 750, 850, 950};
       // std::string z_arr[] = {"m40", "060", "160", "260", "360", "460", "560", "660", "760", "860"};
-      // int         z_val[] = {50, 650, 950};
-      // std::string z_arr[] = {"m40", "560", "860"};
       int         z_val[] = {550};
       std::string z_arr[] = {"460"};
       for (int iz = 0; iz < (int)std::size(z_arr); iz++){
@@ -160,7 +157,7 @@ void Reconstruction::Monitoring()
         dataFile = Form("../Data_DESY21_dev_v9/zscan_PT%i/z_360_275_%i_02T_26_%s_iter9.root", iPT, iPT, z); tag = Form("DESY21_z%s_PT%i", z, iPT); prtcle = Form("electron_z%s", z);
         if(control or dedx) p_uploader = GiveMe_Uploader (intUploader, dataFile);
         // if (control)      p_dEdx->Control();
-        outFile_dEdx = (outDir + tag + "/" + "dEdx_" + tag + "_dEdx" + comment + ".root").c_str();
+        outFile_dEdx = (outDir + tag + "/" + "dEdx_" + tag + comment + ".root").c_str();
         if (dedx)         p_dEdx->      Reconstruction();
         p_DrawOuts = new DrawOuts(outFile_dEdx);
         // if (DO_control)   p_DrawOuts->Control();
