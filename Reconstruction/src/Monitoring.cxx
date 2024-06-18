@@ -24,7 +24,7 @@ namespace Reconstruction{
 
 void Reconstruction::Monitoring()
 {
-  comment = "";
+  comment = "_noG_noSel_1k";
   gErrorIgnoreLevel = kInfo;
 
   MakeMyDir(outDir);
@@ -48,7 +48,7 @@ void Reconstruction::Monitoring()
 
   // Computations
   int control =         0;
-  int dedx =            0;
+  int dedx =            1;
 
   // DrawOuts
   int DO_control =      0;

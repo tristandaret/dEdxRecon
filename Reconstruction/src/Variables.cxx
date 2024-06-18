@@ -22,6 +22,6 @@ namespace Reconstruction{
     int         TB;         // timebin length (ns)
     bool        WFupdated;
     int         WFversion = 0;
-    bool        fcorrectGain = true;
+    bool        fcorrectGain = false;
 
 }

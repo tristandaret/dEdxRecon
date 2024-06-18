@@ -71,7 +71,7 @@ void Reconstruction::dEdx::Reconstruction(){
 	Reconstruction::ERAMMaps *pERAMMaps =  new Reconstruction::ERAMMaps();
 	int fflipX =  0;
 	int fflipY =  0;
-	if(tag.find("DESY") != std::string::npos) fflipX = 35;
+	// if(tag.find("DESY") != std::string::npos) fflipX = 1;
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Output
@@ -133,12 +133,12 @@ void Reconstruction::dEdx::Reconstruction(){
 		p_tevent->numberOfModules =           		pEvent->Get_NberOfModule();
 
 		float fmodID;
-		// Check if there is a track in 4 ERAMs that are aligned
-		for (int iMod =  0; iMod < p_tevent->numberOfModules; iMod++){
-			fmodID =                  				pEvent->Get_Module_InArray(iMod)->Get_ModuleNber();
-			if (pEvent->Validity_ForThisModule(fmodID)!=0) v_erams.push_back(fERAMs_iD[fmodID]);
-		} 
 
+		// // Check if there is a track in 4 ERAMs that are aligned
+		// for (int iMod =  0; iMod < p_tevent->numberOfModules; iMod++){
+		// 	fmodID =                  				pEvent->Get_Module_InArray(iMod)->Get_ModuleNber();
+		// 	if (pEvent->Validity_ForThisModule(fmodID)!=0) v_erams.push_back(fERAMs_iD[fmodID]);
+		// } 
 		// int nber =  2;
 		// if(dataFile.find("All_ERAMS") != std::string::npos){
 		//   // 1 ERAM
@@ -215,11 +215,14 @@ void Reconstruction::dEdx::Reconstruction(){
 					Reconstruction::TPad * p_tpad = new Reconstruction::TPad();
 					p_tpad->v_waveform = 			pPad->Get_vADC();
 					for(int i=0;i<510;i++) p_tcluster->v_waveform[i] += p_tpad->v_waveform[i]; // Gain correction wrt to leading pad's gain after pad loop
-					p_tpad->ix =                    fflipX-pPad->Get_iX();
-					p_tpad->iy =                    fflipY-pPad->Get_iY();
-					p_tpad->RC =                    pERAMMaps->RC(fERAMs_pos[iMod], fflipX-pPad->Get_iX(), fflipY-pPad->Get_iY());
+					p_tpad->ix =                    pPad->Get_iX();
+					if(fflipX ==  1) p_tpad->ix =   35-pPad->Get_iX();
+					p_tpad->iy =                    pPad->Get_iY();
+					if(fflipY ==  1) p_tpad->iy =   32-pPad->Get_iY();
+					p_tpad->RC =                    pERAMMaps->RC(fERAMs_pos[iMod], p_tpad->ix, p_tpad->iy);
+					// p_tpad->RC =                    120;
 					if(fcorrectGain){
-						p_tpad->gain =              pERAMMaps->Gain(fERAMs_pos[iMod], fflipX-pPad->Get_iX(), fflipY-pPad->Get_iY());
+						p_tpad->gain =              pERAMMaps->Gain(fERAMs_pos[iMod], p_tpad->ix, p_tpad->iy);
 						p_tpad->GainCorrection =    AVG_GAIN/p_tpad->gain;
 						p_tpad->ADC =               p_tpad->GainCorrection*pPad->Get_AMax();
 						for(int i=0;i<510;i++) p_tpad->v_waveform[i] = round(p_tpad->v_waveform[i] * p_tpad->GainCorrection);
@@ -261,7 +264,7 @@ void Reconstruction::dEdx::Reconstruction(){
 					p_tevent->						NCrossedPads++;
 				} // Pads
 
-				for(int i=0;i<510;i++) p_tcluster->v_waveform[i] *= fGainCorrectionLead;
+				if(fcorrectGain) for(int i=0;i<510;i++) p_tcluster->v_waveform[i] *= fGainCorrectionLead;
 				// WF method
 				int fAcluster =               		*std::max_element(p_tcluster->v_waveform.begin(), p_tcluster->v_waveform.end());
 				p_tcluster->ratioCorr =             fAref / pcorrFunctionWF->Eval(p_tcluster->length*1000);
