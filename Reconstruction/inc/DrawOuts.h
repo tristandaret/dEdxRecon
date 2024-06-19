@@ -20,11 +20,11 @@ namespace Reconstruction{
         std::string foutputDir;
         std::string foutputFile;
         TCanvas *fpCanvas = new TCanvas("pCanvas", "pCanvas", 1800, 1350);
-
+        
         TFile *fpFile;
         TTree *fpTree;
         TBranch *fpBranch;
-        TEvent *fpEvent;
+        RecoEvent *fpEvent;
         int fnentries;
 
 

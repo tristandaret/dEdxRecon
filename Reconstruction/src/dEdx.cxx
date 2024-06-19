@@ -19,10 +19,10 @@
 #include "GiveMe_Uploader.h"
 #include "Selector.h"
 
-ClassImp(Reconstruction::TPad)
-ClassImp(Reconstruction::TCluster);
-ClassImp(Reconstruction::TModule)
-ClassImp(Reconstruction::TEvent)
+ClassImp(Reconstruction::RecoPad)
+ClassImp(Reconstruction::RecoCluster);
+ClassImp(Reconstruction::RecoModule)
+ClassImp(Reconstruction::RecoEvent)
 
 Reconstruction::dEdx::dEdx(){
 }
@@ -77,8 +77,8 @@ void Reconstruction::dEdx::Reconstruction(){
 	// Output
 	TFile *pFile_dEdx =    						new TFile(outFile_dEdx.c_str(), "RECREATE");
 	TTree *pTree_dEdx =    						new TTree("dEdx_tree", "dEdx TTree");
-	Reconstruction::TEvent *p_teventRef =  		nullptr;
-	pTree_dEdx->								Branch("eventBranch", "Reconstruction::TEvent", &p_teventRef);
+	Reconstruction::RecoEvent *p_tevent =  		new Reconstruction::RecoEvent();
+	pTree_dEdx->								Branch("event_branch", "Reconstruction::RecoEvent", &p_tevent);
 
 	// Selection stage
 	Selector aSelector(selectionSet);
@@ -127,9 +127,7 @@ void Reconstruction::dEdx::Reconstruction(){
 		aSelector.              					ApplySelection(pEvent);
 		if (pEvent->IsValid() != 1) 				continue;
 
-		Reconstruction::TEvent *p_tevent =  		new Reconstruction::TEvent();
 		p_tevent->eventNbr = 			 			iEvent;
-
 		p_tevent->numberOfModules =           		pEvent->Get_NberOfModule();
 
 		float fmodID;
@@ -173,7 +171,7 @@ void Reconstruction::dEdx::Reconstruction(){
 			int NC =                   				pModule->Get_NberOfCluster();
 			if(NC ==  0) 							continue;
 
-			Reconstruction::TModule *p_tmodule =  	new Reconstruction::TModule();
+			Reconstruction::RecoModule *p_tmodule =  	new Reconstruction::RecoModule();
 			p_tmodule->position =         			iMod;
 			p_tmodule->ID =               			fmodID;
 
@@ -204,7 +202,7 @@ void Reconstruction::dEdx::Reconstruction(){
 			// Loop On Clusters
 			for (int iC =  0; iC < NC; iC++){
 				Cluster* pCluster =            		pModule->Get_Cluster(iC);
-				Reconstruction::TCluster *p_tcluster = new Reconstruction::TCluster();
+				Reconstruction::RecoCluster *p_tcluster = new Reconstruction::RecoCluster();
 				p_tcluster->v_waveform.assign(510, 0);
 				float fGainCorrectionLead = 0;
 
@@ -212,7 +210,7 @@ void Reconstruction::dEdx::Reconstruction(){
 				int NPads =                   		 pCluster->Get_NberOfPads();
 				for(int iP =  0; iP < NPads; iP ++){
 					const Pad* pPad =            pCluster->Get_Pad(iP);
-					Reconstruction::TPad * p_tpad = new Reconstruction::TPad();
+					Reconstruction::RecoPad * p_tpad = new Reconstruction::RecoPad();
 					p_tpad->v_waveform = 			pPad->Get_vADC();
 					for(int i=0;i<510;i++) p_tcluster->v_waveform[i] += p_tpad->v_waveform[i]; // Gain correction wrt to leading pad's gain after pad loop
 					p_tpad->ix =                    pPad->Get_iX();
@@ -220,7 +218,6 @@ void Reconstruction::dEdx::Reconstruction(){
 					p_tpad->iy =                    pPad->Get_iY();
 					if(fflipY ==  1) p_tpad->iy =   32-pPad->Get_iY();
 					p_tpad->RC =                    pERAMMaps->RC(fERAMs_pos[iMod], p_tpad->ix, p_tpad->iy);
-					// p_tpad->RC =                    120;
 					if(fcorrectGain){
 						p_tpad->gain =              pERAMMaps->Gain(fERAMs_pos[iMod], p_tpad->ix, p_tpad->iy);
 						p_tpad->GainCorrection =    AVG_GAIN/p_tpad->gain;
@@ -278,25 +275,23 @@ void Reconstruction::dEdx::Reconstruction(){
 			p_tevent->v_modules.					push_back(p_tmodule);
 		} // Modules
 
-		if(p_tevent->NCrossedPads > 0){
-			// WF
-			p_tevent->dEdxWF =                  	ComputedEdxWF(v_dEdxWF, p_tevent->NClusters);
-			ph1f_WF->                       		Fill(p_tevent->dEdxWF);
+		// WF
+		p_tevent->dEdxWF =                  		ComputedEdxWF(v_dEdxWF, p_tevent->NClusters);
+		ph1f_WF->                       			Fill(p_tevent->dEdxWF);
 
-			// XP
-			p_tevent->dEdxXP =                  	ComputedEdxXP(v_dEdxXP, v_dE, v_dx, p_tevent->NCrossedPads);
-			ph1f_XP->                       		Fill(p_tevent->dEdxXP);
-		}
+		// XP
+		p_tevent->dEdxXP =                  		ComputedEdxXP(v_dEdxXP, v_dE, v_dx, p_tevent->NCrossedPads);
+		ph1f_XP->                       			Fill(p_tevent->dEdxXP);
 
-		p_teventRef =  								p_tevent;
 		pTree_dEdx->                				Fill();
+
 		v_erams.                    				clear();
 		v_dE.                       				clear();
 		v_dx.                       				clear();
 		v_dEdxXP.                   				clear();
 		v_dEdxWF.                   				clear();
+		p_tevent->									Clear();
 		delete 										pEvent;
-		delete 										p_tevent;
 	} // Events
 
 	aSelector.PrintStat();
@@ -317,6 +312,7 @@ void Reconstruction::dEdx::Reconstruction(){
 	ptf1_XP->                     					Write();
 	ph1f_WF->                     					Write();
 	ph1f_XP->                     					Write();
+	pTree_dEdx->    								Write();
 	pFile_dEdx->                  					Close();
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -359,32 +355,32 @@ float Reconstruction::dEdx::ComputedEdxXP(const std::vector<float>& v_dEdx, cons
 }
 
 
-Reconstruction::TPad::~TPad(){
+Reconstruction::RecoPad::~RecoPad(){
 	v_waveform.clear();
 }
 
 
-Reconstruction::TCluster::~TCluster(){
+Reconstruction::RecoCluster::~RecoCluster(){
 	v_waveform.clear();
 	for (auto p_tpad : v_pads) delete p_tpad;
 	v_pads.clear();
 }
 
 
-Reconstruction::TModule::~TModule(){
+Reconstruction::RecoModule::~RecoModule(){
 	delete Track;
 	for (auto p_tcluster : v_clusters) delete p_tcluster;
 	v_clusters.clear();
 }
 
-Reconstruction::TEvent::TEvent(){
+Reconstruction::RecoEvent::RecoEvent(){
 }
-Reconstruction::TEvent::~TEvent(){
+Reconstruction::RecoEvent::~RecoEvent(){
 	for (auto p_tmodule : v_modules) delete p_tmodule;
 	v_modules.clear();
 }
 
-void Reconstruction::TEvent::Clear(){
+void Reconstruction::RecoEvent::Clear(){
 	for (auto p_tmodule : v_modules) delete p_tmodule;
 	v_modules.clear();
 	eventNbr =  0;

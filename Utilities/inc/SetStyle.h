@@ -1,7 +1,122 @@
+#ifndef SETSTYLE_H
+#define SETSTYLE_H
+
 #include "TStyle.h"
 #include "TH1.h"
 #include "TPad.h"
 // --- T2K style ---
+
+TStyle* SetMyStyle() {
+  TStyle *myStyle= new TStyle("tristanstyle", "Tristan's style");
+
+  Int_t FontStyle = 42;
+  Float_t FontSizeLabel = 0.045;
+  Float_t FontSizeTitle = 0.055;
+
+  // use plain black on white colors
+  myStyle->SetFrameBorderMode(0);
+  myStyle->SetCanvasBorderMode(0);
+  myStyle->SetPadBorderMode(0);
+  myStyle->SetCanvasBorderSize(0);
+  myStyle->SetFrameBorderSize(0);
+  myStyle->SetDrawBorder(0);
+  myStyle->SetTitleBorderSize(0);
+
+  myStyle->SetPadColor(0);
+  myStyle->SetCanvasColor(0);
+  myStyle->SetStatColor(0);
+  myStyle->SetFillColor(0);
+
+  myStyle->SetEndErrorSize(4);
+  myStyle->SetStripDecimals(kFALSE);
+
+  myStyle->SetLegendBorderSize(0);
+  // myStyle->SetLegendFont(FontStyle);
+
+  // set the paper & margin sizes
+  // myStyle->SetPaperSize(20, 26);
+  myStyle->SetPadTopMargin(0.08);
+  myStyle->SetPadBottomMargin(0.15);
+  myStyle->SetPadRightMargin(0.05);
+  myStyle->SetPadLeftMargin(0.1);
+  
+  // Fonts, sizes, offsets
+  myStyle->SetTextFont(FontStyle);
+  myStyle->SetTextSize(0.04);
+
+  myStyle->SetLabelFont(FontStyle, "x");
+  myStyle->SetLabelFont(FontStyle, "y");
+  myStyle->SetLabelFont(FontStyle, "z");
+  myStyle->SetLabelFont(FontStyle, "t");
+  myStyle->SetLabelSize(FontSizeLabel, "x");
+  myStyle->SetLabelSize(FontSizeLabel, "y");
+  myStyle->SetLabelSize(FontSizeLabel, "z");
+  myStyle->SetLabelOffset(0.01, "x");
+  myStyle->SetLabelOffset(0.01, "y");
+  myStyle->SetLabelOffset(0.01, "z");
+
+  myStyle->SetTitleFont(FontStyle, "x");
+  myStyle->SetTitleFont(FontStyle, "y");
+  myStyle->SetTitleFont(FontStyle, "z");
+  myStyle->SetTitleFont(FontStyle, "t");
+  myStyle->SetTitleSize(FontSizeTitle, "y");
+  myStyle->SetTitleSize(FontSizeTitle, "x");
+  myStyle->SetTitleSize(FontSizeTitle, "z");
+  myStyle->SetTitleOffset(1, "x");
+  myStyle->SetTitleOffset(1, "y");
+  myStyle->SetTitleOffset(1, "z");
+
+  myStyle->SetTitleStyle(0);
+  myStyle->SetTitleFontSize(0.06);
+  myStyle->SetTitleFont(FontStyle, "pad");
+  myStyle->SetTitleBorderSize(0);
+  myStyle->SetTitleX(0.1f);
+  myStyle->SetTitleW(0.8f);
+
+  // myStyle->SetAxisMaxDigits(3);
+
+  // use bold lines and markers
+  myStyle->SetMarkerStyle(20);
+  myStyle->SetHistLineWidth( Width_t(2.5) );
+  myStyle->SetLineStyleString(2, "[12 12]"); // postscript dashes
+  
+  // get rid of X error bars and y error bar caps
+  myStyle->SetErrorX(0.001);
+  
+  // Standard histogram decorations
+  myStyle->SetOptTitle(1);
+  // myStyle->SetOptStat(0);
+  // myStyle->SetOptFit(0);
+  
+  // put tick marks on top and RHS of plots
+  myStyle->SetPadTickX(1);
+  myStyle->SetPadTickY(1);
+  
+  // -- color --
+  myStyle->SetFuncColor(600-4); // blue
+  // myStyle->SetFillColor(1); // make color fillings (not white)
+  myStyle->SetPalette(kViridis);
+  myStyle->SetNumberContours(250);
+
+  // -- axis --
+  myStyle->SetStripDecimals(kFALSE); // removes decimals in labels
+  myStyle->SetHistMinimumZero(kTRUE); // forces 0 to apeear on y-axis
+
+ return(myStyle);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 TStyle* SetT2KStyle(Int_t WhichStyle = 1, TString styleName = "T2K") {
   TStyle *t2kStyle= new TStyle(styleName, "T2K approved plots style");
@@ -91,7 +206,7 @@ TStyle* SetT2KStyle(Int_t WhichStyle = 1, TString styleName = "T2K") {
   t2kStyle->SetTitleOffset(1.2, "z");
 
   t2kStyle->SetTitleStyle(0);
-  t2kStyle->SetTitleFontSize(0.06);//0.08
+  t2kStyle->SetTitleFontSize(0.06);
   t2kStyle->SetTitleFont(FontStyle, "pad");
   t2kStyle->SetTitleBorderSize(0);
   t2kStyle->SetTitleX(0.1f);
@@ -107,8 +222,8 @@ TStyle* SetT2KStyle(Int_t WhichStyle = 1, TString styleName = "T2K") {
   
   // do not display any of the standard histogram decorations
   t2kStyle->SetOptTitle(0);
-  t2kStyle->SetOptStat(0);
-  t2kStyle->SetOptFit(0);
+  // t2kStyle->SetOptStat(0);
+  // t2kStyle->SetOptFit(0);
   
   // put tick marks on top and RHS of plots
   t2kStyle->SetPadTickX(1);
@@ -136,13 +251,8 @@ TStyle* SetT2KStyle(Int_t WhichStyle = 1, TString styleName = "T2K") {
   TColor::CreateGradientColorTable(NRGBs, stops, red, green, blue, NCont);
   t2kStyle->SetNumberContours(NCont);
 
-  // - Rainbow -
-  //  t2kStyle->SetPalette(1);  // use the rainbow color set
-
   // -- axis --
   t2kStyle->SetStripDecimals(kFALSE); // don't do 1.0 -> 1
-  //  TGaxis::SetMaxDigits(3); // doesn't have an effect 
-  // no supressed zeroes!
   t2kStyle->SetHistMinimumZero(kTRUE);
 
 
@@ -163,4 +273,4 @@ int AddGridLinesToPad(TPad *thisPad) {
   return(0);
 }
 
-
+#endif

@@ -10,13 +10,13 @@
 #pragma link C++ namespace Reconstruction;
 
 #pragma link C++ namespace Reconstruction;
-#pragma link C++ class Reconstruction::TPad+;
-#pragma link C++ class std::vector<Reconstruction::TPad*>+;
-#pragma link C++ class Reconstruction::TCluster+;
-#pragma link C++ class std::vector<Reconstruction::TCluster*>+;
-#pragma link C++ class Reconstruction::TModule+;
-#pragma link C++ class std::vector<Reconstruction::TModule*>+;
-#pragma link C++ class Reconstruction::TEvent+;
+#pragma link C++ class Reconstruction::RecoPad+;
+#pragma link C++ class std::vector<Reconstruction::RecoPad*>+;
+#pragma link C++ class Reconstruction::RecoCluster+;
+#pragma link C++ class std::vector<Reconstruction::RecoCluster*>+;
+#pragma link C++ class Reconstruction::RecoModule+;
+#pragma link C++ class std::vector<Reconstruction::RecoModule*>+;
+#pragma link C++ class Reconstruction::RecoEvent+;
 
 // For ERAM maps reading 
 #pragma link C++ class EramInfo+;

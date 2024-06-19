@@ -17,9 +17,9 @@
 
 namespace Reconstruction{
 
-    class TPad : public TObject{
+    class RecoPad : public TObject{
     public:
-        virtual ~TPad();
+        virtual ~RecoPad();
 
         std::vector<int> v_waveform;
         int   ix             = 0;
@@ -39,43 +39,43 @@ namespace Reconstruction{
         float ratioFile      = 0;
         float ratio          = 0;
 
-        ClassDef(TPad, 1);
+        ClassDef(RecoPad, 1);
     };
 
-    class TCluster : public TObject{
+    class RecoCluster : public TObject{
     public:
-        virtual ~TCluster();
+        virtual ~RecoCluster();
 
-        std::vector<TPad*> v_pads;
+        std::vector<RecoPad*> v_pads;
         std::vector<int> v_waveform;
         float   length          = 0;
         int     NPads           = 0;
         float   ratioCorr       = 0; 
 
-        ClassDef(TCluster, 1);
+        ClassDef(RecoCluster, 1);
     };
 
-    class TModule : public TObject{
+    class RecoModule : public TObject{
     public:
-        virtual ~TModule();
+        virtual ~RecoModule();
         
-        std::vector<TCluster*> v_clusters;
+        std::vector<RecoCluster*> v_clusters;
         int ID                  = 0;
         int position            = 0;
         int NClusters           = 0;
         float phi               = 0;
         TF1* Track              = new TF1("pTrackFit", "[0]*x+[1]+[2]*x*x", 0, 2000);
 
-        ClassDef(TModule, 1);
+        ClassDef(RecoModule, 1);
     };
 
-    class TEvent : public TObject{
+    class RecoEvent : public TObject{
     public:
-        TEvent();
-        virtual ~TEvent();
+        RecoEvent();
+        virtual ~RecoEvent();
         void Clear();
 
-        std::vector<TModule*> v_modules;
+        std::vector<RecoModule*> v_modules;
         int eventNbr          = 0;
         float dEdxXP          = 0;
         float dEdxWF          = 0;
@@ -85,7 +85,7 @@ namespace Reconstruction{
         float lengthWF        = 0;
         int numberOfModules   = 0;
 
-        ClassDef(TEvent, 1);
+        ClassDef(RecoEvent, 1);
     };
 
     class dEdx{
@@ -140,7 +140,7 @@ namespace Reconstruction{
 
         // TFile* pFile;
         // TTree* pTree;
-        Reconstruction::TEvent *p_tevent;
+        Reconstruction::RecoEvent *p_tevent;
     };
 
    extern Reconstruction::LUT    *p_lut;

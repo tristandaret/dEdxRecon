@@ -1,5 +1,6 @@
 #include "Util.h"
 #include "Misc.h"
+// #include "SetT2KStyle.h"
 
 #include "Monitoring.h"
 #include "ReconTools.h"
@@ -24,7 +25,9 @@ namespace Reconstruction{
 
 void Reconstruction::Monitoring()
 {
-  comment = "_noG_noSel_1k";
+  // SetT2KStyle(1) ;
+
+  comment = "";
   gErrorIgnoreLevel = kInfo;
 
   MakeMyDir(outDir);
@@ -48,7 +51,7 @@ void Reconstruction::Monitoring()
 
   // Computations
   int control =         0;
-  int dedx =            1;
+  int dedx =            0;
 
   // DrawOuts
   int DO_control =      0;
