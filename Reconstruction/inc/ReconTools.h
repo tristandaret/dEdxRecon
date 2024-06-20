@@ -106,8 +106,8 @@ double GetSeparation(const float& mean1, const float& std1, const float& mean2, 
 double GetSeparationError(const float& mean1, const float& std1, const float& dmean1, const float& dstd1, const float& mean2, const float& std2, const float& dmean2, const float& dstd2);
 
 // Write resolution value for a 1-gaussian fit
-void PrintResolution(TF1* tf1, TCanvas* pCanvas);
-void PrintResolution(TF1* tf1, TCanvas* pCanvas, float NDCx, float NDCy, Color_t color, const std::string& title);
+void PrintResolution(TH1* th1, TCanvas* pCanvas);
+void PrintResolution(TH1* th1, TCanvas* pCanvas, float NDCx, float NDCy, Color_t color, const std::string& title);
 
 // From TH1 get TGraph
 TGraph* hist_to_graph(TH1 *h1);

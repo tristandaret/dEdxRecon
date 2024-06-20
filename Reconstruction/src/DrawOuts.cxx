@@ -3,7 +3,6 @@
 #include "CombinedFit.h"
 
 #include "Util.h"
-#include "SetStyle.h"
 #include <cmath>
 #include <numeric>
 
@@ -22,7 +21,7 @@ Reconstruction::DrawOuts::DrawOuts(const std::string &inputFile){
 	fnentries = 					fpTree->GetEntries();
 
   // Set Style
-  TStyle* ptstyle = SetMyStyle();
+  TStyle* ptstyle = SetT2KStyle();
   gROOT->SetStyle(ptstyle->GetName());
   gPad->UseCurrentStyle();
 
@@ -42,37 +41,39 @@ Reconstruction::DrawOuts::~DrawOuts(){
 
 void Reconstruction::DrawOuts::EnergyLoss(){
 	// Set output
-	foutputFile = 					foutputDir + "dEdx_" + tag + comment + ".pdf";
+	foutputFile = 					foutputDir + "dEdx_" + tag + comment + "_T2K.pdf";
 
 	// Prepare histograms
-	TH1F *ph1f_XP = 				new TH1F("ph1f_XP", "Energy loss with XP;dE/dx;Counts", 100, 0, 1500);
-	TH1F *ph1f_WF = 				new TH1F("ph1f_WF", "Energy loss with WF;dE/dx;Counts", 100, 0, 1500);
-	TH2F *ph2f_XPWF = 		  new TH2F("ph2f_XPWF", "Energy loss with XP vs with WF;dE/dx (WF);dE/dx (XP)", 100, 0, 1500, 100, 0, 1500);
+	TH1F *ph1f_XP = 				new TH1F("ph1f_XP", "Energy loss;dE/dx (ADC counts);Counts", 100, 0, 1300);
+	TH1F *ph1f_WF = 				new TH1F("ph1f_WF", "Energy loss;dE/dx (ADC counts);Counts", 100, 0, 1300);
+	TH2F *ph2f_XPWF = 		  		new TH2F("ph2f_XPWF", "Energy loss with XP vs with WF;dE/dx (WF);dE/dx (XP)", 100, 0, 1300, 100, 0, 1300);
 
 	// Get entries and fill histograms
 	for(int i=0;i<fnentries;i++){
-		fpTree->					  GetEntry(i);
-		ph1f_WF->					  Fill(fpEvent->dEdxWF);
-		ph1f_XP->					  Fill(fpEvent->dEdxXP);
+		fpTree->					GetEntry(i);
+		ph1f_WF->					Fill(fpEvent->dEdxWF);
+		ph1f_XP->					Fill(fpEvent->dEdxXP);
 		ph2f_XPWF->					Fill(fpEvent->dEdxWF, fpEvent->dEdxXP);
 	}
 
 	// Fitting
-	TF1 *ptf1_WF = 				Fit1Gauss(ph1f_WF, 2);
-	TF1 *ptf1_XP = 				Fit1Gauss(ph1f_XP, 2);
+	TF1 *ptf1_WF = 					Fit1Gauss(ph1f_WF, 2);
+	TF1 *ptf1_XP = 					Fit1Gauss(ph1f_XP, 2);
 
 	// Display settings
-	ph1f_WF->						  SetLineColor(kCyan+2);
-	ph1f_WF->						  SetLineWidth(2);
-	ptf1_WF->						  SetLineColor(kCyan-3);
-	ptf1_WF->						  SetLineWidth(2);
-	ph1f_XP->						  SetLineColor(kMagenta+2);
-	ph1f_XP->						  SetLineWidth(2);
-	ptf1_XP->						  SetLineColor(kMagenta+1);
-	ptf1_XP->						  SetLineWidth(2);
+	ph1f_WF->						SetLineColor(kCyan+2);
+	ph1f_WF->						SetLineWidth(2);
+	ptf1_WF->						SetLineColor(kCyan-3);
+	ptf1_WF->						SetLineWidth(2);
+	ph1f_XP->						SetLineColor(kMagenta+2);
+	ph1f_XP->						SetLineWidth(2);
+	ptf1_XP->						SetLineColor(kMagenta+1);
+	ptf1_XP->						SetLineWidth(2);
 
 
 	// Draw
+	gStyle->						SetOptStat(0);
+	gStyle->						SetOptFit(0);
 	TPaveStats* pStat_WF;
 	TPaveStats* pStat_XP;
 	int WFMax = 					ph1f_WF->GetMaximum();
@@ -80,39 +81,27 @@ void Reconstruction::DrawOuts::EnergyLoss(){
 	ph1f_WF->SetAxisRange(0, 1.1 * std::max({WFMax, XPMax}),  "Y");
 
 	float inv = 					0;
-	if(ph1f_WF->GetMean() > 800) inv = 0.45;
-
-	gStyle->						SetOptStat(11);
-	gStyle->						SetOptFit(111);
-
+	if(ph1f_WF->GetMean() > 650) inv = 0.45;
 	ph1f_WF->						Draw("HIST");
 	ptf1_WF->						Draw("same");
-	gPad->							Update();
-	SetStatBoxPosition(ph1f_WF, 0.6-inv, 0.9-inv, 0.2, 0.45);
-	pStat_WF =          (TPaveStats*)ph1f_WF->FindObject("stats");
-	pStat_WF->          SetTextColor(kCyan+2);
 
 	ph1f_XP->						Draw("HIST sames");
 	ptf1_XP->						Draw("same");
-	gPad->							Update();
-	SetStatBoxPosition(ph1f_XP, 0.6-inv, 0.9-inv, 0.45, 0.7);  
-	pStat_XP = 					(TPaveStats*)ph1f_XP->FindObject("stats");
-	pStat_XP->          SetTextColor(kMagenta+2);
 
-	PrintResolution(ptf1_XP, fpCanvas, 0.85-inv, 0.93, kMagenta+2, "XP");
-	PrintResolution(ptf1_WF, fpCanvas, 0.85-inv, 0.83, kCyan+2, "WF");
-	fpCanvas->          SaveAs((foutputFile + "(").c_str());
+	PrintResolution(ph1f_XP, fpCanvas, 0.6-inv, 0.58, kMagenta+2, "XP");
+	PrintResolution(ph1f_WF, fpCanvas, 0.6-inv, 0.25, kCyan+2, "WF");
+	fpCanvas->          			SaveAs((foutputFile + "(").c_str());
 
-	fpCanvas->					cd(); 
-	gStyle->						SetOptStat(111111);
-  gStyle->            SetStatX(0.32);
-  gStyle->            SetStatY(0.88);
-  gStyle->            SetStatX(0.32);
-  gStyle->            SetStatY(0.88);
-  gPad->              SetRightMargin(0.12);
-  ph2f_XPWF->  				GetYaxis()->SetTitleOffset(1.3);
-	ph2f_XPWF->  				Draw("colz");
-	fpCanvas->          SaveAs((foutputFile + ")").c_str());
+	fpCanvas->						cd(); 
+	gStyle->						SetOptStat("merou");
+	gStyle->            			SetStatX(0.4);
+	gStyle->            			SetStatY(0.5);
+	gPad->              			SetRightMargin(0.12);
+	gPad->              			SetLeftMargin(0.12);
+	ph2f_XPWF->						GetYaxis()->SetTitleOffset(1.1);
+	gStyle->   						SetTitleX((1.-gPad->GetRightMargin()+gPad->GetLeftMargin())/2);
+	ph2f_XPWF->  					Draw("colz");
+	fpCanvas->          			SaveAs((foutputFile + ")").c_str());
 
 	// Delete
 	delete ph2f_XPWF;
@@ -853,7 +842,7 @@ void DrawOut_dEdx(const std::string& OutDir, const std::string& Tag, const std::
     gPad->Update();
     if (v_h1f_Qsel[iMod]->GetMean() > (pTCanvas->GetUxmax() - pTCanvas->GetUxmin())/2) SetStatBoxPosition(v_h1f_Qsel[iMod], 0.12, 0.42, 0.52, 0.87);
     else SetStatBoxPosition(v_h1f_Qsel[iMod], 0.58, 0.88, 0.52, 0.87);
-    PrintResolution(v_tf1_Qsel[iMod], pTCanvas, 0.05, 0.3, kBlack , "");
+    PrintResolution(v_h1f_Qsel[iMod], pTCanvas, 0.05, 0.3, kBlack , "");
   }
   pTCanvas->SaveAs(OutputFile_Beg.c_str());
 
@@ -872,7 +861,7 @@ void DrawOut_dEdx(const std::string& OutDir, const std::string& Tag, const std::
     gPad->Update();
     if (v_h1f_Qtrunc[iMod]->GetMean() > (pTCanvas->GetUxmax() - pTCanvas->GetUxmin())/2) SetStatBoxPosition(v_h1f_Qtrunc[iMod], 0.12, 0.42, 0.52, 0.87);
     else SetStatBoxPosition(v_h1f_Qtrunc[iMod], 0.58, 0.88, 0.52, 0.87);
-    PrintResolution(v_tf1_Qtrunc[iMod], pTCanvas, 0.05, 0.3, kBlack , "");
+    PrintResolution(v_h1f_Qtrunc[iMod], pTCanvas, 0.05, 0.3, kBlack , "");
   }
   pTCanvas->SaveAs(OutputFile.c_str());
 
@@ -891,7 +880,7 @@ void DrawOut_dEdx(const std::string& OutDir, const std::string& Tag, const std::
     gPad->Update();
     if (v_h1f_WFsel[iMod]->GetMean() > (pTCanvas->GetUxmax() - pTCanvas->GetUxmin())/2) SetStatBoxPosition(v_h1f_WFsel[iMod], 0.12, 0.42, 0.52, 0.87);
     else SetStatBoxPosition(v_h1f_WFsel[iMod], 0.58, 0.88, 0.52, 0.87);
-    PrintResolution(v_tf1_WFsel[iMod], pTCanvas, 0.05, 0.3, kBlack , "");
+    PrintResolution(v_h1f_WFsel[iMod], pTCanvas, 0.05, 0.3, kBlack , "");
   }
   pTCanvas->SaveAs(OutputFile.c_str());
 
@@ -910,7 +899,7 @@ void DrawOut_dEdx(const std::string& OutDir, const std::string& Tag, const std::
     gPad->Update();
     if (v_h1f_WFsum[iMod]->GetMean() > (pTCanvas->GetUxmax() - pTCanvas->GetUxmin())/2) SetStatBoxPosition(v_h1f_WFsum[iMod], 0.12, 0.42, 0.52, 0.87);
     else SetStatBoxPosition(v_h1f_WFsum[iMod], 0.58, 0.88, 0.52, 0.87);
-    PrintResolution(v_tf1_WFsum[iMod], pTCanvas, 0.05, 0.3, kBlack , "");
+    PrintResolution(v_h1f_WFsum[iMod], pTCanvas, 0.05, 0.3, kBlack , "");
   }
   pTCanvas->SaveAs(OutputFile.c_str());
 
@@ -929,7 +918,7 @@ void DrawOut_dEdx(const std::string& OutDir, const std::string& Tag, const std::
     gPad->Update();
     if (v_h1f_GPsel[iMod]->GetMean() > (pTCanvas->GetUxmax() - pTCanvas->GetUxmin())/2) SetStatBoxPosition(v_h1f_GPsel[iMod], 0.12, 0.42, 0.52, 0.87);
     else SetStatBoxPosition(v_h1f_GPsel[iMod], 0.58, 0.88, 0.52, 0.87);
-    PrintResolution(v_tf1_GPsel[iMod], pTCanvas, 0.05, 0.3, kBlack , "");
+    PrintResolution(v_h1f_GPsel[iMod], pTCanvas, 0.05, 0.3, kBlack , "");
   }
   pTCanvas->SaveAs(OutputFile.c_str());
 
@@ -948,7 +937,7 @@ void DrawOut_dEdx(const std::string& OutDir, const std::string& Tag, const std::
     gPad->Update();
     if (v_h1f_GPv4[iMod]->GetMean() > (pTCanvas->GetUxmax() - pTCanvas->GetUxmin())/2) SetStatBoxPosition(v_h1f_GPv4[iMod], 0.12, 0.42, 0.52, 0.87);
     else SetStatBoxPosition(v_h1f_GPv4[iMod], 0.58, 0.88, 0.52, 0.87);
-    PrintResolution(v_tf1_GPv4[iMod], pTCanvas, 0.05, 0.3, kBlack , "");
+    PrintResolution(v_h1f_GPv4[iMod], pTCanvas, 0.05, 0.3, kBlack , "");
   }
   pTCanvas->SaveAs(OutputFile.c_str());
 
@@ -1087,8 +1076,8 @@ void DrawOut_Methods(const std::string& OutDir, const std::string& Tag, const st
     pStat_XP                       = (TPaveStats*)v_h1f_XP[iMod]->FindObject("stats");
     pStat_XP->                       SetTextColor(kMagenta+2);
 
-    PrintResolution(v_tf1_XP[iMod],     pTCanvas, 0.8-inv, 0.93, kMagenta+2, "XP");
-    PrintResolution(v_tf1_WFsum[iMod], pTCanvas, 0.8-inv, 0.83, kCyan+2, "WF");
+    PrintResolution(v_h1f_XP[iMod],     pTCanvas, 0.8-inv, 0.93, kMagenta+2, "XP");
+    PrintResolution(v_h1f_WFsum[iMod], pTCanvas, 0.8-inv, 0.83, kCyan+2, "WF");
 
   }
   pTCanvas->                  SaveAs(OutputFile.c_str());

@@ -7,6 +7,8 @@
 #include "ClusterFitter.h"
 #include "TrackRecon.h"
 
+#include "TPaveText.h"
+
 /* Equivalent of numpy linspace (npoints uniformly spaced between start and end) */
 std::vector<double> linspace(double start, double end, int numPoints) {
 	std::vector<double> result(numPoints);
@@ -909,20 +911,33 @@ double GetSeparationError(const float& mean1, const float& std1, const float& dm
 
 
 
-void PrintResolution(TF1* tf1, TCanvas* pCanvas){
-  return PrintResolution(tf1, pCanvas, 0.05, 0.7, kBlack, " ") ;
+void PrintResolution(TH1* th1, TCanvas* pCanvas){
+  return PrintResolution(th1, pCanvas, 0.05, 0.7, kBlack, " ") ;
 }
-void PrintResolution(TF1* tf1, TCanvas* pCanvas, float NDCx, float NDCy, Color_t color, const std::string& title){
-  double  xMax          = pCanvas->GetUxmax() ;
-  double  yMax          = pCanvas->GetUymax() ;
-  TLatex* ptText        = new TLatex ;
-  ptText->SetTextSize(0.04) ;
-  ptText->SetTextFont(42) ;
-  ptText->SetTextAlign(31) ;
-  float reso            = tf1->GetParameter(2)/tf1->GetParameter(1) * 100 ;
-  float dreso           = GetResoError(tf1) ;
-  ptText->SetText(NDCx*xMax, NDCy*yMax, Form("#frac{#sigma}{#mu}(%s) = %.2f #pm %.2f %%", title.c_str(), reso, dreso)) ;
-  ptText->SetTextColor(color) ;
-  ptText->DrawClone() ;
-  delete ptText ;
+void PrintResolution(TH1* th1, TCanvas* pCanvas, float NDCx, float NDCy, Color_t color, const std::string& title){
+	TF1* tf1 = th1->GetFunction("gausn") ;
+	double  xMax          = pCanvas->GetUxmax() ;
+	double  yMax          = pCanvas->GetUymax() ;
+  TPaveText *pPaveText = new TPaveText(NDCx, NDCy, NDCx+0.3, NDCy+0.3, "NDC");
+  pPaveText->SetFillStyle(0);
+  pPaveText->SetTextAlign(12);
+  pPaveText->SetLineColor(color);
+  pPaveText->SetTextColor(color);
+  pPaveText->SetShadowColor(0);
+  pPaveText->SetLineWidth(1.5);
+
+	float mu =        	tf1->GetParameter(1) ;
+	float dmu =       	tf1->GetParError(1) ;
+	float sigma =     	tf1->GetParameter(2) ;
+	float dsigma =    	tf1->GetParError(2) ;
+	float reso = 		    tf1->GetParameter(2)/tf1->GetParameter(1) * 100 ;
+	float dreso = 		  GetResoError(tf1) ;
+
+  pPaveText->AddText(Form("%s (%d entries)", title.c_str(), (int)th1->GetEntries()));
+  pPaveText->AddText(Form("#frac{#sigma}{#mu} = %.2f #pm %.2f %%", reso, dreso));
+  pPaveText->AddText(Form("#mu = %.0f #pm %.0f", mu, dmu));
+  pPaveText->AddText(Form("#sigma = %.1f #pm %.1f", sigma, dsigma));
+  pPaveText->GetLine(0)->SetTextFont(22);
+  pPaveText->DrawClone();
+	delete pPaveText ;
 }
