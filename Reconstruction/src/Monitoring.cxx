@@ -27,14 +27,16 @@ void Reconstruction::Monitoring()
 {
   // SetT2KStyle(1) ;
 
-  comment = "";
+  comment = "_noGRCWF";
   gErrorIgnoreLevel = kInfo;
 
   MakeMyDir(outDir);
 
-  WFupdated = true;
+  fcorrectGain =  true;
+  fcorrectRC =    true;
+  WFupdated =     true;
+  WFversion =     0;
   if(WFupdated) WFversion = 1;
-  else WFversion = 0;
 
   
   // Files to use
@@ -48,12 +50,12 @@ void Reconstruction::Monitoring()
 
   // Computations
   int control =         0;
-  int dedx =            1;
+  int dedx =            0;
 
   // DrawOuts
   int DO_control =      0;
   int DO_Checks =       0;
-  int DO_dEdx =         0;
+  int DO_dEdx =         1;
   int DO_Resolution =   0;
   int DO_Global =       0;
   int DO_Scans =        0;

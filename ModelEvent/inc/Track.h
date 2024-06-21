@@ -26,10 +26,6 @@ public:
    int Get_ModuleNber () const ; // Get Module nber
 
 
-//------------------------------Prints-----------------------//
-   void DrawOut( const std::string& OUTDirName) const ;
-
-
 //------------------------------Track Data-----------------------//
    void SetNberOfParameters(const int& NberOfParam );
    int  GetNberOfParameters() const ;

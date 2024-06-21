@@ -11,6 +11,9 @@
 #include "TPaveStats.h"
 #include "TLegendEntry.h"
 #include "TROOT.h"
+#include "TLine.h"
+#include "TLegend.h"
+#include "TLatex.h"
 
 Reconstruction::DrawOuts::DrawOuts(const std::string &inputFile){
 	// Get Tree
@@ -46,29 +49,44 @@ void Reconstruction::DrawOuts::EnergyLoss(){
 	// Prepare histograms
 	TH1F *ph1f_XP = 				new TH1F("ph1f_XP", "Energy loss;dE/dx (ADC counts);Counts", 100, 0, 1300);
 	TH1F *ph1f_WF = 				new TH1F("ph1f_WF", "Energy loss;dE/dx (ADC counts);Counts", 100, 0, 1300);
-	TH2F *ph2f_XPWF = 		  		new TH2F("ph2f_XPWF", "Energy loss with XP vs with WF;dE/dx (WF);dE/dx (XP)", 100, 0, 1300, 100, 0, 1300);
+	TH2F *ph2f_XPWF = 		  new TH2F("ph2f_XPWF", "Energy loss with XP vs with WF;dE/dx (WF);dE/dx (XP)", 100, 0, 1300, 100, 0, 1300);
+  std::vector<TH1F*> v_h1f_XP;
+  std::vector<TH1F*> v_h1f_WF;
+  for(int i=0;i<8;i++){
+    v_h1f_XP.push_back(new TH1F(Form("ph1f_XP_%i", i), Form("Energy loss (module %i);dE/dx (ADC counts);Counts", i), 100, 0, 1300));
+    v_h1f_WF.push_back(new TH1F(Form("ph1f_WF_%i", i), Form("Energy loss (module %i);dE/dx (ADC counts);Counts", i), 100, 0, 1300));
+  }
 
+  int nMod = 0;
 	// Get entries and fill histograms
 	for(int i=0;i<fnentries;i++){
 		fpTree->					GetEntry(i);
+    nMod = fpEvent->v_modules.size();
+    if(nMod == 1){
+      int modnum = fpEvent->v_modules[0]->position;
+      v_h1f_WF[modnum]->Fill(fpEvent->dEdxWF);
+      v_h1f_XP[modnum]->Fill(fpEvent->dEdxXP);
+    }
+    // if(nMod < 4) continue;
 		ph1f_WF->					Fill(fpEvent->dEdxWF);
 		ph1f_XP->					Fill(fpEvent->dEdxXP);
-		ph2f_XPWF->					Fill(fpEvent->dEdxWF, fpEvent->dEdxXP);
+		ph2f_XPWF->				Fill(fpEvent->dEdxWF, fpEvent->dEdxXP);
 	}
 
 	// Fitting
-	TF1 *ptf1_WF = 					Fit1Gauss(ph1f_WF, 2);
-	TF1 *ptf1_XP = 					Fit1Gauss(ph1f_XP, 2);
+	Fit1Gauss(ph1f_WF, 2);
+	Fit1Gauss(ph1f_XP, 2);
 
 	// Display settings
-	ph1f_WF->						SetLineColor(kCyan+2);
-	ph1f_WF->						SetLineWidth(2);
-	ptf1_WF->						SetLineColor(kCyan-3);
-	ptf1_WF->						SetLineWidth(2);
-	ph1f_XP->						SetLineColor(kMagenta+2);
-	ph1f_XP->						SetLineWidth(2);
-	ptf1_XP->						SetLineColor(kMagenta+1);
-	ptf1_XP->						SetLineWidth(2);
+	Graphic_setup(ph1f_WF, 0.5, 1, kCyan+1, 2, kCyan-2, kCyan, 0.2);
+	Graphic_setup(ph1f_XP, 0.5, 1, kMagenta+2, 2, kMagenta-2, kMagenta, 0.2);
+
+	for(int i=0;i<4;i++){
+		Fit1Gauss(v_h1f_WF[i], 2);
+		Fit1Gauss(v_h1f_XP[i], 2);
+		Graphic_setup(v_h1f_WF[i], 0.5, 1, kCyan+1, 1, kCyan-2, kCyan, 0.2);
+		Graphic_setup(v_h1f_XP[i], 0.5, 1, kMagenta+2, 1, kMagenta-2, kMagenta, 0.2);		
+	}
 
 
 	// Draw
@@ -81,18 +99,43 @@ void Reconstruction::DrawOuts::EnergyLoss(){
 	ph1f_WF->SetAxisRange(0, 1.1 * std::max({WFMax, XPMax}),  "Y");
 
 	float inv = 					0;
-	if(ph1f_WF->GetMean() > 650) inv = 0.45;
+	if(ph1f_WF->GetMean() > 650) inv = 0.5;
 	ph1f_WF->						Draw("HIST");
-	ptf1_WF->						Draw("same");
-
 	ph1f_XP->						Draw("HIST sames");
-	ptf1_XP->						Draw("same");
 
-	PrintResolution(ph1f_XP, fpCanvas, 0.6-inv, 0.58, kMagenta+2, "XP");
-	PrintResolution(ph1f_WF, fpCanvas, 0.6-inv, 0.25, kCyan+2, "WF");
+	PrintResolution(ph1f_XP, fpCanvas, 0.65-inv, 0.58, kMagenta+2, "XP");
+	PrintResolution(ph1f_WF, fpCanvas, 0.65-inv, 0.25, kCyan+2, "WF");
 	fpCanvas->          			SaveAs((foutputFile + "(").c_str());
 
+	fpCanvas->						cd();
+	fpCanvas->						Clear();
+	fpCanvas->						Divide(4, 2);
+
+	for(int i=0;i<8;i++){
+		fpCanvas->					cd(i+1);
+		std::vector<int> maxValues;
+		int overallMax = 0;
+		for(int i = 0; i < 8; i++){
+			int maxVal_WF = v_h1f_WF[i]->GetMaximum();
+			int maxVal_XP = v_h1f_XP[i]->GetMaximum();
+			int maxVal = std::max(maxVal_WF, maxVal_XP);
+			maxValues.push_back(maxVal);
+			overallMax = std::max(overallMax, maxVal);
+		}
+		v_h1f_WF[i]->				SetAxisRange(0, 1.1 * overallMax, "Y");
+		inv=0;
+		if(v_h1f_WF[i]->GetMean() > 650) inv = 0.5;
+		gPad->						SetRightMargin(0);
+		v_h1f_WF[i]->				Draw("HIST");
+		v_h1f_XP[i]->				Draw("HIST sames");
+		if(i>3) continue;
+		PrintResolution(v_h1f_XP[i], fpCanvas, 0.65-inv, 0.58, kMagenta+2, "XP");
+		PrintResolution(v_h1f_WF[i], fpCanvas, 0.65-inv, 0.25, kCyan+2, "WF");
+	}
+	fpCanvas->          			SaveAs((foutputFile).c_str());
+
 	fpCanvas->						cd(); 
+	fpCanvas->						Clear();
 	gStyle->						SetOptStat("merou");
 	gStyle->            			SetStatX(0.4);
 	gStyle->            			SetStatY(0.5);

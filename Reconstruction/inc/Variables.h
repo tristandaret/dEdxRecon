@@ -26,9 +26,10 @@ namespace Reconstruction{
     extern int         Dt;         // Transverse diffusion coefficient (µm/sqrt(cm))
     extern int         driftDist;  // drift distance (mm)
     extern int         TB;         // timebin length (ns)
+    extern bool        fcorrectGain;
+    extern bool        fcorrectRC;
     extern bool        WFupdated;
     extern int         WFversion;
-    extern bool        fcorrectGain;
 }
 
 #endif

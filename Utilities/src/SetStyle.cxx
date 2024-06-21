@@ -1,20 +1,15 @@
 #include "SetStyle.h"
+#include "TPaveStats.h"
 
 // --- T2K style ---
 
 TStyle* SetMyStyle() {
   TStyle *myStyle= new TStyle("tristanstyle", "Tristan's style");
 
-  Int_t FontStyle = 132;
+  Int_t FontStyle =       132;
   Float_t FontSizeLabel = 0.045;
   Float_t FontSizeTitle = 0.055;
-  Color_t FontColor = kBlue-1;
-
-  float left = 0.11;
-  float right = 0.02;
-  float middle = (1-right+left)/2;
-  float top = 0.08;
-  float bottom = 0.12;
+  Color_t FontColor =     kBlue-1;
   
   // Standard histogram decorations
   myStyle->SetOptTitle(1);
@@ -22,6 +17,24 @@ TStyle* SetMyStyle() {
   myStyle->SetOptFit(1);
   myStyle->SetPadTickX(1);
   myStyle->SetPadTickY(1);
+
+  // Canvas
+  myStyle->SetCanvasBorderMode(0);
+
+  // Frame
+  myStyle->SetFrameBorderMode(0);
+
+  // Pad
+  float left =    0.11;
+  float right =   0.02;
+  float middle =  (1-right+left)/2;
+  float top =     0.08;
+  float bottom =  0.12;
+  myStyle->SetPadBorderMode(0);
+  myStyle->SetPadTopMargin(top);
+  myStyle->SetPadBottomMargin(bottom);
+  myStyle->SetPadRightMargin(right);
+  myStyle->SetPadLeftMargin(left);
 
   // Legend
   myStyle->SetLegendBorderSize(0);
@@ -33,18 +46,13 @@ TStyle* SetMyStyle() {
   myStyle->SetStatFontSize(0.04);
   myStyle->SetStatTextColor(FontColor);
   myStyle->SetStatStyle(0);
-
-  // set margin sizes
-  myStyle->SetPadTopMargin(top);
-  myStyle->SetPadBottomMargin(bottom);
-  myStyle->SetPadRightMargin(right);
-  myStyle->SetPadLeftMargin(left);
   
-  // Fonts, sizes, offsets
+  // Text
   myStyle->SetTextFont(FontStyle);
   myStyle->SetTextSize(0.04);
   myStyle->SetTextColor(FontColor);
 
+  // Labels
   myStyle->SetLabelFont(FontStyle, "xyz");
   myStyle->SetLabelFont(FontStyle, "t");
   myStyle->SetLabelColor(FontColor, "xyz");
@@ -52,11 +60,11 @@ TStyle* SetMyStyle() {
   myStyle->SetLabelSize(FontSizeLabel, "xyz");
   myStyle->SetLabelOffset(0.01, "xyz");
 
+  // Title
   myStyle->SetTitleFont(FontStyle, "xyz");
   myStyle->SetTitleColor(FontColor, "xyz");
   myStyle->SetTitleSize(FontSizeTitle, "xyz");
   myStyle->SetTitleOffset(1, "xyz");
-
   myStyle->SetTitleFont(FontStyle, "t");
   myStyle->SetTitleTextColor(FontColor);
   myStyle->SetTitleFontSize(0.06);
@@ -71,24 +79,66 @@ TStyle* SetMyStyle() {
   myStyle->SetAxisMaxDigits(4);
   myStyle->SetAxisColor(FontColor, "xyz");
   myStyle->SetStripDecimals(kFALSE); // removes decimals in labels
-  myStyle->SetHistMinimumZero(kTRUE); // forces 0 to apeear on y-axis
-
-  // use bold lines and markers
-  myStyle->SetMarkerStyle(20);
-  myStyle->SetHistLineWidth( Width_t(2.5) );
-  myStyle->SetLineStyleString(2, "[12 12]"); // postscript dashes
+  myStyle->SetHistMinimumZero(kTRUE); // forces 0 to appear on y-axis
   
-  // put tick marks on top and RHS of plots
-  myStyle->SetPadTickX(1);
-  myStyle->SetPadTickY(1);
-  
-  // -- color --
+  // Colors
   myStyle->SetFuncColor(600-4); // blue
-  // myStyle->SetFillColor(1); // make color fillings (not white)
   myStyle->SetPalette(kViridis);
   myStyle->SetNumberContours(250);
 
  return(myStyle);
+}
+
+
+
+// Set graphic settings of a TGraphErrors
+void Graphic_setup(TGraphErrors* ptge, Size_t markersize, Style_t markerstyle, Color_t markercolor, Width_t linewidth, Color_t linecolor){
+  ptge->SetMarkerSize(markersize);
+  ptge->SetMarkerStyle(markerstyle);
+  ptge->SetMarkerColor(markercolor);
+  ptge->SetLineWidth(linewidth);
+  ptge->SetLineColor(linecolor);
+}
+
+
+
+// Set graphic settings of an histogram
+void Graphic_setup(TH1* th1, Size_t markersize, Style_t markerstyle, Color_t markercolor, Width_t linewidth, Color_t linecolor, Color_t fillcolor, Float_t alpha){
+  th1->SetMarkerSize(markersize);
+  th1->SetMarkerStyle(markerstyle);
+  th1->SetMarkerColor(markercolor);
+  th1->SetLineWidth(linewidth);
+  th1->SetLineColor(linecolor);
+  th1->SetFillColorAlpha(fillcolor, alpha);
+}
+
+
+
+// Set graphic settings of an TH2
+void Graphic_setup(TH2* th2, Size_t markersize, Style_t markerstyle, Color_t markercolor){
+  th2->SetMarkerSize(markersize);
+  th2->SetMarkerStyle(markerstyle);
+  th2->SetMarkerColor(markercolor);
+}
+
+
+
+// Set graphic settings for a TF1
+void Graphic_setup(TF1* tf1, Width_t linewidth, Color_t linecolor, Style_t linestyle){
+  tf1->SetLineWidth(linewidth);
+  tf1->SetLineColor(linecolor);
+  tf1->SetLineStyle(linestyle);
+}
+
+
+
+// Set the stats box position
+void SetStatBoxPosition(TH1* pTH, const double& xmin, const double& xmax, const double& ymin, const double& ymax){
+  TPaveStats *st = (TPaveStats*)pTH->FindObject("stats");
+  st->SetX1NDC(xmin);
+  st->SetX2NDC(xmax);
+  st->SetY1NDC(ymin);
+  st->SetY2NDC(ymax);
 }
 
 
@@ -102,7 +152,7 @@ TStyle* SetMyStyle() {
 
 
 
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 TStyle* SetT2KStyle(Int_t WhichStyle, TString styleName) {
   TStyle *t2kStyle= new TStyle(styleName, "T2K approved plots style");

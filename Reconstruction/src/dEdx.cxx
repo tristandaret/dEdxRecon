@@ -59,7 +59,8 @@ void Reconstruction::dEdx::Reconstruction(){
 	std::cout << "driftMethod      : " << driftMethod	<< std::endl;
 	std::cout << "WF updated       : " << WFupdated		<< std::endl;
 	std::cout << "Gain correction  : " << fcorrectGain	<< std::endl;
-	std::cout <<                                             std::endl;
+	std::cout << "RC correction    : " << fcorrectRC	<< std::endl;
+	std::cout <<                                           std::endl;
 
 	// Get ERAM maps
 	std::vector<int> fERAMs_iD;
@@ -116,8 +117,8 @@ void Reconstruction::dEdx::Reconstruction(){
 	std::vector<float> 	v_dEdxXP;
 	std::vector<float> 	v_dEdxWF;
 	std::vector<double> v_erams;
-	TH1F *ph1f_WF =  								new TH1F("ph1f_WF", "<dE/dx> with WF;<dE/dx> (ADC count);Number of events", 90, 0, 1800);
-	TH1F *ph1f_XP =  								new TH1F("ph1f_XP", "<dE/dx> with XP;<dE/dx> (ADC count);Number of events", 90, 0, 1800);
+	TH1F *ph1f_WF =  								new TH1F("ph1f_WF", "<dE/dx> with WF;<dE/dx> (ADC count);Number of events", 100, 0, 1300);
+	TH1F *ph1f_XP =  								new TH1F("ph1f_XP", "<dE/dx> with XP;<dE/dx> (ADC count);Number of events", 100, 0, 1300);
 
 	std::vector<int>   	waveform_cluster(510, 0);
 	std::vector<int>   	waveform_pad(510, 0);
@@ -198,11 +199,14 @@ void Reconstruction::dEdx::Reconstruction(){
 					Reconstruction::RecoPad * p_tpad = new Reconstruction::RecoPad();
 					waveform_pad = 			pPad->Get_vADC();
 					for(int i=0;i<510;i++) waveform_cluster[i] += waveform_pad[i]; // Gain correction wrt to leading pad's gain after pad loop
-
-					// Gain & RC corrections
 					p_tpad->ix =                    pPad->Get_iX();
 					p_tpad->iy =                    pPad->Get_iY();
-					p_tpad->RC =                    pERAMMaps->RC(fERAMs_pos[iMod], p_tpad->ix, p_tpad->iy);
+
+					// RC correction
+					if(fcorrectRC) p_tpad->RC =		pERAMMaps->RC(fERAMs_pos[iMod], p_tpad->ix, p_tpad->iy);
+					else           p_tpad->RC =		120;
+
+					// Gain correction
 					if(fcorrectGain){
 						p_tpad->gain =              pERAMMaps->Gain(fERAMs_pos[iMod], p_tpad->ix, p_tpad->iy);
 						p_tpad->GainCorrection =    AVG_GAIN/p_tpad->gain;

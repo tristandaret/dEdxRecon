@@ -15,6 +15,7 @@
 #include "TProfile.h"
 #include "TLine.h"
 #include "TStyle.h"
+#include "TLatex.h"
 #include "TPaveStats.h"
 #include "TGraphErrors.h"
 #include "TLegendEntry.h"
