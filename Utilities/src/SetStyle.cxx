@@ -20,19 +20,8 @@ TStyle* SetMyStyle() {
   myStyle->SetOptTitle(1);
   myStyle->SetOptStat(1);
   myStyle->SetOptFit(1);
-
-  // use plain black on white colors
-  // myStyle->SetFrameBorderMode(0);
-  // myStyle->SetCanvasBorderMode(0);
-  // myStyle->SetPadBorderMode(0);
-  // myStyle->SetCanvasBorderSize(0);
-  // myStyle->SetFrameBorderSize(0);
-  // myStyle->SetDrawBorder(0);
-
-  // myStyle->SetPadColor(0);
-  // myStyle->SetCanvasColor(0);
-  // myStyle->SetStatColor(0);
-  // myStyle->SetFillColor(0);
+  myStyle->SetPadTickX(1);
+  myStyle->SetPadTickY(1);
 
   // Legend
   myStyle->SetLegendBorderSize(0);
@@ -72,22 +61,17 @@ TStyle* SetMyStyle() {
   myStyle->SetTitleTextColor(FontColor);
   myStyle->SetTitleFontSize(0.06);
   myStyle->SetTitleBorderSize(0);
-  // myStyle->SetTitleOffset(10, "t");
+  myStyle->SetTitleOffset(1, "t");
   myStyle->SetTitleAlign(23);
   myStyle->SetTitleX(middle);
   myStyle->SetTitleY(0.99);
   myStyle->SetTitleStyle(0);
 
-  // myStyle->SetTitleStyle(0);
-  // myStyle->SetTitleFont(FontStyle, "pad");
-  // myStyle->SetTitleColor(FontColor, "pad");
-  // myStyle->SetTitleBorderSize(0);
-  // myStyle->SetTitleX(0.1f);
-  // myStyle->SetTitleW(0.8f);
-
   // Axis
-  // myStyle->SetAxisMaxDigits(3);
+  myStyle->SetAxisMaxDigits(4);
   myStyle->SetAxisColor(FontColor, "xyz");
+  myStyle->SetStripDecimals(kFALSE); // removes decimals in labels
+  myStyle->SetHistMinimumZero(kTRUE); // forces 0 to apeear on y-axis
 
   // use bold lines and markers
   myStyle->SetMarkerStyle(20);
@@ -103,10 +87,6 @@ TStyle* SetMyStyle() {
   // myStyle->SetFillColor(1); // make color fillings (not white)
   myStyle->SetPalette(kViridis);
   myStyle->SetNumberContours(250);
-
-  // -- axis --
-  myStyle->SetStripDecimals(kFALSE); // removes decimals in labels
-  myStyle->SetHistMinimumZero(kTRUE); // forces 0 to apeear on y-axis
 
  return(myStyle);
 }

@@ -31,9 +31,6 @@ void Reconstruction::Monitoring()
   gErrorIgnoreLevel = kInfo;
 
   MakeMyDir(outDir);
-  gStyle->                SetOptStat(111111);
-  gStyle->                SetPadTickX(1);
-  gStyle->                SetPadTickY(1);
 
   WFupdated = true;
   if(WFupdated) WFversion = 1;
@@ -42,21 +39,21 @@ void Reconstruction::Monitoring()
   
   // Files to use
   int prototype =       0;
-  int CERN_Escan =      0; 
+  int CERN_Escan =      1; 
 
-  int DESY_zscan =      1; 
+  int DESY_zscan =      0; 
   int DESY_yscan =      0; 
   int DESY_phi =        0; 
   int DESY_theta =      0; 
 
   // Computations
   int control =         0;
-  int dedx =            0;
+  int dedx =            1;
 
   // DrawOuts
   int DO_control =      0;
   int DO_Checks =       0;
-  int DO_dEdx =         1;
+  int DO_dEdx =         0;
   int DO_Resolution =   0;
   int DO_Global =       0;
   int DO_Scans =        0;
@@ -109,7 +106,8 @@ void Reconstruction::Monitoring()
     if (control or dedx) p_lut = new LUT(Form("~/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi150_nd150_nRC41_nZ21.root", Dt, PT));
     // int NFiles = 14;
     // for (int iFile = 0; iFile < NFiles; iFile++){
-    int part_arr[] = {4, 7, 10, 13};
+    // int part_arr[] = {4, 7, 10, 13};
+    int part_arr[] = {7};
     for (int iFile : part_arr) {
       if (iFile == 0)  { dataFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_e+_0p5GeV_25V_z415_y2pad_iter0.root";       tag = "CERN22_Escan_e+_0p5GeV";  prtcle = "e^{+} 0p5GeV (Mockup)";}
       if (iFile == 1)  { dataFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_e+_0p75GeV_25V_z415_y2pad_iter0.root";      tag = "CERN22_Escan_e+_0p75GeV"; prtcle = "e^{+} 0p75GeV (Mockup)";}
