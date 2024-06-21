@@ -21,7 +21,7 @@ namespace Reconstruction{
     public:
         virtual ~RecoPad();
 
-        std::vector<int> v_waveform;
+        // std::vector<int> v_waveform;
         int   ix             = 0;
         int   iy             = 0;
         float ADC            = 0;
@@ -47,7 +47,7 @@ namespace Reconstruction{
         virtual ~RecoCluster();
 
         std::vector<RecoPad*> v_pads;
-        std::vector<int> v_waveform;
+        // std::vector<int> v_waveform;
         float   length          = 0;
         int     NPads           = 0;
         float   ratioCorr       = 0; 

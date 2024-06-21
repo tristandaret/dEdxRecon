@@ -50,15 +50,15 @@ void Reconstruction::dEdx::Reconstruction(){
 	std::cout.      rdbuf(OUT_DataFile.rdbuf());	// Redirect to output file
 
 	// Log info
-	std::cout << "dataFile         : " << dataFile        << std::endl;
-	std::cout << "OUTDirName       : " << OUTDirName      << std::endl;
-	std::cout << "tag              : " << tag             << std::endl;
-	std::cout << "comment          : " << comment         << std::endl;
-	std::cout << "selectionSet     : " << selectionSet    << std::endl;
-	std::cout << "prtcle           : " << prtcle          << std::endl;
-	std::cout << "driftMethod      : " << driftMethod     << std::endl;
-	std::cout << "WF updated       : " << WFupdated       << std::endl;
-	std::cout << "Gain correction  : " << fcorrectGain << std::endl;
+	std::cout << "dataFile         : " << dataFile      << std::endl;
+	std::cout << "OUTDirName       : " << OUTDirName    << std::endl;
+	std::cout << "tag              : " << tag           << std::endl;
+	std::cout << "comment          : " << comment       << std::endl;
+	std::cout << "selectionSet     : " << selectionSet  << std::endl;
+	std::cout << "prtcle           : " << prtcle        << std::endl;
+	std::cout << "driftMethod      : " << driftMethod	<< std::endl;
+	std::cout << "WF updated       : " << WFupdated		<< std::endl;
+	std::cout << "Gain correction  : " << fcorrectGain	<< std::endl;
 	std::cout <<                                             std::endl;
 
 	// Get ERAM maps
@@ -111,13 +111,16 @@ void Reconstruction::dEdx::Reconstruction(){
 	int fcounterFit =                  				0;
 
 	// Initialization of analysis vectors and histograms
-	std::vector<float> v_dx;
-	std::vector<float> v_dE;
-	std::vector<float> v_dEdxXP;
-	std::vector<float> v_dEdxWF;
+	std::vector<float> 	v_dx;
+	std::vector<float> 	v_dE;
+	std::vector<float> 	v_dEdxXP;
+	std::vector<float> 	v_dEdxWF;
 	std::vector<double> v_erams;
 	TH1F *ph1f_WF =  								new TH1F("ph1f_WF", "<dE/dx> with WF;<dE/dx> (ADC count);Number of events", 90, 0, 1800);
 	TH1F *ph1f_XP =  								new TH1F("ph1f_XP", "<dE/dx> with XP;<dE/dx> (ADC count);Number of events", 90, 0, 1800);
+
+	std::vector<int>   	waveform_cluster(510, 0);
+	std::vector<int>   	waveform_pad(510, 0);
 
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -181,19 +184,20 @@ void Reconstruction::dEdx::Reconstruction(){
 
 			// Loop On Clusters
 			for (int iC =  0; iC < NC; iC++){
+				std::fill(waveform_cluster.begin(), waveform_cluster.end(), 0); // reset waveform
 				Cluster* pCluster =            		pModule->Get_Cluster(iC);
 				Reconstruction::RecoCluster *p_tcluster = new Reconstruction::RecoCluster();
-				p_tcluster->v_waveform.assign(510, 0);
 				float fGainCorrectionLead = 0;
 
 
 				// Loop On Pads
 				int NPads =                   		pCluster->Get_NberOfPads();
 				for(int iP =  0; iP < NPads; iP ++){
+					std::fill(waveform_pad.begin(), waveform_pad.end(), 0); // reset waveform
 					const Pad* pPad =            	pCluster->Get_Pad(iP);
 					Reconstruction::RecoPad * p_tpad = new Reconstruction::RecoPad();
-					p_tpad->v_waveform = 			pPad->Get_vADC();
-					for(int i=0;i<510;i++) p_tcluster->v_waveform[i] += p_tpad->v_waveform[i]; // Gain correction wrt to leading pad's gain after pad loop
+					waveform_pad = 			pPad->Get_vADC();
+					for(int i=0;i<510;i++) waveform_cluster[i] += waveform_pad[i]; // Gain correction wrt to leading pad's gain after pad loop
 
 					// Gain & RC corrections
 					p_tpad->ix =                    pPad->Get_iX();
@@ -203,7 +207,7 @@ void Reconstruction::dEdx::Reconstruction(){
 						p_tpad->gain =              pERAMMaps->Gain(fERAMs_pos[iMod], p_tpad->ix, p_tpad->iy);
 						p_tpad->GainCorrection =    AVG_GAIN/p_tpad->gain;
 						p_tpad->ADC =               p_tpad->GainCorrection*pPad->Get_AMax();
-						for(int i=0;i<510;i++) p_tpad->v_waveform[i] = round(p_tpad->v_waveform[i] * p_tpad->GainCorrection);
+						for(int i=0;i<510;i++) waveform_pad[i] = round(waveform_pad[i] * p_tpad->GainCorrection);
 						if(iP == 0) fGainCorrectionLead = p_tpad->GainCorrection;		
 					}
 					else p_tpad->ADC =              pPad->Get_AMax();
@@ -245,10 +249,10 @@ void Reconstruction::dEdx::Reconstruction(){
 				} // Pads
 
 				// Gain correction for the whole cluster
-				if(fcorrectGain) for(int i=0;i<510;i++) p_tcluster->v_waveform[i] *= fGainCorrectionLead;
+				if(fcorrectGain) for(int i=0;i<510;i++) waveform_cluster[i] *= fGainCorrectionLead;
 
 				// WF correction steps
-				int fAcluster =               		*std::max_element(p_tcluster->v_waveform.begin(), p_tcluster->v_waveform.end());
+				int fAcluster =               		*std::max_element(waveform_cluster.begin(), waveform_cluster.end());
 				p_tcluster->ratioCorr =             fAref / pcorrFunctionWF->Eval(p_tcluster->length*1000);
 				if(tag.find("diag") != std::string::npos) v_dEdxWF.push_back(fAcluster*p_tcluster->ratioCorr/XPADLENGTH*10);
 				else v_dEdxWF.						push_back(fAcluster/(p_tcluster->length*100));
@@ -352,12 +356,12 @@ float Reconstruction::dEdx::ComputedEdxXP(const std::vector<float>& v_dEdx, cons
 /* ANALYSIS CLASSES DEFINITION */
 
 Reconstruction::RecoPad::~RecoPad(){
-	v_waveform.clear();
+	// v_waveform.clear();
 }
 
 
 Reconstruction::RecoCluster::~RecoCluster(){
-	v_waveform.clear();
+	// v_waveform.clear();
 	for (auto p_tpad : v_pads) delete p_tpad;
 	v_pads.clear();
 }

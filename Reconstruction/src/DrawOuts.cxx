@@ -21,7 +21,7 @@ Reconstruction::DrawOuts::DrawOuts(const std::string &inputFile){
 	fnentries = 					fpTree->GetEntries();
 
   // Set Style
-  TStyle* ptstyle = SetT2KStyle();
+  TStyle* ptstyle = SetMyStyle();
   gROOT->SetStyle(ptstyle->GetName());
   gPad->UseCurrentStyle();
 
@@ -41,7 +41,7 @@ Reconstruction::DrawOuts::~DrawOuts(){
 
 void Reconstruction::DrawOuts::EnergyLoss(){
 	// Set output
-	foutputFile = 					foutputDir + "dEdx_" + tag + comment + "_T2K.pdf";
+	foutputFile = 					foutputDir + "dEdx_" + tag + comment + ".pdf";
 
 	// Prepare histograms
 	TH1F *ph1f_XP = 				new TH1F("ph1f_XP", "Energy loss;dE/dx (ADC counts);Counts", 100, 0, 1300);

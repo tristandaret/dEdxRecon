@@ -94,46 +94,52 @@ void Reconstruction::Monitoring()
     if(DO_Separation)         DrawOut_Separation_Reduced(outDir, comment, "1p5");
   }
 
-  // Energy scan using the mockup
-  if(CERN_Escan){
-    selectionSet = "T2_CERN22_Event";
-    outDir = "../OUT_Reconstruction/CERN22_Energy_Scan/";
-    MakeMyDir(outDir);
-    intUploader = 3;
-    moduleCase = -1;
-    PT = 412; Dt = 350; driftDist = 415; TB = 40;
+	// Energy scan using the mockup
+	if(CERN_Escan){
+		selectionSet = "T2_CERN22_Event";
+		outDir = "../OUT_Reconstruction/CERN22_Energy_Scan/";
+		MakeMyDir(outDir);
+		intUploader = 3;
+		moduleCase = -1;
+		PT = 412; Dt = 350; driftDist = 415; TB = 40;
+		if (control or dedx) p_lut = new LUT(Form("~/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi150_nd150_nRC41_nZ21.root", Dt, PT));
 
-    if (control or dedx) p_lut = new LUT(Form("~/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi150_nd150_nRC41_nZ21.root", Dt, PT));
-    // int NFiles = 14;
-    // for (int iFile = 0; iFile < NFiles; iFile++){
-    // int part_arr[] = {4, 7, 10, 13};
-    int part_arr[] = {7};
-    for (int iFile : part_arr) {
-      if (iFile == 0)  { dataFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_e+_0p5GeV_25V_z415_y2pad_iter0.root";       tag = "CERN22_Escan_e+_0p5GeV";  prtcle = "e^{+} 0p5GeV (Mockup)";}
-      if (iFile == 1)  { dataFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_e+_0p75GeV_25V_z415_y2pad_iter0.root";      tag = "CERN22_Escan_e+_0p75GeV"; prtcle = "e^{+} 0p75GeV (Mockup)";}
-      if (iFile == 2)  { dataFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_e+_1GeV_25V_z415p1_y2pad_iter0.root";       tag = "CERN22_Escan_e+_1GeV";    prtcle = "e^{+} 1GeV (Mockup)";}  
-      if (iFile == 3)  { dataFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_e+_1p25GeV_25V_z415p1_y2pad_1_iter0.root";  tag = "CERN22_Escan_e+_1p25GeV"; prtcle = "e^{+} 1p25GeV (Mockup)";}
-      if (iFile == 4)  { dataFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_e+_1p5GeV_25V_z415p1_y2pad_iter0.root";     tag = "CERN22_Escan_e+_1p5GeV";  prtcle = "e^{+} 1p5GeV (Mockup)";}
-      if (iFile == 5)  { dataFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_mu+_0p75GeV_25V_z415_y2pad_iter0.root";     tag = "CERN22_Escan_mu_0p75GeV"; prtcle = "#mu^{+} 0p75GeV (Mockup)";}
-      if (iFile == 6)  { dataFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_mu+_1GeV_25V_z415p1_y2pad_iter0.root";      tag = "CERN22_Escan_mu_1GeV";    prtcle = "#mu^{+} 1GeV (Mockup)";}
-      if (iFile == 7)  { dataFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_mu+_1p5GeV_25V_z415p1_y2pad_iter0.root";    tag = "CERN22_Escan_mu_1p5GeV";  prtcle = "#mu^{+} 1p5GeV (Mockup)";}
-      if (iFile == 8)  { dataFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_pi+_0p75GeV_25V_z415_y2pad_iter0.root";     tag = "CERN22_Escan_pi_0p75GeV"; prtcle = "#pi^{+} 0p75GeV (Mockup)";}
-      if (iFile == 9)  { dataFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_pi+_1p25GeV_25V_z415p1_y2pad_2_iter0.root"; tag = "CERN22_Escan_pi_1p25GeV"; prtcle = "#pi^{+} 1p25GeV (Mockup)";}
-      if (iFile == 10) { dataFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_pi+_1p5GeV_25V_z415p1_y2pad_iter0.root";    tag = "CERN22_Escan_pi_1p5GeV";  prtcle = "#pi^{+} 1p5GeV (Mockup)";}
-      if (iFile == 11) { dataFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_p_1GeV_25V_z415p1_y2pad_iter0.root";        tag = "CERN22_Escan_p+_1GeV";    prtcle = "protons 1GeV (Mockup)";}
-      if (iFile == 12) { dataFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_p_1p25GeV_25V_z415p1_y2pad_iter0.root";     tag = "CERN22_Escan_p+_1p25GeV"; prtcle = "protons 1p25GeV (Mockup)";}
-      if (iFile == 13) { dataFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_p_1p5GeV_25V_z415_y2pad_2_iter0.root";      tag = "CERN22_Escan_p+_1p5GeV";  prtcle = "protons 1p5GeV (Mockup)";}
-      if(control or dedx) p_uploader = GiveMe_Uploader (intUploader, dataFile);
-      if (control)      Control       (outDir, tag, comment, dataFile, selectionSet, p_uploader, moduleCase, 0, PT, TB, prtcle);
-      if (DO_control)   DrawOut_Control           (outDir, tag, comment, selectionSet, 4);
-      if (dedx)          p_dEdx->Reconstruction();
-      if (DO_Checks)     DrawOut_Checks            (outDir, dataFile, tag, comment);
-      if (DO_dEdx)  DrawOut_Methods        (outDir, tag, comment, 1, prtcle);
-      delete p_uploader;
-    }
-    if(DO_Resolution) DrawOut_Escan(outDir, comment);
-    if(DO_Separation) DrawOut_Separation_Reduced(outDir, comment, "1p5");
-  }
+		// int NFiles = 14;
+		// for (int iFile = 0; iFile < NFiles; iFile++){
+		// int part_arr[] = {4, 7, 10, 13};
+		int part_arr[] = {7};
+		for (int iFile : part_arr) {
+			if (iFile == 0)  { dataFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_e+_0p5GeV_25V_z415_y2pad_iter0.root";       tag = "CERN22_Escan_e+_0p5GeV";  prtcle = "e^{+} 0p5GeV (Mockup)";}
+			if (iFile == 1)  { dataFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_e+_0p75GeV_25V_z415_y2pad_iter0.root";      tag = "CERN22_Escan_e+_0p75GeV"; prtcle = "e^{+} 0p75GeV (Mockup)";}
+			if (iFile == 2)  { dataFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_e+_1GeV_25V_z415p1_y2pad_iter0.root";       tag = "CERN22_Escan_e+_1GeV";    prtcle = "e^{+} 1GeV (Mockup)";}  
+			if (iFile == 3)  { dataFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_e+_1p25GeV_25V_z415p1_y2pad_1_iter0.root";  tag = "CERN22_Escan_e+_1p25GeV"; prtcle = "e^{+} 1p25GeV (Mockup)";}
+			if (iFile == 4)  { dataFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_e+_1p5GeV_25V_z415p1_y2pad_iter0.root";     tag = "CERN22_Escan_e+_1p5GeV";  prtcle = "e^{+} 1p5GeV (Mockup)";}
+			if (iFile == 5)  { dataFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_mu+_0p75GeV_25V_z415_y2pad_iter0.root";     tag = "CERN22_Escan_mu_0p75GeV"; prtcle = "#mu^{+} 0p75GeV (Mockup)";}
+			if (iFile == 6)  { dataFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_mu+_1GeV_25V_z415p1_y2pad_iter0.root";      tag = "CERN22_Escan_mu_1GeV";    prtcle = "#mu^{+} 1GeV (Mockup)";}
+			if (iFile == 7)  { dataFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_mu+_1p5GeV_25V_z415p1_y2pad_iter0.root";    tag = "CERN22_Escan_mu_1p5GeV";  prtcle = "#mu^{+} 1p5GeV (Mockup)";}
+			if (iFile == 8)  { dataFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_pi+_0p75GeV_25V_z415_y2pad_iter0.root";     tag = "CERN22_Escan_pi_0p75GeV"; prtcle = "#pi^{+} 0p75GeV (Mockup)";}
+			if (iFile == 9)  { dataFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_pi+_1p25GeV_25V_z415p1_y2pad_2_iter0.root"; tag = "CERN22_Escan_pi_1p25GeV"; prtcle = "#pi^{+} 1p25GeV (Mockup)";}
+			if (iFile == 10) { dataFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_pi+_1p5GeV_25V_z415p1_y2pad_iter0.root";    tag = "CERN22_Escan_pi_1p5GeV";  prtcle = "#pi^{+} 1p5GeV (Mockup)";}
+			if (iFile == 11) { dataFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_p_1GeV_25V_z415p1_y2pad_iter0.root";        tag = "CERN22_Escan_p+_1GeV";    prtcle = "protons 1GeV (Mockup)";}
+			if (iFile == 12) { dataFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_p_1p25GeV_25V_z415p1_y2pad_iter0.root";     tag = "CERN22_Escan_p+_1p25GeV"; prtcle = "protons 1p25GeV (Mockup)";}
+			if (iFile == 13) { dataFile = "../Data_CERN22_vD/All_ERAMS_350V_412ns_p_1p5GeV_25V_z415_y2pad_2_iter0.root";      tag = "CERN22_Escan_p+_1p5GeV";  prtcle = "protons 1p5GeV (Mockup)";}
+
+			if(control or dedx) p_uploader = GiveMe_Uploader (intUploader, dataFile);
+
+			if (control)      Control       (outDir, tag, comment, dataFile, selectionSet, p_uploader, moduleCase, 0, PT, TB, prtcle);
+			if (DO_control)   DrawOut_Control           (outDir, tag, comment, selectionSet, 4);
+
+			outFile_dEdx =	(outDir + tag + "/" + "dEdx_" + tag + comment + ".root").c_str();
+			if (dedx)		p_dEdx->Reconstruction();
+			p_DrawOuts = 	new DrawOuts(outFile_dEdx);
+        	if (DO_dEdx)	p_DrawOuts->EnergyLoss();
+
+			if (DO_Checks)     DrawOut_Checks            (outDir, dataFile, tag, comment);
+			delete p_uploader;
+		}
+		if(DO_Resolution) DrawOut_Escan(outDir, comment);
+		if(DO_Separation) DrawOut_Separation_Reduced(outDir, comment, "1p5");
+	}
   
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // z scan scan with DESY21

@@ -11,7 +11,7 @@ Uploader::Uploader(
   m_SampleFile = SampleFile ;
 
   std::cout << std::endl ;
-  std::cout << "  Uploader::Uploader:  Reading " << m_SampleFile << std::endl ;
+  std::cout << "Data file:  " << m_SampleFile << std::endl ;
   
   p_TFile = TFile::Open(SampleFile.c_str(),"READ");
   if (!p_TFile) {

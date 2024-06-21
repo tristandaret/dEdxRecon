@@ -33,12 +33,6 @@ void Model_ReadOutGeometry::SquareGeometry()
 
   m_Nx = The_N ;
   m_Ny = The_N ;
-  
-  std::cout << std::endl ;
-  std::cout << "Model_ReadOutGeometry::SquareGeometry" << std::endl ;
-  std::cout << "m_Nx = " << m_Nx << "(was " << k_Nx << ")" << std::endl ;
-  std::cout << "m_Ny = " << m_Ny << "(was " << k_Ny << ")" << std::endl ;
-  std::cout << std::endl ;
  
 }
 
@@ -53,14 +47,6 @@ void Model_ReadOutGeometry::SwapGeometry()
   m_LY = k_LX ;
   m_Nx = k_Ny ;
   m_Ny = k_Nx ;
-  
-  std::cout << std::endl ;
-  std::cout << "Model_ReadOutGeometry::SwapGeometry" << std::endl ;
-  std::cout << "m_LX = " << m_LX << "(was " << k_LX << ")" << std::endl ;
-  std::cout << "m_LY = " << m_LY << "(was " << k_LY << ")" << std::endl ;
-  std::cout << "m_Nx = " << m_Nx << "(was " << k_Nx << ")" << std::endl ;
-  std::cout << "m_Ny = " << m_Ny << "(was " << k_Ny << ")" << std::endl ;
-  std::cout << std::endl ;
  
 }
 double Model_ReadOutGeometry::Get_LX      () const { return m_LX       ; }

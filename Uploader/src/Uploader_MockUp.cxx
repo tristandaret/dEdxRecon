@@ -19,13 +19,6 @@ Uploader_MockUp::Uploader_MockUp(
 
   m_BeforeMerging = 0 ;
   m_Swap_XY = 0 ;
-  
-  std::cout << std::endl ;
-  std::cout << "Uploader_MockUp::Uploader_MockUp "<< std::endl ;
-  std::cout << "m_BeforeMerging = " << m_BeforeMerging << std::endl ;
-  std::cout << "m_Swap_XY = " << m_Swap_XY << std::endl ;
-  std::cout << std::endl ;
-
 }
 
 
@@ -191,23 +184,11 @@ Event* Uploader_MockUp::GiveMe_Event(
 void Uploader_MockUp::SetBeforeMerging(const int& i_SetBeforeMerging)
 {
   m_BeforeMerging = i_SetBeforeMerging;
-
-  std::cout << std::endl ;
-  std::cout << "Uploader_MockUp::SetBeforeMerging" << std::endl ;
-  std::cout << "m_BeforeMerging Set to " << m_BeforeMerging << std::endl ;
-  std::cout << std::endl ;
-
 }
 
 void Uploader_MockUp::Setwap_XY(const int& i_Swap_XY)
 {
   m_Swap_XY = i_Swap_XY;
-
-  std::cout << std::endl ;
-  std::cout << "Uploader_MockUp::Setwap_XY" << std::endl ;
-  std::cout << "m_Swap_XY Set to " << m_Swap_XY << std::endl ;
-  std::cout << std::endl ;
-
 }
 
 void Uploader_MockUp::Init()
