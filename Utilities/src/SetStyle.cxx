@@ -18,6 +18,11 @@ TStyle* SetMyStyle() {
   myStyle->SetPadTickX(1);
   myStyle->SetPadTickY(1);
 
+  // Ensure transparent background
+  myStyle->SetPadColor(0);
+  myStyle->SetCanvasColor(0);
+  myStyle->SetFillColor(0);
+
   // Canvas
   myStyle->SetCanvasBorderMode(0);
 
@@ -45,7 +50,9 @@ TStyle* SetMyStyle() {
   myStyle->SetStatFont(FontStyle);
   myStyle->SetStatFontSize(0.04);
   myStyle->SetStatTextColor(FontColor);
-  myStyle->SetStatStyle(0);
+  myStyle->SetStatStyle(1001);
+  myStyle->SetLineColor(FontColor); // may clash with plot color
+  myStyle->SetStatColor(kWhite);
   
   // Text
   myStyle->SetTextFont(FontStyle);

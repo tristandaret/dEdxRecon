@@ -27,7 +27,7 @@ void Reconstruction::Monitoring()
 {
   // SetT2KStyle(1) ;
 
-  comment = "_noGRCWF";
+  comment = "";
   gErrorIgnoreLevel = kInfo;
 
   MakeMyDir(outDir);
@@ -41,12 +41,12 @@ void Reconstruction::Monitoring()
   
   // Files to use
   int prototype =       0;
-  int CERN_Escan =      1; 
+  int CERN_Escan =      1;
 
-  int DESY_zscan =      0; 
-  int DESY_yscan =      0; 
-  int DESY_phi =        0; 
-  int DESY_theta =      0; 
+  int DESY_zscan =      0;
+  int DESY_yscan =      0;
+  int DESY_phi =        0;
+  int DESY_theta =      0;
 
   // Computations
   int control =         0;

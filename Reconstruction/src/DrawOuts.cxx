@@ -90,6 +90,7 @@ void Reconstruction::DrawOuts::EnergyLoss(){
 
 
 	// Draw
+  //////////////////////////////////////////////////////////////////////////////////////////
 	gStyle->						SetOptStat(0);
 	gStyle->						SetOptFit(0);
 	TPaveStats* pStat_WF;
@@ -98,15 +99,16 @@ void Reconstruction::DrawOuts::EnergyLoss(){
 	int XPMax = 					ph1f_XP->GetMaximum();
 	ph1f_WF->SetAxisRange(0, 1.1 * std::max({WFMax, XPMax}),  "Y");
 
-	float inv = 					0;
-	if(ph1f_WF->GetMean() > 650) inv = 0.5;
+	float invX, invY = 					0;
+	if(ph1f_WF->GetMean() > 650) invX = 0.5;
 	ph1f_WF->						Draw("HIST");
 	ph1f_XP->						Draw("HIST sames");
 
-	PrintResolution(ph1f_XP, fpCanvas, 0.65-inv, 0.58, kMagenta+2, "XP");
-	PrintResolution(ph1f_WF, fpCanvas, 0.65-inv, 0.25, kCyan+2, "WF");
+	PrintResolution(ph1f_XP, fpCanvas, 0.65-invX, 0.58, kMagenta+2, "XP");
+	PrintResolution(ph1f_WF, fpCanvas, 0.65-invX, 0.25, kCyan+2, "WF");
 	fpCanvas->          			SaveAs((foutputFile + "(").c_str());
 
+  //////////////////////////////////////////////////////////////////////////////////////////
 	fpCanvas->						cd();
 	fpCanvas->						Clear();
 	fpCanvas->						Divide(4, 2);
@@ -123,28 +125,32 @@ void Reconstruction::DrawOuts::EnergyLoss(){
 			overallMax = std::max(overallMax, maxVal);
 		}
 		v_h1f_WF[i]->				SetAxisRange(0, 1.1 * overallMax, "Y");
-		inv=0;
-		if(v_h1f_WF[i]->GetMean() > 650) inv = 0.5;
+		invX=0;
+		if(v_h1f_WF[i]->GetMean() > 650) invX = 0.5;
 		gPad->						SetRightMargin(0);
 		v_h1f_WF[i]->				Draw("HIST");
 		v_h1f_XP[i]->				Draw("HIST sames");
 		if(i>3) continue;
-		PrintResolution(v_h1f_XP[i], fpCanvas, 0.65-inv, 0.58, kMagenta+2, "XP");
-		PrintResolution(v_h1f_WF[i], fpCanvas, 0.65-inv, 0.25, kCyan+2, "WF");
+		PrintResolution(v_h1f_XP[i], fpCanvas, 0.65-invX, 0.58, kMagenta+2, "XP");
+		PrintResolution(v_h1f_WF[i], fpCanvas, 0.65-invX, 0.25, kCyan+2, "WF");
 	}
-	fpCanvas->          			SaveAs((foutputFile).c_str());
+	fpCanvas->          		SaveAs((foutputFile).c_str());
 
-	fpCanvas->						cd(); 
-	fpCanvas->						Clear();
-	gStyle->						SetOptStat("merou");
-	gStyle->            			SetStatX(0.4);
-	gStyle->            			SetStatY(0.5);
-	gPad->              			SetRightMargin(0.12);
-	gPad->              			SetLeftMargin(0.12);
-	ph2f_XPWF->						GetYaxis()->SetTitleOffset(1.1);
-	gStyle->   						SetTitleX((1.-gPad->GetRightMargin()+gPad->GetLeftMargin())/2);
-	ph2f_XPWF->  					Draw("colz");
-	fpCanvas->          			SaveAs((foutputFile + ")").c_str());
+  //////////////////////////////////////////////////////////////////////////////////////////
+	fpCanvas->						  cd(); 
+	fpCanvas->						  Clear();
+  invX, invY = 0;
+  if(ph2f_XPWF->GetMean(1) > 650) invX = 0.5;
+  if(ph2f_XPWF->GetMean(2) > 650) invY = 0.5;
+	gStyle->						    SetOptStat("merou");
+	gStyle->            		SetStatX(0.36);
+	gStyle->            		SetStatY(0.88);
+	gPad->              		SetRightMargin(0.12);
+	gPad->              		SetLeftMargin(0.12);
+	ph2f_XPWF->						  GetYaxis()->SetTitleOffset(1.1);
+	gStyle->   						  SetTitleX((1.-gPad->GetRightMargin()+gPad->GetLeftMargin())/2);
+	ph2f_XPWF->  					  Draw("colz");
+	fpCanvas->          		SaveAs((foutputFile + ")").c_str());
 
 	// Delete
 	delete ph2f_XPWF;
@@ -1098,8 +1104,8 @@ void DrawOut_Methods(const std::string& OutDir, const std::string& Tag, const st
     int XPMax                        = v_h1f_XP[iMod]->GetMaximum();
     v_h1f_WFsum[iMod]->SetAxisRange(0, 1.1 * std::max({WFsumMax, XPMax}),  "Y");
 
-    float inv                         = 0;
-    if(v_h1f_WFsum[iMod]->GetMean() > 800) inv = 0.4;
+    float invX                         = 0;
+    if(v_h1f_WFsum[iMod]->GetMean() > 800) invX = 0.4;
 
     pTCanvas->cd(iMod+1);
     gStyle->                            SetOptStat(11);
@@ -1119,8 +1125,8 @@ void DrawOut_Methods(const std::string& OutDir, const std::string& Tag, const st
     pStat_XP                       = (TPaveStats*)v_h1f_XP[iMod]->FindObject("stats");
     pStat_XP->                       SetTextColor(kMagenta+2);
 
-    PrintResolution(v_h1f_XP[iMod],     pTCanvas, 0.8-inv, 0.93, kMagenta+2, "XP");
-    PrintResolution(v_h1f_WFsum[iMod], pTCanvas, 0.8-inv, 0.83, kCyan+2, "WF");
+    PrintResolution(v_h1f_XP[iMod],     pTCanvas, 0.8-invX, 0.93, kMagenta+2, "XP");
+    PrintResolution(v_h1f_WFsum[iMod], pTCanvas, 0.8-invX, 0.83, kCyan+2, "WF");
 
   }
   pTCanvas->                  SaveAs(OutputFile.c_str());
