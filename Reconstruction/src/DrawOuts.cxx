@@ -62,12 +62,10 @@ void Reconstruction::DrawOuts::EnergyLoss(){
 	for(int i=0;i<fnentries;i++){
 		fpTree->					GetEntry(i);
     nMod = fpEvent->v_modules.size();
-    if(nMod == 1){
-      int modnum = fpEvent->v_modules[0]->position;
-      v_h1f_WF[modnum]->Fill(fpEvent->dEdxWF);
-      v_h1f_XP[modnum]->Fill(fpEvent->dEdxXP);
+    for(int i=0;i<nMod;i++){
+      v_h1f_XP[i]->        Fill(fpEvent->v_modules[i]->dEdxXP);
+      v_h1f_WF[i]->        Fill(fpEvent->v_modules[i]->dEdxWF);
     }
-    // if(nMod < 4) continue;
 		ph1f_WF->					Fill(fpEvent->dEdxWF);
 		ph1f_XP->					Fill(fpEvent->dEdxXP);
 		ph2f_XPWF->				Fill(fpEvent->dEdxWF, fpEvent->dEdxXP);

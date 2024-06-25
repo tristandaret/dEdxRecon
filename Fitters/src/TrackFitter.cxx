@@ -51,24 +51,18 @@ TrackFitter::TrackFitter(
 
   p_TVirtualFitter->ExecuteCommand("clear"   ,arg, 0) ;
   
-  arg[0] = 3 ;// -1/1 no output/standard output
-  arg[0] = -1 ;// -1/1 no output/standard output
-  ierr = p_TVirtualFitter->ExecuteCommand("SET PRINT",arg,1);
-  if (ierr != 0 ) std::cout << " ierr " << ierr << " for SET PRINT " << std::endl;
-  
+  arg[0] = -1;
+  ierr = p_TVirtualFitter->ExecuteCommand("SET PRINT", arg, 1);
+
   arg[0] = 0 ;
   ierr = p_TVirtualFitter->ExecuteCommand("SET NOW",arg,1);
-  if (ierr != 0 ) std::cout << " ierr " << ierr << " for SET NOW " << std::endl;
   
   arg[0] = 1.e-9;
   ierr = p_TVirtualFitter->ExecuteCommand("set eps" ,arg, 1) ; 
-  if (ierr != 0 ) std::cout << " ierr " << ierr << " for set eps " << std::endl;
   ierr = p_TVirtualFitter->ExecuteCommand("set nog" ,arg, 0) ; 
-  if (ierr != 0 ) std::cout << " ierr " << ierr << " for set nog " << std::endl;
 
   arg[0] = 2;
   ierr = p_TVirtualFitter->ExecuteCommand("set str" ,arg, 1) ; 
-  if (ierr != 0 ) std::cout << " ierr " << ierr << " for set str " << std::endl;
 
 }
 

@@ -62,7 +62,12 @@ namespace Reconstruction{
         std::vector<RecoCluster*> v_clusters;
         int ID                  = 0;
         int position            = 0;
+        float dEdxXP            = 0;
+        float dEdxWF            = 0;
+        int NCrossedPads        = 0;
         int NClusters           = 0;
+        float lengthXP          = 0;
+        float lengthWF          = 0;
         float phi               = 0;
         TF1* Track              = new TF1("pTrackFit", "[0]*x+[1]+[2]*x*x", 0, 2000);
 

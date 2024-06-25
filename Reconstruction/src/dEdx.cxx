@@ -67,7 +67,7 @@ void Reconstruction::dEdx::Reconstruction(){
 	std::vector<int> fERAMs_pos;
 	if(tag.find("DESY") != std::string::npos)         {fERAMs_iD.push_back(1);  fERAMs_pos.push_back(12);}
 	if(dataFile.find("ERAM18") != std::string::npos)  {fERAMs_iD.push_back(18); fERAMs_pos.push_back(18);} // take 14 in position #18 because 18 is not mounted but they are similar
-	if(dataFile.find("All_ERAMS") != std::string::npos){fERAMs_iD =  {7, 1, 23, 2, 16, 15, 10, 12}; fERAMs_pos =  {26, 7, 12, 10, 7, 17, 19, 13, 14};} // 12 replace with 11 in pos #14
+	if(dataFile.find("All_ERAMS") != std::string::npos){fERAMs_iD =  {7, 1, 23, 2, 16, 15, 10, 12}; fERAMs_pos =  {26, 12, 10, 7, 17, 19, 13, 6};} // 12 replace with 9 in pos #6 at JPARC
 	Reconstruction::ERAMMaps *pERAMMaps =  new Reconstruction::ERAMMaps();
 
 	// Handle theta case
@@ -112,16 +112,23 @@ void Reconstruction::dEdx::Reconstruction(){
 	int fcounterFit =                  				0;
 
 	// Initialization of analysis vectors and histograms
-	std::vector<float> 	v_dx;
-	std::vector<float> 	v_dE;
-	std::vector<float> 	v_dEdxXP;
-	std::vector<float> 	v_dEdxWF;
+	// Modules
+	std::vector<float> 	v_mod_dx;
+	std::vector<float> 	v_mod_dE;
+	std::vector<float> 	v_mod_dEdxXP;
+	std::vector<float> 	v_mod_dEdxWF;
+	// Events
+	std::vector<float> 	v_evt_dx;
+	std::vector<float> 	v_evt_dE;
+	std::vector<float> 	v_evt_dEdxXP;
+	std::vector<float> 	v_evt_dEdxWF;
 	std::vector<double> v_erams;
-	TH1F *ph1f_WF =  								new TH1F("ph1f_WF", "<dE/dx> with WF;<dE/dx> (ADC count);Number of events", 100, 0, 1300);
-	TH1F *ph1f_XP =  								new TH1F("ph1f_XP", "<dE/dx> with XP;<dE/dx> (ADC count);Number of events", 100, 0, 1300);
-
+	// Waveforms
 	std::vector<int>   	waveform_cluster(510, 0);
 	std::vector<int>   	waveform_pad(510, 0);
+	// dE/dx quick access histograms
+	TH1F *ph1f_WF =  								new TH1F("ph1f_WF", "<dE/dx> with WF;<dE/dx> (ADC count);Number of events", 100, 0, 1300);
+	TH1F *ph1f_XP =  								new TH1F("ph1f_XP", "<dE/dx> with XP;<dE/dx> (ADC count);Number of events", 100, 0, 1300);
 
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -132,7 +139,7 @@ void Reconstruction::dEdx::Reconstruction(){
 
 	// Event loop
 	for (int iEvent =  0; iEvent < NEvent; iEvent++){
-		if(iEvent % 500 ==  0 or iEvent ==  NEvent-1) std::cout << iEvent << "/" << NEvent << std::endl;
+		if(iEvent % 1000 ==  0 or iEvent ==  NEvent-1) std::cout << iEvent << "/" << NEvent << std::endl;
 
 		Event* pEvent =                     		p_uploader->GiveMe_Event(iEvent, moduleCase, 0, 0);
 		if (!pEvent)                				continue;
@@ -243,13 +250,13 @@ void Reconstruction::dEdx::Reconstruction(){
 					if(driftMethod ==  "zcalc") p_tpad->ratio = p_tpad->ratioDrift;
 					if(driftMethod ==  "zfile") p_tpad->ratio = p_tpad->ratioFile;
 
-					v_dE.                   		push_back(p_tpad->ADC*p_tpad->ratio);
-					v_dx.                   		push_back(p_tpad->length);
-					v_dEdxXP.               		push_back(p_tpad->ADC*p_tpad->ratio/(p_tpad->length*100)); // m to cm
+					v_mod_dE.                   		push_back(p_tpad->ADC*p_tpad->ratio);
+					v_mod_dx.                   		push_back(p_tpad->length);
+					v_mod_dEdxXP.               		push_back(p_tpad->ADC*p_tpad->ratio/(p_tpad->length*100)); // m to cm
 
 					p_tcluster->v_pads.				push_back(p_tpad);
-					p_tevent->lengthXP +=           p_tpad->length;
-					p_tevent->						NCrossedPads++;
+					p_tmodule->NCrossedPads++;
+					p_tmodule->lengthXP += 			p_tpad->length;
 				} // Pads
 
 				// Gain correction for the whole cluster
@@ -258,33 +265,54 @@ void Reconstruction::dEdx::Reconstruction(){
 				// WF correction steps
 				int fAcluster =               		*std::max_element(waveform_cluster.begin(), waveform_cluster.end());
 				p_tcluster->ratioCorr =             fAref / pcorrFunctionWF->Eval(p_tcluster->length*1000);
-				if(tag.find("diag") != std::string::npos) v_dEdxWF.push_back(fAcluster*p_tcluster->ratioCorr/XPADLENGTH*10);
-				else v_dEdxWF.						push_back(fAcluster/(p_tcluster->length*100));
+				if(tag.find("diag") != std::string::npos) v_mod_dEdxWF.push_back(fAcluster*p_tcluster->ratioCorr/XPADLENGTH*10);
+				else v_mod_dEdxWF.						push_back(fAcluster/(p_tcluster->length*100));
 
 				// Fill cluster information
 				p_tmodule->v_clusters.				push_back(p_tcluster);
-				p_tevent->lengthWF +=               p_tcluster->length;							
-				p_tevent->							NClusters++;
+				p_tmodule->NClusters++;
+				p_tmodule->lengthWF += 				p_tcluster->length;
 			} // Clusters
 
+			// Compute dE/dx for the module
+			p_tmodule->dEdxWF =                 	ComputedEdxWF(v_mod_dEdxWF, p_tmodule->NClusters);
+			p_tmodule->dEdxXP =                 	ComputedEdxXP(v_mod_dEdxXP, v_mod_dE, v_mod_dx, p_tmodule->NCrossedPads);
+
+			// Fill module information into the event class
 			p_tevent->v_modules.					push_back(p_tmodule);
+			p_tevent->NCrossedPads += 				p_tmodule->NCrossedPads;
+			p_tevent->NClusters += 					p_tmodule->NClusters;
+			p_tevent->lengthXP += 					p_tmodule->lengthXP;
+			p_tevent->lengthWF += 					p_tmodule->lengthWF;
+			v_evt_dE.                       		insert(v_evt_dE.end(), v_mod_dE.begin(), v_mod_dE.end());
+			v_evt_dx.                       		insert(v_evt_dx.end(), v_mod_dx.begin(), v_mod_dx.end());
+			v_evt_dEdxXP.                   		insert(v_evt_dEdxXP.end(), v_mod_dEdxXP.begin(), v_mod_dEdxXP.end());
+			v_evt_dEdxWF.                   		insert(v_evt_dEdxWF.end(), v_mod_dEdxWF.begin(), v_mod_dEdxWF.end());
+
+			// clear module vectors
+			v_mod_dE.                       		clear();
+			v_mod_dx.                       		clear();
+			v_mod_dEdxXP.                   		clear();
+			v_mod_dEdxWF.                   		clear();
 		} // Modules
 
-		// WF
-		p_tevent->dEdxWF =                  		ComputedEdxWF(v_dEdxWF, p_tevent->NClusters);
-		ph1f_WF->                       			Fill(p_tevent->dEdxWF);
+		// Compute dE/dx for the event
+		p_tevent->dEdxWF =                  		ComputedEdxWF(v_evt_dEdxWF, p_tevent->NClusters);
+		p_tevent->dEdxXP =                  		ComputedEdxXP(v_evt_dEdxXP, v_evt_dE, v_evt_dx, p_tevent->NCrossedPads);
 
-		// XP
-		p_tevent->dEdxXP =                  		ComputedEdxXP(v_dEdxXP, v_dE, v_dx, p_tevent->NCrossedPads);
+		// Make the quick access histograms
+		ph1f_WF->                       			Fill(p_tevent->dEdxWF);
 		ph1f_XP->                       			Fill(p_tevent->dEdxXP);
 
+		// Fill the tree
 		pTree_dEdx->                				Fill();
 
+		// Clear event vectors
 		v_erams.                    				clear();
-		v_dE.                       				clear();
-		v_dx.                       				clear();
-		v_dEdxXP.                   				clear();
-		v_dEdxWF.                   				clear();
+		v_evt_dE.                       			clear();
+		v_evt_dx.                       			clear();
+		v_evt_dEdxXP.                   			clear();
+		v_evt_dEdxWF.                   			clear();
 		p_tevent->									Clear();
 		delete 										pEvent;
 	} // Events
@@ -295,13 +323,12 @@ void Reconstruction::dEdx::Reconstruction(){
 	// Historam fitting
 	std::cout << "Fitting dE/dx histograms... "; 
 	TF1 *ptf1_WF = 									Fit1Gauss(ph1f_WF, 2);
-	ptf1_WF->										SetNameTitle("ptf1_WF", "ptf1_WF");
-
 	TF1 *ptf1_XP = 									Fit1Gauss(ph1f_XP, 2);
+	ptf1_WF->										SetNameTitle("ptf1_WF", "ptf1_WF");
 	ptf1_XP->										SetNameTitle("ptf1_XP", "ptf1_XP");
 	std::cout << "done!" << std::endl; 
 
-	// Methods
+	// Save histograms and fits
 	ptf1_WF->                     					Write();
 	ptf1_XP->                     					Write();
 	ph1f_WF->                     					Write();
