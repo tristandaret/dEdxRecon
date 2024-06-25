@@ -52,6 +52,16 @@ protected:
 
 };
 
+void ClusterFit_Horizontal        (Sample&  aSample , const int& ModuleNber, TF1* pTF1_ToBeUsed);
+void ClusterFit_Horizontal_Event  (Event*   pEvent  , const int& ModuleNber, TF1* pTF1_ToBeUsed, ClusterFitter_Horizontal& aClusterFitter_Horizontal) ;
+void ClusterFit_Horizontal_Cluster(Cluster* pCluster, const int& ModuleNber, TF1* pTF1_ToBeUsed, ClusterFitter_Horizontal& aClusterFitter_Horizontal) ;
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 // DIAGONAL FITTER
@@ -94,10 +104,6 @@ protected:
  
 //-------------------------------------Cluster Fits-------------------------------/
 //Cluster Fits
-void ClusterFit_Horizontal        (Sample&  aSample , const int& ModuleNber, TF1* pTF1_ToBeUsed);
-void ClusterFit_Horizontal_Event  (Event*   pEvent  , const int& ModuleNber, TF1* pTF1_ToBeUsed, int& Kounter_Fit, int& Kounter_Failure, ClusterFitter_Horizontal& aClusterFitter_Horizontal) ;
-void ClusterFit_Horizontal_Cluster(Cluster* pCluster, const int& ModuleNber, TF1* pTF1_ToBeUsed, int& Kounter_Fit, int& Kounter_Failure, ClusterFitter_Horizontal& aClusterFitter_Horizontal) ;
-
 
 void ClusterFit_Diagonal        (const double& AngleRot, Sample&  aSample , const int& ModuleNber, TF1* pTF1_ToBeUsed);
 void ClusterFit_Diagonal_Event  (const double& AngleRot, Event*   pEvent  , const int& ModuleNber, TF1* pTF1_ToBeUsed, int& Kounter_Fit, int& Kounter_Failure, ClusterFitter_Diagonal& aClusterFitter_Diagonal) ;

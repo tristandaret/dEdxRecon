@@ -79,24 +79,16 @@ private:
   double m_YTrack  ; 
   double m_eXTrack ; 
   double m_eYTrack ; 
-  double m_AT      ; 
-  double m_eAT     ;
-  double m_TT      ; 
-  double m_eTT     ;
   bool   m_StatusFit  ; // True: fit failed  ; False: Fit OK
    
   double m_Chi2Min ;
   
   double m_XTrack_BeforeMinimisation  ; 
   double m_YTrack_BeforeMinimisation  ; 
-  double m_AT_BeforeMinimisation      ; 
-  double m_TT_BeforeMinimisation      ; 
   
 public:
    void Set_XTrack(const double& XTrack);
    void Set_YTrack(const double& YTrack);
-   void Set_AT    (const double& AT    );
-   void Set_TT    (const double& TT    );
    
    void Set_eXTrack(const double& eXTrack);
    void Set_eYTrack(const double& eYTrack);
@@ -108,18 +100,12 @@ public:
    double Get_YTrack  () const ;
    double Get_eYTrack () const ;
    
-   double Get_AT      () const ;
-   double Get_eAT     () const ;
    
-   double Get_TT      () const ;
-   double Get_eTT     () const ;
    
    double Get_Chi2Min () const ;
    
    double Get_XTrack_BeforeMinimisation() const ;
    double Get_YTrack_BeforeMinimisation() const ;
-   double Get_AT_BeforeMinimisation    () const ;
-   double Get_TT_BeforeMinimisation    () const ;
   
   
 //---------------------Horizontal-----------------------------//

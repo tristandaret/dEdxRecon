@@ -25,9 +25,7 @@ namespace Reconstruction{
 
 void Reconstruction::Monitoring()
 {
-  // SetT2KStyle(1) ;
-
-  comment = "";
+  comment = "_40k_WFGPad";
   gErrorIgnoreLevel = kInfo;
 
   MakeMyDir(outDir);

@@ -138,7 +138,7 @@ void Reconstruction::dEdx::Reconstruction(){
 
 
 	// Event loop
-	for (int iEvent =  0; iEvent < NEvent; iEvent++){
+	for (int iEvent =  0; iEvent < 4e4; iEvent++){
 		if(iEvent % 1000 ==  0 or iEvent ==  NEvent-1) std::cout << iEvent << "/" << NEvent << std::endl;
 
 		Event* pEvent =                     		p_uploader->GiveMe_Event(iEvent, moduleCase, 0, 0);
@@ -163,13 +163,13 @@ void Reconstruction::dEdx::Reconstruction(){
 			if(NC ==  0) 							continue;
 
 			Reconstruction::RecoModule *p_tmodule =  	new Reconstruction::RecoModule();
-			p_tmodule->position =         			iMod;
-			p_tmodule->ID =               			fmodID;
+			p_tmodule->position =         			fmodID;
+			p_tmodule->ID =               			fERAMs_iD[fmodID];
 
 			// Track fitting
 			if(tag.find("diag") == std::string::npos){
 				ClusterFitter_Horizontal aClusterFitter_Horizontal("Minuit");
-				ClusterFit_Horizontal_Event(pEvent, fmodID, ptf1PRF, fcounterFit, fcounterFail, aClusterFitter_Horizontal);
+				ClusterFit_Horizontal_Event(pEvent, fmodID, ptf1PRF, aClusterFitter_Horizontal);
 			}
 			else{
 				ClusterFitter_Diagonal aClusterFitter_Diagonal("Minuit");
@@ -204,24 +204,24 @@ void Reconstruction::dEdx::Reconstruction(){
 					std::fill(waveform_pad.begin(), waveform_pad.end(), 0); // reset waveform
 					const Pad* pPad =            	pCluster->Get_Pad(iP);
 					Reconstruction::RecoPad * p_tpad = new Reconstruction::RecoPad();
-					waveform_pad = 			pPad->Get_vADC();
-					for(int i=0;i<510;i++) waveform_cluster[i] += waveform_pad[i]; // Gain correction wrt to leading pad's gain after pad loop
+					waveform_pad = 					pPad->Get_vADC();
 					p_tpad->ix =                    pPad->Get_iX();
 					p_tpad->iy =                    pPad->Get_iY();
 
 					// RC correction
-					if(fcorrectRC) p_tpad->RC =		pERAMMaps->RC(fERAMs_pos[iMod], p_tpad->ix, p_tpad->iy);
+					if(fcorrectRC) p_tpad->RC =		pERAMMaps->RC(fERAMs_pos[fmodID], p_tpad->ix, p_tpad->iy);
 					else           p_tpad->RC =		120;
 
 					// Gain correction
 					if(fcorrectGain){
-						p_tpad->gain =              pERAMMaps->Gain(fERAMs_pos[iMod], p_tpad->ix, p_tpad->iy);
+						p_tpad->gain =              pERAMMaps->Gain(fERAMs_pos[fmodID], p_tpad->ix, p_tpad->iy);
 						p_tpad->GainCorrection =    AVG_GAIN/p_tpad->gain;
 						p_tpad->ADC =               p_tpad->GainCorrection*pPad->Get_AMax();
 						for(int i=0;i<510;i++) waveform_pad[i] = round(waveform_pad[i] * p_tpad->GainCorrection);
 						if(iP == 0) fGainCorrectionLead = p_tpad->GainCorrection;		
 					}
 					else p_tpad->ADC =              pPad->Get_AMax();
+					for(int i=0;i<510;i++) waveform_cluster[i] += waveform_pad[i];
 					
 					// Track computations
 					local_params(pPad, pTrack, p_tpad->d, p_tpad->dd, p_tpad->phi, p_tpad->length); // impact parameter and length in pad in m, angle in degrees
@@ -257,10 +257,11 @@ void Reconstruction::dEdx::Reconstruction(){
 					p_tcluster->v_pads.				push_back(p_tpad);
 					p_tmodule->NCrossedPads++;
 					p_tmodule->lengthXP += 			p_tpad->length;
+
 				} // Pads
 
 				// Gain correction for the whole cluster
-				if(fcorrectGain) for(int i=0;i<510;i++) waveform_cluster[i] *= fGainCorrectionLead;
+				// if(fcorrectGain) for(int i=0;i<510;i++) waveform_cluster[i] *= fGainCorrectionLead;
 
 				// WF correction steps
 				int fAcluster =               		*std::max_element(waveform_cluster.begin(), waveform_cluster.end());

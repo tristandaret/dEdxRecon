@@ -58,17 +58,20 @@ void Reconstruction::DrawOuts::EnergyLoss(){
   }
 
   int nMod = 0;
+  int position = 0;
 	// Get entries and fill histograms
 	for(int i=0;i<fnentries;i++){
 		fpTree->					GetEntry(i);
     nMod = fpEvent->v_modules.size();
     for(int i=0;i<nMod;i++){
-      v_h1f_XP[i]->        Fill(fpEvent->v_modules[i]->dEdxXP);
-      v_h1f_WF[i]->        Fill(fpEvent->v_modules[i]->dEdxWF);
+      position = fpEvent->v_modules[i]->position;
+      v_h1f_XP[position]->        Fill(fpEvent->v_modules[i]->dEdxXP);
+      v_h1f_WF[position]->        Fill(fpEvent->v_modules[i]->dEdxWF);
     }
-		ph1f_WF->					Fill(fpEvent->dEdxWF);
-		ph1f_XP->					Fill(fpEvent->dEdxXP);
-		ph2f_XPWF->				Fill(fpEvent->dEdxWF, fpEvent->dEdxXP);
+    if(nMod != 4) continue;
+    ph1f_WF->					Fill(fpEvent->dEdxWF);
+    ph1f_XP->					Fill(fpEvent->dEdxXP);
+    ph2f_XPWF->				Fill(fpEvent->dEdxWF, fpEvent->dEdxXP);
 	}
 
 	// Fitting

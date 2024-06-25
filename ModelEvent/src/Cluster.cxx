@@ -12,7 +12,6 @@ Cluster::Cluster(
   m_EntryNber  = EntryNber ;
   m_ModuleNber = ModuleNber;
 
-//
   Pad_Leading         = 0 ;
   Pad_NextLeading     = 0 ;
   Pad_NextNextLeading = 0 ;
@@ -21,7 +20,6 @@ Cluster::Cluster(
 
   m_StatusFit = 0 ;
 
-//
   Beg_Horizontal() ;
   Beg_Diagonal() ;
 }
@@ -29,10 +27,7 @@ Cluster::Cluster(
 Cluster::~Cluster()
 {
   V_Pad.clear();
-//
   V_Pad.clear()     ; std::vector< const Pad* >().swap( V_Pad    );
-//
-//
   End_Horizontal() ;
   End_Diagonal() ;
 }
@@ -127,51 +122,42 @@ void Cluster::DoClosure()
   }
   
 
-  m_AT  = Get_AMaxLeading() ;
-  m_eAT = 0.1*m_AT ;
-  m_TT  = Get_TMaxLeading() ;
-  m_eTT = 0.1*m_TT ;
 
 }
 
-int  Cluster::Get_NberOfPads     ()      const  { return m_NberOfPads   ; }
-const Pad* Cluster::Get_Pad(const int& Index1D) const  { return V_Pad[Index1D] ; }
+int Cluster::Get_NberOfPads() const { return m_NberOfPads; }
+const Pad* Cluster::Get_Pad(const int& Index1D) const { return V_Pad[Index1D]; }
 
-double Cluster::Get_Acluster () const { return m_Acluster ; }
-double Cluster::Get_XWeight  () const { return m_XWeight  ; }
-double Cluster::Get_YWeight  () const { return m_YWeight  ; }
+double Cluster::Get_Acluster() const { return m_Acluster; }
+double Cluster::Get_XWeight() const { return m_XWeight; }
+double Cluster::Get_YWeight() const { return m_YWeight; }
 
-const Pad* Cluster::Get_LeadingPad() const { return Pad_Leading ; }
-double Cluster::Get_YLeading     ()  const { return Pad_Leading->Get_YPad() ; }
-double Cluster::Get_TMaxLeading  ()  const { return Pad_Leading->Get_TMax() ; }
+const Pad* Cluster::Get_LeadingPad() const { return Pad_Leading; }
+double Cluster::Get_YLeading() const { return Pad_Leading->Get_YPad(); }
+double Cluster::Get_TMaxLeading() const { return Pad_Leading->Get_TMax(); }
 
-const Pad* Cluster::Get_NextLeadingPad()     const { return Pad_NextLeading     ; }
-const Pad* Cluster::Get_NextNextLeadingPad() const { return Pad_NextNextLeading ; }
+const Pad* Cluster::Get_NextLeadingPad() const { return Pad_NextLeading; }
+const Pad* Cluster::Get_NextNextLeadingPad() const { return Pad_NextNextLeading; }
 
-double Cluster::Get_AMaxLeading  ()  const { return Pad_Leading->Get_AMax() ; }
+double Cluster::Get_AMaxLeading() const { return Pad_Leading->Get_AMax(); }
 
-void Cluster::WriteOut() const 
+void Cluster::WriteOut() const
 {
-  std::cout << "StartCluster" << std::endl ;
-  std::cout << " m_EventNber ; " << std::setw(16) << m_EventNber << std::endl ;
-  std::cout << " m_EntryNber ; " << std::setw(16) << m_EntryNber << std::endl ;
-//std::cout << " m_ClNber ; " << std::setw(16) << m_ClNber << std::endl ;
-  for (int iPad = 0 ; iPad< Get_NberOfPads(); iPad++){
-    const Pad*   pPad = V_Pad[iPad] ;
+  for (int iPad = 0; iPad < Get_NberOfPads(); iPad++)
+  {
+    const Pad* pPad = V_Pad[iPad];
     int iX = pPad->Get_iX();
     int iY = pPad->Get_iY();
-    std::cout << " iXiY       ; " << std::setw(16)                         << iX          
-              <<           "  ; " << std::setw(16)                         << iY         << std::endl ;
   }
-  std::cout << "EndCluster" << std::endl ;
 }
+
+
+
 
 
 //--------------------------------------------------------------------------//   
 void Cluster::Set_XTrack(const double& XTrack){ m_XTrack = XTrack; }
 void Cluster::Set_YTrack(const double& YTrack){ m_YTrack = YTrack; }
-void Cluster::Set_AT    (const double& AT    ){ m_AT     = AT    ; }
-void Cluster::Set_TT    (const double& TT    ){ m_TT     = TT    ; }
 
 void Cluster::Set_eXTrack(const double& eXTrack){ m_eXTrack = eXTrack; }
 void Cluster::Set_eYTrack(const double& eYTrack){ m_eYTrack = eYTrack; }
@@ -182,18 +168,22 @@ double Cluster::Get_XTrack  () const { return m_XTrack    ; }
 double Cluster::Get_eXTrack () const { return m_eXTrack   ; }
 double Cluster::Get_YTrack  () const { return m_YTrack    ; }
 double Cluster::Get_eYTrack () const { return m_eYTrack   ; }
-double Cluster::Get_AT      () const { return m_AT        ; }
-double Cluster::Get_eAT     () const { return m_eAT       ; }
-double Cluster::Get_TT      () const { return m_TT        ; }
-double Cluster::Get_eTT     () const { return m_eTT       ; }
 
 double Cluster::Get_Chi2Min () const { return m_Chi2Min   ; }
     
 double Cluster::Get_XTrack_BeforeMinimisation () const { return m_XTrack_BeforeMinimisation ; }
 double Cluster::Get_YTrack_BeforeMinimisation () const { return m_YTrack_BeforeMinimisation ; }
-double Cluster::Get_AT_BeforeMinimisation     () const { return m_AT_BeforeMinimisation     ; }
-double Cluster::Get_TT_BeforeMinimisation     () const { return m_TT_BeforeMinimisation     ; }
 
+
+
+
+
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
 //---------------------Horizontal-----------------------------//
 void   Cluster::Beg_Horizontal()
 {
@@ -208,11 +198,9 @@ void   Cluster::Beg_Horizontal()
 void   Cluster::End_Horizontal()
 {
   delete p_FitOutput_Horizontal ; p_FitOutput_Horizontal = 0 ;
-//
   V_FitRes_Horizontal_Pad     .clear() ; std::vector< const Pad* >().swap( V_FitRes_Horizontal_Pad      );
   V_FitRes_Horizontal_Residual.clear() ; std::vector< double     >().swap( V_FitRes_Horizontal_Residual );
   V_FitRes_Horizontal_Pull    .clear() ; std::vector< double     >().swap( V_FitRes_Horizontal_Pull     );
-//
 }
 int Cluster::StatusFit_Horizontal(){ return m_StatusFit_Horizontal ; }
 
@@ -235,20 +223,14 @@ double Cluster::Eval_Horizontal(const double& Xin)
 
 int Cluster::SetParameter_Horizontal(TVirtualFitter* pTVirtualFitter)
 {
-//
   m_NberOf_V_FitRes_Horizontal_Pad = 0 ;
   V_FitRes_Horizontal_Pad     .clear() ;
   V_FitRes_Horizontal_Residual.clear() ;
   V_FitRes_Horizontal_Pull    .clear() ;
 
-//
   int ier = 0 ; 
   
-//ier = pTVirtualFitter->SetParameter(0, "YTrack" , m_YTrack , 0.0001 , Pad_Leading->Get_YL(), Pad_Leading->Get_YH() ) ;
-//ier = pTVirtualFitter->SetParameter(0, "YTrack" , m_YTrack , 0.0001 , m_YTrack-0.10, m_YTrack+0.10 ) ;
   ier = pTVirtualFitter->SetParameter(0, "YTrack" , m_YTrack , 0.0001 , Pad_Leading->Get_YL() - (Pad_Leading->Get_YH()-Pad_Leading->Get_YL()), Pad_Leading->Get_YH() + (Pad_Leading->Get_YH()-Pad_Leading->Get_YL()) ) ;
-//ier = pTVirtualFitter->SetParameter(0, "YTrack" , m_YTrack , 0.0001 , 0. , 0. ) ;
-  if (ier != 0 ) std::cout << " ier " << ier << " SetParameter " << std::endl;
   
   m_YTrack_BeforeMinimisation =  m_YTrack ;
   
@@ -267,7 +249,6 @@ void Cluster::SetResults_Horizontal(TVirtualFitter* pTVirtualFitter)
 
   m_Chi2Min = Chi2_Horizontal(p_FitOutput_Horizontal->p_par) ;
 
-//
   m_NberOf_V_FitRes_Horizontal_Pad = 0 ;
   V_FitRes_Horizontal_Pad     .clear() ;
   V_FitRes_Horizontal_Residual.clear() ;
@@ -325,7 +306,6 @@ void   Cluster::SetResults_FailledFit_Horizontal (const int& Verbose )
   
   p_FitOutput_Horizontal->SetResults(V_PARname,V_PAR,V_ePAR) ;
 
-//
   m_NberOf_V_FitRes_Horizontal_Pad = 0 ;
   V_FitRes_Horizontal_Pad     .clear() ;
   V_FitRes_Horizontal_Residual.clear() ;
@@ -416,6 +396,29 @@ double     Cluster::FitRes_Horizontal_Get_Residual (const int& Index1D) const  {
 double     Cluster::FitRes_Horizontal_Get_Pull     (const int& Index1D) const  { return V_FitRes_Horizontal_Pull    [Index1D] ; }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
 //---------------------Diagonal-----------------------------//
 void   Cluster::Beg_Diagonal()
 {
@@ -431,11 +434,9 @@ void   Cluster::Beg_Diagonal()
 void   Cluster::End_Diagonal()
 {
   delete p_FitOutput_Diagonal ; p_FitOutput_Diagonal = 0 ;
-//
   V_FitRes_Diagonal_Pad     .clear() ; std::vector< const Pad* >().swap( V_FitRes_Diagonal_Pad      );
   V_FitRes_Diagonal_Residual.clear() ; std::vector< double     >().swap( V_FitRes_Diagonal_Residual );
   V_FitRes_Diagonal_Pull    .clear() ; std::vector< double     >().swap( V_FitRes_Diagonal_Pull     );
-//
 }
 int Cluster::StatusFit_Diagonal(){ return m_StatusFit_Diagonal ; }
 
@@ -458,13 +459,11 @@ double Cluster::Eval_Diagonal(const double& Xin)
 
 int Cluster::SetParameter_Diagonal(TVirtualFitter* pTVirtualFitter)
 {
-//
   m_NberOf_V_FitRes_Diagonal_Pad = 0 ;
   V_FitRes_Diagonal_Pad     .clear() ;
   V_FitRes_Diagonal_Residual.clear() ;
   V_FitRes_Diagonal_Pull    .clear() ;
 
-//
   int ier = 0 ; 
   
   double CosRot = std::cos(m_AngleRot) ;
@@ -506,7 +505,6 @@ void Cluster::SetResults_Diagonal(TVirtualFitter* pTVirtualFitter)
   
   m_Chi2Min = Chi2_Diagonal(p_FitOutput_Diagonal->p_par) ;
 
-//
   m_NberOf_V_FitRes_Diagonal_Pad = 0 ;
   V_FitRes_Diagonal_Pad     .clear() ;
   V_FitRes_Diagonal_Residual.clear() ;
@@ -516,7 +514,6 @@ void Cluster::SetResults_Diagonal(TVirtualFitter* pTVirtualFitter)
   for (int iPad = 0 ; iPad<NberOfPad ; iPad++) {
     const Pad* pPad = V_Pad[iPad] ;
 
-//
     double XLocal = pPad->Get_XPad() ;
     double YLocal = pPad->Get_YPad() ;
     
@@ -579,7 +576,6 @@ void   Cluster::SetResults_FailledFit_Diagonal (const int& Verbose )
   
   p_FitOutput_Diagonal->SetResults(V_PARname,V_PAR,V_ePAR) ;
 
-//
   m_NberOf_V_FitRes_Diagonal_Pad = 0 ;
   V_FitRes_Diagonal_Pad     .clear() ;
   V_FitRes_Diagonal_Residual.clear() ;
@@ -589,7 +585,6 @@ void   Cluster::SetResults_FailledFit_Diagonal (const int& Verbose )
   for (int iPad = 0 ; iPad<NberOfPad ; iPad++) {
     const Pad* pPad = V_Pad[iPad] ;
     
-//
     double XLocal = pPad->Get_XPad() ;
     double YLocal = pPad->Get_YPad() ;
     
@@ -639,7 +634,6 @@ double Cluster::Chi2_Diagonal(double par[])
   for (int iPad = 0 ; iPad<NberOfPad ; iPad++) {
     const Pad* pPad = V_Pad[iPad] ;
     
-//
     double XLocal = pPad->Get_XPad() ;
     double YLocal = pPad->Get_YPad() ;
     

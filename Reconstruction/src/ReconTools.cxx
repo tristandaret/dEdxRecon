@@ -123,7 +123,7 @@ void corr( const std::string& OutDir,
 
       // PRF procedure & track evaluation
       ClusterFitter_Horizontal            aClusterFitter_Horizontal("Minuit") ;
-      ClusterFit_Horizontal_Event(pEvent, iMod, tf1_PRF, Kounter_Fit, Kounter_Fail, aClusterFitter_Horizontal) ;
+      ClusterFit_Horizontal_Event(pEvent, iMod, tf1_PRF, aClusterFitter_Horizontal) ;
       TrackFitter                      aTrackFitter("Minuit", n_param_trk) ;
       int reco                          = TrackRecon_Event(aTrackFitter, pEvent, iMod, n_param_trk) ;
 

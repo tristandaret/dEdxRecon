@@ -32,38 +32,39 @@ TrackFitter::TrackFitter(
                const int& NberOfParameters 
 )
 {
+  int ierr ; 
+  double arg[1] ;
 
-  m_FitterName = FitterName     ;
+  m_FitterName = FitterName;
+  m_NberOfParameters = NberOfParameters;
   
-  m_NberOfParameters = NberOfParameters     ;
+  p_TVirtualFitter = 0;
   
-  p_TVirtualFitter = 0 ;
-  
-  delete p_TVirtualFitter ;
-  TVirtualFitter::SetDefaultFitter(m_FitterName.c_str() );
-  p_TVirtualFitter= TVirtualFitter::Fitter(0,500);
+  delete p_TVirtualFitter;
+  TVirtualFitter::SetDefaultFitter(m_FitterName.c_str());
+  p_TVirtualFitter = TVirtualFitter::Fitter(0, 500);
 
-  int ierr ; double arg[10] ;
-
-  // Set fonction pointer
+  // Set function pointer
   StaticTrackFitter::Set(this);
-  p_TVirtualFitter->SetFCN(TrackFitterFunction); 
+  p_TVirtualFitter->SetFCN(TrackFitterFunction);
 
-  p_TVirtualFitter->ExecuteCommand("clear"   ,arg, 0) ;
-  
+  p_TVirtualFitter->ExecuteCommand("clear", arg, 0);
+
+  // Set print level to -1 to suppress all messages
   arg[0] = -1;
-  ierr = p_TVirtualFitter->ExecuteCommand("SET PRINT", arg, 1);
+  ierr = p_TVirtualFitter->ExecuteCommand("SET PRINT LEVEL", arg, 1);
 
-  arg[0] = 0 ;
-  ierr = p_TVirtualFitter->ExecuteCommand("SET NOW",arg,1);
+  // Set other parameters
+  arg[0] = 0;
+  ierr = p_TVirtualFitter->ExecuteCommand("SET NOW", arg, 1);
   
   arg[0] = 1.e-9;
-  ierr = p_TVirtualFitter->ExecuteCommand("set eps" ,arg, 1) ; 
-  ierr = p_TVirtualFitter->ExecuteCommand("set nog" ,arg, 0) ; 
+  ierr = p_TVirtualFitter->ExecuteCommand("SET EPS", arg, 1);
+  
+  ierr = p_TVirtualFitter->ExecuteCommand("SET NOG", arg, 0);
 
   arg[0] = 2;
-  ierr = p_TVirtualFitter->ExecuteCommand("set str" ,arg, 1) ; 
-
+  ierr = p_TVirtualFitter->ExecuteCommand("SET STRATEGY", arg, 1);
 }
 
 TrackFitter::~TrackFitter() {}
