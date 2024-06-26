@@ -25,7 +25,7 @@ namespace Reconstruction{
 
 void Reconstruction::Monitoring()
 {
-  comment = "_40k_WFGPad";
+  comment = "";
   gErrorIgnoreLevel = kInfo;
 
   MakeMyDir(outDir);

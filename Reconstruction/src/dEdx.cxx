@@ -66,9 +66,13 @@ void Reconstruction::dEdx::Reconstruction(){
 	std::vector<int> fERAMs_iD;
 	std::vector<int> fERAMs_pos;
 	if(tag.find("DESY") != std::string::npos)         {fERAMs_iD.push_back(1);  fERAMs_pos.push_back(12);}
-	if(dataFile.find("ERAM18") != std::string::npos)  {fERAMs_iD.push_back(18); fERAMs_pos.push_back(18);} // take 14 in position #18 because 18 is not mounted but they are similar
-	if(dataFile.find("All_ERAMS") != std::string::npos){fERAMs_iD =  {7, 1, 23, 2, 16, 15, 10, 12}; fERAMs_pos =  {26, 12, 10, 7, 17, 19, 13, 6};} // 12 replace with 9 in pos #6 at JPARC
+	if(dataFile.find("ERAM18") != std::string::npos)  {fERAMs_iD.push_back(18); fERAMs_pos.push_back(33);}
+	if(dataFile.find("All_ERAMS") != std::string::npos){fERAMs_iD =  {7, 1, 23, 2, 16, 15, 10, 12}; fERAMs_pos =  {26, 12, 10, 7, 17, 19, 13, 32};}
 	Reconstruction::ERAMMaps *pERAMMaps =  new Reconstruction::ERAMMaps();
+
+	// Diagonal clustering?
+	bool diag = false;
+	if(tag.find("diag") != std::string::npos) diag = true;
 
 	// Handle theta case
 	float costheta =     1;
@@ -138,7 +142,7 @@ void Reconstruction::dEdx::Reconstruction(){
 
 
 	// Event loop
-	for (int iEvent =  0; iEvent < 4e4; iEvent++){
+	for (int iEvent =  0; iEvent < NEvent; iEvent++){
 		if(iEvent % 1000 ==  0 or iEvent ==  NEvent-1) std::cout << iEvent << "/" << NEvent << std::endl;
 
 		Event* pEvent =                     		p_uploader->GiveMe_Event(iEvent, moduleCase, 0, 0);
@@ -167,7 +171,7 @@ void Reconstruction::dEdx::Reconstruction(){
 			p_tmodule->ID =               			fERAMs_iD[fmodID];
 
 			// Track fitting
-			if(tag.find("diag") == std::string::npos){
+			if(!diag){
 				ClusterFitter_Horizontal aClusterFitter_Horizontal("Minuit");
 				ClusterFit_Horizontal_Event(pEvent, fmodID, ptf1PRF, aClusterFitter_Horizontal);
 			}
@@ -216,11 +220,11 @@ void Reconstruction::dEdx::Reconstruction(){
 					if(fcorrectGain){
 						p_tpad->gain =              pERAMMaps->Gain(fERAMs_pos[fmodID], p_tpad->ix, p_tpad->iy);
 						p_tpad->GainCorrection =    AVG_GAIN/p_tpad->gain;
-						p_tpad->ADC =               p_tpad->GainCorrection*pPad->Get_AMax();
+						p_tpad->ADCmax =            p_tpad->GainCorrection*pPad->Get_AMax();
 						for(int i=0;i<510;i++) waveform_pad[i] = round(waveform_pad[i] * p_tpad->GainCorrection);
 						if(iP == 0) fGainCorrectionLead = p_tpad->GainCorrection;		
 					}
-					else p_tpad->ADC =              pPad->Get_AMax();
+					else p_tpad->ADCmax =              pPad->Get_AMax();
 					for(int i=0;i<510;i++) waveform_cluster[i] += waveform_pad[i];
 					
 					// Track computations
@@ -250,9 +254,11 @@ void Reconstruction::dEdx::Reconstruction(){
 					if(driftMethod ==  "zcalc") p_tpad->ratio = p_tpad->ratioDrift;
 					if(driftMethod ==  "zfile") p_tpad->ratio = p_tpad->ratioFile;
 
-					v_mod_dE.                   		push_back(p_tpad->ADC*p_tpad->ratio);
-					v_mod_dx.                   		push_back(p_tpad->length);
-					v_mod_dEdxXP.               		push_back(p_tpad->ADC*p_tpad->ratio/(p_tpad->length*100)); // m to cm
+					p_tpad->charge =             	p_tpad->ADCmax*p_tpad->ratio;
+					p_tpad->dEdxXP =             	p_tpad->charge/p_tpad->length/100; // m to cm
+					v_mod_dE.                   	push_back(p_tpad->charge);
+					v_mod_dx.                   	push_back(p_tpad->length);
+					v_mod_dEdxXP.               	push_back(p_tpad->dEdxXP);
 
 					p_tcluster->v_pads.				push_back(p_tpad);
 					p_tmodule->NCrossedPads++;
@@ -260,14 +266,15 @@ void Reconstruction::dEdx::Reconstruction(){
 
 				} // Pads
 
-				// Gain correction for the whole cluster
+				// // Gain correction for the whole cluster (doesn't work really well)
 				// if(fcorrectGain) for(int i=0;i<510;i++) waveform_cluster[i] *= fGainCorrectionLead;
 
-				// WF correction steps
-				int fAcluster =               		*std::max_element(waveform_cluster.begin(), waveform_cluster.end());
+				// WF correction function
+				p_tcluster->charge =           		*std::max_element(waveform_cluster.begin(), waveform_cluster.end());
 				p_tcluster->ratioCorr =             fAref / pcorrFunctionWF->Eval(p_tcluster->length*1000);
-				if(tag.find("diag") != std::string::npos) v_mod_dEdxWF.push_back(fAcluster*p_tcluster->ratioCorr/XPADLENGTH*10);
-				else v_mod_dEdxWF.						push_back(fAcluster/(p_tcluster->length*100));
+				if(diag) p_tcluster->dEdxWF = 		p_tcluster->charge*p_tcluster->ratioCorr/XPADLENGTH*10;
+				else p_tcluster->dEdxWF = 			p_tcluster->charge/(p_tcluster->length*100);
+				v_mod_dEdxWF.						push_back(p_tcluster->dEdxWF);
 
 				// Fill cluster information
 				p_tmodule->v_clusters.				push_back(p_tcluster);
@@ -276,8 +283,10 @@ void Reconstruction::dEdx::Reconstruction(){
 			} // Clusters
 
 			// Compute dE/dx for the module
-			p_tmodule->dEdxWF =                 	ComputedEdxWF(v_mod_dEdxWF, p_tmodule->NClusters);
-			p_tmodule->dEdxXP =                 	ComputedEdxXP(v_mod_dEdxXP, v_mod_dE, v_mod_dx, p_tmodule->NCrossedPads);
+			p_tmodule->dEdxWF =                 	ComputedEdxWF(v_mod_dEdxWF, p_tmodule->NClusters, falpha);
+			p_tmodule->dEdxXP =                 	ComputedEdxXP(v_mod_dEdxXP, v_mod_dE, v_mod_dx, p_tmodule->NCrossedPads, falpha);
+			p_tmodule->dEdxWFnoTrunc =          	ComputedEdxWF(v_mod_dEdxWF, p_tmodule->NClusters, 1);
+			p_tmodule->dEdxXPnoTrunc =          	ComputedEdxXP(v_mod_dEdxXP, v_mod_dE, v_mod_dx, p_tmodule->NCrossedPads, 1);
 
 			// Fill module information into the event class
 			p_tevent->v_modules.					push_back(p_tmodule);
@@ -298,8 +307,10 @@ void Reconstruction::dEdx::Reconstruction(){
 		} // Modules
 
 		// Compute dE/dx for the event
-		p_tevent->dEdxWF =                  		ComputedEdxWF(v_evt_dEdxWF, p_tevent->NClusters);
-		p_tevent->dEdxXP =                  		ComputedEdxXP(v_evt_dEdxXP, v_evt_dE, v_evt_dx, p_tevent->NCrossedPads);
+		p_tevent->dEdxWF =                  		ComputedEdxWF(v_evt_dEdxWF, p_tevent->NClusters, falpha);
+		p_tevent->dEdxXP =                  		ComputedEdxXP(v_evt_dEdxXP, v_evt_dE, v_evt_dx, p_tevent->NCrossedPads, falpha);
+		p_tevent->dEdxWFnoTrunc =           		ComputedEdxWF(v_evt_dEdxWF, p_tevent->NClusters, 1);
+		p_tevent->dEdxXPnoTrunc =           		ComputedEdxXP(v_evt_dEdxXP, v_evt_dE, v_evt_dx, p_tevent->NCrossedPads, 1);
 
 		// Make the quick access histograms
 		ph1f_WF->                       			Fill(p_tevent->dEdxWF);
@@ -353,17 +364,17 @@ void Reconstruction::dEdx::Reconstruction(){
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /* dE/dx RECONSTRUCTION ALGORITHMS */
 
-float Reconstruction::dEdx::ComputedEdxWF(std::vector<float> v_dEdxWF, const int& NClusters){
-    float NClustersTrunc =                         int(floor(NClusters*falpha));
+float Reconstruction::dEdx::ComputedEdxWF(std::vector<float> v_dEdxWF, const int& NClusters, const float& alpha){
+    float NClustersTrunc =                         int(floor(NClusters*alpha));
     std::sort(v_dEdxWF.begin(), v_dEdxWF.end());
     return std::accumulate(v_dEdxWF.begin(), v_dEdxWF.begin() + NClustersTrunc, 0.) / NClustersTrunc;
 }
 
 
 
-float Reconstruction::dEdx::ComputedEdxXP(const std::vector<float>& v_dEdx, const std::vector<float>& v_dE, const std::vector<float>& v_dx, const int& nCrossedPads) {
+float Reconstruction::dEdx::ComputedEdxXP(const std::vector<float>& v_dEdx, const std::vector<float>& v_dE, const std::vector<float>& v_dx, const int& nCrossedPads, const float& alpha){
     /// dEdx =  sum(dE)/Sum(dx) and not average(dE/dx) of each pad = > less sensitive to statistical fluctuations
-    float NCrossedTrunc =                         int(floor(nCrossedPads*falpha));
+    float NCrossedTrunc =                         int(floor(nCrossedPads*alpha));
 	float DE = 0, DX = 0;
 
     // Few steps to order v_dE & v_dx similarly to v_dEdx

@@ -73,6 +73,16 @@ void Reconstruction::ERAMMaps::Load()
 	// Filling the maps
 	for (int i=0; i<nentries;i++) {
 		pTree->GetEntry(i);
+		if(fid == 12){ // Not mounted @ JPARC but used in CERN22 Mockup
+			setGain			(32,fx,fy,fgain);
+			setRC			(32,fx,fy,frc);
+			setResolution	(32,fx,fy,fres);
+		}
+		if(fid == 18){ // Not mounted @ JPARC but used for CERN22 prototype
+			setGain			(33,fx,fy,fgain);
+			setRC			(33,fx,fy,frc);
+			setResolution	(33,fx,fy,fres);
+		}
 		if(fpos > 31) continue;
 		setGain       (fpos,fx,fy,fgain);
 		setRC         (fpos,fx,fy,frc);
@@ -81,6 +91,23 @@ void Reconstruction::ERAMMaps::Load()
 
 	// Fill holes in the maps
 	FillHoles();
+
+	if(!verbose) return;
+	float meanGain = 	0;
+	float meanRC = 		0;
+	int iD = 			0;
+	for(int i=0;i<34;i++){
+		iD = ID(i);
+		for(int j=0;j<36;j++){
+			for(int k=0;k<32;k++){
+				meanGain += Gain(i,j,k);
+				meanRC += RC(i,j,k);
+			}
+		}
+		meanGain /= 1152;
+		meanRC /= 1152;
+		std::cout << "ERAM#" << iD << ": mean Gain = " << meanGain << " | mean RC = " << meanRC << std::endl;
+	}
 }
 
 
@@ -113,20 +140,17 @@ double Reconstruction::ERAMMaps::Resolution(const int& position, const int& iX, 
 // ERAMs on endplates 1&3 are X-flipped compared to their maps in the file
 void Reconstruction::ERAMMaps::setGain(const int& position, const int& iX, const int& iY, const double& gain)
 {
-	if(position%16 < 8) fGain[position][iX][iY]    = gain ;
-	else                fGain[position][35-iX][iY] = gain ;
+	fGain[position][iX][iY]			= gain ;
 }
 
 void Reconstruction::ERAMMaps::setRC(const int& position, const int& iX, const int& iY, const double& RC)
 {
-	if(position%16 < 8) fRC[position][iX][iY]    = RC ;
-	else                fRC[position][35-iX][iY] = RC ;
+	fRC[position][iX][iY]			= RC ;
 }
 
 void Reconstruction::ERAMMaps::setResolution(const int& position, const int& iX, const int& iY, const double& resolution)
 {
-	if(position%16 < 8) fResolution[position][iX][iY]    = resolution ;
-	else                fResolution[position][35-iX][iY] = resolution ;
+	fResolution[position][iX][iY]	= resolution ;
 }
 
 
@@ -134,45 +158,44 @@ void Reconstruction::ERAMMaps::FillHoles()
 {
 	for(int i=0;i<32;i++){
 		for(int iY = 0 ; iY < 32 ; iY++){
-		for(int iX = 0 ; iX < 36 ; iX++){
-			double gain = Gain(i,iX,iY) ;
-			double rc   = RC(i,iX,iY) ;
+			for(int iX = 0 ; iX < 36 ; iX++){
+				double gain = Gain(i,iX,iY) ;
+				double rc   = RC(i,iX,iY);
 
-			// Fill holes of maps if there is any
-			std::vector<float> v_sides;
-			if(gain == 0){
-			// std::cout << "ERAM#" << ID(i) << ": " << std::setw(4) << "Gain hole in (iX,iY) = (" << iX << "," << iY << ") | "; 
-			if(iX>0)  v_sides.push_back(Gain(i, iX-1,iY  )) ;
-			if(iX<35) v_sides.push_back(Gain(i, iX+1,iY  )) ;
-			if(iY>0)  v_sides.push_back(Gain(i, iX,  iY-1)) ;
-			if(iY<31) v_sides.push_back(Gain(i, iX,  iY+1)) ;
-			float n_sides = 0;
-			for(int i = 0; i<4; i++) if (v_sides[i]!=0){ // additionnal step to discard empty neighbours
-				gain += v_sides[i];
-				n_sides++;
-			}
-			gain /= n_sides;
-			setGain(i, iX, iY, gain);
-			// std::cout << "value reset at " << gain << std::endl ;
-			}
-			v_sides.clear();
-			if(rc == 0){
-			// std::cout << "ERAM#" << ID(i) << ": " << std::setw(4) << "RC hole in (iX,iY) = (" << iX << "," << iY << ") | "; 
-			if(iX>0)  v_sides.push_back(RC(i, iX-1,iY  )) ;
-			if(iX<35) v_sides.push_back(RC(i, iX+1,iY  )) ;
-			if(iY>0)  v_sides.push_back(RC(i, iX,  iY-1)) ;
-			if(iY<31) v_sides.push_back(RC(i, iX,  iY+1)) ;
-			float n_sides = 0;
-			for(int i = 0; i<4; i++) if (v_sides[i]!=0){ // additionnal step to discard empty neighbours
-				rc += v_sides[i];
-				n_sides++;
-			}
-			rc /= n_sides;
-			setRC(i, iX, iY, rc);
-			// std::cout << "value reset at " << rc << std::endl ;
-			}
-			v_sides.clear();
-		} // iY
+				v_sides.assign(4, 0);
+				if(gain == 0){
+					if(iX>0)  v_sides[0] = Gain(i, iX-1,iY  ) ;
+					if(iX<35) v_sides[1] = Gain(i, iX+1,iY  ) ;
+					if(iY>0)  v_sides[2] = Gain(i, iX,  iY-1) ;
+					if(iY<31) v_sides[3] = Gain(i, iX,  iY+1) ;
+					float n_sides = 0;
+					for(int i = 0; i<4; i++) if (v_sides[i]!=0){ // additionnal step to discard empty neighbours
+						gain += v_sides[i];
+						n_sides++;
+					}
+					gain /= n_sides;
+					setGain(i, iX, iY, gain);
+					std::cout <<"ERAM#" << std::setw(2) << ID(i) << std::setw(2) << " (" << std::setw(2) << i << "): " << "Gain hole in (iX,iY) = (" << iX << "," << iY << ") | value reset at " << Gain(i,iX,iY) << std::endl;
+				}
+
+
+				v_sides.assign(4, 0);
+				if(rc == 0){
+					if(iX>0)  v_sides[0] = RC(i, iX-1,iY  ) ;
+					if(iX<35) v_sides[1] = RC(i, iX+1,iY  ) ;
+					if(iY>0)  v_sides[2] = RC(i, iX,  iY-1) ;
+					if(iY<31) v_sides[3] = RC(i, iX,  iY+1) ;
+					float n_sides = 0;
+					for(int i = 0; i<4; i++) if (v_sides[i]!=0){ // additionnal step to discard empty neighbours
+						rc += v_sides[i];
+						n_sides++;
+					}
+					rc /= n_sides;
+					setRC(i, iX, iY, rc);
+					std::cout <<"ERAM#" << std::setw(2) << ID(i) << std::setw(2) << " (" << std::setw(2) << i << "): " << "RC   hole in (iX,iY) = (" << iX << "," << iY << ") | value reset at " << RC(i,iX,iY) << std::endl;
+				}
+				v_sides.clear();
+			} // iY
 		} // iX
 	}
 }

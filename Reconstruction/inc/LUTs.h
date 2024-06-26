@@ -43,12 +43,14 @@ namespace Reconstruction{
       double Resolution(const int& position, const int& iX, const int& iY);
 
    private:
-    //   std::string fHATPath;
+      bool verbose = false;
       std::string fFile;
       std::vector<int> fID;
-      double fGain        [32][36][32]; // [channel][iX][iY]
-      double fRC          [32][36][32];
-      double fResolution  [32][36][32]; 
+      std::vector<float> v_sides;
+      
+      double fGain        [34][36][32]; // [position][iX][iY]
+      double fRC          [34][36][32];
+      double fResolution  [34][36][32]; 
 
       void Load();
       void setGain       (const int& position, const int& iX, const int& iY, const double& gain) ;
@@ -57,7 +59,8 @@ namespace Reconstruction{
       void FillHoles();
 
       std::vector<int> channel2iD = {24, 30, 28, 19, 21, 13,  9,  2, 26, 17, 23, 29,  1, 10, 11,  3,  /*bottom HATPC*/ 
-                                     47, 16, 14, 15, 42, 45, 37, 36, 20, 38,  7, 44, 43, 39, 41, 46}; /*top    HATPC*/
+                                     47, 16, 14, 15, 42, 45, 37, 36, 20, 38,  7, 44, 43, 39, 41, 46,  /*top    HATPC*/
+                                     12, 18}; // CERN22 MockUp and prototype
    
 
       //------------------------------Data Members-----------------------//

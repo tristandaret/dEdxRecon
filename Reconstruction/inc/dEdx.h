@@ -24,7 +24,9 @@ namespace Reconstruction{
         // std::vector<int> v_waveform;
         int   ix             = 0;
         int   iy             = 0;
-        float ADC            = 0;
+        float ADCmax         = 0;
+        float charge         = 0;
+        float dEdxXP         = 0;
         float RC             = 0;
         float gain           = 0;
         float GainCorrection = 0;
@@ -49,6 +51,8 @@ namespace Reconstruction{
         std::vector<RecoPad*> v_pads;
         // std::vector<int> v_waveform;
         float   length          = 0;
+        float   charge          = 0;
+        float   dEdxWF          = 0;
         int     NPads           = 0;
         float   ratioCorr       = 0; 
 
@@ -64,6 +68,8 @@ namespace Reconstruction{
         int position            = 0;
         float dEdxXP            = 0;
         float dEdxWF            = 0;
+        float dEdxXPnoTrunc     = 0;
+        float dEdxWFnoTrunc     = 0;
         int NCrossedPads        = 0;
         int NClusters           = 0;
         float lengthXP          = 0;
@@ -84,6 +90,8 @@ namespace Reconstruction{
         int eventNbr          = 0;
         float dEdxXP          = 0;
         float dEdxWF          = 0;
+        float dEdxXPnoTrunc   = 0;
+        float dEdxWFnoTrunc   = 0;
         int NCrossedPads      = 0;
         int NClusters         = 0;
         float lengthXP        = 0;
@@ -98,8 +106,8 @@ namespace Reconstruction{
             dEdx();
             virtual ~dEdx();
             void Reconstruction();
-            float ComputedEdxWF(std::vector<float> v_dEdxWF, const int& NClusters);
-            float ComputedEdxXP(const std::vector<float>& v_dEdx, const std::vector<float>& v_dE, const std::vector<float>& v_dx, const int& nCrossedPads);
+            float ComputedEdxWF(std::vector<float> v_dEdxWF, const int& NClusters, const float& alpha);
+            float ComputedEdxXP(const std::vector<float>& v_dEdx, const std::vector<float>& v_dE, const std::vector<float>& v_dx, const int& nCrossedPads, const float& alpha);
 
 
         private:
