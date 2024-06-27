@@ -8,27 +8,39 @@ namespace Reconstruction{
 
     class DrawOuts{
     public:
-
+        // Constructors
         DrawOuts(const std::string &inputFile);
+        DrawOuts(const std::vector<std::string> &v_inputFiles);
+        // Destructor
         virtual ~DrawOuts();
 
-        void Checks();
+        // Methods
+        void SetStyle();
         void EnergyLoss();
+        void FileComparison();
 
     private:
+        // Files
         std::string finputFile;
         std::string foutputDir;
         std::string foutputFile;
-        TCanvas *fpCanvas = new TCanvas("pCanvas", "pCanvas", 1800, 1350);
         
+        // Data file
+        std::vector<TFile*> finputFiles;
+        std::vector<TTree*> finputTrees;
+        std::vector<TBranch*> finputBranches;
         TFile *fpFile;
         TTree *fpTree;
         TBranch *fpBranch;
+
+        // Data
         RecoEvent *fpEvent;
+        std::vector<int> finputnEntries;
         int fnentries;
 
-
+        // Settings
         std::string fparticleType;
+        TCanvas *fpCanvas = new TCanvas("pCanvas", "pCanvas", 1800, 1350);
     };
 }
 

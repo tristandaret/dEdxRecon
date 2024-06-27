@@ -91,7 +91,7 @@ TStyle* SetMyStyle() {
   // Colors
   myStyle->SetFuncColor(600-4); // blue
   myStyle->SetPalette(kViridis);
-  myStyle->SetNumberContours(250);
+  myStyle->SetNumberContours(500);
 
  return(myStyle);
 }

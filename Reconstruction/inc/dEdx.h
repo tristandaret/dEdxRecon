@@ -153,7 +153,7 @@ namespace Reconstruction{
 
         // TFile* pFile;
         // TTree* pTree;
-        Reconstruction::RecoEvent *p_tevent;
+        Reconstruction::RecoEvent *p_recoevent;
     };
 
    extern Reconstruction::LUT    *p_lut;

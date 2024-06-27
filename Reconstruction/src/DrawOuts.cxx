@@ -17,20 +17,38 @@
 
 Reconstruction::DrawOuts::DrawOuts(const std::string &inputFile){
 	// Get Tree
-	fpFile = 						  TFile::Open(inputFile.c_str());
-	fpTree = 						  (TTree*)fpFile->Get("dEdx_tree");
+	fpFile = 						TFile::Open(inputFile.c_str());
+	fpTree = 						(TTree*)fpFile->Get("dEdx_tree");
 	fpEvent = 						new RecoEvent();
-	fpTree->						  SetBranchAddress("event_branch", &fpEvent);
+	fpTree->						SetBranchAddress("event_branch", &fpEvent);
 	fnentries = 					fpTree->GetEntries();
 
-  // Set Style
-  TStyle* ptstyle = SetMyStyle();
-  gROOT->SetStyle(ptstyle->GetName());
-  gPad->UseCurrentStyle();
+	SetStyle();
+}
+
+Reconstruction::DrawOuts::DrawOuts(const std::vector<std::string> &v_inputFiles){
+	// Get Tree
+	for(int i=0; i<(int)v_inputFiles.size(); i++){
+		finputFiles.push_back(TFile::Open(v_inputFiles[i].c_str()));
+		finputTrees.push_back((TTree*)finputFiles[i]->Get("dEdx_tree"));
+		finputBranches.push_back(finputTrees[i]->GetBranch("event_branch"));
+		finputnEntries.push_back(finputTrees[i]->GetEntries());
+	}
+
+	SetStyle();
+}
+
+
+void Reconstruction::DrawOuts::SetStyle(){
+	// Set Style
+	TStyle* ptstyle = 				SetMyStyle();
+	gROOT->							SetStyle(ptstyle->GetName());
+	gPad->							UseCurrentStyle();
 
 	// Set Output
 	foutputDir = 					outDir + tag + "/";
 }
+
 
 
 Reconstruction::DrawOuts::~DrawOuts(){
@@ -47,10 +65,11 @@ void Reconstruction::DrawOuts::EnergyLoss(){
 	foutputFile = 					foutputDir + "dEdx_" + tag + comment + ".pdf";
 
 	// Prepare histograms
+	TH2I *ph2i_heatmap =            new TH2I("ph2i_heatmap", "Events heatmap;iX;iY;", 144, 0, 143, 64, 0, 63);
 	TH1F *ph1f_XP = 				new TH1F("ph1f_XP", "Energy loss;dE/dx (ADC counts);Counts", 100, 0, 1300);
 	TH1F *ph1f_WF = 				new TH1F("ph1f_WF", "Energy loss;dE/dx (ADC counts);Counts", 100, 0, 1300);
-	TH1F *ph1f_XPnoTrunc =          new TH1F("ph1f_XPnoTrunc", "Energy loss (no truncation);dE/dx (ADC counts);Counts", 100, 0, 1300);
-	TH1F *ph1f_WFnoTrunc =          new TH1F("ph1f_WFnoTrunc", "Energy loss (no truncation);dE/dx (ADC counts);Counts", 100, 0, 1300);
+	TH1F *ph1f_XPnoTrunc =			new TH1F("ph1f_XPnoTrunc", "Energy loss (no truncation);dE/dx (ADC counts);Counts", 100, 0, 1300);
+	TH1F *ph1f_WFnoTrunc =			new TH1F("ph1f_WFnoTrunc", "Energy loss (no truncation);dE/dx (ADC counts);Counts", 100, 0, 1300);
 	TH2F *ph2f_XPWF = 		  		new TH2F("ph2f_XPWF", "Energy loss with XP vs with WF;dE/dx (WF);dE/dx (XP)", 100, 0, 1300, 100, 0, 1300);
 	std::vector<TH1F*> v_h1f_XP;
 	std::vector<TH1F*> v_h1f_WF;
@@ -63,20 +82,35 @@ void Reconstruction::DrawOuts::EnergyLoss(){
 		v_h1f_WFnoTrunc.push_back(	new TH1F(Form("ph1f_WFnoTrunc_%i", i), Form("Energy loss (module %i) (no truncation);dE/dx (ADC counts);Counts", i), 100, 0, 1300));
 	}
 
-	int nMod = 0;
-	int position = 0;
+	int NMod = 0, NC = 0, NPads = 0, ix = 0, iy = 0, position = 0;
 	// Get entries and fill histograms
 	for(int i=0;i<fnentries;i++){
 		fpTree->					GetEntry(i);
-		nMod = 							fpEvent->v_modules.size();
-		for(int i=0;i<nMod;i++){
-			position = fpEvent->v_modules[i]->position;
-			v_h1f_XP[position]->        	Fill(fpEvent->v_modules[i]->dEdxXP);
-			v_h1f_WF[position]->        	Fill(fpEvent->v_modules[i]->dEdxWF);
-			v_h1f_XPnoTrunc[position]-> 	Fill(fpEvent->v_modules[i]->dEdxXPnoTrunc);
-			v_h1f_WFnoTrunc[position]-> 	Fill(fpEvent->v_modules[i]->dEdxWFnoTrunc);
+		NMod = 						fpEvent->v_modules.size();
+
+		for(int iMod=0;iMod<NMod;iMod++){
+			// Heatmap
+			position = 				fpEvent->v_modules[iMod]->position;
+			NC = 					fpEvent->v_modules[iMod]->NClusters;
+			for(int iC=0;iC<NC;iC++){
+				NPads = 			fpEvent->v_modules[iMod]->v_clusters[iC]->NPads;
+				for(int iP=0;iP<NPads;iP++){
+					ix = 			fpEvent->v_modules[iMod]->v_clusters[iC]->v_pads[iP]->ix;
+					iy = 			fpEvent->v_modules[iMod]->v_clusters[iC]->v_pads[iP]->iy;
+					if(position<4) iy+=32;
+					ix += 36*position;
+					ph2i_heatmap->	Fill(ix, iy);
+				}
+			}
+
+			// Histograms
+			position = fpEvent->v_modules[iMod]->position;
+			v_h1f_XP[position]->        	Fill(fpEvent->v_modules[iMod]->dEdxXP);
+			v_h1f_WF[position]->        	Fill(fpEvent->v_modules[iMod]->dEdxWF);
+			v_h1f_XPnoTrunc[position]-> 	Fill(fpEvent->v_modules[iMod]->dEdxXPnoTrunc);
+			v_h1f_WFnoTrunc[position]-> 	Fill(fpEvent->v_modules[iMod]->dEdxWFnoTrunc);
 		}
-		if(nMod != 4) continue;
+		if(NMod != 4) continue;
 		ph1f_WF->						Fill(fpEvent->dEdxWF);
 		ph1f_XP->						Fill(fpEvent->dEdxXP);
 		ph1f_WFnoTrunc->            	Fill(fpEvent->dEdxWFnoTrunc);
@@ -118,15 +152,14 @@ void Reconstruction::DrawOuts::EnergyLoss(){
 	int XPMax = 					ph1f_XP->GetMaximum();
 
 	// Get maximum of module plots
-	std::vector<int> maxValues;
-	int overallMax, maxVal_WF, maxVal_XP, maxVal = 0;
+	int overallMax = 0, maxVal_WF = 0, maxVal_XP = 0, maxVal = 0;
 	for(int i=0;i<8;i++){
 		maxVal_WF = 				v_h1f_WF[i]->GetMaximum();
 		maxVal_XP = 				v_h1f_XP[i]->GetMaximum();
-		maxVal =        			std::max(maxVal_WF, maxVal_XP);
-		maxValues.          		push_back(maxVal);
-		overallMax =        		std::max(overallMax, maxVal);
+		overallMax =        		std::max({overallMax, maxVal_WF, maxVal_XP});
+		std::cout << i << " max WF: " << maxVal_WF << " | max XP: " << maxVal_XP << " | overall max: " << overallMax << std::endl;
 	}
+	std::cout << "overall max: " << overallMax << std::endl;
 	float invX, invY;
 	//////////////////////////////////////////////////////////////////////////////////////////
 	fpCanvas->						cd();
@@ -181,6 +214,7 @@ void Reconstruction::DrawOuts::EnergyLoss(){
 	fpCanvas->						Divide(4, 2);
 
 	for(int i=0;i<8;i++){
+		v_h1f_WFnoTrunc[i]->		SetAxisRange(0, 1.1 * overallMax, "Y");
 		fpCanvas->					cd(i+1);
 		invX = 0;
 		if(v_h1f_WFnoTrunc[i]->GetMean() > 650) invX = 0.5;
@@ -208,6 +242,17 @@ void Reconstruction::DrawOuts::EnergyLoss(){
 	ph2f_XPWF->						GetYaxis()->SetTitleOffset(1.1);
 	gStyle->   						SetTitleX((1.-gPad->GetRightMargin()+gPad->GetLeftMargin())/2);
 	ph2f_XPWF->  					Draw("colz");
+	fpCanvas->          			SaveAs((foutputFile).c_str());
+
+
+  	//////////////////////////////////////////////////////////////////////////////////////////
+	fpCanvas->						cd(); 
+	fpCanvas->						Clear();
+	gStyle->						SetOptStat(0);
+	gPad->              			SetLeftMargin(0.075);
+	ph2i_heatmap->					GetYaxis()->SetTitleOffset(0.65);
+	gStyle->   						SetTitleX((1.-gPad->GetRightMargin()+gPad->GetLeftMargin())/2);
+	ph2i_heatmap-> 					Draw("colz");
 	fpCanvas->          			SaveAs((foutputFile + ")").c_str());
 
 	// Delete
@@ -215,25 +260,53 @@ void Reconstruction::DrawOuts::EnergyLoss(){
 }
 
 
-void Reconstruction::DrawOuts::Checks(){
-	// Prepare histograms
-	TH2F *ph2f_XPlenXP = 			new TH2F("ph2f_XPlenXP", "dEdx with XP vs track length with XP", 100, 0, 150, 100, 0, 1500);
 
-	// Get entries and fill histograms
-	for(int i=0;i<fnentries;i++){
-		fpTree->					GetEntry(i);
-		ph2f_XPlenXP->				Fill(fpEvent->lengthXP, fpEvent->dEdxXP);
-	}
 
-	// Draw
-	fpCanvas->						cd();
-	gStyle->						SetOptStat(111111);
-	ph2f_XPlenXP->  				Draw("colz");
-	fpCanvas->   					SaveAs(foutputFile.c_str());
 
-	// Delete
-	delete ph2f_XPlenXP;
+
+void FileComparison(){
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

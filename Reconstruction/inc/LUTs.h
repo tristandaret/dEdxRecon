@@ -13,9 +13,9 @@ public:
     int Position;
     int XX;
     int YY;
-    double RC;
-    double Gain;
-    double Resolution;
+    float RC;
+    float Gain;
+    float Resolution;
 
     int Endplate;
     bool InbTPC;
@@ -33,14 +33,15 @@ namespace Reconstruction{
    class ERAMMaps {
    public:
       /* Constructor */
-      ERAMMaps();
-      ERAMMaps(const std::string& file);
+      ERAMMaps(const std::string& file = "$HOME/Documents/Code/CPP_projects/Read_ERAM_MAP/ERAMinfo.root");
       virtual ~ERAMMaps();
       
       int    ID(const int& position);
-      double RC(const int& position, const int& iX, const int& iY);
-      double Gain(const int& position, const int& iX, const int& iY);
-      double Resolution(const int& position, const int& iX, const int& iY);
+      float RC(const int& position, const int& iX, const int& iY);
+      float Gain(const int& position, const int& iX, const int& iY);
+      float Resolution(const int& position, const int& iX, const int& iY);
+      float MeanGain(const int& position);
+      float MeanRC(const int& position);
 
    private:
       bool verbose = false;
@@ -48,19 +49,25 @@ namespace Reconstruction{
       std::vector<int> fID;
       std::vector<float> v_sides;
       
-      double fGain        [34][36][32]; // [position][iX][iY]
-      double fRC          [34][36][32];
-      double fResolution  [34][36][32]; 
+      float fGain        [34][36][32]; // [position][iX][iY]
+      float fRC          [34][36][32];
+      float fResolution  [34][36][32]; 
+      std::vector<float> fmean_gain;
+      std::vector<float> fmean_RC;
 
       void Load();
-      void setGain       (const int& position, const int& iX, const int& iY, const double& gain) ;
-      void setRC         (const int& position, const int& iX, const int& iY, const double& RC) ;
-      void setResolution (const int& position, const int& iX, const int& iY, const double& resolution) ;
+      void setGain       (const int& position, const int& iX, const int& iY, const float& gain) ;
+      void setRC         (const int& position, const int& iX, const int& iY, const float& RC) ;
+      void setResolution (const int& position, const int& iX, const int& iY, const float& resolution) ;
+      void setMeanGain   (const int& position, const float& meanGain) ;
+      void setMeanRC     (const int& position, const float& meanRC) ;
       void FillHoles();
 
       std::vector<int> channel2iD = {24, 30, 28, 19, 21, 13,  9,  2, 26, 17, 23, 29,  1, 10, 11,  3,  /*bottom HATPC*/ 
                                      47, 16, 14, 15, 42, 45, 37, 36, 20, 38,  7, 44, 43, 39, 41, 46,  /*top    HATPC*/
                                      12, 18}; // CERN22 MockUp and prototype
+
+
    
 
       //------------------------------Data Members-----------------------//
@@ -73,9 +80,9 @@ namespace Reconstruction{
       int            fpos;
       int            fx;
       int            fy;
-      double         frc;
-      double         fgain;
-      double         fres;
+      float         frc;
+      float         fgain;
+      float         fres;
    };
 
 

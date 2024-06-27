@@ -33,7 +33,7 @@ Reconstruction::dEdx::~dEdx(){
 void Reconstruction::dEdx::Reconstruction(){
 
 	// Make directories
-	std::string OUTDirName =                outDir + tag + "/";
+	std::string OUTDirName =                outDir + v_tags.back() + "/";
 	MakeMyDir(OUTDirName);
 	std::string OUTDIR_Display =            OUTDirName + "Evt_Display/";
 	MakeMyDir(OUTDIR_Display);
@@ -41,7 +41,7 @@ void Reconstruction::dEdx::Reconstruction(){
 	MakeMyDir(OUTDIR_WF_Display);
 
 	// Redirect Output
-	std::string     logs = OUTDirName + "dEdx_" + tag + ".log";
+	std::string     logs = OUTDirName + "dEdx_" + v_tags.back() + ".log";
 	std::cout <<    "logs: " << logs		<< std::endl;
 	std::cout <<    std::setprecision(2)	<< std::fixed;
 	std::cout <<    std::endl;
@@ -50,47 +50,47 @@ void Reconstruction::dEdx::Reconstruction(){
 	std::cout.      rdbuf(OUT_DataFile.rdbuf());	// Redirect to output file
 
 	// Log info
-	std::cout << "dataFile         : " << dataFile      << std::endl;
-	std::cout << "OUTDirName       : " << OUTDirName    << std::endl;
-	std::cout << "tag              : " << tag           << std::endl;
-	std::cout << "comment          : " << comment       << std::endl;
-	std::cout << "selectionSet     : " << selectionSet  << std::endl;
-	std::cout << "prtcle           : " << prtcle        << std::endl;
-	std::cout << "driftMethod      : " << driftMethod	<< std::endl;
-	std::cout << "WF updated       : " << WFupdated		<< std::endl;
-	std::cout << "Gain correction  : " << fcorrectGain	<< std::endl;
-	std::cout << "RC correction    : " << fcorrectRC	<< std::endl;
-	std::cout <<                                           std::endl;
+	std::cout << "dataFile         : " << v_dataFiles.back()	<< std::endl;
+	std::cout << "OUTDirName       : " << OUTDirName    		<< std::endl;
+	std::cout << "tag              : " << v_tags.back()           		<< std::endl;
+	std::cout << "comment          : " << comment       		<< std::endl;
+	std::cout << "selectionSet     : " << selectionSet  		<< std::endl;
+	std::cout << "particle         : " << v_prtcles.back()		<< std::endl;
+	std::cout << "drift method     : " << fcorrectDrift			<< std::endl;
+	std::cout << "WF   correction  : " << fcorrectWF			<< std::endl;
+	std::cout << "Gain correction  : " << fcorrectGain			<< std::endl;
+	std::cout << "RC   correction  : " << fcorrectRC			<< std::endl;
+	std::cout <<                                        		   std::endl;
 
 	// Get ERAM maps
 	std::vector<int> fERAMs_iD;
 	std::vector<int> fERAMs_pos;
-	if(tag.find("DESY") != std::string::npos)         {fERAMs_iD.push_back(1);  fERAMs_pos.push_back(12);}
-	if(dataFile.find("ERAM18") != std::string::npos)  {fERAMs_iD.push_back(18); fERAMs_pos.push_back(33);}
-	if(dataFile.find("All_ERAMS") != std::string::npos){fERAMs_iD =  {7, 1, 23, 2, 16, 15, 10, 12}; fERAMs_pos =  {26, 12, 10, 7, 17, 19, 13, 32};}
+	if(v_tags.back().find("DESY") != std::string::npos)         {fERAMs_iD.push_back(1);  fERAMs_pos.push_back(12);}
+	if(v_dataFiles.back().find("ERAM18") != std::string::npos)  {fERAMs_iD.push_back(18); fERAMs_pos.push_back(33);}
+	if(v_dataFiles.back().find("All_ERAMS") != std::string::npos){fERAMs_iD =  {7, 1, 23, 2, 16, 15, 10, 12}; fERAMs_pos =  {26, 12, 10, 7, 17, 19, 13, 32};}
 	Reconstruction::ERAMMaps *pERAMMaps =  new Reconstruction::ERAMMaps();
 
 	// Diagonal clustering?
 	bool diag = false;
-	if(tag.find("diag") != std::string::npos) diag = true;
+	if(v_tags.back().find("diag") != std::string::npos) diag = true;
 
 	// Handle theta case
 	float costheta =     1;
 	int theta_arr[3] =   {-45, -20, 20};
-	for (int theta_file : theta_arr) if(tag.find("theta") != std::string::npos and tag.find(std::to_string(theta_file)) != std::string::npos) costheta =  fabs(cos((float)theta_file/180*M_PI));
+	for (int theta_file : theta_arr) if(v_tags.back().find("theta") != std::string::npos and v_tags.back().find(std::to_string(theta_file)) != std::string::npos) costheta =  fabs(cos((float)theta_file/180*M_PI));
 
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Output
 	TFile *pFile_dEdx =    						new TFile(outFile_dEdx.c_str(), "RECREATE");
 	TTree *pTree_dEdx =    						new TTree("dEdx_tree", "dEdx TTree");
-	Reconstruction::RecoEvent *p_tevent =  		new Reconstruction::RecoEvent();
-	pTree_dEdx->								Branch("event_branch", "Reconstruction::RecoEvent", &p_tevent);
+	Reconstruction::RecoEvent *p_recoevent =  	new Reconstruction::RecoEvent();
+	pTree_dEdx->								Branch("event_branch", "Reconstruction::RecoEvent", &p_recoevent);
 
 	// Selection stage
 	Selector aSelector(selectionSet);
 	int NEvent =  								p_uploader->Get_NberOfEvent();
-	Init_selection(selectionSet, aSelector, tag, p_uploader, moduleCase, 0);
+	Init_selection(selectionSet, aSelector, v_tags.back(), p_uploader, moduleCase, 0);
 	aSelector.Tell_Selection();
 
 	// Log info
@@ -99,12 +99,12 @@ void Reconstruction::dEdx::Reconstruction(){
 	std::cout << "Peaking time:      " 	<< PT              << " ns"        << std::endl;
 	std::cout << "Time bin length:   " 	<< TB              << " ns"        << std::endl;
 	std::cout << "PT/TB =            " 	<< PT/TB           << " time bins" << std::endl;
-	std::cout << "drift method:      " 	<< driftMethod                     << std::endl;
+	std::cout << "drift method:      " 	<< fcorrectDrift                     << std::endl;
 	std::cout << "minimal length:    " 	<< fminLength*1e3  << " mm"        << std::endl;
 	std::cout <<                                                              std::endl;
 
 	// Correction function for WF
-	TF1 *pcorrFunctionWF =              			corr_func(dataFile, tag, WFupdated);
+	TF1 *pcorrFunctionWF =              			corr_func(v_dataFiles.back(), v_tags.back(), fcorrectWF);
 	float fAref =                        			pcorrFunctionWF->Eval(XPADLENGTH);
 
 	// Track fit initializations
@@ -151,14 +151,14 @@ void Reconstruction::dEdx::Reconstruction(){
 		aSelector.              					ApplySelection(pEvent);
 		if (pEvent->IsValid() != 1) 				continue;
 
-		p_tevent->eventNbr = 			 			iEvent;
-		p_tevent->numberOfModules =           		pEvent->Get_NberOfModule();
+		p_recoevent->eventNbr = 			 			iEvent;
+		p_recoevent->numberOfModules =           		pEvent->Get_NberOfModule();
 
 		float fmodID;
 
 
 		// Module loop
-		for (int iMod =  0; iMod < p_tevent->numberOfModules; iMod++){
+		for (int iMod =  0; iMod < p_recoevent->numberOfModules; iMod++){
 			Module* pModule =          				pEvent->Get_Module_InArray(iMod);
 			fmodID =                  				pModule->Get_ModuleNber();
 			if (pEvent->Validity_ForThisModule(fmodID) ==  0) continue;
@@ -166,9 +166,9 @@ void Reconstruction::dEdx::Reconstruction(){
 			int NC =                   				pModule->Get_NberOfCluster();
 			if(NC ==  0) 							continue;
 
-			Reconstruction::RecoModule *p_tmodule =  	new Reconstruction::RecoModule();
-			p_tmodule->position =         			fmodID;
-			p_tmodule->ID =               			fERAMs_iD[fmodID];
+			Reconstruction::RecoModule *p_recomodule =  	new Reconstruction::RecoModule();
+			p_recomodule->position =         			fmodID;
+			p_recomodule->ID =               			fERAMs_iD[fmodID];
 
 			// Track fitting
 			if(!diag){
@@ -184,13 +184,13 @@ void Reconstruction::dEdx::Reconstruction(){
 
 			// Track details
 			const Track* pTrack =      				pEvent->GiveMe_Track_ForThisModule(fmodID);
-			p_tmodule->phi =              			std::atan(pTrack->Get_ParameterValue(1))/M_PI*180;
-			p_tmodule->Track->						SetParameters(pTrack->Get_ParameterValue(0), pTrack->Get_ParameterValue(1));
+			p_recomodule->phi =              			std::atan(pTrack->Get_ParameterValue(1))/M_PI*180;
+			p_recomodule->Track->						SetParameters(pTrack->Get_ParameterValue(0), pTrack->Get_ParameterValue(1));
 			Double_t parErrors[2] = 				{pTrack->Get_ParameterError(0), pTrack->Get_ParameterError(1)};
-			p_tmodule->Track->						SetParErrors(parErrors);
+			p_recomodule->Track->						SetParErrors(parErrors);
 			if(fnParamsTrack ==  3){
-				p_tmodule->Track->					SetParameter(2, pTrack->Get_ParameterValue(2));
-				p_tmodule->Track->					SetParError(2, pTrack->Get_ParameterError(2));
+				p_recomodule->Track->					SetParameter(2, pTrack->Get_ParameterValue(2));
+				p_recomodule->Track->					SetParError(2, pTrack->Get_ParameterError(2));
 			}
 
 
@@ -198,102 +198,121 @@ void Reconstruction::dEdx::Reconstruction(){
 			for (int iC =  0; iC < NC; iC++){
 				std::fill(waveform_cluster.begin(), waveform_cluster.end(), 0); // reset waveform
 				Cluster* pCluster =            		pModule->Get_Cluster(iC);
-				Reconstruction::RecoCluster *p_tcluster = new Reconstruction::RecoCluster();
+				Reconstruction::RecoCluster *p_recocluster = new Reconstruction::RecoCluster();
 				float fGainCorrectionLead = 0;
 
 
 				// Loop On Pads
 				int NPads =                   		pCluster->Get_NberOfPads();
+				p_recocluster->NPads =           		NPads;
 				for(int iP =  0; iP < NPads; iP ++){
 					std::fill(waveform_pad.begin(), waveform_pad.end(), 0); // reset waveform
 					const Pad* pPad =            	pCluster->Get_Pad(iP);
-					Reconstruction::RecoPad * p_tpad = new Reconstruction::RecoPad();
+					Reconstruction::RecoPad * p_recopad = new Reconstruction::RecoPad();
 					waveform_pad = 					pPad->Get_vADC();
-					p_tpad->ix =                    pPad->Get_iX();
-					p_tpad->iy =                    pPad->Get_iY();
+					p_recopad->ix =                    pPad->Get_iX();
+					p_recopad->iy =                    pPad->Get_iY();
 
 					// RC correction
-					if(fcorrectRC) p_tpad->RC =		pERAMMaps->RC(fERAMs_pos[fmodID], p_tpad->ix, p_tpad->iy);
-					else           p_tpad->RC =		120;
+					switch(fcorrectRC){
+						case 0: // no RC correction
+							p_recopad->RC = 	120;
+							break;
+						case 1: // pad per pad RC correction
+							p_recopad->RC = 	pERAMMaps->RC(fERAMs_pos[fmodID], p_recopad->ix, p_recopad->iy);
+							break;
+						case 2: // ERAM per ERAM correction
+							p_recopad->RC = 	pERAMMaps->MeanRC(fERAMs_pos[fmodID]);
+							break;
+					}
 
 					// Gain correction
-					if(fcorrectGain){
-						p_tpad->gain =              pERAMMaps->Gain(fERAMs_pos[fmodID], p_tpad->ix, p_tpad->iy);
-						p_tpad->GainCorrection =    AVG_GAIN/p_tpad->gain;
-						p_tpad->ADCmax =            p_tpad->GainCorrection*pPad->Get_AMax();
-						for(int i=0;i<510;i++) waveform_pad[i] = round(waveform_pad[i] * p_tpad->GainCorrection);
-						if(iP == 0) fGainCorrectionLead = p_tpad->GainCorrection;		
+					switch(fcorrectGain){
+						case 0: // no gain correction
+							p_recopad->GainCorrection = 1.0;
+							break;
+						case 1: // pad per pad gain correction
+							p_recopad->gain = 			pERAMMaps->Gain(fERAMs_pos[fmodID], p_recopad->ix, p_recopad->iy);
+							p_recopad->GainCorrection = AVG_GAIN / p_recopad->gain;
+							for (int i = 0; i < 510; i++) waveform_pad[i] = round(waveform_pad[i] * p_recopad->GainCorrection);
+							if (iP == 0) fGainCorrectionLead = p_recopad->GainCorrection;
+							break;
+						case 2: // ERAM per ERAM correction
+							p_recopad->GainCorrection = AVG_GAIN / pERAMMaps->MeanGain(fERAMs_pos[fmodID]);
+							for (int i = 0; i < 510; i++) waveform_pad[i] = round(waveform_pad[i] * p_recopad->GainCorrection);
+							if (iP == 0) fGainCorrectionLead = p_recopad->GainCorrection;
+							break;
 					}
-					else p_tpad->ADCmax =              pPad->Get_AMax();
+					p_recopad->ADCmax = p_recopad->GainCorrection * pPad->Get_AMax();
 					for(int i=0;i<510;i++) waveform_cluster[i] += waveform_pad[i];
 					
 					// Track computations
-					local_params(pPad, pTrack, p_tpad->d, p_tpad->dd, p_tpad->phi, p_tpad->length); // impact parameter and length in pad in m, angle in degrees
-					p_tpad->d *= 					1000; // in mm
-					p_tpad->dd *= 					1000; // in mm
-					p_tpad->length /= 				costheta;
-					p_tcluster->length += 			p_tpad->length;
+					local_params(pPad, pTrack, p_recopad->d, p_recopad->dd, p_recopad->phi, p_recopad->length); // impact parameter and length in pad in m, angle in degrees
+					p_recopad->d *= 					1000; // in mm
+					p_recopad->dd *= 					1000; // in mm
+					p_recopad->length /= 				costheta;
+					p_recocluster->length += 			p_recopad->length;
 
 					// Minimum length in pad cutoff to avoid fluctuations from small segments
-					if(p_tpad->length*costheta <= fminLength){ // cutoff defined in the ERAM's plane -> remove theta dependence
-						p_tcluster->				v_pads.push_back(p_tpad);	
+					if(p_recopad->length*costheta <= fminLength){ // cutoff defined in the ERAM's plane -> remove theta dependence
+						p_recocluster->				v_pads.push_back(p_recopad);	
 						continue;
 					}
 
 					// Compute drift distance for different time bin sizes and peaking times
-					p_tpad->TMax =              	pPad->Get_TMax();
-					if      (PT ==  412 and TB ==  50){ p_tpad->T0 =  45; p_tpad->driftDistance =  3.90*(p_tpad->TMax-p_tpad->T0); } // 45 =  37(time shift) +  8(PT) from David Attié
-					else if (PT ==  412 and TB ==  40){ p_tpad->T0 =  56; p_tpad->driftDistance =  3.12*(p_tpad->TMax-p_tpad->T0); } // 56 =  46(time shift) + 10(PT)
-					else if (PT ==  200 and TB ==  50){ p_tpad->T0 =  39; p_tpad->driftDistance =  3.90*(p_tpad->TMax-p_tpad->T0); } // 39 =  35(time shift) +  4(PT) own computation
-					else if (PT ==  200 and TB ==  40){ p_tpad->T0 =  48; p_tpad->driftDistance =  3.12*(p_tpad->TMax-p_tpad->T0); } // 48 =  44(time shift) +  5(PT)
+					p_recopad->TMax =              	pPad->Get_TMax();
+					if      (PT ==  412 and TB ==  50){ p_recopad->T0 =  45; p_recopad->driftDistance =  3.90*(p_recopad->TMax-p_recopad->T0); } // 45 =  37(time shift) +  8(PT) from David Attié
+					else if (PT ==  412 and TB ==  40){ p_recopad->T0 =  56; p_recopad->driftDistance =  3.12*(p_recopad->TMax-p_recopad->T0); } // 56 =  46(time shift) + 10(PT)
+					else if (PT ==  200 and TB ==  50){ p_recopad->T0 =  39; p_recopad->driftDistance =  3.90*(p_recopad->TMax-p_recopad->T0); } // 39 =  35(time shift) +  4(PT) own computation
+					else if (PT ==  200 and TB ==  40){ p_recopad->T0 =  48; p_recopad->driftDistance =  3.12*(p_recopad->TMax-p_recopad->T0); } // 48 =  44(time shift) +  5(PT)
 					
 					// Get the LUT ratio 
-					p_tpad->ratioDrift =        	p_lut->getRatio(fabs(p_tpad->phi), fabs(p_tpad->d), p_tpad->RC, p_tpad->driftDistance);
-					p_tpad->ratioFile =         	p_lut->getRatio(fabs(p_tpad->phi), fabs(p_tpad->d), p_tpad->RC, driftDist);
+					p_recopad->ratioDrift =        	p_lut->getRatio(fabs(p_recopad->phi), fabs(p_recopad->d), p_recopad->RC, p_recopad->driftDistance);
+					p_recopad->ratioFile =         	p_lut->getRatio(fabs(p_recopad->phi), fabs(p_recopad->d), p_recopad->RC, driftDist);
 
-					if(driftMethod ==  "zcalc") p_tpad->ratio = p_tpad->ratioDrift;
-					if(driftMethod ==  "zfile") p_tpad->ratio = p_tpad->ratioFile;
+					if(fcorrectDrift ==  1) p_recopad->ratio = p_recopad->ratioDrift;
+					else 					p_recopad->ratio = p_recopad->ratioFile;
 
-					p_tpad->charge =             	p_tpad->ADCmax*p_tpad->ratio;
-					p_tpad->dEdxXP =             	p_tpad->charge/p_tpad->length/100; // m to cm
-					v_mod_dE.                   	push_back(p_tpad->charge);
-					v_mod_dx.                   	push_back(p_tpad->length);
-					v_mod_dEdxXP.               	push_back(p_tpad->dEdxXP);
+					p_recopad->charge =             	p_recopad->ADCmax*p_recopad->ratio;
+					p_recopad->dEdxXP =             	p_recopad->charge/p_recopad->length/100; // m to cm
+					v_mod_dE.                   	push_back(p_recopad->charge);
+					v_mod_dx.                   	push_back(p_recopad->length);
+					v_mod_dEdxXP.               	push_back(p_recopad->dEdxXP);
 
-					p_tcluster->v_pads.				push_back(p_tpad);
-					p_tmodule->NCrossedPads++;
-					p_tmodule->lengthXP += 			p_tpad->length;
+					p_recocluster->v_pads.				push_back(p_recopad);
+					p_recomodule->NCrossedPads++;
+					p_recomodule->lengthXP += 			p_recopad->length;
 
 				} // Pads
 
 				// // Gain correction for the whole cluster (doesn't work really well)
-				// if(fcorrectGain) for(int i=0;i<510;i++) waveform_cluster[i] *= fGainCorrectionLead;
+				// if(fcorrectGain == 1) for(int i=0;i<510;i++) waveform_cluster[i] *= fGainCorrectionLead;
 
 				// WF correction function
-				p_tcluster->charge =           		*std::max_element(waveform_cluster.begin(), waveform_cluster.end());
-				p_tcluster->ratioCorr =             fAref / pcorrFunctionWF->Eval(p_tcluster->length*1000);
-				if(diag) p_tcluster->dEdxWF = 		p_tcluster->charge*p_tcluster->ratioCorr/XPADLENGTH*10;
-				else p_tcluster->dEdxWF = 			p_tcluster->charge/(p_tcluster->length*100);
-				v_mod_dEdxWF.						push_back(p_tcluster->dEdxWF);
+				p_recocluster->charge =           		*std::max_element(waveform_cluster.begin(), waveform_cluster.end());
+				p_recocluster->ratioCorr =             fAref / pcorrFunctionWF->Eval(p_recocluster->length*1000);
+				if(diag) p_recocluster->dEdxWF = 		p_recocluster->charge*p_recocluster->ratioCorr/XPADLENGTH*10;
+				else p_recocluster->dEdxWF = 			p_recocluster->charge/(p_recocluster->length*100);
+				v_mod_dEdxWF.						push_back(p_recocluster->dEdxWF);
 
 				// Fill cluster information
-				p_tmodule->v_clusters.				push_back(p_tcluster);
-				p_tmodule->NClusters++;
-				p_tmodule->lengthWF += 				p_tcluster->length;
+				p_recomodule->v_clusters.				push_back(p_recocluster);
+				p_recomodule->NClusters++;
+				p_recomodule->lengthWF += 				p_recocluster->length;
 			} // Clusters
 
 			// Compute dE/dx for the module
-			p_tmodule->dEdxWF =                 	ComputedEdxWF(v_mod_dEdxWF, p_tmodule->NClusters, falpha);
-			p_tmodule->dEdxXP =                 	ComputedEdxXP(v_mod_dEdxXP, v_mod_dE, v_mod_dx, p_tmodule->NCrossedPads, falpha);
-			p_tmodule->dEdxWFnoTrunc =          	ComputedEdxWF(v_mod_dEdxWF, p_tmodule->NClusters, 1);
-			p_tmodule->dEdxXPnoTrunc =          	ComputedEdxXP(v_mod_dEdxXP, v_mod_dE, v_mod_dx, p_tmodule->NCrossedPads, 1);
+			p_recomodule->dEdxWF =                 	ComputedEdxWF(v_mod_dEdxWF, p_recomodule->NClusters, falpha);
+			p_recomodule->dEdxXP =                 	ComputedEdxXP(v_mod_dEdxXP, v_mod_dE, v_mod_dx, p_recomodule->NCrossedPads, falpha);
+			p_recomodule->dEdxWFnoTrunc =          	ComputedEdxWF(v_mod_dEdxWF, p_recomodule->NClusters, 1);
+			p_recomodule->dEdxXPnoTrunc =          	ComputedEdxXP(v_mod_dEdxXP, v_mod_dE, v_mod_dx, p_recomodule->NCrossedPads, 1);
 
 			// Fill module information into the event class
-			p_tevent->v_modules.					push_back(p_tmodule);
-			p_tevent->NCrossedPads += 				p_tmodule->NCrossedPads;
-			p_tevent->NClusters += 					p_tmodule->NClusters;
-			p_tevent->lengthXP += 					p_tmodule->lengthXP;
-			p_tevent->lengthWF += 					p_tmodule->lengthWF;
+			p_recoevent->v_modules.					push_back(p_recomodule);
+			p_recoevent->NCrossedPads += 				p_recomodule->NCrossedPads;
+			p_recoevent->NClusters += 					p_recomodule->NClusters;
+			p_recoevent->lengthXP += 					p_recomodule->lengthXP;
+			p_recoevent->lengthWF += 					p_recomodule->lengthWF;
 			v_evt_dE.                       		insert(v_evt_dE.end(), v_mod_dE.begin(), v_mod_dE.end());
 			v_evt_dx.                       		insert(v_evt_dx.end(), v_mod_dx.begin(), v_mod_dx.end());
 			v_evt_dEdxXP.                   		insert(v_evt_dEdxXP.end(), v_mod_dEdxXP.begin(), v_mod_dEdxXP.end());
@@ -307,14 +326,14 @@ void Reconstruction::dEdx::Reconstruction(){
 		} // Modules
 
 		// Compute dE/dx for the event
-		p_tevent->dEdxWF =                  		ComputedEdxWF(v_evt_dEdxWF, p_tevent->NClusters, falpha);
-		p_tevent->dEdxXP =                  		ComputedEdxXP(v_evt_dEdxXP, v_evt_dE, v_evt_dx, p_tevent->NCrossedPads, falpha);
-		p_tevent->dEdxWFnoTrunc =           		ComputedEdxWF(v_evt_dEdxWF, p_tevent->NClusters, 1);
-		p_tevent->dEdxXPnoTrunc =           		ComputedEdxXP(v_evt_dEdxXP, v_evt_dE, v_evt_dx, p_tevent->NCrossedPads, 1);
+		p_recoevent->dEdxWF =                  		ComputedEdxWF(v_evt_dEdxWF, p_recoevent->NClusters, falpha);
+		p_recoevent->dEdxXP =                  		ComputedEdxXP(v_evt_dEdxXP, v_evt_dE, v_evt_dx, p_recoevent->NCrossedPads, falpha);
+		p_recoevent->dEdxWFnoTrunc =           		ComputedEdxWF(v_evt_dEdxWF, p_recoevent->NClusters, 1);
+		p_recoevent->dEdxXPnoTrunc =           		ComputedEdxXP(v_evt_dEdxXP, v_evt_dE, v_evt_dx, p_recoevent->NCrossedPads, 1);
 
 		// Make the quick access histograms
-		ph1f_WF->                       			Fill(p_tevent->dEdxWF);
-		ph1f_XP->                       			Fill(p_tevent->dEdxXP);
+		ph1f_WF->                       			Fill(p_recoevent->dEdxWF);
+		ph1f_XP->                       			Fill(p_recoevent->dEdxXP);
 
 		// Fill the tree
 		pTree_dEdx->                				Fill();
@@ -325,7 +344,7 @@ void Reconstruction::dEdx::Reconstruction(){
 		v_evt_dx.                       			clear();
 		v_evt_dEdxXP.                   			clear();
 		v_evt_dEdxWF.                   			clear();
-		p_tevent->									Clear();
+		p_recoevent->									Clear();
 		delete 										pEvent;
 	} // Events
 
@@ -405,26 +424,26 @@ Reconstruction::RecoPad::~RecoPad(){
 
 Reconstruction::RecoCluster::~RecoCluster(){
 	// v_waveform.clear();
-	for (auto p_tpad : v_pads) delete p_tpad;
+	for (auto p_recopad : v_pads) delete p_recopad;
 	v_pads.clear();
 }
 
 
 Reconstruction::RecoModule::~RecoModule(){
 	delete Track;
-	for (auto p_tcluster : v_clusters) delete p_tcluster;
+	for (auto p_recocluster : v_clusters) delete p_recocluster;
 	v_clusters.clear();
 }
 
 Reconstruction::RecoEvent::RecoEvent(){
 }
 Reconstruction::RecoEvent::~RecoEvent(){
-	for (auto p_tmodule : v_modules) delete p_tmodule;
+	for (auto p_recomodule : v_modules) delete p_recomodule;
 	v_modules.clear();
 }
 
 void Reconstruction::RecoEvent::Clear(){
-	for (auto p_tmodule : v_modules) delete p_tmodule;
+	for (auto p_recomodule : v_modules) delete p_recomodule;
 	v_modules.clear();
 	eventNbr =  0;
 	NCrossedPads =  0;

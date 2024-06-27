@@ -33,7 +33,7 @@ void corr(const std::string& OutDir,
 
 
 /* Call the correction function of WF method ----------------------------------------------*/
-TF1* corr_func(const std::string &EventFile, const std::string &Tag, const bool &updated) ;
+TF1* corr_func(const std::string &EventFile, const std::string &Tag, const int& correctWF) ;
 
 
 

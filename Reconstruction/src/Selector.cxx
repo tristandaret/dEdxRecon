@@ -70,20 +70,20 @@ Selector::~Selector()
 
 void Selector::Set_Cuts()
 {
-  m_Cut_StageFinal_NCluster_Low =   34 ;
+    m_Cut_StageFinal_NCluster_Low = 36 ;
 
-  m_Cut_Stage5_Npads_Hig   =   5 ;
-  
-  m_Cut_Stage2_EventBased  =    3. ;
+    m_Cut_Stage5_Npads_Hig =		5 ;
+    
+    m_Cut_Stage2_EventBased =		3 ;
 
-  m_Cut_Stage3_TLow       =   160. ;
-  m_Cut_Stage3_THigh      =   220. ;
+    m_Cut_Stage3_TLow =				160. ;
+    m_Cut_Stage3_THigh =			220. ;
 
-  m_Cut_Stage6_Amax_Low    = 0. ;
-  m_Cut_Stage6_Amax_Hig    = 3700. ;
+    m_Cut_Stage6_Amax_Low = 		0. ;
+    m_Cut_Stage6_Amax_Hig = 		3700. ;
 
-  m_Cut_Stage4_APM_Low      = 2  ;
-  m_Cut_Stage4_APM_High     = 4 ;
+    m_Cut_Stage4_APM_Low = 			2  ;
+    m_Cut_Stage4_APM_High = 		4 ;
 
 }
 
@@ -97,7 +97,7 @@ void Selector::Set_T_DESY21_Event()
   std::cout << std::endl ;
   std::cout << "-------------->Predefined selection T_DESY21_Event" << std::endl ;
   ListOfSelectionName.clear();
-  Add_Selection( "Stage1"   );  // border clusters
+//   Add_Selection( "Stage1"   );  // border clusters
   Add_Selection( "Stage2"  );  // time sync event based
   Add_Selection( "Stage3" );  // time sync run based
   Add_Selection( "Stage4"  );  // average pad multiplicity
@@ -114,7 +114,7 @@ void Selector::Set_T_DESY21theta_Event()
   std::cout << std::endl ;
   std::cout << "-------------->Predefined selection T_DESY21theta_Event" << std::endl ;
   ListOfSelectionName.clear();
-  Add_Selection( "Stage1"   );  // border clusters
+//   Add_Selection( "Stage1"   );  // border clusters
   Add_Selection( "Stage4"  );  // average pad multiplicity
   Add_Selection( "Stage5"  );  // maximum number of pads
   Add_Selection( "Stage6"  );  // min & max amplitude
@@ -128,7 +128,7 @@ void Selector::Set_T2_CERN22_Event()
   std::cout << std::endl ;
   std::cout << "-------------->Predefined selection T2_CERN22_Event" << std::endl ;
   ListOfSelectionName.clear();
-  Add_Selection( "Stage1"   );  // border clusters
+//   Add_Selection( "Stage1"   );  // border clusters
   Add_Selection( "Stage2"  );  // time sync event based
   Add_Selection( "Stage3" );  // time sync run based
   Add_Selection( "Stage4"  );  // average pad multiplicity in cluster
@@ -143,7 +143,7 @@ void Selector::Set_TMC_CERN22_Event()
   std::cout << "-------------->Predefined selection TMC_CERN22_Event" << std::endl ;
   ListOfSelectionName.clear();
   //
-  Add_Selection( "Stage1"   );  // border clusters
+//   Add_Selection( "Stage1"   );  // border clusters
   Add_Selection( "StageFinal"   );  // number of clusters
 }
 

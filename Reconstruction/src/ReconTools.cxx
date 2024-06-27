@@ -201,9 +201,9 @@ void corr( const std::string& OutDir,
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
-TF1* corr_func(const std::string &EventFile, const std::string &Tag, const bool &updated){
+TF1* corr_func(const std::string &EventFile, const std::string &Tag, const int& correctWF){
   TF1* corr_func = new TF1("corr_func", "291.012 + 9.4669*x - 4.04*x*x + 1.31624*x*x*x - 0.059534*x*x*x*x", 0, 17); // values provided by Vlada (2022/10/11)
-  if(updated and Tag.find("diag") != std::string::npos){
+  if(correctWF == 1 and Tag.find("diag") != std::string::npos){
       std::string filename      = EventFile.substr(0, EventFile.length()-5) ;
       int angle ;
       if(    (angle = filename.find("30"))  != (int)std::string::npos or (angle = filename.find("45"))  != (int)std::string::npos) filename.replace(angle, 2, "40") ;
