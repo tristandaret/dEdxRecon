@@ -29,7 +29,7 @@ namespace Reconstruction{
 		float dEdxXP		= 0;
 		float RC			= 0;
 		float gain			= 0;
-		float GainCorrection	 = 0;
+		float GainCorrection= 0;
 		float phi			= 0;
 		float d				= 0;
 		float dd			= 0;

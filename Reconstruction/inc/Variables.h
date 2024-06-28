@@ -13,8 +13,10 @@ namespace Reconstruction{
 	extern std::string	outFile_dEdx;
 	extern std::string	comment;
 	extern std::string	selectionSet;
+	extern std::string	inputDir;
 
-	// Run variables	
+	// Run variables
+	extern std::vector<std::string> v_comments;
 	extern std::vector<std::string> v_tags;
 	extern std::vector<std::string> v_dataFiles;
 	extern std::vector<std::string> v_prtcles;

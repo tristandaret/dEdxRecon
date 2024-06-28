@@ -35,6 +35,7 @@ namespace Reconstruction{
 
 		// Data
 		RecoEvent *fpEvent;
+		std::vector<RecoEvent*> finputEvents;
 		std::vector<int> finputnEntries;
 		int fnentries;
 

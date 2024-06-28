@@ -18,19 +18,11 @@ namespace Reconstruction{
 	extern int DESY_theta;
 
 	// Computations	
-	extern int control;
 	extern int dedx;
 
 	// DrawOuts	
-	extern int DO_control;
-	extern int DO_Checks;
 	extern int DO_dEdx;
-	extern int DO_Resolution;
-	extern int DO_Global;
-	extern int DO_Scans;
-
-	extern int DO_Separation;
-	extern int DO_Systematics;
+	extern int DO_Comparison;
 }
 
 #endif

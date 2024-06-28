@@ -7,8 +7,10 @@ namespace Reconstruction{
 	std::string outFile_dEdx;
 	std::string comment;
 	std::string selectionSet;
+	std::string	inputDir;
 
 	// Run variables
+	std::vector<std::string> v_comments;
 	std::vector<std::string> v_tags;
 	std::vector<std::string> v_dataFiles;
 	std::vector<std::string> v_prtcles;
@@ -23,5 +25,6 @@ namespace Reconstruction{
 	int		fcorrectRC;
 	int		fcorrectWF;
 	int		fcorrectDrift;
+	
 
 }

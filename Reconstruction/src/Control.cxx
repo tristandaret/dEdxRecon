@@ -34,12 +34,12 @@ void Control(
 	std::cout.rdbuf(OUT_DataFile.rdbuf()) ;				// Redirect std::cout to output file
 
 	std::cout << "Control" << Comment << std::endl ;
-	std::cout << "Tag			: " << Tag				<< std::endl ;
-	std::cout << "EventFile	: " << EventFile			<< std::endl ;
-	std::cout << "SelectionSet	: " << SelectionSet		<< std::endl ;
-	std::cout << "iMod			: " << NbrOfMod		<< std::endl ;
-	std::cout << "Data_to_Use	: " << Data_to_Use		<< std::endl ;
-	std::cout << "OUTDirName	: " << OUTDirName		<< std::endl ;
+	std::cout << "Tag: " << Tag				<< std::endl ;
+	std::cout << "EventFile: " << EventFile			<< std::endl ;
+	std::cout << "SelectionSet: " << SelectionSet		<< std::endl ;
+	std::cout << "iMod: " << NbrOfMod		<< std::endl ;
+	std::cout << "Data_to_Use: " << Data_to_Use		<< std::endl ;
+	std::cout << "OUTDirName: " << OUTDirName		<< std::endl ;
 	std::cout <<											std::endl ;
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////
