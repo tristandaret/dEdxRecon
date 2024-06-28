@@ -24,11 +24,11 @@ std::vector<double> linspace(double start, double end, int numPoints);
 
 /* Compute the correction function of WF method ----------------------------------------- */
 void corr(const std::string& OutDir,
-          std::string const& Tag,
-          std::string const& SelectionSet,
-          Uploader* pUploader,
-          int const& NbrOfMod,
-          int const& Data_to_Use);
+			std::string const& Tag,
+			std::string const& SelectionSet,
+			Uploader* pUploader,
+			int const& NbrOfMod,
+			int const& Data_to_Use);
 
 
 
@@ -79,12 +79,12 @@ TF1* BetheBlochExp(const float& Pmin, const float& Pmax, const double& M, const 
 float mean(const std::vector<float>& values);
 
 // Fit a gaussian but within +/- 2sigma to fit only the peak correctly
-TF1*  Fit1Gauss(TH1F* h1F);
+TF1*	Fit1Gauss(TH1F* h1F);
 TF1* Fit1Gauss(TH1F* h1F, float range);
 
 // Fit with 2 gaussians
-TF1*  Fit2Gauss(TH1F* h1F);
-TF1*  Fit2Gauss(TH1F* h1F, const float& x1min, const float& x1max, const float& x2min, const float& x2max);
+TF1*	Fit2Gauss(TH1F* h1F);
+TF1*	Fit2Gauss(TH1F* h1F, const float& x1min, const float& x1max, const float& x2min, const float& x2max);
 
 
 

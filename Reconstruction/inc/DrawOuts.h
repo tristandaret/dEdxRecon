@@ -6,52 +6,52 @@
 #include "SetStyle.h"
 namespace Reconstruction{
 
-    class DrawOuts{
-    public:
-        // Constructors
-        DrawOuts(const std::string &inputFile);
-        DrawOuts(const std::vector<std::string> &v_inputFiles);
-        // Destructor
-        virtual ~DrawOuts();
+	class DrawOuts{
+	public:
+		// Constructors
+		DrawOuts(const std::string &inputFile);
+		DrawOuts(const std::vector<std::string> &v_inputFiles);
+		// Destructor
+		virtual ~DrawOuts();
 
-        // Methods
-        void SetStyle();
-        void EnergyLoss();
-        void FileComparison();
+		// Methods
+		void SetStyle();
+		void EnergyLoss();
+		void FileComparison();
 
-    private:
-        // Files
-        std::string finputFile;
-        std::string foutputDir;
-        std::string foutputFile;
-        
-        // Data file
-        std::vector<TFile*> finputFiles;
-        std::vector<TTree*> finputTrees;
-        std::vector<TBranch*> finputBranches;
-        TFile *fpFile;
-        TTree *fpTree;
-        TBranch *fpBranch;
+	private:
+		// Files
+		std::string finputFile;
+		std::string foutputDir;
+		std::string foutputFile;
+		
+		// Data file
+		std::vector<TFile*> finputFiles;
+		std::vector<TTree*> finputTrees;
+		std::vector<TBranch*> finputBranches;
+		TFile *fpFile;
+		TTree *fpTree;
+		TBranch *fpBranch;
 
-        // Data
-        RecoEvent *fpEvent;
-        std::vector<int> finputnEntries;
-        int fnentries;
+		// Data
+		RecoEvent *fpEvent;
+		std::vector<int> finputnEntries;
+		int fnentries;
 
-        // Settings
-        std::string fparticleType;
-        TCanvas *fpCanvas = new TCanvas("pCanvas", "pCanvas", 1800, 1350);
-    };
+		// Settings
+		std::string fparticleType;
+		TCanvas *fpCanvas	 = new TCanvas("pCanvas", "pCanvas", 1800, 1350);
+	};
 }
 
 // Draw Control plots
-void DrawOut_Control    (const std::string& inputDir, const std::string& Tag, const std::string& Comment, const std::string SelectionSet, const int& nMod);
+void DrawOut_Control	(const std::string& inputDir, const std::string& Tag, const std::string& Comment, const std::string SelectionSet, const int& nMod);
 
 // Draw Check plots
 void DrawOut_Checks(const std::string& OutDir, const std::string EvtFile, const std::string& Tag, const std::string& Comment);
 
 // Draw dE/dx for the different methods
-void DrawOut_dEdx       (const std::string& OutDir, const std::string& Tag, const std::string& Comment, const std::string SelectionSet, const int& nMod);
+void DrawOut_dEdx		(const std::string& OutDir, const std::string& Tag, const std::string& Comment, const std::string SelectionSet, const int& nMod);
 
 // TH2 comparisons of the different methods
 void DrawOut_Methods (const std::string& OutDir, const std::string& Tag, const std::string& Comment, const int& nMod, const std::string& prtcle);
