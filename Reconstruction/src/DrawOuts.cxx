@@ -46,7 +46,7 @@ void Reconstruction::DrawOuts::SetStyle(){
 	gPad->							UseCurrentStyle();
 
 	// Set Output
-	foutputDir = 					outDir + tag + "/";
+	foutputDir = 					outDir + v_tags.back() + "/";
 }
 
 
@@ -62,7 +62,7 @@ Reconstruction::DrawOuts::~DrawOuts(){
 
 void Reconstruction::DrawOuts::EnergyLoss(){
 	// Set output
-	foutputFile = 					foutputDir + "dEdx_" + tag + comment + ".pdf";
+	foutputFile = 					foutputDir + "dEdx_" + v_tags.back() + comment + ".pdf";
 
 	// Prepare histograms
 	TH2I *ph2i_heatmap =            new TH2I("ph2i_heatmap", "Events heatmap;iX;iY;", 144, 0, 143, 64, 0, 63);
@@ -157,9 +157,7 @@ void Reconstruction::DrawOuts::EnergyLoss(){
 		maxVal_WF = 				v_h1f_WF[i]->GetMaximum();
 		maxVal_XP = 				v_h1f_XP[i]->GetMaximum();
 		overallMax =        		std::max({overallMax, maxVal_WF, maxVal_XP});
-		std::cout << i << " max WF: " << maxVal_WF << " | max XP: " << maxVal_XP << " | overall max: " << overallMax << std::endl;
 	}
-	std::cout << "overall max: " << overallMax << std::endl;
 	float invX, invY;
 	//////////////////////////////////////////////////////////////////////////////////////////
 	fpCanvas->						cd();
