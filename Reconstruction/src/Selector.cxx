@@ -23,16 +23,16 @@ Selector::Selector(const std::string DefSelection
 	
 	Set_Cuts() ;
 	
-	if (DefSelection=="T_DESY21_Event"	) { Set_T_DESY21_Event()	; }
-	if (DefSelection=="T_DESY21theta_Event"	) { Set_T_DESY21theta_Event()	; }
-	if (DefSelection=="T2_CERN22_Event"	) { Set_T2_CERN22_Event()	; }
+	if (DefSelection=="Sel_DESY21"	) { Set_T_DESY21_Event()	; }
+	if (DefSelection=="Sel_DESY21_theta"	) { Set_T_DESY21theta_Event()	; }
+	if (DefSelection=="Sel_CERN22"	) { Set_T2_CERN22_Event()	; }
 	if (DefSelection=="TMC_CERN22_Event"	) { Set_TMC_CERN22_Event()	; }
 
 //
 	if (
-		DefSelection!="T_DESY21_Event"	
-	&&DefSelection!="T_DESY21theta_Event"	
-	&&DefSelection!="T2_CERN22_Event" 
+		DefSelection!="Sel_DESY21"	
+	&&DefSelection!="Sel_DESY21_theta"	
+	&&DefSelection!="Sel_CERN22" 
 	&&DefSelection!="TMC_CERN22_Event"
 	) { 
 	std::cout 
@@ -95,7 +95,7 @@ void Selector::Set_T_DESY21_Event()
 	Reset_Selection() ;
 
 	std::cout << std::endl ;
-	std::cout << "-------------->Predefined selection T_DESY21_Event" << std::endl ;
+	std::cout << "-------------->Predefined selection Sel_DESY21" << std::endl ;
 	ListOfSelectionName.clear();
 //	Add_Selection( "Stage1"	);	// border clusters
 	Add_Selection( "Stage2"	);	// time sync event based
@@ -112,7 +112,7 @@ void Selector::Set_T_DESY21theta_Event()
 	Reset_Selection() ;
 
 	std::cout << std::endl ;
-	std::cout << "-------------->Predefined selection T_DESY21theta_Event" << std::endl ;
+	std::cout << "-------------->Predefined selection Sel_DESY21_theta" << std::endl ;
 	ListOfSelectionName.clear();
 //	Add_Selection( "Stage1"	);	// border clusters
 	Add_Selection( "Stage4"	);	// average pad multiplicity
@@ -126,7 +126,7 @@ void Selector::Set_T2_CERN22_Event()
 	Reset_Selection() ;
 
 	std::cout << std::endl ;
-	std::cout << "-------------->Predefined selection T2_CERN22_Event" << std::endl ;
+	std::cout << "-------------->Predefined selection Sel_CERN22" << std::endl ;
 	ListOfSelectionName.clear();
 //	Add_Selection( "Stage1"	);	// border clusters
 	Add_Selection( "Stage2"	);	// time sync event based

@@ -55,7 +55,7 @@ void DrawOut_Checks(const std::string& OutDir, const std::string EvtFile, const 
 void DrawOut_dEdx		(const std::string& OutDir, const std::string& Tag, const std::string& Comment, const std::string SelectionSet, const int& nMod);
 
 // TH2 comparisons of the different methods
-void DrawOut_Methods (const std::string& OutDir, const std::string& Tag, const std::string& Comment, const int& nMod, const std::string& prtcle);
+void DrawOut_Methods (const std::string& OutDir, const std::string& Tag, const std::string& Comment, const int& nMod);
 
 // Draw resolution of 2 different procedures
 void DrawOut_Versions(const std::string& inputDir, const std::string& Method, const std::string& Comment1, const std::string& Comment2);

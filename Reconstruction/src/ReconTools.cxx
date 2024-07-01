@@ -64,7 +64,7 @@ void corr( const std::string& OutDir,
 	int NEvent	 = pUploader->Get_NberOfEvent() ;
 	std::cout << "Number of entries :" << NEvent << std::endl ;
 	// Get the correct cut on TLeading
-	if(SelectionSet	 == "T2_CERN22_Event" or SelectionSet	 == "T_DESY21_Event"){
+	if(SelectionSet	 == "Sel_CERN22" or SelectionSet	 == "Sel_DESY21"){
 	int TLow	= 0 ; int THigh	 = 0 ;
 	if(GetStage3Cut_CSV("../TimeSelection_Cuts.csv", Tag, TLow, THigh)) std::cout << "TLow	 = " << TLow << " | THigh	 = " << THigh << std::endl ;
 	else{
@@ -223,7 +223,7 @@ TF1* corr_func(const std::string &EventFile, const std::string &Tag, const int& 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Init_selection(const std::string &SelectionSet, Selector &aSelector, const std::string &Tag, Uploader *pUploader, const int &NbrOfMod, const int &Data_to_Use){
  // Get the correct cut on TLeading
-	if(SelectionSet	 == "T2_CERN22_Event" or SelectionSet	 == "T_DESY21_Event"){
+	if(SelectionSet	 == "Sel_CERN22" or SelectionSet	 == "Sel_DESY21"){
 	int TLow	 = 0, THigh	 = 0 ;
 	if(GetStage3Cut_CSV("../TimeSelection_Cuts.csv", Tag, TLow, THigh)) std::cout << "TLow	 = " << TLow << " | THigh	 = " << THigh << std::endl ;
 	else{

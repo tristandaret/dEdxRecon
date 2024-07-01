@@ -32,77 +32,66 @@ Reconstruction::dEdx::~dEdx(){
 
 void Reconstruction::dEdx::Reconstruction(){
 
-	// Make directories
-	std::string OUTDirName =				outDir + v_tags.back() + "/";
-	MakeMyDir(OUTDirName);
-	std::string OUTDIR_Display =			OUTDirName + "Evt_Display/";
-	MakeMyDir(OUTDIR_Display);
-	std::string OUTDIR_WF_Display =		OUTDirName + "WF_Display/";
-	MakeMyDir(OUTDIR_WF_Display);
-
 	// Redirect Output
-	std::string	logs = OUTDirName + "dEdx_" + v_tags.back() + ".log";
-	std::cout <<	"logs: " << logs		<< std::endl;
-	std::cout <<	std::setprecision(2)	<< std::fixed;
-	std::cout <<	std::endl;
-	std::streambuf* coutbuf = std::cout.rdbuf();	// Save old buf
-	std::ofstream	OUT_DataFile(logs.c_str() );	// Set output file
-	std::cout.		rdbuf(OUT_DataFile.rdbuf());	// Redirect to output file
+	std::cout <<		std::setprecision(2)	<< std::fixed;
+	std::cout <<		std::endl;
+	// std::streambuf* 	coutbuf = std::cout.rdbuf();	// Save old buf
+	// std::ofstream		OUT_DataFile(log_file.c_str() );	// Set output file
+	// std::cout.			rdbuf(OUT_DataFile.rdbuf());	// Redirect to output file
 
 	// Get ERAM maps
 	std::vector<int> fERAMs_iD;
 	std::vector<int> fERAMs_pos;
-	if(v_tags.back().find("DESY") != std::string::npos)				{fERAMs_iD.push_back(1);						fERAMs_pos.push_back(12);}
+	if(tag.find("DESY") != std::string::npos)				{fERAMs_iD.push_back(1);						fERAMs_pos.push_back(12);}
 	if(v_dataFiles.back().find("ERAM18") != std::string::npos)		{fERAMs_iD.push_back(18);					fERAMs_pos.push_back(33);}
 	if(v_dataFiles.back().find("All_ERAMS") != std::string::npos)	{fERAMs_iD = {7, 1, 23, 2, 16, 15, 10, 12};	fERAMs_pos = {26, 12, 10, 7, 17, 19, 13, 32};}
 	Reconstruction::ERAMMaps *pERAMMaps =	new Reconstruction::ERAMMaps();
 
 	// Diagonal clustering?
 	bool diag = false;
-	if(v_tags.back().find("diag") != std::string::npos) diag = true;
+	if(tag.find("diag") != std::string::npos) diag = true;
 
 	// Handle theta case
 	float costheta =	1;
 	int theta_arr[3] =	{-45, -20, 20};
-	for (int theta_file : theta_arr) if(v_tags.back().find("theta") != std::string::npos and v_tags.back().find(std::to_string(theta_file)) != std::string::npos) costheta =	fabs(cos((float)theta_file/180*M_PI));
+	for (int theta_file : theta_arr) if(tag.find("theta") != std::string::npos and tag.find(std::to_string(theta_file)) != std::string::npos) costheta =	fabs(cos((float)theta_file/180*M_PI));
 
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Output
-	TFile *pFile_dEdx =							new TFile(outFile_dEdx.c_str(), "RECREATE");
+	TFile *pFile_dEdx =							new TFile(rootout_file.c_str(), "RECREATE");
 	TTree *pTree_dEdx =							new TTree("dEdx_tree", "dEdx TTree");
-	Reconstruction::RecoEvent *p_recoevent =		new Reconstruction::RecoEvent();
+	Reconstruction::RecoEvent *p_recoevent =	new Reconstruction::RecoEvent();
 	pTree_dEdx->								Branch("event_branch", "Reconstruction::RecoEvent", &p_recoevent);
 
 	// Selection stage
 	Selector aSelector(selectionSet);
-	int NEvent =									p_uploader->Get_NberOfEvent();
-	Init_selection(selectionSet, aSelector, v_tags.back(), p_uploader, moduleCase, 0);
+	int NEvent =								p_uploader->Get_NberOfEvent();
+	Init_selection(selectionSet, aSelector, testbeam + "_" + tag, p_uploader, moduleCase, 0);
 	aSelector.Tell_Selection();
 
 	// Log info
-	std::cout << "dataFile: 		" << v_dataFiles.back()					<<	std::endl;
-	std::cout << "OUTDirName: 		" << OUTDirName							<<	std::endl;
-	std::cout << "tag: 				" << v_tags.back()						<<	std::endl;
-	std::cout << "comment: 			" << comment							<<	std::endl;
-	std::cout << "selectionSet: 	" << selectionSet						<<	std::endl;
-	std::cout << "particle: 		" << v_prtcles.back()					<<	std::endl;
-	std::cout << "drift method: 	" << fcorrectDrift						<<	std::endl;
-	std::cout << "WF	correction: " << fcorrectWF							<<	std::endl;
-	std::cout << "Gain correction: 	" << fcorrectGain						<<	std::endl;
-	std::cout << "RC	correction: " << fcorrectRC							<<	std::endl;
+	std::cout << "dataFile:          " << v_dataFiles.back()				<<	std::endl;
+	std::cout << "drawout_scanfolder: " << drawout_scanfolder				<<	std::endl;
+	std::cout << "tag:               " << tag								<<	std::endl;
+	std::cout << "comment:           " << comment							<<	std::endl;
+	std::cout << "selectionSet:      " << selectionSet						<<	std::endl;
+	std::cout << "drift method:      " << fcorrectDrift						<<	std::endl;
+	std::cout << "WF	correction:  " << fcorrectWF						<<	std::endl;
+	std::cout << "Gain correction:   " << fcorrectGain						<<	std::endl;
+	std::cout << "RC	correction:  " << fcorrectRC						<<	std::endl;
 	std::cout <<																std::endl;
-	std::cout << "Number of entries: "	<< NEvent << std::endl;
-	std::cout << "drift distance:	"	<< driftDist		<< " mm"		<<	std::endl;
-	std::cout << "Peaking time:		"	<< PT				<< " ns"		<<	std::endl;
-	std::cout << "Time bin length:	"	<< TB				<< " ns"		<<	std::endl;
-	std::cout << "PT/TB =			"	<< PT/TB			<< " time bins"	<<	std::endl;
-	std::cout << "drift method:		"	<< fcorrectDrift					<<	std::endl;
-	std::cout << "minimal length:	"	<< fminLength*1e3	<< " mm"		<<	std::endl;
+	std::cout << "Number of entries: "	<< NEvent 							<<  std::endl;
+	std::cout << "drift distance     "	<< driftDist		<< " mm"		<<	std::endl;
+	std::cout << "Peaking time:      "	<< PT				<< " ns"		<<	std::endl;
+	std::cout << "Time bin length:   "	<< TB				<< " ns"		<<	std::endl;
+	std::cout << "PT/TB =            "	<< PT/TB			<< " time bins"	<<	std::endl;
+	std::cout << "drift method:      "	<< fcorrectDrift					<<	std::endl;
+	std::cout << "minimal length:    "	<< fminLength*1e3	<< " mm"		<<	std::endl;
 	std::cout <<																std::endl;
 
 	// Correction function for WF
-	TF1 *pcorrFunctionWF =							corr_func(v_dataFiles.back(), v_tags.back(), fcorrectWF);
+	TF1 *pcorrFunctionWF =							corr_func(v_dataFiles.back(), tag, fcorrectWF);
 	float fAref  =									pcorrFunctionWF->Eval(XPADLENGTH);
 
 	// Track fit initializations
@@ -111,7 +100,7 @@ void Reconstruction::dEdx::Reconstruction(){
 	TF1 *ptf1PRF =									new TF1("ptf1PRF",aPRFParameters, -2.5*1.128, 2.5*1.128, 5);
 	ptf1PRF->										SetParameters(p_uploader->Get_Norm(), p_uploader->Get_a2(), p_uploader->Get_a4(), p_uploader->Get_b2(), p_uploader->Get_b4());
 	int fcounterFail =								0;
-	int fcounterFit =									0;
+	int fcounterFit =								0;
 
 	// Initialization of analysis vectors and histograms
 	// Modules
@@ -140,7 +129,7 @@ void Reconstruction::dEdx::Reconstruction(){
 
 
 	// Event loop
-	for (int iEvent =	0; iEvent < 4e4; iEvent++){
+	for (int iEvent =	0; iEvent < 5e3; iEvent++){
 		if(iEvent % 1000 ==	0 or iEvent ==	NEvent-1) std::cout << iEvent << "/" << NEvent << std::endl;
 
 		Event* pEvent =							p_uploader->GiveMe_Event(iEvent, moduleCase, 0, 0);
@@ -370,7 +359,7 @@ void Reconstruction::dEdx::Reconstruction(){
 	delete											pcorrFunctionWF;
 	delete											pERAMMaps;
 	delete											ptf1PRF;
-	std::cout.rdbuf(coutbuf); // Reset to standard output
+	// std::cout.rdbuf(coutbuf); // Reset to standard output
 }
 
 

@@ -47,7 +47,7 @@ void Reconstruction::DrawOuts::SetStyle(){
 	gPad->							UseCurrentStyle();
 
 	// Set Output
-	foutputDir =					outDir + v_tags.back() + "/";
+	foutputDir =					drawout_file + v_tags.back() + "/";
 }
 
 
@@ -289,12 +289,11 @@ void Reconstruction::DrawOuts::FileComparison(){
 		}
 	}
 
-	std::cout << finputTrees[0]->GetEntry(0) << std::endl;
-
 	int NMod = 0,	position = 0;
 	// Get entries and fill histograms
 	for(int ifile=0;ifile<(int)v_comments.size();ifile++){
 		for(int i=0;i<finputnEntries[ifile];i++){
+			std::cout << "number of entries" << finputTrees[ifile]->GetEntries() << std::endl;
 			finputTrees[ifile]->			GetEntry(i);
 			NMod =							finputEvents[ifile]->v_modules.size();
 
@@ -1297,7 +1296,7 @@ void DrawOut_dEdx(const std::string& OutDir, const std::string& Tag, const std::
 
 
 
-void DrawOut_Methods(const std::string& OutDir, const std::string& Tag, const std::string& Comment, const int& nMod, const std::string& prtcle){
+void DrawOut_Methods(const std::string& OutDir, const std::string& Tag, const std::string& Comment, const int& nMod){
 
 	std::cout										<< std::endl;
 	std::cout << " DrawOuts: Methods comparison" << std::endl;
@@ -1321,7 +1320,7 @@ void DrawOut_Methods(const std::string& OutDir, const std::string& Tag, const st
 	v_tf1_XP.						push_back(pTFile_dEdx->Get<TF1> ("tf1_XP"));
 
 	// Set Display
-	v_h1f_WFsum[iMod]->		SetTitle(std::string("Mean dE/dx with " + prtcle + ";mean dE/dx of each event;Counts").c_str());
+	v_h1f_WFsum[iMod]->		SetTitle(std::string("Mean dE/dx;mean dE/dx of each event;Counts").c_str());
 	// Set line color
 	v_h1f_WFsum[iMod]->		SetLineColor(kCyan+2);
 	v_h1f_XP[iMod]->			SetLineColor(kMagenta+2);

@@ -184,7 +184,7 @@ void Reconstruction::ERAMMaps::FillHoles()
 					}
 					gain /= n_sides;
 					setGain(i, iX, iY, gain);
-					std::cout <<"ERAM#" << std::setw(2) << ID(i) << std::setw(2) << " (" << std::setw(2) << i << "): " << "Gain hole in (iX,iY)	 = (" << iX << "," << iY << ") | value reset at " << Gain(i,iX,iY) << std::endl;
+					if(verbose) std::cout <<"ERAM#" << std::setw(2) << ID(i) << std::setw(2) << " (" << std::setw(2) << i << "): " << "Gain hole in (iX,iY)	 = (" << iX << "," << iY << ") | value reset at " << Gain(i,iX,iY) << std::endl;
 				}
 
 
@@ -201,7 +201,7 @@ void Reconstruction::ERAMMaps::FillHoles()
 					}
 					rc /= n_sides;
 					setRC(i, iX, iY, rc);
-					std::cout <<"ERAM#" << std::setw(2) << ID(i) << std::setw(2) << " (" << std::setw(2) << i << "): " << "RC	hole in (iX,iY)	 = (" << iX << "," << iY << ") | value reset at " << RC(i,iX,iY) << std::endl;
+					if(verbose) std::cout <<"ERAM#" << std::setw(2) << ID(i) << std::setw(2) << " (" << std::setw(2) << i << "): " << "RC	hole in (iX,iY)	 = (" << iX << "," << iY << ") | value reset at " << RC(i,iX,iY) << std::endl;
 				}
 				v_sides.clear();
 			} // iY
