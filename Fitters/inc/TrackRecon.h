@@ -5,12 +5,12 @@
 #include "TrackFitter.h"
 
 void TrackRecon(
-                            Sample& aSample, const int& ModuleNber,
-                            const int& NberOfParameters = 3
+							Sample& aSample, const int& ModuleNber,
+							const int& NberOfParameters = 3
 );
 
 int TrackRecon_Event(
-                            TrackFitter& aTrackFitter , 
-                            Event* pEvent, const int& ModuleNber ,
-                            const int& NberOfParameters = 3
+							TrackFitter& aTrackFitter , 
+							Event* pEvent, const int& ModuleNber ,
+							const int& NberOfParameters = 3
 );

@@ -9,23 +9,23 @@
 /////////////////////////////////////////////////////////////
 class FuncFromTGraph{
 public:
-   /** Constructor */
-   FuncFromTGraph(TGraph* pTGraph);
-   virtual ~FuncFromTGraph();
-   
-   double Get_Y(const double& vX) ;
-   
-   void Dump();
+	/** Constructor */
+	FuncFromTGraph(TGraph* pTGraph);
+	virtual ~FuncFromTGraph();
+	
+	double Get_Y(const double& vX);
+	
+	void Dump();
 
-   double operator() (double *x, double *par) ;
+	double operator() (double *x, double *par);
 
 private:
 
-  TGraph* p_TGraph  ;
-  double  m_StepX ;
-  double  m_X_Lowest ;
-  double  m_X_Highest ;
-  
+	TGraph* p_TGraph;
+	double	m_StepX;
+	double	m_X_Lowest;
+	double	m_X_Highest;
+	
 };
 
 

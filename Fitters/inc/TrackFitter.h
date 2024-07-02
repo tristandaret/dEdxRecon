@@ -13,42 +13,42 @@
 //
 // Parameters of fit should be unconstrained
 //
-// Fit Basic:  MIGRAD/MINOS
+// Fit Basic:	MIGRAD/MINOS
 //
 // Fit Rescues:
-//   1: MIGRAD->MINMIZE/MIGRAD
-//   2: MIGRAD->SIMPLEX/MIGRAD
+//	1: MIGRAD->MINMIZE/MIGRAD
+//	2: MIGRAD->SIMPLEX/MIGRAD
 //
 // Fit failure -> abort
 //
 class TrackFitter {
 public:
-   TrackFitter(
-               const std::string& FitterName,
-               const int& NberOfParameters = 2
-            );
-   virtual ~TrackFitter();
+	TrackFitter(
+				const std::string& FitterName,
+				const int& NberOfParameters = 2
+			);
+	virtual ~TrackFitter();
 
 public:
 ///////////////////////////////////
 
-  void Set_Track (Track* pTrack) ;
-  
-  int DoMinimisation();
+	void Set_Track (Track* pTrack);
+	
+	int DoMinimisation();
 
-  double Chi2(double par[]); 
+	double Chi2(double par[]); 
 
 
 protected:
 ///////////////////////////////////
 
-  std::string m_FitterName    ; 
-  
-  int m_NberOfParameters ;
+	std::string m_FitterName; 
+	
+	int m_NberOfParameters;
 
-  Track* p_Track    ; 
-   
-  TVirtualFitter* p_TVirtualFitter ; //!< Fitter
+	Track* p_Track; 
+	
+	TVirtualFitter* p_TVirtualFitter; //!< Fitter
 
 };
 

@@ -41,7 +41,7 @@ namespace Reconstruction{
 
 		// Settings
 		std::string fparticleType;
-		TCanvas *fpCanvas	 = new TCanvas("pCanvas", "pCanvas", 1800, 1350);
+		TCanvas *fpCanvas	= new TCanvas("pCanvas", "pCanvas", 1800, 1350);
 	};
 }
 

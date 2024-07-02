@@ -23,8 +23,8 @@ namespace Reconstruction{
 	
 	// Files to use
 	int prototype =			0;
-	int CERN_Escan =		0;
-	int CERN_drift = 		1;
+	int CERN_Escan =		1;
+	int CERN_drift = 		0;
 
 	int DESY_drift =		0;
 	int DESY_yscan =		0;
@@ -56,13 +56,13 @@ void Reconstruction::Monitoring()
 
 		int part_arr[] = {1,2,5,6};
 		for (int iFile : part_arr) {
-			if (iFile == 0) { v_dataFiles.push_back(data_subfolder + "ERAM18_350V_412ns_e+_0p5GeV_iter0.root");							v_tags.push_back("CERN22_ERAM18_e+_0p5GeV");	}
-			if (iFile == 1) { v_dataFiles.push_back(data_subfolder + "ERAM18_350V_412ns_e+_1GeV_iter0.root");							v_tags.push_back("CERN22_ERAM18_e+_1GeV");		}
-			if (iFile == 2) { v_dataFiles.push_back(data_subfolder + "ERAM18_350V_412ns_p_1GeV_iter0.root");							v_tags.push_back("CERN22_ERAM18_p_1GeV");		}
-			if (iFile == 3) { v_dataFiles.push_back(data_subfolder + "ERAM18_350V_412ns_mu-_1GeV_iter0.root");							v_tags.push_back("CERN22_ERAM18_mu-_1GeV");		}
-			if (iFile == 4) { v_dataFiles.push_back(data_subfolder + "ERAM18_350V_412ns_mu+_0p75GeV_iter0.root");						v_tags.push_back("CERN22_ERAM18_mu+_0p75GeV");	}
-			if (iFile == 5) { v_dataFiles.push_back(data_subfolder + "ERAM18_350V_412ns_mu+_1GeV_iter0.root");							v_tags.push_back("CERN22_ERAM18_mu+_1GeV");		}
-			if (iFile == 6) { v_dataFiles.push_back(data_subfolder + "ERAM18_350V_412ns_pi+_0p5GeV_iter0.root");						v_tags.push_back("CERN22_ERAM18_pi+_0p5GeV");	}
+			if (iFile == 0) { v_dataFiles.push_back(data_subfolder + "ERAM18_350V_412ns_e+_0p5GeV_iter0.root");							v_tags.push_back("e+_0p5GeV");	}
+			if (iFile == 1) { v_dataFiles.push_back(data_subfolder + "ERAM18_350V_412ns_e+_1GeV_iter0.root");							v_tags.push_back("e+_1GeV");	}
+			if (iFile == 2) { v_dataFiles.push_back(data_subfolder + "ERAM18_350V_412ns_p_1GeV_iter0.root");							v_tags.push_back("p_1GeV");		}
+			if (iFile == 3) { v_dataFiles.push_back(data_subfolder + "ERAM18_350V_412ns_mu-_1GeV_iter0.root");							v_tags.push_back("mu-_1GeV");	}
+			if (iFile == 4) { v_dataFiles.push_back(data_subfolder + "ERAM18_350V_412ns_mu+_0p75GeV_iter0.root");						v_tags.push_back("mu+_0p75GeV");}
+			if (iFile == 5) { v_dataFiles.push_back(data_subfolder + "ERAM18_350V_412ns_mu+_1GeV_iter0.root");							v_tags.push_back("mu+_1GeV");	}
+			if (iFile == 6) { v_dataFiles.push_back(data_subfolder + "ERAM18_350V_412ns_pi+_0p5GeV_iter0.root");						v_tags.push_back("pi+_0p5GeV");	}
 		}
 	}
 
@@ -96,7 +96,7 @@ void Reconstruction::Monitoring()
 
 	// Drift distance scan scan using the mockup
 	if(CERN_drift){
-		Settings("CERN22", "Drift_Scan", 3, -1, 412, 350, 415, 40);
+		Settings("CERN22", "Drift_Scan", 4, -1, 412, 350, 415, 40);
 
 		int			z_val[] = 	{60, 218, 415, 925};
 		std::string z_arr[] = 	{"60", "218p5", "415", "925"};
@@ -211,7 +211,7 @@ void Reconstruction::Monitoring()
 		v_dataFiles.			push_back(drawout_scanfolder + "dEdx_" + tag + comment2 + ".root");
 
 		p_DrawOuts =			new DrawOuts(v_dataFiles);
-		p_DrawOuts->  			FileComparison();
+		p_DrawOuts->				FileComparison();
 	}
 
 
@@ -250,7 +250,7 @@ void Reconstruction::Settings(const std::string &testbeam_name, const std::strin
 	testbeam = 					testbeam_name;
 	scan = 						scan_name;
 	selectionSet =				"Sel_" + testbeam;
-	data_subfolder =  			data_folder + "Data_" + testbeam + "/";
+	data_subfolder =				data_folder + "Data_" + testbeam + "/";
 	drawout_scanfolder =		drawout_folder + testbeam + "_" + scan + "/";
 	intUploader =				uploader;
 	moduleCase =				modules;
@@ -265,12 +265,12 @@ void Reconstruction::Settings(const std::string &testbeam_name, const std::strin
 
 void Reconstruction::DefaultAnalysis(){
 	tag = 						v_tags.back();
-	drawout_runfolder =			drawout_scanfolder + testbeam + "_" + scan + "_" + tag +  "/";
+	drawout_runfolder =			drawout_scanfolder + testbeam + "_" + scan + "_" + tag +	"/";
 	MakeMyDir(drawout_runfolder);
-	rootout_file =				drawout_runfolder + "dEdx_" + tag + comment + ".root";
-	drawout_file =				drawout_runfolder + "dEdx_" + tag + comment + ".pdf";
-	log_file = 					drawout_runfolder + "dEdx_" + tag + ".log";
-	std::cout << "logs:        " << log_file		<< std::endl;
+	rootout_file =				drawout_runfolder + "dEdx_" + testbeam + "_" + scan + "_" + tag + comment + ".root";
+	drawout_file =				drawout_runfolder + "dEdx_" + testbeam + "_" + scan + "_" + tag + comment + ".pdf";
+	log_file = 					drawout_runfolder + "dEdx_" + testbeam + "_" + scan + "_" + tag + ".log";
+	std::cout << "logs:		" << log_file		<< std::endl;
 
 	if(dedx){
 		p_uploader =			GiveMe_Uploader (intUploader, v_dataFiles.back());

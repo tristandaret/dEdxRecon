@@ -13,7 +13,7 @@ ClassImp(EramInfo)
 
 Reconstruction::ERAMMaps::ERAMMaps(const std::string& file)
 {
-	fFile	= file ;
+	fFile	= file;
 	fmean_gain.assign(34, 0);
 	fmean_RC.assign(34, 0);
 
@@ -27,14 +27,14 @@ Reconstruction::ERAMMaps::~ERAMMaps()
 {
 	pFile->Close();
 	delete pFile;
-	for(int i=0;i<(int)fID.size();i++) fID[i]	 = 0;
+	for(int i=0;i<(int)fID.size();i++) fID[i]	= 0;
 	fID.clear();
 	for(int i=0;i<32;i++){
 		for(int j=0;j<36;j++){
 			for(int k=0;k<32;k++){
-				fGain[i][j][k]	 = 0;
-				fRC[i][j][k]	 = 0;
-				fResolution[i][j][k]	 = 0;
+				fGain[i][j][k]	= 0;
+				fRC[i][j][k]	= 0;
+				fResolution[i][j][k]	= 0;
 			}
 		}
 	}
@@ -67,12 +67,12 @@ void Reconstruction::ERAMMaps::Load()
 	// Filling the maps
 	for (int i=0; i<nentries;i++) {
 		pTree->GetEntry(i);
-		if(fid	 == 12){ // Not mounted @ JPARC but used in CERN22 Mockup
+		if(fid	== 12){ // Not mounted @ JPARC but used in CERN22 Mockup
 			setGain			(32,fx,fy,fgain);
 			setRC			(32,fx,fy,frc);
 			setResolution	(32,fx,fy,fres);
 		}
-		if(fid	 == 18){ // Not mounted @ JPARC but used for CERN22 prototype
+		if(fid	== 18){ // Not mounted @ JPARC but used for CERN22 prototype
 			setGain			(33,fx,fy,fgain);
 			setRC			(33,fx,fy,frc);
 			setResolution	(33,fx,fy,fres);
@@ -86,8 +86,8 @@ void Reconstruction::ERAMMaps::Load()
 	// Fill holes in the maps
 	FillHoles();
 
-	float meanGain	 =	0;
-	float meanRC	 = 		0;
+	float meanGain	=	0;
+	float meanRC	= 		0;
 	for(int i=0;i<34;i++){
 		for(int j=0;j<36;j++){
 			for(int k=0;k<32;k++){
@@ -99,7 +99,7 @@ void Reconstruction::ERAMMaps::Load()
 		meanRC /= 1152;
 		setMeanGain(i, meanGain);
 		setMeanRC(i, meanRC);
-		if(verbose) std::cout << "ERAM#" << ID(i) << ": mean Gain	 = " << MeanGain(i) << " | mean RC	 = " << MeanRC(i) << std::endl;
+		if(verbose) std::cout << "ERAM#" << ID(i) << ": mean Gain	= " << MeanGain(i) << " | mean RC	= " << MeanRC(i) << std::endl;
 	}
 }
 
@@ -113,17 +113,17 @@ int Reconstruction::ERAMMaps::ID(const int& position)
 
 float Reconstruction::ERAMMaps::RC(const int& position, const int& iX, const int& iY)
 {
-		return fRC[position][iX][iY] ;
+		return fRC[position][iX][iY];
 }
 
 float Reconstruction::ERAMMaps::Gain(const int& position, const int& iX, const int& iY)
 {
-		return fGain[position][iX][iY] ;
+		return fGain[position][iX][iY];
 }
 
 float Reconstruction::ERAMMaps::Resolution(const int& position, const int& iX, const int& iY)
 {
-		return fResolution[position][iX][iY] ;
+		return fResolution[position][iX][iY];
 }
 float Reconstruction::ERAMMaps::MeanGain(const int& position)
 {
@@ -141,67 +141,67 @@ float Reconstruction::ERAMMaps::MeanRC(const int& position)
 // ERAMs on endplates 1&3 are X-flipped compared to their maps in the file
 void Reconstruction::ERAMMaps::setGain(const int& position, const int& iX, const int& iY, const float& gain)
 {
-	fGain[position][iX][iY]			= gain ;
+	fGain[position][iX][iY]			= gain;
 }
 
 void Reconstruction::ERAMMaps::setRC(const int& position, const int& iX, const int& iY, const float& RC)
 {
-	fRC[position][iX][iY]			= RC ;
+	fRC[position][iX][iY]			= RC;
 }
 
 void Reconstruction::ERAMMaps::setResolution(const int& position, const int& iX, const int& iY, const float& resolution)
 {
-	fResolution[position][iX][iY]	= resolution ;
+	fResolution[position][iX][iY]	= resolution;
 }
 void Reconstruction::ERAMMaps::setMeanGain(const int& position, const float& meanGain)
 {
-	fmean_gain[position]	 = meanGain;
+	fmean_gain[position]	= meanGain;
 }
 void Reconstruction::ERAMMaps::setMeanRC(const int& position, const float& meanRC)
 {
-	fmean_RC[position]	 = meanRC;
+	fmean_RC[position]	= meanRC;
 }
 
 
 void Reconstruction::ERAMMaps::FillHoles()
 {
 	for(int i=0;i<32;i++){
-		for(int iY	 = 0 ; iY < 32 ; iY++){
-			for(int iX	 = 0 ; iX < 36 ; iX++){
-				float gain	 = Gain(i,iX,iY) ;
+		for(int iY	= 0; iY < 32; iY++){
+			for(int iX	= 0; iX < 36; iX++){
+				float gain	= Gain(i,iX,iY);
 				float rc	= RC(i,iX,iY);
 
 				v_sides.assign(4, 0);
-				if(gain	 == 0){
-					if(iX>0)	v_sides[0]	 = Gain(i, iX-1,iY	) ;
-					if(iX<35) v_sides[1]	 = Gain(i, iX+1,iY	) ;
-					if(iY>0)	v_sides[2]	 = Gain(i, iX,	iY-1) ;
-					if(iY<31) v_sides[3]	 = Gain(i, iX,	iY+1) ;
-					float n_sides	 = 0;
-					for(int i	 = 0; i<4; i++) if (v_sides[i]!=0){ // additionnal step to discard empty neighbours
+				if(gain	== 0){
+					if(iX>0)	v_sides[0]	= Gain(i, iX-1,iY	);
+					if(iX<35) v_sides[1]	= Gain(i, iX+1,iY	);
+					if(iY>0)	v_sides[2]	= Gain(i, iX,	iY-1);
+					if(iY<31) v_sides[3]	= Gain(i, iX,	iY+1);
+					float n_sides	= 0;
+					for(int i	= 0; i<4; i++) if (v_sides[i]!=0){ // additionnal step to discard empty neighbours
 						gain += v_sides[i];
 						n_sides++;
 					}
 					gain /= n_sides;
 					setGain(i, iX, iY, gain);
-					if(verbose) std::cout <<"ERAM#" << std::setw(2) << ID(i) << std::setw(2) << " (" << std::setw(2) << i << "): " << "Gain hole in (iX,iY)	 = (" << iX << "," << iY << ") | value reset at " << Gain(i,iX,iY) << std::endl;
+					if(verbose) std::cout <<"ERAM#" << std::setw(2) << ID(i) << std::setw(2) << " (" << std::setw(2) << i << "): " << "Gain hole in (iX,iY)	= (" << iX << "," << iY << ") | value reset at " << Gain(i,iX,iY) << std::endl;
 				}
 
 
 				v_sides.assign(4, 0);
-				if(rc	 == 0){
-					if(iX>0)	v_sides[0]	 = RC(i, iX-1,iY	) ;
-					if(iX<35) v_sides[1]	 = RC(i, iX+1,iY	) ;
-					if(iY>0)	v_sides[2]	 = RC(i, iX,	iY-1) ;
-					if(iY<31) v_sides[3]	 = RC(i, iX,	iY+1) ;
-					float n_sides	 = 0;
-					for(int i	 = 0; i<4; i++) if (v_sides[i]!=0){ // additionnal step to discard empty neighbours
+				if(rc	== 0){
+					if(iX>0)	v_sides[0]	= RC(i, iX-1,iY	);
+					if(iX<35) v_sides[1]	= RC(i, iX+1,iY	);
+					if(iY>0)	v_sides[2]	= RC(i, iX,	iY-1);
+					if(iY<31) v_sides[3]	= RC(i, iX,	iY+1);
+					float n_sides	= 0;
+					for(int i	= 0; i<4; i++) if (v_sides[i]!=0){ // additionnal step to discard empty neighbours
 						rc += v_sides[i];
 						n_sides++;
 					}
 					rc /= n_sides;
 					setRC(i, iX, iY, rc);
-					if(verbose) std::cout <<"ERAM#" << std::setw(2) << ID(i) << std::setw(2) << " (" << std::setw(2) << i << "): " << "RC	hole in (iX,iY)	 = (" << iX << "," << iY << ") | value reset at " << RC(i,iX,iY) << std::endl;
+					if(verbose) std::cout <<"ERAM#" << std::setw(2) << ID(i) << std::setw(2) << " (" << std::setw(2) << i << "): " << "RC	hole in (iX,iY)	= (" << iX << "," << iY << ") | value reset at " << RC(i,iX,iY) << std::endl;
 				}
 				v_sides.clear();
 			} // iY
@@ -217,7 +217,7 @@ void Reconstruction::ERAMMaps::FillHoles()
 /* Look Up Tables for XP method ------------------------------------------------------------------------------------------------------------------ */
 // Default constructor
 Reconstruction::LUT::LUT(const int& transDiffCoeff, const int& peakingTime){
-	fFile_LUT	 = Form("$HOME/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi150_nd150_nRC41_nZ21.root", transDiffCoeff, peakingTime);
+	fFile_LUT	= Form("$HOME/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi150_nd150_nRC41_nZ21.root", transDiffCoeff, peakingTime);
 	std::cout << "dEdx LUT: LOADING " << fFile_LUT << std::endl;
 	Load();
 	std::cout << "dEdx LUT: LOADED" << std::endl;
@@ -225,7 +225,7 @@ Reconstruction::LUT::LUT(const int& transDiffCoeff, const int& peakingTime){
 
 Reconstruction::LUT::LUT(const std::string& file)
 	{
-	fFile_LUT	 = file;
+	fFile_LUT	= file;
 	std::cout << "dEdx LUT: LOADING " << fFile_LUT << std::endl;
 	Load();
 	std::cout << "dEdx LUT: LOADED" << std::endl;
@@ -236,7 +236,7 @@ Reconstruction::LUT::~LUT()
 	{
 	pFile_LUT->Close();
 	delete pFile_LUT;
-	for(int i=0;i<sN_PHI;i++) for(int j=0;j<sN_D;j++) for(int k=0;k<sN_RC;k++) for(int l=0;l<sN_Z;l++) fValue[i][j][k][l]	 = 0;
+	for(int i=0;i<sN_PHI;i++) for(int j=0;j<sN_D;j++) for(int k=0;k<sN_RC;k++) for(int l=0;l<sN_Z;l++) fValue[i][j][k][l]	= 0;
 }
 
 
@@ -253,9 +253,9 @@ void Reconstruction::LUT::Load()
 
 	
 	// Initializing all values to 0
-	for(int i=0;i<sN_PHI;i++) for(int j=0;j<sN_D;j++) for(int k=0;k<sN_RC;k++) for(int l=0;l<sN_Z;l++) fValue[i][j][k][l]	 = 0;
+	for(int i=0;i<sN_PHI;i++) for(int j=0;j<sN_D;j++) for(int k=0;k<sN_RC;k++) for(int l=0;l<sN_Z;l++) fValue[i][j][k][l]	= 0;
 
-	int nentries	 = pTree_LUT->GetEntries();
+	int nentries	= pTree_LUT->GetEntries();
 	int id, iphi, iRC, iz;
 	for (int i=0; i<nentries;i++) {
 		pTree_LUT->						GetEntry(i);
@@ -272,8 +272,8 @@ float Reconstruction::LUT::getRatio(const float& phi, const float& d, const floa
 {
 	// Determine the indices of the 8 points surrounding the point of interest
 	float iphi	= (phi-1e-6)/sSTEP_PHI;
-	float iphi_min	 = std::min((float)std::floor((phi-1e-6)/sSTEP_PHI), (float)sN_PHI-1);
-	float iphi_max	 = std::max((float)std::ceil((phi-1e-6)/sSTEP_PHI), (float)0.0);
+	float iphi_min	= std::min((float)std::floor((phi-1e-6)/sSTEP_PHI), (float)sN_PHI-1);
+	float iphi_max	= std::max((float)std::ceil((phi-1e-6)/sSTEP_PHI), (float)0.0);
 	float id		= d/sSTEP_D;
 	float id_min	= std::min((float)std::floor(d/sSTEP_D), (float)sN_D-1);
 	float id_max	= std::max((float)std::ceil(d/sSTEP_D), (float)0);
@@ -286,19 +286,19 @@ float Reconstruction::LUT::getRatio(const float& phi, const float& d, const floa
 
 	// Determine the weights for the 8 points
 	float w_phi, w_d, w_RC, w_z;
-	if(iphi_min	 == iphi_max)	w_phi	 = 1;
-	else						w_phi	 = 1 - (iphi - iphi_min)/(iphi_max - iphi_min);
-	if(id_min	 == id_max)		w_d	= 1;
+	if(iphi_min	== iphi_max)	w_phi	= 1;
+	else						w_phi	= 1 - (iphi - iphi_min)/(iphi_max - iphi_min);
+	if(id_min	== id_max)		w_d	= 1;
 	else						w_d	= 1 - (id - id_min)/(id_max - id_min);
-	if(iRC_min	 == iRC_max)	w_RC	= 1;
+	if(iRC_min	== iRC_max)	w_RC	= 1;
 	else						w_RC	= 1 - (iRC - iRC_min)/(iRC_max - iRC_min);
-	if(iz_min	 == iz_max)		w_z	= 1;
+	if(iz_min	== iz_max)		w_z	= 1;
 	else						w_z	= 1 - (iz - iz_min)/(iz_max - iz_min);
 
-	float interpolated_value	 = 0;
-	for (int i	 = 0; i < 2; ++i) for (int j	 = 0; j < 2; ++j) for (int k	 = 0; k < 2; ++k) for (int l	 = 0; l < 2; ++l) 
+	float interpolated_value	= 0;
+	for (int i	= 0; i < 2; ++i) for (int j	= 0; j < 2; ++j) for (int k	= 0; k < 2; ++k) for (int l	= 0; l < 2; ++l) 
 		interpolated_value += fValue[(int)iphi_min + i][(int)id_min + j][(int)iRC_min + k][(int)iz_min + l] *
-							(i	 == 0 ? w_phi : (1 - w_phi)) * (j	 == 0 ? w_d : (1 - w_d)) * (k	 == 0 ? w_RC : (1 - w_RC)) * (l	 == 0 ? w_z : (1 - w_z));
+							(i	== 0 ? w_phi : (1 - w_phi)) * (j	== 0 ? w_d : (1 - w_d)) * (k	== 0 ? w_RC : (1 - w_RC)) * (l	== 0 ? w_z : (1 - w_z));
 
 	return interpolated_value;
 }

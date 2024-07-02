@@ -111,7 +111,7 @@ namespace Reconstruction{
 
 
 		private:
-		// Reconstruction::ERAMMaps *pERAMMaps	 = new Reconstruction::ERAMMaps();
+		// Reconstruction::ERAMMaps *pERAMMaps	= new Reconstruction::ERAMMaps();
 		// Event* pEvent;
 		// std::vector<double> v_erams;
 

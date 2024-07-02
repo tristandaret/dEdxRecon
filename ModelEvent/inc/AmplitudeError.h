@@ -6,10 +6,10 @@
 #include "Pad.h"
 
 double AmplitudeError(
-      const Pad* pPad                 ,
-      const Pad* pPad_Leading         ,
-      const Pad* pPad_NextLeading     ,
-      const Pad* pPad_NextNextLeading  
+		const Pad* pPad,
+		const Pad* pPad_Leading,
+		const Pad* pPad_NextLeading,
+		const Pad* pPad_NextNextLeading	
 );
 
 #endif

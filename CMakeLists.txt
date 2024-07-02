@@ -30,9 +30,9 @@ target_include_directories(dEdxReconLib PUBLIC Utilities/inc)
 
 # Generate dictionaries
 ROOT_GENERATE_DICTIONARY(G__dEdxReconLib
-  Reconstruction/inc/dEdx.h Reconstruction/inc/LUTs.h
-  LINKDEF Reconstruction/inc/Recon_LinkDef.h
-  MODULE dEdxReconLib)
+	Reconstruction/inc/dEdx.h Reconstruction/inc/LUTs.h
+	LINKDEF Reconstruction/inc/Recon_LinkDef.h
+	MODULE dEdxReconLib)
 
 # Link the dictionary to the library
 target_link_libraries(dEdxReconLib PUBLIC ${ROOT_LIBRARIES})

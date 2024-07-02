@@ -266,7 +266,7 @@ void Reconstruction::DrawOuts::FileComparison(){
 	std::string comment_list;
 	for(int i=0;i<(int)v_comments.size();i++){
 		if(v_comments[i] != "") comment_list += v_comments[i] + "_";
-		else  					comment_list += "Default_";
+		else						comment_list += "Default_";
 	}
 	drawout_file =							foutputDir + "Comparison_" + comment_list + ".pdf";
 
@@ -498,8 +498,8 @@ void DrawOut_Control(const std::string& inputDir, const std::string& Tag, const 
 	v_h1f_TL_Raw[iMod]->Draw("HIST");
 	
 	TGraph* pTGraph_1 = new TGraph;
-	pTGraph_1->SetPoint( pTGraph_1->GetN(), TLow	, 1.E4*v_h1f_TL_Raw[iMod]->GetMaximum() );
-	pTGraph_1->SetPoint( pTGraph_1->GetN(), TLow	, 0.1	);
+	pTGraph_1->SetPoint( pTGraph_1->GetN(), TLow, 1.E4*v_h1f_TL_Raw[iMod]->GetMaximum() );
+	pTGraph_1->SetPoint( pTGraph_1->GetN(), TLow, 0.1	);
 	pTGraph_1->SetLineWidth(2);
 	pTGraph_1->SetLineColor(2);
 	pTGraph_1->Draw("l");	

@@ -33,7 +33,7 @@ namespace Reconstruction{
 	class ERAMMaps {
 	public:
 		/* Constructor */
-		ERAMMaps(const std::string& file	 = "$HOME/Documents/Code/CPP_projects/Read_ERAM_MAP/ERAMinfo.root");
+		ERAMMaps(const std::string& file	= "$HOME/Documents/Code/CPP_projects/Read_ERAM_MAP/ERAMinfo.root");
 		virtual ~ERAMMaps();
 		
 		int	ID(const int& position);
@@ -44,7 +44,7 @@ namespace Reconstruction{
 		float MeanRC(const int& position);
 
 	private:
-		bool verbose	 = false;
+		bool verbose	= false;
 		std::string fFile;
 		std::vector<int> fID;
 		std::vector<float> v_sides;
@@ -56,14 +56,14 @@ namespace Reconstruction{
 		std::vector<float> fmean_RC;
 
 		void Load();
-		void setGain		(const int& position, const int& iX, const int& iY, const float& gain) ;
-		void setRC		(const int& position, const int& iX, const int& iY, const float& RC) ;
-		void setResolution (const int& position, const int& iX, const int& iY, const float& resolution) ;
-		void setMeanGain	(const int& position, const float& meanGain) ;
-		void setMeanRC	(const int& position, const float& meanRC) ;
+		void setGain		(const int& position, const int& iX, const int& iY, const float& gain);
+		void setRC		(const int& position, const int& iX, const int& iY, const float& RC);
+		void setResolution (const int& position, const int& iX, const int& iY, const float& resolution);
+		void setMeanGain	(const int& position, const float& meanGain);
+		void setMeanRC	(const int& position, const float& meanRC);
 		void FillHoles();
 
-		std::vector<int> channel2iD	 = {24, 30, 28, 19, 21, 13,	9,	2, 26, 17, 23, 29,	1, 10, 11,	3,	/*bottom HATPC*/ 
+		std::vector<int> channel2iD	= {24, 30, 28, 19, 21, 13,	9,	2, 26, 17, 23, 29,	1, 10, 11,	3,	/*bottom HATPC*/ 
 									47, 16, 14, 15, 42, 45, 37, 36, 20, 38,	7, 44, 43, 39, 41, 46,	/*top	HATPC*/
 									12, 18}; // CERN22 MockUp and prototype
 
@@ -71,8 +71,8 @@ namespace Reconstruction{
 	
 
 		//------------------------------Data Members-----------------------//
-		TFile	*pFile ;
-		TTree	*pTree ;
+		TFile	*pFile;
+		TTree	*pTree;
 		TBranch	*pBranch;
 
 		// Leaves
@@ -124,8 +124,8 @@ namespace Reconstruction{
 	
 		//------------------------------Data Members-----------------------//
 
-		TFile *pFile_LUT ;
-		TTree *pTree_LUT ;
+		TFile *pFile_LUT;
+		TTree *pTree_LUT;
 
 		// Leaves
 		float		fweight;

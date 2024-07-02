@@ -42,7 +42,7 @@ void Reconstruction::dEdx::Reconstruction(){
 	// Get ERAM maps
 	std::vector<int> fERAMs_iD;
 	std::vector<int> fERAMs_pos;
-	if(tag.find("DESY") != std::string::npos)				{fERAMs_iD.push_back(1);						fERAMs_pos.push_back(12);}
+	if(tag.find("DESY") != std::string::npos)						{fERAMs_iD.push_back(1);					fERAMs_pos.push_back(12);}
 	if(v_dataFiles.back().find("ERAM18") != std::string::npos)		{fERAMs_iD.push_back(18);					fERAMs_pos.push_back(33);}
 	if(v_dataFiles.back().find("All_ERAMS") != std::string::npos)	{fERAMs_iD = {7, 1, 23, 2, 16, 15, 10, 12};	fERAMs_pos = {26, 12, 10, 7, 17, 19, 13, 32};}
 	Reconstruction::ERAMMaps *pERAMMaps =	new Reconstruction::ERAMMaps();
@@ -71,28 +71,28 @@ void Reconstruction::dEdx::Reconstruction(){
 	aSelector.Tell_Selection();
 
 	// Log info
-	std::cout << "dataFile:          " << v_dataFiles.back()				<<	std::endl;
+	std::cout << "dataFile:			  " << v_dataFiles.back()				<<	std::endl;
 	std::cout << "drawout_scanfolder: " << drawout_scanfolder				<<	std::endl;
-	std::cout << "tag:               " << tag								<<	std::endl;
-	std::cout << "comment:           " << comment							<<	std::endl;
-	std::cout << "selectionSet:      " << selectionSet						<<	std::endl;
-	std::cout << "drift method:      " << fcorrectDrift						<<	std::endl;
-	std::cout << "WF    correction:  " << fcorrectWF						<<	std::endl;
-	std::cout << "Gain correction:   " << fcorrectGain						<<	std::endl;
-	std::cout << "RC    correction:  " << fcorrectRC						<<	std::endl;
+	std::cout << "tag:                " << tag								<<	std::endl;
+	std::cout << "comment:            " << comment							<<	std::endl;
+	std::cout << "selectionSet:       " << selectionSet						<<	std::endl;
+	std::cout << "drift method:       " << fcorrectDrift					<<	std::endl;
+	std::cout << "WF    correction    " << fcorrectWF						<<	std::endl;
+	std::cout << "Gain correction     " << fcorrectGain						<<	std::endl;
+	std::cout << "RC    correction    " << fcorrectRC						<<	std::endl;
 	std::cout <<																std::endl;
-	std::cout << "Number of entries: "	<< NEvent 							<<  std::endl;
-	std::cout << "drift distance     "	<< driftDist		<< " mm"		<<	std::endl;
-	std::cout << "Peaking time:      "	<< PT				<< " ns"		<<	std::endl;
-	std::cout << "Time bin length:   "	<< TB				<< " ns"		<<	std::endl;
-	std::cout << "PT/TB =            "	<< PT/TB			<< " time bins"	<<	std::endl;
-	std::cout << "drift method:      "	<< fcorrectDrift					<<	std::endl;
-	std::cout << "minimal length:    "	<< fminLength*1e3	<< " mm"		<<	std::endl;
+	std::cout << "Number of entries:  "	<< NEvent 							<<	std::endl;
+	std::cout << "drift               "	<< driftDist		<< " mm"		<<	std::endl;
+	std::cout << "Peaking time:       "	<< PT				<< " ns"		<<	std::endl;
+	std::cout << "Time bin length     "	<< TB				<< " ns"		<<	std::endl;
+	std::cout << "PT/TB =             "	<< PT/TB			<< " time bins"	<<	std::endl;
+	std::cout << "drift method:       "	<< fcorrectDrift					<<	std::endl;
+	std::cout << "minimal length      "	<< fminLength*1e3	<< " mm"		<<	std::endl;
 	std::cout <<																std::endl;
 
 	// Correction function for WF
 	TF1 *pcorrFunctionWF =							corr_func(v_dataFiles.back(), tag, fcorrectWF);
-	float fAref  =									pcorrFunctionWF->Eval(XPADLENGTH);
+	float fAref	=									pcorrFunctionWF->Eval(XPADLENGTH);
 
 	// Track fit initializations
 	TrackFitter aTrackFitter("Minuit", fnParamsTrack);
@@ -129,7 +129,7 @@ void Reconstruction::dEdx::Reconstruction(){
 
 
 	// Event loop
-	for (int iEvent =	0; iEvent < NEvent; iEvent++){
+	for (int iEvent =	0; iEvent < 4e4; iEvent++){
 		if(iEvent % 1000 ==	0 or iEvent ==	NEvent-1) std::cout << iEvent << "/" << NEvent << std::endl;
 
 		Event* pEvent =							p_uploader->GiveMe_Event(iEvent, moduleCase, 0, 0);

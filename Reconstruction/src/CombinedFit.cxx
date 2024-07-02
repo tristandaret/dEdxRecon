@@ -3,7 +3,7 @@
 #include "SetStyle.h"
  
 // definition of parameters (0 to 4 shared, last one is particle mass)
-int npar	 = 6;
+int npar	= 6;
 int iparmuon[]		= {5, 0, 1, 2, 3, 4};
 int iparpion[]		= {6, 0, 1, 2, 3, 4};
 int iparproton[]	= {7, 0, 1, 2, 3, 4};
@@ -16,18 +16,18 @@ struct GlobalChi2_4 {
 	double operator()(const double *par) const
 	{
 		double p1[npar];
-		for (int i	 = 0; i < npar; ++i) p1[i]	 = par[iparmuon[i]];
+		for (int i	= 0; i < npar; ++i) p1[i]	= par[iparmuon[i]];
 
 		double p2[npar];
-		for (int i	 = 0; i < npar; ++i) p2[i]	 = par[iparpion[i]];
+		for (int i	= 0; i < npar; ++i) p2[i]	= par[iparpion[i]];
 
 		double p3[npar];
-		for (int i	 = 0; i < npar; ++i) p3[i]	 = par[iparproton[i]];
+		for (int i	= 0; i < npar; ++i) p3[i]	= par[iparproton[i]];
 
 		double p4[npar];
-		for (int i	 = 0; i < npar; ++i) p4[i]	 = par[iparpositron[i]];
+		for (int i	= 0; i < npar; ++i) p4[i]	= par[iparpositron[i]];
 
-		return (*fChi2_1)(p1) + (*fChi2_2)(p2) + (*fChi2_3)(p3) + (*fChi2_4)(p4) ;
+		return (*fChi2_1)(p1) + (*fChi2_2)(p2) + (*fChi2_3)(p3) + (*fChi2_4)(p4);
 	}
  
 	const ROOT::Math::IMultiGenFunction *fChi2_1;
@@ -41,18 +41,18 @@ struct GlobalChi2_4 {
 
 void combinedFit(std::vector<TGraphErrors*>& v_tge, std::vector<TF1*>& v_tf1)
 {
-	int Npar	 = 9;
-	// double par0[Npar]	 = {1.65179e+02, 3.62857e+00, 3.18209e-02, 2.07081e+00, -7.14413e-01, 105.658e-3, 139.570e-3, 938.272e-3, 0.511e-3}; // THATReconstruction raw
-	// double par0[Npar]	 = {0.301580,	3.62857e+00, 3.18209e-02, 2.07081e+00, -7.14413e-01, 105.658e-3, 139.570e-3, 938.272e-3, 0.511e-3}; // THATReconstruction raw normalized
-	// double par0[Npar]	 = {0.186543, 5.382656, 0.004234, 2.028548, -0.994807, 105.658e-3, 139.570e-3, 938.272e-3, 0.511e-3}; // THATReconstruction fit
+	int Npar	= 9;
+	// double par0[Npar]	= {1.65179e+02, 3.62857e+00, 3.18209e-02, 2.07081e+00, -7.14413e-01, 105.658e-3, 139.570e-3, 938.272e-3, 0.511e-3}; // THATReconstruction raw
+	// double par0[Npar]	= {0.301580,	3.62857e+00, 3.18209e-02, 2.07081e+00, -7.14413e-01, 105.658e-3, 139.570e-3, 938.272e-3, 0.511e-3}; // THATReconstruction raw normalized
+	// double par0[Npar]	= {0.186543, 5.382656, 0.004234, 2.028548, -0.994807, 105.658e-3, 139.570e-3, 938.272e-3, 0.511e-3}; // THATReconstruction fit
 
-	// double par0[Npar]	 = {785,		6.047, 0.00064, 2.308, -1.359, 105.658e-3, 139.570e-3, 938.272e-3, 0.511e-3}; // Claudio raw
-	// double par0[Npar]	 = {0.148800, 6.047, 0.00064, 2.308, -1.359, 105.658e-3, 139.570e-3, 938.272e-3, 0.511e-3}; // Claudio raw normalized
-	// double par0[Npar]	 = {1, 6, 0.0005, 2, -1.5, 105.658e-3, 139.570e-3, 938.272e-3, 0.511e-3}; // Claudio init
-	// double par0[Npar]	 = {0.186524, 5.382954, 0.004232, 2.028659, -0.994959, 105.658e-3, 139.570e-3, 938.272e-3, 0.511e-3}; // Claudio fit
+	// double par0[Npar]	= {785,		6.047, 0.00064, 2.308, -1.359, 105.658e-3, 139.570e-3, 938.272e-3, 0.511e-3}; // Claudio raw
+	// double par0[Npar]	= {0.148800, 6.047, 0.00064, 2.308, -1.359, 105.658e-3, 139.570e-3, 938.272e-3, 0.511e-3}; // Claudio raw normalized
+	// double par0[Npar]	= {1, 6, 0.0005, 2, -1.5, 105.658e-3, 139.570e-3, 938.272e-3, 0.511e-3}; // Claudio init
+	// double par0[Npar]	= {0.186524, 5.382954, 0.004232, 2.028659, -0.994959, 105.658e-3, 139.570e-3, 938.272e-3, 0.511e-3}; // Claudio fit
 
-	double par0[Npar]	 = {7, 3, 5, 0.5, -0.5, 105.658e-3, 139.570e-3, 938.272e-3, 0.511e-3}; // Reconstruction init
-	// double par0[Npar]	 = {8.001897, 2.916423, 5.291697, 0.377516, -0.274286, 105.658e-3, 139.570e-3, 938.272e-3, 0.511e-3}; // Reconstruction fit
+	double par0[Npar]	= {7, 3, 5, 0.5, -0.5, 105.658e-3, 139.570e-3, 938.272e-3, 0.511e-3}; // Reconstruction init
+	// double par0[Npar]	= {8.001897, 2.916423, 5.291697, 0.377516, -0.274286, 105.658e-3, 139.570e-3, 938.272e-3, 0.511e-3}; // Reconstruction fit
 
 	v_tf1[1]->				SetParameters(par0[5], par0[0], par0[1], par0[2], par0[3], par0[4]);
 	v_tf1[1]->				FixParameter(0, par0[5]);
@@ -124,19 +124,19 @@ void combinedFit(std::vector<TGraphErrors*>& v_tge, std::vector<TF1*>& v_tf1)
 	// fit FCN function directly
 	// (specify optionally data size and flag to indicate that is a chi2 fit)
 	fitter.FitFCN(9, GlobalChi2_4, 0, datamuon.Size() + datapion.Size() + dataproton.Size() + datapositron.Size(), true);
-	ROOT::Fit::FitResult result	 = fitter.Result();
+	ROOT::Fit::FitResult result	= fitter.Result();
 	result.Print(std::cout);
  
 
-	TCanvas *c1	 = new TCanvas("Simfit", "Simultaneous fit", 1800, 1200);
+	TCanvas *c1	= new TCanvas("Simfit", "Simultaneous fit", 1800, 1200);
 	c1->cd();
 	gStyle->SetOptFit(0);
 
 	v_tf1[1]->SetFitResult(result, iparmuon);
 	v_tf1[1]->SetLineColor(kBlue);
-	Graphic_setup(v_tge[1], 3, 21, kBlue, 1, kBlue) ;
+	Graphic_setup(v_tge[1], 3, 21, kBlue, 1, kBlue);
 	v_tf1[1]->SetTitle("Approximated Bethe-Bloch;Energy (GeV);dE/dx (keV/cm)");
-	v_tf1[1]->GetXaxis()->SetLimits(0, 20) ;
+	v_tf1[1]->GetXaxis()->SetLimits(0, 20);
 	v_tf1[1]->SetMinimum(0.5);
 	v_tf1[1]->SetMaximum(3);
 	gPad->SetLogx();
@@ -145,19 +145,19 @@ void combinedFit(std::vector<TGraphErrors*>& v_tge, std::vector<TF1*>& v_tf1)
  
 	v_tf1[2]->SetFitResult(result, iparpion);
 	v_tf1[2]->SetLineColor(kGreen+1);
-	Graphic_setup(v_tge[2], 3, 24, kGreen+1, 1, kGreen+1) ;
+	Graphic_setup(v_tge[2], 3, 24, kGreen+1, 1, kGreen+1);
 	v_tge[2]->Draw("p same");
 	v_tf1[2]->Draw("same");
  
 	v_tf1[3]->SetFitResult(result, iparproton);
 	v_tf1[3]->SetLineColor(kRed);
-	Graphic_setup(v_tge[3], 3, 25, kRed, 1, kRed) ;
+	Graphic_setup(v_tge[3], 3, 25, kRed, 1, kRed);
 	v_tge[3]->Draw("p same");
 	v_tf1[3]->Draw("same");
  
 	v_tf1[0]->SetFitResult(result, iparpositron);
 	v_tf1[0]->SetLineColor(kMagenta+1);
-	Graphic_setup(v_tge[0], 3, 20, kMagenta+1, 1, kMagenta+1) ;
+	Graphic_setup(v_tge[0], 3, 20, kMagenta+1, 1, kMagenta+1);
 	v_tge[0]->Draw("p same");
 	v_tf1[0]->Draw("same");
 	

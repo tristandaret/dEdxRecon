@@ -10,14 +10,14 @@ namespace Reconstruction{
 
 	// Output file variables
 	extern const std::string 		dedx_folder;
-	extern const std::string  		data_folder;
-	extern std::string  			data_subfolder;
-	extern const std::string  		drawout_folder;
-	extern std::string  			drawout_scanfolder;
+	extern const std::string			data_folder;
+	extern std::string				data_subfolder;
+	extern const std::string			drawout_folder;
+	extern std::string				drawout_scanfolder;
 	extern std::string 				drawout_runfolder;
-	extern std::string  			drawout_file;
-	extern std::string  			rootout_file;
-	extern std::string  			log_file;
+	extern std::string				drawout_file;
+	extern std::string				rootout_file;
+	extern std::string				log_file;
 	extern std::string				comment;
 	extern std::string				selectionSet;
 	extern std::string				inputDir;

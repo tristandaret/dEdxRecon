@@ -33,7 +33,7 @@ void corr(const std::string& OutDir,
 
 
 /* Call the correction function of WF method ----------------------------------------------*/
-TF1* corr_func(const std::string &EventFile, const std::string &Tag, const int& correctWF) ;
+TF1* corr_func(const std::string &EventFile, const std::string &Tag, const int& correctWF);
 
 
 
@@ -47,7 +47,7 @@ void Init_selection(const std::string &SelectionSet, Selector &aSelector, const 
 std::vector<std::vector<float>> readCSV(std::string filename);
 
 // Determine the time cut
-std::vector<int> ComputeCutStage3_Cut(Uploader* pUploader, const int& NbrOfMod, const int& Data_to_Use, const int& CloseWF) ;
+std::vector<int> ComputeCutStage3_Cut(Uploader* pUploader, const int& NbrOfMod, const int& Data_to_Use, const int& CloseWF);
 
 // Function to search for a word in a CSV file
 bool GetStage3Cut_CSV(const std::string& filename, const std::string& targetWord, int& value1, int& value2);
