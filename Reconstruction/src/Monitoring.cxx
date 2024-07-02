@@ -30,7 +30,7 @@ namespace Reconstruction{
 	int dedx =				1;
 
 	// DrawOuts	
-	int DO_dEdx =			1;
+	int DO_dEdx =			0;
 	int DO_Comparison =		0;
 }
 
@@ -97,7 +97,7 @@ void Reconstruction::Monitoring()
 		std::string z_arr[] = 	{"60", "218p5", "415", "925"};
 
 		int NFiles = 4;
-		for (int iz = 2; iz < NFiles; iz++){
+		for (int iz = 0; iz < NFiles; iz++){
 			const char* z = 	z_arr[iz].c_str();
 			driftDist = 		z_val[iz];
 			v_dataFiles.		push_back(data_subfolder + "All_ERAMS_350V_412ns_e+_0p5GeV_25V_z" + z + "_iter4.root");	

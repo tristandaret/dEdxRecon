@@ -183,6 +183,7 @@ void Reconstruction::dEdx::Reconstruction(){
 					std::fill(waveform_pad.begin(), waveform_pad.end(), 0); // reset waveform
 					pPad =				pCluster->Get_Pad(iP);
 					p_recopad = new Reconstruction::RecoPad();
+					if(iP == 0) p_recopad->leading = true;
 					waveform_pad =					pPad->Get_vADC();
 					p_recopad->ix =					pPad->Get_iX();
 					p_recopad->iy =					pPad->Get_iY();
@@ -235,6 +236,7 @@ void Reconstruction::dEdx::Reconstruction(){
 					}
 
 					// Compute drift distance for different time bin sizes and peaking times
+					if(iP == 0)p_recocluster->TLead =	pPad->Get_TMax();
 					p_recopad->TMax =					pPad->Get_TMax();
 					if		(PT ==	412 and TB ==	50){ p_recopad->T0 =	45; p_recopad->driftDistance =	3.90*(p_recopad->TMax-p_recopad->T0); } // 45 =	37(time shift) +	8(PT) from David Attié
 					else if (PT ==	412 and TB ==	40){ p_recopad->T0 =	56; p_recopad->driftDistance =	3.12*(p_recopad->TMax-p_recopad->T0); } // 56 =	46(time shift) + 10(PT)
@@ -274,8 +276,12 @@ void Reconstruction::dEdx::Reconstruction(){
 				p_recomodule->v_clusters.			push_back(p_recocluster);
 				p_recomodule->NClusters++;
 				p_recomodule->lengthWF +=			p_recocluster->length;
+				p_recomodule->NPads +=				p_recocluster->NPads;
 				
 			} // Clusters
+
+			// Fill module class attributes
+			p_recomodule->avg_pad_mult =			p_recomodule->NPads/p_recomodule->NClusters;
 
 			// Compute dE/dx for the module
 			p_recomodule->dEdxWF =					ComputedEdxWF(v_mod_dEdxWF, p_recomodule->NClusters, falpha);
@@ -286,6 +292,7 @@ void Reconstruction::dEdx::Reconstruction(){
 			// Fill module information into the event class
 			p_recoevent->v_modules.					push_back(p_recomodule);
 			p_recoevent->NCrossedPads +=			p_recomodule->NCrossedPads;
+			p_recoevent->NPads +=					p_recomodule->NPads;
 			p_recoevent->NClusters +=				p_recomodule->NClusters;
 			p_recoevent->lengthXP +=				p_recomodule->lengthXP;
 			p_recoevent->lengthWF +=				p_recomodule->lengthWF;
@@ -300,6 +307,9 @@ void Reconstruction::dEdx::Reconstruction(){
 			v_mod_dEdxXP.							clear();
 			v_mod_dEdxWF.							clear();
 		} // Modules
+
+		// Fill event class attributes
+		p_recoevent->avg_pad_mult =					p_recoevent->NPads/p_recoevent->NClusters;
 
 		// Compute dE/dx for the event
 		p_recoevent->dEdxWF =						ComputedEdxWF(v_evt_dEdxWF, p_recoevent->NClusters, falpha);
@@ -389,118 +399,6 @@ float Reconstruction::dEdx::ComputedEdxXP(const std::vector<float>& v_dEdx, cons
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Events discarded by selection steps
 void Reconstruction::dEdx::DiscardedEvents(){
-	p_recoevent->eventNbr =						iEvent;
-	p_recoevent->numberOfModules =				pEvent->Get_NberOfModule();
-
-	// Module loop
-	for (iMod =	0; iMod < p_recoevent->numberOfModules; iMod++){
-		pModule =							pEvent->Get_Module_InArray(iMod);
-		fmodID =									pModule->Get_ModuleNber();
-
-		NC =									pModule->Get_NberOfCluster();
-		if(NC == 0)							continue;
-
-		p_recomodule =		new Reconstruction::RecoModule();
-		p_recomodule->position =					fmodID;
-		p_recomodule->ID =							fERAMs_iD[fmodID];
-
-		// Loop On Clusters
-		for (iC = 0; iC < NC; iC++){
-			std::fill(waveform_cluster.begin(), waveform_cluster.end(), 0); // reset waveform
-			pCluster =					pModule->Get_Cluster(iC);
-			p_recocluster = new Reconstruction::RecoCluster();
-
-			// Loop On Pads
-			int NPads =							pCluster->Get_NberOfPads();
-			p_recocluster->NPads =					NPads;
-			for(iP = 0; iP < NPads; iP ++){
-				std::fill(waveform_pad.begin(), waveform_pad.end(), 0); // reset waveform
-				pPad =				pCluster->Get_Pad(iP);
-				p_recopad = new Reconstruction::RecoPad();
-				waveform_pad =					pPad->Get_vADC();
-				p_recopad->ix =					pPad->Get_iX();
-				p_recopad->iy =					pPad->Get_iY();
-
-				p_recopad->ADCmax_base =		pPad->Get_AMax();
-				p_recopad->ADCmax = p_recopad->GainCorrection * pPad->Get_AMax();
-				for(int i=0;i<510;i++) waveform_cluster[i] += waveform_pad[i];
-
-				// Compute drift distance for different time bin sizes and peaking times
-				p_recopad->TMax =					pPad->Get_TMax();
-
-				p_recopad->charge =				p_recopad->ADCmax*p_recopad->ratio;
-				p_recopad->dEdxXP =				p_recopad->charge/p_recopad->length/100; // m to cm
-				v_mod_dE.						push_back(p_recopad->charge);
-				v_mod_dx.						push_back(p_recopad->length);
-				v_mod_dEdxXP.					push_back(p_recopad->dEdxXP);
-
-				p_recocluster->v_pads.			push_back(p_recopad);
-				p_recomodule->NCrossedPads++;
-				p_recomodule->lengthXP +=		p_recopad->length;
-
-			} // Pads
-
-			// // Gain correction for the whole cluster (doesn't work really well)
-			// if(fcorrectGain == 1) for(int i=0;i<510;i++) waveform_cluster[i] *= fGainCorrectionLead;
-
-			// WF correction function
-			p_recocluster->charge =				*std::max_element(waveform_cluster.begin(), waveform_cluster.end());
-			p_recocluster->ratioCorr =			fAref / pcorrFunctionWF->Eval(p_recocluster->length*1000);
-			if(diag) p_recocluster->dEdxWF =	p_recocluster->charge*p_recocluster->ratioCorr/XPADLENGTH*10;
-			else p_recocluster->dEdxWF =		p_recocluster->charge/(p_recocluster->length*100);
-			v_mod_dEdxWF.						push_back(p_recocluster->dEdxWF);
-
-			// Fill cluster information
-			p_recomodule->v_clusters.			push_back(p_recocluster);
-			p_recomodule->NClusters++;
-			p_recomodule->lengthWF +=			p_recocluster->length;
-		} // Clusters
-
-		// Compute dE/dx for the module
-		p_recomodule->dEdxWF =					ComputedEdxWF(v_mod_dEdxWF, p_recomodule->NClusters, falpha);
-		p_recomodule->dEdxXP =					ComputedEdxXP(v_mod_dEdxXP, v_mod_dE, v_mod_dx, p_recomodule->NCrossedPads, falpha);
-		p_recomodule->dEdxWFnoTrunc =			ComputedEdxWF(v_mod_dEdxWF, p_recomodule->NClusters, 1);
-		p_recomodule->dEdxXPnoTrunc =			ComputedEdxXP(v_mod_dEdxXP, v_mod_dE, v_mod_dx, p_recomodule->NCrossedPads, 1);
-
-		// Fill module information into the event class
-		p_recoevent->v_modules.					push_back(p_recomodule);
-		p_recoevent->NCrossedPads +=			p_recomodule->NCrossedPads;
-		p_recoevent->NClusters +=				p_recomodule->NClusters;
-		p_recoevent->lengthXP +=				p_recomodule->lengthXP;
-		p_recoevent->lengthWF +=				p_recomodule->lengthWF;
-		v_evt_dE.								insert(v_evt_dE.end(), v_mod_dE.begin(), v_mod_dE.end());
-		v_evt_dx.								insert(v_evt_dx.end(), v_mod_dx.begin(), v_mod_dx.end());
-		v_evt_dEdxXP.							insert(v_evt_dEdxXP.end(), v_mod_dEdxXP.begin(), v_mod_dEdxXP.end());
-		v_evt_dEdxWF.							insert(v_evt_dEdxWF.end(), v_mod_dEdxWF.begin(), v_mod_dEdxWF.end());
-
-		// clear module vectors
-		v_mod_dE.								clear();
-		v_mod_dx.								clear();
-		v_mod_dEdxXP.							clear();
-		v_mod_dEdxWF.							clear();
-	} // Modules
-
-	// Compute dE/dx for the event
-	p_recoevent->dEdxWF =						ComputedEdxWF(v_evt_dEdxWF, p_recoevent->NClusters, falpha);
-	p_recoevent->dEdxXP =						ComputedEdxXP(v_evt_dEdxXP, v_evt_dE, v_evt_dx, p_recoevent->NCrossedPads, falpha);
-	p_recoevent->dEdxWFnoTrunc =				ComputedEdxWF(v_evt_dEdxWF, p_recoevent->NClusters, 1);
-	p_recoevent->dEdxXPnoTrunc =				ComputedEdxXP(v_evt_dEdxXP, v_evt_dE, v_evt_dx, p_recoevent->NCrossedPads, 1);
-
-	// Make the quick access histograms
-	ph1f_WF->									Fill(p_recoevent->dEdxWF);
-	ph1f_XP->									Fill(p_recoevent->dEdxXP);
-
-	// Fill the tree
-	fpTree_dEdx->								Fill();
-
-	// Clear event vectors
-	v_erams.									clear();
-	v_evt_dE.									clear();
-	v_evt_dx.									clear();
-	v_evt_dEdxXP.								clear();
-	v_evt_dEdxWF.								clear();
-	p_recoevent->								Clear();
-	delete										pEvent;
 }
 
 

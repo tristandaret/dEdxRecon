@@ -21,26 +21,26 @@ namespace Reconstruction{
 	public:
 		virtual ~RecoPad();
 
-		// std::vector<int> v_waveform;
-		int	ix			= 0;
-		int	iy			= 0;
-		float ADCmax		= 0;
-		float ADCmax_base =		0;
-		float charge		= 0;
-		float dEdxXP		= 0;
-		float RC			= 0;
-		float gain			= 0;
-		float GainCorrection= 0;
-		float phi			= 0;
-		float d				= 0;
-		float dd			= 0;
-		float length		= 0;
-		float TMax			= 0;
-		float T0			= 0;
-		float driftDistance	= 0;
-		float ratioDrift	= 0;
-		float ratioFile		= 0;
-		float ratio			= 0;
+		bool leading  =				false;
+		int	ix =					0;
+		int	iy =					0;
+		float ADCmax =				0;
+		float ADCmax_base  =		0;
+		float charge =				0;
+		float dEdxXP =				0;
+		float RC =					0;
+		float gain =				0;
+		float GainCorrection =		0;
+		float phi =					0;
+		float d =					0;
+		float dd =					0;
+		float length =				0;
+		int TMax =					0;
+		int T0 =					0;
+		float driftDistance =		0;
+		float ratioDrift =			0;
+		float ratioFile =			0;
+		float ratio =				0;
 
 		ClassDef(RecoPad, 1);
 	};
@@ -49,16 +49,16 @@ namespace Reconstruction{
 	public:
 		virtual ~RecoCluster();
 
-		std::vector<RecoPad*> v_pads;
-		// std::vector<int> v_waveform;
-		float length			= 0;
-		float charge			= 0;
-		float ADCmax_base =		0;
-		float ALead_base = 		0;
-		float ALead_GCorr = 	0;
-		float dEdxWF			= 0;
-		int	NPads			= 0;
-		float	ratioCorr		= 0; 
+		std::vector<RecoPad*> 		v_pads;
+		float 	length =			0;
+		float 	charge =			0;
+		float 	ADCmax_base  =		0;
+		float 	ALead_base  =		0;
+		float 	ALead_GCorr  =		0;
+		int 	TLead =				0;
+		float 	dEdxWF =			0;
+		int		NPads =				0;
+		float	ratioCorr =			0; 
 
 		ClassDef(RecoCluster, 1);
 	};
@@ -67,19 +67,21 @@ namespace Reconstruction{
 	public:
 		virtual ~RecoModule();
 		
-		std::vector<RecoCluster*> v_clusters;
-		int ID					= 0;
-		int position			= 0;
-		float dEdxXP			= 0;
-		float dEdxWF			= 0;
-		float dEdxXPnoTrunc	= 0;
-		float dEdxWFnoTrunc	= 0;
-		int NCrossedPads		= 0;
-		int NClusters			= 0;
-		float lengthXP			= 0;
-		float lengthWF			= 0;
-		float phi				= 0;
-		TF1* Track				= new TF1("pTrackFit", "[0]*x+[1]+[2]*x*x", 0, 2000);
+		std::vector<RecoCluster*> 	v_clusters;
+		int 	ID =				0;
+		int 	position =			0;
+		float 	dEdxXP =			0;
+		float 	dEdxWF =			0;
+		float 	dEdxXPnoTrunc =		0;
+		float 	dEdxWFnoTrunc =		0;
+		int 	NCrossedPads =		0;
+		int 	NClusters =			0;
+		int 	NPads =				0;
+		float 	lengthXP =			0;
+		float 	lengthWF =			0;
+		float 	phi =				0;
+		float 	avg_pad_mult =		0;
+		TF1* 	Track =				new TF1("pTrackFit", "[0]*x+[1]+[2]*x*x", 0, 2000);
 
 		ClassDef(RecoModule, 1);
 	};
@@ -90,17 +92,19 @@ namespace Reconstruction{
 		virtual ~RecoEvent();
 		void Clear();
 
-		std::vector<RecoModule*> v_modules;
-		int eventNbr		= 0;
-		float dEdxXP		= 0;
-		float dEdxWF		= 0;
-		float dEdxXPnoTrunc	= 0;
-		float dEdxWFnoTrunc	= 0;
-		int NCrossedPads	= 0;
-		int NClusters		= 0;
-		float lengthXP		= 0;
-		float lengthWF		= 0;
-		int numberOfModules	= 0;
+		std::vector<RecoModule*> 	v_modules;
+		int 	eventNbr =			0;
+		float 	dEdxXP =			0;
+		float 	dEdxWF =			0;
+		float 	dEdxXPnoTrunc =		0;
+		float 	dEdxWFnoTrunc =		0;
+		int 	NCrossedPads =		0;
+		int 	NPads =				0;
+		int 	NClusters =			0;
+		float 	lengthXP =			0;
+		float 	lengthWF =			0;
+		int 	numberOfModules =	0;
+		float 	avg_pad_mult =		0;
 
 		ClassDef(RecoEvent, 1);
 	};
@@ -123,13 +127,13 @@ namespace Reconstruction{
 			TTree 						*fpTree_dEdx;
 
 			// Setup variables	
-			static constexpr float		AVG_GAIN = 		1947.72; // average gain of the 32 mounted ERAMs
-			static constexpr float		PHIMAX = 		42.10; //std::atan(10.19/11.28)*180/M_PI;
-			static constexpr float		falpha = 		0.7;
-			static constexpr float		fnParamsTrack =	3;
-			static constexpr float		fminLength = 	0.002;
-			static constexpr float		XPADLENGTH = 	11.28; // mm
-			static constexpr float		YPADLENGTH = 	10.19; // mm
+			static constexpr float		AVG_GAIN  =				 		1947.72; // average gain of the 32 mounted ERAMs
+			static constexpr float		PHIMAX  =				 		42.10; //std::atan(10.19/11.28)*180/M_PI;
+			static constexpr float		falpha  =				 		0.7;
+			static constexpr float		fnParamsTrack  =				3;
+			static constexpr float		fminLength  =				 	0.002;
+			static constexpr float		XPADLENGTH  =				 	11.28; // mm
+			static constexpr float		YPADLENGTH  =				 	10.19; // mm
 
 			// Input classes
 			Event 						*pEvent;

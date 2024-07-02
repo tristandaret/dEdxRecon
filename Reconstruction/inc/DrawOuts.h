@@ -16,6 +16,8 @@ namespace Reconstruction{
 
 		// Methods
 		void SetStyle();
+
+		void Control();
 		void EnergyLoss();
 		void FileComparison();
 
@@ -40,6 +42,35 @@ namespace Reconstruction{
 		// Settings
 		std::string fparticleType;
 		TCanvas *fpCanvas;
+
+		// Control
+		TH2I 				*ph2i_heatmap;
+		TH1I 				*ph1i_TLead;
+		std::vector<TH1I*> 	v_TLead;
+		TH1I 				*ph1i_TLeadSel;
+		std::vector<TH1I*> 	v_TLeadSel;
+		TH1I 				*ph1i_PadMult;
+		std::vector<TH1I*> 	v_PadMult;
+		TH1I 				*ph1i_PadMultSel;
+		std::vector<TH1I*> 	v_PadMultSel;
+		TH1F 				*ph1f_AvgPadMult;
+		std::vector<TH1F*> 	v_AvgPadMult;
+		TH1F 				*ph1f_AvgPadMultSel;
+		std::vector<TH1F*> 	v_AvgPadMultSel;
+		TH1F 				*ph1f_ADCmax;
+		std::vector<TH1F*> 	v_ADCmax;
+		TH1F 				*ph1f_ADCmaxSel;
+		std::vector<TH1F*> 	v_ADCmaxSel;
+		TH1F 				*ph1f_ALead;
+		std::vector<TH1F*> 	v_ALead;
+		TH1F 				*ph1f_ALeadSel;
+		std::vector<TH1F*> 	v_ALeadSel;
+		TH1F 				*ph1f_ANeighbour;
+		std::vector<TH1F*> 	v_ANeighbour;
+		TH1F 				*ph1f_ANeighbourSel;
+		std::vector<TH1F*> 	v_ANeighbourSel;
+		
+
 	};
 }
 

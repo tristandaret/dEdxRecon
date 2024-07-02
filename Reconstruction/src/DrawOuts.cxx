@@ -62,6 +62,206 @@ Reconstruction::DrawOuts::~DrawOuts(){
 }
 
 
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void Reconstruction::DrawOuts::Control(){
+
+	// Prepare histograms
+	TH2I *ph2i_heatmap =			new TH2I("ph2i_heatmap", "Events heatmap;iX;iY;", 144, 0, 143, 64, 0, 63);
+	
+	std::vector<TH1F*> v_h1f_XP_mod;
+	std::vector<TH1F*> v_h1f_WF_mod;
+	std::vector<TH1F*> v_h1f_XP_modnoTrunc;
+	std::vector<TH1F*> v_h1f_WF_modnoTrunc;
+	for(int i=0;i<8;i++){
+		v_h1f_XP_mod.push_back(			new TH1F(Form("ph1f_XP_%i", i), Form("Energy loss (module %i);dE/dx (ADC counts);Counts", i), 100, 0, 1300));
+		v_h1f_WF_mod.push_back(			new TH1F(Form("ph1f_WF_%i", i), Form("Energy loss (module %i);dE/dx (ADC counts);Counts", i), 100, 0, 1300));
+		v_h1f_XP_modnoTrunc.push_back(	new TH1F(Form("ph1f_XPnoTrunc_%i", i), Form("Energy loss (module %i) (no truncation);dE/dx (ADC counts);Counts", i), 100, 0, 1300));
+		v_h1f_WF_modnoTrunc.push_back(	new TH1F(Form("ph1f_WFnoTrunc_%i", i), Form("Energy loss (module %i) (no truncation);dE/dx (ADC counts);Counts", i), 100, 0, 1300));
+	}
+
+	int NMod = 0, NC = 0, NPads = 0, ix = 0, iy = 0, position = 0;
+	// Get entries and fill histograms
+	for(int i=0;i<fnentries;i++){
+		fpTree->						GetEntry(i);
+		NMod =							fpEvent->v_modules.size();
+
+		for(int iMod=0;iMod<NMod;iMod++){
+			position =					fpEvent->v_modules[iMod]->position;
+
+
+			// Heatmap
+			NC =						fpEvent->v_modules[iMod]->NClusters;
+			for(int iC=0;iC<NC;iC++){
+				NPads =					fpEvent->v_modules[iMod]->v_clusters[iC]->NPads;
+				for(int iP=0;iP<NPads;iP++){
+					ix =				fpEvent->v_modules[iMod]->v_clusters[iC]->v_pads[iP]->ix;
+					iy =				fpEvent->v_modules[iMod]->v_clusters[iC]->v_pads[iP]->iy;
+					if(position<4) iy+=32;
+					ix += 36*(position%4);
+					ph2i_heatmap->		Fill(ix, iy);
+				}
+			}
+
+			// Histograms
+			v_h1f_XP_mod[position]->		Fill(fpEvent->v_modules[iMod]->dEdxXP);
+			v_h1f_WF_mod[position]->		Fill(fpEvent->v_modules[iMod]->dEdxWF);
+			v_h1f_XP_modnoTrunc[position]->	Fill(fpEvent->v_modules[iMod]->dEdxXPnoTrunc);
+			v_h1f_WF_modnoTrunc[position]->	Fill(fpEvent->v_modules[iMod]->dEdxWFnoTrunc);
+		}
+		if(NMod != 4) continue;
+		ph1f_WF->						Fill(fpEvent->dEdxWF);
+		ph1f_XP->						Fill(fpEvent->dEdxXP);
+		ph1f_WFnoTrunc->				Fill(fpEvent->dEdxWFnoTrunc);
+		ph1f_XPnoTrunc->				Fill(fpEvent->dEdxXPnoTrunc);
+		ph2f_XPWF->						Fill(fpEvent->dEdxWF, fpEvent->dEdxXP);
+	}
+
+	// Fitting
+	Fit1Gauss(ph1f_WF, 2);
+	Fit1Gauss(ph1f_XP, 2);
+	Fit1Gauss(ph1f_WFnoTrunc, 2);
+	Fit1Gauss(ph1f_XPnoTrunc, 2);
+
+	// Display settings
+	Graphic_setup(ph1f_WF, 0.5, 1, kCyan+1, 2, kCyan-2, kCyan, 0.2);
+	Graphic_setup(ph1f_XP, 0.5, 1, kMagenta+2, 2, kMagenta-2, kMagenta, 0.2);
+	Graphic_setup(ph1f_WFnoTrunc, 0.5, 1, kCyan+1, 2, kCyan-2, kCyan, 0.2);
+	Graphic_setup(ph1f_XPnoTrunc, 0.5, 1, kMagenta+2, 2, kMagenta-2, kMagenta, 0.2);
+
+	for(int i=0;i<8;i++){
+		Graphic_setup(v_h1f_WF_mod[i], 0.5, 1, kCyan+1, 1, kCyan-2, kCyan, 0.2);
+		Graphic_setup(v_h1f_XP_mod[i], 0.5, 1, kMagenta+2, 1, kMagenta-2, kMagenta, 0.2);
+		Graphic_setup(v_h1f_WF_modnoTrunc[i], 0.5, 1, kCyan+1, 1, kCyan-2, kCyan, 0.2);
+		Graphic_setup(v_h1f_XP_modnoTrunc[i], 0.5, 1, kMagenta+2, 1, kMagenta-2, kMagenta, 0.2);
+		if(v_h1f_WF_mod[i]->GetEntries() < 100) continue;
+		Fit1Gauss(v_h1f_WF_mod[i], 2);
+		Fit1Gauss(v_h1f_XP_mod[i], 2);
+		Fit1Gauss(v_h1f_WF_modnoTrunc[i], 2);
+		Fit1Gauss(v_h1f_XP_modnoTrunc[i], 2);	
+	}
+
+
+	// Draw
+	bool disp_trunc = true;
+	gStyle->						SetOptStat(0);
+	gStyle->						SetOptFit(0);
+
+	// Get maximum of event plots
+	int WFMax =						ph1f_WF->GetMaximum();
+	int XPMax =						ph1f_XP->GetMaximum();
+
+	// Get maximum of module plots
+	int overallMax = 0, overallMaxMod = 0, maxVal_WF = 0, maxVal_XP = 0;
+	overallMax =					std::max({WFMax, XPMax});
+	for(int i=0;i<8;i++){
+		maxVal_WF =					v_h1f_WF_mod[i]->GetMaximum();
+		maxVal_XP =					v_h1f_XP_mod[i]->GetMaximum();
+		overallMaxMod =				std::max({overallMaxMod, maxVal_WF, maxVal_XP});
+	}
+	float invX, invY;
+	//////////////////////////////////////////////////////////////////////////////////////////
+	fpCanvas->						cd();
+	fpCanvas->						Clear();
+
+	ph1f_WF->						SetAxisRange(0, 1.1 * overallMax,	"Y");
+	invX = 0, invY = 0;
+	if(ph1f_WF->GetMean() > 650) invX = 0.5;
+	ph1f_WF->						Draw("HIST");
+	ph1f_XP->						Draw("HIST sames");
+
+	PrintResolution(ph1f_XP, fpCanvas, 0.65-invX, 0.58, kMagenta+2, "XP");
+	PrintResolution(ph1f_WF, fpCanvas, 0.65-invX, 0.25, kCyan+2, "WF");
+	fpCanvas->						SaveAs((drawout_file + "(").c_str());
+
+		//////////////////////////////////////////////////////////////////////////////////////////
+	fpCanvas->						cd();
+	fpCanvas->						Clear();
+	fpCanvas->						Divide(4, 2);
+
+	for(int i=0;i<8;i++){
+		v_h1f_WF_mod[i]->				SetAxisRange(0, 1.1 * overallMaxMod, "Y");
+		fpCanvas->					cd(i+1);
+		invX=0;
+		if(v_h1f_WF_mod[i]->GetMean() > 650) invX = 0.5;
+		gPad->						SetRightMargin(0);
+		v_h1f_WF_mod[i]->				Draw("HIST");
+		v_h1f_XP_mod[i]->				Draw("HIST sames");
+		if(v_h1f_WF_mod[i]->GetEntries() < 100) continue;
+		PrintResolution(v_h1f_XP_mod[i], fpCanvas, 0.65-invX, 0.58, kMagenta+2, "XP");
+		PrintResolution(v_h1f_WF_mod[i], fpCanvas, 0.65-invX, 0.25, kCyan+2, "WF");
+	}
+	fpCanvas->						SaveAs(drawout_file.c_str());
+
+	//////////////////////////////////////////////////////////////////////////////////////////
+	fpCanvas->						cd();
+	fpCanvas->						Clear();
+
+	ph1f_WFnoTrunc->				SetAxisRange(0, 1.1 * overallMax, "Y");
+	invX = 0, invY = 0;
+	if(ph1f_WFnoTrunc->GetMean(1) > 650) invX = 0.5;
+	ph1f_WFnoTrunc->				Draw("HIST");
+	ph1f_XPnoTrunc->				Draw("HIST sames");
+
+	PrintResolution(ph1f_XPnoTrunc, fpCanvas, 0.65-invX, 0.58, kMagenta+2, "XP");
+	PrintResolution(ph1f_WFnoTrunc, fpCanvas, 0.65-invX, 0.25, kCyan+2, "WF");
+	fpCanvas->						SaveAs(drawout_file.c_str());
+
+	//////////////////////////////////////////////////////////////////////////////////////////
+	fpCanvas->						cd();
+	fpCanvas->						Clear();
+	fpCanvas->						Divide(4, 2);
+
+	for(int i=0;i<8;i++){
+		v_h1f_WF_modnoTrunc[i]->		SetAxisRange(0, 1.1 * overallMaxMod, "Y");
+		fpCanvas->					cd(i+1);
+		invX = 0;
+		if(v_h1f_WF_modnoTrunc[i]->GetMean() > 650) invX = 0.5;
+		gPad->						SetRightMargin(0);
+		v_h1f_WF_modnoTrunc[i]->		Draw("HIST");
+		v_h1f_XP_modnoTrunc[i]->		Draw("HIST sames");
+		if(v_h1f_WF_mod[i]->GetEntries() < 100) continue;
+		PrintResolution(v_h1f_XP_modnoTrunc[i], fpCanvas, 0.65-invX, 0.58, kMagenta+2, "XP");
+		PrintResolution(v_h1f_WF_modnoTrunc[i], fpCanvas, 0.65-invX, 0.25, kCyan+2, "WF");
+	}
+	fpCanvas->						SaveAs(drawout_file.c_str());
+
+
+		//////////////////////////////////////////////////////////////////////////////////////////
+	fpCanvas->						cd(); 
+	fpCanvas->						Clear();
+	invX, invY = 0;
+	if(ph2f_XPWF->GetMean(1) > 650) invX = 0.5;
+	if(ph2f_XPWF->GetMean(2) > 650) invY = 0.5;
+	gStyle->						SetOptStat("merou");
+	gStyle->						SetStatX(0.36);
+	gStyle->						SetStatY(0.88);
+	gPad->							SetRightMargin(0.12);
+	gPad->							SetLeftMargin(0.12);
+	ph2f_XPWF->						GetYaxis()->SetTitleOffset(1.1);
+	gStyle->						SetTitleX((1.-gPad->GetRightMargin()+gPad->GetLeftMargin())/2);
+	ph2f_XPWF->						Draw("colz");
+	fpCanvas->						SaveAs(drawout_file.c_str());
+
+
+		//////////////////////////////////////////////////////////////////////////////////////////
+	fpCanvas->						cd(); 
+	fpCanvas->						Clear();
+	gStyle->						SetOptStat(0);
+	gPad->							SetLeftMargin(0.075);
+	ph2i_heatmap->					GetYaxis()->SetTitleOffset(0.65);
+	gStyle->						SetTitleX((1.-gPad->GetRightMargin()+gPad->GetLeftMargin())/2);
+	ph2i_heatmap->					Draw("colz");
+	fpCanvas->						SaveAs((drawout_file + ")").c_str());
+
+	fpCanvas->						Clear();
+	// Delete
+	delete ph2f_XPWF;
+}
+
+
 void Reconstruction::DrawOuts::EnergyLoss(){
 
 	// Prepare histograms
