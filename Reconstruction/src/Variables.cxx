@@ -3,7 +3,7 @@
 namespace Reconstruction{
 
 	// Output file variables
-	const std::string 			dedx_folder = 			"$HOME/Documents/Code/dEdx/";
+	const std::string 			dedx_folder = 			"../";
 
 	const std::string 			data_folder = 			dedx_folder + "Data/";
 	std::string 				data_subfolder = 		"";

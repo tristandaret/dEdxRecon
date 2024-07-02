@@ -23,8 +23,8 @@ namespace Reconstruction{
 	
 	// Files to use
 	int prototype =			0;
-	int CERN_Escan =		1;
-	int CERN_drift = 		0;
+	int CERN_Escan =		0;
+	int CERN_drift = 		1;
 
 	int DESY_drift =		0;
 	int DESY_yscan =		0;
@@ -105,8 +105,8 @@ void Reconstruction::Monitoring()
 		for (int iz = 0; iz < NFiles; iz++){
 			const char* z = 	z_arr[iz].c_str();
 			driftDist = 		z_val[iz];
-			v_dataFiles.		push_back(data_folder + "All_ERAMS_350V_412ns_e+_0p5GeV_25V_z" + z + "_iter4.root");	
-			v_tags.				push_back(Form("CERN22_Mockup_Drift%s", z));
+			v_dataFiles.		push_back(data_subfolder + "All_ERAMS_350V_412ns_e+_0p5GeV_25V_z" + z + "_iter4.root");	
+			v_tags.				push_back(Form("_Drift%s", z));
 
 			DefaultAnalysis();
 		}
@@ -268,14 +268,16 @@ void Reconstruction::DefaultAnalysis(){
 	drawout_runfolder =			drawout_scanfolder + testbeam + "_" + scan + "_" + tag +  "/";
 	MakeMyDir(drawout_runfolder);
 	rootout_file =				drawout_runfolder + "dEdx_" + tag + comment + ".root";
+	drawout_file =				drawout_runfolder + "dEdx_" + tag + comment + ".pdf";
 	log_file = 					drawout_runfolder + "dEdx_" + tag + ".log";
 	std::cout << "logs:        " << log_file		<< std::endl;
-	std::cout << "rootoutfile: " << rootout_file	<< std::endl;
+
 	if(dedx){
 		p_uploader =			GiveMe_Uploader (intUploader, v_dataFiles.back());
 		p_dEdx->				Reconstruction();
 		delete					p_uploader;
 	}
+
 	if(DO_dEdx){
 		p_DrawOuts =			new DrawOuts(rootout_file);
 		p_DrawOuts->			EnergyLoss();

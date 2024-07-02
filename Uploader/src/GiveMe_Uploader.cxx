@@ -6,7 +6,7 @@
 
 #include "Uploader_ERAM01.h"
 #include "Uploader_Prototype.h"
-#include "Uploader_MockUp.h"
+#include "Uploader_MockUp_V2.h"
 
 Uploader* GiveMe_Uploader(
                           const int& intUploader,
@@ -36,7 +36,7 @@ Uploader* GiveMe_Uploader(
                                                         );
   if ( intUploader == 3 ) {
     pModel_ReadOutGeometry->SquareGeometry() ;
-    Uploader_MockUp* pUploader_MockUp = new Uploader_MockUp(
+    Uploader_MockUp_V2* pUploader_MockUp = new Uploader_MockUp_V2(
                                                          SampleFile             ,
                                                          pModel_ReadOutGeometry ,
                                                          pModel_Electronics     ,

@@ -35,9 +35,9 @@ void Reconstruction::dEdx::Reconstruction(){
 	// Redirect Output
 	std::cout <<		std::setprecision(2)	<< std::fixed;
 	std::cout <<		std::endl;
-	// std::streambuf* 	coutbuf = std::cout.rdbuf();	// Save old buf
-	// std::ofstream		OUT_DataFile(log_file.c_str() );	// Set output file
-	// std::cout.			rdbuf(OUT_DataFile.rdbuf());	// Redirect to output file
+	std::streambuf* 	coutbuf = std::cout.rdbuf();	// Save old buf
+	std::ofstream		OUT_DataFile(log_file.c_str() );	// Set output file
+	std::cout.			rdbuf(OUT_DataFile.rdbuf());	// Redirect to output file
 
 	// Get ERAM maps
 	std::vector<int> fERAMs_iD;
@@ -77,9 +77,9 @@ void Reconstruction::dEdx::Reconstruction(){
 	std::cout << "comment:           " << comment							<<	std::endl;
 	std::cout << "selectionSet:      " << selectionSet						<<	std::endl;
 	std::cout << "drift method:      " << fcorrectDrift						<<	std::endl;
-	std::cout << "WF	correction:  " << fcorrectWF						<<	std::endl;
+	std::cout << "WF    correction:  " << fcorrectWF						<<	std::endl;
 	std::cout << "Gain correction:   " << fcorrectGain						<<	std::endl;
-	std::cout << "RC	correction:  " << fcorrectRC						<<	std::endl;
+	std::cout << "RC    correction:  " << fcorrectRC						<<	std::endl;
 	std::cout <<																std::endl;
 	std::cout << "Number of entries: "	<< NEvent 							<<  std::endl;
 	std::cout << "drift distance     "	<< driftDist		<< " mm"		<<	std::endl;
@@ -129,7 +129,7 @@ void Reconstruction::dEdx::Reconstruction(){
 
 
 	// Event loop
-	for (int iEvent =	0; iEvent < 5e3; iEvent++){
+	for (int iEvent =	0; iEvent < NEvent; iEvent++){
 		if(iEvent % 1000 ==	0 or iEvent ==	NEvent-1) std::cout << iEvent << "/" << NEvent << std::endl;
 
 		Event* pEvent =							p_uploader->GiveMe_Event(iEvent, moduleCase, 0, 0);
@@ -359,7 +359,7 @@ void Reconstruction::dEdx::Reconstruction(){
 	delete											pcorrFunctionWF;
 	delete											pERAMMaps;
 	delete											ptf1PRF;
-	// std::cout.rdbuf(coutbuf); // Reset to standard output
+	std::cout.rdbuf(coutbuf); // Reset to standard output
 }
 
 

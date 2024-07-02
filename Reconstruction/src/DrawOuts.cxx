@@ -47,7 +47,6 @@ void Reconstruction::DrawOuts::SetStyle(){
 	gPad->							UseCurrentStyle();
 
 	// Set Output
-	foutputDir =					drawout_file + v_tags.back() + "/";
 }
 
 
@@ -62,8 +61,6 @@ Reconstruction::DrawOuts::~DrawOuts(){
 
 
 void Reconstruction::DrawOuts::EnergyLoss(){
-	// Set output
-	foutputFile =					foutputDir + "dEdx_" + v_tags.back() + comment + ".pdf";
 
 	// Prepare histograms
 	TH2I *ph2i_heatmap =			new TH2I("ph2i_heatmap", "Events heatmap;iX;iY;", 144, 0, 143, 64, 0, 63);
@@ -173,7 +170,7 @@ void Reconstruction::DrawOuts::EnergyLoss(){
 
 	PrintResolution(ph1f_XP, fpCanvas, 0.65-invX, 0.58, kMagenta+2, "XP");
 	PrintResolution(ph1f_WF, fpCanvas, 0.65-invX, 0.25, kCyan+2, "WF");
-	fpCanvas->						SaveAs((foutputFile + "(").c_str());
+	fpCanvas->						SaveAs((drawout_file + "(").c_str());
 
 		//////////////////////////////////////////////////////////////////////////////////////////
 	fpCanvas->						cd();
@@ -192,7 +189,7 @@ void Reconstruction::DrawOuts::EnergyLoss(){
 		PrintResolution(v_h1f_XP_mod[i], fpCanvas, 0.65-invX, 0.58, kMagenta+2, "XP");
 		PrintResolution(v_h1f_WF_mod[i], fpCanvas, 0.65-invX, 0.25, kCyan+2, "WF");
 	}
-	fpCanvas->						SaveAs((foutputFile).c_str());
+	fpCanvas->						SaveAs(drawout_file.c_str());
 
 	//////////////////////////////////////////////////////////////////////////////////////////
 	fpCanvas->						cd();
@@ -206,7 +203,7 @@ void Reconstruction::DrawOuts::EnergyLoss(){
 
 	PrintResolution(ph1f_XPnoTrunc, fpCanvas, 0.65-invX, 0.58, kMagenta+2, "XP");
 	PrintResolution(ph1f_WFnoTrunc, fpCanvas, 0.65-invX, 0.25, kCyan+2, "WF");
-	fpCanvas->						SaveAs((foutputFile).c_str());
+	fpCanvas->						SaveAs(drawout_file.c_str());
 
 	//////////////////////////////////////////////////////////////////////////////////////////
 	fpCanvas->						cd();
@@ -225,7 +222,7 @@ void Reconstruction::DrawOuts::EnergyLoss(){
 		PrintResolution(v_h1f_XP_modnoTrunc[i], fpCanvas, 0.65-invX, 0.58, kMagenta+2, "XP");
 		PrintResolution(v_h1f_WF_modnoTrunc[i], fpCanvas, 0.65-invX, 0.25, kCyan+2, "WF");
 	}
-	fpCanvas->						SaveAs((foutputFile).c_str());
+	fpCanvas->						SaveAs(drawout_file.c_str());
 
 
 		//////////////////////////////////////////////////////////////////////////////////////////
@@ -242,7 +239,7 @@ void Reconstruction::DrawOuts::EnergyLoss(){
 	ph2f_XPWF->						GetYaxis()->SetTitleOffset(1.1);
 	gStyle->						SetTitleX((1.-gPad->GetRightMargin()+gPad->GetLeftMargin())/2);
 	ph2f_XPWF->						Draw("colz");
-	fpCanvas->						SaveAs((foutputFile).c_str());
+	fpCanvas->						SaveAs(drawout_file.c_str());
 
 
 		//////////////////////////////////////////////////////////////////////////////////////////
@@ -253,7 +250,7 @@ void Reconstruction::DrawOuts::EnergyLoss(){
 	ph2i_heatmap->					GetYaxis()->SetTitleOffset(0.65);
 	gStyle->						SetTitleX((1.-gPad->GetRightMargin()+gPad->GetLeftMargin())/2);
 	ph2i_heatmap->					Draw("colz");
-	fpCanvas->						SaveAs((foutputFile + ")").c_str());
+	fpCanvas->						SaveAs((drawout_file + ")").c_str());
 
 	// Delete
 	delete ph2f_XPWF;
@@ -271,7 +268,7 @@ void Reconstruction::DrawOuts::FileComparison(){
 		if(v_comments[i] != "") comment_list += v_comments[i] + "_";
 		else  					comment_list += "Default_";
 	}
-	foutputFile =							foutputDir + "Comparison_" + comment_list + ".pdf";
+	drawout_file =							foutputDir + "Comparison_" + comment_list + ".pdf";
 
 	// Prepare histograms
 	std::vector<TH1F*> v_h1f_XP;
@@ -351,7 +348,7 @@ void Reconstruction::DrawOuts::FileComparison(){
 		if(i!=0) v_h1f_WF[i]->		Draw("HIST sames");
 		PrintResolution(v_h1f_WF[i], fpCanvas, 0.65-invX, 0.58-0.33, 2+i, v_comments[i].c_str());
 	}
-	fpCanvas->						SaveAs((foutputFile + "(").c_str());
+	fpCanvas->						SaveAs((drawout_file + "(").c_str());
 
 	//////////////////////////////////////////////////////////////////////////////////////////
 	fpCanvas->						cd();	
@@ -365,7 +362,7 @@ void Reconstruction::DrawOuts::FileComparison(){
 		if(i!=0) v_h1f_XP[i]->		Draw("HIST sames");
 		PrintResolution(v_h1f_XP[i], fpCanvas, 0.65-invX, 0.58-0.33, 2+i, v_comments[i].c_str());
 	}	
-	fpCanvas->						SaveAs((foutputFile + ")").c_str());
+	fpCanvas->						SaveAs((drawout_file + ")").c_str());
 
 	// Delete
 	for(int i=0;i<(int)v_comments.size();i++){

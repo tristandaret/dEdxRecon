@@ -1,6 +1,6 @@
-#include "Uploader_MockUp.h"
+#include "Uploader_MockUp_V2.h"
 
-Uploader_MockUp::Uploader_MockUp(
+Uploader_MockUp_V2::Uploader_MockUp_V2(
             const std::string& SampleFile                 ,
             Model_ReadOutGeometry* pModel_ReadOutGeometry ,
             Model_Electronics*     pModel_Electronics     ,
@@ -22,9 +22,9 @@ Uploader_MockUp::Uploader_MockUp(
 }
 
 
-Uploader_MockUp::~Uploader_MockUp(){}
+Uploader_MockUp_V2::~Uploader_MockUp_V2(){}
 
-Event* Uploader_MockUp::GiveMe_Event(
+Event* Uploader_MockUp_V2::GiveMe_Event(
                                const int& iEvent, 
                                const int& ModuleNber_Input, 
                                const int& Data_to_Use
@@ -32,7 +32,7 @@ Event* Uploader_MockUp::GiveMe_Event(
   return GiveMe_Event(iEvent, ModuleNber_Input, Data_to_Use, 1) ;
 }
 
-Event* Uploader_MockUp::GiveMe_Event(
+Event* Uploader_MockUp_V2::GiveMe_Event(
                                const int& iEvent, 
                                const int& ModuleNber_Input, 
                                const int& Data_to_Use,
@@ -115,7 +115,7 @@ Event* Uploader_MockUp::GiveMe_Event(
       }
 
       if (iX_Set < 0 || iX_Set >= m_Nx || iY_Set < 0 || iY_Set >= m_Ny ){
-        std::cout << " Uploader_MockUp::GiveMe_Event "
+        std::cout << " Uploader_MockUp_V2::GiveMe_Event "
                   << " Wrong  "  
                   << " iCluster= " << iCluster
                   << " iX_Set= " << iX_Set
@@ -181,17 +181,17 @@ Event* Uploader_MockUp::GiveMe_Event(
   return pEvent ;
 }
 
-void Uploader_MockUp::SetBeforeMerging(const int& i_SetBeforeMerging)
+void Uploader_MockUp_V2::SetBeforeMerging(const int& i_SetBeforeMerging)
 {
   m_BeforeMerging = i_SetBeforeMerging;
 }
 
-void Uploader_MockUp::Setwap_XY(const int& i_Swap_XY)
+void Uploader_MockUp_V2::Setwap_XY(const int& i_Swap_XY)
 {
   m_Swap_XY = i_Swap_XY;
 }
 
-void Uploader_MockUp::Init()
+void Uploader_MockUp_V2::Init()
 {
    multiplicity = 0;
    charge = 0;
