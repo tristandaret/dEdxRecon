@@ -4,16 +4,11 @@
 #include "Monitoring.h"
 #include "ReconTools.h"
 #include "Variables.h"
-#include "LUTs.h"
-#include "dEdx.h"
 
 #include "Control.h"
-#include "DrawOuts.h"
 
 #include "Selector.h"
 
-#include "Uploader.h"
-#include "GiveMe_Uploader.h"
 
 namespace Reconstruction{
 	Reconstruction::dEdx		*p_dEdx;
@@ -23,8 +18,8 @@ namespace Reconstruction{
 	
 	// Files to use
 	int prototype =			0;
-	int CERN_Escan =		1;
-	int CERN_drift = 		0;
+	int CERN_Escan =		0;
+	int CERN_drift = 		1;
 
 	int DESY_drift =		0;
 	int DESY_yscan =		0;
@@ -68,7 +63,7 @@ void Reconstruction::Monitoring()
 
 	// Energy scan using the mockup
 	if(CERN_Escan){
-		Settings("CERN22", "Energy_Scan", 3, -1, 412, 350, 415, 40);
+		Settings("CERN22", "Energy_Scan", 4, -1, 412, 350, 415, 40);
 
 		// int NFiles = 14;
 		// for (int iFile = 0; iFile < NFiles; iFile++){
@@ -96,17 +91,17 @@ void Reconstruction::Monitoring()
 
 	// Drift distance scan scan using the mockup
 	if(CERN_drift){
-		Settings("CERN22", "Drift_Scan", 4, -1, 412, 350, 415, 40);
+		Settings("CERN22", "Drift_Scan", 3, -1, 412, 350, 415, 40);
 
 		int			z_val[] = 	{60, 218, 415, 925};
 		std::string z_arr[] = 	{"60", "218p5", "415", "925"};
 
 		int NFiles = 4;
-		for (int iz = 0; iz < NFiles; iz++){
+		for (int iz = 2; iz < NFiles; iz++){
 			const char* z = 	z_arr[iz].c_str();
 			driftDist = 		z_val[iz];
 			v_dataFiles.		push_back(data_subfolder + "All_ERAMS_350V_412ns_e+_0p5GeV_25V_z" + z + "_iter4.root");	
-			v_tags.				push_back(Form("_Drift%s", z));
+			v_tags.				push_back(Form("Drift%s", z));
 
 			DefaultAnalysis();
 		}
@@ -265,7 +260,7 @@ void Reconstruction::Settings(const std::string &testbeam_name, const std::strin
 
 void Reconstruction::DefaultAnalysis(){
 	tag = 						v_tags.back();
-	drawout_runfolder =			drawout_scanfolder + testbeam + "_" + scan + "_" + tag +	"/";
+	drawout_runfolder =			drawout_scanfolder + testbeam + "_" + scan + "_" + tag + "/";
 	MakeMyDir(drawout_runfolder);
 	rootout_file =				drawout_runfolder + "dEdx_" + testbeam + "_" + scan + "_" + tag + comment + ".root";
 	drawout_file =				drawout_runfolder + "dEdx_" + testbeam + "_" + scan + "_" + tag + comment + ".pdf";
@@ -274,13 +269,17 @@ void Reconstruction::DefaultAnalysis(){
 
 	if(dedx){
 		p_uploader =			GiveMe_Uploader (intUploader, v_dataFiles.back());
+		p_dEdx =				new dEdx();
 		p_dEdx->				Reconstruction();
 		delete					p_uploader;
+		delete					p_dEdx;
 	}
 
 	if(DO_dEdx){
 		p_DrawOuts =			new DrawOuts(rootout_file);
 		p_DrawOuts->			EnergyLoss();
+		delete  				p_DrawOuts;
+		std::cout << "delete done" << std::endl;
 	}
 }
 

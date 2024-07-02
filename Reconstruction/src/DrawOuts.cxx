@@ -42,20 +42,22 @@ Reconstruction::DrawOuts::DrawOuts(const std::vector<std::string> &v_inputFiles)
 
 void Reconstruction::DrawOuts::SetStyle(){
 	// Set Style
+	fpCanvas = 						new TCanvas("pCanvas", "pCanvas", 1800, 1350);
 	TStyle* ptstyle =				SetMyStyle();
 	gROOT->							SetStyle(ptstyle->GetName());
 	gPad->							UseCurrentStyle();
-
-	// Set Output
 }
 
 
 
 Reconstruction::DrawOuts::~DrawOuts(){
 	delete fpEvent;
-	delete fpFile;
+	for(int i=0;i<(int)finputEvents.size();i++) 	delete finputEvents[i];
 	delete fpTree;
-	delete fpBranch;
+	for(int i=0;i<(int)finputTrees.size();i++) 		delete finputTrees[i];
+	delete fpFile;
+	for(int i=0;i<(int)finputFiles.size();i++) 		delete finputFiles[i];
+
 	delete fpCanvas;
 }
 
@@ -89,6 +91,7 @@ void Reconstruction::DrawOuts::EnergyLoss(){
 		for(int iMod=0;iMod<NMod;iMod++){
 			position =					fpEvent->v_modules[iMod]->position;
 
+
 			// Heatmap
 			NC =						fpEvent->v_modules[iMod]->NClusters;
 			for(int iC=0;iC<NC;iC++){
@@ -97,7 +100,7 @@ void Reconstruction::DrawOuts::EnergyLoss(){
 					ix =				fpEvent->v_modules[iMod]->v_clusters[iC]->v_pads[iP]->ix;
 					iy =				fpEvent->v_modules[iMod]->v_clusters[iC]->v_pads[iP]->iy;
 					if(position<4) iy+=32;
-					ix += 36*position;
+					ix += 36*(position%4);
 					ph2i_heatmap->		Fill(ix, iy);
 				}
 			}
@@ -128,15 +131,16 @@ void Reconstruction::DrawOuts::EnergyLoss(){
 	Graphic_setup(ph1f_WFnoTrunc, 0.5, 1, kCyan+1, 2, kCyan-2, kCyan, 0.2);
 	Graphic_setup(ph1f_XPnoTrunc, 0.5, 1, kMagenta+2, 2, kMagenta-2, kMagenta, 0.2);
 
-	for(int i=0;i<4;i++){
-		Fit1Gauss(v_h1f_WF_mod[i], 2);
-		Fit1Gauss(v_h1f_XP_mod[i], 2);
-		Fit1Gauss(v_h1f_WF_modnoTrunc[i], 2);
-		Fit1Gauss(v_h1f_XP_modnoTrunc[i], 2);
+	for(int i=0;i<8;i++){
 		Graphic_setup(v_h1f_WF_mod[i], 0.5, 1, kCyan+1, 1, kCyan-2, kCyan, 0.2);
 		Graphic_setup(v_h1f_XP_mod[i], 0.5, 1, kMagenta+2, 1, kMagenta-2, kMagenta, 0.2);
 		Graphic_setup(v_h1f_WF_modnoTrunc[i], 0.5, 1, kCyan+1, 1, kCyan-2, kCyan, 0.2);
-		Graphic_setup(v_h1f_XP_modnoTrunc[i], 0.5, 1, kMagenta+2, 1, kMagenta-2, kMagenta, 0.2);	
+		Graphic_setup(v_h1f_XP_modnoTrunc[i], 0.5, 1, kMagenta+2, 1, kMagenta-2, kMagenta, 0.2);
+		if(v_h1f_WF_mod[i]->GetEntries() < 100) continue;
+		Fit1Gauss(v_h1f_WF_mod[i], 2);
+		Fit1Gauss(v_h1f_XP_mod[i], 2);
+		Fit1Gauss(v_h1f_WF_modnoTrunc[i], 2);
+		Fit1Gauss(v_h1f_XP_modnoTrunc[i], 2);	
 	}
 
 
@@ -185,7 +189,7 @@ void Reconstruction::DrawOuts::EnergyLoss(){
 		gPad->						SetRightMargin(0);
 		v_h1f_WF_mod[i]->				Draw("HIST");
 		v_h1f_XP_mod[i]->				Draw("HIST sames");
-		if(i>3) continue;
+		if(v_h1f_WF_mod[i]->GetEntries() < 100) continue;
 		PrintResolution(v_h1f_XP_mod[i], fpCanvas, 0.65-invX, 0.58, kMagenta+2, "XP");
 		PrintResolution(v_h1f_WF_mod[i], fpCanvas, 0.65-invX, 0.25, kCyan+2, "WF");
 	}
@@ -218,7 +222,7 @@ void Reconstruction::DrawOuts::EnergyLoss(){
 		gPad->						SetRightMargin(0);
 		v_h1f_WF_modnoTrunc[i]->		Draw("HIST");
 		v_h1f_XP_modnoTrunc[i]->		Draw("HIST sames");
-		if(i>3) continue;
+		if(v_h1f_WF_mod[i]->GetEntries() < 100) continue;
 		PrintResolution(v_h1f_XP_modnoTrunc[i], fpCanvas, 0.65-invX, 0.58, kMagenta+2, "XP");
 		PrintResolution(v_h1f_WF_modnoTrunc[i], fpCanvas, 0.65-invX, 0.25, kCyan+2, "WF");
 	}
@@ -252,6 +256,7 @@ void Reconstruction::DrawOuts::EnergyLoss(){
 	ph2i_heatmap->					Draw("colz");
 	fpCanvas->						SaveAs((drawout_file + ")").c_str());
 
+	fpCanvas->						Clear();
 	// Delete
 	delete ph2f_XPWF;
 }

@@ -28,10 +28,8 @@ namespace Reconstruction{
 		// Data file
 		std::vector<TFile*> finputFiles;
 		std::vector<TTree*> finputTrees;
-		std::vector<TBranch*> finputBranches;
 		TFile *fpFile;
 		TTree *fpTree;
-		TBranch *fpBranch;
 
 		// Data
 		RecoEvent *fpEvent;
@@ -41,7 +39,7 @@ namespace Reconstruction{
 
 		// Settings
 		std::string fparticleType;
-		TCanvas *fpCanvas	= new TCanvas("pCanvas", "pCanvas", 1800, 1350);
+		TCanvas *fpCanvas;
 	};
 }
 

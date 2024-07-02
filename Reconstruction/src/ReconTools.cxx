@@ -318,9 +318,7 @@ std::vector<int> ComputeCutStage3_Cut(Uploader* pUploader, const int& NbrOfMod, 
 	}
 
 	double MaxTLead	= h1f_TLead->GetMaximum();
-	std::cout << MaxTLead << std::endl;
 	int nbin_max						= h1f_TLead->GetMaximumBin();		
-	std::cout << nbin_max << std::endl;						// bin of the highest peak
 
 	if(nbin_max <= 0 or nbin_max >= 510){
 	std::cout << "Bug with nbin_max: value out of time range | Set cuts to	[0, 510]" << std::endl;
@@ -441,35 +439,35 @@ TF1* Fit1Gauss(TH1F* h1F){
 	return Fit1Gauss(h1F, 2);
 }
 TF1* Fit1Gauss(TH1F* h1F, float range){	
-	TF1* gausn	= new TF1("gausn", "gausn");
-	float mean	= h1F->GetBinCenter(h1F->GetMaximumBin());
-	float std	= h1F->GetRMS();
-	float max	= mean + 1.8*std;
-	float min	= mean - 1.8*std;
-	h1F->Fit("gausn","RQ","0", min, max);
+	TF1* gausn = 			new TF1("gausn", "gausn");
+	float mean = 			h1F->GetBinCenter(h1F->GetMaximumBin());
+	float std = 			h1F->GetRMS();
+	float max = 			mean + 1.8*std;
+	float min = 			mean - 1.8*std;
+	h1F->					Fit("gausn","RQ","0", min, max);
 
-	TF1* g1		= h1F->GetFunction("gausn");
-	mean			= g1->GetParameter(1);
-	std			= g1->GetParameter(2);
-	max			= mean + 1.7*std;
-	min			= mean - 1.7*std;
-	h1F->Fit("gausn","RQ","0", min, max);
+	TF1* g1 = 				h1F->GetFunction("gausn");
+	mean = 					g1->GetParameter(1);
+	std = 					g1->GetParameter(2);
+	max = 					mean + 1.7*std;
+	min = 					mean - 1.7*std;
+	h1F->					Fit("gausn","RQ","0", min, max);
 
-	TF1* g2		= h1F->GetFunction("gausn");
-	mean			= g2->GetParameter(1);
-	std			= g2->GetParameter(2);
-	max			= mean + 1.6*std;
-	min			= mean - 1.6*std;
-	h1F->Fit("gausn","RQ","0", min, max);
+	TF1* g2 = 				h1F->GetFunction("gausn");
+	mean = 					g2->GetParameter(1);
+	std = 					g2->GetParameter(2);
+	max = 					mean + 1.6*std;
+	min = 					mean - 1.6*std;
+	h1F->					Fit("gausn","RQ","0", min, max);
 
-	TF1* g3		= h1F->GetFunction("gausn");
-	mean			= g3->GetParameter(1);
-	std			= g3->GetParameter(2);
-	max			= mean + range*std;
-	min			= mean - range*std;
-	h1F->Fit("gausn","RQ","0", min, max);
+	TF1* g3 =				h1F->GetFunction("gausn");
+	mean = 					g3->GetParameter(1);
+	std =					g3->GetParameter(2);
+	max =					mean + range*std;
+	min =					mean - range*std;
+	h1F->					Fit("gausn","RQ","0", min, max);
 
-	TF1* tf1	= h1F->GetFunction("gausn");
+	TF1* tf1 = 				h1F->GetFunction("gausn");
 	delete gausn;
 
 	return tf1;

@@ -3,16 +3,18 @@
 
 #include "Misc.h"
 #include "Uploader.h"
+#include "LUTs.h"
 
 namespace Reconstruction{
 	
 	extern Uploader					*p_uploader;
+	extern Reconstruction::LUT		*p_lut;
 
 	// Output file variables
 	extern const std::string 		dedx_folder;
-	extern const std::string			data_folder;
+	extern const std::string		data_folder;
 	extern std::string				data_subfolder;
-	extern const std::string			drawout_folder;
+	extern const std::string		drawout_folder;
 	extern std::string				drawout_scanfolder;
 	extern std::string 				drawout_runfolder;
 	extern std::string				drawout_file;
@@ -29,7 +31,6 @@ namespace Reconstruction{
 	extern std::string				tag;
 	extern std::string				testbeam;
 	extern std::string				scan;
-	extern Uploader*				pUploader;
 	extern int						intUploader;
 	extern int						moduleCase; // DESY21:0 | CERN22:-1
 	extern int						PT;		// Peaking time (ns)

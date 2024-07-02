@@ -1,7 +1,17 @@
 #ifndef MONITORING_H
 #define MONITORING_H
 
+#include "Uploader.h"
+#include "GiveMe_Uploader.h"
+
+#include "dEdx.h"
+#include "DrawOuts.h"
+
 namespace Reconstruction{
+
+	extern Reconstruction::dEdx		*p_dEdx;
+	extern Reconstruction::DrawOuts	*p_DrawOuts;
+
 	void Correction(const int& corrRC	= 1, const int& corrGain	= 1, const int& corrWF	= 1, const int& corrDrift	= 1);
 	void Settings(const std::string &testbeam, const std::string &scan, const int &uploader, const int &modules, const int& peaking_time, const int& diffusion, const int& drift_dist, const int& timbin);
 	void DefaultAnalysis();

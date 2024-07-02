@@ -37,6 +37,4 @@ namespace Reconstruction{
 	int							fcorrectRC;
 	int							fcorrectWF;
 	int							fcorrectDrift;
-	
-
 }

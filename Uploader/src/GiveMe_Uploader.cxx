@@ -37,26 +37,21 @@ Uploader* GiveMe_Uploader(
 														);
 	if ( intUploader == 3 ) {
 	pModel_ReadOutGeometry->SquareGeometry();
-	Uploader_MockUp_V1* pUploader_MockUp = new Uploader_MockUp_V1(
+							ToBeReturned = new Uploader_MockUp_V1(
 														SampleFile,
 														pModel_ReadOutGeometry ,
 														pModel_Electronics,
 														pModel_Charge1D		
 														);
-	pUploader_MockUp->Setwap_XY(0);													
-	ToBeReturned = pUploader_MockUp;
 	}
 	if ( intUploader == 4 ) {
 	pModel_ReadOutGeometry->SquareGeometry();
-	Uploader_MockUp_V2* pUploader_MockUp = new Uploader_MockUp_V2(
+							ToBeReturned = new Uploader_MockUp_V2(
 														SampleFile,
 														pModel_ReadOutGeometry ,
 														pModel_Electronics,
 														pModel_Charge1D		
 														);
-	pUploader_MockUp->SetBeforeMerging(0);													
-	pUploader_MockUp->Setwap_XY(0);													
-	ToBeReturned = pUploader_MockUp;
 	}
 	return ToBeReturned;
 }
