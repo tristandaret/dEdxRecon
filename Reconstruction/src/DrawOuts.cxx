@@ -17,10 +17,10 @@
 
 Reconstruction::DrawOuts::DrawOuts(const std::string &inputFile){
 	// Get Tree
-	fpEvent =						new RecoEvent();
+	p_recoevent =						new RecoEvent();
 	fpFile =						TFile::Open(inputFile.c_str());
 	fpTree =						(TTree*)fpFile->Get("dEdx_tree");
-	fpTree->						SetBranchAddress("event_branch", &fpEvent);
+	fpTree->						SetBranchAddress("event_branch", &p_recoevent);
 	fnentries =						fpTree->GetEntries();
 
 	SetStyle();
@@ -51,7 +51,7 @@ void Reconstruction::DrawOuts::SetStyle(){
 
 
 Reconstruction::DrawOuts::~DrawOuts(){
-	delete fpEvent;
+	delete p_recoevent;
 	for(int i=0;i<(int)finputEvents.size();i++) 	delete finputEvents[i];
 	delete fpTree;
 	for(int i=0;i<(int)finputTrees.size();i++) 		delete finputTrees[i];
@@ -69,212 +69,167 @@ Reconstruction::DrawOuts::~DrawOuts(){
 void Reconstruction::DrawOuts::Control(){
 
 	// Prepare histograms
-	TH2I *ph2i_heatmap =			new TH2I("ph2i_heatmap", "Events heatmap;iX;iY;", 144, 0, 143, 64, 0, 63);
-	
-	std::vector<TH1F*> v_h1f_XP_mod;
-	std::vector<TH1F*> v_h1f_WF_mod;
-	std::vector<TH1F*> v_h1f_XP_modnoTrunc;
-	std::vector<TH1F*> v_h1f_WF_modnoTrunc;
+	TH2I *ph2i_heatmap =		new TH2I("ph2i_heatmap", "Events heatmap;iX;iY;", 144, 0, 143, 64, 0, 63);
+	TH1I *ph1i_TLead = 			new TH1I("ph1i_TLead", "T_{max} of leading pad;T_{max};Counts", 511, 0, 510);
+	TH1I *ph1i_TLeadSel = 		new TH1I("ph1i_TLeadSel", "T_{max} of leading pad (after cut);T_{max};Counts", 511, 0, 510);
+	TH1I *ph1i_PadMult = 		new TH1I("ph1i_PadMult", "Pad multiplicity;N_{pads};Counts", 11, 0, 10);
+	TH1I *ph1i_PadMultSel = 	new TH1I("ph1i_PadMultSel", "Pad multiplicity (after cut);N_{pads};Counts", 11, 0, 10);
+	TH1F *ph1f_AvgPadMult = 	new TH1F("ph1f_AvgPadMult", "Average pad multiplicity;N_{pads};Counts", 100, 0, 10);
+	TH1F *ph1f_AvgPadMultSel = 	new TH1F("ph1f_AvgPadMultSel", "Average pad multiplicity (after cut);N_{pads};Counts", 100, 0, 10);
+	TH1F *ph1f_ADCmax = 		new TH1F("ph1f_ADCmax", "ADC max;ADC counts;Counts", 400, 0, 4000);
+	TH1F *ph1f_ADCmaxSel = 		new TH1F("ph1f_ADCmaxSel", "ADC max (after cut);ADC counts;Counts", 400, 0, 4000);
+	TH1F *ph1f_ALead = 			new TH1F("ph1f_ALead", "Leading pad amplitude;ADC counts;Counts", 400, 0, 4000);
+	TH1F *ph1f_ALeadSel = 		new TH1F("ph1f_ALeadSel", "Leading pad amplitude (after cut);ADC counts;Counts", 400, 0, 4000);
+	TH1F *ph1f_ANeighbour = 	new TH1F("ph1f_ANeighbour", "Neighbouring pad amplitude;ADC counts;Counts", 400, 0, 4000);
+	TH1F *ph1f_ANeighbourSel = 	new TH1F("ph1f_ANeighbourSel", "Neighbouring pad amplitude (after cut);ADC counts;Counts", 400, 0, 4000);
+	std::vector<TH1F*> 			v_AvgPadMult;
+	std::vector<TH1F*> 			v_AvgPadMultSel;
+	std::vector<TH1I*> 			v_PadMult;
+	std::vector<TH1I*> 			v_PadMultSel;
+	std::vector<TH1I*> 			v_TLead;
+	std::vector<TH1I*> 			v_TLeadSel;
+	std::vector<TH1F*> 			v_ADCmax;
+	std::vector<TH1F*> 			v_ADCmaxSel;
+	std::vector<TH1F*> 			v_ALead;
+	std::vector<TH1F*> 			v_ALeadSel;
+	std::vector<TH1F*> 			v_ANeighbour;
+	std::vector<TH1F*> 			v_ANeighbourSel;
+
 	for(int i=0;i<8;i++){
-		v_h1f_XP_mod.push_back(			new TH1F(Form("ph1f_XP_%i", i), Form("Energy loss (module %i);dE/dx (ADC counts);Counts", i), 100, 0, 1300));
-		v_h1f_WF_mod.push_back(			new TH1F(Form("ph1f_WF_%i", i), Form("Energy loss (module %i);dE/dx (ADC counts);Counts", i), 100, 0, 1300));
-		v_h1f_XP_modnoTrunc.push_back(	new TH1F(Form("ph1f_XPnoTrunc_%i", i), Form("Energy loss (module %i) (no truncation);dE/dx (ADC counts);Counts", i), 100, 0, 1300));
-		v_h1f_WF_modnoTrunc.push_back(	new TH1F(Form("ph1f_WFnoTrunc_%i", i), Form("Energy loss (module %i) (no truncation);dE/dx (ADC counts);Counts", i), 100, 0, 1300));
+		v_TLead.push_back					(new TH1I(Form("ph1i_TLead_%i", i), Form("T_{max} of leading pad (module %i);T_{max};Counts", i), 511, 0, 510));
+		v_TLeadSel.push_back				(new TH1I(Form("ph1i_TLeadSel_%i", i), Form("T_{max} of leading pad (module %i) (after cut);T_{max};Counts", i), 511, 0, 510));
+		v_PadMult.push_back					(new TH1I(Form("ph1i_PadMult_%i", i), Form("Pad multiplicity (module %i);N_{pads};Counts", i), 100, 0, 100));
+		v_PadMultSel.push_back				(new TH1I(Form("ph1i_PadMultSel_%i", i), Form("Pad multiplicity (module %i) (after cut);N_{pads};Counts", i), 100, 0, 100));
+		v_AvgPadMult.push_back				(new TH1F(Form("ph1f_AvgPadMult_%i", i), Form("Average pad multiplicity (module %i);N_{pads};Counts", i), 100, 0, 100));
+		v_AvgPadMultSel.push_back			(new TH1F(Form("ph1f_AvgPadMultSel_%i", i), Form("Average pad multiplicity (module %i) (after cut);N_{pads};Counts", i), 100, 0, 100));
+		v_ADCmax.push_back					(new TH1F(Form("ph1f_ADCmax_%i", i), Form("ADC max (module %i);ADC counts;Counts", i), 400, 0, 4000));
+		v_ADCmaxSel.push_back				(new TH1F(Form("ph1f_ADCmaxSel_%i", i), Form("ADC max (module %i) (after cut);ADC counts;Counts", i), 400, 0, 4000));
+		v_ALead.push_back					(new TH1F(Form("ph1f_ALead_%i", i), Form("Leading pad amplitude (module %i);ADC counts;Counts", i), 400, 0, 4000));
+		v_ALeadSel.push_back				(new TH1F(Form("ph1f_ALeadSel_%i", i), Form("Leading pad amplitude (module %i) (after cut);ADC counts;Counts", i), 400, 0, 4000));
+		v_ANeighbour.push_back				(new TH1F(Form("ph1f_ANeighbour_%i", i), Form("Neighbouring pad amplitude (module %i);ADC counts;Counts", i), 400, 0, 4000));
+		v_ANeighbourSel.push_back			(new TH1F(Form("ph1f_ANeighbourSel_%i", i), Form("Neighbouring pad amplitude (module %i) (after cut);ADC counts;Counts", i), 400, 0, 4000));
 	}
 
-	int NMod = 0, NC = 0, NPads = 0, ix = 0, iy = 0, position = 0;
 	// Get entries and fill histograms
 	for(int i=0;i<fnentries;i++){
 		fpTree->						GetEntry(i);
-		NMod =							fpEvent->v_modules.size();
+		NMod =							p_recoevent->v_modules.size();
 
 		for(int iMod=0;iMod<NMod;iMod++){
-			position =					fpEvent->v_modules[iMod]->position;
+			p_recomodule =				p_recoevent->v_modules[iMod];
+			position =					p_recomodule->position;
+			NClusters =					p_recomodule->NClusters;
 
 
-			// Heatmap
-			NC =						fpEvent->v_modules[iMod]->NClusters;
-			for(int iC=0;iC<NC;iC++){
-				NPads =					fpEvent->v_modules[iMod]->v_clusters[iC]->NPads;
+			for(int iC=0;iC<NClusters;iC++){
+				p_recocluster =			p_recomodule->v_clusters[iC];
+				NPads =					p_recocluster->NPads;
+
+
 				for(int iP=0;iP<NPads;iP++){
-					ix =				fpEvent->v_modules[iMod]->v_clusters[iC]->v_pads[iP]->ix;
-					iy =				fpEvent->v_modules[iMod]->v_clusters[iC]->v_pads[iP]->iy;
+					// Heatmap
+					ix =				p_recocluster->v_pads[iP]->ix;
+					iy =				p_recocluster->v_pads[iP]->iy;
 					if(position<4) iy+=32;
 					ix += 36*(position%4);
 					ph2i_heatmap->		Fill(ix, iy);
-				}
-			}
+					
+					p_recopad =			p_recocluster->v_pads[iP];
+					ph1f_ADCmax->		Fill(p_recopad->ADCmax);
+					v_ADCmax[position]->Fill(p_recopad->ADCmax);
+					if(!p_recopad->leading){
+						ph1f_ANeighbour->Fill(p_recopad->ADCmax);
+						v_ANeighbour[position]->Fill(p_recopad->ADCmax);
+					}
 
-			// Histograms
-			v_h1f_XP_mod[position]->		Fill(fpEvent->v_modules[iMod]->dEdxXP);
-			v_h1f_WF_mod[position]->		Fill(fpEvent->v_modules[iMod]->dEdxWF);
-			v_h1f_XP_modnoTrunc[position]->	Fill(fpEvent->v_modules[iMod]->dEdxXPnoTrunc);
-			v_h1f_WF_modnoTrunc[position]->	Fill(fpEvent->v_modules[iMod]->dEdxWFnoTrunc);
-		}
-		if(NMod != 4) continue;
-		ph1f_WF->						Fill(fpEvent->dEdxWF);
-		ph1f_XP->						Fill(fpEvent->dEdxXP);
-		ph1f_WFnoTrunc->				Fill(fpEvent->dEdxWFnoTrunc);
-		ph1f_XPnoTrunc->				Fill(fpEvent->dEdxXPnoTrunc);
-		ph2f_XPWF->						Fill(fpEvent->dEdxWF, fpEvent->dEdxXP);
+					if(!p_recomodule->selected) continue;
+					ph1f_ADCmaxSel->	Fill(p_recopad->ADCmax);
+					v_ADCmaxSel[position]->Fill(p_recopad->ADCmax);
+					if(!p_recopad->leading){
+						ph1f_ANeighbourSel->Fill(p_recopad->ADCmax);
+						v_ANeighbourSel[position]->Fill(p_recopad->ADCmax);
+					}
+				} // Pads
+
+				if(p_recocluster->TLead !=0) std::cout << "TLead: " << p_recocluster->TLead << std::endl;
+				if(p_recocluster->TLead !=0) ph1i_TLead->			Fill(p_recocluster->TLead);
+				ph1i_PadMult->			Fill(NPads);
+				ph1f_ALead->			Fill(p_recocluster->ALead_base);
+				v_TLead[position]->		Fill(p_recocluster->TLead);
+				v_PadMult[position]->	Fill(NPads);
+				v_ALead[position]->		Fill(p_recocluster->ALead_base);
+
+				if(!p_recomodule->selected) continue;
+				if(p_recocluster->TLead !=0) ph1i_TLeadSel->			Fill(p_recocluster->TLead);
+				ph1i_PadMultSel->		Fill(NPads);
+				ph1f_ALeadSel->			Fill(p_recocluster->ALead_base);
+				v_TLeadSel[position]->	Fill(p_recocluster->TLead);
+				v_PadMultSel[position]->Fill(NPads);
+				v_ALeadSel[position]->	Fill(p_recocluster->ALead_base);
+			} // Clusters
+
+			ph1f_AvgPadMult->			Fill(p_recomodule->avg_pad_mult);
+			v_AvgPadMult[position]->	Fill(p_recomodule->avg_pad_mult);
+
+			if(!p_recomodule->selected) continue;
+			ph1f_AvgPadMultSel->Fill(p_recomodule->avg_pad_mult);
+			v_AvgPadMultSel[position]->Fill(p_recomodule->avg_pad_mult);
+		} // Modules
 	}
-
-	// Fitting
-	Fit1Gauss(ph1f_WF, 2);
-	Fit1Gauss(ph1f_XP, 2);
-	Fit1Gauss(ph1f_WFnoTrunc, 2);
-	Fit1Gauss(ph1f_XPnoTrunc, 2);
-
-	// Display settings
-	Graphic_setup(ph1f_WF, 0.5, 1, kCyan+1, 2, kCyan-2, kCyan, 0.2);
-	Graphic_setup(ph1f_XP, 0.5, 1, kMagenta+2, 2, kMagenta-2, kMagenta, 0.2);
-	Graphic_setup(ph1f_WFnoTrunc, 0.5, 1, kCyan+1, 2, kCyan-2, kCyan, 0.2);
-	Graphic_setup(ph1f_XPnoTrunc, 0.5, 1, kMagenta+2, 2, kMagenta-2, kMagenta, 0.2);
-
-	for(int i=0;i<8;i++){
-		Graphic_setup(v_h1f_WF_mod[i], 0.5, 1, kCyan+1, 1, kCyan-2, kCyan, 0.2);
-		Graphic_setup(v_h1f_XP_mod[i], 0.5, 1, kMagenta+2, 1, kMagenta-2, kMagenta, 0.2);
-		Graphic_setup(v_h1f_WF_modnoTrunc[i], 0.5, 1, kCyan+1, 1, kCyan-2, kCyan, 0.2);
-		Graphic_setup(v_h1f_XP_modnoTrunc[i], 0.5, 1, kMagenta+2, 1, kMagenta-2, kMagenta, 0.2);
-		if(v_h1f_WF_mod[i]->GetEntries() < 100) continue;
-		Fit1Gauss(v_h1f_WF_mod[i], 2);
-		Fit1Gauss(v_h1f_XP_mod[i], 2);
-		Fit1Gauss(v_h1f_WF_modnoTrunc[i], 2);
-		Fit1Gauss(v_h1f_XP_modnoTrunc[i], 2);	
-	}
-
 
 	// Draw
-	bool disp_trunc = true;
 	gStyle->						SetOptStat(0);
 	gStyle->						SetOptFit(0);
 
-	// Get maximum of event plots
-	int WFMax =						ph1f_WF->GetMaximum();
-	int XPMax =						ph1f_XP->GetMaximum();
-
 	// Get maximum of module plots
-	int overallMax = 0, overallMaxMod = 0, maxVal_WF = 0, maxVal_XP = 0;
-	overallMax =					std::max({WFMax, XPMax});
-	for(int i=0;i<8;i++){
-		maxVal_WF =					v_h1f_WF_mod[i]->GetMaximum();
-		maxVal_XP =					v_h1f_XP_mod[i]->GetMaximum();
-		overallMaxMod =				std::max({overallMaxMod, maxVal_WF, maxVal_XP});
-	}
-	float invX, invY;
+
+
 	//////////////////////////////////////////////////////////////////////////////////////////
 	fpCanvas->						cd();
 	fpCanvas->						Clear();
-
-	ph1f_WF->						SetAxisRange(0, 1.1 * overallMax,	"Y");
-	invX = 0, invY = 0;
-	if(ph1f_WF->GetMean() > 650) invX = 0.5;
-	ph1f_WF->						Draw("HIST");
-	ph1f_XP->						Draw("HIST sames");
-
-	PrintResolution(ph1f_XP, fpCanvas, 0.65-invX, 0.58, kMagenta+2, "XP");
-	PrintResolution(ph1f_WF, fpCanvas, 0.65-invX, 0.25, kCyan+2, "WF");
+	ph1i_TLead->					Draw("HIST");
+	ph1i_TLeadSel->					SetLineColor(kRed);
+	ph1i_TLeadSel->					Draw("HIST sames");
 	fpCanvas->						SaveAs((drawout_file + "(").c_str());
 
-		//////////////////////////////////////////////////////////////////////////////////////////
-	fpCanvas->						cd();
-	fpCanvas->						Clear();
-	fpCanvas->						Divide(4, 2);
-
-	for(int i=0;i<8;i++){
-		v_h1f_WF_mod[i]->				SetAxisRange(0, 1.1 * overallMaxMod, "Y");
-		fpCanvas->					cd(i+1);
-		invX=0;
-		if(v_h1f_WF_mod[i]->GetMean() > 650) invX = 0.5;
-		gPad->						SetRightMargin(0);
-		v_h1f_WF_mod[i]->				Draw("HIST");
-		v_h1f_XP_mod[i]->				Draw("HIST sames");
-		if(v_h1f_WF_mod[i]->GetEntries() < 100) continue;
-		PrintResolution(v_h1f_XP_mod[i], fpCanvas, 0.65-invX, 0.58, kMagenta+2, "XP");
-		PrintResolution(v_h1f_WF_mod[i], fpCanvas, 0.65-invX, 0.25, kCyan+2, "WF");
-	}
-	fpCanvas->						SaveAs(drawout_file.c_str());
-
-	//////////////////////////////////////////////////////////////////////////////////////////
-	fpCanvas->						cd();
-	fpCanvas->						Clear();
-
-	ph1f_WFnoTrunc->				SetAxisRange(0, 1.1 * overallMax, "Y");
-	invX = 0, invY = 0;
-	if(ph1f_WFnoTrunc->GetMean(1) > 650) invX = 0.5;
-	ph1f_WFnoTrunc->				Draw("HIST");
-	ph1f_XPnoTrunc->				Draw("HIST sames");
-
-	PrintResolution(ph1f_XPnoTrunc, fpCanvas, 0.65-invX, 0.58, kMagenta+2, "XP");
-	PrintResolution(ph1f_WFnoTrunc, fpCanvas, 0.65-invX, 0.25, kCyan+2, "WF");
-	fpCanvas->						SaveAs(drawout_file.c_str());
-
 	//////////////////////////////////////////////////////////////////////////////////////////
 	fpCanvas->						cd();
 	fpCanvas->						Clear();
 	fpCanvas->						Divide(4, 2);
-
 	for(int i=0;i<8;i++){
-		v_h1f_WF_modnoTrunc[i]->		SetAxisRange(0, 1.1 * overallMaxMod, "Y");
 		fpCanvas->					cd(i+1);
-		invX = 0;
-		if(v_h1f_WF_modnoTrunc[i]->GetMean() > 650) invX = 0.5;
-		gPad->						SetRightMargin(0);
-		v_h1f_WF_modnoTrunc[i]->		Draw("HIST");
-		v_h1f_XP_modnoTrunc[i]->		Draw("HIST sames");
-		if(v_h1f_WF_mod[i]->GetEntries() < 100) continue;
-		PrintResolution(v_h1f_XP_modnoTrunc[i], fpCanvas, 0.65-invX, 0.58, kMagenta+2, "XP");
-		PrintResolution(v_h1f_WF_modnoTrunc[i], fpCanvas, 0.65-invX, 0.25, kCyan+2, "WF");
+		v_TLeadSel[i]->				SetLineColor(kRed);
+		v_TLead[i]->				Draw("HIST");
+		v_TLeadSel[i]->				Draw("HIST sames");
 	}
-	fpCanvas->						SaveAs(drawout_file.c_str());
-
-
-		//////////////////////////////////////////////////////////////////////////////////////////
-	fpCanvas->						cd(); 
-	fpCanvas->						Clear();
-	invX, invY = 0;
-	if(ph2f_XPWF->GetMean(1) > 650) invX = 0.5;
-	if(ph2f_XPWF->GetMean(2) > 650) invY = 0.5;
-	gStyle->						SetOptStat("merou");
-	gStyle->						SetStatX(0.36);
-	gStyle->						SetStatY(0.88);
-	gPad->							SetRightMargin(0.12);
-	gPad->							SetLeftMargin(0.12);
-	ph2f_XPWF->						GetYaxis()->SetTitleOffset(1.1);
-	gStyle->						SetTitleX((1.-gPad->GetRightMargin()+gPad->GetLeftMargin())/2);
-	ph2f_XPWF->						Draw("colz");
-	fpCanvas->						SaveAs(drawout_file.c_str());
-
-
-		//////////////////////////////////////////////////////////////////////////////////////////
-	fpCanvas->						cd(); 
-	fpCanvas->						Clear();
-	gStyle->						SetOptStat(0);
-	gPad->							SetLeftMargin(0.075);
-	ph2i_heatmap->					GetYaxis()->SetTitleOffset(0.65);
-	gStyle->						SetTitleX((1.-gPad->GetRightMargin()+gPad->GetLeftMargin())/2);
-	ph2i_heatmap->					Draw("colz");
 	fpCanvas->						SaveAs((drawout_file + ")").c_str());
 
+
 	fpCanvas->						Clear();
-	// Delete
-	delete ph2f_XPWF;
 }
 
 
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Reconstruction::DrawOuts::EnergyLoss(){
 
 	// Prepare histograms
-	TH2I *ph2i_heatmap =			new TH2I("ph2i_heatmap", "Events heatmap;iX;iY;", 144, 0, 143, 64, 0, 63);
-	TH1F *ph1f_XP =					new TH1F("ph1f_XP", "Energy loss;dE/dx (ADC counts);Counts", 100, 0, 1300);
-	TH1F *ph1f_WF =					new TH1F("ph1f_WF", "Energy loss;dE/dx (ADC counts);Counts", 100, 0, 1300);
-	TH1F *ph1f_XPnoTrunc =			new TH1F("ph1f_XPnoTrunc", "Energy loss (no truncation);dE/dx (ADC counts);Counts", 100, 0, 1300);
-	TH1F *ph1f_WFnoTrunc =			new TH1F("ph1f_WFnoTrunc", "Energy loss (no truncation);dE/dx (ADC counts);Counts", 100, 0, 1300);
-	TH2F *ph2f_XPWF =				new TH2F("ph2f_XPWF", "Energy loss with XP vs with WF;dE/dx (WF);dE/dx (XP)", 100, 0, 1300, 100, 0, 1300);
-	std::vector<TH1F*> v_h1f_XP_mod;
-	std::vector<TH1F*> v_h1f_WF_mod;
-	std::vector<TH1F*> v_h1f_XP_modnoTrunc;
-	std::vector<TH1F*> v_h1f_WF_modnoTrunc;
+	TH1F *ph1f_XP =				new TH1F("ph1f_XP", "Energy loss;dE/dx (ADC counts);Counts", 100, 0, 1300);
+	TH1F *ph1f_WF =				new TH1F("ph1f_WF", "Energy loss;dE/dx (ADC counts);Counts", 100, 0, 1300);
+	TH1F *ph1f_XPnoTrunc =		new TH1F("ph1f_XPnoTrunc", "Energy loss (no truncation);dE/dx (ADC counts);Counts", 100, 0, 1300);
+	TH1F *ph1f_WFnoTrunc =		new TH1F("ph1f_WFnoTrunc", "Energy loss (no truncation);dE/dx (ADC counts);Counts", 100, 0, 1300);
+	TH2F *ph2f_XPWF =			new TH2F("ph2f_XPWF", "Energy loss with XP vs with WF;dE/dx (WF);dE/dx (XP)", 100, 0, 1300, 100, 0, 1300);
+	std::vector<TH1F*> 			v_h1f_XP_mod;
+	std::vector<TH1F*> 			v_h1f_WF_mod;
+	std::vector<TH1F*> 			v_h1f_XP_modnoTrunc;
+	std::vector<TH1F*> 			v_h1f_WF_modnoTrunc;
+	
 	for(int i=0;i<8;i++){
 		v_h1f_XP_mod.push_back(			new TH1F(Form("ph1f_XP_%i", i), Form("Energy loss (module %i);dE/dx (ADC counts);Counts", i), 100, 0, 1300));
 		v_h1f_WF_mod.push_back(			new TH1F(Form("ph1f_WF_%i", i), Form("Energy loss (module %i);dE/dx (ADC counts);Counts", i), 100, 0, 1300));
@@ -282,41 +237,25 @@ void Reconstruction::DrawOuts::EnergyLoss(){
 		v_h1f_WF_modnoTrunc.push_back(	new TH1F(Form("ph1f_WFnoTrunc_%i", i), Form("Energy loss (module %i) (no truncation);dE/dx (ADC counts);Counts", i), 100, 0, 1300));
 	}
 
-	int NMod = 0, NC = 0, NPads = 0, ix = 0, iy = 0, position = 0;
 	// Get entries and fill histograms
 	for(int i=0;i<fnentries;i++){
 		fpTree->						GetEntry(i);
-		NMod =							fpEvent->v_modules.size();
+		NMod =							p_recoevent->v_modules.size();
 
 		for(int iMod=0;iMod<NMod;iMod++){
-			position =					fpEvent->v_modules[iMod]->position;
-
-
-			// Heatmap
-			NC =						fpEvent->v_modules[iMod]->NClusters;
-			for(int iC=0;iC<NC;iC++){
-				NPads =					fpEvent->v_modules[iMod]->v_clusters[iC]->NPads;
-				for(int iP=0;iP<NPads;iP++){
-					ix =				fpEvent->v_modules[iMod]->v_clusters[iC]->v_pads[iP]->ix;
-					iy =				fpEvent->v_modules[iMod]->v_clusters[iC]->v_pads[iP]->iy;
-					if(position<4) iy+=32;
-					ix += 36*(position%4);
-					ph2i_heatmap->		Fill(ix, iy);
-				}
-			}
-
+			position =					p_recoevent->v_modules[iMod]->position;
 			// Histograms
-			v_h1f_XP_mod[position]->		Fill(fpEvent->v_modules[iMod]->dEdxXP);
-			v_h1f_WF_mod[position]->		Fill(fpEvent->v_modules[iMod]->dEdxWF);
-			v_h1f_XP_modnoTrunc[position]->	Fill(fpEvent->v_modules[iMod]->dEdxXPnoTrunc);
-			v_h1f_WF_modnoTrunc[position]->	Fill(fpEvent->v_modules[iMod]->dEdxWFnoTrunc);
+			v_h1f_XP_mod[position]->		Fill(p_recoevent->v_modules[iMod]->dEdxXP);
+			v_h1f_WF_mod[position]->		Fill(p_recoevent->v_modules[iMod]->dEdxWF);
+			v_h1f_XP_modnoTrunc[position]->	Fill(p_recoevent->v_modules[iMod]->dEdxXPnoTrunc);
+			v_h1f_WF_modnoTrunc[position]->	Fill(p_recoevent->v_modules[iMod]->dEdxWFnoTrunc);
 		}
 		if(NMod != 4) continue;
-		ph1f_WF->						Fill(fpEvent->dEdxWF);
-		ph1f_XP->						Fill(fpEvent->dEdxXP);
-		ph1f_WFnoTrunc->				Fill(fpEvent->dEdxWFnoTrunc);
-		ph1f_XPnoTrunc->				Fill(fpEvent->dEdxXPnoTrunc);
-		ph2f_XPWF->						Fill(fpEvent->dEdxWF, fpEvent->dEdxXP);
+		ph1f_WF->						Fill(p_recoevent->dEdxWF);
+		ph1f_XP->						Fill(p_recoevent->dEdxXP);
+		ph1f_WFnoTrunc->				Fill(p_recoevent->dEdxWFnoTrunc);
+		ph1f_XPnoTrunc->				Fill(p_recoevent->dEdxXPnoTrunc);
+		ph2f_XPWF->						Fill(p_recoevent->dEdxWF, p_recoevent->dEdxXP);
 	}
 
 	// Fitting
@@ -443,17 +382,6 @@ void Reconstruction::DrawOuts::EnergyLoss(){
 	ph2f_XPWF->						GetYaxis()->SetTitleOffset(1.1);
 	gStyle->						SetTitleX((1.-gPad->GetRightMargin()+gPad->GetLeftMargin())/2);
 	ph2f_XPWF->						Draw("colz");
-	fpCanvas->						SaveAs(drawout_file.c_str());
-
-
-		//////////////////////////////////////////////////////////////////////////////////////////
-	fpCanvas->						cd(); 
-	fpCanvas->						Clear();
-	gStyle->						SetOptStat(0);
-	gPad->							SetLeftMargin(0.075);
-	ph2i_heatmap->					GetYaxis()->SetTitleOffset(0.65);
-	gStyle->						SetTitleX((1.-gPad->GetRightMargin()+gPad->GetLeftMargin())/2);
-	ph2i_heatmap->					Draw("colz");
 	fpCanvas->						SaveAs((drawout_file + ")").c_str());
 
 	fpCanvas->						Clear();

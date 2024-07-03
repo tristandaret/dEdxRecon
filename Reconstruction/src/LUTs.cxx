@@ -284,21 +284,39 @@ float Reconstruction::LUT::getRatio(const float& phi, const float& d, const floa
 	float iz_min	= std::min((float)std::floor(z/sSTEP_Z), (float)(sN_Z-1));
 	float iz_max	= std::max((float)std::ceil(z/sSTEP_Z), (float)0);
 
+	if(iz_min<0){
+		iz_min = 0;
+		iz_max = 0;
+	}
+	if(iphi_min<0){
+		iphi_min = 0;
+		iphi_max = 0;
+	}
+	if(id_min<0){
+		id_min = 0;
+		id_max = 0;
+	}
+	if(iRC_min<0){
+		iRC_min = 0;
+		iRC_max = 0;
+	}
+
+	std::cout << "(iphi_min, iphi_max) = (" << iphi_min << ", " << iphi_max << ") | (id_min, id_max) = (" << id_min << ", " << id_max << ") | (iRC_min, iRC_max) = (" << iRC_min << ", " << iRC_max << ") | (iz_min, iz_max) = (" << iz_min << ", " << iz_max << ")" << std::endl;
+
 	// Determine the weights for the 8 points
 	float w_phi, w_d, w_RC, w_z;
-	if(iphi_min	== iphi_max)	w_phi	= 1;
-	else						w_phi	= 1 - (iphi - iphi_min)/(iphi_max - iphi_min);
-	if(id_min	== id_max)		w_d	= 1;
-	else						w_d	= 1 - (id - id_min)/(id_max - id_min);
-	if(iRC_min	== iRC_max)	w_RC	= 1;
-	else						w_RC	= 1 - (iRC - iRC_min)/(iRC_max - iRC_min);
-	if(iz_min	== iz_max)		w_z	= 1;
-	else						w_z	= 1 - (iz - iz_min)/(iz_max - iz_min);
-
+	if(iphi_min	== iphi_max)	w_phi =	1;
+	else						w_phi =	1 - (iphi - iphi_min)/(iphi_max - iphi_min);
+	if(id_min	== id_max)		w_d = 	1;
+	else						w_d = 	1 - (id - id_min)/(id_max - id_min);
+	if(iRC_min	== iRC_max)		w_RC = 	1;
+	else						w_RC = 	1 - (iRC - iRC_min)/(iRC_max - iRC_min);
+	if(iz_min	== iz_max)		w_z	=	1;
+	else						w_z	=	1 - (iz - iz_min)/(iz_max - iz_min);
 	float interpolated_value	= 0;
 	for (int i	= 0; i < 2; ++i) for (int j	= 0; j < 2; ++j) for (int k	= 0; k < 2; ++k) for (int l	= 0; l < 2; ++l) 
-		interpolated_value += fValue[(int)iphi_min + i][(int)id_min + j][(int)iRC_min + k][(int)iz_min + l] *
-							(i	== 0 ? w_phi : (1 - w_phi)) * (j	== 0 ? w_d : (1 - w_d)) * (k	== 0 ? w_RC : (1 - w_RC)) * (l	== 0 ? w_z : (1 - w_z));
+		interpolated_value += 	fValue[(int)iphi_min + i][(int)id_min + j][(int)iRC_min + k][(int)iz_min + l] *
+								(i	== 0 ? w_phi : (1 - w_phi)) * (j	== 0 ? w_d : (1 - w_d)) * (k	== 0 ? w_RC : (1 - w_RC)) * (l	== 0 ? w_z : (1 - w_z));
 
 	return interpolated_value;
 }

@@ -31,6 +31,12 @@ public:
 	
 //------------------------------Prints-----------------------//
 	void WriteOut() const; // Big dump
+
+
+//------------------------------Cluster Validity-----------------------//
+	int	IsValid()	const; // Get validation status
+	void Validate()	; // Validate
+	void Invalidate()	; // Invalidate
  
 	
 //------------------------------Clusters Data-----------------------//
@@ -85,6 +91,8 @@ private:
 	
 	double m_XTrack_BeforeMinimisation; 
 	double m_YTrack_BeforeMinimisation; 
+
+	short int m_isValid;
 	
 public:
 	void Set_XTrack(const double& XTrack);

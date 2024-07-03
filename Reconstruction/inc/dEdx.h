@@ -68,6 +68,7 @@ namespace Reconstruction{
 		virtual ~RecoModule();
 		
 		std::vector<RecoCluster*> 	v_clusters;
+		bool	selected =			false;
 		int 	ID =				0;
 		int 	position =			0;
 		float 	dEdxXP =			0;

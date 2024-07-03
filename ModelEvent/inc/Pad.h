@@ -53,6 +53,12 @@ public:
 	void WriteOut() const; // Big dump
 
 
+//------------------------------Pad Validity-----------------------//
+	int	IsValid()	const; // Get validation status
+	void Validate()	; // Validate
+	void Invalidate()	; // Invalidate
+
+
 //------------------------------Models-----------------------//
 	const Model_ReadOutGeometry*	Get_Model_ReadOutGeometry() const;
 	const Model_Electronics	*	Get_Model_Electronics	() const;
@@ -155,11 +161,13 @@ public:
 //------------------------------Data Members-----------------------//
 private:
 
+	short int m_IsValid;
+
 	void SetEdges(
-	const double& XL ,
-	const double& XH ,
-	const double& YL ,
-	const double& YH
+		const double& XL ,
+		const double& XH ,
+		const double& YL ,
+		const double& YH
 	);
 
 	void Ini_Models(

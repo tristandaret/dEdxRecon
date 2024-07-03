@@ -102,8 +102,8 @@ private:
 	
 	
 //Defaults
-	void Set_T_DESY21_Event				(); // 1+5+11
-	void Set_T_DESY21theta_Event				();
+	void Set_DESY21_Event				(); // 1+5+11
+	void Set_DESY21theta_Event				();
 	void Set_T2_CERN22_Event				(); // 1+11+120+15+5+20
 	void Set_TMC_CERN22_Event		(); // 1+5
 

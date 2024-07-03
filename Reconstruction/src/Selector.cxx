@@ -23,8 +23,8 @@ Selector::Selector(const std::string DefSelection
 	
 	Set_Cuts();
 	
-	if (DefSelection=="Sel_DESY21"	) { Set_T_DESY21_Event(); }
-	if (DefSelection=="Sel_DESY21_theta"	) { Set_T_DESY21theta_Event(); }
+	if (DefSelection=="Sel_DESY21"	) { Set_DESY21_Event(); }
+	if (DefSelection=="Sel_DESY21_theta"	) { Set_DESY21theta_Event(); }
 	if (DefSelection=="Sel_CERN22"	) { Set_T2_CERN22_Event(); }
 	if (DefSelection=="TMC_CERN22_Event"	) { Set_TMC_CERN22_Event(); }
 
@@ -90,7 +90,7 @@ void Selector::Set_Cuts()
 //---------------------------------------------------------------------//
 
 
-void Selector::Set_T_DESY21_Event()
+void Selector::Set_DESY21_Event()
 {
 	Reset_Selection();
 
@@ -107,7 +107,7 @@ void Selector::Set_T_DESY21_Event()
 }
 
 
-void Selector::Set_T_DESY21theta_Event()
+void Selector::Set_DESY21theta_Event()
 {
 	Reset_Selection();
 
@@ -298,7 +298,6 @@ void Selector::SetStat_After(Sample& aSample, const int& ModuleNber,const int& i
 	int NberOfPads		= 0;
 	for (int iE	= 0; iE< NberOfEvents; iE++){
 	Event* pEvent	=	aSample.Get_Event(iE);
-	// if (pEvent->Validity_ForThisModule(ModuleNber)	== 0) continue; 
 	NberOfValidEvents += 1;
 	
 	std::vector < Cluster* >ClusterSet	= pEvent->GiveMe_Clusters_ForThisModule (ModuleNber);	

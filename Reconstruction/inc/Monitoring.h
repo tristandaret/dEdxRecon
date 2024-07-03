@@ -32,6 +32,7 @@ namespace Reconstruction{
 	extern int dedx;
 
 	// DrawOuts	
+	extern int DO_Control;
 	extern int DO_dEdx;
 	extern int DO_Comparison;
 }

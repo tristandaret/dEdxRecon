@@ -17,28 +17,29 @@ namespace Reconstruction{
 	Uploader					*p_uploader;
 	
 	// Files to use
-	int prototype =			0;
-	int CERN_Escan =		0;
-	int CERN_drift = 		1;
+	int prototype =				0;
+	int CERN_Escan =			0;
+	int CERN_drift = 			1;
 
-	int DESY_drift =		0;
-	int DESY_yscan =		0;
-	int DESY_phi =			0;
-	int DESY_theta =		0;
+	int DESY_drift =			0;
+	int DESY_yscan =			0;
+	int DESY_phi =				0;
+	int DESY_theta =			0;
 
-	// Computations	
-	int dedx =				1;
+	// Computations		
+	int dedx =					1;
 
-	// DrawOuts	
-	int DO_dEdx =			0;
-	int DO_Comparison =		0;
+	// DrawOuts		
+	int DO_Control =			1;
+	int DO_dEdx =				1;
+	int DO_Comparison =			0;
 }
 
 
 
 void Reconstruction::Monitoring()
 {
-	comment = "_test";
+	comment = "_NoSel";
 	gErrorIgnoreLevel = kInfo;
 
 	Correction(1,1,1,1);
@@ -97,7 +98,7 @@ void Reconstruction::Monitoring()
 		std::string z_arr[] = 	{"60", "218p5", "415", "925"};
 
 		int NFiles = 4;
-		for (int iz = 0; iz < NFiles; iz++){
+		for (int iz = 0; iz < 1; iz++){
 			const char* z = 	z_arr[iz].c_str();
 			driftDist = 		z_val[iz];
 			v_dataFiles.		push_back(data_subfolder + "All_ERAMS_350V_412ns_e+_0p5GeV_25V_z" + z + "_iter4.root");	
@@ -263,7 +264,6 @@ void Reconstruction::DefaultAnalysis(){
 	drawout_runfolder =			drawout_scanfolder + testbeam + "_" + scan + "_" + tag + "/";
 	MakeMyDir(drawout_runfolder);
 	rootout_file =				drawout_runfolder + "dEdx_" + testbeam + "_" + scan + "_" + tag + comment + ".root";
-	drawout_file =				drawout_runfolder + "dEdx_" + testbeam + "_" + scan + "_" + tag + comment + ".pdf";
 	log_file = 					drawout_runfolder + "dEdx_" + testbeam + "_" + scan + "_" + tag + ".log";
 	std::cout << "logs:		" << log_file		<< std::endl;
 
@@ -275,11 +275,18 @@ void Reconstruction::DefaultAnalysis(){
 		delete					p_dEdx;
 	}
 
+	if(DO_Control){
+		drawout_file =			drawout_runfolder + "Control_" + testbeam + "_" + scan + "_" + tag + comment + ".pdf";
+		p_DrawOuts =			new DrawOuts(rootout_file);
+		p_DrawOuts->			Control();
+		delete  				p_DrawOuts;
+	}
+
 	if(DO_dEdx){
+		drawout_file =			drawout_runfolder + "dEdx_" + testbeam + "_" + scan + "_" + tag + comment + ".pdf";
 		p_DrawOuts =			new DrawOuts(rootout_file);
 		p_DrawOuts->			EnergyLoss();
 		delete  				p_DrawOuts;
-		std::cout << "delete done" << std::endl;
 	}
 }
 
