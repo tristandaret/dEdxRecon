@@ -143,7 +143,7 @@ void corr( const std::string& OutDir,
 		// Loop On Pads
 		int NPads						= pCluster->Get_NberOfPads();
 		for(int iP	= 0; iP < NPads; iP ++){
-			const Pad* pPad				= pCluster->Get_Pad(iP);
+			Pad* pPad				= pCluster->Get_Pad(iP);
 			double G_pad					= pERAMMaps->Gain(pModule->Get_ModuleNber(), pPad->Get_iX(), pPad->Get_iY());
 			float Gcorr					= avg_G/G_pad;
 
@@ -580,7 +580,7 @@ TF1* BetheBlochExp(const float& Pmin, const float& Pmax, const double& M, const 
 // Specific Math //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // impact parameter d (in m) & track angle phi (in degrees) computed locally at the level of the pad
-void local_params(const Pad* pPad, const Track* pTrack, float& d, float& dd, float& phi, float& trk_len_pad){
+void local_params(Pad* pPad, const Track* pTrack, float& d, float& dd, float& phi, float& trk_len_pad){
 
 	int dd_compute	= 1; // compute error on impact parameter, involve matrix	=> slow
 

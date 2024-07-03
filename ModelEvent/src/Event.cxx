@@ -135,7 +135,7 @@ double Event::GiveMe_CutSlopeXY_ForThisModule(const int& ModuleNber)
 	int NClusters = ClusterSet.size();
 	for (int iC = 0; iC< NClusters; iC++){
 	Cluster* pCluster = ClusterSet[iC];
-	const Pad* pPad_Leading = pCluster->Get_LeadingPad();
+	Pad* pPad_Leading = pCluster->Get_LeadingPad();
 	double Yi = pCluster->Get_YWeight() *1.E2;
 	double Xi = pPad_Leading->Get_XPad()*1.E2;
 	
@@ -166,7 +166,7 @@ double Event::GiveMe_CutSlopeXZ_ForThisModule(const int& ModuleNber)
 	int NClusters = ClusterSet.size();
 	for (int iC = 0; iC< NClusters; iC++){
 	Cluster* pCluster = ClusterSet[iC];
-	const Pad* pPad_Leading = pCluster->Get_LeadingPad();
+	Pad* pPad_Leading = pCluster->Get_LeadingPad();
 	double Yi = pCluster->Get_TMaxLeading();
 	double Xi = pPad_Leading->Get_XPad()*1.E2;
 	
@@ -197,7 +197,7 @@ double Event::GiveMe_CutInterCeptXZ_ForThisModule(const int& ModuleNber)
 	int NClusters = ClusterSet.size();
 	for (int iC = 0; iC< NClusters; iC++){
 	Cluster* pCluster = ClusterSet[iC];
-	const Pad* pPad_Leading = pCluster->Get_LeadingPad();
+	Pad* pPad_Leading = pCluster->Get_LeadingPad();
 	double Yi = pCluster->Get_TMaxLeading();
 	double Xi = pPad_Leading->Get_XPad()*1.E2;
 	
@@ -235,7 +235,7 @@ std::vector <double> Event::GiveMe_CutSlopeXYZ_ForThisModule(const int& ModuleNb
 	double Xi = (pCluster->Get_Pad(0))->Get_XPad()*1.E2;
 	double Yi =	pCluster->Get_YWeight() *1.E2;
 
-	const Pad* pPad_Leading = pCluster->Get_LeadingPad();
+	Pad* pPad_Leading = pCluster->Get_LeadingPad();
 			Zi = pCluster->Get_TMaxLeading();
 			Xi = pPad_Leading->Get_XPad()*1.E2;
 	
@@ -330,7 +330,7 @@ Cluster* Event::Get_Cluster_Copy (Cluster* pCluster)
 	
 	int NPads = pCluster->Get_NberOfPads();
 	for (int iP = 0; iP< NPads; iP++){
-	const Pad* pPad = pCluster->Get_Pad(iP);
+	Pad* pPad = pCluster->Get_Pad(iP);
 	ToBeReturned->Add_Pad(pPad);
 	}
 	ToBeReturned->DoClosure();

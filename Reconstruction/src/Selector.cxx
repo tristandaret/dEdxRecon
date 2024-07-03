@@ -70,19 +70,19 @@ Selector::~Selector()
 
 void Selector::Set_Cuts()
 {
-	m_Cut_StageFinal_NCluster_Low	= 36;
+	m_Cut_StageFinal_NCluster_Low = 36;
 
 	m_Cut_Stage5_Npads_Hig	=		5;
 	
-	m_Cut_Stage2_EventBased	=		3;
+	m_Cut_Stage2_EventBased	=		5;
 
-	m_Cut_Stage3_TLow	=				160.;
+	m_Cut_Stage3_TLow	=			160.;
 	m_Cut_Stage3_THigh	=			220.;
 
 	m_Cut_Stage6_Amax_Low	= 		0.;
 	m_Cut_Stage6_Amax_Hig	= 		3700.;
 
-	m_Cut_Stage4_APM_Low	= 			2;
+	m_Cut_Stage4_APM_Low	= 		2;
 	m_Cut_Stage4_APM_High	= 		4;
 
 }
@@ -251,10 +251,10 @@ void Selector::Apply_ASelection(Sample& aSample, const int& ModuleNber,const int
 	SetStat_Before(aSample, ModuleNber ,iTem);
 	
 	if ( SelectionName=="Stage1"	) { Stage1	(aSample, ModuleNber); } 
-	if ( SelectionName=="StageFinal"	) { StageFinal	(aSample, ModuleNber); } 
+	if ( SelectionName=="StageFinal") { StageFinal	(aSample, ModuleNber); } 
 	if ( SelectionName=="Stage5"	) { Stage5 (aSample, ModuleNber); } 
 	if ( SelectionName=="Stage2"	) { Stage2 (aSample, ModuleNber); } 
-	if ( SelectionName=="Stage3" ) { Stage3(aSample, ModuleNber); } 
+	if ( SelectionName=="Stage3" 	) { Stage3(aSample, ModuleNber); } 
 	if ( SelectionName=="Stage6"	) { Stage6 (aSample, ModuleNber); } 
 	if ( SelectionName=="Stage4"	) { Stage4 (aSample, ModuleNber); }
 
@@ -268,20 +268,23 @@ void Selector::SetStat_Before(Sample& aSample, const int& ModuleNber,const int& 
 	int NberOfClusters	= 0;
 	int NberOfPads		= 0;
 	for (int iE	= 0; iE< NberOfEvents; iE++){
-	Event* pEvent	=	aSample.Get_Event(iE);
-	// if (pEvent->Validity_ForThisModule(ModuleNber)	== 0) continue; 
-	NberOfValidEvents += 1;
-	
-	std::vector < Cluster* >ClusterSet	= pEvent->GiveMe_Clusters_ForThisModule (ModuleNber);	
-	int NClusters	= ClusterSet.size();
-	
-	NberOfClusters += NClusters;
-	
-	for (int iC	= 0; iC< NClusters; iC++){
-		Cluster* pCluster	= ClusterSet[iC];
+		Event* pEvent	=	aSample.Get_Event(iE);
+		NberOfValidEvents += 1;
 		
-		NberOfPads += pCluster->Get_NberOfPads();
-	}
+		std::vector < Cluster* >ClusterSet	= pEvent->GiveMe_Clusters_ForThisModule (ModuleNber);	
+		int NClusters	= ClusterSet.size();
+		
+		for (int iC	= 0; iC< NClusters; iC++){
+			Cluster* pCluster	= ClusterSet[iC];
+			NberOfClusters ++;
+			int NPads = pCluster->Get_NberOfPads();
+
+			for(int iP = 0; iP<NPads; iP++){
+				Pad* pPad = pCluster->Get_Pad(iP);
+				NberOfPads ++;
+			}
+			
+		}
 	}
 	
 	ListOfNberOfEvents_Before	[iTem]	= NberOfValidEvents;
@@ -297,25 +300,31 @@ void Selector::SetStat_After(Sample& aSample, const int& ModuleNber,const int& i
 	int NberOfClusters	= 0;
 	int NberOfPads		= 0;
 	for (int iE	= 0; iE< NberOfEvents; iE++){
-	Event* pEvent	=	aSample.Get_Event(iE);
-	NberOfValidEvents += 1;
-	
-	std::vector < Cluster* >ClusterSet	= pEvent->GiveMe_Clusters_ForThisModule (ModuleNber);	
-	int NClusters	= ClusterSet.size();
-	
-	NberOfClusters += NClusters;
-	
-	for (int iC	= 0; iC< NClusters; iC++){
-		Cluster* pCluster	= ClusterSet[iC];
+		Event* pEvent	=	aSample.Get_Event(iE);
+		NberOfValidEvents += 1;
 		
-		NberOfPads += pCluster->Get_NberOfPads();
-	}
+		std::vector < Cluster* >ClusterSet	= pEvent->GiveMe_Clusters_ForThisModule (ModuleNber);	
+		int NClusters	= ClusterSet.size();
+		
+		for (int iC	= 0; iC< NClusters; iC++){
+			Cluster* pCluster	= ClusterSet[iC];
+			if(!pCluster->IsValid()) continue;
+			NberOfClusters ++;
+			int NPads = pCluster->Get_NberOfPads();
+
+			for(int iP = 0; iP<NPads; iP++){
+				Pad* pPad = pCluster->Get_Pad(iP);
+				if(!pPad->IsValid()) continue;
+				NberOfPads ++;
+			}
+			
+		}
 	}
 	
 	ListOfNberOfEvents_After	[iTem]	= NberOfValidEvents;
 	ListOfNberOfModules_After [iTem]	= NberOfValidEvents;
 	ListOfNberOfClusters_After[iTem]	= NberOfClusters;
-	ListOfNberOfPads_After	[iTem]	= NberOfPads	;
+	ListOfNberOfPads_After	[iTem]		= NberOfPads	;
 }
 
 void Selector::ApplySelection(Event*	pEvent)
@@ -330,7 +339,6 @@ void Selector::ApplySelection(Event*	pEvent)
 	for (int iModule	= 0; iModule< NberOfModule; iModule++){	
 		Module* pModule	= pEvent->Get_Module_InArray(iModule);
 		int ModuleNber	= pModule->Get_ModuleNber();
-		// if (pEvent->Validity_ForThisModule(ModuleNber)	== 0) continue;
 		Apply_ASelection(pEvent,ModuleNber,iTem);
 	}
 	
@@ -345,10 +353,10 @@ void Selector::Apply_ASelection(Event*	pEvent, const int& ModuleNber,const int& 
 	std::string SelectionName	= ListOfSelectionName[iTem];
 
 	if ( SelectionName=="Stage1"	) { Stage1	(pEvent, ModuleNber); }
-	if ( SelectionName=="StageFinal"	) { StageFinal	(pEvent, ModuleNber); } 
+	if ( SelectionName=="StageFinal") { StageFinal	(pEvent, ModuleNber); } 
 	if ( SelectionName=="Stage5"	) { Stage5 (pEvent, ModuleNber); } 
 	if ( SelectionName=="Stage2"	) { Stage2 (pEvent, ModuleNber); } 
-	if ( SelectionName=="Stage3" ) { Stage3(pEvent, ModuleNber); } 
+	if ( SelectionName=="Stage3" 	) { Stage3(pEvent, ModuleNber); } 
 	if ( SelectionName=="Stage6"	) { Stage6 (pEvent, ModuleNber); } 
 	if ( SelectionName=="Stage4"	) { Stage4 (pEvent, ModuleNber); }
 }
@@ -363,22 +371,19 @@ void Selector::SetStat_Before(Event*	pEvent , const int& iTem)
 	int NberOfClusters	= 0;
 	int NberOfPads		= 0;
 	for (int iModule	= 0; iModule< NberOfModule; iModule++){	
-	Module* pModule	= pEvent->Get_Module_InArray(iModule);
-	int ModuleNber	= pModule->Get_ModuleNber();
-	// if (pEvent->Validity_ForThisModule(ModuleNber)	== 0) continue;
-	
-	NberOfModules +=1;
-	
-	std::vector < Cluster* >ClusterSet	= pEvent->GiveMe_Clusters_ForThisModule (ModuleNber);	
-	int NClusters	= ClusterSet.size();
-	
-	NberOfClusters += NClusters;
-	
-	for (int iC	= 0; iC< NClusters; iC++){
-		Cluster* pCluster	= ClusterSet[iC];
+		Module* pModule	= pEvent->Get_Module_InArray(iModule);
+		int ModuleNber	= pModule->Get_ModuleNber();		
+		NberOfModules +=1;
 		
-		NberOfPads += pCluster->Get_NberOfPads();
-	}
+		std::vector < Cluster* >ClusterSet	= pEvent->GiveMe_Clusters_ForThisModule (ModuleNber);	
+		int NClusters	= ClusterSet.size();
+		NberOfClusters += NClusters;
+
+		for (int iC	= 0; iC< NClusters; iC++){
+			Cluster* pCluster	= ClusterSet[iC];
+			int NPads = pCluster->Get_NberOfPads();
+			NberOfPads += NPads;
+		}
 	}
 
 	ListOfNberOfEvents_Before	[iTem] += 1			;
@@ -396,22 +401,27 @@ void Selector::SetStat_After(Event*	pEvent , const int& iTem)
 	int NberOfClusters	= 0;
 	int NberOfPads		= 0;
 	for (int iModule	= 0; iModule< NberOfModule; iModule++){	
-	Module* pModule	= pEvent->Get_Module_InArray(iModule);
-	int ModuleNber	= pModule->Get_ModuleNber();
-	// if (pEvent->Validity_ForThisModule(ModuleNber)	== 0) continue;
-	
-	NberOfModules +=1;
+		Module* pModule	= pEvent->Get_Module_InArray(iModule);
+		int ModuleNber	= pModule->Get_ModuleNber();		
+		NberOfModules +=1;
 
-	std::vector < Cluster* >ClusterSet	= pEvent->GiveMe_Clusters_ForThisModule (ModuleNber);	
-	int NClusters	= ClusterSet.size();
-	
-	NberOfClusters += NClusters;
-	
-	for (int iC	= 0; iC< NClusters; iC++){
-		Cluster* pCluster	= ClusterSet[iC];
+		std::vector < Cluster* >ClusterSet	= pEvent->GiveMe_Clusters_ForThisModule (ModuleNber);	
+		int NClusters	= ClusterSet.size();
 		
-		NberOfPads += pCluster->Get_NberOfPads();
-	}
+		for (int iC	= 0; iC< NClusters; iC++){
+			Cluster* pCluster	= ClusterSet[iC];
+			if(!pCluster->IsValid()) continue;
+			NberOfClusters ++;
+			int NPads = pCluster->Get_NberOfPads();
+
+			for(int iP = 0; iP<NPads; iP++){
+				Pad* pPad = pCluster->Get_Pad(iP);
+				if(!pPad->IsValid()) continue;
+				NberOfPads ++;
+			}
+			
+			NberOfPads += pCluster->Get_NberOfPads();
+		}
 	}
 
 	ListOfNberOfEvents_After	[iTem] += 1			;
@@ -463,6 +473,19 @@ void Selector::PrintStat()
 	<< std::endl;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //----------------------------------------------------------------//
 // Stage 1: Remove clusters in first and last columns 
 void Selector::Stage1_Def()
@@ -485,7 +508,6 @@ void Selector::Stage1(Event* pEvent, const int& ModuleNber)
 	int iXLast	= pModel_ReadOutGeometry->Get_Nx() - 1;
 
 	// if (pEvent->Validity_ForThisModule(ModuleNber)	== 0) return;
-	std::vector<Cluster*> V_pCluster;
 
 	std::vector < Cluster* >ClusterSet	= pEvent->GiveMe_Clusters_ForThisModule (ModuleNber);	
 	int NClusters	= ClusterSet.size();
@@ -494,13 +516,10 @@ void Selector::Stage1(Event* pEvent, const int& ModuleNber)
 		
 		int iXCluster	= (pCluster->Get_LeadingPad())->Get_iX();
 		
-		if (iXCluster	== iXFirst || iXCluster	== iXLast) continue;
+		if (iXCluster	== iXFirst || iXCluster	== iXLast) pCluster->Invalidate();
 		
-		Cluster* pCluster_new	= pEvent->Get_Cluster_Copy(pCluster);
-		V_pCluster.push_back(pCluster_new);
 		
 	}
-	pEvent->Replace_Clusters_ForThisModule(V_pCluster, ModuleNber);
 }
 
 //----------------------------------------------------------------//
@@ -510,8 +529,7 @@ void	Selector::Set_Cut_Stage2_EventBased	(double Cut_Stage2_EventBased	) { m_Cut
 void Selector::Stage2_Def()
 {
 	std::cout << "Apply selection 2 -> Remove clusters out of time (Event Based) " << std::endl;
-	
-	std::cout << "						|TLeading -TLeadingMeanOverEvent| <= m_Cut_Stage2_EventBased (= " << std::setw(5) << std::setprecision(0) << m_Cut_Stage2_EventBased << ")" << std::endl;
+	std::cout << "|TLeading -TLeadingMeanOverEvent| <= m_Cut_Stage2_EventBased (= " << std::setw(5) << std::setprecision(0) << m_Cut_Stage2_EventBased << ")" << std::endl;
 }
 void Selector::Stage2(Sample& aSample, const int& ModuleNber)
 {	
@@ -525,33 +543,24 @@ void Selector::Stage2(Sample& aSample, const int& ModuleNber)
 void Selector::Stage2(Event*	pEvent, const int& ModuleNber)
 {
 	if (pEvent->Validity_ForThisModule(ModuleNber)==0) return;
-	std::vector<Cluster*> V_pCluster;
 
 	double Tmean		= 0.;
-	int	Tmean_Kounter	= 0;
-
 	std::vector < Cluster* >ClusterSet	= pEvent->GiveMe_Clusters_ForThisModule (ModuleNber);	
 	int NClusters	= ClusterSet.size();
 	for (int iC	= 0; iC< NClusters; iC++){
-	Cluster* pCluster	= ClusterSet[iC];
-	
-	Tmean += pCluster->Get_TMaxLeading();
-	Tmean_Kounter += 1;
-	
+		Cluster* pCluster	= ClusterSet[iC];
+		Tmean += pCluster->Get_TMaxLeading();
 	}
+
 	Tmean	= Tmean/double(NClusters); 
 
 	for (int iC	= 0; iC< NClusters; iC++){
-	Cluster* pCluster	= ClusterSet[iC];
-
-	double DeltaT	= pCluster->Get_TMaxLeading() - Tmean;
-	if(std::fabs(DeltaT) > m_Cut_Stage2_EventBased) continue;
-	
-	Cluster* pCluster_new	= pEvent->Get_Cluster_Copy(pCluster);
-	V_pCluster.push_back(pCluster_new);
-	
+		Cluster* pCluster	= ClusterSet[iC];
+		double DeltaT	= pCluster->Get_TMaxLeading() - Tmean;
+		if(std::fabs(DeltaT) > m_Cut_Stage2_EventBased){
+			pCluster->Invalidate();
+		}
 	}
-	pEvent->Replace_Clusters_ForThisModule(V_pCluster, ModuleNber);
 }
 
 //----------------------------------------------------------------//
@@ -563,10 +572,9 @@ void	Selector::Set_Cut_Stage3_THigh		(double Cut_Stage3_THigh		) { m_Cut_Stage3_
 void Selector::Stage3_Def()
 {
 	std::cout << "Apply selection 3 -> Remove clusters out of time	" << std::endl;
-	
-	std::cout << "						m_Cut_Stage3_TLow <= TLeading <= m_Cut_Stage3_THigh " << std::endl;
-	std::cout << "						m_Cut_Stage3_TLow	= " << std::setw(4) << std::setprecision(0) << m_Cut_Stage3_TLow	<< std::endl;
-	std::cout << "						m_Cut_Stage3_THigh	= " << std::setw(4) << std::setprecision(0) << m_Cut_Stage3_THigh << std::endl;
+	std::cout << "m_Cut_Stage3_TLow <= TLeading <= m_Cut_Stage3_THigh " << std::endl;
+	std::cout << "m_Cut_Stage3_TLow	= " << std::setw(4) << std::setprecision(0) << m_Cut_Stage3_TLow	<< std::endl;
+	std::cout << "m_Cut_Stage3_THigh	= " << std::setw(4) << std::setprecision(0) << m_Cut_Stage3_THigh << std::endl;
 }
 void Selector::Stage3(Sample& aSample, const int& ModuleNber)
 {	
@@ -580,22 +588,14 @@ void Selector::Stage3(Sample& aSample, const int& ModuleNber)
 void Selector::Stage3(Event*	pEvent , const int& ModuleNber)
 {	
 	// if (pEvent->Validity_ForThisModule(ModuleNber)	== 0) return;
-	std::vector<Cluster*> V_pCluster;
 	
 	std::vector < Cluster* >ClusterSet	= pEvent->GiveMe_Clusters_ForThisModule (ModuleNber);	
 	int NClusters	= ClusterSet.size();
 	for (int iC	= 0; iC< NClusters; iC++){
-	Cluster* pCluster	= ClusterSet[iC];
-	
-	int TLeading	= pCluster->Get_TMaxLeading();
-	if(TLeading > m_Cut_Stage3_THigh) continue;
-	if(TLeading < m_Cut_Stage3_TLow ) continue;
-	
-	Cluster* pCluster_new	= pEvent->Get_Cluster_Copy(pCluster);
-	V_pCluster.push_back(pCluster_new);
-	
+		Cluster* pCluster	= ClusterSet[iC];
+		int TLeading	= pCluster->Get_TMaxLeading();
+		if(m_Cut_Stage3_TLow > TLeading or TLeading > m_Cut_Stage3_THigh) pCluster->Invalidate();
 	}
-	pEvent->Replace_Clusters_ForThisModule(V_pCluster, ModuleNber);
 }
 
 //----------------------------------------------------------------//
@@ -608,8 +608,8 @@ void Selector::Stage4_Def()
 {
 	std::cout << "Apply selection 4 -> Remove Events with an average pad multiplicity too high or too low " << std::endl;
 
-	std::cout << "						Pad Multiplicity >	m_Cut_Stage4_APM_Low	(= " << std::setw(4) << std::setprecision(1) << m_Cut_Stage4_APM_Low << ")" << std::endl;
-	std::cout << "						Pad Multiplicity <= m_Cut_Stage4_APM_High (= " << std::setw(4) << std::setprecision(1) << m_Cut_Stage4_APM_High << ")" << std::endl;
+	std::cout << "Pad Multiplicity >	m_Cut_Stage4_APM_Low	(= " << std::setw(4) << std::setprecision(1) << m_Cut_Stage4_APM_Low << ")" << std::endl;
+	std::cout << "Pad Multiplicity <= m_Cut_Stage4_APM_High (= " << std::setw(4) << std::setprecision(1) << m_Cut_Stage4_APM_High << ")" << std::endl;
 }
 void Selector::Stage4(Sample& aSample, const int& ModuleNber)
 {	
@@ -621,15 +621,13 @@ void Selector::Stage4(Sample& aSample, const int& ModuleNber)
 	
 }
 void Selector::Stage4(Event*	pEvent , const int& ModuleNber)
-{
-	// if (pEvent->Validity_ForThisModule(ModuleNber)	== 0) return;	
-	
+{	
 	std::vector<Cluster*>ClusterSet	= pEvent->GiveMe_Clusters_ForThisModule (ModuleNber);	
 	float NClusters	= ClusterSet.size();
 	float NPads_in_Evt	= 0;
 	for (int iC	= 0; iC < NClusters; iC++){
-	Cluster* pCluster	= ClusterSet[iC];
-	NPads_in_Evt += pCluster->Get_NberOfPads();			
+		Cluster* pCluster	= ClusterSet[iC];
+		NPads_in_Evt += pCluster->Get_NberOfPads();			
 	}
 	float PadMulti	= NPads_in_Evt/NClusters;
 	if(PadMulti <= m_Cut_Stage4_APM_Low or PadMulti > m_Cut_Stage4_APM_High) pEvent->Invalidate_ThisModule(ModuleNber);
@@ -642,7 +640,7 @@ void	Selector::Set_Cut_Stage5_Npads_Hig	(double Cut_Stage5_Npads_Hig	) { m_Cut_S
 void Selector::Stage5_Def()
 {
 	std::cout << "Apply selection 5 -> Remove clusters with too many pads " << std::endl;
-	std::cout << "						Npads <= m_Cut_Stage5_Npads_Hig (= " << std::setw(3) << std::setprecision(0) << m_Cut_Stage5_Npads_Hig << ")" << std::endl;
+	std::cout << "Npads <= m_Cut_Stage5_Npads_Hig (= " << std::setw(3) << std::setprecision(0) << m_Cut_Stage5_Npads_Hig << ")" << std::endl;
 }
 void Selector::Stage5(Sample& aSample, const int& ModuleNber)
 {	
@@ -655,22 +653,14 @@ void Selector::Stage5(Sample& aSample, const int& ModuleNber)
 }
 void Selector::Stage5(Event*	pEvent, const int& ModuleNber)
 {
-	// if (pEvent->Validity_ForThisModule(ModuleNber)	== 0) return;
-	std::vector<Cluster*> V_pCluster;
 
 	std::vector < Cluster* >ClusterSet	= pEvent->GiveMe_Clusters_ForThisModule (ModuleNber);	
 	int NClusters	= ClusterSet.size();
 	for (int iC	= 0; iC< NClusters; iC++){
-	Cluster* pCluster	= ClusterSet[iC];
-
-	int NPads	= pCluster->Get_NberOfPads();
-	if(NPads>m_Cut_Stage5_Npads_Hig) continue;
-	
-	Cluster* pCluster_new	= pEvent->Get_Cluster_Copy(pCluster);
-	V_pCluster.push_back(pCluster_new);
-	
+		Cluster* pCluster	= ClusterSet[iC];
+		int NPads	= pCluster->Get_NberOfPads();
+		if(NPads>m_Cut_Stage5_Npads_Hig) pCluster->Invalidate();
 	}
-	pEvent->Replace_Clusters_ForThisModule(V_pCluster, ModuleNber);
 }
 
 //----------------------------------------------------------------//
@@ -682,16 +672,15 @@ void	Selector::Set_Cut_Stage6_Amax_Hig	(double Cut_Stage6_Amax_Hig	) { m_Cut_Sta
 void Selector::Stage6_Def()
 {
 	std::cout << "Apply selection 6 -> Remove Clusters with a too high APad " << std::endl;
-	
-	std::cout << "						APad >= m_Cut_Stage6_Amax_Low (= " << std::setw(5) << std::setprecision(0) << m_Cut_Stage6_Amax_Low << ")" << std::endl;
-	std::cout << "						APad <= m_Cut_Stage6_Amax_Hig (= " << std::setw(5) << std::setprecision(0) << m_Cut_Stage6_Amax_Hig << ")" << std::endl;
+	std::cout << "APad >= m_Cut_Stage6_Amax_Low (= " << std::setw(5) << std::setprecision(0) << m_Cut_Stage6_Amax_Low << ")" << std::endl;
+	std::cout << "APad <= m_Cut_Stage6_Amax_Hig (= " << std::setw(5) << std::setprecision(0) << m_Cut_Stage6_Amax_Hig << ")" << std::endl;
 }
 void Selector::Stage6(Sample& aSample, const int& ModuleNber)
 {	
 	int NEvents	= aSample.Get_NberOfEvents();
 	for (int iE	= 0; iE < NEvents; iE++){
-	Event* pEvent	=	aSample.Get_Event(iE);
-	Stage6(pEvent,ModuleNber);
+		Event* pEvent	=	aSample.Get_Event(iE);
+		Stage6(pEvent,ModuleNber);
 	}
 	
 }
@@ -699,31 +688,23 @@ void Selector::Stage6(Event*	pEvent , const int& ModuleNber)
 {
 	// if (pEvent->Validity_ForThisModule(ModuleNber)	== 0) return;
 	
-	std::vector<Cluster*> V_pCluster;
-
 	std::vector<Cluster*>ClusterSet	= pEvent->GiveMe_Clusters_ForThisModule (ModuleNber);	
 	int NClusters	= ClusterSet.size();
+
 	for (int iC	= 0; iC < NClusters; iC++){
 	Cluster* pCluster	= ClusterSet[iC];
-	Cluster* pCluster_new	= new Cluster(pCluster->Get_EventNber (), pCluster->Get_EntryNber (), pCluster->Get_ModuleNber() );
-
-	int RemoveCluster	= 0;
-
 	int NPads	= pCluster->Get_NberOfPads();
-	for (int iP	= 0; iP < NPads; iP++){ 
-		const Pad* pPad	= pCluster->Get_Pad(iP);	
+	double Amax;
 
-		double Amax	= pPad ->Get_AMax();
-		if (Amax > m_Cut_Stage6_Amax_Low) pCluster_new->Add_Pad(pPad);
-		if (Amax > m_Cut_Stage6_Amax_Hig) RemoveCluster	= 1;
-		if (RemoveCluster==1) break;
-	
+		for (int iP	= 0; iP < NPads; iP++){ 
+			Pad* pPad	= pCluster->Get_Pad(iP);	
+			Amax	= pPad ->Get_AMax();
+			if (Amax > m_Cut_Stage6_Amax_Hig){
+				pCluster->Invalidate();
+				break;
+			}
+		}
 	}
-	if (RemoveCluster==1 or pCluster_new->Get_NberOfPads()	== 0) continue;
-	pCluster_new->DoClosure();
-	V_pCluster.push_back(pCluster_new);
-	}
-	pEvent->Replace_Clusters_ForThisModule(V_pCluster, ModuleNber);
 }
 
 //----------------------------------------------------------------//
@@ -734,22 +715,27 @@ void Selector::StageFinal_Def()
 {
 	std::cout << "Apply selection	Final -> Reject Events with too few clusters" << std::endl;
 	
-	std::cout << "						NClusters >= m_Cut_StageFinal_NCluster_Low (=" << std::setw(5) << std::setprecision(0) << m_Cut_StageFinal_NCluster_Low << ")" << std::endl;
+	std::cout << "NClusters >= m_Cut_StageFinal_NCluster_Low (=" << std::setw(5) << std::setprecision(0) << m_Cut_StageFinal_NCluster_Low << ")" << std::endl;
 }
 void Selector::StageFinal(Sample& aSample, const int& ModuleNber)
 {
 	int NEvents	= aSample.Get_NberOfEvents();
 	for (int iE	= 0; iE< NEvents; iE++){
-	Event* pEvent	= aSample.Get_Event(iE);
-	StageFinal(pEvent,ModuleNber);
+		Event* pEvent	= aSample.Get_Event(iE);
+		StageFinal(pEvent,ModuleNber);
 	}
 
 }
 void Selector::StageFinal(Event* pEvent, const int& ModuleNber)
 {
-	// if (pEvent->Validity_ForThisModule(ModuleNber)	== 0) return;
-
 	std::vector < Cluster* > ClusterSet	= pEvent->GiveMe_Clusters_ForThisModule (ModuleNber);	
-	int NClusters	= ClusterSet.size();
-	if(NClusters < m_Cut_StageFinal_NCluster_Low) pEvent->Invalidate_ThisModule(ModuleNber); 
+	int NClusters = 	ClusterSet.size();
+	int nClusterValid = 0;
+	for (int iC	= 0; iC< NClusters; iC++){
+		Cluster* pCluster	= ClusterSet[iC];
+		if(pCluster->IsValid()) nClusterValid++;
+	}
+	if(nClusterValid < m_Cut_StageFinal_NCluster_Low){
+		pEvent->Invalidate_ThisModule(ModuleNber);
+	}
 }

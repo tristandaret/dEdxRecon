@@ -161,7 +161,7 @@ public:
 //------------------------------Data Members-----------------------//
 private:
 
-	short int m_IsValid;
+	short int m_IsValid = 1;
 
 	void SetEdges(
 		const double& XL ,

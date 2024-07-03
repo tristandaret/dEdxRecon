@@ -121,28 +121,38 @@ void Reconstruction::dEdx::Reconstruction(){
 		pEvent =									p_uploader->GiveMe_Event(iEvent, moduleCase, 0, 0);
 		if (!pEvent)								continue;
 
-		// aSelector.									ApplySelection(pEvent);
-		if (pEvent->IsValid() != 1)					continue;
-
 		p_recoevent->eventNbr =						iEvent;
-		p_recoevent->numberOfModules =				pEvent->Get_NberOfModule();
+		NMod =										pEvent->Get_NberOfModule();
+		p_recoevent->numberOfModules =				NMod;
+
+		aSelector.									ApplySelection(pEvent);
+		if (pEvent->IsValid() == 0){
+			for (iMod =	0; iMod < NMod; iMod++){
+				pModule =							pEvent->Get_Module_InArray(iMod);
+				fmodID =							pModule->Get_ModuleNber();
+				DiscardedEvents();
+			}
+			delete pEvent;
+			continue;
+		}
+
+		p_recoevent->selected = 					true;
 
 		// Module loop
-		for (iMod =	0; iMod < p_recoevent->numberOfModules; iMod++){
-			pModule =							pEvent->Get_Module_InArray(iMod);
-			fmodID =									pModule->Get_ModuleNber();
-			if (pEvent->Validity_ForThisModule(fmodID) ==	0){
+		for (iMod =	0; iMod < NMod; iMod++){
+			pModule =								pEvent->Get_Module_InArray(iMod);
+			fmodID =								pModule->Get_ModuleNber();
+			if (pEvent->Validity_ForThisModule(fmodID) == 0){
 				DiscardedEvents();
 				continue;
 			}
 
-			NC =									pModule->Get_NberOfCluster();
-			if(NC == 0)							continue;
+			NClusters =								pModule->Get_NberOfCluster();
 
-			p_recomodule =		new Reconstruction::RecoModule();
-			p_recomodule->position =					fmodID;
-			p_recomodule->ID =							fERAMs_iD[fmodID];
-			p_recomodule->selected = 					true;
+			p_recomodule =							new Reconstruction::RecoModule();
+			p_recomodule->position =				fmodID;
+			p_recomodule->ID =						fERAMs_iD[fmodID];
+			p_recomodule->selected = 				true;
 
 			// Track fitting
 			if(!diag){
@@ -157,7 +167,7 @@ void Reconstruction::dEdx::Reconstruction(){
 			TrackRecon_Event(aTrackFitter, pEvent, fmodID, fnParamsTrack);
 
 			// Track details
-			pTrack =					pEvent->GiveMe_Track_ForThisModule(fmodID);
+			pTrack =								pEvent->GiveMe_Track_ForThisModule(fmodID);
 			p_recomodule->phi =						std::atan(pTrack->Get_ParameterValue(1))/M_PI*180;
 			p_recomodule->Track->					SetParameters(pTrack->Get_ParameterValue(0), pTrack->Get_ParameterValue(1));
 			Double_t parErrors[2] =					{pTrack->Get_ParameterError(0), pTrack->Get_ParameterError(1)};
@@ -169,21 +179,22 @@ void Reconstruction::dEdx::Reconstruction(){
 
 
 			// Loop On Clusters
-			for (iC = 0; iC < NC; iC++){
+			for (iC = 0; iC < NClusters; iC++){
 				std::fill(waveform_cluster.begin(), waveform_cluster.end(), 0); // reset waveform
-				pCluster =					pModule->Get_Cluster(iC);
-				p_recocluster = new Reconstruction::RecoCluster();
+				pCluster =							pModule->Get_Cluster(iC);
+				p_recocluster = 					new Reconstruction::RecoCluster();
 				p_recocluster->ADCmax_base =		pCluster->Get_Acluster();
 				p_recocluster->ALead_base = 		pCluster->Get_AMaxLeading();
+				p_recocluster->TLead =				pCluster->Get_TMaxLeading();
 
 
 				// Loop On Pads
 				int NPads =							pCluster->Get_NberOfPads();
-				p_recocluster->NPads =					NPads;
+				p_recocluster->NPads =				NPads;
 				for(iP = 0; iP < NPads; iP ++){
 					std::fill(waveform_pad.begin(), waveform_pad.end(), 0); // reset waveform
-					pPad =				pCluster->Get_Pad(iP);
-					p_recopad = new Reconstruction::RecoPad();
+					pPad =							pCluster->Get_Pad(iP);
+					p_recopad = 					new Reconstruction::RecoPad();
 					if(iP == 0) p_recopad->leading = true;
 					waveform_pad =					pPad->Get_vADC();
 					p_recopad->ix =					pPad->Get_iX();
@@ -237,7 +248,6 @@ void Reconstruction::dEdx::Reconstruction(){
 					}
 
 					// Compute drift distance for different time bin sizes and peaking times
-					if(iP == 0)p_recocluster->TLead =	pPad->Get_TMax();
 					p_recopad->TMax =					pPad->Get_TMax();
 					if		(PT ==	412 and TB ==	50){ p_recopad->T0 =	45; p_recopad->driftDistance =	3.90*(p_recopad->TMax-p_recopad->T0); } // 45 =	37(time shift) +	8(PT) from David Attié
 					else if (PT ==	412 and TB ==	40){ p_recopad->T0 =	56; p_recopad->driftDistance =	3.12*(p_recopad->TMax-p_recopad->T0); } // 56 =	46(time shift) + 10(PT)
@@ -280,6 +290,14 @@ void Reconstruction::dEdx::Reconstruction(){
 				p_recomodule->NPads +=				p_recocluster->NPads;
 				
 			} // Clusters
+			// if(p_recomodule->position > 2){
+			// 	// clear module vectors
+			// 	v_mod_dE.								clear();
+			// 	v_mod_dx.								clear();
+			// 	v_mod_dEdxXP.							clear();
+			// 	v_mod_dEdxWF.							clear();
+			// 	continue;
+			// }
 
 			// Fill module class attributes
 			p_recomodule->avg_pad_mult =			p_recomodule->NPads/p_recomodule->NClusters;
@@ -400,20 +418,21 @@ float Reconstruction::dEdx::ComputedEdxXP(const std::vector<float>& v_dEdx, cons
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Events discarded by selection steps
 void Reconstruction::dEdx::DiscardedEvents(){
-	NC =								pModule->Get_NberOfCluster();
-	if(NC == 0)							return;
+	NClusters =								pModule->Get_NberOfCluster();
+	int NClusOff = 0;
 
 	p_recomodule =		new Reconstruction::RecoModule();
 	p_recomodule->position =					fmodID;
 	p_recomodule->ID =							fERAMs_iD[fmodID];
 
 	// Loop On Clusters
-	for (iC = 0; iC < NC; iC++){
+	for (iC = 0; iC < NClusters; iC++){
 		std::fill(waveform_cluster.begin(), waveform_cluster.end(), 0); // reset waveform
 		pCluster =					pModule->Get_Cluster(iC);
 		p_recocluster = new Reconstruction::RecoCluster();
 		p_recocluster->ADCmax_base =		pCluster->Get_Acluster();
 		p_recocluster->ALead_base = 		pCluster->Get_AMaxLeading();
+		p_recocluster->TLead =				pCluster->Get_TMaxLeading();
 
 
 		// Loop On Pads
@@ -431,7 +450,6 @@ void Reconstruction::dEdx::DiscardedEvents(){
 			for(int i=0;i<510;i++) waveform_cluster[i] += waveform_pad[i];
 
 			// Compute drift distance for different time bin sizes and peaking times
-			if(iP == 0)p_recocluster->TLead =	pPad->Get_TMax();
 			p_recopad->TMax =					pPad->Get_TMax();
 
 			p_recocluster->v_pads.			push_back(p_recopad);
@@ -439,24 +457,17 @@ void Reconstruction::dEdx::DiscardedEvents(){
 
 		// Fill cluster information
 		p_recomodule->v_clusters.			push_back(p_recocluster);
-		p_recomodule->NClusters++;
+		NClusOff++;
 		p_recomodule->NPads +=				p_recocluster->NPads;
 		
 	} // Clusters
 
 	// Fill module class attributes
-	p_recomodule->avg_pad_mult =			p_recomodule->NPads/p_recomodule->NClusters;
+	p_recomodule->avg_pad_mult =			p_recomodule->NPads/NClusOff;
 
 	// Fill module information into the event class
 	p_recoevent->v_modules.					push_back(p_recomodule);
 	p_recoevent->NPads +=					p_recomodule->NPads;
-	p_recoevent->NClusters +=				p_recomodule->NClusters;
-
-	// clear module vectors
-	v_mod_dE.								clear();
-	v_mod_dx.								clear();
-	v_mod_dEdxXP.							clear();
-	v_mod_dEdxWF.							clear();
 }
 
 

@@ -10,10 +10,10 @@ double TimeError_BASE(const double& DeltaT_in);
 
 //
 double TimeError(
-		const Pad* pPad,
-		const Pad* pPad_Leading,
-		const Pad* pPad_NextLeading,
-		const Pad* pPad_NextNextLeading	
+		Pad* pPad,
+		Pad* pPad_Leading,
+		Pad* pPad_NextLeading,
+		Pad* pPad_NextNextLeading	
 ){
 	double ToBeReturned = TimeError( pPad->Get_TMax() - pPad_Leading->Get_TMax());
 	

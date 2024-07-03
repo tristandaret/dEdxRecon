@@ -152,6 +152,10 @@ int	Pad::Get_EventNber () const { return m_EventNber; }
 
 int	Pad::Get_EntryNber () const { return m_EntryNber; }
 
+int Pad::IsValid() const { return m_IsValid; }
+void Pad::Validate() { m_IsValid = 1;}
+void Pad::Invalidate() { m_IsValid = 0;}
+
 void	Pad::Set_Data_2Use(const int& iOpt)
 { 
 	if (iOpt==0){

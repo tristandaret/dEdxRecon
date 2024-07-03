@@ -18,19 +18,19 @@ namespace Reconstruction{
 	
 	// Files to use
 	int prototype =				0;
-	int CERN_Escan =			0;
-	int CERN_drift = 			1;
+	int CERN_Escan =			1;
+	int CERN_drift = 			0;
 
 	int DESY_drift =			0;
 	int DESY_yscan =			0;
 	int DESY_phi =				0;
 	int DESY_theta =			0;
 
-	// Computations		
-	int dedx =					1;
+	// Computations
+	int dedx =					0;
 
 	// DrawOuts		
-	int DO_Control =			1;
+	int DO_Control =			0;
 	int DO_dEdx =				1;
 	int DO_Comparison =			0;
 }
@@ -39,10 +39,10 @@ namespace Reconstruction{
 
 void Reconstruction::Monitoring()
 {
-	comment = "_NoSel";
+	comment = "";
 	gErrorIgnoreLevel = kInfo;
 
-	Correction(1,1,1,1);
+	Correction(2,2,1,1);
 
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -98,7 +98,7 @@ void Reconstruction::Monitoring()
 		std::string z_arr[] = 	{"60", "218p5", "415", "925"};
 
 		int NFiles = 4;
-		for (int iz = 0; iz < 1; iz++){
+		for (int iz = 0; iz < NFiles; iz++){
 			const char* z = 	z_arr[iz].c_str();
 			driftDist = 		z_val[iz];
 			v_dataFiles.		push_back(data_subfolder + "All_ERAMS_350V_412ns_e+_0p5GeV_25V_z" + z + "_iter4.root");	
@@ -263,11 +263,11 @@ void Reconstruction::DefaultAnalysis(){
 	tag = 						v_tags.back();
 	drawout_runfolder =			drawout_scanfolder + testbeam + "_" + scan + "_" + tag + "/";
 	MakeMyDir(drawout_runfolder);
-	rootout_file =				drawout_runfolder + "dEdx_" + testbeam + "_" + scan + "_" + tag + comment + ".root";
-	log_file = 					drawout_runfolder + "dEdx_" + testbeam + "_" + scan + "_" + tag + ".log";
-	std::cout << "logs:		" << log_file		<< std::endl;
+	rootout_file =			drawout_runfolder + testbeam + "_" + scan + "_" + tag + comment + ".root";
 
 	if(dedx){
+		log_file = 				drawout_runfolder + testbeam + "_" + scan + "_" + tag + ".log";
+		std::cout << "logs:		" << log_file		<< std::endl;
 		p_uploader =			GiveMe_Uploader (intUploader, v_dataFiles.back());
 		p_dEdx =				new dEdx();
 		p_dEdx->				Reconstruction();

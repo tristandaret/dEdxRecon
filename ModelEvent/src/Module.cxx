@@ -14,7 +14,6 @@ pModel_Electronics,
 pModel_ChargeI
 )
 {
-//
 	m_IsValid = 1;
 	
 	m_EventNber	= EventNber;
@@ -47,18 +46,20 @@ void Module::Invalidate(){
 	m_IsValid = 0; 
 	delete p_TrackOfTheModule; 
 	p_TrackOfTheModule = 0;
-//
-	Clear_Clusters();
-	int NPads = Get_NberOfPads();
-	for (int iP = 0; iP< NPads; iP++){
-	delete V_Pad[iP];
-	V_Pad[iP] = 0;
+	// Clear_Clusters();
+	for(int i=0;i<Get_NberOfCluster();i++){
+		m_IsValid = 0;
+		V_Cluster[i]->Invalidate();
 	}
-	V_Pad.clear();
-	V_ExisFlag2D.clear();
-	V_Pad.clear(); std::vector< Pad* >().swap( V_Pad	);
-	V_ExisFlag2D.clear(); std::vector<int>().swap( V_ExisFlag2D );
-//
+	// int NPads = Get_NberOfPads();
+	// for (int iP = 0; iP< NPads; iP++){
+	// delete V_Pad[iP];
+	// V_Pad[iP] = 0;
+	// }
+	// V_Pad.clear();
+	// V_ExisFlag2D.clear();
+	// V_Pad.clear(); std::vector< Pad* >().swap( V_Pad	);
+	// V_ExisFlag2D.clear(); std::vector<int>().swap( V_ExisFlag2D );
 }
 
 void Module::Add_Pad(Pad* pPad)
@@ -73,9 +74,7 @@ void Module::Clear_Clusters()
 	V_Cluster[iC] = 0;
 	}
 	V_Cluster.clear();
-//
 	V_Cluster.clear(); std::vector< Cluster* >().swap( V_Cluster	);
-//
 	m_NberOfClusters = 0;
 }
 
@@ -111,7 +110,7 @@ Cluster* Module::Get_Cluster_Copy (Cluster* pCluster)
 	
 	int NPads = pCluster->Get_NberOfPads();
 	for (int iP = 0; iP< NPads; iP++){
-	const Pad* pPad = pCluster->Get_Pad(iP);
+	Pad* pPad = pCluster->Get_Pad(iP);
 	ToBeReturned->Add_Pad(pPad);
 	}
 	ToBeReturned->DoClosure();

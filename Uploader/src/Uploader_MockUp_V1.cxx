@@ -11,15 +11,12 @@ Uploader_MockUp_V1::Uploader_MockUp_V1(
                                    pModel_Electronics     ,
                                    pModel_Charge1D        
 )
-{  
-  std::cout << std::endl ;
-  std::cout << "  Uploader_MockUp_V1::Uploader_MockUp_V1 "<< std::endl ;
+{
 }
 
 
 Uploader_MockUp_V1::~Uploader_MockUp_V1()
 {
-//std::cout << " In Uploader_MockUp_V1::~Uploader_MockUp_V1() " << std::endl ;
 }
 
 Event* Uploader_MockUp_V1::GiveMe_Event(

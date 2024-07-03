@@ -180,7 +180,7 @@ void Control(
 
 		for(int iC	= 0; iC < NClusters; iC++){
 		Cluster* pCluster				= pModule->Get_Cluster(iC);
-		const Pad* pLead				= pCluster->Get_LeadingPad();
+		Pad* pLead				= pCluster->Get_LeadingPad();
 		v_h2f_LeadPos_Raw[ModuleNber]->		Fill(pLead->Get_iX(), pLead->Get_iY());
 		int NPads						= pCluster->Get_NberOfPads();
 		float TL						= pCluster->Get_TMaxLeading();
@@ -202,7 +202,7 @@ void Control(
 		v_h2f_Theta_Raw[ModuleNber]->Fill(pLead->Get_iX(), z_calc);
 
 		for(int iP	= 0; iP < NPads; iP++){
-			const Pad* pPad				= pCluster->Get_Pad(iP);
+			Pad* pPad				= pCluster->Get_Pad(iP);
 			TH1F* h1f_WF					= GiveMe_WaveFormDisplay(pPad, "dummy");
 			h1f_clus->						Add(h1f_WF);
 			float AP						= pPad->Get_AMax();
@@ -240,7 +240,7 @@ void Control(
 
 		for(int iC	= 0; iC < NClusters; iC++){
 		Cluster* pCluster				= pModule->Get_Cluster(iC);
-		const Pad* pLead				= pCluster->Get_LeadingPad();
+		Pad* pLead				= pCluster->Get_LeadingPad();
 		v_h2f_LeadPos_Sel[ModuleNber]->		Fill(pLead->Get_iX(), pLead->Get_iY());
 		int NPads						= pCluster->Get_NberOfPads();
 		float TL						= pCluster->Get_TMaxLeading();
@@ -262,7 +262,7 @@ void Control(
 		v_h2f_Theta_Sel[ModuleNber]->Fill(pLead->Get_iX(), z_calc);
 
 		for(int iP	= 0; iP < NPads; iP++){
-			const Pad* pPad				= pCluster->Get_Pad(iP);
+			Pad* pPad				= pCluster->Get_Pad(iP);
 			TH1F* h1f_WF					= GiveMe_WaveFormDisplay(pPad, "dummy");
 			h1f_clus->						Add(h1f_WF);
 			float AP						= pPad->Get_AMax();

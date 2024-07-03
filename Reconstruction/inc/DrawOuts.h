@@ -18,6 +18,7 @@ namespace Reconstruction{
 		void SetStyle();
 
 		void Control();
+		void Control2();
 		void EnergyLoss();
 		void FileComparison();
 

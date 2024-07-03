@@ -1,6 +1,7 @@
 #include "DrawOuts.h"
 #include "ReconTools.h"
 #include "CombinedFit.h"
+#include "dEdx.h"
 
 #include "Util.h"
 #include <cmath>
@@ -151,8 +152,7 @@ void Reconstruction::DrawOuts::Control(){
 					}
 				} // Pads
 
-				if(p_recocluster->TLead !=0) std::cout << "TLead: " << p_recocluster->TLead << std::endl;
-				if(p_recocluster->TLead !=0) ph1i_TLead->			Fill(p_recocluster->TLead);
+				ph1i_TLead->			Fill(p_recocluster->TLead);
 				ph1i_PadMult->			Fill(NPads);
 				ph1f_ALead->			Fill(p_recocluster->ALead_base);
 				v_TLead[position]->		Fill(p_recocluster->TLead);
@@ -160,7 +160,7 @@ void Reconstruction::DrawOuts::Control(){
 				v_ALead[position]->		Fill(p_recocluster->ALead_base);
 
 				if(!p_recomodule->selected) continue;
-				if(p_recocluster->TLead !=0) ph1i_TLeadSel->			Fill(p_recocluster->TLead);
+				ph1i_TLeadSel->			Fill(p_recocluster->TLead);
 				ph1i_PadMultSel->		Fill(NPads);
 				ph1f_ALeadSel->			Fill(p_recocluster->ALead_base);
 				v_TLeadSel[position]->	Fill(p_recocluster->TLead);
@@ -202,6 +202,11 @@ void Reconstruction::DrawOuts::Control(){
 		v_TLead[i]->				Draw("HIST");
 		v_TLeadSel[i]->				Draw("HIST sames");
 	}
+	fpCanvas->						SaveAs(drawout_file.c_str());
+
+	//////////////////////////////////////////////////////////////////////////////////////////
+	fpCanvas->						Clear();
+	ph2i_heatmap->					Draw("COLZ");
 	fpCanvas->						SaveAs((drawout_file + ")").c_str());
 
 
@@ -237,26 +242,69 @@ void Reconstruction::DrawOuts::EnergyLoss(){
 		v_h1f_WF_modnoTrunc.push_back(	new TH1F(Form("ph1f_WFnoTrunc_%i", i), Form("Energy loss (module %i) (no truncation);dE/dx (ADC counts);Counts", i), 100, 0, 1300));
 	}
 
+	int nmods012 = 0;
+	int NCrossPads = 0;
+	int NClusters = 0;
+	std::vector<float> v_dEdxXP;
+	std::vector<float> v_dEdxWF;
+	std::vector<float> v_dE;
+	std::vector<float> v_dx;
+	float dEdxXP012;
+	float dEdxWF012;
 	// Get entries and fill histograms
+	Reconstruction::dEdx *p_dEdx_tmp = new Reconstruction::dEdx();
 	for(int i=0;i<fnentries;i++){
-		fpTree->						GetEntry(i);
-		NMod =							p_recoevent->v_modules.size();
-
+		fpTree->							GetEntry(i);
+		v_dEdxXP.clear();
+		v_dEdxWF.clear();
+		v_dE.clear();
+		v_dx.clear();
+		NCrossPads = 0;
+		NClusters = 0;
+		nmods012 = 0;
+		NMod =								p_recoevent->v_modules.size();
+		if(!p_recoevent->selected) 			continue;
 		for(int iMod=0;iMod<NMod;iMod++){
-			position =					p_recoevent->v_modules[iMod]->position;
-			// Histograms
-			v_h1f_XP_mod[position]->		Fill(p_recoevent->v_modules[iMod]->dEdxXP);
-			v_h1f_WF_mod[position]->		Fill(p_recoevent->v_modules[iMod]->dEdxWF);
-			v_h1f_XP_modnoTrunc[position]->	Fill(p_recoevent->v_modules[iMod]->dEdxXPnoTrunc);
-			v_h1f_WF_modnoTrunc[position]->	Fill(p_recoevent->v_modules[iMod]->dEdxWFnoTrunc);
+			p_recomodule = 					p_recoevent->v_modules[iMod];
+			if(!p_recomodule->selected) 	continue;
+			position =						p_recomodule->position;
+			v_h1f_XP_mod[position]->		Fill(p_recomodule->dEdxXP);
+			v_h1f_WF_mod[position]->		Fill(p_recomodule->dEdxWF);
+			v_h1f_XP_modnoTrunc[position]->	Fill(p_recomodule->dEdxXPnoTrunc);
+			v_h1f_WF_modnoTrunc[position]->	Fill(p_recomodule->dEdxWFnoTrunc);
+
+			if(position < 3) nmods012++;
 		}
-		if(NMod != 4) continue;
-		ph1f_WF->						Fill(p_recoevent->dEdxWF);
-		ph1f_XP->						Fill(p_recoevent->dEdxXP);
-		ph1f_WFnoTrunc->				Fill(p_recoevent->dEdxWFnoTrunc);
-		ph1f_XPnoTrunc->				Fill(p_recoevent->dEdxXPnoTrunc);
-		ph2f_XPWF->						Fill(p_recoevent->dEdxWF, p_recoevent->dEdxXP);
+		for(int iMod=0;iMod<NMod;iMod++){
+			if(position > 2) continue;
+			if(nmods012 != 3) continue;
+			p_recomodule = 					p_recoevent->v_modules[iMod];
+			if(!p_recomodule->selected) 	continue;
+			position =						p_recomodule->position;
+			NClusters +=						p_recomodule->NClusters;
+			NCrossPads +=					p_recomodule->NCrossedPads;
+			for(int iC=0; iC<p_recomodule->NClusters; iC++){
+				v_dEdxWF.push_back(p_recomodule->v_clusters[iC]->dEdxWF);
+				for(int iP=0; iP<p_recomodule->v_clusters[iC]->NPads; iP++){
+					if(p_recomodule->v_clusters[iC]->v_pads[iP]->length == 0) continue;
+					v_dE.push_back(p_recomodule->v_clusters[iC]->v_pads[iP]->charge);
+					v_dx.push_back(p_recomodule->v_clusters[iC]->v_pads[iP]->length);
+					v_dEdxXP.push_back(p_recomodule->v_clusters[iC]->v_pads[iP]->dEdxXP);
+				}
+			}
+		}
+		if(nmods012 == 3){
+			dEdxXP012 = p_dEdx_tmp->ComputedEdxXP(v_dEdxXP, v_dE, v_dx, NCrossPads, 0.7);
+			dEdxWF012 = p_dEdx_tmp->ComputedEdxWF(v_dEdxWF, NClusters, 0.7);
+
+			ph1f_WF->						Fill(dEdxWF012);
+			ph1f_XP->						Fill(dEdxXP012);
+			ph1f_WFnoTrunc->				Fill(p_recoevent->dEdxWFnoTrunc);
+			ph1f_XPnoTrunc->				Fill(p_recoevent->dEdxXPnoTrunc);
+			ph2f_XPWF->						Fill(p_recoevent->dEdxWF, p_recoevent->dEdxXP);
+		}
 	}
+	delete p_dEdx_tmp;
 
 	// Fitting
 	Fit1Gauss(ph1f_WF, 2);
@@ -532,401 +580,6 @@ void Reconstruction::DrawOuts::FileComparison(){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-void DrawOut_Control(const std::string& inputDir, const std::string& Tag, const std::string& Comment, const std::string SelectionSet, const int& nMod)
-{
-	std::string inputDirName	= inputDir + Tag + "/";
-
-	// Get input file
-	TFile* pTFile_Control	= TFile::Open(TString(inputDir + "/" + Tag + "/" + "1_" + Tag + "_Control" + Comment + ".root"));
-
-	// Get histograms & functions
-	std::vector<TH1F*>			v_h1f_TL_Raw;
-	std::vector<TH1F*>			v_h1f_TL_Sel;
-	std::vector<TH1F*>			v_h1f_PM_Raw;
-	std::vector<TH1F*>			v_h1f_PM_Sel;
-	std::vector<TH1F*>			v_h1f_APM_Raw;
-	std::vector<TH1F*>			v_h1f_APM_Sel;
-	std::vector<TH1F*>			v_h1f_API_Raw;
-	std::vector<TH1F*>			v_h1f_API_Sel;
-	std::vector<TH1F*>			v_h1f_Qpad_Raw;
-	std::vector<TH1F*>			v_h1f_Qpad_Sel;
-	std::vector<TH1F*>			v_h1f_Qlead_Raw;
-	std::vector<TH1F*>			v_h1f_Qlead_Sel;
-	std::vector<TH1F*>			v_h1f_Qneigh_Raw;
-	std::vector<TH1F*>			v_h1f_Qneigh_Sel;
-	std::vector<TH1F*>			v_h1f_CM_Raw;
-	std::vector<TH1F*>			v_h1f_CM_Sel;
-	std::vector<TH1F*>			v_h1f_Eff_Raw;
-	std::vector<TH1F*>			v_h1f_Eff_Sel;
-	std::vector<TH2F*>			v_h2f_LeadPos_Raw;
-	std::vector<TH2F*>			v_h2f_LeadPos_Sel;
-	std::vector<TH2F*>			v_h2f_Theta_Raw;
-	std::vector<TH2F*>			v_h2f_Theta_Sel;
-	std::vector<TH2F*>			v_h2f_rho_DT_Raw;
-	std::vector<TH2F*>			v_h2f_rho_DT_Sel;
-
-	for (int iMod = 0; iMod < nMod; iMod++){
-	v_h1f_TL_Raw.			push_back(pTFile_Control->Get<TH1F>(Form("h1f_TL_Raw_%i", iMod)));
-	v_h1f_TL_Sel.			push_back(pTFile_Control->Get<TH1F>(Form("h1f_TL_Sel_%i", iMod)));
-	v_h1f_PM_Raw.			push_back(pTFile_Control->Get<TH1F>(Form("h1f_PM_Raw_%i", iMod)));
-	v_h1f_PM_Sel.			push_back(pTFile_Control->Get<TH1F>(Form("h1f_PM_Sel_%i", iMod)));
-	v_h1f_APM_Raw.			push_back(pTFile_Control->Get<TH1F>(Form("h1f_APM_Raw_%i", iMod)));
-	v_h1f_APM_Sel.			push_back(pTFile_Control->Get<TH1F>(Form("h1f_APM_Sel_%i", iMod)));
-	v_h1f_API_Raw.			push_back(pTFile_Control->Get<TH1F>(Form("h1f_API_Raw_%i", iMod)));
-	v_h1f_API_Sel.			push_back(pTFile_Control->Get<TH1F>(Form("h1f_API_Sel_%i", iMod)));
-	v_h1f_Qpad_Raw.		push_back(pTFile_Control->Get<TH1F>(Form("h1f_Qpad_Raw_%i", iMod)));
-	v_h1f_Qpad_Sel.		push_back(pTFile_Control->Get<TH1F>(Form("h1f_Qpad_Sel_%i", iMod)));
-	v_h1f_Qlead_Raw.		push_back(pTFile_Control->Get<TH1F>(Form("h1f_Qlead_Raw_%i", iMod)));
-	v_h1f_Qlead_Sel.		push_back(pTFile_Control->Get<TH1F>(Form("h1f_Qlead_Sel_%i", iMod)));
-	v_h1f_Qneigh_Raw.		push_back(pTFile_Control->Get<TH1F>(Form("h1f_Qneigh_Raw_%i", iMod)));
-	v_h1f_Qneigh_Sel.		push_back(pTFile_Control->Get<TH1F>(Form("h1f_Qneigh_Sel_%i", iMod)));
-	v_h1f_CM_Raw.			push_back(pTFile_Control->Get<TH1F>(Form("h1f_CM_Raw_%i", iMod)));
-	v_h1f_CM_Sel.			push_back(pTFile_Control->Get<TH1F>(Form("h1f_CM_Sel_%i", iMod)));
-	v_h1f_Eff_Raw.			push_back(pTFile_Control->Get<TH1F>(Form("h1f_Eff_Raw_%i", iMod)));
-	v_h1f_Eff_Sel.			push_back(pTFile_Control->Get<TH1F>(Form("h1f_Eff_Sel_%i", iMod)));
-	v_h2f_LeadPos_Raw.		push_back(pTFile_Control->Get<TH2F>(Form("h2f_LeadPos_Raw_%i", iMod)));
-	v_h2f_LeadPos_Sel.		push_back(pTFile_Control->Get<TH2F>(Form("h2f_LeadPos_Sel_%i", iMod)));
-	v_h2f_Theta_Raw.		push_back(pTFile_Control->Get<TH2F>(Form("h2f_Theta_Raw_%i", iMod)));
-	v_h2f_Theta_Sel.		push_back(pTFile_Control->Get<TH2F>(Form("h2f_Theta_Sel_%i", iMod)));
-	v_h2f_rho_DT_Raw.		push_back(pTFile_Control->Get<TH2F>(Form("h2f_rho_DT_Raw_%i", iMod)));
-	v_h2f_rho_DT_Sel.		push_back(pTFile_Control->Get<TH2F>(Form("h2f_rho_DT_Sel_%i", iMod)));
-	}
-
-	// Draw out
-	std::string OutputFile	= inputDirName + "1_" + Tag + "_Control" + Comment + ".pdf";
-	std::string OutputFile_Beg = OutputFile + "(";
-	std::string OutputFile_End = OutputFile + ")";
-	gStyle->							SetOptStat(111111);
-	gStyle->							SetStatX(0.89);
-	gStyle->							SetStatY(0.89);
-
-	// Page 1 TL Raw
-	TCanvas* pTCanvas =	new TCanvas("TCanvas_Control", "TCanvas_Control", 1800, 1200);
-	if (nMod != 1) pTCanvas->Divide(2,2); 
-
-	for (int iMod = 0; iMod < nMod; iMod++) {
-	int TLow = 0, THigh = 0;
-	GetStage3Cut_CSV("../TimeSelection_Cuts.csv", Tag, TLow, THigh);
-	pTCanvas->cd(iMod+1);
-	pTCanvas->cd(iMod+1)->SetLogy(1);
-	v_h1f_TL_Raw[iMod]->SetLineWidth(2);
-	v_h1f_TL_Raw[iMod]->Draw("HIST");
-	
-	TGraph* pTGraph_1 = new TGraph;
-	pTGraph_1->SetPoint( pTGraph_1->GetN(), TLow, 1.E4*v_h1f_TL_Raw[iMod]->GetMaximum() );
-	pTGraph_1->SetPoint( pTGraph_1->GetN(), TLow, 0.1	);
-	pTGraph_1->SetLineWidth(2);
-	pTGraph_1->SetLineColor(2);
-	pTGraph_1->Draw("l");	
-
-	TGraph* pTGraph_2 = new TGraph;
-	pTGraph_2->SetPoint( pTGraph_2->GetN(), THigh , 1.E4*v_h1f_TL_Raw[iMod]->GetMaximum() );
-	pTGraph_2->SetPoint( pTGraph_2->GetN(), THigh , 0.1	);
-	pTGraph_2->SetLineColor(2);
-	pTGraph_2->SetLineWidth(2);
-	pTGraph_2->Draw("l");	
-
-	pTCanvas->Update();
-
-	pTCanvas->cd(iMod+1);
-	v_h1f_TL_Sel[iMod]->SetLineWidth(2);
-	v_h1f_TL_Sel[iMod]->SetLineColor(kRed);
-	v_h1f_TL_Sel[iMod]->Draw("HIST same");
-	pTCanvas->Update();
-	}
-	pTCanvas->SaveAs(OutputFile_Beg.c_str());
-
-	// Page 3 Pad Multiplicity in Clusters Raw
-	pTCanvas->Clear();
-	gStyle->SetOptStat(111111);
-	if (nMod != 1) pTCanvas->Divide(2,2); 
-
-	for (int iMod = 0; iMod < nMod; iMod++) {
-	pTCanvas->cd(iMod+1);
-	pTCanvas->cd(iMod+1)->SetLogy(1);
-	v_h1f_PM_Raw[iMod]->SetLineWidth(2);
-	v_h1f_PM_Raw[iMod]->Draw("HIST");
-	pTCanvas->Update();
-
-	pTCanvas->cd(iMod+1);
-	v_h1f_PM_Sel[iMod]->SetLineWidth(2);
-	v_h1f_PM_Sel[iMod]->SetLineColor(kRed);
-	v_h1f_PM_Sel[iMod]->Draw("HIST same");
-	pTCanvas->Update();
-	}
-	pTCanvas->SaveAs(OutputFile.c_str());
-
-	// Page 5 Average Pad Multiplicity in Events (per module) Raw
-	pTCanvas->Clear();
-	if (nMod != 1) pTCanvas->Divide(2,2); 
-
-	for (int iMod = 0; iMod < nMod; iMod++) {
-	pTCanvas->cd(iMod+1);
-	pTCanvas->cd(iMod+1)->SetLogy(1);
-	v_h1f_APM_Raw[iMod]->SetLineWidth(2);
-	v_h1f_APM_Raw[iMod]->Draw("HIST");
-	pTCanvas->Update();
-
-	v_h1f_APM_Sel[iMod]->SetLineWidth(2);
-	v_h1f_APM_Sel[iMod]->SetLineColor(kRed);
-	v_h1f_APM_Sel[iMod]->Draw("HIST same");
-	pTCanvas->Update();
-	}
-	pTCanvas->SaveAs(OutputFile.c_str());
-
-	// Page 9 Average Pad integral Raw
-	pTCanvas->Clear();
-	if (nMod != 1) pTCanvas->Divide(2,2); 
-
-	for (int iMod = 0; iMod < nMod; iMod++) {
-	pTCanvas->cd(iMod+1);
-	pTCanvas->cd(iMod+1)->SetLogy(1);
-	v_h1f_API_Raw[iMod]->SetLineWidth(2);
-	v_h1f_API_Raw[iMod]->Draw("HIST");
-	pTCanvas->Update();
-	
-	v_h1f_API_Sel[iMod]->SetLineWidth(2);
-	v_h1f_API_Sel[iMod]->SetLineColor(kRed);
-	v_h1f_API_Sel[iMod]->Draw("HIST same");
-	pTCanvas->Update();
-	}
-	pTCanvas->SaveAs(OutputFile.c_str());
-
-	// Page 11 Maximum ampitude for leading pad Raw
-	pTCanvas->Clear();
-	if (nMod != 1) pTCanvas->Divide(2,2); 
-
-	for (int iMod = 0; iMod < nMod; iMod++) {
-	pTCanvas->cd(iMod+1);
-	pTCanvas->cd(iMod+1)->SetLogy(0);
-	v_h1f_Qlead_Raw[iMod]->SetLineWidth(2);
-	v_h1f_Qlead_Raw[iMod]->Draw("HIST");
-	pTCanvas->Update();
-	
-	v_h1f_Qlead_Sel[iMod]->SetLineWidth(2);
-	v_h1f_Qlead_Sel[iMod]->SetLineColor(kRed);
-	v_h1f_Qlead_Sel[iMod]->Draw("HIST same");
-	pTCanvas->Update();
-	}
-	pTCanvas->SaveAs(OutputFile.c_str());
-
-	// Page 11 Maximum ampitude for neighbour pads Raw
-	pTCanvas->Clear();
-	if (nMod != 1) pTCanvas->Divide(2,2); 
-
-	for (int iMod = 0; iMod < nMod; iMod++) {
-	pTCanvas->cd(iMod+1);
-	pTCanvas->cd(iMod+1)->SetLogy(1);
-	v_h1f_Qneigh_Raw[iMod]->SetLineWidth(2);
-	v_h1f_Qneigh_Raw[iMod]->Draw("HIST");
-	pTCanvas->Update();
-	
-	v_h1f_Qneigh_Sel[iMod]->SetLineWidth(2);
-	v_h1f_Qneigh_Sel[iMod]->SetLineColor(kRed);
-	v_h1f_Qneigh_Sel[iMod]->Draw("HIST same");
-	pTCanvas->Update();
-	}
-	pTCanvas->SaveAs(OutputFile.c_str());
-
-	// Page 11 Maximum ampitude for each pad Raw
-	pTCanvas->Clear();
-	if (nMod != 1) pTCanvas->Divide(2,2); 
-
-	for (int iMod = 0; iMod < nMod; iMod++) {
-	pTCanvas->cd(iMod+1);
-	pTCanvas->cd(iMod+1)->SetLogy(1);
-	v_h1f_Qpad_Raw[iMod]->SetLineWidth(2);
-	v_h1f_Qpad_Raw[iMod]->Draw("HIST");
-	pTCanvas->Update();
-	
-	v_h1f_Qpad_Sel[iMod]->SetLineWidth(2);
-	v_h1f_Qpad_Sel[iMod]->SetLineColor(kRed);
-	v_h1f_Qpad_Sel[iMod]->Draw("HIST same");
-	pTCanvas->Update();
-	}
-	pTCanvas->SaveAs(OutputFile.c_str());
-
-	// Page 11 Cluster multipicity Raw
-	pTCanvas->Clear();
-	if (nMod != 1) pTCanvas->Divide(2,2); 
-
-	for (int iMod = 0; iMod < nMod; iMod++) {
-	pTCanvas->cd(iMod+1);
-	pTCanvas->cd(iMod+1)->SetLogy(1);
-	v_h1f_CM_Raw[iMod]->SetLineWidth(2);
-	v_h1f_CM_Raw[iMod]->Draw("HIST");
-	pTCanvas->Update();
-	SetStatBoxPosition(v_h1f_CM_Raw[iMod], 0.15, 0.35, 0.6, 0.85);
-	pTCanvas->Update();
-	
-	v_h1f_CM_Sel[iMod]->SetLineWidth(2);
-	v_h1f_CM_Sel[iMod]->SetLineColor(kRed);
-	v_h1f_CM_Sel[iMod]->Draw("HIST same");
-	pTCanvas->Update();
-	// SetStatBoxPosition(v_h1f_CM_Sel[iMod], 0.15, 0.35, 0.6, 0.85);
-	pTCanvas->Update();
-	}
-
-	pTCanvas->SaveAs(OutputFile.c_str());
-
-	// Page 13 Cluster efficiency Raw
-	pTCanvas->Clear();
-	if (nMod != 1) pTCanvas->Divide(2,2); 
-
-	for (int iMod = 0; iMod < nMod; iMod++) {
-	pTCanvas->cd(iMod+1);
-	pTCanvas->cd(iMod+1)->SetLogy(0);
-	v_h1f_Eff_Raw[iMod]->SetLineWidth(2);
-	v_h1f_Eff_Raw[iMod]->Draw("HIST");
-	pTCanvas->Update();
-	SetStatBoxPosition(v_h1f_Eff_Raw[iMod], 0.15, 0.35, 0.3, 0.55);
-	pTCanvas->Update();
-	
-	v_h1f_Eff_Sel[iMod]->SetLineWidth(2);
-	v_h1f_Eff_Sel[iMod]->SetLineColor(kRed);
-	v_h1f_Eff_Sel[iMod]->Draw("HIST same");
-	pTCanvas->Update();
-	// SetStatBoxPosition(v_h1f_Eff_Sel[iMod], 0.15, 0.35, 0.3, 0.55);
-	pTCanvas->Update();
-	}
-	pTCanvas->SaveAs(OutputFile.c_str());
-
-	// 
-	pTCanvas->Clear();
-	if (nMod != 1) pTCanvas->Divide(2,2); 
-
-	for (int iMod = 0; iMod < nMod; iMod++) {
-	pTCanvas->cd(iMod+1);
-	v_h2f_LeadPos_Raw[iMod]->Draw("colz");
-	pTCanvas->Update();
-	}
-	pTCanvas->SaveAs(OutputFile.c_str());
-
-	// 
-	pTCanvas->Clear();
-	if (nMod != 1) pTCanvas->Divide(2,2); 
-
-	for (int iMod = 0; iMod < nMod; iMod++) {
-	pTCanvas->cd(iMod+1);
-	v_h2f_LeadPos_Sel[iMod]->Draw("colz");
-	pTCanvas->Update();
-	}
-	pTCanvas->SaveAs(OutputFile.c_str());
-
-	// 
-	pTCanvas->Clear();
-	if (nMod != 1) pTCanvas->Divide(2,2); 
-
-	for (int iMod = 0; iMod < nMod; iMod++) {
-	pTCanvas->cd(iMod+1);
-	v_h2f_Theta_Raw[iMod]->Draw("colz");
-	pTCanvas->Update();
-	}
-	pTCanvas->SaveAs(OutputFile.c_str());
-
-	// 
-	pTCanvas->Clear();
-	if (nMod != 1) pTCanvas->Divide(2,2); 
-
-	for (int iMod = 0; iMod < nMod; iMod++) {
-	pTCanvas->cd(iMod+1);
-	v_h2f_Theta_Sel[iMod]->Draw("colz");
-	pTCanvas->Update();
-	}
-	pTCanvas->SaveAs(OutputFile.c_str());
-
-	// 
-	pTCanvas->Clear();
-	if (nMod != 1) pTCanvas->Divide(2,2); 
-
-	for (int iMod = 0; iMod < nMod; iMod++) {
-	pTCanvas->cd(iMod+1);
-	v_h2f_rho_DT_Raw[iMod]->Draw("colz");
-	pTCanvas->Update();
-	}
-	pTCanvas->SaveAs(OutputFile.c_str());
-
-	// 
-	pTCanvas->Clear();
-	if (nMod != 1) pTCanvas->Divide(2,2); 
-
-	for (int iMod = 0; iMod < nMod; iMod++) {
-	pTCanvas->cd(iMod+1);
-	v_h2f_rho_DT_Sel[iMod]->Draw("colz");
-	pTCanvas->Update();
-	}
-	pTCanvas->SaveAs(OutputFile_End.c_str());
-	delete pTCanvas;
-
-	for (int iMod = 0; iMod < nMod; iMod++) {
-	delete v_h1f_PM_Raw[iMod];		v_h1f_PM_Raw[iMod] = 0;
-	delete v_h1f_PM_Sel[iMod];		v_h1f_PM_Sel[iMod] = 0;
-	delete v_h1f_TL_Raw[iMod];		v_h1f_TL_Raw[iMod] = 0;
-	delete v_h1f_TL_Sel[iMod];		v_h1f_TL_Sel[iMod] = 0;
-	delete v_h1f_APM_Raw[iMod];		v_h1f_APM_Raw[iMod] = 0;
-	delete v_h1f_APM_Sel[iMod];		v_h1f_APM_Sel[iMod] = 0;
-	delete v_h1f_API_Raw[iMod];		v_h1f_API_Raw[iMod] = 0;
-	delete v_h1f_API_Sel[iMod];		v_h1f_API_Sel[iMod] = 0;
-	delete v_h1f_CM_Raw[iMod];		v_h1f_CM_Raw[iMod] = 0;
-	delete v_h1f_CM_Sel[iMod];		v_h1f_CM_Sel[iMod] = 0;
-	delete v_h1f_Qpad_Raw[iMod];		v_h1f_Qpad_Raw[iMod] = 0;
-	delete v_h1f_Qpad_Sel[iMod];		v_h1f_Qpad_Sel[iMod] = 0;
-	delete v_h1f_Qlead_Raw[iMod];		v_h1f_Qlead_Raw[iMod] = 0;
-	delete v_h1f_Qlead_Sel[iMod];		v_h1f_Qlead_Sel[iMod] = 0;
-	delete v_h1f_Qneigh_Raw[iMod];	v_h1f_Qneigh_Raw[iMod] = 0;
-	delete v_h1f_Qneigh_Sel[iMod];	v_h1f_Qneigh_Sel[iMod] = 0;
-	delete v_h1f_Eff_Raw[iMod];		v_h1f_Eff_Raw[iMod] = 0;
-	delete v_h1f_Eff_Sel[iMod];		v_h1f_Eff_Sel[iMod] = 0;
-	delete v_h2f_LeadPos_Raw[iMod];	v_h2f_LeadPos_Raw[iMod] = 0;
-	delete v_h2f_LeadPos_Sel[iMod];	v_h2f_LeadPos_Sel[iMod] = 0;
-	delete v_h2f_Theta_Raw[iMod];	v_h2f_Theta_Raw[iMod] = 0;
-	delete v_h2f_Theta_Sel[iMod];	v_h2f_Theta_Sel[iMod] = 0;
-	delete v_h2f_rho_DT_Raw[iMod];	v_h2f_rho_DT_Raw[iMod] = 0;
-	delete v_h2f_rho_DT_Sel[iMod];	v_h2f_rho_DT_Sel[iMod] = 0;
-	}
-	v_h1f_TL_Raw.						clear();
-	v_h1f_TL_Sel.						clear();
-	v_h1f_PM_Raw.						clear();
-	v_h1f_PM_Sel.						clear();
-	v_h1f_APM_Raw.						clear();
-	v_h1f_APM_Sel.						clear();
-	v_h1f_API_Raw.						clear();
-	v_h1f_API_Sel.						clear();
-	v_h1f_CM_Raw.						clear();
-	v_h1f_CM_Sel.						clear();
-	v_h1f_Qpad_Raw.						clear();
-	v_h1f_Qpad_Sel.						clear();
-	v_h1f_Qlead_Raw.						clear();
-	v_h1f_Qlead_Sel.						clear();
-	v_h1f_Qneigh_Raw.					clear();
-	v_h1f_Qneigh_Sel.					clear();
-	v_h1f_Eff_Raw.						clear();
-	v_h1f_Eff_Sel.						clear();
-	v_h2f_LeadPos_Raw.					clear();
-	v_h2f_LeadPos_Sel.					clear();
-	v_h2f_Theta_Raw.					clear();
-	v_h2f_Theta_Sel.					clear();
-	v_h2f_rho_DT_Raw.					clear();
-	v_h2f_rho_DT_Sel.					clear();
-}
 
 
 

@@ -8,10 +8,10 @@
 double TimeError(const double& DeltaT_in);
 
 double TimeError(
-		const Pad* pPad,
-		const Pad* pPad_Leading,
-		const Pad* pPad_NextLeading,
-		const Pad* pPad_NextNextLeading	
+		Pad* pPad,
+		Pad* pPad_Leading,
+		Pad* pPad_NextLeading,
+		Pad* pPad_NextNextLeading	
 );
 
 #endif

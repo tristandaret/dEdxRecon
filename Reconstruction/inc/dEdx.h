@@ -94,6 +94,7 @@ namespace Reconstruction{
 		void Clear();
 
 		std::vector<RecoModule*> 	v_modules;
+		bool	selected =			false;
 		int 	eventNbr =			0;
 		float 	dEdxXP =			0;
 		float 	dEdxWF =			0;
@@ -141,7 +142,7 @@ namespace Reconstruction{
 			Module 						*pModule;
 			const Track					*pTrack;
 			Cluster 					*pCluster;
-			const Pad 					*pPad;
+			Pad 						*pPad;
 
 			// Reconstruction classes
 			Reconstruction::RecoEvent 	*p_recoevent;
@@ -173,9 +174,11 @@ namespace Reconstruction{
 			int 						NEvents;
 			int 						iEvent;
 			float 						fmodID;
-			int 						NC;
+			int 						NMod;
 			int 						iMod;
+			int 						NClusters;
 			int 						iC;
+			int 						NPads;
 			int 						iP;
 			// Modules
 			std::vector<float>			v_mod_dx;

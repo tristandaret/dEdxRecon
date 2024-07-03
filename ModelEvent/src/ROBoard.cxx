@@ -87,7 +87,7 @@ void ROBoard::Ini_Models(
 
 }
 
-Pad*	ROBoard::Get_Pad(const Pad* pPad)
+Pad*	ROBoard::Get_Pad(Pad* pPad)
 {
 	int iX = pPad->Get_iX();
 	int iY = pPad->Get_iY();

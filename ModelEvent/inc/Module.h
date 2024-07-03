@@ -73,7 +73,7 @@ public:
 //------------------------------Data Members-----------------------//
 private:
 
-	short int m_IsValid;
+	short int m_IsValid = 1;
 	
 	int m_EventNber;
 	int m_EntryNber;

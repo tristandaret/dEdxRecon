@@ -46,29 +46,29 @@ public:
 
 
 //------------------------------Pads-----------------------//
-	void Add_Pad(const Pad* pPad); // Add Pad
+	void Add_Pad(Pad* pPad); // Add Pad
 	void DoClosure()	; // Closure: Order pads, compute Leading pad stuff
 	
 	int	Get_NberOfPads() const				; // Size of Pad set
-	const Pad* Get_Pad (const int& Index1D)	const; // Get Pad
+	Pad* Get_Pad (const int& Index1D)	const; // Get Pad
 
 //Leading pad	
-	const Pad* Get_LeadingPad () const; // Get Leading pad
+	Pad* Get_LeadingPad () const; // Get Leading pad
 	double Get_YLeading	() const; // Get Leading pad Y position (m)
 	double Get_TMaxLeading() const; // Get Leading pad Time at max (Time bin)
 	double Get_AMaxLeading() const; // Get Leading pad Max amplitude (ADC)
 
-	const Pad* Get_NextLeadingPad ()	const; // Get Next Leading pad, the hotest of the nearest pads of the leading pad
-	const Pad* Get_NextNextLeadingPad () const; // Get NextNext Leading pad, the coldest of the nearest pads of the leading pad
+	Pad* Get_NextLeadingPad ()	const; // Get Next Leading pad, the hotest of the nearest pads of the leading pad
+	Pad* Get_NextNextLeadingPad () const; // Get NextNext Leading pad, the coldest of the nearest pads of the leading pad
 		
 
 //------------------------------Data Members-----------------------//
 private:
 	short int m_NberOfPads;
-	std::vector < const Pad* > V_Pad;
-	const Pad* Pad_Leading;
-	const Pad* Pad_NextLeading;
-	const Pad* Pad_NextNextLeading;
+	std::vector <Pad* > V_Pad;
+	Pad* Pad_Leading;
+	Pad* Pad_NextLeading;
+	Pad* Pad_NextNextLeading;
 
 	double m_Acluster;
 	double m_XWeight;
@@ -92,7 +92,7 @@ private:
 	double m_XTrack_BeforeMinimisation; 
 	double m_YTrack_BeforeMinimisation; 
 
-	short int m_isValid;
+	short int m_isValid = 1;
 	
 public:
 	void Set_XTrack(const double& XTrack);
@@ -127,7 +127,7 @@ public:
 	double Chi2_Horizontal					(double par[])				;
 	
 	int		FitRes_Horizontal_Get_NberOfTermsInChi2()			const;
-	const Pad* FitRes_Horizontal_Get_Pad		(const int& Index1D) const;
+	Pad* FitRes_Horizontal_Get_Pad		(const int& Index1D) const;
 	double	FitRes_Horizontal_Get_Residual (const int& Index1D) const;
 	double	FitRes_Horizontal_Get_Pull	(const int& Index1D) const;
 
@@ -139,7 +139,7 @@ private:
 	TF1* p_TF1_Horizontal;
 	bool m_StatusFit_Horizontal; // True: fit failed; False: Fit OK
 	short int m_NberOf_V_FitRes_Horizontal_Pad;
-	std::vector < const Pad* > V_FitRes_Horizontal_Pad	;
+	std::vector < Pad* > V_FitRes_Horizontal_Pad	;
 	std::vector < double >	V_FitRes_Horizontal_Residual;
 	std::vector < double >	V_FitRes_Horizontal_Pull;
 
@@ -158,7 +158,7 @@ public:
 	double m_AngleRot;
 	
 	int		FitRes_Diagonal_Get_NberOfTermsInChi2()			const;
-	const Pad* FitRes_Diagonal_Get_Pad		(const int& Index1D) const;
+	Pad* FitRes_Diagonal_Get_Pad		(const int& Index1D) const;
 	double	FitRes_Diagonal_Get_Residual (const int& Index1D) const;
 	double	FitRes_Diagonal_Get_Pull	(const int& Index1D) const;
 
@@ -172,7 +172,7 @@ private:
 	TF1* p_TF1_Diagonal;
 	bool m_StatusFit_Diagonal; // True: fit failed; False: Fit OK
 	short int m_NberOf_V_FitRes_Diagonal_Pad;
-	std::vector < const Pad* > V_FitRes_Diagonal_Pad	;
+	std::vector < Pad* > V_FitRes_Diagonal_Pad	;
 	std::vector < double >	V_FitRes_Diagonal_Residual;
 	std::vector < double >	V_FitRes_Diagonal_Pull;
 

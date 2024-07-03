@@ -27,7 +27,7 @@ Cluster::Cluster(
 Cluster::~Cluster()
 {
 	V_Pad.clear();
-	V_Pad.clear(); std::vector< const Pad* >().swap( V_Pad	);
+	V_Pad.clear(); std::vector< Pad* >().swap( V_Pad	);
 	End_Horizontal();
 	End_Diagonal();
 }
@@ -38,7 +38,14 @@ int	Cluster::Get_EntryNber () const { return m_EntryNber; }
 
 int	Cluster::Get_ModuleNber () const { return m_ModuleNber; }
 
-void Cluster::Add_Pad(const Pad* pPad)
+int Cluster::IsValid() const { return m_isValid; }
+void Cluster::Validate() { m_isValid = 1;}
+void Cluster::Invalidate(){
+	m_isValid = 0; 
+	for(int i=0;i<m_NberOfPads;i++) V_Pad[i]->Invalidate();
+}
+
+void Cluster::Add_Pad(Pad* pPad)
 {
 	V_Pad.push_back( pPad );
 	m_NberOfPads += 1;
@@ -52,7 +59,7 @@ void Cluster::DoClosure()
 	int NberOfPads = Get_NberOfPads();
 
 	for (int iPad = 0; iPad< NberOfPads; iPad++){
-	const Pad*	pPad = Get_Pad (iPad);
+	Pad*	pPad = Get_Pad (iPad);
 	double SMax = pPad->Get_AMax();
 	m_Acluster += SMax;
 	double XPad = pPad->Get_XPad();
@@ -69,7 +76,7 @@ void Cluster::DoClosure()
 
 	std::vector < RankedValue > V_RankedValue;
 	for (int iPad = 0; iPad< NberOfPads; iPad++){
-	const Pad* pPad = Get_Pad (iPad);
+	Pad* pPad = Get_Pad (iPad);
 	double SMax = pPad->Get_AMax();
 	RankedValue aRankedValue; 
 	aRankedValue.Value = SMax; 
@@ -77,9 +84,9 @@ void Cluster::DoClosure()
 	V_RankedValue.push_back( aRankedValue );
 	}
 	std::sort(V_RankedValue.begin(), V_RankedValue.end());
-	std::vector < const Pad* > L_Pad;
+	std::vector < Pad* > L_Pad;
 	for (int iPad = 0; iPad< NberOfPads; iPad++){
-	const Pad*	pPad = Get_Pad (V_RankedValue[iPad].Rank);
+	Pad*	pPad = Get_Pad (V_RankedValue[iPad].Rank);
 	L_Pad.push_back(pPad); 
 	}
 	V_Pad.clear();
@@ -90,11 +97,11 @@ void Cluster::DoClosure()
 	Pad_Leading = V_Pad[NberOfPads-1];
 	
 	double	Amax_Next	= 0.;
-	const Pad* pPad_Next	= 0;
+	Pad* pPad_Next	= 0;
 	double	Amax_NextNext = 0.;
-	const Pad* pPad_NextNext = 0;
+	Pad* pPad_NextNext = 0;
 	for (int iPad = 0; iPad< NberOfPads; iPad++){
-	const Pad*	pPad = V_Pad[iPad];
+	Pad*	pPad = V_Pad[iPad];
 	if ( std::fabs( pPad->Get_iY() - Pad_Leading->Get_iY() ) == 1 ){
 		double AMax = pPad->Get_AMax();
 		if (pPad_Next==0){
@@ -126,18 +133,18 @@ void Cluster::DoClosure()
 }
 
 int Cluster::Get_NberOfPads() const { return m_NberOfPads; }
-const Pad* Cluster::Get_Pad(const int& Index1D) const { return V_Pad[Index1D]; }
+Pad* Cluster::Get_Pad(const int& Index1D) const { return V_Pad[Index1D]; }
 
 double Cluster::Get_Acluster() const { return m_Acluster; }
 double Cluster::Get_XWeight() const { return m_XWeight; }
 double Cluster::Get_YWeight() const { return m_YWeight; }
 
-const Pad* Cluster::Get_LeadingPad() const { return Pad_Leading; }
+Pad* Cluster::Get_LeadingPad() const { return Pad_Leading; }
 double Cluster::Get_YLeading() const { return Pad_Leading->Get_YPad(); }
 double Cluster::Get_TMaxLeading() const { return Pad_Leading->Get_TMax(); }
 
-const Pad* Cluster::Get_NextLeadingPad() const { return Pad_NextLeading; }
-const Pad* Cluster::Get_NextNextLeadingPad() const { return Pad_NextNextLeading; }
+Pad* Cluster::Get_NextLeadingPad() const { return Pad_NextLeading; }
+Pad* Cluster::Get_NextNextLeadingPad() const { return Pad_NextNextLeading; }
 
 double Cluster::Get_AMaxLeading() const { return Pad_Leading->Get_AMax(); }
 
@@ -145,7 +152,7 @@ void Cluster::WriteOut() const
 {
 	for (int iPad = 0; iPad < Get_NberOfPads(); iPad++)
 	{
-	const Pad* pPad = V_Pad[iPad];
+	Pad* pPad = V_Pad[iPad];
 	int iX = pPad->Get_iX();
 	int iY = pPad->Get_iY();
 	}
@@ -198,7 +205,7 @@ void	Cluster::Beg_Horizontal()
 void	Cluster::End_Horizontal()
 {
 	delete p_FitOutput_Horizontal; p_FitOutput_Horizontal = 0;
-	V_FitRes_Horizontal_Pad	.clear(); std::vector< const Pad* >().swap( V_FitRes_Horizontal_Pad		);
+	V_FitRes_Horizontal_Pad	.clear(); std::vector< Pad* >().swap( V_FitRes_Horizontal_Pad		);
 	V_FitRes_Horizontal_Residual.clear(); std::vector< double	>().swap( V_FitRes_Horizontal_Residual );
 	V_FitRes_Horizontal_Pull	.clear(); std::vector< double	>().swap( V_FitRes_Horizontal_Pull	);
 }
@@ -256,7 +263,7 @@ void Cluster::SetResults_Horizontal(TVirtualFitter* pTVirtualFitter)
 
 	int NberOfPad = V_Pad.size();
 	for (int iPad = 0; iPad<NberOfPad; iPad++) {
-	const Pad* pPad = V_Pad[iPad];
+	Pad* pPad = V_Pad[iPad];
 	
 	double YTrackYPad	= m_YTrack - pPad->Get_YPad();
 	double ThePrediction = Eval_Horizontal(YTrackYPad);
@@ -313,7 +320,7 @@ void	Cluster::SetResults_FailledFit_Horizontal (const int& Verbose )
 
 	int NberOfPad = V_Pad.size();
 	for (int iPad = 0; iPad<NberOfPad; iPad++) {
-	const Pad* pPad = V_Pad[iPad];
+	Pad* pPad = V_Pad[iPad];
 	
 	double YTrackYPad	= m_YTrack - pPad->Get_YPad();
 	double ThePrediction = Eval_Horizontal(YTrackYPad);
@@ -352,7 +359,7 @@ double Cluster::Chi2_Horizontal(double par[])
 	
 	int NberOfPad = V_Pad.size();
 	for (int iPad = 0; iPad<NberOfPad; iPad++) {
-	const Pad* pPad = V_Pad[iPad];
+	Pad* pPad = V_Pad[iPad];
 	
 	double YTrackYPad	= m_YTrack - pPad->Get_YPad();
 	double ThePrediction = Eval_Horizontal(YTrackYPad);
@@ -391,7 +398,7 @@ void Cluster::SetParameters_Internal_Horizontal(double par[])
 }
 
 int		Cluster::FitRes_Horizontal_Get_NberOfTermsInChi2()	const	{ return m_NberOf_V_FitRes_Horizontal_Pad	; }
-const Pad* Cluster::FitRes_Horizontal_Get_Pad		(const int& Index1D) const	{ return V_FitRes_Horizontal_Pad	[Index1D]; }
+Pad* Cluster::FitRes_Horizontal_Get_Pad		(const int& Index1D) const	{ return V_FitRes_Horizontal_Pad	[Index1D]; }
 double	Cluster::FitRes_Horizontal_Get_Residual (const int& Index1D) const	{ return V_FitRes_Horizontal_Residual[Index1D]; }
 double	Cluster::FitRes_Horizontal_Get_Pull	(const int& Index1D) const	{ return V_FitRes_Horizontal_Pull	[Index1D]; }
 
@@ -434,7 +441,7 @@ void	Cluster::Beg_Diagonal()
 void	Cluster::End_Diagonal()
 {
 	delete p_FitOutput_Diagonal; p_FitOutput_Diagonal = 0;
-	V_FitRes_Diagonal_Pad	.clear(); std::vector< const Pad* >().swap( V_FitRes_Diagonal_Pad		);
+	V_FitRes_Diagonal_Pad	.clear(); std::vector< Pad* >().swap( V_FitRes_Diagonal_Pad		);
 	V_FitRes_Diagonal_Residual.clear(); std::vector< double	>().swap( V_FitRes_Diagonal_Residual );
 	V_FitRes_Diagonal_Pull	.clear(); std::vector< double	>().swap( V_FitRes_Diagonal_Pull	);
 }
@@ -512,7 +519,7 @@ void Cluster::SetResults_Diagonal(TVirtualFitter* pTVirtualFitter)
 
 	int NberOfPad = V_Pad.size();
 	for (int iPad = 0; iPad<NberOfPad; iPad++) {
-	const Pad* pPad = V_Pad[iPad];
+	Pad* pPad = V_Pad[iPad];
 
 	double XLocal = pPad->Get_XPad();
 	double YLocal = pPad->Get_YPad();
@@ -583,7 +590,7 @@ void	Cluster::SetResults_FailledFit_Diagonal (const int& Verbose )
 
 	int NberOfPad = V_Pad.size();
 	for (int iPad = 0; iPad<NberOfPad; iPad++) {
-	const Pad* pPad = V_Pad[iPad];
+	Pad* pPad = V_Pad[iPad];
 	
 	double XLocal = pPad->Get_XPad();
 	double YLocal = pPad->Get_YPad();
@@ -632,7 +639,7 @@ double Cluster::Chi2_Diagonal(double par[])
  
 	int NberOfPad = V_Pad.size();
 	for (int iPad = 0; iPad<NberOfPad; iPad++) {
-	const Pad* pPad = V_Pad[iPad];
+	Pad* pPad = V_Pad[iPad];
 	
 	double XLocal = pPad->Get_XPad();
 	double YLocal = pPad->Get_YPad();
@@ -678,7 +685,7 @@ void Cluster::SetParameters_Internal_Diagonal(double par[])
 }
 
 int		Cluster::FitRes_Diagonal_Get_NberOfTermsInChi2()	const	{ return m_NberOf_V_FitRes_Diagonal_Pad	; }
-const Pad* Cluster::FitRes_Diagonal_Get_Pad		(const int& Index1D) const	{ return V_FitRes_Diagonal_Pad	[Index1D]; }
+Pad* Cluster::FitRes_Diagonal_Get_Pad		(const int& Index1D) const	{ return V_FitRes_Diagonal_Pad	[Index1D]; }
 double	Cluster::FitRes_Diagonal_Get_Residual (const int& Index1D) const	{ return V_FitRes_Diagonal_Residual[Index1D]; }
 double	Cluster::FitRes_Diagonal_Get_Pull	(const int& Index1D) const	{ return V_FitRes_Diagonal_Pull	[Index1D]; }
 

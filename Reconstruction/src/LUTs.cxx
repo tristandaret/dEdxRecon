@@ -301,8 +301,6 @@ float Reconstruction::LUT::getRatio(const float& phi, const float& d, const floa
 		iRC_max = 0;
 	}
 
-	std::cout << "(iphi_min, iphi_max) = (" << iphi_min << ", " << iphi_max << ") | (id_min, id_max) = (" << id_min << ", " << id_max << ") | (iRC_min, iRC_max) = (" << iRC_min << ", " << iRC_max << ") | (iz_min, iz_max) = (" << iz_min << ", " << iz_max << ")" << std::endl;
-
 	// Determine the weights for the 8 points
 	float w_phi, w_d, w_RC, w_z;
 	if(iphi_min	== iphi_max)	w_phi =	1;

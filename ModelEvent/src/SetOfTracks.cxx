@@ -800,7 +800,7 @@ TH1F* SetOfTracks::GiveMe_pTH1F_TrackDeltaT(
 
 	const Track* pTrack = Get_Track(0);
 	const Cluster* pCluster = pTrack->Get_Cluster(0);
-	const Pad* pPad = pCluster->Get_LeadingPad ();	
+	Pad* pPad = pCluster->Get_LeadingPad ();	
 	const Model_ReadOutGeometry*	pModel_ReadOutGeometry = pPad->Get_Model_ReadOutGeometry();
 	
 	double NX		= pModel_ReadOutGeometry->Get_Nx	();
@@ -875,7 +875,7 @@ TH1F* SetOfTracks::GiveMe_pTH1F_YTrackYPadInTracks (
 	for (int iC = 0; iC< NberOfClusters; iC++){
 		const Cluster* pCluster = pTrack->Get_Cluster(iC);
 		
-		const Pad*	pPad_Leading = pCluster->Get_LeadingPad();
+		Pad*	pPad_Leading = pCluster->Get_LeadingPad();
 		int	iXCluster = pPad_Leading->Get_iX();
 		if (iXCluster!= iCol && iCol!=-1) continue;
 
@@ -883,7 +883,7 @@ TH1F* SetOfTracks::GiveMe_pTH1F_YTrackYPadInTracks (
 		
 		int NPads = pCluster->Get_NberOfPads();
 		for (int iP = 0; iP< NPads; iP++){
-		const Pad* pPad = pCluster->Get_Pad(iP);
+		Pad* pPad = pCluster->Get_Pad(iP);
 		
 		double YTrackYPad = YTrack-pPad->Get_YPad();
 		ToBeReturned->Fill( YTrackYPad*1.E2 );
@@ -934,7 +934,7 @@ TH1F* SetOfTracks::GiveMe_pTH1F_YTrackYPadLeadingInTracks (
 	for (int iC = 0; iC< NberOfClusters; iC++){
 		const Cluster* pCluster = pTrack->Get_Cluster(iC);
 		
-		const Pad*	pPad_Leading = pCluster->Get_LeadingPad();
+		Pad*	pPad_Leading = pCluster->Get_LeadingPad();
 		int	iXCluster = pPad_Leading->Get_iX();
 		if (iXCluster!= iCol && iCol!=-1) continue;
 
@@ -976,7 +976,7 @@ TH1F* SetOfTracks::GiveMe_pTH1F_YFitCol (
 	const Track* pTrack = Get_Track(0);
 	if (pTrack==0) return 0;
 	const Cluster* pCluster = pTrack->Get_Cluster(0);
-	const Pad* pPad = pCluster->Get_LeadingPad ();	
+	Pad* pPad = pCluster->Get_LeadingPad ();	
 	const Model_ReadOutGeometry*	pModel_ReadOutGeometry = pPad->Get_Model_ReadOutGeometry();
 
 	double Ycen = 1.E2* pModel_ReadOutGeometry->Get_YcPad(0,iYBeam,pTrack->Get_ModuleNber());
@@ -1017,7 +1017,7 @@ TH1F* SetOfTracks::GiveMe_pTH1F_YFitCol (
 	for (int iC = 0; iC< NberOfClusters; iC++){
 		const Cluster* pCluster = pTrack->Get_Cluster(iC);
 		
-		const Pad*	pPad_Leading = pCluster->Get_LeadingPad();
+		Pad*	pPad_Leading = pCluster->Get_LeadingPad();
 		int	iXCluster = pPad_Leading->Get_iX();
 		if (iXCluster!= iCol && iCol!=-1) continue;
 
@@ -1056,7 +1056,7 @@ TH1F* SetOfTracks::GiveMe_pTH1F_YTrackInTracks (
 	const Track* pTrack = Get_Track(0);
 	if (pTrack==0) return 0;
 	const Cluster* pCluster = pTrack->Get_Cluster(0);
-	const Pad* pPad = pCluster->Get_LeadingPad ();	
+	Pad* pPad = pCluster->Get_LeadingPad ();	
 	const Model_ReadOutGeometry*	pModel_ReadOutGeometry = pPad->Get_Model_ReadOutGeometry();
 
 	double Ycen = 1.E2* pModel_ReadOutGeometry->Get_YcPad(0,iYBeam,pTrack->Get_ModuleNber());
@@ -1096,7 +1096,7 @@ TH1F* SetOfTracks::GiveMe_pTH1F_YTrackInTracks (
 	for (int iC = 0; iC< NberOfClusters; iC++){
 		const Cluster* pCluster = pTrack->Get_Cluster(iC);
 		
-		const Pad*	pPad_Leading = pCluster->Get_LeadingPad();
+		Pad*	pPad_Leading = pCluster->Get_LeadingPad();
 		int	iXCluster = pPad_Leading->Get_iX();
 		if (iXCluster!= iCol && iCol!=-1) continue;
 

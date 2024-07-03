@@ -92,7 +92,7 @@ TH2D* GiveMe_EvtDisplay(Module* pModule ,const std::string& TAG)
 	
 	int	NPads	= pCluster->Get_NberOfPads();
 	for (int iP	= 0; iP< NPads; iP++){
-		const Pad* pPad	= pCluster->Get_Pad(iP);
+		Pad* pPad	= pCluster->Get_Pad(iP);
 		int iX	=	pPad->Get_iX();
 		int iY	=	pPad->Get_iY();
 		int Qv	=	pPad->Get_AMax();
@@ -125,7 +125,7 @@ TH2D* GiveMe_TimeDisplay(Module* pModule ,const std::string& TAG)
 	
 	int	NPads	= pCluster->Get_NberOfPads();
 	for (int iP	= 0; iP< NPads; iP++){
-		const Pad* pPad	= pCluster->Get_Pad(iP);
+		Pad* pPad	= pCluster->Get_Pad(iP);
 		int iX			= pPad->Get_iX();
 		int iY			= pPad->Get_iY();
 		int Tmax		= pPad->Get_TMax();
@@ -138,7 +138,7 @@ TH2D* GiveMe_TimeDisplay(Module* pModule ,const std::string& TAG)
 }
 
 //Output waveform of a pad	with tagging string TAG, placed in OUTDIR dir
-void DrawOut_WaveFormDisplay(const Pad* pPad,const std::string& OUTDIR,const std::string& TAG)
+void DrawOut_WaveFormDisplay(Pad* pPad,const std::string& OUTDIR,const std::string& TAG)
 {
 	std::ostringstream aostringstream;
 	aostringstream << std::setiosflags(std::ios::fixed);
@@ -210,7 +210,7 @@ void DrawOut_WaveFormDisplay(const Pad* pPad,const std::string& OUTDIR,const std
 }
 
 //Get waveform histo of pad with tagging string TAG
-TH1F* GiveMe_WaveFormDisplay(const Pad* pPad,const std::string& TAG)
+TH1F* GiveMe_WaveFormDisplay(Pad* pPad,const std::string& TAG)
 {
 	std::ostringstream aostringstream;
 	aostringstream << std::setiosflags(std::ios::fixed);
@@ -276,11 +276,11 @@ void DrawOut_ClusterWFDisplay(Cluster* pCluster,const std::string& OUTDIR,const 
 
 	
 	std::vector<TH1F*> v_histo;
-	std::vector<const Pad*> v_Pads;
+	std::vector<Pad*> v_Pads;
 	std::vector < RankedValue > vRank;
 	int NPads			= pCluster->Get_NberOfPads();
 	for (int iP	= 0; iP < NPads; iP++){							// Pads
-	const Pad* pPad	= pCluster->Get_Pad(NPads - iP -1);		// Start by end of list to get most energetic pads	
+	Pad* pPad	= pCluster->Get_Pad(NPads - iP -1);		// Start by end of list to get most energetic pads	
 	TH1F* pTH1F		= GiveMe_WaveFormDisplay(pPad,TAG);
 	pTH1F->			SetLineWidth(4);
 	v_histo.			push_back(pTH1F);
@@ -499,7 +499,7 @@ void DrawOut_GWF(Event* pEvent, const int& ModuleNber,const std::string& OUTDIR,
 	// Loop On Pads
 	int NPads					= pCluster->Get_NberOfPads();
 	for(int iP	= 0; iP < NPads; iP ++){
-		const Pad* pPad			= pCluster->Get_Pad(iP);
+		Pad* pPad			= pCluster->Get_Pad(iP);
 		TH1F* pTH1F_pad			= GiveMe_WaveFormDisplay(pPad, "main");
 		pTH1F_cluster->			Add(pTH1F_pad);
 		pTH1F_GWF->				Add(pTH1F_pad);

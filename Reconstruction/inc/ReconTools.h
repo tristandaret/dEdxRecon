@@ -90,7 +90,7 @@ TF1*	Fit2Gauss(TH1F* h1F, const float& x1min, const float& x1max, const float& x
 
 /* SPECIFIC MATH*/
 // impact parameter d (in m) & track angle phi (in degrees) computed locally at the level of the pad
-void local_params(const Pad* pPad, const Track* pTrack, float& d, float& dd, float& phi, float& trk_len_pad);
+void local_params(Pad* pPad, const Track* pTrack, float& d, float& dd, float& phi, float& trk_len_pad);
 
 // Track length
 float trk_len(Module* pModule, const Track* pTrack);

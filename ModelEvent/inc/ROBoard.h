@@ -38,7 +38,7 @@ public:
 	int	Get_IsThisPadExisting(const int& iX, const int& iY) const; // return Pad (iX,iY) existence state
 	Pad* Get_Pad				(const int& iX, const int& iY)	; // return Pad (iX,iY) if it exists
 		
-	Pad* Get_Pad (const Pad* pPad)	; // return Pad (iX,iY) if it exists
+	Pad* Get_Pad (Pad* pPad)	; // return Pad (iX,iY) if it exists
 		
 	
 //------------------------------Data Members-----------------------//
