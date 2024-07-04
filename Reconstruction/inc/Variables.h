@@ -41,6 +41,7 @@ namespace Reconstruction{
 	extern int						fcorrectRC;
 	extern int						fcorrectWF;
 	extern int						fcorrectDrift;
+	extern int 						fsaveSelectOnly;
 }
 
 #endif

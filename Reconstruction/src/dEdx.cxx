@@ -127,7 +127,7 @@ void Reconstruction::dEdx::Reconstruction(){
 
 		aSelector.									ApplySelection(pEvent);
 		if (pEvent->IsValid() == 0){
-			for (iMod =	0; iMod < NMod; iMod++){
+			if(!fsaveSelectOnly ) for (iMod = 0; iMod < NMod; iMod++){
 				pModule =							pEvent->Get_Module_InArray(iMod);
 				fmodID =							pModule->Get_ModuleNber();
 				DiscardedEvents();
@@ -143,7 +143,7 @@ void Reconstruction::dEdx::Reconstruction(){
 			pModule =								pEvent->Get_Module_InArray(iMod);
 			fmodID =								pModule->Get_ModuleNber();
 			if (pEvent->Validity_ForThisModule(fmodID) == 0){
-				DiscardedEvents();
+				if(!fsaveSelectOnly) DiscardedEvents();
 				continue;
 			}
 

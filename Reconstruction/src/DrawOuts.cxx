@@ -206,6 +206,10 @@ void Reconstruction::DrawOuts::Control(){
 
 	//////////////////////////////////////////////////////////////////////////////////////////
 	fpCanvas->						Clear();
+	gPad->							SetRightMargin(0.12);
+	gPad->							SetLeftMargin(0.12);
+	ph2i_heatmap->					GetYaxis()->SetTitleOffset(1.1);
+	gStyle->						SetTitleX((1.-gPad->GetRightMargin()+gPad->GetLeftMargin())/2);
 	ph2i_heatmap->					Draw("COLZ");
 	fpCanvas->						SaveAs((drawout_file + ")").c_str());
 

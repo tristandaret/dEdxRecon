@@ -29,12 +29,13 @@ namespace Reconstruction{
 	Uploader*					pUploader;
 	int							intUploader;
 	int							moduleCase; // DESY21:0 | CERN22:-1
-	int							PT;		// Peaking time (ns)
-	int							Dt;		// Transverse diffusion coefficient (µm/sqrt(cm))
+	int							PT;			// Peaking time (ns)
+	int							Dt;			// Transverse diffusion coefficient (µm/sqrt(cm))
 	int							driftDist;	// drift distance (mm)
-	int							TB;		// timebin length (ns)
+	int							TB;			// timebin length (ns)
 	int							fcorrectGain;
 	int							fcorrectRC;
 	int							fcorrectWF;
 	int							fcorrectDrift;
+	int 						fsaveSelectOnly;
 }

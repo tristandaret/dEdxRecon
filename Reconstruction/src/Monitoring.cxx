@@ -42,7 +42,7 @@ void Reconstruction::Monitoring()
 	comment = "";
 	gErrorIgnoreLevel = kInfo;
 
-	Correction(2,2,1,1);
+	Correction(0,1,1,1,1);
 
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -223,7 +223,7 @@ void Reconstruction::Monitoring()
 
 // Configuration functions
 
-void Reconstruction::Correction(const int& corrRC, const int& corrGain, const int& corrWF, const int& corrDrift){
+void Reconstruction::Correction(const int& corrRC, const int& corrGain, const int& corrWF, const int& corrDrift, const int& saveSelectOnly){
 	fcorrectRC =				corrRC;
 	if(corrRC == 0)	comment =	comment + "_RCoff";
 	if(corrRC == 2)	comment =	comment + "_RCMod";
@@ -237,6 +237,9 @@ void Reconstruction::Correction(const int& corrRC, const int& corrGain, const in
 
 	fcorrectDrift =				corrDrift;
 	if(corrDrift == 0)comment =	comment + "_DriftFile";
+
+	fsaveSelectOnly =			saveSelectOnly;
+	if(saveSelectOnly == 0) comment =	comment + "_wDiscard";	
 }
 
 void Reconstruction::Settings(const std::string &testbeam_name, const std::string &scan_name, const int &uploader, const int &modules, const int& peaking_time, const int& diffusion, const int& drift_dist, const int& timbin){
