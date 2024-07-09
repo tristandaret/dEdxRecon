@@ -246,26 +246,9 @@ void Reconstruction::DrawOuts::EnergyLoss(){
 		v_h1f_WF_modnoTrunc.push_back(	new TH1F(Form("ph1f_WFnoTrunc_%i", i), Form("Energy loss (module %i) (no truncation);dE/dx (ADC counts);Counts", i), 100, 0, 1300));
 	}
 
-	int nmods012 = 0;
-	int NCrossPads = 0;
-	int NClusters = 0;
-	std::vector<float> v_dEdxXP;
-	std::vector<float> v_dEdxWF;
-	std::vector<float> v_dE;
-	std::vector<float> v_dx;
-	float dEdxXP012;
-	float dEdxWF012;
 	// Get entries and fill histograms
-	Reconstruction::dEdx *p_dEdx_tmp = new Reconstruction::dEdx();
 	for(int i=0;i<fnentries;i++){
 		fpTree->							GetEntry(i);
-		v_dEdxXP.clear();
-		v_dEdxWF.clear();
-		v_dE.clear();
-		v_dx.clear();
-		NCrossPads = 0;
-		NClusters = 0;
-		nmods012 = 0;
 		NMod =								p_recoevent->v_modules.size();
 		if(!p_recoevent->selected) 			continue;
 		for(int iMod=0;iMod<NMod;iMod++){
@@ -276,39 +259,13 @@ void Reconstruction::DrawOuts::EnergyLoss(){
 			v_h1f_WF_mod[position]->		Fill(p_recomodule->dEdxWF);
 			v_h1f_XP_modnoTrunc[position]->	Fill(p_recomodule->dEdxXPnoTrunc);
 			v_h1f_WF_modnoTrunc[position]->	Fill(p_recomodule->dEdxWFnoTrunc);
-
-			if(position < 3) nmods012++;
 		}
-		for(int iMod=0;iMod<NMod;iMod++){
-			if(position > 2) continue;
-			if(nmods012 != 3) continue;
-			p_recomodule = 					p_recoevent->v_modules[iMod];
-			if(!p_recomodule->selected) 	continue;
-			position =						p_recomodule->position;
-			NClusters +=						p_recomodule->NClusters;
-			NCrossPads +=					p_recomodule->NCrossedPads;
-			for(int iC=0; iC<p_recomodule->NClusters; iC++){
-				v_dEdxWF.push_back(p_recomodule->v_clusters[iC]->dEdxWF);
-				for(int iP=0; iP<p_recomodule->v_clusters[iC]->NPads; iP++){
-					if(p_recomodule->v_clusters[iC]->v_pads[iP]->length == 0) continue;
-					v_dE.push_back(p_recomodule->v_clusters[iC]->v_pads[iP]->charge);
-					v_dx.push_back(p_recomodule->v_clusters[iC]->v_pads[iP]->length);
-					v_dEdxXP.push_back(p_recomodule->v_clusters[iC]->v_pads[iP]->dEdxXP);
-				}
-			}
-		}
-		if(nmods012 == 3){
-			dEdxXP012 = p_dEdx_tmp->ComputedEdxXP(v_dEdxXP, v_dE, v_dx, NCrossPads, 0.7);
-			dEdxWF012 = p_dEdx_tmp->ComputedEdxWF(v_dEdxWF, NClusters, 0.7);
-
-			ph1f_WF->						Fill(dEdxWF012);
-			ph1f_XP->						Fill(dEdxXP012);
-			ph1f_WFnoTrunc->				Fill(p_recoevent->dEdxWFnoTrunc);
-			ph1f_XPnoTrunc->				Fill(p_recoevent->dEdxXPnoTrunc);
-			ph2f_XPWF->						Fill(p_recoevent->dEdxWF, p_recoevent->dEdxXP);
-		}
+		ph1f_WF->							Fill(p_recoevent->dEdxWF);
+		ph1f_XP->							Fill(p_recoevent->dEdxXP);
+		ph1f_WFnoTrunc->					Fill(p_recoevent->dEdxWFnoTrunc);
+		ph1f_XPnoTrunc->					Fill(p_recoevent->dEdxXPnoTrunc);
+		ph2f_XPWF->							Fill(p_recoevent->dEdxWF, p_recoevent->dEdxXP);
 	}
-	delete p_dEdx_tmp;
 
 	// Fitting
 	Fit1Gauss(ph1f_WF, 2);

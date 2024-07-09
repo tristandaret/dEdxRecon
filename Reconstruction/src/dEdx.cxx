@@ -78,6 +78,7 @@ void Reconstruction::dEdx::Reconstruction(){
 	std::cout << "WF    correction:   " << fcorrectWF						<<	std::endl;
 	std::cout << "Gain  correction:   " << fcorrectGain						<<	std::endl;
 	std::cout << "RC    correction:   " << fcorrectRC						<<	std::endl;
+	std::cout << "Save only selected: " << fsaveSelectOnly					<<	std::endl;
 	std::cout <<																std::endl;
 	std::cout << "Number of entries:  "	<< NEvents 							<<	std::endl;
 	std::cout << "drift               "	<< driftDist		<< " mm"		<<	std::endl;
@@ -203,7 +204,7 @@ void Reconstruction::dEdx::Reconstruction(){
 					// RC correction
 					switch(fcorrectRC){
 						case 0: // no RC correction
-							p_recopad->RC =	120;
+							p_recopad->RC =	170;
 							break;
 						case 1: // pad per pad RC correction
 							p_recopad->RC =	pERAMMaps->RC(fERAMs_pos[fmodID], p_recopad->ix, p_recopad->iy);
@@ -290,14 +291,6 @@ void Reconstruction::dEdx::Reconstruction(){
 				p_recomodule->NPads +=				p_recocluster->NPads;
 				
 			} // Clusters
-			// if(p_recomodule->position > 2){
-			// 	// clear module vectors
-			// 	v_mod_dE.								clear();
-			// 	v_mod_dx.								clear();
-			// 	v_mod_dEdxXP.							clear();
-			// 	v_mod_dEdxWF.							clear();
-			// 	continue;
-			// }
 
 			// Fill module class attributes
 			p_recomodule->avg_pad_mult =			p_recomodule->NPads/p_recomodule->NClusters;

@@ -27,7 +27,7 @@ namespace Reconstruction{
 	int DESY_theta =			0;
 
 	// Computations
-	int dedx =					0;
+	int dedx =					1;
 
 	// DrawOuts		
 	int DO_Control =			0;
