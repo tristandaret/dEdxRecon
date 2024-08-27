@@ -70,7 +70,7 @@ Selector::~Selector()
 
 void Selector::Set_Cuts()
 {
-	m_Cut_StageFinal_NCluster_Low = 36;
+	m_Cut_StageFinal_NCluster_Low = 34;
 
 	m_Cut_Stage5_Npads_Hig	=		5;
 	

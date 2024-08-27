@@ -13,7 +13,7 @@ namespace Reconstruction{
 	// Output file variables
 	extern const std::string 		dedx_folder;
 	extern const std::string		data_folder;
-	extern std::string				data_subfolder;
+	extern std::string				data_scanfolder;
 	extern const std::string		drawout_folder;
 	extern std::string				drawout_scanfolder;
 	extern std::string 				drawout_runfolder;
@@ -27,7 +27,8 @@ namespace Reconstruction{
 	// Run variables
 	extern std::vector<std::string> v_comments;
 	extern std::vector<std::string> v_tags;
-	extern std::vector<std::string> v_dataFiles;
+	extern std::vector<std::string> v_data_files;
+	extern std::vector<std::string> v_rootout_files;
 	extern std::string				tag;
 	extern std::string				testbeam;
 	extern std::string				scan;

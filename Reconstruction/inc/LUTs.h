@@ -33,7 +33,7 @@ namespace Reconstruction{
 	class ERAMMaps {
 	public:
 		/* Constructor */
-		ERAMMaps(const std::string& file	= "$HOME/Documents/Code/CPP_projects/Read_ERAM_MAP/ERAMinfo.root");
+		ERAMMaps(const std::string& file	= "$HOME/Documents/Code/CPP_projects/Read_ERAM_MAP/Data/ERAMinfo.root");
 		virtual ~ERAMMaps();
 		
 		int	ID(const int& position);

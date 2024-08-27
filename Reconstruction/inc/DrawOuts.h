@@ -18,9 +18,10 @@ namespace Reconstruction{
 		void SetStyle();
 
 		void Control();
-		void Control2();
 		void EnergyLoss();
 		void FileComparison();
+
+		void DESY21ScanDrift();
 
 	private:
 		// Files
@@ -54,9 +55,14 @@ namespace Reconstruction{
 		int ix = 				0;
 		int iy = 				0;
 		int position = 			0;
-	};
 
-	
+		constexpr static float YRESOMIN =	6;
+		constexpr static float YRESOMAX =	10;
+		constexpr static float YMEANMIN =	750;
+		constexpr static float YMEANMAX =	1050;
+		constexpr static float YSTDMIN =	55;
+		constexpr static float YSTDMAX =	85;
+	};
 }
 
 // Draw Control plots

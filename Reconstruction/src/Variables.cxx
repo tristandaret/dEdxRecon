@@ -6,7 +6,7 @@ namespace Reconstruction{
 	const std::string 			dedx_folder = 			"../";
 
 	const std::string 			data_folder = 			dedx_folder + "Data/";
-	std::string 				data_subfolder = 		"";
+	std::string 				data_scanfolder = 		"";
 
 	const std::string 			drawout_folder =		dedx_folder + "OUT_Reconstruction/";
 	std::string 				drawout_scanfolder =	"";
@@ -17,12 +17,13 @@ namespace Reconstruction{
 	std::string 				log_file = 				"";
 	std::string 				comment;
 	std::string 				selectionSet;
-	std::string					inputDir;
+	std::string					inputDir; // To be removed when the whole drawout code is updated
 
 	// Run variables
 	std::vector<std::string> 	v_comments;
 	std::vector<std::string> 	v_tags;
-	std::vector<std::string> 	v_dataFiles;
+	std::vector<std::string> 	v_data_files;
+	std::vector<std::string> 	v_rootout_files;
 	std::string 				tag;
 	std::string					testbeam;
 	std::string					scan;

@@ -525,6 +525,125 @@ void Reconstruction::DrawOuts::FileComparison(){
 
 
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void Reconstruction::DrawOuts::DESY21ScanDrift(){
+
+	int npoints = 					v_tags.size();
+	int drift_val[]	= 				{50, 150, 250, 350, 450, 550, 650, 750, 850, 950};
+	std::string drift_arr[]	= 		{"m40", "060", "160", "260", "360", "460", "560", "660", "760", "860"};
+
+	TF1* tf1_WF =					new TF1();
+	TF1* tf1_XP =					new TF1();
+
+	TGraphErrors* pTGE_reso_WF = 	new TGraphErrors();
+	TGraphErrors* pTGE_reso_XP = 	new TGraphErrors();
+	TGraphErrors* pTGE_mean_WF = 	new TGraphErrors();
+	TGraphErrors* pTGE_mean_XP = 	new TGraphErrors();
+	TGraphErrors* pTGE_std_WF = 	new TGraphErrors();
+	TGraphErrors* pTGE_std_XP = 	new TGraphErrors();
+
+	for(int idrift=0;idrift<npoints;idrift++){
+		tf1_WF =					(TF1*)finputFiles[idrift]->Get<TH1F>("ph1f_WF")->GetFunction("gausn");
+		tf1_XP =					(TF1*)finputFiles[idrift]->Get<TH1F>("ph1f_XP")->GetFunction("gausn");
+
+		float mean_WF =				tf1_WF->GetParameter(1);
+		float mean_XP =				tf1_XP->GetParameter(1);
+		float dmean_WF =			tf1_WF->GetParError(1);
+		float dmean_XP =			tf1_XP->GetParError(1);
+
+		float std_WF =				tf1_WF->GetParameter(2);
+		float std_XP =				tf1_XP->GetParameter(2);
+		float dstd_WF =				tf1_WF->GetParError(2);
+		float dstd_XP =				tf1_XP->GetParError(2);
+
+		float reso_WF =				std_WF/mean_WF*100;
+		float reso_XP =				std_XP/mean_XP*100;
+		float dreso_WF =			GetResoError(tf1_WF);
+		float dreso_XP =			GetResoError(tf1_XP);
+
+		pTGE_mean_WF->				SetPoint(idrift, drift_val[idrift], mean_WF);
+		pTGE_mean_XP->				SetPoint(idrift, drift_val[idrift], mean_XP);
+		pTGE_mean_WF->				SetPointError(idrift, 0, dmean_WF);
+		pTGE_mean_XP->				SetPointError(idrift, 0, dmean_XP);
+
+		pTGE_std_WF->				SetPoint(idrift, drift_val[idrift], std_WF);
+		pTGE_std_XP->				SetPoint(idrift, drift_val[idrift], std_XP);
+		pTGE_std_WF->				SetPointError(idrift, 0, dstd_WF);
+		pTGE_std_XP->				SetPointError(idrift, 0, dstd_XP);
+
+		pTGE_reso_WF->				SetPoint(idrift, drift_val[idrift], reso_WF);
+		pTGE_reso_XP->				SetPoint(idrift, drift_val[idrift], reso_XP);
+		pTGE_reso_WF->				SetPointError(idrift, 0, dreso_WF);
+		pTGE_reso_XP->				SetPointError(idrift, 0, dreso_XP);
+
+	}
+
+
+	// Draw
+	gPad->							SetRightMargin(0.04);
+	gPad->							SetTopMargin(0.04);
+	fpCanvas->						Clear();
+	std::string OutputFile = 		drawout_scanfolder + "DriftScan_" + std::to_string(PT) + comment + ".pdf";
+	std::string OutputFile_Beg = 	OutputFile + "(";
+	std::string OutputFile_End = 	OutputFile + ")";
+	fpCanvas->						cd();
+	TLegend* leg =					new TLegend(0.55,0.7,0.93,0.93);
+	leg->							SetTextSize(0.05);
+	leg->							SetFillStyle(0);
+	leg->							AddEntry(pTGE_reso_WF, "Sum of waveforms ", "ep"); 
+	leg->							AddEntry(pTGE_reso_XP, "Crossed pads ", "ep");	
+
+
+	// Resolution
+	pTGE_reso_WF->					GetXaxis()->SetLimits(0, 1000);
+	pTGE_reso_WF->					SetMinimum(YRESOMIN);
+	pTGE_reso_WF->					SetMaximum(YRESOMAX);
+	pTGE_reso_WF->					SetNameTitle("pTGE_reso_WF", ";drift distance (mm);resolution (%)");
+	Graphic_setup(pTGE_reso_WF,	3, 20, kCyan+2,	1, kBlack);
+	Graphic_setup(pTGE_reso_XP,	3, 21, kMagenta+2, 1, kBlack);
+	pTGE_reso_WF->					DrawClone("ap");
+	pTGE_reso_XP->					DrawClone("p same");
+	pTGE_reso_WF->					SetMarkerSize(6);
+	pTGE_reso_XP->					SetMarkerSize(6);
+	leg->							Draw();
+	fpCanvas->						SaveAs(OutputFile_Beg.c_str());
+
+	// Mean
+	fpCanvas->						Clear();
+	pTGE_mean_WF->					SetMinimum(YMEANMIN);
+	pTGE_mean_WF->					SetMaximum(YMEANMAX);
+	pTGE_mean_WF->					SetNameTitle("pTGE_mean_WF", ";drift distance (mm);Mean (ADC count)");
+	Graphic_setup(pTGE_mean_WF,	3, 20, kCyan+2,	1, kBlack);
+	Graphic_setup(pTGE_mean_XP,	3, 21, kMagenta+2, 1, kBlack);
+	pTGE_mean_WF->					Draw("ap");
+	pTGE_mean_XP->					Draw("p same");
+	leg->							Draw();
+	fpCanvas->						SaveAs(OutputFile.c_str());
+
+	// Standard deviation
+	fpCanvas->						Clear();
+	pTGE_std_WF->					SetMinimum(YSTDMIN);
+	pTGE_std_WF->					SetMaximum(YSTDMAX);
+	pTGE_std_WF->					SetNameTitle("pTGE_std_WF", ";drift distance (mm);std (ADC count)");
+	Graphic_setup(pTGE_std_WF,	3, 20, kCyan+2,	1, kBlack);
+	Graphic_setup(pTGE_std_XP,	3, 21, kMagenta+2, 1, kBlack);
+	pTGE_std_WF->					Draw("ap");
+	pTGE_std_XP->					Draw("p same");
+	leg->							Draw();
+	fpCanvas->						SaveAs(OutputFile_End.c_str());
+
+	// Delete
+	fpCanvas->						Clear();
+	delete 							tf1_WF;
+	delete 							tf1_XP;
+	delete 							pTGE_reso_WF;
+	delete 							pTGE_reso_XP;
+	delete 							pTGE_mean_WF;
+	delete 							pTGE_mean_XP;
+	delete 							pTGE_std_WF;
+	delete 							pTGE_std_XP;
+	delete 							leg;
+}
 
 
 
@@ -809,323 +928,6 @@ void DrawOut_Checks(const std::string& OutDir, const std::string EvtFile, const 
 
 
 
-
-
-
-
-
-
-
-
-
-
-void DrawOut_dEdx(const std::string& OutDir, const std::string& Tag, const std::string& Comment, const std::string SelectionSet, const int& nMod)
-{
-	// Get input file
-	TFile* pTFile_dEdx	= TFile::Open(TString(OutDir + "/" + Tag + "/" + "3_" + Tag + "_dEdx_GPv3.root"));
-
-	// Get histograms & functions
-	std::vector<TH1F*>	v_h1f_Qsel;
-	std::vector<TH1F*>	v_h1f_Qtrunc;
-	std::vector<TH1F*>	v_h1f_WFsel;
-	std::vector<TH1F*>	v_h1f_WFsum;
-	std::vector<TH1F*>	v_h1f_GPsel;
-	std::vector<TH1F*>	v_h1f_GPv4;
-
-	std::vector<TF1*>	v_tf1_Qsel;
-	std::vector<TF1*>	v_tf1_Qtrunc;
-	std::vector<TF1*>	v_tf1_WFsel;
-	std::vector<TF1*>	v_tf1_WFsum;
-	std::vector<TF1*>	v_tf1_GPsel;
-	std::vector<TF1*>	v_tf1_GPv4;
-
-	for (int iMod = 0; iMod < nMod; iMod++){
-	v_h1f_Qsel.		push_back(pTFile_dEdx->Get<TH1F>(Form("h1f_Qsel_%i", iMod)));
-	v_h1f_Qtrunc.	push_back(pTFile_dEdx->Get<TH1F>(Form("h1f_Qtrunc_%i", iMod)));
-	v_h1f_WFsel.		push_back(pTFile_dEdx->Get<TH1F>(Form("h1f_WFsel_%i", iMod)));
-	v_h1f_WFsum.	push_back(pTFile_dEdx->Get<TH1F>(Form("h1f_WFsum_%i", iMod)));
-	v_h1f_GPsel.		push_back(pTFile_dEdx->Get<TH1F>(Form("h1f_GPsel_%i", iMod)));
-	v_h1f_GPv4.		push_back(pTFile_dEdx->Get<TH1F>(Form("h1f_GPv4_%i", iMod)));
-
-	v_tf1_Qsel.		push_back(pTFile_dEdx->Get<TF1>(Form("tf1_Qsel_%i", iMod)));
-	v_tf1_Qtrunc.		push_back(pTFile_dEdx->Get<TF1>(Form("tf1_Qtrunc_%i", iMod)));
-	v_tf1_WFsel.		push_back(pTFile_dEdx->Get<TF1>(Form("tf1_WFsel_%i", iMod)));
-	v_tf1_WFsum.	push_back(pTFile_dEdx->Get<TF1>(Form("tf1_WFsum_%i", iMod)));
-	v_tf1_GPsel.		push_back(pTFile_dEdx->Get<TF1>(Form("tf1_GPsel_%i", iMod)));
-	v_tf1_GPv4.		push_back(pTFile_dEdx->Get<TF1>(Form("tf1_GPv4_%i", iMod)));
-	}
-
-	std::string OutputFile	= OutDir + "/" + Tag + "/3_" + Tag + "_dEdx_GPv3.pdf";
-	std::string OutputFile_Beg = OutputFile + "(";
-	std::string OutputFile_End = OutputFile + ")";
-	gStyle->SetOptStat(111111);
-	gStyle->SetOptFit(111);
-	TCanvas* pTCanvas =	new TCanvas("TCanvas_Status", "TCanvas_Status", 1800, 1200);
-
-	// Page 1 Q raw
-	if (nMod != 1) pTCanvas->Divide(2,2);
-	for (int iMod = 0; iMod < nMod; iMod++){
-	pTCanvas->cd(iMod+1);
-	v_h1f_Qsel[iMod]->SetAxisRange(0, 1500, "X");
-	v_h1f_Qsel[iMod]->SetLineColor(kBlack);
-	v_tf1_Qsel[iMod]->SetLineColor(kMagenta+2);
-	v_h1f_Qsel[iMod]->SetLineWidth(2);
-	v_tf1_Qsel[iMod]->SetLineWidth(2);
-	v_h1f_Qsel[iMod]->Draw();
-	v_tf1_Qsel[iMod]->Draw("same");
-	gPad->Update();
-	if (v_h1f_Qsel[iMod]->GetMean() > (pTCanvas->GetUxmax() - pTCanvas->GetUxmin())/2) SetStatBoxPosition(v_h1f_Qsel[iMod], 0.12, 0.42, 0.52, 0.87);
-	else SetStatBoxPosition(v_h1f_Qsel[iMod], 0.58, 0.88, 0.52, 0.87);
-	PrintResolution(v_h1f_Qsel[iMod], pTCanvas, 0.05, 0.3, kBlack , "");
-	}
-	pTCanvas->SaveAs(OutputFile_Beg.c_str());
-
-	// Page 3 Q trunc
-	pTCanvas->Clear();
-	if (nMod != 1) pTCanvas->Divide(2,2);
-	for (int iMod = 0; iMod < nMod; iMod++){
-	pTCanvas->cd(iMod+1);
-	v_h1f_Qtrunc[iMod]->SetAxisRange(0, 1500, "X");
-	v_h1f_Qtrunc[iMod]->SetLineColor(kBlue+3);
-	v_tf1_Qtrunc[iMod]->SetLineColor(kBlue-6);
-	v_h1f_Qtrunc[iMod]->SetLineWidth(2);
-	v_tf1_Qtrunc[iMod]->SetLineWidth(2);
-	v_h1f_Qtrunc[iMod]->Draw();
-	v_tf1_Qtrunc[iMod]->Draw("same");
-	gPad->Update();
-	if (v_h1f_Qtrunc[iMod]->GetMean() > (pTCanvas->GetUxmax() - pTCanvas->GetUxmin())/2) SetStatBoxPosition(v_h1f_Qtrunc[iMod], 0.12, 0.42, 0.52, 0.87);
-	else SetStatBoxPosition(v_h1f_Qtrunc[iMod], 0.58, 0.88, 0.52, 0.87);
-	PrintResolution(v_h1f_Qtrunc[iMod], pTCanvas, 0.05, 0.3, kBlack , "");
-	}
-	pTCanvas->SaveAs(OutputFile.c_str());
-
-	// Page 5 WRsel
-	pTCanvas->Clear();
-	if (nMod != 1) pTCanvas->Divide(2,2);
-	for (int iMod = 0; iMod < nMod; iMod++){
-	pTCanvas->cd(iMod+1);
-	v_h1f_WFsel[iMod]->SetAxisRange(0, 1500, "X");
-	v_h1f_WFsel[iMod]->SetLineColor(kGreen+3);
-	v_tf1_WFsel[iMod]->SetLineColor(kGreen-6);
-	v_h1f_WFsel[iMod]->SetLineWidth(2);
-	v_tf1_WFsel[iMod]->SetLineWidth(2);
-	v_h1f_WFsel[iMod]->Draw();
-	v_tf1_WFsel[iMod]->Draw("same");
-	gPad->Update();
-	if (v_h1f_WFsel[iMod]->GetMean() > (pTCanvas->GetUxmax() - pTCanvas->GetUxmin())/2) SetStatBoxPosition(v_h1f_WFsel[iMod], 0.12, 0.42, 0.52, 0.87);
-	else SetStatBoxPosition(v_h1f_WFsel[iMod], 0.58, 0.88, 0.52, 0.87);
-	PrintResolution(v_h1f_WFsel[iMod], pTCanvas, 0.05, 0.3, kBlack , "");
-	}
-	pTCanvas->SaveAs(OutputFile.c_str());
-
-	// Page 7 WF trunc
-	pTCanvas->Clear();
-	if (nMod != 1) pTCanvas->Divide(2,2);
-	for (int iMod = 0; iMod < nMod; iMod++){
-	pTCanvas->cd(iMod+1);
-	v_h1f_WFsum[iMod]->SetAxisRange(0, 1500, "X");
-	v_h1f_WFsum[iMod]->SetLineColor(kCyan+2);
-	v_tf1_WFsum[iMod]->SetLineColor(kCyan-3);
-	v_h1f_WFsum[iMod]->SetLineWidth(2);
-	v_tf1_WFsum[iMod]->SetLineWidth(2);
-	v_h1f_WFsum[iMod]->Draw();
-	v_tf1_WFsum[iMod]->Draw("same");
-	gPad->Update();
-	if (v_h1f_WFsum[iMod]->GetMean() > (pTCanvas->GetUxmax() - pTCanvas->GetUxmin())/2) SetStatBoxPosition(v_h1f_WFsum[iMod], 0.12, 0.42, 0.52, 0.87);
-	else SetStatBoxPosition(v_h1f_WFsum[iMod], 0.58, 0.88, 0.52, 0.87);
-	PrintResolution(v_h1f_WFsum[iMod], pTCanvas, 0.05, 0.3, kBlack , "");
-	}
-	pTCanvas->SaveAs(OutputFile.c_str());
-
-	// Page 9 GPsel
-	pTCanvas->Clear();
-	if (nMod != 1) pTCanvas->Divide(2,2);
-	for (int iMod = 0; iMod < nMod; iMod++){
-	pTCanvas->cd(iMod+1);
-	v_h1f_GPsel[iMod]->SetAxisRange(0, 1500, "X");
-	v_h1f_GPsel[iMod]->SetLineColor(kGreen+2);
-	v_tf1_GPsel[iMod]->SetLineColor(kGreen-2);
-	v_h1f_GPsel[iMod]->SetLineWidth(2);
-	v_tf1_GPsel[iMod]->SetLineWidth(2);
-	v_h1f_GPsel[iMod]->Draw();
-	v_tf1_GPsel[iMod]->Draw("same");
-	gPad->Update();
-	if (v_h1f_GPsel[iMod]->GetMean() > (pTCanvas->GetUxmax() - pTCanvas->GetUxmin())/2) SetStatBoxPosition(v_h1f_GPsel[iMod], 0.12, 0.42, 0.52, 0.87);
-	else SetStatBoxPosition(v_h1f_GPsel[iMod], 0.58, 0.88, 0.52, 0.87);
-	PrintResolution(v_h1f_GPsel[iMod], pTCanvas, 0.05, 0.3, kBlack , "");
-	}
-	pTCanvas->SaveAs(OutputFile.c_str());
-
-	// Page 11 GPtrunc
-	pTCanvas->Clear();
-	if (nMod != 1) pTCanvas->Divide(2,2);
-	for (int iMod = 0; iMod < nMod; iMod++){
-	pTCanvas->cd(iMod+1);
-	v_h1f_GPv4[iMod]->SetAxisRange(0, 1500, "X");
-	v_h1f_GPv4[iMod]->SetLineColor(kMagenta+3);
-	v_tf1_GPv4[iMod]->SetLineColor(kMagenta-6);
-	v_h1f_GPv4[iMod]->SetLineWidth(2);
-	v_tf1_GPv4[iMod]->SetLineWidth(2);
-	v_h1f_GPv4[iMod]->Draw();
-	v_tf1_GPv4[iMod]->Draw("same");
-	gPad->Update();
-	if (v_h1f_GPv4[iMod]->GetMean() > (pTCanvas->GetUxmax() - pTCanvas->GetUxmin())/2) SetStatBoxPosition(v_h1f_GPv4[iMod], 0.12, 0.42, 0.52, 0.87);
-	else SetStatBoxPosition(v_h1f_GPv4[iMod], 0.58, 0.88, 0.52, 0.87);
-	PrintResolution(v_h1f_GPv4[iMod], pTCanvas, 0.05, 0.3, kBlack , "");
-	}
-	pTCanvas->SaveAs(OutputFile.c_str());
-
-	// Page 11 Summary selected & truncated Q & WF & GP
-	pTCanvas->Clear();
-	if (nMod != 1) pTCanvas->Divide(2,2);
-	for (int iMod = 0; iMod < nMod; iMod++){
-	pTCanvas->cd(iMod+1);
-
-	int QselMax	= v_h1f_Qsel[iMod]->GetMaximum();
-	int QtruncMax	= v_h1f_Qtrunc[iMod]->GetMaximum();
-	int WFselMax	= v_h1f_WFsel[iMod]->GetMaximum();
-	int WFsumMax	= v_h1f_WFsum[iMod]->GetMaximum();
-	int GPselMax	= v_h1f_GPsel[iMod]->GetMaximum();
-	int GPtruncMax	= v_h1f_GPv4[iMod]->GetMaximum();
-
-	v_h1f_Qsel[iMod]->SetStats(0);
-	v_h1f_Qsel[iMod]->SetAxisRange(0, 1500, "X");
-	v_h1f_Qsel[iMod]->SetAxisRange(0, 1.1 * std::max({QselMax, QtruncMax, WFselMax, WFsumMax, GPselMax, GPtruncMax}),	"Y");
-	v_h1f_Qsel[iMod]->SetTitle("Mean dE/dx using Q & WF & GP");
-	v_h1f_Qsel[iMod]->Draw();
-	v_tf1_Qsel[iMod]->Draw("same");
-
-	v_h1f_Qtrunc[iMod]->SetStats(0);
-	v_h1f_Qtrunc[iMod]->Draw("same");
-	v_tf1_Qtrunc[iMod]->Draw("same");
-
-	v_h1f_WFsel[iMod]->SetStats(0);
-	v_h1f_WFsel[iMod]->Draw("same");
-	v_tf1_WFsel[iMod]->Draw("same");
-
-	v_h1f_WFsum[iMod]->SetStats(0);
-	v_h1f_WFsum[iMod]->Draw("same");
-	v_tf1_WFsum[iMod]->Draw("same");
-
-	v_h1f_GPsel[iMod]->SetStats(0);
-	v_h1f_GPsel[iMod]->Draw("same");
-	v_tf1_GPsel[iMod]->Draw("same");
-
-	v_h1f_GPv4[iMod]->SetStats(0);
-	v_h1f_GPv4[iMod]->Draw("same");
-	v_tf1_GPv4[iMod]->Draw("same");
-
-
-	TLegend* leg = new TLegend(0.6,0.60,0.87,0.87); 
-	leg->AddEntry(v_h1f_Qsel[iMod], "Q not truncated ", "l");	
-	leg->AddEntry(v_h1f_Qtrunc[iMod], "Q truncated ", "l");	
-	leg->AddEntry(v_h1f_WFsel[iMod], "WF not truncated ", "l");	
-	leg->AddEntry(v_h1f_WFsum[iMod], "WF truncated ", "l");	
-	leg->AddEntry(v_h1f_GPsel[iMod], "GP not truncated ", "l");	
-	leg->AddEntry(v_h1f_GPv4[iMod], "GP truncated ", "l");	
-	leg->DrawClone();
-	pTCanvas->Update();
-	delete leg;
-	}
-
-	pTCanvas->SaveAs(OutputFile_End.c_str());
-	delete pTCanvas;
-}
-
-
-
-
-
-
-
-
-
-void DrawOut_Methods(const std::string& OutDir, const std::string& Tag, const std::string& Comment, const int& nMod){
-
-	std::cout										<< std::endl;
-	std::cout << " DrawOuts: Methods comparison" << std::endl;
-	std::cout << " OUTDirName: " << OutDir		<< std::endl;
-	std::cout										<< std::endl;
-	int statXin				= gStyle->GetStatX();
-	int statYin				= gStyle->GetStatY();
-
-	// Get histograms
-	TFile* pTFile_dEdx			= TFile::Open(TString(OutDir + Tag + "/3_" + Tag + "_dEdx" + Comment + ".root"));
-
-	std::vector<TH1F*>				v_h1f_WFsum;
-	std::vector<TH1F*>				v_h1f_XP;
-	std::vector<TF1*>				v_tf1_WFsum;
-	std::vector<TF1*>				v_tf1_XP;
-
-	for (int iMod = 0; iMod < nMod; iMod++){
-	v_h1f_WFsum.					push_back(pTFile_dEdx->Get<TH1F>("h1f_WFsum"));
-	v_h1f_XP.						push_back(pTFile_dEdx->Get<TH1F>("h1f_XP"));
-	v_tf1_WFsum.					push_back(pTFile_dEdx->Get<TF1> ("tf1_WFsum"));
-	v_tf1_XP.						push_back(pTFile_dEdx->Get<TF1> ("tf1_XP"));
-
-	// Set Display
-	v_h1f_WFsum[iMod]->		SetTitle(std::string("Mean dE/dx;mean dE/dx of each event;Counts").c_str());
-	// Set line color
-	v_h1f_WFsum[iMod]->		SetLineColor(kCyan+2);
-	v_h1f_XP[iMod]->			SetLineColor(kMagenta+2);
-	v_tf1_WFsum[iMod]->		SetLineColor(kCyan-3);
-	v_tf1_XP[iMod]->			SetLineColor(kMagenta+1);
-	// Set line width
-	v_h1f_WFsum[iMod]->		SetLineWidth(2);
-	v_h1f_XP[iMod]->			SetLineWidth(2);
-	v_tf1_WFsum[iMod]->		SetLineWidth(2);
-	v_tf1_XP[iMod]->			SetLineWidth(2);
-	}
-
-	// Make canvas
-	std::string OutputFile			= OutDir + Tag + "/3_" + Tag + "_Comparison" + Comment + ".pdf";
-	TCanvas* pTCanvas				= new TCanvas("pTCanvas", "pTCanvas", 1800, 1200);
-
-	//	Draw
-	TPaveStats* pStat_WF;
-	TPaveStats* pStat_XP;
-	for(int iMod = 0; iMod < nMod; iMod++){
-	int WFsumMax					= v_h1f_WFsum[iMod]->GetMaximum();
-	int XPMax						= v_h1f_XP[iMod]->GetMaximum();
-	v_h1f_WFsum[iMod]->SetAxisRange(0, 1.1 * std::max({WFsumMax, XPMax}),	"Y");
-
-	float invX						= 0;
-	if(v_h1f_WFsum[iMod]->GetMean() > 800) invX = 0.4;
-
-	pTCanvas->cd(iMod+1);
-	gStyle->							SetOptStat(11);
-	gStyle->							SetOptFit(111);	
-
-	v_h1f_WFsum[iMod]->				Draw("HIST");
-	v_tf1_WFsum[iMod]->				Draw("same");
-	gPad->								Update();
-	SetStatBoxPosition(v_h1f_WFsum[iMod], 0.76, 0.99, 0.52, 0.72);
-	pStat_WF							= (TPaveStats*)v_h1f_WFsum[iMod]->FindObject("stats");
-	pStat_WF->							SetTextColor(kCyan+2);
-
-	v_h1f_XP[iMod]->			Draw("HIST sames");
-	v_tf1_XP[iMod]->			Draw("same");
-	gPad->								Update();
-	SetStatBoxPosition(v_h1f_XP[iMod], 0.76, 0.99, 0.72, 0.92);	
-	pStat_XP						= (TPaveStats*)v_h1f_XP[iMod]->FindObject("stats");
-	pStat_XP->						SetTextColor(kMagenta+2);
-
-	PrintResolution(v_h1f_XP[iMod],	pTCanvas, 0.8-invX, 0.93, kMagenta+2, "XP");
-	PrintResolution(v_h1f_WFsum[iMod], pTCanvas, 0.8-invX, 0.83, kCyan+2, "WF");
-
-	}
-	pTCanvas->					SaveAs(OutputFile.c_str());
-
-	delete						pTCanvas;
-	v_h1f_WFsum.				clear();
-	v_h1f_XP.				clear();
-	v_tf1_WFsum.				clear();
-	v_tf1_XP.				clear();
-	delete						pTFile_dEdx;
-	gStyle->					SetStatX(statXin);
-	gStyle->					SetStatY(statYin);
-	gStyle->					SetOptStat(111111);
-}
 
 
 
@@ -2012,7 +1814,7 @@ void DrawOut_Separation(const std::string& inputDir, const std::string& Comment)
 	ptText->SetTextAlign(31);
 	float sepa			= GetSeparation(mean_WFsum[0],	std_WFsum[0],		mean_WFsum[2],	std_WFsum[2]);
 	float dsepa			= GetSeparationError(mean_WFsum[0], std_WFsum[0], dmean_WFsum[0], dstd_WFsum[0], mean_WFsum[2], std_WFsum[2], dmean_WFsum[2], dstd_WFsum[2]);
-	ptText->SetText(1200, 0.19, Form("S(e^{+} | #mu^{+}) = %.2f #pm %.2f #sigma", sepa, dsepa));
+	ptText->SetText(1200, 0.19, Form("S(e^{+} | #mu^{+}) = 	%.2f #pm %.2f #sigma", sepa, dsepa));
 	ptText->SetTextColor(kCyan+2);
 	ptText->DrawClone();
 	delete ptText;
@@ -2633,132 +2435,6 @@ void DrawOut_Scans(const std::string& inputDir, const std::string& Comment, cons
 
 
 
-
-// Draw resolution as function of Z scan
-void DrawOut_Zscan(const std::string& inputDir, const std::string& Comment, const int& PT)
-{
-	int ipoint				= 0;
-	int nz					= 10;
-
-	// Vectors of TFiles & TH1Fs & TF1s & TGEs
-	TFile* pTFile;
-	std::vector<TF1*>		v_tf1_WF;
-	std::vector<TF1*>		v_tf1_XP;
-
-	int		z_val[]	= {50, 150, 250, 350, 450, 550, 650, 750, 850, 950};
-	std::string z_arr[]	= {"m40", "060", "160", "260", "360", "460", "560", "660", "760", "860"};
-
-	for(int iz = 0; iz < int(std::size(z_arr)); iz++){
-	pTFile					= TFile::Open(TString(inputDir + "/DESY21_z" + z_arr[iz] + "_PT" + PT + "/3_DESY21_z" + z_arr[iz] + "_PT" + PT + "_dEdx" + Comment + ".root"));
-	v_tf1_WF.				push_back(pTFile->	Get<TF1>("tf1_WFsum"));
-	v_tf1_XP.				push_back(pTFile->	Get<TF1>("tf1_XP"));
-	pTFile->					Clear();
-	}
-
-	TGraphErrors* pTGE_reso_WF	= new TGraphErrors();
-	TGraphErrors* pTGE_reso_XP	= new TGraphErrors();
-
-	TGraphErrors* pTGE_mean_WF	= new TGraphErrors();
-	TGraphErrors* pTGE_mean_XP	= new TGraphErrors();
-
-	TGraphErrors* pTGE_std_WF	= new TGraphErrors();
-	TGraphErrors* pTGE_std_XP	= new TGraphErrors();
-
-	// Get mean & std
-	float mean_WF[nz];
-	float mean_XP[nz];
-	float dmean_WF[nz];
-	float dmean_XP[nz];
-	float std_WF[nz];
-	float std_XP[nz];
-	float dstd_WF[nz];
-	float dstd_XP[nz];
-	for(int iz = 0; iz < nz; iz++){
-	mean_WF[iz]				= v_tf1_WF[iz]->	GetParameter(1);
-	mean_XP[iz]				= v_tf1_XP[iz]->	GetParameter(1);
-	std_WF[iz]					= v_tf1_WF[iz]->	GetParameter(2);
-	std_XP[iz]					= v_tf1_XP[iz]->	GetParameter(2);
-	dmean_WF[iz]				= v_tf1_WF[iz]->	GetParError(1);
-	dmean_XP[iz]				= v_tf1_XP[iz]->	GetParError(1);
-	dstd_WF[iz]				= v_tf1_WF[iz]->	GetParError(2);
-	dstd_XP[iz]				= v_tf1_XP[iz]->	GetParError(2);
-
-	pTGE_reso_WF->	SetPoint		(ipoint, z_val[iz], std_WF[iz]/mean_WF[iz]*100);
-	pTGE_reso_XP->	SetPoint		(ipoint, z_val[iz], std_XP[iz]/mean_XP[iz]*100);
-	pTGE_reso_WF->	SetPointError (ipoint, 0,		GetResoError(v_tf1_WF[iz]));
-	pTGE_reso_XP->	SetPointError (ipoint, 0,		GetResoError(v_tf1_XP[iz]));
-
-	pTGE_mean_WF->	SetPoint		(ipoint, z_val[iz], mean_WF[iz]);
-	pTGE_mean_XP->	SetPoint		(ipoint, z_val[iz], mean_XP[iz]);
-	pTGE_mean_WF->	SetPointError (ipoint, 0,		dmean_WF[iz]);
-	pTGE_mean_XP->	SetPointError (ipoint, 0,		dmean_XP[iz]);
-
-	pTGE_std_WF->	SetPoint		(ipoint, z_val[iz], std_WF[iz]);
-	pTGE_std_XP->	SetPoint		(ipoint, z_val[iz], std_XP[iz]);
-	pTGE_std_WF->	SetPointError	(ipoint, 0,		dstd_WF[iz]);
-	pTGE_std_XP->	SetPointError	(ipoint, 0,		dstd_XP[iz]);
-
-	ipoint++;
-	}
-
-
-	// Draw
-	std::string OutputFile		= inputDir + "/Zscan_Resolution" + Comment + ".pdf";
-	std::string OutputFile_Beg	= OutputFile + "(";
-	std::string OutputFile_End	= OutputFile + ")";
-	TCanvas* pTCanvas			= new TCanvas("TCanvas", "TCanvas", 1800, 1200);
-	gStyle->						SetPadTickX(1);
-	gStyle->						SetPadTickY(1);
-	gStyle->						SetOptStat(0);
-	gStyle->						SetGridStyle(1);
-	pTCanvas->					cd();
-	TLegend* leg				= new TLegend(0.8,0.68,0.98,0.98);
-
-
-	// Resolution
-	pTGE_reso_WF->				GetXaxis()->SetLimits(0, 1000);
-	pTGE_reso_WF->				SetMinimum(4);
-	pTGE_reso_WF->				SetMaximum(12);
-	pTGE_reso_WF->				SetNameTitle("pTGE_reso_WF", "Resolution vs drift distance;drift distance (mm);resolution (%)");
-	Graphic_setup(pTGE_reso_WF,	3, 20, kCyan+2,	1, kBlack);
-	Graphic_setup(pTGE_reso_XP,	3, 21, kMagenta+2, 1, kBlack);
-	pTGE_reso_WF->				Draw("ap");
-	pTGE_reso_XP->				Draw("p same");
-	leg->						AddEntry(pTGE_reso_WF, "WF ", "ep"); 
-	leg->						AddEntry(pTGE_reso_XP, "XP ", "ep");	
-	leg->						Draw();
-	pTCanvas->					SaveAs(OutputFile_Beg.c_str());
-
-	// Mean
-	pTCanvas->					Clear();
-	pTGE_mean_WF->				SetMinimum(600);
-	pTGE_mean_WF->				SetMaximum(1200);
-	pTGE_mean_WF->				SetNameTitle("pTGE_mean_WF", "Mean vs drift distance;drift distance (mm);Mean (ADC count)");
-	Graphic_setup(pTGE_mean_WF,	3, 20, kCyan+2,	1, kBlack);
-	Graphic_setup(pTGE_mean_XP,	3, 21, kMagenta+2, 1, kBlack);
-	pTGE_mean_WF->				Draw("ap");
-	pTGE_mean_XP->				Draw("p same");
-	leg->						Draw();
-	pTCanvas->					SaveAs(OutputFile.c_str());
-
-	// Standard deviation
-	pTCanvas->					Clear();
-	pTGE_std_WF->				SetMinimum(40);
-	pTGE_std_WF->				SetMaximum(100);
-	pTGE_std_WF->				SetNameTitle("pTGE_std_WF", "std vs drift distance;drift distance (mm);std (ADC count)");
-	Graphic_setup(pTGE_std_WF,	3, 20, kCyan+2,	1, kBlack);
-	Graphic_setup(pTGE_std_XP,	3, 21, kMagenta+2, 1, kBlack);
-	pTGE_std_WF->				Draw("ap");
-	pTGE_std_XP->				Draw("p same");
-	leg->						Draw();
-	pTCanvas->					SaveAs(OutputFile_End.c_str());
-
-	// Delete
-	delete						pTCanvas;
-	delete						leg;
-	v_tf1_WF.					clear();
-	v_tf1_XP.					clear();
-}
 
 
 

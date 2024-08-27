@@ -16,17 +16,21 @@ include(${ROOT_USE_FILE})
 
 # Add source files
 file(GLOB SOURCES "*/src/*.cxx")
+list(APPEND SOURCES "$ENV{HOME}/Documents/Code/CPP_style/SetStyle.cxx")
 
 # Add a library target
 add_library(dEdxReconLib ${SOURCES})
 
 # Include directories
-target_include_directories(dEdxReconLib PUBLIC Fitters/inc)
-target_include_directories(dEdxReconLib PUBLIC ModelEvent/inc)
-target_include_directories(dEdxReconLib PUBLIC ModelSignal/inc)
-target_include_directories(dEdxReconLib PUBLIC Reconstruction/inc)
-target_include_directories(dEdxReconLib PUBLIC Uploader/inc)
-target_include_directories(dEdxReconLib PUBLIC Utilities/inc)
+target_include_directories(dEdxReconLib PUBLIC
+	Fitters/inc
+	ModelEvent/inc
+	ModelSignal/inc
+	Reconstruction/inc
+	Uploader/inc
+	Utilities/inc
+	"$ENV{HOME}/Documents/Code/CPP_style"
+)
 
 # Generate dictionaries
 ROOT_GENERATE_DICTIONARY(G__dEdxReconLib
