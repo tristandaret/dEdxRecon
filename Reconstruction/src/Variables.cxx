@@ -24,7 +24,7 @@ namespace Reconstruction{
 	std::vector<std::string>	v_valstr;
 	std::vector<std::string> 	v_comments;
 	std::vector<std::string> 	v_tags;
-	std::vector<std::string> 	v_data_files;
+	std::vector<std::string> 	v_datafiles;
 	std::vector<std::string> 	v_rootout_files;
 	std::string 				tag;
 	std::string					testbeam;

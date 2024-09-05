@@ -41,8 +41,8 @@ void Reconstruction::dEdx::Reconstruction(){
 
 	// Get ERAM maps
 	if(tag.find("DESY") != std::string::npos)						{fERAMs_iD.push_back(1);					fERAMs_pos.push_back(12);}
-	if(v_data_files.back().find("ERAM18") != std::string::npos)		{fERAMs_iD.push_back(18);					fERAMs_pos.push_back(33);}
-	if(v_data_files.back().find("All_ERAMS") != std::string::npos)	{fERAMs_iD = {7, 1, 23, 2, 16, 15, 10, 12};	fERAMs_pos = {26, 12, 10, 7, 17, 19, 13, 32};}
+	if(v_datafiles.back().find("ERAM18") != std::string::npos)		{fERAMs_iD.push_back(18);					fERAMs_pos.push_back(33);}
+	if(v_datafiles.back().find("All_ERAMS") != std::string::npos)	{fERAMs_iD = {7, 1, 23, 2, 16, 15, 10, 12};	fERAMs_pos = {26, 12, 10, 7, 17, 19, 13, 32};}
 	pERAMMaps =									new Reconstruction::ERAMMaps();
 
 	// Diagonal clustering?
@@ -69,7 +69,7 @@ void Reconstruction::dEdx::Reconstruction(){
 	aSelector.Tell_Selection();
 
 	// Log info
-	std::cout << "dataFile:			  " << v_data_files.back()				<<	std::endl;
+	std::cout << "dataFile:			  " << v_datafiles.back()				<<	std::endl;
 	std::cout << "drawout_scanfolder: " << drawout_scanfolder				<<	std::endl;
 	std::cout << "tag:                " << tag								<<	std::endl;
 	std::cout << "comment:            " << comment							<<	std::endl;
@@ -90,7 +90,7 @@ void Reconstruction::dEdx::Reconstruction(){
 	std::cout <<																std::endl;
 
 	// Correction function for WF
-	pcorrFunctionWF =							corr_func(v_data_files.back(), tag, fcorrectWF);
+	pcorrFunctionWF =							corr_func(v_datafiles.back(), tag, fcorrectWF);
 	fAref	=									pcorrFunctionWF->Eval(XPADLENGTH);
 
 	// Track fit initializations

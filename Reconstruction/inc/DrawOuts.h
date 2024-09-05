@@ -22,11 +22,15 @@ namespace Reconstruction{
 		void SingleScanFill();
 		void SingleScanDraw();
 
+		void MultipleScanFill();
+		void MultipleScanDraw();
+
 		void Control();
 		void EnergyLoss();
 		void FileComparison();
 
 		void DESY21SingleScan();
+		void DESY21MultipleScan();
 
 	private:
 		// Files

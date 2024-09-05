@@ -138,7 +138,7 @@ void Reconstruction::DrawOuts::SingleScanDraw(){
 
 
 	// Resolution
-	fpTGE_reso_WF->					GetXaxis()->SetLimits(0, 1000);
+	// fpTGE_reso_WF->					GetXaxis()->SetLimits(0, 1000);
 	fpTGE_reso_WF->					SetMinimum(YRESOMIN);
 	fpTGE_reso_WF->					SetMaximum(YRESOMAX);
 	fpTGE_reso_WF->					SetNameTitle("fpTGE_reso_WF", ";drift distance (mm);resolution (%)");
@@ -176,7 +176,9 @@ void Reconstruction::DrawOuts::SingleScanDraw(){
 	fpCanvas->						SaveAs((foutputFile + ")").c_str());
 }
 
+void Reconstruction::DrawOuts::MultipleScanFill(){
 
+}
 
 
 
@@ -628,5 +630,11 @@ void Reconstruction::DrawOuts::FileComparison(){
 void Reconstruction::DrawOuts::DESY21SingleScan(){
 	SingleScanFill();
 	SingleScanDraw();
+	CleanUp();
+}
+
+void Reconstruction::DrawOuts::DESY21MultipleScan(){
+	MultipleScanFill();
+	MultipleScanDraw();
 	CleanUp();
 }
