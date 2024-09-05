@@ -21,8 +21,8 @@ namespace Reconstruction{
 	int CERN_Escan =			0;
 	int CERN_drift = 			0;
 
-	int DESY_drift =			1;
-	int DESY_yscan =			0;
+	int DESY_drift =			0;
+	int DESY_row =				1;
 	int DESY_phi =				0;
 	int DESY_theta =			0;
 
@@ -34,7 +34,7 @@ namespace Reconstruction{
 	int DO_dEdx =				1;
 	int DO_Comparison =			0;
 
-	int DO_DESY21ScanDrift =	1;
+	int DO_DESY21SingleScan =	1;
 }
 
 
@@ -96,13 +96,13 @@ void Reconstruction::Monitoring()
 	if(CERN_drift){
 		Settings("CERN22", "Drift_Scan", 3, -1, 412, 350, 415, 40);
 
-		int			z_val[] = 	{60, 218, 415, 925};
-		std::string z_arr[] = 	{"60", "218p5", "415", "925"};
+		int			v_valint[] = 	{60, 218, 415, 925};
+		std::string v_valstr[] = 	{"60", "218p5", "415", "925"};
 
 		int NFiles = 4;
 		for (int iz = 0; iz < NFiles; iz++){
-			const char* z = 	z_arr[iz].c_str();
-			driftDist = 		z_val[iz];
+			const char* z = 	v_valstr[iz].c_str();
+			driftDist = 		v_valint[iz];
 			v_data_files.		push_back(data_scanfolder + "All_ERAMS_350V_412ns_e+_0p5GeV_25V_z" + z + "_iter4.root");	
 			v_tags.				push_back(Form("Drift%s", z));
 
@@ -113,36 +113,35 @@ void Reconstruction::Monitoring()
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// z scan scan with DESY21
 	if(DESY_drift){
-		int PT_arr[] = {200}; // 200, 412
+		int PT_arr[] = 				{200}; // 200, 412
+		v_valint.					insert(v_valint.end(), {50, 150, 250, 350, 450, 550, 650, 750, 850, 950});
+		v_valstr.					insert(v_valstr.end(), {"m40", "060", "160", "260", "360", "460", "560", "660", "760", "860"});
 		for (int iPT : PT_arr){
-			PT = iPT;
+			PT = 					iPT; // PT is a shared variable in the namespace so it's important to update it here
 			Settings("DESY21", Form("Drift_Scan_PT%i", PT), 1, 0, PT, 310, 450, 50);
 
-			int		z_val[] = {50, 150, 250, 350, 450, 550, 650, 750, 850, 950};
-			std::string z_arr[] = {"m40", "060", "160", "260", "360", "460", "560", "660", "760", "860"};
-			// int		z_val[] = {550};
-			// std::string z_arr[] = {"460"};
-
-			for (int iz = 0; iz < (int)std::size(z_arr); iz++){
-				const char* z = z_arr[iz].c_str();
-				driftDist = z_val[iz];
-				v_data_files.push_back(Form("../Data/Data_DESY21/zscan_PT%i/z_360_275_%i_02T_26_%s_iter9.root", iPT, iPT, z)); v_tags.push_back(Form("DESY21_z%s_PT%i", z, iPT));
+			for (int iz = 0; iz < (int)std::size(v_valstr); iz++){
+				const char* z = 	v_valstr[iz].c_str();
+				driftDist = 		v_valint[iz];
+				v_data_files.		push_back(Form("../Data/Data_DESY21/Drift_scan_PT%i/z_360_275_%i_02T_26_%s_iter9.root", iPT, iPT, z)); v_tags.push_back(Form("DESY21_z%s_PT%i", z, iPT));
 
 				DefaultAnalysis();
 			}
-			if(DO_DESY21ScanDrift) DrawScan(testbeam, scan);
+			if(DO_DESY21SingleScan) DrawScan(testbeam, scan);
 		}
+		v_valint.					clear();
+		v_valstr.					clear();
 	}
 	
 
 
 	// y scan scan with DESY21
-	if(DESY_yscan){
+	if(DESY_row){
 		Settings("DESY21", "Row_Scan", 1, 0, 412, 310, 90, 50);
 
 		std::string Y_arr[] = {"m140", "m120", "m100", "m80", "m60", "m40", "0", "20", "40", "60", "80"};
 		for (int y = 0; y < (int)std::size(Y_arr); y++){
-			v_data_files.push_back(Form("../Data/Data_DESY21/yscan/Y%s_Z0_iter9.root", Y_arr[y].c_str())); v_tags.push_back(Form("DESY21_y%s", Y_arr[y].c_str())); 
+			v_data_files.push_back(Form("../Data/Data_DESY21/Row_scan/Y%s_Z0_iter9.root", Y_arr[y].c_str())); v_tags.push_back(Form("DESY21_y%s", Y_arr[y].c_str())); 
 			DefaultAnalysis();
 		}
 	}
@@ -151,13 +150,13 @@ void Reconstruction::Monitoring()
 
 	// Phi scan with DESY21
 	if(DESY_phi){
-		int			z_val[] =	{50, 550, 950};
-		std::string z_arr[] =	{"m40", "460", "860"};
+		int			v_valint[] =	{50, 550, 950};
+		std::string v_valstr[] =	{"m40", "460", "860"};
 		int			phi_val[] =	{0, 5, 10, 20, 30, 30, 40, 45};
 		
-		for (int iz = 0; iz < (int)std::size(z_arr); iz++){
-			const char* z = z_arr[iz].c_str();
-			Settings("DESY21", Form("DESY21_phi_z%s", z), 1, 0, 200, 310, z_val[iz], 40);
+		for (int iz = 0; iz < (int)std::size(v_valstr); iz++){
+			const char* z = v_valstr[iz].c_str();
+			Settings("DESY21", Form("DESY21_phi_z%s", z), 1, 0, 200, 310, v_valint[iz], 40);
 			
 			std::string comment_phi = comment;
 			for (int ifile = 0; ifile < (int)std::size(phi_val); ifile++){
@@ -252,7 +251,7 @@ void Reconstruction::Settings(const std::string &testbeam_name, const std::strin
 	testbeam = 					testbeam_name;
 	scan = 						scan_name;
 	selectionSet =				"Sel_" + testbeam;
-	data_scanfolder =				data_folder + "Data_" + testbeam + "/";
+	data_scanfolder =			data_folder + "Data_" + testbeam + "/";
 	drawout_scanfolder =		drawout_folder + testbeam + "_" + scan + "/";
 	intUploader =				uploader;
 	moduleCase =				modules;
@@ -304,7 +303,7 @@ void Reconstruction::DrawScan(const std::string &testbeam, const std::string &sc
 	MakeMyDir(drawout_scanfolder);
 
 	p_DrawOuts =				new DrawOuts(v_rootout_files);
-	p_DrawOuts->				DESY21ScanDrift();
+	p_DrawOuts->				DESY21SingleScan();
 	delete  					p_DrawOuts;
 }
 
@@ -345,12 +344,12 @@ void Reconstruction::DrawScan(const std::string &testbeam, const std::string &sc
 //	if (control or dedx) p_lut = new LUT(Form("~/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi150_nd150_nRC41_nZ21.root", Dt, PT));
 //	std::string B_arr[] = {"0", "04", "06"};
 //	std::string Z_arr[] = {"60", "460", "860"};
-//	int z_val[] = {150, 550, 950};
+//	int v_valint[] = {150, 550, 950};
 //	for(int j = 0; j < 3; j++){
 //		const char* B = B_arr[j].c_str();
 //		for(int i = 0; i < 3; i++){
 //		const char* z = Z_arr[i].c_str();
-//		driftDist = z_val[i];
+//		driftDist = v_valint[i];
 //		// v_data_files.push_back(Form			("../Data/Data_DESY21/ExB_scan/ExB_360_412ns_B02_ym10_z%s_iter9.root", z)); v_tags.push_back(Form("DESY21_ExB02_Z%s", z)); v_prtcles.push_back(Form("electron_ExB02_Z%s", z);
 //		v_data_files.push_back(Form			("../Data/Data_DESY21/ExB_scan/ExB_360_phim3_200ns_B%s_ym60_z%s_iter0.root", B, z)); v_tags.push_back(Form("DESY21_ExB%s_Z%s", B, z)); v_prtcles.push_back(Form("electron_ExB%s_Z%s", B, z));
 //		if(control or dedx) p_uploader = GiveMe_Uploader (intUploader, v_data_files.back());

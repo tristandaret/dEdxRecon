@@ -25,6 +25,8 @@ namespace Reconstruction{
 	extern std::string				inputDir;
 
 	// Run variables
+	extern std::vector<int>			v_valint;
+	extern std::vector<std::string>	v_valstr;
 	extern std::vector<std::string> v_comments;
 	extern std::vector<std::string> v_tags;
 	extern std::vector<std::string> v_data_files;

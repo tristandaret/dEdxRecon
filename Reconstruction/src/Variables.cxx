@@ -20,6 +20,8 @@ namespace Reconstruction{
 	std::string					inputDir; // To be removed when the whole drawout code is updated
 
 	// Run variables
+	std::vector<int>			v_valint;
+	std::vector<std::string>	v_valstr;
 	std::vector<std::string> 	v_comments;
 	std::vector<std::string> 	v_tags;
 	std::vector<std::string> 	v_data_files;
