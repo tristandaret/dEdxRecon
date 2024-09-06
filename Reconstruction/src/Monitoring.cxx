@@ -21,8 +21,8 @@ namespace Reconstruction{
 	int CERN_Escan =			0;
 	int CERN_drift = 			0;
 
-	int DESY_drift =			0;
-	int DESY_row =				1;
+	int DESY_drift =			1;
+	int DESY_row =				0;
 	int DESY_phi =				0;
 	int DESY_theta =			0;
 
@@ -35,6 +35,7 @@ namespace Reconstruction{
 	int DO_Comparison =			0;
 
 	int DO_DESY21SingleScan =	1;
+	int DO_DESY21MultScan =		1;
 }
 
 
@@ -47,10 +48,9 @@ void Reconstruction::Monitoring()
 	Correction(1,1,1,1,1);
 
 
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Energy scan using the prototype (ERAM 18)
 	if(prototype){
-		Settings("CERN22", "Prototype", 2, -1, 412, 350, 415, 40);
+		Settings("CERN22", "", "Prototype", "", 2, -1, 412, 350, 415, 40);
 
 		int part_arr[] = {1,2,5,6};
 		for (int iFile : part_arr) {
@@ -66,7 +66,7 @@ void Reconstruction::Monitoring()
 
 	// Energy scan using the mockup
 	if(CERN_Escan){
-		Settings("CERN22", "Energy_Scan", 4, -1, 412, 350, 415, 40);
+		Settings("CERN22", "", "Energy_Scan", "", 4, -1, 412, 350, 415, 40);
 
 		// int NFiles = 14;
 		// for (int iFile = 0; iFile < NFiles; iFile++){
@@ -94,7 +94,7 @@ void Reconstruction::Monitoring()
 
 	// Drift distance scan scan using the mockup
 	if(CERN_drift){
-		Settings("CERN22", "Drift_Scan", 3, -1, 412, 350, 415, 40);
+		Settings("CERN22", "", "Drift_Scan", "", 3, -1, 412, 350, 415, 40);
 
 		int			v_valint[] = 	{60, 218, 415, 925};
 		std::string v_valstr[] = 	{"60", "218p5", "415", "925"};
@@ -113,12 +113,12 @@ void Reconstruction::Monitoring()
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// z scan scan with DESY21
 	if(DESY_drift){
-		int PT_arr[] = 				{200}; // 200, 412
+		int PT_arr[] = 				{412, 200}; // 200, 412
 		v_valint.					insert(v_valint.end(), {50, 150, 250, 350, 450, 550, 650, 750, 850, 950});
 		v_valstr.					insert(v_valstr.end(), {"m40", "060", "160", "260", "360", "460", "560", "660", "760", "860"});
 		for (int iPT : PT_arr){
 			PT = 					iPT; // PT is a shared variable in the namespace so it's important to update it here
-			Settings("DESY21", Form("Drift_Scan_PT%i", PT), 1, 0, PT, 310, 450, 50);
+			Settings("DESY21", "Drift_Scan", Form("Drift_Scan_PT%i", PT), Form("(%i ns)", PT), 1, 0, PT, 310, 450, 50);
 
 			for (int iz = 0; iz < (int)std::size(v_valstr); iz++){
 				const char* z = 	v_valstr[iz].c_str();
@@ -127,17 +127,18 @@ void Reconstruction::Monitoring()
 
 				DefaultAnalysis();
 			}
-			if(DO_DESY21SingleScan) DrawScan(testbeam, scan);
+			if(DO_DESY21SingleScan) DrawSingleScan();
+			scanindex++;
 		}
-		v_valint.					clear();
-		v_valstr.					clear();
+		if(DO_DESY21MultScan) DrawMultipleScan();
+		ClearVectors();
 	}
 	
 
 
 	// y scan scan with DESY21
 	if(DESY_row){
-		Settings("DESY21", "Row_Scan", 1, 0, 412, 310, 90, 50);
+		Settings("DESY21", "", "Row_Scan", "", 1, 0, 412, 310, 90, 50);
 		v_valint.					insert(v_valint.end(), {-140, -120, -100, -80, -60, -40, 0, 20, 40, 60, 80});
 		v_valstr.					insert(v_valstr.end(), {"m140", "m120", "m100", "m80", "m60", "m40", "0", "20", "40", "60", "80"});
 
@@ -145,7 +146,8 @@ void Reconstruction::Monitoring()
 			v_datafiles.push_back(Form("../Data/Data_DESY21/Row_scan/Y%s_Z0_iter9.root", v_valstr[y].c_str())); v_tags.push_back(Form("DESY21_y%s", v_valstr[y].c_str())); 
 			DefaultAnalysis();
 		}
-		if(DO_DESY21SingleScan) DrawScan(testbeam, scan);
+		if(DO_DESY21SingleScan) DrawSingleScan();
+		ClearVectors();
 	}
 	
 
@@ -158,7 +160,7 @@ void Reconstruction::Monitoring()
 		
 		for (int iz = 0; iz < (int)std::size(v_valstr); iz++){
 			const char* z = v_valstr[iz].c_str();
-			Settings("DESY21", Form("DESY21_phi_z%s", z), 1, 0, 200, 310, v_valint[iz], 40);
+			Settings("DESY21", "Phi_Scan", Form("Phi_Scan_z%s", z), Form("(%i cm)", v_valint[iz]), 1, 0, 200, 310, v_valint[iz], 40);
 			
 			std::string comment_phi = comment;
 			for (int ifile = 0; ifile < (int)std::size(phi_val); ifile++){
@@ -170,17 +172,16 @@ void Reconstruction::Monitoring()
 									comment_phi = comment + "_WF" + fcorrectWF;}
 
 				DefaultAnalysis();
-				
-				if(ifile ==0)drawout_scanfolder = drawout_folder + Form("/DESY21_phi/DESY21_phi_z%s/", z); 
 			}
 		}
+		ClearVectors();
 	}
 	
 
 
 	// Theta scan with DESY21
 	if(DESY_theta){
-		Settings("DESY21", "Theta_scan", 1, 0, 200, 310, 350, 40);
+		Settings("DESY21", "", "Theta_scan", "", 1, 0, 200, 310, 350, 40);
 		selectionSet = "Sel_DESY21_theta";
 		std::string theta_arr[] = {"m45", "m20", "20"};
 		for (std::string theta : theta_arr){
@@ -213,8 +214,6 @@ void Reconstruction::Monitoring()
 		p_DrawOuts =			new DrawOuts(v_datafiles);
 		p_DrawOuts->				FileComparison();
 	}
-
-
 }
 
 
@@ -246,25 +245,39 @@ void Reconstruction::Correction(const int& corrRC, const int& corrGain, const in
 	if(saveSelectOnly == 0) comment =	comment + "_wDiscard";	
 }
 
-void Reconstruction::Settings(const std::string &testbeam_name, const std::string &scan_name, const int &uploader, const int &modules, const int& peaking_time, const int& diffusion, const int& drift_dist, const int& timbin){
-	v_datafiles.clear();
-	v_tags.clear();
+void Reconstruction::Settings(const std::string &testbeam_name, const std::string &metascan_name, const std::string &scan_name, const std::string &scanspec, const int &uploader, const int &modules, const int& peaking_time, const int& diffusion, const int& drift_dist, const int& timbin){
 
-	testbeam = 					testbeam_name;
-	scan = 						scan_name;
-	selectionSet =				"Sel_" + testbeam;
-	data_scanfolder =			data_folder + "Data_" + testbeam + "/";
-	drawout_scanfolder =		drawout_folder + testbeam + "_" + scan + "/";
-	intUploader =				uploader;
-	moduleCase =				modules;
-	PT =						peaking_time;
-	Dt =						diffusion;
-	driftDist =					drift_dist;
-	TB =						timbin;
+	testbeam = 								testbeam_name;
+	metascan = 								metascan_name;
+	scan = 									scan_name;
+	v_scanspec.								push_back(scanspec);
+	selectionSet =							"Sel_" + testbeam;
+	data_scanfolder =						data_folder + "Data_" + testbeam + "/";
+	drawout_metascanfolder =				drawout_folder + testbeam + "_" + metascan + "/";
+	if(metascan != "") drawout_scanfolder =	drawout_folder + drawout_metascanfolder + testbeam + "_" + scan + "/";
+	else drawout_scanfolder =				drawout_folder + testbeam + "_" + scan + "/";
+	MakeMyDir(drawout_scanfolder);
 
-	if(dedx) p_lut =			new LUT(Form("~/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi150_nd150_nRC41_nZ21.root", Dt, PT));
+	intUploader =							uploader;
+	moduleCase =							modules;
+	PT =									peaking_time;
+	Dt =									diffusion;
+	driftDist =								drift_dist;
+	TB =									timbin;
+
+	if(dedx) p_lut =						new LUT(Form("~/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi150_nd150_nRC41_nZ21.root", Dt, PT));
 }
 
+void Reconstruction::ClearVectors(){
+	v_valint.					clear();
+	v_valstr.					clear();
+	v_scanspec.					clear();
+	v_comments.					clear();
+	v_tags.						clear();
+	v_datafiles.				clear();
+	v_rootout_files.			clear();
+	scanindex =					0;
+}
 
 void Reconstruction::DefaultAnalysis(){
 	tag = 						v_tags.back();
@@ -287,28 +300,30 @@ void Reconstruction::DefaultAnalysis(){
 		drawout_file =			drawout_runfolder + "Control_" + testbeam + "_" + scan + "_" + tag + comment + ".pdf";
 		p_DrawOuts =			new DrawOuts(rootout_file);
 		p_DrawOuts->			Control();
+		delete 					p_DrawOuts;
 	}
 
 	if(DO_dEdx){
 		drawout_file =			drawout_runfolder + "dEdx_" + testbeam + "_" + scan + "_" + tag + comment + ".pdf";
 		p_DrawOuts =			new DrawOuts(rootout_file);
 		p_DrawOuts->			EnergyLoss();
+		delete 					p_DrawOuts;
 	}
-	delete  				p_DrawOuts;
 }
 
-
-
-
-void Reconstruction::DrawScan(const std::string &testbeam, const std::string &scan){
-	drawout_scanfolder = drawout_folder + testbeam + "_" + scan + "/";
-	MakeMyDir(drawout_scanfolder);
+void Reconstruction::DrawSingleScan(){
 
 	p_DrawOuts =				new DrawOuts(v_rootout_files);
-	p_DrawOuts->				DESY21SingleScan();
+	p_DrawOuts->				DESY21Scan("single");
 	delete  					p_DrawOuts;
 }
 
+void Reconstruction::DrawMultipleScan(){
+
+	p_DrawOuts =				new DrawOuts(v_rootout_files);
+	p_DrawOuts->				DESY21Scan("multiple");
+	delete  					p_DrawOuts;
+}
 
 
 

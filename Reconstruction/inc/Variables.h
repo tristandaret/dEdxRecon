@@ -15,6 +15,7 @@ namespace Reconstruction{
 	extern const std::string		data_folder;
 	extern std::string				data_scanfolder;
 	extern const std::string		drawout_folder;
+	extern std::string				drawout_metascanfolder;
 	extern std::string				drawout_scanfolder;
 	extern std::string 				drawout_runfolder;
 	extern std::string				drawout_file;
@@ -27,13 +28,16 @@ namespace Reconstruction{
 	// Run variables
 	extern std::vector<int>			v_valint;
 	extern std::vector<std::string>	v_valstr;
+	extern std::vector<std::string>	v_scanspec;
 	extern std::vector<std::string> v_comments;
 	extern std::vector<std::string> v_tags;
 	extern std::vector<std::string> v_datafiles;
 	extern std::vector<std::string> v_rootout_files;
 	extern std::string				tag;
 	extern std::string				testbeam;
+	extern std::string				metascan;
 	extern std::string				scan;
+	extern int 						scanindex;
 	extern int						intUploader;
 	extern int						moduleCase; // DESY21:0 | CERN22:-1
 	extern int						PT;		// Peaking time (ns)

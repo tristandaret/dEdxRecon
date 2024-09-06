@@ -3,18 +3,19 @@
 namespace Reconstruction{
 
 	// Output file variables
-	const std::string 			dedx_folder = 			"../";
+	const std::string 			dedx_folder = 				"../";
 
-	const std::string 			data_folder = 			dedx_folder + "Data/";
-	std::string 				data_scanfolder = 		"";
+	const std::string 			data_folder = 				dedx_folder + "Data/";
+	std::string 				data_scanfolder = 			"";
 
-	const std::string 			drawout_folder =		dedx_folder + "OUT_Reconstruction/";
-	std::string 				drawout_scanfolder =	"";
-	std::string					drawout_runfolder =		"";
-	std::string 				drawout_file = 			"";
+	const std::string 			drawout_folder =			dedx_folder + "OUT_Reconstruction/";
+	std::string 				drawout_scanfolder =		"";
+	std::string 				drawout_metascanfolder =	"";
+	std::string					drawout_runfolder =			"";
+	std::string 				drawout_file = 				"";
 
-	std::string 				rootout_file = 			"";
-	std::string 				log_file = 				"";
+	std::string 				rootout_file = 				"";
+	std::string 				log_file = 					"";
 	std::string 				comment;
 	std::string 				selectionSet;
 	std::string					inputDir; // To be removed when the whole drawout code is updated
@@ -22,13 +23,16 @@ namespace Reconstruction{
 	// Run variables
 	std::vector<int>			v_valint;
 	std::vector<std::string>	v_valstr;
+	std::vector<std::string>	v_scanspec;
 	std::vector<std::string> 	v_comments;
 	std::vector<std::string> 	v_tags;
 	std::vector<std::string> 	v_datafiles;
 	std::vector<std::string> 	v_rootout_files;
 	std::string 				tag;
 	std::string					testbeam;
+	std::string					metascan;
 	std::string					scan;
+	int 						scanindex = 0;
 	Uploader*					pUploader;
 	int							intUploader;
 	int							moduleCase; // DESY21:0 | CERN22:-1
