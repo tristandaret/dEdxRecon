@@ -11,13 +11,13 @@ namespace Reconstruction{
 	extern Reconstruction::LUT		*p_lut;
 
 	// Output file variables
-	extern const std::string 		dedx_folder;
-	extern const std::string		data_folder;
-	extern std::string				data_scanfolder;
-	extern const std::string		drawout_folder;
-	extern std::string				drawout_metascanfolder;
-	extern std::string				drawout_scanfolder;
-	extern std::string 				drawout_runfolder;
+	extern const std::string 		dedx_path;
+	extern const std::string		data_path;
+	extern std::string				data_scanpath;
+	extern const std::string		drawout_path;
+	extern std::string				drawout_metascanpath;
+	extern std::string				drawout_scanpath;
+	extern std::string 				drawout_runpath;
 	extern std::string				drawout_file;
 	extern std::string				rootout_file;
 	extern std::string				log_file;
@@ -37,6 +37,7 @@ namespace Reconstruction{
 	extern std::string				testbeam;
 	extern std::string				metascan;
 	extern std::string				scan;
+	extern std::string				runvarstr;
 	extern int 						scanindex;
 	extern int						intUploader;
 	extern int						moduleCase; // DESY21:0 | CERN22:-1

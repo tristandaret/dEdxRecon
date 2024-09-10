@@ -21,6 +21,9 @@
 std::vector<double> linspace(double start, double end, int numPoints);
 
 
+namespace Reconstruction{
+	void WFCorrection(const std::string& OutCorr);
+}
 
 /* Compute the correction function of WF method ----------------------------------------- */
 void corr(const std::string& OutDir,

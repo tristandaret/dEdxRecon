@@ -363,8 +363,7 @@ void Selector::Apply_ASelection(Event*	pEvent, const int& ModuleNber,const int& 
 
 void Selector::SetStat_Before(Event*	pEvent , const int& iTem)
 {
-	if (pEvent->IsValid()	== 0) return;
-	
+	if (pEvent->IsValid() == 0) return;
 	int NberOfModule	= pEvent->Get_NberOfModule();
 
 	int NberOfModules	= 0;

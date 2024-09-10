@@ -33,11 +33,11 @@ Reconstruction::dEdx::~dEdx(){
 void Reconstruction::dEdx::Reconstruction(){
 
 	// Redirect Output
-	std::cout <<		std::setprecision(2)	<< std::fixed;
+	std::cout <<		std::setprecision(2) << std::fixed;
 	std::cout <<		std::endl;
-	std::streambuf* 	coutbuf = std::cout.rdbuf();	// Save old buf
+	std::streambuf* 	coutbuf = std::cout.rdbuf();		// Save old buf
 	std::ofstream		OUT_DataFile(log_file.c_str() );	// Set output file
-	std::cout.			rdbuf(OUT_DataFile.rdbuf());	// Redirect to output file
+	std::cout.			rdbuf(OUT_DataFile.rdbuf());		// Redirect to output file
 
 	// Get ERAM maps
 	if(tag.find("DESY") != std::string::npos)						{fERAMs_iD.push_back(1);					fERAMs_pos.push_back(12);}
@@ -50,8 +50,8 @@ void Reconstruction::dEdx::Reconstruction(){
 	if(tag.find("diag") != std::string::npos) diag = true;
 
 	// Handle theta case
-	costheta =								1;
-	v_theta = 								{-20, 20, 45};
+	costheta =									1;
+	v_theta = 									{-20, 20, 45};
 	for (int theta_file : v_theta) if(tag.find("theta") != std::string::npos and tag.find(std::to_string(theta_file)) != std::string::npos) costheta = fabs(cos((float)theta_file/180*M_PI));
 
 
@@ -64,13 +64,14 @@ void Reconstruction::dEdx::Reconstruction(){
 
 	// Selection stage
 	Selector aSelector(selectionSet);
-	NEvents =										p_uploader->Get_NberOfEvent();
+	NEvents =									p_uploader->Get_NberOfEvent();
 	Init_selection(selectionSet, aSelector, tag, p_uploader, moduleCase, 0);
-	aSelector.Tell_Selection();
+	aSelector.									Tell_Selection();
 
 	// Log info
 	std::cout << "dataFile:			  " << v_datafiles.back()				<<	std::endl;
-	std::cout << "drawout_scanfolder: " << drawout_scanfolder				<<	std::endl;
+	std::cout << "drawout_scanpath:   " << drawout_scanpath					<<	std::endl;
+	std::cout << "root output file:   " << rootout_file						<<	std::endl;
 	std::cout << "tag:                " << tag								<<	std::endl;
 	std::cout << "comment:            " << comment							<<	std::endl;
 	std::cout << "selectionSet:       " << selectionSet						<<	std::endl;
@@ -91,13 +92,13 @@ void Reconstruction::dEdx::Reconstruction(){
 
 	// Correction function for WF
 	pcorrFunctionWF =							corr_func(v_datafiles.back(), tag, fcorrectWF);
-	fAref	=									pcorrFunctionWF->Eval(XPADLENGTH);
+	fAref =										pcorrFunctionWF->Eval(XPADLENGTH);
 
 	// Track fit initializations
 	TrackFitter aTrackFitter("Minuit", fnParamsTrack);
 	PRFParameters aPRFParameters;
 	ptf1PRF =									new TF1("ptf1PRF",aPRFParameters, -2.5*1.128, 2.5*1.128, 5);
-	ptf1PRF->										SetParameters(p_uploader->Get_Norm(), p_uploader->Get_a2(), p_uploader->Get_a4(), p_uploader->Get_b2(), p_uploader->Get_b4());
+	ptf1PRF->									SetParameters(p_uploader->Get_Norm(), p_uploader->Get_a2(), p_uploader->Get_a4(), p_uploader->Get_b2(), p_uploader->Get_b4());
 	fcounterFail =								0;
 	fcounterFit =								0;
 
@@ -105,8 +106,10 @@ void Reconstruction::dEdx::Reconstruction(){
 	waveform_cluster.assign(510, 0);
 	waveform_pad.assign(510, 0);
 	// dE/dx quick access histograms
-	ph1f_WF =									new TH1F("ph1f_WF", "<dE/dx> with WF;<dE/dx> (ADC count);Number of events", 100, 0, 1300);
-	ph1f_XP =									new TH1F("ph1f_XP", "<dE/dx> with XP;<dE/dx> (ADC count);Number of events", 100, 0, 1300);
+	int xmax =									1300;
+	if(tag.find("Theta") != std::string::npos) xmax = 2000;
+	ph1f_WF =									new TH1F("ph1f_WF", "<dE/dx> with WF;<dE/dx> (ADC count);Number of events", 100, 0, xmax);
+	ph1f_XP =									new TH1F("ph1f_XP", "<dE/dx> with XP;<dE/dx> (ADC count);Number of events", 100, 0, xmax);
 
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -462,6 +465,11 @@ void Reconstruction::dEdx::DiscardedEvents(){
 	p_recoevent->v_modules.					push_back(p_recomodule);
 	p_recoevent->NPads +=					p_recomodule->NPads;
 }
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 

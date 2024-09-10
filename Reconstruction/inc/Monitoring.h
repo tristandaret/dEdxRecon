@@ -14,7 +14,7 @@ namespace Reconstruction{
 
 	void Monitoring();
 	void Correction(const int& corrRC	= 1, const int& corrGain	= 1, const int& corrWF	= 1, const int& corrDrift	= 1, const int& saveSelectOnly = 1);
-	void Settings(const std::string &testbeam, const std::string &metascan, const std::string &scan, const std::string &scanspec, const int &uploader, const int &modules, const int& peaking_time, const int& diffusion, const int& drift_dist, const int& timbin);
+	void Settings(const std::string &testbeam, const std::string &metascan, const std::string &scan, const std::string &scanspec, const std::string &runvarstr_name, const int &uploader, const int &modules, const int& peaking_time, const int& diffusion, const int& drift_dist, const int& timbin);
 	void ClearVectors();
 	void DefaultAnalysis();
 	void DrawSingleScan();

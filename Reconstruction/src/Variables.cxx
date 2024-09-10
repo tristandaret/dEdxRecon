@@ -3,15 +3,15 @@
 namespace Reconstruction{
 
 	// Output file variables
-	const std::string 			dedx_folder = 				"../";
+	const std::string 			dedx_path = 				"../";
 
-	const std::string 			data_folder = 				dedx_folder + "Data/";
-	std::string 				data_scanfolder = 			"";
+	const std::string 			data_path = 				dedx_path + "Data/";
+	std::string 				data_scanpath = 			"";
 
-	const std::string 			drawout_folder =			dedx_folder + "OUT_Reconstruction/";
-	std::string 				drawout_scanfolder =		"";
-	std::string 				drawout_metascanfolder =	"";
-	std::string					drawout_runfolder =			"";
+	const std::string 			drawout_path =			dedx_path + "OUT_Reconstruction/";
+	std::string 				drawout_scanpath =		"";
+	std::string 				drawout_metascanpath =	"";
+	std::string					drawout_runpath =			"";
 	std::string 				drawout_file = 				"";
 
 	std::string 				rootout_file = 				"";
@@ -32,6 +32,7 @@ namespace Reconstruction{
 	std::string					testbeam;
 	std::string					metascan;
 	std::string					scan;
+	std::string					runvarstr;
 	int 						scanindex = 0;
 	Uploader*					pUploader;
 	int							intUploader;

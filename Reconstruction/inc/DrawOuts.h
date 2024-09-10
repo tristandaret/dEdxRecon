@@ -18,12 +18,9 @@ namespace Reconstruction{
 		// Methods
 		void CleanUp();
 		void SetStyle();
-
-		void SingleScanFill();
-		void SingleScanDraw();
-
-		void MultipleScanFill();
-		void MultipleScanDraw();
+		
+		void ScanFill();
+		void ScanDraw();
 
 		void Control();
 		void EnergyLoss();
@@ -39,13 +36,10 @@ namespace Reconstruction{
 		std::string foutputFile;
 		
 		// Data file
-		std::vector<TFile*> finputFiles;
-		std::vector<TTree*> finputTrees;
-		TFile *fpFile;
-		TTree *fpTree;
-		std::vector<RecoEvent*> finputEvents;
-		std::vector<int> finputnEntries;
-		int fnentries;
+		std::vector<TFile*> 	v_fFiles;
+		std::vector<TTree*> 	v_fTrees;
+		std::vector<RecoEvent*>	v_fEvents;
+		std::vector<int> 		v_fnentries;
 
 		// Reconstruction classes
 		Reconstruction::RecoEvent 	*p_recoevent;
@@ -88,6 +82,7 @@ namespace Reconstruction{
 		int nscans =				0;
 		int nruns =					0;
 		std::vector<int> markers = {22, 34, 23, 47, 33, 43};
+		std::vector<int> colors = {kCyan-6, kMagenta-6, kCyan+2, kMagenta+2, kCyan+3, kMagenta+3};
 		std::vector<TF1*> v_fptf1_WF;
 		std::vector<TF1*> v_fptf1_XP;
 		std::vector<TGraphErrors*> v_fpTGE_mean_WF;
