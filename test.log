@@ -1,0 +1,28 @@
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /local/home/td263283/Documents/Code/dEdx/dEdxRecon/build
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /local/home/td263283/Documents/Code/dEdx/dEdxRecon/build
+Scanning dependencies of target G__dEdxReconLib
+CMake Error: Directory Information file not found
+[  4%] Built target G__dEdxReconLib
+Consolidate compiler generated dependencies of target dEdxReconLib
+[  6%] Building CXX object CMakeFiles/dEdxReconLib.dir/Reconstruction/src/DrawOuts.cxx.o
+[  8%] Linking CXX static library libdEdxReconLib.a
+[ 95%] Built target dEdxReconLib
+[ 97%] Linking CXX executable Analysis
+[100%] Built target Analysis
+rootout:	../OUT_Reconstruction/CERN22_Energy/CERN22_Energy_e+_0p5GeV/CERN22_Energy_e+_0p5GeV_5k_wDiscard.root
+drawout:	../OUT_Reconstruction/CERN22_Energy/CERN22_Energy_e+_0p5GeV/Control_CERN22_Energy_e+_0p5GeV_5k_wDiscard.pdf
+number of entries in file ../OUT_Reconstruction/CERN22_Energy/CERN22_Energy_e+_0p5GeV/CERN22_Energy_e+_0p5GeV_5k_wDiscard.root: 1259
+Info in <TCanvas::Print>: pdf file ../OUT_Reconstruction/CERN22_Energy/CERN22_Energy_e+_0p5GeV/Control_CERN22_Energy_e+_0p5GeV_5k_wDiscard.pdf has been created using the current canvas
+Info in <TCanvas::Print>: Current canvas added to pdf file ../OUT_Reconstruction/CERN22_Energy/CERN22_Energy_e+_0p5GeV/Control_CERN22_Energy_e+_0p5GeV_5k_wDiscard.pdf
+Info in <TCanvas::Print>: Current canvas added to pdf file ../OUT_Reconstruction/CERN22_Energy/CERN22_Energy_e+_0p5GeV/Control_CERN22_Energy_e+_0p5GeV_5k_wDiscard.pdf
+Info in <TCanvas::Print>: Current canvas added to pdf file ../OUT_Reconstruction/CERN22_Energy/CERN22_Energy_e+_0p5GeV/Control_CERN22_Energy_e+_0p5GeV_5k_wDiscard.pdf
+Info in <TCanvas::Print>: Current canvas added to pdf file ../OUT_Reconstruction/CERN22_Energy/CERN22_Energy_e+_0p5GeV/Control_CERN22_Energy_e+_0p5GeV_5k_wDiscard.pdf
+Info in <TCanvas::Print>: Current canvas added to pdf file ../OUT_Reconstruction/CERN22_Energy/CERN22_Energy_e+_0p5GeV/Control_CERN22_Energy_e+_0p5GeV_5k_wDiscard.pdf and file closed
+
+real	0m0,908s
+user	0m0,780s
+sys	0m0,125s

@@ -119,7 +119,7 @@ void Reconstruction::dEdx::Reconstruction(){
 
 
 	// Event loop
-	for (iEvent = 0; iEvent < NEvents; iEvent++){
+	for (iEvent = 0; iEvent < 5e3; iEvent++){
 		if(iEvent % 1000 ==	0 or iEvent ==	NEvents-1) std::cout << iEvent << "/" << NEvents << std::endl;
 
 		pEvent =									p_uploader->GiveMe_Event(iEvent, moduleCase, 0, 0);
@@ -131,12 +131,15 @@ void Reconstruction::dEdx::Reconstruction(){
 
 		aSelector.									ApplySelection(pEvent);
 		if (pEvent->IsValid() == 0){
+			std::cout << "Whole Event " << iEvent << " discarded" << std::endl;
 			if(!fsaveSelectOnly ) for (iMod = 0; iMod < NMod; iMod++){
 				pModule =							pEvent->Get_Module_InArray(iMod);
 				fmodID =							pModule->Get_ModuleNber();
 				DiscardedEvents();
 			}
-			delete pEvent;
+			fpTree_dEdx->								Fill();
+			p_recoevent->								Clear();
+			delete										pEvent;
 			continue;
 		}
 
@@ -147,6 +150,7 @@ void Reconstruction::dEdx::Reconstruction(){
 			pModule =								pEvent->Get_Module_InArray(iMod);
 			fmodID =								pModule->Get_ModuleNber();
 			if (pEvent->Validity_ForThisModule(fmodID) == 0){
+				std::cout << "Event " << iEvent << " Module " << fmodID << " discarded" << std::endl;
 				if(!fsaveSelectOnly) DiscardedEvents();
 				continue;
 			}
@@ -296,7 +300,7 @@ void Reconstruction::dEdx::Reconstruction(){
 			} // Clusters
 
 			// Fill module class attributes
-			p_recomodule->avg_pad_mult =			p_recomodule->NPads/p_recomodule->NClusters;
+			p_recomodule->avg_pad_mult =			(float)p_recomodule->NPads/p_recomodule->NClusters;
 
 			// Compute dE/dx for the module
 			p_recomodule->dEdxWF =					ComputedEdxWF(v_mod_dEdxWF, p_recomodule->NClusters, falpha);
@@ -324,7 +328,7 @@ void Reconstruction::dEdx::Reconstruction(){
 		} // Modules
 
 		// Fill event class attributes
-		p_recoevent->avg_pad_mult =					p_recoevent->NPads/p_recoevent->NClusters;
+		p_recoevent->avg_pad_mult =					(float)p_recoevent->NPads/p_recoevent->NClusters;
 
 		// Compute dE/dx for the event
 		p_recoevent->dEdxWF =						ComputedEdxWF(v_evt_dEdxWF, p_recoevent->NClusters, falpha);
@@ -340,7 +344,6 @@ void Reconstruction::dEdx::Reconstruction(){
 		fpTree_dEdx->								Fill();
 
 		// Clear event vectors
-		v_erams.									clear();
 		v_evt_dE.									clear();
 		v_evt_dx.									clear();
 		v_evt_dEdxXP.								clear();
@@ -417,14 +420,14 @@ void Reconstruction::dEdx::DiscardedEvents(){
 	NClusters =								pModule->Get_NberOfCluster();
 	int NClusOff = 0;
 
-	p_recomodule =		new Reconstruction::RecoModule();
-	p_recomodule->position =					fmodID;
-	p_recomodule->ID =							fERAMs_iD[fmodID];
+	p_recomodule =							new Reconstruction::RecoModule();
+	p_recomodule->position =				fmodID;
+	p_recomodule->ID =						fERAMs_iD[fmodID];
 
 	// Loop On Clusters
 	for (iC = 0; iC < NClusters; iC++){
 		std::fill(waveform_cluster.begin(), waveform_cluster.end(), 0); // reset waveform
-		pCluster =					pModule->Get_Cluster(iC);
+		pCluster =							pModule->Get_Cluster(iC);
 		p_recocluster = new Reconstruction::RecoCluster();
 		p_recocluster->ADCmax_base =		pCluster->Get_Acluster();
 		p_recocluster->ALead_base = 		pCluster->Get_AMaxLeading();
@@ -433,7 +436,7 @@ void Reconstruction::dEdx::DiscardedEvents(){
 
 		// Loop On Pads
 		int NPads =							pCluster->Get_NberOfPads();
-		p_recocluster->NPads =					NPads;
+		p_recocluster->NPads =				NPads;
 		for(iP = 0; iP < NPads; iP ++){
 			std::fill(waveform_pad.begin(), waveform_pad.end(), 0); // reset waveform
 			pPad =				pCluster->Get_Pad(iP);
@@ -442,7 +445,7 @@ void Reconstruction::dEdx::DiscardedEvents(){
 			waveform_pad =					pPad->Get_vADC();
 			p_recopad->ix =					pPad->Get_iX();
 			p_recopad->iy =					pPad->Get_iY();
-			p_recopad->ADCmax_base =			pPad->Get_AMax();
+			p_recopad->ADCmax_base =		pPad->Get_AMax();
 			for(int i=0;i<510;i++) waveform_cluster[i] += waveform_pad[i];
 
 			// Compute drift distance for different time bin sizes and peaking times
@@ -459,7 +462,7 @@ void Reconstruction::dEdx::DiscardedEvents(){
 	} // Clusters
 
 	// Fill module class attributes
-	p_recomodule->avg_pad_mult =			p_recomodule->NPads/NClusOff;
+	p_recomodule->avg_pad_mult =			(float)p_recomodule->NPads/NClusOff;
 
 	// Fill module information into the event class
 	p_recoevent->v_modules.					push_back(p_recomodule);

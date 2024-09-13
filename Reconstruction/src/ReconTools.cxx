@@ -24,11 +24,11 @@ std::vector<double> linspace(double start, double end, int numPoints) {
 void Reconstruction::WFCorrection(const std::string &OutCorr){
 
 	// Redirect Output
-	std::string OutPut_Analysis = OutCorr.substr(0, OutCorr.length() - 5) + "_corr.log";
-	std::cout <<	OutPut_Analysis			<< 	std::endl;
+	std::string out_log = OutCorr.substr(0, OutCorr.length() - 5) + "_corr.log";
+	std::cout <<	out_log			<< 	std::endl;
 	std::cout <<								std::endl;
 	std::streambuf *coutbuf	= 				std::cout.rdbuf();	// Save old buf
-	std::ofstream	OUT_DataFile( OutPut_Analysis.c_str() );	// Set output file
+	std::ofstream	OUT_DataFile( out_log.c_str() );	// Set output file
 	std::cout.		rdbuf(OUT_DataFile.rdbuf());				// Redirect std::cout to output file
 
 	// Geometry
@@ -97,7 +97,7 @@ void Reconstruction::WFCorrection(const std::string &OutCorr){
 
 			// Track details
 			const Track* pTrack =					pEvent->GiveMe_Track_ForThisModule(fmodID);
-			mean_phi += 							std::atan(pTrack->Get_ParameterValue(1))/M_PI*180;
+			mean_phi += 							std::atan(pTrack->Get_ParameterValue(1));
 
 			// Loop On Clusters
 			for (int iC	= 0; iC < NClusters; iC++){
@@ -144,8 +144,9 @@ void Reconstruction::WFCorrection(const std::string &OutCorr){
 	tge_WFvsLength->						Fit(A_corr,"RQ","0", 0, L_phi);
 
 	// Saving
-	std::cout << "Correction output: " << OutPut_Analysis + "_WFmax_correction_v9i9_v2.root" << std::endl;
-	TFile* pfileROOT_corr = 				new TFile(TString(OutPut_Analysis + "_WFmax_correction_v9i9_v2.root"), "RECREATE");
+	std::string out_root = OutCorr.substr(0, OutCorr.length() - 5) + "_WFmax_correction_v9i9_v2.root";
+	std::cout << "Correction output: " << out_root << std::endl;
+	TFile* pfileROOT_corr = 				new TFile(out_root.c_str(), "RECREATE");
 	h2f_WFvsLength->						Write();
 	A_corr->								Write();
 	tge_WFvsLength->						Write();
@@ -181,10 +182,11 @@ TF1* corr_func(const std::string &EventFile, const std::string &Tag, const int& 
 	}
 
 	// Load the files and get the TF1 of the correction function
-	TFile* pfile =					new TFile((filename + "_WFmax_correction_v9i9.root").c_str(), "READ");
+	std::string filename_corr =		filename + "_WFmax_correction_v9i9_v2.root";
+	TFile* pfile =					new TFile(filename_corr.c_str(), "READ");
 	corr_func =						pfile->Get<TF1>("A_corr");
 	pfile->							Close();
-	std::cout << "correction function: " << filename << "_WFmax_correction_v9i9.root" << std::endl;
+	std::cout << "correction function: " << filename_corr << std::endl;
 	std::cout << std::setprecision(2) << "WF correction parameters: " << corr_func->GetParameter(0) << " | " << corr_func->GetParameter(1) << " | " << corr_func->GetParameter(2) << " | " << corr_func->GetParameter(3) << " | " << corr_func->GetParameter(4) << std::endl;
 	delete							pfile;
 	

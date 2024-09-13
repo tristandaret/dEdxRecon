@@ -50,7 +50,8 @@ namespace Reconstruction{
 		// Settings
 		std::string fparticleType;
 		TCanvas *fpCanvas;
-		TLegend *fpLeg;
+		TLegend *fpLegWF;
+		TLegend *fpLegXP;
 		std::string ftype = "single";
 
 		// Shared variables

@@ -190,7 +190,6 @@ namespace Reconstruction{
 			std::vector<float>			v_evt_dE;
 			std::vector<float>			v_evt_dEdxXP;
 			std::vector<float>			v_evt_dEdxWF;
-			std::vector<double> 		v_erams;
 			// Waveforms
 			std::vector<int>			waveform_cluster;
 			std::vector<int>			waveform_pad;

@@ -18,19 +18,20 @@ namespace Reconstruction{
 	
 	// Files to use
 	int prototype =				0;
-	int CERN_Escan =			0;
+	int CERN_Escan =			1;
 	int CERN_drift = 			0;
 
 	int DESY_drift =			0;
 	int DESY_row =				0;
-	int DESY_phi =				1;
+	int DESY_phi =				0;
 	int DESY_theta =			0;
 
 	// Computations
+	int correction_wf =			0;
 	int dedx =					0;
 
 	// DrawOuts		
-	int DO_Control =			0;
+	int DO_Control =			1;
 	int DO_dEdx =				0;
 	int DO_Comparison =			0;
 
@@ -42,10 +43,10 @@ namespace Reconstruction{
 
 void Reconstruction::Monitoring()
 {
-	comment = "";
+	comment = "_5k";
 	gErrorIgnoreLevel = kInfo;
 
-	Correction(1,1,1,1,1);
+	Correction(1,1,1,1,0);
 
 
 	// Energy scan using the prototype (ERAM 18)
@@ -67,28 +68,23 @@ void Reconstruction::Monitoring()
 	// Energy scan using the mockup
 	if(CERN_Escan){
 		Settings("CERN22", "", "Energy", "", "Energy (GeV)", 4, -1, 412, 350, 415, 40);
+		v_valint.	insert(v_valint.end(), {0.5, 0.75, 1, 1.25, 1.5, 0.75, 1, 1.5, 0.75, 1.25, 1.5, 1, 1.25, 1.5});
+		v_valstr.	insert(v_valstr.end(), {"e+_0p5GeV",	"e+_0p75GeV",	"e+_1GeV",		"e+_1p25GeV", "e+_1p5GeV",	"mu+_0p75GeV",	"mu+_1GeV", 
+											"mu+_1p5GeV",	"pi+_0p75GeV",	"pi+_1p25GeV",	"pi+_1p5GeV", "p+_1GeV",	"p+_1p25GeV",	"p+_1p5GeV"});
 
-		// int NFiles = 14;
-		// for (int iFile = 0; iFile < NFiles; iFile++){
-		int part_arr[] = {7};
-		for (int iFile : part_arr) {
-			if (iFile == 0) {v_datafiles.push_back(data_scanpath + "All_ERAMS_350V_412ns_e+_0p5GeV_25V_z415_y2pad_iter0.root");			v_tags.push_back("e+_0p5GeV");	}
-			if (iFile == 1) {v_datafiles.push_back(data_scanpath + "All_ERAMS_350V_412ns_e+_0p75GeV_25V_z415_y2pad_iter0.root");		v_tags.push_back("e+_0p75GeV");	}
-			if (iFile == 2) {v_datafiles.push_back(data_scanpath + "All_ERAMS_350V_412ns_e+_1GeV_25V_z415p1_y2pad_iter0.root");			v_tags.push_back("e+_1GeV");	}
-			if (iFile == 3) {v_datafiles.push_back(data_scanpath + "All_ERAMS_350V_412ns_e+_1p25GeV_25V_z415p1_y2pad_1_iter0.root");	v_tags.push_back("e+_1p25GeV");	}
-			if (iFile == 4) {v_datafiles.push_back(data_scanpath + "All_ERAMS_350V_412ns_e+_1p5GeV_25V_z415p1_y2pad_iter0.root");		v_tags.push_back("e+_1p5GeV");	}
-			if (iFile == 5) {v_datafiles.push_back(data_scanpath + "All_ERAMS_350V_412ns_mu+_0p75GeV_25V_z415_y2pad_iter0.root");		v_tags.push_back("mu_0p75GeV");	}
-			if (iFile == 6) {v_datafiles.push_back(data_scanpath + "All_ERAMS_350V_412ns_mu+_1GeV_25V_z415p1_y2pad_iter0.root");		v_tags.push_back("mu_1GeV");	}
-			if (iFile == 7) {v_datafiles.push_back(data_scanpath + "All_ERAMS_350V_412ns_mu+_1p5GeV_25V_z415p1_y2pad_iter0.root");		v_tags.push_back("mu_1p5GeV");	}
-			if (iFile == 8) {v_datafiles.push_back(data_scanpath + "All_ERAMS_350V_412ns_pi+_0p75GeV_25V_z415_y2pad_iter0.root");		v_tags.push_back("pi_0p75GeV");	}
-			if (iFile == 9) {v_datafiles.push_back(data_scanpath + "All_ERAMS_350V_412ns_pi+_1p25GeV_25V_z415p1_y2pad_2_iter0.root");	v_tags.push_back("pi_1p25GeV");	}
-			if (iFile == 10){v_datafiles.push_back(data_scanpath + "All_ERAMS_350V_412ns_pi+_1p5GeV_25V_z415p1_y2pad_iter0.root");		v_tags.push_back("pi_1p5GeV");	}
-			if (iFile == 11){v_datafiles.push_back(data_scanpath + "All_ERAMS_350V_412ns_p_1GeV_25V_z415p1_y2pad_iter0.root");			v_tags.push_back("p+_1GeV");	}
-			if (iFile == 12){v_datafiles.push_back(data_scanpath + "All_ERAMS_350V_412ns_p_1p25GeV_25V_z415p1_y2pad_iter0.root");		v_tags.push_back("p+_1p25GeV");	}
-			if (iFile == 13){v_datafiles.push_back(data_scanpath + "All_ERAMS_350V_412ns_p_1p5GeV_25V_z415_y2pad_2_iter0.root");		v_tags.push_back("p+_1p5GeV");	}
+		std::vector<std::string> v_suffix = {	"_25V_z415_y2pad_iter0.root",	"_25V_z415_y2pad_iter0.root",		"_25V_z415p1_y2pad_iter0.root", "_25V_z415p1_y2pad_1_iter0.root",
+												"_25V_z415p1_y2pad_iter0.root", "_25V_z415_y2pad_iter0.root",		"_25V_z415p1_y2pad_iter0.root", "_25V_z415p1_y2pad_iter0.root", 
+												"_25V_z415_y2pad_iter0.root",	"_25V_z415p1_y2pad_2_iter0.root",	"_25V_z415p1_y2pad_iter0.root", "_25V_z415p1_y2pad_iter0.root", 
+												"_25V_z415p1_y2pad_iter0.root",	"_25V_z415_y2pad_2_iter0.root"};
+
+		// for(int iEnergy = 0; iEnergy < (int)std::size(v_valstr); iEnergy++){
+		for(int iEnergy = 0; iEnergy < 1; iEnergy++){
+			v_datafiles.push_back(data_scanpath + "All_ERAMS_350V_412ns_" + v_valstr[iEnergy] + v_suffix[iEnergy]);
+			v_tags.push_back(Form("%s_%s_%s", testbeam.c_str(), scan.c_str(), v_valstr[iEnergy].c_str()));
 
 			DefaultAnalysis();
 		}
+		ClearVectors();
 	}
 
 
@@ -96,8 +92,8 @@ void Reconstruction::Monitoring()
 	if(CERN_drift){
 		Settings("CERN22", "", "Drift", "", "Drift distance (mm)", 3, -1, 412, 350, 415, 40);
 
-		int			v_valint[] = 	{60, 218, 415, 925};
-		std::string v_valstr[] = 	{"60", "218p5", "415", "925"};
+		v_valint.	insert(v_valint.end(), {60, 218, 415, 925});
+		v_valstr.	insert(v_valstr.end(), {"60", "218p5", "415", "925"});
 
 		int NFiles = 4;
 		for (int iz = 0; iz < NFiles; iz++){
@@ -118,12 +114,12 @@ void Reconstruction::Monitoring()
 		v_valstr.					insert(v_valstr.end(), {"m40", "060", "160", "260", "360", "460", "560", "660", "760", "860"});
 		for (int iPT : PT_arr){
 			PT = 					iPT; // PT is a shared variable in the namespace so it's important to update it here
-			Settings("DESY21", "Drift", Form("Drift_PT%i", PT), Form("(%i ns)", PT), "Drift distance (mm)", 1, 0, PT, 310, 450, 50);
+			Settings("DESY21", "Drift", Form("Drift_PT%i", PT), Form("%i ns peak", PT), "Drift distance (mm)", 1, 0, PT, 310, 450, 50);
 
 			for (int iz = 0; iz < (int)std::size(v_valstr); iz++){
 				const char* z = 	v_valstr[iz].c_str();
 				driftDist = 		v_valint[iz];
-				v_datafiles.		push_back(Form("../Data/Data_DESY21/Drift_scan_PT%i/z_360_275_%i_02T_26_%s_iter9.root", iPT, iPT, z)); v_tags.push_back(Form("%s_%s_Z%s", testbeam.c_str(), scan.c_str(), z));
+				v_datafiles.		push_back(data_scanpath + Form("Drift_scan_PT%i/z_360_275_%i_02T_26_%s_iter9.root", iPT, iPT, z)); v_tags.push_back(Form("%s_%s_Z%s", testbeam.c_str(), scan.c_str(), z));
 
 				DefaultAnalysis();
 			}
@@ -143,7 +139,7 @@ void Reconstruction::Monitoring()
 		v_valstr.					insert(v_valstr.end(), {"m140", "m120", "m100", "m80", "m60", "m40", "0", "20", "40", "60", "80"});
 
 		for (int y = 0; y < (int)std::size(v_valstr); y++){
-			v_datafiles.push_back(Form("../Data/Data_DESY21/Row_scan/Y%s_Z0_iter9.root", v_valstr[y].c_str())); v_tags.push_back(Form("%s_%s_Y%s", testbeam.c_str(), scan.c_str(), v_valstr[y].c_str()));
+			v_datafiles.push_back(data_scanpath + Form("Row_scan/Y%s_Z0_iter9.root", v_valstr[y].c_str())); v_tags.push_back(Form("%s_%s_Y%s", testbeam.c_str(), scan.c_str(), v_valstr[y].c_str()));
 			DefaultAnalysis();
 		}
 		if(DO_DESY21SingleScan) DrawSingleScan();
@@ -160,14 +156,16 @@ void Reconstruction::Monitoring()
 		v_valint.								insert(v_valint.end(), {0, 5, 10, 20, 29, 31, 40, 45});
 		
 		for (int iz = 0; iz < (int)v_valdrift.size(); iz++){
+		// for (int iz = 0; iz < 1; iz++){
 			const char* z = v_strdrift[iz].c_str();
-			Settings("DESY21", "Phi", Form("Phi_Z%s", z), Form("(%i cm)", v_valdrift[iz]/10), "Phi angle (#circ)", 1, 0, 200, 310, v_valdrift[iz], 40);
+			Settings("DESY21", "Phi", Form("Phi_Z%s", z), Form("%2i cm drift", v_valdrift[iz]/10), "Phi angle (#circ)", 1, 0, 200, 310, v_valdrift[iz], 40);
 			
 			for (int ifile = 0; ifile < (int)std::size(v_valintreal); ifile++){
+			// for (int ifile = 5; ifile < 6; ifile++){
 				int phi = v_valintreal[ifile];
-				if(ifile == 0){		v_datafiles.push_back(Form("../Data/Data_DESY21/Drift_scan_PT200/z_360_275_200_02T_26_%s_iter9.root", z));		v_tags.push_back(Form("%s_%s_Phi%i",		testbeam.c_str(), scan.c_str(), phi));}
-				else if(ifile < 5){	v_datafiles.push_back(Form("../Data/Data_DESY21/Phi_scan_z%s/phi_200_%i_z%s_ym60_iter9.root", z, phi, z));		v_tags.push_back(Form("%s_%s_Phi%i",		testbeam.c_str(), scan.c_str(), phi));}
-				else{				v_datafiles.push_back(Form("../Data/Data_DESY21/Phi_scan_z%s/phi_200_%i_z%s_ym60_diag_iter9.root", z, phi, z));	v_tags.push_back(Form("%s_%s_Phi%i_diag",	testbeam.c_str(), scan.c_str(), phi));}
+				if(ifile == 0){		v_datafiles.push_back(data_scanpath + Form("Drift_scan_PT200/z_360_275_200_02T_26_%s_iter9.root", z));		v_tags.push_back(Form("%s_%s_Phi%i",		testbeam.c_str(), scan.c_str(), phi));}
+				else if(ifile < 5){	v_datafiles.push_back(data_scanpath + Form("Phi_scan_z%s/phi_200_%i_z%s_ym60_iter9.root", z, phi, z));		v_tags.push_back(Form("%s_%s_Phi%i",		testbeam.c_str(), scan.c_str(), phi));}
+				else{				v_datafiles.push_back(data_scanpath + Form("Phi_scan_z%s/phi_200_%i_z%s_ym60_diag_iter9.root", z, phi, z));	v_tags.push_back(Form("%s_%s_Phi%i_diag",	testbeam.c_str(), scan.c_str(), phi));}
 
 				DefaultAnalysis();
 			}
@@ -189,7 +187,7 @@ void Reconstruction::Monitoring()
 
 		for (int ifile = 0; ifile < (int)std::size(v_valint); ifile++){
 			const char* theta = v_valstr[ifile].c_str();
-			v_datafiles.push_back(Form("../Data/Data_DESY21/Theta_scan/theta_%s_02T_z460_ym60_iter9.root", theta)); v_tags.push_back(Form("%s_%s_%s",	testbeam.c_str(), scan.c_str(), theta));
+			v_datafiles.push_back(data_scanpath + Form("Theta_scan/theta_%s_02T_z460_ym60_iter9.root", theta)); v_tags.push_back(Form("%s_%s_%s",	testbeam.c_str(), scan.c_str(), theta));
 			
 			DefaultAnalysis();
 		}
@@ -291,11 +289,19 @@ void Reconstruction::DefaultAnalysis(){
 	drawout_runpath =			drawout_scanpath + tag + "/";
 	MakeMyDir(drawout_runpath);
 	rootout_file =				drawout_runpath + tag + comment + ".root";
-	if(scan.find("Phi") != std::string::npos and tag.find("diag") == std::string::npos and comment.find("WF0") != std::string::npos)
+	if(scan.find("Phi") != std::string::npos and tag.find("diag") == std::string::npos)
 	{
-		rootout_file.erase(rootout_file.find("_WF0"), 4);
+		if(comment.find("WF0")		!= std::string::npos) rootout_file.erase(rootout_file.find("_WF0"), 4);
+		if(comment.find("_corrv2")	!= std::string::npos) rootout_file.erase(rootout_file.find("_corrv2"), 7);
 	}
 	v_rootout_files.			push_back(rootout_file);
+
+	if(correction_wf)
+	{
+		p_uploader =			GiveMe_Uploader (intUploader, v_datafiles.back());
+		Reconstruction::WFCorrection(v_datafiles.back());
+		delete 					p_uploader;
+	}
 
 	if(dedx)
 	{
@@ -311,6 +317,8 @@ void Reconstruction::DefaultAnalysis(){
 	if(DO_Control)
 	{
 		drawout_file =			drawout_runpath + "Control_" + tag + comment + ".pdf";
+		std::cout << "rootout:	" << rootout_file << std::endl;
+		std::cout << "drawout:	" << drawout_file << std::endl;
 		p_DrawOuts =			new DrawOuts(rootout_file);
 		p_DrawOuts->			Control();
 		delete 					p_DrawOuts;
@@ -323,10 +331,6 @@ void Reconstruction::DefaultAnalysis(){
 		p_DrawOuts->			EnergyLoss();
 		delete 					p_DrawOuts;
 	}
-
-	p_uploader =			GiveMe_Uploader (intUploader, v_datafiles.back());
-	Reconstruction::WFCorrection(v_datafiles.back());
-	delete p_uploader;
 }
 
 void Reconstruction::DrawSingleScan(){
@@ -494,8 +498,8 @@ void Reconstruction::DrawMultipleScan(){
 //	if (control or dedx) p_lut = new LUT(Form("~/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi150_nd150_nRC41_nZ21.root", Dt, PT));
 //		int NFiles = 9;
 //		for (int zDrift = -1; zDrift < NFiles; zDrift++){
-//		if(zDrift == -1) {v_datafiles.push_back(Form("../Data/Data_DESY21/zscan_PT%i_139V/z_360_139_%i_02T_26_m40_iter0.root", PT, PT));			v_tags.push_back(Form("DESY21_zm40_PT%i", PT));			}
-//		else {v_datafiles.push_back(Form("../Data/Data_DESY21/zscan_PT%i_139V/z_360_139_%i_02T_26_%i60_iter0.root", PT, PT, zDrift)); v_tags.push_back(Form("DESY21_z%i60_PT%i", zDrift, PT)); v_prtcles.push_back(Form("electron_z%i60", zDrift));}
+//		if(zDrift == -1) {v_datafiles.push_back(data_scanpath + Form("zscan_PT%i_139V/z_360_139_%i_02T_26_m40_iter0.root", PT, PT));			v_tags.push_back(Form("DESY21_zm40_PT%i", PT));			}
+//		else {v_datafiles.push_back(data_scanpath + Form("zscan_PT%i_139V/z_360_139_%i_02T_26_%i60_iter0.root", PT, PT, zDrift)); v_tags.push_back(Form("DESY21_z%i60_PT%i", zDrift, PT)); v_prtcles.push_back(Form("electron_z%i60", zDrift));}
 //		if(control or dedx) p_uploader = GiveMe_Uploader (intUploader, v_datafiles.back());
 //		if (control)		Control		(drawout_scanpath, v_tags.back(), comment, v_datafiles.back(), selectionSet, p_uploader, moduleCase, 0, PT, TB, v_prtcles.back());
 //		if (DO_control)	DrawOut_Control			(drawout_scanpath, v_tags.back(), comment, selectionSet, 1);

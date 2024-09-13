@@ -31,7 +31,8 @@ Reconstruction::DrawOuts::DrawOuts(const std::vector<std::string> &v_inputFiles)
 		v_fFiles.				push_back(TFile::Open(v_inputFiles[ifile].c_str()));
 		v_fTrees.				push_back((TTree*)v_fFiles[ifile]->Get("dEdx_tree"));
 		v_fTrees[ifile]->		SetBranchAddress("event_branch", &v_fEvents[ifile]);
-		v_fnentries.				push_back(v_fTrees[ifile]->GetEntries());
+		v_fnentries.			push_back(v_fTrees[ifile]->GetEntries());
+		std::cout << "number of entries in file " << v_inputFiles[ifile] << ": " << v_fnentries[ifile] << std::endl;
 	}
 
 	SetStyle();
@@ -59,7 +60,7 @@ void Reconstruction::DrawOuts::SetStyle(){
 void Reconstruction::DrawOuts::CleanUp(){
 
 	fpCanvas->		Clear();
-	delete fpLeg;
+	delete fpLegWF;
 	delete fptf1_WF;
 	delete fptf1_XP;
 	delete fpTGE_mean_WF;
@@ -155,64 +156,101 @@ void Reconstruction::DrawOuts::ScanDraw(){
 		nlegentries = 0;
 	}
 
+	// Drawing settings
 	if(ftype == "multiple") foutputFile = drawout_metascanpath + testbeam + "_" + metascan + comment + ".pdf";
 	else foutputFile = 				drawout_scanpath + scan + comment + ".pdf";
 	gPad->							SetRightMargin(0.04);
 	gPad->							SetTopMargin(0.04);
 	fpCanvas->						Clear();
 	fpCanvas->						cd();
-	fpLeg =							new TLegend(0.42,0.7-0.03*nlegentries,0.93,0.93);
-	fpLeg->							SetTextSize(0.05);
-	fpLeg->							SetFillStyle(0);
-	fpLeg->							SetTextColor(kBlue-1);
+	// Legend
+	fpLegWF =						new TLegend(0.68,0.78-0.03*nlegentries,0.9,0.93);
+	if(nscans != 1) fpLegWF->		SetHeader(" Waveforms sum");
+	fpLegWF->						SetTextSize(0.05);
+	fpLegWF->						SetFillStyle(0);
+	fpLegWF->						SetTextColor(kBlue-1);
+	fpLegXP =						new TLegend(0.4,0.78-0.03*nlegentries,0.6,0.93);
+	if(nscans != 1) fpLegXP->		SetHeader(" Crossed pads");
+	fpLegXP->						SetTextSize(0.05);
+	fpLegXP->						SetFillStyle(0);
+	fpLegXP->						SetTextColor(kBlue-1);
+	if(nscans == 1){
+		fpLegWF->		SetY2(0.91);
+		fpLegWF->		SetX1(0.6);
+	}
 	for(int i=base;i<(int)v_fpTGE_mean_WF.size();i++){
-		fpLeg->						AddEntry(v_fpTGE_reso_WF[i], Form("Sum of waveforms %s", v_scanspec[i].c_str()), "ep"); 
-		fpLeg->						AddEntry(v_fpTGE_reso_XP[i], Form("Crossed pads %s", v_scanspec[i].c_str()), "ep");	
+		if(nscans != 1){
+			fpLegWF->						AddEntry(v_fpTGE_reso_WF[i], Form("%s", v_scanspec[i].c_str()), "p"); 
+			fpLegXP->						AddEntry(v_fpTGE_reso_XP[i], Form("%s", v_scanspec[i].c_str()), "p");	
+		}else{
+			fpLegWF->						AddEntry(v_fpTGE_reso_WF[i], "Waveforms sum", "p"); 
+			fpLegWF->						AddEntry(v_fpTGE_reso_XP[i], "Crossed pads", "p");	
+		}
 	}
 	
+	// Resolution
 	v_fpTGE_reso_WF[base]->			SetMinimum(YRESOMIN);
 	v_fpTGE_reso_WF[base]->			SetMaximum(YRESOMAX);
 	v_fpTGE_reso_WF[base]->			SetNameTitle("fpTGE_reso_WF", Form(";%s;resolution (%%)", runvarstr.c_str()));
-	if (v_fpTGE_reso_WF[base]->GetXaxis()->GetXmin() == 0)
-	{	
-		v_fpTGE_reso_WF[base]->		GetXaxis()->SetLimits(-3, v_fpTGE_reso_WF[base]->GetXaxis()->GetXmax());
-	}
+	if (v_fpTGE_reso_WF[base]->GetXaxis()->GetXmin() == 0) v_fpTGE_reso_WF[base]->GetXaxis()->SetLimits(-3, v_fpTGE_reso_WF[base]->GetXaxis()->GetXmax());
 	for(int i=base;i<(int)v_fpTGE_reso_WF.size();i++){
-		Graphic_setup(v_fpTGE_reso_WF[i], 4, markers[2*i], colors[2*i], 1, kBlack);
-		Graphic_setup(v_fpTGE_reso_XP[i], 4, markers[2*i+1], colors[2*i+1], 1, kBlack);
-		if(i==base) v_fpTGE_reso_WF[i]->	DrawClone("AP");
-		else v_fpTGE_reso_WF[i]->	DrawClone("P same");
-		v_fpTGE_reso_XP[i]->		DrawClone("P same");
-		v_fpTGE_reso_WF[i]->		SetMarkerSize(5);
-		v_fpTGE_reso_XP[i]->		SetMarkerSize(5);
+		if(nscans != 1){
+			Graphic_setup(v_fpTGE_reso_WF[i], 4, markers[2*i], colors[2*i], 1, kBlack);
+			Graphic_setup(v_fpTGE_reso_XP[i], 4, markers[2*i+1], colors[2*i+1], 1, kBlack);
+		}else{
+			Graphic_setup(v_fpTGE_reso_WF[i], 4, markers[4], colors[2], 1, kBlack);
+			Graphic_setup(v_fpTGE_reso_XP[i], 4, markers[3], colors[3], 1, kBlack);
+		}
+		if(i==base) v_fpTGE_reso_WF[i]->DrawClone("AP");
+		else v_fpTGE_reso_WF[i]->		DrawClone("P same");
+		v_fpTGE_reso_XP[i]->			DrawClone("P same");
+		v_fpTGE_reso_WF[i]->			SetMarkerSize(5);
+		v_fpTGE_reso_XP[i]->			SetMarkerSize(5);
 	}
-	fpLeg->							Draw();
+	fpLegWF->						Draw();
+	fpLegXP->						Draw();
 	fpCanvas->						SaveAs((foutputFile + "(").c_str());
 
+	// Mean
 	v_fpTGE_mean_WF[base]->			SetMinimum(YMEANMIN);
 	v_fpTGE_mean_WF[base]->			SetMaximum(YMEANMAX);
 	v_fpTGE_mean_WF[base]->			SetNameTitle("fpTGE_mean_WF", Form(";%s;Mean (ADC count)", runvarstr.c_str()));
+	if(v_fpTGE_mean_WF[base]->GetXaxis()->GetXmin() == 0) v_fpTGE_mean_WF[base]->GetXaxis()->SetLimits(-3, v_fpTGE_mean_WF[base]->GetXaxis()->GetXmax());
 	for(int i=base;i<(int)v_fpTGE_mean_WF.size();i++){
-		Graphic_setup(v_fpTGE_mean_WF[i], 4, markers[2*i], colors[2*i], 1, kBlack);
-		Graphic_setup(v_fpTGE_mean_XP[i], 4, markers[2*i+1], colors[2*i+1], 1, kBlack);
-		if(i==base) v_fpTGE_mean_WF[i]->	Draw("AP");
-		else v_fpTGE_mean_WF[i]->	Draw("P same");
-		v_fpTGE_mean_XP[i]->		Draw("P same");
+		if(nscans != 1){
+			Graphic_setup(v_fpTGE_mean_WF[i], 4, markers[2*i], colors[2*i], 1, kBlack);
+			Graphic_setup(v_fpTGE_mean_XP[i], 4, markers[2*i+1], colors[2*i+1], 1, kBlack);
+		}else{
+			Graphic_setup(v_fpTGE_mean_WF[i], 4, markers[4], colors[2], 1, kBlack);
+			Graphic_setup(v_fpTGE_mean_XP[i], 4, markers[3], colors[3], 1, kBlack);
+		}
+		if(i==base) v_fpTGE_mean_WF[i]->Draw("AP");
+		else v_fpTGE_mean_WF[i]->		Draw("P same");
+		v_fpTGE_mean_XP[i]->			Draw("P same");
 	}
-	fpLeg->							Draw();
+	fpLegWF->						Draw();
+	fpLegXP->						Draw();
 	fpCanvas->						SaveAs(foutputFile.c_str());
 
+	// Standard deviation
 	v_fpTGE_std_WF[base]->			SetMinimum(YSTDMIN);
 	v_fpTGE_std_WF[base]->			SetMaximum(YSTDMAX);
 	v_fpTGE_std_WF[base]->			SetNameTitle("fpTGE_std_WF", Form(";%s;std (ADC count)", runvarstr.c_str()));
+	if(v_fpTGE_reso_WF[base]->GetXaxis()->GetXmin() == 0) v_fpTGE_std_WF[base]->GetXaxis()->SetLimits(-3, v_fpTGE_std_WF[base]->GetXaxis()->GetXmax());
 	for(int i=base;i<(int)v_fpTGE_std_WF.size();i++){
-		Graphic_setup(v_fpTGE_std_WF[i], 4, markers[2*i], colors[2*i], 1, kBlack);
-		Graphic_setup(v_fpTGE_std_XP[i], 4, markers[2*i+1], colors[2*i+1], 1, kBlack);
+		if(nscans != 1){
+			Graphic_setup(v_fpTGE_std_WF[i], 4, markers[2*i], colors[2*i], 1, kBlack);
+			Graphic_setup(v_fpTGE_std_XP[i], 4, markers[2*i+1], colors[2*i+1], 1, kBlack);
+		}else{
+			Graphic_setup(v_fpTGE_std_WF[i], 4, markers[4], colors[2], 1, kBlack);
+			Graphic_setup(v_fpTGE_std_XP[i], 4, markers[3], colors[3], 1, kBlack);
+		}
 		if(i==base) v_fpTGE_std_WF[i]->	Draw("AP");
-		else v_fpTGE_std_WF[i]->	Draw("P same");
-		v_fpTGE_std_XP[i]->			Draw("P same");
+		else v_fpTGE_std_WF[i]->		Draw("P same");
+		v_fpTGE_std_XP[i]->				Draw("P same");
 	}
-	fpLeg->							Draw();
+	fpLegWF->						Draw();
+	fpLegXP->						Draw();
 	fpCanvas->						SaveAs((foutputFile + ")").c_str());
 
 }
@@ -225,6 +263,13 @@ void Reconstruction::DrawOuts::ScanDraw(){
 void Reconstruction::DrawOuts::Control(){
 
 	// Prepare histograms
+	TH1I *ph1i_nmodules =		new TH1I("ph1i_nmodules", "Number of modules;N_{modules};Counts", 8, 0, 8);
+	TH1I *ph1i_nmodulesSel =	new TH1I("ph1i_nmodulesSel", "Number of modules (after cut);N_{modules};Counts", 8, 0, 8);
+	TH1I *ph1i_nclusters =		new TH1I("ph1i_nclusters", "Number of clusters;N_{clusters};Counts", 55, 0, 55);
+	TH1I *ph1i_nclustersSel =	new TH1I("ph1i_nclustersSel", "Number of clusters (after cut);N_{clusters};Counts", 55, 0, 55);
+	TH1I *ph1i_npads =			new TH1I("ph1i_npads", "Number of pads;N_{pads};Counts", 10, 0, 10);
+	TH1I *ph1i_npadsSel =		new TH1I("ph1i_npadsSel", "Number of pads (after cut);N_{pads};Counts", 10, 0, 10);
+
 	TH2I *ph2i_heatmap =		new TH2I("ph2i_heatmap", "Events heatmap;iX;iY;", 144, 0, 143, 64, 0, 63);
 	TH1I *ph1i_TLead = 			new TH1I("ph1i_TLead", "T_{max} of leading pad;T_{max};Counts", 511, 0, 510);
 	TH1I *ph1i_TLeadSel = 		new TH1I("ph1i_TLeadSel", "T_{max} of leading pad (after cut);T_{max};Counts", 511, 0, 510);
@@ -273,69 +318,74 @@ void Reconstruction::DrawOuts::Control(){
 		NMod =							p_recoevent->v_modules.size();
 
 		for(int iMod=0;iMod<NMod;iMod++){
-			p_recomodule =				p_recoevent->v_modules[iMod];
-			position =					p_recomodule->position;
-			NClusters =					p_recomodule->NClusters;
-
-
+			p_recomodule = 					p_recoevent->v_modules[iMod];
+			position =						p_recomodule->position;
+			NClusters =						p_recomodule->NClusters;
+			if(!p_recomodule->selected and NClusters != 0) std::cout << "Event " << i << " module " << iMod << " with " << NClusters << " clusters!" << std::endl;
 			for(int iC=0;iC<NClusters;iC++){
-				p_recocluster =			p_recomodule->v_clusters[iC];
-				NPads =					p_recocluster->NPads;
+				p_recocluster =					p_recomodule->v_clusters[iC];
+				NPads =							p_recocluster->NPads;
 
 
 				for(int iP=0;iP<NPads;iP++){
 					// Heatmap
-					ix =				p_recocluster->v_pads[iP]->ix;
-					iy =				p_recocluster->v_pads[iP]->iy;
-					if(position<4) iy+=32;
-					ix += 36*(position%4);
-					ph2i_heatmap->		Fill(ix, iy);
+					ix =							p_recocluster->v_pads[iP]->ix;
+					iy =							p_recocluster->v_pads[iP]->iy;
+					if(position<4) iy +=			32;
+					ix += 							36*(position%4);
+					ph2i_heatmap->					Fill(ix, iy);
 					
-					p_recopad =			p_recocluster->v_pads[iP];
-					ph1f_ADCmax->		Fill(p_recopad->ADCmax);
-					v_ADCmax[position]->Fill(p_recopad->ADCmax);
+					p_recopad =						p_recocluster->v_pads[iP];
+					ph1f_ADCmax->					Fill(p_recopad->ADCmax);
+					v_ADCmax[position]->			Fill(p_recopad->ADCmax);
 					if(!p_recopad->leading){
-						ph1f_ANeighbour->Fill(p_recopad->ADCmax);
-						v_ANeighbour[position]->Fill(p_recopad->ADCmax);
+						ph1f_ANeighbour->				Fill(p_recopad->ADCmax);
+						v_ANeighbour[position]->		Fill(p_recopad->ADCmax);
 					}
 
-					if(!p_recomodule->selected) continue;
-					ph1f_ADCmaxSel->	Fill(p_recopad->ADCmax);
-					v_ADCmaxSel[position]->Fill(p_recopad->ADCmax);
+					ph1i_npads->						Fill(NPads);
+					if(!p_recomodule->selected) 		continue;
+					ph1i_npadsSel->						Fill(NPads);
+					ph1f_ADCmaxSel->					Fill(p_recopad->ADCmax);
+					v_ADCmaxSel[position]->				Fill(p_recopad->ADCmax);
 					if(!p_recopad->leading){
-						ph1f_ANeighbourSel->Fill(p_recopad->ADCmax);
-						v_ANeighbourSel[position]->Fill(p_recopad->ADCmax);
+						ph1f_ANeighbourSel->			Fill(p_recopad->ADCmax);
+						v_ANeighbourSel[position]->		Fill(p_recopad->ADCmax);
 					}
 				} // Pads
 
-				ph1i_TLead->			Fill(p_recocluster->TLead);
-				ph1i_PadMult->			Fill(NPads);
-				ph1f_ALead->			Fill(p_recocluster->ALead_base);
-				v_TLead[position]->		Fill(p_recocluster->TLead);
-				v_PadMult[position]->	Fill(NPads);
-				v_ALead[position]->		Fill(p_recocluster->ALead_base);
+				ph1i_TLead->					Fill(p_recocluster->TLead);
+				ph1i_PadMult->					Fill(NPads);
+				ph1f_ALead->					Fill(p_recocluster->ALead_base);
+				v_TLead[position]->				Fill(p_recocluster->TLead);
+				v_PadMult[position]->			Fill(NPads);
+				v_ALead[position]->				Fill(p_recocluster->ALead_base);
 
-				if(!p_recomodule->selected) continue;
-				ph1i_TLeadSel->			Fill(p_recocluster->TLead);
-				ph1i_PadMultSel->		Fill(NPads);
-				ph1f_ALeadSel->			Fill(p_recocluster->ALead_base);
-				v_TLeadSel[position]->	Fill(p_recocluster->TLead);
-				v_PadMultSel[position]->Fill(NPads);
-				v_ALeadSel[position]->	Fill(p_recocluster->ALead_base);
+				ph1i_nclusters->				Fill(NClusters);
+				if(!p_recomodule->selected) 	continue;
+				ph1i_nclustersSel->				Fill(NClusters);
+				ph1i_TLeadSel->					Fill(p_recocluster->TLead);
+				ph1i_PadMultSel->				Fill(NPads);
+				ph1f_ALeadSel->					Fill(p_recocluster->ALead_base);
+				v_TLeadSel[position]->			Fill(p_recocluster->TLead);
+				v_PadMultSel[position]->		Fill(NPads);
+				v_ALeadSel[position]->			Fill(p_recocluster->ALead_base);
 			} // Clusters
 
-			ph1f_AvgPadMult->			Fill(p_recomodule->avg_pad_mult);
-			v_AvgPadMult[position]->	Fill(p_recomodule->avg_pad_mult);
+			ph1f_AvgPadMult->				Fill(p_recomodule->avg_pad_mult);
+			v_AvgPadMult[position]->		Fill(p_recomodule->avg_pad_mult);
+			ph1i_nmodules->					Fill(NMod);
 
-			if(!p_recomodule->selected) continue;
-			ph1f_AvgPadMultSel->Fill(p_recomodule->avg_pad_mult);
-			v_AvgPadMultSel[position]->Fill(p_recomodule->avg_pad_mult);
+			if(!p_recomodule->selected) 	continue;
+			ph1i_nmodulesSel->				Fill(NMod);
+			ph1f_AvgPadMultSel->			Fill(p_recomodule->avg_pad_mult);
+			v_AvgPadMultSel[position]->		Fill(p_recomodule->avg_pad_mult);
 		} // Modules
-		delete p_recoevent;
+		// delete p_recoevent;
 	}
 
 	// Draw
-	gStyle->						SetOptStat(0);
+	gStyle->						SetOptStat("nmerou");
 	gStyle->						SetOptFit(0);
 
 	// Get maximum of module plots
@@ -344,13 +394,43 @@ void Reconstruction::DrawOuts::Control(){
 	//////////////////////////////////////////////////////////////////////////////////////////
 	fpCanvas->						cd();
 	fpCanvas->						Clear();
+	ph1i_TLead->					SetLineWidth(4);
 	ph1i_TLead->					Draw("HIST");
 	ph1i_TLeadSel->					SetLineColor(kRed);
 	ph1i_TLeadSel->					Draw("HIST sames");
 	fpCanvas->						SaveAs((drawout_file + "(").c_str());
 
 	//////////////////////////////////////////////////////////////////////////////////////////
-	fpCanvas->						cd();
+	fpCanvas->						Clear();
+	ph1i_nmodules->					SetLineWidth(4);
+	ph1i_nmodules->					Draw("HIST");
+	ph1i_nmodulesSel->				SetLineColor(kRed);
+	ph1i_nmodulesSel->				SetLineWidth(2);
+	ph1i_nmodulesSel->				SetStats(0);
+	ph1i_nmodulesSel->				Draw("HIST sames");
+	fpCanvas->						SaveAs(drawout_file.c_str());
+
+	//////////////////////////////////////////////////////////////////////////////////////////
+	fpCanvas->						Clear();
+	ph1i_nclusters->				SetLineWidth(4);
+	ph1i_nclusters->				Draw("HIST");
+	ph1i_nclustersSel->				SetLineColor(kRed);
+	ph1i_nclustersSel->				SetLineWidth(2);
+	ph1i_nclustersSel->				SetStats(0);
+	ph1i_nclustersSel->				Draw("HIST sames");
+	fpCanvas->						SaveAs(drawout_file.c_str());
+
+	//////////////////////////////////////////////////////////////////////////////////////////
+	fpCanvas->						Clear();
+	ph1i_npads->					SetLineWidth(4);
+	ph1i_npads->					Draw("HIST");
+	ph1i_npadsSel->					SetLineColor(kRed);
+	ph1i_npadsSel->					SetLineWidth(2);
+	ph1i_npadsSel->					SetStats(0);
+	ph1i_npadsSel->					Draw("HIST sames");
+	fpCanvas->						SaveAs(drawout_file.c_str());
+
+	//////////////////////////////////////////////////////////////////////////////////////////
 	fpCanvas->						Clear();
 	fpCanvas->						Divide(4, 2);
 	for(int i=0;i<8;i++){
