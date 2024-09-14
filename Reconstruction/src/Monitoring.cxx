@@ -28,7 +28,7 @@ namespace Reconstruction{
 
 	// Computations
 	int correction_wf =			0;
-	int dedx =					0;
+	int dedx =					1;
 
 	// DrawOuts		
 	int DO_Control =			1;
@@ -43,7 +43,7 @@ namespace Reconstruction{
 
 void Reconstruction::Monitoring()
 {
-	comment = "_5k";
+	comment = "";
 	gErrorIgnoreLevel = kInfo;
 
 	Correction(1,1,1,1,0);

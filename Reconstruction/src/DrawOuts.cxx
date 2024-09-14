@@ -32,7 +32,6 @@ Reconstruction::DrawOuts::DrawOuts(const std::vector<std::string> &v_inputFiles)
 		v_fTrees.				push_back((TTree*)v_fFiles[ifile]->Get("dEdx_tree"));
 		v_fTrees[ifile]->		SetBranchAddress("event_branch", &v_fEvents[ifile]);
 		v_fnentries.			push_back(v_fTrees[ifile]->GetEntries());
-		std::cout << "number of entries in file " << v_inputFiles[ifile] << ": " << v_fnentries[ifile] << std::endl;
 	}
 
 	SetStyle();
@@ -316,16 +315,18 @@ void Reconstruction::DrawOuts::Control(){
 		v_fTrees.back()->				GetEntry(i);
 		p_recoevent =					v_fEvents.back();
 		NMod =							p_recoevent->v_modules.size();
+		int NSelMod = 					0;
 
 		for(int iMod=0;iMod<NMod;iMod++){
 			p_recomodule = 					p_recoevent->v_modules[iMod];
 			position =						p_recomodule->position;
 			NClusters =						p_recomodule->NClusters;
-			if(!p_recomodule->selected and NClusters != 0) std::cout << "Event " << i << " module " << iMod << " with " << NClusters << " clusters!" << std::endl;
+			int NSelClus = 					0;
+
 			for(int iC=0;iC<NClusters;iC++){
 				p_recocluster =					p_recomodule->v_clusters[iC];
 				NPads =							p_recocluster->NPads;
-
+				int NSelPads = 					0;
 
 				for(int iP=0;iP<NPads;iP++){
 					// Heatmap
@@ -336,23 +337,25 @@ void Reconstruction::DrawOuts::Control(){
 					ph2i_heatmap->					Fill(ix, iy);
 					
 					p_recopad =						p_recocluster->v_pads[iP];
-					ph1f_ADCmax->					Fill(p_recopad->ADCmax);
-					v_ADCmax[position]->			Fill(p_recopad->ADCmax);
+					ph1f_ADCmax->					Fill(p_recopad->ADCmax_base);
+					v_ADCmax[position]->			Fill(p_recopad->ADCmax_base);
 					if(!p_recopad->leading){
-						ph1f_ANeighbour->				Fill(p_recopad->ADCmax);
-						v_ANeighbour[position]->		Fill(p_recopad->ADCmax);
+						ph1f_ANeighbour->				Fill(p_recopad->ADCmax_base);
+						v_ANeighbour[position]->		Fill(p_recopad->ADCmax_base);
 					}
+					int TPad = 						p_recopad->TMax;
 
-					ph1i_npads->						Fill(NPads);
 					if(!p_recomodule->selected) 		continue;
-					ph1i_npadsSel->						Fill(NPads);
-					ph1f_ADCmaxSel->					Fill(p_recopad->ADCmax);
-					v_ADCmaxSel[position]->				Fill(p_recopad->ADCmax);
+					NSelPads++;
+					ph1f_ADCmaxSel->					Fill(p_recopad->ADCmax_base);
+					v_ADCmaxSel[position]->				Fill(p_recopad->ADCmax_base);
 					if(!p_recopad->leading){
-						ph1f_ANeighbourSel->			Fill(p_recopad->ADCmax);
-						v_ANeighbourSel[position]->		Fill(p_recopad->ADCmax);
+						ph1f_ANeighbourSel->			Fill(p_recopad->ADCmax_base);
+						v_ANeighbourSel[position]->		Fill(p_recopad->ADCmax_base);
 					}
 				} // Pads
+				ph1i_npads->					Fill(NPads);
+				ph1i_npadsSel->					Fill(NSelPads);
 
 				ph1i_TLead->					Fill(p_recocluster->TLead);
 				ph1i_PadMult->					Fill(NPads);
@@ -361,9 +364,8 @@ void Reconstruction::DrawOuts::Control(){
 				v_PadMult[position]->			Fill(NPads);
 				v_ALead[position]->				Fill(p_recocluster->ALead_base);
 
-				ph1i_nclusters->				Fill(NClusters);
 				if(!p_recomodule->selected) 	continue;
-				ph1i_nclustersSel->				Fill(NClusters);
+				NSelClus++;
 				ph1i_TLeadSel->					Fill(p_recocluster->TLead);
 				ph1i_PadMultSel->				Fill(NPads);
 				ph1f_ALeadSel->					Fill(p_recocluster->ALead_base);
@@ -371,17 +373,19 @@ void Reconstruction::DrawOuts::Control(){
 				v_PadMultSel[position]->		Fill(NPads);
 				v_ALeadSel[position]->			Fill(p_recocluster->ALead_base);
 			} // Clusters
+			ph1i_nclusters->				Fill(NClusters);
+			ph1i_nclustersSel->				Fill(NSelClus);
 
 			ph1f_AvgPadMult->				Fill(p_recomodule->avg_pad_mult);
 			v_AvgPadMult[position]->		Fill(p_recomodule->avg_pad_mult);
-			ph1i_nmodules->					Fill(NMod);
 
 			if(!p_recomodule->selected) 	continue;
-			ph1i_nmodulesSel->				Fill(NMod);
+			NSelMod++;
 			ph1f_AvgPadMultSel->			Fill(p_recomodule->avg_pad_mult);
 			v_AvgPadMultSel[position]->		Fill(p_recomodule->avg_pad_mult);
 		} // Modules
-		// delete p_recoevent;
+		ph1i_nmodules->					Fill(NMod);
+		ph1i_nmodulesSel->				Fill(NSelMod);
 	}
 
 	// Draw
@@ -394,41 +398,12 @@ void Reconstruction::DrawOuts::Control(){
 	//////////////////////////////////////////////////////////////////////////////////////////
 	fpCanvas->						cd();
 	fpCanvas->						Clear();
-	ph1i_TLead->					SetLineWidth(4);
+	ph1i_TLead->					SetLineWidth(3);
 	ph1i_TLead->					Draw("HIST");
+	ph1i_TLeadSel->					SetLineWidth(2);
 	ph1i_TLeadSel->					SetLineColor(kRed);
 	ph1i_TLeadSel->					Draw("HIST sames");
 	fpCanvas->						SaveAs((drawout_file + "(").c_str());
-
-	//////////////////////////////////////////////////////////////////////////////////////////
-	fpCanvas->						Clear();
-	ph1i_nmodules->					SetLineWidth(4);
-	ph1i_nmodules->					Draw("HIST");
-	ph1i_nmodulesSel->				SetLineColor(kRed);
-	ph1i_nmodulesSel->				SetLineWidth(2);
-	ph1i_nmodulesSel->				SetStats(0);
-	ph1i_nmodulesSel->				Draw("HIST sames");
-	fpCanvas->						SaveAs(drawout_file.c_str());
-
-	//////////////////////////////////////////////////////////////////////////////////////////
-	fpCanvas->						Clear();
-	ph1i_nclusters->				SetLineWidth(4);
-	ph1i_nclusters->				Draw("HIST");
-	ph1i_nclustersSel->				SetLineColor(kRed);
-	ph1i_nclustersSel->				SetLineWidth(2);
-	ph1i_nclustersSel->				SetStats(0);
-	ph1i_nclustersSel->				Draw("HIST sames");
-	fpCanvas->						SaveAs(drawout_file.c_str());
-
-	//////////////////////////////////////////////////////////////////////////////////////////
-	fpCanvas->						Clear();
-	ph1i_npads->					SetLineWidth(4);
-	ph1i_npads->					Draw("HIST");
-	ph1i_npadsSel->					SetLineColor(kRed);
-	ph1i_npadsSel->					SetLineWidth(2);
-	ph1i_npadsSel->					SetStats(0);
-	ph1i_npadsSel->					Draw("HIST sames");
-	fpCanvas->						SaveAs(drawout_file.c_str());
 
 	//////////////////////////////////////////////////////////////////////////////////////////
 	fpCanvas->						Clear();
@@ -440,6 +415,56 @@ void Reconstruction::DrawOuts::Control(){
 		v_TLeadSel[i]->				Draw("HIST sames");
 	}
 	fpCanvas->						SaveAs(drawout_file.c_str());
+
+	//////////////////////////////////////////////////////////////////////////////////////////
+	fpCanvas->						cd();
+	gPad->							SetLogy();
+	//////////////////////////////////////////////////////////////////////////////////////////
+	fpCanvas->						Clear();
+	ph1f_ADCmax->					SetLineWidth(3);
+	ph1f_ADCmax->					Draw("HIST");
+	ph1f_ADCmaxSel->				SetLineWidth(2);
+	ph1f_ADCmaxSel->				SetLineColor(kRed);
+	ph1f_ADCmaxSel->				Draw("HIST sames");
+	fpCanvas->						SaveAs((drawout_file + "(").c_str());
+	
+	//////////////////////////////////////////////////////////////////////////////////////////
+	fpCanvas->						Clear();
+	ph1f_ALead->					SetLineWidth(3);
+	ph1f_ALead->					Draw("HIST");
+	ph1f_ALeadSel->					SetLineWidth(2);
+	ph1f_ALeadSel->					SetLineColor(kRed);
+	ph1f_ALeadSel->					Draw("HIST sames");
+	fpCanvas->						SaveAs((drawout_file + "(").c_str());
+
+	//////////////////////////////////////////////////////////////////////////////////////////
+	fpCanvas->						Clear();
+	ph1f_ANeighbour->				SetLineWidth(3);
+	ph1f_ANeighbour->				Draw("HIST");
+	ph1f_ANeighbourSel->			SetLineWidth(2);
+	ph1f_ANeighbourSel->			SetLineColor(kRed);
+	ph1f_ANeighbourSel->			Draw("HIST sames");
+	fpCanvas->						SaveAs((drawout_file + "(").c_str());
+
+	//////////////////////////////////////////////////////////////////////////////////////////
+	gPad->							SetLogy(0);
+	//////////////////////////////////////////////////////////////////////////////////////////
+	fpCanvas->						Clear();
+	ph1i_PadMult->					SetLineWidth(3);
+	ph1i_PadMult->					Draw("HIST");
+	ph1i_PadMultSel->				SetLineWidth(2);
+	ph1i_PadMultSel->				SetLineColor(kRed);
+	ph1i_PadMultSel->				Draw("HIST sames");
+	fpCanvas->						SaveAs((drawout_file + "(").c_str());
+
+	//////////////////////////////////////////////////////////////////////////////////////////
+	fpCanvas->						Clear();
+	ph1f_AvgPadMult->				SetLineWidth(3);
+	ph1f_AvgPadMult->				Draw("HIST");
+	ph1f_AvgPadMultSel->			SetLineWidth(2);
+	ph1f_AvgPadMultSel->			SetLineColor(kRed);
+	ph1f_AvgPadMultSel->			Draw("HIST sames");
+	fpCanvas->						SaveAs((drawout_file + "(").c_str());
 
 	//////////////////////////////////////////////////////////////////////////////////////////
 	fpCanvas->						Clear();

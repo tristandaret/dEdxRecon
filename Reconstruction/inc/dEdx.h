@@ -119,8 +119,7 @@ namespace Reconstruction{
 			float ComputedEdxWF(std::vector<float> v_dEdxWF, const int& NClusters, const float& alpha);
 			float ComputedEdxXP(const std::vector<float>& v_dEdx, const std::vector<float>& v_dE, const std::vector<float>& v_dx, const int& nCrossedPads, const float& alpha);
 
-			void DiscardedEvents();
-
+			void DiscardedModule();
 
 		private:
 

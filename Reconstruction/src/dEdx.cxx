@@ -117,9 +117,8 @@ void Reconstruction::dEdx::Reconstruction(){
 	aSelector.										Reset_StatCounters();
 	std::cout << "Processing events:" << std::endl;
 
-
 	// Event loop
-	for (iEvent = 0; iEvent < 5e3; iEvent++){
+	for (iEvent = 0; iEvent < NEvents; iEvent++){
 		if(iEvent % 1000 ==	0 or iEvent ==	NEvents-1) std::cout << iEvent << "/" << NEvents << std::endl;
 
 		pEvent =									p_uploader->GiveMe_Event(iEvent, moduleCase, 0, 0);
@@ -131,15 +130,16 @@ void Reconstruction::dEdx::Reconstruction(){
 
 		aSelector.									ApplySelection(pEvent);
 		if (pEvent->IsValid() == 0){
-			std::cout << "Whole Event " << iEvent << " discarded" << std::endl;
-			if(!fsaveSelectOnly ) for (iMod = 0; iMod < NMod; iMod++){
-				pModule =							pEvent->Get_Module_InArray(iMod);
-				fmodID =							pModule->Get_ModuleNber();
-				DiscardedEvents();
+			if(!fsaveSelectOnly){
+				for (iMod = 0; iMod < NMod; iMod++){
+					pModule =							pEvent->Get_Module_InArray(iMod);
+					fmodID =							pModule->Get_ModuleNber();
+					DiscardedModule();
+				}
+				fpTree_dEdx->								Fill();
+				p_recoevent->								Clear();
+				delete										pEvent;
 			}
-			fpTree_dEdx->								Fill();
-			p_recoevent->								Clear();
-			delete										pEvent;
 			continue;
 		}
 
@@ -150,8 +150,7 @@ void Reconstruction::dEdx::Reconstruction(){
 			pModule =								pEvent->Get_Module_InArray(iMod);
 			fmodID =								pModule->Get_ModuleNber();
 			if (pEvent->Validity_ForThisModule(fmodID) == 0){
-				std::cout << "Event " << iEvent << " Module " << fmodID << " discarded" << std::endl;
-				if(!fsaveSelectOnly) DiscardedEvents();
+				if(!fsaveSelectOnly) DiscardedModule();
 				continue;
 			}
 
@@ -361,7 +360,7 @@ void Reconstruction::dEdx::Reconstruction(){
 	Fit1Gauss(ph1f_XP, 2);
 	std::cout << "done!" << std::endl; 
 
-	// Save
+	// // Save
 	ph1f_WF->										Write();
 	ph1f_XP->										Write();
 	fpTree_dEdx->									Write();
@@ -416,9 +415,8 @@ float Reconstruction::dEdx::ComputedEdxXP(const std::vector<float>& v_dEdx, cons
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Events discarded by selection steps
-void Reconstruction::dEdx::DiscardedEvents(){
+void Reconstruction::dEdx::DiscardedModule(){
 	NClusters =								pModule->Get_NberOfCluster();
-	int NClusOff = 0;
 
 	p_recomodule =							new Reconstruction::RecoModule();
 	p_recomodule->position =				fmodID;
@@ -426,9 +424,8 @@ void Reconstruction::dEdx::DiscardedEvents(){
 
 	// Loop On Clusters
 	for (iC = 0; iC < NClusters; iC++){
-		std::fill(waveform_cluster.begin(), waveform_cluster.end(), 0); // reset waveform
 		pCluster =							pModule->Get_Cluster(iC);
-		p_recocluster = new Reconstruction::RecoCluster();
+		p_recocluster = 					new Reconstruction::RecoCluster();
 		p_recocluster->ADCmax_base =		pCluster->Get_Acluster();
 		p_recocluster->ALead_base = 		pCluster->Get_AMaxLeading();
 		p_recocluster->TLead =				pCluster->Get_TMaxLeading();
@@ -438,43 +435,33 @@ void Reconstruction::dEdx::DiscardedEvents(){
 		int NPads =							pCluster->Get_NberOfPads();
 		p_recocluster->NPads =				NPads;
 		for(iP = 0; iP < NPads; iP ++){
-			std::fill(waveform_pad.begin(), waveform_pad.end(), 0); // reset waveform
-			pPad =				pCluster->Get_Pad(iP);
-			p_recopad = new Reconstruction::RecoPad();
+			pPad =							pCluster->Get_Pad(iP);
+			p_recopad = 					new Reconstruction::RecoPad();
 			if(iP == 0) p_recopad->leading = true;
 			waveform_pad =					pPad->Get_vADC();
 			p_recopad->ix =					pPad->Get_iX();
 			p_recopad->iy =					pPad->Get_iY();
 			p_recopad->ADCmax_base =		pPad->Get_AMax();
-			for(int i=0;i<510;i++) waveform_cluster[i] += waveform_pad[i];
-
-			// Compute drift distance for different time bin sizes and peaking times
 			p_recopad->TMax =					pPad->Get_TMax();
 
 			p_recocluster->v_pads.			push_back(p_recopad);
+			p_recomodule->NCrossedPads++;
+
 		} // Pads
 
 		// Fill cluster information
 		p_recomodule->v_clusters.			push_back(p_recocluster);
-		NClusOff++;
+		p_recomodule->NClusters++;
 		p_recomodule->NPads +=				p_recocluster->NPads;
 		
 	} // Clusters
 
 	// Fill module class attributes
-	p_recomodule->avg_pad_mult =			(float)p_recomodule->NPads/NClusOff;
+	p_recomodule->avg_pad_mult =			(float)p_recomodule->NPads/p_recomodule->NClusters;
 
 	// Fill module information into the event class
 	p_recoevent->v_modules.					push_back(p_recomodule);
-	p_recoevent->NPads +=					p_recomodule->NPads;
 }
-
-
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -508,12 +495,17 @@ Reconstruction::RecoEvent::~RecoEvent(){
 void Reconstruction::RecoEvent::Clear(){
 	for (auto p_recomodule : v_modules) delete p_recomodule;
 	v_modules.clear();
-	eventNbr =	0;
-	NCrossedPads =	0;
-	NClusters =	0;
-	dEdxXP =	0;
-	dEdxWF =	0;
-	lengthXP =	0;
-	lengthWF =	0;
+	selected =			false;
+	eventNbr =			0;
+	dEdxXP =			0;
+	dEdxWF =			0;
+	dEdxXPnoTrunc =		0;
+	dEdxWFnoTrunc =		0;
+	NCrossedPads =		0;
+	NPads =				0;
+	NClusters =			0;
+	lengthXP =			0;
+	lengthWF =			0;
 	numberOfModules =	0;
+	avg_pad_mult =		0;
 }
