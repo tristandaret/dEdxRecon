@@ -25,16 +25,6 @@ namespace Reconstruction{
 	void WFCorrection(const std::string& OutCorr);
 }
 
-/* Compute the correction function of WF method ----------------------------------------- */
-void corr(const std::string& OutDir,
-			std::string const& Tag,
-			std::string const& SelectionSet,
-			Uploader* pUploader,
-			int const& NbrOfMod,
-			int const& Data_to_Use);
-
-
-
 /* Call the correction function of WF method ----------------------------------------------*/
 TF1* corr_func(const std::string &EventFile, const std::string &Tag, const int& correctWF);
 
@@ -50,7 +40,7 @@ void Init_selection(const std::string &SelectionSet, Selector &aSelector, const 
 std::vector<std::vector<float>> readCSV(std::string filename);
 
 // Determine the time cut
-std::vector<int> ComputeCutStage3_Cut(Uploader* pUploader, const int& NbrOfMod, const int& Data_to_Use, const int& CloseWF);
+std::vector<int> ComputeCutStage3_Cut(Uploader* pUploader, const int& NbrOfMod, const int& Data_to_Use);
 
 // Function to search for a word in a CSV file
 bool GetStage3Cut_CSV(const std::string& filename, const std::string& targetWord, int& value1, int& value2);

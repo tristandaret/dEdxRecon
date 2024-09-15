@@ -128,10 +128,12 @@ void Selector::Set_T2_CERN22_Event()
 	std::cout << std::endl;
 	std::cout << "-------------->Predefined selection Sel_CERN22" << std::endl;
 	ListOfSelectionName.clear();
-//	Add_Selection( "Stage1"	);	// border clusters
+	Add_Selection( "Stage1"	);	// border clusters
 	Add_Selection( "Stage2"	);	// time sync event based
 	Add_Selection( "Stage3" );	// time sync run based
 	Add_Selection( "Stage4"	);	// average pad multiplicity in cluster
+	Add_Selection( "Stage5"	);	// maximum number of pads
+	Add_Selection( "Stage6"	);	// min & max amplitude
 	Add_Selection( "StageFinal"	);	// number of clusters
 }
 

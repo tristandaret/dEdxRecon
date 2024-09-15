@@ -137,9 +137,9 @@ void Reconstruction::dEdx::Reconstruction(){
 					DiscardedModule();
 				}
 				fpTree_dEdx->								Fill();
-				p_recoevent->								Clear();
-				delete										pEvent;
 			}
+			p_recoevent->								Clear();
+			delete										pEvent;
 			continue;
 		}
 
@@ -468,12 +468,11 @@ void Reconstruction::dEdx::DiscardedModule(){
 /* ANALYSIS CLASSES DEFINITION */
 
 Reconstruction::RecoPad::~RecoPad(){
-	// v_waveform.clear();
+	// nothing to clear
 }
 
 
 Reconstruction::RecoCluster::~RecoCluster(){
-	// v_waveform.clear();
 	for (auto p_recopad : v_pads) delete p_recopad;
 	v_pads.clear();
 }

@@ -32,7 +32,7 @@ namespace Reconstruction{
 
 	// DrawOuts		
 	int DO_Control =			1;
-	int DO_dEdx =				0;
+	int DO_dEdx =				1;
 	int DO_Comparison =			0;
 
 	int DO_DESY21SingleScan =	0;
@@ -46,7 +46,7 @@ void Reconstruction::Monitoring()
 	comment = "";
 	gErrorIgnoreLevel = kInfo;
 
-	Correction(1,1,1,1,0);
+	Correction(1,1,1,1,1);
 
 
 	// Energy scan using the prototype (ERAM 18)
@@ -68,17 +68,19 @@ void Reconstruction::Monitoring()
 	// Energy scan using the mockup
 	if(CERN_Escan){
 		Settings("CERN22", "", "Energy", "", "Energy (GeV)", 4, -1, 412, 350, 415, 40);
-		v_valint.	insert(v_valint.end(), {0.5, 0.75, 1, 1.25, 1.5, 0.75, 1, 1.5, 0.75, 1.25, 1.5, 1, 1.25, 1.5});
-		v_valstr.	insert(v_valstr.end(), {"e+_0p5GeV",	"e+_0p75GeV",	"e+_1GeV",		"e+_1p25GeV", "e+_1p5GeV",	"mu+_0p75GeV",	"mu+_1GeV", 
-											"mu+_1p5GeV",	"pi+_0p75GeV",	"pi+_1p25GeV",	"pi+_1p5GeV", "p+_1GeV",	"p+_1p25GeV",	"p+_1p5GeV"});
+		v_valint.	insert(v_valint.end(), {0.5, 0.75, 1, 1.25, 1.5, 0.75, 1, 1.5, 1, 1.25, 1.5, 0.75, 1.25, 1.5});
+		v_valstr.	insert(v_valstr.end(), {"e+_0p5GeV",	"e+_0p75GeV",	"e+_1GeV",		"e+_1p25GeV",	"e+_1p5GeV",	
+											"mu+_0p75GeV",	"mu+_1GeV",		"mu+_1p5GeV",
+											"p_1GeV",		"p_1p25GeV",	"p_1p5GeV",	
+											"pi+_0p75GeV",	"pi+_1p25GeV",	"pi+_1p5GeV"});
 
-		std::vector<std::string> v_suffix = {	"_25V_z415_y2pad_iter0.root",	"_25V_z415_y2pad_iter0.root",		"_25V_z415p1_y2pad_iter0.root", "_25V_z415p1_y2pad_1_iter0.root",
-												"_25V_z415p1_y2pad_iter0.root", "_25V_z415_y2pad_iter0.root",		"_25V_z415p1_y2pad_iter0.root", "_25V_z415p1_y2pad_iter0.root", 
-												"_25V_z415_y2pad_iter0.root",	"_25V_z415p1_y2pad_2_iter0.root",	"_25V_z415p1_y2pad_iter0.root", "_25V_z415p1_y2pad_iter0.root", 
-												"_25V_z415p1_y2pad_iter0.root",	"_25V_z415_y2pad_2_iter0.root"};
+		std::vector<std::string> v_suffix = {	"_25V_z415_y2pad_iter0.root",	"_25V_z415_y2pad_iter0.root",		"_25V_z415p1_y2pad_iter0.root", 		"_25V_z415p1_y2pad_1_iter0.root", "_25V_z415p1_y2pad_iter0.root",
+												"_25V_z415_y2pad_iter0.root",	"_25V_z415p1_y2pad_iter0.root", 	"_25V_z415p1_y2pad_iter0.root",
+												"_25V_z415p1_y2pad_iter0.root",	"_25V_z415p1_y2pad_iter0.root",		"_25V_z415_y2pad_2_iter0.root", 
+												"_25V_z415_y2pad_iter0.root",	"_25V_z415p1_y2pad_2_iter0.root",	"_25V_z415p1_y2pad_iter0.root"};
 
-		// for(int iEnergy = 0; iEnergy < (int)std::size(v_valstr); iEnergy++){
-		for(int iEnergy = 0; iEnergy < 1; iEnergy++){
+		for(int iEnergy = 3; iEnergy < (int)std::size(v_valstr); iEnergy++){
+		// for(int iEnergy = 2; iEnergy < 3; iEnergy++){
 			v_datafiles.push_back(data_scanpath + "All_ERAMS_350V_412ns_" + v_valstr[iEnergy] + v_suffix[iEnergy]);
 			v_tags.push_back(Form("%s_%s_%s", testbeam.c_str(), scan.c_str(), v_valstr[iEnergy].c_str()));
 
