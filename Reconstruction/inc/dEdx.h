@@ -94,6 +94,7 @@ namespace Reconstruction{
 		void Clear();
 
 		std::vector<RecoModule*> 	v_modules;
+		std::vector<int> 			v_modules_position;
 		bool	selected =			false;
 		int 	eventNbr =			0;
 		float 	dEdxXP =			0;

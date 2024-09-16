@@ -158,6 +158,7 @@ void Reconstruction::dEdx::Reconstruction(){
 
 			p_recomodule =							new Reconstruction::RecoModule();
 			p_recomodule->position =				fmodID;
+			p_recoevent->							v_modules_position.push_back(fmodID);
 			p_recomodule->ID =						fERAMs_iD[fmodID];
 			p_recomodule->selected = 				true;
 
@@ -336,8 +337,10 @@ void Reconstruction::dEdx::Reconstruction(){
 		p_recoevent->dEdxXPnoTrunc =				ComputedEdxXP(v_evt_dEdxXP, v_evt_dE, v_evt_dx, p_recoevent->NCrossedPads, 1);
 
 		// Make the quick access histograms
-		ph1f_WF->									Fill(p_recoevent->dEdxWF);
-		ph1f_XP->									Fill(p_recoevent->dEdxXP);
+		if(testbeam.find("CERN22") == std::string::npos || (testbeam.find("CERN22") != std::string::npos and FourModulesInLine(p_recoevent->v_modules_position))){
+			ph1f_WF->									Fill(p_recoevent->dEdxWF);
+			ph1f_XP->									Fill(p_recoevent->dEdxXP);
+		}
 
 		// Fill the tree
 		fpTree_dEdx->								Fill();
@@ -494,6 +497,7 @@ Reconstruction::RecoEvent::~RecoEvent(){
 void Reconstruction::RecoEvent::Clear(){
 	for (auto p_recomodule : v_modules) delete p_recomodule;
 	v_modules.clear();
+	v_modules_position.clear();
 	selected =			false;
 	eventNbr =			0;
 	dEdxXP =			0;

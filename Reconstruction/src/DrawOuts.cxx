@@ -37,6 +37,7 @@ Reconstruction::DrawOuts::DrawOuts(const std::vector<std::string> &v_inputFiles)
 	SetStyle();
 }
 
+// Destructor
 Reconstruction::DrawOuts::~DrawOuts(){
 
 	for(int i=0;i<(int)v_fEvents.size();i++)	delete v_fEvents[i];
@@ -48,6 +49,7 @@ Reconstruction::DrawOuts::~DrawOuts(){
 }
 
 
+// Configuration functions
 void Reconstruction::DrawOuts::SetStyle(){
 
 	fpCanvas = 						new TCanvas("pCanvas", "pCanvas", 1800, 1350);
@@ -91,7 +93,8 @@ void Reconstruction::DrawOuts::CleanUp(){
 	if(ftype == "multiple") v_valint.clear();
 }
 
-void Reconstruction::DrawOuts::ScanFill(){
+// Scan functions
+void Reconstruction::DrawOuts::DESY21ScanFill(){
 
 	int istartscan = 0;
 	if(ftype == "single") istartscan = scanindex;
@@ -147,7 +150,7 @@ void Reconstruction::DrawOuts::ScanFill(){
 	}
 }
 
-void Reconstruction::DrawOuts::ScanDraw(){
+void Reconstruction::DrawOuts::DESY21ScanDraw(){
 	int base = 0;
 	int nlegentries = nscans;
 	if(ftype == "single"){
@@ -254,11 +257,196 @@ void Reconstruction::DrawOuts::ScanDraw(){
 
 }
 
+void Reconstruction::DrawOuts::CERN22ScanFill(){
 
+	// Bethel-Bloch fitting 
+	std::string particles[] = 		{" e^{+}", " #mu^{+}", " #pi^{+}", " p"};
+	std::vector<double>				v_mass{0.511e-3, 105.658e-3, 139.570e-3, 938.272e-3}; // GeV
+
+	int itotalrun = 0;
+	std::vector<int> v_runs = {5,3,3,3};
+	for(int iscan=0;iscan<4;iscan++){ // 4 types of particles
+
+		v_fpTGE_mean_WF.			push_back(new TGraphErrors());
+		v_fpTGE_mean_XP.			push_back(new TGraphErrors());
+		v_fpTGE_std_WF.				push_back(new TGraphErrors());
+		v_fpTGE_std_XP.				push_back(new TGraphErrors());
+		v_fpTGE_reso_WF.			push_back(new TGraphErrors());
+		v_fpTGE_reso_XP.			push_back(new TGraphErrors());
+		v_fptf1_BB. 				push_back(BetheBlochExp(0.25, 20, v_mass[iscan], particles[iscan]));
+
+		for(int irun=0;irun<v_runs[iscan];irun++){
+
+			fptf1_WF =					(TF1*)v_fFiles[itotalrun]->Get<TH1F>("ph1f_WF")->GetFunction("gausn");
+			fptf1_XP =					(TF1*)v_fFiles[itotalrun]->Get<TH1F>("ph1f_XP")->GetFunction("gausn");
+
+			float mean_WF =				fptf1_WF->GetParameter(1);
+			float mean_XP =				fptf1_XP->GetParameter(1);
+			float dmean_WF =			fptf1_WF->GetParError(1);
+			float dmean_XP =			fptf1_XP->GetParError(1);
+
+			float std_WF =				fptf1_WF->GetParameter(2);
+			float std_XP =				fptf1_XP->GetParameter(2);
+			float dstd_WF =				fptf1_WF->GetParError(2);
+			float dstd_XP =				fptf1_XP->GetParError(2);
+
+			float reso_WF =				std_WF/mean_WF*100;
+			float reso_XP =				std_XP/mean_XP*100;
+			float dreso_WF =			GetResoError(fptf1_WF);
+			float dreso_XP =			GetResoError(fptf1_XP);
+
+			v_fpTGE_mean_WF[iscan]->	SetPoint(irun, v_valint[itotalrun], mean_WF*keV);
+			v_fpTGE_mean_XP[iscan]->	SetPoint(irun, v_valint[itotalrun], mean_XP*keV);
+			v_fpTGE_mean_WF[iscan]->	SetPointError(irun, 0, dmean_WF*keV);
+			v_fpTGE_mean_XP[iscan]->	SetPointError(irun, 0, dmean_XP*keV);
+
+			v_fpTGE_std_WF[iscan]->		SetPoint(irun, v_valint[itotalrun], std_WF*keV);
+			v_fpTGE_std_XP[iscan]->		SetPoint(irun, v_valint[itotalrun], std_XP*keV); 
+			v_fpTGE_std_WF[iscan]->		SetPointError(irun, 0, dstd_WF*keV);
+			v_fpTGE_std_XP[iscan]->		SetPointError(irun, 0, dstd_XP*keV);
+
+			v_fpTGE_reso_WF[iscan]->	SetPoint(irun, v_valint[itotalrun], reso_WF);
+			v_fpTGE_reso_XP[iscan]->	SetPoint(irun, v_valint[itotalrun], reso_XP);
+			v_fpTGE_reso_WF[iscan]->	SetPointError(irun, 0, dreso_WF);
+			v_fpTGE_reso_XP[iscan]->	SetPointError(irun, 0, dreso_XP);
+
+			delete fptf1_WF;
+			delete fptf1_XP;
+
+			itotalrun++;
+		}
+	}
+	combinedFit(v_fpTGE_mean_XP, v_fptf1_BB);
+}
+
+void Reconstruction::DrawOuts::CERN22ScanDraw(){
+
+	// Drawing settings
+	foutputFileWF = 				drawout_scanpath + scan + comment + "_WF.pdf";
+	foutputFileXP = 				drawout_scanpath + scan + comment + "_XP.pdf";
+	gPad->							SetRightMargin(0.04);
+	gPad->							SetTopMargin(0.04);
+	fpCanvas->						Clear();
+	fpCanvas->						cd();
+	// Legend
+	fpLeg =							new TLegend(0.75,0.78,0.95,0.93);
+	fpLeg->							SetTextSize(0.05);
+	fpLeg->							SetFillStyle(0);
+	fpLeg->							SetTextColor(kBlue-1);
+	fpLeg->							SetNColumns(2);
+	fpLeg->							AddEntry(v_fpTGE_reso_WF[0], " e^{+}", "p");
+	fpLeg->							AddEntry(v_fpTGE_reso_WF[1], " #mu^{+}", "p");
+	fpLeg->							AddEntry(v_fpTGE_reso_WF[3], " p", "p");
+	fpLeg->							AddEntry(v_fpTGE_reso_WF[2], " #pi^{+}", "p");
+	
+	// WF
+	// Resolution
+	v_fpTGE_reso_WF[0]->			SetMinimum(YRESOMIN-0.5);
+	v_fpTGE_reso_WF[0]->			SetMaximum(YRESOMAX);
+	v_fpTGE_reso_WF[0]->			GetXaxis()->SetLimits(0.25, 1.75);
+	v_fpTGE_reso_WF[0]->			SetNameTitle("fpTGE_reso_WF", Form(";%s;resolution (%%)", runvarstr.c_str()));
+	for(int i=0;i<4;i++)
+	{
+		Graphic_setup(v_fpTGE_reso_WF[i], 4, markersCERN[i], colorsCERN[i], 1, kBlack);
+		v_fpTGE_reso_WF[i]->			Draw(i == 0 ? "AP" : "P same");
+		v_fpTGE_reso_WF[i]->			SetMarkerSize(5);
+	}
+	fpLeg->							Draw();
+	fpCanvas->						SaveAs((foutputFileWF + "(").c_str());
+
+	// Mean
+	fpCanvas->						Clear();
+	v_fpTGE_mean_WF[0]->			SetMinimum(0.5);
+	v_fpTGE_mean_WF[0]->			SetMaximum(3);
+	v_fpTGE_mean_WF[0]->			GetXaxis()->SetLimits(0.25, 1.75);
+	v_fpTGE_mean_WF[0]->			SetNameTitle("fpTGE_mean_WF", Form(";%s;Mean (ADC count)", runvarstr.c_str()));
+	for(int i=0;i<4;i++)
+	{
+		Graphic_setup(v_fpTGE_mean_WF[i], 4, markersCERN[i], colorsCERN[i], 1, kBlack);
+		v_fpTGE_mean_WF[i]->			Draw(i == 0 ? "AP" : "P same");
+	}
+	fpLeg->							Draw();
+	fpCanvas->						SaveAs(foutputFileWF.c_str());
+
+	// Standard deviation
+	fpCanvas->						Clear();
+	v_fpTGE_std_WF[0]->				SetMinimum(0);
+	v_fpTGE_std_WF[0]->				SetMaximum(0.3);
+	v_fpTGE_std_WF[0]->				GetXaxis()->SetLimits(0.25, 1.75);
+	v_fpTGE_std_WF[0]->				SetNameTitle("fpTGE_std_WF", Form(";%s;std (ADC count)", runvarstr.c_str()));
+	for(int i=0;i<4;i++)
+	{
+		Graphic_setup(v_fpTGE_std_WF[i], 4, markersCERN[i], colorsCERN[i], 1, kBlack);
+		v_fpTGE_std_WF[i]->				Draw(i == 0 ? "AP" : "P same");
+	}
+	fpLeg->							Draw();
+	fpCanvas->						SaveAs((foutputFileWF + ")").c_str());
+
+	// XP
+	// Resolution
+	fpCanvas->						Clear();
+	v_fpTGE_reso_XP[0]->			SetMinimum(YRESOMIN-0.5);
+	v_fpTGE_reso_XP[0]->			SetMaximum(YRESOMAX);
+	v_fpTGE_reso_XP[0]->			GetXaxis()->SetLimits(0.25, 1.75);
+	v_fpTGE_reso_XP[0]->			SetNameTitle("fpTGE_reso_XP", Form(";%s;resolution (%%)", runvarstr.c_str()));
+	for(int i=0;i<4;i++)
+	{
+		Graphic_setup(v_fpTGE_reso_XP[i], 4, markersCERN[i], colorsCERN[i], 1, kBlack);
+		v_fpTGE_reso_XP[i]->			Draw(i == 0 ? "AP" : "P same");
+	}
+	fpLeg->							Draw();
+	fpCanvas->						SaveAs((foutputFileXP + "(").c_str());
+
+	// Mean
+	fpCanvas->						Clear();
+	v_fpTGE_mean_XP[0]->			SetMinimum(0.5);
+	v_fpTGE_mean_XP[0]->			SetMaximum(3);
+	v_fpTGE_mean_XP[0]->			GetXaxis()->SetLimits(0.25, 1.75);
+	v_fpTGE_mean_XP[0]->			SetNameTitle("fpTGE_mean_XP", Form(";%s;Mean (ADC count)", runvarstr.c_str()));
+	for(int i=0;i<4;i++)
+	{
+		Graphic_setup(v_fpTGE_mean_XP[i], 4, markersCERN[i], colorsCERN[i], 1, kBlack);
+		v_fpTGE_mean_XP[i]->			Draw(i == 0 ? "AP" : "P same");
+		v_fptf1_BB[i]->					SetNpx(1000);
+		v_fptf1_BB[i]->					SetLineColor(colorsCERN[i]);
+		v_fptf1_BB[i]->					Draw("same");
+	}
+	fpLeg->							Draw();
+	fpCanvas->						SaveAs(foutputFileXP.c_str());
+
+	// Bethe-Bloch extended
+	fpCanvas->						Clear();
+	gPad->							SetLogx();
+	gPad->							SetLogy();
+	v_fptf1_BB[0]->					SetMinimum(0.7);
+	v_fptf1_BB[0]->					SetMaximum(5);
+	v_fptf1_BB[0]->					Draw();
+	for(int i = 1; i < 4; i++)v_fptf1_BB[i]-> Draw("same");
+	fpLeg->							Draw();
+	fpCanvas->						SaveAs(foutputFileXP.c_str());
+
+
+	gPad->							SetLogx(0);
+	gPad->							SetLogy(0);
+	// Standard deviation
+	fpCanvas->						Clear();
+	v_fpTGE_std_XP[0]->				SetMinimum(0);
+	v_fpTGE_std_XP[0]->				SetMaximum(0.3);
+	v_fpTGE_std_XP[0]->				GetXaxis()->SetLimits(0.25, 1.75);
+	v_fpTGE_std_XP[0]->				SetNameTitle("fpTGE_std_XP", Form(";%s;std (ADC count)", runvarstr.c_str()));
+	for(int i=0;i<4;i++)
+	{
+		Graphic_setup(v_fpTGE_std_XP[i], 4, markersCERN[i], colorsCERN[i], 1, kBlack);
+		v_fpTGE_std_XP[i]->			Draw(i == 0 ? "AP" : "P same");
+	}
+	fpLeg->							Draw();
+	fpCanvas->						SaveAs((foutputFileXP + ")").c_str());
+}
 
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Single run functions
 void Reconstruction::DrawOuts::Control(){
 
 	// Prepare histograms
@@ -502,7 +690,9 @@ void Reconstruction::DrawOuts::EnergyLoss(){
 	}
 
 	// Get entries and fill histograms
+	// std::vector<int> v_ModulesOfEvent;
 	for(int i=0;i<v_fnentries.back();i++){
+		// v_ModulesOfEvent.clear();
 		v_fTrees.back()->					GetEntry(i);
 		p_recoevent =						v_fEvents.back();
 		NMod =								p_recoevent->v_modules.size();
@@ -510,12 +700,17 @@ void Reconstruction::DrawOuts::EnergyLoss(){
 		for(int iMod=0;iMod<NMod;iMod++){
 			p_recomodule = 					p_recoevent->v_modules[iMod];
 			if(!p_recomodule->selected) 	continue;
+			// v_ModulesOfEvent.push_back(p_recomodule->position);
 			position =						p_recomodule->position;
 			v_h1f_XP_mod[position]->		Fill(p_recomodule->dEdxXP);
 			v_h1f_WF_mod[position]->		Fill(p_recomodule->dEdxWF);
 			v_h1f_XP_modnoTrunc[position]->	Fill(p_recomodule->dEdxXPnoTrunc);
 			v_h1f_WF_modnoTrunc[position]->	Fill(p_recomodule->dEdxWFnoTrunc);
 		}
+		// if(testbeam.find("CERN") != std::string::npos){
+		// 	if(NMod < 4) continue;
+		// 	if(!FourModulesInLine(v_ModulesOfEvent)) continue;
+		// }
 		ph1f_WF->							Fill(p_recoevent->dEdxWF);
 		ph1f_XP->							Fill(p_recoevent->dEdxXP);
 		ph1f_WFnoTrunc->					Fill(p_recoevent->dEdxWFnoTrunc);
@@ -773,19 +968,15 @@ void Reconstruction::DrawOuts::FileComparison(){
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Reconstruction::DrawOuts::DESY21SingleScan(){
-	
-	ScanFill();
-	// SingleScanDraw();
-	// ScanFill();
-	ScanDraw();
-	CleanUp();
-}
-
 void Reconstruction::DrawOuts::DESY21Scan(const std::string &drawtype){
 
 	ftype = drawtype;
-	ScanFill();
-	ScanDraw();
+	DESY21ScanFill();
+	DESY21ScanDraw();
 	// CleanUp();
+}
+
+void Reconstruction::DrawOuts::CERN22Scan(){
+	CERN22ScanFill();
+	CERN22ScanDraw();
 }

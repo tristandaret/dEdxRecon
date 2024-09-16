@@ -19,21 +19,26 @@ namespace Reconstruction{
 		void CleanUp();
 		void SetStyle();
 		
-		void ScanFill();
-		void ScanDraw();
+		void DESY21ScanFill();
+		void DESY21ScanDraw();
+		
+		void CERN22ScanFill();
+		void CERN22ScanDraw();
 
 		void Control();
 		void EnergyLoss();
 		void FileComparison();
 
-		void DESY21SingleScan();
 		void DESY21Scan(const std::string &drawtype);
+		void CERN22Scan();
 
 	private:
 		// Files
 		std::string finputFile;
 		std::string foutputDir;
 		std::string foutputFile;
+		std::string foutputFileWF;
+		std::string foutputFileXP;
 		
 		// Data file
 		std::vector<TFile*> 	v_fFiles;
@@ -50,6 +55,7 @@ namespace Reconstruction{
 		// Settings
 		std::string fparticleType;
 		TCanvas *fpCanvas;
+		TLegend *fpLeg;
 		TLegend *fpLegWF;
 		TLegend *fpLegXP;
 		std::string ftype = "single";
@@ -68,6 +74,7 @@ namespace Reconstruction{
 		constexpr static float YMEANMAX =	1050;
 		constexpr static float YSTDMIN =	62;
 		constexpr static float YSTDMAX =	85;
+		float keV = 						5.9/(224*1703.74/183); // 5.9 Fe peak energy | 1703 mean MockUp gain | 224 e- created with 5.9keV | 183 e- for 1 ADC
 
 		// Single scan pointers
 		TF1* fptf1_WF;
@@ -84,6 +91,8 @@ namespace Reconstruction{
 		int nruns =					0;
 		std::vector<int> markers = {22, 34, 23, 47, 33, 43};
 		std::vector<int> colors = {kCyan-6, kMagenta-6, kCyan+2, kMagenta+2, kCyan+3, kMagenta+3};
+		std::vector<int> markersCERN = {20, 21, 33, 34};
+		std::vector<int> colorsCERN = {kOrange+7, kAzure+2, kGreen+3, kRed+1};
 		std::vector<TF1*> v_fptf1_WF;
 		std::vector<TF1*> v_fptf1_XP;
 		std::vector<TGraphErrors*> v_fpTGE_mean_WF;
@@ -92,6 +101,9 @@ namespace Reconstruction{
 		std::vector<TGraphErrors*> v_fpTGE_std_XP;
 		std::vector<TGraphErrors*> v_fpTGE_reso_WF;
 		std::vector<TGraphErrors*> v_fpTGE_reso_XP;
+
+		// Bethe-Bloch fitting
+		std::vector<TF1*> v_fptf1_BB;
 		
 	};
 }

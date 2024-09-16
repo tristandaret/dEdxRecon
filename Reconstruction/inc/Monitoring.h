@@ -19,6 +19,7 @@ namespace Reconstruction{
 	void DefaultAnalysis();
 	void DrawSingleScan();
 	void DrawMultipleScan();
+	void DrawCERN22Scan();
 
 	// Run selection
 	// Files to use

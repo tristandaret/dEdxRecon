@@ -21,6 +21,23 @@ std::vector<double> linspace(double start, double end, int numPoints) {
 	return result;
 }
 
+bool FourModulesInLine(const std::vector<int>& vec) {
+    int bitmask = 0;
+    // Set corresponding bits for each number in the vector
+    for (int num : vec) {
+        if (num >= 0 && num <= 7) {
+            bitmask |= (1 << num);
+        }
+    }
+
+    // Define bitmasks for the sets {0,1,2,3} and {4,5,6,7}
+    const int set1 = 0b00001111; // 15 (0,1,2,3)
+    const int set2 = 0b11110000; // 240 (4,5,6,7)
+
+    // Check if all elements of set1 or set2 are present, regardless of extra elements
+    return ((bitmask & set1) == set1) || ((bitmask & set2) == set2);
+}
+
 void Reconstruction::WFCorrection(const std::string &OutCorr){
 
 	// Redirect Output
@@ -160,7 +177,6 @@ void Reconstruction::WFCorrection(const std::string &OutCorr){
 
 	std::cout.rdbuf(coutbuf); // Reset to standard output
 }
-
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////

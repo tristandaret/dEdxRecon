@@ -20,6 +20,7 @@
 /* Python's numpy equivalent of linspace ----------------------------------------------- */
 std::vector<double> linspace(double start, double end, int numPoints);
 
+bool FourModulesInLine(const std::vector<int>& vec);
 
 namespace Reconstruction{
 	void WFCorrection(const std::string& OutCorr);

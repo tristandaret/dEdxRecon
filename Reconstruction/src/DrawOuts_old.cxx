@@ -2042,34 +2042,34 @@ void DrawOut_Escan(const std::string& inputDir, const std::string& Comment)
 
 	int index;
 	for(int iE = 0; iE < npoint; iE++){
-	if(iE < 5)		index = 0;
-	else if(iE < 8)	index = 1;
-	else if(iE < 11)	index = 2;
-	else if(iE < 14)	index = 3;
+		if(iE < 5)		index = 0;
+		else if(iE < 8)	index = 1;
+		else if(iE < 11)	index = 2;
+		else if(iE < 14)	index = 3;
 
-	mean_WF[iE]				= v_tf1_WF[iE]->	GetParameter(1);
-	mean_XP[iE]				= v_tf1_XP[iE]->	GetParameter(1);
-	std_WF[iE]					= v_tf1_WF[iE]->	GetParameter(2);
-	std_XP[iE]					= v_tf1_XP[iE]->	GetParameter(2);
-	dmean_WF[iE]				= v_tf1_WF[iE]->	GetParError(1);
-	dmean_XP[iE]				= v_tf1_XP[iE]->	GetParError(1);
-	dstd_WF[iE]				= v_tf1_WF[iE]->	GetParError(2);
-	dstd_XP[iE]				= v_tf1_XP[iE]->	GetParError(2);
+		mean_WF[iE] =				 v_tf1_WF[iE]->GetParameter(1);
+		mean_XP[iE] =				 v_tf1_XP[iE]->GetParameter(1);
+		std_WF[iE] =				 v_tf1_WF[iE]->GetParameter(2);
+		std_XP[iE] =				 v_tf1_XP[iE]->GetParameter(2);
+		dmean_WF[iE] =				 v_tf1_WF[iE]->GetParError(1);
+		dmean_XP[iE] =				 v_tf1_XP[iE]->GetParError(1);
+		dstd_WF[iE] =				 v_tf1_WF[iE]->GetParError(2);
+		dstd_XP[iE] =				 v_tf1_XP[iE]->GetParError(2);
 
-	v_pTGE_reso_WF[index]-> SetPoint		(n[iE], E_arr[iE], std_WF[iE]/mean_WF[iE]*100);
-	v_pTGE_reso_XP[index]-> SetPoint		(n[iE], E_arr[iE], std_XP[iE]/mean_XP[iE]*100);
-	v_pTGE_reso_WF[index]-> SetPointError (n[iE], 0,		GetResoError(v_tf1_WF[iE]));
-	v_pTGE_reso_XP[index]-> SetPointError (n[iE], 0,		GetResoError(v_tf1_XP[iE]));
+		v_pTGE_reso_WF[index]-> 	SetPoint		(n[iE], E_arr[iE], std_WF[iE]/mean_WF[iE]*100);
+		v_pTGE_reso_XP[index]-> 	SetPoint		(n[iE], E_arr[iE], std_XP[iE]/mean_XP[iE]*100);
+		v_pTGE_reso_WF[index]-> 	SetPointError 	(n[iE], 0,		GetResoError(v_tf1_WF[iE]));
+		v_pTGE_reso_XP[index]-> 	SetPointError 	(n[iE], 0,		GetResoError(v_tf1_XP[iE]));
 
-	v_pTGE_mean_WF[index]-> SetPoint		(n[iE], E_arr[iE], mean_WF[iE]*keV);
-	v_pTGE_mean_XP[index]-> SetPoint		(n[iE], E_arr[iE], mean_XP[iE]*keV);
-	v_pTGE_mean_WF[index]-> SetPointError (n[iE], 0,		dmean_WF[iE]*keV);
-	v_pTGE_mean_XP[index]-> SetPointError (n[iE], 0,		dmean_XP[iE]*keV);
+		v_pTGE_mean_WF[index]-> 	SetPoint		(n[iE], E_arr[iE], mean_WF[iE]*keV);
+		v_pTGE_mean_XP[index]-> 	SetPoint		(n[iE], E_arr[iE], mean_XP[iE]*keV);
+		v_pTGE_mean_WF[index]-> 	SetPointError 	(n[iE], 0,		dmean_WF[iE]*keV);
+		v_pTGE_mean_XP[index]-> 	SetPointError 	(n[iE], 0,		dmean_XP[iE]*keV);
 
-	v_pTGE_std_WF[index]->	SetPoint		(n[iE], E_arr[iE], std_WF[iE]*keV);
-	v_pTGE_std_XP[index]->	SetPoint		(n[iE], E_arr[iE], std_XP[iE]*keV);
-	v_pTGE_std_WF[index]->	SetPointError (n[iE], 0,		dstd_WF[iE]*keV);
-	v_pTGE_std_XP[index]->	SetPointError (n[iE], 0,		dstd_XP[iE]*keV);
+		v_pTGE_std_WF[index]->		SetPoint		(n[iE], E_arr[iE], std_WF[iE]*keV);
+		v_pTGE_std_XP[index]->		SetPoint		(n[iE], E_arr[iE], std_XP[iE]*keV);
+		v_pTGE_std_WF[index]->		SetPointError 	(n[iE], 0,		dstd_WF[iE]*keV);
+		v_pTGE_std_XP[index]->		SetPointError 	(n[iE], 0,		dstd_XP[iE]*keV);
 	}
 
 
@@ -2080,10 +2080,10 @@ void DrawOut_Escan(const std::string& inputDir, const std::string& Comment)
 	//	double paramClaudio[5] = {0.148800, 6.047,		0.00064,	2.308,		-1.359};		// Claudio raw normalized
 	double paramClaudio[5] = {0.186524, 5.382954,	0.004232,	2.028659,	-0.994959};	// Claudio fit
 	for(int ipart = 0; ipart < (int)v_tf1_BB_Claudio.size(); ipart++){
-	for(int iparam = 1; iparam < (int)v_tf1_BB_Claudio[0]->GetNpar(); iparam++){
-		v_tf1_BB_Claudio[ipart]->SetParameter(iparam, paramClaudio[iparam-1]);
-		v_tf1_BB_THATReconstruction[ipart]->SetParameter(iparam, paramTHATReconstruction[iparam-1]);
-	}
+		for(int iparam = 1; iparam < (int)v_tf1_BB_Claudio[0]->GetNpar(); iparam++){
+			v_tf1_BB_Claudio[ipart]->SetParameter(iparam, paramClaudio[iparam-1]);
+			v_tf1_BB_THATReconstruction[ipart]->SetParameter(iparam, paramTHATReconstruction[iparam-1]);
+		}
 	}
 
 	// Draw
