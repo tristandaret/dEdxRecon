@@ -68,12 +68,19 @@ namespace Reconstruction{
 		int iy = 				0;
 		int position = 			0;
 
-		constexpr static float YRESOMIN =	6.5;
 		constexpr static float YRESOMAX =	10;
-		constexpr static float YMEANMIN =	800;
+		constexpr static float YRESOMIN =	6.5;
 		constexpr static float YMEANMAX =	1050;
-		constexpr static float YSTDMIN =	62;
+		constexpr static float YMEANMIN =	800;
 		constexpr static float YSTDMAX =	85;
+		constexpr static float YSTDMIN =	62;
+
+		constexpr static float YRESOMAXCERN =	7;
+		constexpr static float YRESOMINCERN =	3;
+		constexpr static float YMEANMAXCERN =	3;
+		constexpr static float YMEANMINCERN =	0.5;
+		constexpr static float YSTDMAXCERN =	0.15;
+		constexpr static float YSTDMINCERN =	0;
 		float keV = 						5.9/(224*1703.74/183); // 5.9 Fe peak energy | 1703 mean MockUp gain | 224 e- created with 5.9keV | 183 e- for 1 ADC
 
 		// Single scan pointers
@@ -91,8 +98,8 @@ namespace Reconstruction{
 		int nruns =					0;
 		std::vector<int> markers = {22, 34, 23, 47, 33, 43};
 		std::vector<int> colors = {kCyan-6, kMagenta-6, kCyan+2, kMagenta+2, kCyan+3, kMagenta+3};
-		std::vector<int> markersCERN = {20, 21, 33, 34};
-		std::vector<int> colorsCERN = {kOrange+7, kAzure+2, kGreen+3, kRed+1};
+		std::vector<int> markersCERN = {20, 47, 34, 21};
+		std::vector<int> colorsCERN = {kOrange+7, kAzure-6, kSpring-6, kRed+1};
 		std::vector<TF1*> v_fptf1_WF;
 		std::vector<TF1*> v_fptf1_XP;
 		std::vector<TGraphErrors*> v_fpTGE_mean_WF;

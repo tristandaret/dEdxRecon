@@ -27,6 +27,7 @@ Reconstruction::DrawOuts::DrawOuts(const std::vector<std::string> &v_inputFiles)
 	nruns =					v_valint.size();
 	
 	for(int ifile=0; ifile<(int)v_inputFiles.size(); ifile++){
+		std::cout << v_inputFiles[ifile] << std::endl;
 		v_fEvents.				push_back(new RecoEvent());
 		v_fFiles.				push_back(TFile::Open(v_inputFiles[ifile].c_str()));
 		v_fTrees.				push_back((TTree*)v_fFiles[ifile]->Get("dEdx_tree"));
@@ -341,14 +342,14 @@ void Reconstruction::DrawOuts::CERN22ScanDraw(){
 	
 	// WF
 	// Resolution
-	v_fpTGE_reso_WF[0]->			SetMinimum(YRESOMIN-0.5);
-	v_fpTGE_reso_WF[0]->			SetMaximum(YRESOMAX);
+	v_fpTGE_reso_WF[0]->			SetMaximum(YRESOMAXCERN);
+	v_fpTGE_reso_WF[0]->			SetMinimum(YRESOMINCERN);
 	v_fpTGE_reso_WF[0]->			GetXaxis()->SetLimits(0.25, 1.75);
 	v_fpTGE_reso_WF[0]->			SetNameTitle("fpTGE_reso_WF", Form(";%s;resolution (%%)", runvarstr.c_str()));
 	for(int i=0;i<4;i++)
 	{
-		Graphic_setup(v_fpTGE_reso_WF[i], 4, markersCERN[i], colorsCERN[i], 1, kBlack);
-		v_fpTGE_reso_WF[i]->			Draw(i == 0 ? "AP" : "P same");
+		Graphic_setup(v_fpTGE_reso_WF[i], 4, markersCERN[i], colorsCERN[i], 1, colorsCERN[i]);
+		v_fpTGE_reso_WF[i]->Draw(i == 0 ? "AP" : "P same");
 		v_fpTGE_reso_WF[i]->			SetMarkerSize(5);
 	}
 	fpLeg->							Draw();
@@ -356,13 +357,13 @@ void Reconstruction::DrawOuts::CERN22ScanDraw(){
 
 	// Mean
 	fpCanvas->						Clear();
-	v_fpTGE_mean_WF[0]->			SetMinimum(0.5);
-	v_fpTGE_mean_WF[0]->			SetMaximum(3);
+	v_fpTGE_mean_WF[0]->			SetMaximum(YMEANMAXCERN);
+	v_fpTGE_mean_WF[0]->			SetMinimum(YMEANMINCERN);
 	v_fpTGE_mean_WF[0]->			GetXaxis()->SetLimits(0.25, 1.75);
 	v_fpTGE_mean_WF[0]->			SetNameTitle("fpTGE_mean_WF", Form(";%s;Mean (ADC count)", runvarstr.c_str()));
 	for(int i=0;i<4;i++)
 	{
-		Graphic_setup(v_fpTGE_mean_WF[i], 4, markersCERN[i], colorsCERN[i], 1, kBlack);
+		Graphic_setup(v_fpTGE_mean_WF[i], 4, markersCERN[i], colorsCERN[i], 2, colorsCERN[i]);
 		v_fpTGE_mean_WF[i]->			Draw(i == 0 ? "AP" : "P same");
 	}
 	fpLeg->							Draw();
@@ -370,13 +371,13 @@ void Reconstruction::DrawOuts::CERN22ScanDraw(){
 
 	// Standard deviation
 	fpCanvas->						Clear();
-	v_fpTGE_std_WF[0]->				SetMinimum(0);
-	v_fpTGE_std_WF[0]->				SetMaximum(0.3);
+	v_fpTGE_std_WF[0]->				SetMaximum(YSTDMAXCERN);
+	v_fpTGE_std_WF[0]->				SetMinimum(YSTDMINCERN);
 	v_fpTGE_std_WF[0]->				GetXaxis()->SetLimits(0.25, 1.75);
 	v_fpTGE_std_WF[0]->				SetNameTitle("fpTGE_std_WF", Form(";%s;std (ADC count)", runvarstr.c_str()));
 	for(int i=0;i<4;i++)
 	{
-		Graphic_setup(v_fpTGE_std_WF[i], 4, markersCERN[i], colorsCERN[i], 1, kBlack);
+		Graphic_setup(v_fpTGE_std_WF[i], 4, markersCERN[i], colorsCERN[i], 2, colorsCERN[i]);
 		v_fpTGE_std_WF[i]->				Draw(i == 0 ? "AP" : "P same");
 	}
 	fpLeg->							Draw();
@@ -385,13 +386,13 @@ void Reconstruction::DrawOuts::CERN22ScanDraw(){
 	// XP
 	// Resolution
 	fpCanvas->						Clear();
-	v_fpTGE_reso_XP[0]->			SetMinimum(YRESOMIN-0.5);
-	v_fpTGE_reso_XP[0]->			SetMaximum(YRESOMAX);
+	v_fpTGE_reso_XP[0]->			SetMaximum(YRESOMAXCERN);
+	v_fpTGE_reso_XP[0]->			SetMinimum(YRESOMINCERN);
 	v_fpTGE_reso_XP[0]->			GetXaxis()->SetLimits(0.25, 1.75);
 	v_fpTGE_reso_XP[0]->			SetNameTitle("fpTGE_reso_XP", Form(";%s;resolution (%%)", runvarstr.c_str()));
 	for(int i=0;i<4;i++)
 	{
-		Graphic_setup(v_fpTGE_reso_XP[i], 4, markersCERN[i], colorsCERN[i], 1, kBlack);
+		Graphic_setup(v_fpTGE_reso_XP[i], 4, markersCERN[i], colorsCERN[i], 2, colorsCERN[i]);
 		v_fpTGE_reso_XP[i]->			Draw(i == 0 ? "AP" : "P same");
 	}
 	fpLeg->							Draw();
@@ -399,13 +400,13 @@ void Reconstruction::DrawOuts::CERN22ScanDraw(){
 
 	// Mean
 	fpCanvas->						Clear();
-	v_fpTGE_mean_XP[0]->			SetMinimum(0.5);
-	v_fpTGE_mean_XP[0]->			SetMaximum(3);
+	v_fpTGE_mean_XP[0]->			SetMaximum(YMEANMAXCERN);
+	v_fpTGE_mean_XP[0]->			SetMinimum(YMEANMINCERN);
 	v_fpTGE_mean_XP[0]->			GetXaxis()->SetLimits(0.25, 1.75);
 	v_fpTGE_mean_XP[0]->			SetNameTitle("fpTGE_mean_XP", Form(";%s;Mean (ADC count)", runvarstr.c_str()));
 	for(int i=0;i<4;i++)
 	{
-		Graphic_setup(v_fpTGE_mean_XP[i], 4, markersCERN[i], colorsCERN[i], 1, kBlack);
+		Graphic_setup(v_fpTGE_mean_XP[i], 4, markersCERN[i], colorsCERN[i], 2, colorsCERN[i]);
 		v_fpTGE_mean_XP[i]->			Draw(i == 0 ? "AP" : "P same");
 		v_fptf1_BB[i]->					SetNpx(1000);
 		v_fptf1_BB[i]->					SetLineColor(colorsCERN[i]);
@@ -430,13 +431,13 @@ void Reconstruction::DrawOuts::CERN22ScanDraw(){
 	gPad->							SetLogy(0);
 	// Standard deviation
 	fpCanvas->						Clear();
-	v_fpTGE_std_XP[0]->				SetMinimum(0);
-	v_fpTGE_std_XP[0]->				SetMaximum(0.3);
+	v_fpTGE_std_XP[0]->				SetMaximum(YSTDMAXCERN);
+	v_fpTGE_std_XP[0]->				SetMinimum(YSTDMINCERN);
 	v_fpTGE_std_XP[0]->				GetXaxis()->SetLimits(0.25, 1.75);
 	v_fpTGE_std_XP[0]->				SetNameTitle("fpTGE_std_XP", Form(";%s;std (ADC count)", runvarstr.c_str()));
 	for(int i=0;i<4;i++)
 	{
-		Graphic_setup(v_fpTGE_std_XP[i], 4, markersCERN[i], colorsCERN[i], 1, kBlack);
+		Graphic_setup(v_fpTGE_std_XP[i], 4, markersCERN[i], colorsCERN[i], 2, colorsCERN[i]);
 		v_fpTGE_std_XP[i]->			Draw(i == 0 ? "AP" : "P same");
 	}
 	fpLeg->							Draw();
@@ -690,7 +691,7 @@ void Reconstruction::DrawOuts::EnergyLoss(){
 	}
 
 	// Get entries and fill histograms
-	// std::vector<int> v_ModulesOfEvent;
+	std::vector<int> v_ModulesOfEvent;
 	for(int i=0;i<v_fnentries.back();i++){
 		// v_ModulesOfEvent.clear();
 		v_fTrees.back()->					GetEntry(i);
@@ -700,17 +701,17 @@ void Reconstruction::DrawOuts::EnergyLoss(){
 		for(int iMod=0;iMod<NMod;iMod++){
 			p_recomodule = 					p_recoevent->v_modules[iMod];
 			if(!p_recomodule->selected) 	continue;
-			// v_ModulesOfEvent.push_back(p_recomodule->position);
+			v_ModulesOfEvent.push_back(p_recomodule->position);
 			position =						p_recomodule->position;
 			v_h1f_XP_mod[position]->		Fill(p_recomodule->dEdxXP);
 			v_h1f_WF_mod[position]->		Fill(p_recomodule->dEdxWF);
 			v_h1f_XP_modnoTrunc[position]->	Fill(p_recomodule->dEdxXPnoTrunc);
 			v_h1f_WF_modnoTrunc[position]->	Fill(p_recomodule->dEdxWFnoTrunc);
 		}
-		// if(testbeam.find("CERN") != std::string::npos){
-		// 	if(NMod < 4) continue;
-		// 	if(!FourModulesInLine(v_ModulesOfEvent)) continue;
-		// }
+		if(testbeam.find("CERN") != std::string::npos){
+			if(NMod < 4) continue;
+			if(!FourModulesInLine(v_ModulesOfEvent)) continue;
+		}
 		ph1f_WF->							Fill(p_recoevent->dEdxWF);
 		ph1f_XP->							Fill(p_recoevent->dEdxXP);
 		ph1f_WFnoTrunc->					Fill(p_recoevent->dEdxWFnoTrunc);

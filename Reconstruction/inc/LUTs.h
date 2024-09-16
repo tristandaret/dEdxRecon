@@ -33,7 +33,7 @@ namespace Reconstruction{
 	class ERAMMaps {
 	public:
 		/* Constructor */
-		ERAMMaps(const std::string& file	= "$HOME/Documents/Code/CPP_projects/Read_ERAM_MAP/Data/ERAMinfo.root");
+		ERAMMaps(const std::string& file = "$HOME/Documents/Code/CPP_projects/Read_ERAM_MAP/Data/ERAMinfo.root");
 		virtual ~ERAMMaps();
 		
 		int	ID(const int& position);
@@ -57,10 +57,10 @@ namespace Reconstruction{
 
 		void Load();
 		void setGain		(const int& position, const int& iX, const int& iY, const float& gain);
-		void setRC		(const int& position, const int& iX, const int& iY, const float& RC);
-		void setResolution (const int& position, const int& iX, const int& iY, const float& resolution);
+		void setRC			(const int& position, const int& iX, const int& iY, const float& RC);
+		void setResolution 	(const int& position, const int& iX, const int& iY, const float& resolution);
 		void setMeanGain	(const int& position, const float& meanGain);
-		void setMeanRC	(const int& position, const float& meanRC);
+		void setMeanRC		(const int& position, const float& meanRC);
 		void FillHoles();
 
 		std::vector<int> channel2iD	= {24, 30, 28, 19, 21, 13,	9,	2, 26, 17, 23, 29,	1, 10, 11,	3,	/*bottom HATPC*/ 

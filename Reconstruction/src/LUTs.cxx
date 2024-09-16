@@ -141,25 +141,25 @@ float Reconstruction::ERAMMaps::MeanRC(const int& position)
 // ERAMs on endplates 1&3 are X-flipped compared to their maps in the file
 void Reconstruction::ERAMMaps::setGain(const int& position, const int& iX, const int& iY, const float& gain)
 {
-	fGain[position][iX][iY]			= gain;
+	fGain[position][iX][iY] = gain;
 }
 
 void Reconstruction::ERAMMaps::setRC(const int& position, const int& iX, const int& iY, const float& RC)
 {
-	fRC[position][iX][iY]			= RC;
+	fRC[position][iX][iY] = RC;
 }
 
 void Reconstruction::ERAMMaps::setResolution(const int& position, const int& iX, const int& iY, const float& resolution)
 {
-	fResolution[position][iX][iY]	= resolution;
+	fResolution[position][iX][iY] = resolution;
 }
 void Reconstruction::ERAMMaps::setMeanGain(const int& position, const float& meanGain)
 {
-	fmean_gain[position]	= meanGain;
+	fmean_gain[position] = meanGain;
 }
 void Reconstruction::ERAMMaps::setMeanRC(const int& position, const float& meanRC)
 {
-	fmean_RC[position]	= meanRC;
+	fmean_RC[position] = meanRC;
 }
 
 
