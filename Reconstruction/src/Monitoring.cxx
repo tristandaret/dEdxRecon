@@ -82,7 +82,7 @@ void Reconstruction::Monitoring()
 												"_25V_z415p1_y2pad_iter0.root",	"_25V_z415p1_y2pad_iter0.root",		"_25V_z415_y2pad_2_iter0.root"};
 
 		for(int iEnergy = 0; iEnergy < (int)std::size(v_valstr); iEnergy++){
-		// for(int iEnergy = 12; iEnergy < 13; iEnergy++){
+		// for(int iEnergy = 0; iEnergy < 1; iEnergy++){
 			v_datafiles.push_back(data_scanpath + "All_ERAMS_350V_412ns_" + v_valstr[iEnergy] + v_suffix[iEnergy]);
 			v_tags.push_back(Form("%s_%s_%s", testbeam.c_str(), scan.c_str(), v_valstr[iEnergy].c_str()));
 

@@ -918,8 +918,8 @@ void PrintResolution(TH1* th1, TCanvas* pCanvas, float NDCx, float NDCy, Color_t
 
 	float mu	=			tf1->GetParameter(1);
 	float dmu	=			tf1->GetParError(1);
-	float sigma	=		tf1->GetParameter(2);
-	float dsigma	=		tf1->GetParError(2);
+	float sigma	=			tf1->GetParameter(2);
+	float dsigma =			tf1->GetParError(2);
 	float reso	= 			tf1->GetParameter(2)/tf1->GetParameter(1) * 100;
 	float dreso	= 			GetResoError(tf1);
 

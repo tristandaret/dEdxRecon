@@ -217,7 +217,7 @@ void Reconstruction::DrawOuts::DESY21ScanDraw(){
 	// Mean
 	v_fpTGE_mean_WF[base]->			SetMinimum(YMEANMIN);
 	v_fpTGE_mean_WF[base]->			SetMaximum(YMEANMAX);
-	v_fpTGE_mean_WF[base]->			SetNameTitle("fpTGE_mean_WF", Form(";%s;Mean (ADC count)", runvarstr.c_str()));
+	v_fpTGE_mean_WF[base]->			SetNameTitle("fpTGE_mean_WF", Form(";%s;Mean (ADC counts/cm)", runvarstr.c_str()));
 	if(v_fpTGE_mean_WF[base]->GetXaxis()->GetXmin() == 0) v_fpTGE_mean_WF[base]->GetXaxis()->SetLimits(-3, v_fpTGE_mean_WF[base]->GetXaxis()->GetXmax());
 	for(int i=base;i<(int)v_fpTGE_mean_WF.size();i++){
 		if(nscans != 1){
@@ -238,7 +238,7 @@ void Reconstruction::DrawOuts::DESY21ScanDraw(){
 	// Standard deviation
 	v_fpTGE_std_WF[base]->			SetMinimum(YSTDMIN);
 	v_fpTGE_std_WF[base]->			SetMaximum(YSTDMAX);
-	v_fpTGE_std_WF[base]->			SetNameTitle("fpTGE_std_WF", Form(";%s;std (ADC count)", runvarstr.c_str()));
+	v_fpTGE_std_WF[base]->			SetNameTitle("fpTGE_std_WF", Form(";%s;std (ADC counts/cm)", runvarstr.c_str()));
 	if(v_fpTGE_reso_WF[base]->GetXaxis()->GetXmin() == 0) v_fpTGE_std_WF[base]->GetXaxis()->SetLimits(-3, v_fpTGE_std_WF[base]->GetXaxis()->GetXmax());
 	for(int i=base;i<(int)v_fpTGE_std_WF.size();i++){
 		if(nscans != 1){
@@ -316,6 +316,7 @@ void Reconstruction::DrawOuts::CERN22ScanFill(){
 
 			itotalrun++;
 		}
+		// v_fptf1_BB[iscan]->			SetParameters(v_mass[iscan] ,1.65179e+02, 3.62857e+00, 3.18209e-02, 2.07081e+00, 7.14413e-01);
 	}
 	combinedFit(v_fpTGE_mean_XP, v_fptf1_BB);
 }
@@ -360,7 +361,7 @@ void Reconstruction::DrawOuts::CERN22ScanDraw(){
 	v_fpTGE_mean_WF[0]->			SetMaximum(YMEANMAXCERN);
 	v_fpTGE_mean_WF[0]->			SetMinimum(YMEANMINCERN);
 	v_fpTGE_mean_WF[0]->			GetXaxis()->SetLimits(0.25, 1.75);
-	v_fpTGE_mean_WF[0]->			SetNameTitle("fpTGE_mean_WF", Form(";%s;Mean (ADC count)", runvarstr.c_str()));
+	v_fpTGE_mean_WF[0]->			SetNameTitle("fpTGE_mean_WF", Form(";%s;Mean (ADC counts/cm)", runvarstr.c_str()));
 	for(int i=0;i<4;i++)
 	{
 		Graphic_setup(v_fpTGE_mean_WF[i], 4, markersCERN[i], colorsCERN[i], 2, colorsCERN[i]);
@@ -374,7 +375,7 @@ void Reconstruction::DrawOuts::CERN22ScanDraw(){
 	v_fpTGE_std_WF[0]->				SetMaximum(YSTDMAXCERN);
 	v_fpTGE_std_WF[0]->				SetMinimum(YSTDMINCERN);
 	v_fpTGE_std_WF[0]->				GetXaxis()->SetLimits(0.25, 1.75);
-	v_fpTGE_std_WF[0]->				SetNameTitle("fpTGE_std_WF", Form(";%s;std (ADC count)", runvarstr.c_str()));
+	v_fpTGE_std_WF[0]->				SetNameTitle("fpTGE_std_WF", Form(";%s;std (ADC counts/cm)", runvarstr.c_str()));
 	for(int i=0;i<4;i++)
 	{
 		Graphic_setup(v_fpTGE_std_WF[i], 4, markersCERN[i], colorsCERN[i], 2, colorsCERN[i]);
@@ -403,7 +404,7 @@ void Reconstruction::DrawOuts::CERN22ScanDraw(){
 	v_fpTGE_mean_XP[0]->			SetMaximum(YMEANMAXCERN);
 	v_fpTGE_mean_XP[0]->			SetMinimum(YMEANMINCERN);
 	v_fpTGE_mean_XP[0]->			GetXaxis()->SetLimits(0.25, 1.75);
-	v_fpTGE_mean_XP[0]->			SetNameTitle("fpTGE_mean_XP", Form(";%s;Mean (ADC count)", runvarstr.c_str()));
+	v_fpTGE_mean_XP[0]->			SetNameTitle("fpTGE_mean_XP", Form(";%s;Mean (ADC counts/cm)", runvarstr.c_str()));
 	for(int i=0;i<4;i++)
 	{
 		Graphic_setup(v_fpTGE_mean_XP[i], 4, markersCERN[i], colorsCERN[i], 2, colorsCERN[i]);
@@ -434,7 +435,7 @@ void Reconstruction::DrawOuts::CERN22ScanDraw(){
 	v_fpTGE_std_XP[0]->				SetMaximum(YSTDMAXCERN);
 	v_fpTGE_std_XP[0]->				SetMinimum(YSTDMINCERN);
 	v_fpTGE_std_XP[0]->				GetXaxis()->SetLimits(0.25, 1.75);
-	v_fpTGE_std_XP[0]->				SetNameTitle("fpTGE_std_XP", Form(";%s;std (ADC count)", runvarstr.c_str()));
+	v_fpTGE_std_XP[0]->				SetNameTitle("fpTGE_std_XP", Form(";%s;std (ADC counts/cm)", runvarstr.c_str()));
 	for(int i=0;i<4;i++)
 	{
 		Graphic_setup(v_fpTGE_std_XP[i], 4, markersCERN[i], colorsCERN[i], 2, colorsCERN[i]);
@@ -465,12 +466,12 @@ void Reconstruction::DrawOuts::Control(){
 	TH1I *ph1i_PadMultSel = 	new TH1I("ph1i_PadMultSel", "Pad multiplicity (after cut);N_{pads};Counts", 11, 0, 10);
 	TH1F *ph1f_AvgPadMult = 	new TH1F("ph1f_AvgPadMult", "Average pad multiplicity;N_{pads};Counts", 100, 0, 10);
 	TH1F *ph1f_AvgPadMultSel = 	new TH1F("ph1f_AvgPadMultSel", "Average pad multiplicity (after cut);N_{pads};Counts", 100, 0, 10);
-	TH1F *ph1f_ADCmax = 		new TH1F("ph1f_ADCmax", "ADC max;ADC counts;Counts", 400, 0, 4000);
-	TH1F *ph1f_ADCmaxSel = 		new TH1F("ph1f_ADCmaxSel", "ADC max (after cut);ADC counts;Counts", 400, 0, 4000);
-	TH1F *ph1f_ALead = 			new TH1F("ph1f_ALead", "Leading pad amplitude;ADC counts;Counts", 400, 0, 4000);
-	TH1F *ph1f_ALeadSel = 		new TH1F("ph1f_ALeadSel", "Leading pad amplitude (after cut);ADC counts;Counts", 400, 0, 4000);
-	TH1F *ph1f_ANeighbour = 	new TH1F("ph1f_ANeighbour", "Neighbouring pad amplitude;ADC counts;Counts", 400, 0, 4000);
-	TH1F *ph1f_ANeighbourSel = 	new TH1F("ph1f_ANeighbourSel", "Neighbouring pad amplitude (after cut);ADC counts;Counts", 400, 0, 4000);
+	TH1F *ph1f_ADCmax = 		new TH1F("ph1f_ADCmax", "ADC max;ADC counts/cm;Counts", 400, 0, 4000);
+	TH1F *ph1f_ADCmaxSel = 		new TH1F("ph1f_ADCmaxSel", "ADC max (after cut);ADC counts/cm;Counts", 400, 0, 4000);
+	TH1F *ph1f_ALead = 			new TH1F("ph1f_ALead", "Leading pad amplitude;ADC counts/cm;Counts", 400, 0, 4000);
+	TH1F *ph1f_ALeadSel = 		new TH1F("ph1f_ALeadSel", "Leading pad amplitude (after cut);ADC counts/cm;Counts", 400, 0, 4000);
+	TH1F *ph1f_ANeighbour = 	new TH1F("ph1f_ANeighbour", "Neighbouring pad amplitude;ADC counts/cm;Counts", 400, 0, 4000);
+	TH1F *ph1f_ANeighbourSel = 	new TH1F("ph1f_ANeighbourSel", "Neighbouring pad amplitude (after cut);ADC counts/cm;Counts", 400, 0, 4000);
 	std::vector<TH1F*> 			v_AvgPadMult;
 	std::vector<TH1F*> 			v_AvgPadMultSel;
 	std::vector<TH1I*> 			v_PadMult;
@@ -491,12 +492,12 @@ void Reconstruction::DrawOuts::Control(){
 		v_PadMultSel.push_back				(new TH1I(Form("ph1i_PadMultSel_%i", i), Form("Pad multiplicity (module %i) (after cut);N_{pads};Counts", i), 100, 0, 100));
 		v_AvgPadMult.push_back				(new TH1F(Form("ph1f_AvgPadMult_%i", i), Form("Average pad multiplicity (module %i);N_{pads};Counts", i), 100, 0, 100));
 		v_AvgPadMultSel.push_back			(new TH1F(Form("ph1f_AvgPadMultSel_%i", i), Form("Average pad multiplicity (module %i) (after cut);N_{pads};Counts", i), 100, 0, 100));
-		v_ADCmax.push_back					(new TH1F(Form("ph1f_ADCmax_%i", i), Form("ADC max (module %i);ADC counts;Counts", i), 400, 0, 4000));
-		v_ADCmaxSel.push_back				(new TH1F(Form("ph1f_ADCmaxSel_%i", i), Form("ADC max (module %i) (after cut);ADC counts;Counts", i), 400, 0, 4000));
-		v_ALead.push_back					(new TH1F(Form("ph1f_ALead_%i", i), Form("Leading pad amplitude (module %i);ADC counts;Counts", i), 400, 0, 4000));
-		v_ALeadSel.push_back				(new TH1F(Form("ph1f_ALeadSel_%i", i), Form("Leading pad amplitude (module %i) (after cut);ADC counts;Counts", i), 400, 0, 4000));
-		v_ANeighbour.push_back				(new TH1F(Form("ph1f_ANeighbour_%i", i), Form("Neighbouring pad amplitude (module %i);ADC counts;Counts", i), 400, 0, 4000));
-		v_ANeighbourSel.push_back			(new TH1F(Form("ph1f_ANeighbourSel_%i", i), Form("Neighbouring pad amplitude (module %i) (after cut);ADC counts;Counts", i), 400, 0, 4000));
+		v_ADCmax.push_back					(new TH1F(Form("ph1f_ADCmax_%i", i), Form("ADC max (module %i);ADC counts/cm;Counts", i), 400, 0, 4000));
+		v_ADCmaxSel.push_back				(new TH1F(Form("ph1f_ADCmaxSel_%i", i), Form("ADC max (module %i) (after cut);ADC counts/cm;Counts", i), 400, 0, 4000));
+		v_ALead.push_back					(new TH1F(Form("ph1f_ALead_%i", i), Form("Leading pad amplitude (module %i);ADC counts/cm;Counts", i), 400, 0, 4000));
+		v_ALeadSel.push_back				(new TH1F(Form("ph1f_ALeadSel_%i", i), Form("Leading pad amplitude (module %i) (after cut);ADC counts/cm;Counts", i), 400, 0, 4000));
+		v_ANeighbour.push_back				(new TH1F(Form("ph1f_ANeighbour_%i", i), Form("Neighbouring pad amplitude (module %i);ADC counts/cm;Counts", i), 400, 0, 4000));
+		v_ANeighbourSel.push_back			(new TH1F(Form("ph1f_ANeighbourSel_%i", i), Form("Neighbouring pad amplitude (module %i) (after cut);ADC counts/cm;Counts", i), 400, 0, 4000));
 	}
 
 	// Get entries and fill histograms
@@ -673,10 +674,10 @@ void Reconstruction::DrawOuts::EnergyLoss(){
 	int xmax =									1300;
 	if(tag.find("Theta") != std::string::npos) xmax = 2000;
 	// Prepare histograms
-	TH1F *ph1f_XP =				new TH1F("ph1f_XP", "Energy loss;dE/dx (ADC counts);Counts", 100, 0, xmax);
-	TH1F *ph1f_WF =				new TH1F("ph1f_WF", "Energy loss;dE/dx (ADC counts);Counts", 100, 0, xmax);
-	TH1F *ph1f_XPnoTrunc =		new TH1F("ph1f_XPnoTrunc", "Energy loss (no truncation);dE/dx (ADC counts);Counts", 100, 0, xmax);
-	TH1F *ph1f_WFnoTrunc =		new TH1F("ph1f_WFnoTrunc", "Energy loss (no truncation);dE/dx (ADC counts);Counts", 100, 0, xmax);
+	TH1F *ph1f_XP =				new TH1F("ph1f_XP", "Energy loss;dE/dx (ADC counts/cm);Counts", 100, 0, xmax);
+	TH1F *ph1f_WF =				new TH1F("ph1f_WF", "Energy loss;dE/dx (ADC counts/cm);Counts", 100, 0, xmax);
+	TH1F *ph1f_XPnoTrunc =		new TH1F("ph1f_XPnoTrunc", "Energy loss (no truncation);dE/dx (ADC counts/cm);Counts", 100, 0, xmax);
+	TH1F *ph1f_WFnoTrunc =		new TH1F("ph1f_WFnoTrunc", "Energy loss (no truncation);dE/dx (ADC counts/cm);Counts", 100, 0, xmax);
 	TH2F *ph2f_XPWF =			new TH2F("ph2f_XPWF", "Energy loss with XP vs with WF;dE/dx (WF);dE/dx (XP)", 100, 0, xmax, 100, 0, xmax);
 	std::vector<TH1F*> 			v_h1f_XP_mod;
 	std::vector<TH1F*> 			v_h1f_WF_mod;
@@ -684,10 +685,10 @@ void Reconstruction::DrawOuts::EnergyLoss(){
 	std::vector<TH1F*> 			v_h1f_WF_modnoTrunc;
 	
 	for(int i=0;i<8;i++){
-		v_h1f_XP_mod.push_back(			new TH1F(Form("ph1f_XP_%i", i), Form("Energy loss (module %i);dE/dx (ADC counts);Counts", i), 100, 0, xmax));
-		v_h1f_WF_mod.push_back(			new TH1F(Form("ph1f_WF_%i", i), Form("Energy loss (module %i);dE/dx (ADC counts);Counts", i), 100, 0, xmax));
-		v_h1f_XP_modnoTrunc.push_back(	new TH1F(Form("ph1f_XPnoTrunc_%i", i), Form("Energy loss (module %i) (no truncation);dE/dx (ADC counts);Counts", i), 100, 0, xmax));
-		v_h1f_WF_modnoTrunc.push_back(	new TH1F(Form("ph1f_WFnoTrunc_%i", i), Form("Energy loss (module %i) (no truncation);dE/dx (ADC counts);Counts", i), 100, 0, xmax));
+		v_h1f_XP_mod.push_back(			new TH1F(Form("ph1f_XP_%i", i), Form("Energy loss (module %i);dE/dx (ADC counts/cm);Counts", i), 100, 0, xmax));
+		v_h1f_WF_mod.push_back(			new TH1F(Form("ph1f_WF_%i", i), Form("Energy loss (module %i);dE/dx (ADC counts/cm);Counts", i), 100, 0, xmax));
+		v_h1f_XP_modnoTrunc.push_back(	new TH1F(Form("ph1f_XPnoTrunc_%i", i), Form("Energy loss (module %i) (no truncation);dE/dx (ADC counts/cm);Counts", i), 100, 0, xmax));
+		v_h1f_WF_modnoTrunc.push_back(	new TH1F(Form("ph1f_WFnoTrunc_%i", i), Form("Energy loss (module %i) (no truncation);dE/dx (ADC counts/cm);Counts", i), 100, 0, xmax));
 	}
 
 	// Get entries and fill histograms
@@ -865,13 +866,13 @@ void Reconstruction::DrawOuts::FileComparison(){
 	std::vector<std::vector<TH1F*>> v_h1f_XP_mod;
 	std::vector<std::vector<TH1F*>> v_h1f_WF_mod;
 	for(int i=0;i<(int)v_comments.size();i++){
-		v_h1f_XP.							push_back(new TH1F(Form("ph1f_XP_%i", i), Form("Energy loss (%s);dE/dx (ADC counts);Counts", v_comments[i].c_str()), 100, 0, 1300));
-		v_h1f_WF.							push_back(new TH1F(Form("ph1f_WF_%i", i), Form("Energy loss (%s);dE/dx (ADC counts);Counts", v_comments[i].c_str()), 100, 0, 1300));
+		v_h1f_XP.							push_back(new TH1F(Form("ph1f_XP_%i", i), Form("Energy loss (%s);dE/dx (ADC counts/cm);Counts", v_comments[i].c_str()), 100, 0, 1300));
+		v_h1f_WF.							push_back(new TH1F(Form("ph1f_WF_%i", i), Form("Energy loss (%s);dE/dx (ADC counts/cm);Counts", v_comments[i].c_str()), 100, 0, 1300));
 		v_h1f_XP_mod.						push_back(std::vector<TH1F*>());
 		v_h1f_WF_mod. 						push_back(std::vector<TH1F*>());
 		for(int j=0;j<8;j++){
-			v_h1f_XP_mod[i].				push_back(new TH1F(Form("ph1f_XP_%i_%i", i, j), Form("Energy loss (%s, module %i);dE/dx (ADC counts);Counts", v_comments[i].c_str(), j), 100, 0, 1300));
-			v_h1f_WF_mod[i].				push_back(new TH1F(Form("ph1f_WF_%i_%i", i, j), Form("Energy loss (%s, module %i);dE/dx (ADC counts);Counts", v_comments[i].c_str(), j), 100, 0, 1300));
+			v_h1f_XP_mod[i].				push_back(new TH1F(Form("ph1f_XP_%i_%i", i, j), Form("Energy loss (%s, module %i);dE/dx (ADC counts/cm);Counts", v_comments[i].c_str(), j), 100, 0, 1300));
+			v_h1f_WF_mod[i].				push_back(new TH1F(Form("ph1f_WF_%i_%i", i, j), Form("Energy loss (%s, module %i);dE/dx (ADC counts/cm);Counts", v_comments[i].c_str(), j), 100, 0, 1300));
 		}
 	}
 

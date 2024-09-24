@@ -42,20 +42,9 @@ struct GlobalChi2_4 {
 void combinedFit(std::vector<TGraphErrors*>& v_tge, std::vector<TF1*>& v_tf1)
 {
 	int Npar	= 9;
-	// double par0[Npar]	= {1.65179e+02, 3.62857e+00, 3.18209e-02, 2.07081e+00, -7.14413e-01, 0.511e-3, 105.658e-3, 139.570e-3, 938.272e-3}; // THATReconstruction raw
-	// double par0[Npar]	= {0.301580,	3.62857e+00, 3.18209e-02, 2.07081e+00, -7.14413e-01, 0.511e-3, 105.658e-3, 139.570e-3, 938.272e-3}; // THATReconstruction raw normalized
-	// double par0[Npar]	= {0.186543, 5.382656, 0.004234, 2.028548, -0.994807, 0.511e-3, 105.658e-3, 139.570e-3, 938.272e-3}; // THATReconstruction fit
 
-	// double par0[Npar]	= {785,		6.047, 0.00064, 2.308, -1.359, 0.511e-3, 105.658e-3, 139.570e-3, 938.272e-3}; // Claudio raw
-	// double par0[Npar]	= {0.148800, 6.047, 0.00064, 2.308, -1.359, 0.511e-3, 105.658e-3, 139.570e-3, 938.272e-3}; // Claudio raw normalized
-	// double par0[Npar]	= {1, 6, 0.0005, 2, -1.5, 0.511e-3, 105.658e-3, 139.570e-3, 938.272e-3}; // Claudio init
-	// double par0[Npar]	= {0.186524, 5.382954, 0.004232, 2.028659, -0.994959, 0.511e-3, 105.658e-3, 139.570e-3, 938.272e-3}; // Claudio fit
-
-	// double par0[Npar] =		{7, 3, 5, 0.5, -0.5, 0.511e-3, 105.658e-3, 139.570e-3, 938.272e-3}; // Reconstruction init
-	// double par0[Npar]	= {8.001897, 2.916423, 5.291697, 0.377516, -0.274286, 0.511e-3, 105.658e-3, 139.570e-3, 938.272e-3}; // Reconstruction fit
-
-	double par0[Npar] =		{9, 3, 5, 0.5, -0.5, 0.511e-3, 105.658e-3, 139.570e-3, 938.272e-3}; // Reconstruction init with new code
-	// double par0[Npar] =		{1.926500, 2.030733, 0.847980, 1.128209, -0.310988, 0.511e-3, 105.658e-3, 139.570e-3, 938.272e-3}; // Reconstruction fit with new code
+	double par0[Npar] = 	{2, 3.5, 0.03, 2, 0.7, 0.511e-3, 105.658e-3, 139.570e-3, 938.272e-3}; 											// From hatRecon (initialization) => amplitude reset
+	// double par0[Npar] = 	{1.65179e+02, 3.62857e+00, 3.18209e-02, 2.07081e+00, 7.14413e-01, 0.511e-3, 105.658e-3, 139.570e-3, 938.272e-3};// From hatRecon
 
 	v_tf1[0]->				SetParameters(par0[5], par0[0], par0[1], par0[2], par0[3], par0[4]);
 	v_tf1[0]->				FixParameter(0, par0[5]);
