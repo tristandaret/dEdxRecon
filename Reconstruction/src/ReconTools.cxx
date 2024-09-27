@@ -184,20 +184,27 @@ TF1* corr_func(const std::string &EventFile, const std::string &Tag, const int& 
 	// Don't overwrite the current directory in case one was opened before using this function
 	TDirectory* currdir =			gDirectory;
 
+	// correctWF = 3: no correction
+	if(correctWF == 3){
+		TF1* corr_func = 				new TF1("corr_func", "1", 0, 17);
+		return corr_func;
+	}
+
 	// Get the name of the files to get the exclusive function
 	TF1* corr_func = 				new TF1("corr_func", "291.012 + 9.4669*x - 4.04*x*x + 1.31624*x*x*x - 0.059534*x*x*x*x", 0, 17); // values provided by Vlada (2022/10/11)
 	std::string filename =			EventFile.substr(0, EventFile.length()-5);
 
-	if(Tag.find("diag") == std::string::npos) return corr_func;
+	// correctWF = 2: use the correction function from HATRecon
+	if(Tag.find("diag") == std::string::npos or correctWF == 2) return corr_func;
 
-	// Get a single file to apply the same correction for all the files
+	// correctWF = 0: get a single file to apply the same correction for all the files
 	if(correctWF == 0){
 		int angle;
 		if(	(angle = filename.find("30")) != (int)std::string::npos or (angle = filename.find("45")) != (int)std::string::npos) 		filename.replace(angle, 2, "40");
 		while( (angle = filename.find("460")) != (int)std::string::npos or (angle = filename.find("860")) != (int)std::string::npos) 	filename.replace(angle, 3, "m40");
 	}
 
-	// Load the files and get the TF1 of the correction function
+	// correctWF = 1: get the correction function from the file
 	std::string filename_corr =		filename + "_WFmax_correction_v9i9_v2.root";
 	TFile* pfile =					new TFile(filename_corr.c_str(), "READ");
 	corr_func =						pfile->Get<TF1>("A_corr");

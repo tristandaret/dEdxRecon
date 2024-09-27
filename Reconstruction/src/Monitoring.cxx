@@ -18,12 +18,12 @@ namespace Reconstruction{
 	
 	// Files to use
 	int prototype =				0;
-	int CERN_Escan =			1;
+	int CERN_Escan =			0;
 	int CERN_drift = 			0;
 
 	int DESY_drift =			0;
 	int DESY_row =				0;
-	int DESY_phi =				0;
+	int DESY_phi =				1;
 	int DESY_theta =			0;
 
 	// Computations
@@ -36,8 +36,8 @@ namespace Reconstruction{
 	int Draw_Comparison =		0;
 
 	int Draw_DESY21SingleScan =	0;
-	int Draw_DESY21MultScan =	0;
-	int Draw_CERN22Scan =		1;
+	int Draw_DESY21MultScan =	1;
+	int Draw_CERN22Scan =		0;
 
 }
 
@@ -48,7 +48,7 @@ void Reconstruction::Monitoring()
 	comment = "";
 	gErrorIgnoreLevel = kInfo;
 
-	Correction(1,1,1,1,1);
+	Correction(1,1,2,1,1);
 
 
 	// Energy scan using the prototype (ERAM 18)
@@ -157,19 +157,20 @@ void Reconstruction::Monitoring()
 	if(DESY_phi){
 		std::vector<int> v_valdrift =			{50, 550, 950};
 		std::vector<std::string> v_strdrift =	{"m40", "460", "860"};
-		std::vector<int> v_valintreal =			{0, 5, 10, 20, 30, 30, 40, 45};
-		v_valint.								insert(v_valint.end(), {0, 5, 10, 20, 29, 31, 40, 45});
+		// std::vector<int> v_valintreal =			{0, 5, 10, 20, 30, 30, 40, 45};
+		// v_valint.								insert(v_valint.end(), {0, 5, 10, 20, 29, 31, 40, 45});
+		v_valint.								insert(v_valint.end(), {0, 10, 20, 30, 40, 45});
 		
 		for (int iz = 0; iz < (int)v_valdrift.size(); iz++){
 		// for (int iz = 0; iz < 1; iz++){
 			const char* z = v_strdrift[iz].c_str();
-			Settings("DESY21", "Phi", Form("Phi_Z%s", z), Form("%2i cm drift", v_valdrift[iz]/10), "Phi angle (#circ)", 1, 0, 200, 310, v_valdrift[iz], 40);
+			Settings("DESY21", "Phi", Form("Phi_Z%s", z), Form("%2i cm drift", v_valdrift[iz]/10), "Track angle #varphi (#circ)", 1, 0, 200, 310, v_valdrift[iz], 40);
 			
-			for (int ifile = 0; ifile < (int)std::size(v_valintreal); ifile++){
+			for (int ifile = 0; ifile < (int)std::size(v_valint); ifile++){
 			// for (int ifile = 5; ifile < 6; ifile++){
-				int phi = v_valintreal[ifile];
+				int phi = v_valint[ifile];
 				if(ifile == 0){		v_datafiles.push_back(data_scanpath + Form("Drift_scan_PT200/z_360_275_200_02T_26_%s_iter9.root", z));		v_tags.push_back(Form("%s_%s_Phi%i",		testbeam.c_str(), scan.c_str(), phi));}
-				else if(ifile < 5){	v_datafiles.push_back(data_scanpath + Form("Phi_scan_z%s/phi_200_%i_z%s_ym60_iter9.root", z, phi, z));		v_tags.push_back(Form("%s_%s_Phi%i",		testbeam.c_str(), scan.c_str(), phi));}
+				else if(ifile < 4){	v_datafiles.push_back(data_scanpath + Form("Phi_scan_z%s/phi_200_%i_z%s_ym60_iter9.root", z, phi, z));		v_tags.push_back(Form("%s_%s_Phi%i",		testbeam.c_str(), scan.c_str(), phi));}
 				else{				v_datafiles.push_back(data_scanpath + Form("Phi_scan_z%s/phi_200_%i_z%s_ym60_diag_iter9.root", z, phi, z));	v_tags.push_back(Form("%s_%s_Phi%i_diag",	testbeam.c_str(), scan.c_str(), phi));}
 
 				DefaultAnalysis();
@@ -246,6 +247,8 @@ void Reconstruction::Correction(const int& corrRC, const int& corrGain, const in
 
 	fcorrectWF =				corrWF;
 	if(corrWF == 0)	comment =	comment + "_WF0";
+	if(corrWF == 2)	comment =	comment + "_WF2HAT";
+	if(corrWF == 3)	comment =	comment + "_WFoff";
 
 	fcorrectDrift =				corrDrift;
 	if(corrDrift == 0)comment =	comment + "_DriftFile";
@@ -297,7 +300,9 @@ void Reconstruction::DefaultAnalysis(){
 	if(scan.find("Phi") != std::string::npos and tag.find("diag") == std::string::npos)
 	{
 		if(comment.find("WF0")		!= std::string::npos) rootout_file.erase(rootout_file.find("_WF0"), 4);
-		if(comment.find("_corrv2")	!= std::string::npos) rootout_file.erase(rootout_file.find("_corrv2"), 7);
+		if(comment.find("WF2HAT")	!= std::string::npos) rootout_file.erase(rootout_file.find("_WF2HAT"), 7);
+		if(comment.find("WFoff")	!= std::string::npos) rootout_file.erase(rootout_file.find("_WFoff"), 6);
+		if(comment.find("corrv2")	!= std::string::npos) rootout_file.erase(rootout_file.find("_corrv2"), 7);
 	}
 	v_rootout_files.			push_back(rootout_file);
 

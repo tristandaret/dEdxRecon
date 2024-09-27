@@ -8,9 +8,9 @@ namespace Reconstruction{
 	const std::string 			data_path = 				dedx_path + "Data/";
 	std::string 				data_scanpath = 			"";
 
-	const std::string 			drawout_path =			dedx_path + "OUT_Reconstruction/";
-	std::string 				drawout_scanpath =		"";
-	std::string 				drawout_metascanpath =	"";
+	const std::string 			drawout_path =				dedx_path + "OUT_Reconstruction/";
+	std::string 				drawout_metascanpath =		"";
+	std::string 				drawout_scanpath =			"";
 	std::string					drawout_runpath =			"";
 	std::string 				drawout_file = 				"";
 

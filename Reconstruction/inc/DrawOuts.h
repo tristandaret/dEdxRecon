@@ -70,8 +70,8 @@ namespace Reconstruction{
 
 		constexpr static float YRESOMAX =	10;
 		constexpr static float YRESOMIN =	6.5;
-		constexpr static float YMEANMAX =	1050;
-		constexpr static float YMEANMIN =	800;
+		constexpr static float YMEANMAX =	1150;
+		constexpr static float YMEANMIN =	500;
 		constexpr static float YSTDMAX =	85;
 		constexpr static float YSTDMIN =	62;
 

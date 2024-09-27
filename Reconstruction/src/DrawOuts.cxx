@@ -27,7 +27,6 @@ Reconstruction::DrawOuts::DrawOuts(const std::vector<std::string> &v_inputFiles)
 	nruns =					v_valint.size();
 	
 	for(int ifile=0; ifile<(int)v_inputFiles.size(); ifile++){
-		std::cout << v_inputFiles[ifile] << std::endl;
 		v_fEvents.				push_back(new RecoEvent());
 		v_fFiles.				push_back(TFile::Open(v_inputFiles[ifile].c_str()));
 		v_fTrees.				push_back((TTree*)v_fFiles[ifile]->Get("dEdx_tree"));
@@ -107,6 +106,8 @@ void Reconstruction::DrawOuts::DESY21ScanFill(){
 		v_fpTGE_std_XP.				push_back(new TGraphErrors());
 		v_fpTGE_reso_WF.			push_back(new TGraphErrors());
 		v_fpTGE_reso_XP.			push_back(new TGraphErrors());
+		float shift = 				0;
+		if(metascan == "Phi") shift = 0.5;
 
 		if(iscan < istartscan) continue;
 		for(int irun=0;irun<nruns;irun++){
@@ -133,22 +134,27 @@ void Reconstruction::DrawOuts::DESY21ScanFill(){
 			float dreso_WF =			GetResoError(v_fptf1_WF[index]);
 			float dreso_XP =			GetResoError(v_fptf1_XP[index]);
 
-			v_fpTGE_mean_WF[iscan]->	SetPoint(irun, v_valint[irun], mean_WF);
-			v_fpTGE_mean_XP[iscan]->	SetPoint(irun, v_valint[irun], mean_XP);
+			v_fpTGE_mean_WF[iscan]->	SetPoint(irun, v_valint[irun]-shift, mean_WF);
+			v_fpTGE_mean_XP[iscan]->	SetPoint(irun, v_valint[irun]+shift, mean_XP);
 			v_fpTGE_mean_WF[iscan]->	SetPointError(irun, 0, dmean_WF);
 			v_fpTGE_mean_XP[iscan]->	SetPointError(irun, 0, dmean_XP);
 
-			v_fpTGE_std_WF[iscan]->		SetPoint(irun, v_valint[irun], std_WF);
-			v_fpTGE_std_XP[iscan]->		SetPoint(irun, v_valint[irun], std_XP); 
+			v_fpTGE_std_WF[iscan]->		SetPoint(irun, v_valint[irun]-shift, std_WF);
+			v_fpTGE_std_XP[iscan]->		SetPoint(irun, v_valint[irun]+shift, std_XP); 
 			v_fpTGE_std_WF[iscan]->		SetPointError(irun, 0, dstd_WF);
 			v_fpTGE_std_XP[iscan]->		SetPointError(irun, 0, dstd_XP);
 
-			v_fpTGE_reso_WF[iscan]->	SetPoint(irun, v_valint[irun], reso_WF);
-			v_fpTGE_reso_XP[iscan]->	SetPoint(irun, v_valint[irun], reso_XP);
+			v_fpTGE_reso_WF[iscan]->	SetPoint(irun, v_valint[irun]-shift, reso_WF);
+			v_fpTGE_reso_XP[iscan]->	SetPoint(irun, v_valint[irun]+shift, reso_XP);
 			v_fpTGE_reso_WF[iscan]->	SetPointError(irun, 0, dreso_WF);
 			v_fpTGE_reso_XP[iscan]->	SetPointError(irun, 0, dreso_XP);
 		}
 	}
+	// if(ftype == "single") return;
+
+	// v_fFiles.							push_back(TFile::Open(drawout_runpath + tag + "_WF2HAT.root"));
+	std::cout  << drawout_metascanpath + testbeam + "_" + metascan + "_" + "Zm40/" + testbeam + "_" + metascan + "_" + "Zm40_Phi40_diag/" + testbeam + "_" + metascan + "_" + "Zm40_Phi40_diag_WF0.root" << std::endl;
+
 }
 
 void Reconstruction::DrawOuts::DESY21ScanDraw(){
@@ -162,27 +168,33 @@ void Reconstruction::DrawOuts::DESY21ScanDraw(){
 	// Drawing settings
 	if(ftype == "multiple") foutputFile = drawout_metascanpath + testbeam + "_" + metascan + comment + ".pdf";
 	else foutputFile = 				drawout_scanpath + scan + comment + ".pdf";
-	gPad->							SetRightMargin(0.04);
-	gPad->							SetTopMargin(0.04);
+	gPad->							SetLeftMargin(0.11);
+	gPad->							SetRightMargin(0.01);
+	gPad->							SetTopMargin(0.02);
+	
 	fpCanvas->						Clear();
 	fpCanvas->						cd();
 	// Legend
 	fpLegWF =						new TLegend(0.68,0.78-0.03*nlegentries,0.9,0.93);
-	if(nscans != 1) fpLegWF->		SetHeader(" Waveforms sum");
+	if(nscans != 1 and metascan != "Drift"){
+		fpLegWF->		SetHeader(" Waveforms sum");
+	}
 	fpLegWF->						SetTextSize(0.05);
 	fpLegWF->						SetFillStyle(0);
 	fpLegWF->						SetTextColor(kBlue-1);
 	fpLegXP =						new TLegend(0.4,0.78-0.03*nlegentries,0.6,0.93);
-	if(nscans != 1) fpLegXP->		SetHeader(" Crossed pads");
+	if(nscans != 1 and metascan != "Drift"){
+		fpLegXP->		SetHeader(" Crossed pads");
+	}
 	fpLegXP->						SetTextSize(0.05);
 	fpLegXP->						SetFillStyle(0);
 	fpLegXP->						SetTextColor(kBlue-1);
-	if(nscans == 1){
+	if(nscans == 1 or metascan == "Drift"){
 		fpLegWF->		SetY2(0.91);
 		fpLegWF->		SetX1(0.6);
 	}
 	for(int i=base;i<(int)v_fpTGE_mean_WF.size();i++){
-		if(nscans != 1){
+		if(nscans != 1 and metascan != "Drift"){
 			fpLegWF->						AddEntry(v_fpTGE_reso_WF[i], Form("%s", v_scanspec[i].c_str()), "p"); 
 			fpLegXP->						AddEntry(v_fpTGE_reso_XP[i], Form("%s", v_scanspec[i].c_str()), "p");	
 		}else{
@@ -194,21 +206,21 @@ void Reconstruction::DrawOuts::DESY21ScanDraw(){
 	// Resolution
 	v_fpTGE_reso_WF[base]->			SetMinimum(YRESOMIN);
 	v_fpTGE_reso_WF[base]->			SetMaximum(YRESOMAX);
-	v_fpTGE_reso_WF[base]->			SetNameTitle("fpTGE_reso_WF", Form(";%s;resolution (%%)", runvarstr.c_str()));
-	if (v_fpTGE_reso_WF[base]->GetXaxis()->GetXmin() == 0) v_fpTGE_reso_WF[base]->GetXaxis()->SetLimits(-3, v_fpTGE_reso_WF[base]->GetXaxis()->GetXmax());
+	v_fpTGE_reso_WF[base]->			SetNameTitle("fpTGE_reso_WF", Form(";%s;Resolution (%%)", runvarstr.c_str()));
+	if (metascan == "Phi") v_fpTGE_reso_WF[base]->GetXaxis()->SetLimits(-3, v_fpTGE_reso_WF[base]->GetXaxis()->GetXmax());
 	for(int i=base;i<(int)v_fpTGE_reso_WF.size();i++){
-		if(nscans != 1){
-			Graphic_setup(v_fpTGE_reso_WF[i], 4, markers[2*i], colors[2*i], 1, kBlack);
-			Graphic_setup(v_fpTGE_reso_XP[i], 4, markers[2*i+1], colors[2*i+1], 1, kBlack);
+		if(nscans != 1 and metascan != "Drift"){
+			Graphic_setup(v_fpTGE_reso_WF[i], 4, markers[2*i], colors[2*i], 2, colors[2*i]);
+			Graphic_setup(v_fpTGE_reso_XP[i], 4, markers[2*i+1], colors[2*i+1], 2, colors[2*i+1]);
 		}else{
-			Graphic_setup(v_fpTGE_reso_WF[i], 4, markers[4], colors[2], 1, kBlack);
-			Graphic_setup(v_fpTGE_reso_XP[i], 4, markers[3], colors[3], 1, kBlack);
+			Graphic_setup(v_fpTGE_reso_WF[i], 5, markers[4], colors[2], 2, colors[2]);
+			Graphic_setup(v_fpTGE_reso_XP[i], 4, markers[3], colors[3], 2, colors[3]);
 		}
 		if(i==base) v_fpTGE_reso_WF[i]->DrawClone("AP");
 		else v_fpTGE_reso_WF[i]->		DrawClone("P same");
 		v_fpTGE_reso_XP[i]->			DrawClone("P same");
-		v_fpTGE_reso_WF[i]->			SetMarkerSize(5);
-		v_fpTGE_reso_XP[i]->			SetMarkerSize(5);
+		v_fpTGE_reso_WF[i]->			SetMarkerSize(7);
+		v_fpTGE_reso_XP[i]->			SetMarkerSize(7);
 	}
 	fpLegWF->						Draw();
 	fpLegXP->						Draw();
@@ -218,14 +230,14 @@ void Reconstruction::DrawOuts::DESY21ScanDraw(){
 	v_fpTGE_mean_WF[base]->			SetMinimum(YMEANMIN);
 	v_fpTGE_mean_WF[base]->			SetMaximum(YMEANMAX);
 	v_fpTGE_mean_WF[base]->			SetNameTitle("fpTGE_mean_WF", Form(";%s;Mean (ADC counts/cm)", runvarstr.c_str()));
-	if(v_fpTGE_mean_WF[base]->GetXaxis()->GetXmin() == 0) v_fpTGE_mean_WF[base]->GetXaxis()->SetLimits(-3, v_fpTGE_mean_WF[base]->GetXaxis()->GetXmax());
+	if (metascan == "Phi") v_fpTGE_mean_WF[base]->GetXaxis()->SetLimits(-3, v_fpTGE_mean_WF[base]->GetXaxis()->GetXmax());
 	for(int i=base;i<(int)v_fpTGE_mean_WF.size();i++){
-		if(nscans != 1){
-			Graphic_setup(v_fpTGE_mean_WF[i], 4, markers[2*i], colors[2*i], 1, kBlack);
-			Graphic_setup(v_fpTGE_mean_XP[i], 4, markers[2*i+1], colors[2*i+1], 1, kBlack);
+		if(nscans != 1 and metascan != "Drift"){
+			Graphic_setup(v_fpTGE_mean_WF[i], 4, markers[2*i], colors[2*i], 2, colors[2*i]);
+			Graphic_setup(v_fpTGE_mean_XP[i], 4, markers[2*i+1], colors[2*i+1], 2, colors[2*i+1]);
 		}else{
-			Graphic_setup(v_fpTGE_mean_WF[i], 4, markers[4], colors[2], 1, kBlack);
-			Graphic_setup(v_fpTGE_mean_XP[i], 4, markers[3], colors[3], 1, kBlack);
+			Graphic_setup(v_fpTGE_mean_WF[i], 5, markers[4], colors[2], 2, colors[2]);
+			Graphic_setup(v_fpTGE_mean_XP[i], 4, markers[3], colors[3], 2, colors[3]);
 		}
 		if(i==base) v_fpTGE_mean_WF[i]->Draw("AP");
 		else v_fpTGE_mean_WF[i]->		Draw("P same");
@@ -238,15 +250,15 @@ void Reconstruction::DrawOuts::DESY21ScanDraw(){
 	// Standard deviation
 	v_fpTGE_std_WF[base]->			SetMinimum(YSTDMIN);
 	v_fpTGE_std_WF[base]->			SetMaximum(YSTDMAX);
-	v_fpTGE_std_WF[base]->			SetNameTitle("fpTGE_std_WF", Form(";%s;std (ADC counts/cm)", runvarstr.c_str()));
-	if(v_fpTGE_reso_WF[base]->GetXaxis()->GetXmin() == 0) v_fpTGE_std_WF[base]->GetXaxis()->SetLimits(-3, v_fpTGE_std_WF[base]->GetXaxis()->GetXmax());
+	v_fpTGE_std_WF[base]->			SetNameTitle("fpTGE_std_WF", Form(";%s;Standard deviation (ADC counts/cm)", runvarstr.c_str()));
+	if (metascan == "Phi") v_fpTGE_std_WF[base]->GetXaxis()->SetLimits(-3, v_fpTGE_std_WF[base]->GetXaxis()->GetXmax());
 	for(int i=base;i<(int)v_fpTGE_std_WF.size();i++){
-		if(nscans != 1){
-			Graphic_setup(v_fpTGE_std_WF[i], 4, markers[2*i], colors[2*i], 1, kBlack);
-			Graphic_setup(v_fpTGE_std_XP[i], 4, markers[2*i+1], colors[2*i+1], 1, kBlack);
+		if(nscans != 1 and metascan != "Drift"){
+			Graphic_setup(v_fpTGE_std_WF[i], 4, markers[2*i], colors[2*i], 2, colors[2*i]);
+			Graphic_setup(v_fpTGE_std_XP[i], 4, markers[2*i+1], colors[2*i+1], 2, colors[2*i+1]);
 		}else{
-			Graphic_setup(v_fpTGE_std_WF[i], 4, markers[4], colors[2], 1, kBlack);
-			Graphic_setup(v_fpTGE_std_XP[i], 4, markers[3], colors[3], 1, kBlack);
+			Graphic_setup(v_fpTGE_std_WF[i], 5, markers[4], colors[2], 2, colors[2]);
+			Graphic_setup(v_fpTGE_std_XP[i], 4, markers[3], colors[3], 2, colors[3]);
 		}
 		if(i==base) v_fpTGE_std_WF[i]->	Draw("AP");
 		else v_fpTGE_std_WF[i]->		Draw("P same");
@@ -346,7 +358,7 @@ void Reconstruction::DrawOuts::CERN22ScanDraw(){
 	v_fpTGE_reso_WF[0]->			SetMaximum(YRESOMAXCERN);
 	v_fpTGE_reso_WF[0]->			SetMinimum(YRESOMINCERN);
 	v_fpTGE_reso_WF[0]->			GetXaxis()->SetLimits(0.25, 1.75);
-	v_fpTGE_reso_WF[0]->			SetNameTitle("fpTGE_reso_WF", Form(";%s;resolution (%%)", runvarstr.c_str()));
+	v_fpTGE_reso_WF[0]->			SetNameTitle("fpTGE_reso_WF", Form(";%s;Resolution (%%)", runvarstr.c_str()));
 	for(int i=0;i<4;i++)
 	{
 		Graphic_setup(v_fpTGE_reso_WF[i], 4, markersCERN[i], colorsCERN[i], 1, colorsCERN[i]);
@@ -375,7 +387,7 @@ void Reconstruction::DrawOuts::CERN22ScanDraw(){
 	v_fpTGE_std_WF[0]->				SetMaximum(YSTDMAXCERN);
 	v_fpTGE_std_WF[0]->				SetMinimum(YSTDMINCERN);
 	v_fpTGE_std_WF[0]->				GetXaxis()->SetLimits(0.25, 1.75);
-	v_fpTGE_std_WF[0]->				SetNameTitle("fpTGE_std_WF", Form(";%s;std (ADC counts/cm)", runvarstr.c_str()));
+	v_fpTGE_std_WF[0]->				SetNameTitle("fpTGE_std_WF", Form(";%s;Standard deviation (ADC counts/cm)", runvarstr.c_str()));
 	for(int i=0;i<4;i++)
 	{
 		Graphic_setup(v_fpTGE_std_WF[i], 4, markersCERN[i], colorsCERN[i], 2, colorsCERN[i]);
@@ -390,7 +402,7 @@ void Reconstruction::DrawOuts::CERN22ScanDraw(){
 	v_fpTGE_reso_XP[0]->			SetMaximum(YRESOMAXCERN);
 	v_fpTGE_reso_XP[0]->			SetMinimum(YRESOMINCERN);
 	v_fpTGE_reso_XP[0]->			GetXaxis()->SetLimits(0.25, 1.75);
-	v_fpTGE_reso_XP[0]->			SetNameTitle("fpTGE_reso_XP", Form(";%s;resolution (%%)", runvarstr.c_str()));
+	v_fpTGE_reso_XP[0]->			SetNameTitle("fpTGE_reso_XP", Form(";%s;Resolution (%%)", runvarstr.c_str()));
 	for(int i=0;i<4;i++)
 	{
 		Graphic_setup(v_fpTGE_reso_XP[i], 4, markersCERN[i], colorsCERN[i], 2, colorsCERN[i]);
@@ -435,7 +447,7 @@ void Reconstruction::DrawOuts::CERN22ScanDraw(){
 	v_fpTGE_std_XP[0]->				SetMaximum(YSTDMAXCERN);
 	v_fpTGE_std_XP[0]->				SetMinimum(YSTDMINCERN);
 	v_fpTGE_std_XP[0]->				GetXaxis()->SetLimits(0.25, 1.75);
-	v_fpTGE_std_XP[0]->				SetNameTitle("fpTGE_std_XP", Form(";%s;std (ADC counts/cm)", runvarstr.c_str()));
+	v_fpTGE_std_XP[0]->				SetNameTitle("fpTGE_std_XP", Form(";%s;Standard deviation (ADC counts/cm)", runvarstr.c_str()));
 	for(int i=0;i<4;i++)
 	{
 		Graphic_setup(v_fpTGE_std_XP[i], 4, markersCERN[i], colorsCERN[i], 2, colorsCERN[i]);
