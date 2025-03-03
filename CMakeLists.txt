@@ -16,7 +16,8 @@ include(${ROOT_USE_FILE})
 
 # Add source files
 file(GLOB SOURCES "*/src/*.cxx")
-list(APPEND SOURCES "$ENV{HOME}/Documents/Code/CPP_style/SetStyle.cxx")
+file(GLOB SETTINGS_SOURCES "$ENV{HOME}/Documents/Code/CPP/CPP_Settings/src/*.cxx")
+list(APPEND SOURCES ${SETTINGS_SOURCES})
 
 # Add a library target
 add_library(dEdxReconLib ${SOURCES})
@@ -29,7 +30,7 @@ target_include_directories(dEdxReconLib PUBLIC
 	Reconstruction/inc
 	Uploader/inc
 	Utilities/inc
-	"$ENV{HOME}/Documents/Code/CPP_style"
+    "$ENV{HOME}/Documents/Code/CPP/CPP_Settings/inc"
 )
 
 # Generate dictionaries

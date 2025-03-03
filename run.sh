@@ -2,6 +2,6 @@ set -e # Exit on error
 
 cd build
 cmake ..
-make -j 12
+make -j8
 cd ..
 time ./build/Analysis

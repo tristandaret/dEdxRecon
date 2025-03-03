@@ -23,36 +23,28 @@
 //
 class TrackFitter {
 public:
-	TrackFitter(
-				const std::string& FitterName,
-				const int& NberOfParameters = 2
-			);
-	virtual ~TrackFitter();
+   TrackFitter(const std::string &FitterName, const int &NberOfParameters = 2);
+   virtual ~TrackFitter();
 
 public:
-///////////////////////////////////
+   ///////////////////////////////////
 
-	void Set_Track (Track* pTrack);
-	
-	int DoMinimisation();
+   void Set_Track(Track *pTrack);
 
-	double Chi2(double par[]); 
+   int DoMinimisation();
 
+   double Chi2(double par[]);
 
 protected:
-///////////////////////////////////
+   ///////////////////////////////////
 
-	std::string m_FitterName; 
-	
-	int m_NberOfParameters;
+   std::string m_FitterName;
 
-	Track* p_Track; 
-	
-	TVirtualFitter* p_TVirtualFitter; //!< Fitter
+   int m_NberOfParameters;
 
+   Track *p_Track;
+
+   TVirtualFitter *p_TVirtualFitter; //!< Fitter
 };
 
-
-
 #endif
-

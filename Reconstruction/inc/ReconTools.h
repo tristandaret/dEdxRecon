@@ -20,36 +20,31 @@
 /* Python's numpy equivalent of linspace ----------------------------------------------- */
 std::vector<double> linspace(double start, double end, int numPoints);
 
-bool FourModulesInLine(const std::vector<int>& vec);
+bool FourModulesInLine(const std::vector<int> &vec);
 
-namespace Reconstruction{
-	void WFCorrection(const std::string& OutCorr);
+namespace Reconstruction {
+void WFCorrection(const std::string &OutCorr);
 }
 
 /* Call the correction function of WF method ----------------------------------------------*/
-TF1* corr_func(const std::string &EventFile, const std::string &Tag, const int& correctWF);
-
-
+TF1 *corr_func(const std::string &EventFile, const std::string &Tag, const int &correctWF);
 
 /* Initialize selection stages -----------------------------------------------------------*/
-void Init_selection(const std::string &SelectionSet, Selector &aSelector, const std::string &Tag, Uploader *pUploader, const int &NbrOfMod, const int &Data_to_Use);
-
-
+void Init_selection(const std::string &SelectionSet, Selector &aSelector, const std::string &Tag, Uploader *pUploader,
+                    const int &NbrOfMod, const int &Data_to_Use);
 
 /* FILE HANDLING */
 // Read CSV file
 std::vector<std::vector<float>> readCSV(std::string filename);
 
 // Determine the time cut
-std::vector<int> ComputeCutStage3_Cut(Uploader* pUploader, const int& NbrOfMod, const int& Data_to_Use);
+std::vector<int> ComputeCutStage3_Cut(Uploader *pUploader, const int &NbrOfMod, const int &Data_to_Use);
 
 // Function to search for a word in a CSV file
-bool GetStage3Cut_CSV(const std::string& filename, const std::string& targetWord, int& value1, int& value2);
+bool GetStage3Cut_CSV(const std::string &filename, const std::string &targetWord, int &value1, int &value2);
 
 // Function to update a CSV file
-void SetStage3Cut_CSV(const std::string& filename, const std::string& targetWord, int value1, int value2);
-
-
+void SetStage3Cut_CSV(const std::string &filename, const std::string &targetWord, int value1, int value2);
 
 /* GENERAL FUNCTIONS*/
 // Find if a value is in a vector
@@ -57,63 +52,60 @@ bool is_in(std::vector<double> v, double val);
 
 /* GENERAL PHYSICS */
 // Bethe-Bloch function
-TF1* BetheBloch(const float& Emin, const float& Emax, const double& m, const std::string& particle);
+TF1 *BetheBloch(const float &Emin, const float &Emax, const double &m, const std::string &particle);
 
 // Bethe-Bloch relativistic for positrons with Bhabha scattering
-TF1* BetheBlochBhabha(const float& Pmin, const float& Pmax, const double& m, const std::string& particle);
+TF1 *BetheBlochBhabha(const float &Pmin, const float &Pmax, const double &m, const std::string &particle);
 
 // Bethe-Bloch with experimental parametrisation
-TF1* BetheBlochExp(const float& Pmin, const float& Pmax, const double& M, const std::string& particle);
-
-
+TF1 *BetheBlochExp(const float &Pmin, const float &Pmax, const double &M, const std::string &particle);
 
 /* GENERAL MATH*/
 
 // Mean of vector
-float mean(const std::vector<float>& values);
+float mean(const std::vector<float> &values);
 
 // Fit a gaussian but within +/- 2sigma to fit only the peak correctly
-TF1*	Fit1Gauss(TH1F* h1F);
-TF1* Fit1Gauss(TH1F* h1F, float range);
+TF1 *Fit1Gauss(TH1F *h1F);
+TF1 *Fit1Gauss(TH1F *h1F, float range);
 
 // Fit with 2 gaussians
-TF1*	Fit2Gauss(TH1F* h1F);
-TF1*	Fit2Gauss(TH1F* h1F, const float& x1min, const float& x1max, const float& x2min, const float& x2max);
-
-
+TF1 *Fit2Gauss(TH1F *h1F);
+TF1 *Fit2Gauss(TH1F *h1F, const float &x1min, const float &x1max, const float &x2min, const float &x2max);
 
 /* SPECIFIC MATH*/
 // impact parameter d (in m) & track angle phi (in degrees) computed locally at the level of the pad
-void local_params(Pad* pPad, const Track* pTrack, float& d, float& dd, float& phi, float& trk_len_pad);
+void local_params(Pad *pPad, const Track *pTrack, float &d, float &dd, float &phi, float &trk_len_pad);
 
 // Track length
-float trk_len(Module* pModule, const Track* pTrack);
+float trk_len(Module *pModule, const Track *pTrack);
 
 // Formula to get resolution error using a TF1
-double GetResoError(TF1* tf1);
-double GetResoError(TF1* tf1, const int& mu, const int& sigma);
+double GetResoError(TF1 *tf1);
+double GetResoError(TF1 *tf1, const int &mu, const int &sigma);
 
 // Get separation power between 2 particles
-double GetSeparation(const float& mean1, const float& std1, const float& mean2, const float& std2);
+double GetSeparation(const float &mean1, const float &std1, const float &mean2, const float &std2);
 
-// Get separation power error 
-double GetSeparationError(const float& mean1, const float& std1, const float& dmean1, const float& dstd1, const float& mean2, const float& std2, const float& dmean2, const float& dstd2);
+// Get separation power error
+double GetSeparationError(const float &mean1, const float &std1, const float &dmean1, const float &dstd1,
+                          const float &mean2, const float &std2, const float &dmean2, const float &dstd2);
 
 // Write resolution value for a 1-gaussian fit
-void PrintResolution(TH1* th1, TCanvas* pCanvas);
-void PrintResolution(TH1* th1, TCanvas* pCanvas, float NDCx, float NDCy, Color_t color, const std::string& title);
+void PrintResolution(TH1 *th1, TCanvas *pCanvas);
+void PrintResolution(TH1 *th1, TCanvas *pCanvas, float NDCx, float NDCy, Color_t color, const std::string &title);
 
 // From TH1 get TGraph
-TGraph* hist_to_graph(TH1 *h1);
+TGraph *hist_to_graph(TH1 *h1);
 
 // From TH1 get swapped TGraph (transpose x and y)
-TGraph* Swapped_graph(TH1 *h1);
+TGraph *Swapped_graph(TH1 *h1);
 
 /* ROOT */
 
 // Draw TH1
-void DrawTH1(const std::string& OutDir, TH1* h1);
+void DrawTH1(const std::string &OutDir, TH1 *h1);
 
 // Draw TH2
-void DrawTH2(const std::string& OutDir, TH2* h2);
+void DrawTH2(const std::string &OutDir, TH2 *h2);
 #endif

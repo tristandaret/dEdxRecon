@@ -10,6 +10,6 @@
 #include <TCanvas.h>
 #include <TStyle.h>
 
-void combinedFit(std::vector<TGraphErrors*>& v_tge, std::vector<TF1*>& v_tf1);
+void combinedFit(std::vector<TGraphErrors *> &v_tge, std::vector<TF1 *> &v_tf1);
 
 #endif // COMBINEDFIT_H

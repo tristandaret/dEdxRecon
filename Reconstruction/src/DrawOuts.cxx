@@ -17,980 +17,1109 @@
 #include "TLatex.h"
 
 // Constructor delegation
-Reconstruction::DrawOuts::DrawOuts(const std::string &inputFile)
-    : DrawOuts(std::vector<std::string>{inputFile}) {}
+Reconstruction::DrawOuts::DrawOuts(const std::string &inputFile) : DrawOuts(std::vector<std::string>{inputFile}) {}
 
 // Main constructor
-Reconstruction::DrawOuts::DrawOuts(const std::vector<std::string> &v_inputFiles){
+Reconstruction::DrawOuts::DrawOuts(const std::vector<std::string> &v_inputFiles)
+{
 
-	nscans =				v_tags.size()/v_valint.size();
-	nruns =					v_valint.size();
-	
-	for(int ifile=0; ifile<(int)v_inputFiles.size(); ifile++){
-		v_fEvents.				push_back(new RecoEvent());
-		v_fFiles.				push_back(TFile::Open(v_inputFiles[ifile].c_str()));
-		v_fTrees.				push_back((TTree*)v_fFiles[ifile]->Get("dEdx_tree"));
-		v_fTrees[ifile]->		SetBranchAddress("event_branch", &v_fEvents[ifile]);
-		v_fnentries.			push_back(v_fTrees[ifile]->GetEntries());
-	}
+   nscans = v_tags.size() / v_valint.size();
+   nruns = v_valint.size();
 
-	SetStyle();
+   for (int ifile = 0; ifile < (int)v_inputFiles.size(); ifile++) {
+      v_fEvents.push_back(new RecoEvent());
+      v_fFiles.push_back(TFile::Open(v_inputFiles[ifile].c_str()));
+      v_fTrees.push_back((TTree *)v_fFiles[ifile]->Get("dEdx_tree"));
+      v_fTrees[ifile]->SetBranchAddress("event_branch", &v_fEvents[ifile]);
+      v_fnentries.push_back(v_fTrees[ifile]->GetEntries());
+   }
+
+   SetStyle();
 }
 
 // Destructor
-Reconstruction::DrawOuts::~DrawOuts(){
+Reconstruction::DrawOuts::~DrawOuts()
+{
 
-	for(int i=0;i<(int)v_fEvents.size();i++)	delete v_fEvents[i];
-	for(int i=0;i<(int)v_fTrees.size();i++)		delete v_fTrees[i];
-	for(int i=0;i<(int)v_fFiles.size();i++)		delete v_fFiles[i];
+   for (int i = 0; i < (int)v_fEvents.size(); i++)
+      delete v_fEvents[i];
+   for (int i = 0; i < (int)v_fTrees.size(); i++)
+      delete v_fTrees[i];
+   for (int i = 0; i < (int)v_fFiles.size(); i++)
+      delete v_fFiles[i];
 
-	delete fpCanvas;
-
+   delete fpCanvas;
 }
-
 
 // Configuration functions
-void Reconstruction::DrawOuts::SetStyle(){
+void Reconstruction::DrawOuts::SetStyle()
+{
 
-	fpCanvas = 						new TCanvas("pCanvas", "pCanvas", 1800, 1350);
-	TStyle* ptstyle =				SetMyStyle();
-	gROOT->							SetStyle(ptstyle->GetName());
-	gPad->							UseCurrentStyle();
+   fpCanvas = new TCanvas("pCanvas", "pCanvas", 1800, 1350);
+   TStyle *ptstyle = SetMyStyle();
+   gROOT->SetStyle(ptstyle->GetName());
+   gPad->UseCurrentStyle();
 }
 
-void Reconstruction::DrawOuts::CleanUp(){
+void Reconstruction::DrawOuts::CleanUp()
+{
 
-	fpCanvas->		Clear();
-	delete fpLegWF;
-	delete fptf1_WF;
-	delete fptf1_XP;
-	delete fpTGE_mean_WF;
-	delete fpTGE_mean_XP;
-	delete fpTGE_std_WF;
-	delete fpTGE_std_XP;
-	delete fpTGE_reso_WF;
-	delete fpTGE_reso_XP;
+   fpCanvas->Clear();
+   delete fpLegWF;
+   delete fptf1_WF;
+   delete fptf1_XP;
+   delete fpTGE_mean_WF;
+   delete fpTGE_mean_XP;
+   delete fpTGE_std_WF;
+   delete fpTGE_std_XP;
+   delete fpTGE_reso_WF;
+   delete fpTGE_reso_XP;
 
-	for(int i=0;i<(int)v_fpTGE_mean_WF.size();i++){
-		delete v_fpTGE_mean_WF[i];
-		delete v_fpTGE_mean_XP[i];
-		delete v_fpTGE_std_WF[i];
-		delete v_fpTGE_std_XP[i];
-		delete v_fpTGE_reso_WF[i];
-		delete v_fpTGE_reso_XP[i];
-		delete v_fptf1_WF[i];
-		delete v_fptf1_XP[i];
-	}
-	v_fptf1_WF.			clear();
-	v_fptf1_XP.			clear();
-	v_fpTGE_mean_WF.	clear();
-	v_fpTGE_mean_XP.	clear();
-	v_fpTGE_std_WF.		clear();
-	v_fpTGE_std_XP.		clear();
-	v_fpTGE_reso_WF.	clear();
-	v_fpTGE_reso_XP.	clear();
+   for (int i = 0; i < (int)v_fpTGE_mean_WF.size(); i++) {
+      delete v_fpTGE_mean_WF[i];
+      delete v_fpTGE_mean_XP[i];
+      delete v_fpTGE_std_WF[i];
+      delete v_fpTGE_std_XP[i];
+      delete v_fpTGE_reso_WF[i];
+      delete v_fpTGE_reso_XP[i];
+      delete v_fptf1_WF[i];
+      delete v_fptf1_XP[i];
+   }
+   v_fptf1_WF.clear();
+   v_fptf1_XP.clear();
+   v_fpTGE_mean_WF.clear();
+   v_fpTGE_mean_XP.clear();
+   v_fpTGE_std_WF.clear();
+   v_fpTGE_std_XP.clear();
+   v_fpTGE_reso_WF.clear();
+   v_fpTGE_reso_XP.clear();
 
-	if(ftype == "multiple") v_valint.clear();
+   if (ftype == "multiple")
+      v_valint.clear();
 }
 
 // Scan functions
-void Reconstruction::DrawOuts::DESY21ScanFill(){
+void Reconstruction::DrawOuts::DESY21ScanFill()
+{
 
-	int istartscan = 0;
-	if(ftype == "single") istartscan = scanindex;
-	for(int iscan=0;iscan<nscans;iscan++){
+   int istartscan = 0;
+   if (ftype == "single")
+      istartscan = scanindex;
+   for (int iscan = 0; iscan < nscans; iscan++) {
 
-		v_fpTGE_mean_WF.			push_back(new TGraphErrors());
-		v_fpTGE_mean_XP.			push_back(new TGraphErrors());
-		v_fpTGE_std_WF.				push_back(new TGraphErrors());
-		v_fpTGE_std_XP.				push_back(new TGraphErrors());
-		v_fpTGE_reso_WF.			push_back(new TGraphErrors());
-		v_fpTGE_reso_XP.			push_back(new TGraphErrors());
-		float shift = 				0;
-		if(metascan == "Phi") shift = 0.5;
+      v_fpTGE_mean_WF.push_back(new TGraphErrors());
+      v_fpTGE_mean_XP.push_back(new TGraphErrors());
+      v_fpTGE_std_WF.push_back(new TGraphErrors());
+      v_fpTGE_std_XP.push_back(new TGraphErrors());
+      v_fpTGE_reso_WF.push_back(new TGraphErrors());
+      v_fpTGE_reso_XP.push_back(new TGraphErrors());
+      float shift = 0;
+      if (metascan == "Phi")
+         shift = 0.5;
 
-		if(iscan < istartscan) continue;
-		for(int irun=0;irun<nruns;irun++){
+      if (iscan < istartscan)
+         continue;
+      for (int irun = 0; irun < nruns; irun++) {
 
-			int index;
-			if(ftype == "single") index = irun;
-			else index = 				iscan*nruns+irun;
+         int index;
+         if (ftype == "single")
+            index = irun;
+         else
+            index = iscan * nruns + irun;
 
-			v_fptf1_WF.					push_back((TF1*)v_fFiles[iscan*nruns+irun]->Get<TH1F>("ph1f_WF")->GetFunction("gausn"));
-			v_fptf1_XP.					push_back((TF1*)v_fFiles[iscan*nruns+irun]->Get<TH1F>("ph1f_XP")->GetFunction("gausn"));
+         v_fptf1_WF.push_back((TF1 *)v_fFiles[iscan * nruns + irun]->Get<TH1F>("ph1f_WF")->GetFunction("gausn"));
+         v_fptf1_XP.push_back((TF1 *)v_fFiles[iscan * nruns + irun]->Get<TH1F>("ph1f_XP")->GetFunction("gausn"));
 
-			float mean_WF =				v_fptf1_WF[index]->GetParameter(1);
-			float mean_XP =				v_fptf1_XP[index]->GetParameter(1);
-			float dmean_WF =			v_fptf1_WF[index]->GetParError(1);
-			float dmean_XP =			v_fptf1_XP[index]->GetParError(1);
+         float mean_WF = v_fptf1_WF[index]->GetParameter(1);
+         float mean_XP = v_fptf1_XP[index]->GetParameter(1);
+         float dmean_WF = v_fptf1_WF[index]->GetParError(1);
+         float dmean_XP = v_fptf1_XP[index]->GetParError(1);
 
-			float std_WF =				v_fptf1_WF[index]->GetParameter(2);
-			float std_XP =				v_fptf1_XP[index]->GetParameter(2);
-			float dstd_WF =				v_fptf1_WF[index]->GetParError(2);
-			float dstd_XP =				v_fptf1_XP[index]->GetParError(2);
+         float std_WF = v_fptf1_WF[index]->GetParameter(2);
+         float std_XP = v_fptf1_XP[index]->GetParameter(2);
+         float dstd_WF = v_fptf1_WF[index]->GetParError(2);
+         float dstd_XP = v_fptf1_XP[index]->GetParError(2);
 
-			float reso_WF =				std_WF/mean_WF*100;
-			float reso_XP =				std_XP/mean_XP*100;
-			float dreso_WF =			GetResoError(v_fptf1_WF[index]);
-			float dreso_XP =			GetResoError(v_fptf1_XP[index]);
+         float reso_WF = std_WF / mean_WF * 100;
+         float reso_XP = std_XP / mean_XP * 100;
+         float dreso_WF = GetResoError(v_fptf1_WF[index]);
+         float dreso_XP = GetResoError(v_fptf1_XP[index]);
 
-			v_fpTGE_mean_WF[iscan]->	SetPoint(irun, v_valint[irun]-shift, mean_WF);
-			v_fpTGE_mean_XP[iscan]->	SetPoint(irun, v_valint[irun]+shift, mean_XP);
-			v_fpTGE_mean_WF[iscan]->	SetPointError(irun, 0, dmean_WF);
-			v_fpTGE_mean_XP[iscan]->	SetPointError(irun, 0, dmean_XP);
+         v_fpTGE_mean_WF[iscan]->SetPoint(irun, v_valint[irun] - shift, mean_WF);
+         v_fpTGE_mean_XP[iscan]->SetPoint(irun, v_valint[irun] + shift, mean_XP);
+         v_fpTGE_mean_WF[iscan]->SetPointError(irun, 0, dmean_WF);
+         v_fpTGE_mean_XP[iscan]->SetPointError(irun, 0, dmean_XP);
 
-			v_fpTGE_std_WF[iscan]->		SetPoint(irun, v_valint[irun]-shift, std_WF);
-			v_fpTGE_std_XP[iscan]->		SetPoint(irun, v_valint[irun]+shift, std_XP); 
-			v_fpTGE_std_WF[iscan]->		SetPointError(irun, 0, dstd_WF);
-			v_fpTGE_std_XP[iscan]->		SetPointError(irun, 0, dstd_XP);
+         v_fpTGE_std_WF[iscan]->SetPoint(irun, v_valint[irun] - shift, std_WF);
+         v_fpTGE_std_XP[iscan]->SetPoint(irun, v_valint[irun] + shift, std_XP);
+         v_fpTGE_std_WF[iscan]->SetPointError(irun, 0, dstd_WF);
+         v_fpTGE_std_XP[iscan]->SetPointError(irun, 0, dstd_XP);
 
-			v_fpTGE_reso_WF[iscan]->	SetPoint(irun, v_valint[irun]-shift, reso_WF);
-			v_fpTGE_reso_XP[iscan]->	SetPoint(irun, v_valint[irun]+shift, reso_XP);
-			v_fpTGE_reso_WF[iscan]->	SetPointError(irun, 0, dreso_WF);
-			v_fpTGE_reso_XP[iscan]->	SetPointError(irun, 0, dreso_XP);
-		}
-	}
-	// if(ftype == "single") return;
+         v_fpTGE_reso_WF[iscan]->SetPoint(irun, v_valint[irun] - shift, reso_WF);
+         v_fpTGE_reso_XP[iscan]->SetPoint(irun, v_valint[irun] + shift, reso_XP);
+         v_fpTGE_reso_WF[iscan]->SetPointError(irun, 0, dreso_WF);
+         v_fpTGE_reso_XP[iscan]->SetPointError(irun, 0, dreso_XP);
+      }
+   }
+   if (metascan != "Phi" or ftype == "single")
+      return;
 
-	// v_fFiles.							push_back(TFile::Open(drawout_runpath + tag + "_WF2HAT.root"));
-	std::cout  << drawout_metascanpath + testbeam + "_" + metascan + "_" + "Zm40/" + testbeam + "_" + metascan + "_" + "Zm40_Phi40_diag/" + testbeam + "_" + metascan + "_" + "Zm40_Phi40_diag_WF0.root" << std::endl;
+   std::vector<std::string> v_files_WFoff = {
+      drawout_metascanpath + testbeam + "_" + metascan + "_" + "Zm40/" + testbeam + "_" + metascan + "_" +
+         "Zm40_Phi40_diag/" + testbeam + "_" + metascan + "_" + "Zm40_Phi40_diag_WFoff.root",
+      drawout_metascanpath + testbeam + "_" + metascan + "_" + "Z460/" + testbeam + "_" + metascan + "_" +
+         "Z460_Phi40_diag/" + testbeam + "_" + metascan + "_" + "Z460_Phi40_diag_WFoff.root",
+      drawout_metascanpath + testbeam + "_" + metascan + "_" + "Z860/" + testbeam + "_" + metascan + "_" +
+         "Z860_Phi40_diag/" + testbeam + "_" + metascan + "_" + "Z860_Phi40_diag_WFoff.root",
+      drawout_metascanpath + testbeam + "_" + metascan + "_" + "Zm40/" + testbeam + "_" + metascan + "_" +
+         "Zm40_Phi45_diag/" + testbeam + "_" + metascan + "_" + "Zm40_Phi45_diag_WFoff.root",
+      drawout_metascanpath + testbeam + "_" + metascan + "_" + "Z460/" + testbeam + "_" + metascan + "_" +
+         "Z460_Phi45_diag/" + testbeam + "_" + metascan + "_" + "Z460_Phi45_diag_WFoff.root",
+      drawout_metascanpath + testbeam + "_" + metascan + "_" + "Z860/" + testbeam + "_" + metascan + "_" +
+         "Z860_Phi45_diag/" + testbeam + "_" + metascan + "_" + "Z860_Phi45_diag_WFoff.root"};
+   for (int i = 0; i < nscans; i++) {
+      v_fpTGE_mean_WFoff.push_back(new TGraphErrors());
+      v_fpTGE_reso_WFoff.push_back(new TGraphErrors());
+      for (int j = 0; j < 2; j++) {
+         TF1 *ptf1WFoff =
+            (TF1 *)TFile::Open(v_files_WFoff[2 * i + j].c_str())->Get<TH1F>("ph1f_WF")->GetFunction("gausn");
 
+         float mean_WFoff = ptf1WFoff->GetParameter(1);
+         float dmean_WFoff = ptf1WFoff->GetParError(1);
+         float std_WFoff = ptf1WFoff->GetParameter(2);
+         float dstd_WFoff = ptf1WFoff->GetParError(2);
+         float reso_WFoff = std_WFoff / mean_WFoff * 100;
+         float dreso_WFoff = GetResoError(ptf1WFoff);
+
+         v_fpTGE_mean_WFoff[i]->SetPoint(j, 40 + 5 * j - 1.5, mean_WFoff);
+         v_fpTGE_mean_WFoff[i]->SetPointError(j, 0, dmean_WFoff);
+         v_fpTGE_reso_WFoff[i]->SetPoint(j, 40 + 5 * j - 1.5, reso_WFoff);
+         v_fpTGE_reso_WFoff[i]->SetPointError(j, 0, dreso_WFoff);
+      }
+   }
 }
 
-void Reconstruction::DrawOuts::DESY21ScanDraw(){
-	int base = 0;
-	int nlegentries = nscans;
-	if(ftype == "single"){
-		base = scanindex;
-		nlegentries = 0;
-	}
+void Reconstruction::DrawOuts::DESY21ScanDraw()
+{
+   int base = 0;
+   int nlegentries = nscans;
+   if (ftype == "single") {
+      base = scanindex;
+      nlegentries = 0;
+   }
 
-	// Drawing settings
-	if(ftype == "multiple") foutputFile = drawout_metascanpath + testbeam + "_" + metascan + comment + ".pdf";
-	else foutputFile = 				drawout_scanpath + scan + comment + ".pdf";
-	gPad->							SetLeftMargin(0.11);
-	gPad->							SetRightMargin(0.01);
-	gPad->							SetTopMargin(0.02);
-	
-	fpCanvas->						Clear();
-	fpCanvas->						cd();
-	// Legend
-	fpLegWF =						new TLegend(0.68,0.78-0.03*nlegentries,0.9,0.93);
-	if(nscans != 1 and metascan != "Drift"){
-		fpLegWF->		SetHeader(" Waveforms sum");
-	}
-	fpLegWF->						SetTextSize(0.05);
-	fpLegWF->						SetFillStyle(0);
-	fpLegWF->						SetTextColor(kBlue-1);
-	fpLegXP =						new TLegend(0.4,0.78-0.03*nlegentries,0.6,0.93);
-	if(nscans != 1 and metascan != "Drift"){
-		fpLegXP->		SetHeader(" Crossed pads");
-	}
-	fpLegXP->						SetTextSize(0.05);
-	fpLegXP->						SetFillStyle(0);
-	fpLegXP->						SetTextColor(kBlue-1);
-	if(nscans == 1 or metascan == "Drift"){
-		fpLegWF->		SetY2(0.91);
-		fpLegWF->		SetX1(0.6);
-	}
-	for(int i=base;i<(int)v_fpTGE_mean_WF.size();i++){
-		if(nscans != 1 and metascan != "Drift"){
-			fpLegWF->						AddEntry(v_fpTGE_reso_WF[i], Form("%s", v_scanspec[i].c_str()), "p"); 
-			fpLegXP->						AddEntry(v_fpTGE_reso_XP[i], Form("%s", v_scanspec[i].c_str()), "p");	
-		}else{
-			fpLegWF->						AddEntry(v_fpTGE_reso_WF[i], "Waveforms sum", "p"); 
-			fpLegWF->						AddEntry(v_fpTGE_reso_XP[i], "Crossed pads", "p");	
-		}
-	}
-	
-	// Resolution
-	v_fpTGE_reso_WF[base]->			SetMinimum(YRESOMIN);
-	v_fpTGE_reso_WF[base]->			SetMaximum(YRESOMAX);
-	v_fpTGE_reso_WF[base]->			SetNameTitle("fpTGE_reso_WF", Form(";%s;Resolution (%%)", runvarstr.c_str()));
-	if (metascan == "Phi") v_fpTGE_reso_WF[base]->GetXaxis()->SetLimits(-3, v_fpTGE_reso_WF[base]->GetXaxis()->GetXmax());
-	for(int i=base;i<(int)v_fpTGE_reso_WF.size();i++){
-		if(nscans != 1 and metascan != "Drift"){
-			Graphic_setup(v_fpTGE_reso_WF[i], 4, markers[2*i], colors[2*i], 2, colors[2*i]);
-			Graphic_setup(v_fpTGE_reso_XP[i], 4, markers[2*i+1], colors[2*i+1], 2, colors[2*i+1]);
-		}else{
-			Graphic_setup(v_fpTGE_reso_WF[i], 5, markers[4], colors[2], 2, colors[2]);
-			Graphic_setup(v_fpTGE_reso_XP[i], 4, markers[3], colors[3], 2, colors[3]);
-		}
-		if(i==base) v_fpTGE_reso_WF[i]->DrawClone("AP");
-		else v_fpTGE_reso_WF[i]->		DrawClone("P same");
-		v_fpTGE_reso_XP[i]->			DrawClone("P same");
-		v_fpTGE_reso_WF[i]->			SetMarkerSize(7);
-		v_fpTGE_reso_XP[i]->			SetMarkerSize(7);
-	}
-	fpLegWF->						Draw();
-	fpLegXP->						Draw();
-	fpCanvas->						SaveAs((foutputFile + "(").c_str());
+   // Drawing settings
+   if (ftype == "multiple")
+      foutputFile = drawout_metascanpath + testbeam + "_" + metascan + comment + ".pdf";
+   else
+      foutputFile = drawout_scanpath + scan + comment + ".pdf";
+   gPad->SetLeftMargin(0.11);
+   gPad->SetRightMargin(0.01);
+   gPad->SetTopMargin(0.02);
 
-	// Mean
-	v_fpTGE_mean_WF[base]->			SetMinimum(YMEANMIN);
-	v_fpTGE_mean_WF[base]->			SetMaximum(YMEANMAX);
-	v_fpTGE_mean_WF[base]->			SetNameTitle("fpTGE_mean_WF", Form(";%s;Mean (ADC counts/cm)", runvarstr.c_str()));
-	if (metascan == "Phi") v_fpTGE_mean_WF[base]->GetXaxis()->SetLimits(-3, v_fpTGE_mean_WF[base]->GetXaxis()->GetXmax());
-	for(int i=base;i<(int)v_fpTGE_mean_WF.size();i++){
-		if(nscans != 1 and metascan != "Drift"){
-			Graphic_setup(v_fpTGE_mean_WF[i], 4, markers[2*i], colors[2*i], 2, colors[2*i]);
-			Graphic_setup(v_fpTGE_mean_XP[i], 4, markers[2*i+1], colors[2*i+1], 2, colors[2*i+1]);
-		}else{
-			Graphic_setup(v_fpTGE_mean_WF[i], 5, markers[4], colors[2], 2, colors[2]);
-			Graphic_setup(v_fpTGE_mean_XP[i], 4, markers[3], colors[3], 2, colors[3]);
-		}
-		if(i==base) v_fpTGE_mean_WF[i]->Draw("AP");
-		else v_fpTGE_mean_WF[i]->		Draw("P same");
-		v_fpTGE_mean_XP[i]->			Draw("P same");
-	}
-	fpLegWF->						Draw();
-	fpLegXP->						Draw();
-	fpCanvas->						SaveAs(foutputFile.c_str());
+   fpCanvas->Clear();
+   fpCanvas->cd();
+   // Legend
+   fpLegWF = new TLegend(0.68, 0.78 - 0.03 * nlegentries, 0.9, 0.93);
+   fpLegWFoff = new TLegend(0.73, 0.78 - 0.03 * nlegentries, 0.86, 0.93);
+   if (nscans != 1 and metascan != "Drift") {
+      fpLegWF->SetHeader(" Waveforms sum");
+      fpLegWFoff->SetHeader("");
+   }
+   fpLegWF->SetTextSize(0.05);
+   fpLegWF->SetFillStyle(0);
+   fpLegWF->SetTextColor(kPink - 1);
+   fpLegWFoff->SetFillStyle(0);
+   fpLegXP = new TLegend(0.37, 0.78 - 0.03 * nlegentries, 0.57, 0.93);
+   if (nscans != 1 and metascan != "Drift") {
+      fpLegXP->SetHeader(" Crossed pads");
+   }
+   fpLegXP->SetTextSize(0.05);
+   fpLegXP->SetFillStyle(0);
+   fpLegXP->SetTextColor(kPink - 1);
+   if (nscans == 1 or metascan == "Drift") {
+      fpLegWF->SetY2(0.91);
+      fpLegWF->SetX1(0.6);
+   }
+   for (int i = base; i < (int)v_fpTGE_mean_WF.size(); i++) {
+      if (nscans != 1 and metascan != "Drift") {
+         fpLegWF->AddEntry(v_fpTGE_reso_WF[i], Form("    %s", v_scanspec[i].c_str()), "p");
+         fpLegWFoff->AddEntry(v_fpTGE_reso_WFoff[i], "", "p");
+         fpLegXP->AddEntry(v_fpTGE_reso_XP[i], Form("%s", v_scanspec[i].c_str()), "p");
+      } else {
+         fpLegWF->AddEntry(v_fpTGE_reso_WF[i], "Waveforms sum", "p");
+         fpLegWF->AddEntry(v_fpTGE_reso_XP[i], "Crossed pads", "p");
+      }
+   }
 
-	// Standard deviation
-	v_fpTGE_std_WF[base]->			SetMinimum(YSTDMIN);
-	v_fpTGE_std_WF[base]->			SetMaximum(YSTDMAX);
-	v_fpTGE_std_WF[base]->			SetNameTitle("fpTGE_std_WF", Form(";%s;Standard deviation (ADC counts/cm)", runvarstr.c_str()));
-	if (metascan == "Phi") v_fpTGE_std_WF[base]->GetXaxis()->SetLimits(-3, v_fpTGE_std_WF[base]->GetXaxis()->GetXmax());
-	for(int i=base;i<(int)v_fpTGE_std_WF.size();i++){
-		if(nscans != 1 and metascan != "Drift"){
-			Graphic_setup(v_fpTGE_std_WF[i], 4, markers[2*i], colors[2*i], 2, colors[2*i]);
-			Graphic_setup(v_fpTGE_std_XP[i], 4, markers[2*i+1], colors[2*i+1], 2, colors[2*i+1]);
-		}else{
-			Graphic_setup(v_fpTGE_std_WF[i], 5, markers[4], colors[2], 2, colors[2]);
-			Graphic_setup(v_fpTGE_std_XP[i], 4, markers[3], colors[3], 2, colors[3]);
-		}
-		if(i==base) v_fpTGE_std_WF[i]->	Draw("AP");
-		else v_fpTGE_std_WF[i]->		Draw("P same");
-		v_fpTGE_std_XP[i]->				Draw("P same");
-	}
-	fpLegWF->						Draw();
-	fpLegXP->						Draw();
-	fpCanvas->						SaveAs((foutputFile + ")").c_str());
+   // Resolution
+   v_fpTGE_reso_WF[base]->SetMinimum(YRESOMIN);
+   v_fpTGE_reso_WF[base]->SetMaximum(YRESOMAX);
+   v_fpTGE_reso_WF[base]->SetNameTitle("fpTGE_reso_WF", Form(";%s;Resolution (%%)", runvarstr.c_str()));
+   if (metascan == "Phi")
+      v_fpTGE_reso_WF[base]->GetXaxis()->SetLimits(-3, v_fpTGE_reso_WF[base]->GetXaxis()->GetXmax());
+   for (int i = base; i < (int)v_fpTGE_reso_WF.size(); i++) {
+      if (nscans != 1 and metascan != "Drift") {
+         Graphic_setup(v_fpTGE_reso_WF[i], 4, markers[2 * i], colors[2 * i], 1, colors[2 * i]);
+         Graphic_setup(v_fpTGE_reso_XP[i], 4, markers[2 * i + 1], colors[2 * i + 1], 1, colors[2 * i + 1]);
+      } else {
+         Graphic_setup(v_fpTGE_reso_WF[i], 5, markers[4], colors[2], 1, colors[2]);
+         Graphic_setup(v_fpTGE_reso_XP[i], 4, markers[3], colors[3], 1, colors[3]);
+      }
+      if (ftype == "multiple" and metascan == "Phi")
+         Graphic_setup(v_fpTGE_reso_WFoff[i], 4, markersWFoff[i], colors[2 * i], 1, colors[2 * i]);
+      if (i == base)
+         v_fpTGE_reso_WF[i]->DrawClone("AP");
+      else
+         v_fpTGE_reso_WF[i]->DrawClone("P same");
+      v_fpTGE_reso_XP[i]->DrawClone("P same");
+      v_fpTGE_reso_WFoff[i]->DrawClone("P same");
+      v_fpTGE_reso_WF[i]->SetMarkerSize(7);
+      v_fpTGE_reso_WFoff[i]->SetMarkerSize(7);
+      v_fpTGE_reso_XP[i]->SetMarkerSize(7);
+   }
+   fpLegWF->Draw();
+   fpLegWFoff->Draw();
+   fpLegXP->Draw();
+   fpCanvas->SaveAs((foutputFile + "(").c_str());
 
+   // Mean
+   v_fpTGE_mean_WF[base]->SetMinimum(YMEANMIN);
+   v_fpTGE_mean_WF[base]->SetMaximum(YMEANMAX);
+   v_fpTGE_mean_WF[base]->SetNameTitle("fpTGE_mean_WF", Form(";%s;Mean (ADC counts/cm)", runvarstr.c_str()));
+   if (metascan == "Phi")
+      v_fpTGE_mean_WF[base]->GetXaxis()->SetLimits(-3, v_fpTGE_mean_WF[base]->GetXaxis()->GetXmax());
+   for (int i = base; i < (int)v_fpTGE_mean_WF.size(); i++) {
+      std::cout << "i: " << i << std::endl;
+      if (nscans != 1 and metascan != "Drift") {
+         Graphic_setup(v_fpTGE_mean_WF[i], 4, markers[2 * i], colors[2 * i], 1, colors[2 * i]);
+         Graphic_setup(v_fpTGE_mean_XP[i], 4, markers[2 * i + 1], colors[2 * i + 1], 1, colors[2 * i + 1]);
+      } else {
+         Graphic_setup(v_fpTGE_mean_WF[i], 5, markers[4], colors[2], 1, colors[2]);
+         Graphic_setup(v_fpTGE_mean_XP[i], 4, markers[3], colors[3], 1, colors[3]);
+      }
+      if (ftype == "multiple" and metascan == "Phi")
+         Graphic_setup(v_fpTGE_mean_WFoff[i], 4, markersWFoff[i], colors[2 * i], 1, colors[2 * i]);
+      if (i == base)
+         v_fpTGE_mean_WF[i]->Draw("AP");
+      else
+         v_fpTGE_mean_WF[i]->Draw("P same");
+      v_fpTGE_mean_XP[i]->Draw("P same");
+      v_fpTGE_mean_WFoff[i]->Draw("P same");
+   }
+   fpLegWF->Draw();
+   fpLegWFoff->Draw();
+   fpLegXP->Draw();
+   fpCanvas->SaveAs(foutputFile.c_str());
+
+   // Standard deviation
+   v_fpTGE_std_WF[base]->SetMinimum(YSTDMIN);
+   v_fpTGE_std_WF[base]->SetMaximum(YSTDMAX);
+   v_fpTGE_std_WF[base]->SetNameTitle("fpTGE_std_WF",
+                                      Form(";%s;Standard deviation (ADC counts/cm)", runvarstr.c_str()));
+   if (metascan == "Phi")
+      v_fpTGE_std_WF[base]->GetXaxis()->SetLimits(-3, v_fpTGE_std_WF[base]->GetXaxis()->GetXmax());
+   for (int i = base; i < (int)v_fpTGE_std_WF.size(); i++) {
+      if (nscans != 1 and metascan != "Drift") {
+         Graphic_setup(v_fpTGE_std_WF[i], 4, markers[2 * i], colors[2 * i], 1, colors[2 * i]);
+         Graphic_setup(v_fpTGE_std_XP[i], 4, markers[2 * i + 1], colors[2 * i + 1], 1, colors[2 * i + 1]);
+      } else {
+         Graphic_setup(v_fpTGE_std_WF[i], 5, markers[4], colors[2], 1, colors[2]);
+         Graphic_setup(v_fpTGE_std_XP[i], 4, markers[3], colors[3], 1, colors[3]);
+      }
+      if (i == base)
+         v_fpTGE_std_WF[i]->Draw("AP");
+      else
+         v_fpTGE_std_WF[i]->Draw("P same");
+      v_fpTGE_std_XP[i]->Draw("P same");
+   }
+   fpLegWF->Draw();
+   fpLegXP->Draw();
+   fpCanvas->SaveAs((foutputFile + ")").c_str());
 }
 
-void Reconstruction::DrawOuts::CERN22ScanFill(){
+void Reconstruction::DrawOuts::CERN22ScanFill()
+{
 
-	// Bethel-Bloch fitting 
-	std::string particles[] = 		{" e^{+}", " #mu^{+}", " #pi^{+}", " p"};
-	std::vector<double>				v_mass{0.511e-3, 105.658e-3, 139.570e-3, 938.272e-3}; // GeV
+   // Bethel-Bloch fitting
+   std::string particles[] = {" e^{+}", " #mu^{+}", " #pi^{+}", " p"};
+   std::vector<double> v_mass{0.511e-3, 105.658e-3, 139.570e-3, 938.272e-3}; // GeV
 
-	int itotalrun = 0;
-	std::vector<int> v_runs = {5,3,3,3};
-	for(int iscan=0;iscan<4;iscan++){ // 4 types of particles
+   int itotalrun = 0;
+   std::vector<int> v_runs = {5, 3, 3, 3};
+   for (int iscan = 0; iscan < 4; iscan++) { // 4 types of particles
 
-		v_fpTGE_mean_WF.			push_back(new TGraphErrors());
-		v_fpTGE_mean_XP.			push_back(new TGraphErrors());
-		v_fpTGE_std_WF.				push_back(new TGraphErrors());
-		v_fpTGE_std_XP.				push_back(new TGraphErrors());
-		v_fpTGE_reso_WF.			push_back(new TGraphErrors());
-		v_fpTGE_reso_XP.			push_back(new TGraphErrors());
-		v_fptf1_BB. 				push_back(BetheBlochExp(0.25, 20, v_mass[iscan], particles[iscan]));
+      v_fpTGE_mean_WF.push_back(new TGraphErrors());
+      v_fpTGE_mean_XP.push_back(new TGraphErrors());
+      v_fpTGE_std_WF.push_back(new TGraphErrors());
+      v_fpTGE_std_XP.push_back(new TGraphErrors());
+      v_fpTGE_reso_WF.push_back(new TGraphErrors());
+      v_fpTGE_reso_XP.push_back(new TGraphErrors());
+      v_fptf1_BB.push_back(BetheBlochExp(0.25, 20, v_mass[iscan], particles[iscan]));
 
-		for(int irun=0;irun<v_runs[iscan];irun++){
+      for (int irun = 0; irun < v_runs[iscan]; irun++) {
 
-			fptf1_WF =					(TF1*)v_fFiles[itotalrun]->Get<TH1F>("ph1f_WF")->GetFunction("gausn");
-			fptf1_XP =					(TF1*)v_fFiles[itotalrun]->Get<TH1F>("ph1f_XP")->GetFunction("gausn");
+         fptf1_WF = (TF1 *)v_fFiles[itotalrun]->Get<TH1F>("ph1f_WF")->GetFunction("gausn");
+         fptf1_XP = (TF1 *)v_fFiles[itotalrun]->Get<TH1F>("ph1f_XP")->GetFunction("gausn");
 
-			float mean_WF =				fptf1_WF->GetParameter(1);
-			float mean_XP =				fptf1_XP->GetParameter(1);
-			float dmean_WF =			fptf1_WF->GetParError(1);
-			float dmean_XP =			fptf1_XP->GetParError(1);
+         float mean_WF = fptf1_WF->GetParameter(1);
+         float mean_XP = fptf1_XP->GetParameter(1);
+         float dmean_WF = fptf1_WF->GetParError(1);
+         float dmean_XP = fptf1_XP->GetParError(1);
 
-			float std_WF =				fptf1_WF->GetParameter(2);
-			float std_XP =				fptf1_XP->GetParameter(2);
-			float dstd_WF =				fptf1_WF->GetParError(2);
-			float dstd_XP =				fptf1_XP->GetParError(2);
+         float std_WF = fptf1_WF->GetParameter(2);
+         float std_XP = fptf1_XP->GetParameter(2);
+         float dstd_WF = fptf1_WF->GetParError(2);
+         float dstd_XP = fptf1_XP->GetParError(2);
 
-			float reso_WF =				std_WF/mean_WF*100;
-			float reso_XP =				std_XP/mean_XP*100;
-			float dreso_WF =			GetResoError(fptf1_WF);
-			float dreso_XP =			GetResoError(fptf1_XP);
+         float reso_WF = std_WF / mean_WF * 100;
+         float reso_XP = std_XP / mean_XP * 100;
+         float dreso_WF = GetResoError(fptf1_WF);
+         float dreso_XP = GetResoError(fptf1_XP);
 
-			v_fpTGE_mean_WF[iscan]->	SetPoint(irun, v_valint[itotalrun], mean_WF*keV);
-			v_fpTGE_mean_XP[iscan]->	SetPoint(irun, v_valint[itotalrun], mean_XP*keV);
-			v_fpTGE_mean_WF[iscan]->	SetPointError(irun, 0, dmean_WF*keV);
-			v_fpTGE_mean_XP[iscan]->	SetPointError(irun, 0, dmean_XP*keV);
+         v_fpTGE_mean_WF[iscan]->SetPoint(irun, v_valint[itotalrun], mean_WF * keV);
+         v_fpTGE_mean_XP[iscan]->SetPoint(irun, v_valint[itotalrun], mean_XP * keV);
+         v_fpTGE_mean_WF[iscan]->SetPointError(irun, 0, dmean_WF * keV);
+         v_fpTGE_mean_XP[iscan]->SetPointError(irun, 0, dmean_XP * keV);
 
-			v_fpTGE_std_WF[iscan]->		SetPoint(irun, v_valint[itotalrun], std_WF*keV);
-			v_fpTGE_std_XP[iscan]->		SetPoint(irun, v_valint[itotalrun], std_XP*keV); 
-			v_fpTGE_std_WF[iscan]->		SetPointError(irun, 0, dstd_WF*keV);
-			v_fpTGE_std_XP[iscan]->		SetPointError(irun, 0, dstd_XP*keV);
+         v_fpTGE_std_WF[iscan]->SetPoint(irun, v_valint[itotalrun], std_WF * keV);
+         v_fpTGE_std_XP[iscan]->SetPoint(irun, v_valint[itotalrun], std_XP * keV);
+         v_fpTGE_std_WF[iscan]->SetPointError(irun, 0, dstd_WF * keV);
+         v_fpTGE_std_XP[iscan]->SetPointError(irun, 0, dstd_XP * keV);
 
-			v_fpTGE_reso_WF[iscan]->	SetPoint(irun, v_valint[itotalrun], reso_WF);
-			v_fpTGE_reso_XP[iscan]->	SetPoint(irun, v_valint[itotalrun], reso_XP);
-			v_fpTGE_reso_WF[iscan]->	SetPointError(irun, 0, dreso_WF);
-			v_fpTGE_reso_XP[iscan]->	SetPointError(irun, 0, dreso_XP);
+         v_fpTGE_reso_WF[iscan]->SetPoint(irun, v_valint[itotalrun], reso_WF);
+         v_fpTGE_reso_XP[iscan]->SetPoint(irun, v_valint[itotalrun], reso_XP);
+         v_fpTGE_reso_WF[iscan]->SetPointError(irun, 0, dreso_WF);
+         v_fpTGE_reso_XP[iscan]->SetPointError(irun, 0, dreso_XP);
 
-			delete fptf1_WF;
-			delete fptf1_XP;
+         delete fptf1_WF;
+         delete fptf1_XP;
 
-			itotalrun++;
-		}
-		// v_fptf1_BB[iscan]->			SetParameters(v_mass[iscan] ,1.65179e+02, 3.62857e+00, 3.18209e-02, 2.07081e+00, 7.14413e-01);
-	}
-	combinedFit(v_fpTGE_mean_XP, v_fptf1_BB);
+         itotalrun++;
+      }
+      // v_fptf1_BB[iscan]->			SetParameters(v_mass[iscan]
+      // ,1.65179e+02, 3.62857e+00, 3.18209e-02, 2.07081e+00, 7.14413e-01);
+   }
+   combinedFit(v_fpTGE_mean_XP, v_fptf1_BB);
+
+   for (int iparticle = 0; iparticle < 4; iparticle++) {
+      std::cout << particles[iparticle] << ": ";
+      for (int ipar = 0; ipar < 6; ipar++) {
+         std::cout << v_fptf1_BB[iparticle]->GetParameter(ipar) << " ";
+      }
+      std::cout << std::endl;
+   }
 }
 
-void Reconstruction::DrawOuts::CERN22ScanDraw(){
+void Reconstruction::DrawOuts::CERN22ScanDraw()
+{
 
-	// Drawing settings
-	foutputFileWF = 				drawout_scanpath + scan + comment + "_WF.pdf";
-	foutputFileXP = 				drawout_scanpath + scan + comment + "_XP.pdf";
-	gPad->							SetRightMargin(0.04);
-	gPad->							SetTopMargin(0.04);
-	fpCanvas->						Clear();
-	fpCanvas->						cd();
-	// Legend
-	fpLeg =							new TLegend(0.75,0.78,0.95,0.93);
-	fpLeg->							SetTextSize(0.05);
-	fpLeg->							SetFillStyle(0);
-	fpLeg->							SetTextColor(kBlue-1);
-	fpLeg->							SetNColumns(2);
-	fpLeg->							AddEntry(v_fpTGE_reso_WF[0], " e^{+}", "p");
-	fpLeg->							AddEntry(v_fpTGE_reso_WF[1], " #mu^{+}", "p");
-	fpLeg->							AddEntry(v_fpTGE_reso_WF[3], " p", "p");
-	fpLeg->							AddEntry(v_fpTGE_reso_WF[2], " #pi^{+}", "p");
-	
-	// WF
-	// Resolution
-	v_fpTGE_reso_WF[0]->			SetMaximum(YRESOMAXCERN);
-	v_fpTGE_reso_WF[0]->			SetMinimum(YRESOMINCERN);
-	v_fpTGE_reso_WF[0]->			GetXaxis()->SetLimits(0.25, 1.75);
-	v_fpTGE_reso_WF[0]->			SetNameTitle("fpTGE_reso_WF", Form(";%s;Resolution (%%)", runvarstr.c_str()));
-	for(int i=0;i<4;i++)
-	{
-		Graphic_setup(v_fpTGE_reso_WF[i], 4, markersCERN[i], colorsCERN[i], 1, colorsCERN[i]);
-		v_fpTGE_reso_WF[i]->Draw(i == 0 ? "AP" : "P same");
-		v_fpTGE_reso_WF[i]->			SetMarkerSize(5);
-	}
-	fpLeg->							Draw();
-	fpCanvas->						SaveAs((foutputFileWF + "(").c_str());
+   // Drawing settings
+   foutputFileWF = drawout_scanpath + scan + comment + "_WF_test2.pdf";
+   foutputFileXP = drawout_scanpath + scan + comment + "_XP_test2.pdf";
+   gPad->SetRightMargin(0.04);
+   gPad->SetTopMargin(0.04);
+   fpCanvas->Clear();
+   fpCanvas->cd();
+   // Legend
+   fpLeg = new TLegend(0.75, 0.78, 0.95, 0.93);
+   fpLeg->SetTextSize(0.05);
+   fpLeg->SetFillStyle(0);
+   fpLeg->SetTextColor(kPink - 1);
+   fpLeg->SetNColumns(2);
+   fpLeg->AddEntry(v_fpTGE_reso_WF[0], " e^{+}", "p");
+   fpLeg->AddEntry(v_fpTGE_reso_WF[1], " #mu^{+}", "p");
+   fpLeg->AddEntry(v_fpTGE_reso_WF[3], " p", "p");
+   fpLeg->AddEntry(v_fpTGE_reso_WF[2], " #pi^{+}", "p");
 
-	// Mean
-	fpCanvas->						Clear();
-	v_fpTGE_mean_WF[0]->			SetMaximum(YMEANMAXCERN);
-	v_fpTGE_mean_WF[0]->			SetMinimum(YMEANMINCERN);
-	v_fpTGE_mean_WF[0]->			GetXaxis()->SetLimits(0.25, 1.75);
-	v_fpTGE_mean_WF[0]->			SetNameTitle("fpTGE_mean_WF", Form(";%s;Mean (ADC counts/cm)", runvarstr.c_str()));
-	for(int i=0;i<4;i++)
-	{
-		Graphic_setup(v_fpTGE_mean_WF[i], 4, markersCERN[i], colorsCERN[i], 2, colorsCERN[i]);
-		v_fpTGE_mean_WF[i]->			Draw(i == 0 ? "AP" : "P same");
-	}
-	fpLeg->							Draw();
-	fpCanvas->						SaveAs(foutputFileWF.c_str());
+   // WF
+   // Resolution
+   v_fpTGE_reso_WF[0]->SetMaximum(YRESOMAXCERN);
+   v_fpTGE_reso_WF[0]->SetMinimum(YRESOMINCERN);
+   v_fpTGE_reso_WF[0]->GetXaxis()->SetLimits(0.25, 1.75);
+   v_fpTGE_reso_WF[0]->SetNameTitle("fpTGE_reso_WF", Form(";%s;Resolution (%%)", runvarstr.c_str()));
+   for (int i = 0; i < 4; i++) {
+      Graphic_setup(v_fpTGE_reso_WF[i], 4, markersCERN[i], colorsCERN[i], 1, colorsCERN[i]);
+      v_fpTGE_reso_WF[i]->Draw(i == 0 ? "AP" : "P same");
+      v_fpTGE_reso_WF[i]->SetMarkerSize(5);
+   }
+   fpLeg->Draw();
+   fpCanvas->SaveAs((foutputFileWF + "(").c_str());
 
-	// Standard deviation
-	fpCanvas->						Clear();
-	v_fpTGE_std_WF[0]->				SetMaximum(YSTDMAXCERN);
-	v_fpTGE_std_WF[0]->				SetMinimum(YSTDMINCERN);
-	v_fpTGE_std_WF[0]->				GetXaxis()->SetLimits(0.25, 1.75);
-	v_fpTGE_std_WF[0]->				SetNameTitle("fpTGE_std_WF", Form(";%s;Standard deviation (ADC counts/cm)", runvarstr.c_str()));
-	for(int i=0;i<4;i++)
-	{
-		Graphic_setup(v_fpTGE_std_WF[i], 4, markersCERN[i], colorsCERN[i], 2, colorsCERN[i]);
-		v_fpTGE_std_WF[i]->				Draw(i == 0 ? "AP" : "P same");
-	}
-	fpLeg->							Draw();
-	fpCanvas->						SaveAs((foutputFileWF + ")").c_str());
+   // Mean
+   fpCanvas->Clear();
+   v_fpTGE_mean_WF[0]->SetMaximum(YMEANMAXCERN);
+   v_fpTGE_mean_WF[0]->SetMinimum(YMEANMINCERN);
+   v_fpTGE_mean_WF[0]->GetXaxis()->SetLimits(0.25, 1.75);
+   v_fpTGE_mean_WF[0]->SetNameTitle("fpTGE_mean_WF", Form(";%s;Mean (ADC counts/cm)", runvarstr.c_str()));
+   for (int i = 0; i < 4; i++) {
+      Graphic_setup(v_fpTGE_mean_WF[i], 4, markersCERN[i], colorsCERN[i], 2, colorsCERN[i]);
+      v_fpTGE_mean_WF[i]->Draw(i == 0 ? "AP" : "P same");
+   }
+   fpLeg->Draw();
+   fpCanvas->SaveAs(foutputFileWF.c_str());
 
-	// XP
-	// Resolution
-	fpCanvas->						Clear();
-	v_fpTGE_reso_XP[0]->			SetMaximum(YRESOMAXCERN);
-	v_fpTGE_reso_XP[0]->			SetMinimum(YRESOMINCERN);
-	v_fpTGE_reso_XP[0]->			GetXaxis()->SetLimits(0.25, 1.75);
-	v_fpTGE_reso_XP[0]->			SetNameTitle("fpTGE_reso_XP", Form(";%s;Resolution (%%)", runvarstr.c_str()));
-	for(int i=0;i<4;i++)
-	{
-		Graphic_setup(v_fpTGE_reso_XP[i], 4, markersCERN[i], colorsCERN[i], 2, colorsCERN[i]);
-		v_fpTGE_reso_XP[i]->			Draw(i == 0 ? "AP" : "P same");
-	}
-	fpLeg->							Draw();
-	fpCanvas->						SaveAs((foutputFileXP + "(").c_str());
+   // Standard deviation
+   fpCanvas->Clear();
+   v_fpTGE_std_WF[0]->SetMaximum(YSTDMAXCERN);
+   v_fpTGE_std_WF[0]->SetMinimum(YSTDMINCERN);
+   v_fpTGE_std_WF[0]->GetXaxis()->SetLimits(0.25, 1.75);
+   v_fpTGE_std_WF[0]->SetNameTitle("fpTGE_std_WF", Form(";%s;Standard deviation (ADC counts/cm)", runvarstr.c_str()));
+   for (int i = 0; i < 4; i++) {
+      Graphic_setup(v_fpTGE_std_WF[i], 4, markersCERN[i], colorsCERN[i], 2, colorsCERN[i]);
+      v_fpTGE_std_WF[i]->Draw(i == 0 ? "AP" : "P same");
+   }
+   fpLeg->Draw();
+   fpCanvas->SaveAs((foutputFileWF + ")").c_str());
 
-	// Mean
-	fpCanvas->						Clear();
-	v_fpTGE_mean_XP[0]->			SetMaximum(YMEANMAXCERN);
-	v_fpTGE_mean_XP[0]->			SetMinimum(YMEANMINCERN);
-	v_fpTGE_mean_XP[0]->			GetXaxis()->SetLimits(0.25, 1.75);
-	v_fpTGE_mean_XP[0]->			SetNameTitle("fpTGE_mean_XP", Form(";%s;Mean (ADC counts/cm)", runvarstr.c_str()));
-	for(int i=0;i<4;i++)
-	{
-		Graphic_setup(v_fpTGE_mean_XP[i], 4, markersCERN[i], colorsCERN[i], 2, colorsCERN[i]);
-		v_fpTGE_mean_XP[i]->			Draw(i == 0 ? "AP" : "P same");
-		v_fptf1_BB[i]->					SetNpx(1000);
-		v_fptf1_BB[i]->					SetLineColor(colorsCERN[i]);
-		v_fptf1_BB[i]->					Draw("same");
-	}
-	fpLeg->							Draw();
-	fpCanvas->						SaveAs(foutputFileXP.c_str());
+   // XP
+   // Resolution
+   fpCanvas->Clear();
+   v_fpTGE_reso_XP[0]->SetMaximum(YRESOMAXCERN);
+   v_fpTGE_reso_XP[0]->SetMinimum(YRESOMINCERN);
+   v_fpTGE_reso_XP[0]->GetXaxis()->SetLimits(0.25, 1.75);
+   v_fpTGE_reso_XP[0]->SetNameTitle("fpTGE_reso_XP", Form(";%s;Resolution (%%)", runvarstr.c_str()));
+   for (int i = 0; i < 4; i++) {
+      Graphic_setup(v_fpTGE_reso_XP[i], 4, markersCERN[i], colorsCERN[i], 2, colorsCERN[i]);
+      v_fpTGE_reso_XP[i]->Draw(i == 0 ? "AP" : "P same");
+   }
+   fpLeg->Draw();
+   fpCanvas->SaveAs((foutputFileXP + "(").c_str());
 
-	// Bethe-Bloch extended
-	fpCanvas->						Clear();
-	gPad->							SetLogx();
-	gPad->							SetLogy();
-	v_fptf1_BB[0]->					SetMinimum(0.7);
-	v_fptf1_BB[0]->					SetMaximum(5);
-	v_fptf1_BB[0]->					Draw();
-	for(int i = 1; i < 4; i++)v_fptf1_BB[i]-> Draw("same");
-	fpLeg->							Draw();
-	fpCanvas->						SaveAs(foutputFileXP.c_str());
+   // Mean
+   fpCanvas->Clear();
+   v_fpTGE_mean_XP[0]->SetMaximum(YMEANMAXCERN);
+   v_fpTGE_mean_XP[0]->SetMinimum(YMEANMINCERN);
+   v_fpTGE_mean_XP[0]->GetXaxis()->SetLimits(0.25, 1.75);
+   v_fpTGE_mean_XP[0]->SetNameTitle("fpTGE_mean_XP", Form(";%s;Mean (ADC counts/cm)", runvarstr.c_str()));
+   for (int i = 0; i < 4; i++) {
+      Graphic_setup(v_fpTGE_mean_XP[i], 4, markersCERN[i], colorsCERN[i], 2, colorsCERN[i]);
+      v_fpTGE_mean_XP[i]->Draw(i == 0 ? "AP" : "P same");
+      v_fptf1_BB[i]->SetNpx(1000);
+      v_fptf1_BB[i]->SetLineColor(colorsCERN[i]);
+      v_fptf1_BB[i]->Draw("same");
+   }
+   fpLeg->Draw();
+   fpCanvas->SaveAs(foutputFileXP.c_str());
 
+   // Bethe-Bloch extended
+   fpCanvas->Clear();
+   gPad->SetLogx();
+   gPad->SetLogy();
+   v_fptf1_BB[0]->SetMinimum(0.7);
+   v_fptf1_BB[0]->SetMaximum(5);
+   v_fptf1_BB[0]->Draw();
+   for (int i = 1; i < 4; i++)
+      v_fptf1_BB[i]->Draw("same");
+   fpLeg->Draw();
+   fpCanvas->SaveAs(foutputFileXP.c_str());
 
-	gPad->							SetLogx(0);
-	gPad->							SetLogy(0);
-	// Standard deviation
-	fpCanvas->						Clear();
-	v_fpTGE_std_XP[0]->				SetMaximum(YSTDMAXCERN);
-	v_fpTGE_std_XP[0]->				SetMinimum(YSTDMINCERN);
-	v_fpTGE_std_XP[0]->				GetXaxis()->SetLimits(0.25, 1.75);
-	v_fpTGE_std_XP[0]->				SetNameTitle("fpTGE_std_XP", Form(";%s;Standard deviation (ADC counts/cm)", runvarstr.c_str()));
-	for(int i=0;i<4;i++)
-	{
-		Graphic_setup(v_fpTGE_std_XP[i], 4, markersCERN[i], colorsCERN[i], 2, colorsCERN[i]);
-		v_fpTGE_std_XP[i]->			Draw(i == 0 ? "AP" : "P same");
-	}
-	fpLeg->							Draw();
-	fpCanvas->						SaveAs((foutputFileXP + ")").c_str());
+   gPad->SetLogx(0);
+   gPad->SetLogy(0);
+   // Standard deviation
+   fpCanvas->Clear();
+   v_fpTGE_std_XP[0]->SetMaximum(YSTDMAXCERN);
+   v_fpTGE_std_XP[0]->SetMinimum(YSTDMINCERN);
+   v_fpTGE_std_XP[0]->GetXaxis()->SetLimits(0.25, 1.75);
+   v_fpTGE_std_XP[0]->SetNameTitle("fpTGE_std_XP", Form(";%s;Standard deviation (ADC counts/cm)", runvarstr.c_str()));
+   for (int i = 0; i < 4; i++) {
+      Graphic_setup(v_fpTGE_std_XP[i], 4, markersCERN[i], colorsCERN[i], 2, colorsCERN[i]);
+      v_fpTGE_std_XP[i]->Draw(i == 0 ? "AP" : "P same");
+   }
+   fpLeg->Draw();
+   fpCanvas->SaveAs((foutputFileXP + ")").c_str());
 }
 
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Single run functions
-void Reconstruction::DrawOuts::Control(){
+void Reconstruction::DrawOuts::Control()
+{
 
-	// Prepare histograms
-	TH1I *ph1i_nmodules =		new TH1I("ph1i_nmodules", "Number of modules;N_{modules};Counts", 8, 0, 8);
-	TH1I *ph1i_nmodulesSel =	new TH1I("ph1i_nmodulesSel", "Number of modules (after cut);N_{modules};Counts", 8, 0, 8);
-	TH1I *ph1i_nclusters =		new TH1I("ph1i_nclusters", "Number of clusters;N_{clusters};Counts", 55, 0, 55);
-	TH1I *ph1i_nclustersSel =	new TH1I("ph1i_nclustersSel", "Number of clusters (after cut);N_{clusters};Counts", 55, 0, 55);
-	TH1I *ph1i_npads =			new TH1I("ph1i_npads", "Number of pads;N_{pads};Counts", 10, 0, 10);
-	TH1I *ph1i_npadsSel =		new TH1I("ph1i_npadsSel", "Number of pads (after cut);N_{pads};Counts", 10, 0, 10);
+   // Prepare histograms
+   TH1I *ph1i_nmodules = new TH1I("ph1i_nmodules", "Number of modules;N_{modules};Counts", 8, 0, 8);
+   TH1I *ph1i_nmodulesSel = new TH1I("ph1i_nmodulesSel", "Number of modules (after cut);N_{modules};Counts", 8, 0, 8);
+   TH1I *ph1i_nclusters = new TH1I("ph1i_nclusters", "Number of clusters;N_{clusters};Counts", 55, 0, 55);
+   TH1I *ph1i_nclustersSel =
+      new TH1I("ph1i_nclustersSel", "Number of clusters (after cut);N_{clusters};Counts", 55, 0, 55);
+   TH1I *ph1i_npads = new TH1I("ph1i_npads", "Number of pads;N_{pads};Counts", 10, 0, 10);
+   TH1I *ph1i_npadsSel = new TH1I("ph1i_npadsSel", "Number of pads (after cut);N_{pads};Counts", 10, 0, 10);
 
-	TH2I *ph2i_heatmap =		new TH2I("ph2i_heatmap", "Events heatmap;iX;iY;", 144, 0, 143, 64, 0, 63);
-	TH1I *ph1i_TLead = 			new TH1I("ph1i_TLead", "T_{max} of leading pad;T_{max};Counts", 511, 0, 510);
-	TH1I *ph1i_TLeadSel = 		new TH1I("ph1i_TLeadSel", "T_{max} of leading pad (after cut);T_{max};Counts", 511, 0, 510);
-	TH1I *ph1i_PadMult = 		new TH1I("ph1i_PadMult", "Pad multiplicity;N_{pads};Counts", 11, 0, 10);
-	TH1I *ph1i_PadMultSel = 	new TH1I("ph1i_PadMultSel", "Pad multiplicity (after cut);N_{pads};Counts", 11, 0, 10);
-	TH1F *ph1f_AvgPadMult = 	new TH1F("ph1f_AvgPadMult", "Average pad multiplicity;N_{pads};Counts", 100, 0, 10);
-	TH1F *ph1f_AvgPadMultSel = 	new TH1F("ph1f_AvgPadMultSel", "Average pad multiplicity (after cut);N_{pads};Counts", 100, 0, 10);
-	TH1F *ph1f_ADCmax = 		new TH1F("ph1f_ADCmax", "ADC max;ADC counts/cm;Counts", 400, 0, 4000);
-	TH1F *ph1f_ADCmaxSel = 		new TH1F("ph1f_ADCmaxSel", "ADC max (after cut);ADC counts/cm;Counts", 400, 0, 4000);
-	TH1F *ph1f_ALead = 			new TH1F("ph1f_ALead", "Leading pad amplitude;ADC counts/cm;Counts", 400, 0, 4000);
-	TH1F *ph1f_ALeadSel = 		new TH1F("ph1f_ALeadSel", "Leading pad amplitude (after cut);ADC counts/cm;Counts", 400, 0, 4000);
-	TH1F *ph1f_ANeighbour = 	new TH1F("ph1f_ANeighbour", "Neighbouring pad amplitude;ADC counts/cm;Counts", 400, 0, 4000);
-	TH1F *ph1f_ANeighbourSel = 	new TH1F("ph1f_ANeighbourSel", "Neighbouring pad amplitude (after cut);ADC counts/cm;Counts", 400, 0, 4000);
-	std::vector<TH1F*> 			v_AvgPadMult;
-	std::vector<TH1F*> 			v_AvgPadMultSel;
-	std::vector<TH1I*> 			v_PadMult;
-	std::vector<TH1I*> 			v_PadMultSel;
-	std::vector<TH1I*> 			v_TLead;
-	std::vector<TH1I*> 			v_TLeadSel;
-	std::vector<TH1F*> 			v_ADCmax;
-	std::vector<TH1F*> 			v_ADCmaxSel;
-	std::vector<TH1F*> 			v_ALead;
-	std::vector<TH1F*> 			v_ALeadSel;
-	std::vector<TH1F*> 			v_ANeighbour;
-	std::vector<TH1F*> 			v_ANeighbourSel;
+   TH2I *ph2i_heatmap = new TH2I("ph2i_heatmap", "Events heatmap;iX;iY;", 144, 0, 143, 64, 0, 63);
+   TH1I *ph1i_TLead = new TH1I("ph1i_TLead", "T_{max} of leading pad;T_{max};Counts", 511, 0, 510);
+   TH1I *ph1i_TLeadSel = new TH1I("ph1i_TLeadSel", "T_{max} of leading pad (after cut);T_{max};Counts", 511, 0, 510);
+   TH1I *ph1i_PadMult = new TH1I("ph1i_PadMult", "Pad multiplicity;N_{pads};Counts", 11, 0, 10);
+   TH1I *ph1i_PadMultSel = new TH1I("ph1i_PadMultSel", "Pad multiplicity (after cut);N_{pads};Counts", 11, 0, 10);
+   TH1F *ph1f_AvgPadMult = new TH1F("ph1f_AvgPadMult", "Average pad multiplicity;N_{pads};Counts", 100, 0, 10);
+   TH1F *ph1f_AvgPadMultSel =
+      new TH1F("ph1f_AvgPadMultSel", "Average pad multiplicity (after cut);N_{pads};Counts", 100, 0, 10);
+   TH1F *ph1f_ADCmax = new TH1F("ph1f_ADCmax", "ADC max;ADC counts/cm;Counts", 400, 0, 4000);
+   TH1F *ph1f_ADCmaxSel = new TH1F("ph1f_ADCmaxSel", "ADC max (after cut);ADC counts/cm;Counts", 400, 0, 4000);
+   TH1F *ph1f_ALead = new TH1F("ph1f_ALead", "Leading pad amplitude;ADC counts/cm;Counts", 400, 0, 4000);
+   TH1F *ph1f_ALeadSel =
+      new TH1F("ph1f_ALeadSel", "Leading pad amplitude (after cut);ADC counts/cm;Counts", 400, 0, 4000);
+   TH1F *ph1f_ANeighbour = new TH1F("ph1f_ANeighbour", "Neighbouring pad amplitude;ADC counts/cm;Counts", 400, 0, 4000);
+   TH1F *ph1f_ANeighbourSel =
+      new TH1F("ph1f_ANeighbourSel", "Neighbouring pad amplitude (after cut);ADC counts/cm;Counts", 400, 0, 4000);
+   std::vector<TH1F *> v_AvgPadMult;
+   std::vector<TH1F *> v_AvgPadMultSel;
+   std::vector<TH1I *> v_PadMult;
+   std::vector<TH1I *> v_PadMultSel;
+   std::vector<TH1I *> v_TLead;
+   std::vector<TH1I *> v_TLeadSel;
+   std::vector<TH1F *> v_ADCmax;
+   std::vector<TH1F *> v_ADCmaxSel;
+   std::vector<TH1F *> v_ALead;
+   std::vector<TH1F *> v_ALeadSel;
+   std::vector<TH1F *> v_ANeighbour;
+   std::vector<TH1F *> v_ANeighbourSel;
 
-	for(int i=0;i<8;i++){
-		v_TLead.push_back					(new TH1I(Form("ph1i_TLead_%i", i), Form("T_{max} of leading pad (module %i);T_{max};Counts", i), 511, 0, 510));
-		v_TLeadSel.push_back				(new TH1I(Form("ph1i_TLeadSel_%i", i), Form("T_{max} of leading pad (module %i) (after cut);T_{max};Counts", i), 511, 0, 510));
-		v_PadMult.push_back					(new TH1I(Form("ph1i_PadMult_%i", i), Form("Pad multiplicity (module %i);N_{pads};Counts", i), 100, 0, 100));
-		v_PadMultSel.push_back				(new TH1I(Form("ph1i_PadMultSel_%i", i), Form("Pad multiplicity (module %i) (after cut);N_{pads};Counts", i), 100, 0, 100));
-		v_AvgPadMult.push_back				(new TH1F(Form("ph1f_AvgPadMult_%i", i), Form("Average pad multiplicity (module %i);N_{pads};Counts", i), 100, 0, 100));
-		v_AvgPadMultSel.push_back			(new TH1F(Form("ph1f_AvgPadMultSel_%i", i), Form("Average pad multiplicity (module %i) (after cut);N_{pads};Counts", i), 100, 0, 100));
-		v_ADCmax.push_back					(new TH1F(Form("ph1f_ADCmax_%i", i), Form("ADC max (module %i);ADC counts/cm;Counts", i), 400, 0, 4000));
-		v_ADCmaxSel.push_back				(new TH1F(Form("ph1f_ADCmaxSel_%i", i), Form("ADC max (module %i) (after cut);ADC counts/cm;Counts", i), 400, 0, 4000));
-		v_ALead.push_back					(new TH1F(Form("ph1f_ALead_%i", i), Form("Leading pad amplitude (module %i);ADC counts/cm;Counts", i), 400, 0, 4000));
-		v_ALeadSel.push_back				(new TH1F(Form("ph1f_ALeadSel_%i", i), Form("Leading pad amplitude (module %i) (after cut);ADC counts/cm;Counts", i), 400, 0, 4000));
-		v_ANeighbour.push_back				(new TH1F(Form("ph1f_ANeighbour_%i", i), Form("Neighbouring pad amplitude (module %i);ADC counts/cm;Counts", i), 400, 0, 4000));
-		v_ANeighbourSel.push_back			(new TH1F(Form("ph1f_ANeighbourSel_%i", i), Form("Neighbouring pad amplitude (module %i) (after cut);ADC counts/cm;Counts", i), 400, 0, 4000));
-	}
+   for (int i = 0; i < 8; i++) {
+      v_TLead.push_back(
+         new TH1I(Form("ph1i_TLead_%i", i), Form("T_{max} of leading pad (module %i);T_{max};Counts", i), 511, 0, 510));
+      v_TLeadSel.push_back(new TH1I(Form("ph1i_TLeadSel_%i", i),
+                                    Form("T_{max} of leading pad (module %i) (after cut);T_{max};Counts", i), 511, 0,
+                                    510));
+      v_PadMult.push_back(
+         new TH1I(Form("ph1i_PadMult_%i", i), Form("Pad multiplicity (module %i);N_{pads};Counts", i), 100, 0, 100));
+      v_PadMultSel.push_back(new TH1I(Form("ph1i_PadMultSel_%i", i),
+                                      Form("Pad multiplicity (module %i) (after cut);N_{pads};Counts", i), 100, 0,
+                                      100));
+      v_AvgPadMult.push_back(new TH1F(Form("ph1f_AvgPadMult_%i", i),
+                                      Form("Average pad multiplicity (module %i);N_{pads};Counts", i), 100, 0, 100));
+      v_AvgPadMultSel.push_back(new TH1F(Form("ph1f_AvgPadMultSel_%i", i),
+                                         Form("Average pad multiplicity (module %i) (after cut);N_{pads};Counts", i),
+                                         100, 0, 100));
+      v_ADCmax.push_back(
+         new TH1F(Form("ph1f_ADCmax_%i", i), Form("ADC max (module %i);ADC counts/cm;Counts", i), 400, 0, 4000));
+      v_ADCmaxSel.push_back(new TH1F(Form("ph1f_ADCmaxSel_%i", i),
+                                     Form("ADC max (module %i) (after cut);ADC counts/cm;Counts", i), 400, 0, 4000));
+      v_ALead.push_back(new TH1F(Form("ph1f_ALead_%i", i),
+                                 Form("Leading pad amplitude (module %i);ADC counts/cm;Counts", i), 400, 0, 4000));
+      v_ALeadSel.push_back(new TH1F(Form("ph1f_ALeadSel_%i", i),
+                                    Form("Leading pad amplitude (module %i) (after cut);ADC counts/cm;Counts", i), 400,
+                                    0, 4000));
+      v_ANeighbour.push_back(new TH1F(Form("ph1f_ANeighbour_%i", i),
+                                      Form("Neighbouring pad amplitude (module %i);ADC counts/cm;Counts", i), 400, 0,
+                                      4000));
+      v_ANeighbourSel.push_back(
+         new TH1F(Form("ph1f_ANeighbourSel_%i", i),
+                  Form("Neighbouring pad amplitude (module %i) (after cut);ADC counts/cm;Counts", i), 400, 0, 4000));
+   }
 
-	// Get entries and fill histograms
-	for(int i=0;i<v_fnentries.back();i++){
-		v_fTrees.back()->				GetEntry(i);
-		p_recoevent =					v_fEvents.back();
-		NMod =							p_recoevent->v_modules.size();
-		int NSelMod = 					0;
+   // Get entries and fill histograms
+   for (int i = 0; i < v_fnentries.back(); i++) {
+      v_fTrees.back()->GetEntry(i);
+      p_recoevent = v_fEvents.back();
+      NMod = p_recoevent->v_modules.size();
+      int NSelMod = 0;
 
-		for(int iMod=0;iMod<NMod;iMod++){
-			p_recomodule = 					p_recoevent->v_modules[iMod];
-			position =						p_recomodule->position;
-			NClusters =						p_recomodule->NClusters;
-			int NSelClus = 					0;
+      for (int iMod = 0; iMod < NMod; iMod++) {
+         p_recomodule = p_recoevent->v_modules[iMod];
+         position = p_recomodule->position;
+         NClusters = p_recomodule->NClusters;
+         int NSelClus = 0;
 
-			for(int iC=0;iC<NClusters;iC++){
-				p_recocluster =					p_recomodule->v_clusters[iC];
-				NPads =							p_recocluster->NPads;
-				int NSelPads = 					0;
+         for (int iC = 0; iC < NClusters; iC++) {
+            p_recocluster = p_recomodule->v_clusters[iC];
+            NPads = p_recocluster->NPads;
+            int NSelPads = 0;
 
-				for(int iP=0;iP<NPads;iP++){
-					// Heatmap
-					ix =							p_recocluster->v_pads[iP]->ix;
-					iy =							p_recocluster->v_pads[iP]->iy;
-					if(position<4) iy +=			32;
-					ix += 							36*(position%4);
-					ph2i_heatmap->					Fill(ix, iy);
-					
-					p_recopad =						p_recocluster->v_pads[iP];
-					ph1f_ADCmax->					Fill(p_recopad->ADCmax_base);
-					v_ADCmax[position]->			Fill(p_recopad->ADCmax_base);
-					if(!p_recopad->leading){
-						ph1f_ANeighbour->				Fill(p_recopad->ADCmax_base);
-						v_ANeighbour[position]->		Fill(p_recopad->ADCmax_base);
-					}
-					int TPad = 						p_recopad->TMax;
+            for (int iP = 0; iP < NPads; iP++) {
+               // Heatmap
+               ix = p_recocluster->v_pads[iP]->ix;
+               iy = p_recocluster->v_pads[iP]->iy;
+               if (position < 4)
+                  iy += 32;
+               ix += 36 * (position % 4);
+               ph2i_heatmap->Fill(ix, iy);
 
-					if(!p_recomodule->selected) 		continue;
-					NSelPads++;
-					ph1f_ADCmaxSel->					Fill(p_recopad->ADCmax_base);
-					v_ADCmaxSel[position]->				Fill(p_recopad->ADCmax_base);
-					if(!p_recopad->leading){
-						ph1f_ANeighbourSel->			Fill(p_recopad->ADCmax_base);
-						v_ANeighbourSel[position]->		Fill(p_recopad->ADCmax_base);
-					}
-				} // Pads
-				ph1i_npads->					Fill(NPads);
-				ph1i_npadsSel->					Fill(NSelPads);
+               p_recopad = p_recocluster->v_pads[iP];
+               ph1f_ADCmax->Fill(p_recopad->ADCmax_base);
+               v_ADCmax[position]->Fill(p_recopad->ADCmax_base);
+               if (!p_recopad->leading) {
+                  ph1f_ANeighbour->Fill(p_recopad->ADCmax_base);
+                  v_ANeighbour[position]->Fill(p_recopad->ADCmax_base);
+               }
+               int TPad = p_recopad->TMax;
 
-				ph1i_TLead->					Fill(p_recocluster->TLead);
-				ph1i_PadMult->					Fill(NPads);
-				ph1f_ALead->					Fill(p_recocluster->ALead_base);
-				v_TLead[position]->				Fill(p_recocluster->TLead);
-				v_PadMult[position]->			Fill(NPads);
-				v_ALead[position]->				Fill(p_recocluster->ALead_base);
+               if (!p_recomodule->selected)
+                  continue;
+               NSelPads++;
+               ph1f_ADCmaxSel->Fill(p_recopad->ADCmax_base);
+               v_ADCmaxSel[position]->Fill(p_recopad->ADCmax_base);
+               if (!p_recopad->leading) {
+                  ph1f_ANeighbourSel->Fill(p_recopad->ADCmax_base);
+                  v_ANeighbourSel[position]->Fill(p_recopad->ADCmax_base);
+               }
+            } // Pads
+            ph1i_npads->Fill(NPads);
+            ph1i_npadsSel->Fill(NSelPads);
 
-				if(!p_recomodule->selected) 	continue;
-				NSelClus++;
-				ph1i_TLeadSel->					Fill(p_recocluster->TLead);
-				ph1i_PadMultSel->				Fill(NPads);
-				ph1f_ALeadSel->					Fill(p_recocluster->ALead_base);
-				v_TLeadSel[position]->			Fill(p_recocluster->TLead);
-				v_PadMultSel[position]->		Fill(NPads);
-				v_ALeadSel[position]->			Fill(p_recocluster->ALead_base);
-			} // Clusters
-			ph1i_nclusters->				Fill(NClusters);
-			ph1i_nclustersSel->				Fill(NSelClus);
+            ph1i_TLead->Fill(p_recocluster->TLead);
+            ph1i_PadMult->Fill(NPads);
+            ph1f_ALead->Fill(p_recocluster->ALead_base);
+            v_TLead[position]->Fill(p_recocluster->TLead);
+            v_PadMult[position]->Fill(NPads);
+            v_ALead[position]->Fill(p_recocluster->ALead_base);
 
-			ph1f_AvgPadMult->				Fill(p_recomodule->avg_pad_mult);
-			v_AvgPadMult[position]->		Fill(p_recomodule->avg_pad_mult);
+            if (!p_recomodule->selected)
+               continue;
+            NSelClus++;
+            ph1i_TLeadSel->Fill(p_recocluster->TLead);
+            ph1i_PadMultSel->Fill(NPads);
+            ph1f_ALeadSel->Fill(p_recocluster->ALead_base);
+            v_TLeadSel[position]->Fill(p_recocluster->TLead);
+            v_PadMultSel[position]->Fill(NPads);
+            v_ALeadSel[position]->Fill(p_recocluster->ALead_base);
+         } // Clusters
+         ph1i_nclusters->Fill(NClusters);
+         ph1i_nclustersSel->Fill(NSelClus);
 
-			if(!p_recomodule->selected) 	continue;
-			NSelMod++;
-			ph1f_AvgPadMultSel->			Fill(p_recomodule->avg_pad_mult);
-			v_AvgPadMultSel[position]->		Fill(p_recomodule->avg_pad_mult);
-		} // Modules
-		ph1i_nmodules->					Fill(NMod);
-		ph1i_nmodulesSel->				Fill(NSelMod);
-	}
+         ph1f_AvgPadMult->Fill(p_recomodule->avg_pad_mult);
+         v_AvgPadMult[position]->Fill(p_recomodule->avg_pad_mult);
 
-	// Draw
-	gStyle->						SetOptStat("nmerou");
-	gStyle->						SetOptFit(0);
+         if (!p_recomodule->selected)
+            continue;
+         NSelMod++;
+         ph1f_AvgPadMultSel->Fill(p_recomodule->avg_pad_mult);
+         v_AvgPadMultSel[position]->Fill(p_recomodule->avg_pad_mult);
+      } // Modules
+      ph1i_nmodules->Fill(NMod);
+      ph1i_nmodulesSel->Fill(NSelMod);
+   }
 
-	// Get maximum of module plots
+   // Draw
+   gStyle->SetOptStat("nmerou");
+   gStyle->SetOptFit(0);
 
+   // Get maximum of module plots
 
-	//////////////////////////////////////////////////////////////////////////////////////////
-	fpCanvas->						cd();
-	fpCanvas->						Clear();
-	ph1i_TLead->					SetLineWidth(3);
-	ph1i_TLead->					Draw("HIST");
-	ph1i_TLeadSel->					SetLineWidth(2);
-	ph1i_TLeadSel->					SetLineColor(kRed);
-	ph1i_TLeadSel->					Draw("HIST sames");
-	fpCanvas->						SaveAs((drawout_file + "(").c_str());
+   //////////////////////////////////////////////////////////////////////////////////////////
+   fpCanvas->cd();
+   fpCanvas->Clear();
+   ph1i_TLead->SetLineWidth(3);
+   ph1i_TLead->Draw("HIST");
+   ph1i_TLeadSel->SetLineWidth(2);
+   ph1i_TLeadSel->SetLineColor(kRed);
+   ph1i_TLeadSel->Draw("HIST sames");
+   fpCanvas->SaveAs((drawout_file + "(").c_str());
 
-	//////////////////////////////////////////////////////////////////////////////////////////
-	fpCanvas->						Clear();
-	fpCanvas->						Divide(4, 2);
-	for(int i=0;i<8;i++){
-		fpCanvas->					cd(i+1);
-		v_TLeadSel[i]->				SetLineColor(kRed);
-		v_TLead[i]->				Draw("HIST");
-		v_TLeadSel[i]->				Draw("HIST sames");
-	}
-	fpCanvas->						SaveAs(drawout_file.c_str());
+   //////////////////////////////////////////////////////////////////////////////////////////
+   fpCanvas->Clear();
+   fpCanvas->Divide(4, 2);
+   for (int i = 0; i < 8; i++) {
+      fpCanvas->cd(i + 1);
+      v_TLeadSel[i]->SetLineColor(kRed);
+      v_TLead[i]->Draw("HIST");
+      v_TLeadSel[i]->Draw("HIST sames");
+   }
+   fpCanvas->SaveAs(drawout_file.c_str());
 
-	//////////////////////////////////////////////////////////////////////////////////////////
-	fpCanvas->						cd();
-	gPad->							SetLogy();
-	//////////////////////////////////////////////////////////////////////////////////////////
-	fpCanvas->						Clear();
-	ph1f_ADCmax->					SetLineWidth(3);
-	ph1f_ADCmax->					Draw("HIST");
-	ph1f_ADCmaxSel->				SetLineWidth(2);
-	ph1f_ADCmaxSel->				SetLineColor(kRed);
-	ph1f_ADCmaxSel->				Draw("HIST sames");
-	fpCanvas->						SaveAs((drawout_file + "(").c_str());
-	
-	//////////////////////////////////////////////////////////////////////////////////////////
-	fpCanvas->						Clear();
-	ph1f_ALead->					SetLineWidth(3);
-	ph1f_ALead->					Draw("HIST");
-	ph1f_ALeadSel->					SetLineWidth(2);
-	ph1f_ALeadSel->					SetLineColor(kRed);
-	ph1f_ALeadSel->					Draw("HIST sames");
-	fpCanvas->						SaveAs((drawout_file + "(").c_str());
+   //////////////////////////////////////////////////////////////////////////////////////////
+   fpCanvas->cd();
+   gPad->SetLogy();
+   //////////////////////////////////////////////////////////////////////////////////////////
+   fpCanvas->Clear();
+   ph1f_ADCmax->SetLineWidth(3);
+   ph1f_ADCmax->Draw("HIST");
+   ph1f_ADCmaxSel->SetLineWidth(2);
+   ph1f_ADCmaxSel->SetLineColor(kRed);
+   ph1f_ADCmaxSel->Draw("HIST sames");
+   fpCanvas->SaveAs((drawout_file + "(").c_str());
 
-	//////////////////////////////////////////////////////////////////////////////////////////
-	fpCanvas->						Clear();
-	ph1f_ANeighbour->				SetLineWidth(3);
-	ph1f_ANeighbour->				Draw("HIST");
-	ph1f_ANeighbourSel->			SetLineWidth(2);
-	ph1f_ANeighbourSel->			SetLineColor(kRed);
-	ph1f_ANeighbourSel->			Draw("HIST sames");
-	fpCanvas->						SaveAs((drawout_file + "(").c_str());
+   //////////////////////////////////////////////////////////////////////////////////////////
+   fpCanvas->Clear();
+   ph1f_ALead->SetLineWidth(3);
+   ph1f_ALead->Draw("HIST");
+   ph1f_ALeadSel->SetLineWidth(2);
+   ph1f_ALeadSel->SetLineColor(kRed);
+   ph1f_ALeadSel->Draw("HIST sames");
+   fpCanvas->SaveAs((drawout_file + "(").c_str());
 
-	//////////////////////////////////////////////////////////////////////////////////////////
-	gPad->							SetLogy(0);
-	//////////////////////////////////////////////////////////////////////////////////////////
-	fpCanvas->						Clear();
-	ph1i_PadMult->					SetLineWidth(3);
-	ph1i_PadMult->					Draw("HIST");
-	ph1i_PadMultSel->				SetLineWidth(2);
-	ph1i_PadMultSel->				SetLineColor(kRed);
-	ph1i_PadMultSel->				Draw("HIST sames");
-	fpCanvas->						SaveAs((drawout_file + "(").c_str());
+   //////////////////////////////////////////////////////////////////////////////////////////
+   fpCanvas->Clear();
+   ph1f_ANeighbour->SetLineWidth(3);
+   ph1f_ANeighbour->Draw("HIST");
+   ph1f_ANeighbourSel->SetLineWidth(2);
+   ph1f_ANeighbourSel->SetLineColor(kRed);
+   ph1f_ANeighbourSel->Draw("HIST sames");
+   fpCanvas->SaveAs((drawout_file + "(").c_str());
 
-	//////////////////////////////////////////////////////////////////////////////////////////
-	fpCanvas->						Clear();
-	ph1f_AvgPadMult->				SetLineWidth(3);
-	ph1f_AvgPadMult->				Draw("HIST");
-	ph1f_AvgPadMultSel->			SetLineWidth(2);
-	ph1f_AvgPadMultSel->			SetLineColor(kRed);
-	ph1f_AvgPadMultSel->			Draw("HIST sames");
-	fpCanvas->						SaveAs((drawout_file + "(").c_str());
+   //////////////////////////////////////////////////////////////////////////////////////////
+   gPad->SetLogy(0);
+   //////////////////////////////////////////////////////////////////////////////////////////
+   fpCanvas->Clear();
+   ph1i_PadMult->SetLineWidth(3);
+   ph1i_PadMult->Draw("HIST");
+   ph1i_PadMultSel->SetLineWidth(2);
+   ph1i_PadMultSel->SetLineColor(kRed);
+   ph1i_PadMultSel->Draw("HIST sames");
+   fpCanvas->SaveAs((drawout_file + "(").c_str());
 
-	//////////////////////////////////////////////////////////////////////////////////////////
-	fpCanvas->						Clear();
-	gPad->							SetRightMargin(0.12);
-	gPad->							SetLeftMargin(0.12);
-	ph2i_heatmap->					GetYaxis()->SetTitleOffset(1.1);
-	gStyle->						SetTitleX((1.-gPad->GetRightMargin()+gPad->GetLeftMargin())/2);
-	ph2i_heatmap->					Draw("COLZ");
-	fpCanvas->						SaveAs((drawout_file + ")").c_str());
+   //////////////////////////////////////////////////////////////////////////////////////////
+   fpCanvas->Clear();
+   ph1f_AvgPadMult->SetLineWidth(3);
+   ph1f_AvgPadMult->Draw("HIST");
+   ph1f_AvgPadMultSel->SetLineWidth(2);
+   ph1f_AvgPadMultSel->SetLineColor(kRed);
+   ph1f_AvgPadMultSel->Draw("HIST sames");
+   fpCanvas->SaveAs((drawout_file + "(").c_str());
 
+   //////////////////////////////////////////////////////////////////////////////////////////
+   fpCanvas->Clear();
+   gPad->SetRightMargin(0.12);
+   gPad->SetLeftMargin(0.12);
+   ph2i_heatmap->GetYaxis()->SetTitleOffset(1.1);
+   gStyle->SetTitleX((1. - gPad->GetRightMargin() + gPad->GetLeftMargin()) / 2);
+   ph2i_heatmap->Draw("COLZ");
+   fpCanvas->SaveAs((drawout_file + ")").c_str());
 
-	fpCanvas->						Clear();
+   fpCanvas->Clear();
 }
 
-void Reconstruction::DrawOuts::EnergyLoss(){
+void Reconstruction::DrawOuts::EnergyLoss()
+{
 
-	int xmax =									1300;
-	if(tag.find("Theta") != std::string::npos) xmax = 2000;
-	// Prepare histograms
-	TH1F *ph1f_XP =				new TH1F("ph1f_XP", "Energy loss;dE/dx (ADC counts/cm);Counts", 100, 0, xmax);
-	TH1F *ph1f_WF =				new TH1F("ph1f_WF", "Energy loss;dE/dx (ADC counts/cm);Counts", 100, 0, xmax);
-	TH1F *ph1f_XPnoTrunc =		new TH1F("ph1f_XPnoTrunc", "Energy loss (no truncation);dE/dx (ADC counts/cm);Counts", 100, 0, xmax);
-	TH1F *ph1f_WFnoTrunc =		new TH1F("ph1f_WFnoTrunc", "Energy loss (no truncation);dE/dx (ADC counts/cm);Counts", 100, 0, xmax);
-	TH2F *ph2f_XPWF =			new TH2F("ph2f_XPWF", "Energy loss with XP vs with WF;dE/dx (WF);dE/dx (XP)", 100, 0, xmax, 100, 0, xmax);
-	std::vector<TH1F*> 			v_h1f_XP_mod;
-	std::vector<TH1F*> 			v_h1f_WF_mod;
-	std::vector<TH1F*> 			v_h1f_XP_modnoTrunc;
-	std::vector<TH1F*> 			v_h1f_WF_modnoTrunc;
-	
-	for(int i=0;i<8;i++){
-		v_h1f_XP_mod.push_back(			new TH1F(Form("ph1f_XP_%i", i), Form("Energy loss (module %i);dE/dx (ADC counts/cm);Counts", i), 100, 0, xmax));
-		v_h1f_WF_mod.push_back(			new TH1F(Form("ph1f_WF_%i", i), Form("Energy loss (module %i);dE/dx (ADC counts/cm);Counts", i), 100, 0, xmax));
-		v_h1f_XP_modnoTrunc.push_back(	new TH1F(Form("ph1f_XPnoTrunc_%i", i), Form("Energy loss (module %i) (no truncation);dE/dx (ADC counts/cm);Counts", i), 100, 0, xmax));
-		v_h1f_WF_modnoTrunc.push_back(	new TH1F(Form("ph1f_WFnoTrunc_%i", i), Form("Energy loss (module %i) (no truncation);dE/dx (ADC counts/cm);Counts", i), 100, 0, xmax));
-	}
+   int xmax = 1300;
+   if (tag.find("Theta") != std::string::npos)
+      xmax = 2000;
+   // Prepare histograms
+   TH1F *ph1f_XP = new TH1F("ph1f_XP", "Energy loss;dE/dx (ADC counts/cm);Counts", 100, 0, xmax);
+   TH1F *ph1f_WF = new TH1F("ph1f_WF", "Energy loss;dE/dx (ADC counts/cm);Counts", 100, 0, xmax);
+   TH1F *ph1f_XPnoTrunc =
+      new TH1F("ph1f_XPnoTrunc", "Energy loss (no truncation);dE/dx (ADC counts/cm);Counts", 100, 0, xmax);
+   TH1F *ph1f_WFnoTrunc =
+      new TH1F("ph1f_WFnoTrunc", "Energy loss (no truncation);dE/dx (ADC counts/cm);Counts", 100, 0, xmax);
+   TH2F *ph2f_XPWF =
+      new TH2F("ph2f_XPWF", "Energy loss with XP vs with WF;dE/dx (WF);dE/dx (XP)", 100, 0, xmax, 100, 0, xmax);
+   std::vector<TH1F *> v_h1f_XP_mod;
+   std::vector<TH1F *> v_h1f_WF_mod;
+   std::vector<TH1F *> v_h1f_XP_modnoTrunc;
+   std::vector<TH1F *> v_h1f_WF_modnoTrunc;
 
-	// Get entries and fill histograms
-	std::vector<int> v_ModulesOfEvent;
-	for(int i=0;i<v_fnentries.back();i++){
-		// v_ModulesOfEvent.clear();
-		v_fTrees.back()->					GetEntry(i);
-		p_recoevent =						v_fEvents.back();
-		NMod =								p_recoevent->v_modules.size();
-		if(!p_recoevent->selected) 			continue;
-		for(int iMod=0;iMod<NMod;iMod++){
-			p_recomodule = 					p_recoevent->v_modules[iMod];
-			if(!p_recomodule->selected) 	continue;
-			v_ModulesOfEvent.push_back(p_recomodule->position);
-			position =						p_recomodule->position;
-			v_h1f_XP_mod[position]->		Fill(p_recomodule->dEdxXP);
-			v_h1f_WF_mod[position]->		Fill(p_recomodule->dEdxWF);
-			v_h1f_XP_modnoTrunc[position]->	Fill(p_recomodule->dEdxXPnoTrunc);
-			v_h1f_WF_modnoTrunc[position]->	Fill(p_recomodule->dEdxWFnoTrunc);
-		}
-		if(testbeam.find("CERN") != std::string::npos){
-			if(NMod < 4) continue;
-			if(!FourModulesInLine(v_ModulesOfEvent)) continue;
-		}
-		ph1f_WF->							Fill(p_recoevent->dEdxWF);
-		ph1f_XP->							Fill(p_recoevent->dEdxXP);
-		ph1f_WFnoTrunc->					Fill(p_recoevent->dEdxWFnoTrunc);
-		ph1f_XPnoTrunc->					Fill(p_recoevent->dEdxXPnoTrunc);
-		ph2f_XPWF->							Fill(p_recoevent->dEdxWF, p_recoevent->dEdxXP);
-	}
+   for (int i = 0; i < 8; i++) {
+      v_h1f_XP_mod.push_back(new TH1F(Form("ph1f_XP_%i", i),
+                                      Form("Energy loss (module %i);dE/dx (ADC counts/cm);Counts", i), 100, 0, xmax));
+      v_h1f_WF_mod.push_back(new TH1F(Form("ph1f_WF_%i", i),
+                                      Form("Energy loss (module %i);dE/dx (ADC counts/cm);Counts", i), 100, 0, xmax));
+      v_h1f_XP_modnoTrunc.push_back(
+         new TH1F(Form("ph1f_XPnoTrunc_%i", i),
+                  Form("Energy loss (module %i) (no truncation);dE/dx (ADC counts/cm);Counts", i), 100, 0, xmax));
+      v_h1f_WF_modnoTrunc.push_back(
+         new TH1F(Form("ph1f_WFnoTrunc_%i", i),
+                  Form("Energy loss (module %i) (no truncation);dE/dx (ADC counts/cm);Counts", i), 100, 0, xmax));
+   }
 
-	// Fitting
-	Fit1Gauss(ph1f_WF, 2);
-	Fit1Gauss(ph1f_XP, 2);
-	Fit1Gauss(ph1f_WFnoTrunc, 2);
-	Fit1Gauss(ph1f_XPnoTrunc, 2);
+   // Get entries and fill histograms
+   std::vector<int> v_ModulesOfEvent;
+   for (int i = 0; i < v_fnentries.back(); i++) {
+      // v_ModulesOfEvent.clear();
+      v_fTrees.back()->GetEntry(i);
+      p_recoevent = v_fEvents.back();
+      NMod = p_recoevent->v_modules.size();
+      if (!p_recoevent->selected)
+         continue;
+      for (int iMod = 0; iMod < NMod; iMod++) {
+         p_recomodule = p_recoevent->v_modules[iMod];
+         if (!p_recomodule->selected)
+            continue;
+         v_ModulesOfEvent.push_back(p_recomodule->position);
+         position = p_recomodule->position;
+         v_h1f_XP_mod[position]->Fill(p_recomodule->dEdxXP);
+         v_h1f_WF_mod[position]->Fill(p_recomodule->dEdxWF);
+         v_h1f_XP_modnoTrunc[position]->Fill(p_recomodule->dEdxXPnoTrunc);
+         v_h1f_WF_modnoTrunc[position]->Fill(p_recomodule->dEdxWFnoTrunc);
+      }
+      if (testbeam.find("CERN") != std::string::npos) {
+         if (NMod < 4)
+            continue;
+         if (!FourModulesInLine(v_ModulesOfEvent))
+            continue;
+      }
+      ph1f_WF->Fill(p_recoevent->dEdxWF);
+      ph1f_XP->Fill(p_recoevent->dEdxXP);
+      ph1f_WFnoTrunc->Fill(p_recoevent->dEdxWFnoTrunc);
+      ph1f_XPnoTrunc->Fill(p_recoevent->dEdxXPnoTrunc);
+      ph2f_XPWF->Fill(p_recoevent->dEdxWF, p_recoevent->dEdxXP);
+   }
 
-	// Display settings
-	Graphic_setup(ph1f_WF, 0.5, 1, kCyan+1, 2, kCyan-2, kCyan, 0.2);
-	Graphic_setup(ph1f_XP, 0.5, 1, kMagenta+2, 2, kMagenta-2, kMagenta, 0.2);
-	Graphic_setup(ph1f_WFnoTrunc, 0.5, 1, kCyan+1, 2, kCyan-2, kCyan, 0.2);
-	Graphic_setup(ph1f_XPnoTrunc, 0.5, 1, kMagenta+2, 2, kMagenta-2, kMagenta, 0.2);
+   // Fitting
+   Fit1Gauss(ph1f_WF, 2);
+   Fit1Gauss(ph1f_XP, 2);
+   Fit1Gauss(ph1f_WFnoTrunc, 2);
+   Fit1Gauss(ph1f_XPnoTrunc, 2);
 
-	for(int i=0;i<8;i++){
-		Graphic_setup(v_h1f_WF_mod[i], 0.5, 1, kCyan+1, 1, kCyan-2, kCyan, 0.2);
-		Graphic_setup(v_h1f_XP_mod[i], 0.5, 1, kMagenta+2, 1, kMagenta-2, kMagenta, 0.2);
-		Graphic_setup(v_h1f_WF_modnoTrunc[i], 0.5, 1, kCyan+1, 1, kCyan-2, kCyan, 0.2);
-		Graphic_setup(v_h1f_XP_modnoTrunc[i], 0.5, 1, kMagenta+2, 1, kMagenta-2, kMagenta, 0.2);
-		if(v_h1f_WF_mod[i]->GetEntries() < 100) continue;
-		Fit1Gauss(v_h1f_WF_mod[i], 2);
-		Fit1Gauss(v_h1f_XP_mod[i], 2);
-		Fit1Gauss(v_h1f_WF_modnoTrunc[i], 2);
-		Fit1Gauss(v_h1f_XP_modnoTrunc[i], 2);	
-	}
+   // Display settings
+   Graphic_setup(ph1f_WF, 0.5, 1, kCyan + 1, 2, kCyan - 2, kCyan, 0.2);
+   Graphic_setup(ph1f_XP, 0.5, 1, kMagenta + 2, 2, kMagenta - 2, kMagenta, 0.2);
+   Graphic_setup(ph1f_WFnoTrunc, 0.5, 1, kCyan + 1, 2, kCyan - 2, kCyan, 0.2);
+   Graphic_setup(ph1f_XPnoTrunc, 0.5, 1, kMagenta + 2, 2, kMagenta - 2, kMagenta, 0.2);
 
+   for (int i = 0; i < 8; i++) {
+      Graphic_setup(v_h1f_WF_mod[i], 0.5, 1, kCyan + 1, 1, kCyan - 2, kCyan, 0.2);
+      Graphic_setup(v_h1f_XP_mod[i], 0.5, 1, kMagenta + 2, 1, kMagenta - 2, kMagenta, 0.2);
+      Graphic_setup(v_h1f_WF_modnoTrunc[i], 0.5, 1, kCyan + 1, 1, kCyan - 2, kCyan, 0.2);
+      Graphic_setup(v_h1f_XP_modnoTrunc[i], 0.5, 1, kMagenta + 2, 1, kMagenta - 2, kMagenta, 0.2);
+      if (v_h1f_WF_mod[i]->GetEntries() < 100)
+         continue;
+      Fit1Gauss(v_h1f_WF_mod[i], 2);
+      Fit1Gauss(v_h1f_XP_mod[i], 2);
+      Fit1Gauss(v_h1f_WF_modnoTrunc[i], 2);
+      Fit1Gauss(v_h1f_XP_modnoTrunc[i], 2);
+   }
 
-	// Draw
-	bool disp_trunc = true;
-	gStyle->						SetOptStat(0);
-	gStyle->						SetOptFit(0);
+   // Draw
+   bool disp_trunc = true;
+   gStyle->SetOptStat(0);
+   gStyle->SetOptFit(0);
 
-	// Get maximum of event plots
-	int WFMax =						ph1f_WF->GetMaximum();
-	int XPMax =						ph1f_XP->GetMaximum();
+   // Get maximum of event plots
+   int WFMax = ph1f_WF->GetMaximum();
+   int XPMax = ph1f_XP->GetMaximum();
 
-	// Get maximum of module plots
-	int overallMax = 0, overallMaxMod = 0, maxVal_WF = 0, maxVal_XP = 0;
-	overallMax =					std::max({WFMax, XPMax});
-	for(int i=0;i<8;i++){
-		maxVal_WF =					v_h1f_WF_mod[i]->GetMaximum();
-		maxVal_XP =					v_h1f_XP_mod[i]->GetMaximum();
-		overallMaxMod =				std::max({overallMaxMod, maxVal_WF, maxVal_XP});
-	}
-	float invX, invY;
-	//////////////////////////////////////////////////////////////////////////////////////////
-	fpCanvas->						cd();
-	fpCanvas->						Clear();
+   // Get maximum of module plots
+   int overallMax = 0, overallMaxMod = 0, maxVal_WF = 0, maxVal_XP = 0;
+   overallMax = std::max({WFMax, XPMax});
+   for (int i = 0; i < 8; i++) {
+      maxVal_WF = v_h1f_WF_mod[i]->GetMaximum();
+      maxVal_XP = v_h1f_XP_mod[i]->GetMaximum();
+      overallMaxMod = std::max({overallMaxMod, maxVal_WF, maxVal_XP});
+   }
+   float invX, invY;
+   //////////////////////////////////////////////////////////////////////////////////////////
+   fpCanvas->cd();
+   fpCanvas->Clear();
 
-	ph1f_WF->						SetAxisRange(0, 1.1 * overallMax,	"Y");
-	invX = 0, invY = 0;
-	if(ph1f_WF->GetMean() > 650) invX = 0.5;
-	ph1f_WF->						Draw("HIST");
-	ph1f_XP->						Draw("HIST sames");
+   ph1f_WF->SetAxisRange(0, 1.1 * overallMax, "Y");
+   invX = 0, invY = 0;
+   if (ph1f_WF->GetMean() > 650)
+      invX = 0.5;
+   ph1f_WF->Draw("HIST");
+   ph1f_XP->Draw("HIST sames");
 
-	PrintResolution(ph1f_XP, fpCanvas, 0.65-invX, 0.58, kMagenta+2, "XP");
-	PrintResolution(ph1f_WF, fpCanvas, 0.65-invX, 0.25, kCyan+2, "WF");
-	fpCanvas->						SaveAs((drawout_file + "(").c_str());
+   PrintResolution(ph1f_XP, fpCanvas, 0.65 - invX, 0.58, kMagenta + 2, "XP");
+   PrintResolution(ph1f_WF, fpCanvas, 0.65 - invX, 0.25, kCyan + 2, "WF");
+   fpCanvas->SaveAs((drawout_file + "(").c_str());
 
-		//////////////////////////////////////////////////////////////////////////////////////////
-	fpCanvas->						cd();
-	fpCanvas->						Clear();
-	fpCanvas->						Divide(4, 2);
+   //////////////////////////////////////////////////////////////////////////////////////////
+   fpCanvas->cd();
+   fpCanvas->Clear();
+   fpCanvas->Divide(4, 2);
 
-	for(int i=0;i<8;i++){
-		v_h1f_WF_mod[i]->				SetAxisRange(0, 1.1 * overallMaxMod, "Y");
-		fpCanvas->					cd(i+1);
-		invX=0;
-		if(v_h1f_WF_mod[i]->GetMean() > 650) invX = 0.5;
-		gPad->						SetRightMargin(0);
-		v_h1f_WF_mod[i]->				Draw("HIST");
-		v_h1f_XP_mod[i]->				Draw("HIST sames");
-		if(v_h1f_WF_mod[i]->GetEntries() < 100) continue;
-		PrintResolution(v_h1f_XP_mod[i], fpCanvas, 0.65-invX, 0.58, kMagenta+2, "XP");
-		PrintResolution(v_h1f_WF_mod[i], fpCanvas, 0.65-invX, 0.25, kCyan+2, "WF");
-	}
-	fpCanvas->						SaveAs(drawout_file.c_str());
+   for (int i = 0; i < 8; i++) {
+      v_h1f_WF_mod[i]->SetAxisRange(0, 1.1 * overallMaxMod, "Y");
+      fpCanvas->cd(i + 1);
+      invX = 0;
+      if (v_h1f_WF_mod[i]->GetMean() > 650)
+         invX = 0.5;
+      gPad->SetRightMargin(0);
+      v_h1f_WF_mod[i]->Draw("HIST");
+      v_h1f_XP_mod[i]->Draw("HIST sames");
+      if (v_h1f_WF_mod[i]->GetEntries() < 100)
+         continue;
+      PrintResolution(v_h1f_XP_mod[i], fpCanvas, 0.65 - invX, 0.58, kMagenta + 2, "XP");
+      PrintResolution(v_h1f_WF_mod[i], fpCanvas, 0.65 - invX, 0.25, kCyan + 2, "WF");
+   }
+   fpCanvas->SaveAs(drawout_file.c_str());
 
-	//////////////////////////////////////////////////////////////////////////////////////////
-	fpCanvas->						cd();
-	fpCanvas->						Clear();
+   //////////////////////////////////////////////////////////////////////////////////////////
+   fpCanvas->cd();
+   fpCanvas->Clear();
 
-	ph1f_WFnoTrunc->				SetAxisRange(0, 1.1 * overallMax, "Y");
-	invX = 0, invY = 0;
-	if(ph1f_WFnoTrunc->GetMean(1) > 650) invX = 0.5;
-	ph1f_WFnoTrunc->				Draw("HIST");
-	ph1f_XPnoTrunc->				Draw("HIST sames");
+   ph1f_WFnoTrunc->SetAxisRange(0, 1.1 * overallMax, "Y");
+   invX = 0, invY = 0;
+   if (ph1f_WFnoTrunc->GetMean(1) > 650)
+      invX = 0.5;
+   ph1f_WFnoTrunc->Draw("HIST");
+   ph1f_XPnoTrunc->Draw("HIST sames");
 
-	PrintResolution(ph1f_XPnoTrunc, fpCanvas, 0.65-invX, 0.58, kMagenta+2, "XP");
-	PrintResolution(ph1f_WFnoTrunc, fpCanvas, 0.65-invX, 0.25, kCyan+2, "WF");
-	fpCanvas->						SaveAs(drawout_file.c_str());
+   PrintResolution(ph1f_XPnoTrunc, fpCanvas, 0.65 - invX, 0.58, kMagenta + 2, "XP");
+   PrintResolution(ph1f_WFnoTrunc, fpCanvas, 0.65 - invX, 0.25, kCyan + 2, "WF");
+   fpCanvas->SaveAs(drawout_file.c_str());
 
-	//////////////////////////////////////////////////////////////////////////////////////////
-	fpCanvas->						cd();
-	fpCanvas->						Clear();
-	fpCanvas->						Divide(4, 2);
+   //////////////////////////////////////////////////////////////////////////////////////////
+   fpCanvas->cd();
+   fpCanvas->Clear();
+   fpCanvas->Divide(4, 2);
 
-	for(int i=0;i<8;i++){
-		v_h1f_WF_modnoTrunc[i]->		SetAxisRange(0, 1.1 * overallMaxMod, "Y");
-		fpCanvas->					cd(i+1);
-		invX = 0;
-		if(v_h1f_WF_modnoTrunc[i]->GetMean() > 650) invX = 0.5;
-		gPad->						SetRightMargin(0);
-		v_h1f_WF_modnoTrunc[i]->		Draw("HIST");
-		v_h1f_XP_modnoTrunc[i]->		Draw("HIST sames");
-		if(v_h1f_WF_mod[i]->GetEntries() < 100) continue;
-		PrintResolution(v_h1f_XP_modnoTrunc[i], fpCanvas, 0.65-invX, 0.58, kMagenta+2, "XP");
-		PrintResolution(v_h1f_WF_modnoTrunc[i], fpCanvas, 0.65-invX, 0.25, kCyan+2, "WF");
-	}
-	fpCanvas->						SaveAs(drawout_file.c_str());
+   for (int i = 0; i < 8; i++) {
+      v_h1f_WF_modnoTrunc[i]->SetAxisRange(0, 1.1 * overallMaxMod, "Y");
+      fpCanvas->cd(i + 1);
+      invX = 0;
+      if (v_h1f_WF_modnoTrunc[i]->GetMean() > 650)
+         invX = 0.5;
+      gPad->SetRightMargin(0);
+      v_h1f_WF_modnoTrunc[i]->Draw("HIST");
+      v_h1f_XP_modnoTrunc[i]->Draw("HIST sames");
+      if (v_h1f_WF_mod[i]->GetEntries() < 100)
+         continue;
+      PrintResolution(v_h1f_XP_modnoTrunc[i], fpCanvas, 0.65 - invX, 0.58, kMagenta + 2, "XP");
+      PrintResolution(v_h1f_WF_modnoTrunc[i], fpCanvas, 0.65 - invX, 0.25, kCyan + 2, "WF");
+   }
+   fpCanvas->SaveAs(drawout_file.c_str());
 
+   //////////////////////////////////////////////////////////////////////////////////////////
+   fpCanvas->cd();
+   fpCanvas->Clear();
+   invX, invY = 0;
+   if (ph2f_XPWF->GetMean(1) > 650)
+      invX = 0.5;
+   if (ph2f_XPWF->GetMean(2) > 650)
+      invY = 0.5;
+   gStyle->SetOptStat("merou");
+   gStyle->SetStatX(0.36);
+   gStyle->SetStatY(0.88);
+   gPad->SetRightMargin(0.12);
+   gPad->SetLeftMargin(0.12);
+   ph2f_XPWF->GetYaxis()->SetTitleOffset(1.1);
+   gStyle->SetTitleX((1. - gPad->GetRightMargin() + gPad->GetLeftMargin()) / 2);
+   ph2f_XPWF->Draw("colz");
+   fpCanvas->SaveAs((drawout_file + ")").c_str());
 
-		//////////////////////////////////////////////////////////////////////////////////////////
-	fpCanvas->						cd(); 
-	fpCanvas->						Clear();
-	invX, invY = 0;
-	if(ph2f_XPWF->GetMean(1) > 650) invX = 0.5;
-	if(ph2f_XPWF->GetMean(2) > 650) invY = 0.5;
-	gStyle->						SetOptStat("merou");
-	gStyle->						SetStatX(0.36);
-	gStyle->						SetStatY(0.88);
-	gPad->							SetRightMargin(0.12);
-	gPad->							SetLeftMargin(0.12);
-	ph2f_XPWF->						GetYaxis()->SetTitleOffset(1.1);
-	gStyle->						SetTitleX((1.-gPad->GetRightMargin()+gPad->GetLeftMargin())/2);
-	ph2f_XPWF->						Draw("colz");
-	fpCanvas->						SaveAs((drawout_file + ")").c_str());
-
-	fpCanvas->						Clear();
-	// Delete
-	delete ph2f_XPWF;
+   fpCanvas->Clear();
+   // Delete
+   delete ph2f_XPWF;
 }
 
-void Reconstruction::DrawOuts::FileComparison(){
-	// Set output
-	std::string comment_list;
-	for(int i=0;i<(int)v_comments.size();i++){
-		if(v_comments[i] != "") comment_list += v_comments[i] + "_";
-		else						comment_list += "Default_";
-	}
-	drawout_file =							foutputDir + "Comparison_" + comment_list + ".pdf";
+void Reconstruction::DrawOuts::FileComparison()
+{
+   // Set output
+   std::string comment_list;
+   for (int i = 0; i < (int)v_comments.size(); i++) {
+      if (v_comments[i] != "")
+         comment_list += v_comments[i] + "_";
+      else
+         comment_list += "Default_";
+   }
+   drawout_file = foutputDir + "Comparison_" + comment_list + ".pdf";
 
-	// Prepare histograms
-	std::vector<TH1F*> v_h1f_XP;
-	std::vector<TH1F*> v_h1f_WF;
-	std::vector<std::vector<TH1F*>> v_h1f_XP_mod;
-	std::vector<std::vector<TH1F*>> v_h1f_WF_mod;
-	for(int i=0;i<(int)v_comments.size();i++){
-		v_h1f_XP.							push_back(new TH1F(Form("ph1f_XP_%i", i), Form("Energy loss (%s);dE/dx (ADC counts/cm);Counts", v_comments[i].c_str()), 100, 0, 1300));
-		v_h1f_WF.							push_back(new TH1F(Form("ph1f_WF_%i", i), Form("Energy loss (%s);dE/dx (ADC counts/cm);Counts", v_comments[i].c_str()), 100, 0, 1300));
-		v_h1f_XP_mod.						push_back(std::vector<TH1F*>());
-		v_h1f_WF_mod. 						push_back(std::vector<TH1F*>());
-		for(int j=0;j<8;j++){
-			v_h1f_XP_mod[i].				push_back(new TH1F(Form("ph1f_XP_%i_%i", i, j), Form("Energy loss (%s, module %i);dE/dx (ADC counts/cm);Counts", v_comments[i].c_str(), j), 100, 0, 1300));
-			v_h1f_WF_mod[i].				push_back(new TH1F(Form("ph1f_WF_%i_%i", i, j), Form("Energy loss (%s, module %i);dE/dx (ADC counts/cm);Counts", v_comments[i].c_str(), j), 100, 0, 1300));
-		}
-	}
+   // Prepare histograms
+   std::vector<TH1F *> v_h1f_XP;
+   std::vector<TH1F *> v_h1f_WF;
+   std::vector<std::vector<TH1F *>> v_h1f_XP_mod;
+   std::vector<std::vector<TH1F *>> v_h1f_WF_mod;
+   for (int i = 0; i < (int)v_comments.size(); i++) {
+      v_h1f_XP.push_back(new TH1F(Form("ph1f_XP_%i", i),
+                                  Form("Energy loss (%s);dE/dx (ADC counts/cm);Counts", v_comments[i].c_str()), 100, 0,
+                                  1300));
+      v_h1f_WF.push_back(new TH1F(Form("ph1f_WF_%i", i),
+                                  Form("Energy loss (%s);dE/dx (ADC counts/cm);Counts", v_comments[i].c_str()), 100, 0,
+                                  1300));
+      v_h1f_XP_mod.push_back(std::vector<TH1F *>());
+      v_h1f_WF_mod.push_back(std::vector<TH1F *>());
+      for (int j = 0; j < 8; j++) {
+         v_h1f_XP_mod[i].push_back(new TH1F(
+            Form("ph1f_XP_%i_%i", i, j),
+            Form("Energy loss (%s, module %i);dE/dx (ADC counts/cm);Counts", v_comments[i].c_str(), j), 100, 0, 1300));
+         v_h1f_WF_mod[i].push_back(new TH1F(
+            Form("ph1f_WF_%i_%i", i, j),
+            Form("Energy loss (%s, module %i);dE/dx (ADC counts/cm);Counts", v_comments[i].c_str(), j), 100, 0, 1300));
+      }
+   }
 
-	int NMod = 0,	position = 0;
-	// Get entries and fill histograms
-	for(int ifile=0;ifile<(int)v_comments.size();ifile++){
-		for(int i=0;i<v_fnentries[ifile];i++){
-			v_fTrees[ifile]->			GetEntry(i);
-			NMod =							v_fEvents[ifile]->v_modules.size();
+   int NMod = 0, position = 0;
+   // Get entries and fill histograms
+   for (int ifile = 0; ifile < (int)v_comments.size(); ifile++) {
+      for (int i = 0; i < v_fnentries[ifile]; i++) {
+         v_fTrees[ifile]->GetEntry(i);
+         NMod = v_fEvents[ifile]->v_modules.size();
 
-			v_h1f_WF[i]->					Fill(v_fEvents[ifile]->dEdxWF);
-			v_h1f_XP[i]->					Fill(v_fEvents[ifile]->dEdxXP);
-			for(int iMod=0;iMod<NMod;iMod++){
-				position =					v_fEvents[ifile]->v_modules[iMod]->position;
-				v_h1f_WF_mod[i][position]->	Fill(v_fEvents[ifile]->v_modules[iMod]->dEdxWF);
-				v_h1f_XP_mod[i][position]->	Fill(v_fEvents[ifile]->v_modules[iMod]->dEdxXP);
-			}
-		}
-	}
+         v_h1f_WF[i]->Fill(v_fEvents[ifile]->dEdxWF);
+         v_h1f_XP[i]->Fill(v_fEvents[ifile]->dEdxXP);
+         for (int iMod = 0; iMod < NMod; iMod++) {
+            position = v_fEvents[ifile]->v_modules[iMod]->position;
+            v_h1f_WF_mod[i][position]->Fill(v_fEvents[ifile]->v_modules[iMod]->dEdxWF);
+            v_h1f_XP_mod[i][position]->Fill(v_fEvents[ifile]->v_modules[iMod]->dEdxXP);
+         }
+      }
+   }
 
-	for(int i=0;i<(int)v_comments.size();i++){
-		Fit1Gauss(v_h1f_WF[i], 2);
-		Fit1Gauss(v_h1f_XP[i], 2);
-		Graphic_setup(v_h1f_WF[i], 0.5, 1, 2+i, 2, 2+i, 2+i, 0.2);
-		Graphic_setup(v_h1f_XP[i], 0.5, 1, 2+i, 2, 2+i, 2+i, 0.2);
-		for(int j=0;j<8;j++){
-			Fit1Gauss(v_h1f_WF_mod[i][j], 2);
-			Fit1Gauss(v_h1f_XP_mod[i][j], 2);
-			Graphic_setup(v_h1f_WF_mod[i][j], 0.5, 1, 2+i, 1, 2+i, 2+i, 0.2);
-			Graphic_setup(v_h1f_XP_mod[i][j], 0.5, 1, 2+i, 1, 2+i, 2+i, 0.2);
-		}
-	}
+   for (int i = 0; i < (int)v_comments.size(); i++) {
+      Fit1Gauss(v_h1f_WF[i], 2);
+      Fit1Gauss(v_h1f_XP[i], 2);
+      Graphic_setup(v_h1f_WF[i], 0.5, 1, 2 + i, 2, 2 + i, 2 + i, 0.2);
+      Graphic_setup(v_h1f_XP[i], 0.5, 1, 2 + i, 2, 2 + i, 2 + i, 0.2);
+      for (int j = 0; j < 8; j++) {
+         Fit1Gauss(v_h1f_WF_mod[i][j], 2);
+         Fit1Gauss(v_h1f_XP_mod[i][j], 2);
+         Graphic_setup(v_h1f_WF_mod[i][j], 0.5, 1, 2 + i, 1, 2 + i, 2 + i, 0.2);
+         Graphic_setup(v_h1f_XP_mod[i][j], 0.5, 1, 2 + i, 1, 2 + i, 2 + i, 0.2);
+      }
+   }
 
+   // Draw
+   gStyle->SetOptStat(0);
+   gStyle->SetOptFit(0);
 
-	// Draw
-	gStyle->						SetOptStat(0);
-	gStyle->						SetOptFit(0);
+   // Get maximum of event plots
+   int overallMax = 0, overallMaxMod = 0, maxVal_WF = 0, maxVal_XP = 0;
+   for (int i = 0; i < (int)v_comments.size(); i++) {
+      maxVal_WF = v_h1f_WF[i]->GetMaximum();
+      maxVal_XP = v_h1f_XP[i]->GetMaximum();
+      overallMax = std::max({overallMax, maxVal_WF, maxVal_XP});
+      for (int j = 0; j < 8; j++) {
+         maxVal_WF = v_h1f_WF_mod[i][j]->GetMaximum();
+         maxVal_XP = v_h1f_XP_mod[i][j]->GetMaximum();
+         overallMaxMod = std::max({overallMaxMod, maxVal_WF, maxVal_XP});
+      }
+   }
 
-	// Get maximum of event plots
-	int overallMax = 0, overallMaxMod = 0, maxVal_WF = 0, maxVal_XP = 0;
-	for(int i=0;i<(int)v_comments.size();i++){
-		maxVal_WF =					v_h1f_WF[i]->GetMaximum();
-		maxVal_XP =					v_h1f_XP[i]->GetMaximum();
-		overallMax =				std::max({overallMax, maxVal_WF, maxVal_XP});
-		for(int j=0;j<8;j++){
-			maxVal_WF =				v_h1f_WF_mod[i][j]->GetMaximum();
-			maxVal_XP =				v_h1f_XP_mod[i][j]->GetMaximum();
-			overallMaxMod =			std::max({overallMaxMod, maxVal_WF, maxVal_XP});
-		}
-	}
+   float invX;
+   //////////////////////////////////////////////////////////////////////////////////////////
+   fpCanvas->cd();
+   fpCanvas->Clear();
 
-	float invX;
-	//////////////////////////////////////////////////////////////////////////////////////////
-	fpCanvas->						cd();
-	fpCanvas->						Clear();
+   v_h1f_WF[0]->SetAxisRange(0, 1.1 * overallMax, "Y");
+   invX = 0;
+   if (v_h1f_WF[0]->GetMean() > 650)
+      invX = 0.5;
+   v_h1f_WF[0]->Draw("HIST");
+   for (int i = 0; i < (int)v_comments.size(); i++) {
+      if (i != 0)
+         v_h1f_WF[i]->Draw("HIST sames");
+      PrintResolution(v_h1f_WF[i], fpCanvas, 0.65 - invX, 0.58 - 0.33, 2 + i, v_comments[i].c_str());
+   }
+   fpCanvas->SaveAs((drawout_file + "(").c_str());
 
-	v_h1f_WF[0]->					SetAxisRange(0, 1.1 * overallMax,	"Y");
-	invX = 0;
-	if(v_h1f_WF[0]->GetMean() > 650) invX = 0.5;
-	v_h1f_WF[0]->					Draw("HIST");
-	for(int i=0;i<(int)v_comments.size();i++){
-		if(i!=0) v_h1f_WF[i]->		Draw("HIST sames");
-		PrintResolution(v_h1f_WF[i], fpCanvas, 0.65-invX, 0.58-0.33, 2+i, v_comments[i].c_str());
-	}
-	fpCanvas->						SaveAs((drawout_file + "(").c_str());
+   //////////////////////////////////////////////////////////////////////////////////////////
+   fpCanvas->cd();
+   fpCanvas->Clear();
 
-	//////////////////////////////////////////////////////////////////////////////////////////
-	fpCanvas->						cd();	
-	fpCanvas->						Clear();
+   v_h1f_XP[0]->SetAxisRange(0, 1.1 * overallMax, "Y");
+   invX = 0;
+   if (v_h1f_XP[0]->GetMean() > 650)
+      invX = 0.5;
+   v_h1f_XP[0]->Draw("HIST");
+   for (int i = 0; i < (int)v_comments.size(); i++) {
+      if (i != 0)
+         v_h1f_XP[i]->Draw("HIST sames");
+      PrintResolution(v_h1f_XP[i], fpCanvas, 0.65 - invX, 0.58 - 0.33, 2 + i, v_comments[i].c_str());
+   }
+   fpCanvas->SaveAs((drawout_file + ")").c_str());
 
-	v_h1f_XP[0]->					SetAxisRange(0, 1.1 * overallMax,	"Y");
-	invX = 0;
-	if(v_h1f_XP[0]->GetMean() > 650) invX = 0.5;
-	v_h1f_XP[0]->					Draw("HIST");
-	for(int i=0;i<(int)v_comments.size();i++){
-		if(i!=0) v_h1f_XP[i]->		Draw("HIST sames");
-		PrintResolution(v_h1f_XP[i], fpCanvas, 0.65-invX, 0.58-0.33, 2+i, v_comments[i].c_str());
-	}	
-	fpCanvas->						SaveAs((drawout_file + ")").c_str());
-
-	// Delete
-	for(int i=0;i<(int)v_comments.size();i++){
-		delete v_h1f_XP[i];
-		delete v_h1f_WF[i];
-		for(int j=0;j<8;j++){
-			delete v_h1f_XP_mod[i][j];
-			delete v_h1f_WF_mod[i][j];
-		}
-	}
+   // Delete
+   for (int i = 0; i < (int)v_comments.size(); i++) {
+      delete v_h1f_XP[i];
+      delete v_h1f_WF[i];
+      for (int j = 0; j < 8; j++) {
+         delete v_h1f_XP_mod[i][j];
+         delete v_h1f_WF_mod[i][j];
+      }
+   }
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void Reconstruction::DrawOuts::DESY21Scan(const std::string &drawtype)
+{
 
-
-
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Reconstruction::DrawOuts::DESY21Scan(const std::string &drawtype){
-
-	ftype = drawtype;
-	DESY21ScanFill();
-	DESY21ScanDraw();
-	// CleanUp();
+   ftype = drawtype;
+   DESY21ScanFill();
+   DESY21ScanDraw();
+   // CleanUp();
 }
 
-void Reconstruction::DrawOuts::CERN22Scan(){
-	CERN22ScanFill();
-	CERN22ScanDraw();
+void Reconstruction::DrawOuts::CERN22Scan()
+{
+   CERN22ScanFill();
+   CERN22ScanDraw();
 }
