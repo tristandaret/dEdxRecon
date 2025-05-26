@@ -1,7 +1,9 @@
 #include "Uploader_ERAM01.h"
 
-Uploader_ERAM01::Uploader_ERAM01(const std::string &SampleFile, Model_ReadOutGeometry *pModel_ReadOutGeometry,
-                                 Model_Electronics *pModel_Electronics, Model_Charge1D *pModel_Charge1D)
+Uploader_ERAM01::Uploader_ERAM01(const std::string &SampleFile,
+                                 Model_ReadOutGeometry *pModel_ReadOutGeometry,
+                                 Model_Electronics *pModel_Electronics,
+                                 Model_Charge1D *pModel_Charge1D)
    : Uploader(SampleFile, pModel_ReadOutGeometry, pModel_Electronics, pModel_Charge1D)
 {
    std::cout << std::endl;
@@ -13,12 +15,13 @@ Uploader_ERAM01::~Uploader_ERAM01()
    // std::cout << " In Uploader_ERAM01::~Uploader_ERAM01() " << std::endl;
 }
 
-Event *Uploader_ERAM01::GiveMe_Event(const int &iEvent, const int &ModuleNber_Input, const int &Data_to_Use)
+Event *Uploader_ERAM01::GiveMe_Event(const int &iEvent, const int &ModuleNber_Input,
+                                     const int &Data_to_Use)
 {
    return GiveMe_Event(iEvent, ModuleNber_Input, Data_to_Use, 1);
 }
-Event *Uploader_ERAM01::GiveMe_Event(const int &iEvent, const int &ModuleNber_Input, const int &Data_to_Use,
-                                     const int &CloseWF)
+Event *Uploader_ERAM01::GiveMe_Event(const int &iEvent, const int &ModuleNber_Input,
+                                     const int &Data_to_Use, const int &CloseWF)
 {
    if (iEvent >= Get_NberOfEvent())
       return 0;
@@ -92,19 +95,22 @@ Event *Uploader_ERAM01::GiveMe_Event(const int &iEvent, const int &ModuleNber_In
    p_TTree->GetEntry(iEvent);
 
    //
-   Event *pEvent = new Event(ev, iEvent, p_Model_ReadOutGeometry, p_Model_Electronics, p_Model_Charge1D);
+   Event *pEvent = new Event(ev, iEvent, p_Model_ReadOutGeometry, p_Model_Electronics,
+                             p_Model_Charge1D);
 
    std::vector<Module *> V_pModule;
    int iMod_Max = 8;
    for (int iMod = 0; iMod < iMod_Max; iMod++) {
-      Module *pModule = new Module(ev, iEvent, iMod, p_Model_ReadOutGeometry, p_Model_Electronics, p_Model_Charge1D);
+      Module *pModule = new Module(ev, iEvent, iMod, p_Model_ReadOutGeometry,
+                                   p_Model_Electronics, p_Model_Charge1D);
       V_pModule.push_back(pModule);
    }
 
    for (Int_t iCluster = 0; iCluster < iCluster_Max; iCluster++) {
 
       //	SetModule
-      int ModuleNber_Cur = ModuleNber_Input; // This is to get a similar Code Canevas than for other inputs
+      int ModuleNber_Cur =
+         ModuleNber_Input; // This is to get a similar Code Canevas than for other inputs
       if (ModuleNber_Input != -1 && ModuleNber_Cur != ModuleNber_Input)
          continue;
 
@@ -114,8 +120,8 @@ Event *Uploader_ERAM01::GiveMe_Event(const int &iEvent, const int &ModuleNber_In
          continue;
       Cluster *pCluster = new Cluster(ev, iEvent, ModuleNber_Cur);
 
-      // It seems that there are clusters (cluster charge >=0 but with no pad (charge <0 for all pads)
-      // check and store the cluster only if there are pads in it
+      // It seems that there are clusters (cluster charge >=0 but with no pad (charge <0
+      // for all pads) check and store the cluster only if there are pads in it
       int NberOfPads = 0;
       for (Int_t iPad = 0; iPad < iPad_Max; iPad++) {
          if (pad_charge[iCluster][iPad] < 0)
@@ -125,8 +131,9 @@ Event *Uploader_ERAM01::GiveMe_Event(const int &iEvent, const int &ModuleNber_In
          int iX = pad_x[iCluster][iPad];
          int iY = pad_y[iCluster][iPad];
 
-         Pad *pPad = new Pad(p_Model_ReadOutGeometry, p_Model_Electronics, p_Model_Charge1D, "noName", ev, iEvent,
-                             ModuleNber_Cur, iX, iY);
+         Pad *pPad =
+            new Pad(p_Model_ReadOutGeometry, p_Model_Electronics, p_Model_Charge1D,
+                    "noName", ev, iEvent, ModuleNber_Cur, iX, iY);
 
          pPad->Set_AMax(pad_charge[iCluster][iPad]);
          pPad->Set_TMax(pad_time[iCluster][iPad]);

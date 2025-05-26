@@ -12,9 +12,10 @@ FuncFromTGraph::FuncFromTGraph(TGraph *pTGraph)
 
    m_X_Highest = X_pTGraph[p_TGraph->GetN() - 1];
 
-   //	std::cout << " m_StepX	" << std::setw(14) << std::setprecision(9) << m_StepX	<< std::endl;
-   //	std::cout << " m_X_Lowest	" << std::setw(14) << std::setprecision(9) << m_X_Lowest	<< std::endl;
-   //	std::cout << " m_X_Highest " << std::setw(14) << std::setprecision(9) << m_X_Highest << std::endl;
+   //	std::cout << " m_StepX	" << std::setw(14) << std::setprecision(9) << m_StepX	<<
+   //std::endl; 	std::cout << " m_X_Lowest	" << std::setw(14) << std::setprecision(9) <<
+   //m_X_Lowest	<< std::endl; 	std::cout << " m_X_Highest " << std::setw(14) <<
+   //std::setprecision(9) << m_X_Highest << std::endl;
    //
    //	double* Y_pTGraph = p_TGraph ->GetX();
    //	std::cout
@@ -74,7 +75,8 @@ void FuncFromTGraph::Dump()
    double *Y_pTGraph = p_TGraph->GetY();
    int iTem_Max = p_TGraph->GetN();
    for (int iTem = 0; iTem < iTem_Max; iTem++) {
-      std::cout << "DUMPFuncFromTGraph" << std::setw(10) << iTem << std::setw(20) << std::setprecision(10)
-                << X_pTGraph[iTem] << std::setw(20) << std::setprecision(10) << Y_pTGraph[iTem] << std::endl;
+      std::cout << "DUMPFuncFromTGraph" << std::setw(10) << iTem << std::setw(20)
+                << std::setprecision(10) << X_pTGraph[iTem] << std::setw(20)
+                << std::setprecision(10) << Y_pTGraph[iTem] << std::endl;
    }
 }

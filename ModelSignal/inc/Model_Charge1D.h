@@ -18,8 +18,9 @@ public:
    void Set_Lambda(const double &Lambda);
 
    // Get Charge
-   double Get_Qpad(const double &Time, const double &Time0, const double &XTrue, const double &YTrue, const double &XL,
-                   const double &XH, const double &YL, const double &YH) const;
+   double Get_Qpad(const double &Time, const double &Time0, const double &XTrue,
+                   const double &YTrue, const double &XL, const double &XH,
+                   const double &YL, const double &YH) const;
 
    // Big Dump
    void WriteOut() const;

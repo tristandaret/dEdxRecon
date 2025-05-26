@@ -1,7 +1,8 @@
 #include "Event.h"
 #include "TGraph.h"
 
-Event::Event(const int &EventNber, const int &EntryNber, Model_ReadOutGeometry *pModel_ReadOutGeometry,
+Event::Event(const int &EventNber, const int &EntryNber,
+             Model_ReadOutGeometry *pModel_ReadOutGeometry,
              Model_Electronics *pModel_Electronics, Model_ChargeI *pModel_ChargeI)
 {
    // Initialize Models
@@ -21,7 +22,8 @@ Event::~Event()
    int VerboseDelete = 0;
    if (VerboseDelete == 1)
       std::cout << " Event Destructor "
-                << " m_EventNber " << m_EventNber << " m_EntryNber " << m_EntryNber << std::endl;
+                << " m_EventNber " << m_EventNber << " m_EntryNber " << m_EntryNber
+                << std::endl;
    Clear_Modules();
 }
 
@@ -124,7 +126,8 @@ std::vector<Cluster *> Event::GiveMe_Clusters_ForThisModule(const int &ModuleNbe
       }
    } else {
       std::cout << "WARNING from Event::GiveMe_Clusters_ForThisModule"
-                << " The Module ModuleNber=" << ModuleNber << " does not exist" << std::endl;
+                << " The Module ModuleNber=" << ModuleNber << " does not exist"
+                << std::endl;
    }
 
    return ToBeReturned;
@@ -213,7 +216,8 @@ double Event::GiveMe_CutInterCeptXZ_ForThisModule(const int &ModuleNber)
    Y_Mean = Y_Mean / double(NClusters);
 
    double SlopeXZ = (XY_Mean - X_Mean * Y_Mean) / (XX_Mean - X_Mean * X_Mean);
-   double InterCeptXZSlope = (XY_Mean * X_Mean - Y_Mean * XX_Mean) / (X_Mean * X_Mean - XX_Mean);
+   double InterCeptXZSlope =
+      (XY_Mean * X_Mean - Y_Mean * XX_Mean) / (X_Mean * X_Mean - XX_Mean);
 
    return (SlopeXZ * 18. + InterCeptXZSlope);
 }
@@ -277,9 +281,10 @@ std::vector<double> Event::GiveMe_CutSlopeXYZ_ForThisModule(const int &ModuleNbe
    gr1.SetMaximum(36.);
 
    if (EventNber < 1000)
-      xzinfo.SaveAs(TString::Format(
-         "/feynman/home/dphp/shassani/work/Analysis_3.06/OUT_JeanFrancois/plots/c_xzinfo_EventNber_%i_EntryNber_%i.png",
-         EventNber, EntryNber));
+      xzinfo.SaveAs(
+         TString::Format("/feynman/home/dphp/shassani/work/Analysis_3.06/"
+                         "OUT_JeanFrancois/plots/c_xzinfo_EventNber_%i_EntryNber_%i.png",
+                         EventNber, EntryNber));
 
    //
    params.push_back(fit->GetParameter(1));
@@ -290,7 +295,8 @@ std::vector<double> Event::GiveMe_CutSlopeXYZ_ForThisModule(const int &ModuleNbe
 
 //-------------------------------------------------------------------------
 
-void Event::Replace_Clusters_ForThisModule(std::vector<Cluster *> &VCluster, const int &ModuleNber)
+void Event::Replace_Clusters_ForThisModule(std::vector<Cluster *> &VCluster,
+                                           const int &ModuleNber)
 {
 
    Module *pModule = Get_ThisModule(ModuleNber);
@@ -315,14 +321,15 @@ void Event::Replace_Clusters_ForThisModule(std::vector<Cluster *> &VCluster, con
       }
    } else {
       std::cout << "WARNING from Event::Replace_Clusters_ForThisModule"
-                << " The Module ModuleNber=" << ModuleNber << " does not exist" << std::endl;
+                << " The Module ModuleNber=" << ModuleNber << " does not exist"
+                << std::endl;
    }
 }
 
 Cluster *Event::Get_Cluster_Copy(Cluster *pCluster)
 {
-   Cluster *ToBeReturned =
-      new Cluster(pCluster->Get_EventNber(), pCluster->Get_EntryNber(), pCluster->Get_ModuleNber());
+   Cluster *ToBeReturned = new Cluster(
+      pCluster->Get_EventNber(), pCluster->Get_EntryNber(), pCluster->Get_ModuleNber());
 
    int NPads = pCluster->Get_NberOfPads();
    for (int iP = 0; iP < NPads; iP++) {
@@ -341,8 +348,8 @@ int Event::Validity_ForThisModule(const int &ModuleNber) const
    if (pModule) {
       return (pModule->IsValid());
    } else {
-      // std::cout << "WARNING from Event::Validity_ForThisModule: Module #" << ModuleNber << " does not exist" <<
-      // std::endl;
+      // std::cout << "WARNING from Event::Validity_ForThisModule: Module #" << ModuleNber
+      // << " does not exist" << std::endl;
       return 0;
    }
 }
@@ -354,7 +361,8 @@ void Event::Validate_ThisModule(const int &ModuleNber)
       return pModule->Validate();
    }
    // else{
-   //	std::cout << "WARNING from Event::Validate_ThisModule: Module #" << ModuleNber << " does not exist" << std::endl;
+   //	std::cout << "WARNING from Event::Validate_ThisModule: Module #" << ModuleNber << "
+   //does not exist" << std::endl;
    // }
 }
 void Event::Invalidate_ThisModule(const int &ModuleNber)
@@ -373,8 +381,9 @@ void Event::Invalidate_ThisModule(const int &ModuleNber)
          Invalidate(); // If all modules are invalid, invalidate the event
    }
    // else{
-   //	std::cout << "WARNING from Event::Invalidate_ThisModule: Module #" << ModuleNber << " does not exist" <<
-   //std::endl;
+   //	std::cout << "WARNING from Event::Invalidate_ThisModule: Module #" << ModuleNber <<
+   //" does not exist" <<
+   // std::endl;
    // }
 }
 
@@ -386,7 +395,8 @@ Track *Event::GiveMe_AnUnfittedTrack_ForThisModule(const int &ModuleNber)
       return pModule->GiveMe_AnUnfittedTrack();
    } else {
       std::cout << "WARNING from Event::GiveMe_AnUnfittedTrack_ForThisModule"
-                << " The Module ModuleNber=" << ModuleNber << " does not exist" << std::endl;
+                << " The Module ModuleNber=" << ModuleNber << " does not exist"
+                << std::endl;
    }
    return 0;
 }
@@ -397,7 +407,8 @@ void Event::Set_Track_ForThisModule(Track *pTrack, const int &ModuleNber)
       return pModule->Set_ModuleTrack(pTrack);
    } else {
       std::cout << "WARNING from Event::Set_Track_ForThisModule"
-                << " The Module ModuleNber=" << ModuleNber << " does not exist" << std::endl;
+                << " The Module ModuleNber=" << ModuleNber << " does not exist"
+                << std::endl;
    }
 }
 const Track *Event::GiveMe_Track_ForThisModule(const int &ModuleNber)
@@ -407,7 +418,8 @@ const Track *Event::GiveMe_Track_ForThisModule(const int &ModuleNber)
       return pModule->GiveMe_ModuleTrack();
    } else {
       std::cout << "WARNING from Event::GiveMe_Track_ForThisModule"
-                << " The Module ModuleNber=" << ModuleNber << " does not exist" << std::endl;
+                << " The Module ModuleNber=" << ModuleNber << " does not exist"
+                << std::endl;
    }
    return 0;
 }
@@ -446,7 +458,8 @@ const Model_ChargeI *Event::Get_Model_ChargeI()
    return p_Model_ChargeI;
 }
 
-void Event::Ini_Models(Model_ReadOutGeometry *pModel_ReadOutGeometry, Model_Electronics *pModel_Electronics,
+void Event::Ini_Models(Model_ReadOutGeometry *pModel_ReadOutGeometry,
+                       Model_Electronics *pModel_Electronics,
                        Model_ChargeI *pModel_ChargeI)
 {
    //

@@ -71,8 +71,8 @@ private:
 
    constexpr static float YRESOMAX = 10;
    constexpr static float YRESOMIN = 6.5;
-   constexpr static float YMEANMAX = 1250;
-   constexpr static float YMEANMIN = 500;
+   constexpr static float YMEANMAX = 930;
+   constexpr static float YMEANMIN = 550;
    constexpr static float YSTDMAX = 85;
    constexpr static float YSTDMIN = 62;
 
@@ -83,8 +83,8 @@ private:
    constexpr static float YSTDMAXCERN = 0.15;
    constexpr static float YSTDMINCERN = 0;
    float keV =
-      5.9 / (224 * 1703.74 /
-             183); // 5.9 Fe peak energy | 1703 mean MockUp gain | 224 e- created with 5.9keV | 183 e- for 1 ADC
+      5.9 / (224 * 1703.74 / 183); // 5.9 Fe peak energy | 1703 mean MockUp gain | 224 e-
+                                   // created with 5.9keV | 183 e- for 1 ADC
 
    // Single scan pointers
    TF1 *fptf1_WF;
@@ -101,7 +101,8 @@ private:
    int nruns = 0;
    std::vector<int> markers = {22, 34, 23, 47, 33, 43};
    std::vector<int> markersWFoff = {26, 32, 27};
-   std::vector<int> colors = {kCyan - 6, kMagenta - 6, kCyan + 2, kMagenta + 2, kCyan + 3, kMagenta + 3};
+   std::vector<int> colors = {kCyan - 6,    kMagenta - 6, kCyan + 2,
+                              kMagenta + 2, kCyan + 3,    kMagenta + 3};
    std::vector<int> markersCERN = {20, 47, 34, 21};
    std::vector<int> colorsCERN = {kOrange + 7, kAzure - 6, kSpring - 6, kRed + 1};
    std::vector<TF1 *> v_fptf1_WF;

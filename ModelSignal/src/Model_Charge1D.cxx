@@ -37,9 +37,12 @@ void Model_Charge1D::WriteOut() const
 {
    std::cout << "StartModel_Charge1D" << std::endl;
    std::cout << " m_RC; " << std::setw(13) << std::setprecision(6) << m_RC << std::endl;
-   std::cout << " m_Width; " << std::setw(13) << std::setprecision(6) << m_Width << std::endl;
-   std::cout << " m_Lambda; " << std::setw(30) << std::setprecision(25) << m_Lambda << std::endl;
-   std::cout << " m_Gain; " << std::setw(30) << std::setprecision(6) << m_Gain << std::endl;
+   std::cout << " m_Width; " << std::setw(13) << std::setprecision(6) << m_Width
+             << std::endl;
+   std::cout << " m_Lambda; " << std::setw(30) << std::setprecision(25) << m_Lambda
+             << std::endl;
+   std::cout << " m_Gain; " << std::setw(30) << std::setprecision(6) << m_Gain
+             << std::endl;
    std::cout << "EndModel_Charge1D" << std::endl;
 }
 
@@ -50,8 +53,10 @@ void Model_Charge1D::SetSecondaries()
    m_Width2 = m_Width * m_Width;
 }
 
-double Model_Charge1D::Get_Qpad(const double &Time, const double &Time0, const double &XTrue, const double &YTrue,
-                                const double &XL, const double &XH, const double &YL, const double &YH) const
+double Model_Charge1D::Get_Qpad(const double &Time, const double &Time0,
+                                const double &XTrue, const double &YTrue,
+                                const double &XL, const double &XH, const double &YL,
+                                const double &YH) const
 {
    double ToBeReturned = 0.;
 

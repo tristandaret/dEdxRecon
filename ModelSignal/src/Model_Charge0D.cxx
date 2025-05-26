@@ -30,7 +30,8 @@ void Model_Charge0D::Set_Qprim(const double &Qprim)
    SetSecondaries();
 }
 
-void Model_Charge0D::Set_Ion(const int &DoIons, const double &Tion, const double &RTrue, const double &RFactor)
+void Model_Charge0D::Set_Ion(const int &DoIons, const double &Tion, const double &RTrue,
+                             const double &RFactor)
 {
    m_DoIons = DoIons;
    m_Tion = Tion;
@@ -42,9 +43,12 @@ void Model_Charge0D::WriteOut() const
 {
    std::cout << "StartModel_Charge0D" << std::endl;
    std::cout << " m_RC; " << std::setw(13) << std::setprecision(6) << m_RC << std::endl;
-   std::cout << " m_Width; " << std::setw(13) << std::setprecision(6) << m_Width << std::endl;
-   std::cout << " m_Qprim; " << std::setw(30) << std::setprecision(25) << m_Qprim << std::endl;
-   std::cout << " m_Gain; " << std::setw(30) << std::setprecision(25) << m_Gain << std::endl;
+   std::cout << " m_Width; " << std::setw(13) << std::setprecision(6) << m_Width
+             << std::endl;
+   std::cout << " m_Qprim; " << std::setw(30) << std::setprecision(25) << m_Qprim
+             << std::endl;
+   std::cout << " m_Gain; " << std::setw(30) << std::setprecision(25) << m_Gain
+             << std::endl;
    std::cout << "EndModel_Charge0D" << std::endl;
 }
 
@@ -55,8 +59,10 @@ void Model_Charge0D::SetSecondaries()
    m_Width2 = m_Width * m_Width;
 }
 
-double Model_Charge0D::Get_Qpad(const double &Time, const double &Time0, const double &XTrue, const double &YTrue,
-                                const double &XL, const double &XH, const double &YL, const double &YH) const
+double Model_Charge0D::Get_Qpad(const double &Time, const double &Time0,
+                                const double &XTrue, const double &YTrue,
+                                const double &XL, const double &XH, const double &YL,
+                                const double &YH) const
 {
    double ToBeReturned = 0.;
 
@@ -71,7 +77,8 @@ double Model_Charge0D::Get_Qpad(const double &Time, const double &Time0, const d
       if (LocalTime < m_Tion)
          Sigma2 = LocalTime * (2. / (m_RTrue * m_RFactor)) + m_Width2;
       if (LocalTime >= m_Tion)
-         Sigma2 = (LocalTime - m_Tion) * (2. / m_RTrue) + m_Tion * (2. / (m_RTrue * m_RFactor)) + m_Width2;
+         Sigma2 = (LocalTime - m_Tion) * (2. / m_RTrue) +
+                  m_Tion * (2. / (m_RTrue * m_RFactor)) + m_Width2;
       Sigma = std::sqrt(Sigma2);
    }
 

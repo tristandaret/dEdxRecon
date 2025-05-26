@@ -1,7 +1,7 @@
 #include "ROBoard.h"
 
-ROBoard::ROBoard(Model_ReadOutGeometry *pModel_ReadOutGeometry, Model_Electronics *pModel_Electronics,
-                 Model_ChargeI *pModel_ChargeI)
+ROBoard::ROBoard(Model_ReadOutGeometry *pModel_ReadOutGeometry,
+                 Model_Electronics *pModel_Electronics, Model_ChargeI *pModel_ChargeI)
 {
    // Initialize Models
    Ini_Models(pModel_ReadOutGeometry, pModel_Electronics, pModel_ChargeI);
@@ -79,7 +79,8 @@ Pad *ROBoard::Get_Pad(const int &iX, const int &iY)
    return V_Pad[V_ExisFlag2D[GetLinearIndex(iX, iY)] - 1];
 }
 
-void ROBoard::Ini_Models(Model_ReadOutGeometry *pModel_ReadOutGeometry, Model_Electronics *pModel_Electronics,
+void ROBoard::Ini_Models(Model_ReadOutGeometry *pModel_ReadOutGeometry,
+                         Model_Electronics *pModel_Electronics,
                          Model_ChargeI *pModel_ChargeI)
 {
    //

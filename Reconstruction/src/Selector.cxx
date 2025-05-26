@@ -36,8 +36,8 @@ Selector::Selector(const std::string DefSelection)
    }
 
    //
-   if (DefSelection != "Sel_DESY21" && DefSelection != "Sel_DESY21_theta" && DefSelection != "Sel_CERN22" &&
-       DefSelection != "TMC_CERN22_Event") {
+   if (DefSelection != "Sel_DESY21" && DefSelection != "Sel_DESY21_theta" &&
+       DefSelection != "Sel_CERN22" && DefSelection != "TMC_CERN22_Event") {
       std::cout << "Selector::Selector "
                 << " unknown predefined selection " << DefSelection << std::endl;
 
@@ -313,7 +313,8 @@ void Selector::SetStat_Before(Sample &aSample, const int &ModuleNber, const int 
       Event *pEvent = aSample.Get_Event(iE);
       NberOfValidEvents += 1;
 
-      std::vector<Cluster *> ClusterSet = pEvent->GiveMe_Clusters_ForThisModule(ModuleNber);
+      std::vector<Cluster *> ClusterSet =
+         pEvent->GiveMe_Clusters_ForThisModule(ModuleNber);
       int NClusters = ClusterSet.size();
 
       for (int iC = 0; iC < NClusters; iC++) {
@@ -344,7 +345,8 @@ void Selector::SetStat_After(Sample &aSample, const int &ModuleNber, const int &
       Event *pEvent = aSample.Get_Event(iE);
       NberOfValidEvents += 1;
 
-      std::vector<Cluster *> ClusterSet = pEvent->GiveMe_Clusters_ForThisModule(ModuleNber);
+      std::vector<Cluster *> ClusterSet =
+         pEvent->GiveMe_Clusters_ForThisModule(ModuleNber);
       int NClusters = ClusterSet.size();
 
       for (int iC = 0; iC < NClusters; iC++) {
@@ -429,7 +431,8 @@ void Selector::SetStat_Before(Event *pEvent, const int &iTem)
       int ModuleNber = pModule->Get_ModuleNber();
       NberOfModules += 1;
 
-      std::vector<Cluster *> ClusterSet = pEvent->GiveMe_Clusters_ForThisModule(ModuleNber);
+      std::vector<Cluster *> ClusterSet =
+         pEvent->GiveMe_Clusters_ForThisModule(ModuleNber);
       int NClusters = ClusterSet.size();
       NberOfClusters += NClusters;
 
@@ -460,7 +463,8 @@ void Selector::SetStat_After(Event *pEvent, const int &iTem)
       int ModuleNber = pModule->Get_ModuleNber();
       NberOfModules += 1;
 
-      std::vector<Cluster *> ClusterSet = pEvent->GiveMe_Clusters_ForThisModule(ModuleNber);
+      std::vector<Cluster *> ClusterSet =
+         pEvent->GiveMe_Clusters_ForThisModule(ModuleNber);
       int NClusters = ClusterSet.size();
 
       for (int iC = 0; iC < NClusters; iC++) {
@@ -491,23 +495,24 @@ void Selector::PrintStat()
 {
    std::cout << std::endl;
    std::cout << "Selection Statistics " << std::endl;
-   std::cout << std::setw(5) << std::setprecision(0) << "#Cut" << std::setw(8) << std::setprecision(0) << "SelName"
-             << std::setw(9) << std::setprecision(0) << "EvBef" << std::setw(9) << std::setprecision(0) << "EvAfter"
+   std::cout << std::setw(5) << std::setprecision(0) << "#Cut" << std::setw(8)
+             << std::setprecision(0) << "SelName" << std::setw(9) << std::setprecision(0)
+             << "EvBef" << std::setw(9) << std::setprecision(0) << "EvAfter"
              << " (" << std::setw(8) << "wrtPrev"
              << ") "
              << " (" << std::setw(8) << "wrtStart"
-             << ") " << std::setw(9) << std::setprecision(0) << "MdBef" << std::setw(9) << std::setprecision(0)
-             << "MdAfter"
+             << ") " << std::setw(9) << std::setprecision(0) << "MdBef" << std::setw(9)
+             << std::setprecision(0) << "MdAfter"
              << " (" << std::setw(8) << "wrtPrev"
              << ") "
              << " (" << std::setw(8) << "wrtStart"
-             << ") " << std::setw(9) << std::setprecision(0) << "ClBef" << std::setw(9) << std::setprecision(0)
-             << "ClAfter"
+             << ") " << std::setw(9) << std::setprecision(0) << "ClBef" << std::setw(9)
+             << std::setprecision(0) << "ClAfter"
              << " (" << std::setw(8) << "wrtPrev"
              << ") "
              << " (" << std::setw(8) << "wrtStart"
-             << ") " << std::setw(9) << std::setprecision(0) << "PdBef" << std::setw(9) << std::setprecision(0)
-             << "PdAfter"
+             << ") " << std::setw(9) << std::setprecision(0) << "PdBef" << std::setw(9)
+             << std::setprecision(0) << "PdAfter"
              << " (" << std::setw(8) << "wrtPrev"
              << ") "
              << " (" << std::setw(8) << "wrtStart"
@@ -515,57 +520,78 @@ void Selector::PrintStat()
    int iTem_Max = NberOfSelections();
    for (int iTem = 0; iTem < iTem_Max; iTem++) {
       std::cout
-         << std::setw(5) << std::setprecision(0) << iTem << std::setw(8) << std::setprecision(0)
-         << ListOfSelectionName[iTem] << std::setw(9) << std::setprecision(0) << ListOfNberOfEvents_Before[iTem]
-         << std::setw(9) << std::setprecision(0) << ListOfNberOfEvents_After[iTem] << " (" << std::setw(8)
+         << std::setw(5) << std::setprecision(0) << iTem << std::setw(8)
+         << std::setprecision(0) << ListOfSelectionName[iTem] << std::setw(9)
+         << std::setprecision(0) << ListOfNberOfEvents_Before[iTem] << std::setw(9)
+         << std::setprecision(0) << ListOfNberOfEvents_After[iTem] << " (" << std::setw(8)
          << std::setprecision(2)
-         << 100. * (ListOfNberOfEvents_After[iTem] - ListOfNberOfEvents_Before[iTem]) / ListOfNberOfEvents_Before[iTem]
+         << 100. * (ListOfNberOfEvents_After[iTem] - ListOfNberOfEvents_Before[iTem]) /
+               ListOfNberOfEvents_Before[iTem]
          << ") "
          << " (" << std::setw(8) << std::setprecision(2)
-         << 100. * (ListOfNberOfEvents_After[iTem] - ListOfNberOfEvents_Before[0]) / ListOfNberOfEvents_Before[0]
-         << ") " << std::setw(9) << std::setprecision(0) << ListOfNberOfModules_Before[iTem] << std::setw(9)
-         << std::setprecision(0) << ListOfNberOfModules_After[iTem] << " (" << std::setw(8) << std::setprecision(2)
+         << 100. * (ListOfNberOfEvents_After[iTem] - ListOfNberOfEvents_Before[0]) /
+               ListOfNberOfEvents_Before[0]
+         << ") " << std::setw(9) << std::setprecision(0)
+         << ListOfNberOfModules_Before[iTem] << std::setw(9) << std::setprecision(0)
+         << ListOfNberOfModules_After[iTem] << " (" << std::setw(8)
+         << std::setprecision(2)
          << 100. * (ListOfNberOfModules_After[iTem] - ListOfNberOfModules_Before[iTem]) /
                ListOfNberOfModules_Before[iTem]
          << ") "
          << " (" << std::setw(8) << std::setprecision(2)
-         << 100. * (ListOfNberOfModules_After[iTem] - ListOfNberOfModules_Before[0]) / ListOfNberOfModules_Before[0]
-         << ") " << std::setw(9) << std::setprecision(0) << ListOfNberOfClusters_Before[iTem] << std::setw(9)
-         << std::setprecision(0) << ListOfNberOfClusters_After[iTem] << " (" << std::setw(8) << std::setprecision(2)
-         << 100. * (ListOfNberOfClusters_After[iTem] - ListOfNberOfClusters_Before[iTem]) /
+         << 100. * (ListOfNberOfModules_After[iTem] - ListOfNberOfModules_Before[0]) /
+               ListOfNberOfModules_Before[0]
+         << ") " << std::setw(9) << std::setprecision(0)
+         << ListOfNberOfClusters_Before[iTem] << std::setw(9) << std::setprecision(0)
+         << ListOfNberOfClusters_After[iTem] << " (" << std::setw(8)
+         << std::setprecision(2)
+         << 100. *
+               (ListOfNberOfClusters_After[iTem] - ListOfNberOfClusters_Before[iTem]) /
                ListOfNberOfClusters_Before[iTem]
          << ") "
          << " (" << std::setw(8) << std::setprecision(2)
-         << 100. * (ListOfNberOfClusters_After[iTem] - ListOfNberOfClusters_Before[0]) / ListOfNberOfClusters_Before[0]
-         << ") " << std::setw(9) << std::setprecision(0) << ListOfNberOfPads_Before[iTem] << std::setw(9)
-         << std::setprecision(0) << ListOfNberOfPads_After[iTem] << " (" << std::setw(8) << std::setprecision(2)
-         << 100. * (ListOfNberOfPads_After[iTem] - ListOfNberOfPads_Before[iTem]) / ListOfNberOfPads_Before[iTem]
+         << 100. * (ListOfNberOfClusters_After[iTem] - ListOfNberOfClusters_Before[0]) /
+               ListOfNberOfClusters_Before[0]
+         << ") " << std::setw(9) << std::setprecision(0) << ListOfNberOfPads_Before[iTem]
+         << std::setw(9) << std::setprecision(0) << ListOfNberOfPads_After[iTem] << " ("
+         << std::setw(8) << std::setprecision(2)
+         << 100. * (ListOfNberOfPads_After[iTem] - ListOfNberOfPads_Before[iTem]) /
+               ListOfNberOfPads_Before[iTem]
          << ") "
          << " (" << std::setw(8) << std::setprecision(2)
-         << 100. * (ListOfNberOfPads_After[iTem] - ListOfNberOfPads_Before[0]) / ListOfNberOfPads_Before[0] << ") "
-         << std::endl;
+         << 100. * (ListOfNberOfPads_After[iTem] - ListOfNberOfPads_Before[0]) /
+               ListOfNberOfPads_Before[0]
+         << ") " << std::endl;
    }
-   std::cout << std::setw(13) << std::setprecision(0) << "Summary Sel" << std::setw(9) << std::setprecision(0)
-             << ListOfNberOfEvents_Before[0] << std::setw(9) << std::setprecision(0)
-             << ListOfNberOfEvents_After[iTem_Max - 1] << std::setw(12) << " "
-             << " (" << std::setw(8) << std::setprecision(2)
-             << 100. * (ListOfNberOfEvents_After[iTem_Max - 1] - ListOfNberOfEvents_Before[0]) /
-                   ListOfNberOfEvents_Before[0]
-             << ") " << std::setw(9) << std::setprecision(0) << ListOfNberOfModules_Before[0] << std::setw(9)
-             << std::setprecision(0) << ListOfNberOfModules_After[iTem_Max - 1] << std::setw(12) << " "
-             << " (" << std::setw(8) << std::setprecision(2)
-             << 100. * (ListOfNberOfModules_After[iTem_Max - 1] - ListOfNberOfModules_Before[0]) /
-                   ListOfNberOfModules_Before[0]
-             << ") " << std::setw(9) << std::setprecision(0) << ListOfNberOfClusters_Before[0] << std::setw(9)
-             << std::setprecision(0) << ListOfNberOfClusters_After[iTem_Max - 1] << std::setw(12) << " "
-             << " (" << std::setw(8) << std::setprecision(2)
-             << 100. * (ListOfNberOfClusters_After[iTem_Max - 1] - ListOfNberOfClusters_Before[0]) /
-                   ListOfNberOfClusters_Before[0]
-             << ") " << std::setw(9) << std::setprecision(0) << ListOfNberOfPads_Before[0] << std::setw(9)
-             << std::setprecision(0) << ListOfNberOfPads_After[iTem_Max - 1] << std::setw(12) << " "
-             << " (" << std::setw(8) << std::setprecision(2)
-             << 100. * (ListOfNberOfPads_After[iTem_Max - 1] - ListOfNberOfPads_Before[0]) / ListOfNberOfPads_Before[0]
-             << ") " << std::endl;
+   std::cout
+      << std::setw(13) << std::setprecision(0) << "Summary Sel" << std::setw(9)
+      << std::setprecision(0) << ListOfNberOfEvents_Before[0] << std::setw(9)
+      << std::setprecision(0) << ListOfNberOfEvents_After[iTem_Max - 1] << std::setw(12)
+      << " "
+      << " (" << std::setw(8) << std::setprecision(2)
+      << 100. * (ListOfNberOfEvents_After[iTem_Max - 1] - ListOfNberOfEvents_Before[0]) /
+            ListOfNberOfEvents_Before[0]
+      << ") " << std::setw(9) << std::setprecision(0) << ListOfNberOfModules_Before[0]
+      << std::setw(9) << std::setprecision(0) << ListOfNberOfModules_After[iTem_Max - 1]
+      << std::setw(12) << " "
+      << " (" << std::setw(8) << std::setprecision(2)
+      << 100. *
+            (ListOfNberOfModules_After[iTem_Max - 1] - ListOfNberOfModules_Before[0]) /
+            ListOfNberOfModules_Before[0]
+      << ") " << std::setw(9) << std::setprecision(0) << ListOfNberOfClusters_Before[0]
+      << std::setw(9) << std::setprecision(0) << ListOfNberOfClusters_After[iTem_Max - 1]
+      << std::setw(12) << " "
+      << " (" << std::setw(8) << std::setprecision(2)
+      << 100. *
+            (ListOfNberOfClusters_After[iTem_Max - 1] - ListOfNberOfClusters_Before[0]) /
+            ListOfNberOfClusters_Before[0]
+      << ") " << std::setw(9) << std::setprecision(0) << ListOfNberOfPads_Before[0]
+      << std::setw(9) << std::setprecision(0) << ListOfNberOfPads_After[iTem_Max - 1]
+      << std::setw(12) << " "
+      << " (" << std::setw(8) << std::setprecision(2)
+      << 100. * (ListOfNberOfPads_After[iTem_Max - 1] - ListOfNberOfPads_Before[0]) /
+            ListOfNberOfPads_Before[0]
+      << ") " << std::endl;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -573,7 +599,8 @@ void Selector::PrintStat()
 // Stage 1: Remove clusters in first and last columns
 void Selector::Stage1_Def()
 {
-   std::cout << "Apply selection	1 -> Remove clusters in first and last columns " << std::endl;
+   std::cout << "Apply selection	1 -> Remove clusters in first and last columns "
+             << std::endl;
 }
 void Selector::Stage1(Sample &aSample, const int &ModuleNber)
 {
@@ -585,7 +612,8 @@ void Selector::Stage1(Sample &aSample, const int &ModuleNber)
 }
 void Selector::Stage1(Event *pEvent, const int &ModuleNber)
 {
-   const Model_ReadOutGeometry *pModel_ReadOutGeometry = pEvent->Get_Model_ReadOutGeometry();
+   const Model_ReadOutGeometry *pModel_ReadOutGeometry =
+      pEvent->Get_Model_ReadOutGeometry();
    int iXFirst = 0;
    int iXLast = pModel_ReadOutGeometry->Get_Nx() - 1;
 
@@ -615,9 +643,11 @@ void Selector::Set_Cut_Stage2_EventBased(double Cut_Stage2_EventBased)
 }
 void Selector::Stage2_Def()
 {
-   std::cout << "Apply selection 2 -> Remove clusters out of time (Event Based) " << std::endl;
-   std::cout << "|TLeading -TLeadingMeanOverEvent| <= m_Cut_Stage2_EventBased (= " << std::setw(5)
-             << std::setprecision(0) << m_Cut_Stage2_EventBased << ")" << std::endl;
+   std::cout << "Apply selection 2 -> Remove clusters out of time (Event Based) "
+             << std::endl;
+   std::cout << "|TLeading -TLeadingMeanOverEvent| <= m_Cut_Stage2_EventBased (= "
+             << std::setw(5) << std::setprecision(0) << m_Cut_Stage2_EventBased << ")"
+             << std::endl;
 }
 void Selector::Stage2(Sample &aSample, const int &ModuleNber)
 {
@@ -673,8 +703,10 @@ void Selector::Stage3_Def()
 {
    std::cout << "Apply selection 3 -> Remove clusters out of time	" << std::endl;
    std::cout << "m_Cut_Stage3_TLow <= TLeading <= m_Cut_Stage3_THigh " << std::endl;
-   std::cout << "m_Cut_Stage3_TLow	= " << std::setw(4) << std::setprecision(0) << m_Cut_Stage3_TLow << std::endl;
-   std::cout << "m_Cut_Stage3_THigh	= " << std::setw(4) << std::setprecision(0) << m_Cut_Stage3_THigh << std::endl;
+   std::cout << "m_Cut_Stage3_TLow	= " << std::setw(4) << std::setprecision(0)
+             << m_Cut_Stage3_TLow << std::endl;
+   std::cout << "m_Cut_Stage3_THigh	= " << std::setw(4) << std::setprecision(0)
+             << m_Cut_Stage3_THigh << std::endl;
 }
 void Selector::Stage3(Sample &aSample, const int &ModuleNber)
 {
@@ -718,12 +750,14 @@ void Selector::Set_Cut_Stage4_APM_High(double Cut_Stage4_APM_High)
 }
 void Selector::Stage4_Def()
 {
-   std::cout << "Apply selection 4 -> Remove Events with an average pad multiplicity too high or too low " << std::endl;
+   std::cout << "Apply selection 4 -> Remove Events with an average pad multiplicity too "
+                "high or too low "
+             << std::endl;
 
-   std::cout << "Pad Multiplicity >	m_Cut_Stage4_APM_Low	(= " << std::setw(4) << std::setprecision(1)
-             << m_Cut_Stage4_APM_Low << ")" << std::endl;
-   std::cout << "Pad Multiplicity <= m_Cut_Stage4_APM_High (= " << std::setw(4) << std::setprecision(1)
-             << m_Cut_Stage4_APM_High << ")" << std::endl;
+   std::cout << "Pad Multiplicity >	m_Cut_Stage4_APM_Low	(= " << std::setw(4)
+             << std::setprecision(1) << m_Cut_Stage4_APM_Low << ")" << std::endl;
+   std::cout << "Pad Multiplicity <= m_Cut_Stage4_APM_High (= " << std::setw(4)
+             << std::setprecision(1) << m_Cut_Stage4_APM_High << ")" << std::endl;
 }
 void Selector::Stage4(Sample &aSample, const int &ModuleNber)
 {
@@ -760,8 +794,8 @@ void Selector::Set_Cut_Stage5_Npads_Hig(double Cut_Stage5_Npads_Hig)
 void Selector::Stage5_Def()
 {
    std::cout << "Apply selection 5 -> Remove clusters with too many pads " << std::endl;
-   std::cout << "Npads <= m_Cut_Stage5_Npads_Hig (= " << std::setw(3) << std::setprecision(0) << m_Cut_Stage5_Npads_Hig
-             << ")" << std::endl;
+   std::cout << "Npads <= m_Cut_Stage5_Npads_Hig (= " << std::setw(3)
+             << std::setprecision(0) << m_Cut_Stage5_Npads_Hig << ")" << std::endl;
 }
 void Selector::Stage5(Sample &aSample, const int &ModuleNber)
 {
@@ -805,10 +839,10 @@ void Selector::Set_Cut_Stage6_Amax_Hig(double Cut_Stage6_Amax_Hig)
 void Selector::Stage6_Def()
 {
    std::cout << "Apply selection 6 -> Remove Clusters with a too high APad " << std::endl;
-   std::cout << "APad >= m_Cut_Stage6_Amax_Low (= " << std::setw(5) << std::setprecision(0) << m_Cut_Stage6_Amax_Low
-             << ")" << std::endl;
-   std::cout << "APad <= m_Cut_Stage6_Amax_Hig (= " << std::setw(5) << std::setprecision(0) << m_Cut_Stage6_Amax_Hig
-             << ")" << std::endl;
+   std::cout << "APad >= m_Cut_Stage6_Amax_Low (= " << std::setw(5)
+             << std::setprecision(0) << m_Cut_Stage6_Amax_Low << ")" << std::endl;
+   std::cout << "APad <= m_Cut_Stage6_Amax_Hig (= " << std::setw(5)
+             << std::setprecision(0) << m_Cut_Stage6_Amax_Hig << ")" << std::endl;
 }
 void Selector::Stage6(Sample &aSample, const int &ModuleNber)
 {
@@ -853,10 +887,11 @@ void Selector::Set_Cut_StageFinal_NCluster_Low(double Cut_StageFinal_NCluster_Lo
 }
 void Selector::StageFinal_Def()
 {
-   std::cout << "Apply selection	Final -> Reject Events with too few clusters" << std::endl;
+   std::cout << "Apply selection	Final -> Reject Events with too few clusters"
+             << std::endl;
 
-   std::cout << "NClusters >= m_Cut_StageFinal_NCluster_Low (=" << std::setw(5) << std::setprecision(0)
-             << m_Cut_StageFinal_NCluster_Low << ")" << std::endl;
+   std::cout << "NClusters >= m_Cut_StageFinal_NCluster_Low (=" << std::setw(5)
+             << std::setprecision(0) << m_Cut_StageFinal_NCluster_Low << ")" << std::endl;
 }
 void Selector::StageFinal(Sample &aSample, const int &ModuleNber)
 {

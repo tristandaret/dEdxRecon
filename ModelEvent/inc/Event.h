@@ -16,7 +16,8 @@
 class Event {
 public:
    /** Constructor */
-   Event(const int &EventNber, const int &EntryNber, Model_ReadOutGeometry *pModel_ReadOutGeometry,
+   Event(const int &EventNber, const int &EntryNber,
+         Model_ReadOutGeometry *pModel_ReadOutGeometry,
          Model_Electronics *pModel_Electronics, Model_ChargeI *pModel_ChargeI);
    virtual ~Event();
 
@@ -43,16 +44,18 @@ public:
    void Add_Module(Module *pModule); // Add a Module
 
    //------------------------------Module Access-----------------------//
-   Module *Get_ThisModule(const int &ModuleNber); // Get Module by the Module Nber if exists
+   Module *
+   Get_ThisModule(const int &ModuleNber); // Get Module by the Module Nber if exists
    const Module *Get_ThisModuleConst(const int &ModuleNber) const;
 
    int Get_NberOfModule() const;                   // Size of Module set
    Module *Get_Module_InArray(const int &Index1D); // Get Module
 
    //------------------------------Module Validity-----------------------//
-   int Validity_ForThisModule(const int &ModuleNber) const; // Get validation status of the Modle
-   void Validate_ThisModule(const int &ModuleNber);         // Validate the Module
-   void Invalidate_ThisModule(const int &ModuleNber);       // Invalidate theModule
+   int Validity_ForThisModule(
+      const int &ModuleNber) const;                 // Get validation status of the Modle
+   void Validate_ThisModule(const int &ModuleNber); // Validate the Module
+   void Invalidate_ThisModule(const int &ModuleNber); // Invalidate theModule
 
    //------------------------------Clusters Access-----------------------//
    std::vector<Cluster *> GiveMe_Clusters_ForThisModule(const int &ModuleNber);
@@ -64,14 +67,18 @@ public:
 
    std::vector<double> GiveMe_CutSlopeXYZ_ForThisModule(const int &ModuleNber);
 
-   void Replace_Clusters_ForThisModule(std::vector<Cluster *> &VCluster,
-                                       const int &ModuleNber); // Replace existing clusters set
+   void
+   Replace_Clusters_ForThisModule(std::vector<Cluster *> &VCluster,
+                                  const int &ModuleNber); // Replace existing clusters set
 
    Cluster *Get_Cluster_Copy(Cluster *pCluster); // Get copy of the input cluster
 
    //------------------------------Track Access-----------------------//
-   Track *GiveMe_AnUnfittedTrack_ForThisModule(const int &ModuleNber); // Ownership is passed to the user
-   void Set_Track_ForThisModule(Track *pTrack, const int &ModuleNber); // Ownership is passed to the Module
+   Track *GiveMe_AnUnfittedTrack_ForThisModule(
+      const int &ModuleNber); // Ownership is passed to the user
+   void
+   Set_Track_ForThisModule(Track *pTrack,
+                           const int &ModuleNber); // Ownership is passed to the Module
    const Track *GiveMe_Track_ForThisModule(const int &ModuleNber);
 
    //------------------------------Data Members-----------------------//
@@ -84,8 +91,8 @@ private:
    short int m_NberOfModules;
    std::vector<Module *> V_Module;
 
-   void Ini_Models(Model_ReadOutGeometry *pModel_ReadOutGeometry, Model_Electronics *pModel_Electronics,
-                   Model_ChargeI *pModel_ChargeI);
+   void Ini_Models(Model_ReadOutGeometry *pModel_ReadOutGeometry,
+                   Model_Electronics *pModel_Electronics, Model_ChargeI *pModel_ChargeI);
 
    Model_ReadOutGeometry *p_Model_ReadOutGeometry;
    Model_Electronics *p_Model_Electronics;

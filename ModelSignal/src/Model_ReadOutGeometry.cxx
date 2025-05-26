@@ -101,45 +101,54 @@ void Model_ReadOutGeometry::WriteOut() const
    std::cout << "StartModel_ReadOutGeometry" << std::endl;
    std::cout << " m_LX	; " << std::setw(13) << std::setprecision(6) << m_LX << std::endl;
    std::cout << " m_LY	; " << std::setw(13) << std::setprecision(6) << m_LY << std::endl;
-   std::cout << " m_Xpad_min; " << std::setw(13) << std::setprecision(6) << m_Xpad_min << std::endl;
-   std::cout << " m_Ypad_min; " << std::setw(13) << std::setprecision(6) << m_Ypad_min << std::endl;
+   std::cout << " m_Xpad_min; " << std::setw(13) << std::setprecision(6) << m_Xpad_min
+             << std::endl;
+   std::cout << " m_Ypad_min; " << std::setw(13) << std::setprecision(6) << m_Ypad_min
+             << std::endl;
    std::cout << " m_Nx	; " << std::setw(13) << std::setprecision(0) << m_Nx << std::endl;
    std::cout << " m_Ny	; " << std::setw(13) << std::setprecision(0) << m_Ny << std::endl;
    std::cout << "EndModel_ReadOutGeometry" << std::endl;
 }
 
-double Model_ReadOutGeometry::Get_XcPad(const int &iX, const int &iY, const int &ModuleNber) const
+double Model_ReadOutGeometry::Get_XcPad(const int &iX, const int &iY,
+                                        const int &ModuleNber) const
 {
    return (m_Xpad_min + 0.5 * m_LX + double(iX) * m_LX);
 }
-double Model_ReadOutGeometry::Get_YcPad(const int &iX, const int &iY, const int &ModuleNber) const
+double Model_ReadOutGeometry::Get_YcPad(const int &iX, const int &iY,
+                                        const int &ModuleNber) const
 {
    return (m_Ypad_min + 0.5 * m_LY + double(iY) * m_LY);
 }
 
-double Model_ReadOutGeometry::Get_XLPad(const int &iX, const int &iY, const int &ModuleNber) const
+double Model_ReadOutGeometry::Get_XLPad(const int &iX, const int &iY,
+                                        const int &ModuleNber) const
 {
    double Xpad_C = Get_XcPad(iX, iY, ModuleNber);
    return (Xpad_C - 0.5 * m_LX);
 }
-double Model_ReadOutGeometry::Get_YLPad(const int &iX, const int &iY, const int &ModuleNber) const
+double Model_ReadOutGeometry::Get_YLPad(const int &iX, const int &iY,
+                                        const int &ModuleNber) const
 {
    double Ypad_C = Get_YcPad(iX, iY, ModuleNber);
    return (Ypad_C - 0.5 * m_LY);
 }
 
-double Model_ReadOutGeometry::Get_XHPad(const int &iX, const int &iY, const int &ModuleNber) const
+double Model_ReadOutGeometry::Get_XHPad(const int &iX, const int &iY,
+                                        const int &ModuleNber) const
 {
    double Xpad_C = Get_XcPad(iX, iY, ModuleNber);
    return (Xpad_C + 0.5 * m_LX);
 }
-double Model_ReadOutGeometry::Get_YHPad(const int &iX, const int &iY, const int &ModuleNber) const
+double Model_ReadOutGeometry::Get_YHPad(const int &iX, const int &iY,
+                                        const int &ModuleNber) const
 {
    double Ypad_C = Get_YcPad(iX, iY, ModuleNber);
    return (Ypad_C + 0.5 * m_LY);
 }
 
-void Model_ReadOutGeometry::GetPadEdges(const int &iX, const int &iY, const int &ModuleNber, double &XL, double &XH,
+void Model_ReadOutGeometry::GetPadEdges(const int &iX, const int &iY,
+                                        const int &ModuleNber, double &XL, double &XH,
                                         double &YL, double &YH) const
 {
    double Xpad_C = Get_XcPad(iX, iY, ModuleNber);

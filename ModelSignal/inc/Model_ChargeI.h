@@ -24,8 +24,9 @@ public:
    void Set_WidthFromDriftDistance(const double &DriftDistance_cm);
 
    // Get Charge
-   virtual double Get_Qpad(const double &Time, const double &Time0, const double &XTrue, const double &YTrue,
-                           const double &XL, const double &XH, const double &YL, const double &YH) const = 0;
+   virtual double Get_Qpad(const double &Time, const double &Time0, const double &XTrue,
+                           const double &YTrue, const double &XL, const double &XH,
+                           const double &YL, const double &YH) const = 0;
 
    // Big Dump
    virtual void WriteOut() const = 0;

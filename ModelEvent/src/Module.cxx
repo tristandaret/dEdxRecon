@@ -1,8 +1,8 @@
 #include "Module.h"
 
 Module::Module(const int &EventNber, const int &EntryNber, const int &ModuleNber,
-               Model_ReadOutGeometry *pModel_ReadOutGeometry, Model_Electronics *pModel_Electronics,
-               Model_ChargeI *pModel_ChargeI)
+               Model_ReadOutGeometry *pModel_ReadOutGeometry,
+               Model_Electronics *pModel_Electronics, Model_ChargeI *pModel_ChargeI)
    : ROBoard(pModel_ReadOutGeometry, pModel_Electronics, pModel_ChargeI)
 {
    m_IsValid = 1;
@@ -21,8 +21,8 @@ Module::~Module()
    int VerboseDelete = 0;
    if (VerboseDelete == 1)
       std::cout << " Module Destructor "
-                << " m_EventNber " << m_EventNber << " m_EntryNber " << m_EntryNber << " m_ModuleNber " << m_ModuleNber
-                << std::endl;
+                << " m_EventNber " << m_EventNber << " m_EntryNber " << m_EntryNber
+                << " m_ModuleNber " << m_ModuleNber << std::endl;
    Clear_Clusters();
    delete p_TrackOfTheModule;
    p_TrackOfTheModule = 0;
@@ -104,8 +104,8 @@ Cluster *Module::Get_Cluster(const int &Index1D)
 
 Cluster *Module::Get_Cluster_Copy(Cluster *pCluster)
 {
-   Cluster *ToBeReturned =
-      new Cluster(pCluster->Get_EventNber(), pCluster->Get_EntryNber(), pCluster->Get_ModuleNber());
+   Cluster *ToBeReturned = new Cluster(
+      pCluster->Get_EventNber(), pCluster->Get_EntryNber(), pCluster->Get_ModuleNber());
 
    int NPads = pCluster->Get_NberOfPads();
    for (int iP = 0; iP < NPads; iP++) {

@@ -23,8 +23,8 @@ public:
 
    int Get_NberOfEvent();
 
-   virtual Event *
-   GiveMe_Event(const int &iEvent, const int &ModuleNber_Input, const int &Data_to_Use, const int &CloseWF = 1) = 0;
+   virtual Event *GiveMe_Event(const int &iEvent, const int &ModuleNber_Input,
+                               const int &Data_to_Use, const int &CloseWF = 1) = 0;
    int Get_PRF_exist();
    double Get_Norm();
    double Get_a2();

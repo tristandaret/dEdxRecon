@@ -21,17 +21,21 @@ Uploader *GiveMe_Uploader(const int &intUploader, const std::string &SampleFile)
    Uploader *ToBeReturned = 0;
 
    if (intUploader == 1)
-      ToBeReturned = new Uploader_ERAM01(SampleFile, pModel_ReadOutGeometry, pModel_Electronics, pModel_Charge1D);
+      ToBeReturned = new Uploader_ERAM01(SampleFile, pModel_ReadOutGeometry,
+                                         pModel_Electronics, pModel_Charge1D);
 
    if (intUploader == 2)
-      ToBeReturned = new Uploader_Prototype(SampleFile, pModel_ReadOutGeometry, pModel_Electronics, pModel_Charge1D);
+      ToBeReturned = new Uploader_Prototype(SampleFile, pModel_ReadOutGeometry,
+                                            pModel_Electronics, pModel_Charge1D);
    if (intUploader == 3) {
       pModel_ReadOutGeometry->SquareGeometry();
-      ToBeReturned = new Uploader_MockUp_V1(SampleFile, pModel_ReadOutGeometry, pModel_Electronics, pModel_Charge1D);
+      ToBeReturned = new Uploader_MockUp_V1(SampleFile, pModel_ReadOutGeometry,
+                                            pModel_Electronics, pModel_Charge1D);
    }
    if (intUploader == 4) {
       pModel_ReadOutGeometry->SquareGeometry();
-      ToBeReturned = new Uploader_MockUp_V2(SampleFile, pModel_ReadOutGeometry, pModel_Electronics, pModel_Charge1D);
+      ToBeReturned = new Uploader_MockUp_V2(SampleFile, pModel_ReadOutGeometry,
+                                            pModel_Electronics, pModel_Charge1D);
    }
    return ToBeReturned;
 }

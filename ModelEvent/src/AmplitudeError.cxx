@@ -6,7 +6,8 @@ double AmplitudeError_NextLeading();
 double AmplitudeError_NextNextLeading();
 
 //
-double AmplitudeError(Pad *pPad, Pad *pPad_Leading, Pad *pPad_NextLeading, Pad *pPad_NextNextLeading)
+double AmplitudeError(Pad *pPad, Pad *pPad_Leading, Pad *pPad_NextLeading,
+                      Pad *pPad_NextNextLeading)
 {
    double ToBeReturned = std::sqrt(pPad->Get_AMax());
 

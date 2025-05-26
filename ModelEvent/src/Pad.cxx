@@ -5,8 +5,9 @@
 #include "TH1F.h"
 #include "TF1.h"
 
-Pad::Pad(Model_ReadOutGeometry *pModel_ReadOutGeometry, Model_Electronics *pModel_Electronics,
-         Model_ChargeI *pModel_ChargeI, std::string PadName, const int &EventNber, const int &EntryNber,
+Pad::Pad(Model_ReadOutGeometry *pModel_ReadOutGeometry,
+         Model_Electronics *pModel_Electronics, Model_ChargeI *pModel_ChargeI,
+         std::string PadName, const int &EventNber, const int &EntryNber,
          const int &ModuleNber, const int &iX, const int &iY)
 {
    // Initialize Models
@@ -24,7 +25,8 @@ Pad::Pad(Model_ReadOutGeometry *pModel_ReadOutGeometry, Model_Electronics *pMode
    double Xpad_L = 0.;
    double Ypad_H = 0.;
    double Ypad_L = 0.;
-   p_Model_ReadOutGeometry->GetPadEdges(m_iX, m_iY, ModuleNber, Xpad_L, Xpad_H, Ypad_L, Ypad_H);
+   p_Model_ReadOutGeometry->GetPadEdges(m_iX, m_iY, ModuleNber, Xpad_L, Xpad_H, Ypad_L,
+                                        Ypad_H);
 
    SetEdges(Xpad_L, Xpad_H, Ypad_L, Ypad_H);
 
@@ -51,10 +53,11 @@ Pad::Pad(Model_ReadOutGeometry *pModel_ReadOutGeometry, Model_Electronics *pMode
    m_TMax_True = -1;
 }
 
-Pad::Pad(Model_ReadOutGeometry *pModel_ReadOutGeometry, Model_Electronics *pModel_Electronics,
-         Model_ChargeI *pModel_ChargeI, std::string PadName, const int &EventNber, const int &EntryNber,
-         const int &ModuleNber, const int &iX, const int &iY, const double &XL, const double &XH, const double &YL,
-         const double &YH)
+Pad::Pad(Model_ReadOutGeometry *pModel_ReadOutGeometry,
+         Model_Electronics *pModel_Electronics, Model_ChargeI *pModel_ChargeI,
+         std::string PadName, const int &EventNber, const int &EntryNber,
+         const int &ModuleNber, const int &iX, const int &iY, const double &XL,
+         const double &XH, const double &YL, const double &YH)
 {
    // Initialize Models
    Ini_Models(pModel_ReadOutGeometry, pModel_Electronics, pModel_ChargeI);
@@ -247,8 +250,10 @@ void Pad::SetEdges(const double &XL, const double &XH, const double &YL, const d
       std::cout << std::endl;
       std::cout << "Pad::SetEdges" << std::endl;
       std::cout << "	m_LX <= 0. ||	m_LY <= 0. " << std::endl;
-      std::cout << "	m_XPad " << std::setw(13) << std::setprecision(6) << m_XPad << std::endl;
-      std::cout << "	m_YPad " << std::setw(13) << std::setprecision(6) << m_YPad << std::endl;
+      std::cout << "	m_XPad " << std::setw(13) << std::setprecision(6) << m_XPad
+                << std::endl;
+      std::cout << "	m_YPad " << std::setw(13) << std::setprecision(6) << m_YPad
+                << std::endl;
       std::cout << "	m_LX " << std::setw(13) << std::setprecision(6) << m_LX << std::endl;
       std::cout << "	m_LY " << std::setw(13) << std::setprecision(6) << m_LY << std::endl;
       std::cout << "	m_XL " << std::setw(13) << std::setprecision(6) << m_XL << std::endl;
@@ -268,12 +273,17 @@ void Pad::WriteOut() const
    std::cout << " m_EntryNber; " << std::setw(16) << m_EntryNber << std::endl;
    std::cout << " m_iX	; " << std::setw(16) << m_iX << std::endl;
    std::cout << " m_iY	; " << std::setw(16) << m_iY << std::endl;
-   std::cout << " m_Time0; " << std::setw(16) << std::setprecision(9) << m_Time0 << std::endl;
-   std::cout << " m_XTrue; " << std::setw(16) << std::setprecision(9) << m_XTrue << std::endl;
-   std::cout << " m_YTrue; " << std::setw(16) << std::setprecision(9) << m_YTrue << std::endl;
+   std::cout << " m_Time0; " << std::setw(16) << std::setprecision(9) << m_Time0
+             << std::endl;
+   std::cout << " m_XTrue; " << std::setw(16) << std::setprecision(9) << m_XTrue
+             << std::endl;
+   std::cout << " m_YTrue; " << std::setw(16) << std::setprecision(9) << m_YTrue
+             << std::endl;
 
-   std::cout << " m_AMax_WF; " << std::setw(16) << std::setprecision(9) << m_AMax_WF << std::endl;
-   std::cout << " m_TMax_WF; " << std::setw(16) << std::setprecision(9) << m_TMax_WF << std::endl;
+   std::cout << " m_AMax_WF; " << std::setw(16) << std::setprecision(9) << m_AMax_WF
+             << std::endl;
+   std::cout << " m_TMax_WF; " << std::setw(16) << std::setprecision(9) << m_TMax_WF
+             << std::endl;
    std::vector<int> The_v_ADC = Get_vADC();
    int iTem_Max = The_v_ADC.size();
    std::cout << " v_ADC; " << std::setw(5) << iTem_Max;
@@ -285,8 +295,8 @@ void Pad::WriteOut() const
    std::cout << "EndPad" << std::endl;
 }
 
-void Pad::Ini_Models(Model_ReadOutGeometry *pModel_ReadOutGeometry, Model_Electronics *pModel_Electronics,
-                     Model_ChargeI *pModel_ChargeI)
+void Pad::Ini_Models(Model_ReadOutGeometry *pModel_ReadOutGeometry,
+                     Model_Electronics *pModel_Electronics, Model_ChargeI *pModel_ChargeI)
 {
    //
    p_Model_ReadOutGeometry = pModel_ReadOutGeometry;
@@ -300,7 +310,8 @@ void Pad::Ini_Models(Model_ReadOutGeometry *pModel_ReadOutGeometry, Model_Electr
    m_TimeConvoMax = double(TimeBinMax) * 1.E-9;
    m_NberOfTimeConvoPoints = (TimeBinMax - TimeBinMin) * 1 + 1;
 
-   m_TimeConvoStep = (m_TimeConvoMax - m_TimeConvoMin) / double(m_NberOfTimeConvoPoints - 1);
+   m_TimeConvoStep =
+      (m_TimeConvoMax - m_TimeConvoMin) / double(m_NberOfTimeConvoPoints - 1);
 }
 
 void Pad::Clear_ADC()
@@ -516,7 +527,8 @@ void Pad::Get_A_T_Max_FIT(double &Amax, double &Tmax)
    double Tmax_WF = 0.;
    Get_A_T_Max_WF_01(Amax_WF, Tmax_WF);
 
-   TH1F *pTH1F = new TH1F("BIDONGet_A_T_Max_FIT", "BIDONGet_A_T_Max_FIT", 510, -0.5, 509.5);
+   TH1F *pTH1F =
+      new TH1F("BIDONGet_A_T_Max_FIT", "BIDONGet_A_T_Max_FIT", 510, -0.5, 509.5);
 
    std::vector<int> The_v_ADC = Get_vADC();
    int NADC = The_v_ADC.size();
@@ -524,7 +536,8 @@ void Pad::Get_A_T_Max_FIT(double &Amax, double &Tmax)
       int ADC_value = The_v_ADC[iTimeBin];
       if (ADC_value < 0)
          continue;
-      int iTimeBinLoc = iTimeBin + 1; // NB: the 1st Data (iTimeBin=0) goes in the 1st bin (iTimeBinLoc=1) [-0.5,+0.5]
+      int iTimeBinLoc = iTimeBin + 1; // NB: the 1st Data (iTimeBin=0) goes in the 1st bin
+                                      // (iTimeBinLoc=1) [-0.5,+0.5]
       if (iTimeBinLoc >= 1 && iTimeBinLoc <= 510)
          pTH1F->SetBinContent(iTimeBinLoc, ADC_value);
    }
@@ -615,7 +628,8 @@ void Pad::Get_A_T_Max_FIT(double &Amax, double &Tmax)
          m_FIT_Xmax = T_FitMax;
 
          ParabolaFunctionNG aParabolaFunctionNG;
-         TF1 *pTF12 = new TF1("ParabolaFunctionNG", aParabolaFunctionNG, T_FitMin, T_FitMax, 4);
+         TF1 *pTF12 =
+            new TF1("ParabolaFunctionNG", aParabolaFunctionNG, T_FitMin, T_FitMax, 4);
 
          pTF12->SetParName(0, "A0P");
          pTF12->SetParName(1, "A0M");
@@ -629,7 +643,8 @@ void Pad::Get_A_T_Max_FIT(double &Amax, double &Tmax)
 
          pTF12->SetParLimits(2, T_FitMin, T_FitMax);
 
-         int Loc_FIT_Status_C = pTH1F->Fit("ParabolaFunctionNG", "Q", "", T_FitMin, T_FitMax);
+         int Loc_FIT_Status_C =
+            pTH1F->Fit("ParabolaFunctionNG", "Q", "", T_FitMin, T_FitMax);
 
          if (Loc_FIT_Status_C == 0) {
             m_FIT_Status = Loc_FIT_Status_C;
@@ -674,7 +689,8 @@ double Pad::Get_YTrue() const
 
 double Pad::Get_Qpad(const double &Time)
 {
-   return (p_Model_ChargeI->Get_Qpad(Time, m_Time0, m_XTrue, m_YTrue, m_XL, m_XH, m_YL, m_YH));
+   return (
+      p_Model_ChargeI->Get_Qpad(Time, m_Time0, m_XTrue, m_YTrue, m_XL, m_XH, m_YL, m_YH));
 }
 
 double Pad::Get_APad(const double &Time)
@@ -687,8 +703,9 @@ double Pad::Get_APad(const double &Time)
 
    for (int iTem = 0; iTem < m_NberOfTimeConvoPoints; iTem++) {
       double Taui = m_TimeConvoMin + double(iTem) * m_TimeConvoStep;
-      ToBeReturned += p_Model_ChargeI->Get_Qpad(Taui, 0., m_XTrue, m_YTrue, m_XL, m_XH, m_YL, m_YH) *
-                      p_Model_Electronics->Derive_Response_Base(LocalTime - Taui) * m_TimeConvoStep;
+      ToBeReturned +=
+         p_Model_ChargeI->Get_Qpad(Taui, 0., m_XTrue, m_YTrue, m_XL, m_XH, m_YL, m_YH) *
+         p_Model_Electronics->Derive_Response_Base(LocalTime - Taui) * m_TimeConvoStep;
    }
 
    return ToBeReturned;

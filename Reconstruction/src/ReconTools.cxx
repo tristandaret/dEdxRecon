@@ -87,16 +87,18 @@ void Reconstruction::WFCorrection(const std::string &OutCorr)
    aSelector.Tell_Selection();
    aSelector.Reset_StatCounters();
 
-   TH2F *h2f_WFvsLength =
-      new TH2F("h2f_WFvsLength", "WF_{sum} VS length in cluster;Length in cluster (mm);WF_{sum} (ADC count)", 80, -0.1,
-               16, 80, 0, 4100);
+   TH2F *h2f_WFvsLength = new TH2F(
+      "h2f_WFvsLength",
+      "WF_{sum} VS length in cluster;Length in cluster (mm);WF_{sum} (ADC count)", 80,
+      -0.1, 16, 80, 0, 4100);
    TF1 *A_corr = new TF1("A_corr", "[0] + [1]*x + [2]*x*x + [3]*x*x*x + [4]*x*x*x*x", 0,
                          17); // values provided by Vlada (2022/10/11)
    A_corr->SetParameters(291, 9.47, -4.04, 1.32, -0.0595);
    TrackFitter aTrackFitter("Minuit", n_param_trk);
    PRFParameters aPRFParameters;
    TF1 *tf1_PRF = new TF1("tf1_PRF", aPRFParameters, -2.5 * 1.128, 2.5 * 1.128, 5);
-   tf1_PRF->SetParameters(p_uploader->Get_Norm(), p_uploader->Get_a2(), p_uploader->Get_a4(), p_uploader->Get_b2(),
+   tf1_PRF->SetParameters(p_uploader->Get_Norm(), p_uploader->Get_a2(),
+                          p_uploader->Get_a4(), p_uploader->Get_b2(),
                           p_uploader->Get_b4());
    int counterFail = 0;
    int counterFit = 0;
@@ -127,7 +129,8 @@ void Reconstruction::WFCorrection(const std::string &OutCorr)
          float NClusters = pModule->Get_NberOfCluster();
 
          ClusterFitter_Diagonal aClusterFitter_Diagonal("Minuit");
-         ClusterFit_Diagonal_Event(-(M_PI_2 - (PHIMAX * M_PI / 180)), pEvent, fmodID, tf1_PRF, counterFit, counterFail,
+         ClusterFit_Diagonal_Event(-(M_PI_2 - (PHIMAX * M_PI / 180)), pEvent, fmodID,
+                                   tf1_PRF, counterFit, counterFail,
                                    aClusterFitter_Diagonal);
          TrackFitter aTrackFitter("Minuit", fnParamsTrack);
          TrackRecon_Event(aTrackFitter, pEvent, fmodID, fnParamsTrack);
@@ -138,7 +141,8 @@ void Reconstruction::WFCorrection(const std::string &OutCorr)
 
          // Loop On Clusters
          for (int iC = 0; iC < NClusters; iC++) {
-            std::fill(waveform_cluster.begin(), waveform_cluster.end(), 0); // reset waveform
+            std::fill(waveform_cluster.begin(), waveform_cluster.end(),
+                      0); // reset waveform
             Cluster *pCluster = pModule->Get_Cluster(iC);
             float trk_len_clus = 0; // in meters
             int NPads = pCluster->Get_NberOfPads();
@@ -148,7 +152,8 @@ void Reconstruction::WFCorrection(const std::string &OutCorr)
                std::fill(waveform_pad.begin(), waveform_pad.end(), 0); // reset waveform
                Pad *pPad = pCluster->Get_Pad(iP);
                waveform_pad = pPad->Get_vADC();
-               double G_pad = pERAMMaps->Gain(fERAMs_pos[fmodID], pPad->Get_iX(), pPad->Get_iY());
+               double G_pad =
+                  pERAMMaps->Gain(fERAMs_pos[fmodID], pPad->Get_iX(), pPad->Get_iY());
                float Gcorr = AVG_GAIN / G_pad;
                for (int i = 0; i < 510; i++)
                   waveform_pad[i] = round(waveform_pad[i] * Gcorr);
@@ -162,8 +167,9 @@ void Reconstruction::WFCorrection(const std::string &OutCorr)
             }
 
             if (trk_len_clus * 1000 > 0.002) {
-               h2f_WFvsLength->Fill(trk_len_clus * 1000,
-                                    *std::max_element(waveform_cluster.begin(), waveform_cluster.end()));
+               h2f_WFvsLength->Fill(
+                  trk_len_clus * 1000,
+                  *std::max_element(waveform_cluster.begin(), waveform_cluster.end()));
             }
          }
       }
@@ -171,7 +177,8 @@ void Reconstruction::WFCorrection(const std::string &OutCorr)
       n_events++;
    }
    mean_phi /= n_events;
-   std::cout << std::setprecision(2) << "mean_phi	= " << mean_phi * 180 / M_PI << std::endl;
+   std::cout << std::setprecision(2) << "mean_phi	= " << mean_phi * 180 / M_PI
+             << std::endl;
    aSelector.PrintStat();
    delete tf1_PRF;
 
@@ -183,7 +190,8 @@ void Reconstruction::WFCorrection(const std::string &OutCorr)
    tge_WFvsLength->Fit(A_corr, "RQ", "0", 0, L_phi);
 
    // Saving
-   std::string out_root = OutCorr.substr(0, OutCorr.length() - 5) + "_WFmax_correction_v9i9_v2.root";
+   std::string out_root =
+      OutCorr.substr(0, OutCorr.length() - 5) + "_WFmax_correction_v9i9_v2.root";
    std::cout << "Correction output: " << out_root << std::endl;
    TFile *pfileROOT_corr = new TFile(out_root.c_str(), "RECREATE");
    h2f_WFvsLength->Write();
@@ -203,7 +211,8 @@ void Reconstruction::WFCorrection(const std::string &OutCorr)
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 TF1 *corr_func(const std::string &EventFile, const std::string &Tag, const int &correctWF)
 {
-   // Don't overwrite the current directory in case one was opened before using this function
+   // Don't overwrite the current directory in case one was opened before using this
+   // function
    TDirectory *currdir = gDirectory;
 
    // correctWF = 3: no correction
@@ -213,8 +222,9 @@ TF1 *corr_func(const std::string &EventFile, const std::string &Tag, const int &
    }
 
    // Get the name of the files to get the exclusive function
-   TF1 *corr_func = new TF1("corr_func", "291.012 + 9.4669*x - 4.04*x*x + 1.31624*x*x*x - 0.059534*x*x*x*x", 0,
-                            17); // values provided by Vlada (2022/10/11)
+   TF1 *corr_func = new TF1(
+      "corr_func", "291.012 + 9.4669*x - 4.04*x*x + 1.31624*x*x*x - 0.059534*x*x*x*x", 0,
+      17); // values provided by Vlada (2022/10/11)
    std::string filename = EventFile.substr(0, EventFile.length() - 5);
 
    // correctWF = 2: use the correction function from HATRecon
@@ -238,9 +248,11 @@ TF1 *corr_func(const std::string &EventFile, const std::string &Tag, const int &
    corr_func = pfile->Get<TF1>("A_corr");
    pfile->Close();
    std::cout << "correction function: " << filename_corr << std::endl;
-   std::cout << std::setprecision(2) << "WF correction parameters: " << corr_func->GetParameter(0) << " | "
-             << corr_func->GetParameter(1) << " | " << corr_func->GetParameter(2) << " | " << corr_func->GetParameter(3)
-             << " | " << corr_func->GetParameter(4) << std::endl;
+   std::cout << std::setprecision(2)
+             << "WF correction parameters: " << corr_func->GetParameter(0) << " | "
+             << corr_func->GetParameter(1) << " | " << corr_func->GetParameter(2) << " | "
+             << corr_func->GetParameter(3) << " | " << corr_func->GetParameter(4)
+             << std::endl;
    delete pfile;
 
    currdir->cd();
@@ -248,8 +260,9 @@ TF1 *corr_func(const std::string &EventFile, const std::string &Tag, const int &
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Init_selection(const std::string &SelectionSet, Selector &aSelector, const std::string &Tag, Uploader *pUploader,
-                    const int &NbrOfMod, const int &Data_to_Use)
+void Init_selection(const std::string &SelectionSet, Selector &aSelector,
+                    const std::string &Tag, Uploader *pUploader, const int &NbrOfMod,
+                    const int &Data_to_Use)
 {
    // Get the correct cut on TLeading
    if (SelectionSet == "Sel_CERN22" or SelectionSet == "Sel_DESY21") {
@@ -262,7 +275,8 @@ void Init_selection(const std::string &SelectionSet, Selector &aSelector, const 
          TLow = v_TCut[0];
          THigh = v_TCut[1];
          SetStage3Cut_CSV("../TimeSelection_Cuts.csv", Tag, TLow, THigh);
-         std::cout << "Stage3 cuts are " << TLow << " to " << THigh << ". Values added to CSV file." << std::endl;
+         std::cout << "Stage3 cuts are " << TLow << " to " << THigh
+                   << ". Values added to CSV file." << std::endl;
       }
       aSelector.Set_Cut_Stage3_TLow(TLow);
       aSelector.Set_Cut_Stage3_THigh(THigh);
@@ -286,8 +300,8 @@ void Init_selection(const std::string &SelectionSet, Selector &aSelector, const 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // FILE HANDLING
-// ///////////////////////////////////////////////////////////////////////////////////////////////////////// Read CSV
-// file probably rotates by 90° the original CSV file
+// /////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Read CSV file probably rotates by 90° the original CSV file
 std::vector<std::vector<float>> readCSV(std::string filename)
 {
    std::vector<std::vector<float>> data;
@@ -306,7 +320,8 @@ std::vector<std::vector<float>> readCSV(std::string filename)
 }
 
 // Get cut values for the time selection (run based)
-std::vector<int> ComputeCutStage3_Cut(Uploader *pUploader, const int &NbrOfMod, const int &Data_to_Use)
+std::vector<int>
+ComputeCutStage3_Cut(Uploader *pUploader, const int &NbrOfMod, const int &Data_to_Use)
 {
    std::vector<int> v_TCut;
 
@@ -344,7 +359,8 @@ std::vector<int> ComputeCutStage3_Cut(Uploader *pUploader, const int &NbrOfMod, 
    int nbin_max = h1f_TLead->GetMaximumBin();
 
    if (nbin_max <= 0 or nbin_max >= 510) {
-      std::cout << "Bug with nbin_max: value out of time range | Set cuts to	[0, 510]" << std::endl;
+      std::cout << "Bug with nbin_max: value out of time range | Set cuts to	[0, 510]"
+                << std::endl;
       v_TCut.push_back(0);
       v_TCut.push_back(510);
       delete h1f_TLead;
@@ -366,7 +382,8 @@ std::vector<int> ComputeCutStage3_Cut(Uploader *pUploader, const int &NbrOfMod, 
    }
    // Find the higher boundary
    y_0 = h1f_TLead->GetBinContent(nbin_max); // reboot y_0 to maximum value peak
-   while (y_plus1 - y_0 < y_init / 250 and y_minus1 > 0.001 * y_init and iDeltaBinP < 509) {
+   while (y_plus1 - y_0 < y_init / 250 and y_minus1 > 0.001 * y_init and
+          iDeltaBinP < 509) {
       iDeltaBinP++;
       y_0 = h1f_TLead->GetBinContent(nbin_max + iDeltaBinP);
       y_plus1 = h1f_TLead->GetBinContent(nbin_max + iDeltaBinP + 1);
@@ -391,7 +408,8 @@ std::vector<int> ComputeCutStage3_Cut(Uploader *pUploader, const int &NbrOfMod, 
 }
 
 // Function to search for a word in a CSV file
-bool GetStage3Cut_CSV(const std::string &filename, const std::string &targetWord, int &value1, int &value2)
+bool GetStage3Cut_CSV(const std::string &filename, const std::string &targetWord,
+                      int &value1, int &value2)
 {
    std::ifstream file(filename);
    if (!file.is_open()) {
@@ -419,7 +437,8 @@ bool GetStage3Cut_CSV(const std::string &filename, const std::string &targetWord
 }
 
 // Function to update a CSV file
-void SetStage3Cut_CSV(const std::string &filename, const std::string &targetWord, int value1, int value2)
+void SetStage3Cut_CSV(const std::string &filename, const std::string &targetWord,
+                      int value1, int value2)
 {
    std::ofstream file(filename, std::ios_base::app); // Open in append mode
 
@@ -504,7 +523,8 @@ TF1 *Fit2Gauss(TH1F *h1F)
 {
    return Fit2Gauss(h1F, -5, 1, -1, 2);
 }
-TF1 *Fit2Gauss(TH1F *h1F, const float &x1min, const float &x1max, const float &x2min, const float &x2max)
+TF1 *Fit2Gauss(TH1F *h1F, const float &x1min, const float &x1max, const float &x2min,
+               const float &x2max)
 {
    double par[6];
    float min1 = h1F->GetMean() + x1min * h1F->GetStdDev();
@@ -540,7 +560,8 @@ TF1 *Fit2Gauss(TH1F *h1F, const float &x1min, const float &x1max, const float &x
 // ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Bethe-Bloch relativistic for heavy charged particles
-TF1 *BetheBloch(const float &Pmin, const float &Pmax, const double &M, const std::string &particle)
+TF1 *BetheBloch(const float &Pmin, const float &Pmax, const double &M,
+                const std::string &particle)
 {
    /*	Input: Pmin & Pmax GeV | m GeV
       Output: keV/cm */
@@ -552,8 +573,9 @@ TF1 *BetheBloch(const float &Pmin, const float &Pmax, const double &M, const std
    double I = 188e-9;     // GeV
 
    // PDG general
-   const char *formula = "[1]/(x*x)*(x*x+[0]*[0]) * (log(2*[2]/[3]*x*x/([0]*[0])) - 0.5*log(1 + "
-                         "2*sqrt(x*x+[0]*[0])/([0]*[0])*[2]/[0] + [2]*[2]/([0]*[0])) - x*x/(x*x+[0]*[0]))";
+   const char *formula =
+      "[1]/(x*x)*(x*x+[0]*[0]) * (log(2*[2]/[3]*x*x/([0]*[0])) - 0.5*log(1 + "
+      "2*sqrt(x*x+[0]*[0])/([0]*[0])*[2]/[0] + [2]*[2]/([0]*[0])) - x*x/(x*x+[0]*[0]))";
    TF1 *dEdx = new TF1(Form("dEdx_%s", particle.c_str()), formula, Pmin, Pmax, "");
    dEdx->SetParameters(M, coeff, me, I);
    dEdx->FixParameter(0, M);
@@ -565,7 +587,8 @@ TF1 *BetheBloch(const float &Pmin, const float &Pmax, const double &M, const std
 }
 
 // Bethe-Bloch relativistic for positrons with Bhabha scattering
-TF1 *BetheBlochBhabha(const float &Pmin, const float &Pmax, const double &m, const std::string &particle)
+TF1 *BetheBlochBhabha(const float &Pmin, const float &Pmax, const double &m,
+                      const std::string &particle)
 {
    /*	Input: Pmin & Pmax GeV | M GeV
       Output: keV/cm */
@@ -578,38 +601,47 @@ TF1 *BetheBlochBhabha(const float &Pmin, const float &Pmax, const double &m, con
    double I = 188e-9;     // GeV
 
    // PDG Bhabha
-   const char *formula = "[0]/(x*x)*(x*x+[2]) * (log(2*[1]/[3]*x*x/[2]) - 0.5*log(1 + "
-                         "2*sqrt(x*x+[2])/[2]*[1]/sqrt([2]) + [1]*[1]/[2]) - x*x/(x*x+[2])/24. * (23 + "
-                         "14/(sqrt(x*x+[2])/[2]-1) + 10/pow(sqrt(x*x+[2])/[2]-1, 2) + 4/pow(sqrt(x*x+[2])/[2]-1, 3)) )";
+   const char *formula =
+      "[0]/(x*x)*(x*x+[2]) * (log(2*[1]/[3]*x*x/[2]) - 0.5*log(1 + "
+      "2*sqrt(x*x+[2])/[2]*[1]/sqrt([2]) + [1]*[1]/[2]) - x*x/(x*x+[2])/24. * (23 + "
+      "14/(sqrt(x*x+[2])/[2]-1) + 10/pow(sqrt(x*x+[2])/[2]-1, 2) + "
+      "4/pow(sqrt(x*x+[2])/[2]-1, 3)) )";
    TF1 *dEdx = new TF1(Form("dEdx_%s", particle.c_str()), formula, Pmin, Pmax, "");
    dEdx->SetParameters(coeff, me, M2, I);
 
-   dEdx->SetTitle(Form("Bethe-Bloch with Bhabha Xsec for%s;Energy (GeV);mean (keV/cm)", particle.c_str()));
+   dEdx->SetTitle(Form("Bethe-Bloch with Bhabha Xsec for%s;Energy (GeV);mean (keV/cm)",
+                       particle.c_str()));
    return dEdx; // keV/cm
 }
 
 // Bethe-Bloch with experimental parametrisation
-TF1 *BetheBlochExp(const float &Pmin, const float &Pmax, const double &M, const std::string &particle)
+TF1 *BetheBlochExp(const float &Pmin, const float &Pmax, const double &M,
+                   const std::string &particle)
 {
    /*	Input: Pmin & Pmax GeV | m GeV
       Output: keV/cm */
 
    const char *formula =
-      "[0]/pow(x/sqrt(x*x+[5]*[5]),[3]) * ( [1] - pow(x/sqrt(x*x+[5]*[5]),[3]) - log([2] + 1 / pow(x/[5], [4])) )";
+      "[0]/pow(x/sqrt(x*x+[5]*[5]),[3]) * ( [1] - pow(x/sqrt(x*x+[5]*[5]),[3]) - log([2] "
+      "+ 1 / pow(x/[5], [4])) )";
    TF1 *dEdx = new TF1(Form("dEdx_%s", particle.c_str()), formula, Pmin, Pmax, "");
    dEdx->FixParameter(5, M);
 
-   // double dedxexp = (par0 / pow(beta, par3)) * (par1 - pow(beta, par3) - TMath::Log(par2 + (1 / pow(bg, par4))));
+   // double dedxexp = (par0 / pow(beta, par3)) * (par1 - pow(beta, par3) -
+   // TMath::Log(par2 + (1 / pow(bg, par4))));
 
-   dEdx->SetTitle(Form("Experimental Bethe-Bloch for%s;Energy (GeV);mean (keV/cm)", particle.c_str()));
+   dEdx->SetTitle(Form("Experimental Bethe-Bloch for%s;Energy (GeV);mean (keV/cm)",
+                       particle.c_str()));
    return dEdx; // keV/cm
 }
 
 // Specific Math
 // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// impact parameter d (in m) & track angle phi (in degrees) computed locally at the level of the pad
-void local_params(Pad *pPad, const Track *pTrack, float &d, float &dd, float &phi, float &trk_len_pad)
+// impact parameter d (in m) & track angle phi (in degrees) computed locally at the level
+// of the pad
+void local_params(Pad *pPad, const Track *pTrack, float &d, float &dd, float &phi,
+                  float &trk_len_pad)
 {
 
    int dd_compute = 1; // compute error on impact parameter, involve matrix	=> slow
@@ -633,21 +665,26 @@ void local_params(Pad *pPad, const Track *pTrack, float &d, float &dd, float &ph
    phi = TMath::ATan(b) / TMath::Pi() * 180;
 
    // Impact parameter in the pad
-   d = (b * xc - yc + a) / sqrt(pow(b, 2) + 1); // if pTrack is a line, then get d from it directly
+   d = (b * xc - yc + a) /
+       sqrt(pow(b, 2) + 1); // if pTrack is a line, then get d from it directly
    float da_d = 1 / sqrt(b * b + 1);
-   float db_d = (xc * sqrt(b * b + 1) - (b * xc - yc + a) * b / sqrt(b * b + 1)) / (b * b + 1);
+   float db_d =
+      (xc * sqrt(b * b + 1) - (b * xc - yc + a) * b / sqrt(b * b + 1)) / (b * b + 1);
    dd = sqrt(da_d * da_d * da * da + db_d * db_d * db * db);
 
-   // Y position of the track at the left & right borders of the pad and X position at top and bottom borders
+   // Y position of the track at the left & right borders of the pad and X position at top
+   // and bottom borders
    float x_y0 = (y0 - a) / b; // in meters
    float x_y1 = (y1 - a) / b; // in meters
    float y_x0 = b * x0 + a;   // in meters
    float y_x1 = b * x1 + a;   // in meters
 
-   float dx_y0 = sqrt(1 / b * b * da * da + pow((y0 - a) / b * b, 2) * db * db); // in meters
-   float dx_y1 = sqrt(1 / b * b * da * da + pow((y1 - a) / b * b, 2) * db * db); // in meters
-   float dy_x0 = sqrt(da * da + x0 * x0 * db * db);                              // in meters
-   float dy_x1 = sqrt(da * da + x1 * x1 * db * db);                              // in meters
+   float dx_y0 =
+      sqrt(1 / b * b * da * da + pow((y0 - a) / b * b, 2) * db * db); // in meters
+   float dx_y1 =
+      sqrt(1 / b * b * da * da + pow((y1 - a) / b * b, 2) * db * db); // in meters
+   float dy_x0 = sqrt(da * da + x0 * x0 * db * db);                   // in meters
+   float dy_x1 = sqrt(da * da + x1 * x1 * db * db);                   // in meters
 
    // If parabolic fit <=> Magnetic field
    if (pTrack->GetNberOfParameters() == 3) {
@@ -657,33 +694,38 @@ void local_params(Pad *pPad, const Track *pTrack, float &d, float &dd, float &ph
       float Delta_y0 = sqrt(b * b - 4 * (a - y0) * c);
       float Delta_y1 = sqrt(b * b - 4 * (a - y1) * c);
 
-      // Roots of Pol2 to get X position of track at top and bottom borders of the pad (with parabolic track)
+      // Roots of Pol2 to get X position of track at top and bottom borders of the pad
+      // (with parabolic track)
       float xroot1_y0 = (-b - Delta_y0) / (2 * c);
       float da_xroot1_y0 = 1 / Delta_y0;
       float db_xroot1_y0 = 1 / (2 * c) * (-b / Delta_y0 - 1);
       float dc_xroot1_y0 = (a - y0) / (c * Delta_y0) + (b + Delta_y0) / (2 * c * c);
-      float dxroot1_y0 = sqrt(da_xroot1_y0 * da_xroot1_y0 * da * da + db_xroot1_y0 * db_xroot1_y0 * db * db +
+      float dxroot1_y0 = sqrt(da_xroot1_y0 * da_xroot1_y0 * da * da +
+                              db_xroot1_y0 * db_xroot1_y0 * db * db +
                               dc_xroot1_y0 * dc_xroot1_y0 * dc * dc);
 
       float xroot2_y0 = (-b + Delta_y0) / (2 * c);
       float da_xroot2_y0 = -1 / Delta_y0;
       float db_xroot2_y0 = 1 / (2 * c) * (+b / Delta_y0 - 1);
       float dc_xroot2_y0 = -(a - y0) / (c * Delta_y0) + (b - Delta_y0) / (2 * c * c);
-      float dxroot2_y0 = sqrt(da_xroot2_y0 * da_xroot2_y0 * da * da + db_xroot2_y0 * db_xroot2_y0 * db * db +
+      float dxroot2_y0 = sqrt(da_xroot2_y0 * da_xroot2_y0 * da * da +
+                              db_xroot2_y0 * db_xroot2_y0 * db * db +
                               dc_xroot2_y0 * dc_xroot2_y0 * dc * dc);
 
       float xroot1_y1 = (-b - Delta_y1) / (2 * c);
       float da_xroot1_y1 = 1 / Delta_y1;
       float db_xroot1_y1 = 1 / (2 * c) * (-b / Delta_y1 - 1);
       float dc_xroot1_y1 = (a - y1) / (c * Delta_y1) + (b + Delta_y1) / (2 * c * c);
-      float dxroot1_y1 = sqrt(da_xroot1_y1 * da_xroot1_y1 * da * da + db_xroot1_y1 * db_xroot1_y1 * db * db +
+      float dxroot1_y1 = sqrt(da_xroot1_y1 * da_xroot1_y1 * da * da +
+                              db_xroot1_y1 * db_xroot1_y1 * db * db +
                               dc_xroot1_y1 * dc_xroot1_y1 * dc * dc);
 
       float xroot2_y1 = (-b + Delta_y1) / (2 * c);
       float da_xroot2_y1 = -1 / Delta_y1;
       float db_xroot2_y1 = 1 / (2 * c) * (+b / Delta_y1 - 1);
       float dc_xroot2_y1 = -(a - y1) / (c * Delta_y1) + (b - Delta_y1) / (2 * c * c);
-      float dxroot2_y1 = sqrt(da_xroot2_y1 * da_xroot2_y1 * da * da + db_xroot2_y1 * db_xroot2_y1 * db * db +
+      float dxroot2_y1 = sqrt(da_xroot2_y1 * da_xroot2_y1 * da * da +
+                              db_xroot2_y1 * db_xroot2_y1 * db * db +
                               dc_xroot2_y1 * dc_xroot2_y1 * dc * dc);
 
       // Select correct root	= closest to the center of the pad
@@ -702,7 +744,8 @@ void local_params(Pad *pPad, const Track *pTrack, float &d, float &dd, float &ph
          dx_y1 = dxroot2_y1;
       }
 
-      // Y position of the track at level of left & right borders of the pad (with parabolic track)
+      // Y position of the track at level of left & right borders of the pad (with
+      // parabolic track)
       y_x0 = a + b * x0 + c * x0 * x0;
       float da_y_x0 = 1.;
       float db_y_x0 = x0;
@@ -767,13 +810,18 @@ void local_params(Pad *pPad, const Track *pTrack, float &d, float &dd, float &ph
    }
 
    if (wall != 2 and wall > 0) {
-      std::cout << "ALERT: " << wall << " walls crossed for a pad in entry #" << pPad->Get_EntryNber() << std::endl;
-      std::cout << x0 * 100 << " " << x1 * 100 << " " << y0 * 100 << " " << y1 * 100 << std::endl;
-      std::cout << x_y0 * 100 << " " << x_y1 * 100 << " " << y_x0 * 100 << " " << y_x1 * 100 << std::endl;
-      std::cout << a * 100 << " " << b << " " << pTrack->Get_ParameterValue(2) / 100 << std::endl;
+      std::cout << "ALERT: " << wall << " walls crossed for a pad in entry #"
+                << pPad->Get_EntryNber() << std::endl;
+      std::cout << x0 * 100 << " " << x1 * 100 << " " << y0 * 100 << " " << y1 * 100
+                << std::endl;
+      std::cout << x_y0 * 100 << " " << x_y1 * 100 << " " << y_x0 * 100 << " "
+                << y_x1 * 100 << std::endl;
+      std::cout << a * 100 << " " << b << " " << pTrack->Get_ParameterValue(2) / 100
+                << std::endl;
    }
 
-   trk_len_pad = sqrt(pow(y[1] - y[0], 2) + pow(x[1] - x[0], 2)); // in meters (track length in the pad)
+   trk_len_pad = sqrt(pow(y[1] - y[0], 2) +
+                      pow(x[1] - x[0], 2)); // in meters (track length in the pad)
 
    float m = 0, q = 0;
    float dm = 0, dq = 0;
@@ -801,7 +849,8 @@ void local_params(Pad *pPad, const Track *pTrack, float &d, float &dd, float &ph
          // Get impact parameter from entrance & exit points
          float da_d = 1 / sqrt(m * m + 1);
          float db_d = xc / sqrt(m * m + 1) - (m * xc + q - yc) * m / pow(m * m + 1, 1.5);
-         float dc_d = (dc_m * xc + dc_q) / sqrt(m * m + 1) - (m * xc + q - yc) * dc_m * m / pow(m * m + 1, 1.5);
+         float dc_d = (dc_m * xc + dc_q) / sqrt(m * m + 1) -
+                      (m * xc + q - yc) * dc_m * m / pow(m * m + 1, 1.5);
          double errorsd[] = {da_d, db_d, dc_d};
 
          TMatrixD row_err_d(1, 3, errorsd);
@@ -827,13 +876,14 @@ void local_params(Pad *pPad, const Track *pTrack, float &d, float &dd, float &ph
    }
 
    // if(x[0] and dd_compute){
-   //	std::cout << std::setprecision(3) << "x_in: "	<< x[0]*1000 << " +- " << dx[0]*1000 << " | ";
-   //	std::cout << std::setprecision(3) << "y_in: "	<< y[0]*1000 << " +- " << dy[0]*1000 << " | ";
-   //	std::cout << std::setprecision(3) << "x_out: " << x[1]*1000 << " +- " << dx[1]*1000 << " | ";
-   //	std::cout << std::setprecision(3) << "y_out: " << y[1]*1000 << " +- " << dy[1]*1000 << " | ";
-   //	std::cout << std::setprecision(3) << "q: "	<< q*1000	<< " +- " << dq*1000	<< " | ";
-   //	std::cout << std::setprecision(3) << "m: "	<< m		<< " +- " << dm		<< " | ";
-   //	std::cout << std::setprecision(3) << "d: "	<< d*1000	<< " +- " << dd*1000	<< std::endl;
+   //	std::cout << std::setprecision(3) << "x_in: "	<< x[0]*1000 << " +- " << dx[0]*1000
+   //<< " | "; 	std::cout << std::setprecision(3) << "y_in: "	<< y[0]*1000 << " +- " <<
+   //dy[0]*1000 << " | "; 	std::cout << std::setprecision(3) << "x_out: " << x[1]*1000 << "
+   //+- " << dx[1]*1000 << " | "; 	std::cout << std::setprecision(3) << "y_out: " <<
+   //y[1]*1000 << " +- " << dy[1]*1000 << " | "; 	std::cout << std::setprecision(3) << "q:
+   //"	<< q*1000	<< " +- " << dq*1000	<< " | "; 	std::cout << std::setprecision(3) <<
+   //"m: "	<< m		<< " +- " << dm		<< " | "; 	std::cout << std::setprecision(3) <<
+   //"d: "	<< d*1000	<< " +- " << dd*1000	<< std::endl;
    // }
 }
 
@@ -855,16 +905,20 @@ float trk_len(Module *pModule, const Track *pTrack)
 
    if (n_param == 3) {
       // computing arc length of P[2] polynomial between start and end points
-      float in =
-         ((b + 2 * a * start) * sqrt(1 + pow(b + 2 * a * start, 2)) + TMath::ASinH(b + 2 * a * start)) / (4 * a);
-      float out = ((b + 2 * a * end) * sqrt(1 + pow(b + 2 * a * end, 2)) + TMath::ASinH(b + 2 * a * end)) / (4 * a);
+      float in = ((b + 2 * a * start) * sqrt(1 + pow(b + 2 * a * start, 2)) +
+                  TMath::ASinH(b + 2 * a * start)) /
+                 (4 * a);
+      float out = ((b + 2 * a * end) * sqrt(1 + pow(b + 2 * a * end, 2)) +
+                   TMath::ASinH(b + 2 * a * end)) /
+                  (4 * a);
       L = out - in;
    }
 
    return L; // in m
 }
 
-// ROOT /////////////////////////////////////////////////////////////////////////////////////////////////////////
+// ROOT
+// /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Draw TH1
 void DrawTH1(const std::string &OutDir, TH1 *h1)
@@ -927,17 +981,21 @@ double GetResoError(TF1 *tf1, const int &mu, const int &sigma)
    return (std * dmean / (mean * mean) + dstd / mean) * 100;
 }
 
-double GetSeparation(const float &mean1, const float &std1, const float &mean2, const float &std2)
+double GetSeparation(const float &mean1, const float &std1, const float &mean2,
+                     const float &std2)
 {
-   float separation = std::fabs(mean1 - mean2) / std::sqrt((std::pow(std1, 2) + std::pow(std2, 2)) / 2);
+   float separation =
+      std::fabs(mean1 - mean2) / std::sqrt((std::pow(std1, 2) + std::pow(std2, 2)) / 2);
    return separation;
 }
 
-double GetSeparationError(const float &mean1, const float &std1, const float &dmean1, const float &dstd1,
-                          const float &mean2, const float &std2, const float &dmean2, const float &dstd2)
+double GetSeparationError(const float &mean1, const float &std1, const float &dmean1,
+                          const float &dstd1, const float &mean2, const float &std2,
+                          const float &dmean2, const float &dstd2)
 {
    float mu_part = (pow(dmean1, 2) + pow(dmean2, 2)) / (pow(std1, 2) + pow(std2, 2));
-   float sigma_part = pow(mean1 - mean2, 2) * (pow(std1, 2) * pow(dstd1, 2) + pow(std2, 2) * pow(dstd2, 2)) /
+   float sigma_part = pow(mean1 - mean2, 2) *
+                      (pow(std1, 2) * pow(dstd1, 2) + pow(std2, 2) * pow(dstd2, 2)) /
                       pow(pow(std1, 2) + pow(std2, 2), 3);
    float err = sqrt(2) * sqrt(mu_part + sigma_part);
    return err;
@@ -947,7 +1005,8 @@ void PrintResolution(TH1 *th1, TCanvas *pCanvas)
 {
    return PrintResolution(th1, pCanvas, 0.05, 0.7, kBlack, " ");
 }
-void PrintResolution(TH1 *th1, TCanvas *pCanvas, float NDCx, float NDCy, Color_t color, const std::string &title)
+void PrintResolution(TH1 *th1, TCanvas *pCanvas, float NDCx, float NDCy, Color_t color,
+                     const std::string &title)
 {
    TF1 *tf1 = th1->GetFunction("gausn");
    double xMax = pCanvas->GetUxmax();

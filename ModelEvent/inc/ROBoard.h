@@ -13,8 +13,8 @@
 class ROBoard {
 public:
    /** Constructor */
-   ROBoard(Model_ReadOutGeometry *pModel_ReadOutGeometry, Model_Electronics *pModel_Electronics,
-           Model_ChargeI *pModel_ChargeI);
+   ROBoard(Model_ReadOutGeometry *pModel_ReadOutGeometry,
+           Model_Electronics *pModel_Electronics, Model_ChargeI *pModel_ChargeI);
    virtual ~ROBoard();
 
    //------------------------------Models-----------------------//
@@ -29,8 +29,9 @@ public:
    int Get_NberOfPads() const;       // Size of Pad set
    Pad *Get_Pad(const int &Index1D); // Get Pad
 
-   int Get_IsThisPadExisting(const int &iX, const int &iY) const; // return Pad (iX,iY) existence state
-   Pad *Get_Pad(const int &iX, const int &iY);                    // return Pad (iX,iY) if it exists
+   int Get_IsThisPadExisting(const int &iX,
+                             const int &iY) const; // return Pad (iX,iY) existence state
+   Pad *Get_Pad(const int &iX, const int &iY);     // return Pad (iX,iY) if it exists
 
    Pad *Get_Pad(Pad *pPad); // return Pad (iX,iY) if it exists
 
@@ -38,8 +39,8 @@ public:
 protected:
    int GetLinearIndex(const int &iX, const int &iY) const;
 
-   void Ini_Models(Model_ReadOutGeometry *pModel_ReadOutGeometry, Model_Electronics *pModel_Electronics,
-                   Model_ChargeI *pModel_ChargeI);
+   void Ini_Models(Model_ReadOutGeometry *pModel_ReadOutGeometry,
+                   Model_Electronics *pModel_Electronics, Model_ChargeI *pModel_ChargeI);
 
 protected:
    short int m_Nx;

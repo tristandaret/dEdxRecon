@@ -15,7 +15,8 @@ public:
 
    double operator()(double *x, double *par);
 
-   void SetPRF(const double &Norm, const double &A2, const double &A4, const double &B2, const double &B4);
+   void SetPRF(const double &Norm, const double &A2, const double &A4, const double &B2,
+               const double &B4);
 
 private:
    double m_Norm;

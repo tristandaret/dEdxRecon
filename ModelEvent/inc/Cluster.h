@@ -48,8 +48,10 @@ public:
    double Get_TMaxLeading() const; // Get Leading pad Time at max (Time bin)
    double Get_AMaxLeading() const; // Get Leading pad Max amplitude (ADC)
 
-   Pad *Get_NextLeadingPad() const;     // Get Next Leading pad, the hotest of the nearest pads of the leading pad
-   Pad *Get_NextNextLeadingPad() const; // Get NextNext Leading pad, the coldest of the nearest pads of the leading pad
+   Pad *Get_NextLeadingPad()
+      const; // Get Next Leading pad, the hotest of the nearest pads of the leading pad
+   Pad *Get_NextNextLeadingPad() const; // Get NextNext Leading pad, the coldest of the
+                                        // nearest pads of the leading pad
 
    //------------------------------Data Members-----------------------//
 private:

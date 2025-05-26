@@ -59,6 +59,7 @@ public:
    float dEdxWF = 0;
    int NPads = 0;
    float ratioCorr = 0;
+   float yCluster = 0;
 
    ClassDef(RecoCluster, 1);
 };
@@ -117,9 +118,11 @@ public:
    dEdx();
    virtual ~dEdx();
    void Reconstruction();
-   float ComputedEdxWF(std::vector<float> v_dEdxWF, const int &NClusters, const float &alpha);
-   float ComputedEdxXP(const std::vector<float> &v_dEdx, const std::vector<float> &v_dE, const std::vector<float> &v_dx,
-                       const int &nCrossedPads, const float &alpha);
+   float
+   ComputedEdxWF(std::vector<float> v_dEdxWF, const int &NClusters, const float &alpha);
+   float ComputedEdxXP(const std::vector<float> &v_dEdx, const std::vector<float> &v_dE,
+                       const std::vector<float> &v_dx, const int &nCrossedPads,
+                       const float &alpha);
 
    void DiscardedModule();
 

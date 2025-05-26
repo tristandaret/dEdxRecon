@@ -62,7 +62,8 @@ void Reconstruction::dEdx::Reconstruction()
    costheta = 1;
    v_theta = {-20, 20, 45};
    for (int theta_file : v_theta)
-      if (tag.find("theta") != std::string::npos and tag.find(std::to_string(theta_file)) != std::string::npos)
+      if (tag.find("theta") != std::string::npos and
+          tag.find(std::to_string(theta_file)) != std::string::npos)
          costheta = fabs(cos((float)theta_file / 180 * M_PI));
 
    /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -108,7 +109,8 @@ void Reconstruction::dEdx::Reconstruction()
    TrackFitter aTrackFitter("Minuit", fnParamsTrack);
    PRFParameters aPRFParameters;
    ptf1PRF = new TF1("ptf1PRF", aPRFParameters, -2.5 * 1.128, 2.5 * 1.128, 5);
-   ptf1PRF->SetParameters(p_uploader->Get_Norm(), p_uploader->Get_a2(), p_uploader->Get_a4(), p_uploader->Get_b2(),
+   ptf1PRF->SetParameters(p_uploader->Get_Norm(), p_uploader->Get_a2(),
+                          p_uploader->Get_a4(), p_uploader->Get_b2(),
                           p_uploader->Get_b4());
    fcounterFail = 0;
    fcounterFit = 0;
@@ -120,8 +122,10 @@ void Reconstruction::dEdx::Reconstruction()
    int xmax = 1300;
    if (tag.find("Theta") != std::string::npos)
       xmax = 2000;
-   ph1f_WF = new TH1F("ph1f_WF", "<dE/dx> with WF;<dE/dx> (ADC count);Number of events", 100, 0, xmax);
-   ph1f_XP = new TH1F("ph1f_XP", "<dE/dx> with XP;<dE/dx> (ADC count);Number of events", 100, 0, xmax);
+   ph1f_WF = new TH1F("ph1f_WF", "<dE/dx> with WF;<dE/dx> (ADC count);Number of events",
+                      100, 0, xmax);
+   ph1f_XP = new TH1F("ph1f_XP", "<dE/dx> with XP;<dE/dx> (ADC count);Number of events",
+                      100, 0, xmax);
 
    /////////////////////////////////////////////////////////////////////////////////////////////////////////
    // Compute dE/dx
@@ -179,11 +183,13 @@ void Reconstruction::dEdx::Reconstruction()
          // Track fitting
          if (!diag) {
             ClusterFitter_Horizontal aClusterFitter_Horizontal("Minuit");
-            ClusterFit_Horizontal_Event(pEvent, fmodID, ptf1PRF, aClusterFitter_Horizontal);
+            ClusterFit_Horizontal_Event(pEvent, fmodID, ptf1PRF,
+                                        aClusterFitter_Horizontal);
          } else {
             ClusterFitter_Diagonal aClusterFitter_Diagonal("Minuit");
-            ClusterFit_Diagonal_Event(-(M_PI_2 - (PHIMAX * M_PI / 180)), pEvent, fmodID, ptf1PRF, fcounterFit,
-                                      fcounterFail, aClusterFitter_Diagonal);
+            ClusterFit_Diagonal_Event(-(M_PI_2 - (PHIMAX * M_PI / 180)), pEvent, fmodID,
+                                      ptf1PRF, fcounterFit, fcounterFail,
+                                      aClusterFitter_Diagonal);
          }
          TrackFitter aTrackFitter("Minuit", fnParamsTrack);
          TrackRecon_Event(aTrackFitter, pEvent, fmodID, fnParamsTrack);
@@ -191,8 +197,10 @@ void Reconstruction::dEdx::Reconstruction()
          // Track details
          pTrack = pEvent->GiveMe_Track_ForThisModule(fmodID);
          p_recomodule->phi = std::atan(pTrack->Get_ParameterValue(1)) / M_PI * 180;
-         p_recomodule->Track->SetParameters(pTrack->Get_ParameterValue(0), pTrack->Get_ParameterValue(1));
-         Double_t parErrors[2] = {pTrack->Get_ParameterError(0), pTrack->Get_ParameterError(1)};
+         p_recomodule->Track->SetParameters(pTrack->Get_ParameterValue(0),
+                                            pTrack->Get_ParameterValue(1));
+         Double_t parErrors[2] = {pTrack->Get_ParameterError(0),
+                                  pTrack->Get_ParameterError(1)};
          p_recomodule->Track->SetParErrors(parErrors);
          if (fnParamsTrack == 3) {
             p_recomodule->Track->SetParameter(2, pTrack->Get_ParameterValue(2));
@@ -201,12 +209,14 @@ void Reconstruction::dEdx::Reconstruction()
 
          // Loop On Clusters
          for (iC = 0; iC < NClusters; iC++) {
-            std::fill(waveform_cluster.begin(), waveform_cluster.end(), 0); // reset waveform
+            std::fill(waveform_cluster.begin(), waveform_cluster.end(),
+                      0); // reset waveform
             pCluster = pModule->Get_Cluster(iC);
             p_recocluster = new Reconstruction::RecoCluster();
             p_recocluster->ADCmax_base = pCluster->Get_Acluster();
             p_recocluster->ALead_base = pCluster->Get_AMaxLeading();
             p_recocluster->TLead = pCluster->Get_TMaxLeading();
+            p_recocluster->yCluster = pCluster->Get_YTrack();
 
             // Loop On Pads
             int NPads = pCluster->Get_NberOfPads();
@@ -227,7 +237,8 @@ void Reconstruction::dEdx::Reconstruction()
                   p_recopad->RC = 170;
                   break;
                case 1: // pad per pad RC correction
-                  p_recopad->RC = pERAMMaps->RC(fERAMs_pos[fmodID], p_recopad->ix, p_recopad->iy);
+                  p_recopad->RC =
+                     pERAMMaps->RC(fERAMs_pos[fmodID], p_recopad->ix, p_recopad->iy);
                   break;
                case 2: // ERAM per ERAM correction
                   p_recopad->RC = pERAMMaps->MeanRC(fERAMs_pos[fmodID]);
@@ -240,7 +251,8 @@ void Reconstruction::dEdx::Reconstruction()
                   p_recopad->GainCorrection = 1.0;
                   break;
                case 1: // pad per pad gain correction
-                  p_recopad->gain = pERAMMaps->Gain(fERAMs_pos[fmodID], p_recopad->ix, p_recopad->iy);
+                  p_recopad->gain =
+                     pERAMMaps->Gain(fERAMs_pos[fmodID], p_recopad->ix, p_recopad->iy);
                   p_recopad->GainCorrection = AVG_GAIN / p_recopad->gain;
                   for (int i = 0; i < 510; i++)
                      waveform_pad[i] = round(waveform_pad[i] * p_recopad->GainCorrection);
@@ -248,7 +260,8 @@ void Reconstruction::dEdx::Reconstruction()
                      p_recocluster->ALead_GCorr = p_recopad->GainCorrection;
                   break;
                case 2: // ERAM per ERAM correction
-                  p_recopad->GainCorrection = AVG_GAIN / pERAMMaps->MeanGain(fERAMs_pos[fmodID]);
+                  p_recopad->GainCorrection =
+                     AVG_GAIN / pERAMMaps->MeanGain(fERAMs_pos[fmodID]);
                   for (int i = 0; i < 510; i++)
                      waveform_pad[i] = round(waveform_pad[i] * p_recopad->GainCorrection);
                   if (iP == 0)
@@ -262,7 +275,8 @@ void Reconstruction::dEdx::Reconstruction()
 
                // Track computations
                local_params(pPad, pTrack, p_recopad->d, p_recopad->dd, p_recopad->phi,
-                            p_recopad->length); // impact parameter and length in pad in m, angle in degrees
+                            p_recopad->length); // impact parameter and length in pad in
+                                                // m, angle in degrees
                p_recopad->d *= 1000;            // in mm
                p_recopad->dd *= 1000;           // in mm
                p_recopad->length /= costheta;
@@ -270,7 +284,8 @@ void Reconstruction::dEdx::Reconstruction()
 
                // Minimum length in pad cutoff to avoid fluctuations from small segments
                if (p_recopad->length * costheta <=
-                   fminLength) { // cutoff defined in the ERAM's plane -> remove theta dependence
+                   fminLength) { // cutoff defined in the ERAM's plane -> remove theta
+                                 // dependence
                   p_recocluster->v_pads.push_back(p_recopad);
                   continue;
                }
@@ -296,9 +311,10 @@ void Reconstruction::dEdx::Reconstruction()
 
                // Get the LUT ratio
                p_recopad->ratioDrift =
-                  p_lut->getRatio(fabs(p_recopad->phi), fabs(p_recopad->d), p_recopad->RC, p_recopad->driftDistance);
-               p_recopad->ratioFile =
-                  p_lut->getRatio(fabs(p_recopad->phi), fabs(p_recopad->d), p_recopad->RC, driftDist);
+                  p_lut->getRatio(fabs(p_recopad->phi), fabs(p_recopad->d), p_recopad->RC,
+                                  p_recopad->driftDistance);
+               p_recopad->ratioFile = p_lut->getRatio(
+                  fabs(p_recopad->phi), fabs(p_recopad->d), p_recopad->RC, driftDist);
 
                if (fcorrectDrift == 1)
                   p_recopad->ratio = p_recopad->ratioDrift;
@@ -318,15 +334,20 @@ void Reconstruction::dEdx::Reconstruction()
             } // Pads
 
             // // Gain correction for the whole cluster (doesn't work really well)
-            // if(fcorrectGain == 1) for(int i=0;i<510;i++) waveform_cluster[i] *= p_recocluster->ALead_GCorr;
+            // if(fcorrectGain == 1) for(int i=0;i<510;i++) waveform_cluster[i] *=
+            // p_recocluster->ALead_GCorr;
 
             // WF correction function
-            p_recocluster->charge = *std::max_element(waveform_cluster.begin(), waveform_cluster.end());
-            p_recocluster->ratioCorr = fAref / pcorrFunctionWF->Eval(p_recocluster->length * 1000);
+            p_recocluster->charge =
+               *std::max_element(waveform_cluster.begin(), waveform_cluster.end());
+            p_recocluster->ratioCorr =
+               fAref / pcorrFunctionWF->Eval(p_recocluster->length * 1000);
             if (diag)
-               p_recocluster->dEdxWF = p_recocluster->charge * p_recocluster->ratioCorr / XPADLENGTH * 10;
+               p_recocluster->dEdxWF =
+                  p_recocluster->charge * p_recocluster->ratioCorr / XPADLENGTH * 10;
             else
-               p_recocluster->dEdxWF = p_recocluster->charge / (p_recocluster->length * 100);
+               p_recocluster->dEdxWF =
+                  p_recocluster->charge / (p_recocluster->length * 100);
             v_mod_dEdxWF.push_back(p_recocluster->dEdxWF);
 
             // Fill cluster information
@@ -338,13 +359,18 @@ void Reconstruction::dEdx::Reconstruction()
          } // Clusters
 
          // Fill module class attributes
-         p_recomodule->avg_pad_mult = (float)p_recomodule->NPads / p_recomodule->NClusters;
+         p_recomodule->avg_pad_mult =
+            (float)p_recomodule->NPads / p_recomodule->NClusters;
 
          // Compute dE/dx for the module
-         p_recomodule->dEdxWF = ComputedEdxWF(v_mod_dEdxWF, p_recomodule->NClusters, falpha);
-         p_recomodule->dEdxXP = ComputedEdxXP(v_mod_dEdxXP, v_mod_dE, v_mod_dx, p_recomodule->NCrossedPads, falpha);
-         p_recomodule->dEdxWFnoTrunc = ComputedEdxWF(v_mod_dEdxWF, p_recomodule->NClusters, 1);
-         p_recomodule->dEdxXPnoTrunc = ComputedEdxXP(v_mod_dEdxXP, v_mod_dE, v_mod_dx, p_recomodule->NCrossedPads, 1);
+         p_recomodule->dEdxWF =
+            ComputedEdxWF(v_mod_dEdxWF, p_recomodule->NClusters, falpha);
+         p_recomodule->dEdxXP = ComputedEdxXP(v_mod_dEdxXP, v_mod_dE, v_mod_dx,
+                                              p_recomodule->NCrossedPads, falpha);
+         p_recomodule->dEdxWFnoTrunc =
+            ComputedEdxWF(v_mod_dEdxWF, p_recomodule->NClusters, 1);
+         p_recomodule->dEdxXPnoTrunc = ComputedEdxXP(v_mod_dEdxXP, v_mod_dE, v_mod_dx,
+                                                     p_recomodule->NCrossedPads, 1);
 
          // Fill module information into the event class
          p_recoevent->v_modules.push_back(p_recomodule);
@@ -355,8 +381,10 @@ void Reconstruction::dEdx::Reconstruction()
          p_recoevent->lengthWF += p_recomodule->lengthWF;
          v_evt_dE.insert(v_evt_dE.end(), v_mod_dE.begin(), v_mod_dE.end());
          v_evt_dx.insert(v_evt_dx.end(), v_mod_dx.begin(), v_mod_dx.end());
-         v_evt_dEdxXP.insert(v_evt_dEdxXP.end(), v_mod_dEdxXP.begin(), v_mod_dEdxXP.end());
-         v_evt_dEdxWF.insert(v_evt_dEdxWF.end(), v_mod_dEdxWF.begin(), v_mod_dEdxWF.end());
+         v_evt_dEdxXP.insert(v_evt_dEdxXP.end(), v_mod_dEdxXP.begin(),
+                             v_mod_dEdxXP.end());
+         v_evt_dEdxWF.insert(v_evt_dEdxWF.end(), v_mod_dEdxWF.begin(),
+                             v_mod_dEdxWF.end());
 
          // clear module vectors
          v_mod_dE.clear();
@@ -370,13 +398,16 @@ void Reconstruction::dEdx::Reconstruction()
 
       // Compute dE/dx for the event
       p_recoevent->dEdxWF = ComputedEdxWF(v_evt_dEdxWF, p_recoevent->NClusters, falpha);
-      p_recoevent->dEdxXP = ComputedEdxXP(v_evt_dEdxXP, v_evt_dE, v_evt_dx, p_recoevent->NCrossedPads, falpha);
+      p_recoevent->dEdxXP = ComputedEdxXP(v_evt_dEdxXP, v_evt_dE, v_evt_dx,
+                                          p_recoevent->NCrossedPads, falpha);
       p_recoevent->dEdxWFnoTrunc = ComputedEdxWF(v_evt_dEdxWF, p_recoevent->NClusters, 1);
-      p_recoevent->dEdxXPnoTrunc = ComputedEdxXP(v_evt_dEdxXP, v_evt_dE, v_evt_dx, p_recoevent->NCrossedPads, 1);
+      p_recoevent->dEdxXPnoTrunc =
+         ComputedEdxXP(v_evt_dEdxXP, v_evt_dE, v_evt_dx, p_recoevent->NCrossedPads, 1);
 
       // Make the quick access histograms
       if (testbeam.find("CERN22") == std::string::npos ||
-          (testbeam.find("CERN22") != std::string::npos and FourModulesInLine(p_recoevent->v_modules_position))) {
+          (testbeam.find("CERN22") != std::string::npos and
+           FourModulesInLine(p_recoevent->v_modules_position))) {
          ph1f_WF->Fill(p_recoevent->dEdxWF);
          ph1f_XP->Fill(p_recoevent->dEdxXP);
       }
@@ -419,17 +450,22 @@ void Reconstruction::dEdx::Reconstruction()
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /* dE/dx RECONSTRUCTION ALGORITHMS */
 
-float Reconstruction::dEdx::ComputedEdxWF(std::vector<float> v_dEdxWF, const int &NClusters, const float &alpha)
+float Reconstruction::dEdx::ComputedEdxWF(std::vector<float> v_dEdxWF,
+                                          const int &NClusters, const float &alpha)
 {
    float NClustersTrunc = int(floor(NClusters * alpha));
    std::sort(v_dEdxWF.begin(), v_dEdxWF.end());
-   return std::accumulate(v_dEdxWF.begin(), v_dEdxWF.begin() + NClustersTrunc, 0.) / NClustersTrunc;
+   return std::accumulate(v_dEdxWF.begin(), v_dEdxWF.begin() + NClustersTrunc, 0.) /
+          NClustersTrunc;
 }
 
-float Reconstruction::dEdx::ComputedEdxXP(const std::vector<float> &v_dEdx, const std::vector<float> &v_dE,
-                                          const std::vector<float> &v_dx, const int &nCrossedPads, const float &alpha)
+float Reconstruction::dEdx::ComputedEdxXP(const std::vector<float> &v_dEdx,
+                                          const std::vector<float> &v_dE,
+                                          const std::vector<float> &v_dx,
+                                          const int &nCrossedPads, const float &alpha)
 {
-   /// dEdx =	sum(dE)/Sum(dx) and not average(dE/dx) of each pad = > less sensitive to statistical fluctuations
+   /// dEdx =	sum(dE)/Sum(dx) and not average(dE/dx) of each pad = > less sensitive to
+   /// statistical fluctuations
    float NCrossedTrunc = int(floor(nCrossedPads * alpha));
    float DE = 0, DX = 0;
 

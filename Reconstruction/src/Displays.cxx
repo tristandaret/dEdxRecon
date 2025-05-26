@@ -22,12 +22,16 @@
 #include "TFile.h"
 
 // Output event display of an event	with tagging string TAG, placed in OUTDIR dir
-void DrawOut_EventDisplay(Event *pEvent, const int &ModuleNber, const std::string &OUTDIR, const std::string &TAG)
+void DrawOut_EventDisplay(Event *pEvent, const int &ModuleNber, const std::string &OUTDIR,
+                          const std::string &TAG)
 {
-   return DrawOut_EventDisplay(pEvent->Get_ThisModule(ModuleNber), OUTDIR, TAG, "amplitude", 999, 999, 999);
+   return DrawOut_EventDisplay(pEvent->Get_ThisModule(ModuleNber), OUTDIR, TAG,
+                               "amplitude", 999, 999, 999);
 }
-void DrawOut_EventDisplay(Module *pModule, const std::string &OUTDIR, const std::string &TAG, const std::string &type,
-                          const double &parabola, const double &slope, const double &intercept)
+void DrawOut_EventDisplay(Module *pModule, const std::string &OUTDIR,
+                          const std::string &TAG, const std::string &type,
+                          const double &parabola, const double &slope,
+                          const double &intercept)
 {
 
    int OPTSTAT_IN = gStyle->GetOptStat();
@@ -37,21 +41,24 @@ void DrawOut_EventDisplay(Module *pModule, const std::string &OUTDIR, const std:
    if (type == "amplitude") {
       pTH2D = GiveMe_EvtDisplay(pModule, TAG);
       pTH2D->SetMaximum(4096);
-      OutputFile = OUTDIR + "Event_Display_Entry_" + std::to_string(pModule->Get_EntryNber()) + "_Evt_" +
-                   std::to_string(pModule->Get_EventNber()) + "_Mod_" + std::to_string(pModule->Get_ModuleNber()) +
-                   ".png";
+      OutputFile = OUTDIR + "Event_Display_Entry_" +
+                   std::to_string(pModule->Get_EntryNber()) + "_Evt_" +
+                   std::to_string(pModule->Get_EventNber()) + "_Mod_" +
+                   std::to_string(pModule->Get_ModuleNber()) + ".png";
    }
    if (type == "time") {
       pTH2D = GiveMe_TimeDisplay(pModule, TAG);
-      OutputFile = OUTDIR + "Time_Display_Entry_" + std::to_string(pModule->Get_EntryNber()) + "_Evt_" +
-                   std::to_string(pModule->Get_EventNber()) + "_Mod_" + std::to_string(pModule->Get_ModuleNber()) +
-                   ".png";
+      OutputFile = OUTDIR + "Time_Display_Entry_" +
+                   std::to_string(pModule->Get_EntryNber()) + "_Evt_" +
+                   std::to_string(pModule->Get_EventNber()) + "_Mod_" +
+                   std::to_string(pModule->Get_ModuleNber()) + ".png";
       // pTH2D->SetMaximum(510);
       pTH2D->SetMinimum(1.1 * pTH2D->GetMinimum(0) - 0.1 * pTH2D->GetMaximum());
       gStyle->SetPalette(62);
       TColor::InvertPalette();
    }
-   TF1 *pTF1_Track = new TF1(Form("pTF1_Track_%i", pModule->Get_EntryNber()), "[0] + [1]*x + [2]*x*x", -1, 37);
+   TF1 *pTF1_Track = new TF1(Form("pTF1_Track_%i", pModule->Get_EntryNber()),
+                             "[0] + [1]*x + [2]*x*x", -1, 37);
 
    TCanvas *pTCanvas_Evt = new TCanvas("pTCanGP", "pTCanGP", 1800, 1200);
    pTCanvas_Evt->cd();
@@ -88,7 +95,8 @@ TH2D *GiveMe_EvtDisplay(Module *pModule, const std::string &TAG)
    aostringstream << " Display ";
    std::string Title = aostringstream.str();
 
-   TH2D *ToBeReturned = new TH2D(Title.c_str(), Title.c_str(), 36, -0.5, 35.5, 32, -0.5, 31.5);
+   TH2D *ToBeReturned =
+      new TH2D(Title.c_str(), Title.c_str(), 36, -0.5, 35.5, 32, -0.5, 31.5);
 
    std::vector<Cluster *> ClusterSet = pModule->GiveMe_Clusters_ForThisModule();
    int NClusters = ClusterSet.size();
@@ -120,7 +128,8 @@ TH2D *GiveMe_TimeDisplay(Module *pModule, const std::string &TAG)
    aostringstream << " Time Display ";
    std::string Title = aostringstream.str();
 
-   TH2D *ToBeReturned = new TH2D(Title.c_str(), Title.c_str(), 36, -0.5, 35.5, 32, -0.5, 31.5);
+   TH2D *ToBeReturned =
+      new TH2D(Title.c_str(), Title.c_str(), 36, -0.5, 35.5, 32, -0.5, 31.5);
 
    std::vector<Cluster *> ClusterSet = pModule->GiveMe_Clusters_ForThisModule();
    int NClusters = ClusterSet.size();
@@ -247,7 +256,8 @@ TH1F *GiveMe_WaveFormDisplay(Pad *pPad, const std::string &TAG)
       int ADC_value = The_v_ADC[iTimeBin];
       if (ADC_value <= -250)
          continue;
-      int iTimeBinLoc = iTimeBin + 1; // NB: the 1st Data (iTimeBin=0) goes in the 1st bin (iTimeBinLoc=1) [-0.5,+0.5]
+      int iTimeBinLoc = iTimeBin + 1; // NB: the 1st Data (iTimeBin=0) goes in the 1st bin
+                                      // (iTimeBinLoc=1) [-0.5,+0.5]
       if (iTimeBinLoc >= 1 && iTimeBinLoc <= 510)
          ToBeReturned->SetBinContent(iTimeBinLoc, ADC_value);
    }
@@ -256,13 +266,15 @@ TH1F *GiveMe_WaveFormDisplay(Pad *pPad, const std::string &TAG)
 }
 
 // TD: Draw Waveforms of all Pads in a Cluster
-void DrawOut_ClusterWFDisplay(Cluster *pCluster, const std::string &OUTDIR, const std::string &TAG)
+void DrawOut_ClusterWFDisplay(Cluster *pCluster, const std::string &OUTDIR,
+                              const std::string &TAG)
 {
    return DrawOut_ClusterWFDisplay(pCluster, OUTDIR, TAG, 1, 412, 40);
 }
 
-void DrawOut_ClusterWFDisplay(Cluster *pCluster, const std::string &OUTDIR, const std::string &TAG, const int &Option,
-                              const int &PT, const int &TB)
+void DrawOut_ClusterWFDisplay(Cluster *pCluster, const std::string &OUTDIR,
+                              const std::string &TAG, const int &Option, const int &PT,
+                              const int &TB)
 {
    std::ostringstream aostringstream;
    aostringstream << std::setiosflags(std::ios::fixed);
@@ -275,7 +287,8 @@ void DrawOut_ClusterWFDisplay(Cluster *pCluster, const std::string &OUTDIR, cons
    aostringstream << "_Clus_" << (pCluster->Get_LeadingPad())->Get_iX();
    aostringstream << ".png";
    std::string OutputFile = aostringstream.str();
-   std::string OutCWF = OUTDIR + TAG + "_CWF_Event_" + std::to_string(pCluster->Get_EventNber()) + "_Mod_" +
+   std::string OutCWF = OUTDIR + TAG + "_CWF_Event_" +
+                        std::to_string(pCluster->Get_EventNber()) + "_Mod_" +
                         std::to_string(pCluster->Get_ModuleNber()) + "_Cluster_" +
                         std::to_string(pCluster->Get_LeadingPad()->Get_iX()) + ".png";
    gStyle->SetStatX(0.9);
@@ -285,8 +298,9 @@ void DrawOut_ClusterWFDisplay(Cluster *pCluster, const std::string &OUTDIR, cons
    std::vector<Pad *> v_Pads;
    std::vector<RankedValue> vRank;
    int NPads = pCluster->Get_NberOfPads();
-   for (int iP = 0; iP < NPads; iP++) {              // Pads
-      Pad *pPad = pCluster->Get_Pad(NPads - iP - 1); // Start by end of list to get most energetic pads
+   for (int iP = 0; iP < NPads; iP++) { // Pads
+      Pad *pPad = pCluster->Get_Pad(NPads - iP -
+                                    1); // Start by end of list to get most energetic pads
       TH1F *pTH1F = GiveMe_WaveFormDisplay(pPad, TAG);
       pTH1F->SetLineWidth(4);
       v_histo.push_back(pTH1F);
@@ -344,7 +358,8 @@ void DrawOut_ClusterWFDisplay(Cluster *pCluster, const std::string &OUTDIR, cons
    for (int iP = 0; iP < NPads; iP++) {
       int iPL = vRank[iP].Rank;
       pTCanWF->cd(iP + 1);
-      v_histo[iPL]->SetAxisRange(pTH1F_Sum->GetMaximumBin() - 20, pTH1F_Sum->GetMaximumBin() + 75, "X");
+      v_histo[iPL]->SetAxisRange(pTH1F_Sum->GetMaximumBin() - 20,
+                                 pTH1F_Sum->GetMaximumBin() + 75, "X");
       v_histo[iPL]->Draw();
       pTCanWF->Update();
 
@@ -363,7 +378,8 @@ void DrawOut_ClusterWFDisplay(Cluster *pCluster, const std::string &OUTDIR, cons
       }
 
       // Add line of TMax of each pad, on each WF
-      TLine *pTLineV_IN = new TLine(v_Pads[iPL]->Get_TMax(), ADCminWF, v_Pads[iPL]->Get_TMax(), ADCmaxWF);
+      TLine *pTLineV_IN =
+         new TLine(v_Pads[iPL]->Get_TMax(), ADCminWF, v_Pads[iPL]->Get_TMax(), ADCmaxWF);
       pTLineV_IN->SetLineStyle(2);
       pTLineV_IN->SetLineWidth(4);
       pTLineV_IN->SetLineColor(4);
@@ -371,7 +387,8 @@ void DrawOut_ClusterWFDisplay(Cluster *pCluster, const std::string &OUTDIR, cons
       pTCanWF->Update();
 
       // Add line of TMax of Leading pad, on each WF
-      TLine *pTLineV_Lead = new TLine(v_Pads[0]->Get_TMax(), ADCminWF, v_Pads[0]->Get_TMax(), ADCmaxWF);
+      TLine *pTLineV_Lead =
+         new TLine(v_Pads[0]->Get_TMax(), ADCminWF, v_Pads[0]->Get_TMax(), ADCmaxWF);
       pTLineV_Lead->SetLineStyle(9);
       pTLineV_Lead->SetLineWidth(4);
       pTLineV_Lead->SetLineColor(2);
@@ -386,8 +403,8 @@ void DrawOut_ClusterWFDisplay(Cluster *pCluster, const std::string &OUTDIR, cons
          std::ostringstream aostringstream_pTLegEntr_A;
          aostringstream_pTLegEntr_A << std::setiosflags(std::ios::fixed);
          aostringstream_pTLegEntr_A << "Pad Rank " << iPL;
-         TLegendEntry *pTLegendEntry_A =
-            pTLegend_A->AddEntry((TObject *)0, (aostringstream_pTLegEntr_A.str()).c_str(), "");
+         TLegendEntry *pTLegendEntry_A = pTLegend_A->AddEntry(
+            (TObject *)0, (aostringstream_pTLegEntr_A.str()).c_str(), "");
          pTLegendEntry_A->SetTextColor(2);
 
          pTLegend_A->Draw();
@@ -398,7 +415,8 @@ void DrawOut_ClusterWFDisplay(Cluster *pCluster, const std::string &OUTDIR, cons
             double T_FitMax = v_Pads[iPL]->Get_FIT_Xmax();
 
             ParabolaFunctionNG aParabolaFunctionNG;
-            TF1 *pTF1 = new TF1("ParabolaFunctionNG", aParabolaFunctionNG, T_FitMin, T_FitMax, 4);
+            TF1 *pTF1 =
+               new TF1("ParabolaFunctionNG", aParabolaFunctionNG, T_FitMin, T_FitMax, 4);
 
             pTF1->SetParameter(0, v_Pads[iPL]->Get_FIT_A0P());
             pTF1->SetParameter(1, v_Pads[iPL]->Get_FIT_A0M());
@@ -419,7 +437,8 @@ void DrawOut_ClusterWFDisplay(Cluster *pCluster, const std::string &OUTDIR, cons
             TLegend *pTLegend_B = new TLegend(0.40, 0.67, 0.60, 0.75);
             pTLegend_B->SetBorderSize(0);
 
-            TLegendEntry *pTLegendEntry_B = pTLegend_B->AddEntry((TObject *)0, "Failed fit", "");
+            TLegendEntry *pTLegendEntry_B =
+               pTLegend_B->AddEntry((TObject *)0, "Failed fit", "");
             pTLegendEntry_B->SetTextColor(2);
 
             pTLegend_B->Draw();
@@ -436,9 +455,11 @@ void DrawOut_ClusterWFDisplay(Cluster *pCluster, const std::string &OUTDIR, cons
       ADCminWF = pTH1F_Sum->GetMinimum();
 
       float Tsum = pTH1F_Sum->GetMaximumBin();
-      TH1F *pTH1F_DPR = DPR("pTH1F_DPR_" + pCluster->Get_EntryNber() + pCluster->Get_LeadingPad()->Get_iX(), -0.5,
-                            509.5, Tsum - PT / TB, 510, 999, PT, TB);
-      pTH1F_DPR->SetAxisRange(pTH1F_Sum->GetMaximumBin() - 20, pTH1F_Sum->GetMaximumBin() + 75, "X");
+      TH1F *pTH1F_DPR = DPR("pTH1F_DPR_" + pCluster->Get_EntryNber() +
+                               pCluster->Get_LeadingPad()->Get_iX(),
+                            -0.5, 509.5, Tsum - PT / TB, 510, 999, PT, TB);
+      pTH1F_DPR->SetAxisRange(pTH1F_Sum->GetMaximumBin() - 20,
+                              pTH1F_Sum->GetMaximumBin() + 75, "X");
       pTH1F_DPR->Scale(ADCmaxWF);
       pTH1F_DPR->SetLineColor(kRed);
       pTH1F_DPR->SetLineWidth(4);
@@ -449,7 +470,8 @@ void DrawOut_ClusterWFDisplay(Cluster *pCluster, const std::string &OUTDIR, cons
       pTH1F_Sum->SetMinimum(ADCminWF);
       pTH1F_Sum->SetMaximum(ADCmaxWF);
 
-      pTH1F_Sum->SetAxisRange(pTH1F_Sum->GetMaximumBin() - 20, pTH1F_Sum->GetMaximumBin() + 75, "X");
+      pTH1F_Sum->SetAxisRange(pTH1F_Sum->GetMaximumBin() - 20,
+                              pTH1F_Sum->GetMaximumBin() + 75, "X");
       pTH1F_Sum->Draw();
       pTH1F_DPR->DrawClone("hist same");
       TLegend *leg = new TLegend(0.5, 0.65, 0.9, 0.9);
@@ -484,17 +506,22 @@ void DrawOut_ClusterWFDisplay(Cluster *pCluster, const std::string &OUTDIR, cons
 }
 
 // Draw Event waveform
-void DrawOut_GWF(Event *pEvent, const int &ModuleNber, const std::string &OUTDIR, const std::string &TAG, const int &PT,
-                 const int &TB, const float &phi_rad)
+void DrawOut_GWF(Event *pEvent, const int &ModuleNber, const std::string &OUTDIR,
+                 const std::string &TAG, const int &PT, const int &TB,
+                 const float &phi_rad)
 {
-   std::string OutputFile = OUTDIR + TAG + "_GigaWF_Entry_" + std::to_string(pEvent->Get_EntryNber()) + "_Event_" +
-                            std::to_string(pEvent->Get_EventNber()) + "_Mod_" + std::to_string(ModuleNber) + ".png";
+   std::string OutputFile = OUTDIR + TAG + "_GigaWF_Entry_" +
+                            std::to_string(pEvent->Get_EntryNber()) + "_Event_" +
+                            std::to_string(pEvent->Get_EventNber()) + "_Mod_" +
+                            std::to_string(ModuleNber) + ".png";
    TH1F *pTH1F_GWF = new TH1F("pTH1F_GWF", "pTH1F_GWF", 510, -0.5, 509.5);
-   pTH1F_GWF->SetTitle(std::string(TAG + " Entry " + std::to_string(pEvent->Get_EntryNber()) + " Event " +
-                                   std::to_string(pEvent->Get_EventNber()) + " Module " +
-                                   std::to_string(pEvent->Get_Module_InArray(ModuleNber)->Get_ModuleNber()) +
-                                   " Giga WaveForm (GWF);Time (/40 ns);ADC count")
-                          .c_str());
+   pTH1F_GWF->SetTitle(
+      std::string(
+         TAG + " Entry " + std::to_string(pEvent->Get_EntryNber()) + " Event " +
+         std::to_string(pEvent->Get_EventNber()) + " Module " +
+         std::to_string(pEvent->Get_Module_InArray(ModuleNber)->Get_ModuleNber()) +
+         " Giga WaveForm (GWF);Time (/40 ns);ADC count")
+         .c_str());
    pTH1F_GWF->SetTitleSize(0.1, "t");
    Module *pModule = pEvent->Get_ThisModule(ModuleNber);
    int NClusters = pModule->Get_NberOfCluster();
@@ -504,7 +531,8 @@ void DrawOut_GWF(Event *pEvent, const int &ModuleNber, const std::string &OUTDIR
 
    // Loop On Clusters
    for (int iC = 0; iC < NClusters; iC++) {
-      TH1F *pTH1F_cluster = new TH1F("pTH1F_cluster", "pTH1F_cluster", 510, -0.5, 509.5); // Store WF of cluster's pads
+      TH1F *pTH1F_cluster = new TH1F("pTH1F_cluster", "pTH1F_cluster", 510, -0.5,
+                                     509.5); // Store WF of cluster's pads
       Cluster *pCluster = pModule->Get_Cluster(iC);
 
       // Loop On Pads
@@ -523,7 +551,8 @@ void DrawOut_GWF(Event *pEvent, const int &ModuleNber, const std::string &OUTDIR
          delete pTH1F_pad;
       }
       TH1F *pTH1F_WF_DPRcluster =
-         DPR("pTH1F_WF_DPRcluster", -0.5, 509.5, pTH1F_cluster->GetMaximumBin() - PT / TB, 510, iC, PT, TB);
+         DPR("pTH1F_WF_DPRcluster", -0.5, 509.5, pTH1F_cluster->GetMaximumBin() - PT / TB,
+             510, iC, PT, TB);
       pTH1F_WF_DPRcluster->Scale(pTH1F_cluster->GetMaximum());
       v_pTH1F_WF_DPRcluster.push_back(pTH1F_WF_DPRcluster);
       delete pTH1F_cluster;
@@ -542,7 +571,8 @@ void DrawOut_GWF(Event *pEvent, const int &ModuleNber, const std::string &OUTDIR
    float maxGP = pTH1F_GWF->GetMaximum();
    float maxGPtrunc = pTH1F_GWFsum->GetMaximum();
 
-   TH1F *pTH1F_DPR = DPR("pTH1F_DPR", -0.5, 509.5, TmaxGWFsum - PT / TB, 510, 999, PT, TB);
+   TH1F *pTH1F_DPR =
+      DPR("pTH1F_DPR", -0.5, 509.5, TmaxGWFsum - PT / TB, 510, 999, PT, TB);
    pTH1F_DPR->Scale(maxGPtrunc);
 
    // Drawing the GWF
@@ -555,7 +585,8 @@ void DrawOut_GWF(Event *pEvent, const int &ModuleNber, const std::string &OUTDIR
    pTH1F_GWF->SetLineWidth(7);
    pTH1F_GWF->SetLineColor(kGreen + 2);
    pTH1F_GWF->Draw();
-   pTH1F_GWF->SetAxisRange(pTH1F_GWF->GetMaximumBin() - 20, pTH1F_GWF->GetMaximumBin() + 75, "X");
+   pTH1F_GWF->SetAxisRange(pTH1F_GWF->GetMaximumBin() - 20,
+                           pTH1F_GWF->GetMaximumBin() + 75, "X");
    pTH1F_GWFsum->SetLineWidth(7);
    pTH1F_GWFsum->SetLineColor(kMagenta + 3);
    pTH1F_GWFsum->Draw("same hist");
@@ -610,7 +641,8 @@ void DrawOut_GWF(Event *pEvent, const int &ModuleNber, const std::string &OUTDIR
    ptText->SetText(tmax, 0.4 * Ymax, Form("#bar{dE/dx_{total}}	= %.0f ADCs ", maxGP));
    ptText->SetTextColor(kGreen + 2);
    ptText->DrawClone();
-   ptText->SetText(tmax, 0.3 * Ymax, Form("#bar{dE/dx_{truncated}}	= %.0f ADCs ", maxGPtrunc));
+   ptText->SetText(tmax, 0.3 * Ymax,
+                   Form("#bar{dE/dx_{truncated}}	= %.0f ADCs ", maxGPtrunc));
    ptText->SetTextColor(kMagenta + 3);
    ptText->DrawClone();
 

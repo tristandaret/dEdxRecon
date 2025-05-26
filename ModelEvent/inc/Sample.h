@@ -25,8 +25,8 @@ class Sample {
 public:
    /** Constructor */
    Sample();
-   Sample(Model_ReadOutGeometry *pModel_ReadOutGeometry, Model_Electronics *pModel_Electronics,
-          Model_ChargeI *pModel_ChargeI);
+   Sample(Model_ReadOutGeometry *pModel_ReadOutGeometry,
+          Model_Electronics *pModel_Electronics, Model_ChargeI *pModel_ChargeI);
    virtual ~Sample();
 
    //------------------------------Prints-----------------------//
@@ -52,12 +52,15 @@ public:
    Event *Get_Event(int Index1D); // Get Event
 
    //------------------------------Track Access-----------------------//
-   SetOfTracks *Get_SetOfTracks_ForThisModule(const int &ModuleNber); // Ownership is passed to user
+   SetOfTracks *
+   Get_SetOfTracks_ForThisModule(const int &ModuleNber); // Ownership is passed to user
 
    //------------------------------PRF from input file-----------------------//
-   void SetFilePRF(const double &Norm, const double &a2, const double &a4, const double &b2, const double &b4);
+   void SetFilePRF(const double &Norm, const double &a2, const double &a4,
+                   const double &b2, const double &b4);
 
-   void GetFilePRF(int &FilePRF_Exist, double &Norm, double &a2, double &a4, double &b2, double &b4);
+   void GetFilePRF(int &FilePRF_Exist, double &Norm, double &a2, double &a4, double &b2,
+                   double &b4);
 
    //------------------------------Data Members-----------------------//
 private:

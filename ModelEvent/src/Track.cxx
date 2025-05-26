@@ -177,17 +177,19 @@ void Track::DoClosure()
 
 void Track::DumpRec() const
 {
-   std::cout << " EventNber " << std::setw(16) << m_EventNber << " EntryNber " << std::setw(16) << m_EntryNber
-             << std::endl;
+   std::cout << " EventNber " << std::setw(16) << m_EventNber << " EntryNber "
+             << std::setw(16) << m_EntryNber << std::endl;
 
-   std::cout << " Chi2Min " << std::setw(16) << std::setprecision(3) << Get_Chi2Min() << std::endl;
+   std::cout << " Chi2Min " << std::setw(16) << std::setprecision(3) << Get_Chi2Min()
+             << std::endl;
 
    std::cout << " NberOfParam " << std::setw(16) << m_NberOfParam << std::endl;
 
    for (int iPar = 0; iPar < m_NberOfParam; iPar++) {
-      std::cout << "Parameter: " << m_ParameterName[iPar] << " = " << std::setw(16) << std::setprecision(3)
-                << m_Parameter[iPar] * 1.E3 << " +/- " << std::setw(16) << std::setprecision(3)
-                << m_eParameter[iPar] * 1.E3 << std::endl;
+      std::cout << "Parameter: " << m_ParameterName[iPar] << " = " << std::setw(16)
+                << std::setprecision(3) << m_Parameter[iPar] * 1.E3 << " +/- "
+                << std::setw(16) << std::setprecision(3) << m_eParameter[iPar] * 1.E3
+                << std::endl;
    }
 
    std::cout << " NberOfCluster " << std::setw(16) << Get_NberOfCluster() << std::endl;
@@ -196,9 +198,11 @@ void Track::DumpRec() const
       const Cluster *pCluster = Get_Cluster(iC);
       double ThePosition_X = pCluster->Get_XTrack();
       double ThePrediction = Y_Position(ThePosition_X);
-      std::cout << " Y " << std::setw(16) << std::setprecision(3) << pCluster->Get_YTrack() * 1.E3 << " Y "
-                << std::setw(16) << std::setprecision(3) << ThePrediction * 1.E3 << " Res " << std::setw(16)
-                << std::setprecision(3) << Get_Residual(iC) * 1.E3 << " +/- " << std::setw(16) << std::setprecision(3)
+      std::cout << " Y " << std::setw(16) << std::setprecision(3)
+                << pCluster->Get_YTrack() * 1.E3 << " Y " << std::setw(16)
+                << std::setprecision(3) << ThePrediction * 1.E3 << " Res "
+                << std::setw(16) << std::setprecision(3) << Get_Residual(iC) * 1.E3
+                << " +/- " << std::setw(16) << std::setprecision(3)
                 << pCluster->Get_eYTrack() * 1.E3 << std::endl;
    }
 }
@@ -219,12 +223,14 @@ int Track::SetParameter(TVirtualFitter *pTVirtualFitter)
    int ier = 0;
 
    for (int iPar = 0; iPar < m_NberOfParam; iPar++) {
-      //	ier = pTVirtualFitter->SetParameter(iPar, m_ParameterName[iPar].c_str() , m_Parameter[iPar] ,
-      //m_eParameter[iPar] , -1. , 1. );
-      ier = pTVirtualFitter->SetParameter(iPar, m_ParameterName[iPar].c_str(), m_Parameter[iPar], m_eParameter[iPar],
-                                          0., 0.);
+      //	ier = pTVirtualFitter->SetParameter(iPar, m_ParameterName[iPar].c_str() ,
+      //m_Parameter[iPar] ,
+      // m_eParameter[iPar] , -1. , 1. );
+      ier = pTVirtualFitter->SetParameter(iPar, m_ParameterName[iPar].c_str(),
+                                          m_Parameter[iPar], m_eParameter[iPar], 0., 0.);
       if (ier != 0)
-         std::cout << " ier " << ier << " SetParameter " << m_ParameterName[iPar] << std::endl;
+         std::cout << " ier " << ier << " SetParameter " << m_ParameterName[iPar]
+                   << std::endl;
       m_Parameter_BeforeMinimisation[iPar] = m_Parameter[iPar];
    }
 
@@ -239,7 +245,8 @@ void Track::SetResults(TVirtualFitter *pTVirtualFitter)
 
    for (int iPar = 0; iPar < m_NberOfParam; iPar++) {
       m_Parameter[iPar] = p_FitOutput->p_par[iPar];
-      m_eParameter[iPar] = (p_FitOutput->p_eparplus[iPar] - p_FitOutput->p_eparminus[iPar]) / 2.;
+      m_eParameter[iPar] =
+         (p_FitOutput->p_eparplus[iPar] - p_FitOutput->p_eparminus[iPar]) / 2.;
       ;
    }
 

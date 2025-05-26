@@ -37,21 +37,28 @@ public:
 
    // Pad Parameters
    double
-   Get_XcPad(const int &iX, const int &iY, const int &ModuleNber) const; // Get Pad(iX,iY) X position (m) of the center
+   Get_XcPad(const int &iX, const int &iY,
+             const int &ModuleNber) const; // Get Pad(iX,iY) X position (m) of the center
    double
-   Get_YcPad(const int &iX, const int &iY, const int &ModuleNber) const; // Get Pad(iX,iY) X position (m) of the center
+   Get_YcPad(const int &iX, const int &iY,
+             const int &ModuleNber) const; // Get Pad(iX,iY) X position (m) of the center
 
-   double Get_XLPad(const int &iX, const int &iY,
-                    const int &ModuleNber) const; // Get Pad(iX,iY) X position (m) of the Left	edge
-   double Get_YLPad(const int &iX, const int &iY,
-                    const int &ModuleNber) const; // Get Pad(iX,iY) X position (m) of the Bottom edge
+   double Get_XLPad(
+      const int &iX, const int &iY,
+      const int &ModuleNber) const; // Get Pad(iX,iY) X position (m) of the Left	edge
+   double Get_YLPad(
+      const int &iX, const int &iY,
+      const int &ModuleNber) const; // Get Pad(iX,iY) X position (m) of the Bottom edge
 
-   double Get_XHPad(const int &iX, const int &iY,
-                    const int &ModuleNber) const; // Get Pad(iX,iY) X position (m) of the Right edge
-   double Get_YHPad(const int &iX, const int &iY,
-                    const int &ModuleNber) const; // Get Pad(iX,iY) X position (m) of the Top edge
+   double Get_XHPad(
+      const int &iX, const int &iY,
+      const int &ModuleNber) const; // Get Pad(iX,iY) X position (m) of the Right edge
+   double Get_YHPad(
+      const int &iX, const int &iY,
+      const int &ModuleNber) const; // Get Pad(iX,iY) X position (m) of the Top edge
 
-   void GetPadEdges(const int &iX, const int &iY, const int &ModuleNber, double &XL, double &XH, double &YL,
+   void GetPadEdges(const int &iX, const int &iY, const int &ModuleNber, double &XL,
+                    double &XH, double &YL,
                     double &YH) const; // Get Pad(iX,iY) X sides position (m)
 
    // Big Dump

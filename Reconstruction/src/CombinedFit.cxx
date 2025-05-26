@@ -11,8 +11,8 @@ int iparproton[] = {0, 1, 2, 3, 4, 8};
 
 // Create the GlobalCHi2 structure
 struct GlobalChi2_4 {
-   GlobalChi2_4(ROOT::Math::IMultiGenFunction &f1, ROOT::Math::IMultiGenFunction &f2, ROOT::Math::IMultiGenFunction &f3,
-                ROOT::Math::IMultiGenFunction &f4)
+   GlobalChi2_4(ROOT::Math::IMultiGenFunction &f1, ROOT::Math::IMultiGenFunction &f2,
+                ROOT::Math::IMultiGenFunction &f3, ROOT::Math::IMultiGenFunction &f4)
       : fChi2_1(&f1), fChi2_2(&f2), fChi2_3(&f3), fChi2_4(&f4)
    {
    }
@@ -53,9 +53,11 @@ void combinedFit(std::vector<TGraphErrors *> &v_tge, std::vector<TF1 *> &v_tf1)
    //    0.511e-3, 105.658e-3, 139.570e-3, 938.272e-3}; // My fit
    // double par[Npar] = {
    //    2,        3.5,        0.03,       2,         0.7,
-   //    0.511e-3, 105.658e-3, 139.570e-3, 938.272e-3}; // From hatRecon (initialization) => amplitude reset
-   double par[Npar] = {1.65179e+02, 3.62857e+00, 3.18209e-02, 2.07081e+00, 7.14413e-01,
-                       0.511e-3,    105.658e-3,  139.570e-3,  938.272e-3}; // From hatRecon
+   //    0.511e-3, 105.658e-3, 139.570e-3, 938.272e-3}; // From hatRecon (initialization)
+   //    => amplitude reset
+   double par[Npar] = {
+      1.65179e+02, 3.62857e+00, 3.18209e-02, 2.07081e+00, 7.14413e-01,
+      0.511e-3,    105.658e-3,  139.570e-3,  938.272e-3}; // From hatRecon
 
    v_tf1[0]->SetParameters(par[0], par[1], par[2], par[3], par[4], par[5]);
    v_tf1[0]->FixParameter(1, par[1]);
@@ -140,7 +142,9 @@ void combinedFit(std::vector<TGraphErrors *> &v_tge, std::vector<TF1 *> &v_tf1)
 
    // fit FCN function directly
    // (specify optionally data size and flag to indicate that is a chi2 fit)
-   fitter.FitFCN(9, GlobalChi2_4, 0, datapositron.Size() + datamuon.Size() + datapion.Size() + dataproton.Size(), true);
+   fitter.FitFCN(
+      9, GlobalChi2_4, 0,
+      datapositron.Size() + datamuon.Size() + datapion.Size() + dataproton.Size(), true);
    ROOT::Fit::FitResult result = fitter.Result();
    result.Print(std::cout);
 
@@ -179,6 +183,7 @@ void combinedFit(std::vector<TGraphErrors *> &v_tge, std::vector<TF1 *> &v_tf1)
    v_tge[3]->Draw("p same");
    v_tf1[3]->Draw("same");
 
-   c1->SaveAs("../OUT_Reconstruction/CERN22_Energy/Test_Simultaneous_fit_4approx_test2.pdf");
+   c1->SaveAs(
+      "../OUT_Reconstruction/CERN22_Energy/Test_Simultaneous_fit_4approx_test2.pdf");
    delete c1;
 }

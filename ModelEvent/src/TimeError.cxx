@@ -8,7 +8,8 @@ double TimeError_NextNextLeading();
 double TimeError_BASE(const double &DeltaT_in);
 
 //
-double TimeError(Pad *pPad, Pad *pPad_Leading, Pad *pPad_NextLeading, Pad *pPad_NextNextLeading)
+double
+TimeError(Pad *pPad, Pad *pPad_Leading, Pad *pPad_NextLeading, Pad *pPad_NextNextLeading)
 {
    double ToBeReturned = TimeError(pPad->Get_TMax() - pPad_Leading->Get_TMax());
 

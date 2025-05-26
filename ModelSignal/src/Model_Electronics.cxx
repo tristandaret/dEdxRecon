@@ -56,9 +56,11 @@ void Model_Electronics::Set_Amplitude(const double &Amplitude)
 void Model_Electronics::WriteOut() const
 {
    std::cout << "StartModel_Electronics" << std::endl;
-   std::cout << " m_QValue; " << std::setw(13) << std::setprecision(6) << m_QValue << std::endl;
+   std::cout << " m_QValue; " << std::setw(13) << std::setprecision(6) << m_QValue
+             << std::endl;
    std::cout << " m_ws	; " << std::setw(16) << std::setprecision(3) << m_ws << std::endl;
-   std::cout << " m_Amplitude; " << std::setw(13) << std::setprecision(6) << m_Amplitude << std::endl;
+   std::cout << " m_Amplitude; " << std::setw(13) << std::setprecision(6) << m_Amplitude
+             << std::endl;
    std::cout << "EndModel_Electronics" << std::endl;
 }
 
@@ -84,7 +86,8 @@ double Model_Electronics::Response_Base(const double &Time) const
    double TheSin = std::sin(argtrigo);
    double TheCos = std::cos(argtrigo);
 
-   ToBeReturned = std::exp(-m_ws * Time) + std::exp(argexp) * (m_Qfactor1 * TheSin - TheCos);
+   ToBeReturned =
+      std::exp(-m_ws * Time) + std::exp(argexp) * (m_Qfactor1 * TheSin - TheCos);
 
    return ToBeReturned;
 }
@@ -103,8 +106,9 @@ double Model_Electronics::Derive_Response_Base(const double &Time) const
    double TheCos = std::cos(argtrigo);
 
    ToBeReturned =
-      -m_ws * std::exp(-m_ws * Time) + std::exp(argexp) * ((-m_ws / (2. * m_QValue)) * (m_Qfactor1 * TheSin - TheCos) +
-                                                           m_Qfactor2 * m_ws * 0.5 * (m_Qfactor1 * TheCos + TheSin));
+      -m_ws * std::exp(-m_ws * Time) +
+      std::exp(argexp) * ((-m_ws / (2. * m_QValue)) * (m_Qfactor1 * TheSin - TheCos) +
+                          m_Qfactor2 * m_ws * 0.5 * (m_Qfactor1 * TheCos + TheSin));
 
    ToBeReturned *= m_Prefactor;
 

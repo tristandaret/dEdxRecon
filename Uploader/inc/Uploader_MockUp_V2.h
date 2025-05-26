@@ -8,14 +8,17 @@
 class Uploader_MockUp_V2 : public Uploader {
 public:
    /** Constructor */
-   Uploader_MockUp_V2(const std::string &SampleFile, Model_ReadOutGeometry *pModel_ReadOutGeometry,
-                      Model_Electronics *pModel_Electronics, Model_Charge1D *pModel_Charge1D);
+   Uploader_MockUp_V2(const std::string &SampleFile,
+                      Model_ReadOutGeometry *pModel_ReadOutGeometry,
+                      Model_Electronics *pModel_Electronics,
+                      Model_Charge1D *pModel_Charge1D);
    virtual ~Uploader_MockUp_V2();
 
-   virtual Event *
-   GiveMe_Event(const int &iEvent, const int &ModuleNber_Input, const int &Data_to_Use, const int &CloseWF);
+   virtual Event *GiveMe_Event(const int &iEvent, const int &ModuleNber_Input,
+                               const int &Data_to_Use, const int &CloseWF);
 
-   virtual Event *GiveMe_Event(const int &iEvent, const int &ModuleNber_Input, const int &Data_to_Use);
+   virtual Event *
+   GiveMe_Event(const int &iEvent, const int &ModuleNber_Input, const int &Data_to_Use);
 
    void SetBeforeMerging(const int &i_SetBeforeMerging);
    void Setwap_XY(const int &i_Swap_XY);
@@ -27,7 +30,8 @@ public:
    Int_t ev;
    Int_t track;
    ULong64_t date;       // Added since code update contains the date of the events !
-   Bool_t beforeMerging; // Added since code update tells if this track has been saved before or after merging algorithm
+   Bool_t beforeMerging; // Added since code update tells if this track has been saved
+                         // before or after merging algorithm
    Double_t dEdx;
    Double_t angle_yz;
    Double_t angle_xy;

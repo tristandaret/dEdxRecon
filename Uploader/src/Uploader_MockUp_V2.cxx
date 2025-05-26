@@ -1,7 +1,9 @@
 #include "Uploader_MockUp_V2.h"
 
-Uploader_MockUp_V2::Uploader_MockUp_V2(const std::string &SampleFile, Model_ReadOutGeometry *pModel_ReadOutGeometry,
-                                       Model_Electronics *pModel_Electronics, Model_Charge1D *pModel_Charge1D)
+Uploader_MockUp_V2::Uploader_MockUp_V2(const std::string &SampleFile,
+                                       Model_ReadOutGeometry *pModel_ReadOutGeometry,
+                                       Model_Electronics *pModel_Electronics,
+                                       Model_Charge1D *pModel_Charge1D)
    : Uploader(SampleFile, pModel_ReadOutGeometry, pModel_Electronics, pModel_Charge1D)
 {
    m_Nx = pModel_ReadOutGeometry->Get_Nx();
@@ -15,13 +17,14 @@ Uploader_MockUp_V2::Uploader_MockUp_V2(const std::string &SampleFile, Model_Read
 
 Uploader_MockUp_V2::~Uploader_MockUp_V2() {}
 
-Event *Uploader_MockUp_V2::GiveMe_Event(const int &iEvent, const int &ModuleNber_Input, const int &Data_to_Use)
+Event *Uploader_MockUp_V2::GiveMe_Event(const int &iEvent, const int &ModuleNber_Input,
+                                        const int &Data_to_Use)
 {
    return GiveMe_Event(iEvent, ModuleNber_Input, Data_to_Use, 1);
 }
 
-Event *Uploader_MockUp_V2::GiveMe_Event(const int &iEvent, const int &ModuleNber_Input, const int &Data_to_Use,
-                                        const int &CloseWF)
+Event *Uploader_MockUp_V2::GiveMe_Event(const int &iEvent, const int &ModuleNber_Input,
+                                        const int &Data_to_Use, const int &CloseWF)
 {
    if (iEvent >= Get_NberOfEvent())
       return 0;
@@ -44,12 +47,14 @@ Event *Uploader_MockUp_V2::GiveMe_Event(const int &iEvent, const int &ModuleNber
    p_TTree->SetBranchStatus("*", 1);
    p_TTree->GetEntry(iEvent);
 
-   Event *pEvent = new Event(ev, iEvent, p_Model_ReadOutGeometry, p_Model_Electronics, p_Model_Charge1D);
+   Event *pEvent = new Event(ev, iEvent, p_Model_ReadOutGeometry, p_Model_Electronics,
+                             p_Model_Charge1D);
 
    std::vector<Module *> V_pModule;
    int iMod_Max = 8;
    for (int iMod = 0; iMod < iMod_Max; iMod++) {
-      Module *pModule = new Module(ev, iEvent, iMod, p_Model_ReadOutGeometry, p_Model_Electronics, p_Model_Charge1D);
+      Module *pModule = new Module(ev, iEvent, iMod, p_Model_ReadOutGeometry,
+                                   p_Model_Electronics, p_Model_Charge1D);
       V_pModule.push_back(pModule);
    }
 
@@ -67,8 +72,8 @@ Event *Uploader_MockUp_V2::GiveMe_Event(const int &iEvent, const int &ModuleNber
          continue;
       Cluster *pCluster = new Cluster(ev, iEvent, ModuleNber_Cur);
 
-      // It seems that there are clusters (cluster charge >=0 but with no pad (charge <0 for all pads)
-      // check and store the cluster only if there are pads in it
+      // It seems that there are clusters (cluster charge >=0 but with no pad (charge <0
+      // for all pads) check and store the cluster only if there are pads in it
       int NberOfPads = 0;
       int iPad_Max = pad_charge->at(iCluster).size();
       for (Int_t iPad = 0; iPad < iPad_Max; iPad++) {
@@ -93,12 +98,14 @@ Event *Uploader_MockUp_V2::GiveMe_Event(const int &iEvent, const int &ModuleNber
          if (iX_Set < 0 || iX_Set >= m_Nx || iY_Set < 0 || iY_Set >= m_Ny) {
             std::cout << " Uploader_MockUp_V2::GiveMe_Event "
                       << " Wrong	"
-                      << " iCluster= " << iCluster << " iX_Set= " << iX_Set << " iY_Set= " << iY_Set << std::endl;
+                      << " iCluster= " << iCluster << " iX_Set= " << iX_Set
+                      << " iY_Set= " << iY_Set << std::endl;
             abort();
          }
 
-         Pad *pPad = new Pad(p_Model_ReadOutGeometry, p_Model_Electronics, p_Model_Charge1D, "noName", ev, iEvent,
-                             ModuleNber_Cur, iX_Set, iY_Set);
+         Pad *pPad =
+            new Pad(p_Model_ReadOutGeometry, p_Model_Electronics, p_Model_Charge1D,
+                    "noName", ev, iEvent, ModuleNber_Cur, iX_Set, iY_Set);
 
          pPad->Set_AMax(pad_charge->at(iCluster).at(iPad));
          pPad->Set_TMax(pad_time->at(iCluster).at(iPad));

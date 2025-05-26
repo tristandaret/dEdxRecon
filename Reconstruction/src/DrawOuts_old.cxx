@@ -17,15 +17,16 @@
 #include "TLatex.h"
 
 // Draw resolution of 2 different procedures
-void DrawOut_Versions(const std::string &inputDir, const std::string &Method, const std::string &Comment1,
-                      const std::string &Comment2)
+void DrawOut_Versions(const std::string &inputDir, const std::string &Method,
+                      const std::string &Comment1, const std::string &Comment2)
 {
    gStyle->SetPadTickX(1);
    gStyle->SetPadTickY(1);
    gStyle->SetOptStat(0);
    gStyle->SetGridStyle(1);
    // Draw
-   std::string OutputFile = inputDir + "/Comparison_" + Method + Comment1 + "_" + Comment2 + ".pdf";
+   std::string OutputFile =
+      inputDir + "/Comparison_" + Method + Comment1 + "_" + Comment2 + ".pdf";
    std::string OutputFile_Beg = OutputFile + "(";
    std::string OutputFile_End = OutputFile + ")";
    TCanvas *pTCanvas = new TCanvas("TCanvas", "TCanvas", 1800, 1200);
@@ -50,10 +51,12 @@ void DrawOut_Versions(const std::string &inputDir, const std::string &Method, co
 
    int ipoint = 0;
    int npoint = 11;
-   std::string name_arr[] = {"m140", "m120", "m0", "m80", "m60", "m40", "0", "20", "40", "60", "80"};
+   std::string name_arr[] = {"m140", "m120", "m0", "m80", "m60", "m40",
+                             "0",    "20",   "40", "60",  "80"};
    int Row_arr[] = {27, 26, 24, 22, 20, 18, 12, 10, 8, 6, 4};
 
-   std::vector<std::vector<TF1 *>> arr_1; // vector for method 1 => 1 vector per scan => TF1
+   std::vector<std::vector<TF1 *>>
+      arr_1; // vector for method 1 => 1 vector per scan => TF1
    std::vector<std::vector<TF1 *>> arr_2;
    std::vector<TGraphErrors *> v_reso1;
    std::vector<TGraphErrors *> v_reso2;
@@ -84,10 +87,12 @@ void DrawOut_Versions(const std::string &inputDir, const std::string &Method, co
       v_std2.push_back(new TGraphErrors());
    }
    for (int iy = 0; iy < npoint; iy++) {
-      TFile *file1 = TFile::Open(TString(inputDir + "DESY21_yscan/DESY21_y" + name_arr[iy] + "/3_DESY21_y" +
-                                         name_arr[iy] + "_dEdx" + Comment1 + ".root"));
-      TFile *file2 = TFile::Open(TString(inputDir + "DESY21_yscan/DESY21_y" + name_arr[iy] + "/3_DESY21_y" +
-                                         name_arr[iy] + "_dEdx" + Comment2 + ".root"));
+      TFile *file1 = TFile::Open(TString(inputDir + "DESY21_yscan/DESY21_y" +
+                                         name_arr[iy] + "/3_DESY21_y" + name_arr[iy] +
+                                         "_dEdx" + Comment1 + ".root"));
+      TFile *file2 = TFile::Open(TString(inputDir + "DESY21_yscan/DESY21_y" +
+                                         name_arr[iy] + "/3_DESY21_y" + name_arr[iy] +
+                                         "_dEdx" + Comment2 + ".root"));
       v_1_y.push_back(file1->Get<TF1>(method.c_str()));
       v_2_y.push_back(file2->Get<TF1>(method.c_str()));
       delete file1;
@@ -128,7 +133,8 @@ void DrawOut_Versions(const std::string &inputDir, const std::string &Method, co
    v_reso1[0]->GetXaxis()->SetLimits(-0.5, 31.5);
    v_reso1[0]->SetMinimum(4);
    v_reso1[0]->SetMaximum(12);
-   v_reso1[0]->SetNameTitle("v_reso1[0]", "Resolution vs Y position;Pad row;resolution (%)");
+   v_reso1[0]->SetNameTitle("v_reso1[0]",
+                            "Resolution vs Y position;Pad row;resolution (%)");
    Graphic_setup(v_reso1[0], 3, 21, kBefore, 1, kBlack);
    Graphic_setup(v_reso2[0], 3, 20, kAfter, 1, kBlack);
    v_reso1[0]->Draw("ap");
@@ -179,17 +185,21 @@ void DrawOut_Versions(const std::string &inputDir, const std::string &Method, co
       TFile *file1;
       TFile *file2;
       if (i == -1) {
-         file1 = TFile::Open(TString(inputDir +
-                                     "DESY21_zscan/DESY21_zscan_PT200/DESY21_zm40_PT200/3_DESY21_zm40_PT200_dEdx" +
-                                     Comment1 + ".root"));
-         file2 = TFile::Open(TString(inputDir +
-                                     "DESY21_zscan/DESY21_zscan_PT200/DESY21_zm40_PT200/3_DESY21_zm40_PT200_dEdx" +
-                                     Comment2 + ".root"));
+         file1 = TFile::Open(TString(
+            inputDir +
+            "DESY21_zscan/DESY21_zscan_PT200/DESY21_zm40_PT200/3_DESY21_zm40_PT200_dEdx" +
+            Comment1 + ".root"));
+         file2 = TFile::Open(TString(
+            inputDir +
+            "DESY21_zscan/DESY21_zscan_PT200/DESY21_zm40_PT200/3_DESY21_zm40_PT200_dEdx" +
+            Comment2 + ".root"));
       } else {
-         file1 = TFile::Open(TString(inputDir + "DESY21_zscan/DESY21_zscan_PT200/DESY21_z" + i + "60_PT200/3_DESY21_z" +
-                                     i + "60_PT200_dEdx" + Comment1 + ".root"));
-         file2 = TFile::Open(TString(inputDir + "DESY21_zscan/DESY21_zscan_PT200/DESY21_z" + i + "60_PT200/3_DESY21_z" +
-                                     i + "60_PT200_dEdx" + Comment2 + ".root"));
+         file1 = TFile::Open(
+            TString(inputDir + "DESY21_zscan/DESY21_zscan_PT200/DESY21_z" + i +
+                    "60_PT200/3_DESY21_z" + i + "60_PT200_dEdx" + Comment1 + ".root"));
+         file2 = TFile::Open(
+            TString(inputDir + "DESY21_zscan/DESY21_zscan_PT200/DESY21_z" + i +
+                    "60_PT200/3_DESY21_z" + i + "60_PT200_dEdx" + Comment2 + ".root"));
       }
       v_1_z200.push_back(file1->Get<TF1>(method.c_str()));
       v_2_z200.push_back(file2->Get<TF1>(method.c_str()));
@@ -232,7 +242,8 @@ void DrawOut_Versions(const std::string &inputDir, const std::string &Method, co
    v_reso1[1]->GetXaxis()->SetLimits(0, 1000);
    v_reso1[1]->SetMinimum(4);
    v_reso1[1]->SetMaximum(12);
-   v_reso1[1]->SetNameTitle("v_reso1[1]", "Resolution vs Z_{drift} (200 ns);Z_{drift} (mm);resolution (%)");
+   v_reso1[1]->SetNameTitle(
+      "v_reso1[1]", "Resolution vs Z_{drift} (200 ns);Z_{drift} (mm);resolution (%)");
    Graphic_setup(v_reso1[1], 3, 21, kBefore, 1, kBlack);
    Graphic_setup(v_reso2[1], 3, 20, kAfter, 1, kBlack);
    v_reso1[1]->Draw("ap");
@@ -246,7 +257,8 @@ void DrawOut_Versions(const std::string &inputDir, const std::string &Method, co
    v_mean1[1]->GetXaxis()->SetLimits(0, 1000);
    v_mean1[1]->SetMinimum(600);
    v_mean1[1]->SetMaximum(1200);
-   v_mean1[1]->SetNameTitle("v_mean1[1]", "Mean vs Z_{drift} (200 ns);Z_{drift} (mm);Mean (ADC count)");
+   v_mean1[1]->SetNameTitle("v_mean1[1]",
+                            "Mean vs Z_{drift} (200 ns);Z_{drift} (mm);Mean (ADC count)");
    Graphic_setup(v_mean1[1], 3, 21, kBefore, 1, kBlack);
    Graphic_setup(v_mean2[1], 3, 20, kAfter, 1, kBlack);
    v_mean1[1]->Draw("ap");
@@ -258,7 +270,8 @@ void DrawOut_Versions(const std::string &inputDir, const std::string &Method, co
    v_std1[1]->GetXaxis()->SetLimits(0, 1000);
    v_std1[1]->SetMinimum(40);
    v_std1[1]->SetMaximum(121);
-   v_std1[1]->SetNameTitle("v_std1[1]", "Std vs Z_{drift} (200 ns);Z_{drift} (mm);std (ADC count)");
+   v_std1[1]->SetNameTitle("v_std1[1]",
+                           "Std vs Z_{drift} (200 ns);Z_{drift} (mm);std (ADC count)");
    Graphic_setup(v_std1[1], 3, 21, kBefore, 1, kBlack);
    Graphic_setup(v_std2[1], 3, 20, kAfter, 1, kBlack);
    v_std1[1]->Draw("ap");
@@ -283,17 +296,21 @@ void DrawOut_Versions(const std::string &inputDir, const std::string &Method, co
       TFile *file1;
       TFile *file2;
       if (i == -1) {
-         file1 = TFile::Open(TString(inputDir +
-                                     "DESY21_zscan/DESY21_zscan_PT412/DESY21_zm40_PT412/3_DESY21_zm40_PT412_dEdx" +
-                                     Comment1 + ".root"));
-         file2 = TFile::Open(TString(inputDir +
-                                     "DESY21_zscan/DESY21_zscan_PT412/DESY21_zm40_PT412/3_DESY21_zm40_PT412_dEdx" +
-                                     Comment2 + ".root"));
+         file1 = TFile::Open(TString(
+            inputDir +
+            "DESY21_zscan/DESY21_zscan_PT412/DESY21_zm40_PT412/3_DESY21_zm40_PT412_dEdx" +
+            Comment1 + ".root"));
+         file2 = TFile::Open(TString(
+            inputDir +
+            "DESY21_zscan/DESY21_zscan_PT412/DESY21_zm40_PT412/3_DESY21_zm40_PT412_dEdx" +
+            Comment2 + ".root"));
       } else {
-         file1 = TFile::Open(TString(inputDir + "DESY21_zscan/DESY21_zscan_PT412/DESY21_z" + i + "60_PT412/3_DESY21_z" +
-                                     i + "60_PT412_dEdx" + Comment1 + ".root"));
-         file2 = TFile::Open(TString(inputDir + "DESY21_zscan/DESY21_zscan_PT412/DESY21_z" + i + "60_PT412/3_DESY21_z" +
-                                     i + "60_PT412_dEdx" + Comment2 + ".root"));
+         file1 = TFile::Open(
+            TString(inputDir + "DESY21_zscan/DESY21_zscan_PT412/DESY21_z" + i +
+                    "60_PT412/3_DESY21_z" + i + "60_PT412_dEdx" + Comment1 + ".root"));
+         file2 = TFile::Open(
+            TString(inputDir + "DESY21_zscan/DESY21_zscan_PT412/DESY21_z" + i +
+                    "60_PT412/3_DESY21_z" + i + "60_PT412_dEdx" + Comment2 + ".root"));
       }
       v_1_z412.push_back(file1->Get<TF1>(method.c_str()));
       v_2_z412.push_back(file2->Get<TF1>(method.c_str()));
@@ -336,7 +353,8 @@ void DrawOut_Versions(const std::string &inputDir, const std::string &Method, co
    v_reso1[2]->GetXaxis()->SetLimits(0, 1000);
    v_reso1[2]->SetMinimum(4);
    v_reso1[2]->SetMaximum(12);
-   v_reso1[2]->SetNameTitle("v_reso1[2]", "Resolution vs Z_{drift} (412 ns);Z_{drift} (mm);resolution (%)");
+   v_reso1[2]->SetNameTitle(
+      "v_reso1[2]", "Resolution vs Z_{drift} (412 ns);Z_{drift} (mm);resolution (%)");
    Graphic_setup(v_reso1[2], 3, 21, kBefore, 1, kBlack);
    Graphic_setup(v_reso2[2], 3, 20, kAfter, 1, kBlack);
    v_reso1[2]->Draw("ap");
@@ -350,7 +368,8 @@ void DrawOut_Versions(const std::string &inputDir, const std::string &Method, co
    v_mean1[2]->GetXaxis()->SetLimits(0, 1000);
    v_mean1[2]->SetMinimum(600);
    v_mean1[2]->SetMaximum(1200);
-   v_mean1[2]->SetNameTitle("v_mean1[2]", "Mean vs Z_{drift} (412 ns);Z_{drift} (mm);Mean (ADC count)");
+   v_mean1[2]->SetNameTitle("v_mean1[2]",
+                            "Mean vs Z_{drift} (412 ns);Z_{drift} (mm);Mean (ADC count)");
    Graphic_setup(v_mean1[2], 3, 21, kBefore, 1, kBlack);
    Graphic_setup(v_mean2[2], 3, 20, kAfter, 1, kBlack);
    v_mean1[2]->Draw("ap");
@@ -362,7 +381,8 @@ void DrawOut_Versions(const std::string &inputDir, const std::string &Method, co
    v_std1[2]->GetXaxis()->SetLimits(0, 1000);
    v_std1[2]->SetMinimum(40);
    v_std1[2]->SetMaximum(121);
-   v_std1[2]->SetNameTitle("v_std1[2]", "Std vs Z_{drift} (412 ns);Z_{drift} (mm);std (ADC count)");
+   v_std1[2]->SetNameTitle("v_std1[2]",
+                           "Std vs Z_{drift} (412 ns);Z_{drift} (mm);std (ADC count)");
    Graphic_setup(v_std1[2], 3, 21, kBefore, 1, kBlack);
    Graphic_setup(v_std2[2], 3, 20, kAfter, 1, kBlack);
    v_std1[2]->Draw("ap");
@@ -389,24 +409,30 @@ void DrawOut_Versions(const std::string &inputDir, const std::string &Method, co
       TFile *file2;
       if (i == 0)
          file1 = TFile::Open(TString(inputDir +
-                                     "/DESY21_zscan/DESY21_zscan_PT200/DESY21_zm40_PT200/3_DESY21_zm40_PT200_dEdx" +
+                                     "/DESY21_zscan/DESY21_zscan_PT200/DESY21_zm40_PT200/"
+                                     "3_DESY21_zm40_PT200_dEdx" +
                                      Comment1 + ".root"));
       else if (i < 5)
-         file1 = TFile::Open(TString(inputDir + "DESY21_phi/DESY21_phi_zm40/DESY21_phi" + phi_arr[i] +
-                                     "_zm40/3_DESY21_phi" + phi_arr[i] + "_zm40_dEdx" + Comment1 + ".root"));
+         file1 = TFile::Open(TString(inputDir + "DESY21_phi/DESY21_phi_zm40/DESY21_phi" +
+                                     phi_arr[i] + "_zm40/3_DESY21_phi" + phi_arr[i] +
+                                     "_zm40_dEdx" + Comment1 + ".root"));
       else
-         file1 = TFile::Open(TString(inputDir + "DESY21_phi/DESY21_phi_zm40/DESY21_phi" + phi_arr[i] +
-                                     "_diag_zm40/3_DESY21_phi" + phi_arr[i] + "_diag_zm40_dEdx" + Comment1 + ".root"));
+         file1 = TFile::Open(TString(inputDir + "DESY21_phi/DESY21_phi_zm40/DESY21_phi" +
+                                     phi_arr[i] + "_diag_zm40/3_DESY21_phi" + phi_arr[i] +
+                                     "_diag_zm40_dEdx" + Comment1 + ".root"));
       if (i == 0)
          file2 = TFile::Open(TString(inputDir +
-                                     "/DESY21_zscan/DESY21_zscan_PT200/DESY21_zm40_PT200/3_DESY21_zm40_PT200_dEdx" +
+                                     "/DESY21_zscan/DESY21_zscan_PT200/DESY21_zm40_PT200/"
+                                     "3_DESY21_zm40_PT200_dEdx" +
                                      Comment2 + ".root"));
       else if (i < 5)
-         file2 = TFile::Open(TString(inputDir + "DESY21_phi/DESY21_phi_zm40/DESY21_phi" + phi_arr[i] +
-                                     "_zm40/3_DESY21_phi" + phi_arr[i] + "_zm40_dEdx" + Comment2 + ".root"));
+         file2 = TFile::Open(TString(inputDir + "DESY21_phi/DESY21_phi_zm40/DESY21_phi" +
+                                     phi_arr[i] + "_zm40/3_DESY21_phi" + phi_arr[i] +
+                                     "_zm40_dEdx" + Comment2 + ".root"));
       else
-         file2 = TFile::Open(TString(inputDir + "DESY21_phi/DESY21_phi_zm40/DESY21_phi" + phi_arr[i] +
-                                     "_diag_zm40/3_DESY21_phi" + phi_arr[i] + "_diag_zm40_dEdx" + Comment2 + ".root"));
+         file2 = TFile::Open(TString(inputDir + "DESY21_phi/DESY21_phi_zm40/DESY21_phi" +
+                                     phi_arr[i] + "_diag_zm40/3_DESY21_phi" + phi_arr[i] +
+                                     "_diag_zm40_dEdx" + Comment2 + ".root"));
       v_1_phi50.push_back(file1->Get<TF1>(method.c_str()));
       v_2_phi50.push_back(file2->Get<TF1>(method.c_str()));
       delete file1;
@@ -449,8 +475,8 @@ void DrawOut_Versions(const std::string &inputDir, const std::string &Method, co
    v_reso1[3]->GetXaxis()->SetLimits(-3, 48);
    v_reso1[3]->SetMinimum(4);
    v_reso1[3]->SetMaximum(12);
-   v_reso1[3]->SetNameTitle("v_reso1[3]",
-                            "Resolution vs #varphi angle (Z_{drift} = 50 mm);#varphi angle (#circ);resolution (%)");
+   v_reso1[3]->SetNameTitle("v_reso1[3]", "Resolution vs #varphi angle (Z_{drift} = 50 "
+                                          "mm);#varphi angle (#circ);resolution (%)");
    Graphic_setup(v_reso1[3], 3, 21, kBefore, 1, kBlack);
    Graphic_setup(v_reso2[3], 3, 20, kAfter, 1, kBlack);
    v_reso1[3]->Draw("ap");
@@ -464,8 +490,9 @@ void DrawOut_Versions(const std::string &inputDir, const std::string &Method, co
    v_mean1[3]->GetXaxis()->SetLimits(-3, 48);
    v_mean1[3]->SetMinimum(600);
    v_mean1[3]->SetMaximum(1200);
-   v_mean1[3]->SetNameTitle("v_mean1[3]",
-                            "Mean vs #varphi angle (Z_{drift} = 50 mm);#varphi angle (#circ);Mean (ADC count)");
+   v_mean1[3]->SetNameTitle(
+      "v_mean1[3]",
+      "Mean vs #varphi angle (Z_{drift} = 50 mm);#varphi angle (#circ);Mean (ADC count)");
    Graphic_setup(v_mean1[3], 3, 21, kBefore, 1, kBlack);
    Graphic_setup(v_mean2[3], 3, 20, kAfter, 1, kBlack);
    v_mean1[3]->Draw("ap");
@@ -477,8 +504,9 @@ void DrawOut_Versions(const std::string &inputDir, const std::string &Method, co
    v_std1[3]->GetXaxis()->SetLimits(-3, 48);
    v_std1[3]->SetMinimum(40);
    v_std1[3]->SetMaximum(121);
-   v_std1[3]->SetNameTitle("v_std1[3]",
-                           "Std vs #varphi angle (Z_{drift} = 50 mm);#varphi angle (#circ);std (ADC count)");
+   v_std1[3]->SetNameTitle(
+      "v_std1[3]",
+      "Std vs #varphi angle (Z_{drift} = 50 mm);#varphi angle (#circ);std (ADC count)");
    Graphic_setup(v_std1[3], 3, 21, kBefore, 1, kBlack);
    Graphic_setup(v_std2[3], 3, 20, kAfter, 1, kBlack);
    v_std1[3]->Draw("ap");
@@ -504,24 +532,30 @@ void DrawOut_Versions(const std::string &inputDir, const std::string &Method, co
       TFile *file2;
       if (i == 0)
          file1 = TFile::Open(TString(inputDir +
-                                     "/DESY21_zscan/DESY21_zscan_PT200/DESY21_z460_PT200/3_DESY21_z460_PT200_dEdx" +
+                                     "/DESY21_zscan/DESY21_zscan_PT200/DESY21_z460_PT200/"
+                                     "3_DESY21_z460_PT200_dEdx" +
                                      Comment1 + ".root"));
       else if (i < 5)
-         file1 = TFile::Open(TString(inputDir + "DESY21_phi/DESY21_phi_z460/DESY21_phi" + phi_arr[i] +
-                                     "_z460/3_DESY21_phi" + phi_arr[i] + "_z460_dEdx" + Comment1 + ".root"));
+         file1 = TFile::Open(TString(inputDir + "DESY21_phi/DESY21_phi_z460/DESY21_phi" +
+                                     phi_arr[i] + "_z460/3_DESY21_phi" + phi_arr[i] +
+                                     "_z460_dEdx" + Comment1 + ".root"));
       else
-         file1 = TFile::Open(TString(inputDir + "DESY21_phi/DESY21_phi_z460/DESY21_phi" + phi_arr[i] +
-                                     "_diag_z460/3_DESY21_phi" + phi_arr[i] + "_diag_z460_dEdx" + Comment1 + ".root"));
+         file1 = TFile::Open(TString(inputDir + "DESY21_phi/DESY21_phi_z460/DESY21_phi" +
+                                     phi_arr[i] + "_diag_z460/3_DESY21_phi" + phi_arr[i] +
+                                     "_diag_z460_dEdx" + Comment1 + ".root"));
       if (i == 0)
          file2 = TFile::Open(TString(inputDir +
-                                     "/DESY21_zscan/DESY21_zscan_PT200/DESY21_z460_PT200/3_DESY21_z460_PT200_dEdx" +
+                                     "/DESY21_zscan/DESY21_zscan_PT200/DESY21_z460_PT200/"
+                                     "3_DESY21_z460_PT200_dEdx" +
                                      Comment2 + ".root"));
       else if (i < 5)
-         file2 = TFile::Open(TString(inputDir + "DESY21_phi/DESY21_phi_z460/DESY21_phi" + phi_arr[i] +
-                                     "_z460/3_DESY21_phi" + phi_arr[i] + "_z460_dEdx" + Comment2 + ".root"));
+         file2 = TFile::Open(TString(inputDir + "DESY21_phi/DESY21_phi_z460/DESY21_phi" +
+                                     phi_arr[i] + "_z460/3_DESY21_phi" + phi_arr[i] +
+                                     "_z460_dEdx" + Comment2 + ".root"));
       else
-         file2 = TFile::Open(TString(inputDir + "DESY21_phi/DESY21_phi_z460/DESY21_phi" + phi_arr[i] +
-                                     "_diag_z460/3_DESY21_phi" + phi_arr[i] + "_diag_z460_dEdx" + Comment2 + ".root"));
+         file2 = TFile::Open(TString(inputDir + "DESY21_phi/DESY21_phi_z460/DESY21_phi" +
+                                     phi_arr[i] + "_diag_z460/3_DESY21_phi" + phi_arr[i] +
+                                     "_diag_z460_dEdx" + Comment2 + ".root"));
       v_1_phi550.push_back(file1->Get<TF1>(method.c_str()));
       v_2_phi550.push_back(file2->Get<TF1>(method.c_str()));
       delete file1;
@@ -563,8 +597,8 @@ void DrawOut_Versions(const std::string &inputDir, const std::string &Method, co
    v_reso1[4]->GetXaxis()->SetLimits(-3, 48);
    v_reso1[4]->SetMinimum(4);
    v_reso1[4]->SetMaximum(12);
-   v_reso1[4]->SetNameTitle("v_reso1[4]",
-                            "Resolution vs #varphi angle (Z_{drift} = 550 mm);#varphi angle (#circ);resolution (%)");
+   v_reso1[4]->SetNameTitle("v_reso1[4]", "Resolution vs #varphi angle (Z_{drift} = 550 "
+                                          "mm);#varphi angle (#circ);resolution (%)");
    Graphic_setup(v_reso1[4], 3, 21, kBefore, 1, kBlack);
    Graphic_setup(v_reso2[4], 3, 20, kAfter, 1, kBlack);
    v_reso1[4]->Draw("ap");
@@ -578,8 +612,8 @@ void DrawOut_Versions(const std::string &inputDir, const std::string &Method, co
    v_mean1[4]->GetXaxis()->SetLimits(-3, 48);
    v_mean1[4]->SetMinimum(600);
    v_mean1[4]->SetMaximum(1200);
-   v_mean1[4]->SetNameTitle("v_mean1[4]",
-                            "Mean vs #varphi angle (Z_{drift} = 550 mm);#varphi angle (#circ);Mean (ADC count)");
+   v_mean1[4]->SetNameTitle("v_mean1[4]", "Mean vs #varphi angle (Z_{drift} = 550 "
+                                          "mm);#varphi angle (#circ);Mean (ADC count)");
    Graphic_setup(v_mean1[4], 3, 21, kBefore, 1, kBlack);
    Graphic_setup(v_mean2[4], 3, 20, kAfter, 1, kBlack);
    v_mean1[4]->Draw("ap");
@@ -591,8 +625,9 @@ void DrawOut_Versions(const std::string &inputDir, const std::string &Method, co
    v_std1[4]->GetXaxis()->SetLimits(-3, 48);
    v_std1[4]->SetMinimum(550);
    v_std1[4]->SetMaximum(121);
-   v_std1[4]->SetNameTitle("v_std1[4]",
-                           "Std vs #varphi angle (Z_{drift} = 550 mm);#varphi angle (#circ);std (ADC count)");
+   v_std1[4]->SetNameTitle(
+      "v_std1[4]",
+      "Std vs #varphi angle (Z_{drift} = 550 mm);#varphi angle (#circ);std (ADC count)");
    Graphic_setup(v_std1[4], 3, 21, kBefore, 1, kBlack);
    Graphic_setup(v_std2[4], 3, 20, kAfter, 1, kBlack);
    v_std1[4]->Draw("ap");
@@ -618,24 +653,30 @@ void DrawOut_Versions(const std::string &inputDir, const std::string &Method, co
       TFile *file2;
       if (i == 0)
          file1 = TFile::Open(TString(inputDir +
-                                     "/DESY21_zscan/DESY21_zscan_PT200/DESY21_z860_PT200/3_DESY21_z860_PT200_dEdx" +
+                                     "/DESY21_zscan/DESY21_zscan_PT200/DESY21_z860_PT200/"
+                                     "3_DESY21_z860_PT200_dEdx" +
                                      Comment1 + ".root"));
       else if (i < 5)
-         file1 = TFile::Open(TString(inputDir + "DESY21_phi/DESY21_phi_z860/DESY21_phi" + phi_arr[i] +
-                                     "_z860/3_DESY21_phi" + phi_arr[i] + "_z860_dEdx" + Comment1 + ".root"));
+         file1 = TFile::Open(TString(inputDir + "DESY21_phi/DESY21_phi_z860/DESY21_phi" +
+                                     phi_arr[i] + "_z860/3_DESY21_phi" + phi_arr[i] +
+                                     "_z860_dEdx" + Comment1 + ".root"));
       else
-         file1 = TFile::Open(TString(inputDir + "DESY21_phi/DESY21_phi_z860/DESY21_phi" + phi_arr[i] +
-                                     "_diag_z860/3_DESY21_phi" + phi_arr[i] + "_diag_z860_dEdx" + Comment1 + ".root"));
+         file1 = TFile::Open(TString(inputDir + "DESY21_phi/DESY21_phi_z860/DESY21_phi" +
+                                     phi_arr[i] + "_diag_z860/3_DESY21_phi" + phi_arr[i] +
+                                     "_diag_z860_dEdx" + Comment1 + ".root"));
       if (i == 0)
          file2 = TFile::Open(TString(inputDir +
-                                     "/DESY21_zscan/DESY21_zscan_PT200/DESY21_z860_PT200/3_DESY21_z860_PT200_dEdx" +
+                                     "/DESY21_zscan/DESY21_zscan_PT200/DESY21_z860_PT200/"
+                                     "3_DESY21_z860_PT200_dEdx" +
                                      Comment2 + ".root"));
       else if (i < 5)
-         file2 = TFile::Open(TString(inputDir + "DESY21_phi/DESY21_phi_z860/DESY21_phi" + phi_arr[i] +
-                                     "_z860/3_DESY21_phi" + phi_arr[i] + "_z860_dEdx" + Comment2 + ".root"));
+         file2 = TFile::Open(TString(inputDir + "DESY21_phi/DESY21_phi_z860/DESY21_phi" +
+                                     phi_arr[i] + "_z860/3_DESY21_phi" + phi_arr[i] +
+                                     "_z860_dEdx" + Comment2 + ".root"));
       else
-         file2 = TFile::Open(TString(inputDir + "DESY21_phi/DESY21_phi_z860/DESY21_phi" + phi_arr[i] +
-                                     "_diag_z860/3_DESY21_phi" + phi_arr[i] + "_diag_z860_dEdx" + Comment2 + ".root"));
+         file2 = TFile::Open(TString(inputDir + "DESY21_phi/DESY21_phi_z860/DESY21_phi" +
+                                     phi_arr[i] + "_diag_z860/3_DESY21_phi" + phi_arr[i] +
+                                     "_diag_z860_dEdx" + Comment2 + ".root"));
       v_1_phi950.push_back(file1->Get<TF1>(method.c_str()));
       v_2_phi950.push_back(file2->Get<TF1>(method.c_str()));
       delete file1;
@@ -677,8 +718,8 @@ void DrawOut_Versions(const std::string &inputDir, const std::string &Method, co
    v_reso1[5]->GetXaxis()->SetLimits(-3, 48);
    v_reso1[5]->SetMinimum(4);
    v_reso1[5]->SetMaximum(12);
-   v_reso1[5]->SetNameTitle("v_reso1[5]",
-                            "Resolution vs #varphi angle (Z_{drift} = 950 mm);#varphi angle (#circ);resolution (%)");
+   v_reso1[5]->SetNameTitle("v_reso1[5]", "Resolution vs #varphi angle (Z_{drift} = 950 "
+                                          "mm);#varphi angle (#circ);resolution (%)");
    Graphic_setup(v_reso1[5], 3, 21, kBefore, 1, kBlack);
    Graphic_setup(v_reso2[5], 3, 20, kAfter, 1, kBlack);
    v_reso1[5]->Draw("ap");
@@ -692,8 +733,8 @@ void DrawOut_Versions(const std::string &inputDir, const std::string &Method, co
    v_mean1[5]->GetXaxis()->SetLimits(-3, 48);
    v_mean1[5]->SetMinimum(600);
    v_mean1[5]->SetMaximum(1200);
-   v_mean1[5]->SetNameTitle("v_mean1[5]",
-                            "Mean vs #varphi angle (Z_{drift} = 950 mm);#varphi angle (#circ);Mean (ADC count)");
+   v_mean1[5]->SetNameTitle("v_mean1[5]", "Mean vs #varphi angle (Z_{drift} = 950 "
+                                          "mm);#varphi angle (#circ);Mean (ADC count)");
    Graphic_setup(v_mean1[5], 3, 21, kBefore, 1, kBlack);
    Graphic_setup(v_mean2[5], 3, 20, kAfter, 1, kBlack);
    v_mean1[5]->Draw("ap");
@@ -705,8 +746,9 @@ void DrawOut_Versions(const std::string &inputDir, const std::string &Method, co
    v_std1[5]->GetXaxis()->SetLimits(-3, 48);
    v_std1[5]->SetMinimum(950);
    v_std1[5]->SetMaximum(121);
-   v_std1[5]->SetNameTitle("v_std1[5]",
-                           "Std vs #varphi angle (Z_{drift} = 950 mm);#varphi angle (#circ);std (ADC count)");
+   v_std1[5]->SetNameTitle(
+      "v_std1[5]",
+      "Std vs #varphi angle (Z_{drift} = 950 mm);#varphi angle (#circ);std (ADC count)");
    Graphic_setup(v_std1[5], 3, 21, kBefore, 1, kBlack);
    Graphic_setup(v_std2[5], 3, 20, kAfter, 1, kBlack);
    v_std1[5]->Draw("ap");
@@ -721,14 +763,18 @@ void DrawOut_Separation(const std::string &inputDir, const std::string &Comment)
 
    // Get input files
    std::vector<TFile *> v_pTFile_dEdx;
-   v_pTFile_dEdx.push_back(TFile::Open(
-      TString(inputDir + "CERN22_ERAM18_e+_1GeV" + "/" + "3_CERN22_ERAM18_e+_1GeV" + "_dEdx" + Comment + ".root")));
-   v_pTFile_dEdx.push_back(TFile::Open(
-      TString(inputDir + "CERN22_ERAM18_p_1GeV" + "/" + "3_CERN22_ERAM18_p_1GeV" + "_dEdx" + Comment + ".root")));
-   v_pTFile_dEdx.push_back(TFile::Open(
-      TString(inputDir + "CERN22_ERAM18_mu+_1GeV" + "/" + "3_CERN22_ERAM18_mu+_1GeV" + "_dEdx" + Comment + ".root")));
-   v_pTFile_dEdx.push_back(TFile::Open(TString(inputDir + "CERN22_ERAM18_pi+_0p5GeV" + "/" +
-                                               "3_CERN22_ERAM18_pi+_0p5GeV" + "_dEdx" + Comment + ".root")));
+   v_pTFile_dEdx.push_back(
+      TFile::Open(TString(inputDir + "CERN22_ERAM18_e+_1GeV" + "/" +
+                          "3_CERN22_ERAM18_e+_1GeV" + "_dEdx" + Comment + ".root")));
+   v_pTFile_dEdx.push_back(
+      TFile::Open(TString(inputDir + "CERN22_ERAM18_p_1GeV" + "/" +
+                          "3_CERN22_ERAM18_p_1GeV" + "_dEdx" + Comment + ".root")));
+   v_pTFile_dEdx.push_back(
+      TFile::Open(TString(inputDir + "CERN22_ERAM18_mu+_1GeV" + "/" +
+                          "3_CERN22_ERAM18_mu+_1GeV" + "_dEdx" + Comment + ".root")));
+   v_pTFile_dEdx.push_back(
+      TFile::Open(TString(inputDir + "CERN22_ERAM18_pi+_0p5GeV" + "/" +
+                          "3_CERN22_ERAM18_pi+_0p5GeV" + "_dEdx" + Comment + ".root")));
 
    // Get functions
    std::vector<TH1F *> v_h1f_Qtrunc;
@@ -799,8 +845,10 @@ void DrawOut_Separation(const std::string &inputDir, const std::string &Comment)
    }
 
    // Do the table
-   TH2F *h2_separation = new TH2F("h2_separation", "Separation power", 6, -0.5, 5.5, 6, -0.5, 5.5);
-   TH2F *h2_err_separation = new TH2F("h2_err_separation", "Error on separation power", 6, -0.5, 5.5, 6, -0.5, 5.5);
+   TH2F *h2_separation =
+      new TH2F("h2_separation", "Separation power", 6, -0.5, 5.5, 6, -0.5, 5.5);
+   TH2F *h2_err_separation = new TH2F("h2_err_separation", "Error on separation power", 6,
+                                      -0.5, 5.5, 6, -0.5, 5.5);
    const char *particles[6] = {"e^{+}-p",   "e^{+}-#mu^{+}", "e^{+}-#pi^{+}",
                                "p-#mu^{+}", "p-#pi^{+}",     "#mu^{+}-#pi^{+}"};
    const char *methods[5] = {"Q", "WF", "GPv3", "GPv6", "XP"};
@@ -809,20 +857,31 @@ void DrawOut_Separation(const std::string &inputDir, const std::string &Comment)
    int k = 0;
    for (int i = 0; i < nParticles; i++) {
       for (int j = i + 1; j < nParticles; j++) {
-         h2_separation->Fill(
-            methods[0], particles[k],
-            std::floor(GetSeparation(mean_Qtrunc[i], std_Qtrunc[i], mean_Qtrunc[j], std_Qtrunc[j]) * 100) / 100);
+         h2_separation->Fill(methods[0], particles[k],
+                             std::floor(GetSeparation(mean_Qtrunc[i], std_Qtrunc[i],
+                                                      mean_Qtrunc[j], std_Qtrunc[j]) *
+                                        100) /
+                                100);
          h2_separation->Fill(methods[1], particles[k],
-                             std::floor(GetSeparation(mean_WFsum[i], std_WFsum[i], mean_WFsum[j], std_WFsum[j]) * 100) /
+                             std::floor(GetSeparation(mean_WFsum[i], std_WFsum[i],
+                                                      mean_WFsum[j], std_WFsum[j]) *
+                                        100) /
                                 100);
          h2_separation->Fill(methods[2], particles[k],
-                             std::floor(GetSeparation(mean_GPv3[i], std_GPv3[i], mean_GPv3[j], std_GPv3[j]) * 100) /
+                             std::floor(GetSeparation(mean_GPv3[i], std_GPv3[i],
+                                                      mean_GPv3[j], std_GPv3[j]) *
+                                        100) /
                                 100);
          h2_separation->Fill(methods[3], particles[k],
-                             std::floor(GetSeparation(mean_GPv6[i], std_GPv6[i], mean_GPv6[j], std_GPv6[j]) * 100) /
+                             std::floor(GetSeparation(mean_GPv6[i], std_GPv6[i],
+                                                      mean_GPv6[j], std_GPv6[j]) *
+                                        100) /
                                 100);
-         h2_separation->Fill(methods[4], particles[k],
-                             std::floor(GetSeparation(mean_XP[i], std_XP[i], mean_XP[j], std_XP[j]) * 100) / 100);
+         h2_separation->Fill(
+            methods[4], particles[k],
+            std::floor(GetSeparation(mean_XP[i], std_XP[i], mean_XP[j], std_XP[j]) *
+                       100) /
+               100);
          k++;
       }
    }
@@ -833,31 +892,39 @@ void DrawOut_Separation(const std::string &inputDir, const std::string &Comment)
       for (int j = i + 1; j < nParticles; j++) {
          h2_err_separation->Fill(
             methods[0], particles[dk],
-            std::floor(GetSeparationError(mean_Qtrunc[i], std_Qtrunc[i], dmean_Qtrunc[i], dstd_Qtrunc[i],
-                                          mean_Qtrunc[j], std_Qtrunc[j], dmean_Qtrunc[j], dstd_Qtrunc[j]) *
+            std::floor(GetSeparationError(mean_Qtrunc[i], std_Qtrunc[i], dmean_Qtrunc[i],
+                                          dstd_Qtrunc[i], mean_Qtrunc[j], std_Qtrunc[j],
+                                          dmean_Qtrunc[j], dstd_Qtrunc[j]) *
                        100) /
                100);
          h2_err_separation->Fill(
             methods[1], particles[dk],
-            std::floor(GetSeparationError(mean_WFsum[i], std_WFsum[i], dmean_WFsum[i], dstd_WFsum[i], mean_WFsum[j],
-                                          std_WFsum[j], dmean_WFsum[j], dstd_WFsum[j]) *
+            std::floor(GetSeparationError(mean_WFsum[i], std_WFsum[i], dmean_WFsum[i],
+                                          dstd_WFsum[i], mean_WFsum[j], std_WFsum[j],
+                                          dmean_WFsum[j], dstd_WFsum[j]) *
                        100) /
                100);
-         h2_err_separation->Fill(methods[2], particles[dk],
-                                 std::floor(GetSeparationError(mean_GPv3[i], std_GPv3[i], dmean_GPv3[i], dstd_GPv3[i],
-                                                               mean_GPv3[j], std_GPv3[j], dmean_GPv3[j], dstd_GPv3[j]) *
-                                            100) /
-                                    100);
-         h2_err_separation->Fill(methods[3], particles[dk],
-                                 std::floor(GetSeparationError(mean_GPv6[i], std_GPv6[i], dmean_GPv6[i], dstd_GPv6[i],
-                                                               mean_GPv6[j], std_GPv6[j], dmean_GPv6[j], dstd_GPv6[j]) *
-                                            100) /
-                                    100);
-         h2_err_separation->Fill(methods[4], particles[dk],
-                                 std::floor(GetSeparationError(mean_XP[i], std_XP[i], dmean_XP[i], dstd_XP[i],
-                                                               mean_XP[j], std_XP[j], dmean_XP[j], dstd_XP[j]) *
-                                            100) /
-                                    100);
+         h2_err_separation->Fill(
+            methods[2], particles[dk],
+            std::floor(GetSeparationError(mean_GPv3[i], std_GPv3[i], dmean_GPv3[i],
+                                          dstd_GPv3[i], mean_GPv3[j], std_GPv3[j],
+                                          dmean_GPv3[j], dstd_GPv3[j]) *
+                       100) /
+               100);
+         h2_err_separation->Fill(
+            methods[3], particles[dk],
+            std::floor(GetSeparationError(mean_GPv6[i], std_GPv6[i], dmean_GPv6[i],
+                                          dstd_GPv6[i], mean_GPv6[j], std_GPv6[j],
+                                          dmean_GPv6[j], dstd_GPv6[j]) *
+                       100) /
+               100);
+         h2_err_separation->Fill(
+            methods[4], particles[dk],
+            std::floor(GetSeparationError(mean_XP[i], std_XP[i], dmean_XP[i], dstd_XP[i],
+                                          mean_XP[j], std_XP[j], dmean_XP[j],
+                                          dstd_XP[j]) *
+                       100) /
+               100);
          dk++;
       }
    }
@@ -891,25 +958,24 @@ void DrawOut_Separation(const std::string &inputDir, const std::string &Comment)
    // v_h1f_Qtrunc[0]->			SetName("positrons e^{+} 1GeV");
    // v_h1f_Qtrunc[0]->			Scale(1/v_h1f_Qtrunc[0]->GetEntries());
    // v_tf1_Qtrunc[0]->			SetRange(0, 1500);
-   // v_tf1_Qtrunc[0]->			SetParameter(0, v_tf1_Qtrunc[0]->Integral(0, 1500)/v_h1f_Qtrunc[0]->GetEntries());
-   // v_h1f_Qtrunc[0]->			SetLineColor(kPink+3);
+   // v_tf1_Qtrunc[0]->			SetParameter(0, v_tf1_Qtrunc[0]->Integral(0,
+   // 1500)/v_h1f_Qtrunc[0]->GetEntries()); v_h1f_Qtrunc[0]-> SetLineColor(kBlue+3);
    // v_h1f_Qtrunc[0]->			SetLineWidth(2);
-   // v_tf1_Qtrunc[0]->			SetLineColor(kPink-6);
+   // v_tf1_Qtrunc[0]->			SetLineColor(kBlue-6);
    // v_tf1_Qtrunc[0]->			SetLineWidth(2);
    // v_h1f_Qtrunc[2]->			SetName("muons #mu^{+} 1GeV");
    // v_h1f_Qtrunc[2]->			Scale(1/v_h1f_Qtrunc[2]->GetEntries());
    // v_tf1_Qtrunc[2]->			SetRange(0, 1500);
-   // v_tf1_Qtrunc[2]->			SetParameter(0, v_tf1_Qtrunc[2]->Integral(0, 1500)/v_h1f_Qtrunc[2]->GetEntries());
-   // v_h1f_Qtrunc[2]->			SetLineColor(kPink+3);
+   // v_tf1_Qtrunc[2]->			SetParameter(0, v_tf1_Qtrunc[2]->Integral(0,
+   // 1500)/v_h1f_Qtrunc[2]->GetEntries()); v_h1f_Qtrunc[2]-> SetLineColor(kBlue+3);
    // v_h1f_Qtrunc[2]->			SetLineWidth(2);
    // v_h1f_Qtrunc[2]->			SetLineStyle(2);
-   // v_tf1_Qtrunc[2]->			SetLineColor(kPink-6);
+   // v_tf1_Qtrunc[2]->			SetLineColor(kBlue-6);
    // v_tf1_Qtrunc[2]->			SetLineWidth(2);
    // if(v_h1f_Qtrunc[0]->GetMaximum() < v_h1f_Qtrunc[2]->GetMaximum())
-   // v_h1f_Qtrunc[0]->SetAxisRange(0, 1.1*v_h1f_Qtrunc[2]->GetMaximum(),	"Y"); v_h1f_Qtrunc[0]->			Draw("hist");
-   // v_tf1_Qtrunc[0]->			Draw("same");
-   // gPad->						Update();
-   // SetStatBoxPosition(v_h1f_Qtrunc[0], 0.64, 0.89, 0.34,	0.32);
+   // v_h1f_Qtrunc[0]->SetAxisRange(0, 1.1*v_h1f_Qtrunc[2]->GetMaximum(),	"Y");
+   // v_h1f_Qtrunc[0]->			Draw("hist"); v_tf1_Qtrunc[0]->			Draw("same"); gPad->
+   // Update(); SetStatBoxPosition(v_h1f_Qtrunc[0], 0.64, 0.89, 0.34,	0.32);
    // v_h1f_Qtrunc[2]->			Draw("hist sames");
    // v_tf1_Qtrunc[2]->			Draw("same");
    // gPad->						Update();
@@ -925,7 +991,8 @@ void DrawOut_Separation(const std::string &inputDir, const std::string &Comment)
    v_h1f_WFsum[0]->SetName("positrons e^{+} 1GeV");
    v_h1f_WFsum[0]->Scale(1 / v_h1f_WFsum[0]->GetEntries());
    v_tf1_WFsum[0]->SetRange(0, 1500);
-   v_tf1_WFsum[0]->SetParameter(0, v_tf1_WFsum[0]->Integral(0, 1500) / v_h1f_WFsum[0]->GetEntries());
+   v_tf1_WFsum[0]->SetParameter(0, v_tf1_WFsum[0]->Integral(0, 1500) /
+                                      v_h1f_WFsum[0]->GetEntries());
    v_h1f_WFsum[0]->SetLineColor(kCyan + 2);
    v_h1f_WFsum[0]->SetLineWidth(2);
    v_tf1_WFsum[0]->SetLineColor(kCyan + 1);
@@ -933,7 +1000,8 @@ void DrawOut_Separation(const std::string &inputDir, const std::string &Comment)
    v_h1f_WFsum[2]->SetName("muons #mu^{+} 1GeV");
    v_h1f_WFsum[2]->Scale(1 / v_h1f_WFsum[2]->GetEntries());
    v_tf1_WFsum[2]->SetRange(0, 1500);
-   v_tf1_WFsum[2]->SetParameter(0, v_tf1_WFsum[2]->Integral(0, 1500) / v_h1f_WFsum[2]->GetEntries());
+   v_tf1_WFsum[2]->SetParameter(0, v_tf1_WFsum[2]->Integral(0, 1500) /
+                                      v_h1f_WFsum[2]->GetEntries());
    v_h1f_WFsum[2]->SetLineColor(kCyan + 2);
    v_h1f_WFsum[2]->SetLineWidth(2);
    v_h1f_WFsum[2]->SetLineStyle(2);
@@ -958,9 +1026,11 @@ void DrawOut_Separation(const std::string &inputDir, const std::string &Comment)
    ptText->SetTextFont(42);
    ptText->SetTextAlign(31);
    float sepa = GetSeparation(mean_WFsum[0], std_WFsum[0], mean_WFsum[2], std_WFsum[2]);
-   float dsepa = GetSeparationError(mean_WFsum[0], std_WFsum[0], dmean_WFsum[0], dstd_WFsum[0], mean_WFsum[2],
-                                    std_WFsum[2], dmean_WFsum[2], dstd_WFsum[2]);
-   ptText->SetText(1200, 0.19, Form("S(e^{+} | #mu^{+}) = 	%.2f #pm %.2f #sigma", sepa, dsepa));
+   float dsepa =
+      GetSeparationError(mean_WFsum[0], std_WFsum[0], dmean_WFsum[0], dstd_WFsum[0],
+                         mean_WFsum[2], std_WFsum[2], dmean_WFsum[2], dstd_WFsum[2]);
+   ptText->SetText(1200, 0.19,
+                   Form("S(e^{+} | #mu^{+}) = 	%.2f #pm %.2f #sigma", sepa, dsepa));
    ptText->SetTextColor(kCyan + 2);
    ptText->DrawClone();
    delete ptText;
@@ -971,25 +1041,24 @@ void DrawOut_Separation(const std::string &inputDir, const std::string &Comment)
    // v_h1f_GPv3[0]->			SetName("positrons e^{+} 1GeV");
    // v_h1f_GPv3[0]->			Scale(1/v_h1f_GPv3[0]->GetEntries());
    // v_tf1_GPv3[0]->			SetRange(0, 1500);
-   // v_tf1_GPv3[0]->			SetParameter(0, v_tf1_GPv3[0]->Integral(0, 1500)/v_h1f_GPv3[0]->GetEntries());
-   // v_h1f_GPv3[0]->			SetLineColor(kMagenta+3);
+   // v_tf1_GPv3[0]->			SetParameter(0, v_tf1_GPv3[0]->Integral(0,
+   // 1500)/v_h1f_GPv3[0]->GetEntries()); v_h1f_GPv3[0]-> SetLineColor(kMagenta+3);
    // v_h1f_GPv3[0]->			SetLineWidth(2);
    // v_tf1_GPv3[0]->			SetLineColor(kMagenta-6);
    // v_tf1_GPv3[0]->			SetLineWidth(2);
    // v_h1f_GPv3[2]->			SetName("muons #mu^{+} 1GeV");
    // v_h1f_GPv3[2]->			Scale(1/v_h1f_GPv3[2]->GetEntries());
    // v_tf1_GPv3[2]->			SetRange(0, 1500);
-   // v_tf1_GPv3[2]->			SetParameter(0, v_tf1_GPv3[2]->Integral(0, 1500)/v_h1f_GPv3[2]->GetEntries());
-   // v_h1f_GPv3[2]->			SetLineColor(kMagenta+3);
+   // v_tf1_GPv3[2]->			SetParameter(0, v_tf1_GPv3[2]->Integral(0,
+   // 1500)/v_h1f_GPv3[2]->GetEntries()); v_h1f_GPv3[2]-> SetLineColor(kMagenta+3);
    // v_h1f_GPv3[2]->			SetLineWidth(2);
    // v_h1f_GPv3[2]->			SetLineStyle(2);
    // v_tf1_GPv3[2]->			SetLineColor(kMagenta-6);
    // v_tf1_GPv3[2]->			SetLineWidth(2);
    // if(v_h1f_GPv3[0]->GetMaximum() < v_h1f_GPv3[2]->GetMaximum())
-   // v_h1f_GPv3[0]->SetAxisRange(0, 1.1*v_h1f_GPv3[2]->GetMaximum(),	"Y"); v_h1f_GPv3[0]->			Draw("hist");
-   // v_tf1_GPv3[0]->			Draw("same");
-   // gPad->						Update();
-   // SetStatBoxPosition(v_h1f_GPv3[0], 0.64, 0.89, 0.34,	0.32);
+   // v_h1f_GPv3[0]->SetAxisRange(0, 1.1*v_h1f_GPv3[2]->GetMaximum(),	"Y");
+   // v_h1f_GPv3[0]->			Draw("hist"); v_tf1_GPv3[0]->			Draw("same"); gPad->
+   // Update(); SetStatBoxPosition(v_h1f_GPv3[0], 0.64, 0.89, 0.34,	0.32);
    // v_h1f_GPv3[2]->			Draw("hist sames");
    // v_tf1_GPv3[2]->			Draw("same");
    // gPad->						Update();
@@ -1005,25 +1074,24 @@ void DrawOut_Separation(const std::string &inputDir, const std::string &Comment)
    // v_h1f_GPv6[0]->			SetName("positrons e^{+} 1GeV");
    // v_h1f_GPv6[0]->			Scale(1/v_h1f_GPv6[0]->GetEntries());
    // v_tf1_GPv6[0]->			SetRange(0, 1500);
-   // v_tf1_GPv6[0]->			SetParameter(0, v_tf1_GPv6[0]->Integral(0, 1500)/v_h1f_GPv6[0]->GetEntries());
-   // v_h1f_GPv6[0]->			SetLineColor(kGreen-2);
+   // v_tf1_GPv6[0]->			SetParameter(0, v_tf1_GPv6[0]->Integral(0,
+   // 1500)/v_h1f_GPv6[0]->GetEntries()); v_h1f_GPv6[0]->			SetLineColor(kGreen-2);
    // v_h1f_GPv6[0]->			SetLineWidth(2);
    // v_tf1_GPv6[0]->			SetLineColor(kGreen+2);
    // v_tf1_GPv6[0]->			SetLineWidth(2);
    // v_h1f_GPv6[2]->			SetName("muons #mu^{+} 1GeV");
    // v_h1f_GPv6[2]->			Scale(1/v_h1f_GPv6[2]->GetEntries());
    // v_tf1_GPv6[2]->			SetRange(0, 1500);
-   // v_tf1_GPv6[2]->			SetParameter(0, v_tf1_GPv6[2]->Integral(0, 1500)/v_h1f_GPv6[2]->GetEntries());
-   // v_h1f_GPv6[2]->			SetLineColor(kGreen-2);
+   // v_tf1_GPv6[2]->			SetParameter(0, v_tf1_GPv6[2]->Integral(0,
+   // 1500)/v_h1f_GPv6[2]->GetEntries()); v_h1f_GPv6[2]->			SetLineColor(kGreen-2);
    // v_h1f_GPv6[2]->			SetLineWidth(2);
    // v_h1f_GPv6[2]->			SetLineStyle(2);
    // v_tf1_GPv6[2]->			SetLineColor(kGreen+2);
    // v_tf1_GPv6[2]->			SetLineWidth(2);
    // if(v_h1f_GPv6[0]->GetMaximum() < v_h1f_GPv6[2]->GetMaximum())
-   // v_h1f_GPv6[0]->SetAxisRange(0, 1.1*v_h1f_GPv6[2]->GetMaximum(),	"Y"); v_h1f_GPv6[0]->			Draw("hist");
-   // v_tf1_GPv6[0]->			Draw("same");
-   // gPad->						Update();
-   // SetStatBoxPosition(v_h1f_GPv6[0], 0.64, 0.89, 0.34,	0.32);
+   // v_h1f_GPv6[0]->SetAxisRange(0, 1.1*v_h1f_GPv6[2]->GetMaximum(),	"Y");
+   // v_h1f_GPv6[0]->			Draw("hist"); v_tf1_GPv6[0]->			Draw("same"); gPad->
+   // Update(); SetStatBoxPosition(v_h1f_GPv6[0], 0.64, 0.89, 0.34,	0.32);
    // v_h1f_GPv6[2]->			Draw("hist sames");
    // v_tf1_GPv6[2]->			Draw("same");
    // gPad->						Update();
@@ -1039,7 +1107,8 @@ void DrawOut_Separation(const std::string &inputDir, const std::string &Comment)
    v_h1f_XP[0]->SetName("positrons e^{+} 1GeV");
    v_h1f_XP[0]->Scale(1 / v_h1f_XP[0]->GetEntries());
    v_tf1_XP[0]->SetRange(0, 1500);
-   v_tf1_XP[0]->SetParameter(0, v_tf1_XP[0]->Integral(0, 1500) / v_h1f_XP[0]->GetEntries());
+   v_tf1_XP[0]->SetParameter(0,
+                             v_tf1_XP[0]->Integral(0, 1500) / v_h1f_XP[0]->GetEntries());
    v_h1f_XP[0]->SetLineColor(kMagenta + 2);
    v_h1f_XP[0]->SetLineWidth(2);
    v_tf1_XP[0]->SetLineColor(kMagenta + 1);
@@ -1047,7 +1116,8 @@ void DrawOut_Separation(const std::string &inputDir, const std::string &Comment)
    v_h1f_XP[2]->SetName("muons #mu^{+} 1GeV");
    v_h1f_XP[2]->Scale(1 / v_h1f_XP[2]->GetEntries());
    v_tf1_XP[2]->SetRange(0, 1500);
-   v_tf1_XP[2]->SetParameter(0, v_tf1_XP[2]->Integral(0, 1500) / v_h1f_XP[2]->GetEntries());
+   v_tf1_XP[2]->SetParameter(0,
+                             v_tf1_XP[2]->Integral(0, 1500) / v_h1f_XP[2]->GetEntries());
    v_h1f_XP[2]->SetLineColor(kMagenta + 2);
    v_h1f_XP[2]->SetLineWidth(2);
    v_h1f_XP[2]->SetLineStyle(2);
@@ -1071,9 +1141,10 @@ void DrawOut_Separation(const std::string &inputDir, const std::string &Comment)
    ptText->SetTextFont(42);
    ptText->SetTextAlign(31);
    sepa = GetSeparation(mean_XP[0], std_XP[0], mean_XP[2], std_XP[2]);
-   dsepa = GetSeparationError(mean_XP[0], std_XP[0], dmean_XP[0], dstd_XP[0], mean_XP[2], std_XP[2], dmean_XP[2],
-                              dstd_XP[2]);
-   ptText->SetText(1200, 0.19, Form("S(e^{+} | #mu^{+}) = %.2f #pm %.2f #sigma", sepa, dsepa));
+   dsepa = GetSeparationError(mean_XP[0], std_XP[0], dmean_XP[0], dstd_XP[0], mean_XP[2],
+                              std_XP[2], dmean_XP[2], dstd_XP[2]);
+   ptText->SetText(1200, 0.19,
+                   Form("S(e^{+} | #mu^{+}) = %.2f #pm %.2f #sigma", sepa, dsepa));
    ptText->SetTextColor(kMagenta + 2);
    ptText->DrawClone();
    delete ptText;
@@ -1096,27 +1167,34 @@ void DrawOut_Separation(const std::string &inputDir, const std::string &Comment)
    // v_tf1_XP.clear();
 }
 
-void DrawOut_Separation_Reduced(const std::string &inputDir, const std::string &Comment, std::string Energy)
+void DrawOut_Separation_Reduced(const std::string &inputDir, const std::string &Comment,
+                                std::string Energy)
 {
    int nParticles = 4;
 
    // Get input files
    std::vector<TFile *> v_pTFile_dEdx;
    // v_pTFile_dEdx.				push_back(TFile::Open(TString(inputDir +
-   // "CERN22_ERAM18_e+_1GeV/3_CERN22_ERAM18_e+_1GeV_vD"	+ "_dEdx" + Comment + ".root"))); v_pTFile_dEdx.
-   // push_back(TFile::Open(TString(inputDir + "CERN22_ERAM18_p_1GeV/3_CERN22_ERAM18_p_1GeV_vD"		+ "_dEdx" + Comment
+   // "CERN22_ERAM18_e+_1GeV/3_CERN22_ERAM18_e+_1GeV_vD"	+ "_dEdx" + Comment + ".root")));
+   // v_pTFile_dEdx. push_back(TFile::Open(TString(inputDir +
+   // "CERN22_ERAM18_p_1GeV/3_CERN22_ERAM18_p_1GeV_vD"		+ "_dEdx" + Comment
    // + ".root"))); v_pTFile_dEdx.				push_back(TFile::Open(TString(inputDir +
-   // "CERN22_ERAM18_mu+_1GeV/3_CERN22_ERAM18_mu+_1GeV_vD"	+ "_dEdx" + Comment + ".root"))); v_pTFile_dEdx.
-   // push_back(TFile::Open(TString(inputDir + "CERN22_ERAM18_pi+_0p5GeV/3_CERN22_ERAM18_pi+_0p5GeV_vD"	+ "_dEdx" +
-   // Comment + ".root")));
-   v_pTFile_dEdx.push_back(TFile::Open(TString(inputDir + "CERN22_Escan_e+_" + Energy + "GeV/3_CERN22_Escan_e+_" +
-                                               Energy + "GeV_dEdx" + Comment + ".root")));
-   v_pTFile_dEdx.push_back(TFile::Open(TString(inputDir + "CERN22_Escan_p+_" + Energy + "GeV/3_CERN22_Escan_p+_" +
-                                               Energy + "GeV_dEdx" + Comment + ".root")));
-   v_pTFile_dEdx.push_back(TFile::Open(TString(inputDir + "CERN22_Escan_mu_" + Energy + "GeV/3_CERN22_Escan_mu_" +
-                                               Energy + "GeV_dEdx" + Comment + ".root")));
-   v_pTFile_dEdx.push_back(TFile::Open(TString(inputDir + "CERN22_Escan_pi_" + Energy + "GeV/3_CERN22_Escan_pi_" +
-                                               Energy + "GeV_dEdx" + Comment + ".root")));
+   // "CERN22_ERAM18_mu+_1GeV/3_CERN22_ERAM18_mu+_1GeV_vD"	+ "_dEdx" + Comment +
+   // ".root"))); v_pTFile_dEdx. push_back(TFile::Open(TString(inputDir +
+   // "CERN22_ERAM18_pi+_0p5GeV/3_CERN22_ERAM18_pi+_0p5GeV_vD"	+ "_dEdx" + Comment +
+   // ".root")));
+   v_pTFile_dEdx.push_back(TFile::Open(TString(inputDir + "CERN22_Escan_e+_" + Energy +
+                                               "GeV/3_CERN22_Escan_e+_" + Energy +
+                                               "GeV_dEdx" + Comment + ".root")));
+   v_pTFile_dEdx.push_back(TFile::Open(TString(inputDir + "CERN22_Escan_p+_" + Energy +
+                                               "GeV/3_CERN22_Escan_p+_" + Energy +
+                                               "GeV_dEdx" + Comment + ".root")));
+   v_pTFile_dEdx.push_back(TFile::Open(TString(inputDir + "CERN22_Escan_mu_" + Energy +
+                                               "GeV/3_CERN22_Escan_mu_" + Energy +
+                                               "GeV_dEdx" + Comment + ".root")));
+   v_pTFile_dEdx.push_back(TFile::Open(TString(inputDir + "CERN22_Escan_pi_" + Energy +
+                                               "GeV/3_CERN22_Escan_pi_" + Energy +
+                                               "GeV_dEdx" + Comment + ".root")));
 
    // Get functions
    std::vector<TF1 *> v_tf1_WFsum;
@@ -1154,8 +1232,10 @@ void DrawOut_Separation_Reduced(const std::string &inputDir, const std::string &
    }
 
    // Do the table
-   TH2F *h2_separation = new TH2F("h2_separation", "Separation power", 6, -0.5, 5.5, 6, -0.5, 5.5);
-   TH2F *h2_err_separation = new TH2F("h2_err_separation", "Error on separation power", 6, -0.5, 5.5, 6, -0.5, 5.5);
+   TH2F *h2_separation =
+      new TH2F("h2_separation", "Separation power", 6, -0.5, 5.5, 6, -0.5, 5.5);
+   TH2F *h2_err_separation = new TH2F("h2_err_separation", "Error on separation power", 6,
+                                      -0.5, 5.5, 6, -0.5, 5.5);
    const char *particles[6] = {"e^{+}-p",   "e^{+}-#mu^{+}", "e^{+}-#pi^{+}",
                                "p-#mu^{+}", "p-#pi^{+}",     "#mu^{+}-#pi^{+}"};
    const char *methods[2] = {"WF", "XP"};
@@ -1165,10 +1245,15 @@ void DrawOut_Separation_Reduced(const std::string &inputDir, const std::string &
    for (int i = 0; i < nParticles; i++) {
       for (int j = i + 1; j < nParticles; j++) {
          h2_separation->Fill(methods[0], particles[k],
-                             std::floor(GetSeparation(mean_WFsum[i], std_WFsum[i], mean_WFsum[j], std_WFsum[j]) * 100) /
+                             std::floor(GetSeparation(mean_WFsum[i], std_WFsum[i],
+                                                      mean_WFsum[j], std_WFsum[j]) *
+                                        100) /
                                 100);
-         h2_separation->Fill(methods[1], particles[k],
-                             std::floor(GetSeparation(mean_XP[i], std_XP[i], mean_XP[j], std_XP[j]) * 100) / 100);
+         h2_separation->Fill(
+            methods[1], particles[k],
+            std::floor(GetSeparation(mean_XP[i], std_XP[i], mean_XP[j], std_XP[j]) *
+                       100) /
+               100);
          k++;
       }
    }
@@ -1179,15 +1264,18 @@ void DrawOut_Separation_Reduced(const std::string &inputDir, const std::string &
       for (int j = i + 1; j < nParticles; j++) {
          h2_err_separation->Fill(
             methods[0], particles[dk],
-            std::floor(GetSeparationError(mean_WFsum[i], std_WFsum[i], dmean_WFsum[i], dstd_WFsum[i], mean_WFsum[j],
-                                          std_WFsum[j], dmean_WFsum[j], dstd_WFsum[j]) *
+            std::floor(GetSeparationError(mean_WFsum[i], std_WFsum[i], dmean_WFsum[i],
+                                          dstd_WFsum[i], mean_WFsum[j], std_WFsum[j],
+                                          dmean_WFsum[j], dstd_WFsum[j]) *
                        100) /
                100);
-         h2_err_separation->Fill(methods[1], particles[dk],
-                                 std::floor(GetSeparationError(mean_XP[i], std_XP[i], dmean_XP[i], dstd_XP[i],
-                                                               mean_XP[j], std_XP[j], dmean_XP[j], dstd_XP[j]) *
-                                            100) /
-                                    100);
+         h2_err_separation->Fill(
+            methods[1], particles[dk],
+            std::floor(GetSeparationError(mean_XP[i], std_XP[i], dmean_XP[i], dstd_XP[i],
+                                          mean_XP[j], std_XP[j], dmean_XP[j],
+                                          dstd_XP[j]) *
+                       100) /
+               100);
          dk++;
       }
    }
@@ -1230,16 +1318,19 @@ void DrawOut_Separation_Reduced(const std::string &inputDir, const std::string &
    v_th1_WFsum[0]->SetTitle(TString("dE/dx " + Energy + "GeV with WF"));
    v_th1_WFsum[0]->Scale(1 / v_th1_WFsum[0]->GetEntries());
    v_th1_WFsum[2]->Scale(1 / v_th1_WFsum[2]->GetEntries());
-   v_th1_WFsum[0]->SetMaximum(std::max({v_th1_WFsum[0]->GetMaximum(), v_th1_WFsum[2]->GetMaximum()}) * 1.2);
+   v_th1_WFsum[0]->SetMaximum(
+      std::max({v_th1_WFsum[0]->GetMaximum(), v_th1_WFsum[2]->GetMaximum()}) * 1.2);
    v_tf1_WFsum[0]->SetRange(0, 1800);
-   v_tf1_WFsum[0]->SetParameter(0, v_tf1_WFsum[0]->Integral(0, 1500) / v_th1_WFsum[0]->GetEntries());
+   v_tf1_WFsum[0]->SetParameter(0, v_tf1_WFsum[0]->Integral(0, 1500) /
+                                      v_th1_WFsum[0]->GetEntries());
    v_th1_WFsum[0]->SetLineColor(kCyan + 2);
    v_th1_WFsum[0]->SetLineWidth(2);
    v_tf1_WFsum[0]->SetLineColor(kCyan);
    v_tf1_WFsum[0]->SetLineWidth(2);
    v_th1_WFsum[2]->SetName(TString("muons #mu^{+} " + Energy + "GeV"));
    v_tf1_WFsum[2]->SetRange(0, 1800);
-   v_tf1_WFsum[2]->SetParameter(0, v_tf1_WFsum[2]->Integral(0, 1500) / v_th1_WFsum[2]->GetEntries());
+   v_tf1_WFsum[2]->SetParameter(0, v_tf1_WFsum[2]->Integral(0, 1500) /
+                                      v_th1_WFsum[2]->GetEntries());
    v_th1_WFsum[2]->SetLineColor(kCyan + 2);
    v_th1_WFsum[2]->SetLineWidth(2);
    v_th1_WFsum[2]->SetLineStyle(2);
@@ -1264,8 +1355,9 @@ void DrawOut_Separation_Reduced(const std::string &inputDir, const std::string &
    ptText->SetTextFont(42);
    ptText->SetTextAlign(31);
    float sepa = GetSeparation(mean_WFsum[0], std_WFsum[0], mean_WFsum[2], std_WFsum[2]);
-   float dsepa = GetSeparationError(mean_WFsum[0], std_WFsum[0], dmean_WFsum[0], dstd_WFsum[0], mean_WFsum[2],
-                                    std_WFsum[2], dmean_WFsum[2], dstd_WFsum[2]);
+   float dsepa =
+      GetSeparationError(mean_WFsum[0], std_WFsum[0], dmean_WFsum[0], dstd_WFsum[0],
+                         mean_WFsum[2], std_WFsum[2], dmean_WFsum[2], dstd_WFsum[2]);
    ptText->SetText(1200, gPad->GetUymin() + (gPad->GetUymax() - gPad->GetUymin()) * 0.9,
                    Form("S(e^{+} | #mu^{+}) = %.2f #pm %.2f #sigma", sepa, dsepa));
    ptText->SetTextColor(kCyan + 2);
@@ -1279,16 +1371,19 @@ void DrawOut_Separation_Reduced(const std::string &inputDir, const std::string &
    v_th1_XP[0]->SetTitle(TString("dE/dx " + Energy + "GeV with XP"));
    v_th1_XP[0]->Scale(1 / v_th1_XP[0]->GetEntries());
    v_th1_XP[2]->Scale(1 / v_th1_XP[2]->GetEntries());
-   v_th1_XP[0]->SetMaximum(std::max({v_th1_XP[0]->GetMaximum(), v_th1_XP[2]->GetMaximum()}) * 1.2);
+   v_th1_XP[0]->SetMaximum(
+      std::max({v_th1_XP[0]->GetMaximum(), v_th1_XP[2]->GetMaximum()}) * 1.2);
    v_tf1_XP[0]->SetRange(0, 1800);
-   v_tf1_XP[0]->SetParameter(0, v_tf1_XP[0]->Integral(0, 1500) / v_th1_XP[0]->GetEntries());
+   v_tf1_XP[0]->SetParameter(0,
+                             v_tf1_XP[0]->Integral(0, 1500) / v_th1_XP[0]->GetEntries());
    v_th1_XP[0]->SetLineColor(kMagenta + 2);
    v_th1_XP[0]->SetLineWidth(2);
    v_tf1_XP[0]->SetLineColor(kMagenta);
    v_tf1_XP[0]->SetLineWidth(2);
    v_th1_XP[2]->SetName(TString("muons #mu^{+} " + Energy + "GeV"));
    v_tf1_XP[2]->SetRange(0, 1800);
-   v_tf1_XP[2]->SetParameter(0, v_tf1_XP[2]->Integral(0, 1500) / v_th1_XP[2]->GetEntries());
+   v_tf1_XP[2]->SetParameter(0,
+                             v_tf1_XP[2]->Integral(0, 1500) / v_th1_XP[2]->GetEntries());
    v_th1_XP[2]->SetLineColor(kMagenta + 2);
    v_th1_XP[2]->SetLineWidth(2);
    v_th1_XP[2]->SetLineStyle(2);
@@ -1313,8 +1408,8 @@ void DrawOut_Separation_Reduced(const std::string &inputDir, const std::string &
    ptText2->SetTextFont(42);
    ptText2->SetTextAlign(31);
    sepa = GetSeparation(mean_XP[0], std_XP[0], mean_XP[2], std_XP[2]);
-   dsepa = GetSeparationError(mean_XP[0], std_XP[0], dmean_XP[0], dstd_XP[0], mean_XP[2], std_XP[2], dmean_XP[2],
-                              dstd_XP[2]);
+   dsepa = GetSeparationError(mean_XP[0], std_XP[0], dmean_XP[0], dstd_XP[0], mean_XP[2],
+                              std_XP[2], dmean_XP[2], dstd_XP[2]);
    ptText2->SetText(1200, gPad->GetUymin() + (gPad->GetUymax() - gPad->GetUymin()) * 0.9,
                     Form("S(e^{+} | #mu^{+}) = %.2f #pm %.2f #sigma", sepa, dsepa));
    ptText2->SetTextColor(kMagenta + 2);
@@ -1333,7 +1428,8 @@ void DrawOut_Separation_Reduced(const std::string &inputDir, const std::string &
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Draw all scans together
-void DrawOut_Scans(const std::string &inputDir, const std::string &Comment, const std::string &WFversion)
+void DrawOut_Scans(const std::string &inputDir, const std::string &Comment,
+                   const std::string &WFversion)
 {
    // std::string Comment2 = "_zcalc_PRF_4IP_Gain_WFhatrecon";
    std::string OutputFile = inputDir + "/Scans" + Comment + WFversion + ".pdf";
@@ -1380,27 +1476,32 @@ void DrawOut_Scans(const std::string &inputDir, const std::string &Comment, cons
    for (int PT : PT_arr) {
       for (int iz = 0; iz < nz; iz++) {
          if (iz == 0)
-            pTFile = TFile::Open(TString(inputDir + "/DESY21_zscan/DESY21_zscan_PT" + PT + "/DESY21_zm40_PT" + PT +
-                                         "/3_DESY21_zm40_PT" + PT + "_dEdx" + Comment + ".root"));
+            pTFile = TFile::Open(TString(inputDir + "/DESY21_zscan/DESY21_zscan_PT" + PT +
+                                         "/DESY21_zm40_PT" + PT + "/3_DESY21_zm40_PT" +
+                                         PT + "_dEdx" + Comment + ".root"));
          else
-            pTFile = TFile::Open(TString(inputDir + "/DESY21_zscan/DESY21_zscan_PT" + PT + "/DESY21_z" +
-                                         std::to_string(iz - 1) + "60_PT" + PT + "/3_DESY21_z" +
-                                         std::to_string(iz - 1) + "60_PT" + PT + "_dEdx" + Comment + ".root"));
+            pTFile = TFile::Open(TString(inputDir + "/DESY21_zscan/DESY21_zscan_PT" + PT +
+                                         "/DESY21_z" + std::to_string(iz - 1) + "60_PT" +
+                                         PT + "/3_DESY21_z" + std::to_string(iz - 1) +
+                                         "60_PT" + PT + "_dEdx" + Comment + ".root"));
          v_tf1_WF.push_back(pTFile->Get<TF1>("tf1_WFsum"));
          v_tf1_XP.push_back(pTFile->Get<TF1>("tf1_XP"));
          pTFile->Clear();
-         Xlabel.push_back("PT" + std::to_string(PT) + "_Z" + std::to_string(iz * 10 + 5) + "_Y8_#varphi0_#theta0");
+         Xlabel.push_back("PT" + std::to_string(PT) + "_Z" + std::to_string(iz * 10 + 5) +
+                          "_Y8_#varphi0_#theta0");
          npoint++;
       }
       v_TLine.push_back(new TLine(npoint, 0, npoint, 1));
    }
 
    // Y scan
-   std::string Y_arr[] = {"80", "60", "40", "20", "0", "m40", "m60", "m80", "m100", "m120", "m140"};
+   std::string Y_arr[] = {"80",  "60",  "40",   "20",   "0",   "m40",
+                          "m60", "m80", "m100", "m120", "m140"};
    int Row_arr[] = {4, 6, 8, 10, 12, 18, 20, 22, 24, 26, 27};
    for (int iy = 0; iy < ny; iy++) {
-      pTFile = TFile::Open(TString(inputDir + "/DESY21_yscan/DESY21_y" + Y_arr[iy] + "/3_DESY21_y" + Y_arr[iy] +
-                                   "_dEdx" + Comment + ".root"));
+      pTFile =
+         TFile::Open(TString(inputDir + "/DESY21_yscan/DESY21_y" + Y_arr[iy] +
+                             "/3_DESY21_y" + Y_arr[iy] + "_dEdx" + Comment + ".root"));
       v_tf1_WF.push_back(pTFile->Get<TF1>("tf1_WFsum"));
       v_tf1_XP.push_back(pTFile->Get<TF1>("tf1_XP"));
       pTFile->Clear();
@@ -1416,22 +1517,24 @@ void DrawOut_Scans(const std::string &inputDir, const std::string &Comment, cons
    for (int iz = 0; iz < 3; iz++) {
       for (int iphi = 0; iphi < nphi; iphi++) {
          if (iphi < 5)
-            pTFile = TFile::Open(TString(inputDir + "/DESY21_phi/DESY21_phi_z" + Z_arr[iz] + "/DESY21_phi" +
-                                         phi_arr[iphi] + "_z" + Z_arr[iz] + "/3_DESY21_phi" + phi_arr[iphi] + "_z" +
-                                         Z_arr[iz] + "_dEdx" + Comment + ".root"));
+            pTFile = TFile::Open(
+               TString(inputDir + "/DESY21_phi/DESY21_phi_z" + Z_arr[iz] + "/DESY21_phi" +
+                       phi_arr[iphi] + "_z" + Z_arr[iz] + "/3_DESY21_phi" +
+                       phi_arr[iphi] + "_z" + Z_arr[iz] + "_dEdx" + Comment + ".root"));
          else
-            pTFile = TFile::Open(TString(inputDir + "/DESY21_phi/DESY21_phi_z" + Z_arr[iz] + "/DESY21_phi" +
-                                         phi_arr[iphi] + "_diag_z" + Z_arr[iz] + "/3_DESY21_phi" + phi_arr[iphi] +
-                                         "_diag_z" + Z_arr[iz] + "_dEdx" + Comment + WFversion + ".root"));
+            pTFile = TFile::Open(TString(
+               inputDir + "/DESY21_phi/DESY21_phi_z" + Z_arr[iz] + "/DESY21_phi" +
+               phi_arr[iphi] + "_diag_z" + Z_arr[iz] + "/3_DESY21_phi" + phi_arr[iphi] +
+               "_diag_z" + Z_arr[iz] + "_dEdx" + Comment + WFversion + ".root"));
          v_tf1_WF.push_back(pTFile->Get<TF1>("tf1_WFsum"));
          v_tf1_XP.push_back(pTFile->Get<TF1>("tf1_XP"));
          pTFile->Clear();
          if (iphi < 5)
-            Xlabel.push_back("PT200_Z" + std::to_string(Ztrue_arr[iz] / 10) + "_Y4_#varphi" +
-                             std::to_string(phi_arr[iphi]) + "_#theta0");
+            Xlabel.push_back("PT200_Z" + std::to_string(Ztrue_arr[iz] / 10) +
+                             "_Y4_#varphi" + std::to_string(phi_arr[iphi]) + "_#theta0");
          else
-            Xlabel.push_back("PT200_Z" + std::to_string(Ztrue_arr[iz] / 10) + "_Y4_#varphi" +
-                             std::to_string(phi_arr[iphi]) + "d_#theta0");
+            Xlabel.push_back("PT200_Z" + std::to_string(Ztrue_arr[iz] / 10) +
+                             "_Y4_#varphi" + std::to_string(phi_arr[iphi]) + "d_#theta0");
          npoint++;
       }
       v_TLine.push_back(new TLine(npoint, 0, npoint, 1));
@@ -1441,12 +1544,14 @@ void DrawOut_Scans(const std::string &inputDir, const std::string &Comment, cons
    int theta_arr[] = {-45, -20, 20};
    std::string theta_index[] = {"m45", "m20", "20"};
    for (int itheta = 0; itheta < ntheta; itheta++) {
-      pTFile = TFile::Open(TString(inputDir + "/DESY21_theta/DESY21_theta" + theta_index[itheta] + "/3_DESY21_theta" +
+      pTFile = TFile::Open(TString(inputDir + "/DESY21_theta/DESY21_theta" +
+                                   theta_index[itheta] + "/3_DESY21_theta" +
                                    theta_index[itheta] + "_dEdx" + Comment + ".root"));
       v_tf1_WF.push_back(pTFile->Get<TF1>("tf1_WFsum"));
       v_tf1_XP.push_back(pTFile->Get<TF1>("tf1_XP"));
       pTFile->Clear();
-      Xlabel.push_back("PT200_Z45_Y8_#varphi0_#theta" + std::to_string(theta_arr[itheta]));
+      Xlabel.push_back("PT200_Z45_Y8_#varphi0_#theta" +
+                       std::to_string(theta_arr[itheta]));
       npoint++;
    }
 
@@ -1515,7 +1620,8 @@ void DrawOut_Scans(const std::string &inputDir, const std::string &Comment, cons
    leg->AddEntry(ph1_reso_XP, "XP", "ep");
    leg->Draw();
    for (int i = 0; i < (int)v_Text.size(); i++) {
-      v_Text[i]->SetY(pTCanvas->GetUymin() + (pTCanvas->GetUymax() - pTCanvas->GetUymin()) * 7 / 10);
+      v_Text[i]->SetY(pTCanvas->GetUymin() +
+                      (pTCanvas->GetUymax() - pTCanvas->GetUymin()) * 7 / 10);
       v_Text[i]->Draw();
    }
    pTCanvas->SaveAs(OutputFile_Beg.c_str());
@@ -1537,7 +1643,8 @@ void DrawOut_Scans(const std::string &inputDir, const std::string &Comment, cons
    }
    leg->Draw();
    for (int i = 0; i < (int)v_Text.size(); i++) {
-      v_Text[i]->SetY(pTCanvas->GetUymin() + (pTCanvas->GetUymax() - pTCanvas->GetUymin()) * 7 / 10);
+      v_Text[i]->SetY(pTCanvas->GetUymin() +
+                      (pTCanvas->GetUymax() - pTCanvas->GetUymin()) * 7 / 10);
       v_Text[i]->Draw();
    }
    pTCanvas->SaveAs(OutputFile.c_str());
@@ -1559,7 +1666,8 @@ void DrawOut_Scans(const std::string &inputDir, const std::string &Comment, cons
    }
    leg->Draw();
    for (int i = 0; i < (int)v_Text.size(); i++) {
-      v_Text[i]->SetY(pTCanvas->GetUymin() + (pTCanvas->GetUymax() - pTCanvas->GetUymin()) * 7 / 10);
+      v_Text[i]->SetY(pTCanvas->GetUymin() +
+                      (pTCanvas->GetUymax() - pTCanvas->GetUymin()) * 7 / 10);
       v_Text[i]->Draw();
    }
    pTCanvas->SaveAs(OutputFile_End.c_str());
@@ -1594,13 +1702,16 @@ void DrawOut_Zscan_PT(const std::string &inputDir, const std::string &Comment)
    std::vector<TF1 *> v_tf1_WF_412;
 
    int z_val[] = {50, 150, 250, 350, 450, 550, 650, 750, 850, 950};
-   std::string z_arr[] = {"m40", "060", "160", "260", "360", "460", "560", "660", "760", "860"};
+   std::string z_arr[] = {"m40", "060", "160", "260", "360",
+                          "460", "560", "660", "760", "860"};
 
    for (int iz = 0; iz < (int)std::size(z_arr); iz++) {
-      v_pTFile_200.push_back(TFile::Open(TString(inputDir + "/DESY21_zscan_PT200/DESY21_z" + z_arr[iz] +
-                                                 "_PT200/3_DESY21_z" + z_arr[iz] + "_PT200_dEdx" + Comment + ".root")));
-      v_pTFile_412.push_back(TFile::Open(TString(inputDir + "/DESY21_zscan_PT412/DESY21_z" + z_arr[iz] +
-                                                 "_PT412/3_DESY21_z" + z_arr[iz] + "_PT412_dEdx" + Comment + ".root")));
+      v_pTFile_200.push_back(TFile::Open(
+         TString(inputDir + "/DESY21_zscan_PT200/DESY21_z" + z_arr[iz] +
+                 "_PT200/3_DESY21_z" + z_arr[iz] + "_PT200_dEdx" + Comment + ".root")));
+      v_pTFile_412.push_back(TFile::Open(
+         TString(inputDir + "/DESY21_zscan_PT412/DESY21_z" + z_arr[iz] +
+                 "_PT412/3_DESY21_z" + z_arr[iz] + "_PT412_dEdx" + Comment + ".root")));
       v_h1f_WF_200.push_back(v_pTFile_200[iz]->Get<TH1F>("h1f_WFsum"));
       v_h1f_WF_412.push_back(v_pTFile_412[iz]->Get<TH1F>("h1f_WFsum"));
       v_h1f_XP_200.push_back(v_pTFile_200[iz]->Get<TH1F>("h1f_XP"));
@@ -1661,10 +1772,14 @@ void DrawOut_Zscan_PT(const std::string &inputDir, const std::string &Comment)
       dstd_WF_412[iz] = v_tf1_WF_412[iz]->GetParError(2);
       dstd_XP_412[iz] = v_tf1_XP_412[iz]->GetParError(2);
 
-      pTGE_reso_WF_200->SetPoint(ipoint, z_val[iz], std_WF_200[iz] / mean_WF_200[iz] * 100);
-      pTGE_reso_XP_200->SetPoint(ipoint, z_val[iz], std_XP_200[iz] / mean_XP_200[iz] * 100);
-      pTGE_reso_WF_412->SetPoint(ipoint, z_val[iz], std_WF_412[iz] / mean_WF_412[iz] * 100);
-      pTGE_reso_XP_412->SetPoint(ipoint, z_val[iz], std_XP_412[iz] / mean_XP_412[iz] * 100);
+      pTGE_reso_WF_200->SetPoint(ipoint, z_val[iz],
+                                 std_WF_200[iz] / mean_WF_200[iz] * 100);
+      pTGE_reso_XP_200->SetPoint(ipoint, z_val[iz],
+                                 std_XP_200[iz] / mean_XP_200[iz] * 100);
+      pTGE_reso_WF_412->SetPoint(ipoint, z_val[iz],
+                                 std_WF_412[iz] / mean_WF_412[iz] * 100);
+      pTGE_reso_XP_412->SetPoint(ipoint, z_val[iz],
+                                 std_XP_412[iz] / mean_XP_412[iz] * 100);
       pTGE_reso_WF_200->SetPointError(ipoint, 0, GetResoError(v_tf1_WF_200[iz]));
       pTGE_reso_XP_200->SetPointError(ipoint, 0, GetResoError(v_tf1_XP_200[iz]));
       pTGE_reso_WF_412->SetPointError(ipoint, 0, GetResoError(v_tf1_WF_412[iz]));
@@ -1707,7 +1822,8 @@ void DrawOut_Zscan_PT(const std::string &inputDir, const std::string &Comment)
    pTGE_reso_XP_200->GetXaxis()->SetLimits(0, 1000);
    pTGE_reso_XP_200->SetMinimum(4);
    pTGE_reso_XP_200->SetMaximum(10);
-   pTGE_reso_XP_200->SetNameTitle("pTGE_reso_XP", "Resolution vs drift distance;drift distance (mm);resolution (%)");
+   pTGE_reso_XP_200->SetNameTitle(
+      "pTGE_reso_XP", "Resolution vs drift distance;drift distance (mm);resolution (%)");
    Graphic_setup(pTGE_reso_WF_200, 3, 20, kCyan + 2, 1, kBlack);
    Graphic_setup(pTGE_reso_XP_200, 3, 21, kGreen + 3, 1, kBlack);
    Graphic_setup(pTGE_reso_WF_412, 3, 20, kOrange - 3, 1, kBlack);
@@ -1728,7 +1844,8 @@ void DrawOut_Zscan_PT(const std::string &inputDir, const std::string &Comment)
    pTGE_mean_XP_200->GetXaxis()->SetLimits(0, 1000);
    pTGE_mean_XP_200->SetMinimum(600);
    pTGE_mean_XP_200->SetMaximum(1200);
-   pTGE_mean_XP_200->SetNameTitle("pTGE_mean_XP", "Mean vs drift distance;drift distance (mm);Mean (ADC count)");
+   pTGE_mean_XP_200->SetNameTitle(
+      "pTGE_mean_XP", "Mean vs drift distance;drift distance (mm);Mean (ADC count)");
    Graphic_setup(pTGE_mean_WF_200, 3, 20, kCyan + 2, 1, kBlack);
    Graphic_setup(pTGE_mean_XP_200, 3, 21, kGreen + 3, 1, kBlack);
    Graphic_setup(pTGE_mean_WF_412, 3, 20, kOrange - 3, 1, kBlack);
@@ -1745,7 +1862,8 @@ void DrawOut_Zscan_PT(const std::string &inputDir, const std::string &Comment)
    pTGE_std_XP_200->GetXaxis()->SetLimits(0, 1000);
    pTGE_std_XP_200->SetMinimum(40);
    pTGE_std_XP_200->SetMaximum(100);
-   pTGE_std_XP_200->SetNameTitle("pTGE_std_XP", "std vs drift distance;drift distance (mm);std (ADC count)");
+   pTGE_std_XP_200->SetNameTitle(
+      "pTGE_std_XP", "std vs drift distance;drift distance (mm);std (ADC count)");
    Graphic_setup(pTGE_std_WF_200, 3, 20, kCyan + 2, 1, kBlack);
    Graphic_setup(pTGE_std_XP_200, 3, 21, kGreen + 3, 1, kBlack);
    Graphic_setup(pTGE_std_WF_412, 3, 20, kOrange - 3, 1, kBlack);
@@ -1773,7 +1891,8 @@ void DrawOut_Zscan_PT(const std::string &inputDir, const std::string &Comment)
 }
 
 // Draw resolution as function of phi scan for different drift distances
-void DrawOut_Phiscan_Z(const std::string &inputDir, const std::string &Comment, const std::string &WFversion)
+void DrawOut_Phiscan_Z(const std::string &inputDir, const std::string &Comment,
+                       const std::string &WFversion)
 {
    int ipoint = 0;
    int nphi = 8;
@@ -1800,38 +1919,50 @@ void DrawOut_Phiscan_Z(const std::string &inputDir, const std::string &Comment, 
    int phi_arr[] = {0, 5, 10, 20, 30, 30, 40, 45};
    for (int iphi = 0; iphi < nphi; iphi++) {
       if (iphi == 0) {
-         pTFile_5 = TFile::Open(
-            TString("OUT_Reconstruction/DESY21_zscan/DESY21_zscan_PT200/DESY21_zm40_PT200/3_DESY21_zm40_PT200_dEdx" +
-                    Comment + ".root"));
-         pTFile_55 = TFile::Open(
-            TString("OUT_Reconstruction/DESY21_zscan/DESY21_zscan_PT200/DESY21_z460_PT200/3_DESY21_z460_PT200_dEdx" +
-                    Comment + ".root"));
-         pTFile_95 = TFile::Open(
-            TString("OUT_Reconstruction/DESY21_zscan/DESY21_zscan_PT200/DESY21_z860_PT200/3_DESY21_z860_PT200_dEdx" +
-                    Comment + ".root"));
-         // v_pTFile_5.			push_back(TFile::Open(TString(inputDir + "/DESY21_phi_zm40/DESY21_phi" + phi_arr[iphi] +
-         // "_zm40/3_DESY21_phi" + phi_arr[iphi] + "_zm40_dEdx" + Comment + ".root"))); v_pTFile_55.
-         // push_back(TFile::Open(TString(inputDir + "/DESY21_phi_z460/DESY21_phi" + phi_arr[iphi] +
-         // "_z460/3_DESY21_phi" + phi_arr[iphi] + "_z460_dEdx" + Comment + ".root"))); v_pTFile_95.
-         // push_back(TFile::Open(TString(inputDir + "/DESY21_phi_z860/DESY21_phi" + phi_arr[iphi] +
+         pTFile_5 =
+            TFile::Open(TString("OUT_Reconstruction/DESY21_zscan/DESY21_zscan_PT200/"
+                                "DESY21_zm40_PT200/3_DESY21_zm40_PT200_dEdx" +
+                                Comment + ".root"));
+         pTFile_55 =
+            TFile::Open(TString("OUT_Reconstruction/DESY21_zscan/DESY21_zscan_PT200/"
+                                "DESY21_z460_PT200/3_DESY21_z460_PT200_dEdx" +
+                                Comment + ".root"));
+         pTFile_95 =
+            TFile::Open(TString("OUT_Reconstruction/DESY21_zscan/DESY21_zscan_PT200/"
+                                "DESY21_z860_PT200/3_DESY21_z860_PT200_dEdx" +
+                                Comment + ".root"));
+         // v_pTFile_5.			push_back(TFile::Open(TString(inputDir +
+         // "/DESY21_phi_zm40/DESY21_phi" + phi_arr[iphi] +
+         // "_zm40/3_DESY21_phi" + phi_arr[iphi] + "_zm40_dEdx" + Comment + ".root")));
+         // v_pTFile_55. push_back(TFile::Open(TString(inputDir +
+         // "/DESY21_phi_z460/DESY21_phi" + phi_arr[iphi] +
+         // "_z460/3_DESY21_phi" + phi_arr[iphi] + "_z460_dEdx" + Comment + ".root")));
+         // v_pTFile_95. push_back(TFile::Open(TString(inputDir +
+         // "/DESY21_phi_z860/DESY21_phi" + phi_arr[iphi] +
          // "_z860/3_DESY21_phi" + phi_arr[iphi] + "_z860_dEdx" + Comment + ".root")));
       } else if (iphi < 5) {
-         pTFile_5 = TFile::Open(TString(inputDir + "/DESY21_phi_zm40/DESY21_phi" + phi_arr[iphi] +
-                                        "_zm40/3_DESY21_phi" + phi_arr[iphi] + "_zm40_dEdx" + Comment + ".root"));
-         pTFile_55 = TFile::Open(TString(inputDir + "/DESY21_phi_z460/DESY21_phi" + phi_arr[iphi] +
-                                         "_z460/3_DESY21_phi" + phi_arr[iphi] + "_z460_dEdx" + Comment + ".root"));
-         pTFile_95 = TFile::Open(TString(inputDir + "/DESY21_phi_z860/DESY21_phi" + phi_arr[iphi] +
-                                         "_z860/3_DESY21_phi" + phi_arr[iphi] + "_z860_dEdx" + Comment + ".root"));
+         pTFile_5 = TFile::Open(TString(
+            inputDir + "/DESY21_phi_zm40/DESY21_phi" + phi_arr[iphi] +
+            "_zm40/3_DESY21_phi" + phi_arr[iphi] + "_zm40_dEdx" + Comment + ".root"));
+         pTFile_55 = TFile::Open(TString(
+            inputDir + "/DESY21_phi_z460/DESY21_phi" + phi_arr[iphi] +
+            "_z460/3_DESY21_phi" + phi_arr[iphi] + "_z460_dEdx" + Comment + ".root"));
+         pTFile_95 = TFile::Open(TString(
+            inputDir + "/DESY21_phi_z860/DESY21_phi" + phi_arr[iphi] +
+            "_z860/3_DESY21_phi" + phi_arr[iphi] + "_z860_dEdx" + Comment + ".root"));
       } else {
          pTFile_5 =
-            TFile::Open(TString(inputDir + "/DESY21_phi_zm40/DESY21_phi" + phi_arr[iphi] + "_diag_zm40/3_DESY21_phi" +
-                                phi_arr[iphi] + "_diag_zm40_dEdx" + Comment + WFversion + ".root"));
+            TFile::Open(TString(inputDir + "/DESY21_phi_zm40/DESY21_phi" + phi_arr[iphi] +
+                                "_diag_zm40/3_DESY21_phi" + phi_arr[iphi] +
+                                "_diag_zm40_dEdx" + Comment + WFversion + ".root"));
          pTFile_55 =
-            TFile::Open(TString(inputDir + "/DESY21_phi_z460/DESY21_phi" + phi_arr[iphi] + "_diag_z460/3_DESY21_phi" +
-                                phi_arr[iphi] + "_diag_z460_dEdx" + Comment + WFversion + ".root"));
+            TFile::Open(TString(inputDir + "/DESY21_phi_z460/DESY21_phi" + phi_arr[iphi] +
+                                "_diag_z460/3_DESY21_phi" + phi_arr[iphi] +
+                                "_diag_z460_dEdx" + Comment + WFversion + ".root"));
          pTFile_95 =
-            TFile::Open(TString(inputDir + "/DESY21_phi_z860/DESY21_phi" + phi_arr[iphi] + "_diag_z860/3_DESY21_phi" +
-                                phi_arr[iphi] + "_diag_z860_dEdx" + Comment + WFversion + ".root"));
+            TFile::Open(TString(inputDir + "/DESY21_phi_z860/DESY21_phi" + phi_arr[iphi] +
+                                "_diag_z860/3_DESY21_phi" + phi_arr[iphi] +
+                                "_diag_z860_dEdx" + Comment + WFversion + ".root"));
       }
       v_h1f_WF_5.push_back(pTFile_5->Get<TH1F>("h1f_WFsum"));
       v_h1f_WF_55.push_back(pTFile_55->Get<TH1F>("h1f_WFsum"));
@@ -1921,9 +2052,12 @@ void DrawOut_Phiscan_Z(const std::string &inputDir, const std::string &Comment, 
       dstd_XP_55[iphi] = v_tf1_XP_55[iphi]->GetParError(2);
       dstd_XP_95[iphi] = v_tf1_XP_95[iphi]->GetParError(2);
 
-      pTGE_reso_WF_5->SetPoint(ipoint, phi_arr_shift[iphi], std_WF_5[iphi] / mean_WF_5[iphi] * 100);
-      pTGE_reso_WF_55->SetPoint(ipoint, phi_arr_shift[iphi], std_WF_55[iphi] / mean_WF_55[iphi] * 100);
-      pTGE_reso_WF_95->SetPoint(ipoint, phi_arr_shift[iphi], std_WF_95[iphi] / mean_WF_95[iphi] * 100);
+      pTGE_reso_WF_5->SetPoint(ipoint, phi_arr_shift[iphi],
+                               std_WF_5[iphi] / mean_WF_5[iphi] * 100);
+      pTGE_reso_WF_55->SetPoint(ipoint, phi_arr_shift[iphi],
+                                std_WF_55[iphi] / mean_WF_55[iphi] * 100);
+      pTGE_reso_WF_95->SetPoint(ipoint, phi_arr_shift[iphi],
+                                std_WF_95[iphi] / mean_WF_95[iphi] * 100);
       pTGE_reso_WF_5->SetPointError(ipoint, 0, GetResoError(v_tf1_WF_5[iphi]));
       pTGE_reso_WF_55->SetPointError(ipoint, 0, GetResoError(v_tf1_WF_55[iphi]));
       pTGE_reso_WF_95->SetPointError(ipoint, 0, GetResoError(v_tf1_WF_95[iphi]));
@@ -1942,9 +2076,12 @@ void DrawOut_Phiscan_Z(const std::string &inputDir, const std::string &Comment, 
       pTGE_std_WF_55->SetPointError(ipoint, 0, dstd_WF_55[iphi]);
       pTGE_std_WF_95->SetPointError(ipoint, 0, dstd_WF_95[iphi]);
 
-      pTGE_reso_XP_5->SetPoint(ipoint, phi_arr_shift[iphi], std_XP_5[iphi] / mean_XP_5[iphi] * 100);
-      pTGE_reso_XP_55->SetPoint(ipoint, phi_arr_shift[iphi], std_XP_55[iphi] / mean_XP_55[iphi] * 100);
-      pTGE_reso_XP_95->SetPoint(ipoint, phi_arr_shift[iphi], std_XP_95[iphi] / mean_XP_95[iphi] * 100);
+      pTGE_reso_XP_5->SetPoint(ipoint, phi_arr_shift[iphi],
+                               std_XP_5[iphi] / mean_XP_5[iphi] * 100);
+      pTGE_reso_XP_55->SetPoint(ipoint, phi_arr_shift[iphi],
+                                std_XP_55[iphi] / mean_XP_55[iphi] * 100);
+      pTGE_reso_XP_95->SetPoint(ipoint, phi_arr_shift[iphi],
+                                std_XP_95[iphi] / mean_XP_95[iphi] * 100);
       pTGE_reso_XP_5->SetPointError(ipoint, 0, GetResoError(v_tf1_XP_5[iphi]));
       pTGE_reso_XP_55->SetPointError(ipoint, 0, GetResoError(v_tf1_XP_55[iphi]));
       pTGE_reso_XP_95->SetPointError(ipoint, 0, GetResoError(v_tf1_XP_95[iphi]));
@@ -1966,7 +2103,8 @@ void DrawOut_Phiscan_Z(const std::string &inputDir, const std::string &Comment, 
    }
 
    // Draw
-   std::string OutputFile_WF = inputDir + "/Phiscan_Resolution_Z" + Comment + WFversion + ".pdf";
+   std::string OutputFile_WF =
+      inputDir + "/Phiscan_Resolution_Z" + Comment + WFversion + ".pdf";
    std::string OutputFile_WF_Beg = OutputFile_WF + "(";
    std::string OutputFile_WF_End = OutputFile_WF + ")";
    std::string OutputFile_XP = inputDir + "/Phiscan_Resolution_Z" + Comment + "_XP.pdf";
@@ -1984,7 +2122,9 @@ void DrawOut_Phiscan_Z(const std::string &inputDir, const std::string &Comment, 
    pTGE_reso_WF_55->GetXaxis()->SetLimits(-3, 48);
    pTGE_reso_WF_55->SetMinimum(4);
    pTGE_reso_WF_55->SetMaximum(12);
-   pTGE_reso_WF_55->SetNameTitle("pTGE_reso_WF_55", "Resolution vs #varphi angle;#varphi angle (#circ);resolution (%)");
+   pTGE_reso_WF_55->SetNameTitle(
+      "pTGE_reso_WF_55",
+      "Resolution vs #varphi angle;#varphi angle (#circ);resolution (%)");
    Graphic_setup(pTGE_reso_WF_5, 3, 20, kCyan + 2, 1, kBlack);
    Graphic_setup(pTGE_reso_WF_55, 3, 21, kOrange - 3, 1, kBlack);
    Graphic_setup(pTGE_reso_WF_95, 3, 22, kBlack, 1, kBlack);
@@ -2004,7 +2144,9 @@ void DrawOut_Phiscan_Z(const std::string &inputDir, const std::string &Comment, 
    pTGE_reso_XP_55->GetXaxis()->SetLimits(-3, 48);
    pTGE_reso_XP_55->SetMinimum(4);
    pTGE_reso_XP_55->SetMaximum(12);
-   pTGE_reso_XP_55->SetNameTitle("pTGE_reso_XP_5", "Resolution vs #varphi angle;#varphi angle (#circ);resolution (%)");
+   pTGE_reso_XP_55->SetNameTitle(
+      "pTGE_reso_XP_5",
+      "Resolution vs #varphi angle;#varphi angle (#circ);resolution (%)");
    pTGE_reso_XP_55->Draw("ap");
    pTGE_reso_XP_5->Draw("p same");
    pTGE_reso_XP_95->Draw("p same");
@@ -2020,7 +2162,8 @@ void DrawOut_Phiscan_Z(const std::string &inputDir, const std::string &Comment, 
    pTGE_mean_WF_55->GetXaxis()->SetLimits(-3, 48);
    pTGE_mean_WF_55->SetMinimum(600);
    pTGE_mean_WF_55->SetMaximum(1200);
-   pTGE_mean_WF_55->SetNameTitle("pTGE_mean_WF_55", "Mean vs #varphi angle;#varphi angle (#circ);mean (ADC count)");
+   pTGE_mean_WF_55->SetNameTitle(
+      "pTGE_mean_WF_55", "Mean vs #varphi angle;#varphi angle (#circ);mean (ADC count)");
    Graphic_setup(pTGE_mean_WF_5, 3, 20, kCyan + 2, 1, kBlack);
    Graphic_setup(pTGE_mean_WF_55, 3, 21, kOrange - 3, 1, kBlack);
    Graphic_setup(pTGE_mean_WF_95, 3, 22, kBlack, 1, kBlack);
@@ -2040,7 +2183,8 @@ void DrawOut_Phiscan_Z(const std::string &inputDir, const std::string &Comment, 
    pTGE_mean_XP_55->GetXaxis()->SetLimits(-3, 48);
    pTGE_mean_XP_55->SetMinimum(600);
    pTGE_mean_XP_55->SetMaximum(1200);
-   pTGE_mean_XP_55->SetNameTitle("pTGE_mean_XP_5", "Mean vs #varphi angle;#varphi angle (#circ);mean (ADC count)");
+   pTGE_mean_XP_55->SetNameTitle(
+      "pTGE_mean_XP_5", "Mean vs #varphi angle;#varphi angle (#circ);mean (ADC count)");
    pTGE_mean_XP_55->Draw("ap");
    pTGE_mean_XP_5->Draw("p same");
    pTGE_mean_XP_95->Draw("p same");
@@ -2056,7 +2200,8 @@ void DrawOut_Phiscan_Z(const std::string &inputDir, const std::string &Comment, 
    pTGE_std_WF_55->GetXaxis()->SetLimits(-3, 48);
    pTGE_std_WF_55->SetMinimum(40);
    pTGE_std_WF_55->SetMaximum(100);
-   pTGE_std_WF_55->SetNameTitle("pTGE_std_WF_55", "Std vs #varphi angle;#varphi angle (#circ);std (ADC count)");
+   pTGE_std_WF_55->SetNameTitle(
+      "pTGE_std_WF_55", "Std vs #varphi angle;#varphi angle (#circ);std (ADC count)");
    Graphic_setup(pTGE_std_WF_5, 3, 20, kCyan + 2, 1, kBlack);
    Graphic_setup(pTGE_std_WF_55, 3, 21, kOrange - 3, 1, kBlack);
    Graphic_setup(pTGE_std_WF_95, 3, 22, kBlack, 1, kBlack);
@@ -2076,7 +2221,8 @@ void DrawOut_Phiscan_Z(const std::string &inputDir, const std::string &Comment, 
    pTGE_std_XP_55->GetXaxis()->SetLimits(-3, 48);
    pTGE_std_XP_55->SetMinimum(40);
    pTGE_std_XP_55->SetMaximum(100);
-   pTGE_std_XP_55->SetNameTitle("pTGE_std_XP_5", "Std vs #varphi angle;#varphi angle (#circ);std (ADC count)");
+   pTGE_std_XP_55->SetNameTitle(
+      "pTGE_std_XP_5", "Std vs #varphi angle;#varphi angle (#circ);std (ADC count)");
    pTGE_std_XP_55->Draw("ap");
    pTGE_std_XP_5->Draw("p same");
    pTGE_std_XP_95->Draw("p same");
@@ -2109,11 +2255,12 @@ void DrawOut_Escan(const std::string &inputDir, const std::string &Comment)
    gStyle->SetPadTickX(1);
    gStyle->SetPadTickY(1);
    int npoint = 14;
-   std::string Tag[] = {"CERN22_Escan_e+_0p5GeV",  "CERN22_Escan_e+_0p75GeV", "CERN22_Escan_e+_1GeV",
-                        "CERN22_Escan_e+_1p25GeV", "CERN22_Escan_e+_1p5GeV",  "CERN22_Escan_mu_0p75GeV",
-                        "CERN22_Escan_mu_1GeV",    "CERN22_Escan_mu_1p5GeV",  "CERN22_Escan_pi_0p75GeV",
-                        "CERN22_Escan_pi_1p25GeV", "CERN22_Escan_pi_1p5GeV",  "CERN22_Escan_p+_1GeV",
-                        "CERN22_Escan_p+_1p25GeV", "CERN22_Escan_p+_1p5GeV"};
+   std::string Tag[] = {
+      "CERN22_Escan_e+_0p5GeV",  "CERN22_Escan_e+_0p75GeV", "CERN22_Escan_e+_1GeV",
+      "CERN22_Escan_e+_1p25GeV", "CERN22_Escan_e+_1p5GeV",  "CERN22_Escan_mu_0p75GeV",
+      "CERN22_Escan_mu_1GeV",    "CERN22_Escan_mu_1p5GeV",  "CERN22_Escan_pi_0p75GeV",
+      "CERN22_Escan_pi_1p25GeV", "CERN22_Escan_pi_1p5GeV",  "CERN22_Escan_p+_1GeV",
+      "CERN22_Escan_p+_1p25GeV", "CERN22_Escan_p+_1p5GeV"};
 
    float E_arr[] = {0.5, 0.75, 1, 1.25, 1.5, 0.75, 1, 1.5, 0.75, 1.25, 1.5, 1, 1.25, 1.5};
 
@@ -2125,7 +2272,8 @@ void DrawOut_Escan(const std::string &inputDir, const std::string &Comment)
    std::vector<TF1 *> v_tf1_XP;
 
    for (int iE = 0; iE < npoint; iE++) {
-      TFile *ptfile = new TFile((inputDir + Tag[iE] + "/3_" + Tag[iE] + "_dEdx" + Comment + ".root").c_str());
+      TFile *ptfile = new TFile(
+         (inputDir + Tag[iE] + "/3_" + Tag[iE] + "_dEdx" + Comment + ".root").c_str());
       v_tf1_WF.push_back(ptfile->Get<TF1>("tf1_WFsum"));
       v_tf1_XP.push_back(ptfile->Get<TF1>("tf1_XP"));
       delete ptfile;
@@ -2151,11 +2299,15 @@ void DrawOut_Escan(const std::string &inputDir, const std::string &Comment)
       v_pTGE_mean_XP.push_back(new TGraphErrors());
       v_pTGE_std_WF.push_back(new TGraphErrors());
       v_pTGE_std_XP.push_back(new TGraphErrors());
-      v_tf1_BB.push_back(BetheBlochExp(0.25, 20, v_mass[i], particles[i]));                    // m & P range in
-      v_tf1_BB_Claudio.push_back(BetheBlochExp(0.25, 20, v_mass[i], particles[i]));            // m & P range in
-      v_tf1_BB_THATReconstruction.push_back(BetheBlochExp(0.25, 20, v_mass[i], particles[i])); // m & P range in
-      // if(i==0) v_tf1_BB.		push_back(BetheBlochExp(0.25, 2, v_mass[i], particles[i])); // m & P range in GeV GeV
-      // else	v_tf1_BB.		push_back(BetheBloch(0.25, 2, v_mass[i], particles[i])); // m & P range in GeV
+      v_tf1_BB.push_back(
+         BetheBlochExp(0.25, 20, v_mass[i], particles[i])); // m & P range in
+      v_tf1_BB_Claudio.push_back(
+         BetheBlochExp(0.25, 20, v_mass[i], particles[i])); // m & P range in
+      v_tf1_BB_THATReconstruction.push_back(
+         BetheBlochExp(0.25, 20, v_mass[i], particles[i])); // m & P range in
+      // if(i==0) v_tf1_BB.		push_back(BetheBlochExp(0.25, 2, v_mass[i],
+      // particles[i])); // m & P range in GeV GeV else	v_tf1_BB.
+      // push_back(BetheBloch(0.25, 2, v_mass[i], particles[i])); // m & P range in GeV
    }
    // v_tf1_BB[0]->SetParameters(511e-6, -0.3, -0.1, 7.5, 2, 1);
 
@@ -2169,8 +2321,11 @@ void DrawOut_Escan(const std::string &inputDir, const std::string &Comment)
    float dstd_WF[npoint];
    float dstd_XP[npoint];
 
-   float keV = 5.9 / (224 * 1703.74 / 183); // 5.9 Fe peak energy | 1703 mean MockUp gain | 224 e- created with 5.9keV |
-                                            // 183 e- for 1 ADC | 2.23 scaling correction (to be understood)
+   float keV =
+      5.9 /
+      (224 * 1703.74 /
+       183); // 5.9 Fe peak energy | 1703 mean MockUp gain | 224 e- created with 5.9keV |
+             // 183 e- for 1 ADC | 2.23 scaling correction (to be understood)
 
    int index;
    for (int iE = 0; iE < npoint; iE++) {
@@ -2210,15 +2365,20 @@ void DrawOut_Escan(const std::string &inputDir, const std::string &Comment)
 
    combinedFit(v_pTGE_mean_XP, v_tf1_BB);
 
-   //	double paramTHATReconstruction[5] = {0.301580, 3.62857e+00, 3.18209e-02, 2.07081e+00, -7.14413e-01}; //
+   //	double paramTHATReconstruction[5] =
+   //{0.301580, 3.62857e+00, 3.18209e-02, 2.07081e+00, -7.14413e-01}; //
    // THATReconstruction raw normalized
-   double paramTHATReconstruction[5] = {0.186543, 5.382656, 0.004234, 2.028548, -0.994807}; // THATReconstruction fit
-   //	double paramClaudio[5] = {0.148800, 6.047,		0.00064,	2.308,		-1.359};		// Claudio raw normalized
-   double paramClaudio[5] = {0.186524, 5.382954, 0.004232, 2.028659, -0.994959}; // Claudio fit
+   double paramTHATReconstruction[5] = {0.186543, 5.382656, 0.004234, 2.028548,
+                                        -0.994807}; // THATReconstruction fit
+   //	double paramClaudio[5] = {0.148800, 6.047,		0.00064,	2.308,		-1.359};		// Claudio
+   //raw normalized
+   double paramClaudio[5] = {0.186524, 5.382954, 0.004232, 2.028659,
+                             -0.994959}; // Claudio fit
    for (int ipart = 0; ipart < (int)v_tf1_BB_Claudio.size(); ipart++) {
       for (int iparam = 1; iparam < (int)v_tf1_BB_Claudio[0]->GetNpar(); iparam++) {
          v_tf1_BB_Claudio[ipart]->SetParameter(iparam, paramClaudio[iparam - 1]);
-         v_tf1_BB_THATReconstruction[ipart]->SetParameter(iparam, paramTHATReconstruction[iparam - 1]);
+         v_tf1_BB_THATReconstruction[ipart]->SetParameter(
+            iparam, paramTHATReconstruction[iparam - 1]);
       }
    }
 
@@ -2244,13 +2404,14 @@ void DrawOut_Escan(const std::string &inputDir, const std::string &Comment)
    leg2->SetBorderSize(0);
    leg2->SetFillStyle(0);
 
-   Color_t colors[] = {kMagenta + 1, kPink, kGreen + 1, kRed};
+   Color_t colors[] = {kMagenta + 1, kBlue, kGreen + 1, kRed};
    int markers[] = {20, 21, 24, 25};
    // Resolution
    v_pTGE_reso_WF[0]->GetXaxis()->SetLimits(0.45, 1.55);
    v_pTGE_reso_WF[0]->SetMinimum(4);
    v_pTGE_reso_WF[0]->SetMaximum(10);
-   v_pTGE_reso_WF[0]->SetNameTitle("pTGE_reso_WF", "Resolution vs energy with WF method;Energy (GeV);resolution (%)");
+   v_pTGE_reso_WF[0]->SetNameTitle(
+      "pTGE_reso_WF", "Resolution vs energy with WF method;Energy (GeV);resolution (%)");
    for (int i = 0; i < 4; i++) {
       Graphic_setup(v_pTGE_reso_WF[i], 3, markers[i], colors[i], 1, colors[i]);
       if (i == 0)
@@ -2270,7 +2431,8 @@ void DrawOut_Escan(const std::string &inputDir, const std::string &Comment)
    v_pTGE_reso_XP[0]->GetXaxis()->SetLimits(0.45, 1.55);
    v_pTGE_reso_XP[0]->SetMinimum(4);
    v_pTGE_reso_XP[0]->SetMaximum(10);
-   v_pTGE_reso_XP[0]->SetNameTitle("pTGE_reso_XP", "Resolution vs energy with XP method;Energy (GeV);resolution (%)");
+   v_pTGE_reso_XP[0]->SetNameTitle(
+      "pTGE_reso_XP", "Resolution vs energy with XP method;Energy (GeV);resolution (%)");
    for (int i = 0; i < 4; i++) {
       Graphic_setup(v_pTGE_reso_XP[i], 3, markers[i], colors[i], 1, colors[i]);
       if (i == 0)
@@ -2287,7 +2449,8 @@ void DrawOut_Escan(const std::string &inputDir, const std::string &Comment)
    v_pTGE_mean_WF[0]->GetXaxis()->SetLimits(0.45, 1.55);
    v_pTGE_mean_WF[0]->SetMinimum(0.5);
    v_pTGE_mean_WF[0]->SetMaximum(3);
-   v_pTGE_mean_WF[0]->SetNameTitle("pTGE_mean_WF", "Mean vs energy with WF method;Energy (GeV);mean (keV/cm)");
+   v_pTGE_mean_WF[0]->SetNameTitle(
+      "pTGE_mean_WF", "Mean vs energy with WF method;Energy (GeV);mean (keV/cm)");
    for (int i = 0; i < 4; i++) {
       Graphic_setup(v_pTGE_mean_WF[i], 3, markers[i], colors[i], 1, colors[i]);
       if (i == 0)
@@ -2311,7 +2474,8 @@ void DrawOut_Escan(const std::string &inputDir, const std::string &Comment)
    v_pTGE_mean_XP[0]->GetXaxis()->SetLimits(0.45, 1.55);
    v_pTGE_mean_XP[0]->SetMinimum(0.5);
    v_pTGE_mean_XP[0]->SetMaximum(3);
-   v_pTGE_mean_XP[0]->SetNameTitle("pTGE_mean_XP", "Mean vs energy with XP method;Energy (GeV);mean (keV/cm)");
+   v_pTGE_mean_XP[0]->SetNameTitle(
+      "pTGE_mean_XP", "Mean vs energy with XP method;Energy (GeV);mean (keV/cm)");
    for (int i = 0; i < 4; i++) {
       Graphic_setup(v_pTGE_mean_XP[i], 3, markers[i], colors[i], 1, colors[i]);
       if (i == 0)
@@ -2332,7 +2496,8 @@ void DrawOut_Escan(const std::string &inputDir, const std::string &Comment)
    gPad->SetLogy();
    v_tf1_BB[0]->SetMinimum(0.7);
    v_tf1_BB[0]->SetMaximum(5);
-   v_tf1_BB[0]->SetTitle("Bethe-Bloch for different particles;Energy (GeV);mean (keV/cm)");
+   v_tf1_BB[0]->SetTitle(
+      "Bethe-Bloch for different particles;Energy (GeV);mean (keV/cm)");
    v_tf1_BB[0]->Draw();
    for (int i = 1; i < 4; i++)
       v_tf1_BB[i]->Draw("same");
@@ -2351,7 +2516,8 @@ void DrawOut_Escan(const std::string &inputDir, const std::string &Comment)
    v_pTGE_std_WF[0]->GetXaxis()->SetLimits(0.45, 1.55);
    v_pTGE_std_WF[0]->SetMinimum(0.05);
    v_pTGE_std_WF[0]->SetMaximum(0.15);
-   v_pTGE_std_WF[0]->SetNameTitle("pTGE_std_WF", "Std vs energy with WF method;Energy (GeV);std (keV/cm)");
+   v_pTGE_std_WF[0]->SetNameTitle(
+      "pTGE_std_WF", "Std vs energy with WF method;Energy (GeV);std (keV/cm)");
    for (int i = 0; i < 4; i++) {
       Graphic_setup(v_pTGE_std_WF[i], 3, markers[i], colors[i], 1, colors[i]);
       if (i == 0)
@@ -2367,7 +2533,8 @@ void DrawOut_Escan(const std::string &inputDir, const std::string &Comment)
    v_pTGE_std_XP[0]->GetXaxis()->SetLimits(0.45, 1.55);
    v_pTGE_std_XP[0]->SetMinimum(0.05);
    v_pTGE_std_XP[0]->SetMaximum(0.15);
-   v_pTGE_std_XP[0]->SetNameTitle("pTGE_std_XP", "Std vs energy with XP method;Energy (GeV);std (keV/cm)");
+   v_pTGE_std_XP[0]->SetNameTitle(
+      "pTGE_std_XP", "Std vs energy with XP method;Energy (GeV);std (keV/cm)");
    for (int i = 0; i < 4; i++) {
       Graphic_setup(v_pTGE_std_XP[i], 3, markers[i], colors[i], 1, colors[i]);
       if (i == 0)
@@ -2430,19 +2597,22 @@ void DrawOut_TGE_WFsum_L(const std::string &inputDir, const std::string &Comment
    int phi_arr[] = {30, 40, 45};
    for (int iphi = 0; iphi < (int)std::size(phi_arr); iphi++) {
       TFile *TFile50 =
-         TFile::Open(TString(inputDir + "DESY21_phi_zm40/DESY21_phi" + phi_arr[iphi] + "_diag_zm40/2_DESY21_phi" +
-                             phi_arr[iphi] + "_diag_zm40_Checks" + Comment + ".root"));
+         TFile::Open(TString(inputDir + "DESY21_phi_zm40/DESY21_phi" + phi_arr[iphi] +
+                             "_diag_zm40/2_DESY21_phi" + phi_arr[iphi] +
+                             "_diag_zm40_Checks" + Comment + ".root"));
       TH2F *h2f_z50 = TFile50->Get<TH2F>("h2f_WFvsLength");
       TGraphErrors *TGE_z50 = Convert_TH2_TGE(h2f_z50);
       v_TGE_z50.push_back(TGE_z50);
       TFile *TFile550 =
-         TFile::Open(TString(inputDir + "DESY21_phi_z460/DESY21_phi" + phi_arr[iphi] + "_diag_z460/2_DESY21_phi" +
-                             phi_arr[iphi] + "_diag_z460_Checks" + Comment + ".root"));
+         TFile::Open(TString(inputDir + "DESY21_phi_z460/DESY21_phi" + phi_arr[iphi] +
+                             "_diag_z460/2_DESY21_phi" + phi_arr[iphi] +
+                             "_diag_z460_Checks" + Comment + ".root"));
       TH2F *h2f_550 = TFile550->Get<TH2F>("h2f_WFvsLength");
       v_TGE_z550.push_back(Convert_TH2_TGE(h2f_550));
       TFile *TFile950 =
-         TFile::Open(TString(inputDir + "DESY21_phi_z860/DESY21_phi" + phi_arr[iphi] + "_diag_z860/2_DESY21_phi" +
-                             phi_arr[iphi] + "_diag_z860_Checks" + Comment + ".root"));
+         TFile::Open(TString(inputDir + "DESY21_phi_z860/DESY21_phi" + phi_arr[iphi] +
+                             "_diag_z860/2_DESY21_phi" + phi_arr[iphi] +
+                             "_diag_z860_Checks" + Comment + ".root"));
       TH2F *h2f_950 = TFile950->Get<TH2F>("h2f_WFvsLength");
       v_TGE_z950.push_back(Convert_TH2_TGE(h2f_950));
       delete h2f_z50;
@@ -2464,10 +2634,11 @@ void DrawOut_TGE_WFsum_L(const std::string &inputDir, const std::string &Comment
    // pTGE_reso_PRF->				SetMinimum(4);
 
    v_TGE_z50[0]->SetMaximum(1800);
-   v_TGE_z50[0]->SetNameTitle(
-      "TGE_z50", "max of WF vs L_{cluster} for Z_{drift} = 50 mm;length in cluster L (mm);A_{max} (ADC counts)");
+   v_TGE_z50[0]->SetNameTitle("TGE_z50",
+                              "max of WF vs L_{cluster} for Z_{drift} = 50 mm;length in "
+                              "cluster L (mm);A_{max} (ADC counts)");
    Graphic_setup(v_TGE_z50[0], 3, 20, kBlack, 1, kBlack);
-   Graphic_setup(v_TGE_z50[1], 3, 21, kPink, 1, kBlack);
+   Graphic_setup(v_TGE_z50[1], 3, 21, kBlue, 1, kBlack);
    Graphic_setup(v_TGE_z50[2], 3, 22, kRed, 1, kBlack);
    v_TGE_z50[0]->Draw("ap");
    v_TGE_z50[1]->Draw("p same");
@@ -2480,10 +2651,11 @@ void DrawOut_TGE_WFsum_L(const std::string &inputDir, const std::string &Comment
    leg->Clear();
 
    v_TGE_z550[0]->SetMaximum(1800);
-   v_TGE_z550[0]->SetNameTitle(
-      "TGE_z550", "max of WF vs L_{cluster} for Z_{drift} = 550 mm;length in cluster L (mm);A_{max} (ADC counts)");
+   v_TGE_z550[0]->SetNameTitle("TGE_z550",
+                               "max of WF vs L_{cluster} for Z_{drift} = 550 mm;length "
+                               "in cluster L (mm);A_{max} (ADC counts)");
    Graphic_setup(v_TGE_z550[0], 3, 20, kBlack, 1, kBlack);
-   Graphic_setup(v_TGE_z550[1], 3, 21, kPink, 1, kBlack);
+   Graphic_setup(v_TGE_z550[1], 3, 21, kBlue, 1, kBlack);
    Graphic_setup(v_TGE_z550[2], 3, 22, kRed, 1, kBlack);
    v_TGE_z550[0]->Draw("ap");
    v_TGE_z550[1]->Draw("p same");
@@ -2496,10 +2668,11 @@ void DrawOut_TGE_WFsum_L(const std::string &inputDir, const std::string &Comment
    leg->Clear();
 
    v_TGE_z950[0]->SetMaximum(1800);
-   v_TGE_z950[0]->SetNameTitle(
-      "TGE_z950", "max of WF vs L_{cluster} for Z_{drift} = 950 mm;length in cluster L (mm);A_{max} (ADC counts)");
+   v_TGE_z950[0]->SetNameTitle("TGE_z950",
+                               "max of WF vs L_{cluster} for Z_{drift} = 950 mm;length "
+                               "in cluster L (mm);A_{max} (ADC counts)");
    Graphic_setup(v_TGE_z950[0], 3, 20, kBlack, 1, kBlack);
-   Graphic_setup(v_TGE_z950[1], 3, 21, kPink, 1, kBlack);
+   Graphic_setup(v_TGE_z950[1], 3, 21, kBlue, 1, kBlack);
    Graphic_setup(v_TGE_z950[2], 3, 22, kRed, 1, kBlack);
    v_TGE_z950[0]->Draw("ap");
    v_TGE_z950[1]->Draw("p same");
@@ -2519,18 +2692,28 @@ void DrawOut_corrections()
    // Get histograms
    std::vector<TF1 *> v_tf1;
    std::vector<std::string> v_filename;
-   v_filename.push_back("../Data_DESY21/Phi_scan_zm40/phi_200_30_zm40_ym60_diag_iter0_WFmax_correction.root");
-   v_filename.push_back("../Data_DESY21/Phi_scan_z460/phi_200_30_z460_ym60_diag_iter0_WFmax_correction.root");
-   v_filename.push_back("../Data_DESY21/Phi_scan_z860/phi_200_30_z860_ym60_diag_iter0_WFmax_correction.root");
-   v_filename.push_back("../Data_DESY21/Phi_scan_zm40/phi_200_40_zm40_ym60_diag_iter0_WFmax_correction.root");
-   v_filename.push_back("../Data_DESY21/Phi_scan_z460/phi_200_40_z460_ym60_diag_iter0_WFmax_correction.root");
-   v_filename.push_back("../Data_DESY21/Phi_scan_z860/phi_200_40_z860_ym60_diag_iter0_WFmax_correction.root");
-   v_filename.push_back("../Data_DESY21/Phi_scan_zm40/phi_200_45_zm40_ym60_diag_iter0_WFmax_correction.root");
-   v_filename.push_back("../Data_DESY21/Phi_scan_z460/phi_200_45_z460_ym60_diag_iter0_WFmax_correction.root");
-   v_filename.push_back("../Data_DESY21/Phi_scan_z860/phi_200_45_z860_ym60_diag_iter0_WFmax_correction.root");
+   v_filename.push_back("../Data_DESY21/Phi_scan_zm40/"
+                        "phi_200_30_zm40_ym60_diag_iter0_WFmax_correction.root");
+   v_filename.push_back("../Data_DESY21/Phi_scan_z460/"
+                        "phi_200_30_z460_ym60_diag_iter0_WFmax_correction.root");
+   v_filename.push_back("../Data_DESY21/Phi_scan_z860/"
+                        "phi_200_30_z860_ym60_diag_iter0_WFmax_correction.root");
+   v_filename.push_back("../Data_DESY21/Phi_scan_zm40/"
+                        "phi_200_40_zm40_ym60_diag_iter0_WFmax_correction.root");
+   v_filename.push_back("../Data_DESY21/Phi_scan_z460/"
+                        "phi_200_40_z460_ym60_diag_iter0_WFmax_correction.root");
+   v_filename.push_back("../Data_DESY21/Phi_scan_z860/"
+                        "phi_200_40_z860_ym60_diag_iter0_WFmax_correction.root");
+   v_filename.push_back("../Data_DESY21/Phi_scan_zm40/"
+                        "phi_200_45_zm40_ym60_diag_iter0_WFmax_correction.root");
+   v_filename.push_back("../Data_DESY21/Phi_scan_z460/"
+                        "phi_200_45_z460_ym60_diag_iter0_WFmax_correction.root");
+   v_filename.push_back("../Data_DESY21/Phi_scan_z860/"
+                        "phi_200_45_z860_ym60_diag_iter0_WFmax_correction.root");
 
-   TF1 *F_HATRecon = new TF1("F_Vlada", "291.012 + 9.4669*x - 4.04*x*x + 1.31624*x*x*x - 0.059534*x*x*x*x", 0,
-                             17); // values provided by Vlada (2022/10/11)
+   TF1 *F_HATRecon = new TF1(
+      "F_Vlada", "291.012 + 9.4669*x - 4.04*x*x + 1.31624*x*x*x - 0.059534*x*x*x*x", 0,
+      17); // values provided by Vlada (2022/10/11)
    v_tf1.push_back(F_HATRecon);
    for (int i = 0; i < (int)v_filename.size(); i++) {
       TFile *pfile = new TFile(v_filename[i].c_str(), "READ");
@@ -2539,7 +2722,8 @@ void DrawOut_corrections()
    }
 
    // Draw out
-   std::string OutputFile = "OUT_Reconstruction/DESY21_phi/Correction_functions_WFmax_correction.pdf";
+   std::string OutputFile =
+      "OUT_Reconstruction/DESY21_phi/Correction_functions_WFmax_correction.pdf";
    std::string OutputFile_Beg = OutputFile + "(";
    std::string OutputFile_End = OutputFile + ")";
 
@@ -2571,7 +2755,7 @@ void DrawOut_corrections()
    leg->AddEntry(v_tf1[0], "HATRecon", "l");
    for (int i = 4; i < 7; i++) {
       v_tf1[0]->Draw();
-      v_tf1[i]->SetLineColor(kPink + 2 * (i - 4));
+      v_tf1[i]->SetLineColor(kBlue + 2 * (i - 4));
       v_tf1[i]->SetLineWidth(4);
       v_tf1[i]->SetLineStyle((i - 1) % 3 + 1);
       leg->AddEntry(v_tf1[i], Form("%i cm", z[i - 4]), "l");
@@ -2608,7 +2792,8 @@ void DrawOut_corrections()
    for (int i = 1; i < 10; i++) {
       v_tf1[1]->Draw();
       // if(i>1)v_tf1[i]->			Draw("same");
-      legAll->AddEntry(v_tf1[i], Form("%i#circ %i cm", angle[(i - 1) / 3], z[(i - 1) % 3]), "l");
+      legAll->AddEntry(v_tf1[i],
+                       Form("%i#circ %i cm", angle[(i - 1) / 3], z[(i - 1) % 3]), "l");
    }
    for (int i = 1; i < 10; i++)
       v_tf1[i]->Draw("same");
@@ -2624,11 +2809,13 @@ void DrawOut_corrections()
       tg->SetTitle("F(L_{cluster})*F_{ref}(11.28)/F_{ref}(L_{cluster});L_{cluster} "
                    "(mm);F(L_{cluster})*F_{ref}(11.28)/F_{ref}(L_{cluster}) (ADC count)");
       for (int j = 0; j < 100; j++)
-         tg->SetPoint(j, j / 100. * 17., v_tf1[i]->Eval(j / 100. * 17.) * ref / v_tf1[4]->Eval(j / 100. * 17.));
+         tg->SetPoint(j, j / 100. * 17.,
+                      v_tf1[i]->Eval(j / 100. * 17.) * ref /
+                         v_tf1[4]->Eval(j / 100. * 17.));
       if (i >= 1 && i < 4)
          tg->SetLineColor(kGreen + 2 * (i - 1));
       if (i >= 4 && i < 7)
-         tg->SetLineColor(kPink + 2 * (i - 4));
+         tg->SetLineColor(kBlue + 2 * (i - 4));
       if (i >= 7 && i < 10)
          tg->SetLineColor(kRed + 2 * (i - 7));
       tg->SetLineWidth(4);
@@ -2651,7 +2838,8 @@ void DrawOut_corrections()
       TGraph *tg = new TGraph();
       tg->SetMaximum(4);
       tg->SetMinimum(0);
-      tg->SetTitle("F_{ref}(11.28)/F_{ref}(L_{cluster}) with F_{ref} shifted;L_{cluster} (mm);ratio");
+      tg->SetTitle("F_{ref}(11.28)/F_{ref}(L_{cluster}) with F_{ref} shifted;L_{cluster} "
+                   "(mm);ratio");
       v_tf1[4]->SetParameter(0, v_tf1[4]->GetParameter(0) + i * 100);
       ref = v_tf1[4]->Eval(11.28);
       for (int j = 0; j < 100; j++)
@@ -2671,7 +2859,8 @@ void DrawOut_corrections()
 }
 
 // DrawOut dE/dx systematics with Z scan
-void DrawOut_Systematics(const std::string &inputDir, const std::string &Comment, const std::string &scan)
+void DrawOut_Systematics(const std::string &inputDir, const std::string &Comment,
+                         const std::string &scan)
 {
    int sys_RC = 1;
    int sys_Z = 1;
@@ -2723,17 +2912,23 @@ void DrawOut_Systematics(const std::string &inputDir, const std::string &Comment
    std::vector<std::string> file;
    for (std::string tag : arr) {
       if (scan == "Z")
-         file.push_back((inputDir + "DESY21_z" + tag + "_PT412/3_DESY21_z" + tag + "_PT412_dEdx").c_str());
+         file.push_back(
+            (inputDir + "DESY21_z" + tag + "_PT412/3_DESY21_z" + tag + "_PT412_dEdx")
+               .c_str());
       if (scan == "phi")
-         file.push_back((inputDir + "DESY21_phi" + tag + "_z460/3_DESY21_phi" + tag + "_z460_dEdx").c_str());
+         file.push_back(
+            (inputDir + "DESY21_phi" + tag + "_z460/3_DESY21_phi" + tag + "_z460_dEdx")
+               .c_str());
    }
    if (scan == "phi")
-      file[0] = "OUT_Reconstruction/DESY21_zscan/DESY21_zscan_PT200/DESY21_z460_PT200/3_DESY21_z460_PT200_dEdx";
+      file[0] = "OUT_Reconstruction/DESY21_zscan/DESY21_zscan_PT200/DESY21_z460_PT200/"
+                "3_DESY21_z460_PT200_dEdx";
 
    for (int i = 0; i < (int)file.size(); i++) {
       pTFile_XP = TFile::Open(TString(file[i] + Comment + ".root"));
       TF1 *tf1_XP = pTFile_XP->Get<TF1>("tf1_XP");
-      pTGE_reso_XP->SetPoint(i, val[i], tf1_XP->GetParameter(2) / tf1_XP->GetParameter(1) * 100);
+      pTGE_reso_XP->SetPoint(i, val[i],
+                             tf1_XP->GetParameter(2) / tf1_XP->GetParameter(1) * 100);
       pTGE_reso_XP->SetPointError(i, 0, GetResoError(tf1_XP));
       pTGE_mean_XP->SetPoint(i, val[i], tf1_XP->GetParameter(1));
       pTGE_mean_XP->SetPointError(i, 0, tf1_XP->GetParError(1));
@@ -2764,7 +2959,8 @@ void DrawOut_Systematics(const std::string &inputDir, const std::string &Comment
       for (int i = 0; i < (int)file.size(); i++) {
          pTFile_RCm = TFile::Open(TString(file[i] + Comment + "_RCm2%.root"));
          TF1 *tf1_RCm = pTFile_RCm->Get<TF1>("tf1_XP");
-         pTGE_reso_RCm->SetPoint(i, val[i], tf1_RCm->GetParameter(2) / tf1_RCm->GetParameter(1) * 100);
+         pTGE_reso_RCm->SetPoint(
+            i, val[i], tf1_RCm->GetParameter(2) / tf1_RCm->GetParameter(1) * 100);
          pTGE_reso_RCm->SetPointError(i, 0, GetResoError(tf1_RCm));
          pTGE_mean_RCm->SetPoint(i, val[i], tf1_RCm->GetParameter(1));
          pTGE_mean_RCm->SetPointError(i, 0, tf1_RCm->GetParError(1));
@@ -2773,34 +2969,38 @@ void DrawOut_Systematics(const std::string &inputDir, const std::string &Comment
 
          pTFile_RCp = TFile::Open(TString(file[i] + Comment + "_RCp2%.root"));
          TF1 *tf1_RCp = pTFile_RCp->Get<TF1>("tf1_XP");
-         pTGE_reso_RCp->SetPoint(i, val[i], tf1_RCp->GetParameter(2) / tf1_RCp->GetParameter(1) * 100);
+         pTGE_reso_RCp->SetPoint(
+            i, val[i], tf1_RCp->GetParameter(2) / tf1_RCp->GetParameter(1) * 100);
          pTGE_reso_RCp->SetPointError(i, 0, GetResoError(tf1_RCp));
          pTGE_mean_RCp->SetPoint(i, val[i], tf1_RCp->GetParameter(1));
          pTGE_mean_RCp->SetPointError(i, 0, tf1_RCp->GetParError(1));
          pTGE_std_RCp->SetPoint(i, val[i], tf1_RCp->GetParameter(2));
          pTGE_std_RCp->SetPointError(i, 0, tf1_RCp->GetParError(2));
 
-         // pTFile_RCpm					= TFile::Open(TString(file[i] + Comment + "_RCpm%.root"));
-         // TF1* tf1_RCpm				= pTFile_RCpm->Get<TF1>("tf1_XP");
-         // pTGE_reso_RCpm->				SetPoint(	i,val[i], tf1_RCpm->GetParameter(2)/tf1_RCpm->GetParameter(1)*100);
-         // pTGE_reso_RCpm->				SetPointError(i,0,		GetResoError(tf1_RCpm));
-         // pTGE_mean_RCpm->				SetPoint(	i,val[i], tf1_RCpm->GetParameter(1));
-         // pTGE_mean_RCpm->				SetPointError(i,0,		tf1_RCpm->GetParError(1));
-         // pTGE_std_RCpm->				SetPoint(	i,val[i], tf1_RCpm->GetParameter(2));
-         // pTGE_std_RCpm->				SetPointError(i,0,		tf1_RCpm->GetParError(2));
+         // pTFile_RCpm					= TFile::Open(TString(file[i] + Comment +
+         // "_RCpm%.root")); TF1* tf1_RCpm				= pTFile_RCpm->Get<TF1>("tf1_XP");
+         // pTGE_reso_RCpm->				SetPoint(	i,val[i],
+         // tf1_RCpm->GetParameter(2)/tf1_RCpm->GetParameter(1)*100); pTGE_reso_RCpm->
+         // SetPointError(i,0,		GetResoError(tf1_RCpm)); pTGE_mean_RCpm->
+         // SetPoint(	i,val[i], tf1_RCpm->GetParameter(1)); pTGE_mean_RCpm->
+         // SetPointError(i,0,		tf1_RCpm->GetParError(1)); pTGE_std_RCpm->
+         // SetPoint(	i,val[i], tf1_RCpm->GetParameter(2)); pTGE_std_RCpm->
+         // SetPointError(i,0,		tf1_RCpm->GetParError(2));
       }
       // Resolution
       pTGE_reso_XP->GetXaxis()->SetLimits(xmin, xmax);
       pTGE_reso_XP->SetMinimum(4);
       pTGE_reso_XP->SetMaximum(12);
       if (scan == "Z")
-         pTGE_reso_XP->SetNameTitle("pTGE_reso_XP",
-                                    "Z scan systematics | RC | Resolution;drift distance (mm);resolution (%)");
+         pTGE_reso_XP->SetNameTitle(
+            "pTGE_reso_XP",
+            "Z scan systematics | RC | Resolution;drift distance (mm);resolution (%)");
       if (scan == "phi")
-         pTGE_reso_XP->SetNameTitle("pTGE_reso_XP",
-                                    "#phi scan systematics | RC | Resolution;#phi angle (#circ);resolution (%)");
+         pTGE_reso_XP->SetNameTitle(
+            "pTGE_reso_XP",
+            "#phi scan systematics | RC | Resolution;#phi angle (#circ);resolution (%)");
       Graphic_setup(pTGE_reso_XP, 3, 21, kMagenta + 1, 1, kBlack);
-      Graphic_setup(pTGE_reso_RCm, 3, 23, kPink + 1, 1, kBlack);
+      Graphic_setup(pTGE_reso_RCm, 3, 23, kBlue + 1, 1, kBlack);
       Graphic_setup(pTGE_reso_RCp, 3, 22, kRed + 1, 1, kBlack);
       // Graphic_setup(pTGE_reso_RCpm, 3, 20, kGreen+1, 1, kBlack);
       pTGE_reso_XP->Draw("ap");
@@ -2819,12 +3019,14 @@ void DrawOut_Systematics(const std::string &inputDir, const std::string &Comment
       pTGE_mean_XP->SetMinimum(600);
       pTGE_mean_XP->SetMaximum(1200);
       if (scan == "Z")
-         pTGE_mean_XP->SetNameTitle("pTGE_mean_XP",
-                                    "Z scan systematics | RC | Mean;drift distance (mm);mean (ADC count)");
+         pTGE_mean_XP->SetNameTitle(
+            "pTGE_mean_XP",
+            "Z scan systematics | RC | Mean;drift distance (mm);mean (ADC count)");
       if (scan == "phi")
-         pTGE_mean_XP->SetNameTitle("pTGE_mean_XP",
-                                    "#phi scan systematics | RC | Mean;#phi angle (#circ);mean (ADC count)");
-      Graphic_setup(pTGE_mean_RCm, 3, 23, kPink + 1, 1, kBlack);
+         pTGE_mean_XP->SetNameTitle(
+            "pTGE_mean_XP",
+            "#phi scan systematics | RC | Mean;#phi angle (#circ);mean (ADC count)");
+      Graphic_setup(pTGE_mean_RCm, 3, 23, kBlue + 1, 1, kBlack);
       Graphic_setup(pTGE_mean_XP, 3, 21, kMagenta + 1, 1, kBlack);
       Graphic_setup(pTGE_mean_RCp, 3, 22, kRed + 1, 1, kBlack);
       // Graphic_setup(pTGE_mean_RCpm, 3, 20, kGreen+1, 1, kBlack);
@@ -2841,11 +3043,13 @@ void DrawOut_Systematics(const std::string &inputDir, const std::string &Comment
       pTGE_std_XP->SetMaximum(100);
       if (scan == "Z")
          pTGE_std_XP->SetNameTitle("pTGE_std_XP",
-                                   "Z scan systematics | RC | Std;drift distance (mm);standard deviation (ADC count)");
+                                   "Z scan systematics | RC | Std;drift distance "
+                                   "(mm);standard deviation (ADC count)");
       if (scan == "phi")
-         pTGE_std_XP->SetNameTitle(
-            "pTGE_std_XP", "#phi scan systematics | RC | Std;#phi angle (#circ);standard deviation (ADC count)");
-      Graphic_setup(pTGE_std_RCm, 3, 23, kPink + 1, 1, kBlack);
+         pTGE_std_XP->SetNameTitle("pTGE_std_XP",
+                                   "#phi scan systematics | RC | Std;#phi angle "
+                                   "(#circ);standard deviation (ADC count)");
+      Graphic_setup(pTGE_std_RCm, 3, 23, kBlue + 1, 1, kBlack);
       Graphic_setup(pTGE_std_XP, 3, 21, kMagenta + 1, 1, kBlack);
       Graphic_setup(pTGE_std_RCp, 3, 22, kRed + 1, 1, kBlack);
       // Graphic_setup(pTGE_std_RCpm, 3, 20, kGreen+1, 1, kBlack);
@@ -2883,7 +3087,8 @@ void DrawOut_Systematics(const std::string &inputDir, const std::string &Comment
       for (int i = 0; i < (int)file.size(); i++) {
          pTFile_Zm = TFile::Open(TString(file[i] + Comment + "_Zm15mm.root"));
          TF1 *tf1_Zm = pTFile_Zm->Get<TF1>("tf1_XP");
-         pTGE_reso_Zm->SetPoint(i, val[i], tf1_Zm->GetParameter(2) / tf1_Zm->GetParameter(1) * 100);
+         pTGE_reso_Zm->SetPoint(i, val[i],
+                                tf1_Zm->GetParameter(2) / tf1_Zm->GetParameter(1) * 100);
          pTGE_reso_Zm->SetPointError(i, 0, GetResoError(tf1_Zm));
          pTGE_mean_Zm->SetPoint(i, val[i], tf1_Zm->GetParameter(1));
          pTGE_mean_Zm->SetPointError(i, 0, tf1_Zm->GetParError(1));
@@ -2892,19 +3097,21 @@ void DrawOut_Systematics(const std::string &inputDir, const std::string &Comment
 
          pTFile_Zp = TFile::Open(TString(file[i] + Comment + "_Zp15mm.root"));
          TF1 *tf1_Zp = pTFile_Zp->Get<TF1>("tf1_XP");
-         pTGE_reso_Zp->SetPoint(i, val[i], tf1_Zp->GetParameter(2) / tf1_Zp->GetParameter(1) * 100);
+         pTGE_reso_Zp->SetPoint(i, val[i],
+                                tf1_Zp->GetParameter(2) / tf1_Zp->GetParameter(1) * 100);
          pTGE_reso_Zp->SetPointError(i, 0, GetResoError(tf1_Zp));
          pTGE_mean_Zp->SetPoint(i, val[i], tf1_Zp->GetParameter(1));
          pTGE_mean_Zp->SetPointError(i, 0, tf1_Zp->GetParError(1));
          pTGE_std_Zp->SetPoint(i, val[i], tf1_Zp->GetParameter(2));
          pTGE_std_Zp->SetPointError(i, 0, tf1_Zp->GetParError(2));
 
-         // pTFile_Zpm				= TFile::Open(TString(file[i] + Comment + "_Zpmcm.root"));
-         // TF1* tf1_Zpm				= pTFile_Zpm->Get<TF1>("tf1_XP");
-         // pTGE_reso_Zpm->				SetPoint(	i,val[i], tf1_Zpm->GetParameter(2)/tf1_Zpm->GetParameter(1)*100);
-         // pTGE_reso_Zpm->				SetPointError(i,0,		GetResoError(tf1_Zpm));
-         // pTGE_mean_Zpm->				SetPoint(	i,val[i], tf1_Zpm->GetParameter(1));
-         // pTGE_mean_Zpm->				SetPointError(i,0,		tf1_Zpm->GetParError(1));
+         // pTFile_Zpm				= TFile::Open(TString(file[i] + Comment +
+         // "_Zpmcm.root")); TF1* tf1_Zpm				= pTFile_Zpm->Get<TF1>("tf1_XP");
+         // pTGE_reso_Zpm->				SetPoint(	i,val[i],
+         // tf1_Zpm->GetParameter(2)/tf1_Zpm->GetParameter(1)*100); pTGE_reso_Zpm->
+         // SetPointError(i,0,		GetResoError(tf1_Zpm)); pTGE_mean_Zpm->
+         // SetPoint(	i,val[i], tf1_Zpm->GetParameter(1)); pTGE_mean_Zpm->
+         // SetPointError(i,0,		tf1_Zpm->GetParError(1));
          // pTGE_std_Zpm->				SetPoint(	i,val[i], tf1_Zpm->GetParameter(2));
          // pTGE_std_Zpm->				SetPointError(i,0,		tf1_Zpm->GetParError(2));
       }
@@ -2916,11 +3123,13 @@ void DrawOut_Systematics(const std::string &inputDir, const std::string &Comment
       pTGE_reso_XP->SetMaximum(12);
       if (scan == "Z")
          pTGE_reso_XP->SetNameTitle("pTGE_reso_XP",
-                                    "Z scan systematics | Z_{drift} | Resolution;drift distance (mm);resolution (%)");
+                                    "Z scan systematics | Z_{drift} | Resolution;drift "
+                                    "distance (mm);resolution (%)");
       if (scan == "phi")
          pTGE_reso_XP->SetNameTitle("pTGE_reso_XP",
-                                    "#phi scan systematics | Z_{drift} | Resolution;#phi angle (#circ);resolution (%)");
-      Graphic_setup(pTGE_reso_Zm, 3, 23, kPink + 1, 1, kBlack);
+                                    "#phi scan systematics | Z_{drift} | Resolution;#phi "
+                                    "angle (#circ);resolution (%)");
+      Graphic_setup(pTGE_reso_Zm, 3, 23, kBlue + 1, 1, kBlack);
       Graphic_setup(pTGE_reso_XP, 3, 21, kMagenta + 1, 1, kBlack);
       Graphic_setup(pTGE_reso_Zp, 3, 22, kRed + 1, 1, kBlack);
       // Graphic_setup(pTGE_reso_Zpm, 3, 20, kGreen+1, 1, kBlack);
@@ -2943,12 +3152,14 @@ void DrawOut_Systematics(const std::string &inputDir, const std::string &Comment
       pTGE_mean_XP->SetMinimum(600);
       pTGE_mean_XP->SetMaximum(1200);
       if (scan == "Z")
-         pTGE_mean_XP->SetNameTitle("pTGE_mean_XP",
-                                    "Z scan systematics | Z_{drift} | Mean;drift distance (mm);mean (ADC count)");
+         pTGE_mean_XP->SetNameTitle(
+            "pTGE_mean_XP",
+            "Z scan systematics | Z_{drift} | Mean;drift distance (mm);mean (ADC count)");
       if (scan == "phi")
          pTGE_mean_XP->SetNameTitle("pTGE_mean_XP",
-                                    "#phi scan systematics | Z_{drift} | Mean;#phi angle (#circ);mean (ADC count)");
-      Graphic_setup(pTGE_mean_Zm, 3, 23, kPink + 1, 1, kBlack);
+                                    "#phi scan systematics | Z_{drift} | Mean;#phi angle "
+                                    "(#circ);mean (ADC count)");
+      Graphic_setup(pTGE_mean_Zm, 3, 23, kBlue + 1, 1, kBlack);
       Graphic_setup(pTGE_mean_XP, 3, 21, kMagenta + 1, 1, kBlack);
       Graphic_setup(pTGE_mean_Zp, 3, 22, kRed + 1, 1, kBlack);
       // Graphic_setup(pTGE_mean_Zpm, 3, 20, kGreen+1, 1, kBlack);
@@ -2964,12 +3175,14 @@ void DrawOut_Systematics(const std::string &inputDir, const std::string &Comment
       pTGE_std_XP->SetMinimum(40);
       pTGE_std_XP->SetMaximum(100);
       if (scan == "Z")
-         pTGE_std_XP->SetNameTitle(
-            "pTGE_std_XP", "Z scan systematics | Z_{drift} | Std;drift distance (mm);standard deviation (ADC count)");
+         pTGE_std_XP->SetNameTitle("pTGE_std_XP",
+                                   "Z scan systematics | Z_{drift} | Std;drift distance "
+                                   "(mm);standard deviation (ADC count)");
       if (scan == "phi")
-         pTGE_std_XP->SetNameTitle(
-            "pTGE_std_XP", "#phi scan systematics | Z_{drift} | Std;#phi angle (#circ);standard deviation (ADC count)");
-      Graphic_setup(pTGE_std_Zm, 3, 23, kPink + 1, 1, kBlack);
+         pTGE_std_XP->SetNameTitle("pTGE_std_XP",
+                                   "#phi scan systematics | Z_{drift} | Std;#phi angle "
+                                   "(#circ);standard deviation (ADC count)");
+      Graphic_setup(pTGE_std_Zm, 3, 23, kBlue + 1, 1, kBlack);
       Graphic_setup(pTGE_std_XP, 3, 21, kMagenta + 1, 1, kBlack);
       Graphic_setup(pTGE_std_Zp, 3, 22, kRed + 1, 1, kBlack);
       // Graphic_setup(pTGE_std_Zpm, 3, 20, kGreen+1, 1, kBlack);
@@ -2999,7 +3212,8 @@ void DrawOut_Systematics(const std::string &inputDir, const std::string &Comment
       for (int i = 0; i < (int)file.size(); i++) {
          pTFile_dpdd = TFile::Open(TString(file[i] + Comment + "_dpdd.root"));
          TF1 *tf1_dpdd = pTFile_dpdd->Get<TF1>("tf1_XP");
-         pTGE_reso_dpdd->SetPoint(i, val[i], tf1_dpdd->GetParameter(2) / tf1_dpdd->GetParameter(1) * 100);
+         pTGE_reso_dpdd->SetPoint(
+            i, val[i], tf1_dpdd->GetParameter(2) / tf1_dpdd->GetParameter(1) * 100);
          pTGE_reso_dpdd->SetPointError(i, 0, GetResoError(tf1_dpdd));
          pTGE_mean_dpdd->SetPoint(i, val[i], tf1_dpdd->GetParameter(1));
          pTGE_mean_dpdd->SetPointError(i, 0, tf1_dpdd->GetParError(1));
@@ -3008,7 +3222,8 @@ void DrawOut_Systematics(const std::string &inputDir, const std::string &Comment
 
          pTFile_dmdd = TFile::Open(TString(file[i] + Comment + "_dmdd.root"));
          TF1 *tf1_dmdd = pTFile_dmdd->Get<TF1>("tf1_XP");
-         pTGE_reso_dmdd->SetPoint(i, val[i], tf1_dmdd->GetParameter(2) / tf1_dmdd->GetParameter(1) * 100);
+         pTGE_reso_dmdd->SetPoint(
+            i, val[i], tf1_dmdd->GetParameter(2) / tf1_dmdd->GetParameter(1) * 100);
          pTGE_reso_dmdd->SetPointError(i, 0, GetResoError(tf1_dmdd));
          pTGE_mean_dmdd->SetPoint(i, val[i], tf1_dmdd->GetParameter(1));
          pTGE_mean_dmdd->SetPointError(i, 0, tf1_dmdd->GetParError(1));
@@ -3023,15 +3238,16 @@ void DrawOut_Systematics(const std::string &inputDir, const std::string &Comment
       pTGE_reso_XP->SetMinimum(4);
       pTGE_reso_XP->SetMaximum(12);
       if (scan == "Z")
-         pTGE_reso_XP->SetNameTitle(
-            "pTGE_reso_XP", "Z scan systematics | impact parameter d | Resolution;drift distance (mm);resolution (%)");
+         pTGE_reso_XP->SetNameTitle("pTGE_reso_XP",
+                                    "Z scan systematics | impact parameter d | "
+                                    "Resolution;drift distance (mm);resolution (%)");
       if (scan == "phi")
-         pTGE_reso_XP->SetNameTitle(
-            "pTGE_reso_XP",
-            "#phi scan systematics | impact parameter d | Resolution;#phi angle (#circ);resolution (%)");
+         pTGE_reso_XP->SetNameTitle("pTGE_reso_XP",
+                                    "#phi scan systematics | impact parameter d | "
+                                    "Resolution;#phi angle (#circ);resolution (%)");
       Graphic_setup(pTGE_reso_XP, 3, 21, kMagenta + 1, 1, kBlack);
       Graphic_setup(pTGE_reso_dpdd, 3, 22, kRed + 1, 1, kBlack);
-      Graphic_setup(pTGE_reso_dmdd, 3, 23, kPink + 1, 1, kBlack);
+      Graphic_setup(pTGE_reso_dmdd, 3, 23, kBlue + 1, 1, kBlack);
       pTGE_reso_XP->Draw("ap");
       pTGE_reso_dpdd->Draw("p same");
       pTGE_reso_dmdd->Draw("p same");
@@ -3049,14 +3265,16 @@ void DrawOut_Systematics(const std::string &inputDir, const std::string &Comment
       pTGE_mean_XP->SetMinimum(600);
       pTGE_mean_XP->SetMaximum(1200);
       if (scan == "Z")
-         pTGE_mean_XP->SetNameTitle(
-            "pTGE_mean_XP", "Z scan systematics | impact parameter d | Mean;drift distance (mm);mean (ADC count)");
+         pTGE_mean_XP->SetNameTitle("pTGE_mean_XP",
+                                    "Z scan systematics | impact parameter d | "
+                                    "Mean;drift distance (mm);mean (ADC count)");
       if (scan == "phi")
-         pTGE_mean_XP->SetNameTitle(
-            "pTGE_mean_XP", "#phi scan systematics | impact parameter d | Mean;#phi angle (#circ);mean (ADC count)");
+         pTGE_mean_XP->SetNameTitle("pTGE_mean_XP",
+                                    "#phi scan systematics | impact parameter d | "
+                                    "Mean;#phi angle (#circ);mean (ADC count)");
       Graphic_setup(pTGE_mean_XP, 3, 21, kMagenta + 1, 1, kBlack);
       Graphic_setup(pTGE_mean_dpdd, 3, 22, kRed + 1, 1, kBlack);
-      Graphic_setup(pTGE_mean_dmdd, 3, 23, kPink + 1, 1, kBlack);
+      Graphic_setup(pTGE_mean_dmdd, 3, 23, kBlue + 1, 1, kBlack);
       pTGE_mean_XP->Draw("ap");
       pTGE_mean_dpdd->Draw("p same");
       pTGE_mean_dmdd->Draw("p same");
@@ -3068,16 +3286,16 @@ void DrawOut_Systematics(const std::string &inputDir, const std::string &Comment
       pTGE_std_XP->SetMinimum(40);
       pTGE_std_XP->SetMaximum(100);
       if (scan == "Z")
-         pTGE_std_XP->SetNameTitle(
-            "pTGE_std_XP",
-            "Z scan systematics | impact parameter d | Std;drift distance (mm);standard deviation (ADC count)");
+         pTGE_std_XP->SetNameTitle("pTGE_std_XP",
+                                   "Z scan systematics | impact parameter d | Std;drift "
+                                   "distance (mm);standard deviation (ADC count)");
       if (scan == "phi")
          pTGE_std_XP->SetNameTitle(
-            "pTGE_std_XP",
-            "#phi scan systematics | impact parameter d | Std;#phi angle (#circ);standard deviation (ADC count)");
+            "pTGE_std_XP", "#phi scan systematics | impact parameter d | Std;#phi angle "
+                           "(#circ);standard deviation (ADC count)");
       Graphic_setup(pTGE_std_XP, 3, 21, kMagenta + 1, 1, kBlack);
       Graphic_setup(pTGE_std_dpdd, 3, 22, kRed + 1, 1, kBlack);
-      Graphic_setup(pTGE_std_dmdd, 3, 23, kPink + 1, 1, kBlack);
+      Graphic_setup(pTGE_std_dmdd, 3, 23, kBlue + 1, 1, kBlack);
       pTGE_std_XP->Draw("ap");
       pTGE_std_dpdd->Draw("p same");
       pTGE_std_dmdd->Draw("p same");

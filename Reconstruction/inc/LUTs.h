@@ -34,7 +34,7 @@ namespace Reconstruction {
 class ERAMMaps {
 public:
    /* Constructor */
-   ERAMMaps(const std::string &file = "$HOME/Documents/Code/CPP_projects/Read_ERAM_MAP/Data/ERAMinfo.root");
+   ERAMMaps(const std::string &file = "$HOME/Documents/Code/ERAMinfo/ERAMinfo.root");
    virtual ~ERAMMaps();
 
    int ID(const int &position);
@@ -59,14 +59,16 @@ private:
    void Load();
    void setGain(const int &position, const int &iX, const int &iY, const float &gain);
    void setRC(const int &position, const int &iX, const int &iY, const float &RC);
-   void setResolution(const int &position, const int &iX, const int &iY, const float &resolution);
+   void setResolution(const int &position, const int &iX, const int &iY,
+                      const float &resolution);
    void setMeanGain(const int &position, const float &meanGain);
    void setMeanRC(const int &position, const float &meanRC);
    void FillHoles();
 
-   std::vector<int> channel2iD = {24, 30, 28, 19, 21, 13, 9,  2,  26, 17, 23, 29, 1,  10, 11, 3,  /*bottom HATPC*/
-                                  47, 16, 14, 15, 42, 45, 37, 36, 20, 38, 7,  44, 43, 39, 41, 46, /*top	HATPC*/
-                                  12, 18}; // CERN22 MockUp and prototype
+   std::vector<int> channel2iD = {
+      24, 30, 28, 19, 21, 13, 9,  2,  26, 17, 23, 29, 1,  10, 11, 3,  /*bottom HATPC*/
+      47, 16, 14, 15, 42, 45, 37, 36, 20, 38, 7,  44, 43, 39, 41, 46, /*top	HATPC*/
+      12, 18}; // CERN22 MockUp and prototype
 
    //------------------------------Data Members-----------------------//
    TFile *pFile;
@@ -84,7 +86,8 @@ private:
 };
 
 /* Look Up Tables for XP method
- * ---------------------------------------------------------------------------------------------------------------- */
+ * ----------------------------------------------------------------------------------------------------------------
+ */
 class LUT {
 public:
    /* Constructor */
@@ -99,7 +102,8 @@ private:
    //	std::string fhatReconRoot;
    //	std::string fhatReconConfig;
    std::string fFile_LUT;
-   //	int fTransDiffCoeff	= ND::TOARuntimeParams::Get().GetParameterI("hatRecon.TransDiffCoeff");
+   //	int fTransDiffCoeff	=
+   //ND::TOARuntimeParams::Get().GetParameterI("hatRecon.TransDiffCoeff");
    int fTransDiffCoeff = 350;
 
    static constexpr float PAD_DIAG = 15.20; // sqrt(pow(11.28,2) + pow(10.19, 2))

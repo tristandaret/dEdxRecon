@@ -14,7 +14,8 @@ void ClusterFit_Horizontal(Sample &aSample, const int &ModuleNber, TF1 *pTF1_ToB
       if (pEvent->Validity_ForThisModule(ModuleNber) == 0)
          continue;
 
-      ClusterFit_Horizontal_Event(pEvent, ModuleNber, pTF1_ToBeUsed, aClusterFitter_Horizontal);
+      ClusterFit_Horizontal_Event(pEvent, ModuleNber, pTF1_ToBeUsed,
+                                  aClusterFitter_Horizontal);
    }
 }
 
@@ -26,11 +27,13 @@ void ClusterFit_Horizontal_Event(Event *pEvent, const int &ModuleNber, TF1 *pTF1
    for (int iC = 0; iC < NClusters; iC++) {
       Cluster *pCluster = ClusterSet[iC];
 
-      ClusterFit_Horizontal_Cluster(pCluster, ModuleNber, pTF1_ToBeUsed, aClusterFitter_Horizontal);
+      ClusterFit_Horizontal_Cluster(pCluster, ModuleNber, pTF1_ToBeUsed,
+                                    aClusterFitter_Horizontal);
    }
 }
 
-void ClusterFit_Horizontal_Cluster(Cluster *pCluster, const int &ModuleNber, TF1 *pTF1_ToBeUsed,
+void ClusterFit_Horizontal_Cluster(Cluster *pCluster, const int &ModuleNber,
+                                   TF1 *pTF1_ToBeUsed,
                                    ClusterFitter_Horizontal &aClusterFitter_Horizontal)
 {
    // Tell to the cluster which shape function it should use
@@ -54,16 +57,19 @@ public:
    static ClusterFitter_Horizontal *p_ClusterFitter_Horizontal;
 };
 
-ClusterFitter_Horizontal *StaticClusterFitter_Horizontal::p_ClusterFitter_Horizontal = NULL;
+ClusterFitter_Horizontal *StaticClusterFitter_Horizontal::p_ClusterFitter_Horizontal =
+   NULL;
 
 StaticClusterFitter_Horizontal::StaticClusterFitter_Horizontal() {}
 StaticClusterFitter_Horizontal::~StaticClusterFitter_Horizontal() {}
-void StaticClusterFitter_Horizontal::Set(ClusterFitter_Horizontal *pClusterFitter_Horizontal)
+void StaticClusterFitter_Horizontal::Set(
+   ClusterFitter_Horizontal *pClusterFitter_Horizontal)
 {
    p_ClusterFitter_Horizontal = pClusterFitter_Horizontal;
 }
 
-void ClusterFitter_HorizontalFunction(int &nDim, double *gout, double &result, double par[], int flg)
+void ClusterFitter_HorizontalFunction(int &nDim, double *gout, double &result,
+                                      double par[], int flg)
 {
    result = StaticClusterFitter_Horizontal::p_ClusterFitter_Horizontal->Chi2(par);
 }
@@ -177,7 +183,8 @@ double ClusterFitter_Horizontal::Chi2(double par[])
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //-------------------------------------Diagonal-------------------------------/
-void ClusterFit_Diagonal(const double &AngleRot, Sample &aSample, const int &ModuleNber, TF1 *pTF1_ToBeUsed)
+void ClusterFit_Diagonal(const double &AngleRot, Sample &aSample, const int &ModuleNber,
+                         TF1 *pTF1_ToBeUsed)
 {
    // Set the fitter
    ClusterFitter_Diagonal aClusterFitter_Diagonal("Minuit");
@@ -192,30 +199,35 @@ void ClusterFit_Diagonal(const double &AngleRot, Sample &aSample, const int &Mod
       if (pEvent->Validity_ForThisModule(ModuleNber) == 0)
          continue;
 
-      ClusterFit_Diagonal_Event(AngleRot, pEvent, ModuleNber, pTF1_ToBeUsed, Kounter_Fit, Kounter_Failure,
-                                aClusterFitter_Diagonal);
+      ClusterFit_Diagonal_Event(AngleRot, pEvent, ModuleNber, pTF1_ToBeUsed, Kounter_Fit,
+                                Kounter_Failure, aClusterFitter_Diagonal);
    }
    std::cout << std::endl;
    std::cout << " ClusterFit_Diagonal " << std::endl;
    std::cout << "	Nber of Fits		" << std::setw(20) << Kounter_Fit << std::endl;
-   std::cout << "	Nber of Failed Fits " << std::setw(20) << Kounter_Failure << " ( " << std::setw(10)
-             << std::setprecision(4) << 100. * double(Kounter_Failure) / double(Kounter_Fit) << " % ) " << std::endl;
+   std::cout << "	Nber of Failed Fits " << std::setw(20) << Kounter_Failure << " ( "
+             << std::setw(10) << std::setprecision(4)
+             << 100. * double(Kounter_Failure) / double(Kounter_Fit) << " % ) "
+             << std::endl;
 }
 
-void ClusterFit_Diagonal_Event(const double &AngleRot, Event *pEvent, const int &ModuleNber, TF1 *pTF1_ToBeUsed,
-                               int &Kounter_Fit, int &Kounter_Failure, ClusterFitter_Diagonal &aClusterFitter_Diagonal)
+void ClusterFit_Diagonal_Event(const double &AngleRot, Event *pEvent,
+                               const int &ModuleNber, TF1 *pTF1_ToBeUsed,
+                               int &Kounter_Fit, int &Kounter_Failure,
+                               ClusterFitter_Diagonal &aClusterFitter_Diagonal)
 {
    std::vector<Cluster *> ClusterSet = pEvent->GiveMe_Clusters_ForThisModule(ModuleNber);
    int NClusters = ClusterSet.size();
    for (int iC = 0; iC < NClusters; iC++) {
       Cluster *pCluster = ClusterSet[iC];
 
-      ClusterFit_Diagonal_Cluster(AngleRot, pCluster, ModuleNber, pTF1_ToBeUsed, Kounter_Fit, Kounter_Failure,
-                                  aClusterFitter_Diagonal);
+      ClusterFit_Diagonal_Cluster(AngleRot, pCluster, ModuleNber, pTF1_ToBeUsed,
+                                  Kounter_Fit, Kounter_Failure, aClusterFitter_Diagonal);
    }
 }
 
-void ClusterFit_Diagonal_Cluster(const double &AngleRot, Cluster *pCluster, const int &ModuleNber, TF1 *pTF1_ToBeUsed,
+void ClusterFit_Diagonal_Cluster(const double &AngleRot, Cluster *pCluster,
+                                 const int &ModuleNber, TF1 *pTF1_ToBeUsed,
                                  int &Kounter_Fit, int &Kounter_Failure,
                                  ClusterFitter_Diagonal &aClusterFitter_Diagonal)
 {
@@ -255,7 +267,8 @@ void StaticClusterFitter_Diagonal::Set(ClusterFitter_Diagonal *pClusterFitter_Di
    p_ClusterFitter_Diagonal = pClusterFitter_Diagonal;
 }
 
-void ClusterFitter_DiagonalFunction(int &nDim, double *gout, double &result, double par[], int flg)
+void ClusterFitter_DiagonalFunction(int &nDim, double *gout, double &result, double par[],
+                                    int flg)
 {
    result = StaticClusterFitter_Diagonal::p_ClusterFitter_Diagonal->Chi2(par);
 }
@@ -322,7 +335,8 @@ int ClusterFitter_Diagonal::DoMinimisation()
 
       int ierMINOS_N = p_TVirtualFitter->ExecuteCommand("MINOS", arg, 1);
       if (Verbose == 1 && ierMINOS_N != 0)
-         std::cout << " ClusterFitter_Diagonal::DoMinimisation() ierMINOS_N	" << ierMINOS_N << std::endl;
+         std::cout << " ClusterFitter_Diagonal::DoMinimisation() ierMINOS_N	"
+                   << ierMINOS_N << std::endl;
 
       p_Cluster->SetResults_Diagonal(p_TVirtualFitter);
 
@@ -342,11 +356,13 @@ int ClusterFitter_Diagonal::DoMinimisation()
       if (ierMIGRAD_R1 == 0) {
 
          if (Verbose == 1)
-            std::cout << " ClusterFitter_Diagonal::DoMinimisation() Rescue 1 succeeded " << std::endl;
+            std::cout << " ClusterFitter_Diagonal::DoMinimisation() Rescue 1 succeeded "
+                      << std::endl;
 
          int ierMINOS_R1 = p_TVirtualFitter->ExecuteCommand("MINOS", arg, 1);
          if (Verbose == 1 && ierMINOS_R1 != 0)
-            std::cout << " ClusterFitter_Diagonal::DoMinimisation() ->->ierMINOS_R1	" << ierMINOS_R1 << std::endl;
+            std::cout << " ClusterFitter_Diagonal::DoMinimisation() ->->ierMINOS_R1	"
+                      << ierMINOS_R1 << std::endl;
 
          p_Cluster->SetResults_Diagonal(p_TVirtualFitter);
 
@@ -364,11 +380,15 @@ int ClusterFitter_Diagonal::DoMinimisation()
          if (ierMIGRAD_R2 == 0) {
 
             if (Verbose == 1)
-               std::cout << " ClusterFitter_Diagonal::DoMinimisation() Rescue 2 succeeded " << std::endl;
+               std::cout
+                  << " ClusterFitter_Diagonal::DoMinimisation() Rescue 2 succeeded "
+                  << std::endl;
 
             int ierMINOS_R2 = p_TVirtualFitter->ExecuteCommand("MINOS", arg, 1);
             if (Verbose == 1 && ierMINOS_R2 != 0)
-               std::cout << " ClusterFitter_Diagonal::DoMinimisation() ->->->ierMINOS_R2	" << ierMINOS_R2 << std::endl;
+               std::cout
+                  << " ClusterFitter_Diagonal::DoMinimisation() ->->->ierMINOS_R2	"
+                  << ierMINOS_R2 << std::endl;
 
             p_Cluster->SetResults_Diagonal(p_TVirtualFitter);
 
@@ -382,7 +402,8 @@ int ClusterFitter_Diagonal::DoMinimisation()
                std::cout << " ClusterFitter_Diagonal::DoMinimisation() Rescue 2 failed "
                          << "->ierMIGRAD_R2 " << ierMIGRAD_R2 << std::endl;
             if (Verbose == 1)
-               std::cout << " ClusterFitter_Diagonal::DoMinimisation() All Rescues failed : Failure procedure called	"
+               std::cout << " ClusterFitter_Diagonal::DoMinimisation() All Rescues "
+                            "failed : Failure procedure called	"
                          << std::endl;
 
             p_Cluster->SetResults_FailledFit_Diagonal(Verbose);

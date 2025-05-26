@@ -314,9 +314,10 @@ int Cluster::SetParameter_Horizontal(TVirtualFitter *pTVirtualFitter)
 
    int ier = 0;
 
-   ier = pTVirtualFitter->SetParameter(0, "YTrack", m_YTrack, 0.0001,
-                                       Pad_Leading->Get_YL() - (Pad_Leading->Get_YH() - Pad_Leading->Get_YL()),
-                                       Pad_Leading->Get_YH() + (Pad_Leading->Get_YH() - Pad_Leading->Get_YL()));
+   ier = pTVirtualFitter->SetParameter(
+      0, "YTrack", m_YTrack, 0.0001,
+      Pad_Leading->Get_YL() - (Pad_Leading->Get_YH() - Pad_Leading->Get_YL()),
+      Pad_Leading->Get_YH() + (Pad_Leading->Get_YH() - Pad_Leading->Get_YL()));
 
    m_YTrack_BeforeMinimisation = m_YTrack;
 
@@ -331,7 +332,9 @@ void Cluster::SetResults_Horizontal(TVirtualFitter *pTVirtualFitter)
    p_FitOutput_Horizontal->SetResults(pTVirtualFitter);
 
    m_YTrack = p_FitOutput_Horizontal->p_par[0];
-   m_eYTrack = (p_FitOutput_Horizontal->p_eparplus[0] - p_FitOutput_Horizontal->p_eparminus[0]) / 2.;
+   m_eYTrack =
+      (p_FitOutput_Horizontal->p_eparplus[0] - p_FitOutput_Horizontal->p_eparminus[0]) /
+      2.;
 
    m_Chi2Min = Chi2_Horizontal(p_FitOutput_Horizontal->p_par);
 
@@ -360,7 +363,8 @@ void Cluster::SetResults_Horizontal(TVirtualFitter *pTVirtualFitter)
       //	double Error_Nume = 6.;	// Const Amplitude Error
       //	double Error_Deno = 6.;	// Const Amplitude Error
 
-      double TheError = TheObserved * std::sqrt(std::pow(Error_Nume / Nume, 2) + std::pow(Error_Deno / Deno, 2));
+      double TheError = TheObserved * std::sqrt(std::pow(Error_Nume / Nume, 2) +
+                                                std::pow(Error_Deno / Deno, 2));
 
       double Pull = Residual / TheError;
 
@@ -418,7 +422,8 @@ void Cluster::SetResults_FailledFit_Horizontal(const int &Verbose)
       //	double Error_Nume = 6.;	// Const Amplitude Error
       //	double Error_Deno = 6.;	// Const Amplitude Error
 
-      double TheError = TheObserved * std::sqrt(std::pow(Error_Nume / Nume, 2) + std::pow(Error_Deno / Deno, 2));
+      double TheError = TheObserved * std::sqrt(std::pow(Error_Nume / Nume, 2) +
+                                                std::pow(Error_Deno / Deno, 2));
 
       double Pull = Residual / TheError;
 
@@ -455,7 +460,8 @@ double Cluster::Chi2_Horizontal(double par[])
       //	double Error_Nume = 6.;	// Const Amplitude Error
       //	double Error_Deno = 6.;	// Const Amplitude Error
 
-      double TheError = TheObserved * std::sqrt(std::pow(Error_Nume / Nume, 2) + std::pow(Error_Deno / Deno, 2));
+      double TheError = TheObserved * std::sqrt(std::pow(Error_Nume / Nume, 2) +
+                                                std::pow(Error_Deno / Deno, 2));
 
       double Pull = Residual / TheError;
 
@@ -468,7 +474,8 @@ double Cluster::Chi2_Horizontal(double par[])
 void Cluster::SetParameters_Internal_Horizontal(double par[])
 {
    if (par[0] != par[0]) {
-      //	std::cout << " Cluster::SetParameters_Internal_Horizontal called with a NAN !" << std::endl;
+      //	std::cout << " Cluster::SetParameters_Internal_Horizontal called with a NAN !" <<
+      //std::endl;
    } else {
       m_YTrack = par[0];
    }
@@ -552,12 +559,15 @@ int Cluster::SetParameter_Diagonal(TVirtualFitter *pTVirtualFitter)
    double Vref = -SinRot * m_XWeight + CosRot * m_YWeight;
    m_VTrack = Vref;
 
-   // ier = pTVirtualFitter->SetParameter(0, "VTrack" , m_VTrack , 0.0001 , Pad_Leading->Get_YL(), Pad_Leading->Get_YH()
-   // ); ier = pTVirtualFitter->SetParameter(0, "VTrack" , m_VTrack , 0.0001 , m_VTrack-0.10, m_VTrack+0.10 ); ier =
-   // pTVirtualFitter->SetParameter(0, "VTrack" , m_VTrack , 0.0001 , Pad_Leading->Get_YL() -
+   // ier = pTVirtualFitter->SetParameter(0, "VTrack" , m_VTrack , 0.0001 ,
+   // Pad_Leading->Get_YL(), Pad_Leading->Get_YH()
+   // ); ier = pTVirtualFitter->SetParameter(0, "VTrack" , m_VTrack , 0.0001 ,
+   // m_VTrack-0.10, m_VTrack+0.10 ); ier = pTVirtualFitter->SetParameter(0, "VTrack" ,
+   // m_VTrack , 0.0001 , Pad_Leading->Get_YL() -
    // (Pad_Leading->Get_YH()-Pad_Leading->Get_YL()), Pad_Leading->Get_YH() +
    // (Pad_Leading->Get_YH()-Pad_Leading->Get_YL()) );
-   ier = pTVirtualFitter->SetParameter(0, "VTrack", m_VTrack, 0.0001, Vref - 5.E-2, Vref + 5.E-2);
+   ier = pTVirtualFitter->SetParameter(0, "VTrack", m_VTrack, 0.0001, Vref - 5.E-2,
+                                       Vref + 5.E-2);
    // ier = pTVirtualFitter->SetParameter(0, "VTrack" , m_VTrack , 0.0001 , 0. , 0. );
    if (ier != 0)
       std::cout << " ier " << ier << " SetParameter " << std::endl;
@@ -579,11 +589,13 @@ void Cluster::SetResults_Diagonal(TVirtualFitter *pTVirtualFitter)
 
    double CosRot = std::cos(m_AngleRot);
    double SinRot = std::sin(m_AngleRot);
-   double Uref = CosRot * Get_LeadingPad()->Get_XPad() + SinRot * Get_LeadingPad()->Get_YPad();
+   double Uref =
+      CosRot * Get_LeadingPad()->Get_XPad() + SinRot * Get_LeadingPad()->Get_YPad();
    m_XTrack = CosRot * Uref - SinRot * m_VTrack;
    m_YTrack = SinRot * Uref + CosRot * m_VTrack;
 
-   m_eXTrack = (p_FitOutput_Diagonal->p_eparplus[0] - p_FitOutput_Diagonal->p_eparminus[0]) / 2.;
+   m_eXTrack =
+      (p_FitOutput_Diagonal->p_eparplus[0] - p_FitOutput_Diagonal->p_eparminus[0]) / 2.;
    m_eYTrack = m_eXTrack;
 
    m_Chi2Min = Chi2_Diagonal(p_FitOutput_Diagonal->p_par);
@@ -620,7 +632,8 @@ void Cluster::SetResults_Diagonal(TVirtualFitter *pTVirtualFitter)
       //	double Error_Nume = 6.;	// Const Amplitude Error
       //	double Error_Deno = 6.;	// Const Amplitude Error
 
-      double TheError = TheObserved * std::sqrt(std::pow(Error_Nume / Nume, 2) + std::pow(Error_Deno / Deno, 2));
+      double TheError = TheObserved * std::sqrt(std::pow(Error_Nume / Nume, 2) +
+                                                std::pow(Error_Deno / Deno, 2));
 
       double Pull = Residual / TheError;
 
@@ -692,7 +705,8 @@ void Cluster::SetResults_FailledFit_Diagonal(const int &Verbose)
       //	double Error_Nume = 6.;	// Const Amplitude Error
       //	double Error_Deno = 6.;	// Const Amplitude Error
 
-      double TheError = TheObserved * std::sqrt(std::pow(Error_Nume / Nume, 2) + std::pow(Error_Deno / Deno, 2));
+      double TheError = TheObserved * std::sqrt(std::pow(Error_Nume / Nume, 2) +
+                                                std::pow(Error_Deno / Deno, 2));
 
       double Pull = Residual / TheError;
 
@@ -739,7 +753,8 @@ double Cluster::Chi2_Diagonal(double par[])
       //	double Error_Nume = 6.;	// Const Amplitude Error
       //	double Error_Deno = 6.;	// Const Amplitude Error
 
-      double TheError = TheObserved * std::sqrt(std::pow(Error_Nume / Nume, 2) + std::pow(Error_Deno / Deno, 2));
+      double TheError = TheObserved * std::sqrt(std::pow(Error_Nume / Nume, 2) +
+                                                std::pow(Error_Deno / Deno, 2));
 
       double Pull = Residual / TheError;
 
@@ -752,7 +767,8 @@ double Cluster::Chi2_Diagonal(double par[])
 void Cluster::SetParameters_Internal_Diagonal(double par[])
 {
    if (par[0] != par[0]) {
-      //	std::cout << " Cluster::SetParameters_Internal_Diagonal called with a NAN !" << std::endl;
+      //	std::cout << " Cluster::SetParameters_Internal_Diagonal called with a NAN !" <<
+      //std::endl;
    } else {
       m_VTrack = par[0];
    }

@@ -167,21 +167,24 @@ void FitOutput::PrintFitOutput()
    std::cout << "-Number of Data points " << m_NberOfDataPoints << std::endl;
    std::cout << std::endl;
 
-   std::cout << "-Best Chi2 " << std::setw(20) << std::setprecision(10) << m_MinnLL << std::endl;
+   std::cout << "-Best Chi2 " << std::setw(20) << std::setprecision(10) << m_MinnLL
+             << std::endl;
    std::cout << std::endl;
 
    std::cout << "-Parameters: name, values and errors " << std::endl;
 
    for (int ipar = 0; ipar < m_NberOfModelParameters; ipar++) {
-      std::cout << " " << ipar << " " << p_parName[ipar] << " " << std::setw(20) << std::setprecision(10) << p_par[ipar]
-                << " +/-" << std::setw(20) << std::setprecision(10)
-                << p_eparparab[ipar]
-                //				<< " ( "
-                //				<< std::setw(20) << std::setprecision(10) << p_eparplus	[ipar]
-                //				<< "; "
-                //				<< std::setw(20) << std::setprecision(10) << p_eparminus [ipar]
-                //				<< " ) "
-                << std::endl;
+      std::cout
+         << " " << ipar << " " << p_parName[ipar] << " " << std::setw(20)
+         << std::setprecision(10) << p_par[ipar] << " +/-" << std::setw(20)
+         << std::setprecision(10)
+         << p_eparparab[ipar]
+         //				<< " ( "
+         //				<< std::setw(20) << std::setprecision(10) << p_eparplus	[ipar]
+         //				<< "; "
+         //				<< std::setw(20) << std::setprecision(10) << p_eparminus [ipar]
+         //				<< " ) "
+         << std::endl;
    }
    std::cout << std::endl;
 
@@ -236,9 +239,11 @@ void FitOutput::PrintFitOutputInCanvas(double Xstart, double Ystart, double Step
    for (int ipar = 0; ipar < m_NberOfModelParameters; ipar++) {
       Aostringstream.str("");
       Aostringstream.clear();
-      Aostringstream << " " << ipar << " " << p_parName[ipar] << " " << std::setw(20) << std::setprecision(10)
-                     << p_par[ipar] << " +/-" << std::setw(20) << std::setprecision(10) << p_eparparab[ipar];
-      aTLatex.DrawLatex(Xstart, (Ystart - (7 + ipar) * Step), (Aostringstream.str()).c_str());
+      Aostringstream << " " << ipar << " " << p_parName[ipar] << " " << std::setw(20)
+                     << std::setprecision(10) << p_par[ipar] << " +/-" << std::setw(20)
+                     << std::setprecision(10) << p_eparparab[ipar];
+      aTLatex.DrawLatex(Xstart, (Ystart - (7 + ipar) * Step),
+                        (Aostringstream.str()).c_str());
    }
 }
 
@@ -257,7 +262,8 @@ void FitOutput::SetResults(TVirtualFitter *pTVirtualFitter)
 
       ier2 = pTVirtualFitter->GetParameter(ipar, parName, best, ebest, al, bl);
       if (ier2 < 0)
-         std::cout << " ier2 " << ier2 << " for pTVirtualFitter->GetParameter " << std::endl;
+         std::cout << " ier2 " << ier2 << " for pTVirtualFitter->GetParameter "
+                   << std::endl;
 
       double eplus, eminus, eparab, globcc;
       ier2 = pTVirtualFitter->GetErrors(ipar, eplus, eminus, eparab, globcc);
@@ -281,7 +287,8 @@ void FitOutput::SetResults(TVirtualFitter *pTVirtualFitter)
 
    Double_t *pCovReturned = pTVirtualFitter->GetCovarianceMatrix();
    if (pCovReturned) {
-      TMatrixD aTMatrixD(m_NberOfModelParameters, m_NberOfModelParameters, pTVirtualFitter->GetCovarianceMatrix());
+      TMatrixD aTMatrixD(m_NberOfModelParameters, m_NberOfModelParameters,
+                         pTVirtualFitter->GetCovarianceMatrix());
       for (int ipar = 0; ipar < m_NberOfModelParameters; ipar++) {
          for (int jpar = 0; jpar < m_NberOfModelParameters; jpar++) {
             p_CovMatrix[ipar + jpar * m_NberOfModelParameters] = aTMatrixD(ipar, jpar);
@@ -292,11 +299,13 @@ void FitOutput::SetResults(TVirtualFitter *pTVirtualFitter)
       // std::cout << std::endl;
    } else {
       std::cout << "===> FitOutput::SetResults "
-                << "covariance matrix returned is 0; No covarance matrix available " << std::endl;
+                << "covariance matrix returned is 0; No covarance matrix available "
+                << std::endl;
    }
 }
 
-void FitOutput::SetResults(const std::vector<std::string> &V_PARname, const std::vector<double> &V_PAR,
+void FitOutput::SetResults(const std::vector<std::string> &V_PARname,
+                           const std::vector<double> &V_PAR,
                            const std::vector<double> &V_ePAR)
 {
    for (int ipar = 0; ipar < m_NberOfModelParameters; ipar++) {
@@ -311,7 +320,8 @@ void FitOutput::SetResults(const std::vector<std::string> &V_PARname, const std:
          if (ipar != jpar)
             p_CovMatrix[ipar + jpar * m_NberOfModelParameters] = 0.;
          if (ipar == jpar)
-            p_CovMatrix[ipar + jpar * m_NberOfModelParameters] = 1. / (p_eparplus[ipar] * p_eparplus[ipar]);
+            p_CovMatrix[ipar + jpar * m_NberOfModelParameters] =
+               1. / (p_eparplus[ipar] * p_eparplus[ipar]);
       }
    }
 }

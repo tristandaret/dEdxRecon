@@ -6,9 +6,11 @@
 #include "Selector.h"
 #include "Displays.h"
 
-void Control(const std::string &OutDir, std::string const &Tag, std::string const &Comment,
-             std::string const &EventFile, std::string const &SelectionSet, Uploader *pUploader, int const &NbrOfMod,
-             int const &Data_to_Use, int const &PT, int const &TB, const std::string &particle)
+void Control(const std::string &OutDir, std::string const &Tag,
+             std::string const &Comment, std::string const &EventFile,
+             std::string const &SelectionSet, Uploader *pUploader, int const &NbrOfMod,
+             int const &Data_to_Use, int const &PT, int const &TB,
+             const std::string &particle)
 {
    std::string OUTDirName = OutDir + Tag + "/";
    MakeMyDir(OUTDirName);
@@ -22,7 +24,7 @@ void Control(const std::string &OutDir, std::string const &Tag, std::string cons
    std::cout << OutPut_Analysis << std::endl;
    std::streambuf *coutbuf = std::cout.rdbuf();         // Save old buf
    std::ofstream OUT_DataFile(OutPut_Analysis.c_str()); // Set output file
-   std::cout.rdbuf(OUT_DataFile.rdbuf());               // Redirect std::cout to output file
+   std::cout.rdbuf(OUT_DataFile.rdbuf()); // Redirect std::cout to output file
 
    std::cout << "Control" << Comment << std::endl;
    std::cout << "Tag: " << Tag << std::endl;
@@ -75,86 +77,124 @@ void Control(const std::string &OutDir, std::string const &Tag, std::string cons
    std::vector<TH2F *> v_h2f_rho_DT_Sel;
 
    for (int iMod = 0; iMod < 8; iMod++) {
-      TH1F *h1f_TL_Raw =
-         new TH1F(Form("h1f_TL_Raw_%i", iMod), Form("T_{Leading} Raw (Mod %i);Time bin;Count", iMod), 511, -0.5, 510.5);
-      TH1F *h1f_TL_Sel =
-         new TH1F(Form("h1f_TL_Sel_%i", iMod), Form("T_{Leading} Cut (Mod %i);Time bin;Count", iMod), 511, -0.5, 510.5);
-      TH1F *h1f_PM_Raw = new TH1F(Form("h1f_PM_Raw_%i", iMod),
-                                  Form("Pad Multiplicity Raw (Mod %i);Number of pads;Count", iMod), 11, -0.5, 10.5);
-      TH1F *h1f_PM_Sel = new TH1F(Form("h1f_PM_Sel_%i", iMod),
-                                  Form("Pad Multiplicity Cut (Mod %i);Number of pads;Count", iMod), 11, -0.5, 10.5);
-      TH1F *h1f_APM_Raw = new TH1F(
-         Form("h1f_APM_Raw_%i", iMod),
-         Form("Average Pad Multiplicity Raw (Mod %i);average pad integral (ADC counts);Count", iMod), 44, -0.5, 10.5);
-      TH1F *h1f_APM_Sel = new TH1F(
-         Form("h1f_APM_Sel_%i", iMod),
-         Form("Average Pad Multiplicity Cut (Mod %i);average pad integral (ADC counts);Count", iMod), 44, -0.5, 10.5);
-      TH1F *h1f_API_Raw = new TH1F(
-         Form("h1f_API_Raw_%i", iMod),
-         Form("Average of the pad integral Raw (Mod %i);Mean pad integral (ADC counts);Count", iMod), 400, -20, 255);
-      TH1F *h1f_API_Sel = new TH1F(
-         Form("h1f_API_Sel_%i", iMod),
-         Form("Average of the pad integral Cut (Mod %i);Mean pad integral (ADC counts);Count", iMod), 400, -20, 255);
-      TH1F *h1f_Qpad_Raw = new TH1F(Form("h1f_Qpad_Raw_%i", iMod),
-                                    Form("Q_{pad} Raw (Mod %i);Amplitude (ADC counts);Count", iMod), 400, -100, 3900);
-      TH1F *h1f_Qpad_Sel = new TH1F(Form("h1f_Qpad_Sel_%i", iMod),
-                                    Form("Q_{pad} Cut (Mod %i);Amplitude (ADC counts);Count", iMod), 400, -100, 3900);
-      TH1F *h1f_Qlead_Raw = new TH1F(Form("h1f_Qlead_Raw_%i", iMod),
-                                     Form("Q_{lead} Raw (Mod %i);Amplitude (ADC counts);Count", iMod), 200, -100, 3900);
-      TH1F *h1f_Qlead_Sel = new TH1F(Form("h1f_Qlead_Sel_%i", iMod),
-                                     Form("Q_{lead} Cut (Mod %i);Amplitude (ADC counts);Count", iMod), 200, -100, 3900);
+      TH1F *h1f_TL_Raw = new TH1F(Form("h1f_TL_Raw_%i", iMod),
+                                  Form("T_{Leading} Raw (Mod %i);Time bin;Count", iMod),
+                                  511, -0.5, 510.5);
+      TH1F *h1f_TL_Sel = new TH1F(Form("h1f_TL_Sel_%i", iMod),
+                                  Form("T_{Leading} Cut (Mod %i);Time bin;Count", iMod),
+                                  511, -0.5, 510.5);
+      TH1F *h1f_PM_Raw =
+         new TH1F(Form("h1f_PM_Raw_%i", iMod),
+                  Form("Pad Multiplicity Raw (Mod %i);Number of pads;Count", iMod), 11,
+                  -0.5, 10.5);
+      TH1F *h1f_PM_Sel =
+         new TH1F(Form("h1f_PM_Sel_%i", iMod),
+                  Form("Pad Multiplicity Cut (Mod %i);Number of pads;Count", iMod), 11,
+                  -0.5, 10.5);
+      TH1F *h1f_APM_Raw = new TH1F(Form("h1f_APM_Raw_%i", iMod),
+                                   Form("Average Pad Multiplicity Raw (Mod %i);average "
+                                        "pad integral (ADC counts);Count",
+                                        iMod),
+                                   44, -0.5, 10.5);
+      TH1F *h1f_APM_Sel = new TH1F(Form("h1f_APM_Sel_%i", iMod),
+                                   Form("Average Pad Multiplicity Cut (Mod %i);average "
+                                        "pad integral (ADC counts);Count",
+                                        iMod),
+                                   44, -0.5, 10.5);
+      TH1F *h1f_API_Raw = new TH1F(Form("h1f_API_Raw_%i", iMod),
+                                   Form("Average of the pad integral Raw (Mod %i);Mean "
+                                        "pad integral (ADC counts);Count",
+                                        iMod),
+                                   400, -20, 255);
+      TH1F *h1f_API_Sel = new TH1F(Form("h1f_API_Sel_%i", iMod),
+                                   Form("Average of the pad integral Cut (Mod %i);Mean "
+                                        "pad integral (ADC counts);Count",
+                                        iMod),
+                                   400, -20, 255);
+      TH1F *h1f_Qpad_Raw =
+         new TH1F(Form("h1f_Qpad_Raw_%i", iMod),
+                  Form("Q_{pad} Raw (Mod %i);Amplitude (ADC counts);Count", iMod), 400,
+                  -100, 3900);
+      TH1F *h1f_Qpad_Sel =
+         new TH1F(Form("h1f_Qpad_Sel_%i", iMod),
+                  Form("Q_{pad} Cut (Mod %i);Amplitude (ADC counts);Count", iMod), 400,
+                  -100, 3900);
+      TH1F *h1f_Qlead_Raw =
+         new TH1F(Form("h1f_Qlead_Raw_%i", iMod),
+                  Form("Q_{lead} Raw (Mod %i);Amplitude (ADC counts);Count", iMod), 200,
+                  -100, 3900);
+      TH1F *h1f_Qlead_Sel =
+         new TH1F(Form("h1f_Qlead_Sel_%i", iMod),
+                  Form("Q_{lead} Cut (Mod %i);Amplitude (ADC counts);Count", iMod), 200,
+                  -100, 3900);
       TH1F *h1f_Qneigh_Raw =
          new TH1F(Form("h1f_Qneigh_Raw_%i", iMod),
-                  Form("Q_{neighbours} Raw (Mod %i);Amplitude (ADC counts);Count", iMod), 200, -100, 3900);
+                  Form("Q_{neighbours} Raw (Mod %i);Amplitude (ADC counts);Count", iMod),
+                  200, -100, 3900);
       TH1F *h1f_Qneigh_Sel =
          new TH1F(Form("h1f_Qneigh_Sel_%i", iMod),
-                  Form("Q_{neighbours} Cut (Mod %i);Amplitude (ADC counts);Count", iMod), 200, -100, 3900);
+                  Form("Q_{neighbours} Cut (Mod %i);Amplitude (ADC counts);Count", iMod),
+                  200, -100, 3900);
       TH1F *h1f_Qclus_Raw =
-         new TH1F(Form("h1f_Qclus_Raw_%i", iMod), Form("Q_{cluster} Raw (Mod %i);Amplitude (ADC counts);Count", iMod),
+         new TH1F(Form("h1f_Qclus_Raw_%i", iMod),
+                  Form("Q_{cluster} Raw (Mod %i);Amplitude (ADC counts);Count", iMod),
                   120, -100, 3900);
       TH1F *h1f_Qclus_Sel =
-         new TH1F(Form("h1f_Qclus_Sel_%i", iMod), Form("Q_{cluster} Cut (Mod %i);Amplitude (ADC counts);Count", iMod),
+         new TH1F(Form("h1f_Qclus_Sel_%i", iMod),
+                  Form("Q_{cluster} Cut (Mod %i);Amplitude (ADC counts);Count", iMod),
                   120, -100, 3900);
-      TH1F *h1f_CM_Raw =
-         new TH1F(Form("h1f_CM_Raw_%i", iMod),
-                  Form("Number of clusters per module Raw (Mod %i);Number of clusters;Count", iMod), 37, -0.5, 36.5);
-      TH1F *h1f_CM_Sel =
-         new TH1F(Form("h1f_CM_Sel_%i", iMod),
-                  Form("Number of clusters per module Cut (Mod %i);Number of clusters;Count", iMod), 37, -0.5, 36.5);
-      TH1F *h1f_Eff_Raw = new TH1F(
-         Form("h1f_Eff_Raw_%i", iMod),
-         Form("Efficiency : final fraction of events Raw (Mod %i);N_{cluster} minimum;Fraction of events kept (%%)",
+      TH1F *h1f_CM_Raw = new TH1F(
+         Form("h1f_CM_Raw_%i", iMod),
+         Form("Number of clusters per module Raw (Mod %i);Number of clusters;Count",
               iMod),
          37, -0.5, 36.5);
-      TH1F *h1f_Eff_Sel = new TH1F(
-         Form("h1f_Eff_Sel_%i", iMod),
-         Form("Efficiency : final fraction of events Cut (Mod %i);N_{cluster} minimum;Fraction of events kept (%%)",
+      TH1F *h1f_CM_Sel = new TH1F(
+         Form("h1f_CM_Sel_%i", iMod),
+         Form("Number of clusters per module Cut (Mod %i);Number of clusters;Count",
               iMod),
          37, -0.5, 36.5);
+      TH1F *h1f_Eff_Raw =
+         new TH1F(Form("h1f_Eff_Raw_%i", iMod),
+                  Form("Efficiency : final fraction of events Raw (Mod %i);N_{cluster} "
+                       "minimum;Fraction of events kept (%%)",
+                       iMod),
+                  37, -0.5, 36.5);
+      TH1F *h1f_Eff_Sel =
+         new TH1F(Form("h1f_Eff_Sel_%i", iMod),
+                  Form("Efficiency : final fraction of events Cut (Mod %i);N_{cluster} "
+                       "minimum;Fraction of events kept (%%)",
+                       iMod),
+                  37, -0.5, 36.5);
       TH2F *h2f_LeadPos_Raw =
-         new TH2F(Form("h2f_LeadPos_Raw_%i", iMod), Form("Position of leading pads in ERAM (Mod %i);iX;iY", iMod), 36,
-                  -0.5, 35.5, 32, -0.5, 31.5);
+         new TH2F(Form("h2f_LeadPos_Raw_%i", iMod),
+                  Form("Position of leading pads in ERAM (Mod %i);iX;iY", iMod), 36, -0.5,
+                  35.5, 32, -0.5, 31.5);
       TH2F *h2f_LeadPos_Sel =
-         new TH2F(Form("h2f_LeadPos_Sel_%i", iMod), Form("Position of leading pads in ERAM (Mod %i);iX;iY", iMod), 36,
-                  -0.5, 35.5, 32, -0.5, 31.5);
-      TH2F *h2f_Theta_Raw =
-         new TH2F(Form("h2f_Theta_Raw_%i", iMod),
-                  Form("Track inclination along #theta angle(Mod %i);Pad row (iX);Drift distance (mm)", iMod), 36, -0.5,
-                  35.5, 80, 0, 1010);
-      TH2F *h2f_Theta_Sel =
-         new TH2F(Form("h2f_Theta_Sel_%i", iMod),
-                  Form("Track inclination along #theta angle(Mod %i);Pad row (iX);Drift distance (mm)", iMod), 36, -0.5,
-                  35.5, 80, 0, 1010);
-      TH2F *h2f_rho_DT_Raw = new TH2F(Form("h2f_rho_DT_Raw_%i", iMod),
-                                      Form("A_{1st neighbour} / A_{leading} vs T_{1st neighbour} - T_{leading} (Mod "
-                                           "%i);T_{1st neighbour} - T_{leading};A_{1st neighbour} / A_{leading}",
-                                           iMod),
-                                      101, -20, 80, 200, 0, 1);
-      TH2F *h2f_rho_DT_Sel = new TH2F(Form("h2f_rho_DT_Sel_%i", iMod),
-                                      Form("A_{1st neighbour} / A_{leading} vs T_{1st neighbour} - T_{leading} (Mod "
-                                           "%i);T_{1st neighbour} - T_{leading};A_{1st neighbour} / A_{leading}",
-                                           iMod),
-                                      101, -20, 80, 200, 0, 1);
+         new TH2F(Form("h2f_LeadPos_Sel_%i", iMod),
+                  Form("Position of leading pads in ERAM (Mod %i);iX;iY", iMod), 36, -0.5,
+                  35.5, 32, -0.5, 31.5);
+      TH2F *h2f_Theta_Raw = new TH2F(Form("h2f_Theta_Raw_%i", iMod),
+                                     Form("Track inclination along #theta angle(Mod "
+                                          "%i);Pad row (iX);Drift distance (mm)",
+                                          iMod),
+                                     36, -0.5, 35.5, 80, 0, 1010);
+      TH2F *h2f_Theta_Sel = new TH2F(Form("h2f_Theta_Sel_%i", iMod),
+                                     Form("Track inclination along #theta angle(Mod "
+                                          "%i);Pad row (iX);Drift distance (mm)",
+                                          iMod),
+                                     36, -0.5, 35.5, 80, 0, 1010);
+      TH2F *h2f_rho_DT_Raw = new TH2F(
+         Form("h2f_rho_DT_Raw_%i", iMod),
+         Form("A_{1st neighbour} / A_{leading} vs T_{1st neighbour} - T_{leading} (Mod "
+              "%i);T_{1st neighbour} - T_{leading};A_{1st neighbour} / A_{leading}",
+              iMod),
+         101, -20, 80, 200, 0, 1);
+      TH2F *h2f_rho_DT_Sel = new TH2F(
+         Form("h2f_rho_DT_Sel_%i", iMod),
+         Form("A_{1st neighbour} / A_{leading} vs T_{1st neighbour} - T_{leading} (Mod "
+              "%i);T_{1st neighbour} - T_{leading};A_{1st neighbour} / A_{leading}",
+              iMod),
+         101, -20, 80, 200, 0, 1);
       v_h1f_TL_Raw.push_back(h1f_TL_Raw);
       v_h1f_TL_Sel.push_back(h1f_TL_Sel);
       v_h1f_PM_Raw.push_back(h1f_PM_Raw);
@@ -235,12 +275,13 @@ void Control(const std::string &OutDir, std::string const &Tag, std::string cons
                v_h1f_TL_Raw[ModuleNber]->Fill(TL);
             v_h1f_PM_Raw[ModuleNber]->Fill(NPads);
             v_h1f_Qclus_Raw[ModuleNber]->Fill(pCluster->Get_Acluster());
-            TH1F *h1f_clus = new TH1F("h1f_WF_cluster", "h1f_WF_cluster", 510, -0.5, 509.5);
+            TH1F *h1f_clus =
+               new TH1F("h1f_WF_cluster", "h1f_WF_cluster", 510, -0.5, 509.5);
 
             if (NPads > 1)
-               v_h2f_rho_DT_Raw[ModuleNber]->Fill(pCluster->Get_Pad(NPads - 2)->Get_TMax() - TL,
-                                                  pCluster->Get_Pad(NPads - 2)->Get_AMax() /
-                                                     pCluster->Get_AMaxLeading());
+               v_h2f_rho_DT_Raw[ModuleNber]->Fill(
+                  pCluster->Get_Pad(NPads - 2)->Get_TMax() - TL,
+                  pCluster->Get_Pad(NPads - 2)->Get_AMax() / pCluster->Get_AMaxLeading());
 
             float z_calc = 0;
             float T0;
@@ -314,12 +355,13 @@ void Control(const std::string &OutDir, std::string const &Tag, std::string cons
             v_h1f_TL_Sel[ModuleNber]->Fill(TL);
             v_h1f_PM_Sel[ModuleNber]->Fill(NPads);
             v_h1f_Qclus_Sel[ModuleNber]->Fill(pCluster->Get_Acluster());
-            TH1F *h1f_clus = new TH1F("h1f_WF_cluster", "h1f_WF_cluster", 510, -0.5, 509.5);
+            TH1F *h1f_clus =
+               new TH1F("h1f_WF_cluster", "h1f_WF_cluster", 510, -0.5, 509.5);
 
             if (NPads > 1)
-               v_h2f_rho_DT_Sel[ModuleNber]->Fill(pCluster->Get_Pad(NPads - 2)->Get_TMax() - TL,
-                                                  pCluster->Get_Pad(NPads - 2)->Get_AMax() /
-                                                     pCluster->Get_AMaxLeading());
+               v_h2f_rho_DT_Sel[ModuleNber]->Fill(
+                  pCluster->Get_Pad(NPads - 2)->Get_TMax() - TL,
+                  pCluster->Get_Pad(NPads - 2)->Get_AMax() / pCluster->Get_AMaxLeading());
 
             float z_calc = 0;
             float T0;
@@ -389,7 +431,8 @@ void Control(const std::string &OutDir, std::string const &Tag, std::string cons
    std::cout << "Nber Of Entries :" << NEvent << std::endl;
    if (EventFile.find("All_ERAMS") != std::string::npos) {
       std::cout << "Raw		events with at least 4 modules: " << nEvt_raw4mod << std::endl;
-      std::cout << "Selected events with at least 4 modules: " << nEvt_sel4mod << std::endl;
+      std::cout << "Selected events with at least 4 modules: " << nEvt_sel4mod
+                << std::endl;
    }
    aSelector.PrintStat();
 
@@ -401,7 +444,8 @@ void Control(const std::string &OutDir, std::string const &Tag, std::string cons
    else
       nMod = 1;
 
-   TFile *pfileROOT = new TFile(TString(OUTDirName + "1_" + Tag + "_Control" + Comment + ".root"), "RECREATE");
+   TFile *pfileROOT = new TFile(
+      TString(OUTDirName + "1_" + Tag + "_Control" + Comment + ".root"), "RECREATE");
    for (int iMod = 0; iMod < nMod; iMod++) {
       v_h1f_TL_Raw[iMod]->Write();
       v_h1f_TL_Sel[iMod]->Write();

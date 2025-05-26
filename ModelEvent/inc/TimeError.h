@@ -7,6 +7,7 @@
 
 double TimeError(const double &DeltaT_in);
 
-double TimeError(Pad *pPad, Pad *pPad_Leading, Pad *pPad_NextLeading, Pad *pPad_NextNextLeading);
+double
+TimeError(Pad *pPad, Pad *pPad_Leading, Pad *pPad_NextLeading, Pad *pPad_NextNextLeading);
 
 #endif

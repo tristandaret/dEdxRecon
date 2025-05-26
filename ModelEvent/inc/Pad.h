@@ -11,12 +11,14 @@
 class Pad {
 public:
    /** Constructor */
-   Pad(Model_ReadOutGeometry *pModel_ReadOutGeometry, Model_Electronics *pModel_Electronics,
-       Model_ChargeI *pModel_ChargeI, std::string PadName, const int &EventNber, const int &EntryNber,
-       const int &ModuleNber, const int &iX, const int &iY, const double &XL, const double &XH, const double &YL,
-       const double &YH);
-   Pad(Model_ReadOutGeometry *pModel_ReadOutGeometry, Model_Electronics *pModel_Electronics,
-       Model_ChargeI *pModel_ChargeI, std::string PadName, const int &EventNber, const int &EntryNber,
+   Pad(Model_ReadOutGeometry *pModel_ReadOutGeometry,
+       Model_Electronics *pModel_Electronics, Model_ChargeI *pModel_ChargeI,
+       std::string PadName, const int &EventNber, const int &EntryNber,
+       const int &ModuleNber, const int &iX, const int &iY, const double &XL,
+       const double &XH, const double &YL, const double &YH);
+   Pad(Model_ReadOutGeometry *pModel_ReadOutGeometry,
+       Model_Electronics *pModel_Electronics, Model_ChargeI *pModel_ChargeI,
+       std::string PadName, const int &EventNber, const int &EntryNber,
        const int &ModuleNber, const int &iX, const int &iY);
    virtual ~Pad();
 
@@ -60,11 +62,12 @@ public:
    void Set_AMax(const double &AMax); // Set max amplitude (ADC)
    void Set_TMax(const double &TMax); // Set Time at max	(Time bin)
 
-   void Set_Data_2Use(const int &iOpt); // Data: switch for data type to use
-                                        // iOpt = 0; Amax and Tmax from input ntuple
-                                        //		= 1; Amax and Tmax from 1st max of WF
-                                        //		= 2; Amax and Tmax from 1st clean max of WF
-                                        //		= 3; Amax and Tmax from fit of WF peak (Default)
+   void
+   Set_Data_2Use(const int &iOpt); // Data: switch for data type to use
+                                   // iOpt = 0; Amax and Tmax from input ntuple
+                                   //		= 1; Amax and Tmax from 1st max of WF
+                                   //		= 2; Amax and Tmax from 1st clean max of WF
+                                   //		= 3; Amax and Tmax from fit of WF peak (Default)
 
    //------------------------------WFs-----------------------//
    // Waveform stuff
@@ -131,8 +134,8 @@ private:
 
    void SetEdges(const double &XL, const double &XH, const double &YL, const double &YH);
 
-   void Ini_Models(Model_ReadOutGeometry *pModel_ReadOutGeometry, Model_Electronics *pModel_Electronics,
-                   Model_ChargeI *pModel_ChargeI);
+   void Ini_Models(Model_ReadOutGeometry *pModel_ReadOutGeometry,
+                   Model_Electronics *pModel_Electronics, Model_ChargeI *pModel_ChargeI);
 
 private:
    std::string m_PadName;

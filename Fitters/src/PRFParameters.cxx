@@ -14,7 +14,8 @@ double PRFParameters::Eval(const double &Xin)
    return ToBeReturned;
 }
 
-void PRFParameters::SetPRF(const double &Norm, const double &A2, const double &A4, const double &B2, const double &B4)
+void PRFParameters::SetPRF(const double &Norm, const double &A2, const double &A4,
+                           const double &B2, const double &B4)
 {
    m_Norm = Norm;
    m_A2 = A2;

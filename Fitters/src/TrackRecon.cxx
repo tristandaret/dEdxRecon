@@ -19,7 +19,8 @@ void TrackRecon(Sample &aSample, const int &ModuleNber, const int &NberOfParamet
       if (pEvent->Validity_ForThisModule(ModuleNber) == 0)
          continue;
 
-      int FitResult = TrackRecon_Event(aTrackFitter, pEvent, ModuleNber, NberOfParameters);
+      int FitResult =
+         TrackRecon_Event(aTrackFitter, pEvent, ModuleNber, NberOfParameters);
 
       Kounter_Fit += 1;
       if (FitResult != 0)
@@ -28,11 +29,14 @@ void TrackRecon(Sample &aSample, const int &ModuleNber, const int &NberOfParamet
    std::cout << std::endl;
    std::cout << " TrackRecon " << std::endl;
    std::cout << "	Nber of Fits		" << std::setw(20) << Kounter_Fit << std::endl;
-   std::cout << "	Nber of Failed Fits " << std::setw(20) << Kounter_Failure << " ( " << std::setw(10)
-             << std::setprecision(4) << 100. * double(Kounter_Failure) / double(Kounter_Fit) << " % ) " << std::endl;
+   std::cout << "	Nber of Failed Fits " << std::setw(20) << Kounter_Failure << " ( "
+             << std::setw(10) << std::setprecision(4)
+             << 100. * double(Kounter_Failure) / double(Kounter_Fit) << " % ) "
+             << std::endl;
 }
 
-int TrackRecon_Event(TrackFitter &aTrackFitter, Event *pEvent, const int &ModuleNber, const int &NberOfParameters)
+int TrackRecon_Event(TrackFitter &aTrackFitter, Event *pEvent, const int &ModuleNber,
+                     const int &NberOfParameters)
 {
 
    Track *pTrack_ForEvent = 0;

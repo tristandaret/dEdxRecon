@@ -78,7 +78,8 @@ TH1F *SetOfTracks::GiveMe_pTH1F_Ch2Min(const std::string &TAGFinal, const double
    return ToBeReturned;
 }
 
-TH1F *SetOfTracks::GiveMe_pTH1F_Ch2MinPerNODF(const std::string &TAGFinal, const double &Xmax)
+TH1F *
+SetOfTracks::GiveMe_pTH1F_Ch2MinPerNODF(const std::string &TAGFinal, const double &Xmax)
 {
 
    std::ostringstream aostringstream;
@@ -91,14 +92,15 @@ TH1F *SetOfTracks::GiveMe_pTH1F_Ch2MinPerNODF(const std::string &TAGFinal, const
    int NberOfTracks = Get_NberOfTrack();
    for (int iT = 0; iT < NberOfTracks; iT++) {
       const Track *pTrack = Get_Track(iT);
-      double Ch2MinPerDOF = pTrack->Get_Chi2Min() / double(pTrack->Get_NberOfCluster() - pTrack->GetNberOfParameters());
+      double Ch2MinPerDOF = pTrack->Get_Chi2Min() / double(pTrack->Get_NberOfCluster() -
+                                                           pTrack->GetNberOfParameters());
       ToBeReturned->Fill(Ch2MinPerDOF);
    }
    return ToBeReturned;
 }
 
-TH1F *SetOfTracks::GiveMe_pTH1F_Residual(const std::string &TAGFinal, double &Mean, double &eMean, double &Sigma,
-                                         double &eSigma)
+TH1F *SetOfTracks::GiveMe_pTH1F_Residual(const std::string &TAGFinal, double &Mean,
+                                         double &eMean, double &Sigma, double &eSigma)
 {
 
    std::string Name = "GiveMe_pTH1F_Residual" + TAGFinal;
@@ -171,8 +173,10 @@ TH1F *SetOfTracks::GiveMe_pTH1F_Residual(const std::string &TAGFinal, double &Me
 
       int fitStatus = ToBeReturned->Fit("GaussFunction", "Q", "", XminF, XmaxF);
       if (fitStatus != 0) {
-         std::cout << " fitStatus = " << fitStatus << " Name = " << Name << " Title = " << Title
-                   << " pTF1->GetParameter(0) = " << pTF1->GetParameter(0) << " L_Norm = " << L_Norm
+         std::cout << " fitStatus = " << fitStatus << " Name = " << Name
+                   << " Title = " << Title
+                   << " pTF1->GetParameter(0) = " << pTF1->GetParameter(0)
+                   << " L_Norm = " << L_Norm
                    << " L_Norm Scaled = " << L_Norm * (XmaxH - XminH) / 100. << std::endl;
       }
 
@@ -188,8 +192,9 @@ TH1F *SetOfTracks::GiveMe_pTH1F_Residual(const std::string &TAGFinal, double &Me
    return ToBeReturned;
 }
 
-TH1F *SetOfTracks::GiveMe_pTH1F_Residual(const std::string &TAGFinal, const int &iX, double &Mean, double &eMean,
-                                         double &Sigma, double &eSigma)
+TH1F *SetOfTracks::GiveMe_pTH1F_Residual(const std::string &TAGFinal, const int &iX,
+                                         double &Mean, double &eMean, double &Sigma,
+                                         double &eSigma)
 {
 
    std::ostringstream aostringstream2;
@@ -292,8 +297,10 @@ TH1F *SetOfTracks::GiveMe_pTH1F_Residual(const std::string &TAGFinal, const int 
 
       int fitStatus = ToBeReturned->Fit("GaussFunction", "Q", "", XminF, XmaxF);
       if (fitStatus != 0) {
-         std::cout << " fitStatus = " << fitStatus << " Name = " << Name << " Title = " << Title
-                   << " pTF1->GetParameter(0) = " << pTF1->GetParameter(0) << " L_Norm = " << L_Norm
+         std::cout << " fitStatus = " << fitStatus << " Name = " << Name
+                   << " Title = " << Title
+                   << " pTF1->GetParameter(0) = " << pTF1->GetParameter(0)
+                   << " L_Norm = " << L_Norm
                    << " L_Norm Scaled = " << L_Norm * (XmaxH - XminH) / 100. << std::endl;
       }
 
@@ -309,13 +316,14 @@ TH1F *SetOfTracks::GiveMe_pTH1F_Residual(const std::string &TAGFinal, const int 
    return ToBeReturned;
 }
 
-TH1F *
-SetOfTracks::GiveMe_pTH1F_Pull(const std::string &TAGFinal, double &Mean, double &eMean, double &Sigma, double &eSigma)
+TH1F *SetOfTracks::GiveMe_pTH1F_Pull(const std::string &TAGFinal, double &Mean,
+                                     double &eMean, double &Sigma, double &eSigma)
 {
    return GiveMe_pTH1F_Pull(TAGFinal, Mean, eMean, Sigma, eSigma, -5., 5.);
 }
-TH1F *SetOfTracks::GiveMe_pTH1F_Pull(const std::string &TAGFinal, double &Mean, double &eMean, double &Sigma,
-                                     double &eSigma, const double &XminH, const double &XmaxH)
+TH1F *SetOfTracks::GiveMe_pTH1F_Pull(const std::string &TAGFinal, double &Mean,
+                                     double &eMean, double &Sigma, double &eSigma,
+                                     const double &XminH, const double &XmaxH)
 {
 
    std::string Name = "GiveMe_pTH1F_Pull" + TAGFinal;
@@ -385,8 +393,10 @@ TH1F *SetOfTracks::GiveMe_pTH1F_Pull(const std::string &TAGFinal, double &Mean, 
 
    int fitStatus = ToBeReturned->Fit("GaussFunction", "Q", "", XminF, XmaxF);
    if (fitStatus != 0) {
-      std::cout << " fitStatus = " << fitStatus << " Name = " << Name << " Title = " << Title
-                << " pTF1->GetParameter(0) = " << pTF1->GetParameter(0) << " L_Norm = " << L_Norm
+      std::cout << " fitStatus = " << fitStatus << " Name = " << Name
+                << " Title = " << Title
+                << " pTF1->GetParameter(0) = " << pTF1->GetParameter(0)
+                << " L_Norm = " << L_Norm
                 << " L_Norm Scaled = " << L_Norm * (XmaxH - XminH) / 100. << std::endl;
    }
 
@@ -419,13 +429,16 @@ TH1F *SetOfTracks::GiveMe_pTH1F_Pull(const std::string &TAGFinal)
    return ToBeReturned;
 }
 
-TH1F *SetOfTracks::GiveMe_pTH1F_Pull(const std::string &TAGFinal, const int &iX, double &Mean, double &eMean,
-                                     double &Sigma, double &eSigma)
+TH1F *SetOfTracks::GiveMe_pTH1F_Pull(const std::string &TAGFinal, const int &iX,
+                                     double &Mean, double &eMean, double &Sigma,
+                                     double &eSigma)
 {
    return GiveMe_pTH1F_Pull(TAGFinal, iX, Mean, eMean, Sigma, eSigma, -5., 5.);
 }
-TH1F *SetOfTracks::GiveMe_pTH1F_Pull(const std::string &TAGFinal, const int &iX, double &Mean, double &eMean,
-                                     double &Sigma, double &eSigma, const double &XminH, const double &XmaxH)
+TH1F *SetOfTracks::GiveMe_pTH1F_Pull(const std::string &TAGFinal, const int &iX,
+                                     double &Mean, double &eMean, double &Sigma,
+                                     double &eSigma, const double &XminH,
+                                     const double &XmaxH)
 {
 
    std::ostringstream aostringstream2;
@@ -514,8 +527,10 @@ TH1F *SetOfTracks::GiveMe_pTH1F_Pull(const std::string &TAGFinal, const int &iX,
 
    int fitStatus = ToBeReturned->Fit("GaussFunction", "Q", "", XminF, XmaxF);
    if (fitStatus != 0) {
-      std::cout << " fitStatus = " << fitStatus << " Name = " << Name << " Title = " << Title
-                << " pTF1->GetParameter(0) = " << pTF1->GetParameter(0) << " L_Norm = " << L_Norm
+      std::cout << " fitStatus = " << fitStatus << " Name = " << Name
+                << " Title = " << Title
+                << " pTF1->GetParameter(0) = " << pTF1->GetParameter(0)
+                << " L_Norm = " << L_Norm
                 << " L_Norm Scaled = " << L_Norm * (XmaxH - XminH) / 100. << std::endl;
    }
 
@@ -527,8 +542,9 @@ TH1F *SetOfTracks::GiveMe_pTH1F_Pull(const std::string &TAGFinal, const int &iX,
    return ToBeReturned;
 }
 
-TH1F *SetOfTracks::GiveMe_pTH1F_Residual(const std::string &TAGFinal, const int &iX, double YL, double YH,
-                                         double YL_Rescaled, double YH_Rescaled, double &Mean, double &eMean,
+TH1F *SetOfTracks::GiveMe_pTH1F_Residual(const std::string &TAGFinal, const int &iX,
+                                         double YL, double YH, double YL_Rescaled,
+                                         double YH_Rescaled, double &Mean, double &eMean,
                                          double &Sigma, double &eSigma)
 {
 
@@ -679,9 +695,11 @@ TH1F *SetOfTracks::GiveMe_pTH1F_Residual(const std::string &TAGFinal, const int 
 
       int fitStatus = ToBeReturned->Fit("GaussFunction", "Q", "", XminF, XmaxF);
       if (fitStatus != 0) {
-         std::cout << " fitStatus = " << fitStatus << " Name = " << Name << " Title = " << Title
-                   << " L_Norm = " << L_Norm << " iTurn = " << iTurn
-                   << " pTF1->GetParameter(0) = " << pTF1->GetParameter(0) << " L_Norm = " << L_Norm
+         std::cout << " fitStatus = " << fitStatus << " Name = " << Name
+                   << " Title = " << Title << " L_Norm = " << L_Norm
+                   << " iTurn = " << iTurn
+                   << " pTF1->GetParameter(0) = " << pTF1->GetParameter(0)
+                   << " L_Norm = " << L_Norm
                    << " L_Norm Scaled = " << L_Norm * (XmaxH - XminH) / 100. << std::endl;
       } else {
          Mean = pTF1->GetParameter(1);
@@ -726,7 +744,8 @@ TH1F *SetOfTracks::GiveMe_pTH1F_TrackDeltaT(const std::string &TAG, const int &i
    const Track *pTrack = Get_Track(0);
    const Cluster *pCluster = pTrack->Get_Cluster(0);
    Pad *pPad = pCluster->Get_LeadingPad();
-   const Model_ReadOutGeometry *pModel_ReadOutGeometry = pPad->Get_Model_ReadOutGeometry();
+   const Model_ReadOutGeometry *pModel_ReadOutGeometry =
+      pPad->Get_Model_ReadOutGeometry();
 
    double NX = pModel_ReadOutGeometry->Get_Nx();
    double LY = pModel_ReadOutGeometry->Get_LY();
@@ -740,7 +759,8 @@ TH1F *SetOfTracks::GiveMe_pTH1F_TrackDeltaT(const std::string &TAG, const int &i
    double DiffY = Ymax - Ymin;
    Ymax = Ymax + 0.1 * DiffY;
    Ymin = Ymin - 0.1 * DiffY;
-   TH1F *ToBeReturned = new TH1F(Name.c_str(), Title.c_str(), 50, Ymin * 1.E2, Ymax * 1.E2);
+   TH1F *ToBeReturned =
+      new TH1F(Name.c_str(), Title.c_str(), 50, Ymin * 1.E2, Ymax * 1.E2);
 
    int NberOfTracks = Get_NberOfTrack();
    for (int iT = 0; iT < NberOfTracks; iT++) {
@@ -764,12 +784,14 @@ TH1F *SetOfTracks::GiveMe_pTH1F_TrackDeltaT(const std::string &TAG, const int &i
 //-----------------------------------------------------------------//
 
 //-----------------------------------------------------------------//
-TH1F *SetOfTracks::GiveMe_pTH1F_YTrackYPadInTracks(const std::string &TAG, const int &iCol)
+TH1F *
+SetOfTracks::GiveMe_pTH1F_YTrackYPadInTracks(const std::string &TAG, const int &iCol)
 {
    std::string SubTAG = TAG + "Indirect";
    return GiveMe_pTH1F_YTrackYPadInTracks(SubTAG, iCol, 100, -3., 3.);
 }
-TH1F *SetOfTracks::GiveMe_pTH1F_YTrackYPadInTracks(const std::string &TAG, const int &iCol, const int &Nbins,
+TH1F *SetOfTracks::GiveMe_pTH1F_YTrackYPadInTracks(const std::string &TAG,
+                                                   const int &iCol, const int &Nbins,
                                                    const double &Xmin, const double &Xmax)
 {
    std::ostringstream aostringstream;
@@ -818,13 +840,17 @@ TH1F *SetOfTracks::GiveMe_pTH1F_YTrackYPadInTracks(const std::string &TAG, const
 //-----------------------------------------------------------------//
 
 //-----------------------------------------------------------------//
-TH1F *SetOfTracks::GiveMe_pTH1F_YTrackYPadLeadingInTracks(const std::string &TAG, const int &iCol)
+TH1F *SetOfTracks::GiveMe_pTH1F_YTrackYPadLeadingInTracks(const std::string &TAG,
+                                                          const int &iCol)
 {
    std::string SubTAG = TAG + "Indirect";
    return GiveMe_pTH1F_YTrackYPadLeadingInTracks(SubTAG, iCol, 100, -3., 3.);
 }
-TH1F *SetOfTracks::GiveMe_pTH1F_YTrackYPadLeadingInTracks(const std::string &TAG, const int &iCol, const int &Nbins,
-                                                          const double &Xmin, const double &Xmax)
+TH1F *SetOfTracks::GiveMe_pTH1F_YTrackYPadLeadingInTracks(const std::string &TAG,
+                                                          const int &iCol,
+                                                          const int &Nbins,
+                                                          const double &Xmin,
+                                                          const double &Xmax)
 {
    std::ostringstream aostringstream;
    aostringstream << std::setiosflags(std::ios::fixed);
@@ -873,22 +899,25 @@ TH1F *SetOfTracks::GiveMe_pTH1F_YFitCol(const std::string &TAG, const int &iYBea
    std::string SubTAG = TAG + "Indirect1";
    return GiveMe_pTH1F_YFitCol(SubTAG, iYBeam, -1);
 }
-TH1F *
-SetOfTracks::GiveMe_pTH1F_YFitCol(const std::string &TAG, const int &Nbins, const double &Ymin, const double &Ymax)
+TH1F *SetOfTracks::GiveMe_pTH1F_YFitCol(const std::string &TAG, const int &Nbins,
+                                        const double &Ymin, const double &Ymax)
 {
    std::string SubTAG = TAG + "Indirect2";
    return GiveMe_pTH1F_YFitCol(SubTAG, Nbins, Ymin, Ymax, -1);
 }
-TH1F *SetOfTracks::GiveMe_pTH1F_YFitCol(const std::string &TAG, const int &iYBeam, const int &iCol)
+TH1F *SetOfTracks::GiveMe_pTH1F_YFitCol(const std::string &TAG, const int &iYBeam,
+                                        const int &iCol)
 {
    const Track *pTrack = Get_Track(0);
    if (pTrack == 0)
       return 0;
    const Cluster *pCluster = pTrack->Get_Cluster(0);
    Pad *pPad = pCluster->Get_LeadingPad();
-   const Model_ReadOutGeometry *pModel_ReadOutGeometry = pPad->Get_Model_ReadOutGeometry();
+   const Model_ReadOutGeometry *pModel_ReadOutGeometry =
+      pPad->Get_Model_ReadOutGeometry();
 
-   double Ycen = 1.E2 * pModel_ReadOutGeometry->Get_YcPad(0, iYBeam, pTrack->Get_ModuleNber());
+   double Ycen =
+      1.E2 * pModel_ReadOutGeometry->Get_YcPad(0, iYBeam, pTrack->Get_ModuleNber());
    double Ymin = Ycen - 5.;
    double Ymax = Ycen + 5.;
 
@@ -896,8 +925,9 @@ TH1F *SetOfTracks::GiveMe_pTH1F_YFitCol(const std::string &TAG, const int &iYBea
 
    return GiveMe_pTH1F_YFitCol(SubTAG, 100, Ymin, Ymax, iCol);
 }
-TH1F *SetOfTracks::GiveMe_pTH1F_YFitCol(const std::string &TAG, const int &Nbins, const double &Ymin,
-                                        const double &Ymax, const int &iCol)
+TH1F *SetOfTracks::GiveMe_pTH1F_YFitCol(const std::string &TAG, const int &Nbins,
+                                        const double &Ymin, const double &Ymax,
+                                        const int &iCol)
 {
    std::ostringstream aostringstream;
    aostringstream << std::setiosflags(std::ios::fixed);
@@ -943,31 +973,35 @@ TH1F *SetOfTracks::GiveMe_pTH1F_YTrackInTracks(const std::string &TAG, const int
    std::string SubTAG = TAG + "Indirect1";
    return GiveMe_pTH1F_YTrackInTracks(SubTAG, iYBeam, -1);
 }
-TH1F *SetOfTracks::GiveMe_pTH1F_YTrackInTracks(const std::string &TAG, const int &Nbins, const double &Ymin,
-                                               const double &Ymax)
+TH1F *SetOfTracks::GiveMe_pTH1F_YTrackInTracks(const std::string &TAG, const int &Nbins,
+                                               const double &Ymin, const double &Ymax)
 {
    std::string SubTAG = TAG + "Indirect2";
    return GiveMe_pTH1F_YTrackInTracks(SubTAG, Nbins, Ymin, Ymax, -1);
 }
 
-TH1F *SetOfTracks::GiveMe_pTH1F_YTrackInTracks(const std::string &TAG, const int &iYBeam, const int &iCol)
+TH1F *SetOfTracks::GiveMe_pTH1F_YTrackInTracks(const std::string &TAG, const int &iYBeam,
+                                               const int &iCol)
 {
    const Track *pTrack = Get_Track(0);
    if (pTrack == 0)
       return 0;
    const Cluster *pCluster = pTrack->Get_Cluster(0);
    Pad *pPad = pCluster->Get_LeadingPad();
-   const Model_ReadOutGeometry *pModel_ReadOutGeometry = pPad->Get_Model_ReadOutGeometry();
+   const Model_ReadOutGeometry *pModel_ReadOutGeometry =
+      pPad->Get_Model_ReadOutGeometry();
 
-   double Ycen = 1.E2 * pModel_ReadOutGeometry->Get_YcPad(0, iYBeam, pTrack->Get_ModuleNber());
+   double Ycen =
+      1.E2 * pModel_ReadOutGeometry->Get_YcPad(0, iYBeam, pTrack->Get_ModuleNber());
    double Ymin = Ycen - 5.;
    double Ymax = Ycen + 5.;
 
    std::string SubTAG = TAG + "Indirect3";
    return GiveMe_pTH1F_YTrackInTracks(SubTAG, 100, Ymin, Ymax, iCol);
 }
-TH1F *SetOfTracks::GiveMe_pTH1F_YTrackInTracks(const std::string &TAG, const int &Nbins, const double &Ymin,
-                                               const double &Ymax, const int &iCol)
+TH1F *SetOfTracks::GiveMe_pTH1F_YTrackInTracks(const std::string &TAG, const int &Nbins,
+                                               const double &Ymin, const double &Ymax,
+                                               const int &iCol)
 {
    std::ostringstream aostringstream;
    aostringstream << std::setiosflags(std::ios::fixed);

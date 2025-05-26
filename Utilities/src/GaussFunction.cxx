@@ -17,7 +17,8 @@ double GaussFunction::operator()(double *x, double *par)
    m_Mean = par[1];
    m_Sigma = par[2];
 
-   return (m_Norm * exp(-0.5 * (pow((vX - m_Mean) / m_Sigma, 2))) / (m_Sigma * std::sqrt(2 * M_PI)));
+   return (m_Norm * exp(-0.5 * (pow((vX - m_Mean) / m_Sigma, 2))) /
+           (m_Sigma * std::sqrt(2 * M_PI)));
 }
 
 double GaussFunction::Get_Norm()

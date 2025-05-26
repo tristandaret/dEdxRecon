@@ -92,7 +92,8 @@ int TrackFitter::DoMinimisation()
 
       int ierMINOS_N = p_TVirtualFitter->ExecuteCommand("MINOS", arg, 1);
       if (ierMINOS_N != 0)
-         std::cout << " TrackFitter::DoMinimisation() ierMINOS_N	" << ierMINOS_N << std::endl;
+         std::cout << " TrackFitter::DoMinimisation() ierMINOS_N	" << ierMINOS_N
+                   << std::endl;
 
       p_Track->SetResults(p_TVirtualFitter);
 
@@ -113,7 +114,8 @@ int TrackFitter::DoMinimisation()
 
          int ierMINOS_R1 = p_TVirtualFitter->ExecuteCommand("MINOS", arg, 1);
          if (ierMINOS_R1 != 0)
-            std::cout << " TrackFitter::DoMinimisation() ->->ierMINOS_R1	" << ierMINOS_R1 << std::endl;
+            std::cout << " TrackFitter::DoMinimisation() ->->ierMINOS_R1	"
+                      << ierMINOS_R1 << std::endl;
 
          p_Track->SetResults(p_TVirtualFitter);
 
@@ -129,11 +131,13 @@ int TrackFitter::DoMinimisation()
 
          if (ierMIGRAD_R2 == 0) {
 
-            std::cout << " TrackFitter::DoMinimisation() Rescue 2 succeeded " << std::endl;
+            std::cout << " TrackFitter::DoMinimisation() Rescue 2 succeeded "
+                      << std::endl;
 
             int ierMINOS_R2 = p_TVirtualFitter->ExecuteCommand("MINOS", arg, 1);
             if (ierMINOS_R2 != 0)
-               std::cout << " TrackFitter::DoMinimisation() ->->->ierMINOS_R2	" << ierMINOS_R2 << std::endl;
+               std::cout << " TrackFitter::DoMinimisation() ->->->ierMINOS_R2	"
+                         << ierMINOS_R2 << std::endl;
 
             p_Track->SetResults(p_TVirtualFitter);
 
@@ -145,13 +149,16 @@ int TrackFitter::DoMinimisation()
 
             std::cout << " TrackFitter::DoMinimisation() Rescue 2 failed "
                       << "->ierMIGRAD_R2 " << ierMIGRAD_R2 << std::endl;
-            std::cout << " TrackFitter::DoMinimisation() All Rescues failed : abort " << std::endl;
+            std::cout << " TrackFitter::DoMinimisation() All Rescues failed : abort "
+                      << std::endl;
 
             int NClusters = p_Track->Get_NberOfCluster();
             for (int iC = 0; iC < NClusters; iC++) {
                const Cluster *pCluster = p_Track->Get_Cluster(iC);
-               std::cout << " Y " << std::setw(16) << std::setprecision(3) << pCluster->Get_YTrack() * 1.E3 << " +/- "
-                         << std::setw(16) << std::setprecision(3) << pCluster->Get_eYTrack() * 1.E3 << std::endl;
+               std::cout << " Y " << std::setw(16) << std::setprecision(3)
+                         << pCluster->Get_YTrack() * 1.E3 << " +/- " << std::setw(16)
+                         << std::setprecision(3) << pCluster->Get_eYTrack() * 1.E3
+                         << std::endl;
             }
 
             abort();

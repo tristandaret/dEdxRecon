@@ -106,8 +106,8 @@ void Reconstruction::ERAMMaps::Load()
       setMeanGain(i, meanGain);
       setMeanRC(i, meanRC);
       if (verbose)
-         std::cout << "ERAM#" << ID(i) << ": mean Gain	= " << MeanGain(i) << " | mean RC	= " << MeanRC(i)
-                   << std::endl;
+         std::cout << "ERAM#" << ID(i) << ": mean Gain	= " << MeanGain(i)
+                   << " | mean RC	= " << MeanRC(i) << std::endl;
    }
 }
 
@@ -128,7 +128,8 @@ float Reconstruction::ERAMMaps::Gain(const int &position, const int &iX, const i
    return fGain[position][iX][iY];
 }
 
-float Reconstruction::ERAMMaps::Resolution(const int &position, const int &iX, const int &iY)
+float Reconstruction::ERAMMaps::Resolution(const int &position, const int &iX,
+                                           const int &iY)
 {
    return fResolution[position][iX][iY];
 }
@@ -144,17 +145,20 @@ float Reconstruction::ERAMMaps::MeanRC(const int &position)
 /* Private functions */
 // Setters
 // ERAMs on endplates 1&3 are X-flipped compared to their maps in the file
-void Reconstruction::ERAMMaps::setGain(const int &position, const int &iX, const int &iY, const float &gain)
+void Reconstruction::ERAMMaps::setGain(const int &position, const int &iX, const int &iY,
+                                       const float &gain)
 {
    fGain[position][iX][iY] = gain;
 }
 
-void Reconstruction::ERAMMaps::setRC(const int &position, const int &iX, const int &iY, const float &RC)
+void Reconstruction::ERAMMaps::setRC(const int &position, const int &iX, const int &iY,
+                                     const float &RC)
 {
    fRC[position][iX][iY] = RC;
 }
 
-void Reconstruction::ERAMMaps::setResolution(const int &position, const int &iX, const int &iY, const float &resolution)
+void Reconstruction::ERAMMaps::setResolution(const int &position, const int &iX,
+                                             const int &iY, const float &resolution)
 {
    fResolution[position][iX][iY] = resolution;
 }
@@ -194,9 +198,10 @@ void Reconstruction::ERAMMaps::FillHoles()
                gain /= n_sides;
                setGain(i, iX, iY, gain);
                if (verbose)
-                  std::cout << "ERAM#" << std::setw(2) << ID(i) << std::setw(2) << " (" << std::setw(2) << i << "): "
-                            << "Gain hole in (iX,iY)	= (" << iX << "," << iY << ") | value reset at "
-                            << Gain(i, iX, iY) << std::endl;
+                  std::cout << "ERAM#" << std::setw(2) << ID(i) << std::setw(2) << " ("
+                            << std::setw(2) << i << "): "
+                            << "Gain hole in (iX,iY)	= (" << iX << "," << iY
+                            << ") | value reset at " << Gain(i, iX, iY) << std::endl;
             }
 
             v_sides.assign(4, 0);
@@ -218,9 +223,10 @@ void Reconstruction::ERAMMaps::FillHoles()
                rc /= n_sides;
                setRC(i, iX, iY, rc);
                if (verbose)
-                  std::cout << "ERAM#" << std::setw(2) << ID(i) << std::setw(2) << " (" << std::setw(2) << i << "): "
-                            << "RC	hole in (iX,iY)	= (" << iX << "," << iY << ") | value reset at " << RC(i, iX, iY)
-                            << std::endl;
+                  std::cout << "ERAM#" << std::setw(2) << ID(i) << std::setw(2) << " ("
+                            << std::setw(2) << i << "): "
+                            << "RC	hole in (iX,iY)	= (" << iX << "," << iY
+                            << ") | value reset at " << RC(i, iX, iY) << std::endl;
             }
             v_sides.clear();
          } // iY
@@ -229,12 +235,14 @@ void Reconstruction::ERAMMaps::FillHoles()
 }
 
 /* Look Up Tables for XP method
- * ------------------------------------------------------------------------------------------------------------------ */
+ * ------------------------------------------------------------------------------------------------------------------
+ */
 // Default constructor
 Reconstruction::LUT::LUT(const int &transDiffCoeff, const int &peakingTime)
 {
    fFile_LUT =
-      Form("$HOME/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi150_nd150_nRC41_nZ21.root", transDiffCoeff, peakingTime);
+      Form("$HOME/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi150_nd150_nRC41_nZ21.root",
+           transDiffCoeff, peakingTime);
    std::cout << "dEdx LUT: LOADING " << fFile_LUT << std::endl;
    Load();
    std::cout << "dEdx LUT: LOADED" << std::endl;
@@ -290,11 +298,13 @@ void Reconstruction::LUT::Load()
    }
 }
 
-float Reconstruction::LUT::getRatio(const float &phi, const float &d, const float &RC, const float &z)
+float Reconstruction::LUT::getRatio(const float &phi, const float &d, const float &RC,
+                                    const float &z)
 {
    // Determine the indices of the 8 points surrounding the point of interest
    float iphi = (phi - 1e-6) / sSTEP_PHI;
-   float iphi_min = std::min((float)std::floor((phi - 1e-6) / sSTEP_PHI), (float)sN_PHI - 1);
+   float iphi_min =
+      std::min((float)std::floor((phi - 1e-6) / sSTEP_PHI), (float)sN_PHI - 1);
    float iphi_max = std::max((float)std::ceil((phi - 1e-6) / sSTEP_PHI), (float)0.0);
    float id = d / sSTEP_D;
    float id_min = std::min((float)std::floor(d / sSTEP_D), (float)sN_D - 1);
@@ -346,9 +356,11 @@ float Reconstruction::LUT::getRatio(const float &phi, const float &d, const floa
       for (int j = 0; j < 2; ++j)
          for (int k = 0; k < 2; ++k)
             for (int l = 0; l < 2; ++l)
-               interpolated_value += fValue[(int)iphi_min + i][(int)id_min + j][(int)iRC_min + k][(int)iz_min + l] *
-                                     (i == 0 ? w_phi : (1 - w_phi)) * (j == 0 ? w_d : (1 - w_d)) *
-                                     (k == 0 ? w_RC : (1 - w_RC)) * (l == 0 ? w_z : (1 - w_z));
+               interpolated_value +=
+                  fValue[(int)iphi_min + i][(int)id_min + j][(int)iRC_min + k]
+                        [(int)iz_min + l] *
+                  (i == 0 ? w_phi : (1 - w_phi)) * (j == 0 ? w_d : (1 - w_d)) *
+                  (k == 0 ? w_RC : (1 - w_RC)) * (l == 0 ? w_z : (1 - w_z));
 
    return interpolated_value;
 }

@@ -1,7 +1,8 @@
 #include "Uploader.h"
 #include "TF1.h"
 
-Uploader::Uploader(const std::string &sampleFile, Model_ReadOutGeometry *pModel_ReadOutGeometry,
+Uploader::Uploader(const std::string &sampleFile,
+                   Model_ReadOutGeometry *pModel_ReadOutGeometry,
                    Model_Electronics *pModel_Electronics, Model_Charge1D *pModel_Charge1D)
    : m_SampleFile(sampleFile),
      p_Model_ReadOutGeometry(pModel_ReadOutGeometry),
@@ -14,7 +15,8 @@ Uploader::Uploader(const std::string &sampleFile, Model_ReadOutGeometry *pModel_
 
    p_TFile = TFile::Open(sampleFile.c_str(), "READ");
    if (!p_TFile) {
-      std::cout << "Uploader::Uploader ERROR. Couldn't open root file: " << sampleFile << std::endl;
+      std::cout << "Uploader::Uploader ERROR. Couldn't open root file: " << sampleFile
+                << std::endl;
       abort();
    }
 
@@ -28,8 +30,10 @@ Uploader::Uploader(const std::string &sampleFile, Model_ReadOutGeometry *pModel_
 
    TF1 *pTF1 = (TF1 *)p_TFile->Get("PRF_function");
    if (pTF1) {
-      if (std::string(pTF1->GetParName(0)) == "Const" && std::string(pTF1->GetParName(1)) == "a2" &&
-          std::string(pTF1->GetParName(2)) == "a4" && std::string(pTF1->GetParName(3)) == "b2" &&
+      if (std::string(pTF1->GetParName(0)) == "Const" &&
+          std::string(pTF1->GetParName(1)) == "a2" &&
+          std::string(pTF1->GetParName(2)) == "a4" &&
+          std::string(pTF1->GetParName(3)) == "b2" &&
           std::string(pTF1->GetParName(4)) == "b4") {
          double Norm = pTF1->GetParameter(0);
          double a2 = pTF1->GetParameter(1) / (100. * 100.);

@@ -23,8 +23,8 @@ public:
    void Set(const int &NberOfModelParameters);
 
    void SetResults(TVirtualFitter *pTVirtualFitter);
-   void SetResults(const std::vector<std::string> &V_PARname, const std::vector<double> &V_PAR,
-                   const std::vector<double> &V_ePAR);
+   void SetResults(const std::vector<std::string> &V_PARname,
+                   const std::vector<double> &V_PAR, const std::vector<double> &V_ePAR);
 
    void PrintFitOutput();
    void PrintFitOutputInCanvas(double Xstart, double Ystart, double Step);

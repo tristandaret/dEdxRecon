@@ -17,7 +17,10 @@
 #include "TLatex.h"
 
 // Constructor delegation
-Reconstruction::DrawOuts::DrawOuts(const std::string &inputFile) : DrawOuts(std::vector<std::string>{inputFile}) {}
+Reconstruction::DrawOuts::DrawOuts(const std::string &inputFile)
+   : DrawOuts(std::vector<std::string>{inputFile})
+{
+}
 
 // Main constructor
 Reconstruction::DrawOuts::DrawOuts(const std::vector<std::string> &v_inputFiles)
@@ -127,8 +130,15 @@ void Reconstruction::DrawOuts::DESY21ScanFill()
          else
             index = iscan * nruns + irun;
 
-         v_fptf1_WF.push_back((TF1 *)v_fFiles[iscan * nruns + irun]->Get<TH1F>("ph1f_WF")->GetFunction("gausn"));
-         v_fptf1_XP.push_back((TF1 *)v_fFiles[iscan * nruns + irun]->Get<TH1F>("ph1f_XP")->GetFunction("gausn"));
+         v_fptf1_WF.push_back(
+            (TF1 *)v_fFiles[iscan * nruns + irun]->Get<TH1F>("ph1f_WF")->GetFunction(
+               "gausn"));
+         v_fptf1_XP.push_back(
+            (TF1 *)v_fFiles[iscan * nruns + irun]->Get<TH1F>("ph1f_XP")->GetFunction(
+               "gausn"));
+
+         if (v_valint[irun] == 5)
+            continue;
 
          float mean_WF = v_fptf1_WF[index]->GetParameter(1);
          float mean_XP = v_fptf1_XP[index]->GetParameter(1);
@@ -145,18 +155,22 @@ void Reconstruction::DrawOuts::DESY21ScanFill()
          float dreso_WF = GetResoError(v_fptf1_WF[index]);
          float dreso_XP = GetResoError(v_fptf1_XP[index]);
 
-         v_fpTGE_mean_WF[iscan]->SetPoint(irun, v_valint[irun] - shift, mean_WF);
-         v_fpTGE_mean_XP[iscan]->SetPoint(irun, v_valint[irun] + shift, mean_XP);
-         v_fpTGE_mean_WF[iscan]->SetPointError(irun, 0, dmean_WF);
-         v_fpTGE_mean_XP[iscan]->SetPointError(irun, 0, dmean_XP);
+         int irunshift = irun;
+         if (irun > 1)
+            irunshift = irun - 1;
 
-         v_fpTGE_std_WF[iscan]->SetPoint(irun, v_valint[irun] - shift, std_WF);
-         v_fpTGE_std_XP[iscan]->SetPoint(irun, v_valint[irun] + shift, std_XP);
+         v_fpTGE_mean_WF[iscan]->SetPoint(irunshift, v_valint[irun], mean_WF);
+         v_fpTGE_mean_XP[iscan]->SetPoint(irunshift, v_valint[irun], mean_XP);
+         v_fpTGE_mean_WF[iscan]->SetPointError(irunshift, 0, dmean_WF);
+         v_fpTGE_mean_XP[iscan]->SetPointError(irunshift, 0, dmean_XP);
+
+         v_fpTGE_std_WF[iscan]->SetPoint(irun, v_valint[irun], std_WF);
+         v_fpTGE_std_XP[iscan]->SetPoint(irun, v_valint[irun], std_XP);
          v_fpTGE_std_WF[iscan]->SetPointError(irun, 0, dstd_WF);
          v_fpTGE_std_XP[iscan]->SetPointError(irun, 0, dstd_XP);
 
-         v_fpTGE_reso_WF[iscan]->SetPoint(irun, v_valint[irun] - shift, reso_WF);
-         v_fpTGE_reso_XP[iscan]->SetPoint(irun, v_valint[irun] + shift, reso_XP);
+         v_fpTGE_reso_WF[iscan]->SetPoint(irun, v_valint[irun], reso_WF);
+         v_fpTGE_reso_XP[iscan]->SetPoint(irun, v_valint[irun], reso_XP);
          v_fpTGE_reso_WF[iscan]->SetPointError(irun, 0, dreso_WF);
          v_fpTGE_reso_XP[iscan]->SetPointError(irun, 0, dreso_XP);
       }
@@ -165,24 +179,31 @@ void Reconstruction::DrawOuts::DESY21ScanFill()
       return;
 
    std::vector<std::string> v_files_WFoff = {
-      drawout_metascanpath + testbeam + "_" + metascan + "_" + "Zm40/" + testbeam + "_" + metascan + "_" +
-         "Zm40_Phi40_diag/" + testbeam + "_" + metascan + "_" + "Zm40_Phi40_diag_WFoff.root",
-      drawout_metascanpath + testbeam + "_" + metascan + "_" + "Z460/" + testbeam + "_" + metascan + "_" +
-         "Z460_Phi40_diag/" + testbeam + "_" + metascan + "_" + "Z460_Phi40_diag_WFoff.root",
-      drawout_metascanpath + testbeam + "_" + metascan + "_" + "Z860/" + testbeam + "_" + metascan + "_" +
-         "Z860_Phi40_diag/" + testbeam + "_" + metascan + "_" + "Z860_Phi40_diag_WFoff.root",
-      drawout_metascanpath + testbeam + "_" + metascan + "_" + "Zm40/" + testbeam + "_" + metascan + "_" +
-         "Zm40_Phi45_diag/" + testbeam + "_" + metascan + "_" + "Zm40_Phi45_diag_WFoff.root",
-      drawout_metascanpath + testbeam + "_" + metascan + "_" + "Z460/" + testbeam + "_" + metascan + "_" +
-         "Z460_Phi45_diag/" + testbeam + "_" + metascan + "_" + "Z460_Phi45_diag_WFoff.root",
-      drawout_metascanpath + testbeam + "_" + metascan + "_" + "Z860/" + testbeam + "_" + metascan + "_" +
-         "Z860_Phi45_diag/" + testbeam + "_" + metascan + "_" + "Z860_Phi45_diag_WFoff.root"};
+      drawout_metascanpath + testbeam + "_" + metascan + "_" + "Zm40/" + testbeam + "_" +
+         metascan + "_" + "Zm40_Phi40_diag/" + testbeam + "_" + metascan + "_" +
+         "Zm40_Phi40_diag_WFoff.root",
+      drawout_metascanpath + testbeam + "_" + metascan + "_" + "Z460/" + testbeam + "_" +
+         metascan + "_" + "Z460_Phi40_diag/" + testbeam + "_" + metascan + "_" +
+         "Z460_Phi40_diag_WFoff.root",
+      drawout_metascanpath + testbeam + "_" + metascan + "_" + "Z860/" + testbeam + "_" +
+         metascan + "_" + "Z860_Phi40_diag/" + testbeam + "_" + metascan + "_" +
+         "Z860_Phi40_diag_WFoff.root",
+      drawout_metascanpath + testbeam + "_" + metascan + "_" + "Zm40/" + testbeam + "_" +
+         metascan + "_" + "Zm40_Phi45_diag/" + testbeam + "_" + metascan + "_" +
+         "Zm40_Phi45_diag_WFoff.root",
+      drawout_metascanpath + testbeam + "_" + metascan + "_" + "Z460/" + testbeam + "_" +
+         metascan + "_" + "Z460_Phi45_diag/" + testbeam + "_" + metascan + "_" +
+         "Z460_Phi45_diag_WFoff.root",
+      drawout_metascanpath + testbeam + "_" + metascan + "_" + "Z860/" + testbeam + "_" +
+         metascan + "_" + "Z860_Phi45_diag/" + testbeam + "_" + metascan + "_" +
+         "Z860_Phi45_diag_WFoff.root"};
    for (int i = 0; i < nscans; i++) {
       v_fpTGE_mean_WFoff.push_back(new TGraphErrors());
       v_fpTGE_reso_WFoff.push_back(new TGraphErrors());
       for (int j = 0; j < 2; j++) {
-         TF1 *ptf1WFoff =
-            (TF1 *)TFile::Open(v_files_WFoff[2 * i + j].c_str())->Get<TH1F>("ph1f_WF")->GetFunction("gausn");
+         TF1 *ptf1WFoff = (TF1 *)TFile::Open(v_files_WFoff[2 * i + j].c_str())
+                             ->Get<TH1F>("ph1f_WF")
+                             ->GetFunction("gausn");
 
          float mean_WFoff = ptf1WFoff->GetParameter(1);
          float dmean_WFoff = ptf1WFoff->GetParError(1);
@@ -228,7 +249,7 @@ void Reconstruction::DrawOuts::DESY21ScanDraw()
    }
    fpLegWF->SetTextSize(0.05);
    fpLegWF->SetFillStyle(0);
-   fpLegWF->SetTextColor(kPink - 1);
+   fpLegWF->SetTextColor(kBlack);
    fpLegWFoff->SetFillStyle(0);
    fpLegXP = new TLegend(0.37, 0.78 - 0.03 * nlegentries, 0.57, 0.93);
    if (nscans != 1 and metascan != "Drift") {
@@ -236,47 +257,54 @@ void Reconstruction::DrawOuts::DESY21ScanDraw()
    }
    fpLegXP->SetTextSize(0.05);
    fpLegXP->SetFillStyle(0);
-   fpLegXP->SetTextColor(kPink - 1);
+   fpLegXP->SetTextColor(kBlack);
    if (nscans == 1 or metascan == "Drift") {
       fpLegWF->SetY2(0.91);
-      fpLegWF->SetX1(0.6);
+      fpLegWF->SetX1(0.15);
+      fpLegWF->SetX2(0.48);
    }
    for (int i = base; i < (int)v_fpTGE_mean_WF.size(); i++) {
       if (nscans != 1 and metascan != "Drift") {
-         fpLegWF->AddEntry(v_fpTGE_reso_WF[i], Form("    %s", v_scanspec[i].c_str()), "p");
+         fpLegWF->AddEntry(v_fpTGE_reso_WF[i], Form("    %s", v_scanspec[i].c_str()),
+                           "p");
          fpLegWFoff->AddEntry(v_fpTGE_reso_WFoff[i], "", "p");
          fpLegXP->AddEntry(v_fpTGE_reso_XP[i], Form("%s", v_scanspec[i].c_str()), "p");
       } else {
-         fpLegWF->AddEntry(v_fpTGE_reso_WF[i], "Waveforms sum", "p");
-         fpLegWF->AddEntry(v_fpTGE_reso_XP[i], "Crossed pads", "p");
+         fpLegWF->AddEntry(v_fpTGE_reso_WF[i], "Previous", "p");
+         fpLegWF->AddEntry(v_fpTGE_reso_XP[i], "My work", "p");
       }
    }
 
    // Resolution
    v_fpTGE_reso_WF[base]->SetMinimum(YRESOMIN);
    v_fpTGE_reso_WF[base]->SetMaximum(YRESOMAX);
-   v_fpTGE_reso_WF[base]->SetNameTitle("fpTGE_reso_WF", Form(";%s;Resolution (%%)", runvarstr.c_str()));
+   v_fpTGE_reso_WF[base]->SetNameTitle("fpTGE_reso_WF",
+                                       Form(";%s;Resolution (%%)", runvarstr.c_str()));
    if (metascan == "Phi")
-      v_fpTGE_reso_WF[base]->GetXaxis()->SetLimits(-3, v_fpTGE_reso_WF[base]->GetXaxis()->GetXmax());
+      v_fpTGE_reso_WF[base]->GetXaxis()->SetLimits(
+         -3, v_fpTGE_reso_WF[base]->GetXaxis()->GetXmax());
    for (int i = base; i < (int)v_fpTGE_reso_WF.size(); i++) {
       if (nscans != 1 and metascan != "Drift") {
-         Graphic_setup(v_fpTGE_reso_WF[i], 4, markers[2 * i], colors[2 * i], 1, colors[2 * i]);
-         Graphic_setup(v_fpTGE_reso_XP[i], 4, markers[2 * i + 1], colors[2 * i + 1], 1, colors[2 * i + 1]);
+         Graphic_setup(v_fpTGE_reso_WF[i], 4, markers[2 * i], colors[2 * i], 1,
+                       colors[2 * i]);
+         Graphic_setup(v_fpTGE_reso_XP[i], 4, markers[2 * i + 1], colors[2 * i + 1], 1,
+                       colors[2 * i + 1]);
       } else {
          Graphic_setup(v_fpTGE_reso_WF[i], 5, markers[4], colors[2], 1, colors[2]);
          Graphic_setup(v_fpTGE_reso_XP[i], 4, markers[3], colors[3], 1, colors[3]);
       }
       if (ftype == "multiple" and metascan == "Phi")
-         Graphic_setup(v_fpTGE_reso_WFoff[i], 4, markersWFoff[i], colors[2 * i], 1, colors[2 * i]);
+         Graphic_setup(v_fpTGE_reso_WFoff[i], 4, markersWFoff[i], colors[2 * i], 1,
+                       colors[2 * i]);
       if (i == base)
          v_fpTGE_reso_WF[i]->DrawClone("AP");
       else
          v_fpTGE_reso_WF[i]->DrawClone("P same");
       v_fpTGE_reso_XP[i]->DrawClone("P same");
-      v_fpTGE_reso_WFoff[i]->DrawClone("P same");
-      v_fpTGE_reso_WF[i]->SetMarkerSize(7);
-      v_fpTGE_reso_WFoff[i]->SetMarkerSize(7);
-      v_fpTGE_reso_XP[i]->SetMarkerSize(7);
+      // v_fpTGE_reso_WFoff[i]->DrawClone("P same");
+      v_fpTGE_reso_WF[i]->SetMarkerSize(8);
+      // v_fpTGE_reso_WFoff[i]->SetMarkerSize(7);
+      v_fpTGE_reso_XP[i]->SetMarkerSize(8);
    }
    fpLegWF->Draw();
    fpLegWFoff->Draw();
@@ -284,29 +312,44 @@ void Reconstruction::DrawOuts::DESY21ScanDraw()
    fpCanvas->SaveAs((foutputFile + "(").c_str());
 
    // Mean
+   gPad->SetLeftMargin(0.15);
+   gPad->SetBottomMargin(0.17);
    v_fpTGE_mean_WF[base]->SetMinimum(YMEANMIN);
    v_fpTGE_mean_WF[base]->SetMaximum(YMEANMAX);
-   v_fpTGE_mean_WF[base]->SetNameTitle("fpTGE_mean_WF", Form(";%s;Mean (ADC counts/cm)", runvarstr.c_str()));
+   v_fpTGE_mean_WF[base]->SetNameTitle("fpTGE_mean_WF",
+                                       Form(";%s;Mean dE/dx (A.U.)", runvarstr.c_str()));
    if (metascan == "Phi")
-      v_fpTGE_mean_WF[base]->GetXaxis()->SetLimits(-3, v_fpTGE_mean_WF[base]->GetXaxis()->GetXmax());
+      v_fpTGE_mean_WF[base]->GetXaxis()->SetLimits(
+         -3, v_fpTGE_mean_WF[base]->GetXaxis()->GetXmax());
    for (int i = base; i < (int)v_fpTGE_mean_WF.size(); i++) {
       std::cout << "i: " << i << std::endl;
       if (nscans != 1 and metascan != "Drift") {
-         Graphic_setup(v_fpTGE_mean_WF[i], 4, markers[2 * i], colors[2 * i], 1, colors[2 * i]);
-         Graphic_setup(v_fpTGE_mean_XP[i], 4, markers[2 * i + 1], colors[2 * i + 1], 1, colors[2 * i + 1]);
+         Graphic_setup(v_fpTGE_mean_WF[i], 4, markers[2 * i], colors[2 * i], 4,
+                       colors[2 * i]);
+         Graphic_setup(v_fpTGE_mean_XP[i], 4, markers[2 * i + 1], colors[2 * i + 1], 4,
+                       colors[2 * i + 1]);
       } else {
-         Graphic_setup(v_fpTGE_mean_WF[i], 5, markers[4], colors[2], 1, colors[2]);
-         Graphic_setup(v_fpTGE_mean_XP[i], 4, markers[3], colors[3], 1, colors[3]);
+         Graphic_setup(v_fpTGE_mean_WF[i], 7, markers[4], colors[2], 2, colors[2]);
+         Graphic_setup(v_fpTGE_mean_XP[i], 7, markers[3], colors[3], 2, colors[3]);
       }
       if (ftype == "multiple" and metascan == "Phi")
-         Graphic_setup(v_fpTGE_mean_WFoff[i], 4, markersWFoff[i], colors[2 * i], 1, colors[2 * i]);
-      if (i == base)
-         v_fpTGE_mean_WF[i]->Draw("AP");
-      else
-         v_fpTGE_mean_WF[i]->Draw("P same");
-      v_fpTGE_mean_XP[i]->Draw("P same");
-      v_fpTGE_mean_WFoff[i]->Draw("P same");
+         Graphic_setup(v_fpTGE_mean_WFoff[i], 4, markersWFoff[i], colors[2 * i], 1,
+                       colors[2 * i]);
+      if (i == base) {
+         v_fpTGE_mean_WF[i]->GetYaxis()->SetTitleOffset(0.9);
+         v_fpTGE_mean_WF[i]->GetXaxis()->SetTitleSize(0.08);
+         v_fpTGE_mean_WF[i]->GetXaxis()->SetLabelSize(0.08);
+         v_fpTGE_mean_WF[i]->GetYaxis()->SetTitleSize(0.08);
+         v_fpTGE_mean_WF[i]->GetYaxis()->SetLabelSize(0.08);
+         v_fpTGE_mean_WF[i]->Draw("APL");
+      } else
+         v_fpTGE_mean_WF[i]->Draw("PL same");
+      v_fpTGE_mean_XP[i]->Draw("PL same");
+      // v_fpTGE_mean_WFoff[i]->Draw("P same");
    }
+   fpLegWF->SetTextSize(0.08);
+   fpLegWF->SetY1NDC(0.2);
+   fpLegWF->SetY2NDC(0.4);
    fpLegWF->Draw();
    fpLegWFoff->Draw();
    fpLegXP->Draw();
@@ -315,14 +358,17 @@ void Reconstruction::DrawOuts::DESY21ScanDraw()
    // Standard deviation
    v_fpTGE_std_WF[base]->SetMinimum(YSTDMIN);
    v_fpTGE_std_WF[base]->SetMaximum(YSTDMAX);
-   v_fpTGE_std_WF[base]->SetNameTitle("fpTGE_std_WF",
-                                      Form(";%s;Standard deviation (ADC counts/cm)", runvarstr.c_str()));
+   v_fpTGE_std_WF[base]->SetNameTitle(
+      "fpTGE_std_WF", Form(";%s;Standard deviation (ADC counts/cm)", runvarstr.c_str()));
    if (metascan == "Phi")
-      v_fpTGE_std_WF[base]->GetXaxis()->SetLimits(-3, v_fpTGE_std_WF[base]->GetXaxis()->GetXmax());
+      v_fpTGE_std_WF[base]->GetXaxis()->SetLimits(
+         -3, v_fpTGE_std_WF[base]->GetXaxis()->GetXmax());
    for (int i = base; i < (int)v_fpTGE_std_WF.size(); i++) {
       if (nscans != 1 and metascan != "Drift") {
-         Graphic_setup(v_fpTGE_std_WF[i], 4, markers[2 * i], colors[2 * i], 1, colors[2 * i]);
-         Graphic_setup(v_fpTGE_std_XP[i], 4, markers[2 * i + 1], colors[2 * i + 1], 1, colors[2 * i + 1]);
+         Graphic_setup(v_fpTGE_std_WF[i], 4, markers[2 * i], colors[2 * i], 1,
+                       colors[2 * i]);
+         Graphic_setup(v_fpTGE_std_XP[i], 4, markers[2 * i + 1], colors[2 * i + 1], 1,
+                       colors[2 * i + 1]);
       } else {
          Graphic_setup(v_fpTGE_std_WF[i], 5, markers[4], colors[2], 1, colors[2]);
          Graphic_setup(v_fpTGE_std_XP[i], 4, markers[3], colors[3], 1, colors[3]);
@@ -359,8 +405,10 @@ void Reconstruction::DrawOuts::CERN22ScanFill()
 
       for (int irun = 0; irun < v_runs[iscan]; irun++) {
 
-         fptf1_WF = (TF1 *)v_fFiles[itotalrun]->Get<TH1F>("ph1f_WF")->GetFunction("gausn");
-         fptf1_XP = (TF1 *)v_fFiles[itotalrun]->Get<TH1F>("ph1f_XP")->GetFunction("gausn");
+         fptf1_WF =
+            (TF1 *)v_fFiles[itotalrun]->Get<TH1F>("ph1f_WF")->GetFunction("gausn");
+         fptf1_XP =
+            (TF1 *)v_fFiles[itotalrun]->Get<TH1F>("ph1f_XP")->GetFunction("gausn");
 
          float mean_WF = fptf1_WF->GetParameter(1);
          float mean_XP = fptf1_XP->GetParameter(1);
@@ -425,7 +473,7 @@ void Reconstruction::DrawOuts::CERN22ScanDraw()
    fpLeg = new TLegend(0.75, 0.78, 0.95, 0.93);
    fpLeg->SetTextSize(0.05);
    fpLeg->SetFillStyle(0);
-   fpLeg->SetTextColor(kPink - 1);
+   fpLeg->SetTextColor(kBlack);
    fpLeg->SetNColumns(2);
    fpLeg->AddEntry(v_fpTGE_reso_WF[0], " e^{+}", "p");
    fpLeg->AddEntry(v_fpTGE_reso_WF[1], " #mu^{+}", "p");
@@ -437,9 +485,11 @@ void Reconstruction::DrawOuts::CERN22ScanDraw()
    v_fpTGE_reso_WF[0]->SetMaximum(YRESOMAXCERN);
    v_fpTGE_reso_WF[0]->SetMinimum(YRESOMINCERN);
    v_fpTGE_reso_WF[0]->GetXaxis()->SetLimits(0.25, 1.75);
-   v_fpTGE_reso_WF[0]->SetNameTitle("fpTGE_reso_WF", Form(";%s;Resolution (%%)", runvarstr.c_str()));
+   v_fpTGE_reso_WF[0]->SetNameTitle("fpTGE_reso_WF",
+                                    Form(";%s;Resolution (%%)", runvarstr.c_str()));
    for (int i = 0; i < 4; i++) {
-      Graphic_setup(v_fpTGE_reso_WF[i], 4, markersCERN[i], colorsCERN[i], 1, colorsCERN[i]);
+      Graphic_setup(v_fpTGE_reso_WF[i], 4, markersCERN[i], colorsCERN[i], 1,
+                    colorsCERN[i]);
       v_fpTGE_reso_WF[i]->Draw(i == 0 ? "AP" : "P same");
       v_fpTGE_reso_WF[i]->SetMarkerSize(5);
    }
@@ -451,9 +501,11 @@ void Reconstruction::DrawOuts::CERN22ScanDraw()
    v_fpTGE_mean_WF[0]->SetMaximum(YMEANMAXCERN);
    v_fpTGE_mean_WF[0]->SetMinimum(YMEANMINCERN);
    v_fpTGE_mean_WF[0]->GetXaxis()->SetLimits(0.25, 1.75);
-   v_fpTGE_mean_WF[0]->SetNameTitle("fpTGE_mean_WF", Form(";%s;Mean (ADC counts/cm)", runvarstr.c_str()));
+   v_fpTGE_mean_WF[0]->SetNameTitle(
+      "fpTGE_mean_WF", Form(";%s;Mean dE/dx (ADC counts/cm)", runvarstr.c_str()));
    for (int i = 0; i < 4; i++) {
-      Graphic_setup(v_fpTGE_mean_WF[i], 4, markersCERN[i], colorsCERN[i], 2, colorsCERN[i]);
+      Graphic_setup(v_fpTGE_mean_WF[i], 4, markersCERN[i], colorsCERN[i], 2,
+                    colorsCERN[i]);
       v_fpTGE_mean_WF[i]->Draw(i == 0 ? "AP" : "P same");
    }
    fpLeg->Draw();
@@ -464,9 +516,11 @@ void Reconstruction::DrawOuts::CERN22ScanDraw()
    v_fpTGE_std_WF[0]->SetMaximum(YSTDMAXCERN);
    v_fpTGE_std_WF[0]->SetMinimum(YSTDMINCERN);
    v_fpTGE_std_WF[0]->GetXaxis()->SetLimits(0.25, 1.75);
-   v_fpTGE_std_WF[0]->SetNameTitle("fpTGE_std_WF", Form(";%s;Standard deviation (ADC counts/cm)", runvarstr.c_str()));
+   v_fpTGE_std_WF[0]->SetNameTitle(
+      "fpTGE_std_WF", Form(";%s;Standard deviation (ADC counts/cm)", runvarstr.c_str()));
    for (int i = 0; i < 4; i++) {
-      Graphic_setup(v_fpTGE_std_WF[i], 4, markersCERN[i], colorsCERN[i], 2, colorsCERN[i]);
+      Graphic_setup(v_fpTGE_std_WF[i], 4, markersCERN[i], colorsCERN[i], 2,
+                    colorsCERN[i]);
       v_fpTGE_std_WF[i]->Draw(i == 0 ? "AP" : "P same");
    }
    fpLeg->Draw();
@@ -478,9 +532,11 @@ void Reconstruction::DrawOuts::CERN22ScanDraw()
    v_fpTGE_reso_XP[0]->SetMaximum(YRESOMAXCERN);
    v_fpTGE_reso_XP[0]->SetMinimum(YRESOMINCERN);
    v_fpTGE_reso_XP[0]->GetXaxis()->SetLimits(0.25, 1.75);
-   v_fpTGE_reso_XP[0]->SetNameTitle("fpTGE_reso_XP", Form(";%s;Resolution (%%)", runvarstr.c_str()));
+   v_fpTGE_reso_XP[0]->SetNameTitle("fpTGE_reso_XP",
+                                    Form(";%s;Resolution (%%)", runvarstr.c_str()));
    for (int i = 0; i < 4; i++) {
-      Graphic_setup(v_fpTGE_reso_XP[i], 4, markersCERN[i], colorsCERN[i], 2, colorsCERN[i]);
+      Graphic_setup(v_fpTGE_reso_XP[i], 4, markersCERN[i], colorsCERN[i], 2,
+                    colorsCERN[i]);
       v_fpTGE_reso_XP[i]->Draw(i == 0 ? "AP" : "P same");
    }
    fpLeg->Draw();
@@ -491,9 +547,11 @@ void Reconstruction::DrawOuts::CERN22ScanDraw()
    v_fpTGE_mean_XP[0]->SetMaximum(YMEANMAXCERN);
    v_fpTGE_mean_XP[0]->SetMinimum(YMEANMINCERN);
    v_fpTGE_mean_XP[0]->GetXaxis()->SetLimits(0.25, 1.75);
-   v_fpTGE_mean_XP[0]->SetNameTitle("fpTGE_mean_XP", Form(";%s;Mean (ADC counts/cm)", runvarstr.c_str()));
+   v_fpTGE_mean_XP[0]->SetNameTitle(
+      "fpTGE_mean_XP", Form(";%s;Mean dE/dx (ADC counts/cm)", runvarstr.c_str()));
    for (int i = 0; i < 4; i++) {
-      Graphic_setup(v_fpTGE_mean_XP[i], 4, markersCERN[i], colorsCERN[i], 2, colorsCERN[i]);
+      Graphic_setup(v_fpTGE_mean_XP[i], 4, markersCERN[i], colorsCERN[i], 2,
+                    colorsCERN[i]);
       v_fpTGE_mean_XP[i]->Draw(i == 0 ? "AP" : "P same");
       v_fptf1_BB[i]->SetNpx(1000);
       v_fptf1_BB[i]->SetLineColor(colorsCERN[i]);
@@ -521,9 +579,11 @@ void Reconstruction::DrawOuts::CERN22ScanDraw()
    v_fpTGE_std_XP[0]->SetMaximum(YSTDMAXCERN);
    v_fpTGE_std_XP[0]->SetMinimum(YSTDMINCERN);
    v_fpTGE_std_XP[0]->GetXaxis()->SetLimits(0.25, 1.75);
-   v_fpTGE_std_XP[0]->SetNameTitle("fpTGE_std_XP", Form(";%s;Standard deviation (ADC counts/cm)", runvarstr.c_str()));
+   v_fpTGE_std_XP[0]->SetNameTitle(
+      "fpTGE_std_XP", Form(";%s;Standard deviation (ADC counts/cm)", runvarstr.c_str()));
    for (int i = 0; i < 4; i++) {
-      Graphic_setup(v_fpTGE_std_XP[i], 4, markersCERN[i], colorsCERN[i], 2, colorsCERN[i]);
+      Graphic_setup(v_fpTGE_std_XP[i], 4, markersCERN[i], colorsCERN[i], 2,
+                    colorsCERN[i]);
       v_fpTGE_std_XP[i]->Draw(i == 0 ? "AP" : "P same");
    }
    fpLeg->Draw();
@@ -536,30 +596,57 @@ void Reconstruction::DrawOuts::Control()
 {
 
    // Prepare histograms
-   TH1I *ph1i_nmodules = new TH1I("ph1i_nmodules", "Number of modules;N_{modules};Counts", 8, 0, 8);
-   TH1I *ph1i_nmodulesSel = new TH1I("ph1i_nmodulesSel", "Number of modules (after cut);N_{modules};Counts", 8, 0, 8);
-   TH1I *ph1i_nclusters = new TH1I("ph1i_nclusters", "Number of clusters;N_{clusters};Counts", 55, 0, 55);
+   TH1I *ph1i_nmodules =
+      new TH1I("ph1i_nmodules", "Number of modules;N_{modules};Counts", 8, 0, 8);
+   TH1I *ph1i_nmodulesSel = new TH1I(
+      "ph1i_nmodulesSel", "Number of modules (after cut);N_{modules};Counts", 8, 0, 8);
+   TH1I *ph1i_nclusters =
+      new TH1I("ph1i_nclusters", "Number of clusters;N_{clusters};Counts", 55, 0, 55);
    TH1I *ph1i_nclustersSel =
-      new TH1I("ph1i_nclustersSel", "Number of clusters (after cut);N_{clusters};Counts", 55, 0, 55);
+      new TH1I("ph1i_nclustersSel", "Number of clusters (after cut);N_{clusters};Counts",
+               55, 0, 55);
    TH1I *ph1i_npads = new TH1I("ph1i_npads", "Number of pads;N_{pads};Counts", 10, 0, 10);
-   TH1I *ph1i_npadsSel = new TH1I("ph1i_npadsSel", "Number of pads (after cut);N_{pads};Counts", 10, 0, 10);
+   TH1I *ph1i_npadsSel =
+      new TH1I("ph1i_npadsSel", "Number of pads (after cut);N_{pads};Counts", 10, 0, 10);
 
-   TH2I *ph2i_heatmap = new TH2I("ph2i_heatmap", "Events heatmap;iX;iY;", 144, 0, 143, 64, 0, 63);
-   TH1I *ph1i_TLead = new TH1I("ph1i_TLead", "T_{max} of leading pad;T_{max};Counts", 511, 0, 510);
-   TH1I *ph1i_TLeadSel = new TH1I("ph1i_TLeadSel", "T_{max} of leading pad (after cut);T_{max};Counts", 511, 0, 510);
-   TH1I *ph1i_PadMult = new TH1I("ph1i_PadMult", "Pad multiplicity;N_{pads};Counts", 11, 0, 10);
-   TH1I *ph1i_PadMultSel = new TH1I("ph1i_PadMultSel", "Pad multiplicity (after cut);N_{pads};Counts", 11, 0, 10);
-   TH1F *ph1f_AvgPadMult = new TH1F("ph1f_AvgPadMult", "Average pad multiplicity;N_{pads};Counts", 100, 0, 10);
+   TH2I *ph2i_heatmap =
+      new TH2I("ph2i_heatmap", "Events heatmap;iX;iY;", 144, 0, 143, 64, 0, 63);
+   TH1I *ph1i_TLead =
+      new TH1I("ph1i_TLead", "T_{max} of leading pad;T_{max};Counts", 511, 0, 510);
+   TH1I *ph1i_TLeadSel = new TH1I(
+      "ph1i_TLeadSel", "T_{max} of leading pad (after cut);T_{max};Counts", 511, 0, 510);
+   TH1I *ph1i_PadMult =
+      new TH1I("ph1i_PadMult", "Pad multiplicity;N_{pads};Counts", 11, 0, 10);
+   TH1I *ph1i_PadMultSel = new TH1I(
+      "ph1i_PadMultSel", "Pad multiplicity (after cut);N_{pads};Counts", 11, 0, 10);
+   TH1F *ph1f_AvgPadMult =
+      new TH1F("ph1f_AvgPadMult", "Average pad multiplicity;N_{pads};Counts", 100, 0, 10);
    TH1F *ph1f_AvgPadMultSel =
-      new TH1F("ph1f_AvgPadMultSel", "Average pad multiplicity (after cut);N_{pads};Counts", 100, 0, 10);
-   TH1F *ph1f_ADCmax = new TH1F("ph1f_ADCmax", "ADC max;ADC counts/cm;Counts", 400, 0, 4000);
-   TH1F *ph1f_ADCmaxSel = new TH1F("ph1f_ADCmaxSel", "ADC max (after cut);ADC counts/cm;Counts", 400, 0, 4000);
-   TH1F *ph1f_ALead = new TH1F("ph1f_ALead", "Leading pad amplitude;ADC counts/cm;Counts", 400, 0, 4000);
+      new TH1F("ph1f_AvgPadMultSel",
+               "Average pad multiplicity (after cut);N_{pads};Counts", 100, 0, 10);
+   TH1F *ph1f_ADCmax =
+      new TH1F("ph1f_ADCmax", "ADC max;ADC counts/cm;Counts", 400, 0, 4000);
+   TH1F *ph1f_ADCmaxSel = new TH1F(
+      "ph1f_ADCmaxSel", "ADC max (after cut);ADC counts/cm;Counts", 400, 0, 4000);
+   TH1F *ph1f_ALead =
+      new TH1F("ph1f_ALead", "Leading pad amplitude;ADC counts/cm;Counts", 400, 0, 4000);
    TH1F *ph1f_ALeadSel =
-      new TH1F("ph1f_ALeadSel", "Leading pad amplitude (after cut);ADC counts/cm;Counts", 400, 0, 4000);
-   TH1F *ph1f_ANeighbour = new TH1F("ph1f_ANeighbour", "Neighbouring pad amplitude;ADC counts/cm;Counts", 400, 0, 4000);
-   TH1F *ph1f_ANeighbourSel =
-      new TH1F("ph1f_ANeighbourSel", "Neighbouring pad amplitude (after cut);ADC counts/cm;Counts", 400, 0, 4000);
+      new TH1F("ph1f_ALeadSel", "Leading pad amplitude (after cut);ADC counts/cm;Counts",
+               400, 0, 4000);
+   TH1F *ph1f_ANeighbour = new TH1F(
+      "ph1f_ANeighbour", "Neighbouring pad amplitude;ADC counts/cm;Counts", 400, 0, 4000);
+   TH1F *ph1f_ANeighbourSel = new TH1F(
+      "ph1f_ANeighbourSel", "Neighbouring pad amplitude (after cut);ADC counts/cm;Counts",
+      400, 0, 4000);
+   TH1F *ph1f_yCluster = new TH1F("ph1f_yCluster",
+                                  "Vertical cluster position "
+                                  "y_{clus};y_{clus} (cm);Counts",
+                                  100, 4, 12);
+   TH1F *ph1f_yClusterSel = new TH1F("ph1f_yClusterSel",
+                                     "Vertical cluster position "
+                                     "y_{clus} (after cut);y_{clus} (cm);Counts",
+                                     100, 4, 12);
+
    std::vector<TH1F *> v_AvgPadMult;
    std::vector<TH1F *> v_AvgPadMultSel;
    std::vector<TH1I *> v_PadMult;
@@ -572,38 +659,66 @@ void Reconstruction::DrawOuts::Control()
    std::vector<TH1F *> v_ALeadSel;
    std::vector<TH1F *> v_ANeighbour;
    std::vector<TH1F *> v_ANeighbourSel;
+   std::vector<TH1F *> v_yCluster;
+   std::vector<TH1F *> v_yClusterSel;
 
    for (int i = 0; i < 8; i++) {
-      v_TLead.push_back(
-         new TH1I(Form("ph1i_TLead_%i", i), Form("T_{max} of leading pad (module %i);T_{max};Counts", i), 511, 0, 510));
-      v_TLeadSel.push_back(new TH1I(Form("ph1i_TLeadSel_%i", i),
-                                    Form("T_{max} of leading pad (module %i) (after cut);T_{max};Counts", i), 511, 0,
-                                    510));
+      v_TLead.push_back(new TH1I(
+         Form("ph1i_TLead_%i", i),
+         Form("T_{max} of leading pad (module %i);T_{max};Counts", i), 511, 0, 510));
+      v_TLeadSel.push_back(new TH1I(
+         Form("ph1i_TLeadSel_%i", i),
+         Form("T_{max} of leading pad (module %i) (after cut);T_{max};Counts", i), 511, 0,
+         510));
       v_PadMult.push_back(
-         new TH1I(Form("ph1i_PadMult_%i", i), Form("Pad multiplicity (module %i);N_{pads};Counts", i), 100, 0, 100));
-      v_PadMultSel.push_back(new TH1I(Form("ph1i_PadMultSel_%i", i),
-                                      Form("Pad multiplicity (module %i) (after cut);N_{pads};Counts", i), 100, 0,
-                                      100));
-      v_AvgPadMult.push_back(new TH1F(Form("ph1f_AvgPadMult_%i", i),
-                                      Form("Average pad multiplicity (module %i);N_{pads};Counts", i), 100, 0, 100));
-      v_AvgPadMultSel.push_back(new TH1F(Form("ph1f_AvgPadMultSel_%i", i),
-                                         Form("Average pad multiplicity (module %i) (after cut);N_{pads};Counts", i),
-                                         100, 0, 100));
-      v_ADCmax.push_back(
-         new TH1F(Form("ph1f_ADCmax_%i", i), Form("ADC max (module %i);ADC counts/cm;Counts", i), 400, 0, 4000));
-      v_ADCmaxSel.push_back(new TH1F(Form("ph1f_ADCmaxSel_%i", i),
-                                     Form("ADC max (module %i) (after cut);ADC counts/cm;Counts", i), 400, 0, 4000));
-      v_ALead.push_back(new TH1F(Form("ph1f_ALead_%i", i),
-                                 Form("Leading pad amplitude (module %i);ADC counts/cm;Counts", i), 400, 0, 4000));
-      v_ALeadSel.push_back(new TH1F(Form("ph1f_ALeadSel_%i", i),
-                                    Form("Leading pad amplitude (module %i) (after cut);ADC counts/cm;Counts", i), 400,
-                                    0, 4000));
-      v_ANeighbour.push_back(new TH1F(Form("ph1f_ANeighbour_%i", i),
-                                      Form("Neighbouring pad amplitude (module %i);ADC counts/cm;Counts", i), 400, 0,
-                                      4000));
-      v_ANeighbourSel.push_back(
-         new TH1F(Form("ph1f_ANeighbourSel_%i", i),
-                  Form("Neighbouring pad amplitude (module %i) (after cut);ADC counts/cm;Counts", i), 400, 0, 4000));
+         new TH1I(Form("ph1i_PadMult_%i", i),
+                  Form("Pad multiplicity (module %i);N_{pads};Counts", i), 100, 0, 100));
+      v_PadMultSel.push_back(
+         new TH1I(Form("ph1i_PadMultSel_%i", i),
+                  Form("Pad multiplicity (module %i) (after cut);N_{pads};Counts", i),
+                  100, 0, 100));
+      v_AvgPadMult.push_back(new TH1F(
+         Form("ph1f_AvgPadMult_%i", i),
+         Form("Average pad multiplicity (module %i);N_{pads};Counts", i), 100, 0, 100));
+      v_AvgPadMultSel.push_back(new TH1F(
+         Form("ph1f_AvgPadMultSel_%i", i),
+         Form("Average pad multiplicity (module %i) (after cut);N_{pads};Counts", i), 100,
+         0, 100));
+      v_ADCmax.push_back(new TH1F(Form("ph1f_ADCmax_%i", i),
+                                  Form("ADC max (module %i);ADC counts/cm;Counts", i),
+                                  400, 0, 4000));
+      v_ADCmaxSel.push_back(new TH1F(
+         Form("ph1f_ADCmaxSel_%i", i),
+         Form("ADC max (module %i) (after cut);ADC counts/cm;Counts", i), 400, 0, 4000));
+      v_ALead.push_back(
+         new TH1F(Form("ph1f_ALead_%i", i),
+                  Form("Leading pad amplitude (module %i);ADC counts/cm;Counts", i), 400,
+                  0, 4000));
+      v_ALeadSel.push_back(new TH1F(
+         Form("ph1f_ALeadSel_%i", i),
+         Form("Leading pad amplitude (module %i) (after cut);ADC counts/cm;Counts", i),
+         400, 0, 4000));
+      v_ANeighbour.push_back(
+         new TH1F(Form("ph1f_ANeighbour_%i", i),
+                  Form("Neighbouring pad amplitude (module %i);ADC counts/cm;Counts", i),
+                  400, 0, 4000));
+      v_ANeighbourSel.push_back(new TH1F(
+         Form("ph1f_ANeighbourSel_%i", i),
+         Form("Neighbouring pad amplitude (module %i) (after cut);ADC counts/cm;Counts",
+              i),
+         400, 0, 4000));
+   }
+
+   for (int i = 0; i < 36; i++) {
+      v_yCluster.push_back(new TH1F(
+         Form("ph1f_yCluster_%i", i),
+         Form("Vertical cluster position y_{clus} (column %i);y_{clus} (cm);Counts", i),
+         100, 4, 12));
+      v_yClusterSel.push_back(new TH1F(Form("ph1f_yClusterSel_%i", i),
+                                       Form("Vertical cluster position y_{clus} (column "
+                                            "%i) (after cut);y_{clus} (cm);Counts",
+                                            i),
+                                       100, 4, 12));
    }
 
    // Get entries and fill histograms
@@ -616,6 +731,7 @@ void Reconstruction::DrawOuts::Control()
       for (int iMod = 0; iMod < NMod; iMod++) {
          p_recomodule = p_recoevent->v_modules[iMod];
          position = p_recomodule->position;
+         int modCol = position % 4;
          NClusters = p_recomodule->NClusters;
          int NSelClus = 0;
 
@@ -658,9 +774,13 @@ void Reconstruction::DrawOuts::Control()
             ph1i_TLead->Fill(p_recocluster->TLead);
             ph1i_PadMult->Fill(NPads);
             ph1f_ALead->Fill(p_recocluster->ALead_base);
+            ph1f_yCluster->Fill(p_recocluster->yCluster * 100);
             v_TLead[position]->Fill(p_recocluster->TLead);
             v_PadMult[position]->Fill(NPads);
             v_ALead[position]->Fill(p_recocluster->ALead_base);
+            // Not ready for CERN22 and multiple modules
+            int clusCol = 36 * modCol + p_recocluster->v_pads[0]->ix;
+            v_yCluster[clusCol]->Fill(p_recocluster->yCluster * 100);
 
             if (!p_recomodule->selected)
                continue;
@@ -668,9 +788,11 @@ void Reconstruction::DrawOuts::Control()
             ph1i_TLeadSel->Fill(p_recocluster->TLead);
             ph1i_PadMultSel->Fill(NPads);
             ph1f_ALeadSel->Fill(p_recocluster->ALead_base);
+            ph1f_yClusterSel->Fill(p_recocluster->yCluster * 100);
             v_TLeadSel[position]->Fill(p_recocluster->TLead);
             v_PadMultSel[position]->Fill(NPads);
             v_ALeadSel[position]->Fill(p_recocluster->ALead_base);
+            v_yClusterSel[clusCol]->Fill(p_recocluster->yCluster * 100);
          } // Clusters
          ph1i_nclusters->Fill(NClusters);
          ph1i_nclustersSel->Fill(NSelClus);
@@ -772,6 +894,70 @@ void Reconstruction::DrawOuts::Control()
    ph2i_heatmap->GetYaxis()->SetTitleOffset(1.1);
    gStyle->SetTitleX((1. - gPad->GetRightMargin() + gPad->GetLeftMargin()) / 2);
    ph2i_heatmap->Draw("COLZ");
+   fpCanvas->SaveAs(drawout_file.c_str());
+
+   //////////////////////////////////////////////////////////////////////////////////////////
+   // Y position in clusters for each column
+
+   // Precompute vertical lines (same x positions for all clusters)
+   std::vector<TLine> verticalLines;
+   verticalLines.reserve(36); // j = 0 to 35
+   for (int j = 4; j <= 10; ++j) {
+      double x = 1.128 / 2 + j * 1.128;
+      // Dummy y range, will be updated before drawing
+      verticalLines.push_back(TLine(x, 0, x, 1));
+      verticalLines.back().SetLineColor(kBlack);
+      verticalLines.back().SetLineWidth(1);
+   }
+
+   fpCanvas->Clear();
+   gPad->SetRightMargin(0.03);
+   gPad->SetTopMargin(0.1);
+   for (int i = 1; i < 35; ++i) {
+      v_yCluster[i]->SetLineWidth(3);
+      v_yCluster[i]->SetLineColor(kBlue + 2);
+      v_yCluster[i]->Draw("HIST");
+
+      gPad->Update();
+      // Draw vertical lines with updated y-range
+      for (auto &line : verticalLines) {
+         line.SetY1(0);
+         line.SetY2(gPad->GetUymax());
+         line.Draw("same");
+      }
+
+      TPaveStats *stats = (TPaveStats *)v_yCluster[i]->FindObject("stats");
+      if (stats) {
+         stats->SetX1NDC(0.75);
+         stats->SetX2NDC(0.95);
+         stats->SetY1NDC(0.65);
+         stats->SetY2NDC(0.85);
+      }
+
+      fpCanvas->SaveAs(drawout_file.c_str());
+      delete stats; // Clean up stats object
+   }
+
+   //////////////////////////////////////////////////////////////////////////////////////////
+   // Y position in clusters
+   fpCanvas->Clear();
+   ph1f_yCluster->SetLineWidth(3);
+   ph1f_yCluster->SetLineColor(kBlue + 2);
+   ph1f_yCluster->Draw("HIST");
+   gPad->Update();
+   // Draw vertical lines with updated y-range
+   for (auto &line : verticalLines) {
+      line.SetY1(0);
+      line.SetY2(gPad->GetUymax());
+      line.Draw("same");
+   }
+   TPaveStats *stats = (TPaveStats *)ph1f_yCluster->FindObject("stats");
+   if (stats) {
+      stats->SetX1NDC(0.75);
+      stats->SetX2NDC(0.95);
+      stats->SetY1NDC(0.65);
+      stats->SetY2NDC(0.85);
+   }
    fpCanvas->SaveAs((drawout_file + ")").c_str());
 
    fpCanvas->Clear();
@@ -784,30 +970,39 @@ void Reconstruction::DrawOuts::EnergyLoss()
    if (tag.find("Theta") != std::string::npos)
       xmax = 2000;
    // Prepare histograms
-   TH1F *ph1f_XP = new TH1F("ph1f_XP", "Energy loss;dE/dx (ADC counts/cm);Counts", 100, 0, xmax);
-   TH1F *ph1f_WF = new TH1F("ph1f_WF", "Energy loss;dE/dx (ADC counts/cm);Counts", 100, 0, xmax);
+   TH1F *ph1f_XP =
+      new TH1F("ph1f_XP", "Energy loss;dE/dx (ADC counts/cm);Counts", 100, 0, xmax);
+   TH1F *ph1f_WF =
+      new TH1F("ph1f_WF", "Energy loss;dE/dx (ADC counts/cm);Counts", 100, 0, xmax);
    TH1F *ph1f_XPnoTrunc =
-      new TH1F("ph1f_XPnoTrunc", "Energy loss (no truncation);dE/dx (ADC counts/cm);Counts", 100, 0, xmax);
+      new TH1F("ph1f_XPnoTrunc",
+               "Energy loss (no truncation);dE/dx (ADC counts/cm);Counts", 100, 0, xmax);
    TH1F *ph1f_WFnoTrunc =
-      new TH1F("ph1f_WFnoTrunc", "Energy loss (no truncation);dE/dx (ADC counts/cm);Counts", 100, 0, xmax);
+      new TH1F("ph1f_WFnoTrunc",
+               "Energy loss (no truncation);dE/dx (ADC counts/cm);Counts", 100, 0, xmax);
    TH2F *ph2f_XPWF =
-      new TH2F("ph2f_XPWF", "Energy loss with XP vs with WF;dE/dx (WF);dE/dx (XP)", 100, 0, xmax, 100, 0, xmax);
+      new TH2F("ph2f_XPWF", "Energy loss with XP vs with WF;dE/dx (WF);dE/dx (XP)", 100,
+               0, xmax, 100, 0, xmax);
    std::vector<TH1F *> v_h1f_XP_mod;
    std::vector<TH1F *> v_h1f_WF_mod;
    std::vector<TH1F *> v_h1f_XP_modnoTrunc;
    std::vector<TH1F *> v_h1f_WF_modnoTrunc;
 
    for (int i = 0; i < 8; i++) {
-      v_h1f_XP_mod.push_back(new TH1F(Form("ph1f_XP_%i", i),
-                                      Form("Energy loss (module %i);dE/dx (ADC counts/cm);Counts", i), 100, 0, xmax));
-      v_h1f_WF_mod.push_back(new TH1F(Form("ph1f_WF_%i", i),
-                                      Form("Energy loss (module %i);dE/dx (ADC counts/cm);Counts", i), 100, 0, xmax));
-      v_h1f_XP_modnoTrunc.push_back(
-         new TH1F(Form("ph1f_XPnoTrunc_%i", i),
-                  Form("Energy loss (module %i) (no truncation);dE/dx (ADC counts/cm);Counts", i), 100, 0, xmax));
-      v_h1f_WF_modnoTrunc.push_back(
-         new TH1F(Form("ph1f_WFnoTrunc_%i", i),
-                  Form("Energy loss (module %i) (no truncation);dE/dx (ADC counts/cm);Counts", i), 100, 0, xmax));
+      v_h1f_XP_mod.push_back(new TH1F(
+         Form("ph1f_XP_%i", i),
+         Form("Energy loss (module %i);dE/dx (ADC counts/cm);Counts", i), 100, 0, xmax));
+      v_h1f_WF_mod.push_back(new TH1F(
+         Form("ph1f_WF_%i", i),
+         Form("Energy loss (module %i);dE/dx (ADC counts/cm);Counts", i), 100, 0, xmax));
+      v_h1f_XP_modnoTrunc.push_back(new TH1F(
+         Form("ph1f_XPnoTrunc_%i", i),
+         Form("Energy loss (module %i) (no truncation);dE/dx (ADC counts/cm);Counts", i),
+         100, 0, xmax));
+      v_h1f_WF_modnoTrunc.push_back(new TH1F(
+         Form("ph1f_WFnoTrunc_%i", i),
+         Form("Energy loss (module %i) (no truncation);dE/dx (ADC counts/cm);Counts", i),
+         100, 0, xmax));
    }
 
    // Get entries and fill histograms
@@ -857,9 +1052,11 @@ void Reconstruction::DrawOuts::EnergyLoss()
 
    for (int i = 0; i < 8; i++) {
       Graphic_setup(v_h1f_WF_mod[i], 0.5, 1, kCyan + 1, 1, kCyan - 2, kCyan, 0.2);
-      Graphic_setup(v_h1f_XP_mod[i], 0.5, 1, kMagenta + 2, 1, kMagenta - 2, kMagenta, 0.2);
+      Graphic_setup(v_h1f_XP_mod[i], 0.5, 1, kMagenta + 2, 1, kMagenta - 2, kMagenta,
+                    0.2);
       Graphic_setup(v_h1f_WF_modnoTrunc[i], 0.5, 1, kCyan + 1, 1, kCyan - 2, kCyan, 0.2);
-      Graphic_setup(v_h1f_XP_modnoTrunc[i], 0.5, 1, kMagenta + 2, 1, kMagenta - 2, kMagenta, 0.2);
+      Graphic_setup(v_h1f_XP_modnoTrunc[i], 0.5, 1, kMagenta + 2, 1, kMagenta - 2,
+                    kMagenta, 0.2);
       if (v_h1f_WF_mod[i]->GetEntries() < 100)
          continue;
       Fit1Gauss(v_h1f_WF_mod[i], 2);
@@ -953,8 +1150,10 @@ void Reconstruction::DrawOuts::EnergyLoss()
       v_h1f_XP_modnoTrunc[i]->Draw("HIST sames");
       if (v_h1f_WF_mod[i]->GetEntries() < 100)
          continue;
-      PrintResolution(v_h1f_XP_modnoTrunc[i], fpCanvas, 0.65 - invX, 0.58, kMagenta + 2, "XP");
-      PrintResolution(v_h1f_WF_modnoTrunc[i], fpCanvas, 0.65 - invX, 0.25, kCyan + 2, "WF");
+      PrintResolution(v_h1f_XP_modnoTrunc[i], fpCanvas, 0.65 - invX, 0.58, kMagenta + 2,
+                      "XP");
+      PrintResolution(v_h1f_WF_modnoTrunc[i], fpCanvas, 0.65 - invX, 0.25, kCyan + 2,
+                      "WF");
    }
    fpCanvas->SaveAs(drawout_file.c_str());
 
@@ -999,21 +1198,27 @@ void Reconstruction::DrawOuts::FileComparison()
    std::vector<std::vector<TH1F *>> v_h1f_XP_mod;
    std::vector<std::vector<TH1F *>> v_h1f_WF_mod;
    for (int i = 0; i < (int)v_comments.size(); i++) {
-      v_h1f_XP.push_back(new TH1F(Form("ph1f_XP_%i", i),
-                                  Form("Energy loss (%s);dE/dx (ADC counts/cm);Counts", v_comments[i].c_str()), 100, 0,
-                                  1300));
-      v_h1f_WF.push_back(new TH1F(Form("ph1f_WF_%i", i),
-                                  Form("Energy loss (%s);dE/dx (ADC counts/cm);Counts", v_comments[i].c_str()), 100, 0,
-                                  1300));
+      v_h1f_XP.push_back(new TH1F(
+         Form("ph1f_XP_%i", i),
+         Form("Energy loss (%s);dE/dx (ADC counts/cm);Counts", v_comments[i].c_str()),
+         100, 0, 1300));
+      v_h1f_WF.push_back(new TH1F(
+         Form("ph1f_WF_%i", i),
+         Form("Energy loss (%s);dE/dx (ADC counts/cm);Counts", v_comments[i].c_str()),
+         100, 0, 1300));
       v_h1f_XP_mod.push_back(std::vector<TH1F *>());
       v_h1f_WF_mod.push_back(std::vector<TH1F *>());
       for (int j = 0; j < 8; j++) {
-         v_h1f_XP_mod[i].push_back(new TH1F(
-            Form("ph1f_XP_%i_%i", i, j),
-            Form("Energy loss (%s, module %i);dE/dx (ADC counts/cm);Counts", v_comments[i].c_str(), j), 100, 0, 1300));
-         v_h1f_WF_mod[i].push_back(new TH1F(
-            Form("ph1f_WF_%i_%i", i, j),
-            Form("Energy loss (%s, module %i);dE/dx (ADC counts/cm);Counts", v_comments[i].c_str(), j), 100, 0, 1300));
+         v_h1f_XP_mod[i].push_back(
+            new TH1F(Form("ph1f_XP_%i_%i", i, j),
+                     Form("Energy loss (%s, module %i);dE/dx (ADC counts/cm);Counts",
+                          v_comments[i].c_str(), j),
+                     100, 0, 1300));
+         v_h1f_WF_mod[i].push_back(
+            new TH1F(Form("ph1f_WF_%i_%i", i, j),
+                     Form("Energy loss (%s, module %i);dE/dx (ADC counts/cm);Counts",
+                          v_comments[i].c_str(), j),
+                     100, 0, 1300));
       }
    }
 
@@ -1077,7 +1282,8 @@ void Reconstruction::DrawOuts::FileComparison()
    for (int i = 0; i < (int)v_comments.size(); i++) {
       if (i != 0)
          v_h1f_WF[i]->Draw("HIST sames");
-      PrintResolution(v_h1f_WF[i], fpCanvas, 0.65 - invX, 0.58 - 0.33, 2 + i, v_comments[i].c_str());
+      PrintResolution(v_h1f_WF[i], fpCanvas, 0.65 - invX, 0.58 - 0.33, 2 + i,
+                      v_comments[i].c_str());
    }
    fpCanvas->SaveAs((drawout_file + "(").c_str());
 
@@ -1093,7 +1299,8 @@ void Reconstruction::DrawOuts::FileComparison()
    for (int i = 0; i < (int)v_comments.size(); i++) {
       if (i != 0)
          v_h1f_XP[i]->Draw("HIST sames");
-      PrintResolution(v_h1f_XP[i], fpCanvas, 0.65 - invX, 0.58 - 0.33, 2 + i, v_comments[i].c_str());
+      PrintResolution(v_h1f_XP[i], fpCanvas, 0.65 - invX, 0.58 - 0.33, 2 + i,
+                      v_comments[i].c_str());
    }
    fpCanvas->SaveAs((drawout_file + ")").c_str());
 

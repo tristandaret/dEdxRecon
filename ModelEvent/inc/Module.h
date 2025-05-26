@@ -18,8 +18,8 @@ class Module : public ROBoard {
 public:
    /** Constructor */
    Module(const int &EventNber, const int &EntryNber, const int &ModuleNber,
-          Model_ReadOutGeometry *pModel_ReadOutGeometry, Model_Electronics *pModel_Electronics,
-          Model_ChargeI *pModel_ChargeI);
+          Model_ReadOutGeometry *pModel_ReadOutGeometry,
+          Model_Electronics *pModel_Electronics, Model_ChargeI *pModel_ChargeI);
    virtual ~Module();
 
    //------------------------------IDs-----------------------//
@@ -48,7 +48,8 @@ public:
    int Get_NberOfCluster() const;            // Size of Cluster set
    Cluster *Get_Cluster(const int &Index1D); // Get Cluster
 
-   void ReplaceClusters(std::vector<Cluster *> &V_Cluster); // Replace existing clusters set
+   void
+   ReplaceClusters(std::vector<Cluster *> &V_Cluster); // Replace existing clusters set
 
    Cluster *Get_Cluster_Copy(Cluster *pCluster); // Get copy of the input cluster
 

@@ -20,8 +20,8 @@ Sample::Sample()
    //
 }
 
-Sample::Sample(Model_ReadOutGeometry *pModel_ReadOutGeometry, Model_Electronics *pModel_Electronics,
-               Model_ChargeI *pModel_ChargeI)
+Sample::Sample(Model_ReadOutGeometry *pModel_ReadOutGeometry,
+               Model_Electronics *pModel_Electronics, Model_ChargeI *pModel_ChargeI)
 {
    //
    p_Model_ReadOutGeometry = pModel_ReadOutGeometry;
@@ -177,7 +177,8 @@ double Sample::Get_DD_BeforeMinimisation() const
 }
 
 //---------------------------------------
-void Sample::SetFilePRF(const double &Norm, const double &a2, const double &a4, const double &b2, const double &b4)
+void Sample::SetFilePRF(const double &Norm, const double &a2, const double &a4,
+                        const double &b2, const double &b4)
 {
    m_FilePRF_Exist = 1;
    m_FilePRF_Norm = Norm;
@@ -187,7 +188,8 @@ void Sample::SetFilePRF(const double &Norm, const double &a2, const double &a4, 
    m_FilePRF_b4 = b4;
 }
 
-void Sample::GetFilePRF(int &FilePRF_Exist, double &Norm, double &a2, double &a4, double &b2, double &b4)
+void Sample::GetFilePRF(int &FilePRF_Exist, double &Norm, double &a2, double &a4,
+                        double &b2, double &b4)
 {
    FilePRF_Exist = m_FilePRF_Exist;
    Norm = m_FilePRF_Norm;
