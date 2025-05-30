@@ -10,13 +10,13 @@ namespace Reconstruction {
 class DrawOuts {
 public:
    // Constructors
+   DrawOuts();
    DrawOuts(const std::string &inputFile);
    DrawOuts(const std::vector<std::string> &v_inputFiles);
    // Destructor
    virtual ~DrawOuts();
 
    // Methods
-   void CleanUp();
    void SetStyle();
 
    void DESY21ScanFill();
@@ -26,11 +26,14 @@ public:
    void CERN22ScanDraw();
 
    void Control();
-   void EnergyLoss();
+   void EnergyLoss(const int &methods = 0);
    void FileComparison();
 
-   void DESY21Scan(const std::string &drawtype);
+   void DESY21SingleScan(const int &methods = 0);
+   void DESY21MultiScan(const int &methods = 0);
    void CERN22Scan();
+
+   void AmplitudeVSLength();
 
 private:
    // Files
@@ -55,11 +58,9 @@ private:
    // Settings
    std::string fparticleType;
    TCanvas *fpCanvas;
-   TLegend *fpLeg;
-   TLegend *fpLegWF;
-   TLegend *fpLegWFoff;
-   TLegend *fpLegXP;
-   std::string ftype = "single";
+   int drawMultiScans = 0; // 0: normal scan | 1: multi scan
+   int fwhichMethods = 0;  // 0: both methods | 1: only WF | 2: only XP
+   int fnMethods = 2; // Number of methods: 2 (WF and XP) or 1 (WF or XP)
 
    // Shared variables
    int NMod = 0;
@@ -69,12 +70,12 @@ private:
    int iy = 0;
    int position = 0;
 
-   constexpr static float YRESOMAX = 10;
+   constexpr static float YRESOMAX = 11;
    constexpr static float YRESOMIN = 6.5;
-   constexpr static float YMEANMAX = 930;
+   constexpr static float YMEANMAX = 1000;
    constexpr static float YMEANMIN = 550;
-   constexpr static float YSTDMAX = 85;
-   constexpr static float YSTDMIN = 62;
+   constexpr static float YSTDMAX = 90;
+   constexpr static float YSTDMIN = 40;
 
    constexpr static float YRESOMAXCERN = 7;
    constexpr static float YRESOMINCERN = 3;
@@ -97,10 +98,9 @@ private:
    TGraphErrors *fpTGE_std_XP;
 
    // Multiple scan pointers
-   int nscans = 0;
-   int nruns = 0;
+   int nScans = 0;
+   int nRuns = 0;
    std::vector<int> markers = {22, 34, 23, 47, 33, 43};
-   std::vector<int> markersWFoff = {26, 32, 27};
    std::vector<int> colors = {kCyan - 6,    kMagenta - 6, kCyan + 2,
                               kMagenta + 2, kCyan + 3,    kMagenta + 3};
    std::vector<int> markersCERN = {20, 47, 34, 21};
@@ -113,9 +113,6 @@ private:
    std::vector<TGraphErrors *> v_fpTGE_std_XP;
    std::vector<TGraphErrors *> v_fpTGE_reso_WF;
    std::vector<TGraphErrors *> v_fpTGE_reso_XP;
-
-   std::vector<TGraphErrors *> v_fpTGE_mean_WFoff;
-   std::vector<TGraphErrors *> v_fpTGE_reso_WFoff;
 
    // Bethe-Bloch fitting
    std::vector<TF1 *> v_fptf1_BB;

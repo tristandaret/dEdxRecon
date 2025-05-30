@@ -19,7 +19,6 @@
 
 /* Python's numpy equivalent of linspace -----------------------------------------------
  */
-std::vector<double> linspace(double start, double end, int numPoints);
 
 bool FourModulesInLine(const std::vector<int> &vec);
 
@@ -54,9 +53,6 @@ bool GetStage3Cut_CSV(const std::string &filename, const std::string &targetWord
 void SetStage3Cut_CSV(const std::string &filename, const std::string &targetWord,
                       int value1, int value2);
 
-/* GENERAL FUNCTIONS*/
-// Find if a value is in a vector
-bool is_in(std::vector<double> v, double val);
 
 /* GENERAL PHYSICS */
 // Bethe-Bloch function
@@ -73,13 +69,6 @@ TF1 *BetheBlochExp(const float &Pmin, const float &Pmax, const double &M,
 
 /* GENERAL MATH*/
 
-// Mean of vector
-float mean(const std::vector<float> &values);
-
-// Fit a gaussian but within +/- 2sigma to fit only the peak correctly
-TF1 *Fit1Gauss(TH1F *h1F);
-TF1 *Fit1Gauss(TH1F *h1F, float range);
-
 // Fit with 2 gaussians
 TF1 *Fit2Gauss(TH1F *h1F);
 TF1 *Fit2Gauss(TH1F *h1F, const float &x1min, const float &x1max, const float &x2min,
@@ -94,24 +83,6 @@ void local_params(Pad *pPad, const Track *pTrack, float &d, float &dd, float &ph
 // Track length
 float trk_len(Module *pModule, const Track *pTrack);
 
-// Formula to get resolution error using a TF1
-double GetResoError(TF1 *tf1);
-double GetResoError(TF1 *tf1, const int &mu, const int &sigma);
-
-// Get separation power between 2 particles
-double GetSeparation(const float &mean1, const float &std1, const float &mean2,
-                     const float &std2);
-
-// Get separation power error
-double GetSeparationError(const float &mean1, const float &std1, const float &dmean1,
-                          const float &dstd1, const float &mean2, const float &std2,
-                          const float &dmean2, const float &dstd2);
-
-// Write resolution value for a 1-gaussian fit
-void PrintResolution(TH1 *th1, TCanvas *pCanvas);
-void PrintResolution(TH1 *th1, TCanvas *pCanvas, float NDCx, float NDCy, Color_t color,
-                     const std::string &title);
-
 // From TH1 get TGraph
 TGraph *hist_to_graph(TH1 *h1);
 
@@ -119,9 +90,6 @@ TGraph *hist_to_graph(TH1 *h1);
 TGraph *Swapped_graph(TH1 *h1);
 
 /* ROOT */
-
-// Draw TH1
-void DrawTH1(const std::string &OutDir, TH1 *h1);
 
 // Draw TH2
 void DrawTH2(const std::string &OutDir, TH2 *h2);

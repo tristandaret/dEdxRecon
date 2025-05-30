@@ -3,6 +3,7 @@
 #include "Util.h"
 #include "ParabolaFunction.h"
 #include "ParabolaFunctionNG.h"
+#include "SetStyle.h"
 
 #include <typeinfo>
 
@@ -20,6 +21,7 @@
 #include "TGraphErrors.h"
 #include "TLegendEntry.h"
 #include "TFile.h"
+#include "TROOT.h"
 
 // Output event display of an event	with tagging string TAG, placed in OUTDIR dir
 void DrawOut_EventDisplay(Event *pEvent, const int &ModuleNber, const std::string &OUTDIR,
@@ -245,7 +247,8 @@ TH1F *GiveMe_WaveFormDisplay(Pad *pPad, const std::string &TAG)
    namestring << "_Mod" << pPad->Get_ModuleNber();
    namestring << "_iX" << pPad->Get_iX();
    namestring << "_iY" << pPad->Get_iY();
-   namestring << pPad->Get_AMax();
+   namestring << "_AMax" << pPad->Get_AMax();
+   namestring << TAG;
    std::string Name = namestring.str();
 
    TH1F *ToBeReturned = new TH1F(Name.c_str(), Title.c_str(), 510, -0.5, 509.5);
@@ -276,6 +279,7 @@ void DrawOut_ClusterWFDisplay(Cluster *pCluster, const std::string &OUTDIR,
                               const std::string &TAG, const int &Option, const int &PT,
                               const int &TB)
 {
+
    std::ostringstream aostringstream;
    aostringstream << std::setiosflags(std::ios::fixed);
    aostringstream << OUTDIR << "/";
@@ -455,14 +459,14 @@ void DrawOut_ClusterWFDisplay(Cluster *pCluster, const std::string &OUTDIR,
       ADCminWF = pTH1F_Sum->GetMinimum();
 
       float Tsum = pTH1F_Sum->GetMaximumBin();
-      TH1F *pTH1F_DPR = DPR("pTH1F_DPR_" + pCluster->Get_EntryNber() +
+      TH1F *pTH1F_ETF = ETF("pTH1F_ETF_" + pCluster->Get_EntryNber() +
                                pCluster->Get_LeadingPad()->Get_iX(),
                             -0.5, 509.5, Tsum - PT / TB, 510, 999, PT, TB);
-      pTH1F_DPR->SetAxisRange(pTH1F_Sum->GetMaximumBin() - 20,
+      pTH1F_ETF->SetAxisRange(pTH1F_Sum->GetMaximumBin() - 20,
                               pTH1F_Sum->GetMaximumBin() + 75, "X");
-      pTH1F_DPR->Scale(ADCmaxWF);
-      pTH1F_DPR->SetLineColor(kRed);
-      pTH1F_DPR->SetLineWidth(4);
+      pTH1F_ETF->Scale(ADCmaxWF);
+      pTH1F_ETF->SetLineColor(kRed);
+      pTH1F_ETF->SetLineWidth(4);
 
       Diff = ADCmaxWF - ADCminWF;
       ADCminWF = ADCminWF - 0.1 * Diff;
@@ -473,20 +477,20 @@ void DrawOut_ClusterWFDisplay(Cluster *pCluster, const std::string &OUTDIR,
       pTH1F_Sum->SetAxisRange(pTH1F_Sum->GetMaximumBin() - 20,
                               pTH1F_Sum->GetMaximumBin() + 75, "X");
       pTH1F_Sum->Draw();
-      pTH1F_DPR->DrawClone("hist same");
+      pTH1F_ETF->DrawClone("hist same");
       TLegend *leg = new TLegend(0.5, 0.65, 0.9, 0.9);
       leg->AddEntry(pTH1F_Sum, "Cluster's waveform ", "l");
-      leg->AddEntry(pTH1F_DPR, "Dirac Pulse Response (DPR)", "l");
+      leg->AddEntry(pTH1F_ETF, "Dirac Pulse Response (ETF)", "l");
       leg->DrawClone();
 
       pTCanWF->Update();
       pTCanCWF->cd();
       pTH1F_Sum->Draw();
-      pTH1F_DPR->DrawClone("hist same");
+      pTH1F_ETF->DrawClone("hist same");
       leg->DrawClone();
       pTCanCWF->Update();
 
-      delete pTH1F_DPR;
+      delete pTH1F_ETF;
       delete leg;
    }
 
@@ -526,7 +530,7 @@ void DrawOut_GWF(Event *pEvent, const int &ModuleNber, const std::string &OUTDIR
    Module *pModule = pEvent->Get_ThisModule(ModuleNber);
    int NClusters = pModule->Get_NberOfCluster();
    int NClus_trunc = int(floor(pModule->Get_NberOfCluster() * 0.7));
-   std::vector<TH1F *> v_pTH1F_WF_DPRcluster;
+   std::vector<TH1F *> v_pTH1F_WF_ETFcluster;
    std::vector<RankedValue> v_GWF;
 
    // Loop On Clusters
@@ -550,11 +554,11 @@ void DrawOut_GWF(Event *pEvent, const int &ModuleNber, const std::string &OUTDIR
          }
          delete pTH1F_pad;
       }
-      TH1F *pTH1F_WF_DPRcluster =
-         DPR("pTH1F_WF_DPRcluster", -0.5, 509.5, pTH1F_cluster->GetMaximumBin() - PT / TB,
+      TH1F *pTH1F_WF_ETFcluster =
+         ETF("pTH1F_WF_ETFcluster", -0.5, 509.5, pTH1F_cluster->GetMaximumBin() - PT / TB,
              510, iC, PT, TB);
-      pTH1F_WF_DPRcluster->Scale(pTH1F_cluster->GetMaximum());
-      v_pTH1F_WF_DPRcluster.push_back(pTH1F_WF_DPRcluster);
+      pTH1F_WF_ETFcluster->Scale(pTH1F_cluster->GetMaximum());
+      v_pTH1F_WF_ETFcluster.push_back(pTH1F_WF_ETFcluster);
       delete pTH1F_cluster;
    }
 
@@ -563,7 +567,7 @@ void DrawOut_GWF(Event *pEvent, const int &ModuleNber, const std::string &OUTDIR
    TH1F *pTH1F_GWFsum = new TH1F("pTH1F_GWFsum", "pTH1F_GWFsum", 510, -0.5, 509.5);
    pTH1F_GWFsum->Add(pTH1F_GWF);
    for (int iC = (int)NClus_trunc; iC < NClusters; iC++) {
-      pTH1F_GWFsum->Add(v_pTH1F_WF_DPRcluster[v_GWF[iC].Rank], -1);
+      pTH1F_GWFsum->Add(v_pTH1F_WF_ETFcluster[v_GWF[iC].Rank], -1);
    }
 
    int TmaxGWF = pTH1F_GWF->GetMaximumBin();
@@ -571,9 +575,9 @@ void DrawOut_GWF(Event *pEvent, const int &ModuleNber, const std::string &OUTDIR
    float maxGP = pTH1F_GWF->GetMaximum();
    float maxGPtrunc = pTH1F_GWFsum->GetMaximum();
 
-   TH1F *pTH1F_DPR =
-      DPR("pTH1F_DPR", -0.5, 509.5, TmaxGWFsum - PT / TB, 510, 999, PT, TB);
-   pTH1F_DPR->Scale(maxGPtrunc);
+   TH1F *pTH1F_ETF =
+      ETF("pTH1F_ETF", -0.5, 509.5, TmaxGWFsum - PT / TB, 510, 999, PT, TB);
+   pTH1F_ETF->Scale(maxGPtrunc);
 
    // Drawing the GWF
    // ------------------------------------------------------------------------------------------------------------
@@ -590,9 +594,9 @@ void DrawOut_GWF(Event *pEvent, const int &ModuleNber, const std::string &OUTDIR
    pTH1F_GWFsum->SetLineWidth(7);
    pTH1F_GWFsum->SetLineColor(kMagenta + 3);
    pTH1F_GWFsum->Draw("same hist");
-   pTH1F_DPR->SetLineWidth(4);
-   pTH1F_DPR->SetLineColor(kOrange + 7);
-   pTH1F_DPR->Draw("same hist");
+   pTH1F_ETF->SetLineWidth(4);
+   pTH1F_ETF->SetLineColor(kOrange + 7);
+   pTH1F_ETF->Draw("same hist");
    pTCanGP->Update();
 
    double tmin = pTCanGP->GetUxmin();
@@ -627,7 +631,7 @@ void DrawOut_GWF(Event *pEvent, const int &ModuleNber, const std::string &OUTDIR
    TLegend *leg = new TLegend(0.55, 0.7, 0.95, 0.9);
    leg->AddEntry(pTH1F_GWF, "GWF_{total} ", "l");
    leg->AddEntry(pTH1F_GWFsum, "GWF_{truncated} ", "l");
-   leg->AddEntry(pTH1F_DPR, "Dirac Pulse Response (DPR) ", "l");
+   leg->AddEntry(pTH1F_ETF, "Dirac Pulse Response (ETF) ", "l");
    leg->Draw();
    pTCanGP->Update();
 
@@ -650,11 +654,348 @@ void DrawOut_GWF(Event *pEvent, const int &ModuleNber, const std::string &OUTDIR
 
    delete pTH1F_GWF;
    delete pTH1F_GWFsum;
-   delete pTH1F_DPR;
+   delete pTH1F_ETF;
    delete pTCanGP;
    delete leg;
-   for (int iv = 0; iv < (int)v_pTH1F_WF_DPRcluster.size(); iv++) {
-      delete v_pTH1F_WF_DPRcluster[iv];
-      v_pTH1F_WF_DPRcluster[iv] = 0;
+   for (int iv = 0; iv < (int)v_pTH1F_WF_ETFcluster.size(); iv++) {
+      delete v_pTH1F_WF_ETFcluster[iv];
+      v_pTH1F_WF_ETFcluster[iv] = 0;
+   }
+}
+
+void NewClusterDisplay(Event *pEvent, const std::string &OUTDIR, const std::string &TAG,
+                       const int &PT, const int &TB)
+{
+   // Style setup
+   TCanvas *pCanvas = new TCanvas("pCanvas", "pCanvas", 1800, 1350);
+   TStyle *ptstyle = SetMyStyle();
+   gROOT->SetStyle(ptstyle->GetName());
+   gPad->UseCurrentStyle();
+   gStyle->SetOptStat(0);
+   gStyle->SetOptTitle(0);
+   pCanvas->Divide(1, 2, 0, 0);
+
+   TPad *pTopPad = new TPad("pTopPad", "Top Pad", 0, 0.3, 1, 1);
+   TPad *pBottomPad = new TPad("pBottomPad", "Bottom Pad", 0, 0, 1, 0.3);
+   pTopPad->SetMargin(0.14, 0.02, 0.0, 0.03);
+   pBottomPad->SetMargin(0.14, 0.02, 0.4, 0.0);
+   pTopPad->Draw();
+   pBottomPad->Draw();
+   pTopPad->SetGrid(1, 1);
+   pBottomPad->SetGrid(1, 0);
+
+   std::vector<int> colors = {kOrange + 7, kBlue, kRed};
+   // Output file setup
+   std::string outputFile = OUTDIR + "/" + TAG + "_ClusterWF_Evt" +
+                            std::to_string(pEvent->Get_EventNber()) + ".pdf";
+
+   // Start code
+
+   int nModules = pEvent->Get_NberOfModule();
+   // Module loop
+   for (int iModule = 0; iModule < nModules; iModule++) {
+      Module *pModule = pEvent->Get_Module_InArray(iModule);
+      int nClusters = pModule->Get_NberOfCluster();
+
+      // Cluster loop
+      for (int iCluster = 0; iCluster < nClusters; iCluster++) {
+         pTopPad->cd();
+         // Initialize range for canvas
+         int xmin = 510;
+         int xmax = 0;
+         double ymin = 1000;
+         double ymax = -1000;
+
+         Cluster *pCluster = pModule->Get_Cluster(iCluster);
+         std::vector<TH1F *> vWF;
+         TH1F *wfCluster =
+            new TH1F(Form("wfCluster_%d_%d_%d_%d", pEvent->Get_EventNber(),
+                          pModule->Get_ModuleNber(), pCluster->Get_LeadingPad()->Get_iX(),
+                          pCluster->Get_LeadingPad()->Get_iY()),
+                     "clusterWaveform", 510, -0.5, 509.5);
+         int NPads = pCluster->Get_NberOfPads();
+
+         // Legend setup
+         TLegend leg(0.55, 0.55, 0.92, 0.9);
+         leg.SetTextSize(0.06);
+         leg.SetTextColor(kBlue - 1);
+         leg.SetFillStyle(1001);
+         leg.SetBorderSize(1);
+         leg.SetLineWidth(1);
+
+         // Pad loop: Get waveforms
+         for (int iP = 0; iP < NPads; iP++) {
+            // Get waveform of pad
+            Pad *pPad = pCluster->Get_Pad(NPads - iP - 1);
+            vWF.push_back(GiveMe_WaveFormDisplay(pPad, TAG));
+            wfCluster->Add(vWF.back());
+
+            // Find T0
+            int x0 = 0;
+            for (int ix = 1; ix < vWF.back()->GetNbinsX(); ix++) {
+               int binContent = vWF.back()->GetBinContent(ix);
+               if (binContent != 0) {
+                  x0 = ix;
+                  break; // Stop at first non-zero bin
+               }
+            }
+
+            // Update axes range
+            xmin = std::min(xmin, (int)vWF.back()->GetXaxis()->GetBinLowEdge(x0));
+            xmax = xmin + 150;
+            ymax = std::max(ymax, vWF.back()->GetMaximum());
+            ymin = std::min(ymin, vWF.back()->GetMinimum());
+         }
+         // Update axes range with cluster waveform
+         vWF[0]->SetAxisRange(xmin - 20, xmax, "X");
+         ymin = std::min(ymin, wfCluster->GetMinimum());
+         ymax = std::max(ymax, wfCluster->GetMaximum());
+         vWF[0]->GetYaxis()->SetRangeUser(ymin - 0.1 * ymax, 1.1 * ymax);
+         vWF[0]->SetTitle(";timebins;Signal [ADC count]");
+         vWF[0]->GetYaxis()->SetNdivisions(505, kTRUE);
+         vWF[0]->GetYaxis()->SetLabelSize(0.065);
+         vWF[0]->GetYaxis()->SetTitleSize(0.065);
+
+         // Pad loop: Draw waveforms
+         vWF[0]->SetTitle(Form("Event %d, Module %d, Column %d", pEvent->Get_EventNber(),
+                               pModule->Get_ModuleNber(),
+                               pCluster->Get_LeadingPad()->Get_iX()));
+         Graphic_setup(vWF[0], 1, 1, colors[0], 2, colors[0], 0, 0);
+         vWF[0]->DrawClone("HIST");
+         for (int iP = 1; iP < NPads; iP++) {
+            Graphic_setup(vWF[iP], 1, 1, kGray + 1, 2, kGray + 1, 0, 0);
+            vWF[iP]->DrawClone("HIST SAME");
+         }
+
+         // Draw sum of waveforms
+         Graphic_setup(wfCluster, 1, 1, colors[1], 2, colors[1], 0, 0);
+         wfCluster->DrawClone("HIST SAME");
+
+         // Draw ETF
+         TH1F *wfETF = ETF(
+            Form("wfETF_%d_%d_%d_%d_%d", pEvent->Get_EventNber(), pEvent->Get_EntryNber(),
+                 pModule->Get_ModuleNber(), pCluster->Get_LeadingPad()->Get_iX(),
+                 pCluster->Get_LeadingPad()->Get_iY()),
+            -0.5, 509.5, wfCluster->GetMaximumBin() - float(PT) / float(TB), 510, 999,
+            float(PT), float(TB));
+         wfETF->Scale(wfCluster->GetMaximum());
+         Graphic_setup(wfETF, 1, 1, colors[2], 2, colors[2], 0, 0);
+         wfETF->SetLineStyle(1);
+         wfETF->DrawClone("HIST SAME");
+
+         // Draw vertical lines for Amax
+         TLine xAmax(wfCluster->GetMaximumBin() - 1, ymin - 0.1 * ymax,
+                     wfCluster->GetMaximumBin() - 1, ymax + 0.1 * ymax);
+         xAmax.SetLineStyle(7);
+         xAmax.SetLineWidth(2);
+         xAmax.SetLineColor(kViolet - 5);
+         xAmax.DrawClone("SAME");
+
+         // Legend display
+         leg.AddEntry(wfETF, "Total signal (theory)", "l");
+         leg.AddEntry(wfCluster, "Sum of signals", "l");
+         leg.AddEntry(vWF[0], "Leading pad's signal", "l");
+         if (NPads > 1)
+            leg.AddEntry(vWF[1], "Neighbor pads' signals", "l");
+         leg.DrawClone();
+
+         // Difference between ETF and cluster waveform
+         TH1F *wfDiff = (TH1F *)wfCluster->Clone("wfRelDiff");
+         for (int i = 1; i <= wfDiff->GetNbinsX(); ++i) {
+            double num = (wfCluster->GetBinContent(i) - wfETF->GetBinContent(i)) * 100;
+            double denom = wfCluster->GetMaximum();
+            wfDiff->SetBinContent(i, (denom != 0) ? num / fabs(denom) : 0.0);
+         }
+         Graphic_setup(wfDiff, 1, 1, kMagenta + 2, 2, kMagenta + 2, 0, 0);
+         pBottomPad->cd();
+         wfDiff->SetAxisRange(xmin - 20, xmax, "X");
+         double deltay = 0.1 * (wfDiff->GetMaximum() - wfDiff->GetMinimum());
+         wfDiff->SetAxisRange(wfDiff->GetMinimum() - deltay,
+                              wfDiff->GetMaximum() + deltay, "Y");
+         wfDiff->GetXaxis()->SetTitleSize(0.15);
+         wfDiff->GetXaxis()->SetLabelSize(0.15);
+         wfDiff->GetYaxis()->SetTitleSize(0.15);
+         wfDiff->GetYaxis()->SetLabelSize(0.15);
+         wfDiff->GetYaxis()->SetNdivisions(303, kTRUE);
+         wfDiff->GetYaxis()->SetTitleOffset(0.4);
+         wfDiff->SetTitle(";timebins;#frac{S_{sum} - S_{theo}}{S_{sum}^{max}} [%]");
+         wfDiff->DrawClone("HIST");
+
+         // Horizontal line at y=0
+         TLine yzero(xmin - 20, 0, xmax, 0); // Draw horizontal line at y=0
+         yzero.SetLineStyle(7);
+         yzero.SetLineColor(kBlue - 1);
+         yzero.Draw("SAME");
+
+         // Vertical line at TMax of leading pad
+         xAmax.SetY1(wfDiff->GetMinimum());
+         xAmax.SetY2(wfDiff->GetMaximum() + deltay);
+         xAmax.DrawClone("SAME");
+
+         // Save
+         if (iModule == 0 && iCluster == 0) {
+            pCanvas->SaveAs((outputFile + "(").c_str());
+         } else if (iModule == nModules - 1 && iCluster == nClusters - 1) {
+            pCanvas->SaveAs((outputFile + ")").c_str());
+         } else {
+            pCanvas->SaveAs(outputFile.c_str());
+         }
+         for (auto &wf : vWF) {
+            delete wf;
+            wf = nullptr;
+         }
+
+         // Cleaning
+         vWF.clear();
+         delete wfCluster;
+         delete wfETF;
+         delete wfDiff;
+      }
+
+      // Cleaning
+      delete pCanvas;
+      delete ptstyle;
+   }
+}
+
+void NewClusterDisplayMinimal(Event *pEvent, const std::string &OUTDIR,
+                              const std::string &TAG)
+{
+   // Style setup
+   TCanvas *pCanvas = new TCanvas("pCanvas", "pCanvas", 1800, 1350);
+   TStyle *ptstyle = SetMyStyle();
+   gROOT->SetStyle(ptstyle->GetName());
+   gPad->UseCurrentStyle();
+   gStyle->SetOptStat(0);
+   gStyle->SetOptTitle(0);
+   gPad->SetGrid(1, 1);
+   gPad->SetLeftMargin(0.14);
+   gPad->SetTopMargin(0.02);
+
+   std::vector<int> colors = {kOrange + 7, kBlue + 1, kRed};
+   // Output file setup
+   std::string outputFile = OUTDIR + "/" + TAG + "_ClusterWF_Evt" +
+                            std::to_string(pEvent->Get_EventNber()) + "_Minimal.pdf";
+
+   // Start code
+
+   int nModules = pEvent->Get_NberOfModule();
+   // Module loop
+   for (int iModule = 0; iModule < nModules; iModule++) {
+      Module *pModule = pEvent->Get_Module_InArray(iModule);
+      int nClusters = pModule->Get_NberOfCluster();
+
+      // Cluster loop
+      for (int iCluster = 0; iCluster < nClusters; iCluster++) {
+         // Initialize range for canvas
+         int xmin = 510;
+         int xmax = 0;
+         double ymin = 1000;
+         double ymax = -1000;
+
+         Cluster *pCluster = pModule->Get_Cluster(iCluster);
+         std::vector<TH1F *> vWF;
+         TH1F *wfCluster =
+            new TH1F(Form("wfCluster_%d_%d_%d_%d_minimal", pEvent->Get_EventNber(),
+                          pModule->Get_ModuleNber(), pCluster->Get_LeadingPad()->Get_iX(),
+                          pCluster->Get_LeadingPad()->Get_iY()),
+                     "clusterWaveform", 510, -0.5, 509.5);
+         int NPads = pCluster->Get_NberOfPads();
+
+         // Legend setup
+         TLegend leg(0.5, 0.65, 0.95, 0.9);
+         leg.SetTextColor(kBlue - 1);
+         leg.SetFillStyle(1001);
+         leg.SetBorderSize(1);
+         leg.SetLineWidth(1);
+         leg.SetTextSize(0.05);
+
+         // Pad loop: Get waveforms
+         for (int iP = 0; iP < NPads; iP++) {
+            // Get waveform of pad
+            Pad *pPad = pCluster->Get_Pad(NPads - iP - 1);
+            vWF.push_back(GiveMe_WaveFormDisplay(pPad, TAG + "_minimal"));
+            wfCluster->Add(vWF.back());
+
+            // Find T0
+            int x0 = 0;
+            for (int ix = 1; ix < vWF.back()->GetNbinsX(); ix++) {
+               int binContent = vWF.back()->GetBinContent(ix);
+               if (binContent != 0) {
+                  x0 = ix;
+                  break; // Stop at first non-zero bin
+               }
+            }
+
+            // Update axes range
+            xmin = std::min(xmin, (int)vWF.back()->GetXaxis()->GetBinLowEdge(x0));
+            xmax = xmin + 150;
+            ymax = std::max(ymax, vWF.back()->GetMaximum());
+            ymin = std::min(ymin, vWF.back()->GetMinimum());
+         }
+         // Update axes range with cluster waveform
+         vWF[0]->SetAxisRange(xmin - 20, xmax, "X");
+         ymin = std::min(ymin, wfCluster->GetMinimum());
+         ymax = std::max(ymax, wfCluster->GetMaximum());
+         vWF[0]->GetYaxis()->SetRangeUser(ymin - 0.1 * ymax, 1.1 * ymax);
+         vWF[0]->SetTitle(";timebins;Signal [ADC count]");
+         vWF[0]->GetYaxis()->SetNdivisions(505, kTRUE);
+         vWF[0]->GetXaxis()->SetLabelSize(0.05);
+         vWF[0]->GetXaxis()->SetTitleSize(0.05);
+         vWF[0]->GetYaxis()->SetLabelSize(0.05);
+         vWF[0]->GetYaxis()->SetTitleSize(0.05);
+         vWF[0]->GetYaxis()->SetTitleOffset(1.3);
+
+         // Pad loop: Draw waveforms
+         vWF[0]->SetTitle(Form("Event %d, Module %d, Column %d", pEvent->Get_EventNber(),
+                               pModule->Get_ModuleNber(),
+                               pCluster->Get_LeadingPad()->Get_iX()));
+         Graphic_setup(vWF[0], 1, 1, colors[0], 2, colors[0], 0, 0);
+         vWF[0]->DrawClone("HIST");
+         for (int iP = 1; iP < NPads; iP++) {
+            Graphic_setup(vWF[iP], 1, 1, kGray + 1, 2, kGray + 1, 0, 0);
+            vWF[iP]->DrawClone("HIST SAME");
+         }
+
+         // Draw sum of waveforms
+         Graphic_setup(wfCluster, 1, 1, colors[1], 2, colors[1], 0, 0);
+         wfCluster->DrawClone("HIST SAME");
+
+         // Draw vertical lines for Amax
+         TLine xAmax(wfCluster->GetMaximumBin() - 1, ymin - 0.1 * ymax,
+                     wfCluster->GetMaximumBin() - 1, ymax + 0.1 * ymax);
+         xAmax.SetLineStyle(7);
+         xAmax.SetLineWidth(2);
+         xAmax.SetLineColor(kBlue + 2);
+         xAmax.DrawClone("SAME");
+
+         // Legend display
+         leg.AddEntry(wfCluster, "Sum of signals", "l");
+         leg.AddEntry(vWF[0], "Leading pad's signal", "l");
+         if (NPads > 1)
+            leg.AddEntry(vWF[1], "Neighbor pads' signals", "l");
+         leg.DrawClone();
+
+         // Save
+         if (iModule == 0 && iCluster == 0) {
+            pCanvas->SaveAs((outputFile + "(").c_str());
+         } else if (iModule == nModules - 1 && iCluster == nClusters - 1) {
+            pCanvas->SaveAs((outputFile + ")").c_str());
+         } else {
+            pCanvas->SaveAs(outputFile.c_str());
+         }
+         for (auto &wf : vWF) {
+            delete wf;
+            wf = nullptr;
+         }
+
+         // Cleaning
+         vWF.clear();
+         delete wfCluster;
+      }
+
+      // Cleaning
+      delete pCanvas;
+      delete ptstyle;
    }
 }

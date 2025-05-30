@@ -156,13 +156,13 @@ void Control(const std::string &OutDir, std::string const &Tag,
       TH1F *h1f_Eff_Raw =
          new TH1F(Form("h1f_Eff_Raw_%i", iMod),
                   Form("Efficiency : final fraction of events Raw (Mod %i);N_{cluster} "
-                       "minimum;Fraction of events kept (%%)",
+                       "minimum;Fraction of events kept [%%]",
                        iMod),
                   37, -0.5, 36.5);
       TH1F *h1f_Eff_Sel =
          new TH1F(Form("h1f_Eff_Sel_%i", iMod),
                   Form("Efficiency : final fraction of events Cut (Mod %i);N_{cluster} "
-                       "minimum;Fraction of events kept (%%)",
+                       "minimum;Fraction of events kept [%%]",
                        iMod),
                   37, -0.5, 36.5);
       TH2F *h2f_LeadPos_Raw =

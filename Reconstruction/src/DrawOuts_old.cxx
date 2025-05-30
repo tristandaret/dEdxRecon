@@ -2,6 +2,7 @@
 #include "ReconTools.h"
 #include "CombinedFit.h"
 #include "dEdx.h"
+#include "Misc_Functions.h"
 
 #include "Util.h"
 #include <cmath>
@@ -134,7 +135,7 @@ void DrawOut_Versions(const std::string &inputDir, const std::string &Method,
    v_reso1[0]->SetMinimum(4);
    v_reso1[0]->SetMaximum(12);
    v_reso1[0]->SetNameTitle("v_reso1[0]",
-                            "Resolution vs Y position;Pad row;resolution (%)");
+                            "Resolution vs Y position;Pad row;resolution [%]");
    Graphic_setup(v_reso1[0], 3, 21, kBefore, 1, kBlack);
    Graphic_setup(v_reso2[0], 3, 20, kAfter, 1, kBlack);
    v_reso1[0]->Draw("ap");
@@ -243,7 +244,7 @@ void DrawOut_Versions(const std::string &inputDir, const std::string &Method,
    v_reso1[1]->SetMinimum(4);
    v_reso1[1]->SetMaximum(12);
    v_reso1[1]->SetNameTitle(
-      "v_reso1[1]", "Resolution vs Z_{drift} (200 ns);Z_{drift} (mm);resolution (%)");
+      "v_reso1[1]", "Resolution vs Z_{drift} (200 ns);Z_{drift} (mm);resolution [%]");
    Graphic_setup(v_reso1[1], 3, 21, kBefore, 1, kBlack);
    Graphic_setup(v_reso2[1], 3, 20, kAfter, 1, kBlack);
    v_reso1[1]->Draw("ap");
@@ -354,7 +355,7 @@ void DrawOut_Versions(const std::string &inputDir, const std::string &Method,
    v_reso1[2]->SetMinimum(4);
    v_reso1[2]->SetMaximum(12);
    v_reso1[2]->SetNameTitle(
-      "v_reso1[2]", "Resolution vs Z_{drift} (412 ns);Z_{drift} (mm);resolution (%)");
+      "v_reso1[2]", "Resolution vs Z_{drift} (412 ns);Z_{drift} (mm);resolution [%]");
    Graphic_setup(v_reso1[2], 3, 21, kBefore, 1, kBlack);
    Graphic_setup(v_reso2[2], 3, 20, kAfter, 1, kBlack);
    v_reso1[2]->Draw("ap");
@@ -476,7 +477,7 @@ void DrawOut_Versions(const std::string &inputDir, const std::string &Method,
    v_reso1[3]->SetMinimum(4);
    v_reso1[3]->SetMaximum(12);
    v_reso1[3]->SetNameTitle("v_reso1[3]", "Resolution vs #varphi angle (Z_{drift} = 50 "
-                                          "mm);#varphi angle (#circ);resolution (%)");
+                                          "mm);#varphi angle (#circ);resolution [%]");
    Graphic_setup(v_reso1[3], 3, 21, kBefore, 1, kBlack);
    Graphic_setup(v_reso2[3], 3, 20, kAfter, 1, kBlack);
    v_reso1[3]->Draw("ap");
@@ -598,7 +599,7 @@ void DrawOut_Versions(const std::string &inputDir, const std::string &Method,
    v_reso1[4]->SetMinimum(4);
    v_reso1[4]->SetMaximum(12);
    v_reso1[4]->SetNameTitle("v_reso1[4]", "Resolution vs #varphi angle (Z_{drift} = 550 "
-                                          "mm);#varphi angle (#circ);resolution (%)");
+                                          "mm);#varphi angle (#circ);resolution [%]");
    Graphic_setup(v_reso1[4], 3, 21, kBefore, 1, kBlack);
    Graphic_setup(v_reso2[4], 3, 20, kAfter, 1, kBlack);
    v_reso1[4]->Draw("ap");
@@ -719,7 +720,7 @@ void DrawOut_Versions(const std::string &inputDir, const std::string &Method,
    v_reso1[5]->SetMinimum(4);
    v_reso1[5]->SetMaximum(12);
    v_reso1[5]->SetNameTitle("v_reso1[5]", "Resolution vs #varphi angle (Z_{drift} = 950 "
-                                          "mm);#varphi angle (#circ);resolution (%)");
+                                          "mm);#varphi angle (#circ);resolution [%]");
    Graphic_setup(v_reso1[5], 3, 21, kBefore, 1, kBlack);
    Graphic_setup(v_reso2[5], 3, 20, kAfter, 1, kBlack);
    v_reso1[5]->Draw("ap");
@@ -1605,7 +1606,7 @@ void DrawOut_Scans(const std::string &inputDir, const std::string &Comment,
    // Resolution
    ph1_reso_XP->SetMinimum(4);
    ph1_reso_XP->SetMaximum(12);
-   ph1_reso_XP->SetNameTitle("ph1_reso_XP", "dE/dx: Resolution;;resolution (%)");
+   ph1_reso_XP->SetNameTitle("ph1_reso_XP", "dE/dx: Resolution;;resolution [%]");
    Graphic_setup(ph1_reso_WF, 3, 20, kCyan + 2, 1, kBlack);
    Graphic_setup(ph1_reso_XP, 3, 21, kMagenta + 2, 1, kBlack);
    ph1_reso_XP->Draw();
@@ -1823,7 +1824,7 @@ void DrawOut_Zscan_PT(const std::string &inputDir, const std::string &Comment)
    pTGE_reso_XP_200->SetMinimum(4);
    pTGE_reso_XP_200->SetMaximum(10);
    pTGE_reso_XP_200->SetNameTitle(
-      "pTGE_reso_XP", "Resolution vs drift distance;drift distance (mm);resolution (%)");
+      "pTGE_reso_XP", "Resolution vs drift distance;drift distance (mm);resolution [%]");
    Graphic_setup(pTGE_reso_WF_200, 3, 20, kCyan + 2, 1, kBlack);
    Graphic_setup(pTGE_reso_XP_200, 3, 21, kGreen + 3, 1, kBlack);
    Graphic_setup(pTGE_reso_WF_412, 3, 20, kOrange - 3, 1, kBlack);
@@ -2124,7 +2125,7 @@ void DrawOut_Phiscan_Z(const std::string &inputDir, const std::string &Comment,
    pTGE_reso_WF_55->SetMaximum(12);
    pTGE_reso_WF_55->SetNameTitle(
       "pTGE_reso_WF_55",
-      "Resolution vs #varphi angle;#varphi angle (#circ);resolution (%)");
+      "Resolution vs #varphi angle;#varphi angle (#circ);resolution [%]");
    Graphic_setup(pTGE_reso_WF_5, 3, 20, kCyan + 2, 1, kBlack);
    Graphic_setup(pTGE_reso_WF_55, 3, 21, kOrange - 3, 1, kBlack);
    Graphic_setup(pTGE_reso_WF_95, 3, 22, kBlack, 1, kBlack);
@@ -2146,7 +2147,7 @@ void DrawOut_Phiscan_Z(const std::string &inputDir, const std::string &Comment,
    pTGE_reso_XP_55->SetMaximum(12);
    pTGE_reso_XP_55->SetNameTitle(
       "pTGE_reso_XP_5",
-      "Resolution vs #varphi angle;#varphi angle (#circ);resolution (%)");
+      "Resolution vs #varphi angle;#varphi angle (#circ);resolution [%]");
    pTGE_reso_XP_55->Draw("ap");
    pTGE_reso_XP_5->Draw("p same");
    pTGE_reso_XP_95->Draw("p same");
@@ -2370,8 +2371,8 @@ void DrawOut_Escan(const std::string &inputDir, const std::string &Comment)
    // THATReconstruction raw normalized
    double paramTHATReconstruction[5] = {0.186543, 5.382656, 0.004234, 2.028548,
                                         -0.994807}; // THATReconstruction fit
-   //	double paramClaudio[5] = {0.148800, 6.047,		0.00064,	2.308,		-1.359};		// Claudio
-   //raw normalized
+   //	double paramClaudio[5] = {0.148800, 6.047,		0.00064,	2.308,		-1.359};		//
+   // Claudio raw normalized
    double paramClaudio[5] = {0.186524, 5.382954, 0.004232, 2.028659,
                              -0.994959}; // Claudio fit
    for (int ipart = 0; ipart < (int)v_tf1_BB_Claudio.size(); ipart++) {
@@ -2411,7 +2412,7 @@ void DrawOut_Escan(const std::string &inputDir, const std::string &Comment)
    v_pTGE_reso_WF[0]->SetMinimum(4);
    v_pTGE_reso_WF[0]->SetMaximum(10);
    v_pTGE_reso_WF[0]->SetNameTitle(
-      "pTGE_reso_WF", "Resolution vs energy with WF method;Energy (GeV);resolution (%)");
+      "pTGE_reso_WF", "Resolution vs energy with WF method;Energy (GeV);resolution [%]");
    for (int i = 0; i < 4; i++) {
       Graphic_setup(v_pTGE_reso_WF[i], 3, markers[i], colors[i], 1, colors[i]);
       if (i == 0)
@@ -2432,7 +2433,7 @@ void DrawOut_Escan(const std::string &inputDir, const std::string &Comment)
    v_pTGE_reso_XP[0]->SetMinimum(4);
    v_pTGE_reso_XP[0]->SetMaximum(10);
    v_pTGE_reso_XP[0]->SetNameTitle(
-      "pTGE_reso_XP", "Resolution vs energy with XP method;Energy (GeV);resolution (%)");
+      "pTGE_reso_XP", "Resolution vs energy with XP method;Energy (GeV);resolution [%]");
    for (int i = 0; i < 4; i++) {
       Graphic_setup(v_pTGE_reso_XP[i], 3, markers[i], colors[i], 1, colors[i]);
       if (i == 0)
@@ -2584,279 +2585,6 @@ void DrawOut_Escan(const std::string &inputDir, const std::string &Comment)
    v_tf1_XP.clear();
 }
 
-// TGraphError of WFsum vs L plot for 30 to 45#circ
-void DrawOut_TGE_WFsum_L(const std::string &inputDir, const std::string &Comment)
-{
-   gStyle->SetPadTickX(1);
-   gStyle->SetPadTickY(1);
-
-   std::vector<TGraphErrors *> v_TGE_z50;
-   std::vector<TGraphErrors *> v_TGE_z550;
-   std::vector<TGraphErrors *> v_TGE_z950;
-
-   int phi_arr[] = {30, 40, 45};
-   for (int iphi = 0; iphi < (int)std::size(phi_arr); iphi++) {
-      TFile *TFile50 =
-         TFile::Open(TString(inputDir + "DESY21_phi_zm40/DESY21_phi" + phi_arr[iphi] +
-                             "_diag_zm40/2_DESY21_phi" + phi_arr[iphi] +
-                             "_diag_zm40_Checks" + Comment + ".root"));
-      TH2F *h2f_z50 = TFile50->Get<TH2F>("h2f_WFvsLength");
-      TGraphErrors *TGE_z50 = Convert_TH2_TGE(h2f_z50);
-      v_TGE_z50.push_back(TGE_z50);
-      TFile *TFile550 =
-         TFile::Open(TString(inputDir + "DESY21_phi_z460/DESY21_phi" + phi_arr[iphi] +
-                             "_diag_z460/2_DESY21_phi" + phi_arr[iphi] +
-                             "_diag_z460_Checks" + Comment + ".root"));
-      TH2F *h2f_550 = TFile550->Get<TH2F>("h2f_WFvsLength");
-      v_TGE_z550.push_back(Convert_TH2_TGE(h2f_550));
-      TFile *TFile950 =
-         TFile::Open(TString(inputDir + "DESY21_phi_z860/DESY21_phi" + phi_arr[iphi] +
-                             "_diag_z860/2_DESY21_phi" + phi_arr[iphi] +
-                             "_diag_z860_Checks" + Comment + ".root"));
-      TH2F *h2f_950 = TFile950->Get<TH2F>("h2f_WFvsLength");
-      v_TGE_z950.push_back(Convert_TH2_TGE(h2f_950));
-      delete h2f_z50;
-      delete h2f_550;
-      delete h2f_950;
-      TFile50->Close();
-      TFile550->Close();
-      TFile950->Close();
-   }
-
-   std::string OutputFile = inputDir + "Phiscan_Fig16" + Comment + ".pdf";
-   std::string OutputFile_Beg = OutputFile + "(";
-   std::string OutputFile_End = OutputFile + ")";
-   TCanvas *pTCanvas = new TCanvas("pTCanvas", "pTCanvas", 1800, 1200);
-
-   TLegend *leg = new TLegend(0.83, 0.75, 0.97, 0.94);
-   pTCanvas->cd();
-   // pTGE_reso_PRF->				GetXaxis()->SetLimits(0, 1000);
-   // pTGE_reso_PRF->				SetMinimum(4);
-
-   v_TGE_z50[0]->SetMaximum(1800);
-   v_TGE_z50[0]->SetNameTitle("TGE_z50",
-                              "max of WF vs L_{cluster} for Z_{drift} = 50 mm;length in "
-                              "cluster L (mm);A_{max} (ADC counts)");
-   Graphic_setup(v_TGE_z50[0], 3, 20, kBlack, 1, kBlack);
-   Graphic_setup(v_TGE_z50[1], 3, 21, kBlue, 1, kBlack);
-   Graphic_setup(v_TGE_z50[2], 3, 22, kRed, 1, kBlack);
-   v_TGE_z50[0]->Draw("ap");
-   v_TGE_z50[1]->Draw("p same");
-   v_TGE_z50[2]->Draw("p same");
-   leg->AddEntry(v_TGE_z50[0], "30#circ ", "ep");
-   leg->AddEntry(v_TGE_z50[1], "40#circ ", "ep");
-   leg->AddEntry(v_TGE_z50[2], "45#circ ", "ep");
-   leg->Draw();
-   pTCanvas->SaveAs(OutputFile_Beg.c_str());
-   leg->Clear();
-
-   v_TGE_z550[0]->SetMaximum(1800);
-   v_TGE_z550[0]->SetNameTitle("TGE_z550",
-                               "max of WF vs L_{cluster} for Z_{drift} = 550 mm;length "
-                               "in cluster L (mm);A_{max} (ADC counts)");
-   Graphic_setup(v_TGE_z550[0], 3, 20, kBlack, 1, kBlack);
-   Graphic_setup(v_TGE_z550[1], 3, 21, kBlue, 1, kBlack);
-   Graphic_setup(v_TGE_z550[2], 3, 22, kRed, 1, kBlack);
-   v_TGE_z550[0]->Draw("ap");
-   v_TGE_z550[1]->Draw("p same");
-   v_TGE_z550[2]->Draw("p same");
-   leg->AddEntry(v_TGE_z550[0], "30#circ ", "ep");
-   leg->AddEntry(v_TGE_z550[1], "40#circ ", "ep");
-   leg->AddEntry(v_TGE_z550[2], "45#circ ", "ep");
-   leg->Draw();
-   pTCanvas->SaveAs(OutputFile.c_str());
-   leg->Clear();
-
-   v_TGE_z950[0]->SetMaximum(1800);
-   v_TGE_z950[0]->SetNameTitle("TGE_z950",
-                               "max of WF vs L_{cluster} for Z_{drift} = 950 mm;length "
-                               "in cluster L (mm);A_{max} (ADC counts)");
-   Graphic_setup(v_TGE_z950[0], 3, 20, kBlack, 1, kBlack);
-   Graphic_setup(v_TGE_z950[1], 3, 21, kBlue, 1, kBlack);
-   Graphic_setup(v_TGE_z950[2], 3, 22, kRed, 1, kBlack);
-   v_TGE_z950[0]->Draw("ap");
-   v_TGE_z950[1]->Draw("p same");
-   v_TGE_z950[2]->Draw("p same");
-   leg->AddEntry(v_TGE_z950[0], "30#circ ", "ep");
-   leg->AddEntry(v_TGE_z950[1], "40#circ ", "ep");
-   leg->AddEntry(v_TGE_z950[2], "45#circ ", "ep");
-   leg->Draw();
-   pTCanvas->SaveAs(OutputFile_End.c_str());
-}
-
-void DrawOut_corrections()
-{
-
-   gStyle->SetOptStat(0);
-
-   // Get histograms
-   std::vector<TF1 *> v_tf1;
-   std::vector<std::string> v_filename;
-   v_filename.push_back("../Data_DESY21/Phi_scan_zm40/"
-                        "phi_200_30_zm40_ym60_diag_iter0_WFmax_correction.root");
-   v_filename.push_back("../Data_DESY21/Phi_scan_z460/"
-                        "phi_200_30_z460_ym60_diag_iter0_WFmax_correction.root");
-   v_filename.push_back("../Data_DESY21/Phi_scan_z860/"
-                        "phi_200_30_z860_ym60_diag_iter0_WFmax_correction.root");
-   v_filename.push_back("../Data_DESY21/Phi_scan_zm40/"
-                        "phi_200_40_zm40_ym60_diag_iter0_WFmax_correction.root");
-   v_filename.push_back("../Data_DESY21/Phi_scan_z460/"
-                        "phi_200_40_z460_ym60_diag_iter0_WFmax_correction.root");
-   v_filename.push_back("../Data_DESY21/Phi_scan_z860/"
-                        "phi_200_40_z860_ym60_diag_iter0_WFmax_correction.root");
-   v_filename.push_back("../Data_DESY21/Phi_scan_zm40/"
-                        "phi_200_45_zm40_ym60_diag_iter0_WFmax_correction.root");
-   v_filename.push_back("../Data_DESY21/Phi_scan_z460/"
-                        "phi_200_45_z460_ym60_diag_iter0_WFmax_correction.root");
-   v_filename.push_back("../Data_DESY21/Phi_scan_z860/"
-                        "phi_200_45_z860_ym60_diag_iter0_WFmax_correction.root");
-
-   TF1 *F_HATRecon = new TF1(
-      "F_Vlada", "291.012 + 9.4669*x - 4.04*x*x + 1.31624*x*x*x - 0.059534*x*x*x*x", 0,
-      17); // values provided by Vlada (2022/10/11)
-   v_tf1.push_back(F_HATRecon);
-   for (int i = 0; i < (int)v_filename.size(); i++) {
-      TFile *pfile = new TFile(v_filename[i].c_str(), "READ");
-      v_tf1.push_back(pfile->Get<TF1>("A_corr"));
-      pfile->Close();
-   }
-
-   // Draw out
-   std::string OutputFile =
-      "OUT_Reconstruction/DESY21_phi/Correction_functions_WFmax_correction.pdf";
-   std::string OutputFile_Beg = OutputFile + "(";
-   std::string OutputFile_End = OutputFile + ")";
-
-   int z[] = {5, 55, 95};
-   TCanvas *pTCanvas = new TCanvas("pTCanvas", "pTCanvas", 2700, 1800);
-   TLegend *leg = new TLegend(0.85, 0.8, 0.99, 0.99);
-   pTCanvas->cd();
-   v_tf1[0]->SetLineColor(kGray);
-   v_tf1[0]->SetLineWidth(4);
-   v_tf1[0]->GetYaxis()->SetRangeUser(0, 1500);
-
-   v_tf1[0]->SetTitle("Correction functions 30#circ;L_{cluster} (mm);WF (ADC count)");
-   leg->AddEntry(v_tf1[0], "HATRecon", "l");
-   for (int i = 1; i < 4; i++) {
-      v_tf1[0]->Draw();
-      v_tf1[i]->SetLineColor(kGreen + 2 * (i - 1));
-      v_tf1[i]->SetLineWidth(4);
-      v_tf1[i]->SetLineStyle((i - 1) % 3 + 1);
-      leg->AddEntry(v_tf1[i], Form("%i cm", z[i - 1]), "l");
-   }
-   for (int i = 1; i < 4; i++)
-      v_tf1[i]->Draw("same");
-   leg->Draw();
-   pTCanvas->SaveAs(OutputFile_Beg.c_str());
-   leg->Clear();
-   pTCanvas->Clear();
-
-   v_tf1[0]->SetTitle("Correction functions 40#circ;L_{cluster} (mm);WF (ADC count)");
-   leg->AddEntry(v_tf1[0], "HATRecon", "l");
-   for (int i = 4; i < 7; i++) {
-      v_tf1[0]->Draw();
-      v_tf1[i]->SetLineColor(kBlue + 2 * (i - 4));
-      v_tf1[i]->SetLineWidth(4);
-      v_tf1[i]->SetLineStyle((i - 1) % 3 + 1);
-      leg->AddEntry(v_tf1[i], Form("%i cm", z[i - 4]), "l");
-   }
-   for (int i = 4; i < 7; i++)
-      v_tf1[i]->Draw("same");
-   leg->Draw();
-   pTCanvas->SaveAs(OutputFile.c_str());
-   leg->Clear();
-   pTCanvas->Clear();
-
-   v_tf1[0]->SetTitle("Correction functions 45#circ;L_{cluster} (mm);WF (ADC count)");
-   leg->AddEntry(v_tf1[0], "HATRecon", "l");
-   for (int i = 7; i < 10; i++) {
-      v_tf1[0]->Draw();
-      v_tf1[i]->SetLineColor(kRed + 2 * (i - 7));
-      v_tf1[i]->SetLineWidth(4);
-      v_tf1[i]->SetLineStyle((i - 1) % 3 + 1);
-      leg->AddEntry(v_tf1[i], Form("%i cm", z[i - 7]), "l");
-   }
-   for (int i = 7; i < 10; i++)
-      v_tf1[i]->Draw("same");
-   leg->Draw();
-   pTCanvas->SaveAs(OutputFile.c_str());
-   leg->Clear();
-   pTCanvas->Clear();
-
-   TLegend *legAll = new TLegend(0.86, 0.65, 0.99, 0.99);
-   int angle[] = {30, 40, 45};
-   v_tf1[1]->SetTitle("Correction functions;L_{cluster} (mm);WF (ADC count)");
-   v_tf1[1]->GetYaxis()->SetRangeUser(0, 1500);
-   v_tf1[1]->GetXaxis()->SetRangeUser(0, 17);
-   // legAll->						AddEntry(v_tf1[0], "HATRecon" , "l");
-   for (int i = 1; i < 10; i++) {
-      v_tf1[1]->Draw();
-      // if(i>1)v_tf1[i]->			Draw("same");
-      legAll->AddEntry(v_tf1[i],
-                       Form("%i#circ %i cm", angle[(i - 1) / 3], z[(i - 1) % 3]), "l");
-   }
-   for (int i = 1; i < 10; i++)
-      v_tf1[i]->Draw("same");
-   legAll->Draw();
-   pTCanvas->SaveAs(OutputFile.c_str());
-   pTCanvas->Clear();
-
-   float ref = v_tf1[4]->Eval(11.28);
-   for (int i = 1; i < 10; i++) {
-      TGraph *tg = new TGraph();
-      tg->SetMaximum(1500);
-      tg->SetMinimum(0);
-      tg->SetTitle("F(L_{cluster})*F_{ref}(11.28)/F_{ref}(L_{cluster});L_{cluster} "
-                   "(mm);F(L_{cluster})*F_{ref}(11.28)/F_{ref}(L_{cluster}) (ADC count)");
-      for (int j = 0; j < 100; j++)
-         tg->SetPoint(j, j / 100. * 17.,
-                      v_tf1[i]->Eval(j / 100. * 17.) * ref /
-                         v_tf1[4]->Eval(j / 100. * 17.));
-      if (i >= 1 && i < 4)
-         tg->SetLineColor(kGreen + 2 * (i - 1));
-      if (i >= 4 && i < 7)
-         tg->SetLineColor(kBlue + 2 * (i - 4));
-      if (i >= 7 && i < 10)
-         tg->SetLineColor(kRed + 2 * (i - 7));
-      tg->SetLineWidth(4);
-      tg->SetLineStyle((i - 1) % 3 + 1);
-      tg->GetXaxis()->SetLimits(0, 17);
-      if (i == 1)
-         tg->DrawClone("AL");
-      else
-         tg->DrawClone("L same");
-   }
-   legAll->Draw();
-   pTCanvas->SaveAs(OutputFile.c_str());
-   pTCanvas->Clear();
-   legAll->Clear();
-
-   TLegend *legRatio = new TLegend(0.75, 0.6, 0.99, 0.94);
-   Color_t col[] = {kRed - 9, kRed - 7, kRed, kRed + 2, kRed + 4};
-   v_tf1[4]->SetParameter(0, v_tf1[4]->GetParameter(0) - 200);
-   for (int i = 0; i < 5; i++) {
-      TGraph *tg = new TGraph();
-      tg->SetMaximum(4);
-      tg->SetMinimum(0);
-      tg->SetTitle("F_{ref}(11.28)/F_{ref}(L_{cluster}) with F_{ref} shifted;L_{cluster} "
-                   "(mm);ratio");
-      v_tf1[4]->SetParameter(0, v_tf1[4]->GetParameter(0) + i * 100);
-      ref = v_tf1[4]->Eval(11.28);
-      for (int j = 0; j < 100; j++)
-         tg->SetPoint(j, j / 100. * 17., ref / v_tf1[4]->Eval(j / 100. * 17.));
-      tg->SetLineColor(col[i]);
-      tg->SetLineWidth(4);
-      tg->GetXaxis()->SetLimits(0, 17);
-      if (i == 0)
-         tg->DrawClone("AL");
-      else
-         tg->DrawClone("L same");
-      legRatio->AddEntry(tg, Form("%i ADC counts", i * 100 - 200), "l");
-   }
-   legRatio->Draw();
-   pTCanvas->SaveAs(OutputFile_End.c_str());
-   delete pTCanvas;
-}
 
 // DrawOut dE/dx systematics with Z scan
 void DrawOut_Systematics(const std::string &inputDir, const std::string &Comment,
@@ -2994,11 +2722,11 @@ void DrawOut_Systematics(const std::string &inputDir, const std::string &Comment
       if (scan == "Z")
          pTGE_reso_XP->SetNameTitle(
             "pTGE_reso_XP",
-            "Z scan systematics | RC | Resolution;drift distance (mm);resolution (%)");
+            "Z scan systematics | RC | Resolution;drift distance (mm);resolution [%]");
       if (scan == "phi")
          pTGE_reso_XP->SetNameTitle(
             "pTGE_reso_XP",
-            "#phi scan systematics | RC | Resolution;#phi angle (#circ);resolution (%)");
+            "#phi scan systematics | RC | Resolution;#phi angle (#circ);resolution [%]");
       Graphic_setup(pTGE_reso_XP, 3, 21, kMagenta + 1, 1, kBlack);
       Graphic_setup(pTGE_reso_RCm, 3, 23, kBlue + 1, 1, kBlack);
       Graphic_setup(pTGE_reso_RCp, 3, 22, kRed + 1, 1, kBlack);
@@ -3124,11 +2852,11 @@ void DrawOut_Systematics(const std::string &inputDir, const std::string &Comment
       if (scan == "Z")
          pTGE_reso_XP->SetNameTitle("pTGE_reso_XP",
                                     "Z scan systematics | Z_{drift} | Resolution;drift "
-                                    "distance (mm);resolution (%)");
+                                    "distance (mm);resolution [%]");
       if (scan == "phi")
          pTGE_reso_XP->SetNameTitle("pTGE_reso_XP",
                                     "#phi scan systematics | Z_{drift} | Resolution;#phi "
-                                    "angle (#circ);resolution (%)");
+                                    "angle (#circ);resolution [%]");
       Graphic_setup(pTGE_reso_Zm, 3, 23, kBlue + 1, 1, kBlack);
       Graphic_setup(pTGE_reso_XP, 3, 21, kMagenta + 1, 1, kBlack);
       Graphic_setup(pTGE_reso_Zp, 3, 22, kRed + 1, 1, kBlack);
@@ -3240,11 +2968,11 @@ void DrawOut_Systematics(const std::string &inputDir, const std::string &Comment
       if (scan == "Z")
          pTGE_reso_XP->SetNameTitle("pTGE_reso_XP",
                                     "Z scan systematics | impact parameter d | "
-                                    "Resolution;drift distance (mm);resolution (%)");
+                                    "Resolution;drift distance (mm);resolution [%]");
       if (scan == "phi")
          pTGE_reso_XP->SetNameTitle("pTGE_reso_XP",
                                     "#phi scan systematics | impact parameter d | "
-                                    "Resolution;#phi angle (#circ);resolution (%)");
+                                    "Resolution;#phi angle (#circ);resolution [%]");
       Graphic_setup(pTGE_reso_XP, 3, 21, kMagenta + 1, 1, kBlack);
       Graphic_setup(pTGE_reso_dpdd, 3, 22, kRed + 1, 1, kBlack);
       Graphic_setup(pTGE_reso_dmdd, 3, 23, kBlue + 1, 1, kBlack);

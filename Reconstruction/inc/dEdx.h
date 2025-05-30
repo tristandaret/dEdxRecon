@@ -24,6 +24,8 @@ public:
    bool leading = false;
    int ix = 0;
    int iy = 0;
+   float xPad = 0; // in cm
+   float yPad = 0; // in cm
    float ADCmax = 0;
    float ADCmax_base = 0;
    float charge = 0;
@@ -41,6 +43,7 @@ public:
    float ratioDrift = 0;
    float ratioFile = 0;
    float ratio = 0;
+   float dy = 0; // distance to the track in y
 
    ClassDef(RecoPad, 1);
 };
@@ -60,6 +63,7 @@ public:
    int NPads = 0;
    float ratioCorr = 0;
    float yCluster = 0;
+   float yWeight = 0;
 
    ClassDef(RecoCluster, 1);
 };

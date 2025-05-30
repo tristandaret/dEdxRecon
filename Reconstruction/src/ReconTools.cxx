@@ -10,18 +10,6 @@
 #include "TPaveText.h"
 #include "Variables.h"
 
-/* Equivalent of numpy linspace (npoints uniformly spaced between start and end) */
-std::vector<double> linspace(double start, double end, int numPoints)
-{
-   std::vector<double> result(numPoints);
-   double step = (end - start) / (numPoints - 1);
-
-   for (int i = 0; i < numPoints; ++i) {
-      result[i] = start + i * step;
-   }
-   return result;
-}
-
 bool FourModulesInLine(const std::vector<int> &vec)
 {
    int bitmask = 0;
@@ -190,10 +178,7 @@ void Reconstruction::WFCorrection(const std::string &OutCorr)
    tge_WFvsLength->Fit(A_corr, "RQ", "0", 0, L_phi);
 
    // Saving
-   std::string out_root =
-      OutCorr.substr(0, OutCorr.length() - 5) + "_WFmax_correction_v9i9_v2.root";
-   std::cout << "Correction output: " << out_root << std::endl;
-   TFile *pfileROOT_corr = new TFile(out_root.c_str(), "RECREATE");
+   TFile *pfileROOT_corr = new TFile(corrFuncPath.c_str(), "RECREATE");
    h2f_WFvsLength->Write();
    A_corr->Write();
    tge_WFvsLength->Write();
@@ -453,71 +438,8 @@ void SetStage3Cut_CSV(const std::string &filename, const std::string &targetWord
    file.close();
 }
 
-// General functions
-// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// Find if a value is in a vector
-bool is_in(std::vector<double> v, double val)
-{
-   if (std::find(v.begin(), v.end(), val) != v.end())
-      return true;
-   else
-      return false;
-}
-
 // General Math
 // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// Mean of vector
-float mean(const std::vector<float> &values)
-{
-   float sum = 0.0;
-   for (const float &value : values) {
-      sum += value;
-   }
-
-   return sum / values.size();
-}
-
-TF1 *Fit1Gauss(TH1F *h1F)
-{
-   return Fit1Gauss(h1F, 2);
-}
-TF1 *Fit1Gauss(TH1F *h1F, float range)
-{
-   TF1 *gausn = new TF1("gausn", "gausn");
-   float mean = h1F->GetBinCenter(h1F->GetMaximumBin());
-   float std = h1F->GetRMS();
-   float max = mean + 1.8 * std;
-   float min = mean - 1.8 * std;
-   h1F->Fit("gausn", "Q", "0", min, max);
-
-   TF1 *g1 = h1F->GetFunction("gausn");
-   mean = g1->GetParameter(1);
-   std = g1->GetParameter(2);
-   max = mean + 1.7 * std;
-   min = mean - 1.7 * std;
-   h1F->Fit("gausn", "Q", "0", min, max);
-
-   TF1 *g2 = h1F->GetFunction("gausn");
-   mean = g2->GetParameter(1);
-   std = g2->GetParameter(2);
-   max = mean + 1.6 * std;
-   min = mean - 1.6 * std;
-   h1F->Fit("gausn", "Q", "0", min, max);
-
-   TF1 *g3 = h1F->GetFunction("gausn");
-   mean = g3->GetParameter(1);
-   std = g3->GetParameter(2);
-   max = mean + range * std;
-   min = mean - range * std;
-   h1F->Fit("gausn", "Q", "0", min, max);
-
-   TF1 *tf1 = h1F->GetFunction("gausn");
-   delete gausn;
-
-   return tf1;
-}
 
 TF1 *Fit2Gauss(TH1F *h1F)
 {
@@ -877,13 +799,14 @@ void local_params(Pad *pPad, const Track *pTrack, float &d, float &dd, float &ph
 
    // if(x[0] and dd_compute){
    //	std::cout << std::setprecision(3) << "x_in: "	<< x[0]*1000 << " +- " << dx[0]*1000
-   //<< " | "; 	std::cout << std::setprecision(3) << "y_in: "	<< y[0]*1000 << " +- " <<
-   //dy[0]*1000 << " | "; 	std::cout << std::setprecision(3) << "x_out: " << x[1]*1000 << "
+   //<< " | "; 	std::cout << std::setprecision(3) << "y_in: "	<< y[0]*1000 << " +- "
+   //<< dy[0]*1000 << " | "; 	std::cout << std::setprecision(3) << "x_out: " << x[1]*1000
+   // << "
    //+- " << dx[1]*1000 << " | "; 	std::cout << std::setprecision(3) << "y_out: " <<
-   //y[1]*1000 << " +- " << dy[1]*1000 << " | "; 	std::cout << std::setprecision(3) << "q:
-   //"	<< q*1000	<< " +- " << dq*1000	<< " | "; 	std::cout << std::setprecision(3) <<
-   //"m: "	<< m		<< " +- " << dm		<< " | "; 	std::cout << std::setprecision(3) <<
-   //"d: "	<< d*1000	<< " +- " << dd*1000	<< std::endl;
+   // y[1]*1000 << " +- " << dy[1]*1000 << " | "; 	std::cout << std::setprecision(3) <<
+   // "q: "	<< q*1000	<< " +- " << dq*1000	<< " | "; 	std::cout << std::setprecision(3)
+   //<< "m: "	<< m		<< " +- " << dm		<< " | "; 	std::cout << std::setprecision(3)
+   //<< "d: "	<< d*1000	<< " +- " << dd*1000	<< std::endl;
    // }
 }
 
@@ -920,17 +843,6 @@ float trk_len(Module *pModule, const Track *pTrack)
 // ROOT
 // /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// Draw TH1
-void DrawTH1(const std::string &OutDir, TH1 *h1)
-{
-   TCanvas *pCanTH1 = new TCanvas("pCanTH1", "pCanTH1", 1800, 1200);
-   pCanTH1->cd();
-   h1->SetLineWidth(4);
-   h1->Draw("hist");
-   pCanTH1->SaveAs(OutDir.c_str());
-   delete pCanTH1;
-}
-
 // Draw TH2
 void DrawTH2(const std::string &OutDir, TH2 *h2)
 {
@@ -966,71 +878,4 @@ TGraph *Swapped_graph(TH1 *h1)
       gr->SetPoint(n, y, x);
    }
    return gr;
-}
-
-double GetResoError(TF1 *tf1)
-{
-   return GetResoError(tf1, 1, 2);
-}
-double GetResoError(TF1 *tf1, const int &mu, const int &sigma)
-{
-   double mean = tf1->GetParameter(mu);
-   double std = tf1->GetParameter(sigma);
-   double dmean = tf1->GetParError(mu);
-   double dstd = tf1->GetParError(sigma);
-   return (std * dmean / (mean * mean) + dstd / mean) * 100;
-}
-
-double GetSeparation(const float &mean1, const float &std1, const float &mean2,
-                     const float &std2)
-{
-   float separation =
-      std::fabs(mean1 - mean2) / std::sqrt((std::pow(std1, 2) + std::pow(std2, 2)) / 2);
-   return separation;
-}
-
-double GetSeparationError(const float &mean1, const float &std1, const float &dmean1,
-                          const float &dstd1, const float &mean2, const float &std2,
-                          const float &dmean2, const float &dstd2)
-{
-   float mu_part = (pow(dmean1, 2) + pow(dmean2, 2)) / (pow(std1, 2) + pow(std2, 2));
-   float sigma_part = pow(mean1 - mean2, 2) *
-                      (pow(std1, 2) * pow(dstd1, 2) + pow(std2, 2) * pow(dstd2, 2)) /
-                      pow(pow(std1, 2) + pow(std2, 2), 3);
-   float err = sqrt(2) * sqrt(mu_part + sigma_part);
-   return err;
-}
-
-void PrintResolution(TH1 *th1, TCanvas *pCanvas)
-{
-   return PrintResolution(th1, pCanvas, 0.05, 0.7, kBlack, " ");
-}
-void PrintResolution(TH1 *th1, TCanvas *pCanvas, float NDCx, float NDCy, Color_t color,
-                     const std::string &title)
-{
-   TF1 *tf1 = th1->GetFunction("gausn");
-   double xMax = pCanvas->GetUxmax();
-   double yMax = pCanvas->GetUymax();
-   TPaveText *pPaveText = new TPaveText(NDCx, NDCy, NDCx + 0.3, NDCy + 0.3, "NDC");
-   pPaveText->SetFillStyle(0);
-   pPaveText->SetTextAlign(12);
-   pPaveText->SetLineColor(color);
-   pPaveText->SetTextColor(color);
-   pPaveText->SetShadowColor(0);
-   pPaveText->SetLineWidth(1.5);
-
-   float mu = tf1->GetParameter(1);
-   float dmu = tf1->GetParError(1);
-   float sigma = tf1->GetParameter(2);
-   float dsigma = tf1->GetParError(2);
-   float reso = tf1->GetParameter(2) / tf1->GetParameter(1) * 100;
-   float dreso = GetResoError(tf1);
-
-   pPaveText->AddText(Form("%s (%d entries)", title.c_str(), (int)th1->GetEntries()));
-   pPaveText->AddText(Form("#frac{#sigma}{#mu}	= %.2f #pm %.2f %%", reso, dreso));
-   pPaveText->AddText(Form("#mu	= %.0f #pm %.0f", mu, dmu));
-   pPaveText->AddText(Form("#sigma	= %.1f #pm %.1f", sigma, dsigma));
-   pPaveText->GetLine(0)->SetTextFont(22);
-   pPaveText->DrawClone();
-   delete pPaveText;
 }

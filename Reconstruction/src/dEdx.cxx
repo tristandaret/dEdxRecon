@@ -2,6 +2,7 @@
 #include "LUTs.h"
 #include "ReconTools.h"
 #include "Variables.h"
+#include "Misc_Functions.h"
 
 #include "Util.h"
 
@@ -81,7 +82,7 @@ void Reconstruction::dEdx::Reconstruction()
 
    // Log info
    std::cout << "dataFile:			  " << v_datafiles.back() << std::endl;
-   std::cout << "drawout_scanpath:   " << drawout_scanpath << std::endl;
+   std::cout << "drawoutScanPath:   " << drawoutScanPath << std::endl;
    std::cout << "root output file:   " << rootout_file << std::endl;
    std::cout << "tag:                " << tag << std::endl;
    std::cout << "comment:            " << comment << std::endl;
@@ -159,8 +160,15 @@ void Reconstruction::dEdx::Reconstruction()
          delete pEvent;
          continue;
       }
-
       p_recoevent->selected = true;
+
+      // Cluster display
+      if (iEvent < 1) {
+         std::string clusterDrawOutput = drawoutRunPath + "ClusterDisplay";
+         MakeMyDir(clusterDrawOutput);
+         NewClusterDisplay(pEvent, clusterDrawOutput, tag, PT, TB);
+         NewClusterDisplayMinimal(pEvent, clusterDrawOutput, tag);
+      }
 
       // Module loop
       for (iMod = 0; iMod < NMod; iMod++) {
@@ -216,7 +224,8 @@ void Reconstruction::dEdx::Reconstruction()
             p_recocluster->ADCmax_base = pCluster->Get_Acluster();
             p_recocluster->ALead_base = pCluster->Get_AMaxLeading();
             p_recocluster->TLead = pCluster->Get_TMaxLeading();
-            p_recocluster->yCluster = pCluster->Get_YTrack();
+            p_recocluster->yCluster = pCluster->Get_YTrack() * 100; // in cm
+            p_recocluster->yWeight = pCluster->Get_YWeight() * 100; // in cm
 
             // Loop On Pads
             int NPads = pCluster->Get_NberOfPads();
@@ -230,6 +239,9 @@ void Reconstruction::dEdx::Reconstruction()
                waveform_pad = pPad->Get_vADC();
                p_recopad->ix = pPad->Get_iX();
                p_recopad->iy = pPad->Get_iY();
+               p_recopad->xPad = pPad->Get_XPad() * 100; // in cm
+               p_recopad->yPad = pPad->Get_YPad() * 100; // in cm
+               p_recopad->dy = p_recocluster->yCluster - pPad->Get_YPad() * 100;
 
                // RC correction
                switch (fcorrectRC) {
