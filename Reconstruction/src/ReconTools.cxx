@@ -217,7 +217,7 @@ TF1 *corr_func(const std::string &EventFile, const std::string &Tag, const int &
       return corr_func;
 
    // correctWF = 0: get a single file to apply the same correction for all the files
-   if (correctWF == 0) {
+   if (correctWF == 0 or correctWF == 4) {
       int angle;
       if ((angle = filename.find("30")) != (int)std::string::npos or
           (angle = filename.find("45")) != (int)std::string::npos)
@@ -228,10 +228,17 @@ TF1 *corr_func(const std::string &EventFile, const std::string &Tag, const int &
    }
 
    // correctWF = 1: get the correction function from the file
-   std::string filename_corr = filename + "_WFmax_correction_v9i9_v2.root";
+   std::string filename_corr = filename + "_WFCorrFunc.root";
    TFile *pfile = new TFile(filename_corr.c_str(), "READ");
    corr_func = pfile->Get<TF1>("A_corr");
    pfile->Close();
+
+   // correctWF = 4: get a single file to apply the same correction for all the files and shift it by -100
+   if (correctWF == 4) {
+      corr_func->SetParameter(0, corr_func->GetParameter(0) - 100);
+      corr_func->SetNameTitle("A_corr_shifted", "A_corr_shifted");
+   }
+
    std::cout << "correction function: " << filename_corr << std::endl;
    std::cout << std::setprecision(2)
              << "WF correction parameters: " << corr_func->GetParameter(0) << " | "

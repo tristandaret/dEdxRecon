@@ -123,7 +123,7 @@ Event *Uploader_MockUp_V2::GiveMe_Event(const int &iEvent, const int &ModuleNber
                pPad->Set_ADC(iTimeBinProper, ADCProper);
          }
          if (CloseWF == 1)
-            pPad->Wf_DoClosure();
+            pPad->WF_DoClosure();
 
          pPad->Set_Data_2Use(Data_to_Use);
 

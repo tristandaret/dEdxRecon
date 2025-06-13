@@ -148,7 +148,7 @@ Event *Uploader_ERAM01::GiveMe_Event(const int &iEvent, const int &ModuleNber_In
                pPad->Set_ADC(iTimeBinProper, ADCProper);
          }
          if (CloseWF == 1)
-            pPad->Wf_DoClosure();
+            pPad->WF_DoClosure();
 
          pPad->Set_Data_2Use(Data_to_Use);
 

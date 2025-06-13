@@ -74,7 +74,7 @@ public:
    void Clear_ADC(); // Reset ADC set
    void Set_ADC(const int &iTimeb,
                 const int &ADC); // Set ADC set
-   void Wf_DoClosure();          // Closure: compute max amplitude and time
+   void WF_DoClosure();          // Closure: compute max amplitude and time
 
    std::vector<int> Get_vADC() const; // Get ADC as vector
 

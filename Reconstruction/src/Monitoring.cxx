@@ -33,10 +33,10 @@ int dedx = 0;
 int Draw_Control = 0;
 int Draw_dEdx = 0;
 int Draw_Comparison = 0;
-int Draw_Corrections = 1;
+int Draw_Corrections = 0;
 
-int Draw_DESY21SingleScan = 0;
-int Draw_DESY21MultScan = 0;
+int Draw_DESY21SingleScan = 1;
+int Draw_DESY21MultScan = 1;
 int Draw_CERN22Scan = 0;
 
 } // namespace Reconstruction
@@ -47,7 +47,7 @@ void Reconstruction::Monitoring()
    comment = "";
    gErrorIgnoreLevel = kInfo;
 
-   Correction(1, 1, 2, 1, 1);
+   Correction(1, 1, 4, 1, 1);
 
    // Energy scan using the prototype (ERAM 18)
    if (prototype) {
@@ -319,6 +319,8 @@ void Reconstruction::Correction(const int &corrRC, const int &corrGain, const in
       comment = comment + "_WF2HAT";
    if (corrWF == 3)
       comment = comment + "_WFoff";
+   if (corrWF == 4)
+      comment = comment + "_WFcorrm100";
 
    fcorrectDrift = corrDrift;
    if (corrDrift == 0)
@@ -384,6 +386,9 @@ void Reconstruction::DefaultAnalysis()
    MakeMyDir(drawoutRunPath);
    rootout_file = drawoutRunPath + tag + comment + ".root";
    if (tag.find("diag") == std::string::npos) {
+      std::cout << "comment:	" << comment << std::endl;
+      std::cout << "tag:		" << tag << std::endl;
+      std::cout << "rootout:	" << rootout_file << std::endl;
       if (comment.find("WF0") != std::string::npos)
          rootout_file.erase(rootout_file.find("_WF0"), 4);
       if (comment.find("WF2HAT") != std::string::npos)
@@ -392,6 +397,8 @@ void Reconstruction::DefaultAnalysis()
          rootout_file.erase(rootout_file.find("_WFoff"), 6);
       if (comment.find("corrv2") != std::string::npos)
          rootout_file.erase(rootout_file.find("_corrv2"), 7);
+      if (comment.find("corrm100") != std::string::npos)
+         rootout_file.erase(rootout_file.find("_WFcorrm100"), 11);
    }
    std::cout << "rootout:	" << rootout_file << std::endl;
    v_rootout_files.push_back(rootout_file);
@@ -399,7 +406,7 @@ void Reconstruction::DefaultAnalysis()
    // Correction functions
    if (tag.find("diag") != std::string::npos) {
       corrFuncPath = v_datafiles.back().substr(0, v_datafiles.back().length() - 5) +
-                     "_WFmax_correction_v9i9_v2.root";
+                     "_WFCorrFunc.root";
       vcorrFuncPaths.push_back(corrFuncPath);
       if (correction_wf) {
          p_uploader = GiveMe_Uploader(intUploader, v_datafiles.back());

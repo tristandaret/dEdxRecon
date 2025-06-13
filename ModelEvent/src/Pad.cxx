@@ -327,9 +327,9 @@ void Pad::Set_ADC(const int &iTimeb, const int &ADC)
    v_ADC.push_back(ADC);
    v_iTimeb.push_back(iTimeb);
 }
-void Pad::Wf_DoClosure()
+void Pad::WF_DoClosure()
 {
-   //		std::cout << " Pad::Wf_DoClosure "
+   //		std::cout << " Pad::WF_DoClosure "
    //				<< "	"
    //				<< "	Before Get_A_T_Max_WF"
    //				<< std::endl;
@@ -337,7 +337,7 @@ void Pad::Wf_DoClosure()
    m_TMax_WF = 0;
    Get_A_T_Max_WF(m_AMax_WF, m_TMax_WF);
 
-   //		std::cout << " Pad::Wf_DoClosure "
+   //		std::cout << " Pad::WF_DoClosure "
    //				<< "	"
    //				<< "	Before Get_A_T_Max_WF_01"
    //				<< std::endl;
@@ -345,7 +345,7 @@ void Pad::Wf_DoClosure()
    m_TMax_WF_01 = 0;
    Get_A_T_Max_WF_01(m_AMax_WF_01, m_TMax_WF_01);
 
-   //		std::cout << " Pad::Wf_DoClosure "
+   //		std::cout << " Pad::WF_DoClosure "
    //				<< "	"
    //				<< "	Before Get_A_T_Max_FIT"
    //				<< std::endl;
@@ -353,7 +353,7 @@ void Pad::Wf_DoClosure()
    m_TMax_FIT = 0;
    Get_A_T_Max_FIT(m_AMax_FIT, m_TMax_FIT);
 
-   //		std::cout << " Pad::Wf_DoClosure "
+   //		std::cout << " Pad::WF_DoClosure "
    //				<< "	"
    //				<< "	After Get_A_T_Max_FIT"
    //				<< std::endl;

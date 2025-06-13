@@ -179,7 +179,7 @@ void Reconstruction::DrawOuts::DESY21ScanDraw()
 
    // Variable to get the index of the first scan to draw
    int firstScan = 0;
-   int nLegEntries = 2 * nScans; // Wf and XP for each scan
+   int nLegEntries = 2 * nScans; // WF and XP for each scan
 
    // Shift index if we don't draw all scans
    if (drawMultiScans == 0) {
@@ -1553,14 +1553,14 @@ void Reconstruction::DrawOuts::AmplitudeVSLength()
    legAll.SetTextColor(kBlue - 1);
    legAll.SetNColumns(3);
    std::vector<TGraph *> vptglegAll;
-   for(int i = 0; i < 3; i++) {
+   for (int i = 0; i < 3; i++) {
       TGraph *tmp = new TGraph();
       tmp->SetLineStyle(linestyles[i]);
       tmp->SetLineWidth(3);
       legAll.AddEntry(tmp, Form("%d mm", drift_arr[i]), "l");
       vptglegAll.push_back(tmp);
    }
-   for(int i = 0; i < 3; i++) {
+   for (int i = 0; i < 3; i++) {
       TGraph *tmp = new TGraph();
       tmp->SetLineColor(colors[i]);
       tmp->SetLineWidth(3);
@@ -1620,6 +1620,18 @@ void Reconstruction::DrawOuts::AmplitudeVSLength()
       TF1 *ptf1CorrFunc30 = TFileCorrFunc30->Get<TF1>("A_corr");
       TF1 *ptf1CorrFunc40 = TFileCorrFunc40->Get<TF1>("A_corr");
       TF1 *ptf1CorrFunc45 = TFileCorrFunc45->Get<TF1>("A_corr");
+
+      // Print all parameters of each TF1
+      std::cout << "TF1 parameters for drift " << drift_arr[i] << " mm:" << std::endl;
+      std::cout << " - #varphi = " << phi_arr[0] << " degrees: ";
+      ptf1CorrFunc30->Print();
+      std::cout << " - #varphi = " << phi_arr[1] << " degrees: ";
+      ptf1CorrFunc40->Print();
+      std::cout << " - #varphi = " << phi_arr[2] << " degrees: ";
+      ptf1CorrFunc45->Print();
+      std::cout << " - Default: ";
+      ptf1CorrVlada->Print();
+      std::cout << std::endl;
 
       // Set graphic style of TF1
       Graphic_setup(ptf1CorrFunc30, 3, kRed, 1);
@@ -1747,7 +1759,7 @@ void Reconstruction::DrawOuts::AmplitudeVSLength()
    TLegend legRatio(0.5, 0.6, 0.95, 0.94);
    legRatio.SetTextSize(0.05);
    legRatio.SetTextColor(kBlue - 1);
-   Color_t col[] = {kRed - 9, kRed - 7, kRed, kRed + 2, kRed + 4};
+   Color_t col[] = {kBlue - 9, kBlue - 7, kBlue, kBlue + 2, kBlue + 4};
    ptf1CorrFuncRef->SetParameter(0, ptf1CorrFuncRef->GetParameter(0) - 200);
    for (int i = 0; i < 5; i++) {
       TGraph *tg = new TGraph();
