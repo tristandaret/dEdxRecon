@@ -320,13 +320,15 @@ void Reconstruction::dEdx::Reconstruction()
                   p_recopad->T0 = 48;
                   p_recopad->driftDistance = 3.12 * (p_recopad->TMax - p_recopad->T0);
                } // 48 =	44(time shift) +	5(PT)
+               p_recopad->driftDistance = std::max(
+                  p_recopad->driftDistance, (float)0.0); // avoid negative drift distance
 
                // Get the LUT ratio
                p_recopad->ratioDrift =
-                  p_lut->getRatio(fabs(p_recopad->phi), fabs(p_recopad->d), p_recopad->RC,
-                                  p_recopad->driftDistance);
+                  p_lut->getRatio(Dt, p_recopad->RC, p_recopad->driftDistance,
+                                  fabs(p_recopad->d), fabs(p_recopad->phi));
                p_recopad->ratioFile = p_lut->getRatio(
-                  fabs(p_recopad->phi), fabs(p_recopad->d), p_recopad->RC, driftDist);
+                  Dt, p_recopad->RC, driftDist, fabs(p_recopad->d), fabs(p_recopad->phi));
 
                if (fcorrectDrift == 1)
                   p_recopad->ratio = p_recopad->ratioDrift;

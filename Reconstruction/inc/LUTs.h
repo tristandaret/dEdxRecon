@@ -91,34 +91,34 @@ private:
 class LUT {
 public:
    /* Constructor */
-   LUT(const int &transDiffCoeff, const int &peakingTime);
+   LUT(const int &transDiffCoeffB, const int &transDiffCoeffnoB, const int &peakingTime);
    LUT(const std::string &file);
 
    virtual ~LUT();
 
-   float getRatio(const float &phi, const float &d, const float &RC, const float &z);
+   float getRatio(const int &Dt, const int &RC, const float &drift, const float &impact,
+                  const float &angle);
 
 private:
-   //	std::string fhatReconRoot;
-   //	std::string fhatReconConfig;
    std::string fFile_LUT;
-   //	int fTransDiffCoeff	=
-   //ND::TOARuntimeParams::Get().GetParameterI("hatRecon.TransDiffCoeff");
-   int fTransDiffCoeff = 350;
 
    static constexpr float PAD_DIAG = 15.20; // sqrt(pow(11.28,2) + pow(10.19, 2))
 
-   static const int sN_PHI = 150;
-   static const int sN_D = 150;
-   static const int sN_RC = 41;
-   static const int sN_Z = 21;
+   // Number of discrete steps in each dimension of the Look Up Table
+   static const int SNSTEPS_TRANS = 2;
+   static const int SNSTEPS_RC = 2;
+   static const int SNSTEPS_DRIFT = 101;
+   static const int SNSTEPS_IMPACT = 250;
+   static const int SNSTEPS_PHI = 250;
 
-   float fValue[sN_PHI][sN_D][sN_RC][sN_Z];
+   static float LUTValues[SNSTEPS_TRANS][SNSTEPS_RC][SNSTEPS_DRIFT][SNSTEPS_IMPACT]
+                         [SNSTEPS_PHI];
 
-   static constexpr float sSTEP_PHI = (90 - 2e-6) / (sN_PHI - 1);
-   static constexpr float sSTEP_D = PAD_DIAG / 2 / (sN_D - 1);
-   static constexpr float sSTEP_RC = 200. / (sN_RC - 1);
-   static constexpr float sSTEP_Z = 1000. / (sN_Z - 1);
+   float stepSizeTrans = 37;             // 286 -> 323 or 310->350
+   static constexpr float sSTEP_RC = 46; // 112->158, only 2 values
+   static constexpr float sSTEP_PHI = 90. / (SNSTEPS_PHI - 1);
+   static constexpr float sSTEP_IMPACT = (PAD_DIAG / 2) / (SNSTEPS_IMPACT - 1);
+   static constexpr float sSTEP_DRIFT = 1000. / (SNSTEPS_DRIFT - 1);
 
    void Load();
 
@@ -127,12 +127,16 @@ private:
    TFile *pFile_LUT;
    TTree *pTree_LUT;
 
-   // Leaves
+   // Branches
    float fweight;
-   float fd;
-   float fphi;
+   float fDt;
    float fRC;
-   float fz;
+   float fdrift;
+   double fd;
+   double fphi;
+
+   int DtwithB;
+   int DtwithoutB;
 };
 
 } // namespace Reconstruction

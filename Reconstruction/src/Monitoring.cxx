@@ -22,8 +22,8 @@ int CERN_drift = 0;
 
 int DESY_drift = 0;
 int DESY_row = 0;
-int DESY_phi = 1;
-int DESY_theta = 0;
+int DESY_phi = 0;
+int DESY_theta = 1;
 
 // Computations
 int correction_wf = 0;
@@ -31,7 +31,7 @@ int dedx = 0;
 
 // DrawOuts
 int Draw_Control = 0;
-int Draw_dEdx = 0;
+int Draw_dEdx = 1;
 int Draw_Comparison = 0;
 int Draw_Corrections = 0;
 
@@ -39,15 +39,18 @@ int Draw_DESY21SingleScan = 1;
 int Draw_DESY21MultScan = 1;
 int Draw_CERN22Scan = 0;
 
+int DtwithBhere = 286;
+int DtwithoutBhere = 323;
+
 } // namespace Reconstruction
 
 void Reconstruction::Monitoring()
 {
-   drawWhichMethods = 1; // 0: both methods | 1: only WF | 2: only XP
+   drawWhichMethods = 0; // 0: both methods | 1: only WF | 2: only XP
    comment = "";
    gErrorIgnoreLevel = kInfo;
 
-   Correction(1, 1, 4, 1, 1);
+   Correction(1, 1, 1, 1, 1);
 
    // Energy scan using the prototype (ERAM 18)
    if (prototype) {
@@ -146,6 +149,8 @@ void Reconstruction::Monitoring()
    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    // z scan scan with DESY21
    if (DESY_drift) {
+      Dt = DtwithBhere;
+      // int PT_arr[] = {200, 412}; // 200, 412
       int PT_arr[] = {200, 412}; // 200, 412
       vScanVals.insert(vScanVals.end(),
                        {50, 150, 250, 350, 450, 550, 650, 750, 850, 950});
@@ -155,7 +160,7 @@ void Reconstruction::Monitoring()
          PT = iPT; // PT is a shared variable in the namespace so it's important to update
                    // it here
          Settings("DESY21", "Drift", Form("Drift_PT%i", PT), Form("%i ns", PT),
-                  "Drift distance (mm)", 1, 0, PT, 310, 450, 50);
+                  "Drift distance (mm)", 1, 0, PT, Dt, 450, 50);
 
          for (int iz = 0; iz < (int)std::size(vScanLabels); iz++) {
             const char *z = vScanLabels[iz].c_str();
@@ -163,7 +168,8 @@ void Reconstruction::Monitoring()
             v_datafiles.push_back(
                dataScanPath +
                Form("Drift_scan_PT%i/z_360_275_%i_02T_26_%s_iter9.root", iPT, iPT, z));
-            vTags.push_back(Form("%s_%s_Z%s", testbeam.c_str(), scanName.c_str(), z));
+            vTags.push_back(
+               Form("%s_%s_Z%s_Dt%d", testbeam.c_str(), scanName.c_str(), z, Dt));
 
             DefaultAnalysis();
          }
@@ -178,7 +184,8 @@ void Reconstruction::Monitoring()
 
    // y scan scan with DESY21
    if (DESY_row) {
-      Settings("DESY21", "", "Row", "", "Vertical beam position (mm)", 1, 0, 412, 310, 90,
+      Dt = DtwithBhere;
+      Settings("DESY21", "", "Row", "", "Vertical beam position (mm)", 1, 0, 412, Dt, 90,
                50);
       vScanVals.insert(vScanVals.end(),
                        {-140, -120, -100, -80, -60, -40, 0, 20, 40, 60, 80});
@@ -188,8 +195,8 @@ void Reconstruction::Monitoring()
       for (int y = 0; y < (int)std::size(vScanLabels); y++) {
          v_datafiles.push_back(
             dataScanPath + Form("Row_scan/Y%s_Z0_iter9.root", vScanLabels[y].c_str()));
-         vTags.push_back(Form("%s_%s_Y%s", testbeam.c_str(), scanName.c_str(),
-                              vScanLabels[y].c_str()));
+         vTags.push_back(Form("%s_%s_Y%s_Dt%d", testbeam.c_str(), scanName.c_str(),
+                              vScanLabels[y].c_str(), Dt));
          DefaultAnalysis();
       }
       if (Draw_DESY21SingleScan)
@@ -205,10 +212,11 @@ void Reconstruction::Monitoring()
       std::vector<int> vScanValsreal = {0, 10, 20, 30, 30, 40, 45};
 
       for (int iz = 0; iz < (int)v_valdrift.size(); iz++) {
+         Dt = DtwithBhere;
          const char *z = v_strdrift[iz].c_str();
          Settings("DESY21", "Phi", Form("Phi_Z%s", z),
                   Form("%2i cm", v_valdrift[iz] / 10), "Track angle #varphi (#circ)", 1,
-                  0, 200, 310, v_valdrift[iz], 40);
+                  0, 200, Dt, v_valdrift[iz], 40);
 
          for (int ifile = 0; ifile < (int)std::size(vScanVals); ifile++) {
             int phi = vScanVals[ifile];
@@ -218,19 +226,19 @@ void Reconstruction::Monitoring()
                   dataScanPath +
                   Form("Drift_scan_PT200/z_360_275_200_02T_26_%s_iter9.root", z));
                vTags.push_back(
-                  Form("%s_%s_Phi%i", testbeam.c_str(), scanName.c_str(), phi));
+                  Form("%s_%s_Phi%i_Dt%d", testbeam.c_str(), scanName.c_str(), phi, Dt));
             } else if (ifile < 4) {
                v_datafiles.push_back(
                   dataScanPath +
                   Form("Phi_scan_z%s/phi_200_%i_z%s_ym60_iter9.root", z, phireal, z));
-               vTags.push_back(
-                  Form("%s_%s_Phi%i", testbeam.c_str(), scanName.c_str(), phireal));
+               vTags.push_back(Form("%s_%s_Phi%i_Dt%d", testbeam.c_str(),
+                                    scanName.c_str(), phireal, Dt));
             } else {
                v_datafiles.push_back(
                   dataScanPath + Form("Phi_scan_z%s/phi_200_%i_z%s_ym60_diag_iter9.root",
                                       z, phireal, z));
-               vTags.push_back(
-                  Form("%s_%s_Phi%i_diag", testbeam.c_str(), scanName.c_str(), phireal));
+               vTags.push_back(Form("%s_%s_Phi%i_diag_Dt%d", testbeam.c_str(),
+                                    scanName.c_str(), phireal, Dt));
             }
 
             DefaultAnalysis();
@@ -246,7 +254,8 @@ void Reconstruction::Monitoring()
 
    // Theta scan with DESY21
    if (DESY_theta) {
-      Settings("DESY21", "", "Theta", "", "Theta angle (#circ)", 1, 0, 200, 310, 350, 40);
+      Dt = DtwithBhere;
+      Settings("DESY21", "", "Theta", "", "#theta angle (#circ)", 1, 0, 200, Dt, 350, 40);
       selectionSet = "Sel_DESY21_theta";
       vScanVals.insert(vScanVals.end(), {-45, -20, 20});
       vScanLabels.insert(vScanLabels.end(), {"m45", "m20", "20"});
@@ -255,7 +264,8 @@ void Reconstruction::Monitoring()
          const char *theta = vScanLabels[ifile].c_str();
          v_datafiles.push_back(
             dataScanPath + Form("Theta_scan/theta_%s_02T_z460_ym60_iter9.root", theta));
-         vTags.push_back(Form("%s_%s_%s", testbeam.c_str(), scanName.c_str(), theta));
+         vTags.push_back(
+            Form("%s_%s_%s_Dt%d", testbeam.c_str(), scanName.c_str(), theta, Dt));
 
          DefaultAnalysis();
       }
@@ -357,14 +367,24 @@ void Reconstruction::Settings(const std::string &testbeam_name,
    intUploader = uploader;
    moduleCase = modules;
    PT = peaking_time;
-   Dt = diffusion;
+   if (diffusion == 286) {
+      DtB = diffusion;
+      DtnoB = 323;
+   } else if (diffusion == 323) {
+      DtnoB = diffusion;
+      DtB = 286;
+   } else if (diffusion == 310) {
+      DtB = diffusion;
+      DtnoB = 350;
+   } else if (diffusion == 350) {
+      DtnoB = diffusion;
+      DtB = 310;
+   }
    driftDist = drift_dist;
    TB = timbin;
 
    if (dedx)
-      p_lut = new LUT(
-         Form("~/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi150_nd150_nRC41_nZ21.root",
-              Dt, PT));
+      p_lut = new LUT(DtB, DtnoB, PT);
 }
 
 void Reconstruction::ClearVectors()
@@ -483,10 +503,10 @@ void Reconstruction::DrawCERN22Scan()
 //	MakeMyDir(drawoutScanPath);
 //	intUploader = 1;
 //	moduleCase =	0;
-//	PT = 200; Dt = 310;; TB = 40;
+//	PT = 200; DtB = 310;; TB = 40;
 //	if (control or dedx) p_lut = new
 // LUT(Form("~/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi150_nd150_nRC41_nZ21.root",
-// Dt, PT)); 	std::string B_arr[] = {"0", "04", "06"}; 	std::string Z_arr[] = {"60",
+// DtB, PT)); 	std::string B_arr[] = {"0", "04", "06"}; 	std::string Z_arr[] = {"60",
 // "460", "860"}; 	int vScanVals[] = {150, 550, 950}; 	for(int j = 0; j < 3; j++){
 // const char* B = B_arr[j].c_str(); 		for(int i = 0; i < 3; i++){ const char* z =
 // Z_arr[i].c_str(); 		driftDist = vScanVals[i];
@@ -514,10 +534,10 @@ void Reconstruction::DrawCERN22Scan()
 //	selectionSet = "Sel_DESY21";
 //	intUploader = 1;
 //	moduleCase =	0;
-//	PT = 412; Dt = 310; TB = 40; driftDist = 430;
+//	PT = 412; DtB = 310; TB = 40; driftDist = 430;
 //	if (control or dedx) p_lut = new
 // LUT(Form("~/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi150_nd150_nRC41_nZ21.root",
-// Dt, PT)); 	int phi_val[] = {0, 10, 20, 30, 40, 45}; 	int NFiles = 6; drawoutScanPath
+// DtB, PT)); 	int phi_val[] = {0, 10, 20, 30, 40, 45}; 	int NFiles = 6; drawoutScanPath
 // = drawoutPath +
 // "/DESY19_phi/"; 	MakeMyDir(drawoutScanPath); 	for (int ifile = 3; ifile < NFiles;
 // ifile++){ 		int phi = phi_val[ifile];
@@ -546,10 +566,10 @@ void Reconstruction::DrawCERN22Scan()
 //	MakeMyDir(drawoutScanPath);
 //	intUploader = 2;
 //	moduleCase = -1;
-//	PT = 412; Dt = 286; TB = 40; // PT = 400 actually
+//	PT = 412; DtB = 286; TB = 40; // PT = 400 actually
 //	if (control or dedx) p_lut = new
 // LUT(Form("~/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi150_nd150_nRC41_nZ21.root",
-// Dt, PT)); 	int zmax = 9; 	for (int zDrift = 0; zDrift < zmax; zDrift++){
+// DtB, PT)); 	int zmax = 9; 	for (int zDrift = 0; zDrift < zmax; zDrift++){
 //		//
 // v_datafiles.push_back(Form("../Data_MC/MC_zscan/z_400_nomDrift_%i0cm_MD_RC100_v3_iter4.root",
 // zDrift+1));
@@ -583,7 +603,7 @@ void Reconstruction::DrawCERN22Scan()
 //	MakeMyDir(drawoutScanPath);
 //	intUploader = 2;
 //	moduleCase = -1;
-//	PT = 412; Dt = 350; driftDist = 415; TB = 40;
+//	PT = 412; DtB = 350; driftDist = 415; TB = 40;
 
 //	int NFiles = 10;
 //	for (int iFile = 0; iFile < NFiles; iFile++){
@@ -616,14 +636,14 @@ void Reconstruction::DrawCERN22Scan()
 //	selectionSet = "Sel_DESY21";
 //	intUploader = 1;
 //	moduleCase =	0;
-//	Dt = 310; TB = 50;
+//	DtB = 310; TB = 50;
 //	int PT_arr[] = {200};
 //	for (int PT : PT_arr){
 //		drawoutScanPath = drawoutPath + Form("/DESY21_Drift/DESY21_Drift_PT%i_139V/", PT);
 //		MakeMyDir(drawoutScanPath);
 //	if (control or dedx) p_lut = new
 // LUT(Form("~/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi150_nd150_nRC41_nZ21.root",
-// Dt, PT)); 		int NFiles = 9; 		for (int zDrift = -1; zDrift < NFiles; zDrift++){
+// DtB, PT)); 		int NFiles = 9; 		for (int zDrift = -1; zDrift < NFiles; zDrift++){
 // if(zDrift == -1)
 //{v_datafiles.push_back(dataScanPath +
 // Form("zscan_PT%i_139V/z_360_139_%i_02T_26_m40_iter0.root", PT, PT));

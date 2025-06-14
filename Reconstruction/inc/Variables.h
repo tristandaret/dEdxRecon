@@ -46,6 +46,8 @@ extern int intUploader;
 extern int moduleCase; // DESY21:0 | CERN22:-1
 extern int PT;         // Peaking time (ns)
 extern int Dt;         // Transverse diffusion coefficient (µm/sqrt(cm))
+extern int DtB;        // Transverse diffusion coefficient with B(µm/sqrt(cm))
+extern int DtnoB;      // Transverse diffusion coefficient without B(µm/sqrt(cm))
 extern int driftDist;  // drift distance (mm)
 extern int TB;         // timebin length (ns)
 extern int

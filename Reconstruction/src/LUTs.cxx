@@ -230,19 +230,33 @@ void Reconstruction::ERAMMaps::FillHoles()
             }
             v_sides.clear();
          } // iY
-      }    // iX
+      } // iX
    }
 }
 
 /* Look Up Tables for XP method
  * ------------------------------------------------------------------------------------------------------------------
  */
+
+float Reconstruction::LUT::LUTValues[Reconstruction::LUT::SNSTEPS_TRANS]
+                                    [Reconstruction::LUT::SNSTEPS_RC]
+                                    [Reconstruction::LUT::SNSTEPS_DRIFT]
+                                    [Reconstruction::LUT::SNSTEPS_IMPACT]
+                                    [Reconstruction::LUT::SNSTEPS_PHI];
+
 // Default constructor
-Reconstruction::LUT::LUT(const int &transDiffCoeff, const int &peakingTime)
+Reconstruction::LUT::LUT(const int &transDiffCoeffB, const int &transDiffCoeffnoB,
+                         const int &peakingTime)
 {
-   fFile_LUT =
-      Form("$HOME/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi150_nd150_nRC41_nZ21.root",
-           transDiffCoeff, peakingTime);
+   DtwithB = transDiffCoeffB;
+   DtwithoutB = transDiffCoeffnoB;
+   stepSizeTrans = fabs(DtwithB - DtwithoutB);
+   std::cout << "dEdx LUT: Dt with B = " << DtwithB
+             << " | Dt without B = " << DtwithoutB
+             << " | step size = " << stepSizeTrans << std::endl;
+   fFile_LUT = Form("~/Documents/Code/CPP/CPP_Projects/LUT_Maker/Output_LUT/"
+                    "dEdx_XP_LUT_Dt%d_%d_PT%d.root",
+                    transDiffCoeffB, transDiffCoeffnoB, peakingTime);
    std::cout << "dEdx LUT: LOADING " << fFile_LUT << std::endl;
    Load();
    std::cout << "dEdx LUT: LOADED" << std::endl;
@@ -261,106 +275,94 @@ Reconstruction::LUT::~LUT()
 {
    pFile_LUT->Close();
    delete pFile_LUT;
-   for (int i = 0; i < sN_PHI; i++)
-      for (int j = 0; j < sN_D; j++)
-         for (int k = 0; k < sN_RC; k++)
-            for (int l = 0; l < sN_Z; l++)
-               fValue[i][j][k][l] = 0;
 }
 
 // Load the LUTs
 void Reconstruction::LUT::Load()
 {
-   pFile_LUT = TFile::Open(fFile_LUT.c_str(), "READ");
-   pTree_LUT = (TTree *)pFile_LUT->Get("outTree");
-   pTree_LUT->SetBranchAddress("weight", &fweight);
-   pTree_LUT->SetBranchAddress("angle", &fphi);
-   pTree_LUT->SetBranchAddress("impact_param", &fd);
-   pTree_LUT->SetBranchAddress("RC", &fRC);
-   pTree_LUT->SetBranchAddress("drift_dist", &fz);
 
    // Initializing all values to 0
-   for (int i = 0; i < sN_PHI; i++)
-      for (int j = 0; j < sN_D; j++)
-         for (int k = 0; k < sN_RC; k++)
-            for (int l = 0; l < sN_Z; l++)
-               fValue[i][j][k][l] = 0;
+   for (int i = 0; i < SNSTEPS_TRANS; i++)
+      for (int j = 0; j < SNSTEPS_RC; j++)
+         for (int k = 0; k < SNSTEPS_DRIFT; k++)
+            for (int l = 0; l < SNSTEPS_IMPACT; l++)
+               for (int m = 0; m < SNSTEPS_PHI; m++)
+                  LUTValues[i][j][k][l][m] = 0;
 
-   int nentries = pTree_LUT->GetEntries();
-   int id, iphi, iRC, iz;
+   pFile_LUT = TFile::Open(fFile_LUT.c_str(), "READ");
+   TTree &ptree = *(TTree *)pFile_LUT->Get("treeLUTdEdx");
+   ptree.SetBranchAddress("scalefactor", &fweight);
+   ptree.SetBranchAddress("transvDiff", &fDt);
+   ptree.SetBranchAddress("RC", &fRC);
+   ptree.SetBranchAddress("drift", &fdrift);
+   ptree.SetBranchAddress("angle", &fphi);
+   ptree.SetBranchAddress("impact", &fd);
+
+   int nentries = ptree.GetEntries();
+   int iDt, iRC, idrift, id, iphi;
    for (int i = 0; i < nentries; i++) {
-      pTree_LUT->GetEntry(i);
+      ptree.GetEntry(i);
+      iDt = (int)std::round((fDt * pow(10, 3.5) - DtwithB) / stepSizeTrans);
+      iRC = (int)std::round((fRC - 112) / sSTEP_RC);
+      idrift = (int)std::round(fdrift / sSTEP_DRIFT);
+      id = (int)std::round(fd / sSTEP_IMPACT);
       iphi = (int)std::round((fphi - 1e-6) / sSTEP_PHI);
-      id = (int)std::round(fd / sSTEP_D);
-      iRC = (int)std::round((fRC - 50) / sSTEP_RC);
-      iz = (int)std::round(fz / sSTEP_Z);
-      fValue[iphi][id][iRC][iz] = fweight;
+      LUTValues[iDt][iRC][idrift][id][iphi] = fweight;
    }
 }
 
-float Reconstruction::LUT::getRatio(const float &phi, const float &d, const float &RC,
-                                    const float &z)
+float Reconstruction::LUT::getRatio(const int &Dt, const int &RC, const float &drift,
+                                    const float &impact, const float &angle)
 {
-   // Determine the indices of the 8 points surrounding the point of interest
-   float iphi = (phi - 1e-6) / sSTEP_PHI;
+   // keep double
+   int itransvDiff = (int)(Dt - DtwithB) / stepSizeTrans;
+   int iRC = (int)(RC - 112) / sSTEP_RC;
+   float idrift = drift / sSTEP_DRIFT;
+   float idrift_min =
+      std::min((double)std::floor(drift / sSTEP_DRIFT), (double)SNSTEPS_DRIFT - 1);
+   float idrift_max = std::max((double)std::ceil(drift / sSTEP_DRIFT), 0.);
+   float iphi = angle / sSTEP_PHI;
    float iphi_min =
-      std::min((float)std::floor((phi - 1e-6) / sSTEP_PHI), (float)sN_PHI - 1);
-   float iphi_max = std::max((float)std::ceil((phi - 1e-6) / sSTEP_PHI), (float)0.0);
-   float id = d / sSTEP_D;
-   float id_min = std::min((float)std::floor(d / sSTEP_D), (float)sN_D - 1);
-   float id_max = std::max((float)std::ceil(d / sSTEP_D), (float)0);
-   float iRC = (RC - 50) / sSTEP_RC;
-   float iRC_min = std::min((float)std::floor((RC - 50) / sSTEP_RC), (float)(sN_RC - 1));
-   float iRC_max = std::max((float)std::ceil((RC - 50) / sSTEP_RC), (float)0);
-   float iz = z / sSTEP_Z;
-   float iz_min = std::min((float)std::floor(z / sSTEP_Z), (float)(sN_Z - 1));
-   float iz_max = std::max((float)std::ceil(z / sSTEP_Z), (float)0);
+      std::min((double)std::floor(angle / sSTEP_PHI), (double)SNSTEPS_PHI - 1);
+   float iphi_max = std::max((double)std::ceil(angle / sSTEP_PHI), 0.);
+   float id = impact / sSTEP_IMPACT;
+   float id_min =
+      std::min((double)std::floor(impact / sSTEP_IMPACT), (double)SNSTEPS_IMPACT - 1);
+   float id_max = std::max((double)std::ceil(impact / sSTEP_IMPACT), 0.);
 
-   if (iz_min < 0) {
-      iz_min = 0;
-      iz_max = 0;
-   }
-   if (iphi_min < 0) {
-      iphi_min = 0;
-      iphi_max = 0;
-   }
-   if (id_min < 0) {
-      id_min = 0;
-      id_max = 0;
-   }
-   if (iRC_min < 0) {
-      iRC_min = 0;
-      iRC_max = 0;
-   }
-
-   // Determine the weights for the 8 points
-   float w_phi, w_d, w_RC, w_z;
-   if (iphi_min == iphi_max)
-      w_phi = 1;
+   // weights
+   double w_drift, w_d, w_phi;
+   if (idrift_min == idrift_max)
+      w_drift = 1;
    else
-      w_phi = 1 - (iphi - iphi_min) / (iphi_max - iphi_min);
+      w_drift = 1 - (idrift - idrift_min) / (idrift_max - idrift_min);
    if (id_min == id_max)
       w_d = 1;
    else
       w_d = 1 - (id - id_min) / (id_max - id_min);
-   if (iRC_min == iRC_max)
-      w_RC = 1;
+   if (iphi_min == iphi_max)
+      w_phi = 1;
    else
-      w_RC = 1 - (iRC - iRC_min) / (iRC_max - iRC_min);
-   if (iz_min == iz_max)
-      w_z = 1;
-   else
-      w_z = 1 - (iz - iz_min) / (iz_max - iz_min);
-   float interpolated_value = 0;
-   for (int i = 0; i < 2; ++i)
-      for (int j = 0; j < 2; ++j)
-         for (int k = 0; k < 2; ++k)
-            for (int l = 0; l < 2; ++l)
-               interpolated_value +=
-                  fValue[(int)iphi_min + i][(int)id_min + j][(int)iRC_min + k]
-                        [(int)iz_min + l] *
-                  (i == 0 ? w_phi : (1 - w_phi)) * (j == 0 ? w_d : (1 - w_d)) *
-                  (k == 0 ? w_RC : (1 - w_RC)) * (l == 0 ? w_z : (1 - w_z));
+      w_phi = 1 - (iphi - iphi_min) / (iphi_max - iphi_min);
 
-   return interpolated_value;
+   // Interpolation
+   float factor = 0;
+   factor += w_drift * w_d * w_phi *
+             LUTValues[itransvDiff][iRC][(int)idrift_min][(int)id_min][(int)iphi_min];
+   factor += w_drift * w_d * (1 - w_phi) *
+             LUTValues[itransvDiff][iRC][(int)idrift_min][(int)id_min][(int)iphi_max];
+   factor += w_drift * (1 - w_d) * w_phi *
+             LUTValues[itransvDiff][iRC][(int)idrift_min][(int)id_max][(int)iphi_min];
+   factor += w_drift * (1 - w_d) * (1 - w_phi) *
+             LUTValues[itransvDiff][iRC][(int)idrift_min][(int)id_max][(int)iphi_max];
+   factor += (1 - w_drift) * w_d * w_phi *
+             LUTValues[itransvDiff][iRC][(int)idrift_max][(int)id_min][(int)iphi_min];
+   factor += (1 - w_drift) * w_d * (1 - w_phi) *
+             LUTValues[itransvDiff][iRC][(int)idrift_max][(int)id_min][(int)iphi_max];
+   factor += (1 - w_drift) * (1 - w_d) * w_phi *
+             LUTValues[itransvDiff][iRC][(int)idrift_max][(int)id_max][(int)iphi_min];
+   factor += (1 - w_drift) * (1 - w_d) * (1 - w_phi) *
+             LUTValues[itransvDiff][iRC][(int)idrift_max][(int)id_max][(int)iphi_max];
+
+   return factor;
 }

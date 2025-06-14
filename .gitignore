@@ -5,4 +5,5 @@
 build
 OUT_Tristan_old
 OUT_Tristan
-OUT_Reconstruction
+OUT_Reconstruction/**/*.log
+OUT_Reconstruction/**/*.root

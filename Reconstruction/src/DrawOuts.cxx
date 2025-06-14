@@ -189,14 +189,15 @@ void Reconstruction::DrawOuts::DESY21ScanDraw()
    // Drawing settings
    if (drawMultiScans == 1)
       foutputFile = drawoutMultiScanPath + testbeam + "_" + multiScanName + comment +
-                    methodsString + ".pdf";
+                    methodsString + "_Dt" + std::to_string(Dt) + ".pdf";
    else
-      foutputFile = drawoutScanPath + scanName + comment + methodsString + ".pdf";
+      foutputFile = drawoutScanPath + scanName + comment + methodsString + "_Dt" + std::to_string(Dt) + ".pdf";
 
    // Styling
-   gPad->SetMargin(0.14, 0.03, 0.15, 0.04);
+   gPad->SetMargin(0.16, 0.03, 0.15, 0.04);
    gStyle->SetTitleSize(0.07, "xy");
    gStyle->SetLabelSize(0.07, "xy");
+   gStyle->SetTitleOffset(1.2, "y");
    int marksize = 9;
    int linesize = 3;
    gStyle->SetMarkerSize(marksize);
