@@ -17,17 +17,17 @@ Uploader *p_uploader;
 
 // Files to use
 int prototype = 0;
-int CERN_Escan = 0;
+int CERN_Escan = 1;
 int CERN_drift = 0;
 
 int DESY_drift = 0;
 int DESY_row = 0;
 int DESY_phi = 0;
-int DESY_theta = 1;
+int DESY_theta = 0;
 
 // Computations
 int correction_wf = 0;
-int dedx = 0;
+int dedx = 1;
 
 // DrawOuts
 int Draw_Control = 0;
@@ -35,9 +35,9 @@ int Draw_dEdx = 1;
 int Draw_Comparison = 0;
 int Draw_Corrections = 0;
 
-int Draw_DESY21SingleScan = 1;
-int Draw_DESY21MultScan = 1;
-int Draw_CERN22Scan = 0;
+int Draw_DESY21SingleScan = 0;
+int Draw_DESY21MultScan = 0;
+int Draw_CERN22Scan = 1;
 
 int DtwithBhere = 286;
 int DtwithoutBhere = 323;
@@ -94,7 +94,8 @@ void Reconstruction::Monitoring()
 
    // Energy scan using the mockup
    if (CERN_Escan) {
-      Settings("CERN22", "", "Energy", "", "Energy (GeV)", 4, -1, 412, 350, 415, 40);
+      Dt = DtwithoutBhere;
+      Settings("CERN22", "", "Energy", "", "Energy (GeV)", 4, -1, 412, Dt, 415, 40);
       vScanVals.insert(vScanVals.end(), {0.5, 0.75, 1, 1.25, 1.5, 0.75, 1, 1.5, 0.75,
                                          1.25, 1.5, 1, 1.25, 1.5});
       vScanLabels.insert(vScanLabels.end(),
@@ -116,8 +117,8 @@ void Reconstruction::Monitoring()
          // for(int iEnergy = 0; iEnergy < 1; iEnergy++){
          v_datafiles.push_back(dataScanPath + "All_ERAMS_350V_412ns_" +
                                vScanLabels[iEnergy] + v_suffix[iEnergy]);
-         vTags.push_back(Form("%s_%s_%s", testbeam.c_str(), scanName.c_str(),
-                              vScanLabels[iEnergy].c_str()));
+         vTags.push_back(Form("%s_%s_%s_Dt%d", testbeam.c_str(), scanName.c_str(),
+                              vScanLabels[iEnergy].c_str(), Dt));
 
          DefaultAnalysis();
       }

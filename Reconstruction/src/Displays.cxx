@@ -851,11 +851,11 @@ void NewClusterDisplay(Event *pEvent, const std::string &OUTDIR, const std::stri
          delete wfETF;
          delete wfDiff;
       }
-
-      // Cleaning
-      delete pCanvas;
-      delete ptstyle;
    }
+
+   // Cleaning
+   delete pCanvas;
+   delete ptstyle;
 }
 
 void NewClusterDisplayMinimal(Event *pEvent, const std::string &OUTDIR,
@@ -993,9 +993,9 @@ void NewClusterDisplayMinimal(Event *pEvent, const std::string &OUTDIR,
          vWF.clear();
          delete wfCluster;
       }
+}
 
-      // Cleaning
-      delete pCanvas;
-      delete ptstyle;
-   }
+   // Cleaning
+   delete pCanvas;
+   delete ptstyle;
 }

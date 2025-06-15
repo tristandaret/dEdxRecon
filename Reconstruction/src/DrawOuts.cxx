@@ -474,8 +474,8 @@ void Reconstruction::DrawOuts::CERN22ScanDraw()
 {
 
    // Drawing settings
-   foutputFileWF = drawoutScanPath + scanName + comment + "_WF_test2.pdf";
-   foutputFileXP = drawoutScanPath + scanName + comment + "_XP_test2.pdf";
+   foutputFileWF = drawoutScanPath + scanName + comment + "_WF_Dt" + std::to_string(Dt) + ".pdf";
+   foutputFileXP = drawoutScanPath + scanName + comment + "_XP_Dt" + std::to_string(Dt) + ".pdf";
    gPad->SetRightMargin(0.04);
    gPad->SetTopMargin(0.04);
    fpCanvas->Clear();
