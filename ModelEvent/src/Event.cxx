@@ -362,7 +362,7 @@ void Event::Validate_ThisModule(const int &ModuleNber)
    }
    // else{
    //	std::cout << "WARNING from Event::Validate_ThisModule: Module #" << ModuleNber << "
-   //does not exist" << std::endl;
+   // does not exist" << std::endl;
    // }
 }
 void Event::Invalidate_ThisModule(const int &ModuleNber)

@@ -60,7 +60,7 @@ private:
    TCanvas *fpCanvas;
    int drawMultiScans = 0; // 0: normal scan | 1: multi scan
    int fwhichMethods = 0;  // 0: both methods | 1: only WF | 2: only XP
-   int fnMethods = 2; // Number of methods: 2 (WF and XP) or 1 (WF or XP)
+   int fnMethods = 2;      // Number of methods: 2 (WF and XP) or 1 (WF or XP)
 
    // Shared variables
    int NMod = 0;

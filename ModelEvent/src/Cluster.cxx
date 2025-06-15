@@ -475,7 +475,7 @@ void Cluster::SetParameters_Internal_Horizontal(double par[])
 {
    if (par[0] != par[0]) {
       //	std::cout << " Cluster::SetParameters_Internal_Horizontal called with a NAN !" <<
-      //std::endl;
+      // std::endl;
    } else {
       m_YTrack = par[0];
    }
@@ -768,7 +768,7 @@ void Cluster::SetParameters_Internal_Diagonal(double par[])
 {
    if (par[0] != par[0]) {
       //	std::cout << " Cluster::SetParameters_Internal_Diagonal called with a NAN !" <<
-      //std::endl;
+      // std::endl;
    } else {
       m_VTrack = par[0];
    }

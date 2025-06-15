@@ -233,7 +233,8 @@ TF1 *corr_func(const std::string &EventFile, const std::string &Tag, const int &
    corr_func = pfile->Get<TF1>("A_corr");
    pfile->Close();
 
-   // correctWF = 4: get a single file to apply the same correction for all the files and shift it by -100
+   // correctWF = 4: get a single file to apply the same correction for all the files and
+   // shift it by -100
    if (correctWF == 4) {
       corr_func->SetParameter(0, corr_func->GetParameter(0) - 100);
       corr_func->SetNameTitle("A_corr_shifted", "A_corr_shifted");

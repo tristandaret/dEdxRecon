@@ -104,6 +104,10 @@ public:
    int eventNbr = 0;
    float dEdxXP = 0;
    float dEdxWF = 0;
+   float dEdxGP1 = 0;
+   float dEdxGP2 = 0;
+   float dEdxGP3 = 0;
+   float dEdxGP4 = 0;
    float dEdxXPnoTrunc = 0;
    float dEdxWFnoTrunc = 0;
    int NCrossedPads = 0;
@@ -113,6 +117,12 @@ public:
    float lengthWF = 0;
    int numberOfModules = 0;
    float avg_pad_mult = 0;
+
+   // Giga Pad variables
+   TH1F *GWF = nullptr;
+   TH1F *GWFtruncatedGP1 = nullptr;
+   int peakingTime = 0; // in ns
+   int timeBinSize = 0; // in ns
 
    ClassDef(RecoEvent, 1);
 };
@@ -127,6 +137,31 @@ public:
    float ComputedEdxXP(const std::vector<float> &v_dEdx, const std::vector<float> &v_dE,
                        const std::vector<float> &v_dx, const int &nCrossedPads,
                        const float &alpha);
+
+   // GP1: sum waveforms of bottom 70% clusters
+   float
+   ComputedEdxGP1(const std::vector<TH1F> &vClusWF, const std::vector<float> &v_dEdx,
+                  const std::vector<float> &v_Aclus, const std::vector<float> &v_Lclus,
+                  const int &nClusters, const float &alpha);
+
+   // GP2: Remove from total GWF the ETF of the top 30% clusters
+   float
+   ComputedEdxGP2(const std::vector<TH1F> &vClusWF, const std::vector<float> &v_dEdx,
+                  const std::vector<float> &v_Aclus, const std::vector<float> &v_Lclus,
+                  const int &nClusters, const float &alpha);
+
+   // GP3: Remove from total GWF the ETF of the top 30% clusters computed as
+   // Alead*ratio(y_barycenter)
+   // GP4: Remove from total GWF the ETF of the top 30% clusters computed with LUT
+   float
+   ComputedEdxGP34(const std::vector<TH1F> &vClusWF, const std::vector<float> &v_dEdx,
+                  const std::vector<float> &v_Alead, const std::vector<float> &v_Lclus,
+                  const int &nClusters, const float &alpha);
+
+   TH1F *GetGigaWaveform(const std::vector<TH1F> &vClusWF);
+   TH1F *GetTruncatedGigaWaveformGP1(const std::vector<TH1F> &vClusWF,
+                                     const std::vector<float> &v_dEdx,
+                                     const int &nClusters);
 
    void DiscardedModule();
 
@@ -198,11 +233,15 @@ private:
    std::vector<float> v_evt_dEdxXP;
    std::vector<float> v_evt_dEdxWF;
    // Waveforms
-   std::vector<int> waveform_cluster;
-   std::vector<int> waveform_pad;
+   std::vector<float> waveform_cluster;
+   std::vector<float> waveform_pad;
    // histograms
    TH1F *ph1f_WF;
    TH1F *ph1f_XP;
+   TH1F *ph1f_GP1;
+   TH1F *ph1f_GP2;
+   TH1F *ph1f_GP3;
+   TH1F *ph1f_GP4;
 };
 } // namespace Reconstruction
 

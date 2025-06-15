@@ -13,9 +13,9 @@ FuncFromTGraph::FuncFromTGraph(TGraph *pTGraph)
    m_X_Highest = X_pTGraph[p_TGraph->GetN() - 1];
 
    //	std::cout << " m_StepX	" << std::setw(14) << std::setprecision(9) << m_StepX	<<
-   //std::endl; 	std::cout << " m_X_Lowest	" << std::setw(14) << std::setprecision(9) <<
-   //m_X_Lowest	<< std::endl; 	std::cout << " m_X_Highest " << std::setw(14) <<
-   //std::setprecision(9) << m_X_Highest << std::endl;
+   // std::endl; 	std::cout << " m_X_Lowest	" << std::setw(14) << std::setprecision(9) <<
+   // m_X_Lowest	<< std::endl; 	std::cout << " m_X_Highest " << std::setw(14) <<
+   // std::setprecision(9) << m_X_Highest << std::endl;
    //
    //	double* Y_pTGraph = p_TGraph ->GetX();
    //	std::cout

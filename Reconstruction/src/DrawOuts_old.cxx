@@ -2585,7 +2585,6 @@ void DrawOut_Escan(const std::string &inputDir, const std::string &Comment)
    v_tf1_XP.clear();
 }
 
-
 // DrawOut dE/dx systematics with Z scan
 void DrawOut_Systematics(const std::string &inputDir, const std::string &Comment,
                          const std::string &scan)

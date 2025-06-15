@@ -49,4 +49,5 @@ void DrawOut_GWF(Event *pEvent, const int &ModuleNber, const std::string &OUTDIR
 void NewClusterDisplay(Event *pEvent, const std::string &OUTDIR, const std::string &TAG,
                        const int &PT, const int &TB);
 
-void NewClusterDisplayMinimal(Event *pEvent, const std::string &OUTDIR, const std::string &TAG);
+void NewClusterDisplayMinimal(Event *pEvent, const std::string &OUTDIR,
+                              const std::string &TAG);

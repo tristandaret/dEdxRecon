@@ -53,7 +53,6 @@ bool GetStage3Cut_CSV(const std::string &filename, const std::string &targetWord
 void SetStage3Cut_CSV(const std::string &filename, const std::string &targetWord,
                       int value1, int value2);
 
-
 /* GENERAL PHYSICS */
 // Bethe-Bloch function
 TF1 *BetheBloch(const float &Emin, const float &Emax, const double &m,

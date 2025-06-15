@@ -993,7 +993,7 @@ void NewClusterDisplayMinimal(Event *pEvent, const std::string &OUTDIR,
          vWF.clear();
          delete wfCluster;
       }
-}
+   }
 
    // Cleaning
    delete pCanvas;

@@ -230,7 +230,7 @@ void Reconstruction::ERAMMaps::FillHoles()
             }
             v_sides.clear();
          } // iY
-      } // iX
+      }    // iX
    }
 }
 
@@ -251,8 +251,7 @@ Reconstruction::LUT::LUT(const int &transDiffCoeffB, const int &transDiffCoeffno
    DtwithB = transDiffCoeffB;
    DtwithoutB = transDiffCoeffnoB;
    stepSizeTrans = fabs(DtwithB - DtwithoutB);
-   std::cout << "dEdx LUT: Dt with B = " << DtwithB
-             << " | Dt without B = " << DtwithoutB
+   std::cout << "dEdx LUT: Dt with B = " << DtwithB << " | Dt without B = " << DtwithoutB
              << " | step size = " << stepSizeTrans << std::endl;
    fFile_LUT = Form("~/Documents/Code/CPP/CPP_Projects/LUT_Maker/Output_LUT/"
                     "dEdx_XP_LUT_Dt%d_%d_PT%d.root",

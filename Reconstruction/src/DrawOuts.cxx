@@ -1,5 +1,6 @@
 #include "DrawOuts.h"
 #include "ReconTools.h"
+#include "SignalTools.h"
 #include "CombinedFit.h"
 #include "dEdx.h"
 #include "Misc_Functions.h"
@@ -191,7 +192,8 @@ void Reconstruction::DrawOuts::DESY21ScanDraw()
       foutputFile = drawoutMultiScanPath + testbeam + "_" + multiScanName + comment +
                     methodsString + "_Dt" + std::to_string(Dt) + ".pdf";
    else
-      foutputFile = drawoutScanPath + scanName + comment + methodsString + "_Dt" + std::to_string(Dt) + ".pdf";
+      foutputFile = drawoutScanPath + scanName + comment + methodsString + "_Dt" +
+                    std::to_string(Dt) + ".pdf";
 
    // Styling
    gPad->SetMargin(0.16, 0.03, 0.15, 0.04);
@@ -474,8 +476,10 @@ void Reconstruction::DrawOuts::CERN22ScanDraw()
 {
 
    // Drawing settings
-   foutputFileWF = drawoutScanPath + scanName + comment + "_WF_Dt" + std::to_string(Dt) + ".pdf";
-   foutputFileXP = drawoutScanPath + scanName + comment + "_XP_Dt" + std::to_string(Dt) + ".pdf";
+   foutputFileWF =
+      drawoutScanPath + scanName + comment + "_WF_Dt" + std::to_string(Dt) + ".pdf";
+   foutputFileXP =
+      drawoutScanPath + scanName + comment + "_XP_Dt" + std::to_string(Dt) + ".pdf";
    gPad->SetRightMargin(0.04);
    gPad->SetTopMargin(0.04);
    fpCanvas->Clear();
@@ -1073,8 +1077,8 @@ void Reconstruction::DrawOuts::EnergyLoss(const int &methods)
    gStyle->SetOptStat(0);
    gStyle->SetOptFit(0);
    gPad->SetMargin(0.14, 0.05, 0.15, 0.02);
-   gStyle->SetTitleSize(0.07, "xy");
-   gStyle->SetLabelSize(0.07, "xy");
+   gStyle->SetTitleSize(0.07, "xyz");
+   gStyle->SetLabelSize(0.07, "xyz");
 
    // Define which algorithms must be drawn
    fnMethods = 2; // Draw both by default
@@ -1089,6 +1093,10 @@ void Reconstruction::DrawOuts::EnergyLoss(const int &methods)
       xmax = 2000;
 
    // Prepare histograms
+   TH1F *ph1f_GP1 = new TH1F("ph1f_GP1", ";dE/dx [ADC counts/cm];Counts", 100, 0, xmax);
+   TH1F *ph1f_GP2 = new TH1F("ph1f_GP2", ";dE/dx [ADC counts/cm];Counts", 100, 0, xmax);
+   TH1F *ph1f_GP3 = new TH1F("ph1f_GP3", ";dE/dx [ADC counts/cm];Counts", 100, 0, xmax);
+   TH1F *ph1f_GP4 = new TH1F("ph1f_GP4", ";dE/dx [ADC counts/cm];Counts", 100, 0, xmax);
    TH1F *ph1f_XP = new TH1F("ph1f_XP", ";dE/dx [ADC counts/cm];Counts", 100, 0, xmax);
    TH1F *ph1f_WF = new TH1F("ph1f_WF", ";dE/dx [ADC counts/cm];Counts", 100, 0, xmax);
    TH1F *ph1f_XPnoTrunc =
@@ -1120,6 +1128,10 @@ void Reconstruction::DrawOuts::EnergyLoss(const int &methods)
                   0, xmax));
    }
 
+   // Prepare vector of giga waveforms
+   std::vector<TH1F *> v_ph1f_GWF;
+   std::vector<TH1F *> v_ph1f_GWFtruncGP1;
+
    // Get entries and fill histograms
    std::vector<int> v_ModulesOfEvent;
    for (int i = 0; i < v_fnentries.back(); i++) {
@@ -1147,20 +1159,68 @@ void Reconstruction::DrawOuts::EnergyLoss(const int &methods)
       }
       ph1f_WF->Fill(p_recoevent->dEdxWF);
       ph1f_XP->Fill(p_recoevent->dEdxXP);
+      ph1f_GP1->Fill(p_recoevent->dEdxGP1);
+      ph1f_GP2->Fill(p_recoevent->dEdxGP2);
+      ph1f_GP3->Fill(p_recoevent->dEdxGP3);
+      ph1f_GP4->Fill(p_recoevent->dEdxGP4);
       ph1f_WFnoTrunc->Fill(p_recoevent->dEdxWFnoTrunc);
       ph1f_XPnoTrunc->Fill(p_recoevent->dEdxXPnoTrunc);
       ph2f_XPWF->Fill(p_recoevent->dEdxWF, p_recoevent->dEdxXP);
+
+      // Giga waveforms
+      if (i < 100) {
+         TH1F *ph1f_GWF = new TH1F(
+            Form("ph1f_GWF_%i", i),
+            Form(";time bin [%d ns];ADC counts", p_recoevent->timeBinSize), 510, 0, 510);
+         TH1F *ph1f_GWFtruncatedGP1 = new TH1F(Form("ph1f_GWFtruncGP1_%i", i),
+                                               Form(";time bin [%d ns];ADC "
+                                                    "counts",
+                                                    p_recoevent->timeBinSize),
+                                               510, 0, 510);
+         TH1F *ph1F_GWFclone =
+            dynamic_cast<TH1F *>(p_recoevent->GWF->Clone(Form("ph1f_GWF_%i", i)));
+         TH1F *ph1F_GWFtruncGP1clone = dynamic_cast<TH1F *>(
+            p_recoevent->GWFtruncatedGP1->Clone(Form("ph1f_GWFtruncGP1_%i", i)));
+         for (int j = 1; j <= ph1F_GWFclone->GetNbinsX(); j++) {
+            ph1f_GWF->SetBinContent(j, ph1F_GWFclone->GetBinContent(j));
+            ph1f_GWFtruncatedGP1->SetBinContent(j,
+                                                ph1F_GWFtruncGP1clone->GetBinContent(j));
+         }
+         v_ph1f_GWF.push_back(ph1f_GWF);
+         v_ph1f_GWFtruncGP1.push_back(ph1f_GWFtruncatedGP1);
+         delete ph1F_GWFclone;
+         delete ph1F_GWFtruncGP1clone;
+      }
    }
+
+   // GP3 parametrisation plots
+   TH2F *pth2fGP3param_tmp = dynamic_cast<TH2F*>(v_fFiles.back()->Get("pth2f_paramGP3"));
+   TH2F *pth2fGP3param = new TH2F("pth2f_paramGP3", ";y_{track}-y_{leading};A_{cluster}/A_{leading}",
+                                   100, -1, 1, 100, 1, 2.5);
+   for (int j = 1; j <= pth2fGP3param_tmp->GetNbinsX(); j++) {
+      for (int k = 1; k <= pth2fGP3param_tmp->GetNbinsY(); k++) {
+         pth2fGP3param->SetBinContent(j, k, pth2fGP3param_tmp->GetBinContent(j, k));
+      }
+   }
+   TF1 *ptf1GP3param = dynamic_cast<TF1*>(v_fFiles.back()->Get("ptf1_paramGP3"));
 
    // Fitting
    Fit1Gauss(ph1f_WF, 2);
    Fit1Gauss(ph1f_XP, 2);
+   Fit1Gauss(ph1f_GP1, 2);
+   Fit1Gauss(ph1f_GP2, 2);
+   Fit1Gauss(ph1f_GP3, 2);
+   Fit1Gauss(ph1f_GP4, 2);
    Fit1Gauss(ph1f_WFnoTrunc, 2);
    Fit1Gauss(ph1f_XPnoTrunc, 2);
 
    // Display settings
    Graphic_setup(ph1f_WF, 0.5, 1, kCyan + 1, 2, kCyan - 2, kCyan, 0.2);
    Graphic_setup(ph1f_XP, 0.5, 1, kMagenta + 2, 2, kMagenta - 2, kMagenta, 0.2);
+   Graphic_setup(ph1f_GP1, 0.5, 1, kOrange + 7, 2, kOrange + 2, kOrange, 0.2);
+   Graphic_setup(ph1f_GP2, 0.5, 1, kOrange + 7, 2, kOrange + 2, kOrange, 0.2);
+   Graphic_setup(ph1f_GP3, 0.5, 1, kOrange + 7, 2, kOrange + 2, kOrange, 0.2);
+   Graphic_setup(ph1f_GP4, 0.5, 1, kOrange + 7, 2, kOrange + 2, kOrange, 0.2);
    Graphic_setup(ph1f_WFnoTrunc, 0.5, 1, kBlue + 1, 2, kBlue - 2, kBlue, 0.2);
    Graphic_setup(ph1f_XPnoTrunc, 0.5, 1, kRed + 2, 2, kRed - 2, kRed, 0.2);
 
@@ -1181,10 +1241,18 @@ void Reconstruction::DrawOuts::EnergyLoss(const int &methods)
    // Get maximum of event plots
    int WFMax = ph1f_WF->GetMaximum();
    int XPMax = ph1f_XP->GetMaximum();
+   int GP1Max = ph1f_GP1->GetMaximum();
+   int GP2Max = ph1f_GP2->GetMaximum();
+   int GP3Max = ph1f_GP3->GetMaximum();
+   int GP4Max = ph1f_GP4->GetMaximum();
 
    // Get maximum of module plots
    int overallMax = 0, overallMaxMod = 0, maxVal_WF = 0, maxVal_XP = 0;
-   overallMax = std::max({WFMax, XPMax});
+   int maxVal_GP1 = ph1f_GP1->GetMaximum();
+   int maxVal_GP2 = ph1f_GP2->GetMaximum();
+   int maxVal_GP3 = ph1f_GP3->GetMaximum();
+   int maxVal_GP4 = ph1f_GP4->GetMaximum();
+   overallMax = std::max({WFMax, XPMax, GP1Max, GP2Max, GP3Max, GP4Max});
    for (int i = 0; i < 8; i++) {
       maxVal_WF = v_h1f_WF_mod[i]->GetMaximum();
       maxVal_XP = v_h1f_XP_mod[i]->GetMaximum();
@@ -1202,6 +1270,10 @@ void Reconstruction::DrawOuts::EnergyLoss(const int &methods)
    // Force divisions on X axis
    ph1f_WF->GetXaxis()->SetNdivisions(404, kFALSE);
    ph1f_XP->GetXaxis()->SetNdivisions(404, kFALSE);
+   ph1f_GP1->GetXaxis()->SetNdivisions(404, kFALSE);
+   ph1f_GP2->GetXaxis()->SetNdivisions(404, kFALSE);
+   ph1f_GP3->GetXaxis()->SetNdivisions(404, kFALSE);
+   ph1f_GP4->GetXaxis()->SetNdivisions(404, kFALSE);
    ph1f_WFnoTrunc->GetXaxis()->SetNdivisions(404, kFALSE);
    ph1f_XPnoTrunc->GetXaxis()->SetNdivisions(404, kFALSE);
 
@@ -1216,6 +1288,42 @@ void Reconstruction::DrawOuts::EnergyLoss(const int &methods)
    PrintResolution(ph1f_WF, fpCanvas, xDefaultNDC - invX, 0.3, kCyan + 2, "WF");
    PrintResolution(ph1f_XP, fpCanvas, xDefaultNDC - invX, 0.65, kMagenta + 2, "XP");
    fpCanvas->SaveAs((drawout_file + "(").c_str());
+
+   //////////////////////////////////////////////////////////////////////////////////////
+   // Draw WF & GP1
+   fpCanvas->Clear();
+   ph1f_WF->Draw("HIST");
+   ph1f_GP1->Draw("HIST sames");
+   PrintResolution(ph1f_WF, fpCanvas, xDefaultNDC - invX, 0.3, kCyan + 2, "WF");
+   PrintResolution(ph1f_GP1, fpCanvas, xDefaultNDC - invX, 0.65, kOrange + 2, "GP1");
+   fpCanvas->SaveAs(drawout_file.c_str());
+
+   //////////////////////////////////////////////////////////////////////////////////////
+   // Draw WF & GP2
+   fpCanvas->Clear();
+   ph1f_WF->Draw("HIST");
+   ph1f_GP2->Draw("HIST sames");
+   PrintResolution(ph1f_WF, fpCanvas, xDefaultNDC - invX, 0.3, kCyan + 2, "WF");
+   PrintResolution(ph1f_GP2, fpCanvas, xDefaultNDC - invX, 0.65, kOrange + 2, "GP2");
+   fpCanvas->SaveAs(drawout_file.c_str());
+
+   //////////////////////////////////////////////////////////////////////////////////////
+   // Draw WF & GP3
+   fpCanvas->Clear();
+   ph1f_WF->Draw("HIST");
+   ph1f_GP3->Draw("HIST sames");
+   PrintResolution(ph1f_WF, fpCanvas, xDefaultNDC - invX, 0.3, kCyan + 2, "WF");
+   PrintResolution(ph1f_GP3, fpCanvas, xDefaultNDC - invX, 0.65, kOrange + 2, "GP3");
+   fpCanvas->SaveAs(drawout_file.c_str());
+
+   //////////////////////////////////////////////////////////////////////////////////////
+   // Draw WF & GP4
+   fpCanvas->Clear();
+   ph1f_WF->Draw("HIST");
+   ph1f_GP4->Draw("HIST sames");
+   PrintResolution(ph1f_WF, fpCanvas, xDefaultNDC - invX, 0.3, kCyan + 2, "WF");
+   PrintResolution(ph1f_GP4, fpCanvas, xDefaultNDC - invX, 0.65, kOrange + 2, "GP4");
+   fpCanvas->SaveAs(drawout_file.c_str());
 
    //////////////////////////////////////////////////////////////////////////////////////
    // Draw WF alone
@@ -1328,6 +1436,10 @@ void Reconstruction::DrawOuts::EnergyLoss(const int &methods)
    // Draw XP vs WF
    fpCanvas->cd();
    fpCanvas->Clear();
+   fpCanvas->SetGrid(0, 0);
+   ph2f_XPWF->GetXaxis()->SetNdivisions(505, kTRUE);
+   ph2f_XPWF->GetYaxis()->SetNdivisions(505, kTRUE);
+   ph2f_XPWF->GetZaxis()->SetNdivisions(505, kTRUE);
    invX, invY = 0;
    if (ph2f_XPWF->GetMean(1) > xmax / 2)
       invX = 0.5;
@@ -1336,15 +1448,121 @@ void Reconstruction::DrawOuts::EnergyLoss(const int &methods)
    gStyle->SetOptStat("merou");
    gStyle->SetStatX(0.36);
    gStyle->SetStatY(0.88);
-   gPad->SetRightMargin(0.12);
-   gPad->SetLeftMargin(0.12);
-   ph2f_XPWF->GetYaxis()->SetTitleOffset(1.1);
-   gStyle->SetTitleX((1. - gPad->GetRightMargin() + gPad->GetLeftMargin()) / 2);
+   gPad->SetRightMargin(0.14);
+   gPad->SetLeftMargin(0.16);
+   ph2f_XPWF->GetYaxis()->SetTitleOffset(1.2);
    ph2f_XPWF->Draw("colz");
+   fpCanvas->SaveAs(drawout_file.c_str());
+
+
+   //////////////////////////////////////////////////////////////////////////////////////////
+   // Draw parametrisation of GP3
+   fpCanvas->cd();
+   fpCanvas->Clear();
+   fpCanvas->SetGrid(1, 1);
+   gStyle->SetOptStat(0);
+   pth2fGP3param->GetXaxis()->SetNdivisions(505, kTRUE);
+   pth2fGP3param->GetYaxis()->SetNdivisions(505, kTRUE);
+   pth2fGP3param->GetZaxis()->SetNdivisions(505, kTRUE);
+   pth2fGP3param->Draw("colz");
+   ptf1GP3param->SetLineColor(kRed);
+   ptf1GP3param->SetLineWidth(2);
+   ptf1GP3param->Draw("sames");
    fpCanvas->SaveAs((drawout_file + ")").c_str());
 
+   //////////////////////////////////////////////////////////////////////////////////
+   // Draw Giga waveforms
+   std::vector<TH1F *> v_ph1f_ETF;
+   std::vector<TH1F *> v_ph1f_ETFtruncated;
+   std::string drawoutFileGWF = drawout_file.substr(0, drawout_file.size() - 4);
    fpCanvas->Clear();
+   gPad->SetGrid(1, 1);
+   gPad->SetTopMargin(0.07);
+   gPad->SetRightMargin(0.04);
+   gPad->SetLeftMargin(0.12);
+   gStyle->SetTitleOffset(0.8, "y");
+   gStyle->SetOptStat(0);
+   TLegend legGWF(0.6, 0.55, 0.92, 0.9);
+   Graphic_setup(&legGWF, 0.05, kBlue - 1, 1001, kWhite, 1, 1);
+   for (int i = 0; i < (int)v_ph1f_GWF.size(); i++) {
+      Graphic_setup(v_ph1f_GWF[i], 1, 1, kRed + 2, 2, kRed + 2, kRed, 0.2);
+      Graphic_setup(v_ph1f_GWFtruncGP1[i], 1, 1, kBlue + 2, 2, kBlue + 2, kBlue, 0.2);
+      // ETF
+      int maxBin = v_ph1f_GWF[i]->GetMaximumBin();
+      int maxGWF = v_ph1f_GWF[i]->GetMaximum();
+      TH1F *pTH1F_ETF = ETF("pTH1F_ETF_" + std::to_string(i), 0, 510, maxBin - PT / TB,
+                            510, 999, PT, TB);
+      pTH1F_ETF->Scale(maxGWF);
+      Graphic_setup(pTH1F_ETF, 1, 1, kRed + 3, 2, kRed + 3, kRed, 0.2);
+      v_ph1f_ETF.push_back(pTH1F_ETF);
+      /// Truncated ETF
+      int maxBinTrunc = v_ph1f_GWFtruncGP1[i]->GetMaximumBin();
+      int maxGWFtrunc = v_ph1f_GWFtruncGP1[i]->GetMaximum();
+      TH1F *pTH1F_ETFtrunc = ETF("pTH1F_ETFtrunc_" + std::to_string(i), 0, 510,
+                                 maxBinTrunc - PT / TB, 510, 999, PT, TB);
+      pTH1F_ETFtrunc->Scale(maxGWFtrunc);
+      Graphic_setup(pTH1F_ETFtrunc, 1, 1, kBlue + 3, 2, kBlue + 3, kBlue, 0.2);
+      v_ph1f_ETFtruncated.push_back(pTH1F_ETFtrunc);
+      // Set X range
+      float maxX = v_ph1f_GWF[i]->GetXaxis()->GetBinCenter(maxBin);
+      v_ph1f_GWF[i]->GetXaxis()->SetRangeUser(maxX - 20, maxX + 120);
+      // Set Y range
+      float ymin =
+         std::min(v_ph1f_GWF[i]->GetMinimum(), v_ph1f_GWFtruncGP1[i]->GetMinimum());
+      float ymax =
+         std::max(v_ph1f_GWF[i]->GetMaximum(), v_ph1f_GWFtruncGP1[i]->GetMaximum());
+      float margin = (ymax - ymin) * 0.1; // 10% margin
+      v_ph1f_GWF[i]->GetYaxis()->SetRangeUser(ymin - margin, ymax + margin);
+      v_ph1f_GWF[i]->GetYaxis()->SetTitleOffset(0.8);
+   }
+   legGWF.AddEntry(v_ph1f_GWF[0], "GWF", "f");
+   legGWF.AddEntry(v_ph1f_GWFtruncGP1[0], "Truncated GWF", "f");
+   legGWF.AddEntry(v_ph1f_ETF[0], "ETF", "l");
+   legGWF.AddEntry(v_ph1f_ETFtruncated[0], "Truncated ETF", "l");
+   for (int i = 0; i < (int)v_ph1f_GWF.size(); i++) {
+      fpCanvas->Clear();
+      v_ph1f_GWF[i]->Draw("HIST");
+      v_ph1f_ETF[i]->Draw("HIST sames");
+      v_ph1f_GWFtruncGP1[i]->Draw("HIST sames");
+      v_ph1f_ETFtruncated[i]->Draw("HIST sames");
+      legGWF.Draw();
+      if (i == 0)
+         fpCanvas->SaveAs((drawoutFileGWF + "_GWF.pdf(").c_str());
+      else if (i == (int)v_ph1f_GWF.size() - 1)
+         fpCanvas->SaveAs((drawoutFileGWF + "_GWF.pdf)").c_str());
+      else
+         fpCanvas->SaveAs((drawoutFileGWF + "_GWF.pdf").c_str());
+   }
+
    // Delete
+   delete ph1f_GP1;
+   delete ph1f_GP2;
+   delete ph1f_XP;
+   delete ph1f_WF;
+   delete ph1f_XPnoTrunc;
+   delete ph1f_WFnoTrunc;
+   for (int i = 0; i < 8; i++) {
+      delete v_h1f_XP_mod[i];
+      delete v_h1f_WF_mod[i];
+      delete v_h1f_XP_modnoTrunc[i];
+      delete v_h1f_WF_modnoTrunc[i];
+   }
+   for (auto &h1f : v_ph1f_GWF) {
+      delete h1f;
+   }
+   for (auto &h1f : v_ph1f_GWFtruncGP1) {
+      delete h1f;
+   }
+   for (auto &h1f: v_ph1f_ETF){
+      delete h1f;
+   }
+   for (auto &h1f: v_ph1f_ETFtruncated){
+      delete h1f;
+   }
+   v_ph1f_GWF.clear();
+   v_ph1f_GWFtruncGP1.clear();
+   v_ph1f_ETF.clear();
+   v_ph1f_ETFtruncated.clear();
    delete ph2f_XPWF;
 }
 

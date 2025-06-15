@@ -8,7 +8,7 @@ const std::string dEdxPath = "../";
 const std::string dataPath = dEdxPath + "Data/";
 std::string dataScanPath = "";
 
-const std::string drawoutPath = dEdxPath + "OUT_Reconstruction/";
+const std::string drawoutPath = dEdxPath + "OUT_Reconstruction_GP/";
 std::string drawoutMultiScanPath = "";
 std::string drawoutScanPath = "";
 std::string drawoutRunPath = "";

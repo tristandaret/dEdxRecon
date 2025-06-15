@@ -17,12 +17,12 @@ Uploader *p_uploader;
 
 // Files to use
 int prototype = 0;
-int CERN_Escan = 1;
+int CERN_Escan = 0;
 int CERN_drift = 0;
 
 int DESY_drift = 0;
 int DESY_row = 0;
-int DESY_phi = 0;
+int DESY_phi = 1;
 int DESY_theta = 0;
 
 // Computations
@@ -37,7 +37,7 @@ int Draw_Corrections = 0;
 
 int Draw_DESY21SingleScan = 0;
 int Draw_DESY21MultScan = 0;
-int Draw_CERN22Scan = 1;
+int Draw_CERN22Scan = 0;
 
 int DtwithBhere = 286;
 int DtwithoutBhere = 323;
@@ -152,7 +152,7 @@ void Reconstruction::Monitoring()
    if (DESY_drift) {
       Dt = DtwithBhere;
       // int PT_arr[] = {200, 412}; // 200, 412
-      int PT_arr[] = {200, 412}; // 200, 412
+      int PT_arr[] = {412}; // 200, 412
       vScanVals.insert(vScanVals.end(),
                        {50, 150, 250, 350, 450, 550, 650, 750, 850, 950});
       vScanLabels.insert(vScanLabels.end(), {"m40", "060", "160", "260", "360", "460",
@@ -163,7 +163,8 @@ void Reconstruction::Monitoring()
          Settings("DESY21", "Drift", Form("Drift_PT%i", PT), Form("%i ns", PT),
                   "Drift distance (mm)", 1, 0, PT, Dt, 450, 50);
 
-         for (int iz = 0; iz < (int)std::size(vScanLabels); iz++) {
+         // for (int iz = 0; iz < (int)std::size(vScanLabels); iz++) {
+         for (int iz = 0; iz < 1; iz++) {
             const char *z = vScanLabels[iz].c_str();
             driftDist = vScanVals[iz];
             v_datafiles.push_back(
@@ -212,14 +213,16 @@ void Reconstruction::Monitoring()
       vScanVals.insert(vScanVals.end(), {0, 10, 20, 29, 31, 40, 45});
       std::vector<int> vScanValsreal = {0, 10, 20, 30, 30, 40, 45};
 
-      for (int iz = 0; iz < (int)v_valdrift.size(); iz++) {
+      // for (int iz = 0; iz < (int)v_valdrift.size(); iz++) {
+      for (int iz = 0; iz < 1; iz++) {
          Dt = DtwithBhere;
          const char *z = v_strdrift[iz].c_str();
          Settings("DESY21", "Phi", Form("Phi_Z%s", z),
                   Form("%2i cm", v_valdrift[iz] / 10), "Track angle #varphi (#circ)", 1,
                   0, 200, Dt, v_valdrift[iz], 40);
 
-         for (int ifile = 0; ifile < (int)std::size(vScanVals); ifile++) {
+         // for (int ifile = 0; ifile < (int)std::size(vScanVals); ifile++) {
+         for (int ifile = 5; ifile < 6; ifile++) {
             int phi = vScanVals[ifile];
             int phireal = vScanValsreal[ifile];
             if (ifile == 0) {
