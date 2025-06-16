@@ -146,20 +146,14 @@ public:
                   const int &nClusters, const float &alpha);
 
    // GP2: Remove from total GWF the ETF of the top 30% clusters
-   float ComputedEdxGP2(const TH1F *GWF, const std::vector<TH1F> &vClusWF,
-                        const std::vector<float> &v_dEdx,
-                        const std::vector<float> &v_Aclus,
-                        const std::vector<float> &v_Lclus, const int &nClusters,
-                        const float &alpha);
-
    // GP3: Remove from total GWF the ETF of the top 30% clusters computed as
    // Alead*ratio(y_barycenter)
    // GP4: Remove from total GWF the ETF of the top 30% clusters computed with LUT
    // GP5: Remove from total GWF the ETF of the top 30% crossed pads computed with LUT
-   float ComputedEdxGP345(const TH1F *GWF, const std::vector<TH1F> &vWF, const std::vector<float> &v_dEdx,
-                          const std::vector<float> &v_Amax, const float &eventLength,
-                          const std::vector<float> &v_Length, const int &nElements,
-                          const float &alpha);
+   float ComputedEdxGP(const TH1F *GWF, const std::vector<TH1F> &vWF,
+                       const std::vector<float> &v_dEdx, const std::vector<float> &v_Amax,
+                       const float &eventLength, const std::vector<float> &v_Length,
+                       const int &nElements, const float &alpha);
 
    TH1F *GetGigaWaveform(const std::vector<TH1F> &vClusWF);
    TH1F *GetTruncatedGigaWaveformGP1(const std::vector<TH1F> &vClusWF,
