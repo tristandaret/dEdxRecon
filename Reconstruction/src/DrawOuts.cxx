@@ -1487,7 +1487,7 @@ void Reconstruction::DrawOuts::EnergyLoss(const int &methods)
    fpCanvas->SaveAs((drawout_file + ")").c_str());
 
    //////////////////////////////////////////////////////////////////////////////////
-   bool drawGigaWF = false;
+   bool drawGigaWF = true;
    if (drawGigaWF) {
       // Draw Giga waveforms
       std::vector<TH1F *> v_ph1f_ETF;

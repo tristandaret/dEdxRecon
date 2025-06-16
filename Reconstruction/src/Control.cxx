@@ -275,8 +275,7 @@ void Control(const std::string &OutDir, std::string const &Tag,
                v_h1f_TL_Raw[ModuleNber]->Fill(TL);
             v_h1f_PM_Raw[ModuleNber]->Fill(NPads);
             v_h1f_Qclus_Raw[ModuleNber]->Fill(pCluster->Get_Acluster());
-            TH1F *h1f_clus =
-               new TH1F("h1f_WF_cluster", "h1f_WF_cluster", 510, -0.5, 509.5);
+            TH1F *h1f_clus = new TH1F("h1f_WF_cluster", "h1f_WF_cluster", 510, 0, 510);
 
             if (NPads > 1)
                v_h2f_rho_DT_Raw[ModuleNber]->Fill(
@@ -355,8 +354,7 @@ void Control(const std::string &OutDir, std::string const &Tag,
             v_h1f_TL_Sel[ModuleNber]->Fill(TL);
             v_h1f_PM_Sel[ModuleNber]->Fill(NPads);
             v_h1f_Qclus_Sel[ModuleNber]->Fill(pCluster->Get_Acluster());
-            TH1F *h1f_clus =
-               new TH1F("h1f_WF_cluster", "h1f_WF_cluster", 510, -0.5, 509.5);
+            TH1F *h1f_clus = new TH1F("h1f_WF_cluster", "h1f_WF_cluster", 510, 0, 510);
 
             if (NPads > 1)
                v_h2f_rho_DT_Sel[ModuleNber]->Fill(

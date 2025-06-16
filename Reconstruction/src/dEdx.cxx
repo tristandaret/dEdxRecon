@@ -241,8 +241,8 @@ void Reconstruction::dEdx::Reconstruction()
 
    // Event loop
    for (iEvent = 0; iEvent < NEvents; iEvent++) {
-      if (iEvent % 1000 == 0 or iEvent == NEvents - 1)
-         std::cout << iEvent << "/" << NEvents << std::endl;
+      // if (iEvent % 1000 == 0 or iEvent == NEvents - 1)
+      std::cout << iEvent << "/" << NEvents;
 
       pEvent = p_uploader->GiveMe_Event(iEvent, moduleCase, 0, 0);
       if (!pEvent)
@@ -264,19 +264,19 @@ void Reconstruction::dEdx::Reconstruction()
          }
          p_recoevent->Clear();
          delete pEvent;
-         // std::cout << " - Discarded" << std::endl;
+         std::cout << " - Discarded" << std::endl;
          continue;
       }
       p_recoevent->selected = true;
-      // auto start_time = std::chrono::high_resolution_clock::now();
+      auto start_time = std::chrono::high_resolution_clock::now();
 
       // Cluster display
-      // if (iEvent < 1) {
-      //    std::string clusterDrawOutput = drawoutRunPath + "ClusterDisplay";
-      //    MakeMyDir(clusterDrawOutput);
-      //    NewClusterDisplay(pEvent, clusterDrawOutput, tag, PT, TB);
-      //    NewClusterDisplayMinimal(pEvent, clusterDrawOutput, tag);
-      // }
+      if (iEvent < 1) {
+         std::string clusterDrawOutput = drawoutRunPath + "ClusterDisplay";
+         MakeMyDir(clusterDrawOutput);
+         NewClusterDisplay(pEvent, clusterDrawOutput, tag, PT, TB);
+         NewClusterDisplayMinimal(pEvent, clusterDrawOutput, tag);
+      }
 
       // Reset GP variables
       p_recoevent->peakingTime = PT;
@@ -509,9 +509,7 @@ void Reconstruction::dEdx::Reconstruction()
                vCrossedWaveforms.push_back(hCrossedWF); // add after gain correction
             } // Pads
 
-            // // Gain correction for the whole cluster (doesn't work really well)
-            // if(fcorrectGain == 1) for(int i=0;i<510;i++) waveform_cluster[i] *=
-            // p_recocluster->ALead_GCorr;
+            // Gain correction for the whole cluster (doesn't work really well)
 
             // WF correction function
             p_recocluster->charge =
@@ -533,7 +531,6 @@ void Reconstruction::dEdx::Reconstruction()
             p_recomodule->NPads += p_recocluster->NPads;
 
             // GP variables
-            nEventClusters++;
             float rhoGP3 = ptf1_paramGP3->Eval(
                (pCluster->Get_YTrack() - pCluster->Get_YLeading()) * 100);
             float dE_GP3 = pCluster->Get_AMaxLeading() * rhoGP3;
@@ -595,24 +592,24 @@ void Reconstruction::dEdx::Reconstruction()
 
       // Fill Giga Waveforms
       p_recoevent->GWF = GetGigaWaveform(vClusterWaveforms);
-      p_recoevent->GWFtruncatedGP1 =
-         GetTruncatedGigaWaveformGP1(vClusterWaveforms, v_dEdxCluster, nEventClusters);
+      p_recoevent->GWFtruncatedGP1 = GetTruncatedGigaWaveformGP1(
+         vClusterWaveforms, v_dEdxCluster, p_recoevent->NClusters);
 
       // Compute dE/dx for the event
       p_recoevent->dEdxGP1 = ComputedEdxGP1(vClusterWaveforms, v_dEdxCluster, v_Aclus,
-                                            v_Lclus, nEventClusters, falpha);
+                                            v_Lclus, p_recoevent->NClusters, falpha);
       p_recoevent->dEdxGP2 =
          ComputedEdxGP(p_recoevent->GWF, vClusterWaveforms, v_dEdxCluster, v_Aclus,
-                       Levent, v_Lclus, nEventClusters, falpha);
+                       Levent, v_Lclus, p_recoevent->NClusters, falpha);
       p_recoevent->dEdxGP3 =
          ComputedEdxGP(p_recoevent->GWF, vClusterWaveforms, v_dEdxClusterGP3, v_AleadGP3,
-                       Levent, v_Lclus, nEventClusters, falpha);
+                       Levent, v_Lclus, p_recoevent->NClusters, falpha);
       p_recoevent->dEdxGP4 =
          ComputedEdxGP(p_recoevent->GWF, vClusterWaveforms, v_dEdxClusterGP4, v_AleadGP4,
-                       Levent, v_Lclus, nEventClusters, falpha);
+                       Levent, v_Lclus, p_recoevent->NClusters, falpha);
       p_recoevent->dEdxGP5 =
          ComputedEdxGP(p_recoevent->GWF, vCrossedWaveforms, v_evt_dEdxXP, v_evt_dE,
-                       Levent, v_evt_dx, nEventCrossedPads, falpha);
+                       Levent, v_evt_dx, p_recoevent->NCrossedPads, falpha);
 
       p_recoevent->dEdxWF = ComputedEdxWF(v_evt_dEdxWF, p_recoevent->NClusters, falpha);
       p_recoevent->dEdxXP = ComputedEdxXP(v_evt_dEdxXP, v_evt_dE, v_evt_dx,
@@ -649,10 +646,10 @@ void Reconstruction::dEdx::Reconstruction()
       v_evt_dEdxWF.clear();
       p_recoevent->Clear();
       delete pEvent;
-      // auto end_time = std::chrono::high_resolution_clock::now();
-      // std::chrono::duration<double> ms = (end_time - start_time) * 1e3;
-      // std::cout << " => " << std::setprecision(2) << std::fixed << ms.count()
-      //           << " milliseconds" << std::endl;
+      auto end_time = std::chrono::high_resolution_clock::now();
+      std::chrono::duration<double> ms = (end_time - start_time) * 1e3;
+      std::cout << " => " << std::setprecision(2) << std::fixed << ms.count()
+                << " milliseconds" << std::endl;
    } // Events
 
    aSelector.PrintStat();
@@ -766,6 +763,7 @@ float Reconstruction::dEdx::ComputedEdxGP(const TH1F *GWF, const std::vector<TH1
    TH1F *localCopyGWF = dynamic_cast<TH1F *>(GWF->Clone("localCopyGWF"));
    float nElementsTruncated = int(floor(nElements * alpha));
    float LtruncatedTrack = eventLength;
+   float TmaxGWF = localCopyGWF->GetMaximumBin();
 
    // Few steps to order v_Amax & v_Length similarly to v_dEdx
    std::vector<int> indices(v_dEdx.size());
@@ -778,10 +776,9 @@ float Reconstruction::dEdx::ComputedEdxGP(const TH1F *GWF, const std::vector<TH1
    for (int i = nElementsTruncated; i < nElements; ++i) {
       LtruncatedTrack -= v_Length[indices[i]];
       float Ascale = v_Amax[indices[i]];
-      int tMaxClusterWF = vWF[indices[i]].GetMaximumBin();
       TH1F *etf = ETF("pTH1F_ETFtrunc_" + std::to_string(i) + std::to_string(iEvent) +
                          std::to_string(iMod),
-                      0, 510, tMaxClusterWF - PT / TB, 510, 999, PT, TB);
+                      0, 510, TmaxGWF - PT / TB, 510, 999, PT, TB);
       etf->Scale(Ascale);
       localCopyGWF->Add(etf, -1); // subtract ETF from the GigaWaveform
       delete etf;
@@ -854,9 +851,6 @@ void Reconstruction::dEdx::DiscardedModule()
          p_recopad = new Reconstruction::RecoPad();
          if (iP == 0)
             p_recopad->leading = true;
-         std::vector<int> v_int = pPad->Get_vADC();
-         std::vector<float> waveform_pad(
-            v_int.begin(), v_int.end()); // Implicit conversion from int to float
          p_recopad->ix = pPad->Get_iX();
          p_recopad->iy = pPad->Get_iY();
          p_recopad->ADCmax_base = pPad->Get_AMax();

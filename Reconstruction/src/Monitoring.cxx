@@ -47,7 +47,7 @@ int DtwithoutBhere = 323;
 void Reconstruction::Monitoring()
 {
    drawWhichMethods = 0; // 0: both methods | 1: only WF | 2: only XP
-   comment = "n1000_GP2345";
+   comment = "_n1000_GetWFDisplay";
    gErrorIgnoreLevel = kInfo;
 
    Correction(1, 1, 1, 1, 1);
@@ -113,8 +113,8 @@ void Reconstruction::Monitoring()
          "_25V_z415p1_y2pad_iter0.root", "_25V_z415p1_y2pad_iter0.root",
          "_25V_z415p1_y2pad_iter0.root", "_25V_z415_y2pad_2_iter0.root"};
 
-      for (int iEnergy = 0; iEnergy < (int)std::size(vScanLabels); iEnergy++) {
-         // for(int iEnergy = 0; iEnergy < 1; iEnergy++){
+      // for (int iEnergy = 0; iEnergy < (int)std::size(vScanLabels); iEnergy++) {
+         for(int iEnergy = 2; iEnergy < 3; iEnergy++){
          v_datafiles.push_back(dataScanPath + "All_ERAMS_350V_412ns_" +
                                vScanLabels[iEnergy] + v_suffix[iEnergy]);
          vTags.push_back(Form("%s_%s_%s_Dt%d", testbeam.c_str(), scanName.c_str(),

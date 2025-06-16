@@ -251,7 +251,7 @@ TH1F *GiveMe_WaveFormDisplay(Pad *pPad, const std::string &TAG)
    namestring << TAG;
    std::string Name = namestring.str();
 
-   TH1F *ToBeReturned = new TH1F(Name.c_str(), Title.c_str(), 510, -0.5, 509.5);
+   TH1F *ToBeReturned = new TH1F(Name.c_str(), Title.c_str(), 510, 0, 510);
 
    std::vector<int> The_v_ADC = pPad->Get_vADC();
    int NADC = The_v_ADC.size();
@@ -461,7 +461,7 @@ void DrawOut_ClusterWFDisplay(Cluster *pCluster, const std::string &OUTDIR,
       float Tsum = pTH1F_Sum->GetMaximumBin();
       TH1F *pTH1F_ETF = ETF("pTH1F_ETF_" + pCluster->Get_EntryNber() +
                                pCluster->Get_LeadingPad()->Get_iX(),
-                            -0.5, 509.5, Tsum - PT / TB, 510, 999, PT, TB);
+                            0, 510, Tsum - PT / TB, 510, 999, PT, TB);
       pTH1F_ETF->SetAxisRange(pTH1F_Sum->GetMaximumBin() - 20,
                               pTH1F_Sum->GetMaximumBin() + 75, "X");
       pTH1F_ETF->Scale(ADCmaxWF);
@@ -518,7 +518,7 @@ void DrawOut_GWF(Event *pEvent, const int &ModuleNber, const std::string &OUTDIR
                             std::to_string(pEvent->Get_EntryNber()) + "_Event_" +
                             std::to_string(pEvent->Get_EventNber()) + "_Mod_" +
                             std::to_string(ModuleNber) + ".png";
-   TH1F *pTH1F_GWF = new TH1F("pTH1F_GWF", "pTH1F_GWF", 510, -0.5, 509.5);
+   TH1F *pTH1F_GWF = new TH1F("pTH1F_GWF", "pTH1F_GWF", 510, 0, 510);
    pTH1F_GWF->SetTitle(
       std::string(
          TAG + " Entry " + std::to_string(pEvent->Get_EntryNber()) + " Event " +
@@ -555,8 +555,8 @@ void DrawOut_GWF(Event *pEvent, const int &ModuleNber, const std::string &OUTDIR
          delete pTH1F_pad;
       }
       TH1F *pTH1F_WF_ETFcluster =
-         ETF("pTH1F_WF_ETFcluster", -0.5, 509.5, pTH1F_cluster->GetMaximumBin() - PT / TB,
-             510, iC, PT, TB);
+         ETF("pTH1F_WF_ETFcluster", 0, 510, pTH1F_cluster->GetMaximumBin() - PT / TB, 510,
+             iC, PT, TB);
       pTH1F_WF_ETFcluster->Scale(pTH1F_cluster->GetMaximum());
       v_pTH1F_WF_ETFcluster.push_back(pTH1F_WF_ETFcluster);
       delete pTH1F_cluster;
@@ -564,7 +564,7 @@ void DrawOut_GWF(Event *pEvent, const int &ModuleNber, const std::string &OUTDIR
 
    // GPv3
    std::sort(v_GWF.begin(), v_GWF.end());
-   TH1F *pTH1F_GWFsum = new TH1F("pTH1F_GWFsum", "pTH1F_GWFsum", 510, -0.5, 509.5);
+   TH1F *pTH1F_GWFsum = new TH1F("pTH1F_GWFsum", "pTH1F_GWFsum", 510, 0, 510);
    pTH1F_GWFsum->Add(pTH1F_GWF);
    for (int iC = (int)NClus_trunc; iC < NClusters; iC++) {
       pTH1F_GWFsum->Add(v_pTH1F_WF_ETFcluster[v_GWF[iC].Rank], -1);
@@ -575,8 +575,7 @@ void DrawOut_GWF(Event *pEvent, const int &ModuleNber, const std::string &OUTDIR
    float maxGP = pTH1F_GWF->GetMaximum();
    float maxGPtrunc = pTH1F_GWFsum->GetMaximum();
 
-   TH1F *pTH1F_ETF =
-      ETF("pTH1F_ETF", -0.5, 509.5, TmaxGWFsum - PT / TB, 510, 999, PT, TB);
+   TH1F *pTH1F_ETF = ETF("pTH1F_ETF", 0, 510, TmaxGWFsum - PT / TB, 510, 999, PT, TB);
    pTH1F_ETF->Scale(maxGPtrunc);
 
    // Drawing the GWF
@@ -712,7 +711,7 @@ void NewClusterDisplay(Event *pEvent, const std::string &OUTDIR, const std::stri
             new TH1F(Form("wfCluster_%d_%d_%d_%d", pEvent->Get_EventNber(),
                           pModule->Get_ModuleNber(), pCluster->Get_LeadingPad()->Get_iX(),
                           pCluster->Get_LeadingPad()->Get_iY()),
-                     "clusterWaveform", 510, -0.5, 509.5);
+                     "clusterWaveform", 510, 0, 510);
          int NPads = pCluster->Get_NberOfPads();
 
          // Legend setup
@@ -772,12 +771,12 @@ void NewClusterDisplay(Event *pEvent, const std::string &OUTDIR, const std::stri
          wfCluster->DrawClone("HIST SAME");
 
          // Draw ETF
-         TH1F *wfETF = ETF(
-            Form("wfETF_%d_%d_%d_%d_%d", pEvent->Get_EventNber(), pEvent->Get_EntryNber(),
-                 pModule->Get_ModuleNber(), pCluster->Get_LeadingPad()->Get_iX(),
-                 pCluster->Get_LeadingPad()->Get_iY()),
-            -0.5, 509.5, wfCluster->GetMaximumBin() - float(PT) / float(TB), 510, 999,
-            float(PT), float(TB));
+         TH1F *wfETF = ETF(Form("wfETF_%d_%d_%d_%d_%d", pEvent->Get_EventNber(),
+                                pEvent->Get_EntryNber(), pModule->Get_ModuleNber(),
+                                pCluster->Get_LeadingPad()->Get_iX(),
+                                pCluster->Get_LeadingPad()->Get_iY()),
+                           0, 510, wfCluster->GetMaximumBin() - float(PT) / float(TB),
+                           510, 999, float(PT), float(TB));
          wfETF->Scale(wfCluster->GetMaximum());
          Graphic_setup(wfETF, 1, 1, colors[2], 2, colors[2], 0, 0);
          wfETF->SetLineStyle(1);
@@ -899,7 +898,7 @@ void NewClusterDisplayMinimal(Event *pEvent, const std::string &OUTDIR,
             new TH1F(Form("wfCluster_%d_%d_%d_%d_minimal", pEvent->Get_EventNber(),
                           pModule->Get_ModuleNber(), pCluster->Get_LeadingPad()->Get_iX(),
                           pCluster->Get_LeadingPad()->Get_iY()),
-                     "clusterWaveform", 510, -0.5, 509.5);
+                     "clusterWaveform", 510, 0, 510);
          int NPads = pCluster->Get_NberOfPads();
 
          // Legend setup
