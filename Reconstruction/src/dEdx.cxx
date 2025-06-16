@@ -342,7 +342,7 @@ void Reconstruction::dEdx::Reconstruction()
             p_recomodule->Track->SetParameter(2, pTrack->Get_ParameterValue(2));
             p_recomodule->Track->SetParError(2, pTrack->Get_ParameterError(2));
          }
-
+         // Levent += trk_len(pModule, pTrack);
          // Loop On Clusters
          for (iC = 0; iC < NClusters; iC++) {
             std::fill(waveform_cluster.begin(), waveform_cluster.end(),
@@ -363,14 +363,21 @@ void Reconstruction::dEdx::Reconstruction()
             int NPads = pCluster->Get_NberOfPads();
             p_recocluster->NPads = NPads;
             for (iP = 0; iP < NPads; iP++) {
-               std::fill(waveform_pad.begin(), waveform_pad.end(), 0); // reset waveform
+               waveform_pad.clear();
+               waveform_pad.shrink_to_fit();
+               // std::fill(waveform_pad.begin(), waveform_pad.end(), 0); // reset
+               // waveform
                pPad = pCluster->Get_Pad(iP);
                p_recopad = new Reconstruction::RecoPad();
                if (iP == NPads - 1)
                   p_recopad->leading = true;
-               std::vector<int> v_int = pPad->Get_vADC();
-               std::vector<float> waveform_pad(
-                  v_int.begin(), v_int.end()); // Implicit conversion from int to float
+               // std::vector<int> v_int = pPad->Get_vADC();
+               // std::vector<float> waveform_pad(
+               //    v_int.begin(), v_int.end()); // Implicit conversion from int to float
+               TH1F *wfPad = GiveMe_WaveFormDisplay(pPad, tag);
+               for (int ibin = 1; ibin <= wfPad->GetNbinsX(); ++ibin)
+                  waveform_pad.push_back(static_cast<int>(wfPad->GetBinContent(ibin)));
+               delete wfPad; // delete the histogram to avoid memory leak
                p_recopad->ix = pPad->Get_iX();
                p_recopad->iy = pPad->Get_iY();
                p_recopad->xPad = pPad->Get_XPad() * 100; // in cm
@@ -764,6 +771,8 @@ float Reconstruction::dEdx::ComputedEdxGP(const TH1F *GWF, const std::vector<TH1
    float nElementsTruncated = int(floor(nElements * alpha));
    float LtruncatedTrack = eventLength;
    float TmaxGWF = localCopyGWF->GetMaximumBin();
+   TH1F *etf = ETF("pTH1F_ETFtrunc_" + std::to_string(iEvent) + std::to_string(iMod), 0,
+                   510, TmaxGWF - PT / TB, 510, 999, PT, TB);
 
    // Few steps to order v_Amax & v_Length similarly to v_dEdx
    std::vector<int> indices(v_dEdx.size());
@@ -776,15 +785,11 @@ float Reconstruction::dEdx::ComputedEdxGP(const TH1F *GWF, const std::vector<TH1
    for (int i = nElementsTruncated; i < nElements; ++i) {
       LtruncatedTrack -= v_Length[indices[i]];
       float Ascale = v_Amax[indices[i]];
-      TH1F *etf = ETF("pTH1F_ETFtrunc_" + std::to_string(i) + std::to_string(iEvent) +
-                         std::to_string(iMod),
-                      0, 510, TmaxGWF - PT / TB, 510, 999, PT, TB);
-      etf->Scale(Ascale);
-      localCopyGWF->Add(etf, -1); // subtract ETF from the GigaWaveform
-      delete etf;
+      localCopyGWF->Add(etf, -Ascale); // subtract ETF from the GigaWaveform
    }
 
    int amplitudeGWF = localCopyGWF->GetMaximum();
+   delete etf;
    delete localCopyGWF;
    return amplitudeGWF / (LtruncatedTrack * 100); // dE/dx in ADC count/cm
 }

@@ -1487,7 +1487,7 @@ void Reconstruction::DrawOuts::EnergyLoss(const int &methods)
    fpCanvas->SaveAs((drawout_file + ")").c_str());
 
    //////////////////////////////////////////////////////////////////////////////////
-   bool drawGigaWF = true;
+   bool drawGigaWF = false;
    if (drawGigaWF) {
       // Draw Giga waveforms
       std::vector<TH1F *> v_ph1f_ETF;
@@ -1532,8 +1532,6 @@ void Reconstruction::DrawOuts::EnergyLoss(const int &methods)
          float margin = (ymax - ymin) * 0.1; // 10% margin
          v_ph1f_GWF[i]->GetYaxis()->SetRangeUser(ymin - margin, ymax + margin);
          v_ph1f_GWF[i]->GetYaxis()->SetTitleOffset(0.8);
-         delete pTH1F_ETF;
-         delete pTH1F_ETFtrunc;
       }
       legGWF.AddEntry(v_ph1f_GWF[0], "GWF", "f");
       legGWF.AddEntry(v_ph1f_GWFtruncGP1[0], "Truncated GWF", "f");
@@ -1552,7 +1550,11 @@ void Reconstruction::DrawOuts::EnergyLoss(const int &methods)
             fpCanvas->SaveAs((drawoutFileGWF + "_GWF.pdf)").c_str());
          else
             fpCanvas->SaveAs((drawoutFileGWF + "_GWF.pdf").c_str());
+         delete v_ph1f_ETF[i];
+         delete v_ph1f_ETFtruncated[i];
       }
+      v_ph1f_ETF.clear();
+      v_ph1f_ETFtruncated.clear();
    }
 
    // Delete
@@ -1571,11 +1573,9 @@ void Reconstruction::DrawOuts::EnergyLoss(const int &methods)
       delete v_h1f_XP_modnoTrunc[i];
       delete v_h1f_WF_modnoTrunc[i];
    }
-   for (auto &h1f : v_ph1f_GWF) {
-      delete h1f;
-   }
-   for (auto &h1f : v_ph1f_GWFtruncGP1) {
-      delete h1f;
+   for (int i = 0; i < (int)v_ph1f_GWF.size(); i++) {
+      delete v_ph1f_GWF[i];
+      delete v_ph1f_GWFtruncGP1[i];
    }
    v_ph1f_GWF.clear();
    v_ph1f_GWFtruncGP1.clear();

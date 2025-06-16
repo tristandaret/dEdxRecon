@@ -20,7 +20,7 @@ int prototype = 0;
 int CERN_Escan = 0;
 int CERN_drift = 0;
 
-int DESY_drift = 0;
+int DESY_drift = 1;
 int DESY_row = 0;
 int DESY_phi = 1;
 int DESY_theta = 0;
@@ -47,7 +47,7 @@ int DtwithoutBhere = 323;
 void Reconstruction::Monitoring()
 {
    drawWhichMethods = 0; // 0: both methods | 1: only WF | 2: only XP
-   comment = "_n1000_GetWFDisplay";
+   comment = "_n1000_tgwf_Ltrklen_gimmeWFDisp";
    gErrorIgnoreLevel = kInfo;
 
    Correction(1, 1, 1, 1, 1);
