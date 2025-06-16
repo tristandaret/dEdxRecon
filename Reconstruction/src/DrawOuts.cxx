@@ -1097,6 +1097,7 @@ void Reconstruction::DrawOuts::EnergyLoss(const int &methods)
    TH1F *ph1f_GP2 = new TH1F("ph1f_GP2", ";dE/dx [ADC counts/cm];Counts", 100, 0, xmax);
    TH1F *ph1f_GP3 = new TH1F("ph1f_GP3", ";dE/dx [ADC counts/cm];Counts", 100, 0, xmax);
    TH1F *ph1f_GP4 = new TH1F("ph1f_GP4", ";dE/dx [ADC counts/cm];Counts", 100, 0, xmax);
+   TH1F *ph1f_GP5 = new TH1F("ph1f_GP5", ";dE/dx [ADC counts/cm];Counts", 100, 0, xmax);
    TH1F *ph1f_XP = new TH1F("ph1f_XP", ";dE/dx [ADC counts/cm];Counts", 100, 0, xmax);
    TH1F *ph1f_WF = new TH1F("ph1f_WF", ";dE/dx [ADC counts/cm];Counts", 100, 0, xmax);
    TH1F *ph1f_XPnoTrunc =
@@ -1163,6 +1164,7 @@ void Reconstruction::DrawOuts::EnergyLoss(const int &methods)
       ph1f_GP2->Fill(p_recoevent->dEdxGP2);
       ph1f_GP3->Fill(p_recoevent->dEdxGP3);
       ph1f_GP4->Fill(p_recoevent->dEdxGP4);
+      ph1f_GP5->Fill(p_recoevent->dEdxGP5);
       ph1f_WFnoTrunc->Fill(p_recoevent->dEdxWFnoTrunc);
       ph1f_XPnoTrunc->Fill(p_recoevent->dEdxXPnoTrunc);
       ph2f_XPWF->Fill(p_recoevent->dEdxWF, p_recoevent->dEdxXP);
@@ -1194,15 +1196,16 @@ void Reconstruction::DrawOuts::EnergyLoss(const int &methods)
    }
 
    // GP3 parametrisation plots
-   TH2F *pth2fGP3param_tmp = dynamic_cast<TH2F*>(v_fFiles.back()->Get("pth2f_paramGP3"));
-   TH2F *pth2fGP3param = new TH2F("pth2f_paramGP3", ";y_{track}-y_{leading};A_{cluster}/A_{leading}",
-                                   100, -1, 1, 100, 1, 2.5);
+   TH2F *pth2fGP3param_tmp = dynamic_cast<TH2F *>(v_fFiles.back()->Get("pth2f_paramGP3"));
+   TH2F *pth2fGP3param =
+      new TH2F("pth2f_paramGP3", ";y_{track}-y_{leading};A_{cluster}/A_{leading}", 100,
+               -1, 1, 100, 1, 2.5);
    for (int j = 1; j <= pth2fGP3param_tmp->GetNbinsX(); j++) {
       for (int k = 1; k <= pth2fGP3param_tmp->GetNbinsY(); k++) {
          pth2fGP3param->SetBinContent(j, k, pth2fGP3param_tmp->GetBinContent(j, k));
       }
    }
-   TF1 *ptf1GP3param = dynamic_cast<TF1*>(v_fFiles.back()->Get("ptf1_paramGP3"));
+   TF1 *ptf1GP3param = dynamic_cast<TF1 *>(v_fFiles.back()->Get("ptf1_paramGP3"));
 
    // Fitting
    Fit1Gauss(ph1f_WF, 2);
@@ -1211,6 +1214,7 @@ void Reconstruction::DrawOuts::EnergyLoss(const int &methods)
    Fit1Gauss(ph1f_GP2, 2);
    Fit1Gauss(ph1f_GP3, 2);
    Fit1Gauss(ph1f_GP4, 2);
+   Fit1Gauss(ph1f_GP5, 2);
    Fit1Gauss(ph1f_WFnoTrunc, 2);
    Fit1Gauss(ph1f_XPnoTrunc, 2);
 
@@ -1221,6 +1225,7 @@ void Reconstruction::DrawOuts::EnergyLoss(const int &methods)
    Graphic_setup(ph1f_GP2, 0.5, 1, kOrange + 7, 2, kOrange + 2, kOrange, 0.2);
    Graphic_setup(ph1f_GP3, 0.5, 1, kOrange + 7, 2, kOrange + 2, kOrange, 0.2);
    Graphic_setup(ph1f_GP4, 0.5, 1, kOrange + 7, 2, kOrange + 2, kOrange, 0.2);
+   Graphic_setup(ph1f_GP5, 0.5, 1, kOrange + 7, 2, kOrange + 2, kOrange, 0.2);
    Graphic_setup(ph1f_WFnoTrunc, 0.5, 1, kBlue + 1, 2, kBlue - 2, kBlue, 0.2);
    Graphic_setup(ph1f_XPnoTrunc, 0.5, 1, kRed + 2, 2, kRed - 2, kRed, 0.2);
 
@@ -1245,6 +1250,7 @@ void Reconstruction::DrawOuts::EnergyLoss(const int &methods)
    int GP2Max = ph1f_GP2->GetMaximum();
    int GP3Max = ph1f_GP3->GetMaximum();
    int GP4Max = ph1f_GP4->GetMaximum();
+   int GP5Max = ph1f_GP5->GetMaximum();
 
    // Get maximum of module plots
    int overallMax = 0, overallMaxMod = 0, maxVal_WF = 0, maxVal_XP = 0;
@@ -1252,7 +1258,8 @@ void Reconstruction::DrawOuts::EnergyLoss(const int &methods)
    int maxVal_GP2 = ph1f_GP2->GetMaximum();
    int maxVal_GP3 = ph1f_GP3->GetMaximum();
    int maxVal_GP4 = ph1f_GP4->GetMaximum();
-   overallMax = std::max({WFMax, XPMax, GP1Max, GP2Max, GP3Max, GP4Max});
+   int maxVal_GP5 = ph1f_GP5->GetMaximum();
+   overallMax = std::max({WFMax, XPMax, GP1Max, GP2Max, GP3Max, GP4Max, GP5Max});
    for (int i = 0; i < 8; i++) {
       maxVal_WF = v_h1f_WF_mod[i]->GetMaximum();
       maxVal_XP = v_h1f_XP_mod[i]->GetMaximum();
@@ -1274,6 +1281,7 @@ void Reconstruction::DrawOuts::EnergyLoss(const int &methods)
    ph1f_GP2->GetXaxis()->SetNdivisions(404, kFALSE);
    ph1f_GP3->GetXaxis()->SetNdivisions(404, kFALSE);
    ph1f_GP4->GetXaxis()->SetNdivisions(404, kFALSE);
+   ph1f_GP5->GetXaxis()->SetNdivisions(404, kFALSE);
    ph1f_WFnoTrunc->GetXaxis()->SetNdivisions(404, kFALSE);
    ph1f_XPnoTrunc->GetXaxis()->SetNdivisions(404, kFALSE);
 
@@ -1323,6 +1331,15 @@ void Reconstruction::DrawOuts::EnergyLoss(const int &methods)
    ph1f_GP4->Draw("HIST sames");
    PrintResolution(ph1f_WF, fpCanvas, xDefaultNDC - invX, 0.3, kCyan + 2, "WF");
    PrintResolution(ph1f_GP4, fpCanvas, xDefaultNDC - invX, 0.65, kOrange + 2, "GP4");
+   fpCanvas->SaveAs(drawout_file.c_str());
+
+   //////////////////////////////////////////////////////////////////////////////////////
+   // Draw WF & GP5
+   fpCanvas->Clear();
+   ph1f_WF->Draw("HIST");
+   ph1f_GP5->Draw("HIST sames");
+   PrintResolution(ph1f_WF, fpCanvas, xDefaultNDC - invX, 0.3, kCyan + 2, "WF");
+   PrintResolution(ph1f_GP5, fpCanvas, xDefaultNDC - invX, 0.65, kOrange + 2, "GP5");
    fpCanvas->SaveAs(drawout_file.c_str());
 
    //////////////////////////////////////////////////////////////////////////////////////
@@ -1454,7 +1471,6 @@ void Reconstruction::DrawOuts::EnergyLoss(const int &methods)
    ph2f_XPWF->Draw("colz");
    fpCanvas->SaveAs(drawout_file.c_str());
 
-
    //////////////////////////////////////////////////////////////////////////////////////////
    // Draw parametrisation of GP3
    fpCanvas->cd();
@@ -1471,72 +1487,80 @@ void Reconstruction::DrawOuts::EnergyLoss(const int &methods)
    fpCanvas->SaveAs((drawout_file + ")").c_str());
 
    //////////////////////////////////////////////////////////////////////////////////
-   // Draw Giga waveforms
-   std::vector<TH1F *> v_ph1f_ETF;
-   std::vector<TH1F *> v_ph1f_ETFtruncated;
-   std::string drawoutFileGWF = drawout_file.substr(0, drawout_file.size() - 4);
-   fpCanvas->Clear();
-   gPad->SetGrid(1, 1);
-   gPad->SetTopMargin(0.07);
-   gPad->SetRightMargin(0.04);
-   gPad->SetLeftMargin(0.12);
-   gStyle->SetTitleOffset(0.8, "y");
-   gStyle->SetOptStat(0);
-   TLegend legGWF(0.6, 0.55, 0.92, 0.9);
-   Graphic_setup(&legGWF, 0.05, kBlue - 1, 1001, kWhite, 1, 1);
-   for (int i = 0; i < (int)v_ph1f_GWF.size(); i++) {
-      Graphic_setup(v_ph1f_GWF[i], 1, 1, kRed + 2, 2, kRed + 2, kRed, 0.2);
-      Graphic_setup(v_ph1f_GWFtruncGP1[i], 1, 1, kBlue + 2, 2, kBlue + 2, kBlue, 0.2);
-      // ETF
-      int maxBin = v_ph1f_GWF[i]->GetMaximumBin();
-      int maxGWF = v_ph1f_GWF[i]->GetMaximum();
-      TH1F *pTH1F_ETF = ETF("pTH1F_ETF_" + std::to_string(i), 0, 510, maxBin - PT / TB,
-                            510, 999, PT, TB);
-      pTH1F_ETF->Scale(maxGWF);
-      Graphic_setup(pTH1F_ETF, 1, 1, kRed + 3, 2, kRed + 3, kRed, 0.2);
-      v_ph1f_ETF.push_back(pTH1F_ETF);
-      /// Truncated ETF
-      int maxBinTrunc = v_ph1f_GWFtruncGP1[i]->GetMaximumBin();
-      int maxGWFtrunc = v_ph1f_GWFtruncGP1[i]->GetMaximum();
-      TH1F *pTH1F_ETFtrunc = ETF("pTH1F_ETFtrunc_" + std::to_string(i), 0, 510,
-                                 maxBinTrunc - PT / TB, 510, 999, PT, TB);
-      pTH1F_ETFtrunc->Scale(maxGWFtrunc);
-      Graphic_setup(pTH1F_ETFtrunc, 1, 1, kBlue + 3, 2, kBlue + 3, kBlue, 0.2);
-      v_ph1f_ETFtruncated.push_back(pTH1F_ETFtrunc);
-      // Set X range
-      float maxX = v_ph1f_GWF[i]->GetXaxis()->GetBinCenter(maxBin);
-      v_ph1f_GWF[i]->GetXaxis()->SetRangeUser(maxX - 20, maxX + 120);
-      // Set Y range
-      float ymin =
-         std::min(v_ph1f_GWF[i]->GetMinimum(), v_ph1f_GWFtruncGP1[i]->GetMinimum());
-      float ymax =
-         std::max(v_ph1f_GWF[i]->GetMaximum(), v_ph1f_GWFtruncGP1[i]->GetMaximum());
-      float margin = (ymax - ymin) * 0.1; // 10% margin
-      v_ph1f_GWF[i]->GetYaxis()->SetRangeUser(ymin - margin, ymax + margin);
-      v_ph1f_GWF[i]->GetYaxis()->SetTitleOffset(0.8);
-   }
-   legGWF.AddEntry(v_ph1f_GWF[0], "GWF", "f");
-   legGWF.AddEntry(v_ph1f_GWFtruncGP1[0], "Truncated GWF", "f");
-   legGWF.AddEntry(v_ph1f_ETF[0], "ETF", "l");
-   legGWF.AddEntry(v_ph1f_ETFtruncated[0], "Truncated ETF", "l");
-   for (int i = 0; i < (int)v_ph1f_GWF.size(); i++) {
+   bool drawGigaWF = false;
+   if (drawGigaWF) {
+      // Draw Giga waveforms
+      std::vector<TH1F *> v_ph1f_ETF;
+      std::vector<TH1F *> v_ph1f_ETFtruncated;
+      std::string drawoutFileGWF = drawout_file.substr(0, drawout_file.size() - 4);
       fpCanvas->Clear();
-      v_ph1f_GWF[i]->Draw("HIST");
-      v_ph1f_ETF[i]->Draw("HIST sames");
-      v_ph1f_GWFtruncGP1[i]->Draw("HIST sames");
-      v_ph1f_ETFtruncated[i]->Draw("HIST sames");
-      legGWF.Draw();
-      if (i == 0)
-         fpCanvas->SaveAs((drawoutFileGWF + "_GWF.pdf(").c_str());
-      else if (i == (int)v_ph1f_GWF.size() - 1)
-         fpCanvas->SaveAs((drawoutFileGWF + "_GWF.pdf)").c_str());
-      else
-         fpCanvas->SaveAs((drawoutFileGWF + "_GWF.pdf").c_str());
+      gPad->SetGrid(1, 1);
+      gPad->SetTopMargin(0.07);
+      gPad->SetRightMargin(0.04);
+      gPad->SetLeftMargin(0.12);
+      gStyle->SetTitleOffset(0.8, "y");
+      gStyle->SetOptStat(0);
+      TLegend legGWF(0.6, 0.55, 0.92, 0.9);
+      Graphic_setup(&legGWF, 0.05, kBlue - 1, 1001, kWhite, 1, 1);
+      for (int i = 0; i < (int)v_ph1f_GWF.size(); i++) {
+         Graphic_setup(v_ph1f_GWF[i], 1, 1, kRed + 2, 2, kRed + 2, kRed, 0.2);
+         Graphic_setup(v_ph1f_GWFtruncGP1[i], 1, 1, kBlue + 2, 2, kBlue + 2, kBlue, 0.2);
+         // ETF
+         int maxBin = v_ph1f_GWF[i]->GetMaximumBin();
+         int maxGWF = v_ph1f_GWF[i]->GetMaximum();
+         TH1F *pTH1F_ETF = ETF("pTH1F_ETF_" + std::to_string(i), 0, 510, maxBin - PT / TB,
+                               510, 999, PT, TB);
+         pTH1F_ETF->Scale(maxGWF);
+         Graphic_setup(pTH1F_ETF, 1, 1, kRed + 3, 2, kRed + 3, kRed, 0.2);
+         v_ph1f_ETF.push_back(pTH1F_ETF);
+         /// Truncated ETF
+         int maxBinTrunc = v_ph1f_GWFtruncGP1[i]->GetMaximumBin();
+         int maxGWFtrunc = v_ph1f_GWFtruncGP1[i]->GetMaximum();
+         TH1F *pTH1F_ETFtrunc = ETF("pTH1F_ETFtrunc_" + std::to_string(i), 0, 510,
+                                    maxBinTrunc - PT / TB, 510, 999, PT, TB);
+         pTH1F_ETFtrunc->Scale(maxGWFtrunc);
+         Graphic_setup(pTH1F_ETFtrunc, 1, 1, kBlue + 3, 2, kBlue + 3, kBlue, 0.2);
+         v_ph1f_ETFtruncated.push_back(pTH1F_ETFtrunc);
+         // Set X range
+         float maxX = v_ph1f_GWF[i]->GetXaxis()->GetBinCenter(maxBin);
+         v_ph1f_GWF[i]->GetXaxis()->SetRangeUser(maxX - 20, maxX + 120);
+         // Set Y range
+         float ymin =
+            std::min(v_ph1f_GWF[i]->GetMinimum(), v_ph1f_GWFtruncGP1[i]->GetMinimum());
+         float ymax =
+            std::max(v_ph1f_GWF[i]->GetMaximum(), v_ph1f_GWFtruncGP1[i]->GetMaximum());
+         float margin = (ymax - ymin) * 0.1; // 10% margin
+         v_ph1f_GWF[i]->GetYaxis()->SetRangeUser(ymin - margin, ymax + margin);
+         v_ph1f_GWF[i]->GetYaxis()->SetTitleOffset(0.8);
+         delete pTH1F_ETF;
+         delete pTH1F_ETFtrunc;
+      }
+      legGWF.AddEntry(v_ph1f_GWF[0], "GWF", "f");
+      legGWF.AddEntry(v_ph1f_GWFtruncGP1[0], "Truncated GWF", "f");
+      legGWF.AddEntry(v_ph1f_ETF[0], "ETF", "l");
+      legGWF.AddEntry(v_ph1f_ETFtruncated[0], "Truncated ETF", "l");
+      for (int i = 0; i < (int)v_ph1f_GWF.size(); i++) {
+         fpCanvas->Clear();
+         v_ph1f_GWF[i]->Draw("HIST");
+         v_ph1f_ETF[i]->Draw("HIST sames");
+         v_ph1f_GWFtruncGP1[i]->Draw("HIST sames");
+         v_ph1f_ETFtruncated[i]->Draw("HIST sames");
+         legGWF.Draw();
+         if (i == 0)
+            fpCanvas->SaveAs((drawoutFileGWF + "_GWF.pdf(").c_str());
+         else if (i == (int)v_ph1f_GWF.size() - 1)
+            fpCanvas->SaveAs((drawoutFileGWF + "_GWF.pdf)").c_str());
+         else
+            fpCanvas->SaveAs((drawoutFileGWF + "_GWF.pdf").c_str());
+      }
    }
 
    // Delete
    delete ph1f_GP1;
    delete ph1f_GP2;
+   delete ph1f_GP3;
+   delete ph1f_GP4;
+   delete ph1f_GP5;
    delete ph1f_XP;
    delete ph1f_WF;
    delete ph1f_XPnoTrunc;
@@ -1553,16 +1577,8 @@ void Reconstruction::DrawOuts::EnergyLoss(const int &methods)
    for (auto &h1f : v_ph1f_GWFtruncGP1) {
       delete h1f;
    }
-   for (auto &h1f: v_ph1f_ETF){
-      delete h1f;
-   }
-   for (auto &h1f: v_ph1f_ETFtruncated){
-      delete h1f;
-   }
    v_ph1f_GWF.clear();
    v_ph1f_GWFtruncGP1.clear();
-   v_ph1f_ETF.clear();
-   v_ph1f_ETFtruncated.clear();
    delete ph2f_XPWF;
 }
 

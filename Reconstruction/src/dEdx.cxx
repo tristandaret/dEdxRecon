@@ -74,6 +74,7 @@ void Reconstruction::dEdx::Reconstruction()
    // Selection stage
    Selector aSelector(selectionSet);
    NEvents = p_uploader->Get_NberOfEvent();
+   NEvents = 1000;
    Init_selection(selectionSet, aSelector, tag, p_uploader, moduleCase, 0);
    aSelector.Tell_Selection();
 
@@ -132,6 +133,8 @@ void Reconstruction::dEdx::Reconstruction()
       "ph1f_GP3", "<dE/dx> with GP3;<dE/dx> (ADC count);Number of events", 100, 0, xmax);
    ph1f_GP4 = new TH1F(
       "ph1f_GP4", "<dE/dx> with GP4;<dE/dx> (ADC count);Number of events", 100, 0, xmax);
+   ph1f_GP5 = new TH1F(
+      "ph1f_GP5", "<dE/dx> with GP5;<dE/dx> (ADC count);Number of events", 100, 0, xmax);
 
    /////////////////////////////////////////////////////////////////////////////////////////////////////////
    // Compute dE/dx
@@ -141,11 +144,14 @@ void Reconstruction::dEdx::Reconstruction()
    // GP variables
    std::vector<TH1F> vPadWaveforms;
    std::vector<TH1F> vClusterWaveforms;
+   std::vector<TH1F> vCrossedWaveforms;
    std::vector<float> v_dEdxCluster;
    std::vector<float> v_dEdxClusterGP3;
    std::vector<float> v_dEdxClusterGP4;
+   std::vector<float> v_dEdxCrossedGP5;
    std::vector<float> v_Aclus;    // amplitude of cluster in ADC counts
-   std::vector<float> v_Lclus;    // length in cm
+   std::vector<float> v_Lclus;    // length in clusters in cm
+   std::vector<float> v_Lcrossed; // length in crossed pads in cm
    std::vector<float> v_Alead;    // amplitude of leading pads in ADC counts
    std::vector<float> v_AleadGP3; // amplitude of leading pads in ADC counts
    std::vector<float> v_AleadGP4; // amplitude of leading pads in ADC counts
@@ -265,27 +271,32 @@ void Reconstruction::dEdx::Reconstruction()
       // auto start_time = std::chrono::high_resolution_clock::now();
 
       // Cluster display
-      if (iEvent < 1) {
-         std::string clusterDrawOutput = drawoutRunPath + "ClusterDisplay";
-         MakeMyDir(clusterDrawOutput);
-         NewClusterDisplay(pEvent, clusterDrawOutput, tag, PT, TB);
-         NewClusterDisplayMinimal(pEvent, clusterDrawOutput, tag);
-      }
+      // if (iEvent < 1) {
+      //    std::string clusterDrawOutput = drawoutRunPath + "ClusterDisplay";
+      //    MakeMyDir(clusterDrawOutput);
+      //    NewClusterDisplay(pEvent, clusterDrawOutput, tag, PT, TB);
+      //    NewClusterDisplayMinimal(pEvent, clusterDrawOutput, tag);
+      // }
 
       // Reset GP variables
       p_recoevent->peakingTime = PT;
       p_recoevent->timeBinSize = TB;
       vPadWaveforms.clear();
       vClusterWaveforms.clear();
+      vCrossedWaveforms.clear();
       v_dEdxCluster.clear();
       v_dEdxClusterGP3.clear();
       v_dEdxClusterGP4.clear();
+      v_dEdxCrossedGP5.clear();
       v_Aclus.clear();
       v_Lclus.clear();
+      v_Lcrossed.clear();
       v_Alead.clear();
       v_AleadGP3.clear();
       v_AleadGP4.clear();
       int nEventClusters = 0;
+      int nEventCrossedPads = 0;
+      float Levent = 0; // length of the event in m
 
       // Module loop
       for (iMod = 0; iMod < NMod; iMod++) {
@@ -419,13 +430,14 @@ void Reconstruction::dEdx::Reconstruction()
                p_recocluster->length += p_recopad->length;
 
                // GP variables
+               Levent += p_recopad->length; // length in pads in cm
                TH1F hPadWF(Form("PadWF_mod%d_clu%d_pad%d", iMod, iC, iP), "Pad waveform",
                            waveform_pad.size(), 0, waveform_pad.size());
                for (size_t ibin = 0; ibin < waveform_pad.size(); ++ibin) {
                   hPadWF.SetBinContent(ibin + 1, waveform_pad[ibin]);
                }
-               vPadWaveforms.push_back(hPadWF);  // add after gain correction
-               Lclus += p_recopad->length * 100; // length in pad in cm
+               vPadWaveforms.push_back(hPadWF); // add after gain correction
+               Lclus += p_recopad->length;      // length in pad in m
 
                // Compute drift distance for different time bin sizes and peaking times
                p_recopad->TMax = pPad->Get_TMax();
@@ -457,8 +469,7 @@ void Reconstruction::dEdx::Reconstruction()
                                            fabs(impactGP4), fabs(p_recopad->phi));
                }
 
-               // Minimum length in pad cutoff to avoid fluctuations from small
-               // segments
+               // Min length in pad to avoid fluctuations from small segments
                if (p_recopad->length * costheta <=
                    fminLength) { // cutoff defined in the ERAM's plane -> remove theta
                                  // dependence
@@ -488,6 +499,15 @@ void Reconstruction::dEdx::Reconstruction()
                p_recomodule->NCrossedPads++;
                p_recomodule->lengthXP += p_recopad->length;
 
+               // GP5
+               nEventCrossedPads++;
+               TH1F hCrossedWF(Form("CrossedWF_mod%d_clu%d_pad%d", iMod, iC, iP),
+                               "Crossed pad waveform", waveform_pad.size(), 0,
+                               waveform_pad.size());
+               for (size_t ibin = 0; ibin < waveform_pad.size(); ++ibin) {
+                  hCrossedWF.SetBinContent(ibin + 1, waveform_pad[ibin]);
+               }
+               vCrossedWaveforms.push_back(hCrossedWF); // add after gain correction
             } // Pads
 
             // // Gain correction for the whole cluster (doesn't work really well)
@@ -516,17 +536,17 @@ void Reconstruction::dEdx::Reconstruction()
             // GP variables
             nEventClusters++;
             float rhoGP3 = ptf1_paramGP3->Eval(
-               (pCluster->Get_YTrack() - pCluster->Get_YLeading()) * 100); // in cm
+               (pCluster->Get_YTrack() - pCluster->Get_YLeading()) * 100);
             float dE_GP3 = pCluster->Get_AMaxLeading() * rhoGP3;
             float dE_GP4 = pCluster->Get_AMaxLeading() * rhoGP4;
             v_Alead.push_back(pCluster->Get_AMaxLeading());
             v_AleadGP3.push_back(dE_GP3);
             v_AleadGP4.push_back(dE_GP4);
             v_Aclus.push_back(Aclus);
-            v_Lclus.push_back(Lclus);                   // length in cm
-            v_dEdxCluster.push_back(Aclus / Lclus);     // dE/dx in ADC count
-            v_dEdxClusterGP3.push_back(dE_GP3 / Lclus); // dE/dx in ADC count
-            v_dEdxClusterGP4.push_back(dE_GP4 / Lclus); // dE/dx in ADC count
+            v_Lclus.push_back(Lclus);                           // length in cm
+            v_dEdxCluster.push_back(Aclus / (Lclus * 100));     // dE/dx in ADC count
+            v_dEdxClusterGP3.push_back(dE_GP3 / (Lclus * 100)); // dE/dx in ADC count
+            v_dEdxClusterGP4.push_back(dE_GP4 / (Lclus * 100)); // dE/dx in ADC count
             TH1F hClusterWF(Form("ClusterWF_mod%d_clu%d", iMod, iC), "Cluster waveform",
                             waveform_cluster.size(), 0, waveform_cluster.size());
             for (size_t ibin = 0; ibin < waveform_cluster.size(); ++ibin) {
@@ -582,12 +602,19 @@ void Reconstruction::dEdx::Reconstruction()
       // Compute dE/dx for the event
       p_recoevent->dEdxGP1 = ComputedEdxGP1(vClusterWaveforms, v_dEdxCluster, v_Aclus,
                                             v_Lclus, nEventClusters, falpha);
-      p_recoevent->dEdxGP2 = ComputedEdxGP2(vClusterWaveforms, v_dEdxCluster, v_Aclus,
-                                            v_Lclus, nEventClusters, falpha);
-      p_recoevent->dEdxGP3 = ComputedEdxGP34(vClusterWaveforms, v_dEdxClusterGP3,
-                                             v_AleadGP3, v_Lclus, nEventClusters, falpha);
-      p_recoevent->dEdxGP4 = ComputedEdxGP34(vClusterWaveforms, v_dEdxClusterGP4,
-                                             v_AleadGP4, v_Lclus, nEventClusters, falpha);
+      p_recoevent->dEdxGP2 =
+         ComputedEdxGP2(p_recoevent->GWF, vClusterWaveforms, v_dEdxCluster, v_Aclus,
+                        v_Lclus, nEventClusters, falpha);
+      p_recoevent->dEdxGP3 =
+         ComputedEdxGP345(p_recoevent->GWF, vClusterWaveforms, v_dEdxClusterGP3,
+                          v_AleadGP3, Levent, v_Lclus, nEventClusters, falpha);
+      p_recoevent->dEdxGP4 =
+         ComputedEdxGP345(p_recoevent->GWF, vClusterWaveforms, v_dEdxClusterGP4,
+                          v_AleadGP4, Levent, v_Lclus, nEventClusters, falpha);
+      p_recoevent->dEdxGP5 =
+         ComputedEdxGP345(p_recoevent->GWF, vCrossedWaveforms, v_evt_dEdxXP, v_evt_dE,
+                          Levent, v_evt_dx, nEventCrossedPads, falpha);
+
       p_recoevent->dEdxWF = ComputedEdxWF(v_evt_dEdxWF, p_recoevent->NClusters, falpha);
       p_recoevent->dEdxXP = ComputedEdxXP(v_evt_dEdxXP, v_evt_dE, v_evt_dx,
                                           p_recoevent->NCrossedPads, falpha);
@@ -727,27 +754,19 @@ float Reconstruction::dEdx::ComputedEdxGP1(const std::vector<TH1F> &vClusWF,
 
    int amplitudeGWF = GWFtruncatedGP1.GetMaximum();
    GWFtruncatedGP1.Delete();
-   return amplitudeGWF / LtruncatedTrack; // dE/dx in ADC count/ cm
+   return amplitudeGWF / (LtruncatedTrack * 100); // dE/dx in ADC count/ cm
 }
 
-float Reconstruction::dEdx::ComputedEdxGP2(const std::vector<TH1F> &vClusWF,
+float Reconstruction::dEdx::ComputedEdxGP2(const TH1F *GWF,
+                                           const std::vector<TH1F> &vClusWF,
                                            const std::vector<float> &v_dEdx,
                                            const std::vector<float> &v_Aclus,
                                            const std::vector<float> &v_Lclus,
                                            const int &nClusters, const float &alpha)
 {
+   TH1F *localCopyGWF = dynamic_cast<TH1F *>(GWF->Clone("localCopyGWF"));
    float nTruncatedClusters = int(floor(nClusters * alpha));
-
-   // Prepare the GigaWaveform
-   TH1F GWF(("GWF2" + std::to_string(iEvent) + std::to_string(iMod)).c_str(),
-            "Giga Waveform", 510, 0, 510);
-   TH1F GWFtruncatedGP2(
-      ("GWFtruncatedGP2" + std::to_string(iEvent) + std::to_string(iMod)).c_str(),
-      "Truncated Giga Waveform GP2", 510, 0, 510);
    float LtruncatedTrack = 0;
-   for (int i = 0; i < nClusters; ++i) {
-      GWF.Add(&vClusWF[i]); // sum all waveforms
-   }
 
    // Few steps to order v_Aclus & v_Lclus similarly to v_dEdx
    std::vector<int> indices(v_dEdx.size());
@@ -762,7 +781,6 @@ float Reconstruction::dEdx::ComputedEdxGP2(const std::vector<TH1F> &vClusWF,
    }
 
    // Start from the complete GigaWaveform and subtract top 30% ETFs
-   GWFtruncatedGP2 = GWF;
    for (int i = nTruncatedClusters; i < nClusters; ++i) {
       int tMaxClusterWF = vClusWF[indices[i]].GetMaximumBin();
       int AMaxClusterWF = vClusWF[indices[i]].GetMaximum();
@@ -770,64 +788,47 @@ float Reconstruction::dEdx::ComputedEdxGP2(const std::vector<TH1F> &vClusWF,
                          std::to_string(iMod),
                       0, 510, tMaxClusterWF - PT / TB, 510, 999, PT, TB);
       etf->Scale(AMaxClusterWF);
-      GWFtruncatedGP2.Add(etf, -1); // subtract ETF from the GigaWaveform
+      localCopyGWF->Add(etf, -1); // subtract ETF from the GigaWaveform
       delete etf;
    }
 
-   int amplitudeGWF = GWFtruncatedGP2.GetMaximum();
-   GWF.Delete();
-   GWFtruncatedGP2.Delete();
-   return amplitudeGWF / LtruncatedTrack; // dE/dx in ADC count/ cm
+   int amplitudeGWF = localCopyGWF->GetMaximum();
+   delete localCopyGWF;
+   return amplitudeGWF / (LtruncatedTrack * 100); // dE/dx in ADC count/ cm
 }
 
-float Reconstruction::dEdx::ComputedEdxGP34(const std::vector<TH1F> &vClusWF,
-                                            const std::vector<float> &v_dEdx,
-                                            const std::vector<float> &v_Alead,
-                                            const std::vector<float> &v_Lclus,
-                                            const int &nClusters, const float &alpha)
+float Reconstruction::dEdx::ComputedEdxGP345(
+   const TH1F *GWF, const std::vector<TH1F> &vWF, const std::vector<float> &v_dEdx,
+   const std::vector<float> &v_Amax, const float &eventLength,
+   const std::vector<float> &v_Length, const int &nElements, const float &alpha)
 {
-   float nTruncatedClusters = int(floor(nClusters * alpha));
+   TH1F *localCopyGWF = dynamic_cast<TH1F *>(GWF->Clone("localCopyGWF"));
+   float nElementsTruncated = int(floor(nElements * alpha));
+   float LtruncatedTrack = eventLength;
 
-   // Prepare the GigaWaveform
-   TH1F GWF(("GWF34" + std::to_string(iEvent) + std::to_string(iMod)).c_str(),
-            "Giga Waveform", 510, 0, 510);
-   TH1F GWFtruncatedGP34(
-      ("GWFtruncatedGP34" + std::to_string(iEvent) + std::to_string(iMod)).c_str(),
-      "Truncated Giga Waveform GP34", 510, 0, 510);
-   float LtruncatedTrack = 0;
-   for (int i = 0; i < nClusters; ++i) {
-      GWF.Add(&vClusWF[i]); // sum all waveforms
-   }
-
-   // Few steps to order v_Aclus & v_Lclus similarly to v_dEdx
+   // Few steps to order v_Amax & v_Length similarly to v_dEdx
    std::vector<int> indices(v_dEdx.size());
    std::iota(indices.begin(), indices.end(), 0);
    std::sort(indices.begin(), indices.end(), [&](int i, int j) { // sorting wrt v_dEdx
       return v_dEdx[i] < v_dEdx[j];
    });
 
-   // Compute the truncated track length
-   for (int i = 0; i < nTruncatedClusters; ++i) {
-      LtruncatedTrack += v_Lclus[indices[i]];
-   }
-
    // Start from the complete GigaWaveform and subtract top 30% ETFs
-   GWFtruncatedGP34 = GWF;
-   for (int i = nTruncatedClusters; i < nClusters; ++i) {
-      float Ascale = v_Alead[indices[i]];
-      int tMaxClusterWF = vClusWF[indices[i]].GetMaximumBin();
+   for (int i = nElementsTruncated; i < nElements; ++i) {
+      LtruncatedTrack -= v_Length[indices[i]];
+      float Ascale = v_Amax[indices[i]];
+      int tMaxClusterWF = vWF[indices[i]].GetMaximumBin();
       TH1F *etf = ETF("pTH1F_ETFtrunc_" + std::to_string(i) + std::to_string(iEvent) +
                          std::to_string(iMod),
                       0, 510, tMaxClusterWF - PT / TB, 510, 999, PT, TB);
       etf->Scale(Ascale);
-      GWFtruncatedGP34.Add(etf, -1); // subtract ETF from the GigaWaveform
+      localCopyGWF->Add(etf, -1); // subtract ETF from the GigaWaveform
       delete etf;
    }
 
-   int amplitudeGWF = GWFtruncatedGP34.GetMaximum();
-   GWF.Delete();
-   GWFtruncatedGP34.Delete();
-   return amplitudeGWF / LtruncatedTrack;
+   int amplitudeGWF = localCopyGWF->GetMaximum();
+   delete localCopyGWF;
+   return amplitudeGWF / (LtruncatedTrack * 100); // dE/dx in ADC count/cm
 }
 
 TH1F *Reconstruction::dEdx::GetGigaWaveform(const std::vector<TH1F> &vClusWF)

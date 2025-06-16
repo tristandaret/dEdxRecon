@@ -108,6 +108,7 @@ public:
    float dEdxGP2 = 0;
    float dEdxGP3 = 0;
    float dEdxGP4 = 0;
+   float dEdxGP5 = 0;
    float dEdxXPnoTrunc = 0;
    float dEdxWFnoTrunc = 0;
    int NCrossedPads = 0;
@@ -145,18 +146,20 @@ public:
                   const int &nClusters, const float &alpha);
 
    // GP2: Remove from total GWF the ETF of the top 30% clusters
-   float
-   ComputedEdxGP2(const std::vector<TH1F> &vClusWF, const std::vector<float> &v_dEdx,
-                  const std::vector<float> &v_Aclus, const std::vector<float> &v_Lclus,
-                  const int &nClusters, const float &alpha);
+   float ComputedEdxGP2(const TH1F *GWF, const std::vector<TH1F> &vClusWF,
+                        const std::vector<float> &v_dEdx,
+                        const std::vector<float> &v_Aclus,
+                        const std::vector<float> &v_Lclus, const int &nClusters,
+                        const float &alpha);
 
    // GP3: Remove from total GWF the ETF of the top 30% clusters computed as
    // Alead*ratio(y_barycenter)
    // GP4: Remove from total GWF the ETF of the top 30% clusters computed with LUT
-   float
-   ComputedEdxGP34(const std::vector<TH1F> &vClusWF, const std::vector<float> &v_dEdx,
-                  const std::vector<float> &v_Alead, const std::vector<float> &v_Lclus,
-                  const int &nClusters, const float &alpha);
+   // GP5: Remove from total GWF the ETF of the top 30% crossed pads computed with LUT
+   float ComputedEdxGP345(const TH1F *GWF, const std::vector<TH1F> &vWF, const std::vector<float> &v_dEdx,
+                          const std::vector<float> &v_Amax, const float &eventLength,
+                          const std::vector<float> &v_Length, const int &nElements,
+                          const float &alpha);
 
    TH1F *GetGigaWaveform(const std::vector<TH1F> &vClusWF);
    TH1F *GetTruncatedGigaWaveformGP1(const std::vector<TH1F> &vClusWF,
@@ -242,6 +245,7 @@ private:
    TH1F *ph1f_GP2;
    TH1F *ph1f_GP3;
    TH1F *ph1f_GP4;
+   TH1F *ph1f_GP5;
 };
 } // namespace Reconstruction
 

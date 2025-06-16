@@ -47,7 +47,7 @@ int DtwithoutBhere = 323;
 void Reconstruction::Monitoring()
 {
    drawWhichMethods = 0; // 0: both methods | 1: only WF | 2: only XP
-   comment = "";
+   comment = "n1000_GP2";
    gErrorIgnoreLevel = kInfo;
 
    Correction(1, 1, 1, 1, 1);
