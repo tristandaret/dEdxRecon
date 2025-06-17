@@ -64,6 +64,7 @@ public:
    float ratioCorr = 0;
    float yCluster = 0;
    float yWeight = 0;
+   float LUTrhoLead = 0;
 
    ClassDef(RecoCluster, 1);
 };
@@ -103,7 +104,11 @@ public:
    bool selected = false;
    int eventNbr = 0;
    float dEdxXP = 0;
+   float dEdxXP4 = 0;
+   float dEdxXP5 = 0;
    float dEdxWF = 0;
+   float dEdxGPL = 0;
+   float dEdxGPC = 0;
    float dEdxGP1 = 0;
    float dEdxGP2 = 0;
    float dEdxGP3 = 0;
@@ -145,12 +150,22 @@ public:
                   const std::vector<float> &v_Aclus, const std::vector<float> &v_Lclus,
                   const int &nClusters, const float &alpha);
 
+   // GPL: Remove from total GWF the ETF of the top 30% leading pads
+   // GPC: Remove from total GWF the ETF of the top 30% crossed pads
    // GP2: Remove from total GWF the ETF of the top 30% clusters
    // GP3: Remove from total GWF the ETF of the top 30% clusters computed as
    // Alead*ratio(y_barycenter)
    // GP4: Remove from total GWF the ETF of the top 30% clusters computed with LUT
    // GP5: Remove from total GWF the ETF of the top 30% crossed pads computed with LUT
    float ComputedEdxGP(const TH1F *GWF, const std::vector<TH1F> &vWF,
+                       const std::vector<float> &v_dEdx, const std::vector<float> &v_Amax,
+                       const float &eventLength, const std::vector<float> &v_Length,
+                       const int &nElements, const float &alpha);
+   float ComputedEdxGA(const TH1F *GWF, const std::vector<TH1F> &vWF,
+                       const std::vector<float> &v_dEdx, const std::vector<float> &v_Amax,
+                       const float &eventLength, const std::vector<float> &v_Length,
+                       const int &nElements, const float &alpha);
+   float ComputedEdxXP5(const TH1F *GWF, const std::vector<TH1F> &vWF,
                        const std::vector<float> &v_dEdx, const std::vector<float> &v_Amax,
                        const float &eventLength, const std::vector<float> &v_Length,
                        const int &nElements, const float &alpha);
@@ -235,6 +250,8 @@ private:
    // histograms
    TH1F *ph1f_WF;
    TH1F *ph1f_XP;
+   TH1F *ph1f_GPL;
+   TH1F *ph1f_GPC;
    TH1F *ph1f_GP1;
    TH1F *ph1f_GP2;
    TH1F *ph1f_GP3;

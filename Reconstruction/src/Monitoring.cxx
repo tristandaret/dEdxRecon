@@ -20,7 +20,7 @@ int prototype = 0;
 int CERN_Escan = 0;
 int CERN_drift = 0;
 
-int DESY_drift = 1;
+int DESY_drift = 0;
 int DESY_row = 0;
 int DESY_phi = 1;
 int DESY_theta = 0;
@@ -47,7 +47,7 @@ int DtwithoutBhere = 323;
 void Reconstruction::Monitoring()
 {
    drawWhichMethods = 0; // 0: both methods | 1: only WF | 2: only XP
-   comment = "_n1000_tgwf_Ltrklen_gimmeWFDisp";
+   comment = "_n1000_fullLUT_XP2";
    gErrorIgnoreLevel = kInfo;
 
    Correction(1, 1, 1, 1, 1);
@@ -114,7 +114,7 @@ void Reconstruction::Monitoring()
          "_25V_z415p1_y2pad_iter0.root", "_25V_z415_y2pad_2_iter0.root"};
 
       // for (int iEnergy = 0; iEnergy < (int)std::size(vScanLabels); iEnergy++) {
-         for(int iEnergy = 2; iEnergy < 3; iEnergy++){
+      for (int iEnergy = 2; iEnergy < 3; iEnergy++) {
          v_datafiles.push_back(dataScanPath + "All_ERAMS_350V_412ns_" +
                                vScanLabels[iEnergy] + v_suffix[iEnergy]);
          vTags.push_back(Form("%s_%s_%s_Dt%d", testbeam.c_str(), scanName.c_str(),
@@ -278,7 +278,7 @@ void Reconstruction::Monitoring()
       ClearVectors();
    }
 
-   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   //////////////////////////////////////////////////////////////////////////////////////
    // Drawing
    if (Draw_Comparison) {
       vTags.push_back("");
@@ -307,7 +307,6 @@ void Reconstruction::Monitoring()
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Configuration functions
 

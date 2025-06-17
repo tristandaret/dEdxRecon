@@ -254,7 +254,7 @@ Reconstruction::LUT::LUT(const int &transDiffCoeffB, const int &transDiffCoeffno
    std::cout << "dEdx LUT: Dt with B = " << DtwithB << " | Dt without B = " << DtwithoutB
              << " | step size = " << stepSizeTrans << std::endl;
    fFile_LUT = Form("~/Documents/Code/CPP/CPP_Projects/LUT_Maker/Output_LUT/"
-                    "dEdx_XP_LUT_Dt%d_%d_PT%d.root",
+                    "dEdx_XP_LUT_Dt%d_%d_RC_80_160_nDrift_21_PT%d.root",
                     transDiffCoeffB, transDiffCoeffnoB, peakingTime);
    std::cout << "dEdx LUT: LOADING " << fFile_LUT << std::endl;
    Load();
@@ -302,7 +302,7 @@ void Reconstruction::LUT::Load()
    for (int i = 0; i < nentries; i++) {
       ptree.GetEntry(i);
       iDt = (int)std::round((fDt * pow(10, 3.5) - DtwithB) / stepSizeTrans);
-      iRC = (int)std::round((fRC - 112) / sSTEP_RC);
+      iRC = (int)std::round((fRC - RCmin) / sSTEP_RC);
       idrift = (int)std::round(fdrift / sSTEP_DRIFT);
       id = (int)std::round(fd / sSTEP_IMPACT);
       iphi = (int)std::round((fphi - 1e-6) / sSTEP_PHI);
@@ -314,8 +314,10 @@ float Reconstruction::LUT::getRatio(const int &Dt, const int &RC, const float &d
                                     const float &impact, const float &angle)
 {
    // keep double
-   int itransvDiff = (int)(Dt - DtwithB) / stepSizeTrans;
-   int iRC = (int)(RC - 112) / sSTEP_RC;
+   int iDt = (int)(Dt - DtwithB) / stepSizeTrans;
+   float iRC = (RC - RCmin) / sSTEP_RC;
+   float iRC_min = std::min((double)std::floor(iRC), (double)SNSTEPS_RC - 1);
+   float iRC_max = std::max((double)std::ceil(iRC), 0.);
    float idrift = drift / sSTEP_DRIFT;
    float idrift_min =
       std::min((double)std::floor(drift / sSTEP_DRIFT), (double)SNSTEPS_DRIFT - 1);
@@ -330,38 +332,50 @@ float Reconstruction::LUT::getRatio(const int &Dt, const int &RC, const float &d
    float id_max = std::max((double)std::ceil(impact / sSTEP_IMPACT), 0.);
 
    // weights
-   double w_drift, w_d, w_phi;
-   if (idrift_min == idrift_max)
-      w_drift = 1;
-   else
+   double w_RC = 1, w_drift = 1, w_d = 1, w_phi = 1;
+   if (iRC_min != iRC_max)
+      w_RC = 1 - (iRC - iRC_min) / (iRC_max - iRC_min);
+   if (idrift_min != idrift_max)
       w_drift = 1 - (idrift - idrift_min) / (idrift_max - idrift_min);
-   if (id_min == id_max)
-      w_d = 1;
-   else
+   if (id_min != id_max)
       w_d = 1 - (id - id_min) / (id_max - id_min);
-   if (iphi_min == iphi_max)
-      w_phi = 1;
-   else
+   if (iphi_min != iphi_max)
       w_phi = 1 - (iphi - iphi_min) / (iphi_max - iphi_min);
 
    // Interpolation
    float factor = 0;
-   factor += w_drift * w_d * w_phi *
-             LUTValues[itransvDiff][iRC][(int)idrift_min][(int)id_min][(int)iphi_min];
-   factor += w_drift * w_d * (1 - w_phi) *
-             LUTValues[itransvDiff][iRC][(int)idrift_min][(int)id_min][(int)iphi_max];
-   factor += w_drift * (1 - w_d) * w_phi *
-             LUTValues[itransvDiff][iRC][(int)idrift_min][(int)id_max][(int)iphi_min];
-   factor += w_drift * (1 - w_d) * (1 - w_phi) *
-             LUTValues[itransvDiff][iRC][(int)idrift_min][(int)id_max][(int)iphi_max];
-   factor += (1 - w_drift) * w_d * w_phi *
-             LUTValues[itransvDiff][iRC][(int)idrift_max][(int)id_min][(int)iphi_min];
-   factor += (1 - w_drift) * w_d * (1 - w_phi) *
-             LUTValues[itransvDiff][iRC][(int)idrift_max][(int)id_min][(int)iphi_max];
-   factor += (1 - w_drift) * (1 - w_d) * w_phi *
-             LUTValues[itransvDiff][iRC][(int)idrift_max][(int)id_max][(int)iphi_min];
-   factor += (1 - w_drift) * (1 - w_d) * (1 - w_phi) *
-             LUTValues[itransvDiff][iRC][(int)idrift_max][(int)id_max][(int)iphi_max];
+   factor += w_RC * w_drift * w_d * w_phi *
+             LUTValues[iDt][(int)iRC][(int)idrift_min][(int)id_min][(int)iphi_min];
+   factor += w_RC * w_drift * w_d * (1 - w_phi) *
+             LUTValues[iDt][(int)iRC][(int)idrift_min][(int)id_min][(int)iphi_max];
+   factor += w_RC * w_drift * (1 - w_d) * w_phi *
+             LUTValues[iDt][(int)iRC][(int)idrift_min][(int)id_max][(int)iphi_min];
+   factor += w_RC * w_drift * (1 - w_d) * (1 - w_phi) *
+             LUTValues[iDt][(int)iRC][(int)idrift_min][(int)id_max][(int)iphi_max];
+   factor += w_RC * (1 - w_drift) * w_d * w_phi *
+             LUTValues[iDt][(int)iRC][(int)idrift_max][(int)id_min][(int)iphi_min];
+   factor += w_RC * (1 - w_drift) * w_d * (1 - w_phi) *
+             LUTValues[iDt][(int)iRC][(int)idrift_max][(int)id_min][(int)iphi_max];
+   factor += w_RC * (1 - w_drift) * (1 - w_d) * w_phi *
+             LUTValues[iDt][(int)iRC][(int)idrift_max][(int)id_max][(int)iphi_min];
+   factor += w_RC * (1 - w_drift) * (1 - w_d) * (1 - w_phi) *
+             LUTValues[iDt][(int)iRC][(int)idrift_max][(int)id_max][(int)iphi_max];
+   factor += (1 - w_RC) * w_drift * w_d * w_phi *
+             LUTValues[iDt][(int)iRC][(int)idrift_min][(int)id_min][(int)iphi_min];
+   factor += (1 - w_RC) * w_drift * w_d * (1 - w_phi) *
+             LUTValues[iDt][(int)iRC][(int)idrift_min][(int)id_min][(int)iphi_max];
+   factor += (1 - w_RC) * w_drift * (1 - w_d) * w_phi *
+             LUTValues[iDt][(int)iRC][(int)idrift_min][(int)id_max][(int)iphi_min];
+   factor += (1 - w_RC) * w_drift * (1 - w_d) * (1 - w_phi) *
+             LUTValues[iDt][(int)iRC][(int)idrift_min][(int)id_max][(int)iphi_max];
+   factor += (1 - w_RC) * (1 - w_drift) * w_d * w_phi *
+             LUTValues[iDt][(int)iRC][(int)idrift_max][(int)id_min][(int)iphi_min];
+   factor += (1 - w_RC) * (1 - w_drift) * w_d * (1 - w_phi) *
+             LUTValues[iDt][(int)iRC][(int)idrift_max][(int)id_min][(int)iphi_max];
+   factor += (1 - w_RC) * (1 - w_drift) * (1 - w_d) * w_phi *
+             LUTValues[iDt][(int)iRC][(int)idrift_max][(int)id_max][(int)iphi_min];
+   factor += (1 - w_RC) * (1 - w_drift) * (1 - w_d) * (1 - w_phi) *
+             LUTValues[iDt][(int)iRC][(int)idrift_max][(int)id_max][(int)iphi_max];
 
    return factor;
 }

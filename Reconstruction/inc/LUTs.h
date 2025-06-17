@@ -104,18 +104,21 @@ private:
 
    static constexpr float PAD_DIAG = 15.20; // sqrt(pow(11.28,2) + pow(10.19, 2))
 
+   static constexpr int RCmin = 80;
+   static constexpr int RCmax = 160;
+
    // Number of discrete steps in each dimension of the Look Up Table
    static const int SNSTEPS_TRANS = 2;
-   static const int SNSTEPS_RC = 2;
-   static const int SNSTEPS_DRIFT = 101;
+   static const int SNSTEPS_RC = 17;
+   static const int SNSTEPS_DRIFT = 21;
    static const int SNSTEPS_IMPACT = 250;
    static const int SNSTEPS_PHI = 250;
 
    static float LUTValues[SNSTEPS_TRANS][SNSTEPS_RC][SNSTEPS_DRIFT][SNSTEPS_IMPACT]
                          [SNSTEPS_PHI];
 
-   float stepSizeTrans = 37;             // 286 -> 323 or 310->350
-   static constexpr float sSTEP_RC = 46; // 112->158, only 2 values
+   float stepSizeTrans = 37; // 286 -> 323 or 310->350
+   static constexpr float sSTEP_RC = 5;
    static constexpr float sSTEP_PHI = 90. / (SNSTEPS_PHI - 1);
    static constexpr float sSTEP_IMPACT = (PAD_DIAG / 2) / (SNSTEPS_IMPACT - 1);
    static constexpr float sSTEP_DRIFT = 1000. / (SNSTEPS_DRIFT - 1);

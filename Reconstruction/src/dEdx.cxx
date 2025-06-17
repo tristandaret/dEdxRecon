@@ -102,7 +102,8 @@ void Reconstruction::dEdx::Reconstruction()
 
    // Correction function for WF
    pcorrFunctionWF = corr_func(v_datafiles.back(), tag, fcorrectWF);
-   fAref = pcorrFunctionWF->Eval(XPADLENGTH);
+   // Take the reference as a track as long as a pad width, and normalize to 1 cm
+   fAref = pcorrFunctionWF->Eval(XPADLENGTH) / XPADLENGTH * 10;
 
    // Track fit initializations
    TrackFitter aTrackFitter("Minuit", fnParamsTrack);
@@ -125,6 +126,10 @@ void Reconstruction::dEdx::Reconstruction()
                       100, 0, xmax);
    ph1f_XP = new TH1F("ph1f_XP", "<dE/dx> with XP;<dE/dx> (ADC count);Number of events",
                       100, 0, xmax);
+   ph1f_GPL = new TH1F(
+      "ph1f_GPL", "<dE/dx> with GPL;<dE/dx> (ADC count);Number of events", 100, 0, xmax);
+   ph1f_GPC = new TH1F(
+      "ph1f_GPC", "<dE/dx> with GPC;<dE/dx> (ADC count);Number of events", 100, 0, xmax);
    ph1f_GP1 = new TH1F(
       "ph1f_GP1", "<dE/dx> with GP1;<dE/dx> (ADC count);Number of events", 100, 0, xmax);
    ph1f_GP2 = new TH1F(
@@ -142,16 +147,16 @@ void Reconstruction::dEdx::Reconstruction()
    std::cout << "Processing events:" << std::endl;
 
    // GP variables
-   std::vector<TH1F> vPadWaveforms;
    std::vector<TH1F> vClusterWaveforms;
    std::vector<TH1F> vCrossedWaveforms;
    std::vector<float> v_dEdxCluster;
+   std::vector<float> v_dEdxClusterGPL;
    std::vector<float> v_dEdxClusterGP3;
    std::vector<float> v_dEdxClusterGP4;
-   std::vector<float> v_dEdxCrossedGP5;
+   std::vector<float> v_dEdxCrossedGPC;
    std::vector<float> v_Aclus;    // amplitude of cluster in ADC counts
    std::vector<float> v_Lclus;    // length in clusters in cm
-   std::vector<float> v_Lcrossed; // length in crossed pads in cm
+   std::vector<float> v_Acrossed; // amplitude of crossed pads in ADC counts
    std::vector<float> v_Alead;    // amplitude of leading pads in ADC counts
    std::vector<float> v_AleadGP3; // amplitude of leading pads in ADC counts
    std::vector<float> v_AleadGP4; // amplitude of leading pads in ADC counts
@@ -164,8 +169,7 @@ void Reconstruction::dEdx::Reconstruction()
    if (testGP3param && !testGP3param->IsZombie()) {
       ptf1_paramGP3 = testGP3param->Get<TF1>("ptf1_paramGP3");
       pth2f_paramGP3 = testGP3param->Get<TH2F>("pth2f_paramGP3");
-      pth2f_paramGP3->SetDirectory(
-         fpFile_dEdx); // avoids issue when writing in my output file
+      pth2f_paramGP3->SetDirectory(0); // avoids issue when writing in my output file
       testGP3param->Close();
    } else {
       testGP3param = TFile::Open(GP3paramPath.c_str(), "RECREATE");
@@ -216,7 +220,6 @@ void Reconstruction::dEdx::Reconstruction()
                pCluster = pModule->Get_Cluster(iC);
                float Aclus = pCluster->Get_Acluster();
                float Alead = pCluster->Get_AMaxLeading();
-               float Lclus = 0;
                float ytrack = pCluster->Get_YTrack() * 100;  // in cm
                float ylead = pCluster->Get_YLeading() * 100; // in cm
                pth2f_paramGP3->Fill(ytrack - ylead, Aclus / Alead);
@@ -241,8 +244,8 @@ void Reconstruction::dEdx::Reconstruction()
 
    // Event loop
    for (iEvent = 0; iEvent < NEvents; iEvent++) {
-      // if (iEvent % 1000 == 0 or iEvent == NEvents - 1)
-      std::cout << iEvent << "/" << NEvents;
+      if (iEvent % 1000 == 0 or iEvent == NEvents - 1)
+         std::cout << iEvent << "/" << NEvents << std::endl;
 
       pEvent = p_uploader->GiveMe_Event(iEvent, moduleCase, 0, 0);
       if (!pEvent)
@@ -264,11 +267,11 @@ void Reconstruction::dEdx::Reconstruction()
          }
          p_recoevent->Clear();
          delete pEvent;
-         std::cout << " - Discarded" << std::endl;
+         // std::cout << " - Discarded" << std::endl;
          continue;
       }
       p_recoevent->selected = true;
-      auto start_time = std::chrono::high_resolution_clock::now();
+      // auto start_time = std::chrono::high_resolution_clock::now();
 
       // Cluster display
       if (iEvent < 1) {
@@ -281,16 +284,16 @@ void Reconstruction::dEdx::Reconstruction()
       // Reset GP variables
       p_recoevent->peakingTime = PT;
       p_recoevent->timeBinSize = TB;
-      vPadWaveforms.clear();
       vClusterWaveforms.clear();
       vCrossedWaveforms.clear();
       v_dEdxCluster.clear();
+      v_dEdxClusterGPL.clear();
       v_dEdxClusterGP3.clear();
       v_dEdxClusterGP4.clear();
-      v_dEdxCrossedGP5.clear();
+      v_dEdxCrossedGPC.clear();
       v_Aclus.clear();
       v_Lclus.clear();
-      v_Lcrossed.clear();
+      v_Acrossed.clear();
       v_Alead.clear();
       v_AleadGP3.clear();
       v_AleadGP4.clear();
@@ -342,7 +345,6 @@ void Reconstruction::dEdx::Reconstruction()
             p_recomodule->Track->SetParameter(2, pTrack->Get_ParameterValue(2));
             p_recomodule->Track->SetParError(2, pTrack->Get_ParameterError(2));
          }
-         // Levent += trk_len(pModule, pTrack);
          // Loop On Clusters
          for (iC = 0; iC < NClusters; iC++) {
             std::fill(waveform_cluster.begin(), waveform_cluster.end(),
@@ -356,8 +358,8 @@ void Reconstruction::dEdx::Reconstruction()
             p_recocluster->yWeight = pCluster->Get_YWeight() * 100; // in cm
 
             // GP variables
-            float Lclus = 0;
             float rhoGP4 = 0;
+            float AleadSafe = 0;
 
             // Loop On Pads
             int NPads = pCluster->Get_NberOfPads();
@@ -371,13 +373,9 @@ void Reconstruction::dEdx::Reconstruction()
                p_recopad = new Reconstruction::RecoPad();
                if (iP == NPads - 1)
                   p_recopad->leading = true;
-               // std::vector<int> v_int = pPad->Get_vADC();
-               // std::vector<float> waveform_pad(
-               //    v_int.begin(), v_int.end()); // Implicit conversion from int to float
-               TH1F *wfPad = GiveMe_WaveFormDisplay(pPad, tag);
-               for (int ibin = 1; ibin <= wfPad->GetNbinsX(); ++ibin)
-                  waveform_pad.push_back(static_cast<int>(wfPad->GetBinContent(ibin)));
-               delete wfPad; // delete the histogram to avoid memory leak
+               std::vector<int> v_int = pPad->Get_vADC();
+               std::vector<float> waveform_pad(
+                  v_int.begin(), v_int.end()); // Implicit conversion from int to float
                p_recopad->ix = pPad->Get_iX();
                p_recopad->iy = pPad->Get_iY();
                p_recopad->xPad = pPad->Get_XPad() * 100; // in cm
@@ -409,7 +407,7 @@ void Reconstruction::dEdx::Reconstruction()
                   p_recopad->GainCorrection = AVG_GAIN / p_recopad->gain;
                   for (int i = 0; i < 510; i++)
                      waveform_pad[i] = waveform_pad[i] * p_recopad->GainCorrection;
-                  if (iP == 0)
+                  if (iP == NPads - 1)
                      p_recocluster->ALead_GCorr = p_recopad->GainCorrection;
                   break;
                case 2: // ERAM per ERAM correction
@@ -417,7 +415,7 @@ void Reconstruction::dEdx::Reconstruction()
                      AVG_GAIN / pERAMMaps->MeanGain(fERAMs_pos[fmodID]);
                   for (int i = 0; i < 510; i++)
                      waveform_pad[i] = waveform_pad[i] * p_recopad->GainCorrection;
-                  if (iP == 0)
+                  if (iP == NPads - 1)
                      p_recocluster->ALead_GCorr = p_recopad->GainCorrection;
                   break;
                }
@@ -442,8 +440,6 @@ void Reconstruction::dEdx::Reconstruction()
                for (size_t ibin = 0; ibin < waveform_pad.size(); ++ibin) {
                   hPadWF.SetBinContent(ibin + 1, waveform_pad[ibin]);
                }
-               vPadWaveforms.push_back(hPadWF); // add after gain correction
-               Lclus += p_recopad->length;      // length in pad in m
 
                // Compute drift distance for different time bin sizes and peaking times
                p_recopad->TMax = pPad->Get_TMax();
@@ -473,6 +469,8 @@ void Reconstruction::dEdx::Reconstruction()
                   float impactGP4 = std::min(halfdiag, p_recopad->d);
                   rhoGP4 = p_lut->getRatio(Dt, p_recopad->RC, p_recopad->driftDistance,
                                            fabs(impactGP4), fabs(p_recopad->phi));
+                  p_recocluster->LUTrhoLead = rhoGP4; // LUT ratio for leading pad
+                  AleadSafe = *std::max_element(waveform_pad.begin(), waveform_pad.end());
                }
 
                // Min length in pad to avoid fluctuations from small segments
@@ -505,6 +503,9 @@ void Reconstruction::dEdx::Reconstruction()
                p_recomodule->NCrossedPads++;
                p_recomodule->lengthXP += p_recopad->length;
 
+               // GPC
+               v_Acrossed.push_back(pPad->Get_AMax()); // amplitude of crossed pads
+               v_dEdxCrossedGPC.push_back(pPad->Get_AMax() / p_recopad->length / 100);
                // GP5
                nEventCrossedPads++;
                TH1F hCrossedWF(Form("CrossedWF_mod%d_clu%d_pad%d", iMod, iC, iP),
@@ -524,8 +525,7 @@ void Reconstruction::dEdx::Reconstruction()
             p_recocluster->ratioCorr =
                fAref / pcorrFunctionWF->Eval(p_recocluster->length * 1000);
             if (diag)
-               p_recocluster->dEdxWF =
-                  p_recocluster->charge * p_recocluster->ratioCorr / XPADLENGTH * 10;
+               p_recocluster->dEdxWF = p_recocluster->charge * p_recocluster->ratioCorr;
             else
                p_recocluster->dEdxWF =
                   p_recocluster->charge / (p_recocluster->length * 100);
@@ -540,16 +540,18 @@ void Reconstruction::dEdx::Reconstruction()
             // GP variables
             float rhoGP3 = ptf1_paramGP3->Eval(
                (pCluster->Get_YTrack() - pCluster->Get_YLeading()) * 100);
-            float dE_GP3 = pCluster->Get_AMaxLeading() * rhoGP3;
-            float dE_GP4 = pCluster->Get_AMaxLeading() * rhoGP4;
-            v_Alead.push_back(pCluster->Get_AMaxLeading());
+            float dE_GP3 = AleadSafe * rhoGP3;
+            float dE_GP4 = AleadSafe * rhoGP4;
+            v_Alead.push_back(AleadSafe);
             v_AleadGP3.push_back(dE_GP3);
             v_AleadGP4.push_back(dE_GP4);
             v_Aclus.push_back(p_recocluster->charge);
-            v_Lclus.push_back(Lclus); // length in cm
-            v_dEdxCluster.push_back(p_recocluster->charge / (Lclus * 100));
-            v_dEdxClusterGP3.push_back(dE_GP3 / (Lclus * 100)); // dE/dx in ADC count
-            v_dEdxClusterGP4.push_back(dE_GP4 / (Lclus * 100)); // dE/dx in ADC count
+            v_Lclus.push_back(p_recocluster->length); // length in cm
+            v_dEdxCluster.push_back(p_recocluster->charge /
+                                    (p_recocluster->length * 100));
+            v_dEdxClusterGP3.push_back(dE_GP3 / (p_recocluster->length * 100));
+            v_dEdxClusterGP4.push_back(dE_GP4 / (p_recocluster->length * 100));
+            v_dEdxClusterGPL.push_back(AleadSafe / (p_recocluster->length * 100));
             TH1F hClusterWF(Form("ClusterWF_mod%d_clu%d", iMod, iC), "Cluster waveform",
                             waveform_cluster.size(), 0, waveform_cluster.size());
             for (size_t ibin = 0; ibin < waveform_cluster.size(); ++ibin) {
@@ -603,24 +605,104 @@ void Reconstruction::dEdx::Reconstruction()
          vClusterWaveforms, v_dEdxCluster, p_recoevent->NClusters);
 
       // Compute dE/dx for the event
+      std::vector<int> indices(v_evt_dEdxWF.size());
+      std::iota(indices.begin(), indices.end(), 0);
+      std::sort(indices.begin(), indices.end(),
+                [&](int i, int j) { return v_evt_dEdxWF[i] < v_evt_dEdxWF[j]; });
+      float AclusTotal = 0;
+      float trunc = int(floor(p_recoevent->NClusters * 0.7));
+      for (int i = 0; i < p_recoevent->NClusters; i++) {
+         AclusTotal += v_Aclus[indices[i]];
+      }
+      float AclusTrunc = AclusTotal;
+      std::cout << std::setprecision(0) << std::fixed;
+      std::cout << "AcT: " << AclusTotal;
+      for (int i = trunc; i < p_recoevent->NClusters; i++) {
+         AclusTrunc -= v_Aclus[indices[i]];
+         std::cout << "-" << v_Aclus[indices[i]];
+      }
+      std::cout << "=" << AclusTrunc << " (-" << AclusTotal - AclusTrunc << " <=> "
+                << (AclusTotal - AclusTrunc) / AclusTotal * 100 << "%)" << std::endl;
+
+      std::cout << "GPC: ";
+      p_recoevent->dEdxGPC =
+         ComputedEdxGP(p_recoevent->GWF, vCrossedWaveforms, v_dEdxCrossedGPC, v_Acrossed,
+                       Levent, v_evt_dx, p_recoevent->NCrossedPads, falpha);
+      std::cout << "GPL: ";
+      p_recoevent->dEdxGPL =
+         ComputedEdxGP(p_recoevent->GWF, vClusterWaveforms, v_dEdxClusterGPL, v_Alead,
+                       Levent, v_Lclus, p_recoevent->NClusters, falpha);
       p_recoevent->dEdxGP1 = ComputedEdxGP1(vClusterWaveforms, v_dEdxCluster, v_Aclus,
                                             v_Lclus, p_recoevent->NClusters, falpha);
+      std::cout << "GP2: ";
       p_recoevent->dEdxGP2 =
          ComputedEdxGP(p_recoevent->GWF, vClusterWaveforms, v_dEdxCluster, v_Aclus,
                        Levent, v_Lclus, p_recoevent->NClusters, falpha);
+      std::cout << "GP3: ";
       p_recoevent->dEdxGP3 =
          ComputedEdxGP(p_recoevent->GWF, vClusterWaveforms, v_dEdxClusterGP3, v_AleadGP3,
                        Levent, v_Lclus, p_recoevent->NClusters, falpha);
+
+      std::cout << std::endl;
+      std::vector<int> indicesGP4(v_dEdxClusterGP4.size());
+      std::iota(indicesGP4.begin(), indicesGP4.end(), 0);
+      std::sort(indicesGP4.begin(), indicesGP4.end(),
+                [&](int i, int j) { return v_dEdxClusterGP4[i] < v_dEdxClusterGP4[j]; });
+      float AGP4 = 0;
+      trunc = int(floor(p_recoevent->NClusters * 0.7));
+      for (int i = 0; i < p_recoevent->NClusters; i++) {
+         AGP4 += v_AleadGP4[indicesGP4[i]];
+      }
+      float AGP4Trunc = AGP4;
+      std::cout << std::setprecision(0) << std::fixed;
+      std::cout << "AcT: " << AGP4;
+      for (int i = trunc; i < p_recoevent->NClusters; i++) {
+         AGP4Trunc -= v_AleadGP4[indicesGP4[i]];
+         std::cout << "-" << v_AleadGP4[indicesGP4[i]];
+      }
+      std::cout << "=" << AGP4Trunc << " (-" << AGP4 - AGP4Trunc << " <=> "
+                << (AGP4 - AGP4Trunc) / AGP4 * 100 << "%)" << std::endl;
+      std::cout << "GP4: ";
       p_recoevent->dEdxGP4 =
          ComputedEdxGP(p_recoevent->GWF, vClusterWaveforms, v_dEdxClusterGP4, v_AleadGP4,
                        Levent, v_Lclus, p_recoevent->NClusters, falpha);
-      p_recoevent->dEdxGP5 =
-         ComputedEdxGP(p_recoevent->GWF, vCrossedWaveforms, v_evt_dEdxXP, v_evt_dE,
-                       Levent, v_evt_dx, p_recoevent->NCrossedPads, falpha);
 
+      std::cout << std::endl;
+      std::vector<int> indicesCr(v_evt_dEdxXP.size());
+      std::iota(indicesCr.begin(), indicesCr.end(), 0);
+      std::sort(indicesCr.begin(), indicesCr.end(),
+                [&](int i, int j) { return v_evt_dEdxXP[i] < v_evt_dEdxXP[j]; });
+      float AcrossTotal = 0;
+      trunc = int(floor(p_recoevent->NCrossedPads * 0.7));
+      for (int i = 0; i < p_recoevent->NCrossedPads; i++) {
+         AcrossTotal += v_evt_dE[indicesCr[i]];
+      }
+      float AcrossTrunc = AcrossTotal;
+      std::cout << std::setprecision(0) << std::fixed;
+      std::cout << "AcT: " << AcrossTotal;
+      for (int i = trunc; i < p_recoevent->NCrossedPads; i++) {
+         AcrossTrunc -= v_evt_dE[indicesCr[i]];
+         std::cout << "-" << v_evt_dE[indicesCr[i]];
+      }
+      std::cout << "=" << AcrossTrunc << " (-" << AcrossTotal - AcrossTrunc << " <=> "
+                << (AcrossTotal - AcrossTrunc) / AcrossTotal * 100 << "%)" << std::endl;
+      std::cout << "GP5: ";
+      p_recoevent->dEdxGP5 =
+         ComputedEdxGA(p_recoevent->GWF, vCrossedWaveforms, v_evt_dEdxXP, v_evt_dE,
+                       Levent, v_evt_dx, p_recoevent->NCrossedPads, falpha);
+      std::cout << "WF:  ";
       p_recoevent->dEdxWF = ComputedEdxWF(v_evt_dEdxWF, p_recoevent->NClusters, falpha);
+      std::cout << "XP:  ";
       p_recoevent->dEdxXP = ComputedEdxXP(v_evt_dEdxXP, v_evt_dE, v_evt_dx,
                                           p_recoevent->NCrossedPads, falpha);
+      std::cout << "XP5: ";
+      p_recoevent->dEdxXP5 =
+         ComputedEdxXP5(p_recoevent->GWF, vCrossedWaveforms, v_evt_dEdxXP, v_evt_dE,
+                       Levent, v_evt_dx, p_recoevent->NCrossedPads, falpha);
+      std::cout << "XP4: ";
+      p_recoevent->dEdxXP4 =
+         ComputedEdxXP5(p_recoevent->GWF, vClusterWaveforms, v_dEdxClusterGP4, v_AleadGP4,
+                       Levent, v_Lclus, p_recoevent->NClusters, falpha);
       p_recoevent->dEdxWFnoTrunc = ComputedEdxWF(v_evt_dEdxWF, p_recoevent->NClusters, 1);
       p_recoevent->dEdxXPnoTrunc =
          ComputedEdxXP(v_evt_dEdxXP, v_evt_dE, v_evt_dx, p_recoevent->NCrossedPads, 1);
@@ -653,10 +735,10 @@ void Reconstruction::dEdx::Reconstruction()
       v_evt_dEdxWF.clear();
       p_recoevent->Clear();
       delete pEvent;
-      auto end_time = std::chrono::high_resolution_clock::now();
-      std::chrono::duration<double> ms = (end_time - start_time) * 1e3;
-      std::cout << " => " << std::setprecision(2) << std::fixed << ms.count()
-                << " milliseconds" << std::endl;
+      // auto end_time = std::chrono::high_resolution_clock::now();
+      // std::chrono::duration<double> ms = (end_time - start_time) * 1e3;
+      // std::cout << " => " << std::setprecision(2) << std::fixed << ms.count()
+      //           << " milliseconds" << std::endl;
    } // Events
 
    aSelector.PrintStat();
@@ -679,6 +761,9 @@ void Reconstruction::dEdx::Reconstruction()
    ph1f_GP2->Write();
    ph1f_GP3->Write();
    ph1f_GP4->Write();
+   ph1f_GP5->Write();
+   ph1f_GPC->Write();
+   ph1f_GPL->Write();
 
    pth2f_paramGP3->Write();
    ptf1_paramGP3->Write();
@@ -701,6 +786,11 @@ float Reconstruction::dEdx::ComputedEdxWF(std::vector<float> v_dEdxWF,
 {
    float NClustersTrunc = int(floor(NClusters * alpha));
    std::sort(v_dEdxWF.begin(), v_dEdxWF.end());
+   std::cout << std::accumulate(v_dEdxWF.begin(), v_dEdxWF.begin() + NClustersTrunc, 0.)
+             << " / " << NClustersTrunc << " = "
+             << std::accumulate(v_dEdxWF.begin(), v_dEdxWF.begin() + NClustersTrunc, 0.) /
+                   NClustersTrunc
+             << std::endl;
    return std::accumulate(v_dEdxWF.begin(), v_dEdxWF.begin() + NClustersTrunc, 0.) /
           NClustersTrunc;
 }
@@ -726,6 +816,7 @@ float Reconstruction::dEdx::ComputedEdxXP(const std::vector<float> &v_dEdx,
       DE += v_dE[indices[i]];
       DX += v_dx[indices[i]] * 100; // m->cm normalization
    }
+   std::cout << DE << " / " << DX << " = " << DE / DX << std::endl;
    return DE / DX;
 }
 
@@ -770,10 +861,12 @@ float Reconstruction::dEdx::ComputedEdxGP(const TH1F *GWF, const std::vector<TH1
    TH1F *localCopyGWF = dynamic_cast<TH1F *>(GWF->Clone("localCopyGWF"));
    float nElementsTruncated = int(floor(nElements * alpha));
    float LtruncatedTrack = eventLength;
-   float TmaxGWF = localCopyGWF->GetMaximumBin();
-   TH1F *etf = ETF("pTH1F_ETFtrunc_" + std::to_string(iEvent) + std::to_string(iMod), 0,
-                   510, TmaxGWF - PT / TB, 510, 999, PT, TB);
-
+   float Lref = 0;
+   for (int i = 0; i < nElementsTruncated; ++i) {
+      Lref += v_Length[i];
+   }
+   float maxGWF = localCopyGWF->GetMaximum();
+   float tMaxGWF = localCopyGWF->GetMaximumBin();
    // Few steps to order v_Amax & v_Length similarly to v_dEdx
    std::vector<int> indices(v_dEdx.size());
    std::iota(indices.begin(), indices.end(), 0);
@@ -782,16 +875,105 @@ float Reconstruction::dEdx::ComputedEdxGP(const TH1F *GWF, const std::vector<TH1
    });
 
    // Start from the complete GigaWaveform and subtract top 30% ETFs
+   std::cout << maxGWF;
+   float maxGWFnow = maxGWF;
+   float maxGWFprevious = 0;
    for (int i = nElementsTruncated; i < nElements; ++i) {
+      maxGWFprevious = maxGWFnow;
       LtruncatedTrack -= v_Length[indices[i]];
       float Ascale = v_Amax[indices[i]];
+      float tMax = vWF[indices[i]].GetMaximumBin();
+      TH1F *etf = ETF("pTH1F_ETFtrunc_" + std::to_string(iEvent) + std::to_string(iMod),
+                      0, 510, tMaxGWF - PT / TB, 510, 999, PT, TB);
       localCopyGWF->Add(etf, -Ascale); // subtract ETF from the GigaWaveform
+      maxGWFnow = localCopyGWF->GetMaximum();
+      std::cout << "-" << maxGWFprevious - maxGWFnow << "(" << Ascale << " "
+                << tMaxGWF - tMax << ") ";
+      delete etf;
    }
-
+   std::cout << std::endl;
    int amplitudeGWF = localCopyGWF->GetMaximum();
-   delete etf;
    delete localCopyGWF;
+   std::cout << amplitudeGWF << " / " << (LtruncatedTrack * 100) << " = "
+             << amplitudeGWF / (LtruncatedTrack * 100) << " (" << maxGWF << " => "
+             << amplitudeGWF << " <=> " << maxGWF - amplitudeGWF << " "
+             << (maxGWF - amplitudeGWF) / maxGWF * 100 << "%)" << std::endl;
+   std::cout << "L: " << LtruncatedTrack * 1000 << " vs " << Lref * 1000 << std::endl;
    return amplitudeGWF / (LtruncatedTrack * 100); // dE/dx in ADC count/cm
+}
+
+float Reconstruction::dEdx::ComputedEdxGA(const TH1F *GWF, const std::vector<TH1F> &vWF,
+                                          const std::vector<float> &v_dEdx,
+                                          const std::vector<float> &v_Amax,
+                                          const float &eventLength,
+                                          const std::vector<float> &v_Length,
+                                          const int &nElements, const float &alpha)
+{
+   float maxGWF = GWF->GetMaximum();
+   float nElementsTruncated = int(floor(nElements * alpha));
+   float LtruncatedTrack = eventLength;
+   // Few steps to order v_Amax & v_Length similarly to v_dEdx
+   std::vector<int> indices(v_dEdx.size());
+   std::iota(indices.begin(), indices.end(), 0);
+   std::sort(indices.begin(), indices.end(),
+             [&](int i, int j) { return v_dEdx[i] < v_dEdx[j]; });
+
+   std::cout << maxGWF;
+   float maxGWFprevious = 0;
+   for (int i = nElementsTruncated; i < nElements; ++i) {
+      maxGWFprevious = maxGWF;
+      LtruncatedTrack -= v_Length[indices[i]];
+      float Ascale = v_Amax[indices[i]];
+      maxGWF -= Ascale;
+      std::cout << "-" << maxGWFprevious - maxGWF << "(" << Ascale << ")";
+   }
+   std::cout << std::endl;
+   std::cout << maxGWF << " / " << (LtruncatedTrack * 100) << " = "
+             << maxGWF / (LtruncatedTrack * 100) << std::endl;
+   return maxGWF / (LtruncatedTrack * 100);
+}
+
+float Reconstruction::dEdx::ComputedEdxXP5(const TH1F *GWF, const std::vector<TH1F> &vWF,
+                                          const std::vector<float> &v_dEdx,
+                                          const std::vector<float> &v_Amax,
+                                          const float &eventLength,
+                                          const std::vector<float> &v_Length,
+                                          const int &nElements, const float &alpha)
+{
+   TH1F *localCopyGWF = new TH1F(
+      ("localCopyGWF" + std::to_string(iEvent) + std::to_string(iMod)).c_str(),
+      "Local Copy Giga Waveform", 510, 0, 510);
+   float nElementsTruncated = int(floor(nElements * alpha));
+   float LtruncatedTrack = 0;
+   float maxGWF = 0;
+   float tMaxGWF = localCopyGWF->GetMaximumBin();
+   // Few steps to order v_Amax & v_Length similarly to v_dEdx
+   std::vector<int> indices(v_dEdx.size());
+   std::iota(indices.begin(), indices.end(), 0);
+   std::sort(indices.begin(), indices.end(), [&](int i, int j) { // sorting wrt v_dEdx
+      return v_dEdx[i] < v_dEdx[j];
+   });
+
+   // Start from the complete GigaWaveform and subtract top 30% ETFs
+   std::cout << maxGWF;
+   float maxGWFprevious = 0;
+   for (int i = 0; i < nElementsTruncated; ++i) {
+      maxGWFprevious = maxGWF;
+      LtruncatedTrack += v_Length[indices[i]];
+      float Ascale = v_Amax[indices[i]];
+      float tMax = vWF[indices[i]].GetMaximumBin();
+      TH1F *etf = ETF("pTH1F_ETFtrunc_" + std::to_string(iEvent) + std::to_string(iMod),
+                      0, 510, tMaxGWF - PT / TB, 510, 999, PT, TB);
+      localCopyGWF->Add(etf, Ascale);
+      maxGWF = localCopyGWF->GetMaximum();
+      std::cout << "+" << maxGWF;
+      delete etf;
+   }
+   maxGWF = localCopyGWF->GetMaximum();
+   std::cout << " => " << maxGWF << " / " << (LtruncatedTrack * 100) << " = "
+             << maxGWF / (LtruncatedTrack * 100) << std::endl;
+   delete localCopyGWF;
+   return maxGWF / (LtruncatedTrack * 100); // dE/dx in ADC count/cm
 }
 
 TH1F *Reconstruction::dEdx::GetGigaWaveform(const std::vector<TH1F> &vClusWF)
@@ -854,7 +1036,7 @@ void Reconstruction::dEdx::DiscardedModule()
       for (iP = 0; iP < NPads; iP++) {
          pPad = pCluster->Get_Pad(iP);
          p_recopad = new Reconstruction::RecoPad();
-         if (iP == 0)
+         if (iP == NPads - 1)
             p_recopad->leading = true;
          p_recopad->ix = pPad->Get_iX();
          p_recopad->iy = pPad->Get_iY();

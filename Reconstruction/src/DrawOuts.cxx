@@ -1098,6 +1098,17 @@ void Reconstruction::DrawOuts::EnergyLoss(const int &methods)
    TH1F *ph1f_GP3 = new TH1F("ph1f_GP3", ";dE/dx [ADC counts/cm];Counts", 100, 0, xmax);
    TH1F *ph1f_GP4 = new TH1F("ph1f_GP4", ";dE/dx [ADC counts/cm];Counts", 100, 0, xmax);
    TH1F *ph1f_GP5 = new TH1F("ph1f_GP5", ";dE/dx [ADC counts/cm];Counts", 100, 0, xmax);
+   TH1F *ph1f_GPC = new TH1F("ph1f_GPC", ";dE/dx [ADC counts/cm];Counts", 100, 0, xmax);
+   TH1F *ph1f_GPL = new TH1F("ph1f_GPL", ";dE/dx [ADC counts/cm];Counts", 100, 0, xmax);
+   TH1F *ph1f_rhoC =
+      new TH1F("ph1f_rhoC", ";LUT ratio for crossed pads;Counts", 100, 0, 2);
+   TH1F *ph1f_rhoL =
+      new TH1F("ph1f_rhoL", ";LUT ratio for leading pad;Counts", 100, 0, 2);
+   TH1F *ph1f_TmaxCrossed =
+      new TH1F("ph1f_TmaxCrossed", ";T_{max} of crossed pads;Counts", 80, 20, 100);
+   TH1F *ph1f_TmaxLeading =
+      new TH1F("ph1f_TmaxLeading", ";T_{max} of leading pad;Counts", 80, 20, 100);
+
    TH1F *ph1f_XP = new TH1F("ph1f_XP", ";dE/dx [ADC counts/cm];Counts", 100, 0, xmax);
    TH1F *ph1f_WF = new TH1F("ph1f_WF", ";dE/dx [ADC counts/cm];Counts", 100, 0, xmax);
    TH1F *ph1f_XPnoTrunc =
@@ -1141,6 +1152,7 @@ void Reconstruction::DrawOuts::EnergyLoss(const int &methods)
       NMod = p_recoevent->v_modules.size();
       if (!p_recoevent->selected)
          continue;
+
       for (int iMod = 0; iMod < NMod; iMod++) {
          p_recomodule = p_recoevent->v_modules[iMod];
          if (!p_recomodule->selected)
@@ -1151,6 +1163,21 @@ void Reconstruction::DrawOuts::EnergyLoss(const int &methods)
          v_h1f_WF_mod[position]->Fill(p_recomodule->dEdxWF);
          v_h1f_XP_modnoTrunc[position]->Fill(p_recomodule->dEdxXPnoTrunc);
          v_h1f_WF_modnoTrunc[position]->Fill(p_recomodule->dEdxWFnoTrunc);
+
+         NClusters = p_recomodule->NClusters;
+         for (int iC = 0; iC < NClusters; iC++) {
+            p_recocluster = p_recomodule->v_clusters[iC];
+            ph1f_rhoL->Fill(p_recocluster->LUTrhoLead);
+            ph1f_TmaxLeading->Fill(p_recocluster->TLead);
+            NPads = p_recocluster->NPads;
+            for (int iP = 0; iP < NPads; iP++) {
+               p_recopad = p_recocluster->v_pads[iP];
+               if (p_recopad->ratioDrift != 0) {
+                  ph1f_rhoC->Fill(p_recopad->ratioDrift);
+                  ph1f_TmaxCrossed->Fill(p_recopad->TMax);
+               }
+            }
+         }
       }
       if (testbeam.find("CERN") != std::string::npos) {
          if (NMod < 4)
@@ -1165,6 +1192,8 @@ void Reconstruction::DrawOuts::EnergyLoss(const int &methods)
       ph1f_GP3->Fill(p_recoevent->dEdxGP3);
       ph1f_GP4->Fill(p_recoevent->dEdxGP4);
       ph1f_GP5->Fill(p_recoevent->dEdxGP5);
+      ph1f_GPC->Fill(p_recoevent->dEdxGPC);
+      ph1f_GPL->Fill(p_recoevent->dEdxGPL);
       ph1f_WFnoTrunc->Fill(p_recoevent->dEdxWFnoTrunc);
       ph1f_XPnoTrunc->Fill(p_recoevent->dEdxXPnoTrunc);
       ph2f_XPWF->Fill(p_recoevent->dEdxWF, p_recoevent->dEdxXP);
@@ -1215,6 +1244,8 @@ void Reconstruction::DrawOuts::EnergyLoss(const int &methods)
    Fit1Gauss(ph1f_GP3, 2);
    Fit1Gauss(ph1f_GP4, 2);
    Fit1Gauss(ph1f_GP5, 2);
+   Fit1Gauss(ph1f_GPC, 2);
+   Fit1Gauss(ph1f_GPL, 2);
    Fit1Gauss(ph1f_WFnoTrunc, 2);
    Fit1Gauss(ph1f_XPnoTrunc, 2);
 
@@ -1226,8 +1257,12 @@ void Reconstruction::DrawOuts::EnergyLoss(const int &methods)
    Graphic_setup(ph1f_GP3, 0.5, 1, kOrange + 7, 2, kOrange + 2, kOrange, 0.2);
    Graphic_setup(ph1f_GP4, 0.5, 1, kOrange + 7, 2, kOrange + 2, kOrange, 0.2);
    Graphic_setup(ph1f_GP5, 0.5, 1, kOrange + 7, 2, kOrange + 2, kOrange, 0.2);
+   Graphic_setup(ph1f_GPC, 0.5, 1, kYellow + 7, 2, kYellow + 2, kYellow, 0.2);
+   Graphic_setup(ph1f_GPL, 0.5, 1, kYellow + 7, 2, kYellow + 2, kYellow, 0.2);
    Graphic_setup(ph1f_WFnoTrunc, 0.5, 1, kBlue + 1, 2, kBlue - 2, kBlue, 0.2);
    Graphic_setup(ph1f_XPnoTrunc, 0.5, 1, kRed + 2, 2, kRed - 2, kRed, 0.2);
+   Graphic_setup(ph1f_rhoC, 0.5, 1, kBlue + 2, 2, kBlue - 2, kBlue, 0.2);
+   Graphic_setup(ph1f_rhoL, 0.5, 1, kRed + 2, 2, kRed - 2, kRed, 0.2);
 
    for (int i = 0; i < 8; i++) {
       Graphic_setup(v_h1f_WF_mod[i], 0.5, 1, kCyan + 1, 1, kCyan - 2, kCyan, 0.2);
@@ -1270,6 +1305,10 @@ void Reconstruction::DrawOuts::EnergyLoss(const int &methods)
    float invX, invY;
    ph1f_WF->SetAxisRange(0, 1.1 * overallMax, "Y");
    ph1f_XP->SetAxisRange(0, 1.1 * overallMax, "Y");
+   ph1f_GP4->SetAxisRange(0, 1.1 * overallMax, "Y");
+   ph1f_GP5->SetAxisRange(0, 1.1 * overallMax, "Y");
+   ph1f_GPC->SetAxisRange(0, 1.1 * overallMax, "Y");
+   ph1f_GPL->SetAxisRange(0, 1.1 * overallMax, "Y");
    invX = 0, invY = 0;
    if (ph1f_WF->GetMean() > xmax / 2)
       invX = 0.5;
@@ -1282,8 +1321,12 @@ void Reconstruction::DrawOuts::EnergyLoss(const int &methods)
    ph1f_GP3->GetXaxis()->SetNdivisions(404, kFALSE);
    ph1f_GP4->GetXaxis()->SetNdivisions(404, kFALSE);
    ph1f_GP5->GetXaxis()->SetNdivisions(404, kFALSE);
+   ph1f_GPC->GetXaxis()->SetNdivisions(404, kFALSE);
+   ph1f_GPL->GetXaxis()->SetNdivisions(404, kFALSE);
    ph1f_WFnoTrunc->GetXaxis()->SetNdivisions(404, kFALSE);
    ph1f_XPnoTrunc->GetXaxis()->SetNdivisions(404, kFALSE);
+   ph1f_rhoC->GetXaxis()->SetNdivisions(404, kFALSE);
+   ph1f_rhoL->GetXaxis()->SetNdivisions(404, kFALSE);
 
    // Drawing
    fpCanvas->cd();
@@ -1334,12 +1377,84 @@ void Reconstruction::DrawOuts::EnergyLoss(const int &methods)
    fpCanvas->SaveAs(drawout_file.c_str());
 
    //////////////////////////////////////////////////////////////////////////////////////
+   // Draw WF & GPL
+   fpCanvas->Clear();
+   ph1f_WF->Draw("HIST");
+   ph1f_GPL->Draw("HIST sames");
+   PrintResolution(ph1f_WF, fpCanvas, xDefaultNDC - invX, 0.3, kCyan + 2, "WF");
+   PrintResolution(ph1f_GPL, fpCanvas, xDefaultNDC - invX, 0.65, kOrange + 2, "GPL");
+   fpCanvas->SaveAs(drawout_file.c_str());
+
+   //////////////////////////////////////////////////////////////////////////////////////
+   // Draw GP4 & GPL
+   fpCanvas->Clear();
+   ph1f_GP4->Draw("HIST");
+   ph1f_GPL->Draw("HIST sames");
+   PrintResolution(ph1f_GP4, fpCanvas, xDefaultNDC - invX, 0.3, kOrange + 2, "GP4");
+   PrintResolution(ph1f_GPL, fpCanvas, xDefaultNDC - invX, 0.65, kYellow + 2, "GPL");
+   fpCanvas->SaveAs(drawout_file.c_str());
+
+   //////////////////////////////////////////////////////////////////////////////////////
    // Draw WF & GP5
    fpCanvas->Clear();
    ph1f_WF->Draw("HIST");
    ph1f_GP5->Draw("HIST sames");
    PrintResolution(ph1f_WF, fpCanvas, xDefaultNDC - invX, 0.3, kCyan + 2, "WF");
    PrintResolution(ph1f_GP5, fpCanvas, xDefaultNDC - invX, 0.65, kOrange + 2, "GP5");
+   fpCanvas->SaveAs(drawout_file.c_str());
+
+   //////////////////////////////////////////////////////////////////////////////////////
+   // Draw WF & GPC
+   fpCanvas->Clear();
+   ph1f_WF->Draw("HIST");
+   ph1f_GPC->Draw("HIST sames");
+   PrintResolution(ph1f_WF, fpCanvas, xDefaultNDC - invX, 0.3, kCyan + 2, "WF");
+   PrintResolution(ph1f_GPC, fpCanvas, xDefaultNDC - invX, 0.65, kOrange + 2, "GPC");
+   fpCanvas->SaveAs(drawout_file.c_str());
+
+   //////////////////////////////////////////////////////////////////////////////////////
+   // Draw GP5 & GPC
+   fpCanvas->Clear();
+   ph1f_GP5->Draw("HIST");
+   ph1f_GPC->Draw("HIST sames");
+   PrintResolution(ph1f_GP5, fpCanvas, xDefaultNDC - invX, 0.3, kOrange + 2, "GP5");
+   PrintResolution(ph1f_GPC, fpCanvas, xDefaultNDC - invX, 0.65, kYellow + 2, "GPC");
+   fpCanvas->SaveAs(drawout_file.c_str());
+
+   //////////////////////////////////////////////////////////////////////////////////////
+   // Draw XP & GP5
+   fpCanvas->Clear();
+   ph1f_XP->Draw("HIST");
+   ph1f_GP5->Draw("HIST sames");
+   PrintResolution(ph1f_XP, fpCanvas, xDefaultNDC - invX, 0.3, kMagenta + 2, "XP");
+   PrintResolution(ph1f_GP5, fpCanvas, xDefaultNDC - invX, 0.65, kOrange + 2, "GP5");
+   fpCanvas->SaveAs(drawout_file.c_str());
+
+   //////////////////////////////////////////////////////////////////////////////////////
+   // Draw rhoC & rhoL
+   fpCanvas->Clear();
+   TLegend leg_rho(0.6, 0.7, 0.9, 0.9);
+   Graphic_setup(&leg_rho, 0.06, kBlue - 1, 1001, kWhite, 1, 1);
+   leg_rho.AddEntry(ph1f_rhoC, "Crossed pads", "l");
+   leg_rho.AddEntry(ph1f_rhoL, "Leading pads", "l");
+   ph1f_rhoC->GetXaxis()->SetTitle("LUT ratio");
+   ph1f_rhoC->Draw("HIST");
+   ph1f_rhoL->Draw("HIST sames");
+   leg_rho.Draw();
+   fpCanvas->SaveAs(drawout_file.c_str());
+
+   //////////////////////////////////////////////////////////////////////////////////////
+   // Draw Tmax of crossed and leading pads
+   fpCanvas->Clear();
+   TLegend leg_Tmax(0.6, 0.7, 0.9, 0.9);
+   Graphic_setup(&leg_Tmax, 0.06, kBlue - 1, 1001, kWhite, 1, 1);
+   leg_Tmax.AddEntry(ph1f_TmaxCrossed, "Crossed pads", "l");
+   leg_Tmax.AddEntry(ph1f_TmaxLeading, "Leading pads", "l");
+   Graphic_setup(ph1f_TmaxCrossed, 0.5, 1, kBlue + 2, 2, kBlue - 2, kBlue, 0.2);
+   Graphic_setup(ph1f_TmaxLeading, 0.5, 1, kRed + 2, 2, kRed - 2, kRed, 0.2);
+   ph1f_TmaxCrossed->Draw("HIST");
+   ph1f_TmaxLeading->Draw("HIST sames");
+   leg_Tmax.Draw();
    fpCanvas->SaveAs(drawout_file.c_str());
 
    //////////////////////////////////////////////////////////////////////////////////////
