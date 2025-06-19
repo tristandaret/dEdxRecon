@@ -76,7 +76,7 @@ public:
                 const int &ADC); // Set ADC set
    void WF_DoClosure();          // Closure: compute max amplitude and time
 
-   std::vector<int> Get_vADC() const; // Get ADC as vector
+   std::vector<float> Get_vADC() const; // Get ADC as vector
 
    // A and T max
    // A and T from last call to Set functions

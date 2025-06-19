@@ -284,7 +284,7 @@ void Pad::WriteOut() const
              << std::endl;
    std::cout << " m_TMax_WF; " << std::setw(16) << std::setprecision(9) << m_TMax_WF
              << std::endl;
-   std::vector<int> The_v_ADC = Get_vADC();
+   std::vector<float> The_v_ADC = Get_vADC();
    int iTem_Max = The_v_ADC.size();
    std::cout << " v_ADC; " << std::setw(5) << iTem_Max;
    for (int iTem = 0; iTem < iTem_Max; iTem++) {
@@ -361,15 +361,15 @@ void Pad::WF_DoClosure()
    //	v_iTimeb.clear(); std::vector<short int>().swap( v_iTimeb );
 }
 
-std::vector<int> Pad::Get_vADC() const
+std::vector<float> Pad::Get_vADC() const
 {
-   std::vector<int> ToBeReturned;
+   std::vector<float> ToBeReturned;
    ToBeReturned.clear();
    ToBeReturned.resize(510, 0.);
    int iTimeBin_Max = v_ADC.size();
    for (int iTimeBin = 0; iTimeBin < iTimeBin_Max; iTimeBin++) {
       int TheTimeBin = v_iTimeb[iTimeBin];
-      int TheADC = v_ADC[iTimeBin];
+      float TheADC = v_ADC[iTimeBin];
       if (TheTimeBin < 510)
          ToBeReturned[TheTimeBin] = TheADC;
    }
@@ -462,14 +462,14 @@ void Pad::Get_A_T_Max_WF(double &Amax, double &Tmax)
 {
    Amax = 0;
    Tmax = 0;
-   std::vector<int> The_v_ADC = Get_vADC();
+   std::vector<float> The_v_ADC = Get_vADC();
    int First = 1;
-   int NADC = The_v_ADC.size();
+   float NADC = The_v_ADC.size();
    //	std::cout << "Pad::Get_A_T_Max_WF "
    //			<< "NADC " << NADC
    //			<< std::endl;
    for (int iTimeBin = 0; iTimeBin < NADC; iTimeBin++) {
-      int ADC_value = The_v_ADC[iTimeBin];
+      float ADC_value = The_v_ADC[iTimeBin];
       if (First == 1) {
          First = 0;
          Amax = ADC_value;
@@ -486,11 +486,11 @@ void Pad::Get_A_T_Max_WF_01(double &Amax, double &Tmax)
 {
    Amax = 0;
    Tmax = 0;
-   std::vector<int> The_v_ADC = Get_vADC();
+   std::vector<float> The_v_ADC = Get_vADC();
    int First = 1;
    int NADC = The_v_ADC.size();
    for (int iTimeBin = 0; iTimeBin < NADC; iTimeBin++) {
-      int ADC_value = The_v_ADC[iTimeBin];
+      float ADC_value = The_v_ADC[iTimeBin];
       if (First == 1) {
          First = 0;
          Amax = ADC_value;
@@ -530,10 +530,10 @@ void Pad::Get_A_T_Max_FIT(double &Amax, double &Tmax)
    TH1F *pTH1F =
       new TH1F("BIDONGet_A_T_Max_FIT", "BIDONGet_A_T_Max_FIT", 510, -0.5, 509.5);
 
-   std::vector<int> The_v_ADC = Get_vADC();
+   std::vector<float> The_v_ADC = Get_vADC();
    int NADC = The_v_ADC.size();
    for (Int_t iTimeBin = 0; iTimeBin < NADC; iTimeBin++) {
-      int ADC_value = The_v_ADC[iTimeBin];
+      float ADC_value = The_v_ADC[iTimeBin];
       if (ADC_value < 0)
          continue;
       int iTimeBinLoc = iTimeBin + 1; // NB: the 1st Data (iTimeBin=0) goes in the 1st bin

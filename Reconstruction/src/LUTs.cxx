@@ -230,7 +230,7 @@ void Reconstruction::ERAMMaps::FillHoles()
             }
             v_sides.clear();
          } // iY
-      }    // iX
+      } // iX
    }
 }
 
@@ -315,21 +315,34 @@ float Reconstruction::LUT::getRatio(const int &Dt, const int &RC, const float &d
 {
    // keep double
    int iDt = (int)(Dt - DtwithB) / stepSizeTrans;
+
    float iRC = (RC - RCmin) / sSTEP_RC;
-   float iRC_min = std::min((double)std::floor(iRC), (double)SNSTEPS_RC - 1);
-   float iRC_max = std::max((double)std::ceil(iRC), 0.);
+   float iRC_min = std::floor(iRC);
+   float iRC_max = std::ceil(iRC);
+   iRC = std::clamp(iRC, 0.0f, float(SNSTEPS_RC - 1));
+   iRC_min = std::clamp(iRC_min, 0.0f, float(SNSTEPS_RC - 1));
+   iRC_max = std::clamp(iRC_max, 0.0f, float(SNSTEPS_RC - 1));
+
    float idrift = drift / sSTEP_DRIFT;
-   float idrift_min =
-      std::min((double)std::floor(drift / sSTEP_DRIFT), (double)SNSTEPS_DRIFT - 1);
-   float idrift_max = std::max((double)std::ceil(drift / sSTEP_DRIFT), 0.);
+   float idrift_min = std::floor(idrift);
+   float idrift_max = std::ceil(idrift);
+   idrift = std::clamp(idrift, 0.0f, float(SNSTEPS_DRIFT - 1));
+   idrift_min = std::clamp(idrift_min, 0.0f, float(SNSTEPS_DRIFT - 1));
+   idrift_max = std::clamp(idrift_max, 0.0f, float(SNSTEPS_DRIFT - 1));
+
    float iphi = angle / sSTEP_PHI;
-   float iphi_min =
-      std::min((double)std::floor(angle / sSTEP_PHI), (double)SNSTEPS_PHI - 1);
-   float iphi_max = std::max((double)std::ceil(angle / sSTEP_PHI), 0.);
+   float iphi_min = std::floor(iphi);
+   float iphi_max = std::ceil(iphi);
+   iphi = std::clamp(iphi, 0.0f, float(SNSTEPS_PHI - 1));
+   iphi_min = std::clamp(iphi_min, 0.0f, float(SNSTEPS_PHI - 1));
+   iphi_max = std::clamp(iphi_max, 0.0f, float(SNSTEPS_PHI - 1));
+
    float id = impact / sSTEP_IMPACT;
-   float id_min =
-      std::min((double)std::floor(impact / sSTEP_IMPACT), (double)SNSTEPS_IMPACT - 1);
-   float id_max = std::max((double)std::ceil(impact / sSTEP_IMPACT), 0.);
+   float id_min = std::floor(id);
+   float id_max = std::ceil(id);
+   id = std::clamp(id, 0.0f, float(SNSTEPS_IMPACT - 1));
+   id_min = std::clamp(id_min, 0.0f, float(SNSTEPS_IMPACT - 1));
+   id_max = std::clamp(id_max, 0.0f, float(SNSTEPS_IMPACT - 1));
 
    // weights
    double w_RC = 1, w_drift = 1, w_d = 1, w_phi = 1;

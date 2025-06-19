@@ -91,8 +91,8 @@ void Reconstruction::WFCorrection(const std::string &OutCorr)
    int counterFail = 0;
    int counterFit = 0;
 
-   std::vector<int> waveform_cluster(510, 0);
-   std::vector<int> waveform_pad(510, 0);
+   std::vector<float> waveform_cluster(510, 0);
+   std::vector<float> waveform_pad(510, 0);
 
    // Event loop
    std::cout << "Processing events:" << std::endl;
@@ -129,8 +129,7 @@ void Reconstruction::WFCorrection(const std::string &OutCorr)
 
          // Loop On Clusters
          for (int iC = 0; iC < NClusters; iC++) {
-            std::fill(waveform_cluster.begin(), waveform_cluster.end(),
-                      0); // reset waveform
+            std::fill(waveform_cluster.begin(), waveform_cluster.end(), 0); // reset
             Cluster *pCluster = pModule->Get_Cluster(iC);
             float trk_len_clus = 0; // in meters
             int NPads = pCluster->Get_NberOfPads();

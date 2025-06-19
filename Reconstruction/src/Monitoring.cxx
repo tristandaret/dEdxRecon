@@ -17,12 +17,12 @@ Uploader *p_uploader;
 
 // Files to use
 int prototype = 0;
-int CERN_Escan = 0;
+int CERN_Escan = 1;
 int CERN_drift = 0;
 
 int DESY_drift = 0;
 int DESY_row = 0;
-int DESY_phi = 1;
+int DESY_phi = 0;
 int DESY_theta = 0;
 
 // Computations
@@ -31,7 +31,7 @@ int dedx = 1;
 
 // DrawOuts
 int Draw_Control = 0;
-int Draw_dEdx = 1;
+int Draw_dEdx = 0;
 int Draw_Comparison = 0;
 int Draw_Corrections = 0;
 
@@ -46,8 +46,8 @@ int DtwithoutBhere = 323;
 
 void Reconstruction::Monitoring()
 {
-   drawWhichMethods = 0; // 0: both methods | 1: only WF | 2: only XP
-   comment = "_n1000_fullLUT_XP2";
+   drawWhichMethods = 1; // 0: both methods | 1: only WF | 2: only XP
+   comment = "";
    gErrorIgnoreLevel = kInfo;
 
    Correction(1, 1, 1, 1, 1);
@@ -113,8 +113,8 @@ void Reconstruction::Monitoring()
          "_25V_z415p1_y2pad_iter0.root", "_25V_z415p1_y2pad_iter0.root",
          "_25V_z415p1_y2pad_iter0.root", "_25V_z415_y2pad_2_iter0.root"};
 
-      // for (int iEnergy = 0; iEnergy < (int)std::size(vScanLabels); iEnergy++) {
-      for (int iEnergy = 2; iEnergy < 3; iEnergy++) {
+      for (int iEnergy = 0; iEnergy < (int)std::size(vScanLabels); iEnergy++) {
+      // for (int iEnergy = 2; iEnergy < 3; iEnergy++) {
          v_datafiles.push_back(dataScanPath + "All_ERAMS_350V_412ns_" +
                                vScanLabels[iEnergy] + v_suffix[iEnergy]);
          vTags.push_back(Form("%s_%s_%s_Dt%d", testbeam.c_str(), scanName.c_str(),
@@ -151,8 +151,8 @@ void Reconstruction::Monitoring()
    // z scan scan with DESY21
    if (DESY_drift) {
       Dt = DtwithBhere;
-      // int PT_arr[] = {200, 412}; // 200, 412
-      int PT_arr[] = {412}; // 200, 412
+      int PT_arr[] = {200, 412}; // 200, 412
+      // int PT_arr[] = {412}; // 200, 412
       vScanVals.insert(vScanVals.end(),
                        {50, 150, 250, 350, 450, 550, 650, 750, 850, 950});
       vScanLabels.insert(vScanLabels.end(), {"m40", "060", "160", "260", "360", "460",
@@ -163,8 +163,8 @@ void Reconstruction::Monitoring()
          Settings("DESY21", "Drift", Form("Drift_PT%i", PT), Form("%i ns", PT),
                   "Drift distance (mm)", 1, 0, PT, Dt, 450, 50);
 
-         // for (int iz = 0; iz < (int)std::size(vScanLabels); iz++) {
-         for (int iz = 0; iz < 1; iz++) {
+         for (int iz = 0; iz < (int)std::size(vScanLabels); iz++) {
+         // for (int iz = 0; iz < 1; iz++) {
             const char *z = vScanLabels[iz].c_str();
             driftDist = vScanVals[iz];
             v_datafiles.push_back(
@@ -213,16 +213,15 @@ void Reconstruction::Monitoring()
       vScanVals.insert(vScanVals.end(), {0, 10, 20, 29, 31, 40, 45});
       std::vector<int> vScanValsreal = {0, 10, 20, 30, 30, 40, 45};
 
-      // for (int iz = 0; iz < (int)v_valdrift.size(); iz++) {
-      for (int iz = 0; iz < 1; iz++) {
+      for (int iz = 0; iz < (int)v_valdrift.size(); iz++) {
          Dt = DtwithBhere;
          const char *z = v_strdrift[iz].c_str();
          Settings("DESY21", "Phi", Form("Phi_Z%s", z),
                   Form("%2i cm", v_valdrift[iz] / 10), "Track angle #varphi (#circ)", 1,
                   0, 200, Dt, v_valdrift[iz], 40);
 
-         // for (int ifile = 0; ifile < (int)std::size(vScanVals); ifile++) {
-         for (int ifile = 5; ifile < 6; ifile++) {
+         for (int ifile = 0; ifile < (int)std::size(vScanVals); ifile++) {
+         // for (int ifile = 4; ifile < (int)std::size(vScanVals); ifile++) {
             int phi = vScanVals[ifile];
             int phireal = vScanValsreal[ifile];
             if (ifile == 0) {
@@ -274,7 +273,7 @@ void Reconstruction::Monitoring()
          DefaultAnalysis();
       }
       if (Draw_DESY21SingleScan)
-         DrawSingleScan();
+         DrawSingleScan(drawWhichMethods);
       ClearVectors();
    }
 
@@ -325,14 +324,14 @@ void Reconstruction::Correction(const int &corrRC, const int &corrGain, const in
    if (corrGain == 2)
       comment = comment + "_GainMod";
 
-   fcorrectWF = corrWF;
-   if (corrWF == 0)
+   fcorrectWF = corrWF; // Default 1: use one corr func for each
+   if (corrWF == 0)     // Use my (40, m40) correction function for all
       comment = comment + "_WF0";
-   if (corrWF == 2)
+   if (corrWF == 2) // Use hatRecon's correction function
       comment = comment + "_WF2HAT";
-   if (corrWF == 3)
+   if (corrWF == 3) // Do not use a correction function
       comment = comment + "_WFoff";
-   if (corrWF == 4)
+   if (corrWF == 4) // Use my (40, m40) corr func shifted down by 100 ADCs for all
       comment = comment + "_WFcorrm100";
 
    fcorrectDrift = corrDrift;

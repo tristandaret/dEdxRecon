@@ -253,10 +253,10 @@ TH1F *GiveMe_WaveFormDisplay(Pad *pPad, const std::string &TAG)
 
    TH1F *ToBeReturned = new TH1F(Name.c_str(), Title.c_str(), 510, 0, 510);
 
-   std::vector<int> The_v_ADC = pPad->Get_vADC();
+   std::vector<float> The_v_ADC = pPad->Get_vADC();
    int NADC = The_v_ADC.size();
    for (Int_t iTimeBin = 0; iTimeBin < NADC; iTimeBin++) {
-      int ADC_value = The_v_ADC[iTimeBin];
+      float ADC_value = The_v_ADC[iTimeBin];
       if (ADC_value <= -250)
          continue;
       int iTimeBinLoc = iTimeBin + 1; // NB: the 1st Data (iTimeBin=0) goes in the 1st bin
