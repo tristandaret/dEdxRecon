@@ -1,3 +1,16 @@
+#/***************************************************************************
+ * File: AmplitudeError.cxx
+ * Project: dEdxRecon
+ *
+ * Brief: Implementation of amplitude error calculation helpers used to
+ *        estimate uncertainties on pad amplitudes for fit weighting and
+ *        error propagation.
+ *
+ * Contents: AmplitudeError functions.
+ *
+ * Notes: See AmplitudeError.h for usage.
+ ***************************************************************************/
+
 #include "AmplitudeError.h"
 
 //
@@ -7,35 +20,25 @@ double AmplitudeError_NextNextLeading();
 
 //
 double AmplitudeError(Pad *pPad, Pad *pPad_Leading, Pad *pPad_NextLeading,
-                      Pad *pPad_NextNextLeading)
-{
-   double ToBeReturned = std::sqrt(pPad->Get_AMax());
+                      Pad *pPad_NextNextLeading) {
+  double ToBeReturned = std::sqrt(pPad->Get_AMax());
 
-   if (std::fabs(pPad->Get_iY() - pPad_Leading->Get_iY()) == 0)
-      ToBeReturned = ToBeReturned * AmplitudeError_Leading();
+  if (std::fabs(pPad->Get_iY() - pPad_Leading->Get_iY()) == 0)
+    ToBeReturned = ToBeReturned * AmplitudeError_Leading();
 
-   if (pPad_NextLeading) {
-      if (std::fabs(pPad->Get_iY() - pPad_NextLeading->Get_iY()) == 0)
-         ToBeReturned = ToBeReturned * AmplitudeError_NextLeading();
-   }
+  if (pPad_NextLeading) {
+    if (std::fabs(pPad->Get_iY() - pPad_NextLeading->Get_iY()) == 0)
+      ToBeReturned = ToBeReturned * AmplitudeError_NextLeading();
+  }
 
-   if (pPad_NextNextLeading) {
-      if (std::fabs(pPad->Get_iY() - pPad_NextNextLeading->Get_iY()) == 0)
-         ToBeReturned = ToBeReturned * AmplitudeError_NextNextLeading();
-   }
+  if (pPad_NextNextLeading) {
+    if (std::fabs(pPad->Get_iY() - pPad_NextNextLeading->Get_iY()) == 0)
+      ToBeReturned = ToBeReturned * AmplitudeError_NextNextLeading();
+  }
 
-   return ToBeReturned;
+  return ToBeReturned;
 }
 
-double AmplitudeError_Leading()
-{
-   return 1.;
-}
-double AmplitudeError_NextLeading()
-{
-   return 1.;
-}
-double AmplitudeError_NextNextLeading()
-{
-   return 1.;
-}
+double AmplitudeError_Leading() { return 1.; }
+double AmplitudeError_NextLeading() { return 1.; }
+double AmplitudeError_NextNextLeading() { return 1.; }

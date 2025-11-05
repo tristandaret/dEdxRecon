@@ -1,3 +1,16 @@
+#/***************************************************************************
+ * File: Variables.cxx
+ * Project: dEdxRecon
+ *
+ * Brief: Definitions and initialisation of module-global variables declared
+ *        in Variables.h. Central place for configuration strings and
+ *        shared pointers used by reconstruction routines.
+ *
+ * Contents: variable definitions and any default initialisation.
+ *
+ * Notes: Keep initial values minimal and configurable from callers.
+ ***************************************************************************/
+
 #include "Variables.h"
 
 namespace Reconstruction {
@@ -18,7 +31,7 @@ std::string rootout_file = "";
 std::string log_file = "";
 std::string comment;
 std::string selectionSet;
-std::string inputDir;          // To be removed when the whole drawout code is updated
+std::string inputDir; // To be removed when the whole drawout code is updated
 int drawWhichMethods = 0;      // 0: both methods | 1: only WF | 2: only XP
 std::string corrFuncPath = ""; // Path to the correction functions
 std::vector<std::string> vcorrFuncPaths; // Paths to the correction functions

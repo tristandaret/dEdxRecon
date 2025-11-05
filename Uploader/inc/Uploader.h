@@ -1,12 +1,27 @@
+#/***************************************************************************
+ * File: Uploader.h
+ * Project: dEdxRecon
+ *
+ * Brief: Abstract base class for data uploaders that provide Events to the
+ *        reconstruction pipeline. Subclasses implement file-format specific
+ *        logic to read samples and produce `Event` instances.
+ *
+ * Contents: class Uploader (abstract) with accessor methods and members for
+ *           ROOT file/tree handling and PRF parameters.
+ *
+ * Notes: Concrete uploaders are implemented in the Uploader submodule and
+ *        selected via GiveMe_Uploader().
+ ***************************************************************************/
+
 #ifndef Uploader_H
 #define Uploader_H
 
-#include "Misc.h"
 #include "Event.h"
+#include "Misc.h"
 
-#include "Model_ReadOutGeometry.h"
-#include "Model_Electronics.h"
 #include "Model_Charge1D.h"
+#include "Model_Electronics.h"
+#include "Model_ReadOutGeometry.h"
 
 #include "TFile.h"
 #include "TTree.h"
@@ -14,47 +29,50 @@
 /////////////////////////////////////////////////////////////
 class Uploader {
 public:
-   /** Constructor */
-   Uploader(const std::string &SampleFile, Model_ReadOutGeometry *pModel_ReadOutGeometry,
-            Model_Electronics *pModel_Electronics, Model_Charge1D *pModel_Charge1D);
-   virtual ~Uploader();
+  /** Constructor */
+  Uploader(const std::string &SampleFile,
+           Model_ReadOutGeometry *pModel_ReadOutGeometry,
+           Model_Electronics *pModel_Electronics,
+           Model_Charge1D *pModel_Charge1D);
+  virtual ~Uploader();
 
-   std::string Get_SampleFile();
+  std::string Get_SampleFile();
 
-   int Get_NberOfEvent();
+  int Get_NberOfEvent();
 
-   virtual Event *GiveMe_Event(const int &iEvent, const int &ModuleNber_Input,
-                               const int &Data_to_Use, const int &CloseWF = 1) = 0;
-   int Get_PRF_exist();
-   double Get_Norm();
-   double Get_a2();
-   double Get_a4();
-   double Get_b2();
-   double Get_b4();
+  virtual Event *GiveMe_Event(const int &iEvent, const int &ModuleNber_Input,
+                              const int &Data_to_Use,
+                              const int &CloseWF = 1) = 0;
+  int Get_PRF_exist();
+  double Get_Norm();
+  double Get_a2();
+  double Get_a4();
+  double Get_b2();
+  double Get_b4();
 
-   Model_ReadOutGeometry *Get_Model_ReadOutGeometry();
-   Model_Electronics *Get_Model_Electronics();
-   Model_Charge1D *Get_Model_Charge1D();
+  Model_ReadOutGeometry *Get_Model_ReadOutGeometry();
+  Model_Electronics *Get_Model_Electronics();
+  Model_Charge1D *Get_Model_Charge1D();
 
-   //------------------------------Data Members-----------------------//
+  //------------------------------Data Members-----------------------//
 protected:
-   std::string m_SampleFile;
-   int m_NberOfEvent;
+  std::string m_SampleFile;
+  int m_NberOfEvent;
 
-   TFile *p_TFile;
+  TFile *p_TFile;
 
-   TTree *p_TTree;
+  TTree *p_TTree;
 
-   Model_ReadOutGeometry *p_Model_ReadOutGeometry;
-   Model_Electronics *p_Model_Electronics;
-   Model_Charge1D *p_Model_Charge1D;
+  Model_ReadOutGeometry *p_Model_ReadOutGeometry;
+  Model_Electronics *p_Model_Electronics;
+  Model_Charge1D *p_Model_Charge1D;
 
-   short int m_PRF_exist;
-   double m_Norm;
-   double m_a2;
-   double m_a4;
-   double m_b2;
-   double m_b4;
+  short int m_PRF_exist;
+  double m_Norm;
+  double m_a2;
+  double m_a4;
+  double m_b2;
+  double m_b4;
 };
 
 #endif

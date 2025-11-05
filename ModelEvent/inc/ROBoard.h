@@ -1,3 +1,17 @@
+/***************************************************************************
+ * File: ROBoard.h
+ * Project: dEdxRecon
+ *
+ * Brief: Declaration of the read-out board (ROBoard) abstraction. Models
+ *        hardware-level groupings of pads and supports mapping between
+ *        electronics channels and pad indices.
+ *
+ * Contents: ROBoard class declaration and mapping helpers.
+ *
+ * Notes: Implementation in ROBoard.cxx.
+ ***************************************************************************/
+#ifndef ROBOARD_H
+#define ROBOARD_H
 #ifndef ROBoard_H
 #define ROBoard_H
 
@@ -5,54 +19,56 @@
 
 #include "Pad.h"
 
-#include "Model_ReadOutGeometry.h"
-#include "Model_Electronics.h"
 #include "Model_ChargeI.h"
+#include "Model_Electronics.h"
+#include "Model_ReadOutGeometry.h"
 
 /////////////////////////////////////////////////////////////
 class ROBoard {
 public:
-   /** Constructor */
-   ROBoard(Model_ReadOutGeometry *pModel_ReadOutGeometry,
-           Model_Electronics *pModel_Electronics, Model_ChargeI *pModel_ChargeI);
-   virtual ~ROBoard();
+  /** Constructor */
+  ROBoard(Model_ReadOutGeometry *pModel_ReadOutGeometry,
+          Model_Electronics *pModel_Electronics, Model_ChargeI *pModel_ChargeI);
+  virtual ~ROBoard();
 
-   //------------------------------Models-----------------------//
-   const Model_ReadOutGeometry *Get_Model_ReadOutGeometry();
-   const Model_Electronics *Get_Model_Electronics();
-   const Model_ChargeI *Get_Model_ChargeI();
+  //------------------------------Models-----------------------//
+  const Model_ReadOutGeometry *Get_Model_ReadOutGeometry();
+  const Model_Electronics *Get_Model_Electronics();
+  const Model_ChargeI *Get_Model_ChargeI();
 
-   //------------------------------Pads addition-----------------------//
-   virtual void Add_Pad(Pad *pPad); // Add a pad
+  //------------------------------Pads addition-----------------------//
+  virtual void Add_Pad(Pad *pPad); // Add a pad
 
-   //------------------------------Pads Access-----------------------//
-   int Get_NberOfPads() const;       // Size of Pad set
-   Pad *Get_Pad(const int &Index1D); // Get Pad
+  //------------------------------Pads Access-----------------------//
+  int Get_NberOfPads() const;       // Size of Pad set
+  Pad *Get_Pad(const int &Index1D); // Get Pad
 
-   int Get_IsThisPadExisting(const int &iX,
-                             const int &iY) const; // return Pad (iX,iY) existence state
-   Pad *Get_Pad(const int &iX, const int &iY);     // return Pad (iX,iY) if it exists
+  int Get_IsThisPadExisting(
+      const int &iX,
+      const int &iY) const; // return Pad (iX,iY) existence state
+  Pad *Get_Pad(const int &iX, const int &iY); // return Pad (iX,iY) if it exists
 
-   Pad *Get_Pad(Pad *pPad); // return Pad (iX,iY) if it exists
+  Pad *Get_Pad(Pad *pPad); // return Pad (iX,iY) if it exists
 
-   //------------------------------Data Members-----------------------//
+  //------------------------------Data Members-----------------------//
 protected:
-   int GetLinearIndex(const int &iX, const int &iY) const;
+  int GetLinearIndex(const int &iX, const int &iY) const;
 
-   void Ini_Models(Model_ReadOutGeometry *pModel_ReadOutGeometry,
-                   Model_Electronics *pModel_Electronics, Model_ChargeI *pModel_ChargeI);
+  void Ini_Models(Model_ReadOutGeometry *pModel_ReadOutGeometry,
+                  Model_Electronics *pModel_Electronics,
+                  Model_ChargeI *pModel_ChargeI);
 
 protected:
-   short int m_Nx;
-   short int m_Ny;
+  short int m_Nx;
+  short int m_Ny;
 
-   std::vector<int> V_ExisFlag2D;
+  std::vector<int> V_ExisFlag2D;
 
-   std::vector<Pad *> V_Pad;
+  std::vector<Pad *> V_Pad;
 
-   Model_ReadOutGeometry *p_Model_ReadOutGeometry;
-   Model_Electronics *p_Model_Electronics;
-   Model_ChargeI *p_Model_ChargeI;
+  Model_ReadOutGeometry *p_Model_ReadOutGeometry;
+  Model_Electronics *p_Model_Electronics;
+  Model_ChargeI *p_Model_ChargeI;
 };
 
 #endif

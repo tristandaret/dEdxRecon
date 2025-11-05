@@ -1,9 +1,23 @@
+#/***************************************************************************
+ * File: DrawOuts_old.h
+ * Project: dEdxRecon
+ *
+ * Brief: Legacy/older drawout interfaces kept for backward compatibility.
+ *        Declares older drawing utilities that may be used by legacy
+ *        workflows or for regression comparisons.
+ *
+ * Contents: legacy drawing class/function declarations.
+ *
+ * Notes: Prefer the newer DrawOuts API; this header is retained for
+ *        compatibility.
+ ***************************************************************************/
+
 #ifndef DRAWOUTSOLD_H
 #define DRAWOUTSOLD_H
 
 #include "Misc.h"
-#include "dEdx.h"
 #include "SetStyle.h"
+#include "dEdx.h"
 
 // TH2 comparisons of the different methods
 void DrawOut_Methods(const std::string &OutDir, const std::string &Tag,
@@ -14,11 +28,13 @@ void DrawOut_Versions(const std::string &inputDir, const std::string &Method,
                       const std::string &Comment1, const std::string &Comment2);
 
 // Draw separation power histograms for all methods and particles
-void DrawOut_Separation(const std::string &inputDir, const std::string &Comment);
+void DrawOut_Separation(const std::string &inputDir,
+                        const std::string &Comment);
 
-// Draw separation power histograms for all methods and particles only for WF & XP
-void DrawOut_Separation_Reduced(const std::string &inputDir, const std::string &Comment,
-                                std::string Energy);
+// Draw separation power histograms for all methods and particles only for WF &
+// XP
+void DrawOut_Separation_Reduced(const std::string &inputDir,
+                                const std::string &Comment, std::string Energy);
 
 // Draw all scans together
 void DrawOut_Scans(const std::string &inputDir, const std::string &Comment,
@@ -49,7 +65,7 @@ void DrawOut_Phiscan_Z(const std::string &inputDir, const std::string &Comment,
 void DrawOut_Escan(const std::string &inputDir, const std::string &Comment);
 
 // DrawOut dE/dx systematics with Z scan
-void DrawOut_Systematics(const std::string &inputDir, const std::string &Comment,
-                         const std::string &scan);
+void DrawOut_Systematics(const std::string &inputDir,
+                         const std::string &Comment, const std::string &scan);
 
 #endif

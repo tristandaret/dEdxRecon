@@ -1,3 +1,16 @@
+#/***************************************************************************
+ * File: Uploader_Prototype.h
+ * Project: dEdxRecon
+ *
+ * Brief: Declaration for a prototype uploader that reads prototype-format
+ *        datasets and converts them into Event objects used by the
+ *        reconstruction pipeline.
+ *
+ * Contents: Uploader_Prototype subclass declaration.
+ *
+ * Notes: Implementation in Uploader_Prototype.cxx.
+ ***************************************************************************/
+
 #ifndef Uploader_Prototype_H
 #define Uploader_Prototype_H
 
@@ -7,20 +20,20 @@
 /////////////////////////////////////////////////////////////
 class Uploader_Prototype : public Uploader {
 public:
-   /** Constructor */
-   Uploader_Prototype(const std::string &SampleFile,
-                      Model_ReadOutGeometry *pModel_ReadOutGeometry,
-                      Model_Electronics *pModel_Electronics,
-                      Model_Charge1D *pModel_Charge1D);
-   virtual ~Uploader_Prototype();
+  /** Constructor */
+  Uploader_Prototype(const std::string &SampleFile,
+                     Model_ReadOutGeometry *pModel_ReadOutGeometry,
+                     Model_Electronics *pModel_Electronics,
+                     Model_Charge1D *pModel_Charge1D);
+  virtual ~Uploader_Prototype();
 
-   virtual Event *GiveMe_Event(const int &iEvent, const int &ModuleNber_Input,
-                               const int &Data_to_Use, const int &CloseWF);
+  virtual Event *GiveMe_Event(const int &iEvent, const int &ModuleNber_Input,
+                              const int &Data_to_Use, const int &CloseWF);
 
-   virtual Event *
-   GiveMe_Event(const int &iEvent, const int &ModuleNber_Input, const int &Data_to_Use);
+  virtual Event *GiveMe_Event(const int &iEvent, const int &ModuleNber_Input,
+                              const int &Data_to_Use);
 
-   //------------------------------Data Members-----------------------//
+  //------------------------------Data Members-----------------------//
 private:
 };
 

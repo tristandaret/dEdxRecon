@@ -1,52 +1,66 @@
+#/***************************************************************************
+ * File: FitOutput.h
+ * Project: dEdxRecon
+ *
+ * Brief: Declarations for containers that hold fit results produced by
+ *        cluster/track fitting routines. Includes structures to store
+ *        parameter values, uncertainties, and quality flags.
+ *
+ * Contents: FitOutput class declaration.
+ *
+ * Notes: Implementation in FitOutput.cxx.
+ ***************************************************************************/
+
 #ifndef FitOutput_H
 #define FitOutput_H
 
 #include "Misc.h"
 
 #include "TCanvas.h"
-#include "TVirtualFitter.h"
 #include "TMatrixD.h"
+#include "TVirtualFitter.h"
 
 /////////////////////////////////////////////////////////////
 class FitOutput {
 public:
-   FitOutput();
-   virtual ~FitOutput();
+  FitOutput();
+  virtual ~FitOutput();
 
-   FitOutput(const FitOutput &ToBeCopied);
-   FitOutput &operator=(const FitOutput &ToBeCopied);
-
-public:
-   ///////////////////////////////////
-
-   void Reset();
-   void Set(const int &NberOfModelParameters);
-
-   void SetResults(TVirtualFitter *pTVirtualFitter);
-   void SetResults(const std::vector<std::string> &V_PARname,
-                   const std::vector<double> &V_PAR, const std::vector<double> &V_ePAR);
-
-   void PrintFitOutput();
-   void PrintFitOutputInCanvas(double Xstart, double Ystart, double Step);
+  FitOutput(const FitOutput &ToBeCopied);
+  FitOutput &operator=(const FitOutput &ToBeCopied);
 
 public:
-   ///////////////////////////////////
+  ///////////////////////////////////
 
-   std::string m_NameOfTheModel;
+  void Reset();
+  void Set(const int &NberOfModelParameters);
 
-   int m_NberOfModelParameters;
+  void SetResults(TVirtualFitter *pTVirtualFitter);
+  void SetResults(const std::vector<std::string> &V_PARname,
+                  const std::vector<double> &V_PAR,
+                  const std::vector<double> &V_ePAR);
 
-   int m_NberOfDataPoints;
+  void PrintFitOutput();
+  void PrintFitOutputInCanvas(double Xstart, double Ystart, double Step);
 
-   double *p_par;          //!< Parameters
-   std::string *p_parName; //!< Name
-   double *p_eparplus;     //!< Errors
-   double *p_eparminus;    //!< Errors
-   double *p_eparparab;    //!< Errors
-   double *p_CovMatrix;    //!< Cov matrix
-   double m_MinnLL;        //!< Likelihood
+public:
+  ///////////////////////////////////
 
-   std::string m_Description;
+  std::string m_NameOfTheModel;
+
+  int m_NberOfModelParameters;
+
+  int m_NberOfDataPoints;
+
+  double *p_par;          //!< Parameters
+  std::string *p_parName; //!< Name
+  double *p_eparplus;     //!< Errors
+  double *p_eparminus;    //!< Errors
+  double *p_eparparab;    //!< Errors
+  double *p_CovMatrix;    //!< Cov matrix
+  double m_MinnLL;        //!< Likelihood
+
+  std::string m_Description;
 };
 
 #endif

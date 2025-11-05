@@ -1,3 +1,17 @@
+#/***************************************************************************
+ * File: Model_Charge1D.h
+ * Project: dEdxRecon
+ *
+ * Brief: Declaration of a 1-dimensional charge model that models charge
+ *        spreading along one axis (e.g., drift/time). Inherits from
+ *        Model_ChargeI and provides Get_Qpad implementations appropriate for
+ *        1D spreading.
+ *
+ * Contents: class Model_Charge1D : public Model_ChargeI
+ *
+ * Notes: Implementation in Model_Charge1D.cxx.
+ ***************************************************************************/
+
 #ifndef Model_Charge1D_H
 #define Model_Charge1D_H
 
@@ -7,28 +21,28 @@
 /////////////////////////////////////////////////////////////
 class Model_Charge1D : public Model_ChargeI {
 public:
-   /** Constructor */
-   Model_Charge1D();
-   virtual ~Model_Charge1D();
+  /** Constructor */
+  Model_Charge1D();
+  virtual ~Model_Charge1D();
 
-   // Get charge spreading parameters
-   double Get_Lambda() const;
+  // Get charge spreading parameters
+  double Get_Lambda() const;
 
-   // Set charge spreading parameters
-   void Set_Lambda(const double &Lambda);
+  // Set charge spreading parameters
+  void Set_Lambda(const double &Lambda);
 
-   // Get Charge
-   double Get_Qpad(const double &Time, const double &Time0, const double &XTrue,
-                   const double &YTrue, const double &XL, const double &XH,
-                   const double &YL, const double &YH) const;
+  // Get Charge
+  double Get_Qpad(const double &Time, const double &Time0, const double &XTrue,
+                  const double &YTrue, const double &XL, const double &XH,
+                  const double &YL, const double &YH) const;
 
-   // Big Dump
-   void WriteOut() const;
+  // Big Dump
+  void WriteOut() const;
 
 protected:
-   void SetSecondaries();
+  void SetSecondaries();
 
-   double m_Lambda;
+  double m_Lambda;
 };
 
 #endif
