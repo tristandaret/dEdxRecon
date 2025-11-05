@@ -1,16 +1,12 @@
-#/***************************************************************************
- * File: DrawOuts.h
- * Project: dEdxRecon
+/**
+ * @file DrawOuts.h
+ * @brief Declaration of the DrawOuts helper class for plotting and summaries.
  *
- * Brief: Declaration of the DrawOuts class which provides routines for
- *        creating plots and visual summaries of reconstruction results.
- *
- * Contents: class Reconstruction::DrawOuts and methods for many plotting
- *           tasks (scan drawing, energy loss plots, comparisons, etc.).
- *
- * Notes: Heavy use of ROOT graphics classes; implementation in DrawOuts.cxx
- *        and related helpers.
- ***************************************************************************/
+ * The DrawOuts class provides routines for creating plots and visual
+ * summaries of reconstruction results (scan drawing, energy loss plots,
+ * comparisons, etc.). Implementation and plotting logic live in
+ * DrawOuts.cxx.
+ */
 
 #ifndef DRAWOUTS_H
 #define DRAWOUTS_H
@@ -21,32 +17,76 @@
 #include "dEdx.h"
 namespace Reconstruction {
 
+/**
+ * @class DrawOuts
+ * @brief Plotting helper for reconstruction results
+ *
+ * Provides methods to create scan drawings, energy loss plots, comparisons
+ * and other visual summaries used by the analysis tools.
+ */
 class DrawOuts {
 public:
-  // Constructors
+  /** @brief Default constructor */
   DrawOuts();
+
+  /**
+   * @brief Construct from a single input file
+   * @param inputFile path to the input file
+   */
   DrawOuts(const std::string &inputFile);
+
+  /**
+   * @brief Construct from a list of input files
+   * @param v_inputFiles vector with input file paths
+   */
   DrawOuts(const std::vector<std::string> &v_inputFiles);
-  // Destructor
+
+  /** @brief Virtual destructor */
   virtual ~DrawOuts();
 
-  // Methods
+  /** @brief Set plotting style (ROOT style settings) */
   void SetStyle();
 
+  /** @brief Fill DESY21 single-run scan data */
   void DESY21ScanFill();
+
+  /** @brief Draw DESY21 scan summaries */
   void DESY21ScanDraw();
 
+  /** @brief Fill CERN22 single-run scan data */
   void CERN22ScanFill();
+
+  /** @brief Draw CERN22 scan summaries */
   void CERN22ScanDraw();
 
+  /** @brief General control/entry point for plotting */
   void Control();
+
+  /**
+   * @brief Produce energy-loss plots
+   * @param methods selection of methods (0: both, 1: only WF, 2: only XP)
+   */
   void EnergyLoss(const int &methods = 0);
+
+  /** @brief Produce file comparison plots */
   void FileComparison();
 
+  /**
+   * @brief Draw DESY21 single scan
+   * @param methods selection of methods (0: both, 1: only WF, 2: only XP)
+   */
   void DESY21SingleScan(const int &methods = 0);
+
+  /**
+   * @brief Draw DESY21 multi-scan summaries
+   * @param methods selection of methods (0: both, 1: only WF, 2: only XP)
+   */
   void DESY21MultiScan(const int &methods = 0);
+
+  /** @brief Draw CERN22 scan summaries (wrapper) */
   void CERN22Scan();
 
+  /** @brief Plot amplitude versus cluster length */
   void AmplitudeVSLength();
 
 private:

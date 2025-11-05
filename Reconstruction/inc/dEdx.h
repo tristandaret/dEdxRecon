@@ -1,16 +1,10 @@
-#/***************************************************************************
- * File: dEdx.h
- * Project: dEdxRecon
+#/**
+ * @file dEdx.h
+ * @brief dE/dx estimation and particle identification declarations.
  *
- * Brief: Declarations related to dE/dx estimation and particle identification.
- *        Provides function signatures, enums and small utilities used by
- *        the reconstruction pipeline to compute energy loss estimates.
- *
- * Contents: dE/dx related declarations and interfaces.
- *
- * Notes: Implementation in dEdx.cxx.
- ***************************************************************************/
-
+ * Contains declarations for data structures, helper classes and functions
+ * used to compute energy loss estimates used by the reconstruction pipeline.
+ */
 #ifndef DEDX_H
 #define DEDX_H
 

@@ -1,16 +1,10 @@
-#/***************************************************************************
- * File: Cluster.h
- * Project: dEdxRecon
+#/**
+ * @file Cluster.h
+ * @brief Cluster container representing a group of pads forming a detected charge.
  *
- * Brief: Declaration of the Cluster class representing a group of pads
- *        forming a detected charge cluster. Provides accessors and
- *        utilities used by fitting and reconstruction code.
- *
- * Contents: Cluster class declaration and helpers.
- *
- * Notes: Implementation in Cluster.cxx.
- ***************************************************************************/
-
+ * The Cluster class provides accessors and utilities used by fitting and
+ * reconstruction code.
+ */
 #ifndef Cluster_H
 #define Cluster_H
 
@@ -26,8 +20,15 @@
 /////////////////////////////////////////////////////////////
 class Cluster {
 public:
-  /** Constructor */
+  /**
+   * @brief Construct a Cluster
+   * @param EventNber event number
+   * @param EntryNber entry index
+   * @param ModuleNber module index
+   */
   Cluster(const int &EventNber, const int &EntryNber, const int &ModuleNber);
+
+  /** @brief Virtual destructor */
   virtual ~Cluster();
 
   //------------------------------IDs-----------------------//

@@ -1,19 +1,12 @@
-#/***************************************************************************
- * File: TrackFitter.h
- * Project: dEdxRecon
+/**
+ * @file TrackFitter.h
+ * @brief Declaration of the TrackFitter class used to perform track fits.
  *
- * Brief: Declaration of the TrackFitter class used to perform track fits.
- *        This header defines the TrackFitter interface which wraps a
- *        minimiser (ROOT's TVirtualFitter/TMinuit) and exposes methods to
- *        set the track, run minimisation and compute the chi2. It contains
- *        configuration comments about the fitting strategy and parameter
- *        ownership expectations.
- *
- * Contents: class TrackFitter { ... }
- *
- * Notes: This file only contains the public API for track fitting. The
- *        implementation is in TrackFitter.cxx.
- ***************************************************************************/
+ * This header defines the TrackFitter interface which wraps a minimiser
+ * (ROOT's TVirtualFitter/TMinuit) and exposes methods to set the track,
+ * run minimisation and compute the chi2. The implementation lives in
+ * TrackFitter.cxx.
+ */
 
 #ifndef TrackFitter_H
 #define TrackFitter_H
@@ -40,16 +33,38 @@
 //
 class TrackFitter {
 public:
+  /**
+   * @brief Construct a TrackFitter
+   * @param FitterName name used to identify the fitter instance
+   * @param NberOfParameters number of fit parameters (default: 2)
+   */
   TrackFitter(const std::string &FitterName, const int &NberOfParameters = 2);
+
+  /**
+   * @brief Virtual destructor
+   */
   virtual ~TrackFitter();
 
 public:
   ///////////////////////////////////
 
+  /**
+   * @brief Set the track to be fitted
+   * @param pTrack pointer to a Track object (ownership not transferred)
+   */
   void Set_Track(Track *pTrack);
 
+  /**
+   * @brief Run the minimisation routine
+   * @return status code (0 on success, non-zero on failure)
+   */
   int DoMinimisation();
 
+  /**
+   * @brief Compute chi2 for the current parameter vector
+   * @param par parameter array used for the chi2 evaluation
+   * @return computed chi2 value
+   */
   double Chi2(double par[]);
 
 protected:

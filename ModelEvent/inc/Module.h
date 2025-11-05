@@ -1,16 +1,10 @@
-#/***************************************************************************
- * File: Module.h
- * Project: dEdxRecon
+#/**
+ * @file Module.h
+ * @brief Module container representing a detector module of pads and clusters.
  *
- * Brief: Declaration of the Module class which represents a detector module
- *        composed of pads and clusters. Provides interface to access and
- *        manipulate per-module collections used in reconstruction.
- *
- * Contents: Module class declaration and related helpers.
- *
- * Notes: Implementation in Module.cxx.
- ***************************************************************************/
-
+ * Module extends ROBoard and provides helpers to access and manipulate
+ * per-module collections used by the reconstruction pipeline.
+ */
 #ifndef Module_H
 #define Module_H
 

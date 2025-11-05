@@ -1,16 +1,11 @@
-/***************************************************************************
- * File: Displays.h
- * Project: dEdxRecon
+/**
+ * @file Displays.h
+ * @brief High-level display utilities and plotting helpers.
  *
- * Brief: High-level display utilities and wrappers around plotting code.
- *        Declares helpers used by the GUI/plotting components of the
- *        reconstruction pipeline.
- *
- * Contents: class/function declarations to manage drawing and visual
- *           presentation of results.
- *
- * Notes: Implementation in Displays.cxx.
- ***************************************************************************/
+ * Declares functions and helpers used by the GUI and plotting components of
+ * the reconstruction pipeline (event displays, waveform displays, cluster
+ * visualisations, etc.).
+ */
 
 #ifndef DISPLAYS_H
 #define DISPLAYS_H
@@ -24,19 +19,29 @@
 #include "TH1F.h"
 #include "TH2D.h"
 
-//------------------------Event Display
-// Output event display of an event	with tagging string TAG, placed in
-// OUTDIR dir
+// Event display
+/**
+ * @brief Output an event display for a given event
+ * @param pEvent pointer to the Event
+ * @param ModuleNber module index
+ * @param OUTDIR output directory path
+ * @param TAG tagging string used in output filenames
+ */
 void DrawOut_EventDisplay(Event *pEvent, const int &ModuleNber,
                           const std::string &OUTDIR, const std::string &TAG);
+
+/**
+ * @brief Output an event display for a module
+ */
 void DrawOut_EventDisplay(Module *pModule, const std::string &OUTDIR,
                           const std::string &TAG, const std::string &type,
                           const double &parabola, const double &slope,
                           const double &intercept);
 
-// Get event display histo of an event with tagging string TAG
+/** @brief Get an event display TH2D for an event */
 TH2D *GiveMe_EvtDisplay(Event *pEvent, const int &ModuleNber,
                         const std::string &TAG);
+/** @brief Get an event display TH2D for a module */
 TH2D *GiveMe_EvtDisplay(Module *pModule, const std::string &TAG);
 
 // Get Timing Event display

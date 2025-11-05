@@ -1,16 +1,11 @@
-#/***************************************************************************
- * File: ParabolaFunctionNG.h
- * Project: dEdxRecon
+#/**
+ * @file ParabolaFunctionNG.h
+ * @brief Non-symmetric parabola helper function declaration.
  *
- * Brief: Declaration of a non-symmetric parabola function used for fitting
- *        when the curvature differs on either side of the vertex. Provides
- *        parameter accessors and a callable operator for use with TF1.
- *
- * Contents: ParabolaFunctionNG class declaration.
- *
- * Notes: Implementation in ParabolaFunctionNG.cxx.
- ***************************************************************************/
-
+ * Declares ParabolaFunctionNG which implements a parabola with different
+ * curvature on either side of the vertex. Useful for asymmetric fits and
+ * TF1-compatible callbacks.
+ */
 #ifndef ParabolaFunctionNG_H
 #define ParabolaFunctionNG_H
 

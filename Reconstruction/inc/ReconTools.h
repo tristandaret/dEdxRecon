@@ -1,16 +1,10 @@
-#/***************************************************************************
- * File: ReconTools.h
- * Project: dEdxRecon
+#/**
+ * @file ReconTools.h
+ * @brief Miscellaneous reconstruction helper functions and utilities.
  *
- * Brief: Miscellaneous reconstruction helper functions and small tools.
- *        Contains utility routines used across reconstruction, plotting and
- *        fitting code.
- *
- * Contents: small helper functions and thin adapters for common tasks.
- *
- * Notes: Implementation in ReconTools.cxx.
- ***************************************************************************/
-
+ * Small helpers and adapters used across reconstruction, plotting and fitting
+ * code (linspace equivalents, I/O helpers, Bethe-Bloch wrappers, etc.).
+ */
 #ifndef Reconstruction_TOOLS_H
 #define Reconstruction_TOOLS_H
 

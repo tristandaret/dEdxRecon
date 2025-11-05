@@ -1,16 +1,11 @@
-#/***************************************************************************
- * File: Uploader_MockUp_V2.h
- * Project: dEdxRecon
+#/**
+ * @file Uploader_MockUp_V2.h
+ * @brief Mock-up uploader (version 2) declaration for richer test datasets.
  *
- * Brief: Declaration for a mock-up uploader (version 2) providing a richer
- *        set of branches and fields used in newer test datasets. Includes
- *        branch pointers used to fill vectors and waveform arrays.
- *
- * Contents: Uploader_MockUp_V2 subclass declaration and data member lists.
- *
- * Notes: Implementation in Uploader_MockUp_V2.cxx.
- ***************************************************************************/
-
+ * Version 2 exposes additional branches and fields commonly found in newer
+ * test datasets and provides branch pointers used to populate vectors and
+ * waveform arrays.
+ */
 #ifndef Uploader__V2_H
 #define Uploader__V2_H
 

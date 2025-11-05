@@ -1,17 +1,11 @@
-#/***************************************************************************
- * File: Model_Charge1D.h
- * Project: dEdxRecon
+#/**
+ * @file Model_Charge1D.h
+ * @brief 1D charge model declaration (inherits from Model_ChargeI).
  *
- * Brief: Declaration of a 1-dimensional charge model that models charge
- *        spreading along one axis (e.g., drift/time). Inherits from
- *        Model_ChargeI and provides Get_Qpad implementations appropriate for
- *        1D spreading.
- *
- * Contents: class Model_Charge1D : public Model_ChargeI
- *
- * Notes: Implementation in Model_Charge1D.cxx.
- ***************************************************************************/
-
+ * Declares Model_Charge1D which models charge spreading along a single axis
+ * (e.g. time/drift). Concrete Get_Qpad and related helpers are provided in
+ * Model_Charge1D.cxx.
+ */
 #ifndef Model_Charge1D_H
 #define Model_Charge1D_H
 

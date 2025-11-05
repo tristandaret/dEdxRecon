@@ -1,15 +1,10 @@
-/***************************************************************************
- * File: Selector.h
- * Project: dEdxRecon
+/**
+ * @file Selector.h
+ * @brief Selection utilities to filter events, modules and clusters.
  *
- * Brief: Declaration of selection utilities used to filter events, modules,
- *        clusters or pads according to configurable selection sets. The
- *        Selector class encapsulates selection stages and criteria.
- *
- * Contents: Selector class and selection-stage related declarations.
- *
- * Notes: Implementation in Selector.cxx.
- ***************************************************************************/
+ * The Selector class encapsulates selection stages and criteria and provides
+ * methods to apply selections to samples and events.
+ */
 #ifndef SELECTOR_H
 #define SELECTOR_H
 #ifndef Selector_H
@@ -20,34 +15,51 @@
 #include "Sample.h"
 
 /////////////////////////////////////////////////////////////
+/**
+ * @class Selector
+ * @brief Encapsulates event/module/cluster selection logic
+ */
 class Selector {
 public:
-  /** Constructor */
+  /** Constructor with default selection name */
   Selector(const std::string DefSelection);
+  /** Default constructor */
   Selector();
+  /** Virtual destructor */
   virtual ~Selector();
 
-  //
+  /** @brief Reset all selections to empty */
   void Reset_Selection();
 
+  /** @brief Add a named selection */
   void Add_Selection(const std::string &SelectionName);
 
+  /** @brief Get number of selections */
   int NberOfSelections();
 
+  /** @brief Retrieve a selection name by index */
   std::string Get_SelectionName(const int &iTem);
 
+  /** @brief Print selection information to stdout */
   void Tell_Selection();
 
-  //
+  /**
+   * @brief Apply selection to a Sample
+   * @param aSample reference to the Sample
+   * @param ModuleNber module index
+   */
   void ApplySelection(Sample &aSample, const int &ModuleNber);
+
+  /** @brief Apply a specific selection index to a Sample */
   void Apply_ASelection(Sample &aSample, const int &ModuleNber,
                         const int &iTem);
 
-  //
+  /** @brief Apply selection to an Event */
   void ApplySelection(Event *pEvent);
+  /** @brief Apply a specific selection index to an Event */
   void Apply_ASelection(Event *pEvent, const int &ModuleNber, const int &iTem);
 
-  //
+  /** @brief Reset statistical counters used for selection monitoring */
   void Reset_StatCounters();
   void PrintStat();
 

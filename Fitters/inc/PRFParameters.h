@@ -1,17 +1,11 @@
-#/***************************************************************************
- * File: PRFParameters.h
- * Project: dEdxRecon
+#/**
+ * @file PRFParameters.h
+ * @brief Parameter container and evaluator for the Pad Response Function (PRF).
  *
- * Brief: Parameter container and evaluator for the Pad Response Function (PRF).
- *        Declares the PRFParameters class which stores polynomial coefficients
- *        used to evaluate a PRF model used by cluster/track fitting.
- *
- * Contents: class PRFParameters { Eval, SetPRF, operator() }
- *
- * Notes: Implementation is in PRFParameters.cxx. This is a lightweight POD-like
- *        helper used by fitters.
- ***************************************************************************/
-
+ * Declares the PRFParameters class which stores polynomial coefficients used
+ * to evaluate a PRF model used by cluster/track fitting. Implementation is in
+ * PRFParameters.cxx.
+ */
 #ifndef PRFParameters_H
 #define PRFParameters_H
 
@@ -20,15 +14,36 @@
 /////////////////////////////////////////////////////////////
 class PRFParameters {
 public:
-  /** Constructor */
+  /**
+   * @brief Default constructor
+   */
   PRFParameters();
+
+  /**
+   * @brief Virtual destructor
+   */
   virtual ~PRFParameters();
 
-  // Evaluate PRF, Xin in cm
+  /**
+   * @brief Evaluate the PRF at a given position
+   * @param Xin input position in cm
+   * @return evaluated PRF value
+   */
   double Eval(const double &Xin);
 
+  /**
+   * @brief Function-call operator used by ROOT TF1-style callbacks
+   */
   double operator()(double *x, double *par);
 
+  /**
+   * @brief Set PRF polynomial parameters
+   * @param Norm normalization
+   * @param A2 coefficient A2
+   * @param A4 coefficient A4
+   * @param B2 coefficient B2
+   * @param B4 coefficient B4
+   */
   void SetPRF(const double &Norm, const double &A2, const double &A4,
               const double &B2, const double &B4);
 

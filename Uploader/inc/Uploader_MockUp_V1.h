@@ -1,16 +1,10 @@
-#/***************************************************************************
- * File: Uploader_MockUp_V1.h
- * Project: dEdxRecon
+#/**
+ * @file Uploader_MockUp_V1.h
+ * @brief Mock-up uploader (version 1) declaration for testing.
  *
- * Brief: Declaration for a mock-up uploader (version 1) used for testing and
- *        development. Reads a simplified dataset and fills Event structures
- *        suitable for exercising reconstruction code.
- *
- * Contents: Uploader_MockUp_V1 subclass declaration.
- *
- * Notes: Implementation in Uploader_MockUp_V1.cxx.
- ***************************************************************************/
-
+ * Reads simplified datasets and fills Event structures for development and
+ * testing of reconstruction code.
+ */
 #ifndef Uploader_MOCKUP_V1_H
 #define Uploader_MOCKUP_V1_H
 

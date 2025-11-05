@@ -1,16 +1,10 @@
-#/***************************************************************************
- * File: Uploader_Prototype.h
- * Project: dEdxRecon
+#/**
+ * @file Uploader_Prototype.h
+ * @brief Prototype-format uploader declaration.
  *
- * Brief: Declaration for a prototype uploader that reads prototype-format
- *        datasets and converts them into Event objects used by the
- *        reconstruction pipeline.
- *
- * Contents: Uploader_Prototype subclass declaration.
- *
- * Notes: Implementation in Uploader_Prototype.cxx.
- ***************************************************************************/
-
+ * Declares Uploader_Prototype which reads prototype-format datasets and
+ * converts them into Event objects for reconstruction.
+ */
 #ifndef Uploader_Prototype_H
 #define Uploader_Prototype_H
 

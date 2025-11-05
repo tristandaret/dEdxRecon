@@ -1,15 +1,10 @@
-/***************************************************************************
- * File: TimeError.h
- * Project: dEdxRecon
+#/**
+ * @file TimeError.h
+ * @brief Time error model utilities.
  *
- * Brief: Declarations for time/temporal error models used to represent
- *        uncertainties in time measurements (per-sample or per-pad).
- *
- * Contents: TimeError class/utility declarations.
- *
- * Notes: Implementation in TimeError.cxx.
- ***************************************************************************/
-
+ * Declares helpers to compute temporal uncertainties used during signal
+ * processing and fitting.
+ */
 #ifndef TimeError_H
 #define TimeError_H
 

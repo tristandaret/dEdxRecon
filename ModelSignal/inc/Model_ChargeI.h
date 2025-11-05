@@ -1,17 +1,10 @@
-#/***************************************************************************
- * File: Model_ChargeI.h
- * Project: dEdxRecon
+#/**
+ * @file Model_ChargeI.h
+ * @brief Abstract base class for charge models.
  *
- * Brief: Abstract base class for charge models. Defines the interface used
- *        by concrete charge model implementations (0D, 1D, etc.). Provides
- *        common parameter accessors (RC, width, gain) and utility helpers.
- *
- * Contents: class Model_ChargeI (abstract) with virtual Get_Qpad and
- *           WriteOut methods.
- *
- * Notes: Concrete subclasses implement Get_Qpad and SetSecondaries.
- ***************************************************************************/
-
+ * Defines the interface used by concrete charge model implementations
+ * (0D, 1D, etc.). Provides common parameter accessors and utility helpers.
+ */
 #ifndef Model_ChargeI_H
 #define Model_ChargeI_H
 

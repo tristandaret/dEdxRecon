@@ -1,16 +1,10 @@
-#/***************************************************************************
-# * File: Misc.h
-# * Project: dEdxRecon
-# *
-# * Brief: General-purpose small utilities and common definitions used across
-# *        the project (print helpers, small constants, and convenience
-# *        functions). Intended to be lightweight and dependency-free.
-# *
-# * Contents: utility declarations used by many modules.
-# *
-# * Notes: Keep this header minimal to avoid heavy coupling.
-# ***************************************************************************/
-
+#/**
+ * @file Misc.h
+ * @brief Small general-purpose utilities and common definitions.
+ *
+ * Contains lightweight helpers, constants and convenience utilities used
+ * across the project. Keep this header minimal to reduce coupling.
+ */
 #ifndef Misc_H
 #define Misc_H
 

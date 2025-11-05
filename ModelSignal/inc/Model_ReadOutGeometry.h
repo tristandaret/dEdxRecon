@@ -1,16 +1,10 @@
-#/***************************************************************************
- * File: Model_ReadOutGeometry.h
- * Project: dEdxRecon
+#/**
+ * @file Model_ReadOutGeometry.h
+ * @brief Readout geometry model declaration.
  *
- * Brief: Declaration of the readout geometry model describing pad layout,
- *        pad sizes and indexing. Provides utilities to query pad center
- *        coordinates and edges used by charge models and reconstruction.
- *
- * Contents: class Model_ReadOutGeometry with pad geometry accessors.
- *
- * Notes: Implementation in Model_ReadOutGeometry.cxx.
- ***************************************************************************/
-
+ * Declares Model_ReadOutGeometry which describes pad layout, sizes and
+ * indexing. Provides utilities to query pad centre coordinates and edges.
+ */
 #ifndef Model_ReadOutGeometry_H
 #define Model_ReadOutGeometry_H
 

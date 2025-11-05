@@ -1,16 +1,11 @@
-#/***************************************************************************
- * File: GaussFunction.h
- * Project: dEdxRecon
+#/**
+ * @file GaussFunction.h
+ * @brief Gaussian function wrapper declaration.
  *
- * Brief: Declaration of a Gaussian function wrapper compatible with ROOT's
- *        TF1. Provides parameter accessors and a callable operator that
- *        returns the Gaussian value for a given x and parameter set.
- *
- * Contents: class GaussFunction with getters/setters and operator().
- *
- * Notes: Implementation in GaussFunction.cxx.
- ***************************************************************************/
-
+ * Declares GaussFunction which provides getters/setters and a TF1-compatible
+ * operator() to evaluate a Gaussian with configurable normalization,
+ * mean and sigma.
+ */
 #ifndef GaussFunction_H
 #define GaussFunction_H
 

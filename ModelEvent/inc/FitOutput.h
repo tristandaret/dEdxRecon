@@ -1,16 +1,10 @@
-#/***************************************************************************
- * File: FitOutput.h
- * Project: dEdxRecon
+#/**
+ * @file FitOutput.h
+ * @brief Containers to hold fit results from cluster/track fitters.
  *
- * Brief: Declarations for containers that hold fit results produced by
- *        cluster/track fitting routines. Includes structures to store
- *        parameter values, uncertainties, and quality flags.
- *
- * Contents: FitOutput class declaration.
- *
- * Notes: Implementation in FitOutput.cxx.
- ***************************************************************************/
-
+ * Declares FitOutput which stores parameter values, uncertainties and
+ * auxiliary quality flags produced by fitting routines.
+ */
 #ifndef FitOutput_H
 #define FitOutput_H
 

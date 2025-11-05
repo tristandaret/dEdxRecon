@@ -1,15 +1,10 @@
-/***************************************************************************
- * File: ROBoard.h
- * Project: dEdxRecon
+#/**
+ * @file ROBoard.h
+ * @brief Read-out board (ROBoard) abstraction and mapping helpers.
  *
- * Brief: Declaration of the read-out board (ROBoard) abstraction. Models
- *        hardware-level groupings of pads and supports mapping between
- *        electronics channels and pad indices.
- *
- * Contents: ROBoard class declaration and mapping helpers.
- *
- * Notes: Implementation in ROBoard.cxx.
- ***************************************************************************/
+ * Models hardware-level groupings of pads and supports mapping between
+ * electronics channels and pad indices.
+ */
 #ifndef ROBOARD_H
 #define ROBOARD_H
 #ifndef ROBoard_H
@@ -24,6 +19,10 @@
 #include "Model_ReadOutGeometry.h"
 
 /////////////////////////////////////////////////////////////
+/**
+ * @class ROBoard
+ * @brief Abstraction for a read-out board grouping pads and providing mapping
+ */
 class ROBoard {
 public:
   /** Constructor */
@@ -31,15 +30,15 @@ public:
           Model_Electronics *pModel_Electronics, Model_ChargeI *pModel_ChargeI);
   virtual ~ROBoard();
 
-  //------------------------------Models-----------------------//
+  // Models
   const Model_ReadOutGeometry *Get_Model_ReadOutGeometry();
   const Model_Electronics *Get_Model_Electronics();
   const Model_ChargeI *Get_Model_ChargeI();
 
-  //------------------------------Pads addition-----------------------//
+  // Pads addition
   virtual void Add_Pad(Pad *pPad); // Add a pad
 
-  //------------------------------Pads Access-----------------------//
+  // Pads Access
   int Get_NberOfPads() const;       // Size of Pad set
   Pad *Get_Pad(const int &Index1D); // Get Pad
 
@@ -50,7 +49,6 @@ public:
 
   Pad *Get_Pad(Pad *pPad); // return Pad (iX,iY) if it exists
 
-  //------------------------------Data Members-----------------------//
 protected:
   int GetLinearIndex(const int &iX, const int &iY) const;
 

@@ -1,18 +1,11 @@
-#/***************************************************************************
- * File: Event.h
- * Project: dEdxRecon
+#/**
+ * @file Event.h
+ * @brief Event container holding modules, clusters and tracks.
  *
- * Brief: Declaration of the Event class which aggregates modules, clusters
- *        and tracks for a single detector event. The Event holds pointers
- *        to model objects (geometry, electronics, charge) used when
- *        simulating or reconstructing detector responses.
- *
- * Contents: class Event { ... } with module management, validation and
- *           accessors for contained objects.
- *
- * Notes: Implementation is in Event.cxx.
- ***************************************************************************/
-
+ * The Event class aggregates detector modules, clusters and track
+ * candidates for a single event. It also holds pointers to model objects
+ * (geometry, electronics, charge) used by simulation and reconstruction.
+ */
 #ifndef Event_H
 #define Event_H
 

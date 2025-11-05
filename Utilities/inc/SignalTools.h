@@ -1,22 +1,17 @@
-/***************************************************************************
- * File: SignalTools.h
- * Project: dEdxRecon
+
+/**
+ * @file SignalTools.h
+ * @brief Signal-processing helper declarations (baseline, pulse finding, ...)
  *
- * Brief: Declarations for signal-processing helper functions used by
- *        reconstruction and fitting code (e.g., baseline subtraction,
- *        pulse-finding, integration routines).
- *
- * Contents: signal processing helper declarations.
- *
- * Notes: Implementations are in SignalTools.cxx.
- ***************************************************************************/
+ * Provides utility declarations used by reconstruction and fitting code for
+ * basic signal processing tasks such as building ETF pulse shapes.
+ */
 
 #ifndef MISC_SIGNALTOOLS_H
 #define MISC_SIGNALTOOLS_H
 
 #include "TH1F.h"
 
-/* SIGNAL MODELISATION*/
 // Electronics pulse response function
 TH1F *ETF(std::string name, const float &tmin, float const &tmax,
           const float &t_0, const int &nbins, const int &iC, const float &PT,

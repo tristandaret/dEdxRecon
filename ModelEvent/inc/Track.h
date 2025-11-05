@@ -1,16 +1,10 @@
-#/***************************************************************************
- * File: Track.h
- * Project: dEdxRecon
+#/**
+ * @file Track.h
+ * @brief Track class representing a reconstructed particle trajectory.
  *
- * Brief: Declaration of the Track class representing a reconstructed (or
- *        candidate) particle trajectory, with parameters, associated
- *        clusters and utility methods for fitting and evaluation.
- *
- * Contents: Track class declaration and accessors.
- *
- * Notes: Implementation in Track.cxx.
- ***************************************************************************/
-
+ * The Track class stores fit parameters, associated clusters and provides
+ * utilities for fitting and evaluating the reconstructed trajectory.
+ */
 #ifndef Track_H
 #define Track_H
 
@@ -24,13 +18,21 @@
 /////////////////////////////////////////////////////////////
 class Track {
 public:
+  /**
+   * @brief Construct a Track
+   * @param EventNber event number
+   * @param EntryNber entry index
+   * @param ModuleNber module index
+   */
   Track(const int &EventNber, const int &EntryNber, const int &ModuleNber);
+
+  /** @brief Virtual destructor */
   virtual ~Track();
 
-  //------------------------------IDs-----------------------//
-  int Get_EventNber() const;  // Get Event nber
-  int Get_EntryNber() const;  // Get Entry nber
-  int Get_ModuleNber() const; // Get Module nber
+  // IDs
+  int Get_EventNber() const;  ///< Get Event number
+  int Get_EntryNber() const;  ///< Get Entry number
+  int Get_ModuleNber() const; ///< Get Module number
 
   //------------------------------Track Data-----------------------//
   void SetNberOfParameters(const int &NberOfParam);
@@ -55,7 +57,7 @@ public:
   void DumpRec() const;
 
   //------------------According to Fit Y position for given
-  //X-----------------------//
+  // X-----------------------//
   double Y_Position(const double &X) const;
 
   //------------------------------Data Members-----------------------//

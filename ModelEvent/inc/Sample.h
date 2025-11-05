@@ -1,16 +1,10 @@
-#/***************************************************************************
- * File: Sample.h
- * Project: dEdxRecon
+#/**
+ * @file Sample.h
+ * @brief Sample container representing a dataset (collection of events).
  *
- * Brief: Declaration of the Sample class which represents a collection of
- *        events or a dataset to be processed. Provides convenience methods
- *        for iterating and managing I/O-derived samples.
- *
- * Contents: Sample class declaration and helpers.
- *
- * Notes: Implementation in Sample.cxx.
- ***************************************************************************/
-
+ * The Sample class stores a set of Event objects and provides convenience
+ * methods for iteration, model association and PRF handling.
+ */
 #ifndef Sample_H
 #define Sample_H
 

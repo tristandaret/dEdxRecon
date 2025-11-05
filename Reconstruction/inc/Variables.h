@@ -8,20 +8,15 @@
 namespace Reconstruction {
 
 extern Uploader *p_uploader;
-/***************************************************************************
- * File: Variables.h
- * Project: dEdxRecon
+
+/**
+ * @file Variables.h
+ * @brief Central place to declare reconstruction-wide variables and helpers.
  *
- * Brief: Central place to declare reconstruction-wide variables and small
- *        helper utilities shared across modules. This header exposes data
- *        structures and constants used by drawing, monitoring and fitting
- *        code.
- *
- * Contents: shared variables, constants, and light helpers.
- *
- * Notes: Implementation and initialization (if any) should live in
- *        Variables.cxx.
- ***************************************************************************/
+ * This header exposes shared data structures, constants and light helper
+ * utilities used by drawing, monitoring and fitting code. Definitions and
+ * initialisation (if any) should live in Variables.cxx.
+ */
 
 extern Reconstruction::LUT *p_lut;
 

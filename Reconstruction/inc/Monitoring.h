@@ -1,16 +1,10 @@
-#/***************************************************************************
- * File: Monitoring.h
- * Project: dEdxRecon
+#/**
+ * @file Monitoring.h
+ * @brief Monitoring utilities and entry points for analysis workflows.
  *
- * Brief: Declaration of monitoring utilities used to run analysis and
- *        produce diagnostic summaries (histograms, performance numbers,
- *        etc.). Contains the top-level entry used by the Analysis app.
- *
- * Contents: function declarations for monitoring workflows.
- *
- * Notes: Implementation in Monitoring.cxx.
- ***************************************************************************/
-
+ * Declares functions used to run monitoring, produce diagnostic summaries
+ * (histograms, performance numbers) and control analysis settings.
+ */
 #ifndef MONITORING_H
 #define MONITORING_H
 

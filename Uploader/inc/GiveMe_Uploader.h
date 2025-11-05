@@ -1,17 +1,10 @@
-#/***************************************************************************
- * File: GiveMe_Uploader.h
- * Project: dEdxRecon
+#/**
+ * @file GiveMe_Uploader.h
+ * @brief Factory that constructs a concrete Uploader instance.
  *
- * Brief: Factory helper that constructs a concrete Uploader instance based
- *        on an integer selector. Creates necessary model objects and
- *        returns a configured Uploader pointer.
- *
- * Contents: GiveMe_Uploader factory declaration.
- *
- * Notes: Caller takes ownership of the returned Uploader pointer; the
- *        created model objects currently leak for lifetime reasons.
- ***************************************************************************/
-
+ * Helper that returns a configured Uploader pointer based on an integer
+ * selector. The caller receives ownership of the returned pointer.
+ */
 #include "Misc.h"
 #include "Uploader.h"
 

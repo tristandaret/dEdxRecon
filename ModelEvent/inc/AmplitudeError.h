@@ -1,16 +1,10 @@
-/***************************************************************************
- * File: AmplitudeError.h
- * Project: dEdxRecon
+#/**
+ * @file AmplitudeError.h
+ * @brief Amplitude error model utilities.
  *
- * Brief: Declarations for amplitude error models and containers. Used to
- *        represent uncertainties on amplitude measurements (per-pad or per-
- *        cluster) during fitting and dE/dx estimation.
- *
- * Contents: AmplitudeError class declaration and accessors.
- *
- * Notes: Implementation in AmplitudeError.cxx.
- ***************************************************************************/
-
+ * Declares helpers to compute amplitude uncertainties for pads and clusters
+ * used during fitting and dE/dx estimation.
+ */
 #ifndef AmplitudeError_H
 #define AmplitudeError_H
 

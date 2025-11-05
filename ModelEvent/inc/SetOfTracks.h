@@ -1,16 +1,10 @@
-#/***************************************************************************
- * File: SetOfTracks.h
- * Project: dEdxRecon
+#/**
+ * @file SetOfTracks.h
+ * @brief Container for collections of Track objects.
  *
- * Brief: Declaration of a container for tracks (SetOfTracks). Provides
- *        storage and access patterns for collections of Track objects used
- *        by reconstruction and analysis.
- *
- * Contents: SetOfTracks class declaration.
- *
- * Notes: Implementation in SetOfTracks.cxx.
- ***************************************************************************/
-
+ * Provides storage and plotting helpers for sets of tracks used in
+ * reconstruction and analysis.
+ */
 #ifndef SetOfTracks_H
 #define SetOfTracks_H
 

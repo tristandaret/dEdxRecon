@@ -1,18 +1,11 @@
-#/***************************************************************************
- * File: Uploader.h
- * Project: dEdxRecon
+#/**
+ * @file Uploader.h
+ * @brief Abstract base class for data uploaders.
  *
- * Brief: Abstract base class for data uploaders that provide Events to the
- *        reconstruction pipeline. Subclasses implement file-format specific
- *        logic to read samples and produce `Event` instances.
- *
- * Contents: class Uploader (abstract) with accessor methods and members for
- *           ROOT file/tree handling and PRF parameters.
- *
- * Notes: Concrete uploaders are implemented in the Uploader submodule and
- *        selected via GiveMe_Uploader().
- ***************************************************************************/
-
+ * Declares the Uploader interface used to read input samples and produce
+ * `Event` objects for the reconstruction pipeline. Concrete uploaders
+ * implement format-specific logic.
+ */
 #ifndef Uploader_H
 #define Uploader_H
 

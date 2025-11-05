@@ -1,17 +1,11 @@
-#/***************************************************************************
- * File: Model_Electronics.h
- * Project: dEdxRecon
+#/**
+ * @file Model_Electronics.h
+ * @brief Electronics response model declaration.
  *
- * Brief: Declaration of an electronics response model. Provides methods to
- *        configure impulse response parameters and evaluate the electronics
- *        time-shape and its derivative. Used to model shaping and readout
- *        chain effects applied to detector signals.
- *
- * Contents: class Model_Electronics with response evaluation methods.
- *
- * Notes: Implementation in Model_Electronics.cxx.
- ***************************************************************************/
-
+ * Declares Model_Electronics which provides methods to configure impulse
+ * response parameters and evaluate the electronics time-shape and derivative.
+ * Implementation is in Model_Electronics.cxx.
+ */
 #ifndef Model_Electronics_H
 #define Model_Electronics_H
 

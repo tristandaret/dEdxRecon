@@ -1,17 +1,10 @@
-#/***************************************************************************
- * File: Recon_LinkDef.h
- * Project: dEdxRecon
+#/**
+ * @file Recon_LinkDef.h
+ * @brief ROOT linkdef file for Reconstruction module classes.
  *
- * Brief: ROOT dictionary/linkdef file for classes and namespaces used in the
- *        Reconstruction module and for external types like EramInfo. This file
- *        is processed by rootcling to generate dictionaries for I/O and
- *        interactive use.
- *
- * Contents: #pragma link directives for Reconstruction classes and containers.
- *
- * Notes: This file is only meaningful to ROOT's dictionary generation tools.
- ***************************************************************************/
-
+ * Contains #pragma link directives used by rootcling to generate dictionaries
+ * for I/O and interactive ROOT usage.
+ */
 #include "dEdx.h"
 #include <vector>
 #ifdef __ROOTCLING__

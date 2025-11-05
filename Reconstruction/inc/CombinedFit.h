@@ -1,16 +1,10 @@
-#/***************************************************************************
- * File: CombinedFit.h
- * Project: dEdxRecon
+#/**
+ * @file CombinedFit.h
+ * @brief Combined fitting utilities declaration.
  *
- * Brief: Declaration for combined fitting utilities used for higher-level
- *        fits, e.g., fitting Bethe-Bloch curves or combining multiple data
- *        series into a single fit procedure.
- *
- * Contents: combinedFit function declaration.
- *
- * Notes: Implementation lives in CombinedFit.cxx.
- ***************************************************************************/
-
+ * Declares the combinedFit helper used to fit multiple TGraphErrors/TF1
+ * series together (e.g., high-level fits like Bethe-Bloch curve fits).
+ */
 #ifndef COMBINEDFIT_H
 #define COMBINEDFIT_H
 

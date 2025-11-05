@@ -1,19 +1,12 @@
-#/***************************************************************************
- * File: ClusterFitter.h
- * Project: dEdxRecon
+#/**
+ * @file ClusterFitter.h
+ * @brief Declarations for cluster-level fitters used to fit pad-cluster
+ *        charge distributions.
  *
- * Brief: Declarations for cluster-level fitters used to fit pad-cluster
- *        charge distributions. This header defines both horizontal and
- *        diagonal cluster fitter classes and related convenience functions
- *        to run fits on Samples, Events and individual Clusters.
- *
- * Contents: ClusterFitter_Horizontal, ClusterFitter_Diagonal, and helper
- *           functions ClusterFit_* for different geometries.
- *
- * Notes: Implementations live in ClusterFitter.cxx. Fitting uses ROOT's
- *        TVirtualFitter/TMinuit and TF1 for model functions.
- ***************************************************************************/
-
+ * This header defines both horizontal and diagonal cluster fitter classes
+ * and related helper functions to run fits on Samples, Events and Clusters.
+ * Implementations live in ClusterFitter.cxx.
+ */
 #ifndef CLUSTER_FIT_H
 #define CLUSTER_FIT_H
 
@@ -41,25 +34,40 @@
 //
 class ClusterFitter_Horizontal {
 public:
+  /**
+   * @brief Construct a horizontal cluster fitter
+   * @param FitterName name used to identify the fitter instance
+   */
   ClusterFitter_Horizontal(const std::string &FitterName);
+
+  /**
+   * @brief Virtual destructor
+   */
   virtual ~ClusterFitter_Horizontal();
 
 public:
-  ///////////////////////////////////
-
+  /**
+   * @brief Set the cluster to be fitted
+   * @param pCluster pointer to the Cluster (ownership not transferred)
+   */
   void Set_Cluster(Cluster *pCluster);
 
+  /**
+   * @brief Run minimisation for the current cluster
+   * @return 0 on success, non-zero on failure
+   */
   int DoMinimisation();
 
+  /**
+   * @brief Compute chi2 for given parameters
+   * @param par parameter array for chi2 evaluation
+   * @return chi2 value
+   */
   double Chi2(double par[]);
 
 protected:
-  ///////////////////////////////////
-
   std::string m_FitterName;
-
   Cluster *p_Cluster;
-
   TVirtualFitter *p_TVirtualFitter; //!< Fitter
 };
 
@@ -85,30 +93,45 @@ void ClusterFit_Horizontal_Cluster(
 //
 class ClusterFitter_Diagonal {
 public:
+  /**
+   * @brief Construct a diagonal cluster fitter
+   * @param FitterName name used to identify the fitter instance
+   */
   ClusterFitter_Diagonal(const std::string &FitterName);
+
+  /**
+   * @brief Virtual destructor
+   */
   virtual ~ClusterFitter_Diagonal();
 
 public:
-  ///////////////////////////////////
-
+  /**
+   * @brief Set the cluster to be fitted
+   * @param pCluster pointer to the Cluster (ownership not transferred)
+   */
   void Set_Cluster(Cluster *pCluster);
 
+  /**
+   * @brief Run minimisation for the current diagonal cluster
+   * @return 0 on success, non-zero on failure
+   */
   int DoMinimisation();
 
+  /**
+   * @brief Compute chi2 for given parameters
+   * @param par parameter array for chi2 evaluation
+   * @return chi2 value
+   */
   double Chi2(double par[]);
 
 protected:
-  ///////////////////////////////////
-
   std::string m_FitterName;
-
   Cluster *p_Cluster;
-
   TVirtualFitter *p_TVirtualFitter; //!< Fitter
 };
 
 //-------------------------------------Cluster
-//Fits-------------------------------/
+// Fits-------------------------------/
 // Cluster Fits
 
 void ClusterFit_Diagonal(const double &AngleRot, Sample &aSample,

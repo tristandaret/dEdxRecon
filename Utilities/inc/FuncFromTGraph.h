@@ -1,18 +1,14 @@
 #ifndef FuncFromTGraph_H
 #define FuncFromTGraph_H
 
-#/***************************************************************************
-# * File: FuncFromTGraph.h
-# * Project: dEdxRecon
-# *
-# * Brief: Utility to create analytic function wrappers from ROOT TGraph/TGraphErrors
-# *        objects. Useful for interpolation and building TF1-like callables from
-# *        discrete points.
-# *
-# * Contents: class/function declarations for converting TGraph to callable forms.
-# *
-# * Notes: Implementation in FuncFromTGraph.cxx.
-# ***************************************************************************/
+#/**
+ * @file FuncFromTGraph.h
+ * @brief Create function wrappers from ROOT TGraph objects.
+ *
+ * Utility to produce analytic-like function wrappers from TGraph/TGraphErrors
+ * objects. Useful for interpolation and for creating TF1-compatible callables
+ * from discrete points.
+ */
 #ifndef FuncFromTGraph_H
 #define FuncFromTGraph_H
 #include "Misc.h"

@@ -1,16 +1,11 @@
-#/***************************************************************************
- * File: Model_Charge0D.h
- * Project: dEdxRecon
+#/**
+ * @file Model_Charge0D.h
+ * @brief 0D charge model declaration (inherits from Model_ChargeI).
  *
- * Brief: Declaration of a 0-dimensional charge model used to estimate the
- *        integrated charge produced by an ionising particle in a pad or
- *        collection region. Intended for simplified or analytic studies.
- *
- * Contents: class Model_Charge0D : public Model_ChargeI
- *
- * Notes: Implementation in Model_Charge0D.cxx.
- ***************************************************************************/
-
+ * Declares Model_Charge0D which estimates integrated charge produced by an
+ * ionising particle in a pad or collection region. Implementation is in
+ * Model_Charge0D.cxx.
+ */
 #ifndef Model_Charge0D_H
 #define Model_Charge0D_H
 

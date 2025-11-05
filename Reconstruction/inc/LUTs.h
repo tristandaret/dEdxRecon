@@ -1,17 +1,11 @@
-/***************************************************************************
- * File: LUTs.h
- * Project: dEdxRecon
+#/**
+ * @file LUTs.h
+ * @brief Lookup table utilities used by reconstruction algorithms.
  *
- * Brief: Lookup table utilities used by reconstruction algorithms.
- *        Declares functions and data structures for building and accessing
- *        LUTs (e.g., geometry or calibration tables) used in dE/dx and
- *        track/cluster reconstruction.
- *
- * Contents: LUT building/access declarations.
- *
- * Notes: Implementation in LUTs.cxx.
- ***************************************************************************/
-
+ * Declares data structures and helpers for building and accessing LUTs
+ * (geometry, calibration, etc.) used by dE/dx and track/cluster
+ * reconstruction.
+ */
 #ifndef LUT_H
 #define LUT_H
 

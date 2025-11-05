@@ -1,16 +1,10 @@
-#/***************************************************************************
- * File: Control.h
- * Project: dEdxRecon
+#/**
+ * @file Control.h
+ * @brief High-level orchestration function declaration.
  *
- * Brief: Declaration for Control(), the high-level orchestration function
- *        that sets up runs, parsing arguments and invoking appropriate
- *        reconstruction/analysis steps.
- *
- * Contents: Control(...) function declaration used by top-level apps.
- *
- * Notes: Implementation in Control.cxx.
- ***************************************************************************/
-
+ * Declares the `Control` function used by top-level applications to set up
+ * runs and invoke reconstruction/analysis steps.
+ */
 #ifndef CONTROL_H
 #define CONTROL_H
 

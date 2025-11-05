@@ -1,15 +1,10 @@
-#/***************************************************************************
- * File: Uploader_ERAM01.h
- * Project: dEdxRecon
+#/**
+ * @file Uploader_ERAM01.h
+ * @brief Uploader for ERAM01-format data files.
  *
- * Brief: Declaration for an Uploader that reads ERAM01-format data files and
- *        converts them into `Event` objects for the reconstruction pipeline.
- *
- * Contents: Uploader_ERAM01 subclass declaration.
- *
- * Notes: Implementation is in Uploader_ERAM01.cxx.
- ***************************************************************************/
-
+ * Declares Uploader_ERAM01 which converts ERAM01-format data into Event
+ * objects for use by the reconstruction pipeline.
+ */
 #ifndef Uploader_ERAM1_H
 #define Uploader_ERAM1_H
 

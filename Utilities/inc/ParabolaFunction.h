@@ -1,16 +1,11 @@
-#/***************************************************************************
-# * File: ParabolaFunction.h
-# * Project: dEdxRecon
-# *
-# * Brief: Declaration of a simple parabola function helper used for fitting
-# *        and curve approximation. Provides a small callable wrapper compatible
-# *        with ROOT TF1 if needed.
-# *
-# * Contents: ParabolaFunction class declaration.
-# *
-# * Notes: Implementation in ParabolaFunction.cxx.
-# ***************************************************************************/
-
+#/**
+ * @file ParabolaFunction.h
+ * @brief Parabola helper function declaration.
+ *
+ * Declares ParabolaFunction which implements a simple parabola wrapper used
+ * for fitting and curve approximation. A TF1-callable operator() is provided
+ * for integration with ROOT if needed.
+ */
 #ifndef ParabolaFunction_H
 #define ParabolaFunction_H
 
