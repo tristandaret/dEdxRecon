@@ -1,0 +1,68 @@
+\doxysection{Uploader.\+h}
+\hypertarget{_uploader_8h_source}{}\label{_uploader_8h_source}\index{Uploader/inc/Uploader.h@{Uploader/inc/Uploader.h}}
+\mbox{\hyperlink{_uploader_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#ifndef\ Uploader\_H}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#define\ Uploader\_H}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_event_8h}{Event.h}}"{}}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_misc_8h}{Misc.h}}"{}}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_model___charge1_d_8h}{Model\_Charge1D.h}}"{}}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_model___electronics_8h}{Model\_Electronics.h}}"{}}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_model___read_out_geometry_8h}{Model\_ReadOutGeometry.h}}"{}}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ "{}TFile.h"{}}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ "{}TTree.h"{}}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00023\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_uploader_aec81ed059aa54d27b5287e32c004649d}{Uploader}}\ \{}
+\DoxyCodeLine{00024\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00026\ \ \ \mbox{\hyperlink{class_uploader_aec81ed059aa54d27b5287e32c004649d}{Uploader}}(\textcolor{keyword}{const}\ std::string\ \&SampleFile,}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_model___read_out_geometry}{Model\_ReadOutGeometry}}\ *pModel\_ReadOutGeometry,}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_model___electronics}{Model\_Electronics}}\ *pModel\_Electronics,}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_model___charge1_d}{Model\_Charge1D}}\ *pModel\_Charge1D);}
+\DoxyCodeLine{00030\ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_uploader_a4fb7d8db79102f75a8353344d3b23132}{\string~Uploader}}();}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ std::string\ \mbox{\hyperlink{class_uploader_a73ab9cbc5c0989126b561f7ac0262eae}{Get\_SampleFile}}();}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_uploader_a5c6f9c4ff8f2b1971b521715ede7c2dc}{Get\_NberOfEvent}}();}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_event}{Event}}\ *\mbox{\hyperlink{class_uploader_ad7a160cf4cff401f9d181f123a88425a}{GiveMe\_Event}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&iEvent,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&ModuleNber\_Input,}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&Data\_to\_Use,}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&CloseWF\ =\ 1)\ =\ 0;}
+\DoxyCodeLine{00039\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_uploader_accc0ea3ef10db78665279497d5949221}{Get\_PRF\_exist}}();}
+\DoxyCodeLine{00040\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_uploader_a1fc205fe4f061b76d2d2360f56c066db}{Get\_Norm}}();}
+\DoxyCodeLine{00041\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_uploader_a89b2ef6a1686fd0f9a18419f4655cffc}{Get\_a2}}();}
+\DoxyCodeLine{00042\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_uploader_a78664945527466ec29068ff77a6f28f1}{Get\_a4}}();}
+\DoxyCodeLine{00043\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_uploader_a78f19be485f5ad1afd47fa0fcfc966fb}{Get\_b2}}();}
+\DoxyCodeLine{00044\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_uploader_ae6f4b29e9156967a0434cf9c4e181ed7}{Get\_b4}}();}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \mbox{\hyperlink{class_model___read_out_geometry}{Model\_ReadOutGeometry}}\ *\mbox{\hyperlink{class_uploader_a2e678e9cec7f4537588f34fa4988320f}{Get\_Model\_ReadOutGeometry}}();}
+\DoxyCodeLine{00047\ \ \ \mbox{\hyperlink{class_model___electronics}{Model\_Electronics}}\ *\mbox{\hyperlink{class_uploader_a2e4c6ad7cf59d67398555c39e6514201}{Get\_Model\_Electronics}}();}
+\DoxyCodeLine{00048\ \ \ \mbox{\hyperlink{class_model___charge1_d}{Model\_Charge1D}}\ *\mbox{\hyperlink{class_uploader_af8e61237701836aff5e33451658308ff}{Get\_Model\_Charge1D}}();}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Data\ Members-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\///}}
+\DoxyCodeLine{00051\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00052\ \ \ std::string\ \mbox{\hyperlink{class_uploader_a90d0d535f6a8355d136747ee47ab7e33}{m\_SampleFile}};}
+\DoxyCodeLine{00053\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_uploader_a1ea45616465ddbd7d75c24a27b614c98}{m\_NberOfEvent}};}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ TFile\ *\mbox{\hyperlink{class_uploader_a4eeb64031a9d9be88474603eb6badf25}{p\_TFile}};}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ TTree\ *\mbox{\hyperlink{class_uploader_a2e336134811e1b5953d0a61a17767341}{p\_TTree}};}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \mbox{\hyperlink{class_model___read_out_geometry}{Model\_ReadOutGeometry}}\ *\mbox{\hyperlink{class_uploader_af9e5742a66377f703ec13b3c070ed803}{p\_Model\_ReadOutGeometry}};}
+\DoxyCodeLine{00060\ \ \ \mbox{\hyperlink{class_model___electronics}{Model\_Electronics}}\ *\mbox{\hyperlink{class_uploader_adb387ba71ea4b7b297bf397fdf502152}{p\_Model\_Electronics}};}
+\DoxyCodeLine{00061\ \ \ \mbox{\hyperlink{class_model___charge1_d}{Model\_Charge1D}}\ *\mbox{\hyperlink{class_uploader_a953676c56e8a9bcf0b693d8dde00196e}{p\_Model\_Charge1D}};}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \textcolor{keywordtype}{short}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_uploader_acda645e8f299bc9b295850e7422918f3}{m\_PRF\_exist}};}
+\DoxyCodeLine{00064\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_uploader_ae0d5121b1e34900a2e27162a4fc391b0}{m\_Norm}};}
+\DoxyCodeLine{00065\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_uploader_af4bbae8d732180a259924eb109f344b4}{m\_a2}};}
+\DoxyCodeLine{00066\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_uploader_a30ea891f2b51eab54057a02c2374ff5f}{m\_a4}};}
+\DoxyCodeLine{00067\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_uploader_adda774b596a2993dea548b5dcc7b506f}{m\_b2}};}
+\DoxyCodeLine{00068\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_uploader_a50d64b9b4bce3ffb63b6acabb5d325b2}{m\_b4}};}
+\DoxyCodeLine{00069\ \};}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

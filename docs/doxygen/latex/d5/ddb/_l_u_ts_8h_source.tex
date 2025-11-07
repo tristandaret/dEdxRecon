@@ -1,0 +1,159 @@
+\doxysection{LUTs.\+h}
+\hypertarget{_l_u_ts_8h_source}{}\label{_l_u_ts_8h_source}\index{Reconstruction/inc/LUTs.h@{Reconstruction/inc/LUTs.h}}
+\mbox{\hyperlink{_l_u_ts_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#ifndef\ LUT\_H}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#define\ LUT\_H}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <TBranch.h>}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ <TFile.h>}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ <TTree.h>}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_eram_info_a43da0df772e6e6ef1e0ce30e6b5206dc}{EramInfo}}\ :\ \textcolor{keyword}{public}\ TObject\ \{}
+\DoxyCodeLine{00024\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00025\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_eram_info_a4dafcc5a0870411013ddaf5ab42fc35b}{Id}};}
+\DoxyCodeLine{00026\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_eram_info_af83f240f858efab5f4141ea2cec3c5d9}{Position}};}
+\DoxyCodeLine{00027\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_eram_info_a667d97706e1ed63b24b9a2abd6caea15}{XX}};}
+\DoxyCodeLine{00028\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_eram_info_afc8d1b8a972caedc116f2f8ea19f0c10}{YY}};}
+\DoxyCodeLine{00029\ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_eram_info_ae43bd255790394aa166b7dd5df918ddf}{RC}};}
+\DoxyCodeLine{00030\ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_eram_info_a5d8c1d5d5ae721b8d7f8443ba2c09508}{Gain}};}
+\DoxyCodeLine{00031\ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_eram_info_a510f754db7e3f81777663dfe45bda791}{Resolution}};}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_eram_info_a8fa90b253df52414a551d7f0730b44eb}{Endplate}};}
+\DoxyCodeLine{00034\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_eram_info_a959701c964bf9c59af1e997a018ba3da}{InbTPC}};}
+\DoxyCodeLine{00035\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_eram_info_ae25fd0feace9a27ab78bbb46704b4155}{IntTPC}};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \mbox{\hyperlink{class_eram_info_a43da0df772e6e6ef1e0ce30e6b5206dc}{EramInfo}}()\ \{\}}
+\DoxyCodeLine{00038\ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_eram_info_a99a684dc2be8fe23d179855e676e3d3e}{\string~EramInfo}}()\ \{\}}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ ClassDef(\mbox{\hyperlink{class_eram_info}{EramInfo}},\ 2)}
+\DoxyCodeLine{00041\ \};}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_reconstruction}{Reconstruction}}\ \{}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \textcolor{comment}{/*\ ERAM\ MAPS\ READING}}
+\DoxyCodeLine{00046\ \textcolor{comment}{\ *\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00047\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00048\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_reconstruction_1_1_e_r_a_m_maps_a01188a4e5ef1c735b12a2716695214fd}{ERAMMaps}}\ \{}
+\DoxyCodeLine{00049\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00050\ \ \ \textcolor{comment}{/*\ Constructor\ */}}
+\DoxyCodeLine{00051\ \ \ \mbox{\hyperlink{class_reconstruction_1_1_e_r_a_m_maps_a01188a4e5ef1c735b12a2716695214fd}{ERAMMaps}}(}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&file\ =\ \textcolor{stringliteral}{"{}\$HOME/Documents/Code/ERAMinfo/ERAMinfo.root"{}});}
+\DoxyCodeLine{00053\ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_reconstruction_1_1_e_r_a_m_maps_a4d760855d884d2c8bfede14b77f03d52}{\string~ERAMMaps}}();}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_reconstruction_1_1_e_r_a_m_maps_ac3584d39a0beda97850d3dd66ec4e770}{ID}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&position);}
+\DoxyCodeLine{00056\ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_reconstruction_1_1_e_r_a_m_maps_a16a4a70326b267f49a17d9047ccf1389}{RC}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&position,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&iX,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&iY);}
+\DoxyCodeLine{00057\ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_reconstruction_1_1_e_r_a_m_maps_af8090da64eb500f8cebee547798bc341}{Gain}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&position,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&iX,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&iY);}
+\DoxyCodeLine{00058\ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_reconstruction_1_1_e_r_a_m_maps_afd968ae70e960dfffba67024c141f9af}{Resolution}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&position,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&iX,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&iY);}
+\DoxyCodeLine{00059\ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_reconstruction_1_1_e_r_a_m_maps_a038c9a51cff628bf1bbfa7d3e2f635d0}{MeanGain}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&position);}
+\DoxyCodeLine{00060\ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_reconstruction_1_1_e_r_a_m_maps_acc2f5047e6ef7cbaf8bc2accf1f3899e}{MeanRC}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&position);}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00063\ \ \ \textcolor{keywordtype}{bool}\ verbose\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00064\ \ \ std::string\ fFile;}
+\DoxyCodeLine{00065\ \ \ std::vector<int>\ fID;}
+\DoxyCodeLine{00066\ \ \ std::vector<float>\ v\_sides;}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \textcolor{keywordtype}{float}\ fGain[34][36][32];\ \textcolor{comment}{//\ [position][iX][iY]}}
+\DoxyCodeLine{00069\ \ \ \textcolor{keywordtype}{float}\ fRC[34][36][32];}
+\DoxyCodeLine{00070\ \ \ \textcolor{keywordtype}{float}\ fResolution[34][36][32];}
+\DoxyCodeLine{00071\ \ \ std::vector<float>\ fmean\_gain;}
+\DoxyCodeLine{00072\ \ \ std::vector<float>\ fmean\_RC;}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \ \ \textcolor{keywordtype}{void}\ Load();}
+\DoxyCodeLine{00075\ \ \ \textcolor{keywordtype}{void}\ setGain(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&position,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&iX,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&iY,}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \&gain);}
+\DoxyCodeLine{00077\ \ \ \textcolor{keywordtype}{void}\ setRC(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&position,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&iX,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&iY,}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \&\mbox{\hyperlink{class_reconstruction_1_1_e_r_a_m_maps_a16a4a70326b267f49a17d9047ccf1389}{RC}});}
+\DoxyCodeLine{00079\ \ \ \textcolor{keywordtype}{void}\ setResolution(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&position,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&iX,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&iY,}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \&resolution);}
+\DoxyCodeLine{00081\ \ \ \textcolor{keywordtype}{void}\ setMeanGain(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&position,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \&meanGain);}
+\DoxyCodeLine{00082\ \ \ \textcolor{keywordtype}{void}\ setMeanRC(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&position,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \&meanRC);}
+\DoxyCodeLine{00083\ \ \ \textcolor{keywordtype}{void}\ FillHoles();}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \ \ std::vector<int>\ channel2iD\ =\ \{24,\ 30,\ 28,\ 19,\ 21,\ 13,\ 9,\ \ 2,\ \ 26,}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 17,\ 23,\ 29,\ 1,\ \ 10,\ 11,\ 3,\ \textcolor{comment}{/*bottom\ HATPC*/}}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 47,\ 16,\ 14,\ 15,\ 42,\ 45,\ 37,\ 36,\ 20,}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 38,\ 7,\ \ 44,\ 43,\ 39,\ 41,\ 46,\ \textcolor{comment}{/*top\ \ HATPC*/}}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 12,\ 18\};\ \textcolor{comment}{//\ CERN22\ MockUp\ and\ prototype}}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Data\ Members-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\///}}
+\DoxyCodeLine{00092\ \ \ TFile\ *pFile;}
+\DoxyCodeLine{00093\ \ \ TTree\ *pTree;}
+\DoxyCodeLine{00094\ \ \ TBranch\ *pBranch;}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \ \ \textcolor{comment}{//\ Leaves}}
+\DoxyCodeLine{00097\ \ \ \textcolor{keywordtype}{int}\ fid;}
+\DoxyCodeLine{00098\ \ \ \textcolor{keywordtype}{int}\ fpos;}
+\DoxyCodeLine{00099\ \ \ \textcolor{keywordtype}{int}\ fx;}
+\DoxyCodeLine{00100\ \ \ \textcolor{keywordtype}{int}\ fy;}
+\DoxyCodeLine{00101\ \ \ \textcolor{keywordtype}{float}\ frc;}
+\DoxyCodeLine{00102\ \ \ \textcolor{keywordtype}{float}\ fgain;}
+\DoxyCodeLine{00103\ \ \ \textcolor{keywordtype}{float}\ fres;}
+\DoxyCodeLine{00104\ \};}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \textcolor{comment}{/*\ Look\ Up\ Tables\ for\ XP\ method}}
+\DoxyCodeLine{00107\ \textcolor{comment}{\ *\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00108\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00109\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_reconstruction_1_1_l_u_t_a81dc929b9dac7eda50f069eab4369d34}{LUT}}\ \{}
+\DoxyCodeLine{00110\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00111\ \ \ \textcolor{comment}{/*\ Constructor\ */}}
+\DoxyCodeLine{00112\ \ \ \mbox{\hyperlink{class_reconstruction_1_1_l_u_t_a81dc929b9dac7eda50f069eab4369d34}{LUT}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&transDiffCoeffB,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&transDiffCoeffnoB,}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&peakingTime);}
+\DoxyCodeLine{00114\ \ \ \mbox{\hyperlink{class_reconstruction_1_1_l_u_t_a81dc929b9dac7eda50f069eab4369d34}{LUT}}(\textcolor{keyword}{const}\ std::string\ \&file);}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00116\ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_reconstruction_1_1_l_u_t_a241dd310505cd1e1e4992c66f3142c11}{\string~LUT}}();}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00118\ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_reconstruction_1_1_l_u_t_a49882e2557400ae65dab58c89e47bda6}{getRatio}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&\mbox{\hyperlink{namespace_reconstruction_aaf0aa066dcfa96821489a5d449cdd2a6}{Dt}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&RC,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \&drift,}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \&impact,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \&angle);}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00122\ \ \ std::string\ fFile\_LUT;}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00124\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{float}\ PAD\_DIAG\ =\ 15.20;\ \textcolor{comment}{//\ sqrt(pow(11.28,2)\ +\ pow(10.19,\ 2))}}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00126\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ RCmin\ =\ 80;}
+\DoxyCodeLine{00127\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ RCmax\ =\ 160;}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00129\ \ \ \textcolor{comment}{//\ Number\ of\ discrete\ steps\ in\ each\ dimension\ of\ the\ Look\ Up\ Table}}
+\DoxyCodeLine{00130\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ SNSTEPS\_TRANS\ =\ 2;}
+\DoxyCodeLine{00131\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ SNSTEPS\_RC\ =\ 17;}
+\DoxyCodeLine{00132\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ SNSTEPS\_DRIFT\ =\ 21;}
+\DoxyCodeLine{00133\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ SNSTEPS\_IMPACT\ =\ 250;}
+\DoxyCodeLine{00134\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ SNSTEPS\_PHI\ =\ 250;}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00136\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{float}\ LUTValues[SNSTEPS\_TRANS][SNSTEPS\_RC][SNSTEPS\_DRIFT]}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [SNSTEPS\_IMPACT][SNSTEPS\_PHI];}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00139\ \ \ \textcolor{keywordtype}{float}\ stepSizeTrans\ =\ 37;\ \textcolor{comment}{//\ 286\ -\/>\ 323\ or\ 310-\/>350}}
+\DoxyCodeLine{00140\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{float}\ sSTEP\_RC\ =\ 5;}
+\DoxyCodeLine{00141\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{float}\ sSTEP\_PHI\ =\ 90.\ /\ (SNSTEPS\_PHI\ -\/\ 1);}
+\DoxyCodeLine{00142\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{float}\ sSTEP\_IMPACT\ =\ (PAD\_DIAG\ /\ 2)\ /\ (SNSTEPS\_IMPACT\ -\/\ 1);}
+\DoxyCodeLine{00143\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{float}\ sSTEP\_DRIFT\ =\ 1000.\ /\ (SNSTEPS\_DRIFT\ -\/\ 1);}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00145\ \ \ \textcolor{keywordtype}{void}\ Load();}
+\DoxyCodeLine{00146\ }
+\DoxyCodeLine{00147\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Data\ Members-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\///}}
+\DoxyCodeLine{00148\ }
+\DoxyCodeLine{00149\ \ \ TFile\ *pFile\_LUT;}
+\DoxyCodeLine{00150\ \ \ TTree\ *pTree\_LUT;}
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00152\ \ \ \textcolor{comment}{//\ Branches}}
+\DoxyCodeLine{00153\ \ \ \textcolor{keywordtype}{float}\ fweight;}
+\DoxyCodeLine{00154\ \ \ \textcolor{keywordtype}{float}\ fDt;}
+\DoxyCodeLine{00155\ \ \ \textcolor{keywordtype}{float}\ fRC;}
+\DoxyCodeLine{00156\ \ \ \textcolor{keywordtype}{float}\ fdrift;}
+\DoxyCodeLine{00157\ \ \ \textcolor{keywordtype}{double}\ fd;}
+\DoxyCodeLine{00158\ \ \ \textcolor{keywordtype}{double}\ fphi;}
+\DoxyCodeLine{00159\ }
+\DoxyCodeLine{00160\ \ \ \textcolor{keywordtype}{int}\ DtwithB;}
+\DoxyCodeLine{00161\ \ \ \textcolor{keywordtype}{int}\ DtwithoutB;}
+\DoxyCodeLine{00162\ \};}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00164\ \}\ \textcolor{comment}{//\ namespace\ Reconstruction}}
+\DoxyCodeLine{00165\ }
+\DoxyCodeLine{00166\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

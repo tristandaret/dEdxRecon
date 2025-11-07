@@ -1,0 +1,273 @@
+\doxysection{Set\+Of\+Tracks Class Reference}
+\hypertarget{class_set_of_tracks}{}\label{class_set_of_tracks}\index{SetOfTracks@{SetOfTracks}}
+
+
+{\ttfamily \#include $<$Set\+Of\+Tracks.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_set_of_tracks_a748b3f5a1ef09acea7d3532a45a650ca}{Set\+Of\+Tracks}} ()
+\item 
+virtual \mbox{\hyperlink{class_set_of_tracks_ac35066ff516ddba6943a23d876e23ab3}{\texorpdfstring{$\sim$}{\string~}\+Set\+Of\+Tracks}} ()
+\item 
+void \mbox{\hyperlink{class_set_of_tracks_ad29abd6118b7bec538bdd981af777474}{Add\+\_\+\+Track}} (const \mbox{\hyperlink{class_track}{Track}} \texorpdfstring{$\ast$}{*}p\+Track)
+\item 
+int \mbox{\hyperlink{class_set_of_tracks_a4c3874356f31557ab4064ea973d55a93}{Get\+\_\+\+Nber\+Of\+Track}} () const
+\item 
+const \mbox{\hyperlink{class_track}{Track}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_set_of_tracks_a4e187514d03633a6efc2e4955638da3b}{Get\+\_\+\+Track}} (int Index1D) const
+\item 
+void \mbox{\hyperlink{class_set_of_tracks_a08b338d9b2424cb8074fecc182b952fd}{Dump\+Rec}} () const
+\item 
+int \mbox{\hyperlink{class_set_of_tracks_a3def9fc867ef08c121aa235db79df537}{Get\+\_\+\+Minimal\+Nber\+Of\+Entries}} ()
+\item 
+void \mbox{\hyperlink{class_set_of_tracks_ab1f6843b11019ed3458654316202e353}{Set\+\_\+\+Minimal\+Nber\+Of\+Entries}} (const int \&Minimal\+Nber\+Of\+Entries)
+\item 
+TH1F \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_set_of_tracks_a88af2f458b318cd0af6a7fc22cbf182b}{Give\+Me\+\_\+p\+TH1\+F\+\_\+\+YTrack\+In\+Tracks}} (const std\+::string \&TAG, const int \&i\+YBeam)
+\item 
+TH1F \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_set_of_tracks_abbdfe8f75d16977916fde58235896fd1}{Give\+Me\+\_\+p\+TH1\+F\+\_\+\+YTrack\+In\+Tracks}} (const std\+::string \&TAG, const int \&Nbins, const double \&Ymin, const double \&Ymax)
+\item 
+TH1F \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_set_of_tracks_a6b75197c91d3ac15a3a4596c7e7f2cd1}{Give\+Me\+\_\+p\+TH1\+F\+\_\+\+YTrack\+In\+Tracks}} (const std\+::string \&TAG, const int \&i\+YBeam, const int \&i\+Col)
+\item 
+TH1F \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_set_of_tracks_a818c592795b21d5b83c99ccc164b2365}{Give\+Me\+\_\+p\+TH1\+F\+\_\+\+YTrack\+In\+Tracks}} (const std\+::string \&TAG, const int \&Nbins, const double \&Ymin, const double \&Ymax, const int \&i\+Col)
+\item 
+TH1F \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_set_of_tracks_a0b5783a21de412165c11a7234de1f8e4}{Give\+Me\+\_\+p\+TH1\+F\+\_\+\+YFit\+Col}} (const std\+::string \&TAG, const int \&i\+YBeam)
+\item 
+TH1F \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_set_of_tracks_aeecef98c8ffacacdbb72f1d417b9e0e0}{Give\+Me\+\_\+p\+TH1\+F\+\_\+\+YFit\+Col}} (const std\+::string \&TAG, const int \&Nbins, const double \&Ymin, const double \&Ymax)
+\item 
+TH1F \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_set_of_tracks_a34b31fd6ca8d381f37bff13c314df7ba}{Give\+Me\+\_\+p\+TH1\+F\+\_\+\+YFit\+Col}} (const std\+::string \&TAG, const int \&i\+YBeam, const int \&i\+Col)
+\item 
+TH1F \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_set_of_tracks_a55a331941e2f322e4ba7b2a66bcf4210}{Give\+Me\+\_\+p\+TH1\+F\+\_\+\+YFit\+Col}} (const std\+::string \&TAG, const int \&Nbins, const double \&Ymin, const double \&Ymax, const int \&i\+Col)
+\item 
+TH1F \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_set_of_tracks_ad6984fb2fb389a544b1db1646b3881b4}{Give\+Me\+\_\+p\+TH1\+F\+\_\+\+YTrack\+YPad\+In\+Tracks}} (const std\+::string \&TAG, const int \&i\+Col)
+\item 
+TH1F \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_set_of_tracks_a156cb6542333939b2ce83c14e3d6734d}{Give\+Me\+\_\+p\+TH1\+F\+\_\+\+YTrack\+YPad\+In\+Tracks}} (const std\+::string \&TAG, const int \&i\+Col, const int \&Nbins, const double \&Xmin, const double \&Xmax)
+\item 
+TH1F \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_set_of_tracks_aecdca325e1e0d9d7d035cd3ea265d940}{Give\+Me\+\_\+p\+TH1\+F\+\_\+\+YTrack\+YPad\+Leading\+In\+Tracks}} (const std\+::string \&TAG, const int \&i\+Col)
+\item 
+TH1F \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_set_of_tracks_a3928a806616c797c7691f930316f0f64}{Give\+Me\+\_\+p\+TH1\+F\+\_\+\+YTrack\+YPad\+Leading\+In\+Tracks}} (const std\+::string \&TAG, const int \&i\+Col, const int \&Nbins, const double \&Xmin, const double \&Xmax)
+\item 
+TH1F \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_set_of_tracks_a6fa7c9adeb323e111a286c1ad4df8d1e}{Give\+Me\+\_\+p\+TH1\+F\+\_\+\+Track\+DeltaT}} (const std\+::string \&TAG, const int \&i\+Col)
+\item 
+TH1F \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_set_of_tracks_a7a3a25a53343ca398fc2ca94387e51d2}{Give\+Me\+\_\+p\+TH1\+F\+\_\+\+Ch2\+Min\+Per\+NODF}} (const std\+::string \&TAGFinal, const double \&Xmax)
+\item 
+TH1F \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_set_of_tracks_a7215b6bd2e3f5ad0d8e774fa118230f3}{Give\+Me\+\_\+p\+TH1\+F\+\_\+\+Ch2\+Min}} (const std\+::string \&TAGFinal, const double \&Xmax)
+\item 
+TH1F \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_set_of_tracks_ad4344cec64f95e4eaca83bda33333c3d}{Give\+Me\+\_\+p\+TH1\+F\+\_\+\+Residual}} (const std\+::string \&TAGFinal, double \&Mean, double \&e\+Mean, double \&Sigma, double \&e\+Sigma)
+\item 
+TH1F \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_set_of_tracks_afffadb0057c81cd258deb3a36fec1f0b}{Give\+Me\+\_\+p\+TH1\+F\+\_\+\+Residual}} (const std\+::string \&TAGFinal, const int \&iX, double \&Mean, double \&e\+Mean, double \&Sigma, double \&e\+Sigma)
+\item 
+TH1F \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_set_of_tracks_a163603b5296d229aa311d8ca9b3fd426}{Give\+Me\+\_\+p\+TH1\+F\+\_\+\+Residual}} (const std\+::string \&TAGFinal, const int \&iX, double YL, double YH, double YL\+\_\+\+Rescaled, double YH\+\_\+\+Rescaled, double \&Mean, double \&e\+Mean, double \&Sigma, double \&e\+Sigma)
+\item 
+TH1F \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_set_of_tracks_ad96305107b16686833b7c10838f29037}{Give\+Me\+\_\+p\+TH1\+F\+\_\+\+Pull}} (const std\+::string \&TAGFinal)
+\item 
+TH1F \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_set_of_tracks_a5bfe80c295ed2edb6958b1a6f34cbae9}{Give\+Me\+\_\+p\+TH1\+F\+\_\+\+Pull}} (const std\+::string \&TAGFinal, double \&Mean, double \&e\+Mean, double \&Sigma, double \&e\+Sigma)
+\item 
+TH1F \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_set_of_tracks_a81bd043ee05c0f25fefafbc994b9d7e3}{Give\+Me\+\_\+p\+TH1\+F\+\_\+\+Pull}} (const std\+::string \&TAGFinal, double \&Mean, double \&e\+Mean, double \&Sigma, double \&e\+Sigma, const double \&XminH, const double \&XmaxH)
+\item 
+TH1F \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_set_of_tracks_ac55c2ce801ea5ebc3b29e4229fca9dec}{Give\+Me\+\_\+p\+TH1\+F\+\_\+\+Pull}} (const std\+::string \&TAGFinal, const int \&iX, double \&Mean, double \&e\+Mean, double \&Sigma, double \&e\+Sigma)
+\item 
+TH1F \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_set_of_tracks_a7b4f3a264e3e19916bef0739114e8e71}{Give\+Me\+\_\+p\+TH1\+F\+\_\+\+Pull}} (const std\+::string \&TAGFinal, const int \&iX, double \&Mean, double \&e\+Mean, double \&Sigma, double \&e\+Sigma, const double \&XminH, const double \&XmaxH)
+\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{class_set_of_tracks_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_set_of_tracks_a748b3f5a1ef09acea7d3532a45a650ca}\index{SetOfTracks@{SetOfTracks}!SetOfTracks@{SetOfTracks}}
+\index{SetOfTracks@{SetOfTracks}!SetOfTracks@{SetOfTracks}}
+\doxysubsubsection{\texorpdfstring{SetOfTracks()}{SetOfTracks()}}
+{\footnotesize\ttfamily \label{class_set_of_tracks_a748b3f5a1ef09acea7d3532a45a650ca} 
+Set\+Of\+Tracks\+::\+Set\+Of\+Tracks (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_set_of_tracks_ac35066ff516ddba6943a23d876e23ab3}\index{SetOfTracks@{SetOfTracks}!````~SetOfTracks@{\texorpdfstring{$\sim$}{\string~}SetOfTracks}}
+\index{````~SetOfTracks@{\texorpdfstring{$\sim$}{\string~}SetOfTracks}!SetOfTracks@{SetOfTracks}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}SetOfTracks()}{\string~SetOfTracks()}}
+{\footnotesize\ttfamily \label{class_set_of_tracks_ac35066ff516ddba6943a23d876e23ab3} 
+Set\+Of\+Tracks\+::\texorpdfstring{$\sim$}{\string~}\+Set\+Of\+Tracks (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_set_of_tracks_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_set_of_tracks_ad29abd6118b7bec538bdd981af777474}\index{SetOfTracks@{SetOfTracks}!Add\_Track@{Add\_Track}}
+\index{Add\_Track@{Add\_Track}!SetOfTracks@{SetOfTracks}}
+\doxysubsubsection{\texorpdfstring{Add\_Track()}{Add\_Track()}}
+{\footnotesize\ttfamily \label{class_set_of_tracks_ad29abd6118b7bec538bdd981af777474} 
+void Set\+Of\+Tracks\+::\+Add\+\_\+\+Track (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_track}{Track}} \texorpdfstring{$\ast$}{*}}]{p\+Track}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_set_of_tracks_a08b338d9b2424cb8074fecc182b952fd}\index{SetOfTracks@{SetOfTracks}!DumpRec@{DumpRec}}
+\index{DumpRec@{DumpRec}!SetOfTracks@{SetOfTracks}}
+\doxysubsubsection{\texorpdfstring{DumpRec()}{DumpRec()}}
+{\footnotesize\ttfamily \label{class_set_of_tracks_a08b338d9b2424cb8074fecc182b952fd} 
+void Set\+Of\+Tracks\+::\+Dump\+Rec (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_set_of_tracks_a3def9fc867ef08c121aa235db79df537}\index{SetOfTracks@{SetOfTracks}!Get\_MinimalNberOfEntries@{Get\_MinimalNberOfEntries}}
+\index{Get\_MinimalNberOfEntries@{Get\_MinimalNberOfEntries}!SetOfTracks@{SetOfTracks}}
+\doxysubsubsection{\texorpdfstring{Get\_MinimalNberOfEntries()}{Get\_MinimalNberOfEntries()}}
+{\footnotesize\ttfamily \label{class_set_of_tracks_a3def9fc867ef08c121aa235db79df537} 
+int Set\+Of\+Tracks\+::\+Get\+\_\+\+Minimal\+Nber\+Of\+Entries (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_set_of_tracks_a4c3874356f31557ab4064ea973d55a93}\index{SetOfTracks@{SetOfTracks}!Get\_NberOfTrack@{Get\_NberOfTrack}}
+\index{Get\_NberOfTrack@{Get\_NberOfTrack}!SetOfTracks@{SetOfTracks}}
+\doxysubsubsection{\texorpdfstring{Get\_NberOfTrack()}{Get\_NberOfTrack()}}
+{\footnotesize\ttfamily \label{class_set_of_tracks_a4c3874356f31557ab4064ea973d55a93} 
+int Set\+Of\+Tracks\+::\+Get\+\_\+\+Nber\+Of\+Track (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_set_of_tracks_a4e187514d03633a6efc2e4955638da3b}\index{SetOfTracks@{SetOfTracks}!Get\_Track@{Get\_Track}}
+\index{Get\_Track@{Get\_Track}!SetOfTracks@{SetOfTracks}}
+\doxysubsubsection{\texorpdfstring{Get\_Track()}{Get\_Track()}}
+{\footnotesize\ttfamily \label{class_set_of_tracks_a4e187514d03633a6efc2e4955638da3b} 
+const \mbox{\hyperlink{class_track}{Track}} \texorpdfstring{$\ast$}{*} Set\+Of\+Tracks\+::\+Get\+\_\+\+Track (\begin{DoxyParamCaption}\item[{int}]{Index1D}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_set_of_tracks_a7215b6bd2e3f5ad0d8e774fa118230f3}\index{SetOfTracks@{SetOfTracks}!GiveMe\_pTH1F\_Ch2Min@{GiveMe\_pTH1F\_Ch2Min}}
+\index{GiveMe\_pTH1F\_Ch2Min@{GiveMe\_pTH1F\_Ch2Min}!SetOfTracks@{SetOfTracks}}
+\doxysubsubsection{\texorpdfstring{GiveMe\_pTH1F\_Ch2Min()}{GiveMe\_pTH1F\_Ch2Min()}}
+{\footnotesize\ttfamily \label{class_set_of_tracks_a7215b6bd2e3f5ad0d8e774fa118230f3} 
+TH1F \texorpdfstring{$\ast$}{*} Set\+Of\+Tracks\+::\+Give\+Me\+\_\+p\+TH1\+F\+\_\+\+Ch2\+Min (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{TAGFinal}{, }\item[{const double \&}]{Xmax}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_set_of_tracks_a7a3a25a53343ca398fc2ca94387e51d2}\index{SetOfTracks@{SetOfTracks}!GiveMe\_pTH1F\_Ch2MinPerNODF@{GiveMe\_pTH1F\_Ch2MinPerNODF}}
+\index{GiveMe\_pTH1F\_Ch2MinPerNODF@{GiveMe\_pTH1F\_Ch2MinPerNODF}!SetOfTracks@{SetOfTracks}}
+\doxysubsubsection{\texorpdfstring{GiveMe\_pTH1F\_Ch2MinPerNODF()}{GiveMe\_pTH1F\_Ch2MinPerNODF()}}
+{\footnotesize\ttfamily \label{class_set_of_tracks_a7a3a25a53343ca398fc2ca94387e51d2} 
+TH1F \texorpdfstring{$\ast$}{*} Set\+Of\+Tracks\+::\+Give\+Me\+\_\+p\+TH1\+F\+\_\+\+Ch2\+Min\+Per\+NODF (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{TAGFinal}{, }\item[{const double \&}]{Xmax}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_set_of_tracks_ad96305107b16686833b7c10838f29037}\index{SetOfTracks@{SetOfTracks}!GiveMe\_pTH1F\_Pull@{GiveMe\_pTH1F\_Pull}}
+\index{GiveMe\_pTH1F\_Pull@{GiveMe\_pTH1F\_Pull}!SetOfTracks@{SetOfTracks}}
+\doxysubsubsection{\texorpdfstring{GiveMe\_pTH1F\_Pull()}{GiveMe\_pTH1F\_Pull()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
+{\footnotesize\ttfamily \label{class_set_of_tracks_ad96305107b16686833b7c10838f29037} 
+TH1F \texorpdfstring{$\ast$}{*} Set\+Of\+Tracks\+::\+Give\+Me\+\_\+p\+TH1\+F\+\_\+\+Pull (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{TAGFinal}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_set_of_tracks_ac55c2ce801ea5ebc3b29e4229fca9dec}\index{SetOfTracks@{SetOfTracks}!GiveMe\_pTH1F\_Pull@{GiveMe\_pTH1F\_Pull}}
+\index{GiveMe\_pTH1F\_Pull@{GiveMe\_pTH1F\_Pull}!SetOfTracks@{SetOfTracks}}
+\doxysubsubsection{\texorpdfstring{GiveMe\_pTH1F\_Pull()}{GiveMe\_pTH1F\_Pull()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
+{\footnotesize\ttfamily \label{class_set_of_tracks_ac55c2ce801ea5ebc3b29e4229fca9dec} 
+TH1F \texorpdfstring{$\ast$}{*} Set\+Of\+Tracks\+::\+Give\+Me\+\_\+p\+TH1\+F\+\_\+\+Pull (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{TAGFinal}{, }\item[{const int \&}]{iX}{, }\item[{double \&}]{Mean}{, }\item[{double \&}]{e\+Mean}{, }\item[{double \&}]{Sigma}{, }\item[{double \&}]{e\+Sigma}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_set_of_tracks_a7b4f3a264e3e19916bef0739114e8e71}\index{SetOfTracks@{SetOfTracks}!GiveMe\_pTH1F\_Pull@{GiveMe\_pTH1F\_Pull}}
+\index{GiveMe\_pTH1F\_Pull@{GiveMe\_pTH1F\_Pull}!SetOfTracks@{SetOfTracks}}
+\doxysubsubsection{\texorpdfstring{GiveMe\_pTH1F\_Pull()}{GiveMe\_pTH1F\_Pull()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
+{\footnotesize\ttfamily \label{class_set_of_tracks_a7b4f3a264e3e19916bef0739114e8e71} 
+TH1F \texorpdfstring{$\ast$}{*} Set\+Of\+Tracks\+::\+Give\+Me\+\_\+p\+TH1\+F\+\_\+\+Pull (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{TAGFinal}{, }\item[{const int \&}]{iX}{, }\item[{double \&}]{Mean}{, }\item[{double \&}]{e\+Mean}{, }\item[{double \&}]{Sigma}{, }\item[{double \&}]{e\+Sigma}{, }\item[{const double \&}]{XminH}{, }\item[{const double \&}]{XmaxH}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_set_of_tracks_a5bfe80c295ed2edb6958b1a6f34cbae9}\index{SetOfTracks@{SetOfTracks}!GiveMe\_pTH1F\_Pull@{GiveMe\_pTH1F\_Pull}}
+\index{GiveMe\_pTH1F\_Pull@{GiveMe\_pTH1F\_Pull}!SetOfTracks@{SetOfTracks}}
+\doxysubsubsection{\texorpdfstring{GiveMe\_pTH1F\_Pull()}{GiveMe\_pTH1F\_Pull()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
+{\footnotesize\ttfamily \label{class_set_of_tracks_a5bfe80c295ed2edb6958b1a6f34cbae9} 
+TH1F \texorpdfstring{$\ast$}{*} Set\+Of\+Tracks\+::\+Give\+Me\+\_\+p\+TH1\+F\+\_\+\+Pull (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{TAGFinal}{, }\item[{double \&}]{Mean}{, }\item[{double \&}]{e\+Mean}{, }\item[{double \&}]{Sigma}{, }\item[{double \&}]{e\+Sigma}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_set_of_tracks_a81bd043ee05c0f25fefafbc994b9d7e3}\index{SetOfTracks@{SetOfTracks}!GiveMe\_pTH1F\_Pull@{GiveMe\_pTH1F\_Pull}}
+\index{GiveMe\_pTH1F\_Pull@{GiveMe\_pTH1F\_Pull}!SetOfTracks@{SetOfTracks}}
+\doxysubsubsection{\texorpdfstring{GiveMe\_pTH1F\_Pull()}{GiveMe\_pTH1F\_Pull()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
+{\footnotesize\ttfamily \label{class_set_of_tracks_a81bd043ee05c0f25fefafbc994b9d7e3} 
+TH1F \texorpdfstring{$\ast$}{*} Set\+Of\+Tracks\+::\+Give\+Me\+\_\+p\+TH1\+F\+\_\+\+Pull (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{TAGFinal}{, }\item[{double \&}]{Mean}{, }\item[{double \&}]{e\+Mean}{, }\item[{double \&}]{Sigma}{, }\item[{double \&}]{e\+Sigma}{, }\item[{const double \&}]{XminH}{, }\item[{const double \&}]{XmaxH}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_set_of_tracks_afffadb0057c81cd258deb3a36fec1f0b}\index{SetOfTracks@{SetOfTracks}!GiveMe\_pTH1F\_Residual@{GiveMe\_pTH1F\_Residual}}
+\index{GiveMe\_pTH1F\_Residual@{GiveMe\_pTH1F\_Residual}!SetOfTracks@{SetOfTracks}}
+\doxysubsubsection{\texorpdfstring{GiveMe\_pTH1F\_Residual()}{GiveMe\_pTH1F\_Residual()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{class_set_of_tracks_afffadb0057c81cd258deb3a36fec1f0b} 
+TH1F \texorpdfstring{$\ast$}{*} Set\+Of\+Tracks\+::\+Give\+Me\+\_\+p\+TH1\+F\+\_\+\+Residual (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{TAGFinal}{, }\item[{const int \&}]{iX}{, }\item[{double \&}]{Mean}{, }\item[{double \&}]{e\+Mean}{, }\item[{double \&}]{Sigma}{, }\item[{double \&}]{e\+Sigma}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_set_of_tracks_a163603b5296d229aa311d8ca9b3fd426}\index{SetOfTracks@{SetOfTracks}!GiveMe\_pTH1F\_Residual@{GiveMe\_pTH1F\_Residual}}
+\index{GiveMe\_pTH1F\_Residual@{GiveMe\_pTH1F\_Residual}!SetOfTracks@{SetOfTracks}}
+\doxysubsubsection{\texorpdfstring{GiveMe\_pTH1F\_Residual()}{GiveMe\_pTH1F\_Residual()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{class_set_of_tracks_a163603b5296d229aa311d8ca9b3fd426} 
+TH1F \texorpdfstring{$\ast$}{*} Set\+Of\+Tracks\+::\+Give\+Me\+\_\+p\+TH1\+F\+\_\+\+Residual (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{TAGFinal}{, }\item[{const int \&}]{iX}{, }\item[{double}]{YL}{, }\item[{double}]{YH}{, }\item[{double}]{YL\+\_\+\+Rescaled}{, }\item[{double}]{YH\+\_\+\+Rescaled}{, }\item[{double \&}]{Mean}{, }\item[{double \&}]{e\+Mean}{, }\item[{double \&}]{Sigma}{, }\item[{double \&}]{e\+Sigma}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_set_of_tracks_ad4344cec64f95e4eaca83bda33333c3d}\index{SetOfTracks@{SetOfTracks}!GiveMe\_pTH1F\_Residual@{GiveMe\_pTH1F\_Residual}}
+\index{GiveMe\_pTH1F\_Residual@{GiveMe\_pTH1F\_Residual}!SetOfTracks@{SetOfTracks}}
+\doxysubsubsection{\texorpdfstring{GiveMe\_pTH1F\_Residual()}{GiveMe\_pTH1F\_Residual()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{class_set_of_tracks_ad4344cec64f95e4eaca83bda33333c3d} 
+TH1F \texorpdfstring{$\ast$}{*} Set\+Of\+Tracks\+::\+Give\+Me\+\_\+p\+TH1\+F\+\_\+\+Residual (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{TAGFinal}{, }\item[{double \&}]{Mean}{, }\item[{double \&}]{e\+Mean}{, }\item[{double \&}]{Sigma}{, }\item[{double \&}]{e\+Sigma}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_set_of_tracks_a6fa7c9adeb323e111a286c1ad4df8d1e}\index{SetOfTracks@{SetOfTracks}!GiveMe\_pTH1F\_TrackDeltaT@{GiveMe\_pTH1F\_TrackDeltaT}}
+\index{GiveMe\_pTH1F\_TrackDeltaT@{GiveMe\_pTH1F\_TrackDeltaT}!SetOfTracks@{SetOfTracks}}
+\doxysubsubsection{\texorpdfstring{GiveMe\_pTH1F\_TrackDeltaT()}{GiveMe\_pTH1F\_TrackDeltaT()}}
+{\footnotesize\ttfamily \label{class_set_of_tracks_a6fa7c9adeb323e111a286c1ad4df8d1e} 
+TH1F \texorpdfstring{$\ast$}{*} Set\+Of\+Tracks\+::\+Give\+Me\+\_\+p\+TH1\+F\+\_\+\+Track\+DeltaT (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{TAG}{, }\item[{const int \&}]{i\+Col}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_set_of_tracks_a0b5783a21de412165c11a7234de1f8e4}\index{SetOfTracks@{SetOfTracks}!GiveMe\_pTH1F\_YFitCol@{GiveMe\_pTH1F\_YFitCol}}
+\index{GiveMe\_pTH1F\_YFitCol@{GiveMe\_pTH1F\_YFitCol}!SetOfTracks@{SetOfTracks}}
+\doxysubsubsection{\texorpdfstring{GiveMe\_pTH1F\_YFitCol()}{GiveMe\_pTH1F\_YFitCol()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \label{class_set_of_tracks_a0b5783a21de412165c11a7234de1f8e4} 
+TH1F \texorpdfstring{$\ast$}{*} Set\+Of\+Tracks\+::\+Give\+Me\+\_\+p\+TH1\+F\+\_\+\+YFit\+Col (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{TAG}{, }\item[{const int \&}]{i\+YBeam}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_set_of_tracks_a34b31fd6ca8d381f37bff13c314df7ba}\index{SetOfTracks@{SetOfTracks}!GiveMe\_pTH1F\_YFitCol@{GiveMe\_pTH1F\_YFitCol}}
+\index{GiveMe\_pTH1F\_YFitCol@{GiveMe\_pTH1F\_YFitCol}!SetOfTracks@{SetOfTracks}}
+\doxysubsubsection{\texorpdfstring{GiveMe\_pTH1F\_YFitCol()}{GiveMe\_pTH1F\_YFitCol()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \label{class_set_of_tracks_a34b31fd6ca8d381f37bff13c314df7ba} 
+TH1F \texorpdfstring{$\ast$}{*} Set\+Of\+Tracks\+::\+Give\+Me\+\_\+p\+TH1\+F\+\_\+\+YFit\+Col (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{TAG}{, }\item[{const int \&}]{i\+YBeam}{, }\item[{const int \&}]{i\+Col}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_set_of_tracks_aeecef98c8ffacacdbb72f1d417b9e0e0}\index{SetOfTracks@{SetOfTracks}!GiveMe\_pTH1F\_YFitCol@{GiveMe\_pTH1F\_YFitCol}}
+\index{GiveMe\_pTH1F\_YFitCol@{GiveMe\_pTH1F\_YFitCol}!SetOfTracks@{SetOfTracks}}
+\doxysubsubsection{\texorpdfstring{GiveMe\_pTH1F\_YFitCol()}{GiveMe\_pTH1F\_YFitCol()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \label{class_set_of_tracks_aeecef98c8ffacacdbb72f1d417b9e0e0} 
+TH1F \texorpdfstring{$\ast$}{*} Set\+Of\+Tracks\+::\+Give\+Me\+\_\+p\+TH1\+F\+\_\+\+YFit\+Col (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{TAG}{, }\item[{const int \&}]{Nbins}{, }\item[{const double \&}]{Ymin}{, }\item[{const double \&}]{Ymax}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_set_of_tracks_a55a331941e2f322e4ba7b2a66bcf4210}\index{SetOfTracks@{SetOfTracks}!GiveMe\_pTH1F\_YFitCol@{GiveMe\_pTH1F\_YFitCol}}
+\index{GiveMe\_pTH1F\_YFitCol@{GiveMe\_pTH1F\_YFitCol}!SetOfTracks@{SetOfTracks}}
+\doxysubsubsection{\texorpdfstring{GiveMe\_pTH1F\_YFitCol()}{GiveMe\_pTH1F\_YFitCol()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily \label{class_set_of_tracks_a55a331941e2f322e4ba7b2a66bcf4210} 
+TH1F \texorpdfstring{$\ast$}{*} Set\+Of\+Tracks\+::\+Give\+Me\+\_\+p\+TH1\+F\+\_\+\+YFit\+Col (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{TAG}{, }\item[{const int \&}]{Nbins}{, }\item[{const double \&}]{Ymin}{, }\item[{const double \&}]{Ymax}{, }\item[{const int \&}]{i\+Col}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_set_of_tracks_a88af2f458b318cd0af6a7fc22cbf182b}\index{SetOfTracks@{SetOfTracks}!GiveMe\_pTH1F\_YTrackInTracks@{GiveMe\_pTH1F\_YTrackInTracks}}
+\index{GiveMe\_pTH1F\_YTrackInTracks@{GiveMe\_pTH1F\_YTrackInTracks}!SetOfTracks@{SetOfTracks}}
+\doxysubsubsection{\texorpdfstring{GiveMe\_pTH1F\_YTrackInTracks()}{GiveMe\_pTH1F\_YTrackInTracks()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \label{class_set_of_tracks_a88af2f458b318cd0af6a7fc22cbf182b} 
+TH1F \texorpdfstring{$\ast$}{*} Set\+Of\+Tracks\+::\+Give\+Me\+\_\+p\+TH1\+F\+\_\+\+YTrack\+In\+Tracks (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{TAG}{, }\item[{const int \&}]{i\+YBeam}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_set_of_tracks_a6b75197c91d3ac15a3a4596c7e7f2cd1}\index{SetOfTracks@{SetOfTracks}!GiveMe\_pTH1F\_YTrackInTracks@{GiveMe\_pTH1F\_YTrackInTracks}}
+\index{GiveMe\_pTH1F\_YTrackInTracks@{GiveMe\_pTH1F\_YTrackInTracks}!SetOfTracks@{SetOfTracks}}
+\doxysubsubsection{\texorpdfstring{GiveMe\_pTH1F\_YTrackInTracks()}{GiveMe\_pTH1F\_YTrackInTracks()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \label{class_set_of_tracks_a6b75197c91d3ac15a3a4596c7e7f2cd1} 
+TH1F \texorpdfstring{$\ast$}{*} Set\+Of\+Tracks\+::\+Give\+Me\+\_\+p\+TH1\+F\+\_\+\+YTrack\+In\+Tracks (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{TAG}{, }\item[{const int \&}]{i\+YBeam}{, }\item[{const int \&}]{i\+Col}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_set_of_tracks_abbdfe8f75d16977916fde58235896fd1}\index{SetOfTracks@{SetOfTracks}!GiveMe\_pTH1F\_YTrackInTracks@{GiveMe\_pTH1F\_YTrackInTracks}}
+\index{GiveMe\_pTH1F\_YTrackInTracks@{GiveMe\_pTH1F\_YTrackInTracks}!SetOfTracks@{SetOfTracks}}
+\doxysubsubsection{\texorpdfstring{GiveMe\_pTH1F\_YTrackInTracks()}{GiveMe\_pTH1F\_YTrackInTracks()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \label{class_set_of_tracks_abbdfe8f75d16977916fde58235896fd1} 
+TH1F \texorpdfstring{$\ast$}{*} Set\+Of\+Tracks\+::\+Give\+Me\+\_\+p\+TH1\+F\+\_\+\+YTrack\+In\+Tracks (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{TAG}{, }\item[{const int \&}]{Nbins}{, }\item[{const double \&}]{Ymin}{, }\item[{const double \&}]{Ymax}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_set_of_tracks_a818c592795b21d5b83c99ccc164b2365}\index{SetOfTracks@{SetOfTracks}!GiveMe\_pTH1F\_YTrackInTracks@{GiveMe\_pTH1F\_YTrackInTracks}}
+\index{GiveMe\_pTH1F\_YTrackInTracks@{GiveMe\_pTH1F\_YTrackInTracks}!SetOfTracks@{SetOfTracks}}
+\doxysubsubsection{\texorpdfstring{GiveMe\_pTH1F\_YTrackInTracks()}{GiveMe\_pTH1F\_YTrackInTracks()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily \label{class_set_of_tracks_a818c592795b21d5b83c99ccc164b2365} 
+TH1F \texorpdfstring{$\ast$}{*} Set\+Of\+Tracks\+::\+Give\+Me\+\_\+p\+TH1\+F\+\_\+\+YTrack\+In\+Tracks (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{TAG}{, }\item[{const int \&}]{Nbins}{, }\item[{const double \&}]{Ymin}{, }\item[{const double \&}]{Ymax}{, }\item[{const int \&}]{i\+Col}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_set_of_tracks_ad6984fb2fb389a544b1db1646b3881b4}\index{SetOfTracks@{SetOfTracks}!GiveMe\_pTH1F\_YTrackYPadInTracks@{GiveMe\_pTH1F\_YTrackYPadInTracks}}
+\index{GiveMe\_pTH1F\_YTrackYPadInTracks@{GiveMe\_pTH1F\_YTrackYPadInTracks}!SetOfTracks@{SetOfTracks}}
+\doxysubsubsection{\texorpdfstring{GiveMe\_pTH1F\_YTrackYPadInTracks()}{GiveMe\_pTH1F\_YTrackYPadInTracks()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_set_of_tracks_ad6984fb2fb389a544b1db1646b3881b4} 
+TH1F \texorpdfstring{$\ast$}{*} Set\+Of\+Tracks\+::\+Give\+Me\+\_\+p\+TH1\+F\+\_\+\+YTrack\+YPad\+In\+Tracks (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{TAG}{, }\item[{const int \&}]{i\+Col}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_set_of_tracks_a156cb6542333939b2ce83c14e3d6734d}\index{SetOfTracks@{SetOfTracks}!GiveMe\_pTH1F\_YTrackYPadInTracks@{GiveMe\_pTH1F\_YTrackYPadInTracks}}
+\index{GiveMe\_pTH1F\_YTrackYPadInTracks@{GiveMe\_pTH1F\_YTrackYPadInTracks}!SetOfTracks@{SetOfTracks}}
+\doxysubsubsection{\texorpdfstring{GiveMe\_pTH1F\_YTrackYPadInTracks()}{GiveMe\_pTH1F\_YTrackYPadInTracks()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_set_of_tracks_a156cb6542333939b2ce83c14e3d6734d} 
+TH1F \texorpdfstring{$\ast$}{*} Set\+Of\+Tracks\+::\+Give\+Me\+\_\+p\+TH1\+F\+\_\+\+YTrack\+YPad\+In\+Tracks (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{TAG}{, }\item[{const int \&}]{i\+Col}{, }\item[{const int \&}]{Nbins}{, }\item[{const double \&}]{Xmin}{, }\item[{const double \&}]{Xmax}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_set_of_tracks_aecdca325e1e0d9d7d035cd3ea265d940}\index{SetOfTracks@{SetOfTracks}!GiveMe\_pTH1F\_YTrackYPadLeadingInTracks@{GiveMe\_pTH1F\_YTrackYPadLeadingInTracks}}
+\index{GiveMe\_pTH1F\_YTrackYPadLeadingInTracks@{GiveMe\_pTH1F\_YTrackYPadLeadingInTracks}!SetOfTracks@{SetOfTracks}}
+\doxysubsubsection{\texorpdfstring{GiveMe\_pTH1F\_YTrackYPadLeadingInTracks()}{GiveMe\_pTH1F\_YTrackYPadLeadingInTracks()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_set_of_tracks_aecdca325e1e0d9d7d035cd3ea265d940} 
+TH1F \texorpdfstring{$\ast$}{*} Set\+Of\+Tracks\+::\+Give\+Me\+\_\+p\+TH1\+F\+\_\+\+YTrack\+YPad\+Leading\+In\+Tracks (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{TAG}{, }\item[{const int \&}]{i\+Col}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_set_of_tracks_a3928a806616c797c7691f930316f0f64}\index{SetOfTracks@{SetOfTracks}!GiveMe\_pTH1F\_YTrackYPadLeadingInTracks@{GiveMe\_pTH1F\_YTrackYPadLeadingInTracks}}
+\index{GiveMe\_pTH1F\_YTrackYPadLeadingInTracks@{GiveMe\_pTH1F\_YTrackYPadLeadingInTracks}!SetOfTracks@{SetOfTracks}}
+\doxysubsubsection{\texorpdfstring{GiveMe\_pTH1F\_YTrackYPadLeadingInTracks()}{GiveMe\_pTH1F\_YTrackYPadLeadingInTracks()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_set_of_tracks_a3928a806616c797c7691f930316f0f64} 
+TH1F \texorpdfstring{$\ast$}{*} Set\+Of\+Tracks\+::\+Give\+Me\+\_\+p\+TH1\+F\+\_\+\+YTrack\+YPad\+Leading\+In\+Tracks (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{TAG}{, }\item[{const int \&}]{i\+Col}{, }\item[{const int \&}]{Nbins}{, }\item[{const double \&}]{Xmin}{, }\item[{const double \&}]{Xmax}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_set_of_tracks_ab1f6843b11019ed3458654316202e353}\index{SetOfTracks@{SetOfTracks}!Set\_MinimalNberOfEntries@{Set\_MinimalNberOfEntries}}
+\index{Set\_MinimalNberOfEntries@{Set\_MinimalNberOfEntries}!SetOfTracks@{SetOfTracks}}
+\doxysubsubsection{\texorpdfstring{Set\_MinimalNberOfEntries()}{Set\_MinimalNberOfEntries()}}
+{\footnotesize\ttfamily \label{class_set_of_tracks_ab1f6843b11019ed3458654316202e353} 
+void Set\+Of\+Tracks\+::\+Set\+\_\+\+Minimal\+Nber\+Of\+Entries (\begin{DoxyParamCaption}\item[{const int \&}]{Minimal\+Nber\+Of\+Entries}{}\end{DoxyParamCaption})}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Model\+Event/inc/\mbox{\hyperlink{_set_of_tracks_8h}{Set\+Of\+Tracks.\+h}}\item 
+Model\+Event/src/\mbox{\hyperlink{_set_of_tracks_8cxx}{Set\+Of\+Tracks.\+cxx}}\end{DoxyCompactItemize}

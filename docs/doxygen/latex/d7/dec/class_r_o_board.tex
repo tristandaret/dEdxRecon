@@ -1,0 +1,214 @@
+\doxysection{ROBoard Class Reference}
+\hypertarget{class_r_o_board}{}\label{class_r_o_board}\index{ROBoard@{ROBoard}}
+
+
+Abstraction for a read-\/out board grouping pads and providing mapping.  
+
+
+
+
+{\ttfamily \#include $<$ROBoard.\+h$>$}
+
+Inheritance diagram for ROBoard\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{d7/dec/class_r_o_board}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_r_o_board_a4038f0efaae81a40a44c73ae53151a0c}{ROBoard}} (\mbox{\hyperlink{class_model___read_out_geometry}{Model\+\_\+\+Read\+Out\+Geometry}} \texorpdfstring{$\ast$}{*}p\+Model\+\_\+\+Read\+Out\+Geometry, \mbox{\hyperlink{class_model___electronics}{Model\+\_\+\+Electronics}} \texorpdfstring{$\ast$}{*}p\+Model\+\_\+\+Electronics, \mbox{\hyperlink{class_model___charge_i}{Model\+\_\+\+ChargeI}} \texorpdfstring{$\ast$}{*}p\+Model\+\_\+\+ChargeI)
+\item 
+virtual \mbox{\hyperlink{class_r_o_board_a2a75941873b4de222750e1680996e5d2}{\texorpdfstring{$\sim$}{\string~}\+ROBoard}} ()
+\item 
+const \mbox{\hyperlink{class_model___read_out_geometry}{Model\+\_\+\+Read\+Out\+Geometry}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_r_o_board_af4dfe76397f6b4da168e296c063712c5}{Get\+\_\+\+Model\+\_\+\+Read\+Out\+Geometry}} ()
+\item 
+const \mbox{\hyperlink{class_model___electronics}{Model\+\_\+\+Electronics}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_r_o_board_ac70b3b08f7b3018f489d7410e01d7ddc}{Get\+\_\+\+Model\+\_\+\+Electronics}} ()
+\item 
+const \mbox{\hyperlink{class_model___charge_i}{Model\+\_\+\+ChargeI}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_r_o_board_a4c79a276420d86f392cf35d8cde359e6}{Get\+\_\+\+Model\+\_\+\+ChargeI}} ()
+\item 
+virtual void \mbox{\hyperlink{class_r_o_board_a161b281667b8f9ae8e098b6734351825}{Add\+\_\+\+Pad}} (\mbox{\hyperlink{class_pad}{Pad}} \texorpdfstring{$\ast$}{*}p\+Pad)
+\item 
+int \mbox{\hyperlink{class_r_o_board_a9c947de179e82b226b058e3f2ce39ef0}{Get\+\_\+\+Nber\+Of\+Pads}} () const
+\item 
+\mbox{\hyperlink{class_pad}{Pad}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_r_o_board_a0289df3558a579e299413ed628d18bac}{Get\+\_\+\+Pad}} (const int \&Index1D)
+\item 
+int \mbox{\hyperlink{class_r_o_board_a94c40c94ac6a10067e01934685599fb1}{Get\+\_\+\+Is\+This\+Pad\+Existing}} (const int \&iX, const int \&iY) const
+\item 
+\mbox{\hyperlink{class_pad}{Pad}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_r_o_board_a998353d12371930ea6bd61926e84aa52}{Get\+\_\+\+Pad}} (const int \&iX, const int \&iY)
+\item 
+\mbox{\hyperlink{class_pad}{Pad}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_r_o_board_a497a171a93a6c76726f9528a2adfc3d9}{Get\+\_\+\+Pad}} (\mbox{\hyperlink{class_pad}{Pad}} \texorpdfstring{$\ast$}{*}p\+Pad)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{class_r_o_board_a378b1162655244151750f8448a91993c}{Get\+Linear\+Index}} (const int \&iX, const int \&iY) const
+\item 
+void \mbox{\hyperlink{class_r_o_board_af012c4e885c92b123ff6ecf543ee09f8}{Ini\+\_\+\+Models}} (\mbox{\hyperlink{class_model___read_out_geometry}{Model\+\_\+\+Read\+Out\+Geometry}} \texorpdfstring{$\ast$}{*}p\+Model\+\_\+\+Read\+Out\+Geometry, \mbox{\hyperlink{class_model___electronics}{Model\+\_\+\+Electronics}} \texorpdfstring{$\ast$}{*}p\+Model\+\_\+\+Electronics, \mbox{\hyperlink{class_model___charge_i}{Model\+\_\+\+ChargeI}} \texorpdfstring{$\ast$}{*}p\+Model\+\_\+\+ChargeI)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+short int \mbox{\hyperlink{class_r_o_board_ac92b16da883cb91f819b257c986aef07}{m\+\_\+\+Nx}}
+\item 
+short int \mbox{\hyperlink{class_r_o_board_a8a15430d177014fda6142c2d2ca91c9e}{m\+\_\+\+Ny}}
+\item 
+std\+::vector$<$ int $>$ \mbox{\hyperlink{class_r_o_board_a60dd197aa2e47f0720d40a07925cb00e}{V\+\_\+\+Exis\+Flag2D}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{class_pad}{Pad}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_r_o_board_a7845bafeceeb873bdac7056ca4fe8706}{V\+\_\+\+Pad}}
+\item 
+\mbox{\hyperlink{class_model___read_out_geometry}{Model\+\_\+\+Read\+Out\+Geometry}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_r_o_board_a8f4bc41090c2983b46e5d4d783db6e42}{p\+\_\+\+Model\+\_\+\+Read\+Out\+Geometry}}
+\item 
+\mbox{\hyperlink{class_model___electronics}{Model\+\_\+\+Electronics}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_r_o_board_addec0074851261ae2f5c878ad5e03912}{p\+\_\+\+Model\+\_\+\+Electronics}}
+\item 
+\mbox{\hyperlink{class_model___charge_i}{Model\+\_\+\+ChargeI}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_r_o_board_a3fb3be0e97ca357960fef270a0a176d5}{p\+\_\+\+Model\+\_\+\+ChargeI}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Abstraction for a read-\/out board grouping pads and providing mapping. 
+
+\label{doc-constructors}
+\Hypertarget{class_r_o_board_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_r_o_board_a4038f0efaae81a40a44c73ae53151a0c}\index{ROBoard@{ROBoard}!ROBoard@{ROBoard}}
+\index{ROBoard@{ROBoard}!ROBoard@{ROBoard}}
+\doxysubsubsection{\texorpdfstring{ROBoard()}{ROBoard()}}
+{\footnotesize\ttfamily \label{class_r_o_board_a4038f0efaae81a40a44c73ae53151a0c} 
+ROBoard\+::\+ROBoard (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_model___read_out_geometry}{Model\+\_\+\+Read\+Out\+Geometry}} \texorpdfstring{$\ast$}{*}}]{p\+Model\+\_\+\+Read\+Out\+Geometry}{, }\item[{\mbox{\hyperlink{class_model___electronics}{Model\+\_\+\+Electronics}} \texorpdfstring{$\ast$}{*}}]{p\+Model\+\_\+\+Electronics}{, }\item[{\mbox{\hyperlink{class_model___charge_i}{Model\+\_\+\+ChargeI}} \texorpdfstring{$\ast$}{*}}]{p\+Model\+\_\+\+ChargeI}{}\end{DoxyParamCaption})}
+
+Constructor \Hypertarget{class_r_o_board_a2a75941873b4de222750e1680996e5d2}\index{ROBoard@{ROBoard}!````~ROBoard@{\texorpdfstring{$\sim$}{\string~}ROBoard}}
+\index{````~ROBoard@{\texorpdfstring{$\sim$}{\string~}ROBoard}!ROBoard@{ROBoard}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}ROBoard()}{\string~ROBoard()}}
+{\footnotesize\ttfamily \label{class_r_o_board_a2a75941873b4de222750e1680996e5d2} 
+ROBoard\+::\texorpdfstring{$\sim$}{\string~}\+ROBoard (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_r_o_board_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_r_o_board_a161b281667b8f9ae8e098b6734351825}\index{ROBoard@{ROBoard}!Add\_Pad@{Add\_Pad}}
+\index{Add\_Pad@{Add\_Pad}!ROBoard@{ROBoard}}
+\doxysubsubsection{\texorpdfstring{Add\_Pad()}{Add\_Pad()}}
+{\footnotesize\ttfamily \label{class_r_o_board_a161b281667b8f9ae8e098b6734351825} 
+void ROBoard\+::\+Add\+\_\+\+Pad (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_pad}{Pad}} \texorpdfstring{$\ast$}{*}}]{p\+Pad}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Reimplemented in \mbox{\hyperlink{class_module_a02ec7ec93722c96ebef6921bc1553880}{Module}}.
+
+\Hypertarget{class_r_o_board_a94c40c94ac6a10067e01934685599fb1}\index{ROBoard@{ROBoard}!Get\_IsThisPadExisting@{Get\_IsThisPadExisting}}
+\index{Get\_IsThisPadExisting@{Get\_IsThisPadExisting}!ROBoard@{ROBoard}}
+\doxysubsubsection{\texorpdfstring{Get\_IsThisPadExisting()}{Get\_IsThisPadExisting()}}
+{\footnotesize\ttfamily \label{class_r_o_board_a94c40c94ac6a10067e01934685599fb1} 
+int ROBoard\+::\+Get\+\_\+\+Is\+This\+Pad\+Existing (\begin{DoxyParamCaption}\item[{const int \&}]{iX}{, }\item[{const int \&}]{iY}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_r_o_board_a4c79a276420d86f392cf35d8cde359e6}\index{ROBoard@{ROBoard}!Get\_Model\_ChargeI@{Get\_Model\_ChargeI}}
+\index{Get\_Model\_ChargeI@{Get\_Model\_ChargeI}!ROBoard@{ROBoard}}
+\doxysubsubsection{\texorpdfstring{Get\_Model\_ChargeI()}{Get\_Model\_ChargeI()}}
+{\footnotesize\ttfamily \label{class_r_o_board_a4c79a276420d86f392cf35d8cde359e6} 
+const \mbox{\hyperlink{class_model___charge_i}{Model\+\_\+\+ChargeI}} \texorpdfstring{$\ast$}{*} ROBoard\+::\+Get\+\_\+\+Model\+\_\+\+ChargeI (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_r_o_board_ac70b3b08f7b3018f489d7410e01d7ddc}\index{ROBoard@{ROBoard}!Get\_Model\_Electronics@{Get\_Model\_Electronics}}
+\index{Get\_Model\_Electronics@{Get\_Model\_Electronics}!ROBoard@{ROBoard}}
+\doxysubsubsection{\texorpdfstring{Get\_Model\_Electronics()}{Get\_Model\_Electronics()}}
+{\footnotesize\ttfamily \label{class_r_o_board_ac70b3b08f7b3018f489d7410e01d7ddc} 
+const \mbox{\hyperlink{class_model___electronics}{Model\+\_\+\+Electronics}} \texorpdfstring{$\ast$}{*} ROBoard\+::\+Get\+\_\+\+Model\+\_\+\+Electronics (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_r_o_board_af4dfe76397f6b4da168e296c063712c5}\index{ROBoard@{ROBoard}!Get\_Model\_ReadOutGeometry@{Get\_Model\_ReadOutGeometry}}
+\index{Get\_Model\_ReadOutGeometry@{Get\_Model\_ReadOutGeometry}!ROBoard@{ROBoard}}
+\doxysubsubsection{\texorpdfstring{Get\_Model\_ReadOutGeometry()}{Get\_Model\_ReadOutGeometry()}}
+{\footnotesize\ttfamily \label{class_r_o_board_af4dfe76397f6b4da168e296c063712c5} 
+const \mbox{\hyperlink{class_model___read_out_geometry}{Model\+\_\+\+Read\+Out\+Geometry}} \texorpdfstring{$\ast$}{*} ROBoard\+::\+Get\+\_\+\+Model\+\_\+\+Read\+Out\+Geometry (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_r_o_board_a9c947de179e82b226b058e3f2ce39ef0}\index{ROBoard@{ROBoard}!Get\_NberOfPads@{Get\_NberOfPads}}
+\index{Get\_NberOfPads@{Get\_NberOfPads}!ROBoard@{ROBoard}}
+\doxysubsubsection{\texorpdfstring{Get\_NberOfPads()}{Get\_NberOfPads()}}
+{\footnotesize\ttfamily \label{class_r_o_board_a9c947de179e82b226b058e3f2ce39ef0} 
+int ROBoard\+::\+Get\+\_\+\+Nber\+Of\+Pads (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_r_o_board_a0289df3558a579e299413ed628d18bac}\index{ROBoard@{ROBoard}!Get\_Pad@{Get\_Pad}}
+\index{Get\_Pad@{Get\_Pad}!ROBoard@{ROBoard}}
+\doxysubsubsection{\texorpdfstring{Get\_Pad()}{Get\_Pad()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{class_r_o_board_a0289df3558a579e299413ed628d18bac} 
+\mbox{\hyperlink{class_pad}{Pad}} \texorpdfstring{$\ast$}{*} ROBoard\+::\+Get\+\_\+\+Pad (\begin{DoxyParamCaption}\item[{const int \&}]{Index1D}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_r_o_board_a998353d12371930ea6bd61926e84aa52}\index{ROBoard@{ROBoard}!Get\_Pad@{Get\_Pad}}
+\index{Get\_Pad@{Get\_Pad}!ROBoard@{ROBoard}}
+\doxysubsubsection{\texorpdfstring{Get\_Pad()}{Get\_Pad()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{class_r_o_board_a998353d12371930ea6bd61926e84aa52} 
+\mbox{\hyperlink{class_pad}{Pad}} \texorpdfstring{$\ast$}{*} ROBoard\+::\+Get\+\_\+\+Pad (\begin{DoxyParamCaption}\item[{const int \&}]{iX}{, }\item[{const int \&}]{iY}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_r_o_board_a497a171a93a6c76726f9528a2adfc3d9}\index{ROBoard@{ROBoard}!Get\_Pad@{Get\_Pad}}
+\index{Get\_Pad@{Get\_Pad}!ROBoard@{ROBoard}}
+\doxysubsubsection{\texorpdfstring{Get\_Pad()}{Get\_Pad()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{class_r_o_board_a497a171a93a6c76726f9528a2adfc3d9} 
+\mbox{\hyperlink{class_pad}{Pad}} \texorpdfstring{$\ast$}{*} ROBoard\+::\+Get\+\_\+\+Pad (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_pad}{Pad}} \texorpdfstring{$\ast$}{*}}]{p\+Pad}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_r_o_board_a378b1162655244151750f8448a91993c}\index{ROBoard@{ROBoard}!GetLinearIndex@{GetLinearIndex}}
+\index{GetLinearIndex@{GetLinearIndex}!ROBoard@{ROBoard}}
+\doxysubsubsection{\texorpdfstring{GetLinearIndex()}{GetLinearIndex()}}
+{\footnotesize\ttfamily \label{class_r_o_board_a378b1162655244151750f8448a91993c} 
+int ROBoard\+::\+Get\+Linear\+Index (\begin{DoxyParamCaption}\item[{const int \&}]{iX}{, }\item[{const int \&}]{iY}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_r_o_board_af012c4e885c92b123ff6ecf543ee09f8}\index{ROBoard@{ROBoard}!Ini\_Models@{Ini\_Models}}
+\index{Ini\_Models@{Ini\_Models}!ROBoard@{ROBoard}}
+\doxysubsubsection{\texorpdfstring{Ini\_Models()}{Ini\_Models()}}
+{\footnotesize\ttfamily \label{class_r_o_board_af012c4e885c92b123ff6ecf543ee09f8} 
+void ROBoard\+::\+Ini\+\_\+\+Models (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_model___read_out_geometry}{Model\+\_\+\+Read\+Out\+Geometry}} \texorpdfstring{$\ast$}{*}}]{p\+Model\+\_\+\+Read\+Out\+Geometry}{, }\item[{\mbox{\hyperlink{class_model___electronics}{Model\+\_\+\+Electronics}} \texorpdfstring{$\ast$}{*}}]{p\+Model\+\_\+\+Electronics}{, }\item[{\mbox{\hyperlink{class_model___charge_i}{Model\+\_\+\+ChargeI}} \texorpdfstring{$\ast$}{*}}]{p\+Model\+\_\+\+ChargeI}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{class_r_o_board_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_r_o_board_ac92b16da883cb91f819b257c986aef07}\index{ROBoard@{ROBoard}!m\_Nx@{m\_Nx}}
+\index{m\_Nx@{m\_Nx}!ROBoard@{ROBoard}}
+\doxysubsubsection{\texorpdfstring{m\_Nx}{m\_Nx}}
+{\footnotesize\ttfamily \label{class_r_o_board_ac92b16da883cb91f819b257c986aef07} 
+short int ROBoard\+::m\+\_\+\+Nx\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_r_o_board_a8a15430d177014fda6142c2d2ca91c9e}\index{ROBoard@{ROBoard}!m\_Ny@{m\_Ny}}
+\index{m\_Ny@{m\_Ny}!ROBoard@{ROBoard}}
+\doxysubsubsection{\texorpdfstring{m\_Ny}{m\_Ny}}
+{\footnotesize\ttfamily \label{class_r_o_board_a8a15430d177014fda6142c2d2ca91c9e} 
+short int ROBoard\+::m\+\_\+\+Ny\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_r_o_board_a3fb3be0e97ca357960fef270a0a176d5}\index{ROBoard@{ROBoard}!p\_Model\_ChargeI@{p\_Model\_ChargeI}}
+\index{p\_Model\_ChargeI@{p\_Model\_ChargeI}!ROBoard@{ROBoard}}
+\doxysubsubsection{\texorpdfstring{p\_Model\_ChargeI}{p\_Model\_ChargeI}}
+{\footnotesize\ttfamily \label{class_r_o_board_a3fb3be0e97ca357960fef270a0a176d5} 
+\mbox{\hyperlink{class_model___charge_i}{Model\+\_\+\+ChargeI}}\texorpdfstring{$\ast$}{*} ROBoard\+::p\+\_\+\+Model\+\_\+\+ChargeI\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_r_o_board_addec0074851261ae2f5c878ad5e03912}\index{ROBoard@{ROBoard}!p\_Model\_Electronics@{p\_Model\_Electronics}}
+\index{p\_Model\_Electronics@{p\_Model\_Electronics}!ROBoard@{ROBoard}}
+\doxysubsubsection{\texorpdfstring{p\_Model\_Electronics}{p\_Model\_Electronics}}
+{\footnotesize\ttfamily \label{class_r_o_board_addec0074851261ae2f5c878ad5e03912} 
+\mbox{\hyperlink{class_model___electronics}{Model\+\_\+\+Electronics}}\texorpdfstring{$\ast$}{*} ROBoard\+::p\+\_\+\+Model\+\_\+\+Electronics\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_r_o_board_a8f4bc41090c2983b46e5d4d783db6e42}\index{ROBoard@{ROBoard}!p\_Model\_ReadOutGeometry@{p\_Model\_ReadOutGeometry}}
+\index{p\_Model\_ReadOutGeometry@{p\_Model\_ReadOutGeometry}!ROBoard@{ROBoard}}
+\doxysubsubsection{\texorpdfstring{p\_Model\_ReadOutGeometry}{p\_Model\_ReadOutGeometry}}
+{\footnotesize\ttfamily \label{class_r_o_board_a8f4bc41090c2983b46e5d4d783db6e42} 
+\mbox{\hyperlink{class_model___read_out_geometry}{Model\+\_\+\+Read\+Out\+Geometry}}\texorpdfstring{$\ast$}{*} ROBoard\+::p\+\_\+\+Model\+\_\+\+Read\+Out\+Geometry\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_r_o_board_a60dd197aa2e47f0720d40a07925cb00e}\index{ROBoard@{ROBoard}!V\_ExisFlag2D@{V\_ExisFlag2D}}
+\index{V\_ExisFlag2D@{V\_ExisFlag2D}!ROBoard@{ROBoard}}
+\doxysubsubsection{\texorpdfstring{V\_ExisFlag2D}{V\_ExisFlag2D}}
+{\footnotesize\ttfamily \label{class_r_o_board_a60dd197aa2e47f0720d40a07925cb00e} 
+std\+::vector$<$int$>$ ROBoard\+::\+V\+\_\+\+Exis\+Flag2D\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_r_o_board_a7845bafeceeb873bdac7056ca4fe8706}\index{ROBoard@{ROBoard}!V\_Pad@{V\_Pad}}
+\index{V\_Pad@{V\_Pad}!ROBoard@{ROBoard}}
+\doxysubsubsection{\texorpdfstring{V\_Pad}{V\_Pad}}
+{\footnotesize\ttfamily \label{class_r_o_board_a7845bafeceeb873bdac7056ca4fe8706} 
+std\+::vector$<$\mbox{\hyperlink{class_pad}{Pad}} \texorpdfstring{$\ast$}{*}$>$ ROBoard\+::\+V\+\_\+\+Pad\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Model\+Event/inc/\mbox{\hyperlink{_r_o_board_8h}{ROBoard.\+h}}\item 
+Model\+Event/src/\mbox{\hyperlink{_r_o_board_8cxx}{ROBoard.\+cxx}}\end{DoxyCompactItemize}

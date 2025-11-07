@@ -1,0 +1,72 @@
+\doxysection{Fitters/inc/\+Track\+Recon.h File Reference}
+\hypertarget{_track_recon_8h}{}\label{_track_recon_8h}\index{Fitters/inc/TrackRecon.h@{Fitters/inc/TrackRecon.h}}
+
+
+Declarations for track reconstruction utilities and helpers.  
+
+
+{\ttfamily \#include "{}Misc.\+h"{}}\newline
+{\ttfamily \#include "{}Sample.\+h"{}}\newline
+{\ttfamily \#include "{}Track\+Fitter.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_track_recon_8h_af218c0769742e1597913ca814518ce31}{Track\+Recon}} (\mbox{\hyperlink{class_sample}{Sample}} \&a\+Sample, const int \&Module\+Nber, const int \&Nber\+Of\+Parameters=3)
+\begin{DoxyCompactList}\small\item\em Run track reconstruction over a sample. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{_track_recon_8h_aa5f704023ee95f5f2547b1b9ed617b2c}{Track\+Recon\+\_\+\+Event}} (\mbox{\hyperlink{class_track_fitter}{Track\+Fitter}} \&a\+Track\+Fitter, \mbox{\hyperlink{class_event}{Event}} \texorpdfstring{$\ast$}{*}p\+Event, const int \&Module\+Nber, const int \&Nber\+Of\+Parameters=3)
+\begin{DoxyCompactList}\small\item\em Run track reconstruction for a single event using a \doxylink{class_track_fitter}{Track\+Fitter}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Declarations for track reconstruction utilities and helpers. 
+
+This header exposes the Track\+Recon top-\/level functions that run reconstruction over a \doxylink{class_sample}{Sample} or an \doxylink{class_event}{Event} using a \doxylink{class_track_fitter}{Track\+Fitter}. Implementation is in \doxylink{_track_recon_8cxx}{Track\+Recon.\+cxx}.
+
+The implementation orchestrates fitting over Samples and Events and uses the \doxylink{class_track_fitter}{Track\+Fitter} API to run per-\/track minimisations. It contains the top-\/level control loops that increment fit/failure counters and report simple summaries after processing. 
+
+\label{doc-func-members}
+\Hypertarget{_track_recon_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_track_recon_8h_af218c0769742e1597913ca814518ce31}\index{TrackRecon.h@{TrackRecon.h}!TrackRecon@{TrackRecon}}
+\index{TrackRecon@{TrackRecon}!TrackRecon.h@{TrackRecon.h}}
+\doxysubsubsection{\texorpdfstring{TrackRecon()}{TrackRecon()}}
+{\footnotesize\ttfamily \label{_track_recon_8h_af218c0769742e1597913ca814518ce31} 
+void Track\+Recon (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_sample}{Sample}} \&}]{a\+Sample}{, }\item[{const int \&}]{Module\+Nber}{, }\item[{const int \&}]{Nber\+Of\+Parameters}{ = {\ttfamily 3}}\end{DoxyParamCaption})}
+
+
+
+Run track reconstruction over a sample. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Sample} & reference to the input \doxylink{class_sample}{Sample} \\
+\hline
+{\em Module\+Nber} & module index \\
+\hline
+{\em Nber\+Of\+Parameters} & number of fit parameters (default\+: 3) \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_track_recon_8h_aa5f704023ee95f5f2547b1b9ed617b2c}\index{TrackRecon.h@{TrackRecon.h}!TrackRecon\_Event@{TrackRecon\_Event}}
+\index{TrackRecon\_Event@{TrackRecon\_Event}!TrackRecon.h@{TrackRecon.h}}
+\doxysubsubsection{\texorpdfstring{TrackRecon\_Event()}{TrackRecon\_Event()}}
+{\footnotesize\ttfamily \label{_track_recon_8h_aa5f704023ee95f5f2547b1b9ed617b2c} 
+int Track\+Recon\+\_\+\+Event (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_track_fitter}{Track\+Fitter}} \&}]{a\+Track\+Fitter}{, }\item[{\mbox{\hyperlink{class_event}{Event}} \texorpdfstring{$\ast$}{*}}]{p\+Event}{, }\item[{const int \&}]{Module\+Nber}{, }\item[{const int \&}]{Nber\+Of\+Parameters}{ = {\ttfamily 3}}\end{DoxyParamCaption})}
+
+
+
+Run track reconstruction for a single event using a \doxylink{class_track_fitter}{Track\+Fitter}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Track\+Fitter} & reference to an existing \doxylink{class_track_fitter}{Track\+Fitter} instance \\
+\hline
+{\em p\+Event} & pointer to the \doxylink{class_event}{Event} to process \\
+\hline
+{\em Module\+Nber} & module index \\
+\hline
+{\em Nber\+Of\+Parameters} & number of fit parameters (default\+: 3) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+integer status (0 on success) 
+\end{DoxyReturn}

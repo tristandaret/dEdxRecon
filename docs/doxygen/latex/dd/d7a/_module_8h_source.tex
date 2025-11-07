@@ -1,0 +1,80 @@
+\doxysection{Module.\+h}
+\hypertarget{_module_8h_source}{}\label{_module_8h_source}\index{ModelEvent/inc/Module.h@{ModelEvent/inc/Module.h}}
+\mbox{\hyperlink{_module_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#ifndef\ Module\_H}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ Module\_H}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_misc_8h}{Misc.h}}"{}}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_cluster_8h}{Cluster.h}}"{}}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_pad_8h}{Pad.h}}"{}}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_track_8h}{Track.h}}"{}}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_r_o_board_8h}{ROBoard.h}}"{}}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_model___charge_i_8h}{Model\_ChargeI.h}}"{}}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_model___electronics_8h}{Model\_Electronics.h}}"{}}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_model___read_out_geometry_8h}{Model\_ReadOutGeometry.h}}"{}}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00024\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_module_aad3fabbf0851cc1431bb3c945dc65543}{Module}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_r_o_board_a4038f0efaae81a40a44c73ae53151a0c}{ROBoard}}\ \{}
+\DoxyCodeLine{00025\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00027\ \ \ \mbox{\hyperlink{class_module_aad3fabbf0851cc1431bb3c945dc65543}{Module}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&EventNber,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&EntryNber,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&ModuleNber,}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_model___read_out_geometry}{Model\_ReadOutGeometry}}\ *pModel\_ReadOutGeometry,}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_model___electronics}{Model\_Electronics}}\ *pModel\_Electronics,\ \mbox{\hyperlink{class_model___charge_i}{Model\_ChargeI}}\ *pModel\_ChargeI);}
+\DoxyCodeLine{00030\ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_module_a7c9d9c096786d127590fdd8aa2b7d681}{\string~Module}}();}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/IDs-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\///}}
+\DoxyCodeLine{00033\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_module_a733e142dba6e0812d9a16707c962a9f3}{Get\_EventNber}}()\ \textcolor{keyword}{const};\ \ \textcolor{comment}{//\ Get\ Event\ nber}}
+\DoxyCodeLine{00034\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_module_a7ba57cebed6e38131d2c700dc1c3c0d8}{Get\_EntryNber}}()\ \textcolor{keyword}{const};\ \ \textcolor{comment}{//\ Get\ Entry\ nber}}
+\DoxyCodeLine{00035\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_module_a78bd1dfc7e8c839b84dcbffe0db09d92}{Get\_ModuleNber}}()\ \textcolor{keyword}{const};\ \textcolor{comment}{//\ Get\ Module\ nber}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Prints-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\///}}
+\DoxyCodeLine{00038\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_module_a145d5b2a547c5caf5e17f1e28dcf5ea0}{SmallDump}}()\ \textcolor{keyword}{const};\ \textcolor{comment}{//\ Small\ dump}}
+\DoxyCodeLine{00039\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_module_a2df1453609389b6ccfdc58bc0d54c48a}{WriteOut}}()\ \textcolor{keyword}{const};\ \ \textcolor{comment}{//\ Big\ dump}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Module\ Validity-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\///}}
+\DoxyCodeLine{00042\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_module_aaae0c1b37704206782134a487912554c}{IsValid}}()\ \textcolor{keyword}{const};\ \textcolor{comment}{//\ Get\ validation\ status\ of\ the\ Module}}
+\DoxyCodeLine{00043\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_module_a056be6fad1b886cd014b420640aaaf5e}{Validate}}();\ \ \ \ \ \textcolor{comment}{//\ Validate\ the\ Module}}
+\DoxyCodeLine{00044\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_module_afe45815effec52ec7c10631396ea591f}{Invalidate}}();\ \ \ \textcolor{comment}{//\ Invalidate\ the\ Module}}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Pad\ addition-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\///}}
+\DoxyCodeLine{00047\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_module_a02ec7ec93722c96ebef6921bc1553880}{Add\_Pad}}(\mbox{\hyperlink{class_pad}{Pad}}\ *pPad);\ \textcolor{comment}{//\ Add\ a\ pad}}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Clusters\ Addition-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\///}}
+\DoxyCodeLine{00050\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_module_aa5d6dc7649368312ab047d32808b5007}{Clear\_Clusters}}();\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Clear\ existing\ clusters\ set}}
+\DoxyCodeLine{00051\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_module_abfa7ecc5786630ba628a019a3a54736c}{Add\_Cluster}}(\mbox{\hyperlink{class_cluster}{Cluster}}\ *pCluster);\ \textcolor{comment}{//\ Add\ a\ cluster}}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Clusters\ Access-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\///}}
+\DoxyCodeLine{00054\ \ \ std::vector<Cluster\ *>\ \mbox{\hyperlink{class_module_ad49a4a44a5de5472c7bcc45f114674be}{GiveMe\_Clusters\_ForThisModule}}();}
+\DoxyCodeLine{00055\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_module_a47bbf0457c8a7895c3973640976e84bb}{Get\_NberOfCluster}}()\ \textcolor{keyword}{const};\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Size\ of\ Cluster\ set}}
+\DoxyCodeLine{00056\ \ \ \mbox{\hyperlink{class_cluster}{Cluster}}\ *\mbox{\hyperlink{class_module_ac41f5c11e23e66ef967b590e4675ec37}{Get\_Cluster}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&Index1D);\ \textcolor{comment}{//\ Get\ Cluster}}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_module_a4a1d037f0679ae67d218659326589bda}{ReplaceClusters}}(}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ std::vector<Cluster\ *>\ \&V\_Cluster);\ \textcolor{comment}{//\ Replace\ existing\ clusters\ set}}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \mbox{\hyperlink{class_cluster}{Cluster}}\ *\mbox{\hyperlink{class_module_a1cce94e6b7d3fcd1410de6535a47a7a9}{Get\_Cluster\_Copy}}(\mbox{\hyperlink{class_cluster}{Cluster}}\ *pCluster);\ \textcolor{comment}{//\ Get\ copy\ of\ the\ input\ cluster}}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Track-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\///}}
+\DoxyCodeLine{00064\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_track}{Track}}\ *\mbox{\hyperlink{class_module_ad02173b48a10595542d5af61bdb595c6}{GiveMe\_ModuleTrack}}();}
+\DoxyCodeLine{00065\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_module_ad15311ef70eca0fc49301041af81f8ea}{Set\_ModuleTrack}}(\mbox{\hyperlink{class_track}{Track}}\ *pTrack);\ \textcolor{comment}{//\ Ownership\ is\ passed\ to\ the\ Module}}
+\DoxyCodeLine{00066\ \ \ \mbox{\hyperlink{class_track}{Track}}\ *\mbox{\hyperlink{class_module_ab04375d8131eada52d1dd5f6ffac21eb}{GiveMe\_AnUnfittedTrack}}();\ \ \ \ \ \textcolor{comment}{//\ Ownership\ is\ passed\ to\ the\ user}}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Data\ Members-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\///}}
+\DoxyCodeLine{00069\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00070\ \ \ \textcolor{keywordtype}{short}\ \textcolor{keywordtype}{int}\ m\_IsValid\ =\ 1;}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \ \ \textcolor{keywordtype}{int}\ m\_EventNber;}
+\DoxyCodeLine{00073\ \ \ \textcolor{keywordtype}{int}\ m\_EntryNber;}
+\DoxyCodeLine{00074\ \ \ \textcolor{keywordtype}{short}\ \textcolor{keywordtype}{int}\ m\_ModuleNber;}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \ \ \textcolor{keywordtype}{short}\ \textcolor{keywordtype}{int}\ m\_NberOfClusters;}
+\DoxyCodeLine{00077\ \ \ std::vector<Cluster\ *>\ V\_Cluster;}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \mbox{\hyperlink{class_track}{Track}}\ *p\_TrackOfTheModule;}
+\DoxyCodeLine{00080\ \};}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

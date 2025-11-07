@@ -1,0 +1,1351 @@
+\@ifundefined {etoctocstyle}{\let \etoc@startlocaltoc \@gobble \let \etoc@settocdepth \@gobble \let \etoc@depthtag \@gobble \let \etoc@setlocaltop \@gobble }{}
+\contentsline {chapter}{\numberline {1}Directory Hierarchy}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Directories}{1}{section.1.1}%
+\contentsline {chapter}{\numberline {2}Namespace Index}{5}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Namespace List}{5}{section.2.1}%
+\contentsline {chapter}{\numberline {3}Hierarchical Index}{7}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Class Hierarchy}{7}{section.3.1}%
+\contentsline {chapter}{\numberline {4}Class Index}{9}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Class List}{9}{section.4.1}%
+\contentsline {chapter}{\numberline {5}File Index}{11}{chapter.5}%
+\contentsline {section}{\numberline {5.1}File List}{11}{section.5.1}%
+\contentsline {chapter}{\numberline {6}Directory Documentation}{15}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Apps Directory Reference}{15}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Fitters Directory Reference}{15}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Fitters/inc Directory Reference}{15}{section.6.3}%
+\contentsline {section}{\numberline {6.4}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Event/inc Directory Reference}{16}{section.6.4}%
+\contentsline {section}{\numberline {6.5}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Signal/inc Directory Reference}{16}{section.6.5}%
+\contentsline {section}{\numberline {6.6}Reconstruction/inc Directory Reference}{17}{section.6.6}%
+\contentsline {section}{\numberline {6.7}Uploader/inc Directory Reference}{17}{section.6.7}%
+\contentsline {section}{\numberline {6.8}Utilities/inc Directory Reference}{18}{section.6.8}%
+\contentsline {section}{\numberline {6.9}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Event Directory Reference}{18}{section.6.9}%
+\contentsline {section}{\numberline {6.10}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Signal Directory Reference}{18}{section.6.10}%
+\contentsline {section}{\numberline {6.11}Reconstruction Directory Reference}{18}{section.6.11}%
+\contentsline {section}{\numberline {6.12}Fitters/src Directory Reference}{18}{section.6.12}%
+\contentsline {section}{\numberline {6.13}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Event/src Directory Reference}{19}{section.6.13}%
+\contentsline {section}{\numberline {6.14}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Signal/src Directory Reference}{19}{section.6.14}%
+\contentsline {section}{\numberline {6.15}Reconstruction/src Directory Reference}{19}{section.6.15}%
+\contentsline {section}{\numberline {6.16}Uploader/src Directory Reference}{19}{section.6.16}%
+\contentsline {section}{\numberline {6.17}Utilities/src Directory Reference}{20}{section.6.17}%
+\contentsline {section}{\numberline {6.18}Uploader Directory Reference}{20}{section.6.18}%
+\contentsline {section}{\numberline {6.19}Utilities Directory Reference}{20}{section.6.19}%
+\contentsline {chapter}{\numberline {7}Namespace Documentation}{21}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Reconstruction Namespace Reference}{21}{section.7.1}%
+\contentsline {subsection}{\numberline {7.1.1}Detailed Description}{23}{subsection.7.1.1}%
+\contentsline {subsection}{\numberline {7.1.2}$\ast $ @file d\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Edx.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{23}{subsection.7.1.2}%
+\contentsline {subsection}{\numberline {7.1.3}$\ast $}{23}{subsection.7.1.3}%
+\contentsline {subsection}{\numberline {7.1.4}$\ast $ Contains declarations for data structures, helper classes and functions}{23}{subsection.7.1.4}%
+\contentsline {subsection}{\numberline {7.1.5}$\ast $ used to compute energy loss estimates used by the reconstruction pipeline.}{23}{subsection.7.1.5}%
+\contentsline {subsection}{\numberline {7.1.6}$\ast $}{23}{subsection.7.1.6}%
+\contentsline {subsection}{\numberline {7.1.7}$\ast $}{23}{subsection.7.1.7}%
+\contentsline {subsection}{\numberline {7.1.8}$\ast $ The implementation (d\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Edx.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cxx) contains the core numerical routines and}{23}{subsection.7.1.8}%
+\contentsline {subsection}{\numberline {7.1.9}$\ast $ algorithms used to compute energy loss per unit length from reconstructed}{23}{subsection.7.1.9}%
+\contentsline {subsection}{\numberline {7.1.10}$\ast $ cluster and pad information, together with helper utilities for particle}{23}{subsection.7.1.10}%
+\contentsline {subsection}{\numberline {7.1.11}$\ast $ identification. Interfaces for computing WF and XP estimates, Giga\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Waveform}{23}{subsection.7.1.11}%
+\contentsline {subsection}{\numberline {7.1.12}$\ast $ helpers and truncated estimators are declared here; heavy numerical work}{23}{subsection.7.1.12}%
+\contentsline {subsection}{\numberline {7.1.13}$\ast $ and algorithmic details live in the source file.}{23}{subsection.7.1.13}%
+\contentsline {subsection}{\numberline {7.1.14}autotoc\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}md13}{23}{subsection.7.1.14}%
+\contentsline {subsection}{\numberline {7.1.15}Function Documentation}{23}{subsection.7.1.15}%
+\contentsline {subsubsection}{\numberline {7.1.15.1}ClearVectors()}{23}{subsubsection.7.1.15.1}%
+\contentsline {subsubsection}{\numberline {7.1.15.2}Correction()}{24}{subsubsection.7.1.15.2}%
+\contentsline {subsubsection}{\numberline {7.1.15.3}DefaultAnalysis()}{24}{subsubsection.7.1.15.3}%
+\contentsline {subsubsection}{\numberline {7.1.15.4}DrawCERN22Scan()}{24}{subsubsection.7.1.15.4}%
+\contentsline {subsubsection}{\numberline {7.1.15.5}DrawMultipleScan()}{24}{subsubsection.7.1.15.5}%
+\contentsline {subsubsection}{\numberline {7.1.15.6}DrawSingleScan()}{24}{subsubsection.7.1.15.6}%
+\contentsline {subsubsection}{\numberline {7.1.15.7}Monitoring()}{24}{subsubsection.7.1.15.7}%
+\contentsline {subsubsection}{\numberline {7.1.15.8}Settings()}{24}{subsubsection.7.1.15.8}%
+\contentsline {subsubsection}{\numberline {7.1.15.9}WFCorrection()}{25}{subsubsection.7.1.15.9}%
+\contentsline {subsection}{\numberline {7.1.16}Variable Documentation}{25}{subsection.7.1.16}%
+\contentsline {subsubsection}{\numberline {7.1.16.1}CERN\_drift}{25}{subsubsection.7.1.16.1}%
+\contentsline {subsubsection}{\numberline {7.1.16.2}CERN\_Escan}{25}{subsubsection.7.1.16.2}%
+\contentsline {subsubsection}{\numberline {7.1.16.3}comment}{25}{subsubsection.7.1.16.3}%
+\contentsline {subsubsection}{\numberline {7.1.16.4}correction\_wf}{25}{subsubsection.7.1.16.4}%
+\contentsline {subsubsection}{\numberline {7.1.16.5}corrFuncPath}{25}{subsubsection.7.1.16.5}%
+\contentsline {subsubsection}{\numberline {7.1.16.6}dataPath}{25}{subsubsection.7.1.16.6}%
+\contentsline {subsubsection}{\numberline {7.1.16.7}dataScanPath}{25}{subsubsection.7.1.16.7}%
+\contentsline {subsubsection}{\numberline {7.1.16.8}dedx}{25}{subsubsection.7.1.16.8}%
+\contentsline {subsubsection}{\numberline {7.1.16.9}dEdxPath}{25}{subsubsection.7.1.16.9}%
+\contentsline {subsubsection}{\numberline {7.1.16.10}DESY\_drift}{26}{subsubsection.7.1.16.10}%
+\contentsline {subsubsection}{\numberline {7.1.16.11}DESY\_phi}{26}{subsubsection.7.1.16.11}%
+\contentsline {subsubsection}{\numberline {7.1.16.12}DESY\_row}{26}{subsubsection.7.1.16.12}%
+\contentsline {subsubsection}{\numberline {7.1.16.13}DESY\_theta}{26}{subsubsection.7.1.16.13}%
+\contentsline {subsubsection}{\numberline {7.1.16.14}DESY\_yscan}{26}{subsubsection.7.1.16.14}%
+\contentsline {subsubsection}{\numberline {7.1.16.15}DESY\_zscan}{26}{subsubsection.7.1.16.15}%
+\contentsline {subsubsection}{\numberline {7.1.16.16}DO\_Comparison}{26}{subsubsection.7.1.16.16}%
+\contentsline {subsubsection}{\numberline {7.1.16.17}DO\_Control}{26}{subsubsection.7.1.16.17}%
+\contentsline {subsubsection}{\numberline {7.1.16.18}DO\_dEdx}{26}{subsubsection.7.1.16.18}%
+\contentsline {subsubsection}{\numberline {7.1.16.19}Draw\_CERN22Scan}{26}{subsubsection.7.1.16.19}%
+\contentsline {subsubsection}{\numberline {7.1.16.20}Draw\_Comparison}{27}{subsubsection.7.1.16.20}%
+\contentsline {subsubsection}{\numberline {7.1.16.21}Draw\_Control}{27}{subsubsection.7.1.16.21}%
+\contentsline {subsubsection}{\numberline {7.1.16.22}Draw\_Corrections}{27}{subsubsection.7.1.16.22}%
+\contentsline {subsubsection}{\numberline {7.1.16.23}Draw\_dEdx}{27}{subsubsection.7.1.16.23}%
+\contentsline {subsubsection}{\numberline {7.1.16.24}Draw\_DESY21MultScan}{27}{subsubsection.7.1.16.24}%
+\contentsline {subsubsection}{\numberline {7.1.16.25}Draw\_DESY21SingleScan}{27}{subsubsection.7.1.16.25}%
+\contentsline {subsubsection}{\numberline {7.1.16.26}drawout\_file}{27}{subsubsection.7.1.16.26}%
+\contentsline {subsubsection}{\numberline {7.1.16.27}drawoutMultiScanPath}{27}{subsubsection.7.1.16.27}%
+\contentsline {subsubsection}{\numberline {7.1.16.28}drawoutPath}{27}{subsubsection.7.1.16.28}%
+\contentsline {subsubsection}{\numberline {7.1.16.29}drawoutRunPath}{27}{subsubsection.7.1.16.29}%
+\contentsline {subsubsection}{\numberline {7.1.16.30}drawoutScanPath}{28}{subsubsection.7.1.16.30}%
+\contentsline {subsubsection}{\numberline {7.1.16.31}drawWhichMethods}{28}{subsubsection.7.1.16.31}%
+\contentsline {subsubsection}{\numberline {7.1.16.32}driftDist}{28}{subsubsection.7.1.16.32}%
+\contentsline {subsubsection}{\numberline {7.1.16.33}Dt}{28}{subsubsection.7.1.16.33}%
+\contentsline {subsubsection}{\numberline {7.1.16.34}DtB}{28}{subsubsection.7.1.16.34}%
+\contentsline {subsubsection}{\numberline {7.1.16.35}DtnoB}{28}{subsubsection.7.1.16.35}%
+\contentsline {subsubsection}{\numberline {7.1.16.36}DtwithBhere}{28}{subsubsection.7.1.16.36}%
+\contentsline {subsubsection}{\numberline {7.1.16.37}DtwithoutBhere}{28}{subsubsection.7.1.16.37}%
+\contentsline {subsubsection}{\numberline {7.1.16.38}fcorrectDrift}{28}{subsubsection.7.1.16.38}%
+\contentsline {subsubsection}{\numberline {7.1.16.39}fcorrectGain}{28}{subsubsection.7.1.16.39}%
+\contentsline {subsubsection}{\numberline {7.1.16.40}fcorrectRC}{29}{subsubsection.7.1.16.40}%
+\contentsline {subsubsection}{\numberline {7.1.16.41}fcorrectWF}{29}{subsubsection.7.1.16.41}%
+\contentsline {subsubsection}{\numberline {7.1.16.42}fsaveSelectOnly}{29}{subsubsection.7.1.16.42}%
+\contentsline {subsubsection}{\numberline {7.1.16.43}inputDir}{29}{subsubsection.7.1.16.43}%
+\contentsline {subsubsection}{\numberline {7.1.16.44}intUploader}{29}{subsubsection.7.1.16.44}%
+\contentsline {subsubsection}{\numberline {7.1.16.45}log\_file}{29}{subsubsection.7.1.16.45}%
+\contentsline {subsubsection}{\numberline {7.1.16.46}moduleCase}{29}{subsubsection.7.1.16.46}%
+\contentsline {subsubsection}{\numberline {7.1.16.47}multiScanName}{29}{subsubsection.7.1.16.47}%
+\contentsline {subsubsection}{\numberline {7.1.16.48}p\_dEdx}{29}{subsubsection.7.1.16.48}%
+\contentsline {subsubsection}{\numberline {7.1.16.49}p\_DrawOuts}{29}{subsubsection.7.1.16.49}%
+\contentsline {subsubsection}{\numberline {7.1.16.50}p\_lut}{30}{subsubsection.7.1.16.50}%
+\contentsline {subsubsection}{\numberline {7.1.16.51}p\_uploader}{30}{subsubsection.7.1.16.51}%
+\contentsline {subsubsection}{\numberline {7.1.16.52}prototype}{30}{subsubsection.7.1.16.52}%
+\contentsline {subsubsection}{\numberline {7.1.16.53}PT}{30}{subsubsection.7.1.16.53}%
+\contentsline {subsubsection}{\numberline {7.1.16.54}pUploader}{30}{subsubsection.7.1.16.54}%
+\contentsline {subsubsection}{\numberline {7.1.16.55}rootout\_file}{30}{subsubsection.7.1.16.55}%
+\contentsline {subsubsection}{\numberline {7.1.16.56}runvarstr}{30}{subsubsection.7.1.16.56}%
+\contentsline {subsubsection}{\numberline {7.1.16.57}scanIndex}{30}{subsubsection.7.1.16.57}%
+\contentsline {subsubsection}{\numberline {7.1.16.58}scanName}{30}{subsubsection.7.1.16.58}%
+\contentsline {subsubsection}{\numberline {7.1.16.59}selectionSet}{30}{subsubsection.7.1.16.59}%
+\contentsline {subsubsection}{\numberline {7.1.16.60}tag}{31}{subsubsection.7.1.16.60}%
+\contentsline {subsubsection}{\numberline {7.1.16.61}TB}{31}{subsubsection.7.1.16.61}%
+\contentsline {subsubsection}{\numberline {7.1.16.62}testbeam}{31}{subsubsection.7.1.16.62}%
+\contentsline {subsubsection}{\numberline {7.1.16.63}v\_comments}{31}{subsubsection.7.1.16.63}%
+\contentsline {subsubsection}{\numberline {7.1.16.64}v\_datafiles}{31}{subsubsection.7.1.16.64}%
+\contentsline {subsubsection}{\numberline {7.1.16.65}v\_rootout\_files}{31}{subsubsection.7.1.16.65}%
+\contentsline {subsubsection}{\numberline {7.1.16.66}v\_scanspec}{31}{subsubsection.7.1.16.66}%
+\contentsline {subsubsection}{\numberline {7.1.16.67}vcorrFuncPaths}{31}{subsubsection.7.1.16.67}%
+\contentsline {subsubsection}{\numberline {7.1.16.68}vScanLabels}{31}{subsubsection.7.1.16.68}%
+\contentsline {subsubsection}{\numberline {7.1.16.69}vScanVals}{31}{subsubsection.7.1.16.69}%
+\contentsline {subsubsection}{\numberline {7.1.16.70}vTags}{31}{subsubsection.7.1.16.70}%
+\contentsline {chapter}{\numberline {8}Class Documentation}{33}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Cluster Class Reference}{33}{section.8.1}%
+\contentsline {subsection}{\numberline {8.1.1}Constructor \& Destructor Documentation}{34}{subsection.8.1.1}%
+\contentsline {subsubsection}{\numberline {8.1.1.1}Cluster()}{34}{subsubsection.8.1.1.1}%
+\contentsline {subsubsection}{\numberline {8.1.1.2}$\sim $Cluster()}{35}{subsubsection.8.1.1.2}%
+\contentsline {subsection}{\numberline {8.1.2}Member Function Documentation}{35}{subsection.8.1.2}%
+\contentsline {subsubsection}{\numberline {8.1.2.1}Add\_Pad()}{35}{subsubsection.8.1.2.1}%
+\contentsline {subsubsection}{\numberline {8.1.2.2}Chi2\_Diagonal()}{35}{subsubsection.8.1.2.2}%
+\contentsline {subsubsection}{\numberline {8.1.2.3}Chi2\_Horizontal()}{35}{subsubsection.8.1.2.3}%
+\contentsline {subsubsection}{\numberline {8.1.2.4}DoClosure()}{35}{subsubsection.8.1.2.4}%
+\contentsline {subsubsection}{\numberline {8.1.2.5}Eval\_Diagonal()}{35}{subsubsection.8.1.2.5}%
+\contentsline {subsubsection}{\numberline {8.1.2.6}Eval\_Horizontal()}{35}{subsubsection.8.1.2.6}%
+\contentsline {subsubsection}{\numberline {8.1.2.7}FitRes\_Diagonal\_Get\_NberOfTermsInChi2()}{35}{subsubsection.8.1.2.7}%
+\contentsline {subsubsection}{\numberline {8.1.2.8}FitRes\_Diagonal\_Get\_Pad()}{36}{subsubsection.8.1.2.8}%
+\contentsline {subsubsection}{\numberline {8.1.2.9}FitRes\_Diagonal\_Get\_Pull()}{36}{subsubsection.8.1.2.9}%
+\contentsline {subsubsection}{\numberline {8.1.2.10}FitRes\_Diagonal\_Get\_Residual()}{36}{subsubsection.8.1.2.10}%
+\contentsline {subsubsection}{\numberline {8.1.2.11}FitRes\_Horizontal\_Get\_NberOfTermsInChi2()}{36}{subsubsection.8.1.2.11}%
+\contentsline {subsubsection}{\numberline {8.1.2.12}FitRes\_Horizontal\_Get\_Pad()}{36}{subsubsection.8.1.2.12}%
+\contentsline {subsubsection}{\numberline {8.1.2.13}FitRes\_Horizontal\_Get\_Pull()}{36}{subsubsection.8.1.2.13}%
+\contentsline {subsubsection}{\numberline {8.1.2.14}FitRes\_Horizontal\_Get\_Residual()}{36}{subsubsection.8.1.2.14}%
+\contentsline {subsubsection}{\numberline {8.1.2.15}Get\_Acluster()}{36}{subsubsection.8.1.2.15}%
+\contentsline {subsubsection}{\numberline {8.1.2.16}Get\_AMaxLeading()}{36}{subsubsection.8.1.2.16}%
+\contentsline {subsubsection}{\numberline {8.1.2.17}Get\_Chi2Min()}{37}{subsubsection.8.1.2.17}%
+\contentsline {subsubsection}{\numberline {8.1.2.18}Get\_EntryNber()}{37}{subsubsection.8.1.2.18}%
+\contentsline {subsubsection}{\numberline {8.1.2.19}Get\_EventNber()}{37}{subsubsection.8.1.2.19}%
+\contentsline {subsubsection}{\numberline {8.1.2.20}Get\_eXTrack()}{37}{subsubsection.8.1.2.20}%
+\contentsline {subsubsection}{\numberline {8.1.2.21}Get\_eYTrack()}{37}{subsubsection.8.1.2.21}%
+\contentsline {subsubsection}{\numberline {8.1.2.22}Get\_LeadingPad()}{37}{subsubsection.8.1.2.22}%
+\contentsline {subsubsection}{\numberline {8.1.2.23}Get\_ModuleNber()}{37}{subsubsection.8.1.2.23}%
+\contentsline {subsubsection}{\numberline {8.1.2.24}Get\_NberOfPads()}{37}{subsubsection.8.1.2.24}%
+\contentsline {subsubsection}{\numberline {8.1.2.25}Get\_NextLeadingPad()}{37}{subsubsection.8.1.2.25}%
+\contentsline {subsubsection}{\numberline {8.1.2.26}Get\_NextNextLeadingPad()}{37}{subsubsection.8.1.2.26}%
+\contentsline {subsubsection}{\numberline {8.1.2.27}Get\_Pad()}{38}{subsubsection.8.1.2.27}%
+\contentsline {subsubsection}{\numberline {8.1.2.28}Get\_TMaxLeading()}{38}{subsubsection.8.1.2.28}%
+\contentsline {subsubsection}{\numberline {8.1.2.29}Get\_XTrack()}{38}{subsubsection.8.1.2.29}%
+\contentsline {subsubsection}{\numberline {8.1.2.30}Get\_XTrack\_BeforeMinimisation()}{38}{subsubsection.8.1.2.30}%
+\contentsline {subsubsection}{\numberline {8.1.2.31}Get\_XWeight()}{38}{subsubsection.8.1.2.31}%
+\contentsline {subsubsection}{\numberline {8.1.2.32}Get\_YLeading()}{38}{subsubsection.8.1.2.32}%
+\contentsline {subsubsection}{\numberline {8.1.2.33}Get\_YTrack()}{38}{subsubsection.8.1.2.33}%
+\contentsline {subsubsection}{\numberline {8.1.2.34}Get\_YTrack\_BeforeMinimisation()}{38}{subsubsection.8.1.2.34}%
+\contentsline {subsubsection}{\numberline {8.1.2.35}Get\_YWeight()}{38}{subsubsection.8.1.2.35}%
+\contentsline {subsubsection}{\numberline {8.1.2.36}Invalidate()}{38}{subsubsection.8.1.2.36}%
+\contentsline {subsubsection}{\numberline {8.1.2.37}IsValid()}{39}{subsubsection.8.1.2.37}%
+\contentsline {subsubsection}{\numberline {8.1.2.38}Set\_eXTrack()}{39}{subsubsection.8.1.2.38}%
+\contentsline {subsubsection}{\numberline {8.1.2.39}Set\_eYTrack()}{39}{subsubsection.8.1.2.39}%
+\contentsline {subsubsection}{\numberline {8.1.2.40}Set\_XTrack()}{39}{subsubsection.8.1.2.40}%
+\contentsline {subsubsection}{\numberline {8.1.2.41}Set\_YTrack()}{39}{subsubsection.8.1.2.41}%
+\contentsline {subsubsection}{\numberline {8.1.2.42}SetEval\_Diagonal()}{39}{subsubsection.8.1.2.42}%
+\contentsline {subsubsection}{\numberline {8.1.2.43}SetEval\_Horizontal()}{39}{subsubsection.8.1.2.43}%
+\contentsline {subsubsection}{\numberline {8.1.2.44}SetParameter\_Diagonal()}{39}{subsubsection.8.1.2.44}%
+\contentsline {subsubsection}{\numberline {8.1.2.45}SetParameter\_Horizontal()}{39}{subsubsection.8.1.2.45}%
+\contentsline {subsubsection}{\numberline {8.1.2.46}SetResults\_Diagonal()}{40}{subsubsection.8.1.2.46}%
+\contentsline {subsubsection}{\numberline {8.1.2.47}SetResults\_FailledFit\_Diagonal()}{40}{subsubsection.8.1.2.47}%
+\contentsline {subsubsection}{\numberline {8.1.2.48}SetResults\_FailledFit\_Horizontal()}{40}{subsubsection.8.1.2.48}%
+\contentsline {subsubsection}{\numberline {8.1.2.49}SetResults\_Horizontal()}{40}{subsubsection.8.1.2.49}%
+\contentsline {subsubsection}{\numberline {8.1.2.50}StatusFit()}{40}{subsubsection.8.1.2.50}%
+\contentsline {subsubsection}{\numberline {8.1.2.51}StatusFit\_Diagonal()}{40}{subsubsection.8.1.2.51}%
+\contentsline {subsubsection}{\numberline {8.1.2.52}StatusFit\_Horizontal()}{40}{subsubsection.8.1.2.52}%
+\contentsline {subsubsection}{\numberline {8.1.2.53}Validate()}{40}{subsubsection.8.1.2.53}%
+\contentsline {subsubsection}{\numberline {8.1.2.54}WriteOut()}{40}{subsubsection.8.1.2.54}%
+\contentsline {subsection}{\numberline {8.1.3}Member Data Documentation}{41}{subsection.8.1.3}%
+\contentsline {subsubsection}{\numberline {8.1.3.1}m\_AngleRot}{41}{subsubsection.8.1.3.1}%
+\contentsline {section}{\numberline {8.2}Cluster\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Fitter\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Diagonal Class Reference}{41}{section.8.2}%
+\contentsline {subsection}{\numberline {8.2.1}Constructor \& Destructor Documentation}{41}{subsection.8.2.1}%
+\contentsline {subsubsection}{\numberline {8.2.1.1}ClusterFitter\_Diagonal()}{41}{subsubsection.8.2.1.1}%
+\contentsline {subsubsection}{\numberline {8.2.1.2}$\sim $ClusterFitter\_Diagonal()}{42}{subsubsection.8.2.1.2}%
+\contentsline {subsection}{\numberline {8.2.2}Member Function Documentation}{42}{subsection.8.2.2}%
+\contentsline {subsubsection}{\numberline {8.2.2.1}Chi2()}{42}{subsubsection.8.2.2.1}%
+\contentsline {subsubsection}{\numberline {8.2.2.2}DoMinimisation()}{42}{subsubsection.8.2.2.2}%
+\contentsline {subsubsection}{\numberline {8.2.2.3}Set\_Cluster()}{42}{subsubsection.8.2.2.3}%
+\contentsline {subsection}{\numberline {8.2.3}Member Data Documentation}{43}{subsection.8.2.3}%
+\contentsline {subsubsection}{\numberline {8.2.3.1}m\_FitterName}{43}{subsubsection.8.2.3.1}%
+\contentsline {subsubsection}{\numberline {8.2.3.2}p\_Cluster}{43}{subsubsection.8.2.3.2}%
+\contentsline {subsubsection}{\numberline {8.2.3.3}p\_TVirtualFitter}{43}{subsubsection.8.2.3.3}%
+\contentsline {section}{\numberline {8.3}Cluster\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Fitter\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Horizontal Class Reference}{43}{section.8.3}%
+\contentsline {subsection}{\numberline {8.3.1}Constructor \& Destructor Documentation}{44}{subsection.8.3.1}%
+\contentsline {subsubsection}{\numberline {8.3.1.1}ClusterFitter\_Horizontal()}{44}{subsubsection.8.3.1.1}%
+\contentsline {subsubsection}{\numberline {8.3.1.2}$\sim $ClusterFitter\_Horizontal()}{44}{subsubsection.8.3.1.2}%
+\contentsline {subsection}{\numberline {8.3.2}Member Function Documentation}{44}{subsection.8.3.2}%
+\contentsline {subsubsection}{\numberline {8.3.2.1}Chi2()}{44}{subsubsection.8.3.2.1}%
+\contentsline {subsubsection}{\numberline {8.3.2.2}DoMinimisation()}{45}{subsubsection.8.3.2.2}%
+\contentsline {subsubsection}{\numberline {8.3.2.3}Set\_Cluster()}{45}{subsubsection.8.3.2.3}%
+\contentsline {subsection}{\numberline {8.3.3}Member Data Documentation}{45}{subsection.8.3.3}%
+\contentsline {subsubsection}{\numberline {8.3.3.1}m\_FitterName}{45}{subsubsection.8.3.3.1}%
+\contentsline {subsubsection}{\numberline {8.3.3.2}p\_Cluster}{45}{subsubsection.8.3.3.2}%
+\contentsline {subsubsection}{\numberline {8.3.3.3}p\_TVirtualFitter}{45}{subsubsection.8.3.3.3}%
+\contentsline {section}{\numberline {8.4}Reconstruction\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::d\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Edx Class Reference}{45}{section.8.4}%
+\contentsline {subsection}{\numberline {8.4.1}Constructor \& Destructor Documentation}{46}{subsection.8.4.1}%
+\contentsline {subsubsection}{\numberline {8.4.1.1}dEdx()}{46}{subsubsection.8.4.1.1}%
+\contentsline {subsubsection}{\numberline {8.4.1.2}$\sim $dEdx()}{46}{subsubsection.8.4.1.2}%
+\contentsline {subsection}{\numberline {8.4.2}Member Function Documentation}{46}{subsection.8.4.2}%
+\contentsline {subsubsection}{\numberline {8.4.2.1}ComputedEdxGP()}{46}{subsubsection.8.4.2.1}%
+\contentsline {subsubsection}{\numberline {8.4.2.2}ComputedEdxGP1()}{46}{subsubsection.8.4.2.2}%
+\contentsline {subsubsection}{\numberline {8.4.2.3}ComputedEdxWF()}{47}{subsubsection.8.4.2.3}%
+\contentsline {subsubsection}{\numberline {8.4.2.4}ComputedEdxXP()}{47}{subsubsection.8.4.2.4}%
+\contentsline {subsubsection}{\numberline {8.4.2.5}DiscardedModule()}{47}{subsubsection.8.4.2.5}%
+\contentsline {subsubsection}{\numberline {8.4.2.6}GetGigaWaveform()}{47}{subsubsection.8.4.2.6}%
+\contentsline {subsubsection}{\numberline {8.4.2.7}GetTruncatedGigaWaveformGP1()}{47}{subsubsection.8.4.2.7}%
+\contentsline {subsubsection}{\numberline {8.4.2.8}Reconstruction()}{47}{subsubsection.8.4.2.8}%
+\contentsline {section}{\numberline {8.5}Reconstruction\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Draw\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Outs Class Reference}{47}{section.8.5}%
+\contentsline {subsection}{\numberline {8.5.1}Detailed Description}{48}{subsection.8.5.1}%
+\contentsline {subsection}{\numberline {8.5.2}Constructor \& Destructor Documentation}{48}{subsection.8.5.2}%
+\contentsline {subsubsection}{\numberline {8.5.2.1}DrawOuts()\hspace {0.1cm}{\footnotesize \ttfamily [1/3]}}{48}{subsubsection.8.5.2.1}%
+\contentsline {subsubsection}{\numberline {8.5.2.2}DrawOuts()\hspace {0.1cm}{\footnotesize \ttfamily [2/3]}}{49}{subsubsection.8.5.2.2}%
+\contentsline {subsubsection}{\numberline {8.5.2.3}DrawOuts()\hspace {0.1cm}{\footnotesize \ttfamily [3/3]}}{50}{subsubsection.8.5.2.3}%
+\contentsline {subsubsection}{\numberline {8.5.2.4}$\sim $DrawOuts()}{50}{subsubsection.8.5.2.4}%
+\contentsline {subsection}{\numberline {8.5.3}Member Function Documentation}{50}{subsection.8.5.3}%
+\contentsline {subsubsection}{\numberline {8.5.3.1}AmplitudeVSLength()}{50}{subsubsection.8.5.3.1}%
+\contentsline {subsubsection}{\numberline {8.5.3.2}CERN22Scan()}{50}{subsubsection.8.5.3.2}%
+\contentsline {subsubsection}{\numberline {8.5.3.3}CERN22ScanDraw()}{50}{subsubsection.8.5.3.3}%
+\contentsline {subsubsection}{\numberline {8.5.3.4}CERN22ScanFill()}{50}{subsubsection.8.5.3.4}%
+\contentsline {subsubsection}{\numberline {8.5.3.5}Control()}{51}{subsubsection.8.5.3.5}%
+\contentsline {subsubsection}{\numberline {8.5.3.6}DESY21MultiScan()}{51}{subsubsection.8.5.3.6}%
+\contentsline {subsubsection}{\numberline {8.5.3.7}DESY21ScanDraw()}{51}{subsubsection.8.5.3.7}%
+\contentsline {subsubsection}{\numberline {8.5.3.8}DESY21ScanFill()}{51}{subsubsection.8.5.3.8}%
+\contentsline {subsubsection}{\numberline {8.5.3.9}DESY21SingleScan()}{51}{subsubsection.8.5.3.9}%
+\contentsline {subsubsection}{\numberline {8.5.3.10}EnergyLoss()}{51}{subsubsection.8.5.3.10}%
+\contentsline {subsubsection}{\numberline {8.5.3.11}FileComparison()}{52}{subsubsection.8.5.3.11}%
+\contentsline {subsubsection}{\numberline {8.5.3.12}SetStyle()}{52}{subsubsection.8.5.3.12}%
+\contentsline {section}{\numberline {8.6}Eram\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Info Class Reference}{52}{section.8.6}%
+\contentsline {subsection}{\numberline {8.6.1}Detailed Description}{53}{subsection.8.6.1}%
+\contentsline {subsection}{\numberline {8.6.2}$\ast $ @file LUTs.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{53}{subsection.8.6.2}%
+\contentsline {subsection}{\numberline {8.6.3}$\ast $}{53}{subsection.8.6.3}%
+\contentsline {subsection}{\numberline {8.6.4}$\ast $ Declares data structures and helpers for building and accessing LUTs}{53}{subsection.8.6.4}%
+\contentsline {subsection}{\numberline {8.6.5}$\ast $ (geometry, calibration, etc.) used by d\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}E/dx and track/cluster}{53}{subsection.8.6.5}%
+\contentsline {subsection}{\numberline {8.6.6}$\ast $ reconstruction.}{53}{subsection.8.6.6}%
+\contentsline {subsection}{\numberline {8.6.7}$\ast $}{53}{subsection.8.6.7}%
+\contentsline {subsection}{\numberline {8.6.8}$\ast $}{53}{subsection.8.6.8}%
+\contentsline {subsection}{\numberline {8.6.9}$\ast $ The implementation file LUTs.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cxx constructs ERAM maps, fills lookup tables}{53}{subsection.8.6.9}%
+\contentsline {subsection}{\numberline {8.6.10}$\ast $ and exposes accessors used across the reconstruction pipeline. The source}{53}{subsection.8.6.10}%
+\contentsline {subsection}{\numberline {8.6.11}$\ast $ also contains helpers to fill and repair maps (Fill\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Holes), and code to}{53}{subsection.8.6.11}%
+\contentsline {subsection}{\numberline {8.6.12}$\ast $ compute mean gains/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}RC values used in calibration steps.}{53}{subsection.8.6.12}%
+\contentsline {subsection}{\numberline {8.6.13}autotoc\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}md26}{53}{subsection.8.6.13}%
+\contentsline {subsection}{\numberline {8.6.14}Constructor \& Destructor Documentation}{53}{subsection.8.6.14}%
+\contentsline {subsubsection}{\numberline {8.6.14.1}EramInfo()}{53}{subsubsection.8.6.14.1}%
+\contentsline {subsubsection}{\numberline {8.6.14.2}$\sim $EramInfo()}{53}{subsubsection.8.6.14.2}%
+\contentsline {subsection}{\numberline {8.6.15}Member Data Documentation}{53}{subsection.8.6.15}%
+\contentsline {subsubsection}{\numberline {8.6.15.1}Endplate}{53}{subsubsection.8.6.15.1}%
+\contentsline {subsubsection}{\numberline {8.6.15.2}Gain}{54}{subsubsection.8.6.15.2}%
+\contentsline {subsubsection}{\numberline {8.6.15.3}Id}{54}{subsubsection.8.6.15.3}%
+\contentsline {subsubsection}{\numberline {8.6.15.4}InbTPC}{54}{subsubsection.8.6.15.4}%
+\contentsline {subsubsection}{\numberline {8.6.15.5}IntTPC}{54}{subsubsection.8.6.15.5}%
+\contentsline {subsubsection}{\numberline {8.6.15.6}Position}{54}{subsubsection.8.6.15.6}%
+\contentsline {subsubsection}{\numberline {8.6.15.7}RC}{54}{subsubsection.8.6.15.7}%
+\contentsline {subsubsection}{\numberline {8.6.15.8}Resolution}{54}{subsubsection.8.6.15.8}%
+\contentsline {subsubsection}{\numberline {8.6.15.9}XX}{54}{subsubsection.8.6.15.9}%
+\contentsline {subsubsection}{\numberline {8.6.15.10}YY}{54}{subsubsection.8.6.15.10}%
+\contentsline {section}{\numberline {8.7}Reconstruction\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::ERAMMaps Class Reference}{55}{section.8.7}%
+\contentsline {subsection}{\numberline {8.7.1}Constructor \& Destructor Documentation}{55}{subsection.8.7.1}%
+\contentsline {subsubsection}{\numberline {8.7.1.1}ERAMMaps()}{55}{subsubsection.8.7.1.1}%
+\contentsline {subsubsection}{\numberline {8.7.1.2}$\sim $ERAMMaps()}{55}{subsubsection.8.7.1.2}%
+\contentsline {subsection}{\numberline {8.7.2}Member Function Documentation}{55}{subsection.8.7.2}%
+\contentsline {subsubsection}{\numberline {8.7.2.1}Gain()}{55}{subsubsection.8.7.2.1}%
+\contentsline {subsubsection}{\numberline {8.7.2.2}ID()}{55}{subsubsection.8.7.2.2}%
+\contentsline {subsubsection}{\numberline {8.7.2.3}MeanGain()}{55}{subsubsection.8.7.2.3}%
+\contentsline {subsubsection}{\numberline {8.7.2.4}MeanRC()}{56}{subsubsection.8.7.2.4}%
+\contentsline {subsubsection}{\numberline {8.7.2.5}RC()}{56}{subsubsection.8.7.2.5}%
+\contentsline {subsubsection}{\numberline {8.7.2.6}Resolution()}{56}{subsubsection.8.7.2.6}%
+\contentsline {section}{\numberline {8.8}Event Class Reference}{56}{section.8.8}%
+\contentsline {subsection}{\numberline {8.8.1}Constructor \& Destructor Documentation}{57}{subsection.8.8.1}%
+\contentsline {subsubsection}{\numberline {8.8.1.1}Event()}{57}{subsubsection.8.8.1.1}%
+\contentsline {subsubsection}{\numberline {8.8.1.2}$\sim $Event()}{57}{subsubsection.8.8.1.2}%
+\contentsline {subsection}{\numberline {8.8.2}Member Function Documentation}{57}{subsection.8.8.2}%
+\contentsline {subsubsection}{\numberline {8.8.2.1}Add\_Module()}{57}{subsubsection.8.8.2.1}%
+\contentsline {subsubsection}{\numberline {8.8.2.2}Clear\_Modules()}{57}{subsubsection.8.8.2.2}%
+\contentsline {subsubsection}{\numberline {8.8.2.3}Get\_Cluster\_Copy()}{57}{subsubsection.8.8.2.3}%
+\contentsline {subsubsection}{\numberline {8.8.2.4}Get\_EntryNber()}{58}{subsubsection.8.8.2.4}%
+\contentsline {subsubsection}{\numberline {8.8.2.5}Get\_EventNber()}{58}{subsubsection.8.8.2.5}%
+\contentsline {subsubsection}{\numberline {8.8.2.6}Get\_Model\_ChargeI()}{58}{subsubsection.8.8.2.6}%
+\contentsline {subsubsection}{\numberline {8.8.2.7}Get\_Model\_Electronics()}{58}{subsubsection.8.8.2.7}%
+\contentsline {subsubsection}{\numberline {8.8.2.8}Get\_Model\_ReadOutGeometry()}{58}{subsubsection.8.8.2.8}%
+\contentsline {subsubsection}{\numberline {8.8.2.9}Get\_Module\_InArray()}{58}{subsubsection.8.8.2.9}%
+\contentsline {subsubsection}{\numberline {8.8.2.10}Get\_NberOfModule()}{58}{subsubsection.8.8.2.10}%
+\contentsline {subsubsection}{\numberline {8.8.2.11}Get\_ThisModule()}{58}{subsubsection.8.8.2.11}%
+\contentsline {subsubsection}{\numberline {8.8.2.12}Get\_ThisModuleConst()}{58}{subsubsection.8.8.2.12}%
+\contentsline {subsubsection}{\numberline {8.8.2.13}GiveMe\_AnUnfittedTrack\_ForThisModule()}{58}{subsubsection.8.8.2.13}%
+\contentsline {subsubsection}{\numberline {8.8.2.14}GiveMe\_Clusters\_ForThisModule()}{59}{subsubsection.8.8.2.14}%
+\contentsline {subsubsection}{\numberline {8.8.2.15}GiveMe\_CutInterCeptXZ\_ForThisModule()}{59}{subsubsection.8.8.2.15}%
+\contentsline {subsubsection}{\numberline {8.8.2.16}GiveMe\_CutSlopeXY\_ForThisModule()}{59}{subsubsection.8.8.2.16}%
+\contentsline {subsubsection}{\numberline {8.8.2.17}GiveMe\_CutSlopeXYZ\_ForThisModule()}{59}{subsubsection.8.8.2.17}%
+\contentsline {subsubsection}{\numberline {8.8.2.18}GiveMe\_CutSlopeXZ\_ForThisModule()}{59}{subsubsection.8.8.2.18}%
+\contentsline {subsubsection}{\numberline {8.8.2.19}GiveMe\_Track\_ForThisModule()}{59}{subsubsection.8.8.2.19}%
+\contentsline {subsubsection}{\numberline {8.8.2.20}Invalidate()}{59}{subsubsection.8.8.2.20}%
+\contentsline {subsubsection}{\numberline {8.8.2.21}Invalidate\_ThisModule()}{59}{subsubsection.8.8.2.21}%
+\contentsline {subsubsection}{\numberline {8.8.2.22}IsValid()}{59}{subsubsection.8.8.2.22}%
+\contentsline {subsubsection}{\numberline {8.8.2.23}Replace\_Clusters\_ForThisModule()}{60}{subsubsection.8.8.2.23}%
+\contentsline {subsubsection}{\numberline {8.8.2.24}Set\_Track\_ForThisModule()}{60}{subsubsection.8.8.2.24}%
+\contentsline {subsubsection}{\numberline {8.8.2.25}SmallDump()}{60}{subsubsection.8.8.2.25}%
+\contentsline {subsubsection}{\numberline {8.8.2.26}Validate()}{60}{subsubsection.8.8.2.26}%
+\contentsline {subsubsection}{\numberline {8.8.2.27}Validate\_ThisModule()}{60}{subsubsection.8.8.2.27}%
+\contentsline {subsubsection}{\numberline {8.8.2.28}Validity\_ForThisModule()}{60}{subsubsection.8.8.2.28}%
+\contentsline {subsubsection}{\numberline {8.8.2.29}WriteOut()}{60}{subsubsection.8.8.2.29}%
+\contentsline {section}{\numberline {8.9}Fit\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Output Class Reference}{60}{section.8.9}%
+\contentsline {subsection}{\numberline {8.9.1}Constructor \& Destructor Documentation}{61}{subsection.8.9.1}%
+\contentsline {subsubsection}{\numberline {8.9.1.1}FitOutput()\hspace {0.1cm}{\footnotesize \ttfamily [1/2]}}{61}{subsubsection.8.9.1.1}%
+\contentsline {subsubsection}{\numberline {8.9.1.2}$\sim $FitOutput()}{61}{subsubsection.8.9.1.2}%
+\contentsline {subsubsection}{\numberline {8.9.1.3}FitOutput()\hspace {0.1cm}{\footnotesize \ttfamily [2/2]}}{61}{subsubsection.8.9.1.3}%
+\contentsline {subsection}{\numberline {8.9.2}Member Function Documentation}{62}{subsection.8.9.2}%
+\contentsline {subsubsection}{\numberline {8.9.2.1}operator=()}{62}{subsubsection.8.9.2.1}%
+\contentsline {subsubsection}{\numberline {8.9.2.2}PrintFitOutput()}{62}{subsubsection.8.9.2.2}%
+\contentsline {subsubsection}{\numberline {8.9.2.3}PrintFitOutputInCanvas()}{62}{subsubsection.8.9.2.3}%
+\contentsline {subsubsection}{\numberline {8.9.2.4}Reset()}{62}{subsubsection.8.9.2.4}%
+\contentsline {subsubsection}{\numberline {8.9.2.5}Set()}{62}{subsubsection.8.9.2.5}%
+\contentsline {subsubsection}{\numberline {8.9.2.6}SetResults()\hspace {0.1cm}{\footnotesize \ttfamily [1/2]}}{62}{subsubsection.8.9.2.6}%
+\contentsline {subsubsection}{\numberline {8.9.2.7}SetResults()\hspace {0.1cm}{\footnotesize \ttfamily [2/2]}}{62}{subsubsection.8.9.2.7}%
+\contentsline {subsection}{\numberline {8.9.3}Member Data Documentation}{62}{subsection.8.9.3}%
+\contentsline {subsubsection}{\numberline {8.9.3.1}m\_Description}{62}{subsubsection.8.9.3.1}%
+\contentsline {subsubsection}{\numberline {8.9.3.2}m\_MinnLL}{63}{subsubsection.8.9.3.2}%
+\contentsline {subsubsection}{\numberline {8.9.3.3}m\_NameOfTheModel}{63}{subsubsection.8.9.3.3}%
+\contentsline {subsubsection}{\numberline {8.9.3.4}m\_NberOfDataPoints}{63}{subsubsection.8.9.3.4}%
+\contentsline {subsubsection}{\numberline {8.9.3.5}m\_NberOfModelParameters}{63}{subsubsection.8.9.3.5}%
+\contentsline {subsubsection}{\numberline {8.9.3.6}p\_CovMatrix}{63}{subsubsection.8.9.3.6}%
+\contentsline {subsubsection}{\numberline {8.9.3.7}p\_eparminus}{63}{subsubsection.8.9.3.7}%
+\contentsline {subsubsection}{\numberline {8.9.3.8}p\_eparparab}{63}{subsubsection.8.9.3.8}%
+\contentsline {subsubsection}{\numberline {8.9.3.9}p\_eparplus}{63}{subsubsection.8.9.3.9}%
+\contentsline {subsubsection}{\numberline {8.9.3.10}p\_par}{64}{subsubsection.8.9.3.10}%
+\contentsline {subsubsection}{\numberline {8.9.3.11}p\_parName}{64}{subsubsection.8.9.3.11}%
+\contentsline {section}{\numberline {8.10}Gauss\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Function Class Reference}{64}{section.8.10}%
+\contentsline {subsection}{\numberline {8.10.1}Constructor \& Destructor Documentation}{64}{subsection.8.10.1}%
+\contentsline {subsubsection}{\numberline {8.10.1.1}GaussFunction()}{64}{subsubsection.8.10.1.1}%
+\contentsline {subsubsection}{\numberline {8.10.1.2}$\sim $GaussFunction()}{64}{subsubsection.8.10.1.2}%
+\contentsline {subsection}{\numberline {8.10.2}Member Function Documentation}{65}{subsection.8.10.2}%
+\contentsline {subsubsection}{\numberline {8.10.2.1}Get\_Mean()}{65}{subsubsection.8.10.2.1}%
+\contentsline {subsubsection}{\numberline {8.10.2.2}Get\_Norm()}{65}{subsubsection.8.10.2.2}%
+\contentsline {subsubsection}{\numberline {8.10.2.3}Get\_Sigma()}{65}{subsubsection.8.10.2.3}%
+\contentsline {subsubsection}{\numberline {8.10.2.4}operator()()}{65}{subsubsection.8.10.2.4}%
+\contentsline {subsubsection}{\numberline {8.10.2.5}Set\_Mean()}{65}{subsubsection.8.10.2.5}%
+\contentsline {subsubsection}{\numberline {8.10.2.6}Set\_Norm()}{65}{subsubsection.8.10.2.6}%
+\contentsline {subsubsection}{\numberline {8.10.2.7}Set\_Sigma()}{65}{subsubsection.8.10.2.7}%
+\contentsline {section}{\numberline {8.11}Global\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Chi2\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}4 Struct Reference}{66}{section.8.11}%
+\contentsline {subsection}{\numberline {8.11.1}Constructor \& Destructor Documentation}{66}{subsection.8.11.1}%
+\contentsline {subsubsection}{\numberline {8.11.1.1}GlobalChi2\_4()}{66}{subsubsection.8.11.1.1}%
+\contentsline {subsection}{\numberline {8.11.2}Member Function Documentation}{66}{subsection.8.11.2}%
+\contentsline {subsubsection}{\numberline {8.11.2.1}operator()()}{66}{subsubsection.8.11.2.1}%
+\contentsline {subsection}{\numberline {8.11.3}Member Data Documentation}{66}{subsection.8.11.3}%
+\contentsline {subsubsection}{\numberline {8.11.3.1}fChi2\_1}{66}{subsubsection.8.11.3.1}%
+\contentsline {subsubsection}{\numberline {8.11.3.2}fChi2\_2}{66}{subsubsection.8.11.3.2}%
+\contentsline {subsubsection}{\numberline {8.11.3.3}fChi2\_3}{66}{subsubsection.8.11.3.3}%
+\contentsline {subsubsection}{\numberline {8.11.3.4}fChi2\_4}{67}{subsubsection.8.11.3.4}%
+\contentsline {section}{\numberline {8.12}Reconstruction\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::LUT Class Reference}{67}{section.8.12}%
+\contentsline {subsection}{\numberline {8.12.1}Constructor \& Destructor Documentation}{67}{subsection.8.12.1}%
+\contentsline {subsubsection}{\numberline {8.12.1.1}LUT()\hspace {0.1cm}{\footnotesize \ttfamily [1/2]}}{67}{subsubsection.8.12.1.1}%
+\contentsline {subsubsection}{\numberline {8.12.1.2}LUT()\hspace {0.1cm}{\footnotesize \ttfamily [2/2]}}{67}{subsubsection.8.12.1.2}%
+\contentsline {subsubsection}{\numberline {8.12.1.3}$\sim $LUT()}{67}{subsubsection.8.12.1.3}%
+\contentsline {subsection}{\numberline {8.12.2}Member Function Documentation}{68}{subsection.8.12.2}%
+\contentsline {subsubsection}{\numberline {8.12.2.1}getRatio()}{68}{subsubsection.8.12.2.1}%
+\contentsline {section}{\numberline {8.13}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Charge0D Class Reference}{68}{section.8.13}%
+\contentsline {subsection}{\numberline {8.13.1}Constructor \& Destructor Documentation}{69}{subsection.8.13.1}%
+\contentsline {subsubsection}{\numberline {8.13.1.1}Model\_Charge0D()}{69}{subsubsection.8.13.1.1}%
+\contentsline {subsubsection}{\numberline {8.13.1.2}$\sim $Model\_Charge0D()}{69}{subsubsection.8.13.1.2}%
+\contentsline {subsection}{\numberline {8.13.2}Member Function Documentation}{69}{subsection.8.13.2}%
+\contentsline {subsubsection}{\numberline {8.13.2.1}Get\_Qpad()}{69}{subsubsection.8.13.2.1}%
+\contentsline {subsubsection}{\numberline {8.13.2.2}Get\_Qprim()}{70}{subsubsection.8.13.2.2}%
+\contentsline {subsubsection}{\numberline {8.13.2.3}Set\_Ion()}{70}{subsubsection.8.13.2.3}%
+\contentsline {subsubsection}{\numberline {8.13.2.4}Set\_Qprim()}{70}{subsubsection.8.13.2.4}%
+\contentsline {subsubsection}{\numberline {8.13.2.5}SetSecondaries()}{70}{subsubsection.8.13.2.5}%
+\contentsline {subsubsection}{\numberline {8.13.2.6}WriteOut()}{70}{subsubsection.8.13.2.6}%
+\contentsline {subsection}{\numberline {8.13.3}Member Data Documentation}{70}{subsection.8.13.3}%
+\contentsline {subsubsection}{\numberline {8.13.3.1}m\_DoIons}{70}{subsubsection.8.13.3.1}%
+\contentsline {subsubsection}{\numberline {8.13.3.2}m\_Qprim}{70}{subsubsection.8.13.3.2}%
+\contentsline {subsubsection}{\numberline {8.13.3.3}m\_RFactor}{70}{subsubsection.8.13.3.3}%
+\contentsline {subsubsection}{\numberline {8.13.3.4}m\_RTrue}{71}{subsubsection.8.13.3.4}%
+\contentsline {subsubsection}{\numberline {8.13.3.5}m\_Tion}{71}{subsubsection.8.13.3.5}%
+\contentsline {section}{\numberline {8.14}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Charge1D Class Reference}{71}{section.8.14}%
+\contentsline {subsection}{\numberline {8.14.1}Constructor \& Destructor Documentation}{72}{subsection.8.14.1}%
+\contentsline {subsubsection}{\numberline {8.14.1.1}Model\_Charge1D()}{72}{subsubsection.8.14.1.1}%
+\contentsline {subsubsection}{\numberline {8.14.1.2}$\sim $Model\_Charge1D()}{72}{subsubsection.8.14.1.2}%
+\contentsline {subsection}{\numberline {8.14.2}Member Function Documentation}{72}{subsection.8.14.2}%
+\contentsline {subsubsection}{\numberline {8.14.2.1}Get\_Lambda()}{72}{subsubsection.8.14.2.1}%
+\contentsline {subsubsection}{\numberline {8.14.2.2}Get\_Qpad()}{73}{subsubsection.8.14.2.2}%
+\contentsline {subsubsection}{\numberline {8.14.2.3}Set\_Lambda()}{73}{subsubsection.8.14.2.3}%
+\contentsline {subsubsection}{\numberline {8.14.2.4}SetSecondaries()}{73}{subsubsection.8.14.2.4}%
+\contentsline {subsubsection}{\numberline {8.14.2.5}WriteOut()}{73}{subsubsection.8.14.2.5}%
+\contentsline {subsection}{\numberline {8.14.3}Member Data Documentation}{73}{subsection.8.14.3}%
+\contentsline {subsubsection}{\numberline {8.14.3.1}m\_Lambda}{73}{subsubsection.8.14.3.1}%
+\contentsline {section}{\numberline {8.15}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}ChargeI Class Reference}{74}{section.8.15}%
+\contentsline {subsection}{\numberline {8.15.1}Constructor \& Destructor Documentation}{74}{subsection.8.15.1}%
+\contentsline {subsubsection}{\numberline {8.15.1.1}Model\_ChargeI()}{74}{subsubsection.8.15.1.1}%
+\contentsline {subsubsection}{\numberline {8.15.1.2}$\sim $Model\_ChargeI()}{75}{subsubsection.8.15.1.2}%
+\contentsline {subsection}{\numberline {8.15.2}Member Function Documentation}{75}{subsection.8.15.2}%
+\contentsline {subsubsection}{\numberline {8.15.2.1}Get\_Gain()}{75}{subsubsection.8.15.2.1}%
+\contentsline {subsubsection}{\numberline {8.15.2.2}Get\_Qpad()}{75}{subsubsection.8.15.2.2}%
+\contentsline {subsubsection}{\numberline {8.15.2.3}Get\_RC()}{75}{subsubsection.8.15.2.3}%
+\contentsline {subsubsection}{\numberline {8.15.2.4}Get\_Width()}{75}{subsubsection.8.15.2.4}%
+\contentsline {subsubsection}{\numberline {8.15.2.5}Set\_Gain()}{75}{subsubsection.8.15.2.5}%
+\contentsline {subsubsection}{\numberline {8.15.2.6}Set\_RC()}{75}{subsubsection.8.15.2.6}%
+\contentsline {subsubsection}{\numberline {8.15.2.7}Set\_Width()}{75}{subsubsection.8.15.2.7}%
+\contentsline {subsubsection}{\numberline {8.15.2.8}Set\_WidthFromDriftDistance()}{76}{subsubsection.8.15.2.8}%
+\contentsline {subsubsection}{\numberline {8.15.2.9}SetSecondaries()}{76}{subsubsection.8.15.2.9}%
+\contentsline {subsubsection}{\numberline {8.15.2.10}WidthFromDriftDistance()}{76}{subsubsection.8.15.2.10}%
+\contentsline {subsubsection}{\numberline {8.15.2.11}WriteOut()}{76}{subsubsection.8.15.2.11}%
+\contentsline {subsection}{\numberline {8.15.3}Member Data Documentation}{76}{subsection.8.15.3}%
+\contentsline {subsubsection}{\numberline {8.15.3.1}m\_2RCinv}{76}{subsubsection.8.15.3.1}%
+\contentsline {subsubsection}{\numberline {8.15.3.2}m\_Gain}{76}{subsubsection.8.15.3.2}%
+\contentsline {subsubsection}{\numberline {8.15.3.3}m\_NormQPad}{76}{subsubsection.8.15.3.3}%
+\contentsline {subsubsection}{\numberline {8.15.3.4}m\_RC}{76}{subsubsection.8.15.3.4}%
+\contentsline {subsubsection}{\numberline {8.15.3.5}m\_Width}{76}{subsubsection.8.15.3.5}%
+\contentsline {subsubsection}{\numberline {8.15.3.6}m\_Width2}{77}{subsubsection.8.15.3.6}%
+\contentsline {section}{\numberline {8.16}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Electronics Class Reference}{77}{section.8.16}%
+\contentsline {subsection}{\numberline {8.16.1}Constructor \& Destructor Documentation}{77}{subsection.8.16.1}%
+\contentsline {subsubsection}{\numberline {8.16.1.1}Model\_Electronics()}{77}{subsubsection.8.16.1.1}%
+\contentsline {subsubsection}{\numberline {8.16.1.2}$\sim $Model\_Electronics()}{77}{subsubsection.8.16.1.2}%
+\contentsline {subsection}{\numberline {8.16.2}Member Function Documentation}{77}{subsection.8.16.2}%
+\contentsline {subsubsection}{\numberline {8.16.2.1}Derive\_Response\_Base()}{77}{subsubsection.8.16.2.1}%
+\contentsline {subsubsection}{\numberline {8.16.2.2}Get\_Amplitude()}{78}{subsubsection.8.16.2.2}%
+\contentsline {subsubsection}{\numberline {8.16.2.3}Get\_QValue()}{78}{subsubsection.8.16.2.3}%
+\contentsline {subsubsection}{\numberline {8.16.2.4}Get\_ws()}{78}{subsubsection.8.16.2.4}%
+\contentsline {subsubsection}{\numberline {8.16.2.5}Response\_Base()}{78}{subsubsection.8.16.2.5}%
+\contentsline {subsubsection}{\numberline {8.16.2.6}Set\_Amplitude()}{78}{subsubsection.8.16.2.6}%
+\contentsline {subsubsection}{\numberline {8.16.2.7}Set\_TimeShape()}{78}{subsubsection.8.16.2.7}%
+\contentsline {subsubsection}{\numberline {8.16.2.8}WriteOut()}{78}{subsubsection.8.16.2.8}%
+\contentsline {section}{\numberline {8.17}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Read\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Out\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Geometry Class Reference}{78}{section.8.17}%
+\contentsline {subsection}{\numberline {8.17.1}Constructor \& Destructor Documentation}{79}{subsection.8.17.1}%
+\contentsline {subsubsection}{\numberline {8.17.1.1}Model\_ReadOutGeometry()}{79}{subsubsection.8.17.1.1}%
+\contentsline {subsubsection}{\numberline {8.17.1.2}$\sim $Model\_ReadOutGeometry()}{79}{subsubsection.8.17.1.2}%
+\contentsline {subsection}{\numberline {8.17.2}Member Function Documentation}{79}{subsection.8.17.2}%
+\contentsline {subsubsection}{\numberline {8.17.2.1}Get\_LX()}{79}{subsubsection.8.17.2.1}%
+\contentsline {subsubsection}{\numberline {8.17.2.2}Get\_LY()}{80}{subsubsection.8.17.2.2}%
+\contentsline {subsubsection}{\numberline {8.17.2.3}Get\_Nx()}{80}{subsubsection.8.17.2.3}%
+\contentsline {subsubsection}{\numberline {8.17.2.4}Get\_Ny()}{80}{subsubsection.8.17.2.4}%
+\contentsline {subsubsection}{\numberline {8.17.2.5}Get\_XcPad()}{80}{subsubsection.8.17.2.5}%
+\contentsline {subsubsection}{\numberline {8.17.2.6}Get\_XHPad()}{80}{subsubsection.8.17.2.6}%
+\contentsline {subsubsection}{\numberline {8.17.2.7}Get\_XLPad()}{80}{subsubsection.8.17.2.7}%
+\contentsline {subsubsection}{\numberline {8.17.2.8}Get\_Xpad\_min()}{80}{subsubsection.8.17.2.8}%
+\contentsline {subsubsection}{\numberline {8.17.2.9}Get\_YcPad()}{80}{subsubsection.8.17.2.9}%
+\contentsline {subsubsection}{\numberline {8.17.2.10}Get\_YHPad()}{81}{subsubsection.8.17.2.10}%
+\contentsline {subsubsection}{\numberline {8.17.2.11}Get\_YLPad()}{81}{subsubsection.8.17.2.11}%
+\contentsline {subsubsection}{\numberline {8.17.2.12}Get\_Ypad\_min()}{81}{subsubsection.8.17.2.12}%
+\contentsline {subsubsection}{\numberline {8.17.2.13}GetPadEdges()}{81}{subsubsection.8.17.2.13}%
+\contentsline {subsubsection}{\numberline {8.17.2.14}Set\_LX()}{81}{subsubsection.8.17.2.14}%
+\contentsline {subsubsection}{\numberline {8.17.2.15}Set\_LY()}{81}{subsubsection.8.17.2.15}%
+\contentsline {subsubsection}{\numberline {8.17.2.16}Set\_Nx()}{81}{subsubsection.8.17.2.16}%
+\contentsline {subsubsection}{\numberline {8.17.2.17}Set\_Ny()}{82}{subsubsection.8.17.2.17}%
+\contentsline {subsubsection}{\numberline {8.17.2.18}Set\_Xpad\_min()}{82}{subsubsection.8.17.2.18}%
+\contentsline {subsubsection}{\numberline {8.17.2.19}Set\_Ypad\_min()}{82}{subsubsection.8.17.2.19}%
+\contentsline {subsubsection}{\numberline {8.17.2.20}SquareGeometry()}{82}{subsubsection.8.17.2.20}%
+\contentsline {subsubsection}{\numberline {8.17.2.21}SwapGeometry()}{82}{subsubsection.8.17.2.21}%
+\contentsline {subsubsection}{\numberline {8.17.2.22}WriteOut()}{82}{subsubsection.8.17.2.22}%
+\contentsline {section}{\numberline {8.18}Module Class Reference}{82}{section.8.18}%
+\contentsline {subsection}{\numberline {8.18.1}Constructor \& Destructor Documentation}{84}{subsection.8.18.1}%
+\contentsline {subsubsection}{\numberline {8.18.1.1}Module()}{84}{subsubsection.8.18.1.1}%
+\contentsline {subsubsection}{\numberline {8.18.1.2}$\sim $Module()}{84}{subsubsection.8.18.1.2}%
+\contentsline {subsection}{\numberline {8.18.2}Member Function Documentation}{84}{subsection.8.18.2}%
+\contentsline {subsubsection}{\numberline {8.18.2.1}Add\_Cluster()}{84}{subsubsection.8.18.2.1}%
+\contentsline {subsubsection}{\numberline {8.18.2.2}Add\_Pad()}{84}{subsubsection.8.18.2.2}%
+\contentsline {subsubsection}{\numberline {8.18.2.3}Clear\_Clusters()}{84}{subsubsection.8.18.2.3}%
+\contentsline {subsubsection}{\numberline {8.18.2.4}Get\_Cluster()}{85}{subsubsection.8.18.2.4}%
+\contentsline {subsubsection}{\numberline {8.18.2.5}Get\_Cluster\_Copy()}{85}{subsubsection.8.18.2.5}%
+\contentsline {subsubsection}{\numberline {8.18.2.6}Get\_EntryNber()}{85}{subsubsection.8.18.2.6}%
+\contentsline {subsubsection}{\numberline {8.18.2.7}Get\_EventNber()}{85}{subsubsection.8.18.2.7}%
+\contentsline {subsubsection}{\numberline {8.18.2.8}Get\_ModuleNber()}{85}{subsubsection.8.18.2.8}%
+\contentsline {subsubsection}{\numberline {8.18.2.9}Get\_NberOfCluster()}{85}{subsubsection.8.18.2.9}%
+\contentsline {subsubsection}{\numberline {8.18.2.10}GiveMe\_AnUnfittedTrack()}{85}{subsubsection.8.18.2.10}%
+\contentsline {subsubsection}{\numberline {8.18.2.11}GiveMe\_Clusters\_ForThisModule()}{85}{subsubsection.8.18.2.11}%
+\contentsline {subsubsection}{\numberline {8.18.2.12}GiveMe\_ModuleTrack()}{85}{subsubsection.8.18.2.12}%
+\contentsline {subsubsection}{\numberline {8.18.2.13}Invalidate()}{85}{subsubsection.8.18.2.13}%
+\contentsline {subsubsection}{\numberline {8.18.2.14}IsValid()}{86}{subsubsection.8.18.2.14}%
+\contentsline {subsubsection}{\numberline {8.18.2.15}ReplaceClusters()}{86}{subsubsection.8.18.2.15}%
+\contentsline {subsubsection}{\numberline {8.18.2.16}Set\_ModuleTrack()}{86}{subsubsection.8.18.2.16}%
+\contentsline {subsubsection}{\numberline {8.18.2.17}SmallDump()}{86}{subsubsection.8.18.2.17}%
+\contentsline {subsubsection}{\numberline {8.18.2.18}Validate()}{86}{subsubsection.8.18.2.18}%
+\contentsline {subsubsection}{\numberline {8.18.2.19}WriteOut()}{86}{subsubsection.8.18.2.19}%
+\contentsline {section}{\numberline {8.19}Pad Class Reference}{86}{section.8.19}%
+\contentsline {subsection}{\numberline {8.19.1}Constructor \& Destructor Documentation}{88}{subsection.8.19.1}%
+\contentsline {subsubsection}{\numberline {8.19.1.1}Pad()\hspace {0.1cm}{\footnotesize \ttfamily [1/2]}}{88}{subsubsection.8.19.1.1}%
+\contentsline {subsubsection}{\numberline {8.19.1.2}Pad()\hspace {0.1cm}{\footnotesize \ttfamily [2/2]}}{88}{subsubsection.8.19.1.2}%
+\contentsline {subsubsection}{\numberline {8.19.1.3}$\sim $Pad()}{89}{subsubsection.8.19.1.3}%
+\contentsline {subsection}{\numberline {8.19.2}Member Function Documentation}{89}{subsection.8.19.2}%
+\contentsline {subsubsection}{\numberline {8.19.2.1}Clear\_ADC()}{89}{subsubsection.8.19.2.1}%
+\contentsline {subsubsection}{\numberline {8.19.2.2}Get\_AMax()}{89}{subsubsection.8.19.2.2}%
+\contentsline {subsubsection}{\numberline {8.19.2.3}Get\_AMax\_FIT()}{89}{subsubsection.8.19.2.3}%
+\contentsline {subsubsection}{\numberline {8.19.2.4}Get\_AMax\_FromSet()}{89}{subsubsection.8.19.2.4}%
+\contentsline {subsubsection}{\numberline {8.19.2.5}Get\_AMax\_True()}{89}{subsubsection.8.19.2.5}%
+\contentsline {subsubsection}{\numberline {8.19.2.6}Get\_AMax\_WF()}{89}{subsubsection.8.19.2.6}%
+\contentsline {subsubsection}{\numberline {8.19.2.7}Get\_AMax\_WF\_01()}{89}{subsubsection.8.19.2.7}%
+\contentsline {subsubsection}{\numberline {8.19.2.8}Get\_APad()}{89}{subsubsection.8.19.2.8}%
+\contentsline {subsubsection}{\numberline {8.19.2.9}Get\_EntryNber()}{90}{subsubsection.8.19.2.9}%
+\contentsline {subsubsection}{\numberline {8.19.2.10}Get\_EventNber()}{90}{subsubsection.8.19.2.10}%
+\contentsline {subsubsection}{\numberline {8.19.2.11}Get\_FIT\_A0M()}{90}{subsubsection.8.19.2.11}%
+\contentsline {subsubsection}{\numberline {8.19.2.12}Get\_FIT\_A0P()}{90}{subsubsection.8.19.2.12}%
+\contentsline {subsubsection}{\numberline {8.19.2.13}Get\_FIT\_Status()}{90}{subsubsection.8.19.2.13}%
+\contentsline {subsubsection}{\numberline {8.19.2.14}Get\_FIT\_X0()}{90}{subsubsection.8.19.2.14}%
+\contentsline {subsubsection}{\numberline {8.19.2.15}Get\_FIT\_Xmax()}{90}{subsubsection.8.19.2.15}%
+\contentsline {subsubsection}{\numberline {8.19.2.16}Get\_FIT\_Xmin()}{90}{subsubsection.8.19.2.16}%
+\contentsline {subsubsection}{\numberline {8.19.2.17}Get\_FIT\_Y0()}{90}{subsubsection.8.19.2.17}%
+\contentsline {subsubsection}{\numberline {8.19.2.18}Get\_iX()}{90}{subsubsection.8.19.2.18}%
+\contentsline {subsubsection}{\numberline {8.19.2.19}Get\_iY()}{91}{subsubsection.8.19.2.19}%
+\contentsline {subsubsection}{\numberline {8.19.2.20}Get\_LX()}{91}{subsubsection.8.19.2.20}%
+\contentsline {subsubsection}{\numberline {8.19.2.21}Get\_LY()}{91}{subsubsection.8.19.2.21}%
+\contentsline {subsubsection}{\numberline {8.19.2.22}Get\_Model\_ChargeI()}{91}{subsubsection.8.19.2.22}%
+\contentsline {subsubsection}{\numberline {8.19.2.23}Get\_Model\_Electronics()}{91}{subsubsection.8.19.2.23}%
+\contentsline {subsubsection}{\numberline {8.19.2.24}Get\_Model\_ReadOutGeometry()}{91}{subsubsection.8.19.2.24}%
+\contentsline {subsubsection}{\numberline {8.19.2.25}Get\_ModuleNber()}{91}{subsubsection.8.19.2.25}%
+\contentsline {subsubsection}{\numberline {8.19.2.26}Get\_PadName()}{91}{subsubsection.8.19.2.26}%
+\contentsline {subsubsection}{\numberline {8.19.2.27}Get\_Qpad()}{91}{subsubsection.8.19.2.27}%
+\contentsline {subsubsection}{\numberline {8.19.2.28}Get\_Time0()}{91}{subsubsection.8.19.2.28}%
+\contentsline {subsubsection}{\numberline {8.19.2.29}Get\_TMax()}{92}{subsubsection.8.19.2.29}%
+\contentsline {subsubsection}{\numberline {8.19.2.30}Get\_TMax\_FIT()}{92}{subsubsection.8.19.2.30}%
+\contentsline {subsubsection}{\numberline {8.19.2.31}Get\_TMax\_FromSet()}{92}{subsubsection.8.19.2.31}%
+\contentsline {subsubsection}{\numberline {8.19.2.32}Get\_TMax\_True()}{92}{subsubsection.8.19.2.32}%
+\contentsline {subsubsection}{\numberline {8.19.2.33}Get\_TMax\_WF()}{92}{subsubsection.8.19.2.33}%
+\contentsline {subsubsection}{\numberline {8.19.2.34}Get\_TMax\_WF\_01()}{92}{subsubsection.8.19.2.34}%
+\contentsline {subsubsection}{\numberline {8.19.2.35}Get\_vADC()}{92}{subsubsection.8.19.2.35}%
+\contentsline {subsubsection}{\numberline {8.19.2.36}Get\_XH()}{92}{subsubsection.8.19.2.36}%
+\contentsline {subsubsection}{\numberline {8.19.2.37}Get\_XL()}{92}{subsubsection.8.19.2.37}%
+\contentsline {subsubsection}{\numberline {8.19.2.38}Get\_XPad()}{92}{subsubsection.8.19.2.38}%
+\contentsline {subsubsection}{\numberline {8.19.2.39}Get\_XTrue()}{93}{subsubsection.8.19.2.39}%
+\contentsline {subsubsection}{\numberline {8.19.2.40}Get\_YH()}{93}{subsubsection.8.19.2.40}%
+\contentsline {subsubsection}{\numberline {8.19.2.41}Get\_YL()}{93}{subsubsection.8.19.2.41}%
+\contentsline {subsubsection}{\numberline {8.19.2.42}Get\_YPad()}{93}{subsubsection.8.19.2.42}%
+\contentsline {subsubsection}{\numberline {8.19.2.43}Get\_YTrue()}{93}{subsubsection.8.19.2.43}%
+\contentsline {subsubsection}{\numberline {8.19.2.44}Invalidate()}{93}{subsubsection.8.19.2.44}%
+\contentsline {subsubsection}{\numberline {8.19.2.45}IsValid()}{93}{subsubsection.8.19.2.45}%
+\contentsline {subsubsection}{\numberline {8.19.2.46}Set\_ADC()}{93}{subsubsection.8.19.2.46}%
+\contentsline {subsubsection}{\numberline {8.19.2.47}Set\_AMax()}{93}{subsubsection.8.19.2.47}%
+\contentsline {subsubsection}{\numberline {8.19.2.48}Set\_AMax\_True()}{93}{subsubsection.8.19.2.48}%
+\contentsline {subsubsection}{\numberline {8.19.2.49}Set\_Data\_2Use()}{94}{subsubsection.8.19.2.49}%
+\contentsline {subsubsection}{\numberline {8.19.2.50}Set\_TMax()}{94}{subsubsection.8.19.2.50}%
+\contentsline {subsubsection}{\numberline {8.19.2.51}Set\_TMax\_True()}{94}{subsubsection.8.19.2.51}%
+\contentsline {subsubsection}{\numberline {8.19.2.52}SetSignalModel()}{94}{subsubsection.8.19.2.52}%
+\contentsline {subsubsection}{\numberline {8.19.2.53}Validate()}{94}{subsubsection.8.19.2.53}%
+\contentsline {subsubsection}{\numberline {8.19.2.54}WF\_DoClosure()}{94}{subsubsection.8.19.2.54}%
+\contentsline {subsubsection}{\numberline {8.19.2.55}WriteOut()}{94}{subsubsection.8.19.2.55}%
+\contentsline {section}{\numberline {8.20}Parabola\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Function Class Reference}{94}{section.8.20}%
+\contentsline {subsection}{\numberline {8.20.1}Constructor \& Destructor Documentation}{95}{subsection.8.20.1}%
+\contentsline {subsubsection}{\numberline {8.20.1.1}ParabolaFunction()}{95}{subsubsection.8.20.1.1}%
+\contentsline {subsubsection}{\numberline {8.20.1.2}$\sim $ParabolaFunction()}{95}{subsubsection.8.20.1.2}%
+\contentsline {subsection}{\numberline {8.20.2}Member Function Documentation}{95}{subsection.8.20.2}%
+\contentsline {subsubsection}{\numberline {8.20.2.1}Get\_A0()}{95}{subsubsection.8.20.2.1}%
+\contentsline {subsubsection}{\numberline {8.20.2.2}Get\_X0()}{95}{subsubsection.8.20.2.2}%
+\contentsline {subsubsection}{\numberline {8.20.2.3}Get\_Y0()}{95}{subsubsection.8.20.2.3}%
+\contentsline {subsubsection}{\numberline {8.20.2.4}operator()()}{95}{subsubsection.8.20.2.4}%
+\contentsline {subsubsection}{\numberline {8.20.2.5}Set\_A0()}{96}{subsubsection.8.20.2.5}%
+\contentsline {subsubsection}{\numberline {8.20.2.6}Set\_X0()}{96}{subsubsection.8.20.2.6}%
+\contentsline {subsubsection}{\numberline {8.20.2.7}Set\_Y0()}{96}{subsubsection.8.20.2.7}%
+\contentsline {section}{\numberline {8.21}Parabola\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Function\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}NG Class Reference}{96}{section.8.21}%
+\contentsline {subsection}{\numberline {8.21.1}Constructor \& Destructor Documentation}{96}{subsection.8.21.1}%
+\contentsline {subsubsection}{\numberline {8.21.1.1}ParabolaFunctionNG()}{96}{subsubsection.8.21.1.1}%
+\contentsline {subsubsection}{\numberline {8.21.1.2}$\sim $ParabolaFunctionNG()}{97}{subsubsection.8.21.1.2}%
+\contentsline {subsection}{\numberline {8.21.2}Member Function Documentation}{97}{subsection.8.21.2}%
+\contentsline {subsubsection}{\numberline {8.21.2.1}Get\_A0M()}{97}{subsubsection.8.21.2.1}%
+\contentsline {subsubsection}{\numberline {8.21.2.2}Get\_A0P()}{97}{subsubsection.8.21.2.2}%
+\contentsline {subsubsection}{\numberline {8.21.2.3}Get\_X0()}{97}{subsubsection.8.21.2.3}%
+\contentsline {subsubsection}{\numberline {8.21.2.4}Get\_Y0()}{97}{subsubsection.8.21.2.4}%
+\contentsline {subsubsection}{\numberline {8.21.2.5}operator()()}{97}{subsubsection.8.21.2.5}%
+\contentsline {subsubsection}{\numberline {8.21.2.6}Set\_A0M()}{97}{subsubsection.8.21.2.6}%
+\contentsline {subsubsection}{\numberline {8.21.2.7}Set\_A0P()}{97}{subsubsection.8.21.2.7}%
+\contentsline {subsubsection}{\numberline {8.21.2.8}Set\_X0()}{97}{subsubsection.8.21.2.8}%
+\contentsline {subsubsection}{\numberline {8.21.2.9}Set\_Y0()}{98}{subsubsection.8.21.2.9}%
+\contentsline {section}{\numberline {8.22}PRFParameters Class Reference}{98}{section.8.22}%
+\contentsline {subsection}{\numberline {8.22.1}Constructor \& Destructor Documentation}{98}{subsection.8.22.1}%
+\contentsline {subsubsection}{\numberline {8.22.1.1}PRFParameters()}{98}{subsubsection.8.22.1.1}%
+\contentsline {subsubsection}{\numberline {8.22.1.2}$\sim $PRFParameters()}{98}{subsubsection.8.22.1.2}%
+\contentsline {subsection}{\numberline {8.22.2}Member Function Documentation}{98}{subsection.8.22.2}%
+\contentsline {subsubsection}{\numberline {8.22.2.1}Eval()}{98}{subsubsection.8.22.2.1}%
+\contentsline {subsubsection}{\numberline {8.22.2.2}operator()()}{99}{subsubsection.8.22.2.2}%
+\contentsline {subsubsection}{\numberline {8.22.2.3}SetPRF()}{99}{subsubsection.8.22.2.3}%
+\contentsline {section}{\numberline {8.23}Reconstruction\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Reco\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Cluster Class Reference}{99}{section.8.23}%
+\contentsline {subsection}{\numberline {8.23.1}Constructor \& Destructor Documentation}{100}{subsection.8.23.1}%
+\contentsline {subsubsection}{\numberline {8.23.1.1}$\sim $RecoCluster()}{100}{subsubsection.8.23.1.1}%
+\contentsline {subsection}{\numberline {8.23.2}Member Function Documentation}{100}{subsection.8.23.2}%
+\contentsline {subsubsection}{\numberline {8.23.2.1}ClassDef()}{100}{subsubsection.8.23.2.1}%
+\contentsline {subsection}{\numberline {8.23.3}Member Data Documentation}{100}{subsection.8.23.3}%
+\contentsline {subsubsection}{\numberline {8.23.3.1}ADCmax\_base}{100}{subsubsection.8.23.3.1}%
+\contentsline {subsubsection}{\numberline {8.23.3.2}ALead\_base}{100}{subsubsection.8.23.3.2}%
+\contentsline {subsubsection}{\numberline {8.23.3.3}ALead\_GCorr}{101}{subsubsection.8.23.3.3}%
+\contentsline {subsubsection}{\numberline {8.23.3.4}charge}{101}{subsubsection.8.23.3.4}%
+\contentsline {subsubsection}{\numberline {8.23.3.5}dEdxWF}{101}{subsubsection.8.23.3.5}%
+\contentsline {subsubsection}{\numberline {8.23.3.6}length}{101}{subsubsection.8.23.3.6}%
+\contentsline {subsubsection}{\numberline {8.23.3.7}LUTrhoLead}{101}{subsubsection.8.23.3.7}%
+\contentsline {subsubsection}{\numberline {8.23.3.8}NPads}{101}{subsubsection.8.23.3.8}%
+\contentsline {subsubsection}{\numberline {8.23.3.9}ratioCorr}{101}{subsubsection.8.23.3.9}%
+\contentsline {subsubsection}{\numberline {8.23.3.10}TLead}{101}{subsubsection.8.23.3.10}%
+\contentsline {subsubsection}{\numberline {8.23.3.11}v\_pads}{101}{subsubsection.8.23.3.11}%
+\contentsline {subsubsection}{\numberline {8.23.3.12}yCluster}{101}{subsubsection.8.23.3.12}%
+\contentsline {subsubsection}{\numberline {8.23.3.13}yWeight}{102}{subsubsection.8.23.3.13}%
+\contentsline {section}{\numberline {8.24}Reconstruction\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Reco\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Event Class Reference}{102}{section.8.24}%
+\contentsline {subsection}{\numberline {8.24.1}Constructor \& Destructor Documentation}{103}{subsection.8.24.1}%
+\contentsline {subsubsection}{\numberline {8.24.1.1}RecoEvent()}{103}{subsubsection.8.24.1.1}%
+\contentsline {subsubsection}{\numberline {8.24.1.2}$\sim $RecoEvent()}{103}{subsubsection.8.24.1.2}%
+\contentsline {subsection}{\numberline {8.24.2}Member Function Documentation}{103}{subsection.8.24.2}%
+\contentsline {subsubsection}{\numberline {8.24.2.1}ClassDef()}{103}{subsubsection.8.24.2.1}%
+\contentsline {subsubsection}{\numberline {8.24.2.2}Clear()}{103}{subsubsection.8.24.2.2}%
+\contentsline {subsection}{\numberline {8.24.3}Member Data Documentation}{103}{subsection.8.24.3}%
+\contentsline {subsubsection}{\numberline {8.24.3.1}avg\_pad\_mult}{103}{subsubsection.8.24.3.1}%
+\contentsline {subsubsection}{\numberline {8.24.3.2}dEdxGP1}{103}{subsubsection.8.24.3.2}%
+\contentsline {subsubsection}{\numberline {8.24.3.3}dEdxGP2}{103}{subsubsection.8.24.3.3}%
+\contentsline {subsubsection}{\numberline {8.24.3.4}dEdxGP3}{103}{subsubsection.8.24.3.4}%
+\contentsline {subsubsection}{\numberline {8.24.3.5}dEdxGP4}{104}{subsubsection.8.24.3.5}%
+\contentsline {subsubsection}{\numberline {8.24.3.6}dEdxGP5}{104}{subsubsection.8.24.3.6}%
+\contentsline {subsubsection}{\numberline {8.24.3.7}dEdxWF}{104}{subsubsection.8.24.3.7}%
+\contentsline {subsubsection}{\numberline {8.24.3.8}dEdxWFnoTrunc}{104}{subsubsection.8.24.3.8}%
+\contentsline {subsubsection}{\numberline {8.24.3.9}dEdxXP}{104}{subsubsection.8.24.3.9}%
+\contentsline {subsubsection}{\numberline {8.24.3.10}dEdxXPnoTrunc}{104}{subsubsection.8.24.3.10}%
+\contentsline {subsubsection}{\numberline {8.24.3.11}eventNbr}{104}{subsubsection.8.24.3.11}%
+\contentsline {subsubsection}{\numberline {8.24.3.12}GWF}{104}{subsubsection.8.24.3.12}%
+\contentsline {subsubsection}{\numberline {8.24.3.13}GWFtruncatedGP1}{104}{subsubsection.8.24.3.13}%
+\contentsline {subsubsection}{\numberline {8.24.3.14}lengthWF}{104}{subsubsection.8.24.3.14}%
+\contentsline {subsubsection}{\numberline {8.24.3.15}lengthXP}{105}{subsubsection.8.24.3.15}%
+\contentsline {subsubsection}{\numberline {8.24.3.16}NClusters}{105}{subsubsection.8.24.3.16}%
+\contentsline {subsubsection}{\numberline {8.24.3.17}NCrossedPads}{105}{subsubsection.8.24.3.17}%
+\contentsline {subsubsection}{\numberline {8.24.3.18}NPads}{105}{subsubsection.8.24.3.18}%
+\contentsline {subsubsection}{\numberline {8.24.3.19}numberOfModules}{105}{subsubsection.8.24.3.19}%
+\contentsline {subsubsection}{\numberline {8.24.3.20}peakingTime}{105}{subsubsection.8.24.3.20}%
+\contentsline {subsubsection}{\numberline {8.24.3.21}selected}{105}{subsubsection.8.24.3.21}%
+\contentsline {subsubsection}{\numberline {8.24.3.22}timeBinSize}{105}{subsubsection.8.24.3.22}%
+\contentsline {subsubsection}{\numberline {8.24.3.23}v\_modules}{105}{subsubsection.8.24.3.23}%
+\contentsline {subsubsection}{\numberline {8.24.3.24}v\_modules\_position}{105}{subsubsection.8.24.3.24}%
+\contentsline {section}{\numberline {8.25}Reconstruction\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Reco\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Module Class Reference}{106}{section.8.25}%
+\contentsline {subsection}{\numberline {8.25.1}Constructor \& Destructor Documentation}{106}{subsection.8.25.1}%
+\contentsline {subsubsection}{\numberline {8.25.1.1}$\sim $RecoModule()}{106}{subsubsection.8.25.1.1}%
+\contentsline {subsection}{\numberline {8.25.2}Member Function Documentation}{106}{subsection.8.25.2}%
+\contentsline {subsubsection}{\numberline {8.25.2.1}ClassDef()}{106}{subsubsection.8.25.2.1}%
+\contentsline {subsection}{\numberline {8.25.3}Member Data Documentation}{107}{subsection.8.25.3}%
+\contentsline {subsubsection}{\numberline {8.25.3.1}avg\_pad\_mult}{107}{subsubsection.8.25.3.1}%
+\contentsline {subsubsection}{\numberline {8.25.3.2}dEdxWF}{107}{subsubsection.8.25.3.2}%
+\contentsline {subsubsection}{\numberline {8.25.3.3}dEdxWFnoTrunc}{107}{subsubsection.8.25.3.3}%
+\contentsline {subsubsection}{\numberline {8.25.3.4}dEdxXP}{107}{subsubsection.8.25.3.4}%
+\contentsline {subsubsection}{\numberline {8.25.3.5}dEdxXPnoTrunc}{107}{subsubsection.8.25.3.5}%
+\contentsline {subsubsection}{\numberline {8.25.3.6}ID}{107}{subsubsection.8.25.3.6}%
+\contentsline {subsubsection}{\numberline {8.25.3.7}lengthWF}{107}{subsubsection.8.25.3.7}%
+\contentsline {subsubsection}{\numberline {8.25.3.8}lengthXP}{107}{subsubsection.8.25.3.8}%
+\contentsline {subsubsection}{\numberline {8.25.3.9}NClusters}{107}{subsubsection.8.25.3.9}%
+\contentsline {subsubsection}{\numberline {8.25.3.10}NCrossedPads}{107}{subsubsection.8.25.3.10}%
+\contentsline {subsubsection}{\numberline {8.25.3.11}NPads}{108}{subsubsection.8.25.3.11}%
+\contentsline {subsubsection}{\numberline {8.25.3.12}phi}{108}{subsubsection.8.25.3.12}%
+\contentsline {subsubsection}{\numberline {8.25.3.13}position}{108}{subsubsection.8.25.3.13}%
+\contentsline {subsubsection}{\numberline {8.25.3.14}selected}{108}{subsubsection.8.25.3.14}%
+\contentsline {subsubsection}{\numberline {8.25.3.15}Track}{108}{subsubsection.8.25.3.15}%
+\contentsline {subsubsection}{\numberline {8.25.3.16}v\_clusters}{108}{subsubsection.8.25.3.16}%
+\contentsline {section}{\numberline {8.26}Reconstruction\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Reco\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Pad Class Reference}{108}{section.8.26}%
+\contentsline {subsection}{\numberline {8.26.1}Constructor \& Destructor Documentation}{109}{subsection.8.26.1}%
+\contentsline {subsubsection}{\numberline {8.26.1.1}$\sim $RecoPad()}{109}{subsubsection.8.26.1.1}%
+\contentsline {subsection}{\numberline {8.26.2}Member Function Documentation}{109}{subsection.8.26.2}%
+\contentsline {subsubsection}{\numberline {8.26.2.1}ClassDef()}{109}{subsubsection.8.26.2.1}%
+\contentsline {subsection}{\numberline {8.26.3}Member Data Documentation}{109}{subsection.8.26.3}%
+\contentsline {subsubsection}{\numberline {8.26.3.1}ADCmax}{109}{subsubsection.8.26.3.1}%
+\contentsline {subsubsection}{\numberline {8.26.3.2}ADCmax\_base}{110}{subsubsection.8.26.3.2}%
+\contentsline {subsubsection}{\numberline {8.26.3.3}charge}{110}{subsubsection.8.26.3.3}%
+\contentsline {subsubsection}{\numberline {8.26.3.4}d}{110}{subsubsection.8.26.3.4}%
+\contentsline {subsubsection}{\numberline {8.26.3.5}dd}{110}{subsubsection.8.26.3.5}%
+\contentsline {subsubsection}{\numberline {8.26.3.6}dEdxXP}{110}{subsubsection.8.26.3.6}%
+\contentsline {subsubsection}{\numberline {8.26.3.7}driftDistance}{110}{subsubsection.8.26.3.7}%
+\contentsline {subsubsection}{\numberline {8.26.3.8}dy}{110}{subsubsection.8.26.3.8}%
+\contentsline {subsubsection}{\numberline {8.26.3.9}gain}{110}{subsubsection.8.26.3.9}%
+\contentsline {subsubsection}{\numberline {8.26.3.10}GainCorrection}{110}{subsubsection.8.26.3.10}%
+\contentsline {subsubsection}{\numberline {8.26.3.11}ix}{110}{subsubsection.8.26.3.11}%
+\contentsline {subsubsection}{\numberline {8.26.3.12}iy}{111}{subsubsection.8.26.3.12}%
+\contentsline {subsubsection}{\numberline {8.26.3.13}leading}{111}{subsubsection.8.26.3.13}%
+\contentsline {subsubsection}{\numberline {8.26.3.14}length}{111}{subsubsection.8.26.3.14}%
+\contentsline {subsubsection}{\numberline {8.26.3.15}phi}{111}{subsubsection.8.26.3.15}%
+\contentsline {subsubsection}{\numberline {8.26.3.16}ratio}{111}{subsubsection.8.26.3.16}%
+\contentsline {subsubsection}{\numberline {8.26.3.17}ratioDrift}{111}{subsubsection.8.26.3.17}%
+\contentsline {subsubsection}{\numberline {8.26.3.18}ratioFile}{111}{subsubsection.8.26.3.18}%
+\contentsline {subsubsection}{\numberline {8.26.3.19}RC}{111}{subsubsection.8.26.3.19}%
+\contentsline {subsubsection}{\numberline {8.26.3.20}T0}{111}{subsubsection.8.26.3.20}%
+\contentsline {subsubsection}{\numberline {8.26.3.21}TMax}{111}{subsubsection.8.26.3.21}%
+\contentsline {subsubsection}{\numberline {8.26.3.22}xPad}{112}{subsubsection.8.26.3.22}%
+\contentsline {subsubsection}{\numberline {8.26.3.23}yPad}{112}{subsubsection.8.26.3.23}%
+\contentsline {section}{\numberline {8.27}ROBoard Class Reference}{112}{section.8.27}%
+\contentsline {subsection}{\numberline {8.27.1}Detailed Description}{113}{subsection.8.27.1}%
+\contentsline {subsection}{\numberline {8.27.2}Constructor \& Destructor Documentation}{113}{subsection.8.27.2}%
+\contentsline {subsubsection}{\numberline {8.27.2.1}ROBoard()}{113}{subsubsection.8.27.2.1}%
+\contentsline {subsubsection}{\numberline {8.27.2.2}$\sim $ROBoard()}{113}{subsubsection.8.27.2.2}%
+\contentsline {subsection}{\numberline {8.27.3}Member Function Documentation}{113}{subsection.8.27.3}%
+\contentsline {subsubsection}{\numberline {8.27.3.1}Add\_Pad()}{113}{subsubsection.8.27.3.1}%
+\contentsline {subsubsection}{\numberline {8.27.3.2}Get\_IsThisPadExisting()}{113}{subsubsection.8.27.3.2}%
+\contentsline {subsubsection}{\numberline {8.27.3.3}Get\_Model\_ChargeI()}{113}{subsubsection.8.27.3.3}%
+\contentsline {subsubsection}{\numberline {8.27.3.4}Get\_Model\_Electronics()}{114}{subsubsection.8.27.3.4}%
+\contentsline {subsubsection}{\numberline {8.27.3.5}Get\_Model\_ReadOutGeometry()}{114}{subsubsection.8.27.3.5}%
+\contentsline {subsubsection}{\numberline {8.27.3.6}Get\_NberOfPads()}{114}{subsubsection.8.27.3.6}%
+\contentsline {subsubsection}{\numberline {8.27.3.7}Get\_Pad()\hspace {0.1cm}{\footnotesize \ttfamily [1/3]}}{114}{subsubsection.8.27.3.7}%
+\contentsline {subsubsection}{\numberline {8.27.3.8}Get\_Pad()\hspace {0.1cm}{\footnotesize \ttfamily [2/3]}}{114}{subsubsection.8.27.3.8}%
+\contentsline {subsubsection}{\numberline {8.27.3.9}Get\_Pad()\hspace {0.1cm}{\footnotesize \ttfamily [3/3]}}{114}{subsubsection.8.27.3.9}%
+\contentsline {subsubsection}{\numberline {8.27.3.10}GetLinearIndex()}{114}{subsubsection.8.27.3.10}%
+\contentsline {subsubsection}{\numberline {8.27.3.11}Ini\_Models()}{114}{subsubsection.8.27.3.11}%
+\contentsline {subsection}{\numberline {8.27.4}Member Data Documentation}{115}{subsection.8.27.4}%
+\contentsline {subsubsection}{\numberline {8.27.4.1}m\_Nx}{115}{subsubsection.8.27.4.1}%
+\contentsline {subsubsection}{\numberline {8.27.4.2}m\_Ny}{115}{subsubsection.8.27.4.2}%
+\contentsline {subsubsection}{\numberline {8.27.4.3}p\_Model\_ChargeI}{115}{subsubsection.8.27.4.3}%
+\contentsline {subsubsection}{\numberline {8.27.4.4}p\_Model\_Electronics}{115}{subsubsection.8.27.4.4}%
+\contentsline {subsubsection}{\numberline {8.27.4.5}p\_Model\_ReadOutGeometry}{115}{subsubsection.8.27.4.5}%
+\contentsline {subsubsection}{\numberline {8.27.4.6}V\_ExisFlag2D}{115}{subsubsection.8.27.4.6}%
+\contentsline {subsubsection}{\numberline {8.27.4.7}V\_Pad}{115}{subsubsection.8.27.4.7}%
+\contentsline {section}{\numberline {8.28}Sample Class Reference}{115}{section.8.28}%
+\contentsline {subsection}{\numberline {8.28.1}Constructor \& Destructor Documentation}{116}{subsection.8.28.1}%
+\contentsline {subsubsection}{\numberline {8.28.1.1}Sample()\hspace {0.1cm}{\footnotesize \ttfamily [1/2]}}{116}{subsubsection.8.28.1.1}%
+\contentsline {subsubsection}{\numberline {8.28.1.2}Sample()\hspace {0.1cm}{\footnotesize \ttfamily [2/2]}}{116}{subsubsection.8.28.1.2}%
+\contentsline {subsubsection}{\numberline {8.28.1.3}$\sim $Sample()}{116}{subsubsection.8.28.1.3}%
+\contentsline {subsection}{\numberline {8.28.2}Member Function Documentation}{117}{subsection.8.28.2}%
+\contentsline {subsubsection}{\numberline {8.28.2.1}Add\_Event()}{117}{subsubsection.8.28.2.1}%
+\contentsline {subsubsection}{\numberline {8.28.2.2}Get\_Chi2Min()}{117}{subsubsection.8.28.2.2}%
+\contentsline {subsubsection}{\numberline {8.28.2.3}Get\_DD()}{117}{subsubsection.8.28.2.3}%
+\contentsline {subsubsection}{\numberline {8.28.2.4}Get\_DD\_BeforeMinimisation()}{117}{subsubsection.8.28.2.4}%
+\contentsline {subsubsection}{\numberline {8.28.2.5}Get\_eDD()}{117}{subsubsection.8.28.2.5}%
+\contentsline {subsubsection}{\numberline {8.28.2.6}Get\_eRC()}{117}{subsubsection.8.28.2.6}%
+\contentsline {subsubsection}{\numberline {8.28.2.7}Get\_Event()}{117}{subsubsection.8.28.2.7}%
+\contentsline {subsubsection}{\numberline {8.28.2.8}Get\_Model\_ChargeI()}{117}{subsubsection.8.28.2.8}%
+\contentsline {subsubsection}{\numberline {8.28.2.9}Get\_Model\_Electronics()}{117}{subsubsection.8.28.2.9}%
+\contentsline {subsubsection}{\numberline {8.28.2.10}Get\_Model\_ReadOutGeometry()}{118}{subsubsection.8.28.2.10}%
+\contentsline {subsubsection}{\numberline {8.28.2.11}Get\_NberOfEvents()}{118}{subsubsection.8.28.2.11}%
+\contentsline {subsubsection}{\numberline {8.28.2.12}Get\_RC()}{118}{subsubsection.8.28.2.12}%
+\contentsline {subsubsection}{\numberline {8.28.2.13}Get\_RC\_BeforeMinimisation()}{118}{subsubsection.8.28.2.13}%
+\contentsline {subsubsection}{\numberline {8.28.2.14}Get\_SetOfTracks\_ForThisModule()}{118}{subsubsection.8.28.2.14}%
+\contentsline {subsubsection}{\numberline {8.28.2.15}GetFilePRF()}{118}{subsubsection.8.28.2.15}%
+\contentsline {subsubsection}{\numberline {8.28.2.16}Set\_DD()}{118}{subsubsection.8.28.2.16}%
+\contentsline {subsubsection}{\numberline {8.28.2.17}Set\_Model\_Charge()}{118}{subsubsection.8.28.2.17}%
+\contentsline {subsubsection}{\numberline {8.28.2.18}Set\_Model\_Electronics()}{118}{subsubsection.8.28.2.18}%
+\contentsline {subsubsection}{\numberline {8.28.2.19}Set\_Model\_ReadOutGeometry()}{119}{subsubsection.8.28.2.19}%
+\contentsline {subsubsection}{\numberline {8.28.2.20}Set\_RC()}{119}{subsubsection.8.28.2.20}%
+\contentsline {subsubsection}{\numberline {8.28.2.21}SetFilePRF()}{119}{subsubsection.8.28.2.21}%
+\contentsline {subsubsection}{\numberline {8.28.2.22}SmallDump()}{119}{subsubsection.8.28.2.22}%
+\contentsline {subsubsection}{\numberline {8.28.2.23}StatusFit()}{119}{subsubsection.8.28.2.23}%
+\contentsline {subsubsection}{\numberline {8.28.2.24}WriteOut()}{119}{subsubsection.8.28.2.24}%
+\contentsline {section}{\numberline {8.29}Selector Class Reference}{119}{section.8.29}%
+\contentsline {subsection}{\numberline {8.29.1}Detailed Description}{120}{subsection.8.29.1}%
+\contentsline {subsection}{\numberline {8.29.2}Constructor \& Destructor Documentation}{121}{subsection.8.29.2}%
+\contentsline {subsubsection}{\numberline {8.29.2.1}Selector()\hspace {0.1cm}{\footnotesize \ttfamily [1/2]}}{121}{subsubsection.8.29.2.1}%
+\contentsline {subsubsection}{\numberline {8.29.2.2}Selector()\hspace {0.1cm}{\footnotesize \ttfamily [2/2]}}{121}{subsubsection.8.29.2.2}%
+\contentsline {subsubsection}{\numberline {8.29.2.3}$\sim $Selector()}{121}{subsubsection.8.29.2.3}%
+\contentsline {subsection}{\numberline {8.29.3}Member Function Documentation}{121}{subsection.8.29.3}%
+\contentsline {subsubsection}{\numberline {8.29.3.1}Add\_Selection()}{121}{subsubsection.8.29.3.1}%
+\contentsline {subsubsection}{\numberline {8.29.3.2}Apply\_ASelection()\hspace {0.1cm}{\footnotesize \ttfamily [1/2]}}{121}{subsubsection.8.29.3.2}%
+\contentsline {subsubsection}{\numberline {8.29.3.3}Apply\_ASelection()\hspace {0.1cm}{\footnotesize \ttfamily [2/2]}}{121}{subsubsection.8.29.3.3}%
+\contentsline {subsubsection}{\numberline {8.29.3.4}ApplySelection()\hspace {0.1cm}{\footnotesize \ttfamily [1/2]}}{122}{subsubsection.8.29.3.4}%
+\contentsline {subsubsection}{\numberline {8.29.3.5}ApplySelection()\hspace {0.1cm}{\footnotesize \ttfamily [2/2]}}{122}{subsubsection.8.29.3.5}%
+\contentsline {subsubsection}{\numberline {8.29.3.6}Get\_Cut\_Stage2\_EventBased()}{122}{subsubsection.8.29.3.6}%
+\contentsline {subsubsection}{\numberline {8.29.3.7}Get\_Cut\_Stage3\_THigh()}{122}{subsubsection.8.29.3.7}%
+\contentsline {subsubsection}{\numberline {8.29.3.8}Get\_Cut\_Stage3\_TLow()}{122}{subsubsection.8.29.3.8}%
+\contentsline {subsubsection}{\numberline {8.29.3.9}Get\_Cut\_Stage4\_APM\_High()}{122}{subsubsection.8.29.3.9}%
+\contentsline {subsubsection}{\numberline {8.29.3.10}Get\_Cut\_Stage4\_APM\_Low()}{122}{subsubsection.8.29.3.10}%
+\contentsline {subsubsection}{\numberline {8.29.3.11}Get\_Cut\_Stage5\_Npads\_Hig()}{122}{subsubsection.8.29.3.11}%
+\contentsline {subsubsection}{\numberline {8.29.3.12}Get\_Cut\_Stage6\_Amax\_Hig()}{123}{subsubsection.8.29.3.12}%
+\contentsline {subsubsection}{\numberline {8.29.3.13}Get\_Cut\_Stage6\_Amax\_Low()}{123}{subsubsection.8.29.3.13}%
+\contentsline {subsubsection}{\numberline {8.29.3.14}Get\_Cut\_StageFinal\_NCluster\_Low()}{123}{subsubsection.8.29.3.14}%
+\contentsline {subsubsection}{\numberline {8.29.3.15}Get\_SelectionName()}{123}{subsubsection.8.29.3.15}%
+\contentsline {subsubsection}{\numberline {8.29.3.16}NberOfSelections()}{123}{subsubsection.8.29.3.16}%
+\contentsline {subsubsection}{\numberline {8.29.3.17}PrintStat()}{123}{subsubsection.8.29.3.17}%
+\contentsline {subsubsection}{\numberline {8.29.3.18}Reset\_Selection()}{123}{subsubsection.8.29.3.18}%
+\contentsline {subsubsection}{\numberline {8.29.3.19}Reset\_StatCounters()}{123}{subsubsection.8.29.3.19}%
+\contentsline {subsubsection}{\numberline {8.29.3.20}Set\_Cut\_Stage2\_EventBased()}{123}{subsubsection.8.29.3.20}%
+\contentsline {subsubsection}{\numberline {8.29.3.21}Set\_Cut\_Stage3\_THigh()}{124}{subsubsection.8.29.3.21}%
+\contentsline {subsubsection}{\numberline {8.29.3.22}Set\_Cut\_Stage3\_TLow()}{124}{subsubsection.8.29.3.22}%
+\contentsline {subsubsection}{\numberline {8.29.3.23}Set\_Cut\_Stage4\_APM\_High()}{124}{subsubsection.8.29.3.23}%
+\contentsline {subsubsection}{\numberline {8.29.3.24}Set\_Cut\_Stage4\_APM\_Low()}{124}{subsubsection.8.29.3.24}%
+\contentsline {subsubsection}{\numberline {8.29.3.25}Set\_Cut\_Stage5\_Npads\_Hig()}{124}{subsubsection.8.29.3.25}%
+\contentsline {subsubsection}{\numberline {8.29.3.26}Set\_Cut\_Stage6\_Amax\_Hig()}{124}{subsubsection.8.29.3.26}%
+\contentsline {subsubsection}{\numberline {8.29.3.27}Set\_Cut\_Stage6\_Amax\_Low()}{124}{subsubsection.8.29.3.27}%
+\contentsline {subsubsection}{\numberline {8.29.3.28}Set\_Cut\_StageFinal\_NCluster\_Low()}{124}{subsubsection.8.29.3.28}%
+\contentsline {subsubsection}{\numberline {8.29.3.29}Tell\_Selection()}{125}{subsubsection.8.29.3.29}%
+\contentsline {section}{\numberline {8.30}Set\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Of\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Tracks Class Reference}{125}{section.8.30}%
+\contentsline {subsection}{\numberline {8.30.1}Constructor \& Destructor Documentation}{126}{subsection.8.30.1}%
+\contentsline {subsubsection}{\numberline {8.30.1.1}SetOfTracks()}{126}{subsubsection.8.30.1.1}%
+\contentsline {subsubsection}{\numberline {8.30.1.2}$\sim $SetOfTracks()}{126}{subsubsection.8.30.1.2}%
+\contentsline {subsection}{\numberline {8.30.2}Member Function Documentation}{126}{subsection.8.30.2}%
+\contentsline {subsubsection}{\numberline {8.30.2.1}Add\_Track()}{126}{subsubsection.8.30.2.1}%
+\contentsline {subsubsection}{\numberline {8.30.2.2}DumpRec()}{126}{subsubsection.8.30.2.2}%
+\contentsline {subsubsection}{\numberline {8.30.2.3}Get\_MinimalNberOfEntries()}{126}{subsubsection.8.30.2.3}%
+\contentsline {subsubsection}{\numberline {8.30.2.4}Get\_NberOfTrack()}{126}{subsubsection.8.30.2.4}%
+\contentsline {subsubsection}{\numberline {8.30.2.5}Get\_Track()}{126}{subsubsection.8.30.2.5}%
+\contentsline {subsubsection}{\numberline {8.30.2.6}GiveMe\_pTH1F\_Ch2Min()}{127}{subsubsection.8.30.2.6}%
+\contentsline {subsubsection}{\numberline {8.30.2.7}GiveMe\_pTH1F\_Ch2MinPerNODF()}{127}{subsubsection.8.30.2.7}%
+\contentsline {subsubsection}{\numberline {8.30.2.8}GiveMe\_pTH1F\_Pull()\hspace {0.1cm}{\footnotesize \ttfamily [1/5]}}{127}{subsubsection.8.30.2.8}%
+\contentsline {subsubsection}{\numberline {8.30.2.9}GiveMe\_pTH1F\_Pull()\hspace {0.1cm}{\footnotesize \ttfamily [2/5]}}{127}{subsubsection.8.30.2.9}%
+\contentsline {subsubsection}{\numberline {8.30.2.10}GiveMe\_pTH1F\_Pull()\hspace {0.1cm}{\footnotesize \ttfamily [3/5]}}{127}{subsubsection.8.30.2.10}%
+\contentsline {subsubsection}{\numberline {8.30.2.11}GiveMe\_pTH1F\_Pull()\hspace {0.1cm}{\footnotesize \ttfamily [4/5]}}{127}{subsubsection.8.30.2.11}%
+\contentsline {subsubsection}{\numberline {8.30.2.12}GiveMe\_pTH1F\_Pull()\hspace {0.1cm}{\footnotesize \ttfamily [5/5]}}{128}{subsubsection.8.30.2.12}%
+\contentsline {subsubsection}{\numberline {8.30.2.13}GiveMe\_pTH1F\_Residual()\hspace {0.1cm}{\footnotesize \ttfamily [1/3]}}{128}{subsubsection.8.30.2.13}%
+\contentsline {subsubsection}{\numberline {8.30.2.14}GiveMe\_pTH1F\_Residual()\hspace {0.1cm}{\footnotesize \ttfamily [2/3]}}{128}{subsubsection.8.30.2.14}%
+\contentsline {subsubsection}{\numberline {8.30.2.15}GiveMe\_pTH1F\_Residual()\hspace {0.1cm}{\footnotesize \ttfamily [3/3]}}{128}{subsubsection.8.30.2.15}%
+\contentsline {subsubsection}{\numberline {8.30.2.16}GiveMe\_pTH1F\_TrackDeltaT()}{128}{subsubsection.8.30.2.16}%
+\contentsline {subsubsection}{\numberline {8.30.2.17}GiveMe\_pTH1F\_YFitCol()\hspace {0.1cm}{\footnotesize \ttfamily [1/4]}}{129}{subsubsection.8.30.2.17}%
+\contentsline {subsubsection}{\numberline {8.30.2.18}GiveMe\_pTH1F\_YFitCol()\hspace {0.1cm}{\footnotesize \ttfamily [2/4]}}{129}{subsubsection.8.30.2.18}%
+\contentsline {subsubsection}{\numberline {8.30.2.19}GiveMe\_pTH1F\_YFitCol()\hspace {0.1cm}{\footnotesize \ttfamily [3/4]}}{129}{subsubsection.8.30.2.19}%
+\contentsline {subsubsection}{\numberline {8.30.2.20}GiveMe\_pTH1F\_YFitCol()\hspace {0.1cm}{\footnotesize \ttfamily [4/4]}}{129}{subsubsection.8.30.2.20}%
+\contentsline {subsubsection}{\numberline {8.30.2.21}GiveMe\_pTH1F\_YTrackInTracks()\hspace {0.1cm}{\footnotesize \ttfamily [1/4]}}{129}{subsubsection.8.30.2.21}%
+\contentsline {subsubsection}{\numberline {8.30.2.22}GiveMe\_pTH1F\_YTrackInTracks()\hspace {0.1cm}{\footnotesize \ttfamily [2/4]}}{129}{subsubsection.8.30.2.22}%
+\contentsline {subsubsection}{\numberline {8.30.2.23}GiveMe\_pTH1F\_YTrackInTracks()\hspace {0.1cm}{\footnotesize \ttfamily [3/4]}}{129}{subsubsection.8.30.2.23}%
+\contentsline {subsubsection}{\numberline {8.30.2.24}GiveMe\_pTH1F\_YTrackInTracks()\hspace {0.1cm}{\footnotesize \ttfamily [4/4]}}{130}{subsubsection.8.30.2.24}%
+\contentsline {subsubsection}{\numberline {8.30.2.25}GiveMe\_pTH1F\_YTrackYPadInTracks()\hspace {0.1cm}{\footnotesize \ttfamily [1/2]}}{130}{subsubsection.8.30.2.25}%
+\contentsline {subsubsection}{\numberline {8.30.2.26}GiveMe\_pTH1F\_YTrackYPadInTracks()\hspace {0.1cm}{\footnotesize \ttfamily [2/2]}}{130}{subsubsection.8.30.2.26}%
+\contentsline {subsubsection}{\numberline {8.30.2.27}GiveMe\_pTH1F\_YTrackYPadLeadingInTracks()\hspace {0.1cm}{\footnotesize \ttfamily [1/2]}}{130}{subsubsection.8.30.2.27}%
+\contentsline {subsubsection}{\numberline {8.30.2.28}GiveMe\_pTH1F\_YTrackYPadLeadingInTracks()\hspace {0.1cm}{\footnotesize \ttfamily [2/2]}}{130}{subsubsection.8.30.2.28}%
+\contentsline {subsubsection}{\numberline {8.30.2.29}Set\_MinimalNberOfEntries()}{130}{subsubsection.8.30.2.29}%
+\contentsline {section}{\numberline {8.31}Static\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Cluster\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Fitter\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Diagonal Class Reference}{131}{section.8.31}%
+\contentsline {subsection}{\numberline {8.31.1}Constructor \& Destructor Documentation}{131}{subsection.8.31.1}%
+\contentsline {subsubsection}{\numberline {8.31.1.1}StaticClusterFitter\_Diagonal()}{131}{subsubsection.8.31.1.1}%
+\contentsline {subsubsection}{\numberline {8.31.1.2}$\sim $StaticClusterFitter\_Diagonal()}{131}{subsubsection.8.31.1.2}%
+\contentsline {subsection}{\numberline {8.31.2}Member Function Documentation}{131}{subsection.8.31.2}%
+\contentsline {subsubsection}{\numberline {8.31.2.1}Set()}{131}{subsubsection.8.31.2.1}%
+\contentsline {subsection}{\numberline {8.31.3}Member Data Documentation}{131}{subsection.8.31.3}%
+\contentsline {subsubsection}{\numberline {8.31.3.1}p\_ClusterFitter\_Diagonal}{131}{subsubsection.8.31.3.1}%
+\contentsline {section}{\numberline {8.32}Static\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Cluster\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Fitter\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Horizontal Class Reference}{132}{section.8.32}%
+\contentsline {subsection}{\numberline {8.32.1}Constructor \& Destructor Documentation}{132}{subsection.8.32.1}%
+\contentsline {subsubsection}{\numberline {8.32.1.1}StaticClusterFitter\_Horizontal()}{132}{subsubsection.8.32.1.1}%
+\contentsline {subsubsection}{\numberline {8.32.1.2}$\sim $StaticClusterFitter\_Horizontal()}{132}{subsubsection.8.32.1.2}%
+\contentsline {subsection}{\numberline {8.32.2}Member Function Documentation}{132}{subsection.8.32.2}%
+\contentsline {subsubsection}{\numberline {8.32.2.1}Set()}{132}{subsubsection.8.32.2.1}%
+\contentsline {subsection}{\numberline {8.32.3}Member Data Documentation}{132}{subsection.8.32.3}%
+\contentsline {subsubsection}{\numberline {8.32.3.1}p\_ClusterFitter\_Horizontal}{132}{subsubsection.8.32.3.1}%
+\contentsline {section}{\numberline {8.33}Static\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Track\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Fitter Class Reference}{133}{section.8.33}%
+\contentsline {subsection}{\numberline {8.33.1}Constructor \& Destructor Documentation}{133}{subsection.8.33.1}%
+\contentsline {subsubsection}{\numberline {8.33.1.1}StaticTrackFitter()}{133}{subsubsection.8.33.1.1}%
+\contentsline {subsubsection}{\numberline {8.33.1.2}$\sim $StaticTrackFitter()}{133}{subsubsection.8.33.1.2}%
+\contentsline {subsection}{\numberline {8.33.2}Member Function Documentation}{133}{subsection.8.33.2}%
+\contentsline {subsubsection}{\numberline {8.33.2.1}Set()}{133}{subsubsection.8.33.2.1}%
+\contentsline {subsection}{\numberline {8.33.3}Member Data Documentation}{133}{subsection.8.33.3}%
+\contentsline {subsubsection}{\numberline {8.33.3.1}p\_TrackFitter}{133}{subsubsection.8.33.3.1}%
+\contentsline {section}{\numberline {8.34}Track Class Reference}{134}{section.8.34}%
+\contentsline {subsection}{\numberline {8.34.1}Constructor \& Destructor Documentation}{134}{subsection.8.34.1}%
+\contentsline {subsubsection}{\numberline {8.34.1.1}Track()}{134}{subsubsection.8.34.1.1}%
+\contentsline {subsubsection}{\numberline {8.34.1.2}$\sim $Track()}{135}{subsubsection.8.34.1.2}%
+\contentsline {subsection}{\numberline {8.34.2}Member Function Documentation}{135}{subsection.8.34.2}%
+\contentsline {subsubsection}{\numberline {8.34.2.1}Add\_Cluster()}{135}{subsubsection.8.34.2.1}%
+\contentsline {subsubsection}{\numberline {8.34.2.2}Chi2()}{135}{subsubsection.8.34.2.2}%
+\contentsline {subsubsection}{\numberline {8.34.2.3}DoClosure()}{135}{subsubsection.8.34.2.3}%
+\contentsline {subsubsection}{\numberline {8.34.2.4}DumpRec()}{135}{subsubsection.8.34.2.4}%
+\contentsline {subsubsection}{\numberline {8.34.2.5}Get\_Chi2Min()}{135}{subsubsection.8.34.2.5}%
+\contentsline {subsubsection}{\numberline {8.34.2.6}Get\_Cluster()}{135}{subsubsection.8.34.2.6}%
+\contentsline {subsubsection}{\numberline {8.34.2.7}Get\_CovMatrix()}{135}{subsubsection.8.34.2.7}%
+\contentsline {subsubsection}{\numberline {8.34.2.8}Get\_EntryNber()}{136}{subsubsection.8.34.2.8}%
+\contentsline {subsubsection}{\numberline {8.34.2.9}Get\_EventNber()}{136}{subsubsection.8.34.2.9}%
+\contentsline {subsubsection}{\numberline {8.34.2.10}Get\_ModuleNber()}{136}{subsubsection.8.34.2.10}%
+\contentsline {subsubsection}{\numberline {8.34.2.11}Get\_NberOfCluster()}{136}{subsubsection.8.34.2.11}%
+\contentsline {subsubsection}{\numberline {8.34.2.12}Get\_ParameterError()}{136}{subsubsection.8.34.2.12}%
+\contentsline {subsubsection}{\numberline {8.34.2.13}Get\_ParameterName()}{136}{subsubsection.8.34.2.13}%
+\contentsline {subsubsection}{\numberline {8.34.2.14}Get\_ParameterValue()}{136}{subsubsection.8.34.2.14}%
+\contentsline {subsubsection}{\numberline {8.34.2.15}Get\_ParameterValue\_BeforeMinimisation()}{136}{subsubsection.8.34.2.15}%
+\contentsline {subsubsection}{\numberline {8.34.2.16}Get\_Pull()}{137}{subsubsection.8.34.2.16}%
+\contentsline {subsubsection}{\numberline {8.34.2.17}Get\_Residual()}{137}{subsubsection.8.34.2.17}%
+\contentsline {subsubsection}{\numberline {8.34.2.18}GetNberOfParameters()}{137}{subsubsection.8.34.2.18}%
+\contentsline {subsubsection}{\numberline {8.34.2.19}SetNberOfParameters()}{137}{subsubsection.8.34.2.19}%
+\contentsline {subsubsection}{\numberline {8.34.2.20}SetParameter()}{137}{subsubsection.8.34.2.20}%
+\contentsline {subsubsection}{\numberline {8.34.2.21}SetParameters\_Internal()}{137}{subsubsection.8.34.2.21}%
+\contentsline {subsubsection}{\numberline {8.34.2.22}SetResults()}{137}{subsubsection.8.34.2.22}%
+\contentsline {subsubsection}{\numberline {8.34.2.23}Y\_Position()}{137}{subsubsection.8.34.2.23}%
+\contentsline {subsection}{\numberline {8.34.3}Member Data Documentation}{137}{subsection.8.34.3}%
+\contentsline {subsubsection}{\numberline {8.34.3.1}m\_NberOfClusters}{137}{subsubsection.8.34.3.1}%
+\contentsline {subsubsection}{\numberline {8.34.3.2}V\_Cluster}{138}{subsubsection.8.34.3.2}%
+\contentsline {subsubsection}{\numberline {8.34.3.3}V\_Pull}{138}{subsubsection.8.34.3.3}%
+\contentsline {subsubsection}{\numberline {8.34.3.4}V\_Residual}{138}{subsubsection.8.34.3.4}%
+\contentsline {section}{\numberline {8.35}Track\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Fitter Class Reference}{138}{section.8.35}%
+\contentsline {subsection}{\numberline {8.35.1}Constructor \& Destructor Documentation}{138}{subsection.8.35.1}%
+\contentsline {subsubsection}{\numberline {8.35.1.1}TrackFitter()}{138}{subsubsection.8.35.1.1}%
+\contentsline {subsubsection}{\numberline {8.35.1.2}$\sim $TrackFitter()}{139}{subsubsection.8.35.1.2}%
+\contentsline {subsection}{\numberline {8.35.2}Member Function Documentation}{139}{subsection.8.35.2}%
+\contentsline {subsubsection}{\numberline {8.35.2.1}Chi2()}{139}{subsubsection.8.35.2.1}%
+\contentsline {subsubsection}{\numberline {8.35.2.2}DoMinimisation()}{139}{subsubsection.8.35.2.2}%
+\contentsline {subsubsection}{\numberline {8.35.2.3}Set\_Track()}{139}{subsubsection.8.35.2.3}%
+\contentsline {subsection}{\numberline {8.35.3}Member Data Documentation}{140}{subsection.8.35.3}%
+\contentsline {subsubsection}{\numberline {8.35.3.1}m\_FitterName}{140}{subsubsection.8.35.3.1}%
+\contentsline {subsubsection}{\numberline {8.35.3.2}m\_NberOfParameters}{140}{subsubsection.8.35.3.2}%
+\contentsline {subsubsection}{\numberline {8.35.3.3}p\_Track}{140}{subsubsection.8.35.3.3}%
+\contentsline {subsubsection}{\numberline {8.35.3.4}p\_TVirtualFitter}{140}{subsubsection.8.35.3.4}%
+\contentsline {section}{\numberline {8.36}Uploader Class Reference}{140}{section.8.36}%
+\contentsline {subsection}{\numberline {8.36.1}Constructor \& Destructor Documentation}{141}{subsection.8.36.1}%
+\contentsline {subsubsection}{\numberline {8.36.1.1}Uploader()}{141}{subsubsection.8.36.1.1}%
+\contentsline {subsubsection}{\numberline {8.36.1.2}$\sim $Uploader()}{141}{subsubsection.8.36.1.2}%
+\contentsline {subsection}{\numberline {8.36.2}Member Function Documentation}{142}{subsection.8.36.2}%
+\contentsline {subsubsection}{\numberline {8.36.2.1}Get\_a2()}{142}{subsubsection.8.36.2.1}%
+\contentsline {subsubsection}{\numberline {8.36.2.2}Get\_a4()}{142}{subsubsection.8.36.2.2}%
+\contentsline {subsubsection}{\numberline {8.36.2.3}Get\_b2()}{142}{subsubsection.8.36.2.3}%
+\contentsline {subsubsection}{\numberline {8.36.2.4}Get\_b4()}{142}{subsubsection.8.36.2.4}%
+\contentsline {subsubsection}{\numberline {8.36.2.5}Get\_Model\_Charge1D()}{142}{subsubsection.8.36.2.5}%
+\contentsline {subsubsection}{\numberline {8.36.2.6}Get\_Model\_Electronics()}{142}{subsubsection.8.36.2.6}%
+\contentsline {subsubsection}{\numberline {8.36.2.7}Get\_Model\_ReadOutGeometry()}{142}{subsubsection.8.36.2.7}%
+\contentsline {subsubsection}{\numberline {8.36.2.8}Get\_NberOfEvent()}{142}{subsubsection.8.36.2.8}%
+\contentsline {subsubsection}{\numberline {8.36.2.9}Get\_Norm()}{142}{subsubsection.8.36.2.9}%
+\contentsline {subsubsection}{\numberline {8.36.2.10}Get\_PRF\_exist()}{142}{subsubsection.8.36.2.10}%
+\contentsline {subsubsection}{\numberline {8.36.2.11}Get\_SampleFile()}{143}{subsubsection.8.36.2.11}%
+\contentsline {subsubsection}{\numberline {8.36.2.12}GiveMe\_Event()}{143}{subsubsection.8.36.2.12}%
+\contentsline {subsection}{\numberline {8.36.3}Member Data Documentation}{143}{subsection.8.36.3}%
+\contentsline {subsubsection}{\numberline {8.36.3.1}m\_a2}{143}{subsubsection.8.36.3.1}%
+\contentsline {subsubsection}{\numberline {8.36.3.2}m\_a4}{143}{subsubsection.8.36.3.2}%
+\contentsline {subsubsection}{\numberline {8.36.3.3}m\_b2}{143}{subsubsection.8.36.3.3}%
+\contentsline {subsubsection}{\numberline {8.36.3.4}m\_b4}{143}{subsubsection.8.36.3.4}%
+\contentsline {subsubsection}{\numberline {8.36.3.5}m\_NberOfEvent}{143}{subsubsection.8.36.3.5}%
+\contentsline {subsubsection}{\numberline {8.36.3.6}m\_Norm}{143}{subsubsection.8.36.3.6}%
+\contentsline {subsubsection}{\numberline {8.36.3.7}m\_PRF\_exist}{143}{subsubsection.8.36.3.7}%
+\contentsline {subsubsection}{\numberline {8.36.3.8}m\_SampleFile}{144}{subsubsection.8.36.3.8}%
+\contentsline {subsubsection}{\numberline {8.36.3.9}p\_Model\_Charge1D}{144}{subsubsection.8.36.3.9}%
+\contentsline {subsubsection}{\numberline {8.36.3.10}p\_Model\_Electronics}{144}{subsubsection.8.36.3.10}%
+\contentsline {subsubsection}{\numberline {8.36.3.11}p\_Model\_ReadOutGeometry}{144}{subsubsection.8.36.3.11}%
+\contentsline {subsubsection}{\numberline {8.36.3.12}p\_TFile}{144}{subsubsection.8.36.3.12}%
+\contentsline {subsubsection}{\numberline {8.36.3.13}p\_TTree}{144}{subsubsection.8.36.3.13}%
+\contentsline {section}{\numberline {8.37}Uploader\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}ERAM01 Class Reference}{144}{section.8.37}%
+\contentsline {subsection}{\numberline {8.37.1}Constructor \& Destructor Documentation}{145}{subsection.8.37.1}%
+\contentsline {subsubsection}{\numberline {8.37.1.1}Uploader\_ERAM01()}{145}{subsubsection.8.37.1.1}%
+\contentsline {subsubsection}{\numberline {8.37.1.2}$\sim $Uploader\_ERAM01()}{146}{subsubsection.8.37.1.2}%
+\contentsline {subsection}{\numberline {8.37.2}Member Function Documentation}{146}{subsection.8.37.2}%
+\contentsline {subsubsection}{\numberline {8.37.2.1}GiveMe\_Event()\hspace {0.1cm}{\footnotesize \ttfamily [1/2]}}{146}{subsubsection.8.37.2.1}%
+\contentsline {subsubsection}{\numberline {8.37.2.2}GiveMe\_Event()\hspace {0.1cm}{\footnotesize \ttfamily [2/2]}}{146}{subsubsection.8.37.2.2}%
+\contentsline {section}{\numberline {8.38}Uploader\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Mock\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Up\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}V1 Class Reference}{146}{section.8.38}%
+\contentsline {subsection}{\numberline {8.38.1}Constructor \& Destructor Documentation}{147}{subsection.8.38.1}%
+\contentsline {subsubsection}{\numberline {8.38.1.1}Uploader\_MockUp\_V1()}{147}{subsubsection.8.38.1.1}%
+\contentsline {subsubsection}{\numberline {8.38.1.2}$\sim $Uploader\_MockUp\_V1()}{147}{subsubsection.8.38.1.2}%
+\contentsline {subsection}{\numberline {8.38.2}Member Function Documentation}{148}{subsection.8.38.2}%
+\contentsline {subsubsection}{\numberline {8.38.2.1}GiveMe\_Event()\hspace {0.1cm}{\footnotesize \ttfamily [1/2]}}{148}{subsubsection.8.38.2.1}%
+\contentsline {subsubsection}{\numberline {8.38.2.2}GiveMe\_Event()\hspace {0.1cm}{\footnotesize \ttfamily [2/2]}}{148}{subsubsection.8.38.2.2}%
+\contentsline {section}{\numberline {8.39}Uploader\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Mock\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Up\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}V2 Class Reference}{148}{section.8.39}%
+\contentsline {subsection}{\numberline {8.39.1}Constructor \& Destructor Documentation}{151}{subsection.8.39.1}%
+\contentsline {subsubsection}{\numberline {8.39.1.1}Uploader\_MockUp\_V2()}{151}{subsubsection.8.39.1.1}%
+\contentsline {subsubsection}{\numberline {8.39.1.2}$\sim $Uploader\_MockUp\_V2()}{151}{subsubsection.8.39.1.2}%
+\contentsline {subsection}{\numberline {8.39.2}Member Function Documentation}{151}{subsection.8.39.2}%
+\contentsline {subsubsection}{\numberline {8.39.2.1}GiveMe\_Event()\hspace {0.1cm}{\footnotesize \ttfamily [1/2]}}{151}{subsubsection.8.39.2.1}%
+\contentsline {subsubsection}{\numberline {8.39.2.2}GiveMe\_Event()\hspace {0.1cm}{\footnotesize \ttfamily [2/2]}}{151}{subsubsection.8.39.2.2}%
+\contentsline {subsubsection}{\numberline {8.39.2.3}Init()}{151}{subsubsection.8.39.2.3}%
+\contentsline {subsubsection}{\numberline {8.39.2.4}SetBeforeMerging()}{151}{subsubsection.8.39.2.4}%
+\contentsline {subsubsection}{\numberline {8.39.2.5}Setwap\_XY()}{151}{subsubsection.8.39.2.5}%
+\contentsline {subsection}{\numberline {8.39.3}Member Data Documentation}{152}{subsection.8.39.3}%
+\contentsline {subsubsection}{\numberline {8.39.3.1}angle\_xy}{152}{subsubsection.8.39.3.1}%
+\contentsline {subsubsection}{\numberline {8.39.3.2}angle\_yz}{152}{subsubsection.8.39.3.2}%
+\contentsline {subsubsection}{\numberline {8.39.3.3}b\_angle\_xy}{152}{subsubsection.8.39.3.3}%
+\contentsline {subsubsection}{\numberline {8.39.3.4}b\_angle\_yz}{152}{subsubsection.8.39.3.4}%
+\contentsline {subsubsection}{\numberline {8.39.3.5}b\_beforeMerging}{152}{subsubsection.8.39.3.5}%
+\contentsline {subsubsection}{\numberline {8.39.3.6}b\_charge}{152}{subsubsection.8.39.3.6}%
+\contentsline {subsubsection}{\numberline {8.39.3.7}b\_clust\_pos}{152}{subsubsection.8.39.3.7}%
+\contentsline {subsubsection}{\numberline {8.39.3.8}b\_clust\_pos\_err}{152}{subsubsection.8.39.3.8}%
+\contentsline {subsubsection}{\numberline {8.39.3.9}b\_date}{152}{subsubsection.8.39.3.9}%
+\contentsline {subsubsection}{\numberline {8.39.3.10}b\_dEdx}{152}{subsubsection.8.39.3.10}%
+\contentsline {subsubsection}{\numberline {8.39.3.11}b\_dx}{153}{subsubsection.8.39.3.11}%
+\contentsline {subsubsection}{\numberline {8.39.3.12}b\_ev}{153}{subsubsection.8.39.3.12}%
+\contentsline {subsubsection}{\numberline {8.39.3.13}b\_max\_mult}{153}{subsubsection.8.39.3.13}%
+\contentsline {subsubsection}{\numberline {8.39.3.14}b\_mean\_mult}{153}{subsubsection.8.39.3.14}%
+\contentsline {subsubsection}{\numberline {8.39.3.15}b\_module}{153}{subsubsection.8.39.3.15}%
+\contentsline {subsubsection}{\numberline {8.39.3.16}b\_mom}{153}{subsubsection.8.39.3.16}%
+\contentsline {subsubsection}{\numberline {8.39.3.17}b\_multiplicity}{153}{subsubsection.8.39.3.17}%
+\contentsline {subsubsection}{\numberline {8.39.3.18}b\_offset}{153}{subsubsection.8.39.3.18}%
+\contentsline {subsubsection}{\numberline {8.39.3.19}b\_pad\_charge}{153}{subsubsection.8.39.3.19}%
+\contentsline {subsubsection}{\numberline {8.39.3.20}b\_pad\_time}{153}{subsubsection.8.39.3.20}%
+\contentsline {subsubsection}{\numberline {8.39.3.21}b\_pad\_wf\_q}{154}{subsubsection.8.39.3.21}%
+\contentsline {subsubsection}{\numberline {8.39.3.22}b\_pad\_x}{154}{subsubsection.8.39.3.22}%
+\contentsline {subsubsection}{\numberline {8.39.3.23}b\_pad\_y}{154}{subsubsection.8.39.3.23}%
+\contentsline {subsubsection}{\numberline {8.39.3.24}b\_qfrac}{154}{subsubsection.8.39.3.24}%
+\contentsline {subsubsection}{\numberline {8.39.3.25}b\_quality}{154}{subsubsection.8.39.3.25}%
+\contentsline {subsubsection}{\numberline {8.39.3.26}b\_residual}{154}{subsubsection.8.39.3.26}%
+\contentsline {subsubsection}{\numberline {8.39.3.27}b\_residual\_corr}{154}{subsubsection.8.39.3.27}%
+\contentsline {subsubsection}{\numberline {8.39.3.28}b\_rob\_clusters}{154}{subsubsection.8.39.3.28}%
+\contentsline {subsubsection}{\numberline {8.39.3.29}b\_sina}{154}{subsubsection.8.39.3.29}%
+\contentsline {subsubsection}{\numberline {8.39.3.30}b\_time}{154}{subsubsection.8.39.3.30}%
+\contentsline {subsubsection}{\numberline {8.39.3.31}b\_track}{155}{subsubsection.8.39.3.31}%
+\contentsline {subsubsection}{\numberline {8.39.3.32}b\_track\_pos}{155}{subsubsection.8.39.3.32}%
+\contentsline {subsubsection}{\numberline {8.39.3.33}b\_wf\_fwhm}{155}{subsubsection.8.39.3.33}%
+\contentsline {subsubsection}{\numberline {8.39.3.34}b\_wf\_width}{155}{subsubsection.8.39.3.34}%
+\contentsline {subsubsection}{\numberline {8.39.3.35}beforeMerging}{155}{subsubsection.8.39.3.35}%
+\contentsline {subsubsection}{\numberline {8.39.3.36}charge}{155}{subsubsection.8.39.3.36}%
+\contentsline {subsubsection}{\numberline {8.39.3.37}clust\_pos}{155}{subsubsection.8.39.3.37}%
+\contentsline {subsubsection}{\numberline {8.39.3.38}clust\_pos\_err}{155}{subsubsection.8.39.3.38}%
+\contentsline {subsubsection}{\numberline {8.39.3.39}date}{155}{subsubsection.8.39.3.39}%
+\contentsline {subsubsection}{\numberline {8.39.3.40}dEdx}{155}{subsubsection.8.39.3.40}%
+\contentsline {subsubsection}{\numberline {8.39.3.41}dx}{156}{subsubsection.8.39.3.41}%
+\contentsline {subsubsection}{\numberline {8.39.3.42}ev}{156}{subsubsection.8.39.3.42}%
+\contentsline {subsubsection}{\numberline {8.39.3.43}fCurrent}{156}{subsubsection.8.39.3.43}%
+\contentsline {subsubsection}{\numberline {8.39.3.44}max\_mult}{156}{subsubsection.8.39.3.44}%
+\contentsline {subsubsection}{\numberline {8.39.3.45}mean\_mult}{156}{subsubsection.8.39.3.45}%
+\contentsline {subsubsection}{\numberline {8.39.3.46}module}{156}{subsubsection.8.39.3.46}%
+\contentsline {subsubsection}{\numberline {8.39.3.47}mom}{156}{subsubsection.8.39.3.47}%
+\contentsline {subsubsection}{\numberline {8.39.3.48}multiplicity}{156}{subsubsection.8.39.3.48}%
+\contentsline {subsubsection}{\numberline {8.39.3.49}offset}{156}{subsubsection.8.39.3.49}%
+\contentsline {subsubsection}{\numberline {8.39.3.50}pad\_charge}{156}{subsubsection.8.39.3.50}%
+\contentsline {subsubsection}{\numberline {8.39.3.51}pad\_time}{157}{subsubsection.8.39.3.51}%
+\contentsline {subsubsection}{\numberline {8.39.3.52}pad\_wf\_q}{157}{subsubsection.8.39.3.52}%
+\contentsline {subsubsection}{\numberline {8.39.3.53}pad\_x}{157}{subsubsection.8.39.3.53}%
+\contentsline {subsubsection}{\numberline {8.39.3.54}pad\_y}{157}{subsubsection.8.39.3.54}%
+\contentsline {subsubsection}{\numberline {8.39.3.55}qfrac}{157}{subsubsection.8.39.3.55}%
+\contentsline {subsubsection}{\numberline {8.39.3.56}quality}{157}{subsubsection.8.39.3.56}%
+\contentsline {subsubsection}{\numberline {8.39.3.57}residual}{157}{subsubsection.8.39.3.57}%
+\contentsline {subsubsection}{\numberline {8.39.3.58}residual\_corr}{157}{subsubsection.8.39.3.58}%
+\contentsline {subsubsection}{\numberline {8.39.3.59}rob\_clusters}{157}{subsubsection.8.39.3.59}%
+\contentsline {subsubsection}{\numberline {8.39.3.60}sina}{157}{subsubsection.8.39.3.60}%
+\contentsline {subsubsection}{\numberline {8.39.3.61}time}{158}{subsubsection.8.39.3.61}%
+\contentsline {subsubsection}{\numberline {8.39.3.62}track}{158}{subsubsection.8.39.3.62}%
+\contentsline {subsubsection}{\numberline {8.39.3.63}track\_pos}{158}{subsubsection.8.39.3.63}%
+\contentsline {subsubsection}{\numberline {8.39.3.64}wf\_fwhm}{158}{subsubsection.8.39.3.64}%
+\contentsline {subsubsection}{\numberline {8.39.3.65}wf\_width}{158}{subsubsection.8.39.3.65}%
+\contentsline {section}{\numberline {8.40}Uploader\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Prototype Class Reference}{158}{section.8.40}%
+\contentsline {subsection}{\numberline {8.40.1}Constructor \& Destructor Documentation}{159}{subsection.8.40.1}%
+\contentsline {subsubsection}{\numberline {8.40.1.1}Uploader\_Prototype()}{159}{subsubsection.8.40.1.1}%
+\contentsline {subsubsection}{\numberline {8.40.1.2}$\sim $Uploader\_Prototype()}{159}{subsubsection.8.40.1.2}%
+\contentsline {subsection}{\numberline {8.40.2}Member Function Documentation}{160}{subsection.8.40.2}%
+\contentsline {subsubsection}{\numberline {8.40.2.1}GiveMe\_Event()\hspace {0.1cm}{\footnotesize \ttfamily [1/2]}}{160}{subsubsection.8.40.2.1}%
+\contentsline {subsubsection}{\numberline {8.40.2.2}GiveMe\_Event()\hspace {0.1cm}{\footnotesize \ttfamily [2/2]}}{160}{subsubsection.8.40.2.2}%
+\contentsline {chapter}{\numberline {9}File Documentation}{161}{chapter.9}%
+\contentsline {section}{\numberline {9.1}Apps/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Analysis.cxx File Reference}{161}{section.9.1}%
+\contentsline {subsection}{\numberline {9.1.1}Function Documentation}{161}{subsection.9.1.1}%
+\contentsline {subsubsection}{\numberline {9.1.1.1}main()}{161}{subsubsection.9.1.1.1}%
+\contentsline {section}{\numberline {9.2}Apps/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Draw\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Out.cxx File Reference}{161}{section.9.2}%
+\contentsline {subsection}{\numberline {9.2.1}Function Documentation}{162}{subsection.9.2.1}%
+\contentsline {subsubsection}{\numberline {9.2.1.1}main()}{162}{subsubsection.9.2.1.1}%
+\contentsline {section}{\numberline {9.3}Fitters/inc/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Cluster\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Fitter.h File Reference}{162}{section.9.3}%
+\contentsline {subsection}{\numberline {9.3.1}Detailed Description}{162}{subsection.9.3.1}%
+\contentsline {subsection}{\numberline {9.3.2}Function Documentation}{163}{subsection.9.3.2}%
+\contentsline {subsubsection}{\numberline {9.3.2.1}ClusterFit\_Diagonal()}{163}{subsubsection.9.3.2.1}%
+\contentsline {subsubsection}{\numberline {9.3.2.2}ClusterFit\_Diagonal\_Cluster()}{163}{subsubsection.9.3.2.2}%
+\contentsline {subsubsection}{\numberline {9.3.2.3}ClusterFit\_Diagonal\_Event()}{163}{subsubsection.9.3.2.3}%
+\contentsline {subsubsection}{\numberline {9.3.2.4}ClusterFit\_Horizontal()}{163}{subsubsection.9.3.2.4}%
+\contentsline {subsubsection}{\numberline {9.3.2.5}ClusterFit\_Horizontal\_Cluster()}{163}{subsubsection.9.3.2.5}%
+\contentsline {subsubsection}{\numberline {9.3.2.6}ClusterFit\_Horizontal\_Event()}{164}{subsubsection.9.3.2.6}%
+\contentsline {section}{\numberline {9.4}Cluster\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Fitter.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{164}{section.9.4}%
+\contentsline {section}{\numberline {9.5}Fitters/inc/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}PRFParameters.h File Reference}{165}{section.9.5}%
+\contentsline {subsection}{\numberline {9.5.1}Detailed Description}{165}{subsection.9.5.1}%
+\contentsline {section}{\numberline {9.6}PRFParameters.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{166}{section.9.6}%
+\contentsline {section}{\numberline {9.7}Fitters/inc/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Track\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Fitter.h File Reference}{166}{section.9.7}%
+\contentsline {subsection}{\numberline {9.7.1}Detailed Description}{166}{subsection.9.7.1}%
+\contentsline {section}{\numberline {9.8}Track\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Fitter.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{167}{section.9.8}%
+\contentsline {section}{\numberline {9.9}Fitters/inc/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Track\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Recon.h File Reference}{167}{section.9.9}%
+\contentsline {subsection}{\numberline {9.9.1}Detailed Description}{168}{subsection.9.9.1}%
+\contentsline {subsection}{\numberline {9.9.2}Function Documentation}{168}{subsection.9.9.2}%
+\contentsline {subsubsection}{\numberline {9.9.2.1}TrackRecon()}{168}{subsubsection.9.9.2.1}%
+\contentsline {subsubsection}{\numberline {9.9.2.2}TrackRecon\_Event()}{168}{subsubsection.9.9.2.2}%
+\contentsline {section}{\numberline {9.10}Track\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Recon.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{169}{section.9.10}%
+\contentsline {section}{\numberline {9.11}Fitters/src/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Cluster\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Fitter.cxx File Reference}{169}{section.9.11}%
+\contentsline {subsection}{\numberline {9.11.1}Function Documentation}{169}{subsection.9.11.1}%
+\contentsline {subsubsection}{\numberline {9.11.1.1}ClusterFit\_Diagonal()}{169}{subsubsection.9.11.1.1}%
+\contentsline {subsubsection}{\numberline {9.11.1.2}ClusterFit\_Diagonal\_Cluster()}{170}{subsubsection.9.11.1.2}%
+\contentsline {subsubsection}{\numberline {9.11.1.3}ClusterFit\_Diagonal\_Event()}{170}{subsubsection.9.11.1.3}%
+\contentsline {subsubsection}{\numberline {9.11.1.4}ClusterFit\_Horizontal()}{170}{subsubsection.9.11.1.4}%
+\contentsline {subsubsection}{\numberline {9.11.1.5}ClusterFit\_Horizontal\_Cluster()}{170}{subsubsection.9.11.1.5}%
+\contentsline {subsubsection}{\numberline {9.11.1.6}ClusterFit\_Horizontal\_Event()}{170}{subsubsection.9.11.1.6}%
+\contentsline {subsubsection}{\numberline {9.11.1.7}ClusterFitter\_DiagonalFunction()}{170}{subsubsection.9.11.1.7}%
+\contentsline {subsubsection}{\numberline {9.11.1.8}ClusterFitter\_HorizontalFunction()}{171}{subsubsection.9.11.1.8}%
+\contentsline {section}{\numberline {9.12}Fitters/src/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}PRFParameters.cxx File Reference}{171}{section.9.12}%
+\contentsline {section}{\numberline {9.13}Fitters/src/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Track\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Fitter.cxx File Reference}{171}{section.9.13}%
+\contentsline {subsection}{\numberline {9.13.1}Function Documentation}{171}{subsection.9.13.1}%
+\contentsline {subsubsection}{\numberline {9.13.1.1}TrackFitterFunction()}{171}{subsubsection.9.13.1.1}%
+\contentsline {section}{\numberline {9.14}Fitters/src/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Track\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Recon.cxx File Reference}{171}{section.9.14}%
+\contentsline {subsection}{\numberline {9.14.1}Function Documentation}{172}{subsection.9.14.1}%
+\contentsline {subsubsection}{\numberline {9.14.1.1}TrackRecon()}{172}{subsubsection.9.14.1.1}%
+\contentsline {subsubsection}{\numberline {9.14.1.2}TrackRecon\_Event()}{172}{subsubsection.9.14.1.2}%
+\contentsline {section}{\numberline {9.15}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Event/inc/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Amplitude\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Error.h File Reference}{173}{section.9.15}%
+\contentsline {subsection}{\numberline {9.15.1}Detailed Description}{173}{subsection.9.15.1}%
+\contentsline {subsection}{\numberline {9.15.2}Function Documentation}{173}{subsection.9.15.2}%
+\contentsline {subsubsection}{\numberline {9.15.2.1}AmplitudeError()}{173}{subsubsection.9.15.2.1}%
+\contentsline {section}{\numberline {9.16}Amplitude\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Error.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{173}{section.9.16}%
+\contentsline {section}{\numberline {9.17}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Event/inc/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Cluster.h File Reference}{173}{section.9.17}%
+\contentsline {subsection}{\numberline {9.17.1}Detailed Description}{174}{subsection.9.17.1}%
+\contentsline {section}{\numberline {9.18}Cluster.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{174}{section.9.18}%
+\contentsline {section}{\numberline {9.19}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Event/inc/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Event.h File Reference}{176}{section.9.19}%
+\contentsline {subsection}{\numberline {9.19.1}Detailed Description}{176}{subsection.9.19.1}%
+\contentsline {section}{\numberline {9.20}Event.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{176}{section.9.20}%
+\contentsline {section}{\numberline {9.21}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Event/inc/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Fit\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Output.h File Reference}{178}{section.9.21}%
+\contentsline {subsection}{\numberline {9.21.1}Detailed Description}{178}{subsection.9.21.1}%
+\contentsline {section}{\numberline {9.22}Fit\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Output.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{178}{section.9.22}%
+\contentsline {section}{\numberline {9.23}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Event/inc/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Module.h File Reference}{179}{section.9.23}%
+\contentsline {subsection}{\numberline {9.23.1}Detailed Description}{179}{subsection.9.23.1}%
+\contentsline {section}{\numberline {9.24}Module.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{179}{section.9.24}%
+\contentsline {section}{\numberline {9.25}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Event/inc/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Pad.h File Reference}{180}{section.9.25}%
+\contentsline {subsection}{\numberline {9.25.1}Detailed Description}{181}{subsection.9.25.1}%
+\contentsline {section}{\numberline {9.26}Pad.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{181}{section.9.26}%
+\contentsline {section}{\numberline {9.27}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Event/inc/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}ROBoard.h File Reference}{183}{section.9.27}%
+\contentsline {subsection}{\numberline {9.27.1}Detailed Description}{184}{subsection.9.27.1}%
+\contentsline {subsection}{\numberline {9.27.2}Macro Definition Documentation}{184}{subsection.9.27.2}%
+\contentsline {subsubsection}{\numberline {9.27.2.1}ROBoard\_H}{184}{subsubsection.9.27.2.1}%
+\contentsline {section}{\numberline {9.28}ROBoard.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{184}{section.9.28}%
+\contentsline {section}{\numberline {9.29}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Event/inc/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Sample.h File Reference}{185}{section.9.29}%
+\contentsline {subsection}{\numberline {9.29.1}Detailed Description}{185}{subsection.9.29.1}%
+\contentsline {section}{\numberline {9.30}Sample.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{185}{section.9.30}%
+\contentsline {section}{\numberline {9.31}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Event/inc/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Set\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Of\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Tracks.h File Reference}{187}{section.9.31}%
+\contentsline {subsection}{\numberline {9.31.1}Detailed Description}{187}{subsection.9.31.1}%
+\contentsline {section}{\numberline {9.32}Set\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Of\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Tracks.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{187}{section.9.32}%
+\contentsline {section}{\numberline {9.33}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Event/inc/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Time\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Error.h File Reference}{189}{section.9.33}%
+\contentsline {subsection}{\numberline {9.33.1}Detailed Description}{189}{subsection.9.33.1}%
+\contentsline {subsection}{\numberline {9.33.2}Function Documentation}{189}{subsection.9.33.2}%
+\contentsline {subsubsection}{\numberline {9.33.2.1}TimeError()\hspace {0.1cm}{\footnotesize \ttfamily [1/2]}}{189}{subsubsection.9.33.2.1}%
+\contentsline {subsubsection}{\numberline {9.33.2.2}TimeError()\hspace {0.1cm}{\footnotesize \ttfamily [2/2]}}{189}{subsubsection.9.33.2.2}%
+\contentsline {section}{\numberline {9.34}Time\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Error.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{189}{section.9.34}%
+\contentsline {section}{\numberline {9.35}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Event/inc/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Track.h File Reference}{190}{section.9.35}%
+\contentsline {subsection}{\numberline {9.35.1}Detailed Description}{190}{subsection.9.35.1}%
+\contentsline {section}{\numberline {9.36}Track.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{190}{section.9.36}%
+\contentsline {section}{\numberline {9.37}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Event/src/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Amplitude\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Error.cxx File Reference}{191}{section.9.37}%
+\contentsline {subsection}{\numberline {9.37.1}Function Documentation}{191}{subsection.9.37.1}%
+\contentsline {subsubsection}{\numberline {9.37.1.1}AmplitudeError()}{191}{subsubsection.9.37.1.1}%
+\contentsline {subsubsection}{\numberline {9.37.1.2}AmplitudeError\_Leading()}{192}{subsubsection.9.37.1.2}%
+\contentsline {subsubsection}{\numberline {9.37.1.3}AmplitudeError\_NextLeading()}{192}{subsubsection.9.37.1.3}%
+\contentsline {subsubsection}{\numberline {9.37.1.4}AmplitudeError\_NextNextLeading()}{192}{subsubsection.9.37.1.4}%
+\contentsline {section}{\numberline {9.38}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Event/src/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Cluster.cxx File Reference}{192}{section.9.38}%
+\contentsline {section}{\numberline {9.39}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Event/src/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Event.cxx File Reference}{192}{section.9.39}%
+\contentsline {section}{\numberline {9.40}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Event/src/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Fit\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Output.cxx File Reference}{192}{section.9.40}%
+\contentsline {section}{\numberline {9.41}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Event/src/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Module.cxx File Reference}{192}{section.9.41}%
+\contentsline {section}{\numberline {9.42}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Event/src/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Pad.cxx File Reference}{193}{section.9.42}%
+\contentsline {section}{\numberline {9.43}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Event/src/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}ROBoard.cxx File Reference}{193}{section.9.43}%
+\contentsline {section}{\numberline {9.44}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Event/src/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Sample.cxx File Reference}{193}{section.9.44}%
+\contentsline {section}{\numberline {9.45}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Event/src/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Set\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Of\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Tracks.cxx File Reference}{193}{section.9.45}%
+\contentsline {section}{\numberline {9.46}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Event/src/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Time\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Error.cxx File Reference}{193}{section.9.46}%
+\contentsline {subsection}{\numberline {9.46.1}Function Documentation}{194}{subsection.9.46.1}%
+\contentsline {subsubsection}{\numberline {9.46.1.1}TimeError()\hspace {0.1cm}{\footnotesize \ttfamily [1/2]}}{194}{subsubsection.9.46.1.1}%
+\contentsline {subsubsection}{\numberline {9.46.1.2}TimeError()\hspace {0.1cm}{\footnotesize \ttfamily [2/2]}}{194}{subsubsection.9.46.1.2}%
+\contentsline {subsubsection}{\numberline {9.46.1.3}TimeError\_BASE()}{194}{subsubsection.9.46.1.3}%
+\contentsline {subsubsection}{\numberline {9.46.1.4}TimeError\_Leading()}{194}{subsubsection.9.46.1.4}%
+\contentsline {subsubsection}{\numberline {9.46.1.5}TimeError\_NextLeading()}{194}{subsubsection.9.46.1.5}%
+\contentsline {subsubsection}{\numberline {9.46.1.6}TimeError\_NextNextLeading()}{194}{subsubsection.9.46.1.6}%
+\contentsline {section}{\numberline {9.47}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Event/src/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Track.cxx File Reference}{195}{section.9.47}%
+\contentsline {section}{\numberline {9.48}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Signal/inc/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Charge0D.h File Reference}{195}{section.9.48}%
+\contentsline {subsection}{\numberline {9.48.1}Detailed Description}{195}{subsection.9.48.1}%
+\contentsline {section}{\numberline {9.49}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Charge0\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}D.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{196}{section.9.49}%
+\contentsline {section}{\numberline {9.50}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Signal/inc/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Charge1D.h File Reference}{196}{section.9.50}%
+\contentsline {subsection}{\numberline {9.50.1}Detailed Description}{196}{subsection.9.50.1}%
+\contentsline {section}{\numberline {9.51}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Charge1\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}D.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{197}{section.9.51}%
+\contentsline {section}{\numberline {9.52}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Signal/inc/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}ChargeI.h File Reference}{197}{section.9.52}%
+\contentsline {subsection}{\numberline {9.52.1}Detailed Description}{197}{subsection.9.52.1}%
+\contentsline {section}{\numberline {9.53}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Charge\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}I.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{198}{section.9.53}%
+\contentsline {section}{\numberline {9.54}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Signal/inc/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Electronics.h File Reference}{198}{section.9.54}%
+\contentsline {subsection}{\numberline {9.54.1}Detailed Description}{198}{subsection.9.54.1}%
+\contentsline {section}{\numberline {9.55}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Electronics.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{199}{section.9.55}%
+\contentsline {section}{\numberline {9.56}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Signal/inc/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Read\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Out\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Geometry.h File Reference}{199}{section.9.56}%
+\contentsline {subsection}{\numberline {9.56.1}Detailed Description}{199}{subsection.9.56.1}%
+\contentsline {section}{\numberline {9.57}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Read\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Out\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Geometry.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{200}{section.9.57}%
+\contentsline {section}{\numberline {9.58}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Signal/src/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Charge0D.cxx File Reference}{201}{section.9.58}%
+\contentsline {section}{\numberline {9.59}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Signal/src/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Charge1D.cxx File Reference}{201}{section.9.59}%
+\contentsline {section}{\numberline {9.60}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Signal/src/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}ChargeI.cxx File Reference}{201}{section.9.60}%
+\contentsline {section}{\numberline {9.61}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Signal/src/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Electronics.cxx File Reference}{201}{section.9.61}%
+\contentsline {section}{\numberline {9.62}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Signal/src/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Read\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Out\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Geometry.cxx File Reference}{201}{section.9.62}%
+\contentsline {section}{\numberline {9.63}Reconstruction/inc/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Combined\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Fit.h File Reference}{201}{section.9.63}%
+\contentsline {subsection}{\numberline {9.63.1}Detailed Description}{202}{subsection.9.63.1}%
+\contentsline {subsection}{\numberline {9.63.2}Function Documentation}{202}{subsection.9.63.2}%
+\contentsline {subsubsection}{\numberline {9.63.2.1}combinedFit()}{202}{subsubsection.9.63.2.1}%
+\contentsline {section}{\numberline {9.64}Combined\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Fit.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{202}{section.9.64}%
+\contentsline {section}{\numberline {9.65}Reconstruction/inc/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Control.h File Reference}{202}{section.9.65}%
+\contentsline {subsection}{\numberline {9.65.1}Detailed Description}{203}{subsection.9.65.1}%
+\contentsline {subsection}{\numberline {9.65.2}Function Documentation}{203}{subsection.9.65.2}%
+\contentsline {subsubsection}{\numberline {9.65.2.1}Control()}{203}{subsubsection.9.65.2.1}%
+\contentsline {section}{\numberline {9.66}Control.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{203}{section.9.66}%
+\contentsline {section}{\numberline {9.67}Reconstruction/inc/d\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Edx.h File Reference}{203}{section.9.67}%
+\contentsline {section}{\numberline {9.68}d\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Edx.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{204}{section.9.68}%
+\contentsline {section}{\numberline {9.69}Reconstruction/inc/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Displays.h File Reference}{207}{section.9.69}%
+\contentsline {subsection}{\numberline {9.69.1}Detailed Description}{208}{subsection.9.69.1}%
+\contentsline {subsection}{\numberline {9.69.2}Function Documentation}{208}{subsection.9.69.2}%
+\contentsline {subsubsection}{\numberline {9.69.2.1}DrawOut\_ClusterWFDisplay()\hspace {0.1cm}{\footnotesize \ttfamily [1/2]}}{208}{subsubsection.9.69.2.1}%
+\contentsline {subsubsection}{\numberline {9.69.2.2}DrawOut\_ClusterWFDisplay()\hspace {0.1cm}{\footnotesize \ttfamily [2/2]}}{208}{subsubsection.9.69.2.2}%
+\contentsline {subsubsection}{\numberline {9.69.2.3}DrawOut\_EventDisplay()\hspace {0.1cm}{\footnotesize \ttfamily [1/2]}}{208}{subsubsection.9.69.2.3}%
+\contentsline {subsubsection}{\numberline {9.69.2.4}DrawOut\_EventDisplay()\hspace {0.1cm}{\footnotesize \ttfamily [2/2]}}{209}{subsubsection.9.69.2.4}%
+\contentsline {subsubsection}{\numberline {9.69.2.5}DrawOut\_GWF()}{209}{subsubsection.9.69.2.5}%
+\contentsline {subsubsection}{\numberline {9.69.2.6}DrawOut\_WaveFormDisplay()}{209}{subsubsection.9.69.2.6}%
+\contentsline {subsubsection}{\numberline {9.69.2.7}GiveMe\_EvtDisplay()\hspace {0.1cm}{\footnotesize \ttfamily [1/2]}}{209}{subsubsection.9.69.2.7}%
+\contentsline {subsubsection}{\numberline {9.69.2.8}GiveMe\_EvtDisplay()\hspace {0.1cm}{\footnotesize \ttfamily [2/2]}}{209}{subsubsection.9.69.2.8}%
+\contentsline {subsubsection}{\numberline {9.69.2.9}GiveMe\_TimeDisplay()}{210}{subsubsection.9.69.2.9}%
+\contentsline {subsubsection}{\numberline {9.69.2.10}GiveMe\_WaveFormDisplay()}{210}{subsubsection.9.69.2.10}%
+\contentsline {subsubsection}{\numberline {9.69.2.11}NewClusterDisplay()}{210}{subsubsection.9.69.2.11}%
+\contentsline {subsubsection}{\numberline {9.69.2.12}NewClusterDisplayMinimal()}{210}{subsubsection.9.69.2.12}%
+\contentsline {section}{\numberline {9.70}Displays.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{210}{section.9.70}%
+\contentsline {section}{\numberline {9.71}Reconstruction/inc/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Draw\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Outs.h File Reference}{211}{section.9.71}%
+\contentsline {subsection}{\numberline {9.71.1}Detailed Description}{211}{subsection.9.71.1}%
+\contentsline {section}{\numberline {9.72}Draw\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Outs.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{212}{section.9.72}%
+\contentsline {section}{\numberline {9.73}Reconstruction/inc/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Draw\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Outs\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}old.h File Reference}{213}{section.9.73}%
+\contentsline {subsection}{\numberline {9.73.1}Detailed Description}{214}{subsection.9.73.1}%
+\contentsline {subsection}{\numberline {9.73.2}Function Documentation}{214}{subsection.9.73.2}%
+\contentsline {subsubsection}{\numberline {9.73.2.1}DrawOut\_Escan()}{214}{subsubsection.9.73.2.1}%
+\contentsline {subsubsection}{\numberline {9.73.2.2}DrawOut\_Methods()}{214}{subsubsection.9.73.2.2}%
+\contentsline {subsubsection}{\numberline {9.73.2.3}DrawOut\_Phiscan()}{214}{subsubsection.9.73.2.3}%
+\contentsline {subsubsection}{\numberline {9.73.2.4}DrawOut\_Phiscan\_Z()}{214}{subsubsection.9.73.2.4}%
+\contentsline {subsubsection}{\numberline {9.73.2.5}DrawOut\_Scans()}{215}{subsubsection.9.73.2.5}%
+\contentsline {subsubsection}{\numberline {9.73.2.6}DrawOut\_Separation()}{215}{subsubsection.9.73.2.6}%
+\contentsline {subsubsection}{\numberline {9.73.2.7}DrawOut\_Separation\_Reduced()}{215}{subsubsection.9.73.2.7}%
+\contentsline {subsubsection}{\numberline {9.73.2.8}DrawOut\_Systematics()}{215}{subsubsection.9.73.2.8}%
+\contentsline {subsubsection}{\numberline {9.73.2.9}DrawOut\_Thetascan()}{215}{subsubsection.9.73.2.9}%
+\contentsline {subsubsection}{\numberline {9.73.2.10}DrawOut\_Versions()}{215}{subsubsection.9.73.2.10}%
+\contentsline {subsubsection}{\numberline {9.73.2.11}DrawOut\_Yscan()}{215}{subsubsection.9.73.2.11}%
+\contentsline {subsubsection}{\numberline {9.73.2.12}DrawOut\_Zscan()}{216}{subsubsection.9.73.2.12}%
+\contentsline {subsubsection}{\numberline {9.73.2.13}DrawOut\_Zscan\_PT()}{216}{subsubsection.9.73.2.13}%
+\contentsline {section}{\numberline {9.74}Draw\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Outs\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}old.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{216}{section.9.74}%
+\contentsline {section}{\numberline {9.75}Reconstruction/inc/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}LUTs.h File Reference}{217}{section.9.75}%
+\contentsline {section}{\numberline {9.76}LUTs.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{218}{section.9.76}%
+\contentsline {section}{\numberline {9.77}Reconstruction/inc/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Monitoring.h File Reference}{220}{section.9.77}%
+\contentsline {subsection}{\numberline {9.77.1}Detailed Description}{221}{subsection.9.77.1}%
+\contentsline {section}{\numberline {9.78}Monitoring.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{221}{section.9.78}%
+\contentsline {section}{\numberline {9.79}Reconstruction/inc/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Recon\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Link\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Def.h File Reference}{222}{section.9.79}%
+\contentsline {subsection}{\numberline {9.79.1}Detailed Description}{222}{subsection.9.79.1}%
+\contentsline {section}{\numberline {9.80}Recon\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Link\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Def.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{222}{section.9.80}%
+\contentsline {section}{\numberline {9.81}Reconstruction/inc/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Recon\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Tools.h File Reference}{222}{section.9.81}%
+\contentsline {subsection}{\numberline {9.81.1}Detailed Description}{223}{subsection.9.81.1}%
+\contentsline {subsection}{\numberline {9.81.2}Function Documentation}{223}{subsection.9.81.2}%
+\contentsline {subsubsection}{\numberline {9.81.2.1}BetheBloch()}{223}{subsubsection.9.81.2.1}%
+\contentsline {subsubsection}{\numberline {9.81.2.2}BetheBlochBhabha()}{224}{subsubsection.9.81.2.2}%
+\contentsline {subsubsection}{\numberline {9.81.2.3}BetheBlochExp()}{224}{subsubsection.9.81.2.3}%
+\contentsline {subsubsection}{\numberline {9.81.2.4}ComputeCutStage3\_Cut()}{224}{subsubsection.9.81.2.4}%
+\contentsline {subsubsection}{\numberline {9.81.2.5}corr\_func()}{224}{subsubsection.9.81.2.5}%
+\contentsline {subsubsection}{\numberline {9.81.2.6}DrawTH2()}{224}{subsubsection.9.81.2.6}%
+\contentsline {subsubsection}{\numberline {9.81.2.7}Fit2Gauss()\hspace {0.1cm}{\footnotesize \ttfamily [1/2]}}{224}{subsubsection.9.81.2.7}%
+\contentsline {subsubsection}{\numberline {9.81.2.8}Fit2Gauss()\hspace {0.1cm}{\footnotesize \ttfamily [2/2]}}{224}{subsubsection.9.81.2.8}%
+\contentsline {subsubsection}{\numberline {9.81.2.9}FourModulesInLine()}{225}{subsubsection.9.81.2.9}%
+\contentsline {subsubsection}{\numberline {9.81.2.10}GetStage3Cut\_CSV()}{225}{subsubsection.9.81.2.10}%
+\contentsline {subsubsection}{\numberline {9.81.2.11}hist\_to\_graph()}{225}{subsubsection.9.81.2.11}%
+\contentsline {subsubsection}{\numberline {9.81.2.12}Init\_selection()}{225}{subsubsection.9.81.2.12}%
+\contentsline {subsubsection}{\numberline {9.81.2.13}local\_params()}{225}{subsubsection.9.81.2.13}%
+\contentsline {subsubsection}{\numberline {9.81.2.14}readCSV()}{225}{subsubsection.9.81.2.14}%
+\contentsline {subsubsection}{\numberline {9.81.2.15}SetStage3Cut\_CSV()}{225}{subsubsection.9.81.2.15}%
+\contentsline {subsubsection}{\numberline {9.81.2.16}Swapped\_graph()}{226}{subsubsection.9.81.2.16}%
+\contentsline {subsubsection}{\numberline {9.81.2.17}trk\_len()}{226}{subsubsection.9.81.2.17}%
+\contentsline {section}{\numberline {9.82}Recon\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Tools.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{226}{section.9.82}%
+\contentsline {section}{\numberline {9.83}Reconstruction/inc/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Selector.h File Reference}{227}{section.9.83}%
+\contentsline {subsection}{\numberline {9.83.1}Detailed Description}{227}{subsection.9.83.1}%
+\contentsline {subsection}{\numberline {9.83.2}Macro Definition Documentation}{228}{subsection.9.83.2}%
+\contentsline {subsubsection}{\numberline {9.83.2.1}Selector\_H}{228}{subsubsection.9.83.2.1}%
+\contentsline {section}{\numberline {9.84}Selector.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{228}{section.9.84}%
+\contentsline {section}{\numberline {9.85}Reconstruction/inc/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Variables.h File Reference}{229}{section.9.85}%
+\contentsline {subsection}{\numberline {9.85.1}Detailed Description}{231}{subsection.9.85.1}%
+\contentsline {section}{\numberline {9.86}Variables.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{231}{section.9.86}%
+\contentsline {section}{\numberline {9.87}Reconstruction/src/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Combined\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Fit.cxx File Reference}{232}{section.9.87}%
+\contentsline {subsection}{\numberline {9.87.1}Macro Definition Documentation}{232}{subsection.9.87.1}%
+\contentsline {subsubsection}{\numberline {9.87.1.1}COMBINEDFIT\_H}{232}{subsubsection.9.87.1.1}%
+\contentsline {subsection}{\numberline {9.87.2}Variable Documentation}{232}{subsection.9.87.2}%
+\contentsline {subsubsection}{\numberline {9.87.2.1}iparmuon}{232}{subsubsection.9.87.2.1}%
+\contentsline {subsubsection}{\numberline {9.87.2.2}iparpion}{232}{subsubsection.9.87.2.2}%
+\contentsline {subsubsection}{\numberline {9.87.2.3}iparpositron}{232}{subsubsection.9.87.2.3}%
+\contentsline {subsubsection}{\numberline {9.87.2.4}iparproton}{233}{subsubsection.9.87.2.4}%
+\contentsline {subsubsection}{\numberline {9.87.2.5}npar}{233}{subsubsection.9.87.2.5}%
+\contentsline {section}{\numberline {9.88}Reconstruction/src/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Control.cxx File Reference}{233}{section.9.88}%
+\contentsline {subsection}{\numberline {9.88.1}Function Documentation}{233}{subsection.9.88.1}%
+\contentsline {subsubsection}{\numberline {9.88.1.1}Control()}{233}{subsubsection.9.88.1.1}%
+\contentsline {section}{\numberline {9.89}Reconstruction/src/d\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Edx.cxx File Reference}{234}{section.9.89}%
+\contentsline {subsection}{\numberline {9.89.1}Function Documentation}{234}{subsection.9.89.1}%
+\contentsline {subsubsection}{\numberline {9.89.1.1}ClassImp()\hspace {0.1cm}{\footnotesize \ttfamily [1/4]}}{234}{subsubsection.9.89.1.1}%
+\contentsline {subsubsection}{\numberline {9.89.1.2}ClassImp()\hspace {0.1cm}{\footnotesize \ttfamily [2/4]}}{234}{subsubsection.9.89.1.2}%
+\contentsline {subsubsection}{\numberline {9.89.1.3}ClassImp()\hspace {0.1cm}{\footnotesize \ttfamily [3/4]}}{234}{subsubsection.9.89.1.3}%
+\contentsline {subsubsection}{\numberline {9.89.1.4}ClassImp()\hspace {0.1cm}{\footnotesize \ttfamily [4/4]}}{235}{subsubsection.9.89.1.4}%
+\contentsline {section}{\numberline {9.90}Reconstruction/src/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Displays.cxx File Reference}{235}{section.9.90}%
+\contentsline {subsection}{\numberline {9.90.1}Function Documentation}{236}{subsection.9.90.1}%
+\contentsline {subsubsection}{\numberline {9.90.1.1}DrawOut\_ClusterWFDisplay()\hspace {0.1cm}{\footnotesize \ttfamily [1/2]}}{236}{subsubsection.9.90.1.1}%
+\contentsline {subsubsection}{\numberline {9.90.1.2}DrawOut\_ClusterWFDisplay()\hspace {0.1cm}{\footnotesize \ttfamily [2/2]}}{236}{subsubsection.9.90.1.2}%
+\contentsline {subsubsection}{\numberline {9.90.1.3}DrawOut\_EventDisplay()\hspace {0.1cm}{\footnotesize \ttfamily [1/2]}}{236}{subsubsection.9.90.1.3}%
+\contentsline {subsubsection}{\numberline {9.90.1.4}DrawOut\_EventDisplay()\hspace {0.1cm}{\footnotesize \ttfamily [2/2]}}{236}{subsubsection.9.90.1.4}%
+\contentsline {subsubsection}{\numberline {9.90.1.5}DrawOut\_GWF()}{237}{subsubsection.9.90.1.5}%
+\contentsline {subsubsection}{\numberline {9.90.1.6}DrawOut\_WaveFormDisplay()}{237}{subsubsection.9.90.1.6}%
+\contentsline {subsubsection}{\numberline {9.90.1.7}GiveMe\_EvtDisplay()\hspace {0.1cm}{\footnotesize \ttfamily [1/2]}}{237}{subsubsection.9.90.1.7}%
+\contentsline {subsubsection}{\numberline {9.90.1.8}GiveMe\_EvtDisplay()\hspace {0.1cm}{\footnotesize \ttfamily [2/2]}}{237}{subsubsection.9.90.1.8}%
+\contentsline {subsubsection}{\numberline {9.90.1.9}GiveMe\_TimeDisplay()}{237}{subsubsection.9.90.1.9}%
+\contentsline {subsubsection}{\numberline {9.90.1.10}GiveMe\_WaveFormDisplay()}{237}{subsubsection.9.90.1.10}%
+\contentsline {subsubsection}{\numberline {9.90.1.11}NewClusterDisplay()}{238}{subsubsection.9.90.1.11}%
+\contentsline {subsubsection}{\numberline {9.90.1.12}NewClusterDisplayMinimal()}{238}{subsubsection.9.90.1.12}%
+\contentsline {section}{\numberline {9.91}Reconstruction/src/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Draw\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Outs.cxx File Reference}{238}{section.9.91}%
+\contentsline {subsection}{\numberline {9.91.1}Function Documentation}{238}{subsection.9.91.1}%
+\contentsline {subsubsection}{\numberline {9.91.1.1}DrawOut\_corrections()}{238}{subsubsection.9.91.1.1}%
+\contentsline {section}{\numberline {9.92}Reconstruction/src/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Draw\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Outs\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}old.cxx File Reference}{239}{section.9.92}%
+\contentsline {subsection}{\numberline {9.92.1}Function Documentation}{239}{subsection.9.92.1}%
+\contentsline {subsubsection}{\numberline {9.92.1.1}DrawOut\_Escan()}{239}{subsubsection.9.92.1.1}%
+\contentsline {subsubsection}{\numberline {9.92.1.2}DrawOut\_Phiscan\_Z()}{239}{subsubsection.9.92.1.2}%
+\contentsline {subsubsection}{\numberline {9.92.1.3}DrawOut\_Scans()}{240}{subsubsection.9.92.1.3}%
+\contentsline {subsubsection}{\numberline {9.92.1.4}DrawOut\_Separation()}{240}{subsubsection.9.92.1.4}%
+\contentsline {subsubsection}{\numberline {9.92.1.5}DrawOut\_Separation\_Reduced()}{240}{subsubsection.9.92.1.5}%
+\contentsline {subsubsection}{\numberline {9.92.1.6}DrawOut\_Systematics()}{240}{subsubsection.9.92.1.6}%
+\contentsline {subsubsection}{\numberline {9.92.1.7}DrawOut\_Versions()}{240}{subsubsection.9.92.1.7}%
+\contentsline {subsubsection}{\numberline {9.92.1.8}DrawOut\_Zscan\_PT()}{240}{subsubsection.9.92.1.8}%
+\contentsline {section}{\numberline {9.93}Reconstruction/src/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}LUTs.cxx File Reference}{240}{section.9.93}%
+\contentsline {subsection}{\numberline {9.93.1}Function Documentation}{241}{subsection.9.93.1}%
+\contentsline {subsubsection}{\numberline {9.93.1.1}ClassImp()}{241}{subsubsection.9.93.1.1}%
+\contentsline {section}{\numberline {9.94}Reconstruction/src/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Monitoring.cxx File Reference}{241}{section.9.94}%
+\contentsline {section}{\numberline {9.95}Reconstruction/src/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Recon\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Tools.cxx File Reference}{242}{section.9.95}%
+\contentsline {subsection}{\numberline {9.95.1}Function Documentation}{242}{subsection.9.95.1}%
+\contentsline {subsubsection}{\numberline {9.95.1.1}BetheBloch()}{242}{subsubsection.9.95.1.1}%
+\contentsline {subsubsection}{\numberline {9.95.1.2}BetheBlochBhabha()}{242}{subsubsection.9.95.1.2}%
+\contentsline {subsubsection}{\numberline {9.95.1.3}BetheBlochExp()}{243}{subsubsection.9.95.1.3}%
+\contentsline {subsubsection}{\numberline {9.95.1.4}ComputeCutStage3\_Cut()}{243}{subsubsection.9.95.1.4}%
+\contentsline {subsubsection}{\numberline {9.95.1.5}corr\_func()}{243}{subsubsection.9.95.1.5}%
+\contentsline {subsubsection}{\numberline {9.95.1.6}DrawTH2()}{243}{subsubsection.9.95.1.6}%
+\contentsline {subsubsection}{\numberline {9.95.1.7}Fit2Gauss()\hspace {0.1cm}{\footnotesize \ttfamily [1/2]}}{243}{subsubsection.9.95.1.7}%
+\contentsline {subsubsection}{\numberline {9.95.1.8}Fit2Gauss()\hspace {0.1cm}{\footnotesize \ttfamily [2/2]}}{243}{subsubsection.9.95.1.8}%
+\contentsline {subsubsection}{\numberline {9.95.1.9}FourModulesInLine()}{243}{subsubsection.9.95.1.9}%
+\contentsline {subsubsection}{\numberline {9.95.1.10}GetStage3Cut\_CSV()}{244}{subsubsection.9.95.1.10}%
+\contentsline {subsubsection}{\numberline {9.95.1.11}hist\_to\_graph()}{244}{subsubsection.9.95.1.11}%
+\contentsline {subsubsection}{\numberline {9.95.1.12}Init\_selection()}{244}{subsubsection.9.95.1.12}%
+\contentsline {subsubsection}{\numberline {9.95.1.13}local\_params()}{244}{subsubsection.9.95.1.13}%
+\contentsline {subsubsection}{\numberline {9.95.1.14}readCSV()}{244}{subsubsection.9.95.1.14}%
+\contentsline {subsubsection}{\numberline {9.95.1.15}SetStage3Cut\_CSV()}{244}{subsubsection.9.95.1.15}%
+\contentsline {subsubsection}{\numberline {9.95.1.16}Swapped\_graph()}{245}{subsubsection.9.95.1.16}%
+\contentsline {subsubsection}{\numberline {9.95.1.17}trk\_len()}{245}{subsubsection.9.95.1.17}%
+\contentsline {section}{\numberline {9.96}Reconstruction/src/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Selector.cxx File Reference}{245}{section.9.96}%
+\contentsline {section}{\numberline {9.97}Reconstruction/src/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Variables.cxx File Reference}{245}{section.9.97}%
+\contentsline {section}{\numberline {9.98}Uploader/inc/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Give\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Me\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Uploader.h File Reference}{246}{section.9.98}%
+\contentsline {subsection}{\numberline {9.98.1}Detailed Description}{246}{subsection.9.98.1}%
+\contentsline {subsection}{\numberline {9.98.2}Function Documentation}{246}{subsection.9.98.2}%
+\contentsline {subsubsection}{\numberline {9.98.2.1}GiveMe\_Uploader()}{246}{subsubsection.9.98.2.1}%
+\contentsline {section}{\numberline {9.99}Give\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Me\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Uploader.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{246}{section.9.99}%
+\contentsline {section}{\numberline {9.100}Uploader/inc/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Uploader.h File Reference}{246}{section.9.100}%
+\contentsline {subsection}{\numberline {9.100.1}Detailed Description}{247}{subsection.9.100.1}%
+\contentsline {section}{\numberline {9.101}Uploader.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{247}{section.9.101}%
+\contentsline {section}{\numberline {9.102}Uploader/inc/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Uploader\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}ERAM01.h File Reference}{248}{section.9.102}%
+\contentsline {subsection}{\numberline {9.102.1}Detailed Description}{248}{subsection.9.102.1}%
+\contentsline {section}{\numberline {9.103}Uploader\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}ERAM01.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{248}{section.9.103}%
+\contentsline {section}{\numberline {9.104}Uploader/inc/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Uploader\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Mock\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Up\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}V1.h File Reference}{248}{section.9.104}%
+\contentsline {subsection}{\numberline {9.104.1}Detailed Description}{249}{subsection.9.104.1}%
+\contentsline {section}{\numberline {9.105}Uploader\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Mock\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Up\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}V1.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{249}{section.9.105}%
+\contentsline {section}{\numberline {9.106}Uploader/inc/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Uploader\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Mock\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Up\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}V2.h File Reference}{249}{section.9.106}%
+\contentsline {subsection}{\numberline {9.106.1}Detailed Description}{249}{subsection.9.106.1}%
+\contentsline {section}{\numberline {9.107}Uploader\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Mock\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Up\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}V2.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{250}{section.9.107}%
+\contentsline {section}{\numberline {9.108}Uploader/inc/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Uploader\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Prototype.h File Reference}{251}{section.9.108}%
+\contentsline {subsection}{\numberline {9.108.1}Detailed Description}{251}{subsection.9.108.1}%
+\contentsline {section}{\numberline {9.109}Uploader\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Prototype.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{251}{section.9.109}%
+\contentsline {section}{\numberline {9.110}Uploader/src/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Give\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Me\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Uploader.cxx File Reference}{252}{section.9.110}%
+\contentsline {subsection}{\numberline {9.110.1}Function Documentation}{252}{subsection.9.110.1}%
+\contentsline {subsubsection}{\numberline {9.110.1.1}GiveMe\_Uploader()}{252}{subsubsection.9.110.1.1}%
+\contentsline {section}{\numberline {9.111}Uploader/src/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Uploader.cxx File Reference}{252}{section.9.111}%
+\contentsline {section}{\numberline {9.112}Uploader/src/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Uploader\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}ERAM01.cxx File Reference}{252}{section.9.112}%
+\contentsline {section}{\numberline {9.113}Uploader/src/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Uploader\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Mock\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Up\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}V1.cxx File Reference}{253}{section.9.113}%
+\contentsline {section}{\numberline {9.114}Uploader/src/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Uploader\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Mock\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Up\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}V2.cxx File Reference}{253}{section.9.114}%
+\contentsline {section}{\numberline {9.115}Uploader/src/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Uploader\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Prototype.cxx File Reference}{253}{section.9.115}%
+\contentsline {section}{\numberline {9.116}Utilities/inc/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Func\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}From\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}TGraph.h File Reference}{253}{section.9.116}%
+\contentsline {subsection}{\numberline {9.116.1}Detailed Description}{253}{subsection.9.116.1}%
+\contentsline {section}{\numberline {9.117}Func\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}From\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}TGraph.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{253}{section.9.117}%
+\contentsline {section}{\numberline {9.118}Utilities/inc/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Gauss\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Function.h File Reference}{254}{section.9.118}%
+\contentsline {subsection}{\numberline {9.118.1}Detailed Description}{254}{subsection.9.118.1}%
+\contentsline {section}{\numberline {9.119}Gauss\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Function.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{254}{section.9.119}%
+\contentsline {section}{\numberline {9.120}Utilities/inc/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Misc.h File Reference}{254}{section.9.120}%
+\contentsline {subsection}{\numberline {9.120.1}Detailed Description}{255}{subsection.9.120.1}%
+\contentsline {section}{\numberline {9.121}Misc.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{255}{section.9.121}%
+\contentsline {section}{\numberline {9.122}Utilities/inc/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Parabola\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Function.h File Reference}{255}{section.9.122}%
+\contentsline {subsection}{\numberline {9.122.1}Detailed Description}{255}{subsection.9.122.1}%
+\contentsline {section}{\numberline {9.123}Parabola\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Function.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{256}{section.9.123}%
+\contentsline {section}{\numberline {9.124}Utilities/inc/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Parabola\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Function\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}NG.h File Reference}{256}{section.9.124}%
+\contentsline {subsection}{\numberline {9.124.1}Detailed Description}{256}{subsection.9.124.1}%
+\contentsline {section}{\numberline {9.125}Parabola\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Function\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}NG.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{257}{section.9.125}%
+\contentsline {section}{\numberline {9.126}Utilities/inc/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Signal\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Tools.h File Reference}{257}{section.9.126}%
+\contentsline {subsection}{\numberline {9.126.1}Detailed Description}{257}{subsection.9.126.1}%
+\contentsline {subsection}{\numberline {9.126.2}Function Documentation}{258}{subsection.9.126.2}%
+\contentsline {subsubsection}{\numberline {9.126.2.1}ETF()}{258}{subsubsection.9.126.2.1}%
+\contentsline {section}{\numberline {9.127}Signal\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Tools.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{258}{section.9.127}%
+\contentsline {section}{\numberline {9.128}Utilities/src/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Func\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}From\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}TGraph.cxx File Reference}{258}{section.9.128}%
+\contentsline {section}{\numberline {9.129}Utilities/src/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Gauss\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Function.cxx File Reference}{258}{section.9.129}%
+\contentsline {section}{\numberline {9.130}Utilities/src/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Parabola\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Function.cxx File Reference}{258}{section.9.130}%
+\contentsline {section}{\numberline {9.131}Utilities/src/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Parabola\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Function\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}NG.cxx File Reference}{259}{section.9.131}%
+\contentsline {section}{\numberline {9.132}Utilities/src/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Signal\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Tools.cxx File Reference}{259}{section.9.132}%
+\contentsline {subsection}{\numberline {9.132.1}Function Documentation}{259}{subsection.9.132.1}%
+\contentsline {subsubsection}{\numberline {9.132.1.1}ETF()}{259}{subsubsection.9.132.1.1}%
+\contentsline {chapter}{Index}{261}{section*.204}%

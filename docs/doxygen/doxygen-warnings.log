@@ -1,0 +1,27 @@
+/Users/tristandaret/Document/Code/dEdxRecon/Apps/Analysis.cxx:10: warning: More #if's than #endif's found (might be in an included file).
+/Users/tristandaret/Document/Code/dEdxRecon/ModelEvent/inc/ROBoard.h:73: warning: More #if's than #endif's found (might be in an included file).
+/Users/tristandaret/Document/Code/dEdxRecon/Reconstruction/inc/dEdx.h:2: warning: '\file' command is not allowed in section title, escaping command.
+/Users/tristandaret/Document/Code/dEdxRecon/Reconstruction/inc/dEdx.h:3: warning: '\brief' command is not allowed in section title, ending section title.
+/Users/tristandaret/Document/Code/dEdxRecon/Reconstruction/inc/dEdx.h:8: warning: '\details' command is not allowed in section title, ending section title.
+/Users/tristandaret/Document/Code/dEdxRecon/Reconstruction/inc/Displays.h:83: warning: More #if's than #endif's found (might be in an included file).
+/Users/tristandaret/Document/Code/dEdxRecon/Reconstruction/inc/LUTs.h:2: warning: '\file' command is not allowed in section title, escaping command.
+/Users/tristandaret/Document/Code/dEdxRecon/Reconstruction/inc/LUTs.h:3: warning: '\brief' command is not allowed in section title, ending section title.
+/Users/tristandaret/Document/Code/dEdxRecon/Reconstruction/inc/LUTs.h:9: warning: '\details' command is not allowed in section title, ending section title.
+/Users/tristandaret/Document/Code/dEdxRecon/Reconstruction/inc/ReconTools.h:109: warning: More #if's than #endif's found (might be in an included file).
+/Users/tristandaret/Document/Code/dEdxRecon/Reconstruction/inc/Selector.h:175: warning: More #if's than #endif's found (might be in an included file).
+/Users/tristandaret/Document/Code/dEdxRecon/Reconstruction/src/Control.cxx:594: warning: More #if's than #endif's found (might be in an included file).
+/Users/tristandaret/Document/Code/dEdxRecon/Utilities/inc/FuncFromTGraph.h:40: warning: More #if's than #endif's found (might be in an included file).
+/Users/tristandaret/Document/Code/dEdxRecon/Utilities/src/FuncFromTGraph.cxx:98: warning: More #if's than #endif's found (might be in an included file).
+/Users/tristandaret/Document/Code/dEdxRecon/Utilities/src/FuncFromTGraph.cxx:16: warning: documented symbol 'FuncFromTGraph::FuncFromTGraph' was not declared or defined.
+/Users/tristandaret/Document/Code/dEdxRecon/Utilities/src/FuncFromTGraph.cxx:49: warning: documented symbol 'FuncFromTGraph::~FuncFromTGraph' was not declared or defined.
+/Users/tristandaret/Document/Code/dEdxRecon/Utilities/src/FuncFromTGraph.cxx:51: warning: no uniquely matching class member found for 
+  double FuncFromTGraph::operator()(double *x, double *par)
+Possible candidates:
+  'double PRFParameters::operator()(double *x, double *par)' at line 43 of file /Users/tristandaret/Document/Code/dEdxRecon/Fitters/inc/PRFParameters.h
+  'double GlobalChi2_4::operator()(const double *par) const' at line 20 of file /Users/tristandaret/Document/Code/dEdxRecon/Reconstruction/src/CombinedFit.cxx
+  'double GaussFunction::operator()(double *x, double *par)' at line 28 of file /Users/tristandaret/Document/Code/dEdxRecon/Utilities/inc/GaussFunction.h
+  'double ParabolaFunction::operator()(double *x, double *par)' at line 31 of file /Users/tristandaret/Document/Code/dEdxRecon/Utilities/inc/ParabolaFunction.h
+  'double ParabolaFunctionNG::operator()(double *x, double *par)' at line 33 of file /Users/tristandaret/Document/Code/dEdxRecon/Utilities/inc/ParabolaFunctionNG.h
+/Users/tristandaret/Document/Code/dEdxRecon/Utilities/src/FuncFromTGraph.cxx:56: warning: documented symbol 'double FuncFromTGraph::Get_Y' was not declared or defined.
+/Users/tristandaret/Document/Code/dEdxRecon/Utilities/src/FuncFromTGraph.cxx:88: warning: documented symbol 'void FuncFromTGraph::Dump' was not declared or defined.
+/Users/tristandaret/Document/Code/dEdxRecon/Reconstruction/inc/Recon_LinkDef.h:5: warning: explicit link request to 'pragma' could not be resolved

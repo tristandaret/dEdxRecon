@@ -16,6 +16,12 @@ extern Uploader *p_uploader;
  * This header exposes shared data structures, constants and light helper
  * utilities used by drawing, monitoring and fitting code. Definitions and
  * initialisation (if any) should live in Variables.cxx.
+ *
+ * @details
+ * The implementation file `Variables.cxx` defines module-global configuration
+ * strings, pointers and run parameters used across reconstruction and
+ * plotting code. Keep definitions minimal: only shared state should be
+ * declared here and initialised in the source file.
  */
 
 extern Reconstruction::LUT *p_lut;

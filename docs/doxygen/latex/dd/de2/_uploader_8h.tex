@@ -1,0 +1,25 @@
+\doxysection{Uploader/inc/\+Uploader.h File Reference}
+\hypertarget{_uploader_8h}{}\label{_uploader_8h}\index{Uploader/inc/Uploader.h@{Uploader/inc/Uploader.h}}
+
+
+Abstract base class for data uploaders.  
+
+
+{\ttfamily \#include "{}Event.\+h"{}}\newline
+{\ttfamily \#include "{}Misc.\+h"{}}\newline
+{\ttfamily \#include "{}Model\+\_\+\+Charge1\+D.\+h"{}}\newline
+{\ttfamily \#include "{}Model\+\_\+\+Electronics.\+h"{}}\newline
+{\ttfamily \#include "{}Model\+\_\+\+Read\+Out\+Geometry.\+h"{}}\newline
+{\ttfamily \#include "{}TFile.\+h"{}}\newline
+{\ttfamily \#include "{}TTree.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_uploader}{Uploader}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Abstract base class for data uploaders. 
+
+Declares the \doxylink{class_uploader}{Uploader} interface used to read input samples and produce {\ttfamily \doxylink{class_event}{Event}} objects for the reconstruction pipeline. Concrete uploaders implement format-\/specific logic. 

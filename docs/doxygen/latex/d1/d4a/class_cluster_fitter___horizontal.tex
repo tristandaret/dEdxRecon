@@ -1,0 +1,142 @@
+\doxysection{Cluster\+Fitter\+\_\+\+Horizontal Class Reference}
+\hypertarget{class_cluster_fitter___horizontal}{}\label{class_cluster_fitter___horizontal}\index{ClusterFitter\_Horizontal@{ClusterFitter\_Horizontal}}
+
+
+{\ttfamily \#include $<$Cluster\+Fitter.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_cluster_fitter___horizontal_a213893a2a6b32999a4d9917e726e11da}{Cluster\+Fitter\+\_\+\+Horizontal}} (const std\+::string \&Fitter\+Name)
+\begin{DoxyCompactList}\small\item\em Construct a horizontal cluster fitter. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{class_cluster_fitter___horizontal_af7d7c747dee9e0ee4ab25988649aedd9}{\texorpdfstring{$\sim$}{\string~}\+Cluster\+Fitter\+\_\+\+Horizontal}} ()
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_cluster_fitter___horizontal_a26f1f1cee160002cbffbcb1d0da00735}{Set\+\_\+\+Cluster}} (\mbox{\hyperlink{class_cluster}{Cluster}} \texorpdfstring{$\ast$}{*}p\+Cluster)
+\begin{DoxyCompactList}\small\item\em Set the cluster to be fitted. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_cluster_fitter___horizontal_ace20066af45258ad234ca58937994de1}{Do\+Minimisation}} ()
+\begin{DoxyCompactList}\small\item\em Run minimisation for the current cluster. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_cluster_fitter___horizontal_aa777634582122f33045d9cd322fb94fc}{Chi2}} (double par\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Compute chi2 for given parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{class_cluster_fitter___horizontal_a86d0c902a4d4e98f8881c623763e0c2c}{m\+\_\+\+Fitter\+Name}}
+\item 
+\mbox{\hyperlink{class_cluster}{Cluster}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_cluster_fitter___horizontal_a0004ccab23de48755f1f54ecf798f2bd}{p\+\_\+\+Cluster}}
+\item 
+TVirtual\+Fitter \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_cluster_fitter___horizontal_a766d385536846cef1954ead7627cf5fa}{p\+\_\+\+TVirtual\+Fitter}}
+\begin{DoxyCompactList}\small\item\em Fitter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{class_cluster_fitter___horizontal_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_cluster_fitter___horizontal_a213893a2a6b32999a4d9917e726e11da}\index{ClusterFitter\_Horizontal@{ClusterFitter\_Horizontal}!ClusterFitter\_Horizontal@{ClusterFitter\_Horizontal}}
+\index{ClusterFitter\_Horizontal@{ClusterFitter\_Horizontal}!ClusterFitter\_Horizontal@{ClusterFitter\_Horizontal}}
+\doxysubsubsection{\texorpdfstring{ClusterFitter\_Horizontal()}{ClusterFitter\_Horizontal()}}
+{\footnotesize\ttfamily \label{class_cluster_fitter___horizontal_a213893a2a6b32999a4d9917e726e11da} 
+Cluster\+Fitter\+\_\+\+Horizontal\+::\+Cluster\+Fitter\+\_\+\+Horizontal (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{Fitter\+Name}{}\end{DoxyParamCaption})}
+
+
+
+Construct a horizontal cluster fitter. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Fitter\+Name} & name used to identify the fitter instance \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_cluster_fitter___horizontal_af7d7c747dee9e0ee4ab25988649aedd9}\index{ClusterFitter\_Horizontal@{ClusterFitter\_Horizontal}!````~ClusterFitter\_Horizontal@{\texorpdfstring{$\sim$}{\string~}ClusterFitter\_Horizontal}}
+\index{````~ClusterFitter\_Horizontal@{\texorpdfstring{$\sim$}{\string~}ClusterFitter\_Horizontal}!ClusterFitter\_Horizontal@{ClusterFitter\_Horizontal}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}ClusterFitter\_Horizontal()}{\string~ClusterFitter\_Horizontal()}}
+{\footnotesize\ttfamily \label{class_cluster_fitter___horizontal_af7d7c747dee9e0ee4ab25988649aedd9} 
+Cluster\+Fitter\+\_\+\+Horizontal\+::\texorpdfstring{$\sim$}{\string~}\+Cluster\+Fitter\+\_\+\+Horizontal (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Virtual destructor. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_cluster_fitter___horizontal_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_cluster_fitter___horizontal_aa777634582122f33045d9cd322fb94fc}\index{ClusterFitter\_Horizontal@{ClusterFitter\_Horizontal}!Chi2@{Chi2}}
+\index{Chi2@{Chi2}!ClusterFitter\_Horizontal@{ClusterFitter\_Horizontal}}
+\doxysubsubsection{\texorpdfstring{Chi2()}{Chi2()}}
+{\footnotesize\ttfamily \label{class_cluster_fitter___horizontal_aa777634582122f33045d9cd322fb94fc} 
+double Cluster\+Fitter\+\_\+\+Horizontal\+::\+Chi2 (\begin{DoxyParamCaption}\item[{double}]{par}{\mbox{[}$\,$\mbox{]}}\end{DoxyParamCaption})}
+
+
+
+Compute chi2 for given parameters. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em par} & parameter array for chi2 evaluation \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+chi2 value 
+\end{DoxyReturn}
+\Hypertarget{class_cluster_fitter___horizontal_ace20066af45258ad234ca58937994de1}\index{ClusterFitter\_Horizontal@{ClusterFitter\_Horizontal}!DoMinimisation@{DoMinimisation}}
+\index{DoMinimisation@{DoMinimisation}!ClusterFitter\_Horizontal@{ClusterFitter\_Horizontal}}
+\doxysubsubsection{\texorpdfstring{DoMinimisation()}{DoMinimisation()}}
+{\footnotesize\ttfamily \label{class_cluster_fitter___horizontal_ace20066af45258ad234ca58937994de1} 
+int Cluster\+Fitter\+\_\+\+Horizontal\+::\+Do\+Minimisation (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Run minimisation for the current cluster. 
+
+\begin{DoxyReturn}{Returns}
+0 on success, non-\/zero on failure 
+\end{DoxyReturn}
+\Hypertarget{class_cluster_fitter___horizontal_a26f1f1cee160002cbffbcb1d0da00735}\index{ClusterFitter\_Horizontal@{ClusterFitter\_Horizontal}!Set\_Cluster@{Set\_Cluster}}
+\index{Set\_Cluster@{Set\_Cluster}!ClusterFitter\_Horizontal@{ClusterFitter\_Horizontal}}
+\doxysubsubsection{\texorpdfstring{Set\_Cluster()}{Set\_Cluster()}}
+{\footnotesize\ttfamily \label{class_cluster_fitter___horizontal_a26f1f1cee160002cbffbcb1d0da00735} 
+void Cluster\+Fitter\+\_\+\+Horizontal\+::\+Set\+\_\+\+Cluster (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_cluster}{Cluster}} \texorpdfstring{$\ast$}{*}}]{p\+Cluster}{}\end{DoxyParamCaption})}
+
+
+
+Set the cluster to be fitted. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+Cluster} & pointer to the \doxylink{class_cluster}{Cluster} (ownership not transferred) \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-variable-members}
+\Hypertarget{class_cluster_fitter___horizontal_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_cluster_fitter___horizontal_a86d0c902a4d4e98f8881c623763e0c2c}\index{ClusterFitter\_Horizontal@{ClusterFitter\_Horizontal}!m\_FitterName@{m\_FitterName}}
+\index{m\_FitterName@{m\_FitterName}!ClusterFitter\_Horizontal@{ClusterFitter\_Horizontal}}
+\doxysubsubsection{\texorpdfstring{m\_FitterName}{m\_FitterName}}
+{\footnotesize\ttfamily \label{class_cluster_fitter___horizontal_a86d0c902a4d4e98f8881c623763e0c2c} 
+std\+::string Cluster\+Fitter\+\_\+\+Horizontal\+::m\+\_\+\+Fitter\+Name\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_cluster_fitter___horizontal_a0004ccab23de48755f1f54ecf798f2bd}\index{ClusterFitter\_Horizontal@{ClusterFitter\_Horizontal}!p\_Cluster@{p\_Cluster}}
+\index{p\_Cluster@{p\_Cluster}!ClusterFitter\_Horizontal@{ClusterFitter\_Horizontal}}
+\doxysubsubsection{\texorpdfstring{p\_Cluster}{p\_Cluster}}
+{\footnotesize\ttfamily \label{class_cluster_fitter___horizontal_a0004ccab23de48755f1f54ecf798f2bd} 
+\mbox{\hyperlink{class_cluster}{Cluster}}\texorpdfstring{$\ast$}{*} Cluster\+Fitter\+\_\+\+Horizontal\+::p\+\_\+\+Cluster\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_cluster_fitter___horizontal_a766d385536846cef1954ead7627cf5fa}\index{ClusterFitter\_Horizontal@{ClusterFitter\_Horizontal}!p\_TVirtualFitter@{p\_TVirtualFitter}}
+\index{p\_TVirtualFitter@{p\_TVirtualFitter}!ClusterFitter\_Horizontal@{ClusterFitter\_Horizontal}}
+\doxysubsubsection{\texorpdfstring{p\_TVirtualFitter}{p\_TVirtualFitter}}
+{\footnotesize\ttfamily \label{class_cluster_fitter___horizontal_a766d385536846cef1954ead7627cf5fa} 
+TVirtual\+Fitter\texorpdfstring{$\ast$}{*} Cluster\+Fitter\+\_\+\+Horizontal\+::p\+\_\+\+TVirtual\+Fitter\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Fitter. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Fitters/inc/\mbox{\hyperlink{_cluster_fitter_8h}{Cluster\+Fitter.\+h}}\item 
+Fitters/src/\mbox{\hyperlink{_cluster_fitter_8cxx}{Cluster\+Fitter.\+cxx}}\end{DoxyCompactItemize}

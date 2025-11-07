@@ -1,0 +1,294 @@
+\doxysection{Track Class Reference}
+\hypertarget{class_track}{}\label{class_track}\index{Track@{Track}}
+
+
+{\ttfamily \#include $<$Track.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_track_af5f5eec0fffa6c53df1ee7766eb3358f}{Track}} (const int \&Event\+Nber, const int \&Entry\+Nber, const int \&Module\+Nber)
+\begin{DoxyCompactList}\small\item\em Construct a \doxylink{class_track}{Track}. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{class_track_a416e75e66accc8eb9e3fafc3e8555216}{\texorpdfstring{$\sim$}{\string~}\+Track}} ()
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_track_a76f17e608a1e103105b8cafba5bfc039}{Get\+\_\+\+Event\+Nber}} () const
+\begin{DoxyCompactList}\small\item\em Get \doxylink{class_event}{Event} number. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_track_ae150c863930265703178e34aff302f29}{Get\+\_\+\+Entry\+Nber}} () const
+\begin{DoxyCompactList}\small\item\em Get Entry number. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_track_a53a3b06ff5f640b23c6f837a40c5913f}{Get\+\_\+\+Module\+Nber}} () const
+\begin{DoxyCompactList}\small\item\em Get \doxylink{class_module}{Module} number. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_track_a39f505bcb3245191575e31cd884f1c5f}{Set\+Nber\+Of\+Parameters}} (const int \&Nber\+Of\+Param)
+\item 
+int \mbox{\hyperlink{class_track_a3df2763a1ed51d19cc7b43d6e4577f65}{Get\+Nber\+Of\+Parameters}} () const
+\item 
+std\+::string \mbox{\hyperlink{class_track_a46b04235717f048ed64aa5a6b8eabe58}{Get\+\_\+\+Parameter\+Name}} (const int \&i\+Par) const
+\item 
+double \mbox{\hyperlink{class_track_ae1c89625a747ea7b92469e0c9741e4e5}{Get\+\_\+\+Parameter\+Value}} (const int \&i\+Par) const
+\item 
+double \mbox{\hyperlink{class_track_a30a31afdb658d3403b714460a9efd919}{Get\+\_\+\+Parameter\+Error}} (const int \&i\+Par) const
+\item 
+double \mbox{\hyperlink{class_track_aa91207fe600dcd61613221881e4983af}{Get\+\_\+\+Parameter\+Value\+\_\+\+Before\+Minimisation}} (const int \&i\+Par) const
+\item 
+void \mbox{\hyperlink{class_track_a5025935228c0eec5e5d1e6d008988043}{Add\+\_\+\+Cluster}} (\mbox{\hyperlink{class_cluster}{Cluster}} \texorpdfstring{$\ast$}{*}p\+Cluster)
+\item 
+int \mbox{\hyperlink{class_track_a8e94aecf4201579409175f964baf52d2}{Get\+\_\+\+Nber\+Of\+Cluster}} () const
+\item 
+const \mbox{\hyperlink{class_cluster}{Cluster}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_track_a3f008ff85bb1bff185480e4f38c8434f}{Get\+\_\+\+Cluster}} (int Index1D) const
+\item 
+double \mbox{\hyperlink{class_track_aff079d43004c50c20d2892c265dbe053}{Get\+\_\+\+Residual}} (int Index1D) const
+\item 
+double \mbox{\hyperlink{class_track_a3baa5ba1f6fcbad6d7e079a706fd13bd}{Get\+\_\+\+Pull}} (int Index1D) const
+\item 
+void \mbox{\hyperlink{class_track_ac8699359a440d6d2a16cd3c9ffcdac69}{Do\+Closure}} ()
+\item 
+void \mbox{\hyperlink{class_track_ae87081db098ff5bee454446bfbdb42c6}{Dump\+Rec}} () const
+\item 
+double \mbox{\hyperlink{class_track_a5ae5e5a189b92622c342aac176916663}{Y\+\_\+\+Position}} (const double \&X) const
+\item 
+double \mbox{\hyperlink{class_track_a5c763bedd0f5bc87f684db6a5e257ad6}{Get\+\_\+\+Chi2\+Min}} () const
+\item 
+int \mbox{\hyperlink{class_track_a16f05d0d06f7a81b9194b597be927078}{Set\+Parameter}} (TVirtual\+Fitter \texorpdfstring{$\ast$}{*}p\+TVirtual\+Fitter)
+\item 
+void \mbox{\hyperlink{class_track_aad1e054a1670c01d6007b8c420f96661}{Set\+Results}} (TVirtual\+Fitter \texorpdfstring{$\ast$}{*}p\+TVirtual\+Fitter)
+\item 
+double \mbox{\hyperlink{class_track_a2d476d46420466b05465fdd4d7fa0116}{Chi2}} (double par\mbox{[}$\,$\mbox{]})
+\item 
+void \mbox{\hyperlink{class_track_a71f8bcae7f583d15b307acbbc815cf86}{Set\+Parameters\+\_\+\+Internal}} (double par\mbox{[}$\,$\mbox{]})
+\item 
+TMatrixD \mbox{\hyperlink{class_track_a47e7c2690b7515b767c18ad4925db104}{Get\+\_\+\+Cov\+Matrix}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{class_track_a84c1f76b0c580c3e5e265ecad3ec4ba3}{m\+\_\+\+Nber\+Of\+Clusters}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{class_cluster}{Cluster}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_track_a70287db72956761680439f8f8eb8fae8}{V\+\_\+\+Cluster}}
+\item 
+std\+::vector$<$ double $>$ \mbox{\hyperlink{class_track_ad70ebed8af203004664188c768ed5cb2}{V\+\_\+\+Residual}}
+\item 
+std\+::vector$<$ double $>$ \mbox{\hyperlink{class_track_adbd9ce900824da1a59b8f481bef38744}{V\+\_\+\+Pull}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{class_track_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_track_af5f5eec0fffa6c53df1ee7766eb3358f}\index{Track@{Track}!Track@{Track}}
+\index{Track@{Track}!Track@{Track}}
+\doxysubsubsection{\texorpdfstring{Track()}{Track()}}
+{\footnotesize\ttfamily \label{class_track_af5f5eec0fffa6c53df1ee7766eb3358f} 
+Track\+::\+Track (\begin{DoxyParamCaption}\item[{const int \&}]{Event\+Nber}{, }\item[{const int \&}]{Entry\+Nber}{, }\item[{const int \&}]{Module\+Nber}{}\end{DoxyParamCaption})}
+
+
+
+Construct a \doxylink{class_track}{Track}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Event\+Nber} & event number \\
+\hline
+{\em Entry\+Nber} & entry index \\
+\hline
+{\em Module\+Nber} & module index \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_track_a416e75e66accc8eb9e3fafc3e8555216}\index{Track@{Track}!````~Track@{\texorpdfstring{$\sim$}{\string~}Track}}
+\index{````~Track@{\texorpdfstring{$\sim$}{\string~}Track}!Track@{Track}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Track()}{\string~Track()}}
+{\footnotesize\ttfamily \label{class_track_a416e75e66accc8eb9e3fafc3e8555216} 
+Track\+::\texorpdfstring{$\sim$}{\string~}\+Track (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Virtual destructor. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_track_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_track_a5025935228c0eec5e5d1e6d008988043}\index{Track@{Track}!Add\_Cluster@{Add\_Cluster}}
+\index{Add\_Cluster@{Add\_Cluster}!Track@{Track}}
+\doxysubsubsection{\texorpdfstring{Add\_Cluster()}{Add\_Cluster()}}
+{\footnotesize\ttfamily \label{class_track_a5025935228c0eec5e5d1e6d008988043} 
+void Track\+::\+Add\+\_\+\+Cluster (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_cluster}{Cluster}} \texorpdfstring{$\ast$}{*}}]{p\+Cluster}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_track_a2d476d46420466b05465fdd4d7fa0116}\index{Track@{Track}!Chi2@{Chi2}}
+\index{Chi2@{Chi2}!Track@{Track}}
+\doxysubsubsection{\texorpdfstring{Chi2()}{Chi2()}}
+{\footnotesize\ttfamily \label{class_track_a2d476d46420466b05465fdd4d7fa0116} 
+double Track\+::\+Chi2 (\begin{DoxyParamCaption}\item[{double}]{par}{\mbox{[}$\,$\mbox{]}}\end{DoxyParamCaption})}
+
+\Hypertarget{class_track_ac8699359a440d6d2a16cd3c9ffcdac69}\index{Track@{Track}!DoClosure@{DoClosure}}
+\index{DoClosure@{DoClosure}!Track@{Track}}
+\doxysubsubsection{\texorpdfstring{DoClosure()}{DoClosure()}}
+{\footnotesize\ttfamily \label{class_track_ac8699359a440d6d2a16cd3c9ffcdac69} 
+void Track\+::\+Do\+Closure (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_track_ae87081db098ff5bee454446bfbdb42c6}\index{Track@{Track}!DumpRec@{DumpRec}}
+\index{DumpRec@{DumpRec}!Track@{Track}}
+\doxysubsubsection{\texorpdfstring{DumpRec()}{DumpRec()}}
+{\footnotesize\ttfamily \label{class_track_ae87081db098ff5bee454446bfbdb42c6} 
+void Track\+::\+Dump\+Rec (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_track_a5c763bedd0f5bc87f684db6a5e257ad6}\index{Track@{Track}!Get\_Chi2Min@{Get\_Chi2Min}}
+\index{Get\_Chi2Min@{Get\_Chi2Min}!Track@{Track}}
+\doxysubsubsection{\texorpdfstring{Get\_Chi2Min()}{Get\_Chi2Min()}}
+{\footnotesize\ttfamily \label{class_track_a5c763bedd0f5bc87f684db6a5e257ad6} 
+double Track\+::\+Get\+\_\+\+Chi2\+Min (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_track_a3f008ff85bb1bff185480e4f38c8434f}\index{Track@{Track}!Get\_Cluster@{Get\_Cluster}}
+\index{Get\_Cluster@{Get\_Cluster}!Track@{Track}}
+\doxysubsubsection{\texorpdfstring{Get\_Cluster()}{Get\_Cluster()}}
+{\footnotesize\ttfamily \label{class_track_a3f008ff85bb1bff185480e4f38c8434f} 
+const \mbox{\hyperlink{class_cluster}{Cluster}} \texorpdfstring{$\ast$}{*} Track\+::\+Get\+\_\+\+Cluster (\begin{DoxyParamCaption}\item[{int}]{Index1D}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_track_a47e7c2690b7515b767c18ad4925db104}\index{Track@{Track}!Get\_CovMatrix@{Get\_CovMatrix}}
+\index{Get\_CovMatrix@{Get\_CovMatrix}!Track@{Track}}
+\doxysubsubsection{\texorpdfstring{Get\_CovMatrix()}{Get\_CovMatrix()}}
+{\footnotesize\ttfamily \label{class_track_a47e7c2690b7515b767c18ad4925db104} 
+TMatrixD Track\+::\+Get\+\_\+\+Cov\+Matrix (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_track_ae150c863930265703178e34aff302f29}\index{Track@{Track}!Get\_EntryNber@{Get\_EntryNber}}
+\index{Get\_EntryNber@{Get\_EntryNber}!Track@{Track}}
+\doxysubsubsection{\texorpdfstring{Get\_EntryNber()}{Get\_EntryNber()}}
+{\footnotesize\ttfamily \label{class_track_ae150c863930265703178e34aff302f29} 
+int Track\+::\+Get\+\_\+\+Entry\+Nber (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Get Entry number. 
+
+\Hypertarget{class_track_a76f17e608a1e103105b8cafba5bfc039}\index{Track@{Track}!Get\_EventNber@{Get\_EventNber}}
+\index{Get\_EventNber@{Get\_EventNber}!Track@{Track}}
+\doxysubsubsection{\texorpdfstring{Get\_EventNber()}{Get\_EventNber()}}
+{\footnotesize\ttfamily \label{class_track_a76f17e608a1e103105b8cafba5bfc039} 
+int Track\+::\+Get\+\_\+\+Event\+Nber (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Get \doxylink{class_event}{Event} number. 
+
+\Hypertarget{class_track_a53a3b06ff5f640b23c6f837a40c5913f}\index{Track@{Track}!Get\_ModuleNber@{Get\_ModuleNber}}
+\index{Get\_ModuleNber@{Get\_ModuleNber}!Track@{Track}}
+\doxysubsubsection{\texorpdfstring{Get\_ModuleNber()}{Get\_ModuleNber()}}
+{\footnotesize\ttfamily \label{class_track_a53a3b06ff5f640b23c6f837a40c5913f} 
+int Track\+::\+Get\+\_\+\+Module\+Nber (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Get \doxylink{class_module}{Module} number. 
+
+\Hypertarget{class_track_a8e94aecf4201579409175f964baf52d2}\index{Track@{Track}!Get\_NberOfCluster@{Get\_NberOfCluster}}
+\index{Get\_NberOfCluster@{Get\_NberOfCluster}!Track@{Track}}
+\doxysubsubsection{\texorpdfstring{Get\_NberOfCluster()}{Get\_NberOfCluster()}}
+{\footnotesize\ttfamily \label{class_track_a8e94aecf4201579409175f964baf52d2} 
+int Track\+::\+Get\+\_\+\+Nber\+Of\+Cluster (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_track_a30a31afdb658d3403b714460a9efd919}\index{Track@{Track}!Get\_ParameterError@{Get\_ParameterError}}
+\index{Get\_ParameterError@{Get\_ParameterError}!Track@{Track}}
+\doxysubsubsection{\texorpdfstring{Get\_ParameterError()}{Get\_ParameterError()}}
+{\footnotesize\ttfamily \label{class_track_a30a31afdb658d3403b714460a9efd919} 
+double Track\+::\+Get\+\_\+\+Parameter\+Error (\begin{DoxyParamCaption}\item[{const int \&}]{i\+Par}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_track_a46b04235717f048ed64aa5a6b8eabe58}\index{Track@{Track}!Get\_ParameterName@{Get\_ParameterName}}
+\index{Get\_ParameterName@{Get\_ParameterName}!Track@{Track}}
+\doxysubsubsection{\texorpdfstring{Get\_ParameterName()}{Get\_ParameterName()}}
+{\footnotesize\ttfamily \label{class_track_a46b04235717f048ed64aa5a6b8eabe58} 
+std\+::string Track\+::\+Get\+\_\+\+Parameter\+Name (\begin{DoxyParamCaption}\item[{const int \&}]{i\+Par}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_track_ae1c89625a747ea7b92469e0c9741e4e5}\index{Track@{Track}!Get\_ParameterValue@{Get\_ParameterValue}}
+\index{Get\_ParameterValue@{Get\_ParameterValue}!Track@{Track}}
+\doxysubsubsection{\texorpdfstring{Get\_ParameterValue()}{Get\_ParameterValue()}}
+{\footnotesize\ttfamily \label{class_track_ae1c89625a747ea7b92469e0c9741e4e5} 
+double Track\+::\+Get\+\_\+\+Parameter\+Value (\begin{DoxyParamCaption}\item[{const int \&}]{i\+Par}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_track_aa91207fe600dcd61613221881e4983af}\index{Track@{Track}!Get\_ParameterValue\_BeforeMinimisation@{Get\_ParameterValue\_BeforeMinimisation}}
+\index{Get\_ParameterValue\_BeforeMinimisation@{Get\_ParameterValue\_BeforeMinimisation}!Track@{Track}}
+\doxysubsubsection{\texorpdfstring{Get\_ParameterValue\_BeforeMinimisation()}{Get\_ParameterValue\_BeforeMinimisation()}}
+{\footnotesize\ttfamily \label{class_track_aa91207fe600dcd61613221881e4983af} 
+double Track\+::\+Get\+\_\+\+Parameter\+Value\+\_\+\+Before\+Minimisation (\begin{DoxyParamCaption}\item[{const int \&}]{i\+Par}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_track_a3baa5ba1f6fcbad6d7e079a706fd13bd}\index{Track@{Track}!Get\_Pull@{Get\_Pull}}
+\index{Get\_Pull@{Get\_Pull}!Track@{Track}}
+\doxysubsubsection{\texorpdfstring{Get\_Pull()}{Get\_Pull()}}
+{\footnotesize\ttfamily \label{class_track_a3baa5ba1f6fcbad6d7e079a706fd13bd} 
+double Track\+::\+Get\+\_\+\+Pull (\begin{DoxyParamCaption}\item[{int}]{Index1D}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_track_aff079d43004c50c20d2892c265dbe053}\index{Track@{Track}!Get\_Residual@{Get\_Residual}}
+\index{Get\_Residual@{Get\_Residual}!Track@{Track}}
+\doxysubsubsection{\texorpdfstring{Get\_Residual()}{Get\_Residual()}}
+{\footnotesize\ttfamily \label{class_track_aff079d43004c50c20d2892c265dbe053} 
+double Track\+::\+Get\+\_\+\+Residual (\begin{DoxyParamCaption}\item[{int}]{Index1D}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_track_a3df2763a1ed51d19cc7b43d6e4577f65}\index{Track@{Track}!GetNberOfParameters@{GetNberOfParameters}}
+\index{GetNberOfParameters@{GetNberOfParameters}!Track@{Track}}
+\doxysubsubsection{\texorpdfstring{GetNberOfParameters()}{GetNberOfParameters()}}
+{\footnotesize\ttfamily \label{class_track_a3df2763a1ed51d19cc7b43d6e4577f65} 
+int Track\+::\+Get\+Nber\+Of\+Parameters (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_track_a39f505bcb3245191575e31cd884f1c5f}\index{Track@{Track}!SetNberOfParameters@{SetNberOfParameters}}
+\index{SetNberOfParameters@{SetNberOfParameters}!Track@{Track}}
+\doxysubsubsection{\texorpdfstring{SetNberOfParameters()}{SetNberOfParameters()}}
+{\footnotesize\ttfamily \label{class_track_a39f505bcb3245191575e31cd884f1c5f} 
+void Track\+::\+Set\+Nber\+Of\+Parameters (\begin{DoxyParamCaption}\item[{const int \&}]{Nber\+Of\+Param}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_track_a16f05d0d06f7a81b9194b597be927078}\index{Track@{Track}!SetParameter@{SetParameter}}
+\index{SetParameter@{SetParameter}!Track@{Track}}
+\doxysubsubsection{\texorpdfstring{SetParameter()}{SetParameter()}}
+{\footnotesize\ttfamily \label{class_track_a16f05d0d06f7a81b9194b597be927078} 
+int Track\+::\+Set\+Parameter (\begin{DoxyParamCaption}\item[{TVirtual\+Fitter \texorpdfstring{$\ast$}{*}}]{p\+TVirtual\+Fitter}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_track_a71f8bcae7f583d15b307acbbc815cf86}\index{Track@{Track}!SetParameters\_Internal@{SetParameters\_Internal}}
+\index{SetParameters\_Internal@{SetParameters\_Internal}!Track@{Track}}
+\doxysubsubsection{\texorpdfstring{SetParameters\_Internal()}{SetParameters\_Internal()}}
+{\footnotesize\ttfamily \label{class_track_a71f8bcae7f583d15b307acbbc815cf86} 
+void Track\+::\+Set\+Parameters\+\_\+\+Internal (\begin{DoxyParamCaption}\item[{double}]{par}{\mbox{[}$\,$\mbox{]}}\end{DoxyParamCaption})}
+
+\Hypertarget{class_track_aad1e054a1670c01d6007b8c420f96661}\index{Track@{Track}!SetResults@{SetResults}}
+\index{SetResults@{SetResults}!Track@{Track}}
+\doxysubsubsection{\texorpdfstring{SetResults()}{SetResults()}}
+{\footnotesize\ttfamily \label{class_track_aad1e054a1670c01d6007b8c420f96661} 
+void Track\+::\+Set\+Results (\begin{DoxyParamCaption}\item[{TVirtual\+Fitter \texorpdfstring{$\ast$}{*}}]{p\+TVirtual\+Fitter}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_track_a5ae5e5a189b92622c342aac176916663}\index{Track@{Track}!Y\_Position@{Y\_Position}}
+\index{Y\_Position@{Y\_Position}!Track@{Track}}
+\doxysubsubsection{\texorpdfstring{Y\_Position()}{Y\_Position()}}
+{\footnotesize\ttfamily \label{class_track_a5ae5e5a189b92622c342aac176916663} 
+double Track\+::\+Y\+\_\+\+Position (\begin{DoxyParamCaption}\item[{const double \&}]{X}{}\end{DoxyParamCaption}) const}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{class_track_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_track_a84c1f76b0c580c3e5e265ecad3ec4ba3}\index{Track@{Track}!m\_NberOfClusters@{m\_NberOfClusters}}
+\index{m\_NberOfClusters@{m\_NberOfClusters}!Track@{Track}}
+\doxysubsubsection{\texorpdfstring{m\_NberOfClusters}{m\_NberOfClusters}}
+{\footnotesize\ttfamily \label{class_track_a84c1f76b0c580c3e5e265ecad3ec4ba3} 
+int Track\+::m\+\_\+\+Nber\+Of\+Clusters}
+
+\Hypertarget{class_track_a70287db72956761680439f8f8eb8fae8}\index{Track@{Track}!V\_Cluster@{V\_Cluster}}
+\index{V\_Cluster@{V\_Cluster}!Track@{Track}}
+\doxysubsubsection{\texorpdfstring{V\_Cluster}{V\_Cluster}}
+{\footnotesize\ttfamily \label{class_track_a70287db72956761680439f8f8eb8fae8} 
+std\+::vector$<$\mbox{\hyperlink{class_cluster}{Cluster}} \texorpdfstring{$\ast$}{*}$>$ Track\+::\+V\+\_\+\+Cluster}
+
+\Hypertarget{class_track_adbd9ce900824da1a59b8f481bef38744}\index{Track@{Track}!V\_Pull@{V\_Pull}}
+\index{V\_Pull@{V\_Pull}!Track@{Track}}
+\doxysubsubsection{\texorpdfstring{V\_Pull}{V\_Pull}}
+{\footnotesize\ttfamily \label{class_track_adbd9ce900824da1a59b8f481bef38744} 
+std\+::vector$<$double$>$ Track\+::\+V\+\_\+\+Pull}
+
+\Hypertarget{class_track_ad70ebed8af203004664188c768ed5cb2}\index{Track@{Track}!V\_Residual@{V\_Residual}}
+\index{V\_Residual@{V\_Residual}!Track@{Track}}
+\doxysubsubsection{\texorpdfstring{V\_Residual}{V\_Residual}}
+{\footnotesize\ttfamily \label{class_track_ad70ebed8af203004664188c768ed5cb2} 
+std\+::vector$<$double$>$ Track\+::\+V\+\_\+\+Residual}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Model\+Event/inc/\mbox{\hyperlink{_track_8h}{Track.\+h}}\item 
+Model\+Event/src/\mbox{\hyperlink{_track_8cxx}{Track.\+cxx}}\end{DoxyCompactItemize}

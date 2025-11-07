@@ -1,0 +1,28 @@
+var class_reconstruction_1_1_reco_pad =
+[
+    [ "~RecoPad", "de/d3b/class_reconstruction_1_1_reco_pad.html#a334aa459d8cc0f45d83210e9689e49fa", null ],
+    [ "ClassDef", "de/d3b/class_reconstruction_1_1_reco_pad.html#aec0f3584322addb1b0b62221256aef7e", null ],
+    [ "ADCmax", "de/d3b/class_reconstruction_1_1_reco_pad.html#a782c67340005de3e6e0b3bdf74ea708f", null ],
+    [ "ADCmax_base", "de/d3b/class_reconstruction_1_1_reco_pad.html#abfc489bcd149988e1c7489b6bdc0514d", null ],
+    [ "charge", "de/d3b/class_reconstruction_1_1_reco_pad.html#a1994ee796af063405feac736d3092855", null ],
+    [ "d", "de/d3b/class_reconstruction_1_1_reco_pad.html#a062afd9f10613fb0444c8d0cfe0b005f", null ],
+    [ "dd", "de/d3b/class_reconstruction_1_1_reco_pad.html#a582baac22eb6da302c489d8145185a05", null ],
+    [ "dEdxXP", "de/d3b/class_reconstruction_1_1_reco_pad.html#a7f6de94bae2f528f650ffa1056e12449", null ],
+    [ "driftDistance", "de/d3b/class_reconstruction_1_1_reco_pad.html#a195b27aa9779a933fbe71389b330d587", null ],
+    [ "dy", "de/d3b/class_reconstruction_1_1_reco_pad.html#a896f4399547c903ddb374d788dbf42d2", null ],
+    [ "gain", "de/d3b/class_reconstruction_1_1_reco_pad.html#a1dd82eff75adc26ebaf490373f55cb03", null ],
+    [ "GainCorrection", "de/d3b/class_reconstruction_1_1_reco_pad.html#aedf69bbec403530a325c4130c251e7a9", null ],
+    [ "ix", "de/d3b/class_reconstruction_1_1_reco_pad.html#a9bac92e0483291efab7a603b68646279", null ],
+    [ "iy", "de/d3b/class_reconstruction_1_1_reco_pad.html#a2ef044eeb2aa28f09e740dcc8682f825", null ],
+    [ "leading", "de/d3b/class_reconstruction_1_1_reco_pad.html#adf4cd690a73f933de768f11d91139d19", null ],
+    [ "length", "de/d3b/class_reconstruction_1_1_reco_pad.html#ac87c3fe0b6869b66d2793cdf36d3e8f0", null ],
+    [ "phi", "de/d3b/class_reconstruction_1_1_reco_pad.html#aa839d7dcfd886257f6cce88278a1c6ea", null ],
+    [ "ratio", "de/d3b/class_reconstruction_1_1_reco_pad.html#a41b5bcc8b230d33b705c95e57547387e", null ],
+    [ "ratioDrift", "de/d3b/class_reconstruction_1_1_reco_pad.html#a2d23cd7f743acd51ad7ca2d489d5e4cf", null ],
+    [ "ratioFile", "de/d3b/class_reconstruction_1_1_reco_pad.html#a4e7f861944f50d60a64a5057676d7d45", null ],
+    [ "RC", "de/d3b/class_reconstruction_1_1_reco_pad.html#a80420327a8aa570faac19f6748799e0b", null ],
+    [ "T0", "de/d3b/class_reconstruction_1_1_reco_pad.html#a877883a7720037935afb099447161933", null ],
+    [ "TMax", "de/d3b/class_reconstruction_1_1_reco_pad.html#ab426d9ab99cabacea9bf7bb28f870175", null ],
+    [ "xPad", "de/d3b/class_reconstruction_1_1_reco_pad.html#a2b01615852e64a511700359d191890aa", null ],
+    [ "yPad", "de/d3b/class_reconstruction_1_1_reco_pad.html#a1954d728fe326903fa5e72e3b08e9952", null ]
+];

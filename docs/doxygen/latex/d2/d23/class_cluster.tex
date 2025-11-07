@@ -1,0 +1,506 @@
+\doxysection{Cluster Class Reference}
+\hypertarget{class_cluster}{}\label{class_cluster}\index{Cluster@{Cluster}}
+
+
+{\ttfamily \#include $<$Cluster.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_cluster_ad5359288e0ae8407e82041e1e8a87b1c}{Cluster}} (const int \&Event\+Nber, const int \&Entry\+Nber, const int \&Module\+Nber)
+\begin{DoxyCompactList}\small\item\em Construct a \doxylink{class_cluster}{Cluster}. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{class_cluster_a4bddfc88ac859610acab15dd12851b58}{\texorpdfstring{$\sim$}{\string~}\+Cluster}} ()
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_cluster_a6e6d0e24144304c3f424fbb2de190056}{Get\+\_\+\+Event\+Nber}} () const
+\item 
+int \mbox{\hyperlink{class_cluster_ae66423ca38e7695d0907bafbbb9a1115}{Get\+\_\+\+Entry\+Nber}} () const
+\item 
+int \mbox{\hyperlink{class_cluster_a3b13ad1d528130f926641f82a13c1774}{Get\+\_\+\+Module\+Nber}} () const
+\item 
+void \mbox{\hyperlink{class_cluster_a5834cca37e9dfe1cad665c4013acadf2}{Write\+Out}} () const
+\item 
+int \mbox{\hyperlink{class_cluster_ae8f70da74c47786003feeba1fd028709}{Is\+Valid}} () const
+\item 
+void \mbox{\hyperlink{class_cluster_a9cc13f47bf4ab37b26df954e99d3b100}{Validate}} ()
+\item 
+void \mbox{\hyperlink{class_cluster_a0ff5b5a2df323dac8907799259d13b18}{Invalidate}} ()
+\item 
+double \mbox{\hyperlink{class_cluster_a7d7a5520019d24530f9889783c894ddd}{Get\+\_\+\+Acluster}} () const
+\item 
+double \mbox{\hyperlink{class_cluster_a030f05dd9975a67f75aa19dd93047f2d}{Get\+\_\+\+XWeight}} () const
+\item 
+double \mbox{\hyperlink{class_cluster_ae8624a28a1822094427354fdef269806}{Get\+\_\+\+YWeight}} () const
+\item 
+void \mbox{\hyperlink{class_cluster_a5d7b27cb7e9287fa3ec7d1c81ee96a3c}{Add\+\_\+\+Pad}} (\mbox{\hyperlink{class_pad}{Pad}} \texorpdfstring{$\ast$}{*}p\+Pad)
+\item 
+void \mbox{\hyperlink{class_cluster_a2bf920fbd222bebca45077e17ec65d57}{Do\+Closure}} ()
+\item 
+int \mbox{\hyperlink{class_cluster_ae1793df1c856c9bc56acee50abbbbcb3}{Get\+\_\+\+Nber\+Of\+Pads}} () const
+\item 
+\mbox{\hyperlink{class_pad}{Pad}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_cluster_aa5c628832a4ec2b58aa434fec7a92cae}{Get\+\_\+\+Pad}} (const int \&Index1D) const
+\item 
+\mbox{\hyperlink{class_pad}{Pad}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_cluster_a9ee70c1c607f9b0842e91da85900eb37}{Get\+\_\+\+Leading\+Pad}} () const
+\item 
+double \mbox{\hyperlink{class_cluster_ac9bee316809e5ada39f340b6c6190442}{Get\+\_\+\+YLeading}} () const
+\item 
+double \mbox{\hyperlink{class_cluster_ae8db4f68c2a62ceca12503ed3cea9d7b}{Get\+\_\+\+TMax\+Leading}} () const
+\item 
+double \mbox{\hyperlink{class_cluster_a2fece51408b3e81c777fce559203c5aa}{Get\+\_\+\+AMax\+Leading}} () const
+\item 
+\mbox{\hyperlink{class_pad}{Pad}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_cluster_aa3409932cd4e1b525d498f400c472805}{Get\+\_\+\+Next\+Leading\+Pad}} () const
+\item 
+\mbox{\hyperlink{class_pad}{Pad}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_cluster_a694c5ef6e97d65645e9fafcdd2c24fcc}{Get\+\_\+\+Next\+Next\+Leading\+Pad}} () const
+\item 
+void \mbox{\hyperlink{class_cluster_a11bba2a48c9f72a47a45605ed578b29b}{Set\+\_\+\+XTrack}} (const double \&XTrack)
+\item 
+void \mbox{\hyperlink{class_cluster_a16cdc4c5692379b5056af87fac179d5a}{Set\+\_\+\+YTrack}} (const double \&YTrack)
+\item 
+void \mbox{\hyperlink{class_cluster_ae2270688f88916b77ccb27f877c24572}{Set\+\_\+e\+XTrack}} (const double \&e\+XTrack)
+\item 
+void \mbox{\hyperlink{class_cluster_a40fe075c9f382c2b2f533c733ff7116f}{Set\+\_\+e\+YTrack}} (const double \&e\+YTrack)
+\item 
+int \mbox{\hyperlink{class_cluster_ace9ff5963cadef729a28a026a073eded}{Status\+Fit}} ()
+\item 
+double \mbox{\hyperlink{class_cluster_abd117ccf2b0dbe8e8ba4c73c5f9b7e28}{Get\+\_\+\+XTrack}} () const
+\item 
+double \mbox{\hyperlink{class_cluster_a0d9662f81cf1b0fdfc4e83f868182f1a}{Get\+\_\+e\+XTrack}} () const
+\item 
+double \mbox{\hyperlink{class_cluster_a6baf6a280285622a172be2e33b989504}{Get\+\_\+\+YTrack}} () const
+\item 
+double \mbox{\hyperlink{class_cluster_a3987f8b59870add2f5b7c4589559f081}{Get\+\_\+e\+YTrack}} () const
+\item 
+double \mbox{\hyperlink{class_cluster_aebb6577c4d347f86485490e9a38c3541}{Get\+\_\+\+Chi2\+Min}} () const
+\item 
+double \mbox{\hyperlink{class_cluster_a36969fdb0c7c554e1f782c031efc2127}{Get\+\_\+\+XTrack\+\_\+\+Before\+Minimisation}} () const
+\item 
+double \mbox{\hyperlink{class_cluster_a4fbf34dbeabb414d8aab9013ff8b1746}{Get\+\_\+\+YTrack\+\_\+\+Before\+Minimisation}} () const
+\item 
+int \mbox{\hyperlink{class_cluster_a9f240f117802201ceb4846bf9be3a5bb}{Status\+Fit\+\_\+\+Horizontal}} ()
+\item 
+void \mbox{\hyperlink{class_cluster_af6899cd7be6f2e2b628363c38053727f}{Set\+Eval\+\_\+\+Horizontal}} (TF1 \texorpdfstring{$\ast$}{*}p\+TF1)
+\item 
+double \mbox{\hyperlink{class_cluster_a82a994c14d2f254b3940040325109cdf}{Eval\+\_\+\+Horizontal}} (const double \&Xin)
+\item 
+int \mbox{\hyperlink{class_cluster_ac355c35c3b035f62c19641f589a01bb7}{Set\+Parameter\+\_\+\+Horizontal}} (TVirtual\+Fitter \texorpdfstring{$\ast$}{*}p\+TVirtual\+Fitter)
+\item 
+void \mbox{\hyperlink{class_cluster_a4b36d05b07d6893e3ca64e7b5e308ae9}{Set\+Results\+\_\+\+Horizontal}} (TVirtual\+Fitter \texorpdfstring{$\ast$}{*}p\+TVirtual\+Fitter)
+\item 
+void \mbox{\hyperlink{class_cluster_ae87e944b7a63c9100f2313a31d7d2576}{Set\+Results\+\_\+\+Failled\+Fit\+\_\+\+Horizontal}} (const int \&Verbose)
+\item 
+double \mbox{\hyperlink{class_cluster_a24a8e200bfc6258f5574f2bfc9142711}{Chi2\+\_\+\+Horizontal}} (double par\mbox{[}$\,$\mbox{]})
+\item 
+int \mbox{\hyperlink{class_cluster_a2cd2a3f623e4edb2816943c29c6d94be}{Fit\+Res\+\_\+\+Horizontal\+\_\+\+Get\+\_\+\+Nber\+Of\+Terms\+In\+Chi2}} () const
+\item 
+\mbox{\hyperlink{class_pad}{Pad}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_cluster_adcd0382fc4f5bd2aecf0141d4e75cb11}{Fit\+Res\+\_\+\+Horizontal\+\_\+\+Get\+\_\+\+Pad}} (const int \&Index1D) const
+\item 
+double \mbox{\hyperlink{class_cluster_a3791850f15aff7a2ff7b2245a74cba0a}{Fit\+Res\+\_\+\+Horizontal\+\_\+\+Get\+\_\+\+Residual}} (const int \&Index1D) const
+\item 
+double \mbox{\hyperlink{class_cluster_afff0945fb2db9fcf85a58c12a1b714c3}{Fit\+Res\+\_\+\+Horizontal\+\_\+\+Get\+\_\+\+Pull}} (const int \&Index1D) const
+\item 
+int \mbox{\hyperlink{class_cluster_adfa75b25bce4bfff335cffe4a39b226f}{Status\+Fit\+\_\+\+Diagonal}} ()
+\item 
+void \mbox{\hyperlink{class_cluster_a5b9373fc0cd68f4a9a42575d1d25e79e}{Set\+Eval\+\_\+\+Diagonal}} (TF1 \texorpdfstring{$\ast$}{*}p\+TF1)
+\item 
+double \mbox{\hyperlink{class_cluster_a22ab52d35287b9cedac7fe34ad60ff0e}{Eval\+\_\+\+Diagonal}} (const double \&Xin)
+\item 
+int \mbox{\hyperlink{class_cluster_aab9930670913790a0b8e6f905302ff8a}{Set\+Parameter\+\_\+\+Diagonal}} (TVirtual\+Fitter \texorpdfstring{$\ast$}{*}p\+TVirtual\+Fitter)
+\item 
+void \mbox{\hyperlink{class_cluster_a30a901eb065e51b7f3687da30fd5ce7a}{Set\+Results\+\_\+\+Diagonal}} (TVirtual\+Fitter \texorpdfstring{$\ast$}{*}p\+TVirtual\+Fitter)
+\item 
+void \mbox{\hyperlink{class_cluster_a929aad0957f6ba62067e2b0caa5f38fe}{Set\+Results\+\_\+\+Failled\+Fit\+\_\+\+Diagonal}} (const int \&Verbose)
+\item 
+double \mbox{\hyperlink{class_cluster_a436472a13fdedce8a660bfe429cd58f8}{Chi2\+\_\+\+Diagonal}} (double par\mbox{[}$\,$\mbox{]})
+\item 
+int \mbox{\hyperlink{class_cluster_aa6b26301671f8913ec742f810c0947b0}{Fit\+Res\+\_\+\+Diagonal\+\_\+\+Get\+\_\+\+Nber\+Of\+Terms\+In\+Chi2}} () const
+\item 
+\mbox{\hyperlink{class_pad}{Pad}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_cluster_ae8ab6fb848bc1c0a9a8d8442e779556c}{Fit\+Res\+\_\+\+Diagonal\+\_\+\+Get\+\_\+\+Pad}} (const int \&Index1D) const
+\item 
+double \mbox{\hyperlink{class_cluster_a0d3e5870b3522aeb7eaad6be09a036b1}{Fit\+Res\+\_\+\+Diagonal\+\_\+\+Get\+\_\+\+Residual}} (const int \&Index1D) const
+\item 
+double \mbox{\hyperlink{class_cluster_a064f0da23d127056eaf65888833351d7}{Fit\+Res\+\_\+\+Diagonal\+\_\+\+Get\+\_\+\+Pull}} (const int \&Index1D) const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{class_cluster_a53289f1dfff38cbdf26c5203ca5b3b61}{m\+\_\+\+Angle\+Rot}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{class_cluster_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_cluster_ad5359288e0ae8407e82041e1e8a87b1c}\index{Cluster@{Cluster}!Cluster@{Cluster}}
+\index{Cluster@{Cluster}!Cluster@{Cluster}}
+\doxysubsubsection{\texorpdfstring{Cluster()}{Cluster()}}
+{\footnotesize\ttfamily \label{class_cluster_ad5359288e0ae8407e82041e1e8a87b1c} 
+Cluster\+::\+Cluster (\begin{DoxyParamCaption}\item[{const int \&}]{Event\+Nber}{, }\item[{const int \&}]{Entry\+Nber}{, }\item[{const int \&}]{Module\+Nber}{}\end{DoxyParamCaption})}
+
+
+
+Construct a \doxylink{class_cluster}{Cluster}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Event\+Nber} & event number \\
+\hline
+{\em Entry\+Nber} & entry index \\
+\hline
+{\em Module\+Nber} & module index \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_cluster_a4bddfc88ac859610acab15dd12851b58}\index{Cluster@{Cluster}!````~Cluster@{\texorpdfstring{$\sim$}{\string~}Cluster}}
+\index{````~Cluster@{\texorpdfstring{$\sim$}{\string~}Cluster}!Cluster@{Cluster}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Cluster()}{\string~Cluster()}}
+{\footnotesize\ttfamily \label{class_cluster_a4bddfc88ac859610acab15dd12851b58} 
+Cluster\+::\texorpdfstring{$\sim$}{\string~}\+Cluster (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Virtual destructor. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_cluster_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_cluster_a5d7b27cb7e9287fa3ec7d1c81ee96a3c}\index{Cluster@{Cluster}!Add\_Pad@{Add\_Pad}}
+\index{Add\_Pad@{Add\_Pad}!Cluster@{Cluster}}
+\doxysubsubsection{\texorpdfstring{Add\_Pad()}{Add\_Pad()}}
+{\footnotesize\ttfamily \label{class_cluster_a5d7b27cb7e9287fa3ec7d1c81ee96a3c} 
+void Cluster\+::\+Add\+\_\+\+Pad (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_pad}{Pad}} \texorpdfstring{$\ast$}{*}}]{p\+Pad}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_cluster_a436472a13fdedce8a660bfe429cd58f8}\index{Cluster@{Cluster}!Chi2\_Diagonal@{Chi2\_Diagonal}}
+\index{Chi2\_Diagonal@{Chi2\_Diagonal}!Cluster@{Cluster}}
+\doxysubsubsection{\texorpdfstring{Chi2\_Diagonal()}{Chi2\_Diagonal()}}
+{\footnotesize\ttfamily \label{class_cluster_a436472a13fdedce8a660bfe429cd58f8} 
+double Cluster\+::\+Chi2\+\_\+\+Diagonal (\begin{DoxyParamCaption}\item[{double}]{par}{\mbox{[}$\,$\mbox{]}}\end{DoxyParamCaption})}
+
+\Hypertarget{class_cluster_a24a8e200bfc6258f5574f2bfc9142711}\index{Cluster@{Cluster}!Chi2\_Horizontal@{Chi2\_Horizontal}}
+\index{Chi2\_Horizontal@{Chi2\_Horizontal}!Cluster@{Cluster}}
+\doxysubsubsection{\texorpdfstring{Chi2\_Horizontal()}{Chi2\_Horizontal()}}
+{\footnotesize\ttfamily \label{class_cluster_a24a8e200bfc6258f5574f2bfc9142711} 
+double Cluster\+::\+Chi2\+\_\+\+Horizontal (\begin{DoxyParamCaption}\item[{double}]{par}{\mbox{[}$\,$\mbox{]}}\end{DoxyParamCaption})}
+
+\Hypertarget{class_cluster_a2bf920fbd222bebca45077e17ec65d57}\index{Cluster@{Cluster}!DoClosure@{DoClosure}}
+\index{DoClosure@{DoClosure}!Cluster@{Cluster}}
+\doxysubsubsection{\texorpdfstring{DoClosure()}{DoClosure()}}
+{\footnotesize\ttfamily \label{class_cluster_a2bf920fbd222bebca45077e17ec65d57} 
+void Cluster\+::\+Do\+Closure (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_cluster_a22ab52d35287b9cedac7fe34ad60ff0e}\index{Cluster@{Cluster}!Eval\_Diagonal@{Eval\_Diagonal}}
+\index{Eval\_Diagonal@{Eval\_Diagonal}!Cluster@{Cluster}}
+\doxysubsubsection{\texorpdfstring{Eval\_Diagonal()}{Eval\_Diagonal()}}
+{\footnotesize\ttfamily \label{class_cluster_a22ab52d35287b9cedac7fe34ad60ff0e} 
+double Cluster\+::\+Eval\+\_\+\+Diagonal (\begin{DoxyParamCaption}\item[{const double \&}]{Xin}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_cluster_a82a994c14d2f254b3940040325109cdf}\index{Cluster@{Cluster}!Eval\_Horizontal@{Eval\_Horizontal}}
+\index{Eval\_Horizontal@{Eval\_Horizontal}!Cluster@{Cluster}}
+\doxysubsubsection{\texorpdfstring{Eval\_Horizontal()}{Eval\_Horizontal()}}
+{\footnotesize\ttfamily \label{class_cluster_a82a994c14d2f254b3940040325109cdf} 
+double Cluster\+::\+Eval\+\_\+\+Horizontal (\begin{DoxyParamCaption}\item[{const double \&}]{Xin}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_cluster_aa6b26301671f8913ec742f810c0947b0}\index{Cluster@{Cluster}!FitRes\_Diagonal\_Get\_NberOfTermsInChi2@{FitRes\_Diagonal\_Get\_NberOfTermsInChi2}}
+\index{FitRes\_Diagonal\_Get\_NberOfTermsInChi2@{FitRes\_Diagonal\_Get\_NberOfTermsInChi2}!Cluster@{Cluster}}
+\doxysubsubsection{\texorpdfstring{FitRes\_Diagonal\_Get\_NberOfTermsInChi2()}{FitRes\_Diagonal\_Get\_NberOfTermsInChi2()}}
+{\footnotesize\ttfamily \label{class_cluster_aa6b26301671f8913ec742f810c0947b0} 
+int Cluster\+::\+Fit\+Res\+\_\+\+Diagonal\+\_\+\+Get\+\_\+\+Nber\+Of\+Terms\+In\+Chi2 (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_cluster_ae8ab6fb848bc1c0a9a8d8442e779556c}\index{Cluster@{Cluster}!FitRes\_Diagonal\_Get\_Pad@{FitRes\_Diagonal\_Get\_Pad}}
+\index{FitRes\_Diagonal\_Get\_Pad@{FitRes\_Diagonal\_Get\_Pad}!Cluster@{Cluster}}
+\doxysubsubsection{\texorpdfstring{FitRes\_Diagonal\_Get\_Pad()}{FitRes\_Diagonal\_Get\_Pad()}}
+{\footnotesize\ttfamily \label{class_cluster_ae8ab6fb848bc1c0a9a8d8442e779556c} 
+\mbox{\hyperlink{class_pad}{Pad}} \texorpdfstring{$\ast$}{*} Cluster\+::\+Fit\+Res\+\_\+\+Diagonal\+\_\+\+Get\+\_\+\+Pad (\begin{DoxyParamCaption}\item[{const int \&}]{Index1D}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_cluster_a064f0da23d127056eaf65888833351d7}\index{Cluster@{Cluster}!FitRes\_Diagonal\_Get\_Pull@{FitRes\_Diagonal\_Get\_Pull}}
+\index{FitRes\_Diagonal\_Get\_Pull@{FitRes\_Diagonal\_Get\_Pull}!Cluster@{Cluster}}
+\doxysubsubsection{\texorpdfstring{FitRes\_Diagonal\_Get\_Pull()}{FitRes\_Diagonal\_Get\_Pull()}}
+{\footnotesize\ttfamily \label{class_cluster_a064f0da23d127056eaf65888833351d7} 
+double Cluster\+::\+Fit\+Res\+\_\+\+Diagonal\+\_\+\+Get\+\_\+\+Pull (\begin{DoxyParamCaption}\item[{const int \&}]{Index1D}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_cluster_a0d3e5870b3522aeb7eaad6be09a036b1}\index{Cluster@{Cluster}!FitRes\_Diagonal\_Get\_Residual@{FitRes\_Diagonal\_Get\_Residual}}
+\index{FitRes\_Diagonal\_Get\_Residual@{FitRes\_Diagonal\_Get\_Residual}!Cluster@{Cluster}}
+\doxysubsubsection{\texorpdfstring{FitRes\_Diagonal\_Get\_Residual()}{FitRes\_Diagonal\_Get\_Residual()}}
+{\footnotesize\ttfamily \label{class_cluster_a0d3e5870b3522aeb7eaad6be09a036b1} 
+double Cluster\+::\+Fit\+Res\+\_\+\+Diagonal\+\_\+\+Get\+\_\+\+Residual (\begin{DoxyParamCaption}\item[{const int \&}]{Index1D}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_cluster_a2cd2a3f623e4edb2816943c29c6d94be}\index{Cluster@{Cluster}!FitRes\_Horizontal\_Get\_NberOfTermsInChi2@{FitRes\_Horizontal\_Get\_NberOfTermsInChi2}}
+\index{FitRes\_Horizontal\_Get\_NberOfTermsInChi2@{FitRes\_Horizontal\_Get\_NberOfTermsInChi2}!Cluster@{Cluster}}
+\doxysubsubsection{\texorpdfstring{FitRes\_Horizontal\_Get\_NberOfTermsInChi2()}{FitRes\_Horizontal\_Get\_NberOfTermsInChi2()}}
+{\footnotesize\ttfamily \label{class_cluster_a2cd2a3f623e4edb2816943c29c6d94be} 
+int Cluster\+::\+Fit\+Res\+\_\+\+Horizontal\+\_\+\+Get\+\_\+\+Nber\+Of\+Terms\+In\+Chi2 (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_cluster_adcd0382fc4f5bd2aecf0141d4e75cb11}\index{Cluster@{Cluster}!FitRes\_Horizontal\_Get\_Pad@{FitRes\_Horizontal\_Get\_Pad}}
+\index{FitRes\_Horizontal\_Get\_Pad@{FitRes\_Horizontal\_Get\_Pad}!Cluster@{Cluster}}
+\doxysubsubsection{\texorpdfstring{FitRes\_Horizontal\_Get\_Pad()}{FitRes\_Horizontal\_Get\_Pad()}}
+{\footnotesize\ttfamily \label{class_cluster_adcd0382fc4f5bd2aecf0141d4e75cb11} 
+\mbox{\hyperlink{class_pad}{Pad}} \texorpdfstring{$\ast$}{*} Cluster\+::\+Fit\+Res\+\_\+\+Horizontal\+\_\+\+Get\+\_\+\+Pad (\begin{DoxyParamCaption}\item[{const int \&}]{Index1D}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_cluster_afff0945fb2db9fcf85a58c12a1b714c3}\index{Cluster@{Cluster}!FitRes\_Horizontal\_Get\_Pull@{FitRes\_Horizontal\_Get\_Pull}}
+\index{FitRes\_Horizontal\_Get\_Pull@{FitRes\_Horizontal\_Get\_Pull}!Cluster@{Cluster}}
+\doxysubsubsection{\texorpdfstring{FitRes\_Horizontal\_Get\_Pull()}{FitRes\_Horizontal\_Get\_Pull()}}
+{\footnotesize\ttfamily \label{class_cluster_afff0945fb2db9fcf85a58c12a1b714c3} 
+double Cluster\+::\+Fit\+Res\+\_\+\+Horizontal\+\_\+\+Get\+\_\+\+Pull (\begin{DoxyParamCaption}\item[{const int \&}]{Index1D}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_cluster_a3791850f15aff7a2ff7b2245a74cba0a}\index{Cluster@{Cluster}!FitRes\_Horizontal\_Get\_Residual@{FitRes\_Horizontal\_Get\_Residual}}
+\index{FitRes\_Horizontal\_Get\_Residual@{FitRes\_Horizontal\_Get\_Residual}!Cluster@{Cluster}}
+\doxysubsubsection{\texorpdfstring{FitRes\_Horizontal\_Get\_Residual()}{FitRes\_Horizontal\_Get\_Residual()}}
+{\footnotesize\ttfamily \label{class_cluster_a3791850f15aff7a2ff7b2245a74cba0a} 
+double Cluster\+::\+Fit\+Res\+\_\+\+Horizontal\+\_\+\+Get\+\_\+\+Residual (\begin{DoxyParamCaption}\item[{const int \&}]{Index1D}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_cluster_a7d7a5520019d24530f9889783c894ddd}\index{Cluster@{Cluster}!Get\_Acluster@{Get\_Acluster}}
+\index{Get\_Acluster@{Get\_Acluster}!Cluster@{Cluster}}
+\doxysubsubsection{\texorpdfstring{Get\_Acluster()}{Get\_Acluster()}}
+{\footnotesize\ttfamily \label{class_cluster_a7d7a5520019d24530f9889783c894ddd} 
+double Cluster\+::\+Get\+\_\+\+Acluster (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_cluster_a2fece51408b3e81c777fce559203c5aa}\index{Cluster@{Cluster}!Get\_AMaxLeading@{Get\_AMaxLeading}}
+\index{Get\_AMaxLeading@{Get\_AMaxLeading}!Cluster@{Cluster}}
+\doxysubsubsection{\texorpdfstring{Get\_AMaxLeading()}{Get\_AMaxLeading()}}
+{\footnotesize\ttfamily \label{class_cluster_a2fece51408b3e81c777fce559203c5aa} 
+double Cluster\+::\+Get\+\_\+\+AMax\+Leading (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_cluster_aebb6577c4d347f86485490e9a38c3541}\index{Cluster@{Cluster}!Get\_Chi2Min@{Get\_Chi2Min}}
+\index{Get\_Chi2Min@{Get\_Chi2Min}!Cluster@{Cluster}}
+\doxysubsubsection{\texorpdfstring{Get\_Chi2Min()}{Get\_Chi2Min()}}
+{\footnotesize\ttfamily \label{class_cluster_aebb6577c4d347f86485490e9a38c3541} 
+double Cluster\+::\+Get\+\_\+\+Chi2\+Min (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_cluster_ae66423ca38e7695d0907bafbbb9a1115}\index{Cluster@{Cluster}!Get\_EntryNber@{Get\_EntryNber}}
+\index{Get\_EntryNber@{Get\_EntryNber}!Cluster@{Cluster}}
+\doxysubsubsection{\texorpdfstring{Get\_EntryNber()}{Get\_EntryNber()}}
+{\footnotesize\ttfamily \label{class_cluster_ae66423ca38e7695d0907bafbbb9a1115} 
+int Cluster\+::\+Get\+\_\+\+Entry\+Nber (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_cluster_a6e6d0e24144304c3f424fbb2de190056}\index{Cluster@{Cluster}!Get\_EventNber@{Get\_EventNber}}
+\index{Get\_EventNber@{Get\_EventNber}!Cluster@{Cluster}}
+\doxysubsubsection{\texorpdfstring{Get\_EventNber()}{Get\_EventNber()}}
+{\footnotesize\ttfamily \label{class_cluster_a6e6d0e24144304c3f424fbb2de190056} 
+int Cluster\+::\+Get\+\_\+\+Event\+Nber (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_cluster_a0d9662f81cf1b0fdfc4e83f868182f1a}\index{Cluster@{Cluster}!Get\_eXTrack@{Get\_eXTrack}}
+\index{Get\_eXTrack@{Get\_eXTrack}!Cluster@{Cluster}}
+\doxysubsubsection{\texorpdfstring{Get\_eXTrack()}{Get\_eXTrack()}}
+{\footnotesize\ttfamily \label{class_cluster_a0d9662f81cf1b0fdfc4e83f868182f1a} 
+double Cluster\+::\+Get\+\_\+e\+XTrack (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_cluster_a3987f8b59870add2f5b7c4589559f081}\index{Cluster@{Cluster}!Get\_eYTrack@{Get\_eYTrack}}
+\index{Get\_eYTrack@{Get\_eYTrack}!Cluster@{Cluster}}
+\doxysubsubsection{\texorpdfstring{Get\_eYTrack()}{Get\_eYTrack()}}
+{\footnotesize\ttfamily \label{class_cluster_a3987f8b59870add2f5b7c4589559f081} 
+double Cluster\+::\+Get\+\_\+e\+YTrack (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_cluster_a9ee70c1c607f9b0842e91da85900eb37}\index{Cluster@{Cluster}!Get\_LeadingPad@{Get\_LeadingPad}}
+\index{Get\_LeadingPad@{Get\_LeadingPad}!Cluster@{Cluster}}
+\doxysubsubsection{\texorpdfstring{Get\_LeadingPad()}{Get\_LeadingPad()}}
+{\footnotesize\ttfamily \label{class_cluster_a9ee70c1c607f9b0842e91da85900eb37} 
+\mbox{\hyperlink{class_pad}{Pad}} \texorpdfstring{$\ast$}{*} Cluster\+::\+Get\+\_\+\+Leading\+Pad (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_cluster_a3b13ad1d528130f926641f82a13c1774}\index{Cluster@{Cluster}!Get\_ModuleNber@{Get\_ModuleNber}}
+\index{Get\_ModuleNber@{Get\_ModuleNber}!Cluster@{Cluster}}
+\doxysubsubsection{\texorpdfstring{Get\_ModuleNber()}{Get\_ModuleNber()}}
+{\footnotesize\ttfamily \label{class_cluster_a3b13ad1d528130f926641f82a13c1774} 
+int Cluster\+::\+Get\+\_\+\+Module\+Nber (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_cluster_ae1793df1c856c9bc56acee50abbbbcb3}\index{Cluster@{Cluster}!Get\_NberOfPads@{Get\_NberOfPads}}
+\index{Get\_NberOfPads@{Get\_NberOfPads}!Cluster@{Cluster}}
+\doxysubsubsection{\texorpdfstring{Get\_NberOfPads()}{Get\_NberOfPads()}}
+{\footnotesize\ttfamily \label{class_cluster_ae1793df1c856c9bc56acee50abbbbcb3} 
+int Cluster\+::\+Get\+\_\+\+Nber\+Of\+Pads (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_cluster_aa3409932cd4e1b525d498f400c472805}\index{Cluster@{Cluster}!Get\_NextLeadingPad@{Get\_NextLeadingPad}}
+\index{Get\_NextLeadingPad@{Get\_NextLeadingPad}!Cluster@{Cluster}}
+\doxysubsubsection{\texorpdfstring{Get\_NextLeadingPad()}{Get\_NextLeadingPad()}}
+{\footnotesize\ttfamily \label{class_cluster_aa3409932cd4e1b525d498f400c472805} 
+\mbox{\hyperlink{class_pad}{Pad}} \texorpdfstring{$\ast$}{*} Cluster\+::\+Get\+\_\+\+Next\+Leading\+Pad (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_cluster_a694c5ef6e97d65645e9fafcdd2c24fcc}\index{Cluster@{Cluster}!Get\_NextNextLeadingPad@{Get\_NextNextLeadingPad}}
+\index{Get\_NextNextLeadingPad@{Get\_NextNextLeadingPad}!Cluster@{Cluster}}
+\doxysubsubsection{\texorpdfstring{Get\_NextNextLeadingPad()}{Get\_NextNextLeadingPad()}}
+{\footnotesize\ttfamily \label{class_cluster_a694c5ef6e97d65645e9fafcdd2c24fcc} 
+\mbox{\hyperlink{class_pad}{Pad}} \texorpdfstring{$\ast$}{*} Cluster\+::\+Get\+\_\+\+Next\+Next\+Leading\+Pad (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_cluster_aa5c628832a4ec2b58aa434fec7a92cae}\index{Cluster@{Cluster}!Get\_Pad@{Get\_Pad}}
+\index{Get\_Pad@{Get\_Pad}!Cluster@{Cluster}}
+\doxysubsubsection{\texorpdfstring{Get\_Pad()}{Get\_Pad()}}
+{\footnotesize\ttfamily \label{class_cluster_aa5c628832a4ec2b58aa434fec7a92cae} 
+\mbox{\hyperlink{class_pad}{Pad}} \texorpdfstring{$\ast$}{*} Cluster\+::\+Get\+\_\+\+Pad (\begin{DoxyParamCaption}\item[{const int \&}]{Index1D}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_cluster_ae8db4f68c2a62ceca12503ed3cea9d7b}\index{Cluster@{Cluster}!Get\_TMaxLeading@{Get\_TMaxLeading}}
+\index{Get\_TMaxLeading@{Get\_TMaxLeading}!Cluster@{Cluster}}
+\doxysubsubsection{\texorpdfstring{Get\_TMaxLeading()}{Get\_TMaxLeading()}}
+{\footnotesize\ttfamily \label{class_cluster_ae8db4f68c2a62ceca12503ed3cea9d7b} 
+double Cluster\+::\+Get\+\_\+\+TMax\+Leading (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_cluster_abd117ccf2b0dbe8e8ba4c73c5f9b7e28}\index{Cluster@{Cluster}!Get\_XTrack@{Get\_XTrack}}
+\index{Get\_XTrack@{Get\_XTrack}!Cluster@{Cluster}}
+\doxysubsubsection{\texorpdfstring{Get\_XTrack()}{Get\_XTrack()}}
+{\footnotesize\ttfamily \label{class_cluster_abd117ccf2b0dbe8e8ba4c73c5f9b7e28} 
+double Cluster\+::\+Get\+\_\+\+XTrack (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_cluster_a36969fdb0c7c554e1f782c031efc2127}\index{Cluster@{Cluster}!Get\_XTrack\_BeforeMinimisation@{Get\_XTrack\_BeforeMinimisation}}
+\index{Get\_XTrack\_BeforeMinimisation@{Get\_XTrack\_BeforeMinimisation}!Cluster@{Cluster}}
+\doxysubsubsection{\texorpdfstring{Get\_XTrack\_BeforeMinimisation()}{Get\_XTrack\_BeforeMinimisation()}}
+{\footnotesize\ttfamily \label{class_cluster_a36969fdb0c7c554e1f782c031efc2127} 
+double Cluster\+::\+Get\+\_\+\+XTrack\+\_\+\+Before\+Minimisation (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_cluster_a030f05dd9975a67f75aa19dd93047f2d}\index{Cluster@{Cluster}!Get\_XWeight@{Get\_XWeight}}
+\index{Get\_XWeight@{Get\_XWeight}!Cluster@{Cluster}}
+\doxysubsubsection{\texorpdfstring{Get\_XWeight()}{Get\_XWeight()}}
+{\footnotesize\ttfamily \label{class_cluster_a030f05dd9975a67f75aa19dd93047f2d} 
+double Cluster\+::\+Get\+\_\+\+XWeight (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_cluster_ac9bee316809e5ada39f340b6c6190442}\index{Cluster@{Cluster}!Get\_YLeading@{Get\_YLeading}}
+\index{Get\_YLeading@{Get\_YLeading}!Cluster@{Cluster}}
+\doxysubsubsection{\texorpdfstring{Get\_YLeading()}{Get\_YLeading()}}
+{\footnotesize\ttfamily \label{class_cluster_ac9bee316809e5ada39f340b6c6190442} 
+double Cluster\+::\+Get\+\_\+\+YLeading (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_cluster_a6baf6a280285622a172be2e33b989504}\index{Cluster@{Cluster}!Get\_YTrack@{Get\_YTrack}}
+\index{Get\_YTrack@{Get\_YTrack}!Cluster@{Cluster}}
+\doxysubsubsection{\texorpdfstring{Get\_YTrack()}{Get\_YTrack()}}
+{\footnotesize\ttfamily \label{class_cluster_a6baf6a280285622a172be2e33b989504} 
+double Cluster\+::\+Get\+\_\+\+YTrack (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_cluster_a4fbf34dbeabb414d8aab9013ff8b1746}\index{Cluster@{Cluster}!Get\_YTrack\_BeforeMinimisation@{Get\_YTrack\_BeforeMinimisation}}
+\index{Get\_YTrack\_BeforeMinimisation@{Get\_YTrack\_BeforeMinimisation}!Cluster@{Cluster}}
+\doxysubsubsection{\texorpdfstring{Get\_YTrack\_BeforeMinimisation()}{Get\_YTrack\_BeforeMinimisation()}}
+{\footnotesize\ttfamily \label{class_cluster_a4fbf34dbeabb414d8aab9013ff8b1746} 
+double Cluster\+::\+Get\+\_\+\+YTrack\+\_\+\+Before\+Minimisation (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_cluster_ae8624a28a1822094427354fdef269806}\index{Cluster@{Cluster}!Get\_YWeight@{Get\_YWeight}}
+\index{Get\_YWeight@{Get\_YWeight}!Cluster@{Cluster}}
+\doxysubsubsection{\texorpdfstring{Get\_YWeight()}{Get\_YWeight()}}
+{\footnotesize\ttfamily \label{class_cluster_ae8624a28a1822094427354fdef269806} 
+double Cluster\+::\+Get\+\_\+\+YWeight (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_cluster_a0ff5b5a2df323dac8907799259d13b18}\index{Cluster@{Cluster}!Invalidate@{Invalidate}}
+\index{Invalidate@{Invalidate}!Cluster@{Cluster}}
+\doxysubsubsection{\texorpdfstring{Invalidate()}{Invalidate()}}
+{\footnotesize\ttfamily \label{class_cluster_a0ff5b5a2df323dac8907799259d13b18} 
+void Cluster\+::\+Invalidate (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_cluster_ae8f70da74c47786003feeba1fd028709}\index{Cluster@{Cluster}!IsValid@{IsValid}}
+\index{IsValid@{IsValid}!Cluster@{Cluster}}
+\doxysubsubsection{\texorpdfstring{IsValid()}{IsValid()}}
+{\footnotesize\ttfamily \label{class_cluster_ae8f70da74c47786003feeba1fd028709} 
+int Cluster\+::\+Is\+Valid (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_cluster_ae2270688f88916b77ccb27f877c24572}\index{Cluster@{Cluster}!Set\_eXTrack@{Set\_eXTrack}}
+\index{Set\_eXTrack@{Set\_eXTrack}!Cluster@{Cluster}}
+\doxysubsubsection{\texorpdfstring{Set\_eXTrack()}{Set\_eXTrack()}}
+{\footnotesize\ttfamily \label{class_cluster_ae2270688f88916b77ccb27f877c24572} 
+void Cluster\+::\+Set\+\_\+e\+XTrack (\begin{DoxyParamCaption}\item[{const double \&}]{e\+XTrack}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_cluster_a40fe075c9f382c2b2f533c733ff7116f}\index{Cluster@{Cluster}!Set\_eYTrack@{Set\_eYTrack}}
+\index{Set\_eYTrack@{Set\_eYTrack}!Cluster@{Cluster}}
+\doxysubsubsection{\texorpdfstring{Set\_eYTrack()}{Set\_eYTrack()}}
+{\footnotesize\ttfamily \label{class_cluster_a40fe075c9f382c2b2f533c733ff7116f} 
+void Cluster\+::\+Set\+\_\+e\+YTrack (\begin{DoxyParamCaption}\item[{const double \&}]{e\+YTrack}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_cluster_a11bba2a48c9f72a47a45605ed578b29b}\index{Cluster@{Cluster}!Set\_XTrack@{Set\_XTrack}}
+\index{Set\_XTrack@{Set\_XTrack}!Cluster@{Cluster}}
+\doxysubsubsection{\texorpdfstring{Set\_XTrack()}{Set\_XTrack()}}
+{\footnotesize\ttfamily \label{class_cluster_a11bba2a48c9f72a47a45605ed578b29b} 
+void Cluster\+::\+Set\+\_\+\+XTrack (\begin{DoxyParamCaption}\item[{const double \&}]{XTrack}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_cluster_a16cdc4c5692379b5056af87fac179d5a}\index{Cluster@{Cluster}!Set\_YTrack@{Set\_YTrack}}
+\index{Set\_YTrack@{Set\_YTrack}!Cluster@{Cluster}}
+\doxysubsubsection{\texorpdfstring{Set\_YTrack()}{Set\_YTrack()}}
+{\footnotesize\ttfamily \label{class_cluster_a16cdc4c5692379b5056af87fac179d5a} 
+void Cluster\+::\+Set\+\_\+\+YTrack (\begin{DoxyParamCaption}\item[{const double \&}]{YTrack}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_cluster_a5b9373fc0cd68f4a9a42575d1d25e79e}\index{Cluster@{Cluster}!SetEval\_Diagonal@{SetEval\_Diagonal}}
+\index{SetEval\_Diagonal@{SetEval\_Diagonal}!Cluster@{Cluster}}
+\doxysubsubsection{\texorpdfstring{SetEval\_Diagonal()}{SetEval\_Diagonal()}}
+{\footnotesize\ttfamily \label{class_cluster_a5b9373fc0cd68f4a9a42575d1d25e79e} 
+void Cluster\+::\+Set\+Eval\+\_\+\+Diagonal (\begin{DoxyParamCaption}\item[{TF1 \texorpdfstring{$\ast$}{*}}]{p\+TF1}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_cluster_af6899cd7be6f2e2b628363c38053727f}\index{Cluster@{Cluster}!SetEval\_Horizontal@{SetEval\_Horizontal}}
+\index{SetEval\_Horizontal@{SetEval\_Horizontal}!Cluster@{Cluster}}
+\doxysubsubsection{\texorpdfstring{SetEval\_Horizontal()}{SetEval\_Horizontal()}}
+{\footnotesize\ttfamily \label{class_cluster_af6899cd7be6f2e2b628363c38053727f} 
+void Cluster\+::\+Set\+Eval\+\_\+\+Horizontal (\begin{DoxyParamCaption}\item[{TF1 \texorpdfstring{$\ast$}{*}}]{p\+TF1}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_cluster_aab9930670913790a0b8e6f905302ff8a}\index{Cluster@{Cluster}!SetParameter\_Diagonal@{SetParameter\_Diagonal}}
+\index{SetParameter\_Diagonal@{SetParameter\_Diagonal}!Cluster@{Cluster}}
+\doxysubsubsection{\texorpdfstring{SetParameter\_Diagonal()}{SetParameter\_Diagonal()}}
+{\footnotesize\ttfamily \label{class_cluster_aab9930670913790a0b8e6f905302ff8a} 
+int Cluster\+::\+Set\+Parameter\+\_\+\+Diagonal (\begin{DoxyParamCaption}\item[{TVirtual\+Fitter \texorpdfstring{$\ast$}{*}}]{p\+TVirtual\+Fitter}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_cluster_ac355c35c3b035f62c19641f589a01bb7}\index{Cluster@{Cluster}!SetParameter\_Horizontal@{SetParameter\_Horizontal}}
+\index{SetParameter\_Horizontal@{SetParameter\_Horizontal}!Cluster@{Cluster}}
+\doxysubsubsection{\texorpdfstring{SetParameter\_Horizontal()}{SetParameter\_Horizontal()}}
+{\footnotesize\ttfamily \label{class_cluster_ac355c35c3b035f62c19641f589a01bb7} 
+int Cluster\+::\+Set\+Parameter\+\_\+\+Horizontal (\begin{DoxyParamCaption}\item[{TVirtual\+Fitter \texorpdfstring{$\ast$}{*}}]{p\+TVirtual\+Fitter}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_cluster_a30a901eb065e51b7f3687da30fd5ce7a}\index{Cluster@{Cluster}!SetResults\_Diagonal@{SetResults\_Diagonal}}
+\index{SetResults\_Diagonal@{SetResults\_Diagonal}!Cluster@{Cluster}}
+\doxysubsubsection{\texorpdfstring{SetResults\_Diagonal()}{SetResults\_Diagonal()}}
+{\footnotesize\ttfamily \label{class_cluster_a30a901eb065e51b7f3687da30fd5ce7a} 
+void Cluster\+::\+Set\+Results\+\_\+\+Diagonal (\begin{DoxyParamCaption}\item[{TVirtual\+Fitter \texorpdfstring{$\ast$}{*}}]{p\+TVirtual\+Fitter}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_cluster_a929aad0957f6ba62067e2b0caa5f38fe}\index{Cluster@{Cluster}!SetResults\_FailledFit\_Diagonal@{SetResults\_FailledFit\_Diagonal}}
+\index{SetResults\_FailledFit\_Diagonal@{SetResults\_FailledFit\_Diagonal}!Cluster@{Cluster}}
+\doxysubsubsection{\texorpdfstring{SetResults\_FailledFit\_Diagonal()}{SetResults\_FailledFit\_Diagonal()}}
+{\footnotesize\ttfamily \label{class_cluster_a929aad0957f6ba62067e2b0caa5f38fe} 
+void Cluster\+::\+Set\+Results\+\_\+\+Failled\+Fit\+\_\+\+Diagonal (\begin{DoxyParamCaption}\item[{const int \&}]{Verbose}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_cluster_ae87e944b7a63c9100f2313a31d7d2576}\index{Cluster@{Cluster}!SetResults\_FailledFit\_Horizontal@{SetResults\_FailledFit\_Horizontal}}
+\index{SetResults\_FailledFit\_Horizontal@{SetResults\_FailledFit\_Horizontal}!Cluster@{Cluster}}
+\doxysubsubsection{\texorpdfstring{SetResults\_FailledFit\_Horizontal()}{SetResults\_FailledFit\_Horizontal()}}
+{\footnotesize\ttfamily \label{class_cluster_ae87e944b7a63c9100f2313a31d7d2576} 
+void Cluster\+::\+Set\+Results\+\_\+\+Failled\+Fit\+\_\+\+Horizontal (\begin{DoxyParamCaption}\item[{const int \&}]{Verbose}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_cluster_a4b36d05b07d6893e3ca64e7b5e308ae9}\index{Cluster@{Cluster}!SetResults\_Horizontal@{SetResults\_Horizontal}}
+\index{SetResults\_Horizontal@{SetResults\_Horizontal}!Cluster@{Cluster}}
+\doxysubsubsection{\texorpdfstring{SetResults\_Horizontal()}{SetResults\_Horizontal()}}
+{\footnotesize\ttfamily \label{class_cluster_a4b36d05b07d6893e3ca64e7b5e308ae9} 
+void Cluster\+::\+Set\+Results\+\_\+\+Horizontal (\begin{DoxyParamCaption}\item[{TVirtual\+Fitter \texorpdfstring{$\ast$}{*}}]{p\+TVirtual\+Fitter}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_cluster_ace9ff5963cadef729a28a026a073eded}\index{Cluster@{Cluster}!StatusFit@{StatusFit}}
+\index{StatusFit@{StatusFit}!Cluster@{Cluster}}
+\doxysubsubsection{\texorpdfstring{StatusFit()}{StatusFit()}}
+{\footnotesize\ttfamily \label{class_cluster_ace9ff5963cadef729a28a026a073eded} 
+int Cluster\+::\+Status\+Fit (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_cluster_adfa75b25bce4bfff335cffe4a39b226f}\index{Cluster@{Cluster}!StatusFit\_Diagonal@{StatusFit\_Diagonal}}
+\index{StatusFit\_Diagonal@{StatusFit\_Diagonal}!Cluster@{Cluster}}
+\doxysubsubsection{\texorpdfstring{StatusFit\_Diagonal()}{StatusFit\_Diagonal()}}
+{\footnotesize\ttfamily \label{class_cluster_adfa75b25bce4bfff335cffe4a39b226f} 
+int Cluster\+::\+Status\+Fit\+\_\+\+Diagonal (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_cluster_a9f240f117802201ceb4846bf9be3a5bb}\index{Cluster@{Cluster}!StatusFit\_Horizontal@{StatusFit\_Horizontal}}
+\index{StatusFit\_Horizontal@{StatusFit\_Horizontal}!Cluster@{Cluster}}
+\doxysubsubsection{\texorpdfstring{StatusFit\_Horizontal()}{StatusFit\_Horizontal()}}
+{\footnotesize\ttfamily \label{class_cluster_a9f240f117802201ceb4846bf9be3a5bb} 
+int Cluster\+::\+Status\+Fit\+\_\+\+Horizontal (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_cluster_a9cc13f47bf4ab37b26df954e99d3b100}\index{Cluster@{Cluster}!Validate@{Validate}}
+\index{Validate@{Validate}!Cluster@{Cluster}}
+\doxysubsubsection{\texorpdfstring{Validate()}{Validate()}}
+{\footnotesize\ttfamily \label{class_cluster_a9cc13f47bf4ab37b26df954e99d3b100} 
+void Cluster\+::\+Validate (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_cluster_a5834cca37e9dfe1cad665c4013acadf2}\index{Cluster@{Cluster}!WriteOut@{WriteOut}}
+\index{WriteOut@{WriteOut}!Cluster@{Cluster}}
+\doxysubsubsection{\texorpdfstring{WriteOut()}{WriteOut()}}
+{\footnotesize\ttfamily \label{class_cluster_a5834cca37e9dfe1cad665c4013acadf2} 
+void Cluster\+::\+Write\+Out (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{class_cluster_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_cluster_a53289f1dfff38cbdf26c5203ca5b3b61}\index{Cluster@{Cluster}!m\_AngleRot@{m\_AngleRot}}
+\index{m\_AngleRot@{m\_AngleRot}!Cluster@{Cluster}}
+\doxysubsubsection{\texorpdfstring{m\_AngleRot}{m\_AngleRot}}
+{\footnotesize\ttfamily \label{class_cluster_a53289f1dfff38cbdf26c5203ca5b3b61} 
+double Cluster\+::m\+\_\+\+Angle\+Rot}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Model\+Event/inc/\mbox{\hyperlink{_cluster_8h}{Cluster.\+h}}\item 
+Model\+Event/src/\mbox{\hyperlink{_cluster_8cxx}{Cluster.\+cxx}}\end{DoxyCompactItemize}

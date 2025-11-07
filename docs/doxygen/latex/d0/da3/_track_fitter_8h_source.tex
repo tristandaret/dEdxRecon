@@ -1,0 +1,57 @@
+\doxysection{Track\+Fitter.\+h}
+\hypertarget{_track_fitter_8h_source}{}\label{_track_fitter_8h_source}\index{Fitters/inc/TrackFitter.h@{Fitters/inc/TrackFitter.h}}
+\mbox{\hyperlink{_track_fitter_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#ifndef\ TrackFitter\_H}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#define\ TrackFitter\_H}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_misc_8h}{Misc.h}}"{}}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_track_8h}{Track.h}}"{}}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#include\ "{}TMath.h"{}}}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#include\ "{}TMatrixD.h"{}}}
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#include\ "{}TMinuit.h"{}}}
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#include\ "{}TVirtualFitter.h"{}}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{comment}{//}}
+\DoxyCodeLine{00033\ \textcolor{comment}{//\ Parameters\ of\ fit\ should\ be\ unconstrained}}
+\DoxyCodeLine{00034\ \textcolor{comment}{//}}
+\DoxyCodeLine{00035\ \textcolor{comment}{//\ Fit\ Basic:\ \ \ MIGRAD/MINOS}}
+\DoxyCodeLine{00036\ \textcolor{comment}{//}}
+\DoxyCodeLine{00037\ \textcolor{comment}{//\ Fit\ Rescues:}}
+\DoxyCodeLine{00038\ \textcolor{comment}{//\ \ 1:\ MIGRAD-\/>MINMIZE/MIGRAD}}
+\DoxyCodeLine{00039\ \textcolor{comment}{//\ \ 2:\ MIGRAD-\/>SIMPLEX/MIGRAD}}
+\DoxyCodeLine{00040\ \textcolor{comment}{//}}
+\DoxyCodeLine{00041\ \textcolor{comment}{//\ Fit\ failure\ -\/>\ abort}}
+\DoxyCodeLine{00042\ \textcolor{comment}{//}}
+\DoxyCodeLine{00043\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_track_fitter_ae025aac2302f33104dedecc717030d3a}{TrackFitter}}\ \{}
+\DoxyCodeLine{00044\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00050\ \ \ \mbox{\hyperlink{class_track_fitter_ae025aac2302f33104dedecc717030d3a}{TrackFitter}}(\textcolor{keyword}{const}\ std::string\ \&FitterName,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&NberOfParameters\ =\ 2);}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00055\ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_track_fitter_af133575e88be13eb271000c6d20c7809}{\string~TrackFitter}}();}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00064\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_track_fitter_a37fdbd6ed17d945e6391658e5dacdb41}{Set\_Track}}(\mbox{\hyperlink{class_track}{Track}}\ *pTrack);}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00070\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_track_fitter_a1b431c98427c655d7c50728f1b6608a2}{DoMinimisation}}();}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00077\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_track_fitter_a3df1d9e938f891f5d99c281b074c9e2a}{Chi2}}(\textcolor{keywordtype}{double}\ par[]);}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \ \ std::string\ \mbox{\hyperlink{class_track_fitter_a129b8257240eaa58fde435852bd45b55}{m\_FitterName}};}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_track_fitter_a3243e619c9427cfd551f8aa9c47d81f9}{m\_NberOfParameters}};}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \ \ \mbox{\hyperlink{class_track}{Track}}\ *\mbox{\hyperlink{class_track_fitter_a1826e20323bf19e89940724bfd0fad99}{p\_Track}};}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \ \ TVirtualFitter\ *\mbox{\hyperlink{class_track_fitter_aebe0d4d087dbc913973006907be74ca4}{p\_TVirtualFitter}};\ }
+\DoxyCodeLine{00089\ \};}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

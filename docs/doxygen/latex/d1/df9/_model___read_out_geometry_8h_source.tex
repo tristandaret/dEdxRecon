@@ -1,0 +1,84 @@
+\doxysection{Model\+\_\+\+Read\+Out\+Geometry.\+h}
+\hypertarget{_model___read_out_geometry_8h_source}{}\label{_model___read_out_geometry_8h_source}\index{ModelSignal/inc/Model\_ReadOutGeometry.h@{ModelSignal/inc/Model\_ReadOutGeometry.h}}
+\mbox{\hyperlink{_model___read_out_geometry_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#ifndef\ Model\_ReadOutGeometry\_H}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#define\ Model\_ReadOutGeometry\_H}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_misc_8h}{Misc.h}}"{}}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00020\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_model___read_out_geometry_a1138a9ebf646ae19bc2ff582b02b6282}{Model\_ReadOutGeometry}}\ \{}
+\DoxyCodeLine{00021\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00023\ \ \ \mbox{\hyperlink{class_model___read_out_geometry_a1138a9ebf646ae19bc2ff582b02b6282}{Model\_ReadOutGeometry}}();}
+\DoxyCodeLine{00024\ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_model___read_out_geometry_a52bb002461dca5fbf6bcf83529b75986}{\string~Model\_ReadOutGeometry}}();}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \textcolor{comment}{//\ Get\ Pad\ board\ data}}
+\DoxyCodeLine{00027\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_model___read_out_geometry_ac2ad954b73d8330d21fd5a37c8b59b25}{Get\_LX}}()\ \textcolor{keyword}{const};\ \textcolor{comment}{//\ Get\ X\ Pad\ size\ (m)}}
+\DoxyCodeLine{00028\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_model___read_out_geometry_a7d9db9c374e98884cfc0d978f90d7c6a}{Get\_LY}}()\ \textcolor{keyword}{const};\ \textcolor{comment}{//\ Get\ Y\ Pad\ size\ (m)}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_model___read_out_geometry_a8e1845116f75a466c27d804857f743b3}{Get\_Xpad\_min}}()\ \textcolor{keyword}{const};\ \textcolor{comment}{//\ Get\ Lower\ left\ corner\ X\ position\ (m)}}
+\DoxyCodeLine{00031\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_model___read_out_geometry_a6ea38c85e4367734356dca36e3012182}{Get\_Ypad\_min}}()\ \textcolor{keyword}{const};\ \textcolor{comment}{//\ Get\ Lower\ left\ corner\ Y\ position\ (m)}}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_model___read_out_geometry_a9f7e9f3952c6762ad6ebfcde53a88635}{Get\_Nx}}()\ \textcolor{keyword}{const};\ \textcolor{comment}{//\ Get\ Nber\ of\ pads\ along\ X}}
+\DoxyCodeLine{00034\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_model___read_out_geometry_a1f5440ff37e302dcf698680f7d6881b2}{Get\_Ny}}()\ \textcolor{keyword}{const};\ \textcolor{comment}{//\ Get\ Nber\ of\ pads\ along\ Y}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \textcolor{comment}{//\ Swap\ Geometry}}
+\DoxyCodeLine{00037\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_model___read_out_geometry_a5d8698e6d93258c17dd1abfa656968ac}{SwapGeometry}}();\ \textcolor{comment}{//\ Swap\ Nx/Ny\ and\ Lx/Ly}}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \textcolor{comment}{//\ Square\ Geometry}}
+\DoxyCodeLine{00040\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_model___read_out_geometry_a268aaf308cba37ba75926b2e60ea111d}{SquareGeometry}}();\ \textcolor{comment}{//\ Set\ Nx=Ny\ to\ the\ highest\ of\ the\ originals}}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \textcolor{comment}{//\ Set\ Pad\ board\ data}}
+\DoxyCodeLine{00043\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_model___read_out_geometry_a03f59e982f3fe014b0059a703909cc73}{Set\_LX}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&LX);\ \textcolor{comment}{//\ Set\ X\ Pad\ size\ (m)}}
+\DoxyCodeLine{00044\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_model___read_out_geometry_a083f55199bca514492bfa953f4cd264b}{Set\_LY}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&LY);\ \textcolor{comment}{//\ Set\ Y\ Pad\ size\ (m)}}
+\DoxyCodeLine{00045\ \ \ \textcolor{keywordtype}{void}}
+\DoxyCodeLine{00046\ \ \ \mbox{\hyperlink{class_model___read_out_geometry_ab710a622500f499f4acd20ac3a86d215}{Set\_Xpad\_min}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&Xpad\_min);\ \textcolor{comment}{//\ Set\ Lower\ left\ corner\ X\ position\ (m)}}
+\DoxyCodeLine{00047\ \ \ \textcolor{keywordtype}{void}}
+\DoxyCodeLine{00048\ \ \ \mbox{\hyperlink{class_model___read_out_geometry_a14f57a514272fb3dfcd99531d1d6fd99}{Set\_Ypad\_min}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&Ypad\_min);\ \textcolor{comment}{//\ Set\ Lower\ left\ corner\ Y\ position\ (m)}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_model___read_out_geometry_a5ce6819bd1fbce9f4315d10591dd3ad1}{Set\_Nx}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&Nx);\ \textcolor{comment}{//\ Set\ Nber\ of\ pads\ along\ X}}
+\DoxyCodeLine{00051\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_model___read_out_geometry_a82bba87b59569ded18619e080441db85}{Set\_Ny}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&Ny);\ \textcolor{comment}{//\ Set\ Nber\ of\ pads\ along\ Y}}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \textcolor{comment}{//\ Pad\ Parameters}}
+\DoxyCodeLine{00054\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_model___read_out_geometry_ad77dc79ae761d21ba3e12a0d5196684b}{Get\_XcPad}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&iX,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&iY,}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&ModuleNber)}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \textcolor{keyword}{const};\ \textcolor{comment}{//\ Get\ Pad(iX,iY)\ X\ position\ (m)\ of\ the\ center}}
+\DoxyCodeLine{00057\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_model___read_out_geometry_a3824355c0639b8cafec773936472bc9e}{Get\_YcPad}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&iX,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&iY,}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&ModuleNber)}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \textcolor{keyword}{const};\ \textcolor{comment}{//\ Get\ Pad(iX,iY)\ X\ position\ (m)\ of\ the\ center}}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_model___read_out_geometry_a5a6161f5f21566de9dc03823f17a31fa}{Get\_XLPad}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&iX,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&iY,}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&ModuleNber)}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \textcolor{keyword}{const};\ \textcolor{comment}{//\ Get\ Pad(iX,iY)\ X\ position\ (m)\ of\ the\ Left\ \ \ edge}}
+\DoxyCodeLine{00064\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_model___read_out_geometry_a4ac82126aa3844c1b2256410748945b2}{Get\_YLPad}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&iX,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&iY,}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&ModuleNber)}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \textcolor{keyword}{const};\ \textcolor{comment}{//\ Get\ Pad(iX,iY)\ X\ position\ (m)\ of\ the\ Bottom\ edge}}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_model___read_out_geometry_ae3245b08739cb2093d79d9b165994d4c}{Get\_XHPad}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&iX,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&iY,}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&ModuleNber)}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \textcolor{keyword}{const};\ \textcolor{comment}{//\ Get\ Pad(iX,iY)\ X\ position\ (m)\ of\ the\ Right\ edge}}
+\DoxyCodeLine{00071\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_model___read_out_geometry_aef13393f31d92c6d0e70dbcb4f9f82c7}{Get\_YHPad}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&iX,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&iY,}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&ModuleNber)}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \textcolor{keyword}{const};\ \textcolor{comment}{//\ Get\ Pad(iX,iY)\ X\ position\ (m)\ of\ the\ Top\ edge}}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_model___read_out_geometry_ac521d72fd2a05551df927e50c188e66c}{GetPadEdges}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&iX,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&iY,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&ModuleNber,}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \&XL,\ \textcolor{keywordtype}{double}\ \&XH,\ \textcolor{keywordtype}{double}\ \&YL,}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \&YH)\ \textcolor{keyword}{const};\ \textcolor{comment}{//\ Get\ Pad(iX,iY)\ X\ sides\ position\ (m)}}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \textcolor{comment}{//\ Big\ Dump}}
+\DoxyCodeLine{00080\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_model___read_out_geometry_a7667bcfaf6ff5f2e42b2b3e57d81761b}{WriteOut}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00083\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00084\ \ \ \textcolor{keywordtype}{double}\ m\_LX;}
+\DoxyCodeLine{00085\ \ \ \textcolor{keywordtype}{double}\ m\_LY;}
+\DoxyCodeLine{00086\ \ \ \textcolor{keywordtype}{double}\ m\_Xpad\_min;}
+\DoxyCodeLine{00087\ \ \ \textcolor{keywordtype}{double}\ m\_Ypad\_min;}
+\DoxyCodeLine{00088\ \ \ \textcolor{keywordtype}{double}\ m\_Nx;}
+\DoxyCodeLine{00089\ \ \ \textcolor{keywordtype}{double}\ m\_Ny;}
+\DoxyCodeLine{00090\ \};}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

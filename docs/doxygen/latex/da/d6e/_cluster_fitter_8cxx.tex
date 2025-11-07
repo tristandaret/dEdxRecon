@@ -1,0 +1,84 @@
+\doxysection{Fitters/src/\+Cluster\+Fitter.cxx File Reference}
+\hypertarget{_cluster_fitter_8cxx}{}\label{_cluster_fitter_8cxx}\index{Fitters/src/ClusterFitter.cxx@{Fitters/src/ClusterFitter.cxx}}
+{\ttfamily \#include "{}Cluster\+Fitter.\+h"{}}\newline
+{\ttfamily \#include "{}TFitter.\+h"{}}\newline
+{\ttfamily \#include "{}Util.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_static_cluster_fitter___horizontal}{Static\+Cluster\+Fitter\+\_\+\+Horizontal}}
+\item 
+class \mbox{\hyperlink{class_static_cluster_fitter___diagonal}{Static\+Cluster\+Fitter\+\_\+\+Diagonal}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_cluster_fitter_8cxx_af18c327c86277fab22c0b62106d71df1}{Cluster\+Fit\+\_\+\+Horizontal}} (\mbox{\hyperlink{class_sample}{Sample}} \&a\+Sample, const int \&Module\+Nber, TF1 \texorpdfstring{$\ast$}{*}p\+TF1\+\_\+\+To\+Be\+Used)
+\item 
+void \mbox{\hyperlink{_cluster_fitter_8cxx_a49a77c77988b951d15c1d42217c48fa9}{Cluster\+Fit\+\_\+\+Horizontal\+\_\+\+Event}} (\mbox{\hyperlink{class_event}{Event}} \texorpdfstring{$\ast$}{*}p\+Event, const int \&Module\+Nber, TF1 \texorpdfstring{$\ast$}{*}p\+TF1\+\_\+\+To\+Be\+Used, \mbox{\hyperlink{class_cluster_fitter___horizontal}{Cluster\+Fitter\+\_\+\+Horizontal}} \&a\+Cluster\+Fitter\+\_\+\+Horizontal)
+\item 
+void \mbox{\hyperlink{_cluster_fitter_8cxx_a4785e0ff174187953048be7b59fbdcf4}{Cluster\+Fit\+\_\+\+Horizontal\+\_\+\+Cluster}} (\mbox{\hyperlink{class_cluster}{Cluster}} \texorpdfstring{$\ast$}{*}p\+Cluster, const int \&Module\+Nber, TF1 \texorpdfstring{$\ast$}{*}p\+TF1\+\_\+\+To\+Be\+Used, \mbox{\hyperlink{class_cluster_fitter___horizontal}{Cluster\+Fitter\+\_\+\+Horizontal}} \&a\+Cluster\+Fitter\+\_\+\+Horizontal)
+\item 
+void \mbox{\hyperlink{_cluster_fitter_8cxx_ade14e84508d0c67252a6c28f62965211}{Cluster\+Fitter\+\_\+\+Horizontal\+Function}} (int \&n\+Dim, double \texorpdfstring{$\ast$}{*}gout, double \&result, double par\mbox{[}$\,$\mbox{]}, int flg)
+\item 
+void \mbox{\hyperlink{_cluster_fitter_8cxx_a748b02d065cbb8c83f7725903e811d73}{Cluster\+Fit\+\_\+\+Diagonal}} (const double \&Angle\+Rot, \mbox{\hyperlink{class_sample}{Sample}} \&a\+Sample, const int \&Module\+Nber, TF1 \texorpdfstring{$\ast$}{*}p\+TF1\+\_\+\+To\+Be\+Used)
+\item 
+void \mbox{\hyperlink{_cluster_fitter_8cxx_ac28f3727523beadb21b84e6912852fcc}{Cluster\+Fit\+\_\+\+Diagonal\+\_\+\+Event}} (const double \&Angle\+Rot, \mbox{\hyperlink{class_event}{Event}} \texorpdfstring{$\ast$}{*}p\+Event, const int \&Module\+Nber, TF1 \texorpdfstring{$\ast$}{*}p\+TF1\+\_\+\+To\+Be\+Used, int \&Kounter\+\_\+\+Fit, int \&Kounter\+\_\+\+Failure, \mbox{\hyperlink{class_cluster_fitter___diagonal}{Cluster\+Fitter\+\_\+\+Diagonal}} \&a\+Cluster\+Fitter\+\_\+\+Diagonal)
+\item 
+void \mbox{\hyperlink{_cluster_fitter_8cxx_abfb130d7dd8f66dc9387b7c114537af0}{Cluster\+Fit\+\_\+\+Diagonal\+\_\+\+Cluster}} (const double \&Angle\+Rot, \mbox{\hyperlink{class_cluster}{Cluster}} \texorpdfstring{$\ast$}{*}p\+Cluster, const int \&Module\+Nber, TF1 \texorpdfstring{$\ast$}{*}p\+TF1\+\_\+\+To\+Be\+Used, int \&Kounter\+\_\+\+Fit, int \&Kounter\+\_\+\+Failure, \mbox{\hyperlink{class_cluster_fitter___diagonal}{Cluster\+Fitter\+\_\+\+Diagonal}} \&a\+Cluster\+Fitter\+\_\+\+Diagonal)
+\item 
+void \mbox{\hyperlink{_cluster_fitter_8cxx_afbc0e5b8f65084e0d2a9e6056a359c1a}{Cluster\+Fitter\+\_\+\+Diagonal\+Function}} (int \&n\+Dim, double \texorpdfstring{$\ast$}{*}gout, double \&result, double par\mbox{[}$\,$\mbox{]}, int flg)
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{_cluster_fitter_8cxx_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_cluster_fitter_8cxx_a748b02d065cbb8c83f7725903e811d73}\index{ClusterFitter.cxx@{ClusterFitter.cxx}!ClusterFit\_Diagonal@{ClusterFit\_Diagonal}}
+\index{ClusterFit\_Diagonal@{ClusterFit\_Diagonal}!ClusterFitter.cxx@{ClusterFitter.cxx}}
+\doxysubsubsection{\texorpdfstring{ClusterFit\_Diagonal()}{ClusterFit\_Diagonal()}}
+{\footnotesize\ttfamily \label{_cluster_fitter_8cxx_a748b02d065cbb8c83f7725903e811d73} 
+void Cluster\+Fit\+\_\+\+Diagonal (\begin{DoxyParamCaption}\item[{const double \&}]{Angle\+Rot}{, }\item[{\mbox{\hyperlink{class_sample}{Sample}} \&}]{a\+Sample}{, }\item[{const int \&}]{Module\+Nber}{, }\item[{TF1 \texorpdfstring{$\ast$}{*}}]{p\+TF1\+\_\+\+To\+Be\+Used}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_cluster_fitter_8cxx_abfb130d7dd8f66dc9387b7c114537af0}\index{ClusterFitter.cxx@{ClusterFitter.cxx}!ClusterFit\_Diagonal\_Cluster@{ClusterFit\_Diagonal\_Cluster}}
+\index{ClusterFit\_Diagonal\_Cluster@{ClusterFit\_Diagonal\_Cluster}!ClusterFitter.cxx@{ClusterFitter.cxx}}
+\doxysubsubsection{\texorpdfstring{ClusterFit\_Diagonal\_Cluster()}{ClusterFit\_Diagonal\_Cluster()}}
+{\footnotesize\ttfamily \label{_cluster_fitter_8cxx_abfb130d7dd8f66dc9387b7c114537af0} 
+void Cluster\+Fit\+\_\+\+Diagonal\+\_\+\+Cluster (\begin{DoxyParamCaption}\item[{const double \&}]{Angle\+Rot}{, }\item[{\mbox{\hyperlink{class_cluster}{Cluster}} \texorpdfstring{$\ast$}{*}}]{p\+Cluster}{, }\item[{const int \&}]{Module\+Nber}{, }\item[{TF1 \texorpdfstring{$\ast$}{*}}]{p\+TF1\+\_\+\+To\+Be\+Used}{, }\item[{int \&}]{Kounter\+\_\+\+Fit}{, }\item[{int \&}]{Kounter\+\_\+\+Failure}{, }\item[{\mbox{\hyperlink{class_cluster_fitter___diagonal}{Cluster\+Fitter\+\_\+\+Diagonal}} \&}]{a\+Cluster\+Fitter\+\_\+\+Diagonal}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_cluster_fitter_8cxx_ac28f3727523beadb21b84e6912852fcc}\index{ClusterFitter.cxx@{ClusterFitter.cxx}!ClusterFit\_Diagonal\_Event@{ClusterFit\_Diagonal\_Event}}
+\index{ClusterFit\_Diagonal\_Event@{ClusterFit\_Diagonal\_Event}!ClusterFitter.cxx@{ClusterFitter.cxx}}
+\doxysubsubsection{\texorpdfstring{ClusterFit\_Diagonal\_Event()}{ClusterFit\_Diagonal\_Event()}}
+{\footnotesize\ttfamily \label{_cluster_fitter_8cxx_ac28f3727523beadb21b84e6912852fcc} 
+void Cluster\+Fit\+\_\+\+Diagonal\+\_\+\+Event (\begin{DoxyParamCaption}\item[{const double \&}]{Angle\+Rot}{, }\item[{\mbox{\hyperlink{class_event}{Event}} \texorpdfstring{$\ast$}{*}}]{p\+Event}{, }\item[{const int \&}]{Module\+Nber}{, }\item[{TF1 \texorpdfstring{$\ast$}{*}}]{p\+TF1\+\_\+\+To\+Be\+Used}{, }\item[{int \&}]{Kounter\+\_\+\+Fit}{, }\item[{int \&}]{Kounter\+\_\+\+Failure}{, }\item[{\mbox{\hyperlink{class_cluster_fitter___diagonal}{Cluster\+Fitter\+\_\+\+Diagonal}} \&}]{a\+Cluster\+Fitter\+\_\+\+Diagonal}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_cluster_fitter_8cxx_af18c327c86277fab22c0b62106d71df1}\index{ClusterFitter.cxx@{ClusterFitter.cxx}!ClusterFit\_Horizontal@{ClusterFit\_Horizontal}}
+\index{ClusterFit\_Horizontal@{ClusterFit\_Horizontal}!ClusterFitter.cxx@{ClusterFitter.cxx}}
+\doxysubsubsection{\texorpdfstring{ClusterFit\_Horizontal()}{ClusterFit\_Horizontal()}}
+{\footnotesize\ttfamily \label{_cluster_fitter_8cxx_af18c327c86277fab22c0b62106d71df1} 
+void Cluster\+Fit\+\_\+\+Horizontal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_sample}{Sample}} \&}]{a\+Sample}{, }\item[{const int \&}]{Module\+Nber}{, }\item[{TF1 \texorpdfstring{$\ast$}{*}}]{p\+TF1\+\_\+\+To\+Be\+Used}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_cluster_fitter_8cxx_a4785e0ff174187953048be7b59fbdcf4}\index{ClusterFitter.cxx@{ClusterFitter.cxx}!ClusterFit\_Horizontal\_Cluster@{ClusterFit\_Horizontal\_Cluster}}
+\index{ClusterFit\_Horizontal\_Cluster@{ClusterFit\_Horizontal\_Cluster}!ClusterFitter.cxx@{ClusterFitter.cxx}}
+\doxysubsubsection{\texorpdfstring{ClusterFit\_Horizontal\_Cluster()}{ClusterFit\_Horizontal\_Cluster()}}
+{\footnotesize\ttfamily \label{_cluster_fitter_8cxx_a4785e0ff174187953048be7b59fbdcf4} 
+void Cluster\+Fit\+\_\+\+Horizontal\+\_\+\+Cluster (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_cluster}{Cluster}} \texorpdfstring{$\ast$}{*}}]{p\+Cluster}{, }\item[{const int \&}]{Module\+Nber}{, }\item[{TF1 \texorpdfstring{$\ast$}{*}}]{p\+TF1\+\_\+\+To\+Be\+Used}{, }\item[{\mbox{\hyperlink{class_cluster_fitter___horizontal}{Cluster\+Fitter\+\_\+\+Horizontal}} \&}]{a\+Cluster\+Fitter\+\_\+\+Horizontal}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_cluster_fitter_8cxx_a49a77c77988b951d15c1d42217c48fa9}\index{ClusterFitter.cxx@{ClusterFitter.cxx}!ClusterFit\_Horizontal\_Event@{ClusterFit\_Horizontal\_Event}}
+\index{ClusterFit\_Horizontal\_Event@{ClusterFit\_Horizontal\_Event}!ClusterFitter.cxx@{ClusterFitter.cxx}}
+\doxysubsubsection{\texorpdfstring{ClusterFit\_Horizontal\_Event()}{ClusterFit\_Horizontal\_Event()}}
+{\footnotesize\ttfamily \label{_cluster_fitter_8cxx_a49a77c77988b951d15c1d42217c48fa9} 
+void Cluster\+Fit\+\_\+\+Horizontal\+\_\+\+Event (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_event}{Event}} \texorpdfstring{$\ast$}{*}}]{p\+Event}{, }\item[{const int \&}]{Module\+Nber}{, }\item[{TF1 \texorpdfstring{$\ast$}{*}}]{p\+TF1\+\_\+\+To\+Be\+Used}{, }\item[{\mbox{\hyperlink{class_cluster_fitter___horizontal}{Cluster\+Fitter\+\_\+\+Horizontal}} \&}]{a\+Cluster\+Fitter\+\_\+\+Horizontal}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_cluster_fitter_8cxx_afbc0e5b8f65084e0d2a9e6056a359c1a}\index{ClusterFitter.cxx@{ClusterFitter.cxx}!ClusterFitter\_DiagonalFunction@{ClusterFitter\_DiagonalFunction}}
+\index{ClusterFitter\_DiagonalFunction@{ClusterFitter\_DiagonalFunction}!ClusterFitter.cxx@{ClusterFitter.cxx}}
+\doxysubsubsection{\texorpdfstring{ClusterFitter\_DiagonalFunction()}{ClusterFitter\_DiagonalFunction()}}
+{\footnotesize\ttfamily \label{_cluster_fitter_8cxx_afbc0e5b8f65084e0d2a9e6056a359c1a} 
+void Cluster\+Fitter\+\_\+\+Diagonal\+Function (\begin{DoxyParamCaption}\item[{int \&}]{n\+Dim}{, }\item[{double \texorpdfstring{$\ast$}{*}}]{gout}{, }\item[{double \&}]{result}{, }\item[{double}]{par}{\mbox{[}$\,$\mbox{]}, }\item[{int}]{flg}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_cluster_fitter_8cxx_ade14e84508d0c67252a6c28f62965211}\index{ClusterFitter.cxx@{ClusterFitter.cxx}!ClusterFitter\_HorizontalFunction@{ClusterFitter\_HorizontalFunction}}
+\index{ClusterFitter\_HorizontalFunction@{ClusterFitter\_HorizontalFunction}!ClusterFitter.cxx@{ClusterFitter.cxx}}
+\doxysubsubsection{\texorpdfstring{ClusterFitter\_HorizontalFunction()}{ClusterFitter\_HorizontalFunction()}}
+{\footnotesize\ttfamily \label{_cluster_fitter_8cxx_ade14e84508d0c67252a6c28f62965211} 
+void Cluster\+Fitter\+\_\+\+Horizontal\+Function (\begin{DoxyParamCaption}\item[{int \&}]{n\+Dim}{, }\item[{double \texorpdfstring{$\ast$}{*}}]{gout}{, }\item[{double \&}]{result}{, }\item[{double}]{par}{\mbox{[}$\,$\mbox{]}, }\item[{int}]{flg}{}\end{DoxyParamCaption})}
+

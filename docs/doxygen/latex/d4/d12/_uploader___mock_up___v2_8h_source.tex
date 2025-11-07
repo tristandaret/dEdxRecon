@@ -1,0 +1,112 @@
+\doxysection{Uploader\+\_\+\+Mock\+Up\+\_\+\+V2.\+h}
+\hypertarget{_uploader___mock_up___v2_8h_source}{}\label{_uploader___mock_up___v2_8h_source}\index{Uploader/inc/Uploader\_MockUp\_V2.h@{Uploader/inc/Uploader\_MockUp\_V2.h}}
+\mbox{\hyperlink{_uploader___mock_up___v2_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#ifndef\ Uploader\_\_V2\_H}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#define\ Uploader\_\_V2\_H}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_misc_8h}{Misc.h}}"{}}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_uploader_8h}{Uploader.h}}"{}}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_uploader___mock_up___v2_af78aaa5b19c287cbfe281d9e5e9d1ee9}{Uploader\_MockUp\_V2}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_uploader_aec81ed059aa54d27b5287e32c004649d}{Uploader}}\ \{}
+\DoxyCodeLine{00017\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00019\ \ \ \mbox{\hyperlink{class_uploader___mock_up___v2_af78aaa5b19c287cbfe281d9e5e9d1ee9}{Uploader\_MockUp\_V2}}(\textcolor{keyword}{const}\ std::string\ \&SampleFile,}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_model___read_out_geometry}{Model\_ReadOutGeometry}}\ *pModel\_ReadOutGeometry,}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_model___electronics}{Model\_Electronics}}\ *pModel\_Electronics,}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_model___charge1_d}{Model\_Charge1D}}\ *pModel\_Charge1D);}
+\DoxyCodeLine{00023\ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_uploader___mock_up___v2_ad34e6fd7b2a8bec2508f14adbd68da89}{\string~Uploader\_MockUp\_V2}}();}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_event}{Event}}\ *\mbox{\hyperlink{class_uploader___mock_up___v2_a815ab97f71ad06bcc037e7791c57cbe8}{GiveMe\_Event}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&iEvent,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&ModuleNber\_Input,}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&Data\_to\_Use,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&CloseWF);}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_event}{Event}}\ *\mbox{\hyperlink{class_uploader___mock_up___v2_a815ab97f71ad06bcc037e7791c57cbe8}{GiveMe\_Event}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&iEvent,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&ModuleNber\_Input,}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&Data\_to\_Use);}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_uploader___mock_up___v2_a3f8b0eceb8961bded4304184ddff1fd1}{SetBeforeMerging}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&i\_SetBeforeMerging);}
+\DoxyCodeLine{00032\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_uploader___mock_up___v2_a17f6a0a012d4ab20f94d07eb569df69f}{Setwap\_XY}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&i\_Swap\_XY);}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Data\ Members-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\///}}
+\DoxyCodeLine{00035\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00036\ \ \ Int\_t\ \mbox{\hyperlink{class_uploader___mock_up___v2_a922e1eb4f1839ca897cc5076d5d9c42e}{fCurrent}};}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ Int\_t\ \mbox{\hyperlink{class_uploader___mock_up___v2_a2113553103b17a7af957e3ad477ff2fe}{ev}};}
+\DoxyCodeLine{00039\ \ \ Int\_t\ \mbox{\hyperlink{class_uploader___mock_up___v2_a2ed16a7c07568bb2612a4e02f67c9143}{track}};}
+\DoxyCodeLine{00040\ \ \ ULong64\_t\ \mbox{\hyperlink{class_uploader___mock_up___v2_a8b14177976c503bebf201dd440ee212f}{date}};\ \textcolor{comment}{//\ Added\ since\ code\ update\ contains\ the\ date\ of\ the\ events\ !}}
+\DoxyCodeLine{00041\ \ \ Bool\_t\ \mbox{\hyperlink{class_uploader___mock_up___v2_a75e9fe7fb86d70ebac2466e922902e17}{beforeMerging}};\ \textcolor{comment}{//\ Added\ since\ code\ update\ tells\ if\ this\ track\ has\ been}}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ saved\ before\ or\ after\ merging\ algorithm}}
+\DoxyCodeLine{00043\ \ \ Double\_t\ \mbox{\hyperlink{class_uploader___mock_up___v2_a5795a0fd1fb47a0e8318b39946fbb3d2}{dEdx}};}
+\DoxyCodeLine{00044\ \ \ Double\_t\ \mbox{\hyperlink{class_uploader___mock_up___v2_a9df743bdb7e5d5847fe191e70eb812fb}{angle\_yz}};}
+\DoxyCodeLine{00045\ \ \ Double\_t\ \mbox{\hyperlink{class_uploader___mock_up___v2_ac03d1dd3b13124ccf550a08ce43eccd4}{angle\_xy}};}
+\DoxyCodeLine{00046\ \ \ Int\_t\ \mbox{\hyperlink{class_uploader___mock_up___v2_a7fa4c93c7db23d9e1089b0cc469f54ba}{rob\_clusters}};}
+\DoxyCodeLine{00047\ \ \ Double\_t\ \mbox{\hyperlink{class_uploader___mock_up___v2_aa17868e18ed39bbacee0f0a2e2446a40}{quality}};}
+\DoxyCodeLine{00048\ \ \ Double\_t\ \mbox{\hyperlink{class_uploader___mock_up___v2_a832afaeede774d7b1a3bfc497a7dd0c1}{mom}};}
+\DoxyCodeLine{00049\ \ \ Double\_t\ \mbox{\hyperlink{class_uploader___mock_up___v2_aeca3267f2791838b42069c0252d9920b}{sina}};}
+\DoxyCodeLine{00050\ \ \ Double\_t\ \mbox{\hyperlink{class_uploader___mock_up___v2_a330e7d9be5919e95a5b27e606f5b21eb}{offset}};}
+\DoxyCodeLine{00051\ \ \ Int\_t\ \mbox{\hyperlink{class_uploader___mock_up___v2_a383dafd8a8d82f57ce0dd8b00760d90d}{max\_mult}};}
+\DoxyCodeLine{00052\ \ \ Double\_t\ \mbox{\hyperlink{class_uploader___mock_up___v2_a66f5ed22a1f4f856335b926ec75bcf3c}{mean\_mult}};}
+\DoxyCodeLine{00053\ \ \ std::vector<int>\ *\mbox{\hyperlink{class_uploader___mock_up___v2_a5aebff2cf89e6d1a331fdc5ac5f3be89}{multiplicity}};}
+\DoxyCodeLine{00054\ \ \ std::vector<int>\ *\mbox{\hyperlink{class_uploader___mock_up___v2_aaa65ef9c640cd4561c21e293d7dc2ea0}{charge}};}
+\DoxyCodeLine{00055\ \ \ std::vector<double>\ *\mbox{\hyperlink{class_uploader___mock_up___v2_a33a98d2b4d2eb76fd61d76ecb9830600}{residual}};}
+\DoxyCodeLine{00056\ \ \ std::vector<double>\ *\mbox{\hyperlink{class_uploader___mock_up___v2_a7fb9baa4afa52e048166208ffd7ab894}{residual\_corr}};}
+\DoxyCodeLine{00057\ \ \ std::vector<std::vector<double>>\ *\mbox{\hyperlink{class_uploader___mock_up___v2_a4184250dc117bc574f5a92a1f2b8f414}{dx}};}
+\DoxyCodeLine{00058\ \ \ std::vector<std::vector<double>>\ *\mbox{\hyperlink{class_uploader___mock_up___v2_aa15d7c78cf6ab286cb717081cdd19a71}{qfrac}};}
+\DoxyCodeLine{00059\ \ \ std::vector<std::vector<int>>\ *\mbox{\hyperlink{class_uploader___mock_up___v2_aef10649c1c1f60a5cb9543af71942112}{time}};}
+\DoxyCodeLine{00060\ \ \ std::vector<double>\ *\mbox{\hyperlink{class_uploader___mock_up___v2_abd16dbe8f1c78d61a314faca3340079f}{clust\_pos}};}
+\DoxyCodeLine{00061\ \ \ std::vector<double>\ *\mbox{\hyperlink{class_uploader___mock_up___v2_ae304b6bdf21e49041049b6443267080e}{clust\_pos\_err}};}
+\DoxyCodeLine{00062\ \ \ std::vector<double>\ *\mbox{\hyperlink{class_uploader___mock_up___v2_a4778c7cb223f9c96745d88cb58c24937}{track\_pos}};}
+\DoxyCodeLine{00063\ \ \ std::vector<int>\ *\mbox{\hyperlink{class_uploader___mock_up___v2_ac77c2460e460d82e8d9e0ffe32b4b3c9}{module}};}
+\DoxyCodeLine{00064\ \ \ std::vector<std::vector<int>>\ *\mbox{\hyperlink{class_uploader___mock_up___v2_aa1473498460453175f7ce9d0868bb981}{pad\_charge}};}
+\DoxyCodeLine{00065\ \ \ std::vector<std::vector<int>>\ *\mbox{\hyperlink{class_uploader___mock_up___v2_a6acde41a804429ffba78b5d185ee7214}{pad\_time}};}
+\DoxyCodeLine{00066\ \ \ std::vector<std::vector<int>>\ *\mbox{\hyperlink{class_uploader___mock_up___v2_a0c949256102e2deee6e30869e443a6db}{wf\_width}};}
+\DoxyCodeLine{00067\ \ \ std::vector<std::vector<int>>\ *\mbox{\hyperlink{class_uploader___mock_up___v2_a1f3a5bc18972f406067508d4a4866d17}{wf\_fwhm}};}
+\DoxyCodeLine{00068\ \ \ std::vector<std::vector<int>>\ *\mbox{\hyperlink{class_uploader___mock_up___v2_a6a0a7655a5046cd75a0bee6474334e56}{pad\_x}};}
+\DoxyCodeLine{00069\ \ \ std::vector<std::vector<int>>\ *\mbox{\hyperlink{class_uploader___mock_up___v2_a91243469f6651d44b34b24d3a7923f19}{pad\_y}};}
+\DoxyCodeLine{00070\ \ \ std::vector<std::vector<std::vector<int>>>\ *\mbox{\hyperlink{class_uploader___mock_up___v2_aef20c9fcf10a51e532b74115239afe71}{pad\_wf\_q}};}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \ \ \textcolor{comment}{//\ List\ of\ branches}}
+\DoxyCodeLine{00073\ \ \ TBranch\ *\mbox{\hyperlink{class_uploader___mock_up___v2_a45ad9dc3f81e82ed97f62edeb40694c4}{b\_ev}};}
+\DoxyCodeLine{00074\ \ \ TBranch\ *\mbox{\hyperlink{class_uploader___mock_up___v2_a673a6e22304cb77cf5fb0aac3c10b17b}{b\_track}};}
+\DoxyCodeLine{00075\ \ \ TBranch\ *\mbox{\hyperlink{class_uploader___mock_up___v2_abf05786275cfac6bbf62bec73265faf3}{b\_date}};}
+\DoxyCodeLine{00076\ \ \ TBranch\ *\mbox{\hyperlink{class_uploader___mock_up___v2_ad90baa24088e619e12d84536a9b6709e}{b\_beforeMerging}};}
+\DoxyCodeLine{00077\ \ \ TBranch\ *\mbox{\hyperlink{class_uploader___mock_up___v2_a7ffbc0e89abb9a79eae9373b5a270b3a}{b\_dEdx}};}
+\DoxyCodeLine{00078\ \ \ TBranch\ *\mbox{\hyperlink{class_uploader___mock_up___v2_a469bb364958b3fe5143cae13adc9ce2a}{b\_angle\_yz}};}
+\DoxyCodeLine{00079\ \ \ TBranch\ *\mbox{\hyperlink{class_uploader___mock_up___v2_aff7908769be2de49c67cd116186932fb}{b\_angle\_xy}};}
+\DoxyCodeLine{00080\ \ \ TBranch\ *\mbox{\hyperlink{class_uploader___mock_up___v2_a94419a77acec2f02582b2d1bff47261b}{b\_rob\_clusters}};}
+\DoxyCodeLine{00081\ \ \ TBranch\ *\mbox{\hyperlink{class_uploader___mock_up___v2_abe9c0df35ed42eddcc1316f0d0397375}{b\_quality}};}
+\DoxyCodeLine{00082\ \ \ TBranch\ *\mbox{\hyperlink{class_uploader___mock_up___v2_ad5bad25932f043e40bee05b54628ab7a}{b\_mom}};}
+\DoxyCodeLine{00083\ \ \ TBranch\ *\mbox{\hyperlink{class_uploader___mock_up___v2_a5f170048470b1786c2547acdec372c6c}{b\_sina}};}
+\DoxyCodeLine{00084\ \ \ TBranch\ *\mbox{\hyperlink{class_uploader___mock_up___v2_a344474b458a9844bc0abc89d39f0993a}{b\_offset}};}
+\DoxyCodeLine{00085\ \ \ TBranch\ *\mbox{\hyperlink{class_uploader___mock_up___v2_a74ec8c83228d65e5d86ea795437a801d}{b\_max\_mult}};}
+\DoxyCodeLine{00086\ \ \ TBranch\ *\mbox{\hyperlink{class_uploader___mock_up___v2_a231991cd350b78b0baf0397de8993061}{b\_mean\_mult}};}
+\DoxyCodeLine{00087\ \ \ TBranch\ *\mbox{\hyperlink{class_uploader___mock_up___v2_a19463bc9b3ca816dc16aea41ed46eb7b}{b\_multiplicity}};}
+\DoxyCodeLine{00088\ \ \ TBranch\ *\mbox{\hyperlink{class_uploader___mock_up___v2_a5ab8b0146a493a0d87a86f40b8798321}{b\_charge}};}
+\DoxyCodeLine{00089\ \ \ TBranch\ *\mbox{\hyperlink{class_uploader___mock_up___v2_a0f9a6cd9e691f83aa2771c975d3e157e}{b\_residual}};}
+\DoxyCodeLine{00090\ \ \ TBranch\ *\mbox{\hyperlink{class_uploader___mock_up___v2_ae04318877cbf0be06b67121a2409d6e6}{b\_residual\_corr}};}
+\DoxyCodeLine{00091\ \ \ TBranch\ *\mbox{\hyperlink{class_uploader___mock_up___v2_a4708d2188422cc7ae8a4d188cf49b3c3}{b\_dx}};}
+\DoxyCodeLine{00092\ \ \ TBranch\ *\mbox{\hyperlink{class_uploader___mock_up___v2_a78388e5b636a75572ec18fc014ab18b7}{b\_qfrac}};}
+\DoxyCodeLine{00093\ \ \ TBranch\ *\mbox{\hyperlink{class_uploader___mock_up___v2_ae4bd5106ab722af9194737955981ed6a}{b\_time}};}
+\DoxyCodeLine{00094\ \ \ TBranch\ *\mbox{\hyperlink{class_uploader___mock_up___v2_a89abe62b190bf8f990b31701a23eedf2}{b\_clust\_pos}};}
+\DoxyCodeLine{00095\ \ \ TBranch\ *\mbox{\hyperlink{class_uploader___mock_up___v2_ac0724784d24a82e65f76489637c069a3}{b\_clust\_pos\_err}};}
+\DoxyCodeLine{00096\ \ \ TBranch\ *\mbox{\hyperlink{class_uploader___mock_up___v2_a323ba5c3c03159293c1c41dd4ef7241d}{b\_track\_pos}};}
+\DoxyCodeLine{00097\ \ \ TBranch\ *\mbox{\hyperlink{class_uploader___mock_up___v2_aac713fc70f88c0ef52ba333fa3da603e}{b\_module}};}
+\DoxyCodeLine{00098\ \ \ TBranch\ *\mbox{\hyperlink{class_uploader___mock_up___v2_a7c67b205896b91e4f139d03356e3fdd9}{b\_pad\_charge}};}
+\DoxyCodeLine{00099\ \ \ TBranch\ *\mbox{\hyperlink{class_uploader___mock_up___v2_a256ec4bdf153af7b32e1212a01ab130a}{b\_pad\_time}};}
+\DoxyCodeLine{00100\ \ \ TBranch\ *\mbox{\hyperlink{class_uploader___mock_up___v2_a2c4170661cdc23bb3a026c05007d321e}{b\_wf\_width}};}
+\DoxyCodeLine{00101\ \ \ TBranch\ *\mbox{\hyperlink{class_uploader___mock_up___v2_ae14b93a3ae120a4707fbbde17d2ac305}{b\_wf\_fwhm}};}
+\DoxyCodeLine{00102\ \ \ TBranch\ *\mbox{\hyperlink{class_uploader___mock_up___v2_ab46fc9b4f2795c5c864d526e8883efb1}{b\_pad\_x}};}
+\DoxyCodeLine{00103\ \ \ TBranch\ *\mbox{\hyperlink{class_uploader___mock_up___v2_a39de3348967092c46f78c90bfc60037c}{b\_pad\_y}};}
+\DoxyCodeLine{00104\ \ \ TBranch\ *\mbox{\hyperlink{class_uploader___mock_up___v2_a2f83e5935221524909d61e01a9550093}{b\_pad\_wf\_q}};}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_uploader___mock_up___v2_aa7ef84f7125b8ff1ce899d9065cd1a81}{Init}}();}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00108\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00109\ \ \ \textcolor{keywordtype}{int}\ m\_BeforeMerging;}
+\DoxyCodeLine{00110\ \ \ \textcolor{keywordtype}{int}\ m\_Swap\_XY;}
+\DoxyCodeLine{00111\ \ \ \textcolor{keywordtype}{int}\ m\_Nx;}
+\DoxyCodeLine{00112\ \ \ \textcolor{keywordtype}{int}\ m\_Ny;}
+\DoxyCodeLine{00113\ \};}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00115\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

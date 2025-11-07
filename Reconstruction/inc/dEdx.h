@@ -1,10 +1,18 @@
 #/**
- * @file dEdx.h
- * @brief dE/dx estimation and particle identification declarations.
- *
- * Contains declarations for data structures, helper classes and functions
- * used to compute energy loss estimates used by the reconstruction pipeline.
- */
+# * @file dEdx.h
+# * @brief dE/dx estimation and particle identification declarations.
+# *
+# * Contains declarations for data structures, helper classes and functions
+# * used to compute energy loss estimates used by the reconstruction pipeline.
+# *
+# * @details
+# * The implementation (dEdx.cxx) contains the core numerical routines and
+# * algorithms used to compute energy loss per unit length from reconstructed
+# * cluster and pad information, together with helper utilities for particle
+# * identification. Interfaces for computing WF and XP estimates, GigaWaveform
+# * helpers and truncated estimators are declared here; heavy numerical work
+# * and algorithmic details live in the source file.
+# */
 #ifndef DEDX_H
 #define DEDX_H
 

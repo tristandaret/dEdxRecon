@@ -1,0 +1,155 @@
+\doxysection{Reconstruction/src/\+Displays.cxx File Reference}
+\hypertarget{_displays_8cxx}{}\label{_displays_8cxx}\index{Reconstruction/src/Displays.cxx@{Reconstruction/src/Displays.cxx}}
+{\ttfamily \#include "{}Displays.\+h"{}}\newline
+{\ttfamily \#include "{}Parabola\+Function.\+h"{}}\newline
+{\ttfamily \#include "{}Parabola\+Function\+NG.\+h"{}}\newline
+{\ttfamily \#include "{}Set\+Style.\+h"{}}\newline
+{\ttfamily \#include "{}Signal\+Tools.\+h"{}}\newline
+{\ttfamily \#include "{}Util.\+h"{}}\newline
+{\ttfamily \#include $<$typeinfo$>$}\newline
+{\ttfamily \#include "{}TAxis.\+h"{}}\newline
+{\ttfamily \#include "{}TCanvas.\+h"{}}\newline
+{\ttfamily \#include "{}TF1.\+h"{}}\newline
+{\ttfamily \#include "{}TFile.\+h"{}}\newline
+{\ttfamily \#include "{}TGraph.\+h"{}}\newline
+{\ttfamily \#include "{}TGraph\+Errors.\+h"{}}\newline
+{\ttfamily \#include "{}TLatex.\+h"{}}\newline
+{\ttfamily \#include "{}TLegend.\+h"{}}\newline
+{\ttfamily \#include "{}TLegend\+Entry.\+h"{}}\newline
+{\ttfamily \#include "{}TLine.\+h"{}}\newline
+{\ttfamily \#include "{}TMulti\+Graph.\+h"{}}\newline
+{\ttfamily \#include "{}TPave\+Stats.\+h"{}}\newline
+{\ttfamily \#include "{}TProfile.\+h"{}}\newline
+{\ttfamily \#include "{}TROOT.\+h"{}}\newline
+{\ttfamily \#include "{}TStyle.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_displays_8cxx_ad7fa96393c4875b4ea24675ac63dffbe}{Draw\+Out\+\_\+\+Event\+Display}} (\mbox{\hyperlink{class_event}{Event}} \texorpdfstring{$\ast$}{*}p\+Event, const int \&Module\+Nber, const std\+::string \&OUTDIR, const std\+::string \&TAG)
+\begin{DoxyCompactList}\small\item\em Output an event display for a given event. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_displays_8cxx_aa266721504736454ec48c7126683256c}{Draw\+Out\+\_\+\+Event\+Display}} (\mbox{\hyperlink{class_module}{Module}} \texorpdfstring{$\ast$}{*}p\+Module, const std\+::string \&OUTDIR, const std\+::string \&TAG, const std\+::string \&type, const double \&parabola, const double \&slope, const double \&intercept)
+\begin{DoxyCompactList}\small\item\em Output an event display for a module. \end{DoxyCompactList}\item 
+TH2D \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_displays_8cxx_a1d9ffed9d03dd0e33d7eead16655eb84}{Give\+Me\+\_\+\+Evt\+Display}} (\mbox{\hyperlink{class_event}{Event}} \texorpdfstring{$\ast$}{*}p\+Event, const int \&Module\+Nber, const std\+::string \&TAG)
+\begin{DoxyCompactList}\small\item\em Get an event display TH2D for an event. \end{DoxyCompactList}\item 
+TH2D \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_displays_8cxx_a3d7720b0132e45b50cbf68f4e8f78429}{Give\+Me\+\_\+\+Evt\+Display}} (\mbox{\hyperlink{class_module}{Module}} \texorpdfstring{$\ast$}{*}p\+Module, const std\+::string \&TAG)
+\begin{DoxyCompactList}\small\item\em Get an event display TH2D for a module. \end{DoxyCompactList}\item 
+TH2D \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_displays_8cxx_a936286e3b509a3c7e3186183dfae834f}{Give\+Me\+\_\+\+Time\+Display}} (\mbox{\hyperlink{class_module}{Module}} \texorpdfstring{$\ast$}{*}p\+Module, const std\+::string \&TAG)
+\item 
+void \mbox{\hyperlink{_displays_8cxx_a964185626427f088abc8d4e5afe2309f}{Draw\+Out\+\_\+\+Wave\+Form\+Display}} (\mbox{\hyperlink{class_pad}{Pad}} \texorpdfstring{$\ast$}{*}p\+Pad, const std\+::string \&OUTDIR, const std\+::string \&TAG)
+\item 
+TH1F \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_displays_8cxx_ad475141075e240c0932deb34d6690f76}{Give\+Me\+\_\+\+Wave\+Form\+Display}} (\mbox{\hyperlink{class_pad}{Pad}} \texorpdfstring{$\ast$}{*}p\+Pad, const std\+::string \&TAG)
+\item 
+void \mbox{\hyperlink{_displays_8cxx_a71509ac632013b193d51a8b4d376ce4c}{Draw\+Out\+\_\+\+Cluster\+WFDisplay}} (\mbox{\hyperlink{class_cluster}{Cluster}} \texorpdfstring{$\ast$}{*}p\+Cluster, const std\+::string \&OUTDIR, const std\+::string \&TAG)
+\item 
+void \mbox{\hyperlink{_displays_8cxx_acf324ac4eba02af1dc8c0bb231a504c2}{Draw\+Out\+\_\+\+Cluster\+WFDisplay}} (\mbox{\hyperlink{class_cluster}{Cluster}} \texorpdfstring{$\ast$}{*}p\+Cluster, const std\+::string \&OUTDIR, const std\+::string \&TAG, const int \&Option, const int \&PT, const int \&TB)
+\item 
+void \mbox{\hyperlink{_displays_8cxx_aff8f6ee3b35ae66b507a99d41bf22463}{Draw\+Out\+\_\+\+GWF}} (\mbox{\hyperlink{class_event}{Event}} \texorpdfstring{$\ast$}{*}p\+Event, const int \&Module\+Nber, const std\+::string \&OUTDIR, const std\+::string \&TAG, const int \&PT, const int \&TB, const float \&phi\+\_\+rad)
+\item 
+void \mbox{\hyperlink{_displays_8cxx_a90b29df35763b1b9819010080bde0ac6}{New\+Cluster\+Display}} (\mbox{\hyperlink{class_event}{Event}} \texorpdfstring{$\ast$}{*}p\+Event, const std\+::string \&OUTDIR, const std\+::string \&TAG, const int \&PT, const int \&TB)
+\item 
+void \mbox{\hyperlink{_displays_8cxx_af8fec9e27b1b22bc782eceef8967310d}{New\+Cluster\+Display\+Minimal}} (\mbox{\hyperlink{class_event}{Event}} \texorpdfstring{$\ast$}{*}p\+Event, const std\+::string \&OUTDIR, const std\+::string \&TAG)
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{_displays_8cxx_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_displays_8cxx_a71509ac632013b193d51a8b4d376ce4c}\index{Displays.cxx@{Displays.cxx}!DrawOut\_ClusterWFDisplay@{DrawOut\_ClusterWFDisplay}}
+\index{DrawOut\_ClusterWFDisplay@{DrawOut\_ClusterWFDisplay}!Displays.cxx@{Displays.cxx}}
+\doxysubsubsection{\texorpdfstring{DrawOut\_ClusterWFDisplay()}{DrawOut\_ClusterWFDisplay()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{_displays_8cxx_a71509ac632013b193d51a8b4d376ce4c} 
+void Draw\+Out\+\_\+\+Cluster\+WFDisplay (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_cluster}{Cluster}} \texorpdfstring{$\ast$}{*}}]{p\+Cluster}{, }\item[{const std\+::string \&}]{OUTDIR}{, }\item[{const std\+::string \&}]{TAG}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_displays_8cxx_acf324ac4eba02af1dc8c0bb231a504c2}\index{Displays.cxx@{Displays.cxx}!DrawOut\_ClusterWFDisplay@{DrawOut\_ClusterWFDisplay}}
+\index{DrawOut\_ClusterWFDisplay@{DrawOut\_ClusterWFDisplay}!Displays.cxx@{Displays.cxx}}
+\doxysubsubsection{\texorpdfstring{DrawOut\_ClusterWFDisplay()}{DrawOut\_ClusterWFDisplay()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{_displays_8cxx_acf324ac4eba02af1dc8c0bb231a504c2} 
+void Draw\+Out\+\_\+\+Cluster\+WFDisplay (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_cluster}{Cluster}} \texorpdfstring{$\ast$}{*}}]{p\+Cluster}{, }\item[{const std\+::string \&}]{OUTDIR}{, }\item[{const std\+::string \&}]{TAG}{, }\item[{const int \&}]{Option}{, }\item[{const int \&}]{PT}{, }\item[{const int \&}]{TB}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_displays_8cxx_ad7fa96393c4875b4ea24675ac63dffbe}\index{Displays.cxx@{Displays.cxx}!DrawOut\_EventDisplay@{DrawOut\_EventDisplay}}
+\index{DrawOut\_EventDisplay@{DrawOut\_EventDisplay}!Displays.cxx@{Displays.cxx}}
+\doxysubsubsection{\texorpdfstring{DrawOut\_EventDisplay()}{DrawOut\_EventDisplay()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{_displays_8cxx_ad7fa96393c4875b4ea24675ac63dffbe} 
+void Draw\+Out\+\_\+\+Event\+Display (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_event}{Event}} \texorpdfstring{$\ast$}{*}}]{p\+Event}{, }\item[{const int \&}]{Module\+Nber}{, }\item[{const std\+::string \&}]{OUTDIR}{, }\item[{const std\+::string \&}]{TAG}{}\end{DoxyParamCaption})}
+
+
+
+Output an event display for a given event. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+Event} & pointer to the \doxylink{class_event}{Event} \\
+\hline
+{\em Module\+Nber} & module index \\
+\hline
+{\em OUTDIR} & output directory path \\
+\hline
+{\em TAG} & tagging string used in output filenames \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_displays_8cxx_aa266721504736454ec48c7126683256c}\index{Displays.cxx@{Displays.cxx}!DrawOut\_EventDisplay@{DrawOut\_EventDisplay}}
+\index{DrawOut\_EventDisplay@{DrawOut\_EventDisplay}!Displays.cxx@{Displays.cxx}}
+\doxysubsubsection{\texorpdfstring{DrawOut\_EventDisplay()}{DrawOut\_EventDisplay()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{_displays_8cxx_aa266721504736454ec48c7126683256c} 
+void Draw\+Out\+\_\+\+Event\+Display (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_module}{Module}} \texorpdfstring{$\ast$}{*}}]{p\+Module}{, }\item[{const std\+::string \&}]{OUTDIR}{, }\item[{const std\+::string \&}]{TAG}{, }\item[{const std\+::string \&}]{type}{, }\item[{const double \&}]{parabola}{, }\item[{const double \&}]{slope}{, }\item[{const double \&}]{intercept}{}\end{DoxyParamCaption})}
+
+
+
+Output an event display for a module. 
+
+\Hypertarget{_displays_8cxx_aff8f6ee3b35ae66b507a99d41bf22463}\index{Displays.cxx@{Displays.cxx}!DrawOut\_GWF@{DrawOut\_GWF}}
+\index{DrawOut\_GWF@{DrawOut\_GWF}!Displays.cxx@{Displays.cxx}}
+\doxysubsubsection{\texorpdfstring{DrawOut\_GWF()}{DrawOut\_GWF()}}
+{\footnotesize\ttfamily \label{_displays_8cxx_aff8f6ee3b35ae66b507a99d41bf22463} 
+void Draw\+Out\+\_\+\+GWF (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_event}{Event}} \texorpdfstring{$\ast$}{*}}]{p\+Event}{, }\item[{const int \&}]{Module\+Nber}{, }\item[{const std\+::string \&}]{OUTDIR}{, }\item[{const std\+::string \&}]{TAG}{, }\item[{const int \&}]{PT}{, }\item[{const int \&}]{TB}{, }\item[{const float \&}]{phi\+\_\+rad}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_displays_8cxx_a964185626427f088abc8d4e5afe2309f}\index{Displays.cxx@{Displays.cxx}!DrawOut\_WaveFormDisplay@{DrawOut\_WaveFormDisplay}}
+\index{DrawOut\_WaveFormDisplay@{DrawOut\_WaveFormDisplay}!Displays.cxx@{Displays.cxx}}
+\doxysubsubsection{\texorpdfstring{DrawOut\_WaveFormDisplay()}{DrawOut\_WaveFormDisplay()}}
+{\footnotesize\ttfamily \label{_displays_8cxx_a964185626427f088abc8d4e5afe2309f} 
+void Draw\+Out\+\_\+\+Wave\+Form\+Display (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_pad}{Pad}} \texorpdfstring{$\ast$}{*}}]{p\+Pad}{, }\item[{const std\+::string \&}]{OUTDIR}{, }\item[{const std\+::string \&}]{TAG}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_displays_8cxx_a1d9ffed9d03dd0e33d7eead16655eb84}\index{Displays.cxx@{Displays.cxx}!GiveMe\_EvtDisplay@{GiveMe\_EvtDisplay}}
+\index{GiveMe\_EvtDisplay@{GiveMe\_EvtDisplay}!Displays.cxx@{Displays.cxx}}
+\doxysubsubsection{\texorpdfstring{GiveMe\_EvtDisplay()}{GiveMe\_EvtDisplay()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{_displays_8cxx_a1d9ffed9d03dd0e33d7eead16655eb84} 
+TH2D \texorpdfstring{$\ast$}{*} Give\+Me\+\_\+\+Evt\+Display (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_event}{Event}} \texorpdfstring{$\ast$}{*}}]{p\+Event}{, }\item[{const int \&}]{Module\+Nber}{, }\item[{const std\+::string \&}]{TAG}{}\end{DoxyParamCaption})}
+
+
+
+Get an event display TH2D for an event. 
+
+\Hypertarget{_displays_8cxx_a3d7720b0132e45b50cbf68f4e8f78429}\index{Displays.cxx@{Displays.cxx}!GiveMe\_EvtDisplay@{GiveMe\_EvtDisplay}}
+\index{GiveMe\_EvtDisplay@{GiveMe\_EvtDisplay}!Displays.cxx@{Displays.cxx}}
+\doxysubsubsection{\texorpdfstring{GiveMe\_EvtDisplay()}{GiveMe\_EvtDisplay()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{_displays_8cxx_a3d7720b0132e45b50cbf68f4e8f78429} 
+TH2D \texorpdfstring{$\ast$}{*} Give\+Me\+\_\+\+Evt\+Display (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_module}{Module}} \texorpdfstring{$\ast$}{*}}]{p\+Module}{, }\item[{const std\+::string \&}]{TAG}{}\end{DoxyParamCaption})}
+
+
+
+Get an event display TH2D for a module. 
+
+\Hypertarget{_displays_8cxx_a936286e3b509a3c7e3186183dfae834f}\index{Displays.cxx@{Displays.cxx}!GiveMe\_TimeDisplay@{GiveMe\_TimeDisplay}}
+\index{GiveMe\_TimeDisplay@{GiveMe\_TimeDisplay}!Displays.cxx@{Displays.cxx}}
+\doxysubsubsection{\texorpdfstring{GiveMe\_TimeDisplay()}{GiveMe\_TimeDisplay()}}
+{\footnotesize\ttfamily \label{_displays_8cxx_a936286e3b509a3c7e3186183dfae834f} 
+TH2D \texorpdfstring{$\ast$}{*} Give\+Me\+\_\+\+Time\+Display (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_module}{Module}} \texorpdfstring{$\ast$}{*}}]{p\+Module}{, }\item[{const std\+::string \&}]{TAG}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_displays_8cxx_ad475141075e240c0932deb34d6690f76}\index{Displays.cxx@{Displays.cxx}!GiveMe\_WaveFormDisplay@{GiveMe\_WaveFormDisplay}}
+\index{GiveMe\_WaveFormDisplay@{GiveMe\_WaveFormDisplay}!Displays.cxx@{Displays.cxx}}
+\doxysubsubsection{\texorpdfstring{GiveMe\_WaveFormDisplay()}{GiveMe\_WaveFormDisplay()}}
+{\footnotesize\ttfamily \label{_displays_8cxx_ad475141075e240c0932deb34d6690f76} 
+TH1F \texorpdfstring{$\ast$}{*} Give\+Me\+\_\+\+Wave\+Form\+Display (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_pad}{Pad}} \texorpdfstring{$\ast$}{*}}]{p\+Pad}{, }\item[{const std\+::string \&}]{TAG}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_displays_8cxx_a90b29df35763b1b9819010080bde0ac6}\index{Displays.cxx@{Displays.cxx}!NewClusterDisplay@{NewClusterDisplay}}
+\index{NewClusterDisplay@{NewClusterDisplay}!Displays.cxx@{Displays.cxx}}
+\doxysubsubsection{\texorpdfstring{NewClusterDisplay()}{NewClusterDisplay()}}
+{\footnotesize\ttfamily \label{_displays_8cxx_a90b29df35763b1b9819010080bde0ac6} 
+void New\+Cluster\+Display (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_event}{Event}} \texorpdfstring{$\ast$}{*}}]{p\+Event}{, }\item[{const std\+::string \&}]{OUTDIR}{, }\item[{const std\+::string \&}]{TAG}{, }\item[{const int \&}]{PT}{, }\item[{const int \&}]{TB}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_displays_8cxx_af8fec9e27b1b22bc782eceef8967310d}\index{Displays.cxx@{Displays.cxx}!NewClusterDisplayMinimal@{NewClusterDisplayMinimal}}
+\index{NewClusterDisplayMinimal@{NewClusterDisplayMinimal}!Displays.cxx@{Displays.cxx}}
+\doxysubsubsection{\texorpdfstring{NewClusterDisplayMinimal()}{NewClusterDisplayMinimal()}}
+{\footnotesize\ttfamily \label{_displays_8cxx_af8fec9e27b1b22bc782eceef8967310d} 
+void New\+Cluster\+Display\+Minimal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_event}{Event}} \texorpdfstring{$\ast$}{*}}]{p\+Event}{, }\item[{const std\+::string \&}]{OUTDIR}{, }\item[{const std\+::string \&}]{TAG}{}\end{DoxyParamCaption})}
+

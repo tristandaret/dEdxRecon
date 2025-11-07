@@ -1,17 +1,3 @@
-#/***************************************************************************
- * File: PRFParameters.cxx
- * Project: dEdxRecon
- *
- * Brief: Implementation of PRFParameters which evaluates the pad response
- *        function (PRF) model used by fitters. Provides Eval, SetPRF and
- *        operator() for use as a callable functor (e.g., for TF1).
- *
- * Contents: PRFParameters constructor/destructor, Eval, SetPRF and operator().
- *
- * Notes: This is a small value-type helper; behaviour is controlled by the
- *        coefficients stored in the instance.
- ***************************************************************************/
-
 #include "PRFParameters.h"
 
 PRFParameters::PRFParameters() {}

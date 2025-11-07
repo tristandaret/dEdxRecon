@@ -5,6 +5,12 @@
  * Declares Model_Charge0D which estimates integrated charge produced by an
  * ionising particle in a pad or collection region. Implementation is in
  * Model_Charge0D.cxx.
+ *
+ * @details
+ * The 0D model returns integrated pad charges and can be used for quick
+ * analytic studies or as a baseline reference in tests. It provides
+ * configuration for ion contributions and normalization used by fitter
+ * utilities.
  */
 #ifndef Model_Charge0D_H
 #define Model_Charge0D_H

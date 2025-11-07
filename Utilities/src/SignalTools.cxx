@@ -1,21 +1,7 @@
-#/***************************************************************************
- * File: SignalTools.cxx
- * Project: dEdxRecon
- *
- * Brief: Signal processing utilities used to model and manipulate waveform
- *        data. Contains routines for impulse response generation, ETF
- *        construction and other helpers used when simulating or analysing
- *        pad waveforms.
- *
- * Contents: ETF and other signal model helper implementations.
- *
- * Notes: Keep numerical code here; API in SignalTools.h.
- ***************************************************************************/
-
 #include "SignalTools.h"
 #include "Misc_Functions.h"
 
-/* SIGNAL MODELISATION*/
+// SIGNAL MODELISATION
 
 // Dirac Pulse Response function
 TH1F *ETF(std::string name, const float &tmin, float const &tmax,

@@ -1,0 +1,104 @@
+\doxysection{Set\+Of\+Tracks.\+h}
+\hypertarget{_set_of_tracks_8h_source}{}\label{_set_of_tracks_8h_source}\index{ModelEvent/inc/SetOfTracks.h@{ModelEvent/inc/SetOfTracks.h}}
+\mbox{\hyperlink{_set_of_tracks_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#ifndef\ SetOfTracks\_H}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ SetOfTracks\_H}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_misc_8h}{Misc.h}}"{}}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_track_8h}{Track.h}}"{}}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ "{}TH1F.h"{}}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_set_of_tracks_a748b3f5a1ef09acea7d3532a45a650ca}{SetOfTracks}}\ \{}
+\DoxyCodeLine{00018\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00019\ \ \ \mbox{\hyperlink{class_set_of_tracks_a748b3f5a1ef09acea7d3532a45a650ca}{SetOfTracks}}();}
+\DoxyCodeLine{00020\ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_set_of_tracks_ac35066ff516ddba6943a23d876e23ab3}{\string~SetOfTracks}}();}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Track\ Addition-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\///}}
+\DoxyCodeLine{00023\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_set_of_tracks_ad29abd6118b7bec538bdd981af777474}{Add\_Track}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_track}{Track}}\ *pTrack);}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Track\ Acess-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\///}}
+\DoxyCodeLine{00026\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_set_of_tracks_a4c3874356f31557ab4064ea973d55a93}{Get\_NberOfTrack}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00027\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_track}{Track}}\ *\mbox{\hyperlink{class_set_of_tracks_a4e187514d03633a6efc2e4955638da3b}{Get\_Track}}(\textcolor{keywordtype}{int}\ Index1D)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Prints-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\///}}
+\DoxyCodeLine{00030\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_set_of_tracks_a08b338d9b2424cb8074fecc182b952fd}{DumpRec}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Plots-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\///}}
+\DoxyCodeLine{00033\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_set_of_tracks_a3def9fc867ef08c121aa235db79df537}{Get\_MinimalNberOfEntries}}();}
+\DoxyCodeLine{00034\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_set_of_tracks_ab1f6843b11019ed3458654316202e353}{Set\_MinimalNberOfEntries}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&MinimalNberOfEntries);}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ TH1F\ *\mbox{\hyperlink{class_set_of_tracks_a88af2f458b318cd0af6a7fc22cbf182b}{GiveMe\_pTH1F\_YTrackInTracks}}(\textcolor{keyword}{const}\ std::string\ \&TAG,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&iYBeam);}
+\DoxyCodeLine{00037\ \ \ TH1F\ *\mbox{\hyperlink{class_set_of_tracks_a88af2f458b318cd0af6a7fc22cbf182b}{GiveMe\_pTH1F\_YTrackInTracks}}(\textcolor{keyword}{const}\ std::string\ \&TAG,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&Nbins,}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&Ymin,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&Ymax);}
+\DoxyCodeLine{00039\ \ \ TH1F\ *\mbox{\hyperlink{class_set_of_tracks_a88af2f458b318cd0af6a7fc22cbf182b}{GiveMe\_pTH1F\_YTrackInTracks}}(\textcolor{keyword}{const}\ std::string\ \&TAG,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&iYBeam,}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&iCol);}
+\DoxyCodeLine{00041\ \ \ TH1F\ *\mbox{\hyperlink{class_set_of_tracks_a88af2f458b318cd0af6a7fc22cbf182b}{GiveMe\_pTH1F\_YTrackInTracks}}(\textcolor{keyword}{const}\ std::string\ \&TAG,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&Nbins,}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&Ymin,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&Ymax,}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&iCol);}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00046\ \ \ TH1F\ *\mbox{\hyperlink{class_set_of_tracks_a0b5783a21de412165c11a7234de1f8e4}{GiveMe\_pTH1F\_YFitCol}}(\textcolor{keyword}{const}\ std::string\ \&TAG,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&iYBeam);}
+\DoxyCodeLine{00047\ \ \ TH1F\ *\mbox{\hyperlink{class_set_of_tracks_a0b5783a21de412165c11a7234de1f8e4}{GiveMe\_pTH1F\_YFitCol}}(\textcolor{keyword}{const}\ std::string\ \&TAG,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&Nbins,}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&Ymin,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&Ymax);}
+\DoxyCodeLine{00049\ \ \ TH1F\ *\mbox{\hyperlink{class_set_of_tracks_a0b5783a21de412165c11a7234de1f8e4}{GiveMe\_pTH1F\_YFitCol}}(\textcolor{keyword}{const}\ std::string\ \&TAG,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&iYBeam,}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&iCol);}
+\DoxyCodeLine{00051\ \ \ TH1F\ *\mbox{\hyperlink{class_set_of_tracks_a0b5783a21de412165c11a7234de1f8e4}{GiveMe\_pTH1F\_YFitCol}}(\textcolor{keyword}{const}\ std::string\ \&TAG,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&Nbins,}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&Ymin,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&Ymax,}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&iCol);}
+\DoxyCodeLine{00054\ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00055\ \ \ TH1F\ *\mbox{\hyperlink{class_set_of_tracks_ad6984fb2fb389a544b1db1646b3881b4}{GiveMe\_pTH1F\_YTrackYPadInTracks}}(\textcolor{keyword}{const}\ std::string\ \&TAG,}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&iCol);}
+\DoxyCodeLine{00057\ \ \ TH1F\ *\mbox{\hyperlink{class_set_of_tracks_ad6984fb2fb389a544b1db1646b3881b4}{GiveMe\_pTH1F\_YTrackYPadInTracks}}(\textcolor{keyword}{const}\ std::string\ \&TAG,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&iCol,}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&Nbins,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&Xmin,}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&Xmax);}
+\DoxyCodeLine{00060\ \ \ TH1F\ *\mbox{\hyperlink{class_set_of_tracks_aecdca325e1e0d9d7d035cd3ea265d940}{GiveMe\_pTH1F\_YTrackYPadLeadingInTracks}}(\textcolor{keyword}{const}\ std::string\ \&TAG,}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&iCol);}
+\DoxyCodeLine{00062\ \ \ TH1F\ *\mbox{\hyperlink{class_set_of_tracks_aecdca325e1e0d9d7d035cd3ea265d940}{GiveMe\_pTH1F\_YTrackYPadLeadingInTracks}}(\textcolor{keyword}{const}\ std::string\ \&TAG,}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&iCol,}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&Nbins,}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&Xmin,}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&Xmax);}
+\DoxyCodeLine{00067\ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00068\ \ \ TH1F\ *\mbox{\hyperlink{class_set_of_tracks_a6fa7c9adeb323e111a286c1ad4df8d1e}{GiveMe\_pTH1F\_TrackDeltaT}}(\textcolor{keyword}{const}\ std::string\ \&TAG,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&iCol);}
+\DoxyCodeLine{00069\ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00070\ \ \ TH1F\ *\mbox{\hyperlink{class_set_of_tracks_a7a3a25a53343ca398fc2ca94387e51d2}{GiveMe\_pTH1F\_Ch2MinPerNODF}}(\textcolor{keyword}{const}\ std::string\ \&TAGFinal,}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&Xmax);}
+\DoxyCodeLine{00072\ \ \ TH1F\ *\mbox{\hyperlink{class_set_of_tracks_a7215b6bd2e3f5ad0d8e774fa118230f3}{GiveMe\_pTH1F\_Ch2Min}}(\textcolor{keyword}{const}\ std::string\ \&TAGFinal,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&Xmax);}
+\DoxyCodeLine{00073\ \ \ TH1F\ *\mbox{\hyperlink{class_set_of_tracks_ad4344cec64f95e4eaca83bda33333c3d}{GiveMe\_pTH1F\_Residual}}(\textcolor{keyword}{const}\ std::string\ \&TAGFinal,\ \textcolor{keywordtype}{double}\ \&Mean,}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \&eMean,\ \textcolor{keywordtype}{double}\ \&Sigma,\ \textcolor{keywordtype}{double}\ \&eSigma);}
+\DoxyCodeLine{00075\ \ \ TH1F\ *\mbox{\hyperlink{class_set_of_tracks_ad4344cec64f95e4eaca83bda33333c3d}{GiveMe\_pTH1F\_Residual}}(\textcolor{keyword}{const}\ std::string\ \&TAGFinal,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&iX,}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \&Mean,\ \textcolor{keywordtype}{double}\ \&eMean,\ \textcolor{keywordtype}{double}\ \&Sigma,}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \&eSigma);}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ TH1F\ *\mbox{\hyperlink{class_set_of_tracks_ad4344cec64f95e4eaca83bda33333c3d}{GiveMe\_pTH1F\_Residual}}(\textcolor{keyword}{const}\ std::string\ \&TAGFinal,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&iX,}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ YL,\ \textcolor{keywordtype}{double}\ YH,\ \textcolor{keywordtype}{double}\ YL\_Rescaled,}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ YH\_Rescaled,\ \textcolor{keywordtype}{double}\ \&Mean,\ \textcolor{keywordtype}{double}\ \&eMean,}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \&Sigma,\ \textcolor{keywordtype}{double}\ \&eSigma);}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \ \ TH1F\ *\mbox{\hyperlink{class_set_of_tracks_ad96305107b16686833b7c10838f29037}{GiveMe\_pTH1F\_Pull}}(\textcolor{keyword}{const}\ std::string\ \&TAGFinal);}
+\DoxyCodeLine{00085\ \ \ TH1F\ *\mbox{\hyperlink{class_set_of_tracks_ad96305107b16686833b7c10838f29037}{GiveMe\_pTH1F\_Pull}}(\textcolor{keyword}{const}\ std::string\ \&TAGFinal,\ \textcolor{keywordtype}{double}\ \&Mean,}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \&eMean,\ \textcolor{keywordtype}{double}\ \&Sigma,\ \textcolor{keywordtype}{double}\ \&eSigma);}
+\DoxyCodeLine{00087\ \ \ TH1F\ *\mbox{\hyperlink{class_set_of_tracks_ad96305107b16686833b7c10838f29037}{GiveMe\_pTH1F\_Pull}}(\textcolor{keyword}{const}\ std::string\ \&TAGFinal,\ \textcolor{keywordtype}{double}\ \&Mean,}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \&eMean,\ \textcolor{keywordtype}{double}\ \&Sigma,\ \textcolor{keywordtype}{double}\ \&eSigma,}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&XminH,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&XmaxH);}
+\DoxyCodeLine{00090\ \ \ TH1F\ *\mbox{\hyperlink{class_set_of_tracks_ad96305107b16686833b7c10838f29037}{GiveMe\_pTH1F\_Pull}}(\textcolor{keyword}{const}\ std::string\ \&TAGFinal,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&iX,}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \&Mean,\ \textcolor{keywordtype}{double}\ \&eMean,\ \textcolor{keywordtype}{double}\ \&Sigma,}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \&eSigma);}
+\DoxyCodeLine{00093\ \ \ TH1F\ *\mbox{\hyperlink{class_set_of_tracks_ad96305107b16686833b7c10838f29037}{GiveMe\_pTH1F\_Pull}}(\textcolor{keyword}{const}\ std::string\ \&TAGFinal,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&iX,}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \&Mean,\ \textcolor{keywordtype}{double}\ \&eMean,\ \textcolor{keywordtype}{double}\ \&Sigma,}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \&eSigma,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&XminH,}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&XmaxH);}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00100\ \ \ \textcolor{keywordtype}{int}\ m\_MinimalNberOfEntries;}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \ \ \textcolor{keywordtype}{int}\ m\_NberOfTracks;}
+\DoxyCodeLine{00103\ \ \ std::vector<const\ Track\ *>\ V\_Track;}
+\DoxyCodeLine{00104\ \};}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

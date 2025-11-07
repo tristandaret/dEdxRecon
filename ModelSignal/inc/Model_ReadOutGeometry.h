@@ -4,6 +4,12 @@
  *
  * Declares Model_ReadOutGeometry which describes pad layout, sizes and
  * indexing. Provides utilities to query pad centre coordinates and edges.
+ *
+ * @details
+ * The implementation contains utility functions to query pad centres and
+ * edges and supports swapping/squaring the geometry for different board
+ * layouts. Geometry parameters are used by simulation and reconstruction
+ * modules.
  */
 #ifndef Model_ReadOutGeometry_H
 #define Model_ReadOutGeometry_H

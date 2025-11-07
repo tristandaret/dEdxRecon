@@ -1,0 +1,142 @@
+\doxysection{Cluster\+Fitter\+\_\+\+Diagonal Class Reference}
+\hypertarget{class_cluster_fitter___diagonal}{}\label{class_cluster_fitter___diagonal}\index{ClusterFitter\_Diagonal@{ClusterFitter\_Diagonal}}
+
+
+{\ttfamily \#include $<$Cluster\+Fitter.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_cluster_fitter___diagonal_a27269c26d37f3deee7ce0112809bc0d6}{Cluster\+Fitter\+\_\+\+Diagonal}} (const std\+::string \&Fitter\+Name)
+\begin{DoxyCompactList}\small\item\em Construct a diagonal cluster fitter. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{class_cluster_fitter___diagonal_ab30c7b46a322f741088aecb6215c7999}{\texorpdfstring{$\sim$}{\string~}\+Cluster\+Fitter\+\_\+\+Diagonal}} ()
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_cluster_fitter___diagonal_af3cf33e5d76f7ff6bee852aa065f9df3}{Set\+\_\+\+Cluster}} (\mbox{\hyperlink{class_cluster}{Cluster}} \texorpdfstring{$\ast$}{*}p\+Cluster)
+\begin{DoxyCompactList}\small\item\em Set the cluster to be fitted. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_cluster_fitter___diagonal_ac5999313a521fdd4fdf0c9a0c1da75b8}{Do\+Minimisation}} ()
+\begin{DoxyCompactList}\small\item\em Run minimisation for the current diagonal cluster. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_cluster_fitter___diagonal_a9314a8b01618cdfd797a2f52a321a21b}{Chi2}} (double par\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Compute chi2 for given parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{class_cluster_fitter___diagonal_a5427281c9e7a994621eb68ef3c7abaca}{m\+\_\+\+Fitter\+Name}}
+\item 
+\mbox{\hyperlink{class_cluster}{Cluster}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_cluster_fitter___diagonal_ae94c59576a251a601342e3706853d86a}{p\+\_\+\+Cluster}}
+\item 
+TVirtual\+Fitter \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_cluster_fitter___diagonal_a816470da3d309c76db087f7cd8e10aa3}{p\+\_\+\+TVirtual\+Fitter}}
+\begin{DoxyCompactList}\small\item\em Fitter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{class_cluster_fitter___diagonal_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_cluster_fitter___diagonal_a27269c26d37f3deee7ce0112809bc0d6}\index{ClusterFitter\_Diagonal@{ClusterFitter\_Diagonal}!ClusterFitter\_Diagonal@{ClusterFitter\_Diagonal}}
+\index{ClusterFitter\_Diagonal@{ClusterFitter\_Diagonal}!ClusterFitter\_Diagonal@{ClusterFitter\_Diagonal}}
+\doxysubsubsection{\texorpdfstring{ClusterFitter\_Diagonal()}{ClusterFitter\_Diagonal()}}
+{\footnotesize\ttfamily \label{class_cluster_fitter___diagonal_a27269c26d37f3deee7ce0112809bc0d6} 
+Cluster\+Fitter\+\_\+\+Diagonal\+::\+Cluster\+Fitter\+\_\+\+Diagonal (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{Fitter\+Name}{}\end{DoxyParamCaption})}
+
+
+
+Construct a diagonal cluster fitter. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Fitter\+Name} & name used to identify the fitter instance \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_cluster_fitter___diagonal_ab30c7b46a322f741088aecb6215c7999}\index{ClusterFitter\_Diagonal@{ClusterFitter\_Diagonal}!````~ClusterFitter\_Diagonal@{\texorpdfstring{$\sim$}{\string~}ClusterFitter\_Diagonal}}
+\index{````~ClusterFitter\_Diagonal@{\texorpdfstring{$\sim$}{\string~}ClusterFitter\_Diagonal}!ClusterFitter\_Diagonal@{ClusterFitter\_Diagonal}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}ClusterFitter\_Diagonal()}{\string~ClusterFitter\_Diagonal()}}
+{\footnotesize\ttfamily \label{class_cluster_fitter___diagonal_ab30c7b46a322f741088aecb6215c7999} 
+Cluster\+Fitter\+\_\+\+Diagonal\+::\texorpdfstring{$\sim$}{\string~}\+Cluster\+Fitter\+\_\+\+Diagonal (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Virtual destructor. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_cluster_fitter___diagonal_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_cluster_fitter___diagonal_a9314a8b01618cdfd797a2f52a321a21b}\index{ClusterFitter\_Diagonal@{ClusterFitter\_Diagonal}!Chi2@{Chi2}}
+\index{Chi2@{Chi2}!ClusterFitter\_Diagonal@{ClusterFitter\_Diagonal}}
+\doxysubsubsection{\texorpdfstring{Chi2()}{Chi2()}}
+{\footnotesize\ttfamily \label{class_cluster_fitter___diagonal_a9314a8b01618cdfd797a2f52a321a21b} 
+double Cluster\+Fitter\+\_\+\+Diagonal\+::\+Chi2 (\begin{DoxyParamCaption}\item[{double}]{par}{\mbox{[}$\,$\mbox{]}}\end{DoxyParamCaption})}
+
+
+
+Compute chi2 for given parameters. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em par} & parameter array for chi2 evaluation \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+chi2 value 
+\end{DoxyReturn}
+\Hypertarget{class_cluster_fitter___diagonal_ac5999313a521fdd4fdf0c9a0c1da75b8}\index{ClusterFitter\_Diagonal@{ClusterFitter\_Diagonal}!DoMinimisation@{DoMinimisation}}
+\index{DoMinimisation@{DoMinimisation}!ClusterFitter\_Diagonal@{ClusterFitter\_Diagonal}}
+\doxysubsubsection{\texorpdfstring{DoMinimisation()}{DoMinimisation()}}
+{\footnotesize\ttfamily \label{class_cluster_fitter___diagonal_ac5999313a521fdd4fdf0c9a0c1da75b8} 
+int Cluster\+Fitter\+\_\+\+Diagonal\+::\+Do\+Minimisation (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Run minimisation for the current diagonal cluster. 
+
+\begin{DoxyReturn}{Returns}
+0 on success, non-\/zero on failure 
+\end{DoxyReturn}
+\Hypertarget{class_cluster_fitter___diagonal_af3cf33e5d76f7ff6bee852aa065f9df3}\index{ClusterFitter\_Diagonal@{ClusterFitter\_Diagonal}!Set\_Cluster@{Set\_Cluster}}
+\index{Set\_Cluster@{Set\_Cluster}!ClusterFitter\_Diagonal@{ClusterFitter\_Diagonal}}
+\doxysubsubsection{\texorpdfstring{Set\_Cluster()}{Set\_Cluster()}}
+{\footnotesize\ttfamily \label{class_cluster_fitter___diagonal_af3cf33e5d76f7ff6bee852aa065f9df3} 
+void Cluster\+Fitter\+\_\+\+Diagonal\+::\+Set\+\_\+\+Cluster (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_cluster}{Cluster}} \texorpdfstring{$\ast$}{*}}]{p\+Cluster}{}\end{DoxyParamCaption})}
+
+
+
+Set the cluster to be fitted. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+Cluster} & pointer to the \doxylink{class_cluster}{Cluster} (ownership not transferred) \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-variable-members}
+\Hypertarget{class_cluster_fitter___diagonal_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_cluster_fitter___diagonal_a5427281c9e7a994621eb68ef3c7abaca}\index{ClusterFitter\_Diagonal@{ClusterFitter\_Diagonal}!m\_FitterName@{m\_FitterName}}
+\index{m\_FitterName@{m\_FitterName}!ClusterFitter\_Diagonal@{ClusterFitter\_Diagonal}}
+\doxysubsubsection{\texorpdfstring{m\_FitterName}{m\_FitterName}}
+{\footnotesize\ttfamily \label{class_cluster_fitter___diagonal_a5427281c9e7a994621eb68ef3c7abaca} 
+std\+::string Cluster\+Fitter\+\_\+\+Diagonal\+::m\+\_\+\+Fitter\+Name\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_cluster_fitter___diagonal_ae94c59576a251a601342e3706853d86a}\index{ClusterFitter\_Diagonal@{ClusterFitter\_Diagonal}!p\_Cluster@{p\_Cluster}}
+\index{p\_Cluster@{p\_Cluster}!ClusterFitter\_Diagonal@{ClusterFitter\_Diagonal}}
+\doxysubsubsection{\texorpdfstring{p\_Cluster}{p\_Cluster}}
+{\footnotesize\ttfamily \label{class_cluster_fitter___diagonal_ae94c59576a251a601342e3706853d86a} 
+\mbox{\hyperlink{class_cluster}{Cluster}}\texorpdfstring{$\ast$}{*} Cluster\+Fitter\+\_\+\+Diagonal\+::p\+\_\+\+Cluster\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_cluster_fitter___diagonal_a816470da3d309c76db087f7cd8e10aa3}\index{ClusterFitter\_Diagonal@{ClusterFitter\_Diagonal}!p\_TVirtualFitter@{p\_TVirtualFitter}}
+\index{p\_TVirtualFitter@{p\_TVirtualFitter}!ClusterFitter\_Diagonal@{ClusterFitter\_Diagonal}}
+\doxysubsubsection{\texorpdfstring{p\_TVirtualFitter}{p\_TVirtualFitter}}
+{\footnotesize\ttfamily \label{class_cluster_fitter___diagonal_a816470da3d309c76db087f7cd8e10aa3} 
+TVirtual\+Fitter\texorpdfstring{$\ast$}{*} Cluster\+Fitter\+\_\+\+Diagonal\+::p\+\_\+\+TVirtual\+Fitter\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Fitter. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Fitters/inc/\mbox{\hyperlink{_cluster_fitter_8h}{Cluster\+Fitter.\+h}}\item 
+Fitters/src/\mbox{\hyperlink{_cluster_fitter_8cxx}{Cluster\+Fitter.\+cxx}}\end{DoxyCompactItemize}

@@ -1,11 +1,17 @@
 #/**
- * @file LUTs.h
- * @brief Lookup table utilities used by reconstruction algorithms.
- *
- * Declares data structures and helpers for building and accessing LUTs
- * (geometry, calibration, etc.) used by dE/dx and track/cluster
- * reconstruction.
- */
+# * @file LUTs.h
+# * @brief Lookup table utilities used by reconstruction algorithms.
+# *
+# * Declares data structures and helpers for building and accessing LUTs
+# * (geometry, calibration, etc.) used by dE/dx and track/cluster
+# * reconstruction.
+# *
+# * @details
+# * The implementation file LUTs.cxx constructs ERAM maps, fills lookup tables
+# * and exposes accessors used across the reconstruction pipeline. The source
+# * also contains helpers to fill and repair maps (FillHoles), and code to
+# * compute mean gains/RC values used in calibration steps.
+# */
 #ifndef LUT_H
 #define LUT_H
 

@@ -1,0 +1,251 @@
+\doxysection{Module Class Reference}
+\hypertarget{class_module}{}\label{class_module}\index{Module@{Module}}
+
+
+{\ttfamily \#include $<$Module.\+h$>$}
+
+Inheritance diagram for Module\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{dd/df9/class_module}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_module_aad3fabbf0851cc1431bb3c945dc65543}{Module}} (const int \&Event\+Nber, const int \&Entry\+Nber, const int \&Module\+Nber, \mbox{\hyperlink{class_model___read_out_geometry}{Model\+\_\+\+Read\+Out\+Geometry}} \texorpdfstring{$\ast$}{*}p\+Model\+\_\+\+Read\+Out\+Geometry, \mbox{\hyperlink{class_model___electronics}{Model\+\_\+\+Electronics}} \texorpdfstring{$\ast$}{*}p\+Model\+\_\+\+Electronics, \mbox{\hyperlink{class_model___charge_i}{Model\+\_\+\+ChargeI}} \texorpdfstring{$\ast$}{*}p\+Model\+\_\+\+ChargeI)
+\item 
+virtual \mbox{\hyperlink{class_module_a7c9d9c096786d127590fdd8aa2b7d681}{\texorpdfstring{$\sim$}{\string~}\+Module}} ()
+\item 
+int \mbox{\hyperlink{class_module_a733e142dba6e0812d9a16707c962a9f3}{Get\+\_\+\+Event\+Nber}} () const
+\item 
+int \mbox{\hyperlink{class_module_a7ba57cebed6e38131d2c700dc1c3c0d8}{Get\+\_\+\+Entry\+Nber}} () const
+\item 
+int \mbox{\hyperlink{class_module_a78bd1dfc7e8c839b84dcbffe0db09d92}{Get\+\_\+\+Module\+Nber}} () const
+\item 
+void \mbox{\hyperlink{class_module_a145d5b2a547c5caf5e17f1e28dcf5ea0}{Small\+Dump}} () const
+\item 
+void \mbox{\hyperlink{class_module_a2df1453609389b6ccfdc58bc0d54c48a}{Write\+Out}} () const
+\item 
+int \mbox{\hyperlink{class_module_aaae0c1b37704206782134a487912554c}{Is\+Valid}} () const
+\item 
+void \mbox{\hyperlink{class_module_a056be6fad1b886cd014b420640aaaf5e}{Validate}} ()
+\item 
+void \mbox{\hyperlink{class_module_afe45815effec52ec7c10631396ea591f}{Invalidate}} ()
+\item 
+virtual void \mbox{\hyperlink{class_module_a02ec7ec93722c96ebef6921bc1553880}{Add\+\_\+\+Pad}} (\mbox{\hyperlink{class_pad}{Pad}} \texorpdfstring{$\ast$}{*}p\+Pad)
+\item 
+void \mbox{\hyperlink{class_module_aa5d6dc7649368312ab047d32808b5007}{Clear\+\_\+\+Clusters}} ()
+\item 
+void \mbox{\hyperlink{class_module_abfa7ecc5786630ba628a019a3a54736c}{Add\+\_\+\+Cluster}} (\mbox{\hyperlink{class_cluster}{Cluster}} \texorpdfstring{$\ast$}{*}p\+Cluster)
+\item 
+std\+::vector$<$ \mbox{\hyperlink{class_cluster}{Cluster}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_module_ad49a4a44a5de5472c7bcc45f114674be}{Give\+Me\+\_\+\+Clusters\+\_\+\+For\+This\+Module}} ()
+\item 
+int \mbox{\hyperlink{class_module_a47bbf0457c8a7895c3973640976e84bb}{Get\+\_\+\+Nber\+Of\+Cluster}} () const
+\item 
+\mbox{\hyperlink{class_cluster}{Cluster}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_module_ac41f5c11e23e66ef967b590e4675ec37}{Get\+\_\+\+Cluster}} (const int \&Index1D)
+\item 
+void \mbox{\hyperlink{class_module_a4a1d037f0679ae67d218659326589bda}{Replace\+Clusters}} (std\+::vector$<$ \mbox{\hyperlink{class_cluster}{Cluster}} \texorpdfstring{$\ast$}{*} $>$ \&V\+\_\+\+Cluster)
+\item 
+\mbox{\hyperlink{class_cluster}{Cluster}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_module_a1cce94e6b7d3fcd1410de6535a47a7a9}{Get\+\_\+\+Cluster\+\_\+\+Copy}} (\mbox{\hyperlink{class_cluster}{Cluster}} \texorpdfstring{$\ast$}{*}p\+Cluster)
+\item 
+const \mbox{\hyperlink{class_track}{Track}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_module_ad02173b48a10595542d5af61bdb595c6}{Give\+Me\+\_\+\+Module\+Track}} ()
+\item 
+void \mbox{\hyperlink{class_module_ad15311ef70eca0fc49301041af81f8ea}{Set\+\_\+\+Module\+Track}} (\mbox{\hyperlink{class_track}{Track}} \texorpdfstring{$\ast$}{*}p\+Track)
+\item 
+\mbox{\hyperlink{class_track}{Track}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_module_ab04375d8131eada52d1dd5f6ffac21eb}{Give\+Me\+\_\+\+An\+Unfitted\+Track}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_r_o_board}{ROBoard}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_r_o_board_a4038f0efaae81a40a44c73ae53151a0c}{ROBoard}} (\mbox{\hyperlink{class_model___read_out_geometry}{Model\+\_\+\+Read\+Out\+Geometry}} \texorpdfstring{$\ast$}{*}p\+Model\+\_\+\+Read\+Out\+Geometry, \mbox{\hyperlink{class_model___electronics}{Model\+\_\+\+Electronics}} \texorpdfstring{$\ast$}{*}p\+Model\+\_\+\+Electronics, \mbox{\hyperlink{class_model___charge_i}{Model\+\_\+\+ChargeI}} \texorpdfstring{$\ast$}{*}p\+Model\+\_\+\+ChargeI)
+\item 
+virtual \mbox{\hyperlink{class_r_o_board_a2a75941873b4de222750e1680996e5d2}{\texorpdfstring{$\sim$}{\string~}\+ROBoard}} ()
+\item 
+const \mbox{\hyperlink{class_model___read_out_geometry}{Model\+\_\+\+Read\+Out\+Geometry}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_r_o_board_af4dfe76397f6b4da168e296c063712c5}{Get\+\_\+\+Model\+\_\+\+Read\+Out\+Geometry}} ()
+\item 
+const \mbox{\hyperlink{class_model___electronics}{Model\+\_\+\+Electronics}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_r_o_board_ac70b3b08f7b3018f489d7410e01d7ddc}{Get\+\_\+\+Model\+\_\+\+Electronics}} ()
+\item 
+const \mbox{\hyperlink{class_model___charge_i}{Model\+\_\+\+ChargeI}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_r_o_board_a4c79a276420d86f392cf35d8cde359e6}{Get\+\_\+\+Model\+\_\+\+ChargeI}} ()
+\item 
+int \mbox{\hyperlink{class_r_o_board_a9c947de179e82b226b058e3f2ce39ef0}{Get\+\_\+\+Nber\+Of\+Pads}} () const
+\item 
+\mbox{\hyperlink{class_pad}{Pad}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_r_o_board_a0289df3558a579e299413ed628d18bac}{Get\+\_\+\+Pad}} (const int \&Index1D)
+\item 
+int \mbox{\hyperlink{class_r_o_board_a94c40c94ac6a10067e01934685599fb1}{Get\+\_\+\+Is\+This\+Pad\+Existing}} (const int \&iX, const int \&iY) const
+\item 
+\mbox{\hyperlink{class_pad}{Pad}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_r_o_board_a998353d12371930ea6bd61926e84aa52}{Get\+\_\+\+Pad}} (const int \&iX, const int \&iY)
+\item 
+\mbox{\hyperlink{class_pad}{Pad}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_r_o_board_a497a171a93a6c76726f9528a2adfc3d9}{Get\+\_\+\+Pad}} (\mbox{\hyperlink{class_pad}{Pad}} \texorpdfstring{$\ast$}{*}p\+Pad)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{class_r_o_board}{ROBoard}}}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{class_r_o_board_a378b1162655244151750f8448a91993c}{Get\+Linear\+Index}} (const int \&iX, const int \&iY) const
+\item 
+void \mbox{\hyperlink{class_r_o_board_af012c4e885c92b123ff6ecf543ee09f8}{Ini\+\_\+\+Models}} (\mbox{\hyperlink{class_model___read_out_geometry}{Model\+\_\+\+Read\+Out\+Geometry}} \texorpdfstring{$\ast$}{*}p\+Model\+\_\+\+Read\+Out\+Geometry, \mbox{\hyperlink{class_model___electronics}{Model\+\_\+\+Electronics}} \texorpdfstring{$\ast$}{*}p\+Model\+\_\+\+Electronics, \mbox{\hyperlink{class_model___charge_i}{Model\+\_\+\+ChargeI}} \texorpdfstring{$\ast$}{*}p\+Model\+\_\+\+ChargeI)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_r_o_board}{ROBoard}}}
+\begin{DoxyCompactItemize}
+\item 
+short int \mbox{\hyperlink{class_r_o_board_ac92b16da883cb91f819b257c986aef07}{m\+\_\+\+Nx}}
+\item 
+short int \mbox{\hyperlink{class_r_o_board_a8a15430d177014fda6142c2d2ca91c9e}{m\+\_\+\+Ny}}
+\item 
+std\+::vector$<$ int $>$ \mbox{\hyperlink{class_r_o_board_a60dd197aa2e47f0720d40a07925cb00e}{V\+\_\+\+Exis\+Flag2D}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{class_pad}{Pad}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_r_o_board_a7845bafeceeb873bdac7056ca4fe8706}{V\+\_\+\+Pad}}
+\item 
+\mbox{\hyperlink{class_model___read_out_geometry}{Model\+\_\+\+Read\+Out\+Geometry}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_r_o_board_a8f4bc41090c2983b46e5d4d783db6e42}{p\+\_\+\+Model\+\_\+\+Read\+Out\+Geometry}}
+\item 
+\mbox{\hyperlink{class_model___electronics}{Model\+\_\+\+Electronics}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_r_o_board_addec0074851261ae2f5c878ad5e03912}{p\+\_\+\+Model\+\_\+\+Electronics}}
+\item 
+\mbox{\hyperlink{class_model___charge_i}{Model\+\_\+\+ChargeI}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_r_o_board_a3fb3be0e97ca357960fef270a0a176d5}{p\+\_\+\+Model\+\_\+\+ChargeI}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{class_module_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_module_aad3fabbf0851cc1431bb3c945dc65543}\index{Module@{Module}!Module@{Module}}
+\index{Module@{Module}!Module@{Module}}
+\doxysubsubsection{\texorpdfstring{Module()}{Module()}}
+{\footnotesize\ttfamily \label{class_module_aad3fabbf0851cc1431bb3c945dc65543} 
+Module\+::\+Module (\begin{DoxyParamCaption}\item[{const int \&}]{Event\+Nber}{, }\item[{const int \&}]{Entry\+Nber}{, }\item[{const int \&}]{Module\+Nber}{, }\item[{\mbox{\hyperlink{class_model___read_out_geometry}{Model\+\_\+\+Read\+Out\+Geometry}} \texorpdfstring{$\ast$}{*}}]{p\+Model\+\_\+\+Read\+Out\+Geometry}{, }\item[{\mbox{\hyperlink{class_model___electronics}{Model\+\_\+\+Electronics}} \texorpdfstring{$\ast$}{*}}]{p\+Model\+\_\+\+Electronics}{, }\item[{\mbox{\hyperlink{class_model___charge_i}{Model\+\_\+\+ChargeI}} \texorpdfstring{$\ast$}{*}}]{p\+Model\+\_\+\+ChargeI}{}\end{DoxyParamCaption})}
+
+Constructor \Hypertarget{class_module_a7c9d9c096786d127590fdd8aa2b7d681}\index{Module@{Module}!````~Module@{\texorpdfstring{$\sim$}{\string~}Module}}
+\index{````~Module@{\texorpdfstring{$\sim$}{\string~}Module}!Module@{Module}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Module()}{\string~Module()}}
+{\footnotesize\ttfamily \label{class_module_a7c9d9c096786d127590fdd8aa2b7d681} 
+Module\+::\texorpdfstring{$\sim$}{\string~}\+Module (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_module_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_module_abfa7ecc5786630ba628a019a3a54736c}\index{Module@{Module}!Add\_Cluster@{Add\_Cluster}}
+\index{Add\_Cluster@{Add\_Cluster}!Module@{Module}}
+\doxysubsubsection{\texorpdfstring{Add\_Cluster()}{Add\_Cluster()}}
+{\footnotesize\ttfamily \label{class_module_abfa7ecc5786630ba628a019a3a54736c} 
+void Module\+::\+Add\+\_\+\+Cluster (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_cluster}{Cluster}} \texorpdfstring{$\ast$}{*}}]{p\+Cluster}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_module_a02ec7ec93722c96ebef6921bc1553880}\index{Module@{Module}!Add\_Pad@{Add\_Pad}}
+\index{Add\_Pad@{Add\_Pad}!Module@{Module}}
+\doxysubsubsection{\texorpdfstring{Add\_Pad()}{Add\_Pad()}}
+{\footnotesize\ttfamily \label{class_module_a02ec7ec93722c96ebef6921bc1553880} 
+void Module\+::\+Add\+\_\+\+Pad (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_pad}{Pad}} \texorpdfstring{$\ast$}{*}}]{p\+Pad}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_r_o_board_a161b281667b8f9ae8e098b6734351825}{ROBoard}}.
+
+\Hypertarget{class_module_aa5d6dc7649368312ab047d32808b5007}\index{Module@{Module}!Clear\_Clusters@{Clear\_Clusters}}
+\index{Clear\_Clusters@{Clear\_Clusters}!Module@{Module}}
+\doxysubsubsection{\texorpdfstring{Clear\_Clusters()}{Clear\_Clusters()}}
+{\footnotesize\ttfamily \label{class_module_aa5d6dc7649368312ab047d32808b5007} 
+void Module\+::\+Clear\+\_\+\+Clusters (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_module_ac41f5c11e23e66ef967b590e4675ec37}\index{Module@{Module}!Get\_Cluster@{Get\_Cluster}}
+\index{Get\_Cluster@{Get\_Cluster}!Module@{Module}}
+\doxysubsubsection{\texorpdfstring{Get\_Cluster()}{Get\_Cluster()}}
+{\footnotesize\ttfamily \label{class_module_ac41f5c11e23e66ef967b590e4675ec37} 
+\mbox{\hyperlink{class_cluster}{Cluster}} \texorpdfstring{$\ast$}{*} Module\+::\+Get\+\_\+\+Cluster (\begin{DoxyParamCaption}\item[{const int \&}]{Index1D}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_module_a1cce94e6b7d3fcd1410de6535a47a7a9}\index{Module@{Module}!Get\_Cluster\_Copy@{Get\_Cluster\_Copy}}
+\index{Get\_Cluster\_Copy@{Get\_Cluster\_Copy}!Module@{Module}}
+\doxysubsubsection{\texorpdfstring{Get\_Cluster\_Copy()}{Get\_Cluster\_Copy()}}
+{\footnotesize\ttfamily \label{class_module_a1cce94e6b7d3fcd1410de6535a47a7a9} 
+\mbox{\hyperlink{class_cluster}{Cluster}} \texorpdfstring{$\ast$}{*} Module\+::\+Get\+\_\+\+Cluster\+\_\+\+Copy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_cluster}{Cluster}} \texorpdfstring{$\ast$}{*}}]{p\+Cluster}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_module_a7ba57cebed6e38131d2c700dc1c3c0d8}\index{Module@{Module}!Get\_EntryNber@{Get\_EntryNber}}
+\index{Get\_EntryNber@{Get\_EntryNber}!Module@{Module}}
+\doxysubsubsection{\texorpdfstring{Get\_EntryNber()}{Get\_EntryNber()}}
+{\footnotesize\ttfamily \label{class_module_a7ba57cebed6e38131d2c700dc1c3c0d8} 
+int Module\+::\+Get\+\_\+\+Entry\+Nber (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_module_a733e142dba6e0812d9a16707c962a9f3}\index{Module@{Module}!Get\_EventNber@{Get\_EventNber}}
+\index{Get\_EventNber@{Get\_EventNber}!Module@{Module}}
+\doxysubsubsection{\texorpdfstring{Get\_EventNber()}{Get\_EventNber()}}
+{\footnotesize\ttfamily \label{class_module_a733e142dba6e0812d9a16707c962a9f3} 
+int Module\+::\+Get\+\_\+\+Event\+Nber (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_module_a78bd1dfc7e8c839b84dcbffe0db09d92}\index{Module@{Module}!Get\_ModuleNber@{Get\_ModuleNber}}
+\index{Get\_ModuleNber@{Get\_ModuleNber}!Module@{Module}}
+\doxysubsubsection{\texorpdfstring{Get\_ModuleNber()}{Get\_ModuleNber()}}
+{\footnotesize\ttfamily \label{class_module_a78bd1dfc7e8c839b84dcbffe0db09d92} 
+int Module\+::\+Get\+\_\+\+Module\+Nber (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_module_a47bbf0457c8a7895c3973640976e84bb}\index{Module@{Module}!Get\_NberOfCluster@{Get\_NberOfCluster}}
+\index{Get\_NberOfCluster@{Get\_NberOfCluster}!Module@{Module}}
+\doxysubsubsection{\texorpdfstring{Get\_NberOfCluster()}{Get\_NberOfCluster()}}
+{\footnotesize\ttfamily \label{class_module_a47bbf0457c8a7895c3973640976e84bb} 
+int Module\+::\+Get\+\_\+\+Nber\+Of\+Cluster (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_module_ab04375d8131eada52d1dd5f6ffac21eb}\index{Module@{Module}!GiveMe\_AnUnfittedTrack@{GiveMe\_AnUnfittedTrack}}
+\index{GiveMe\_AnUnfittedTrack@{GiveMe\_AnUnfittedTrack}!Module@{Module}}
+\doxysubsubsection{\texorpdfstring{GiveMe\_AnUnfittedTrack()}{GiveMe\_AnUnfittedTrack()}}
+{\footnotesize\ttfamily \label{class_module_ab04375d8131eada52d1dd5f6ffac21eb} 
+\mbox{\hyperlink{class_track}{Track}} \texorpdfstring{$\ast$}{*} Module\+::\+Give\+Me\+\_\+\+An\+Unfitted\+Track (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_module_ad49a4a44a5de5472c7bcc45f114674be}\index{Module@{Module}!GiveMe\_Clusters\_ForThisModule@{GiveMe\_Clusters\_ForThisModule}}
+\index{GiveMe\_Clusters\_ForThisModule@{GiveMe\_Clusters\_ForThisModule}!Module@{Module}}
+\doxysubsubsection{\texorpdfstring{GiveMe\_Clusters\_ForThisModule()}{GiveMe\_Clusters\_ForThisModule()}}
+{\footnotesize\ttfamily \label{class_module_ad49a4a44a5de5472c7bcc45f114674be} 
+std\+::vector$<$ \mbox{\hyperlink{class_cluster}{Cluster}} \texorpdfstring{$\ast$}{*} $>$ Module\+::\+Give\+Me\+\_\+\+Clusters\+\_\+\+For\+This\+Module (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_module_ad02173b48a10595542d5af61bdb595c6}\index{Module@{Module}!GiveMe\_ModuleTrack@{GiveMe\_ModuleTrack}}
+\index{GiveMe\_ModuleTrack@{GiveMe\_ModuleTrack}!Module@{Module}}
+\doxysubsubsection{\texorpdfstring{GiveMe\_ModuleTrack()}{GiveMe\_ModuleTrack()}}
+{\footnotesize\ttfamily \label{class_module_ad02173b48a10595542d5af61bdb595c6} 
+const \mbox{\hyperlink{class_track}{Track}} \texorpdfstring{$\ast$}{*} Module\+::\+Give\+Me\+\_\+\+Module\+Track (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_module_afe45815effec52ec7c10631396ea591f}\index{Module@{Module}!Invalidate@{Invalidate}}
+\index{Invalidate@{Invalidate}!Module@{Module}}
+\doxysubsubsection{\texorpdfstring{Invalidate()}{Invalidate()}}
+{\footnotesize\ttfamily \label{class_module_afe45815effec52ec7c10631396ea591f} 
+void Module\+::\+Invalidate (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_module_aaae0c1b37704206782134a487912554c}\index{Module@{Module}!IsValid@{IsValid}}
+\index{IsValid@{IsValid}!Module@{Module}}
+\doxysubsubsection{\texorpdfstring{IsValid()}{IsValid()}}
+{\footnotesize\ttfamily \label{class_module_aaae0c1b37704206782134a487912554c} 
+int Module\+::\+Is\+Valid (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_module_a4a1d037f0679ae67d218659326589bda}\index{Module@{Module}!ReplaceClusters@{ReplaceClusters}}
+\index{ReplaceClusters@{ReplaceClusters}!Module@{Module}}
+\doxysubsubsection{\texorpdfstring{ReplaceClusters()}{ReplaceClusters()}}
+{\footnotesize\ttfamily \label{class_module_a4a1d037f0679ae67d218659326589bda} 
+void Module\+::\+Replace\+Clusters (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{class_cluster}{Cluster}} \texorpdfstring{$\ast$}{*} $>$ \&}]{V\+\_\+\+Cluster}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_module_ad15311ef70eca0fc49301041af81f8ea}\index{Module@{Module}!Set\_ModuleTrack@{Set\_ModuleTrack}}
+\index{Set\_ModuleTrack@{Set\_ModuleTrack}!Module@{Module}}
+\doxysubsubsection{\texorpdfstring{Set\_ModuleTrack()}{Set\_ModuleTrack()}}
+{\footnotesize\ttfamily \label{class_module_ad15311ef70eca0fc49301041af81f8ea} 
+void Module\+::\+Set\+\_\+\+Module\+Track (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_track}{Track}} \texorpdfstring{$\ast$}{*}}]{p\+Track}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_module_a145d5b2a547c5caf5e17f1e28dcf5ea0}\index{Module@{Module}!SmallDump@{SmallDump}}
+\index{SmallDump@{SmallDump}!Module@{Module}}
+\doxysubsubsection{\texorpdfstring{SmallDump()}{SmallDump()}}
+{\footnotesize\ttfamily \label{class_module_a145d5b2a547c5caf5e17f1e28dcf5ea0} 
+void Module\+::\+Small\+Dump (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_module_a056be6fad1b886cd014b420640aaaf5e}\index{Module@{Module}!Validate@{Validate}}
+\index{Validate@{Validate}!Module@{Module}}
+\doxysubsubsection{\texorpdfstring{Validate()}{Validate()}}
+{\footnotesize\ttfamily \label{class_module_a056be6fad1b886cd014b420640aaaf5e} 
+void Module\+::\+Validate (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_module_a2df1453609389b6ccfdc58bc0d54c48a}\index{Module@{Module}!WriteOut@{WriteOut}}
+\index{WriteOut@{WriteOut}!Module@{Module}}
+\doxysubsubsection{\texorpdfstring{WriteOut()}{WriteOut()}}
+{\footnotesize\ttfamily \label{class_module_a2df1453609389b6ccfdc58bc0d54c48a} 
+void Module\+::\+Write\+Out (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Model\+Event/inc/\mbox{\hyperlink{_module_8h}{Module.\+h}}\item 
+Model\+Event/src/\mbox{\hyperlink{_module_8cxx}{Module.\+cxx}}\end{DoxyCompactItemize}

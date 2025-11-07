@@ -1,0 +1,39 @@
+\doxysection{Parabola\+Function\+NG.\+h}
+\hypertarget{_parabola_function_n_g_8h_source}{}\label{_parabola_function_n_g_8h_source}\index{Utilities/inc/ParabolaFunctionNG.h@{Utilities/inc/ParabolaFunctionNG.h}}
+\mbox{\hyperlink{_parabola_function_n_g_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#ifndef\ ParabolaFunctionNG\_H}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#define\ ParabolaFunctionNG\_H}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_misc_8h}{Misc.h}}"{}}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{comment}{//}}
+\DoxyCodeLine{00015\ \textcolor{comment}{//\ Fit\ parabola\ -\/std::fabs(A0)\ *\ std::pow(X0-\/vX,2)+\ Y0\ );}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00018\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_parabola_function_n_g_af2f90fe4642a35b4dce9312e9a055f3f}{ParabolaFunctionNG}}\ \{}
+\DoxyCodeLine{00019\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00021\ \ \ \mbox{\hyperlink{class_parabola_function_n_g_af2f90fe4642a35b4dce9312e9a055f3f}{ParabolaFunctionNG}}();}
+\DoxyCodeLine{00022\ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_parabola_function_n_g_a670582fe17f84e697037bac9c4c0b57a}{\string~ParabolaFunctionNG}}();}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_parabola_function_n_g_af5135538239be2aa402e2586688dcdd5}{Get\_A0P}}();}
+\DoxyCodeLine{00025\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_parabola_function_n_g_a8a9a9bad9db748426b3faf630da12225}{Get\_A0M}}();}
+\DoxyCodeLine{00026\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_parabola_function_n_g_a601a2889e34db47e990dc85dd803b2fa}{Get\_X0}}();}
+\DoxyCodeLine{00027\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_parabola_function_n_g_abdd9667f3b1f243bbee7118d148ba442}{Get\_Y0}}();}
+\DoxyCodeLine{00028\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_parabola_function_n_g_a03f82beb64dc2dd5369ba5dbdb87a908}{Set\_A0P}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&A0P);}
+\DoxyCodeLine{00029\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_parabola_function_n_g_a760fe5689b168fabcf73dbe6c367d94a}{Set\_A0M}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&A0M);}
+\DoxyCodeLine{00030\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_parabola_function_n_g_adcd7f8fddcbe7dd4b2275dfddb081652}{Set\_X0}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&X0);}
+\DoxyCodeLine{00031\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_parabola_function_n_g_afad0be5082c36830b287d179239e401a}{Set\_Y0}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&Y0);}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_parabola_function_n_g_aaaa95ea136d28a5919d98e741019320f}{operator()}}(\textcolor{keywordtype}{double}\ *x,\ \textcolor{keywordtype}{double}\ *par);}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00036\ \ \ \textcolor{keywordtype}{double}\ m\_A0P;}
+\DoxyCodeLine{00037\ \ \ \textcolor{keywordtype}{double}\ m\_A0M;}
+\DoxyCodeLine{00038\ \ \ \textcolor{keywordtype}{double}\ m\_X0;}
+\DoxyCodeLine{00039\ \ \ \textcolor{keywordtype}{double}\ m\_Y0;}
+\DoxyCodeLine{00040\ \};}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

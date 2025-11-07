@@ -1,0 +1,273 @@
+\doxysection{Event Class Reference}
+\hypertarget{class_event}{}\label{class_event}\index{Event@{Event}}
+
+
+{\ttfamily \#include $<$Event.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_event_a20ddfd720f45ad323719279c5d41de2b}{Event}} (const int \&Event\+Nber, const int \&Entry\+Nber, \mbox{\hyperlink{class_model___read_out_geometry}{Model\+\_\+\+Read\+Out\+Geometry}} \texorpdfstring{$\ast$}{*}p\+Model\+\_\+\+Read\+Out\+Geometry, \mbox{\hyperlink{class_model___electronics}{Model\+\_\+\+Electronics}} \texorpdfstring{$\ast$}{*}p\+Model\+\_\+\+Electronics, \mbox{\hyperlink{class_model___charge_i}{Model\+\_\+\+ChargeI}} \texorpdfstring{$\ast$}{*}p\+Model\+\_\+\+ChargeI)
+\item 
+virtual \mbox{\hyperlink{class_event_a7704ec01ce91e673885792054214b3d2}{\texorpdfstring{$\sim$}{\string~}\+Event}} ()
+\item 
+int \mbox{\hyperlink{class_event_a86e59eedde4b03b5803f40f1aa82f229}{Get\+\_\+\+Event\+Nber}} () const
+\item 
+int \mbox{\hyperlink{class_event_a0ef4abb6ae84ce10778869680625869d}{Get\+\_\+\+Entry\+Nber}} () const
+\item 
+void \mbox{\hyperlink{class_event_af4cad1a5dc6a6e06087e82e6c801eef4}{Small\+Dump}} () const
+\item 
+void \mbox{\hyperlink{class_event_a8e3cce9cf1cfbb0b94db86355adf7e93}{Write\+Out}} () const
+\item 
+const \mbox{\hyperlink{class_model___read_out_geometry}{Model\+\_\+\+Read\+Out\+Geometry}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_event_a87845494a29d2a55bec8bb2c1fabf96b}{Get\+\_\+\+Model\+\_\+\+Read\+Out\+Geometry}} ()
+\item 
+const \mbox{\hyperlink{class_model___electronics}{Model\+\_\+\+Electronics}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_event_a355ba3c5ae6ce73c2c6b99445e1f400b}{Get\+\_\+\+Model\+\_\+\+Electronics}} ()
+\item 
+const \mbox{\hyperlink{class_model___charge_i}{Model\+\_\+\+ChargeI}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_event_a6c6a4c4e7a453736755eafdcb60c55cd}{Get\+\_\+\+Model\+\_\+\+ChargeI}} ()
+\item 
+int \mbox{\hyperlink{class_event_a930dc407fc89247b491a2a066dc2374e}{Is\+Valid}} () const
+\item 
+void \mbox{\hyperlink{class_event_afac07e9a54e740990ccbfd950e503f80}{Validate}} ()
+\item 
+void \mbox{\hyperlink{class_event_af08f42b14a47693b66c539eeda2b7c1f}{Invalidate}} ()
+\item 
+void \mbox{\hyperlink{class_event_aca08c7971e85c4fcb9cefd4579c2adde}{Clear\+\_\+\+Modules}} ()
+\item 
+void \mbox{\hyperlink{class_event_ad0b1ac96ec7199542c1b0b0d4b6c2f0d}{Add\+\_\+\+Module}} (\mbox{\hyperlink{class_module}{Module}} \texorpdfstring{$\ast$}{*}p\+Module)
+\item 
+\mbox{\hyperlink{class_module}{Module}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_event_a2d0a6d149023d738f30e106c48ec04f8}{Get\+\_\+\+This\+Module}} (const int \&Module\+Nber)
+\item 
+const \mbox{\hyperlink{class_module}{Module}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_event_a23b0a728548d60a630ab3072ee7e088f}{Get\+\_\+\+This\+Module\+Const}} (const int \&Module\+Nber) const
+\item 
+int \mbox{\hyperlink{class_event_a4d976d0083330f5e715e25c0448a6319}{Get\+\_\+\+Nber\+Of\+Module}} () const
+\item 
+\mbox{\hyperlink{class_module}{Module}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_event_a9e012067b0f7a58510f78b75fdff8809}{Get\+\_\+\+Module\+\_\+\+In\+Array}} (const int \&Index1D)
+\item 
+int \mbox{\hyperlink{class_event_ae738d44d2b40356803911a598a13f3c9}{Validity\+\_\+\+For\+This\+Module}} (const int \&Module\+Nber) const
+\item 
+void \mbox{\hyperlink{class_event_ac2082499bf5b4baecac423eab724fd57}{Validate\+\_\+\+This\+Module}} (const int \&Module\+Nber)
+\item 
+void \mbox{\hyperlink{class_event_a5097654e974cd671439d144f26eb1cfd}{Invalidate\+\_\+\+This\+Module}} (const int \&Module\+Nber)
+\item 
+std\+::vector$<$ \mbox{\hyperlink{class_cluster}{Cluster}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_event_a196c29b094d8cea9834f642eaae32c0e}{Give\+Me\+\_\+\+Clusters\+\_\+\+For\+This\+Module}} (const int \&Module\+Nber)
+\item 
+double \mbox{\hyperlink{class_event_ae9ebedb1c13b69947d4399d4f769f748}{Give\+Me\+\_\+\+Cut\+Slope\+XY\+\_\+\+For\+This\+Module}} (const int \&Module\+Nber)
+\item 
+double \mbox{\hyperlink{class_event_a3437ed7e8fac8aeb59bf758d55bed941}{Give\+Me\+\_\+\+Cut\+Slope\+XZ\+\_\+\+For\+This\+Module}} (const int \&Module\+Nber)
+\item 
+double \mbox{\hyperlink{class_event_a604a632bfd47fa2b9dc57ffe39dc000e}{Give\+Me\+\_\+\+Cut\+Inter\+Cept\+XZ\+\_\+\+For\+This\+Module}} (const int \&Module\+Nber)
+\item 
+std\+::vector$<$ double $>$ \mbox{\hyperlink{class_event_af960039afde24314d6bc1b0be1729722}{Give\+Me\+\_\+\+Cut\+Slope\+XYZ\+\_\+\+For\+This\+Module}} (const int \&Module\+Nber)
+\item 
+void \mbox{\hyperlink{class_event_a45e575cf0cef2e7384d22c714117306b}{Replace\+\_\+\+Clusters\+\_\+\+For\+This\+Module}} (std\+::vector$<$ \mbox{\hyperlink{class_cluster}{Cluster}} \texorpdfstring{$\ast$}{*} $>$ \&VCluster, const int \&Module\+Nber)
+\item 
+\mbox{\hyperlink{class_cluster}{Cluster}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_event_a5851ff8f80b1eac055d7b231aa892b32}{Get\+\_\+\+Cluster\+\_\+\+Copy}} (\mbox{\hyperlink{class_cluster}{Cluster}} \texorpdfstring{$\ast$}{*}p\+Cluster)
+\item 
+\mbox{\hyperlink{class_track}{Track}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_event_a62c25da16486c084be2feca710419dda}{Give\+Me\+\_\+\+An\+Unfitted\+Track\+\_\+\+For\+This\+Module}} (const int \&Module\+Nber)
+\item 
+void \mbox{\hyperlink{class_event_a8bd4ea618570a9fc3b8a71eca08c37cd}{Set\+\_\+\+Track\+\_\+\+For\+This\+Module}} (\mbox{\hyperlink{class_track}{Track}} \texorpdfstring{$\ast$}{*}p\+Track, const int \&Module\+Nber)
+\item 
+const \mbox{\hyperlink{class_track}{Track}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_event_a2918ca3295248b26113deb6b3f57a075}{Give\+Me\+\_\+\+Track\+\_\+\+For\+This\+Module}} (const int \&Module\+Nber)
+\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{class_event_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_event_a20ddfd720f45ad323719279c5d41de2b}\index{Event@{Event}!Event@{Event}}
+\index{Event@{Event}!Event@{Event}}
+\doxysubsubsection{\texorpdfstring{Event()}{Event()}}
+{\footnotesize\ttfamily \label{class_event_a20ddfd720f45ad323719279c5d41de2b} 
+Event\+::\+Event (\begin{DoxyParamCaption}\item[{const int \&}]{Event\+Nber}{, }\item[{const int \&}]{Entry\+Nber}{, }\item[{\mbox{\hyperlink{class_model___read_out_geometry}{Model\+\_\+\+Read\+Out\+Geometry}} \texorpdfstring{$\ast$}{*}}]{p\+Model\+\_\+\+Read\+Out\+Geometry}{, }\item[{\mbox{\hyperlink{class_model___electronics}{Model\+\_\+\+Electronics}} \texorpdfstring{$\ast$}{*}}]{p\+Model\+\_\+\+Electronics}{, }\item[{\mbox{\hyperlink{class_model___charge_i}{Model\+\_\+\+ChargeI}} \texorpdfstring{$\ast$}{*}}]{p\+Model\+\_\+\+ChargeI}{}\end{DoxyParamCaption})}
+
+Constructor \Hypertarget{class_event_a7704ec01ce91e673885792054214b3d2}\index{Event@{Event}!````~Event@{\texorpdfstring{$\sim$}{\string~}Event}}
+\index{````~Event@{\texorpdfstring{$\sim$}{\string~}Event}!Event@{Event}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Event()}{\string~Event()}}
+{\footnotesize\ttfamily \label{class_event_a7704ec01ce91e673885792054214b3d2} 
+Event\+::\texorpdfstring{$\sim$}{\string~}\+Event (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_event_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_event_ad0b1ac96ec7199542c1b0b0d4b6c2f0d}\index{Event@{Event}!Add\_Module@{Add\_Module}}
+\index{Add\_Module@{Add\_Module}!Event@{Event}}
+\doxysubsubsection{\texorpdfstring{Add\_Module()}{Add\_Module()}}
+{\footnotesize\ttfamily \label{class_event_ad0b1ac96ec7199542c1b0b0d4b6c2f0d} 
+void Event\+::\+Add\+\_\+\+Module (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_module}{Module}} \texorpdfstring{$\ast$}{*}}]{p\+Module}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_event_aca08c7971e85c4fcb9cefd4579c2adde}\index{Event@{Event}!Clear\_Modules@{Clear\_Modules}}
+\index{Clear\_Modules@{Clear\_Modules}!Event@{Event}}
+\doxysubsubsection{\texorpdfstring{Clear\_Modules()}{Clear\_Modules()}}
+{\footnotesize\ttfamily \label{class_event_aca08c7971e85c4fcb9cefd4579c2adde} 
+void Event\+::\+Clear\+\_\+\+Modules (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_event_a5851ff8f80b1eac055d7b231aa892b32}\index{Event@{Event}!Get\_Cluster\_Copy@{Get\_Cluster\_Copy}}
+\index{Get\_Cluster\_Copy@{Get\_Cluster\_Copy}!Event@{Event}}
+\doxysubsubsection{\texorpdfstring{Get\_Cluster\_Copy()}{Get\_Cluster\_Copy()}}
+{\footnotesize\ttfamily \label{class_event_a5851ff8f80b1eac055d7b231aa892b32} 
+\mbox{\hyperlink{class_cluster}{Cluster}} \texorpdfstring{$\ast$}{*} Event\+::\+Get\+\_\+\+Cluster\+\_\+\+Copy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_cluster}{Cluster}} \texorpdfstring{$\ast$}{*}}]{p\+Cluster}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_event_a0ef4abb6ae84ce10778869680625869d}\index{Event@{Event}!Get\_EntryNber@{Get\_EntryNber}}
+\index{Get\_EntryNber@{Get\_EntryNber}!Event@{Event}}
+\doxysubsubsection{\texorpdfstring{Get\_EntryNber()}{Get\_EntryNber()}}
+{\footnotesize\ttfamily \label{class_event_a0ef4abb6ae84ce10778869680625869d} 
+int Event\+::\+Get\+\_\+\+Entry\+Nber (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_event_a86e59eedde4b03b5803f40f1aa82f229}\index{Event@{Event}!Get\_EventNber@{Get\_EventNber}}
+\index{Get\_EventNber@{Get\_EventNber}!Event@{Event}}
+\doxysubsubsection{\texorpdfstring{Get\_EventNber()}{Get\_EventNber()}}
+{\footnotesize\ttfamily \label{class_event_a86e59eedde4b03b5803f40f1aa82f229} 
+int Event\+::\+Get\+\_\+\+Event\+Nber (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_event_a6c6a4c4e7a453736755eafdcb60c55cd}\index{Event@{Event}!Get\_Model\_ChargeI@{Get\_Model\_ChargeI}}
+\index{Get\_Model\_ChargeI@{Get\_Model\_ChargeI}!Event@{Event}}
+\doxysubsubsection{\texorpdfstring{Get\_Model\_ChargeI()}{Get\_Model\_ChargeI()}}
+{\footnotesize\ttfamily \label{class_event_a6c6a4c4e7a453736755eafdcb60c55cd} 
+const \mbox{\hyperlink{class_model___charge_i}{Model\+\_\+\+ChargeI}} \texorpdfstring{$\ast$}{*} Event\+::\+Get\+\_\+\+Model\+\_\+\+ChargeI (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_event_a355ba3c5ae6ce73c2c6b99445e1f400b}\index{Event@{Event}!Get\_Model\_Electronics@{Get\_Model\_Electronics}}
+\index{Get\_Model\_Electronics@{Get\_Model\_Electronics}!Event@{Event}}
+\doxysubsubsection{\texorpdfstring{Get\_Model\_Electronics()}{Get\_Model\_Electronics()}}
+{\footnotesize\ttfamily \label{class_event_a355ba3c5ae6ce73c2c6b99445e1f400b} 
+const \mbox{\hyperlink{class_model___electronics}{Model\+\_\+\+Electronics}} \texorpdfstring{$\ast$}{*} Event\+::\+Get\+\_\+\+Model\+\_\+\+Electronics (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_event_a87845494a29d2a55bec8bb2c1fabf96b}\index{Event@{Event}!Get\_Model\_ReadOutGeometry@{Get\_Model\_ReadOutGeometry}}
+\index{Get\_Model\_ReadOutGeometry@{Get\_Model\_ReadOutGeometry}!Event@{Event}}
+\doxysubsubsection{\texorpdfstring{Get\_Model\_ReadOutGeometry()}{Get\_Model\_ReadOutGeometry()}}
+{\footnotesize\ttfamily \label{class_event_a87845494a29d2a55bec8bb2c1fabf96b} 
+const \mbox{\hyperlink{class_model___read_out_geometry}{Model\+\_\+\+Read\+Out\+Geometry}} \texorpdfstring{$\ast$}{*} Event\+::\+Get\+\_\+\+Model\+\_\+\+Read\+Out\+Geometry (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_event_a9e012067b0f7a58510f78b75fdff8809}\index{Event@{Event}!Get\_Module\_InArray@{Get\_Module\_InArray}}
+\index{Get\_Module\_InArray@{Get\_Module\_InArray}!Event@{Event}}
+\doxysubsubsection{\texorpdfstring{Get\_Module\_InArray()}{Get\_Module\_InArray()}}
+{\footnotesize\ttfamily \label{class_event_a9e012067b0f7a58510f78b75fdff8809} 
+\mbox{\hyperlink{class_module}{Module}} \texorpdfstring{$\ast$}{*} Event\+::\+Get\+\_\+\+Module\+\_\+\+In\+Array (\begin{DoxyParamCaption}\item[{const int \&}]{Index1D}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_event_a4d976d0083330f5e715e25c0448a6319}\index{Event@{Event}!Get\_NberOfModule@{Get\_NberOfModule}}
+\index{Get\_NberOfModule@{Get\_NberOfModule}!Event@{Event}}
+\doxysubsubsection{\texorpdfstring{Get\_NberOfModule()}{Get\_NberOfModule()}}
+{\footnotesize\ttfamily \label{class_event_a4d976d0083330f5e715e25c0448a6319} 
+int Event\+::\+Get\+\_\+\+Nber\+Of\+Module (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_event_a2d0a6d149023d738f30e106c48ec04f8}\index{Event@{Event}!Get\_ThisModule@{Get\_ThisModule}}
+\index{Get\_ThisModule@{Get\_ThisModule}!Event@{Event}}
+\doxysubsubsection{\texorpdfstring{Get\_ThisModule()}{Get\_ThisModule()}}
+{\footnotesize\ttfamily \label{class_event_a2d0a6d149023d738f30e106c48ec04f8} 
+\mbox{\hyperlink{class_module}{Module}} \texorpdfstring{$\ast$}{*} Event\+::\+Get\+\_\+\+This\+Module (\begin{DoxyParamCaption}\item[{const int \&}]{Module\+Nber}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_event_a23b0a728548d60a630ab3072ee7e088f}\index{Event@{Event}!Get\_ThisModuleConst@{Get\_ThisModuleConst}}
+\index{Get\_ThisModuleConst@{Get\_ThisModuleConst}!Event@{Event}}
+\doxysubsubsection{\texorpdfstring{Get\_ThisModuleConst()}{Get\_ThisModuleConst()}}
+{\footnotesize\ttfamily \label{class_event_a23b0a728548d60a630ab3072ee7e088f} 
+const \mbox{\hyperlink{class_module}{Module}} \texorpdfstring{$\ast$}{*} Event\+::\+Get\+\_\+\+This\+Module\+Const (\begin{DoxyParamCaption}\item[{const int \&}]{Module\+Nber}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_event_a62c25da16486c084be2feca710419dda}\index{Event@{Event}!GiveMe\_AnUnfittedTrack\_ForThisModule@{GiveMe\_AnUnfittedTrack\_ForThisModule}}
+\index{GiveMe\_AnUnfittedTrack\_ForThisModule@{GiveMe\_AnUnfittedTrack\_ForThisModule}!Event@{Event}}
+\doxysubsubsection{\texorpdfstring{GiveMe\_AnUnfittedTrack\_ForThisModule()}{GiveMe\_AnUnfittedTrack\_ForThisModule()}}
+{\footnotesize\ttfamily \label{class_event_a62c25da16486c084be2feca710419dda} 
+\mbox{\hyperlink{class_track}{Track}} \texorpdfstring{$\ast$}{*} Event\+::\+Give\+Me\+\_\+\+An\+Unfitted\+Track\+\_\+\+For\+This\+Module (\begin{DoxyParamCaption}\item[{const int \&}]{Module\+Nber}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_event_a196c29b094d8cea9834f642eaae32c0e}\index{Event@{Event}!GiveMe\_Clusters\_ForThisModule@{GiveMe\_Clusters\_ForThisModule}}
+\index{GiveMe\_Clusters\_ForThisModule@{GiveMe\_Clusters\_ForThisModule}!Event@{Event}}
+\doxysubsubsection{\texorpdfstring{GiveMe\_Clusters\_ForThisModule()}{GiveMe\_Clusters\_ForThisModule()}}
+{\footnotesize\ttfamily \label{class_event_a196c29b094d8cea9834f642eaae32c0e} 
+std\+::vector$<$ \mbox{\hyperlink{class_cluster}{Cluster}} \texorpdfstring{$\ast$}{*} $>$ Event\+::\+Give\+Me\+\_\+\+Clusters\+\_\+\+For\+This\+Module (\begin{DoxyParamCaption}\item[{const int \&}]{Module\+Nber}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_event_a604a632bfd47fa2b9dc57ffe39dc000e}\index{Event@{Event}!GiveMe\_CutInterCeptXZ\_ForThisModule@{GiveMe\_CutInterCeptXZ\_ForThisModule}}
+\index{GiveMe\_CutInterCeptXZ\_ForThisModule@{GiveMe\_CutInterCeptXZ\_ForThisModule}!Event@{Event}}
+\doxysubsubsection{\texorpdfstring{GiveMe\_CutInterCeptXZ\_ForThisModule()}{GiveMe\_CutInterCeptXZ\_ForThisModule()}}
+{\footnotesize\ttfamily \label{class_event_a604a632bfd47fa2b9dc57ffe39dc000e} 
+double Event\+::\+Give\+Me\+\_\+\+Cut\+Inter\+Cept\+XZ\+\_\+\+For\+This\+Module (\begin{DoxyParamCaption}\item[{const int \&}]{Module\+Nber}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_event_ae9ebedb1c13b69947d4399d4f769f748}\index{Event@{Event}!GiveMe\_CutSlopeXY\_ForThisModule@{GiveMe\_CutSlopeXY\_ForThisModule}}
+\index{GiveMe\_CutSlopeXY\_ForThisModule@{GiveMe\_CutSlopeXY\_ForThisModule}!Event@{Event}}
+\doxysubsubsection{\texorpdfstring{GiveMe\_CutSlopeXY\_ForThisModule()}{GiveMe\_CutSlopeXY\_ForThisModule()}}
+{\footnotesize\ttfamily \label{class_event_ae9ebedb1c13b69947d4399d4f769f748} 
+double Event\+::\+Give\+Me\+\_\+\+Cut\+Slope\+XY\+\_\+\+For\+This\+Module (\begin{DoxyParamCaption}\item[{const int \&}]{Module\+Nber}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_event_af960039afde24314d6bc1b0be1729722}\index{Event@{Event}!GiveMe\_CutSlopeXYZ\_ForThisModule@{GiveMe\_CutSlopeXYZ\_ForThisModule}}
+\index{GiveMe\_CutSlopeXYZ\_ForThisModule@{GiveMe\_CutSlopeXYZ\_ForThisModule}!Event@{Event}}
+\doxysubsubsection{\texorpdfstring{GiveMe\_CutSlopeXYZ\_ForThisModule()}{GiveMe\_CutSlopeXYZ\_ForThisModule()}}
+{\footnotesize\ttfamily \label{class_event_af960039afde24314d6bc1b0be1729722} 
+std\+::vector$<$ double $>$ Event\+::\+Give\+Me\+\_\+\+Cut\+Slope\+XYZ\+\_\+\+For\+This\+Module (\begin{DoxyParamCaption}\item[{const int \&}]{Module\+Nber}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_event_a3437ed7e8fac8aeb59bf758d55bed941}\index{Event@{Event}!GiveMe\_CutSlopeXZ\_ForThisModule@{GiveMe\_CutSlopeXZ\_ForThisModule}}
+\index{GiveMe\_CutSlopeXZ\_ForThisModule@{GiveMe\_CutSlopeXZ\_ForThisModule}!Event@{Event}}
+\doxysubsubsection{\texorpdfstring{GiveMe\_CutSlopeXZ\_ForThisModule()}{GiveMe\_CutSlopeXZ\_ForThisModule()}}
+{\footnotesize\ttfamily \label{class_event_a3437ed7e8fac8aeb59bf758d55bed941} 
+double Event\+::\+Give\+Me\+\_\+\+Cut\+Slope\+XZ\+\_\+\+For\+This\+Module (\begin{DoxyParamCaption}\item[{const int \&}]{Module\+Nber}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_event_a2918ca3295248b26113deb6b3f57a075}\index{Event@{Event}!GiveMe\_Track\_ForThisModule@{GiveMe\_Track\_ForThisModule}}
+\index{GiveMe\_Track\_ForThisModule@{GiveMe\_Track\_ForThisModule}!Event@{Event}}
+\doxysubsubsection{\texorpdfstring{GiveMe\_Track\_ForThisModule()}{GiveMe\_Track\_ForThisModule()}}
+{\footnotesize\ttfamily \label{class_event_a2918ca3295248b26113deb6b3f57a075} 
+const \mbox{\hyperlink{class_track}{Track}} \texorpdfstring{$\ast$}{*} Event\+::\+Give\+Me\+\_\+\+Track\+\_\+\+For\+This\+Module (\begin{DoxyParamCaption}\item[{const int \&}]{Module\+Nber}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_event_af08f42b14a47693b66c539eeda2b7c1f}\index{Event@{Event}!Invalidate@{Invalidate}}
+\index{Invalidate@{Invalidate}!Event@{Event}}
+\doxysubsubsection{\texorpdfstring{Invalidate()}{Invalidate()}}
+{\footnotesize\ttfamily \label{class_event_af08f42b14a47693b66c539eeda2b7c1f} 
+void Event\+::\+Invalidate (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_event_a5097654e974cd671439d144f26eb1cfd}\index{Event@{Event}!Invalidate\_ThisModule@{Invalidate\_ThisModule}}
+\index{Invalidate\_ThisModule@{Invalidate\_ThisModule}!Event@{Event}}
+\doxysubsubsection{\texorpdfstring{Invalidate\_ThisModule()}{Invalidate\_ThisModule()}}
+{\footnotesize\ttfamily \label{class_event_a5097654e974cd671439d144f26eb1cfd} 
+void Event\+::\+Invalidate\+\_\+\+This\+Module (\begin{DoxyParamCaption}\item[{const int \&}]{Module\+Nber}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_event_a930dc407fc89247b491a2a066dc2374e}\index{Event@{Event}!IsValid@{IsValid}}
+\index{IsValid@{IsValid}!Event@{Event}}
+\doxysubsubsection{\texorpdfstring{IsValid()}{IsValid()}}
+{\footnotesize\ttfamily \label{class_event_a930dc407fc89247b491a2a066dc2374e} 
+int Event\+::\+Is\+Valid (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_event_a45e575cf0cef2e7384d22c714117306b}\index{Event@{Event}!Replace\_Clusters\_ForThisModule@{Replace\_Clusters\_ForThisModule}}
+\index{Replace\_Clusters\_ForThisModule@{Replace\_Clusters\_ForThisModule}!Event@{Event}}
+\doxysubsubsection{\texorpdfstring{Replace\_Clusters\_ForThisModule()}{Replace\_Clusters\_ForThisModule()}}
+{\footnotesize\ttfamily \label{class_event_a45e575cf0cef2e7384d22c714117306b} 
+void Event\+::\+Replace\+\_\+\+Clusters\+\_\+\+For\+This\+Module (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{class_cluster}{Cluster}} \texorpdfstring{$\ast$}{*} $>$ \&}]{VCluster}{, }\item[{const int \&}]{Module\+Nber}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_event_a8bd4ea618570a9fc3b8a71eca08c37cd}\index{Event@{Event}!Set\_Track\_ForThisModule@{Set\_Track\_ForThisModule}}
+\index{Set\_Track\_ForThisModule@{Set\_Track\_ForThisModule}!Event@{Event}}
+\doxysubsubsection{\texorpdfstring{Set\_Track\_ForThisModule()}{Set\_Track\_ForThisModule()}}
+{\footnotesize\ttfamily \label{class_event_a8bd4ea618570a9fc3b8a71eca08c37cd} 
+void Event\+::\+Set\+\_\+\+Track\+\_\+\+For\+This\+Module (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_track}{Track}} \texorpdfstring{$\ast$}{*}}]{p\+Track}{, }\item[{const int \&}]{Module\+Nber}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_event_af4cad1a5dc6a6e06087e82e6c801eef4}\index{Event@{Event}!SmallDump@{SmallDump}}
+\index{SmallDump@{SmallDump}!Event@{Event}}
+\doxysubsubsection{\texorpdfstring{SmallDump()}{SmallDump()}}
+{\footnotesize\ttfamily \label{class_event_af4cad1a5dc6a6e06087e82e6c801eef4} 
+void Event\+::\+Small\+Dump (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_event_afac07e9a54e740990ccbfd950e503f80}\index{Event@{Event}!Validate@{Validate}}
+\index{Validate@{Validate}!Event@{Event}}
+\doxysubsubsection{\texorpdfstring{Validate()}{Validate()}}
+{\footnotesize\ttfamily \label{class_event_afac07e9a54e740990ccbfd950e503f80} 
+void Event\+::\+Validate (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_event_ac2082499bf5b4baecac423eab724fd57}\index{Event@{Event}!Validate\_ThisModule@{Validate\_ThisModule}}
+\index{Validate\_ThisModule@{Validate\_ThisModule}!Event@{Event}}
+\doxysubsubsection{\texorpdfstring{Validate\_ThisModule()}{Validate\_ThisModule()}}
+{\footnotesize\ttfamily \label{class_event_ac2082499bf5b4baecac423eab724fd57} 
+void Event\+::\+Validate\+\_\+\+This\+Module (\begin{DoxyParamCaption}\item[{const int \&}]{Module\+Nber}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_event_ae738d44d2b40356803911a598a13f3c9}\index{Event@{Event}!Validity\_ForThisModule@{Validity\_ForThisModule}}
+\index{Validity\_ForThisModule@{Validity\_ForThisModule}!Event@{Event}}
+\doxysubsubsection{\texorpdfstring{Validity\_ForThisModule()}{Validity\_ForThisModule()}}
+{\footnotesize\ttfamily \label{class_event_ae738d44d2b40356803911a598a13f3c9} 
+int Event\+::\+Validity\+\_\+\+For\+This\+Module (\begin{DoxyParamCaption}\item[{const int \&}]{Module\+Nber}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_event_a8e3cce9cf1cfbb0b94db86355adf7e93}\index{Event@{Event}!WriteOut@{WriteOut}}
+\index{WriteOut@{WriteOut}!Event@{Event}}
+\doxysubsubsection{\texorpdfstring{WriteOut()}{WriteOut()}}
+{\footnotesize\ttfamily \label{class_event_a8e3cce9cf1cfbb0b94db86355adf7e93} 
+void Event\+::\+Write\+Out (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Model\+Event/inc/\mbox{\hyperlink{_event_8h}{Event.\+h}}\item 
+Model\+Event/src/\mbox{\hyperlink{_event_8cxx}{Event.\+cxx}}\end{DoxyCompactItemize}

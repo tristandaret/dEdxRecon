@@ -1,0 +1,692 @@
+\doxysection{Reconstruction Namespace Reference}
+\hypertarget{namespace_reconstruction}{}\label{namespace_reconstruction}\index{Reconstruction@{Reconstruction}}
+
+
+d\+E/dx estimation and particle identification declarations.  
+
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_reconstruction_1_1_reco_pad}{Reco\+Pad}}
+\item 
+class \mbox{\hyperlink{class_reconstruction_1_1_reco_cluster}{Reco\+Cluster}}
+\item 
+class \mbox{\hyperlink{class_reconstruction_1_1_reco_module}{Reco\+Module}}
+\item 
+class \mbox{\hyperlink{class_reconstruction_1_1_reco_event}{Reco\+Event}}
+\item 
+class \mbox{\hyperlink{class_reconstruction_1_1d_edx}{d\+Edx}}
+\item 
+class \mbox{\hyperlink{class_reconstruction_1_1_draw_outs}{Draw\+Outs}}
+\begin{DoxyCompactList}\small\item\em Plotting helper for reconstruction results. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_reconstruction_1_1_e_r_a_m_maps}{ERAMMaps}}
+\item 
+class \mbox{\hyperlink{class_reconstruction_1_1_l_u_t}{LUT}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespace_reconstruction_aa6c4189b9f8794fb9b7ad71b9765b826}{Monitoring}} ()
+\item 
+void \mbox{\hyperlink{namespace_reconstruction_ab8e79e3e83c48bac0667579399d635f7}{Correction}} (const int \&corr\+RC=1, const int \&corr\+Gain=1, const int \&corr\+WF=1, const int \&corr\+Drift=1, const int \&save\+Select\+Only=1)
+\item 
+void \mbox{\hyperlink{namespace_reconstruction_a3f53f87ee01a45f5b47c576c9e6611c3}{Settings}} (const std\+::string \&\mbox{\hyperlink{namespace_reconstruction_aa247a28fec76cc4006345e785c837167}{testbeam}}, const std\+::string \&\mbox{\hyperlink{namespace_reconstruction_aff2e417ce2ebbe016c1a923993e5931f}{multi\+Scan\+Name}}, const std\+::string \&\mbox{\hyperlink{namespace_reconstruction_a95778d5c57d744f35d4515247148b504}{scan\+Name}}, const std\+::string \&scanspec, const std\+::string \&runvarstr\+\_\+name, const int \&uploader, const int \&modules, const int \&peaking\+\_\+time, const int \&diffusion, const int \&drift\+\_\+dist, const int \&timbin)
+\item 
+void \mbox{\hyperlink{namespace_reconstruction_a057ee330bf04cb919427219c25bf2d4f}{Clear\+Vectors}} ()
+\item 
+void \mbox{\hyperlink{namespace_reconstruction_af550d3b32df95f0749794a3b5234009c}{Default\+Analysis}} ()
+\item 
+void \mbox{\hyperlink{namespace_reconstruction_a96e2ff84f5f53811c3c9999239a9b354}{Draw\+Single\+Scan}} (const int \&methods=0)
+\item 
+void \mbox{\hyperlink{namespace_reconstruction_aa5658d5b431a6747c639924952a0cfa0}{Draw\+Multiple\+Scan}} (const int \&methods=0)
+\item 
+void \mbox{\hyperlink{namespace_reconstruction_a1fa8abc443a0aee1c67c155e72ab35de}{Draw\+CERN22\+Scan}} ()
+\item 
+void \mbox{\hyperlink{namespace_reconstruction_a857a325f53feb2a8ab37382badfa3420}{WFCorrection}} (const std\+::string \&Out\+Corr)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_reconstruction_1_1d_edx}{Reconstruction\+::d\+Edx}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespace_reconstruction_a361eada0f4a66e9daaf94dd86d1458e0}{p\+\_\+d\+Edx}}
+\item 
+\mbox{\hyperlink{class_reconstruction_1_1_draw_outs}{Reconstruction\+::\+Draw\+Outs}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespace_reconstruction_a55a58124d364f8ee41735f2581bace65}{p\+\_\+\+Draw\+Outs}}
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_a9dd23faf5a74cca585201f3278764e74}{prototype}} = 0
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_a287fadc53d5739888b07f5cca3bc41b9}{CERN\+\_\+\+Escan}} = 1
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_acc7cfe2129354c6b814cb3fa1d221735}{CERN\+\_\+drift}} = 0
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_adc74ef74e60b2f0733496d49fb528444}{DESY\+\_\+zscan}}
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_a82d60e32ba57ed46286aca223f0e76b0}{DESY\+\_\+yscan}}
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_a20996853dcc322f1b8de80d49dad019f}{DESY\+\_\+phi}} = 0
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_a175d54a144080ac65c769ed65a9c1e88}{DESY\+\_\+theta}} = 0
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_af128763838107a1314ac4bb1cc198e98}{dedx}} = 1
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_a5def978733bb0ac898c165771d23005c}{DO\+\_\+\+Control}}
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_ab646562009b56c77f8cf8dce861eeeb4}{DO\+\_\+d\+Edx}}
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_a571403e47aab7020ee9f3e20b11c5a9a}{DO\+\_\+\+Comparison}}
+\item 
+\mbox{\hyperlink{class_uploader}{Uploader}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespace_reconstruction_a882db6a4cdced013e7ef63a4f9e0385a}{p\+\_\+uploader}}
+\item 
+\mbox{\hyperlink{class_reconstruction_1_1_l_u_t}{Reconstruction\+::\+LUT}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespace_reconstruction_af671490dae2544dcd115730d401bc043}{p\+\_\+lut}}
+\item 
+const std\+::string \mbox{\hyperlink{namespace_reconstruction_a3be77f2d6e8bbd2d2bad5257739798d3}{d\+Edx\+Path}} = "{}../"{}
+\item 
+const std\+::string \mbox{\hyperlink{namespace_reconstruction_aad46e0f0630feac11753a1d2c42151b8}{data\+Path}} = \mbox{\hyperlink{namespace_reconstruction_a3be77f2d6e8bbd2d2bad5257739798d3}{d\+Edx\+Path}} + "{}Data/"{}
+\item 
+std\+::string \mbox{\hyperlink{namespace_reconstruction_a3eb4a73cbd5967c6f73787e462aa16ad}{data\+Scan\+Path}} = "{}"{}
+\item 
+const std\+::string \mbox{\hyperlink{namespace_reconstruction_addfb4627cb45d1021b519eb3fdb10d95}{drawout\+Path}} = \mbox{\hyperlink{namespace_reconstruction_a3be77f2d6e8bbd2d2bad5257739798d3}{d\+Edx\+Path}} + "{}OUT\+\_\+\+Reconstruction\+\_\+\+GP/"{}
+\item 
+std\+::string \mbox{\hyperlink{namespace_reconstruction_a06ce02ca9dc2e7a76823495dcdb8a861}{drawout\+Multi\+Scan\+Path}} = "{}"{}
+\item 
+std\+::string \mbox{\hyperlink{namespace_reconstruction_ac146fb7a467bd0b6bbcc40631a94df62}{drawout\+Scan\+Path}} = "{}"{}
+\item 
+std\+::string \mbox{\hyperlink{namespace_reconstruction_a0b8af3569c931a8bc482a551c36898c2}{drawout\+Run\+Path}} = "{}"{}
+\item 
+std\+::string \mbox{\hyperlink{namespace_reconstruction_a72914e1f56ccd05364109b56bdc1a8eb}{drawout\+\_\+file}} = "{}"{}
+\item 
+std\+::string \mbox{\hyperlink{namespace_reconstruction_a44fe2c0e00005ffa3d9f831dbf763723}{rootout\+\_\+file}} = "{}"{}
+\item 
+std\+::string \mbox{\hyperlink{namespace_reconstruction_add2458fa96d0454c44016028be2702b1}{log\+\_\+file}} = "{}"{}
+\item 
+std\+::string \mbox{\hyperlink{namespace_reconstruction_a8ba512293ba86701a1b1a78d918c0273}{comment}}
+\item 
+std\+::string \mbox{\hyperlink{namespace_reconstruction_ae7e1e0f3abc093e79fc8570d74604192}{selection\+Set}}
+\item 
+std\+::string \mbox{\hyperlink{namespace_reconstruction_a1a0154b2913a09c52258eac54413cb6d}{input\+Dir}}
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_aa255d6ec499c5193fa352506bc59e4fc}{draw\+Which\+Methods}} = 0
+\item 
+std\+::string \mbox{\hyperlink{namespace_reconstruction_a4c7ae43256b6fdd5fc72643d5c71f6a6}{corr\+Func\+Path}} = "{}"{}
+\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{namespace_reconstruction_a51d538f43e8dd84ac69cdd99fd43c350}{vcorr\+Func\+Paths}}
+\item 
+std\+::vector$<$ float $>$ \mbox{\hyperlink{namespace_reconstruction_a223c48440ff66da0fa4126418c3062e1}{v\+Scan\+Vals}}
+\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{namespace_reconstruction_ae8d48e6a589f60892172d844b3e79391}{v\+Scan\+Labels}}
+\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{namespace_reconstruction_a96149af66110037c26db441bef45da48}{v\+\_\+scanspec}}
+\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{namespace_reconstruction_a201b3cdb488531810431822413e177c7}{v\+\_\+comments}}
+\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{namespace_reconstruction_a977a6d8ff81004c5df77f6db4a7a8b11}{v\+Tags}}
+\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{namespace_reconstruction_a50ad7b60a597a2f3777d3b9acb20b3fa}{v\+\_\+datafiles}}
+\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{namespace_reconstruction_a6704a82aaabd8632841f30f550517058}{v\+\_\+rootout\+\_\+files}}
+\item 
+std\+::string \mbox{\hyperlink{namespace_reconstruction_a4f6586c945fb393c11557e5c716096cd}{tag}}
+\item 
+std\+::string \mbox{\hyperlink{namespace_reconstruction_aa247a28fec76cc4006345e785c837167}{testbeam}}
+\item 
+std\+::string \mbox{\hyperlink{namespace_reconstruction_aff2e417ce2ebbe016c1a923993e5931f}{multi\+Scan\+Name}}
+\item 
+std\+::string \mbox{\hyperlink{namespace_reconstruction_a95778d5c57d744f35d4515247148b504}{scan\+Name}}
+\item 
+std\+::string \mbox{\hyperlink{namespace_reconstruction_a75d95e59d3e8a8a3baa4c436fa1a5b4c}{runvarstr}}
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_a02c880aa3fc60efa7a1e32a2cf219781}{scan\+Index}} = 0
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_aebe11808af331f686f3bd0d845d6f951}{int\+Uploader}}
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_a66246bf38d688a4d0d668c2250b386da}{module\+Case}}
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_af069e60f84af61c134ed010b539b93cf}{PT}}
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_aaf0aa066dcfa96821489a5d449cdd2a6}{Dt}}
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_a19e6ec3c4f542bcd6b15749b4526a919}{DtB}}
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_a1509eecf74b816a22cdc97816b22b075}{DtnoB}}
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_a1abbe9f647bbdf9a046575dfadc01a0f}{drift\+Dist}}
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_a1ec3814e94230dbe1b31c62b4160dc00}{TB}}
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_a19ac4fb414338706da055fbf4c43e57f}{fcorrect\+Gain}}
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_af39c7a3b05e31ad997e6d8ea2d4f7f5f}{fcorrect\+RC}}
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_ab759deecd94c5c0c7089f9c941991cf4}{fcorrect\+WF}}
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_aa0ffb621e6ddc921355fabdd1d6bb940}{fcorrect\+Drift}}
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_a8eac77e8fdca171987cd1622e93e6408}{fsave\+Select\+Only}}
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_ae93a10f83dcbdc4a18c669e3e61b58c5}{DESY\+\_\+drift}} = 0
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_a81a0f75e1c6a96b411989ee601884a83}{DESY\+\_\+row}} = 0
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_a6a742cff6e54ac29a00a9129314bcb74}{correction\+\_\+wf}} = 0
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_a6d3568578cc64f760fa10184431061bc}{Draw\+\_\+\+Control}} = 0
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_a39312d44d50a57f29749174ba3b5f48d}{Draw\+\_\+d\+Edx}} = 0
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_a8434d4b3c7f94d31de0b32f515266652}{Draw\+\_\+\+Comparison}} = 0
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_ab9bd66d65e998f586dca3340b035135a}{Draw\+\_\+\+Corrections}} = 0
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_a6ee42ba7d26a47d136b75b9d1bbec4da}{Draw\+\_\+\+DESY21\+Single\+Scan}} = 0
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_adcd9cb558077f8bdf059e131e6b0ef0c}{Draw\+\_\+\+DESY21\+Mult\+Scan}} = 0
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_a6d5c35c6ab99521c688de81fcaf137a0}{Draw\+\_\+\+CERN22\+Scan}} = 0
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_a7badf9d32376d75444315b1d35b5d59f}{Dtwith\+Bhere}} = 286
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_a3e1b13329b169bab3606871da421b11b}{Dtwithout\+Bhere}} = 323
+\item 
+\mbox{\hyperlink{class_uploader}{Uploader}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespace_reconstruction_a5293e1ff777fde07b7f00dd2ae16042d}{p\+Uploader}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+d\+E/dx estimation and particle identification declarations. 
+
+\hypertarget{namespace_reconstruction_autotoc_md0}{}\doxysubsection{\texorpdfstring{\texorpdfstring{$\ast$}{*} @file d\+Edx.\+h}{\texorpdfstring{$\ast$}{*} @file d\+Edx.\+h}}\label{namespace_reconstruction_autotoc_md0}
+\hypertarget{namespace_reconstruction_autotoc_md1}{}\doxysubsection{\texorpdfstring{\texorpdfstring{$\ast$}{*}}{\texorpdfstring{$\ast$}{*}}}\label{namespace_reconstruction_autotoc_md1}
+\hypertarget{namespace_reconstruction_autotoc_md3}{}\doxysubsection{\texorpdfstring{\texorpdfstring{$\ast$}{*} Contains declarations for data structures, helper classes and functions}{\texorpdfstring{$\ast$}{*} Contains declarations for data structures, helper classes and functions}}\label{namespace_reconstruction_autotoc_md3}
+\hypertarget{namespace_reconstruction_autotoc_md4}{}\doxysubsection{\texorpdfstring{\texorpdfstring{$\ast$}{*} used to compute energy loss estimates used by the reconstruction pipeline.}{\texorpdfstring{$\ast$}{*} used to compute energy loss estimates used by the reconstruction pipeline.}}\label{namespace_reconstruction_autotoc_md4}
+\hypertarget{namespace_reconstruction_autotoc_md5}{}\doxysubsection{\texorpdfstring{\texorpdfstring{$\ast$}{*}}{\texorpdfstring{$\ast$}{*}}}\label{namespace_reconstruction_autotoc_md5}
+\hypertarget{namespace_reconstruction_autotoc_md6}{}\doxysubsection{\texorpdfstring{\texorpdfstring{$\ast$}{*}}{\texorpdfstring{$\ast$}{*}}}\label{namespace_reconstruction_autotoc_md6}
+\hypertarget{namespace_reconstruction_autotoc_md7}{}\doxysubsection{\texorpdfstring{\texorpdfstring{$\ast$}{*} The implementation (d\+Edx.\+cxx) contains the core numerical routines and}{\texorpdfstring{$\ast$}{*} The implementation (d\+Edx.\+cxx) contains the core numerical routines and}}\label{namespace_reconstruction_autotoc_md7}
+\hypertarget{namespace_reconstruction_autotoc_md8}{}\doxysubsection{\texorpdfstring{\texorpdfstring{$\ast$}{*} algorithms used to compute energy loss per unit length from reconstructed}{\texorpdfstring{$\ast$}{*} algorithms used to compute energy loss per unit length from reconstructed}}\label{namespace_reconstruction_autotoc_md8}
+\hypertarget{namespace_reconstruction_autotoc_md9}{}\doxysubsection{\texorpdfstring{\texorpdfstring{$\ast$}{*} cluster and pad information, together with helper utilities for particle}{\texorpdfstring{$\ast$}{*} cluster and pad information, together with helper utilities for particle}}\label{namespace_reconstruction_autotoc_md9}
+\hypertarget{namespace_reconstruction_autotoc_md10}{}\doxysubsection{\texorpdfstring{\texorpdfstring{$\ast$}{*} identification. Interfaces for computing WF and XP estimates, Giga\+Waveform}{\texorpdfstring{$\ast$}{*} identification. Interfaces for computing WF and XP estimates, Giga\+Waveform}}\label{namespace_reconstruction_autotoc_md10}
+\hypertarget{namespace_reconstruction_autotoc_md11}{}\doxysubsection{\texorpdfstring{\texorpdfstring{$\ast$}{*} helpers and truncated estimators are declared here; heavy numerical work}{\texorpdfstring{$\ast$}{*} helpers and truncated estimators are declared here; heavy numerical work}}\label{namespace_reconstruction_autotoc_md11}
+\hypertarget{namespace_reconstruction_autotoc_md12}{}\doxysubsection{\texorpdfstring{\texorpdfstring{$\ast$}{*} and algorithmic details live in the source file.}{\texorpdfstring{$\ast$}{*} and algorithmic details live in the source file.}}\label{namespace_reconstruction_autotoc_md12}
+\hypertarget{dEdx.h_autotoc_md13}{}\doxysubsection{\texorpdfstring{autotoc\+\_\+md13}{autotoc\+\_\+md13}}\label{dEdx.h_autotoc_md13}
+
+
+\label{doc-func-members}
+\Hypertarget{namespace_reconstruction_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{namespace_reconstruction_a057ee330bf04cb919427219c25bf2d4f}\index{Reconstruction@{Reconstruction}!ClearVectors@{ClearVectors}}
+\index{ClearVectors@{ClearVectors}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{ClearVectors()}{ClearVectors()}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_a057ee330bf04cb919427219c25bf2d4f} 
+void Reconstruction\+::\+Clear\+Vectors (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{namespace_reconstruction_ab8e79e3e83c48bac0667579399d635f7}\index{Reconstruction@{Reconstruction}!Correction@{Correction}}
+\index{Correction@{Correction}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{Correction()}{Correction()}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_ab8e79e3e83c48bac0667579399d635f7} 
+void Reconstruction\+::\+Correction (\begin{DoxyParamCaption}\item[{const int \&}]{corr\+RC}{ = {\ttfamily 1}, }\item[{const int \&}]{corr\+Gain}{ = {\ttfamily 1}, }\item[{const int \&}]{corr\+WF}{ = {\ttfamily 1}, }\item[{const int \&}]{corr\+Drift}{ = {\ttfamily 1}, }\item[{const int \&}]{save\+Select\+Only}{ = {\ttfamily 1}}\end{DoxyParamCaption})}
+
+\Hypertarget{namespace_reconstruction_af550d3b32df95f0749794a3b5234009c}\index{Reconstruction@{Reconstruction}!DefaultAnalysis@{DefaultAnalysis}}
+\index{DefaultAnalysis@{DefaultAnalysis}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{DefaultAnalysis()}{DefaultAnalysis()}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_af550d3b32df95f0749794a3b5234009c} 
+void Reconstruction\+::\+Default\+Analysis (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{namespace_reconstruction_a1fa8abc443a0aee1c67c155e72ab35de}\index{Reconstruction@{Reconstruction}!DrawCERN22Scan@{DrawCERN22Scan}}
+\index{DrawCERN22Scan@{DrawCERN22Scan}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{DrawCERN22Scan()}{DrawCERN22Scan()}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_a1fa8abc443a0aee1c67c155e72ab35de} 
+void Reconstruction\+::\+Draw\+CERN22\+Scan (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{namespace_reconstruction_aa5658d5b431a6747c639924952a0cfa0}\index{Reconstruction@{Reconstruction}!DrawMultipleScan@{DrawMultipleScan}}
+\index{DrawMultipleScan@{DrawMultipleScan}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{DrawMultipleScan()}{DrawMultipleScan()}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_aa5658d5b431a6747c639924952a0cfa0} 
+void Reconstruction\+::\+Draw\+Multiple\+Scan (\begin{DoxyParamCaption}\item[{const int \&}]{methods}{ = {\ttfamily 0}}\end{DoxyParamCaption})}
+
+\Hypertarget{namespace_reconstruction_a96e2ff84f5f53811c3c9999239a9b354}\index{Reconstruction@{Reconstruction}!DrawSingleScan@{DrawSingleScan}}
+\index{DrawSingleScan@{DrawSingleScan}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{DrawSingleScan()}{DrawSingleScan()}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_a96e2ff84f5f53811c3c9999239a9b354} 
+void Reconstruction\+::\+Draw\+Single\+Scan (\begin{DoxyParamCaption}\item[{const int \&}]{methods}{ = {\ttfamily 0}}\end{DoxyParamCaption})}
+
+\Hypertarget{namespace_reconstruction_aa6c4189b9f8794fb9b7ad71b9765b826}\index{Reconstruction@{Reconstruction}!Monitoring@{Monitoring}}
+\index{Monitoring@{Monitoring}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{Monitoring()}{Monitoring()}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_aa6c4189b9f8794fb9b7ad71b9765b826} 
+void Reconstruction\+::\+Monitoring (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{namespace_reconstruction_a3f53f87ee01a45f5b47c576c9e6611c3}\index{Reconstruction@{Reconstruction}!Settings@{Settings}}
+\index{Settings@{Settings}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{Settings()}{Settings()}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_a3f53f87ee01a45f5b47c576c9e6611c3} 
+void Reconstruction\+::\+Settings (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{testbeam}{, }\item[{const std\+::string \&}]{multi\+Scan\+Name}{, }\item[{const std\+::string \&}]{scan\+Name}{, }\item[{const std\+::string \&}]{scanspec}{, }\item[{const std\+::string \&}]{runvarstr\+\_\+name}{, }\item[{const int \&}]{uploader}{, }\item[{const int \&}]{modules}{, }\item[{const int \&}]{peaking\+\_\+time}{, }\item[{const int \&}]{diffusion}{, }\item[{const int \&}]{drift\+\_\+dist}{, }\item[{const int \&}]{timbin}{}\end{DoxyParamCaption})}
+
+\Hypertarget{namespace_reconstruction_a857a325f53feb2a8ab37382badfa3420}\index{Reconstruction@{Reconstruction}!WFCorrection@{WFCorrection}}
+\index{WFCorrection@{WFCorrection}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{WFCorrection()}{WFCorrection()}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_a857a325f53feb2a8ab37382badfa3420} 
+void Reconstruction\+::\+WFCorrection (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{Out\+Corr}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-var-members}
+\Hypertarget{namespace_reconstruction_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespace_reconstruction_acc7cfe2129354c6b814cb3fa1d221735}\index{Reconstruction@{Reconstruction}!CERN\_drift@{CERN\_drift}}
+\index{CERN\_drift@{CERN\_drift}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{CERN\_drift}{CERN\_drift}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_acc7cfe2129354c6b814cb3fa1d221735} 
+int Reconstruction\+::\+CERN\+\_\+drift = 0}
+
+\Hypertarget{namespace_reconstruction_a287fadc53d5739888b07f5cca3bc41b9}\index{Reconstruction@{Reconstruction}!CERN\_Escan@{CERN\_Escan}}
+\index{CERN\_Escan@{CERN\_Escan}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{CERN\_Escan}{CERN\_Escan}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_a287fadc53d5739888b07f5cca3bc41b9} 
+int Reconstruction\+::\+CERN\+\_\+\+Escan = 1}
+
+\Hypertarget{namespace_reconstruction_a8ba512293ba86701a1b1a78d918c0273}\index{Reconstruction@{Reconstruction}!comment@{comment}}
+\index{comment@{comment}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{comment}{comment}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_a8ba512293ba86701a1b1a78d918c0273} 
+std\+::string Reconstruction\+::comment}
+
+\Hypertarget{namespace_reconstruction_a6a742cff6e54ac29a00a9129314bcb74}\index{Reconstruction@{Reconstruction}!correction\_wf@{correction\_wf}}
+\index{correction\_wf@{correction\_wf}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{correction\_wf}{correction\_wf}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_a6a742cff6e54ac29a00a9129314bcb74} 
+int Reconstruction\+::correction\+\_\+wf = 0}
+
+\Hypertarget{namespace_reconstruction_a4c7ae43256b6fdd5fc72643d5c71f6a6}\index{Reconstruction@{Reconstruction}!corrFuncPath@{corrFuncPath}}
+\index{corrFuncPath@{corrFuncPath}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{corrFuncPath}{corrFuncPath}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_a4c7ae43256b6fdd5fc72643d5c71f6a6} 
+std\+::string Reconstruction\+::corr\+Func\+Path = "{}"{}}
+
+\Hypertarget{namespace_reconstruction_aad46e0f0630feac11753a1d2c42151b8}\index{Reconstruction@{Reconstruction}!dataPath@{dataPath}}
+\index{dataPath@{dataPath}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{dataPath}{dataPath}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_aad46e0f0630feac11753a1d2c42151b8} 
+const std\+::string Reconstruction\+::data\+Path = \mbox{\hyperlink{namespace_reconstruction_a3be77f2d6e8bbd2d2bad5257739798d3}{d\+Edx\+Path}} + "{}Data/"{}}
+
+\Hypertarget{namespace_reconstruction_a3eb4a73cbd5967c6f73787e462aa16ad}\index{Reconstruction@{Reconstruction}!dataScanPath@{dataScanPath}}
+\index{dataScanPath@{dataScanPath}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{dataScanPath}{dataScanPath}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_a3eb4a73cbd5967c6f73787e462aa16ad} 
+std\+::string Reconstruction\+::data\+Scan\+Path = "{}"{}}
+
+\Hypertarget{namespace_reconstruction_af128763838107a1314ac4bb1cc198e98}\index{Reconstruction@{Reconstruction}!dedx@{dedx}}
+\index{dedx@{dedx}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{dedx}{dedx}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_af128763838107a1314ac4bb1cc198e98} 
+int Reconstruction\+::dedx = 1}
+
+\Hypertarget{namespace_reconstruction_a3be77f2d6e8bbd2d2bad5257739798d3}\index{Reconstruction@{Reconstruction}!dEdxPath@{dEdxPath}}
+\index{dEdxPath@{dEdxPath}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{dEdxPath}{dEdxPath}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_a3be77f2d6e8bbd2d2bad5257739798d3} 
+const std\+::string Reconstruction\+::d\+Edx\+Path = "{}../"{}}
+
+\Hypertarget{namespace_reconstruction_ae93a10f83dcbdc4a18c669e3e61b58c5}\index{Reconstruction@{Reconstruction}!DESY\_drift@{DESY\_drift}}
+\index{DESY\_drift@{DESY\_drift}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{DESY\_drift}{DESY\_drift}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_ae93a10f83dcbdc4a18c669e3e61b58c5} 
+int Reconstruction\+::\+DESY\+\_\+drift = 0}
+
+\Hypertarget{namespace_reconstruction_a20996853dcc322f1b8de80d49dad019f}\index{Reconstruction@{Reconstruction}!DESY\_phi@{DESY\_phi}}
+\index{DESY\_phi@{DESY\_phi}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{DESY\_phi}{DESY\_phi}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_a20996853dcc322f1b8de80d49dad019f} 
+int Reconstruction\+::\+DESY\+\_\+phi = 0}
+
+\Hypertarget{namespace_reconstruction_a81a0f75e1c6a96b411989ee601884a83}\index{Reconstruction@{Reconstruction}!DESY\_row@{DESY\_row}}
+\index{DESY\_row@{DESY\_row}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{DESY\_row}{DESY\_row}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_a81a0f75e1c6a96b411989ee601884a83} 
+int Reconstruction\+::\+DESY\+\_\+row = 0}
+
+\Hypertarget{namespace_reconstruction_a175d54a144080ac65c769ed65a9c1e88}\index{Reconstruction@{Reconstruction}!DESY\_theta@{DESY\_theta}}
+\index{DESY\_theta@{DESY\_theta}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{DESY\_theta}{DESY\_theta}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_a175d54a144080ac65c769ed65a9c1e88} 
+int Reconstruction\+::\+DESY\+\_\+theta = 0}
+
+\Hypertarget{namespace_reconstruction_a82d60e32ba57ed46286aca223f0e76b0}\index{Reconstruction@{Reconstruction}!DESY\_yscan@{DESY\_yscan}}
+\index{DESY\_yscan@{DESY\_yscan}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{DESY\_yscan}{DESY\_yscan}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_a82d60e32ba57ed46286aca223f0e76b0} 
+int Reconstruction\+::\+DESY\+\_\+yscan\hspace{0.3cm}{\ttfamily [extern]}}
+
+\Hypertarget{namespace_reconstruction_adc74ef74e60b2f0733496d49fb528444}\index{Reconstruction@{Reconstruction}!DESY\_zscan@{DESY\_zscan}}
+\index{DESY\_zscan@{DESY\_zscan}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{DESY\_zscan}{DESY\_zscan}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_adc74ef74e60b2f0733496d49fb528444} 
+int Reconstruction\+::\+DESY\+\_\+zscan\hspace{0.3cm}{\ttfamily [extern]}}
+
+\Hypertarget{namespace_reconstruction_a571403e47aab7020ee9f3e20b11c5a9a}\index{Reconstruction@{Reconstruction}!DO\_Comparison@{DO\_Comparison}}
+\index{DO\_Comparison@{DO\_Comparison}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{DO\_Comparison}{DO\_Comparison}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_a571403e47aab7020ee9f3e20b11c5a9a} 
+int Reconstruction\+::\+DO\+\_\+\+Comparison\hspace{0.3cm}{\ttfamily [extern]}}
+
+\Hypertarget{namespace_reconstruction_a5def978733bb0ac898c165771d23005c}\index{Reconstruction@{Reconstruction}!DO\_Control@{DO\_Control}}
+\index{DO\_Control@{DO\_Control}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{DO\_Control}{DO\_Control}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_a5def978733bb0ac898c165771d23005c} 
+int Reconstruction\+::\+DO\+\_\+\+Control\hspace{0.3cm}{\ttfamily [extern]}}
+
+\Hypertarget{namespace_reconstruction_ab646562009b56c77f8cf8dce861eeeb4}\index{Reconstruction@{Reconstruction}!DO\_dEdx@{DO\_dEdx}}
+\index{DO\_dEdx@{DO\_dEdx}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{DO\_dEdx}{DO\_dEdx}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_ab646562009b56c77f8cf8dce861eeeb4} 
+int Reconstruction\+::\+DO\+\_\+d\+Edx\hspace{0.3cm}{\ttfamily [extern]}}
+
+\Hypertarget{namespace_reconstruction_a6d5c35c6ab99521c688de81fcaf137a0}\index{Reconstruction@{Reconstruction}!Draw\_CERN22Scan@{Draw\_CERN22Scan}}
+\index{Draw\_CERN22Scan@{Draw\_CERN22Scan}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{Draw\_CERN22Scan}{Draw\_CERN22Scan}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_a6d5c35c6ab99521c688de81fcaf137a0} 
+int Reconstruction\+::\+Draw\+\_\+\+CERN22\+Scan = 0}
+
+\Hypertarget{namespace_reconstruction_a8434d4b3c7f94d31de0b32f515266652}\index{Reconstruction@{Reconstruction}!Draw\_Comparison@{Draw\_Comparison}}
+\index{Draw\_Comparison@{Draw\_Comparison}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{Draw\_Comparison}{Draw\_Comparison}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_a8434d4b3c7f94d31de0b32f515266652} 
+int Reconstruction\+::\+Draw\+\_\+\+Comparison = 0}
+
+\Hypertarget{namespace_reconstruction_a6d3568578cc64f760fa10184431061bc}\index{Reconstruction@{Reconstruction}!Draw\_Control@{Draw\_Control}}
+\index{Draw\_Control@{Draw\_Control}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{Draw\_Control}{Draw\_Control}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_a6d3568578cc64f760fa10184431061bc} 
+int Reconstruction\+::\+Draw\+\_\+\+Control = 0}
+
+\Hypertarget{namespace_reconstruction_ab9bd66d65e998f586dca3340b035135a}\index{Reconstruction@{Reconstruction}!Draw\_Corrections@{Draw\_Corrections}}
+\index{Draw\_Corrections@{Draw\_Corrections}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{Draw\_Corrections}{Draw\_Corrections}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_ab9bd66d65e998f586dca3340b035135a} 
+int Reconstruction\+::\+Draw\+\_\+\+Corrections = 0}
+
+\Hypertarget{namespace_reconstruction_a39312d44d50a57f29749174ba3b5f48d}\index{Reconstruction@{Reconstruction}!Draw\_dEdx@{Draw\_dEdx}}
+\index{Draw\_dEdx@{Draw\_dEdx}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{Draw\_dEdx}{Draw\_dEdx}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_a39312d44d50a57f29749174ba3b5f48d} 
+int Reconstruction\+::\+Draw\+\_\+d\+Edx = 0}
+
+\Hypertarget{namespace_reconstruction_adcd9cb558077f8bdf059e131e6b0ef0c}\index{Reconstruction@{Reconstruction}!Draw\_DESY21MultScan@{Draw\_DESY21MultScan}}
+\index{Draw\_DESY21MultScan@{Draw\_DESY21MultScan}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{Draw\_DESY21MultScan}{Draw\_DESY21MultScan}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_adcd9cb558077f8bdf059e131e6b0ef0c} 
+int Reconstruction\+::\+Draw\+\_\+\+DESY21\+Mult\+Scan = 0}
+
+\Hypertarget{namespace_reconstruction_a6ee42ba7d26a47d136b75b9d1bbec4da}\index{Reconstruction@{Reconstruction}!Draw\_DESY21SingleScan@{Draw\_DESY21SingleScan}}
+\index{Draw\_DESY21SingleScan@{Draw\_DESY21SingleScan}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{Draw\_DESY21SingleScan}{Draw\_DESY21SingleScan}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_a6ee42ba7d26a47d136b75b9d1bbec4da} 
+int Reconstruction\+::\+Draw\+\_\+\+DESY21\+Single\+Scan = 0}
+
+\Hypertarget{namespace_reconstruction_a72914e1f56ccd05364109b56bdc1a8eb}\index{Reconstruction@{Reconstruction}!drawout\_file@{drawout\_file}}
+\index{drawout\_file@{drawout\_file}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{drawout\_file}{drawout\_file}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_a72914e1f56ccd05364109b56bdc1a8eb} 
+std\+::string Reconstruction\+::drawout\+\_\+file = "{}"{}}
+
+\Hypertarget{namespace_reconstruction_a06ce02ca9dc2e7a76823495dcdb8a861}\index{Reconstruction@{Reconstruction}!drawoutMultiScanPath@{drawoutMultiScanPath}}
+\index{drawoutMultiScanPath@{drawoutMultiScanPath}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{drawoutMultiScanPath}{drawoutMultiScanPath}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_a06ce02ca9dc2e7a76823495dcdb8a861} 
+std\+::string Reconstruction\+::drawout\+Multi\+Scan\+Path = "{}"{}}
+
+\Hypertarget{namespace_reconstruction_addfb4627cb45d1021b519eb3fdb10d95}\index{Reconstruction@{Reconstruction}!drawoutPath@{drawoutPath}}
+\index{drawoutPath@{drawoutPath}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{drawoutPath}{drawoutPath}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_addfb4627cb45d1021b519eb3fdb10d95} 
+const std\+::string Reconstruction\+::drawout\+Path = \mbox{\hyperlink{namespace_reconstruction_a3be77f2d6e8bbd2d2bad5257739798d3}{d\+Edx\+Path}} + "{}OUT\+\_\+\+Reconstruction\+\_\+\+GP/"{}}
+
+\Hypertarget{namespace_reconstruction_a0b8af3569c931a8bc482a551c36898c2}\index{Reconstruction@{Reconstruction}!drawoutRunPath@{drawoutRunPath}}
+\index{drawoutRunPath@{drawoutRunPath}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{drawoutRunPath}{drawoutRunPath}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_a0b8af3569c931a8bc482a551c36898c2} 
+std\+::string Reconstruction\+::drawout\+Run\+Path = "{}"{}}
+
+\Hypertarget{namespace_reconstruction_ac146fb7a467bd0b6bbcc40631a94df62}\index{Reconstruction@{Reconstruction}!drawoutScanPath@{drawoutScanPath}}
+\index{drawoutScanPath@{drawoutScanPath}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{drawoutScanPath}{drawoutScanPath}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_ac146fb7a467bd0b6bbcc40631a94df62} 
+std\+::string Reconstruction\+::drawout\+Scan\+Path = "{}"{}}
+
+\Hypertarget{namespace_reconstruction_aa255d6ec499c5193fa352506bc59e4fc}\index{Reconstruction@{Reconstruction}!drawWhichMethods@{drawWhichMethods}}
+\index{drawWhichMethods@{drawWhichMethods}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{drawWhichMethods}{drawWhichMethods}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_aa255d6ec499c5193fa352506bc59e4fc} 
+int Reconstruction\+::draw\+Which\+Methods = 0}
+
+\Hypertarget{namespace_reconstruction_a1abbe9f647bbdf9a046575dfadc01a0f}\index{Reconstruction@{Reconstruction}!driftDist@{driftDist}}
+\index{driftDist@{driftDist}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{driftDist}{driftDist}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_a1abbe9f647bbdf9a046575dfadc01a0f} 
+int Reconstruction\+::drift\+Dist}
+
+\Hypertarget{namespace_reconstruction_aaf0aa066dcfa96821489a5d449cdd2a6}\index{Reconstruction@{Reconstruction}!Dt@{Dt}}
+\index{Dt@{Dt}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{Dt}{Dt}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_aaf0aa066dcfa96821489a5d449cdd2a6} 
+int Reconstruction\+::\+Dt}
+
+\Hypertarget{namespace_reconstruction_a19e6ec3c4f542bcd6b15749b4526a919}\index{Reconstruction@{Reconstruction}!DtB@{DtB}}
+\index{DtB@{DtB}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{DtB}{DtB}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_a19e6ec3c4f542bcd6b15749b4526a919} 
+int Reconstruction\+::\+DtB}
+
+\Hypertarget{namespace_reconstruction_a1509eecf74b816a22cdc97816b22b075}\index{Reconstruction@{Reconstruction}!DtnoB@{DtnoB}}
+\index{DtnoB@{DtnoB}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{DtnoB}{DtnoB}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_a1509eecf74b816a22cdc97816b22b075} 
+int Reconstruction\+::\+DtnoB}
+
+\Hypertarget{namespace_reconstruction_a7badf9d32376d75444315b1d35b5d59f}\index{Reconstruction@{Reconstruction}!DtwithBhere@{DtwithBhere}}
+\index{DtwithBhere@{DtwithBhere}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{DtwithBhere}{DtwithBhere}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_a7badf9d32376d75444315b1d35b5d59f} 
+int Reconstruction\+::\+Dtwith\+Bhere = 286}
+
+\Hypertarget{namespace_reconstruction_a3e1b13329b169bab3606871da421b11b}\index{Reconstruction@{Reconstruction}!DtwithoutBhere@{DtwithoutBhere}}
+\index{DtwithoutBhere@{DtwithoutBhere}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{DtwithoutBhere}{DtwithoutBhere}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_a3e1b13329b169bab3606871da421b11b} 
+int Reconstruction\+::\+Dtwithout\+Bhere = 323}
+
+\Hypertarget{namespace_reconstruction_aa0ffb621e6ddc921355fabdd1d6bb940}\index{Reconstruction@{Reconstruction}!fcorrectDrift@{fcorrectDrift}}
+\index{fcorrectDrift@{fcorrectDrift}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{fcorrectDrift}{fcorrectDrift}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_aa0ffb621e6ddc921355fabdd1d6bb940} 
+int Reconstruction\+::fcorrect\+Drift}
+
+\Hypertarget{namespace_reconstruction_a19ac4fb414338706da055fbf4c43e57f}\index{Reconstruction@{Reconstruction}!fcorrectGain@{fcorrectGain}}
+\index{fcorrectGain@{fcorrectGain}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{fcorrectGain}{fcorrectGain}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_a19ac4fb414338706da055fbf4c43e57f} 
+int Reconstruction\+::fcorrect\+Gain}
+
+\Hypertarget{namespace_reconstruction_af39c7a3b05e31ad997e6d8ea2d4f7f5f}\index{Reconstruction@{Reconstruction}!fcorrectRC@{fcorrectRC}}
+\index{fcorrectRC@{fcorrectRC}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{fcorrectRC}{fcorrectRC}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_af39c7a3b05e31ad997e6d8ea2d4f7f5f} 
+int Reconstruction\+::fcorrect\+RC}
+
+\Hypertarget{namespace_reconstruction_ab759deecd94c5c0c7089f9c941991cf4}\index{Reconstruction@{Reconstruction}!fcorrectWF@{fcorrectWF}}
+\index{fcorrectWF@{fcorrectWF}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{fcorrectWF}{fcorrectWF}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_ab759deecd94c5c0c7089f9c941991cf4} 
+int Reconstruction\+::fcorrect\+WF}
+
+\Hypertarget{namespace_reconstruction_a8eac77e8fdca171987cd1622e93e6408}\index{Reconstruction@{Reconstruction}!fsaveSelectOnly@{fsaveSelectOnly}}
+\index{fsaveSelectOnly@{fsaveSelectOnly}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{fsaveSelectOnly}{fsaveSelectOnly}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_a8eac77e8fdca171987cd1622e93e6408} 
+int Reconstruction\+::fsave\+Select\+Only}
+
+\Hypertarget{namespace_reconstruction_a1a0154b2913a09c52258eac54413cb6d}\index{Reconstruction@{Reconstruction}!inputDir@{inputDir}}
+\index{inputDir@{inputDir}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{inputDir}{inputDir}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_a1a0154b2913a09c52258eac54413cb6d} 
+std\+::string Reconstruction\+::input\+Dir}
+
+\Hypertarget{namespace_reconstruction_aebe11808af331f686f3bd0d845d6f951}\index{Reconstruction@{Reconstruction}!intUploader@{intUploader}}
+\index{intUploader@{intUploader}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{intUploader}{intUploader}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_aebe11808af331f686f3bd0d845d6f951} 
+int Reconstruction\+::int\+Uploader}
+
+\Hypertarget{namespace_reconstruction_add2458fa96d0454c44016028be2702b1}\index{Reconstruction@{Reconstruction}!log\_file@{log\_file}}
+\index{log\_file@{log\_file}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{log\_file}{log\_file}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_add2458fa96d0454c44016028be2702b1} 
+std\+::string Reconstruction\+::log\+\_\+file = "{}"{}}
+
+\Hypertarget{namespace_reconstruction_a66246bf38d688a4d0d668c2250b386da}\index{Reconstruction@{Reconstruction}!moduleCase@{moduleCase}}
+\index{moduleCase@{moduleCase}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{moduleCase}{moduleCase}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_a66246bf38d688a4d0d668c2250b386da} 
+int Reconstruction\+::module\+Case}
+
+\Hypertarget{namespace_reconstruction_aff2e417ce2ebbe016c1a923993e5931f}\index{Reconstruction@{Reconstruction}!multiScanName@{multiScanName}}
+\index{multiScanName@{multiScanName}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{multiScanName}{multiScanName}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_aff2e417ce2ebbe016c1a923993e5931f} 
+std\+::string Reconstruction\+::multi\+Scan\+Name}
+
+\Hypertarget{namespace_reconstruction_a361eada0f4a66e9daaf94dd86d1458e0}\index{Reconstruction@{Reconstruction}!p\_dEdx@{p\_dEdx}}
+\index{p\_dEdx@{p\_dEdx}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{p\_dEdx}{p\_dEdx}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_a361eada0f4a66e9daaf94dd86d1458e0} 
+\mbox{\hyperlink{class_reconstruction_1_1d_edx}{Reconstruction\+::d\+Edx}} \texorpdfstring{$\ast$}{*} Reconstruction\+::p\+\_\+d\+Edx}
+
+\Hypertarget{namespace_reconstruction_a55a58124d364f8ee41735f2581bace65}\index{Reconstruction@{Reconstruction}!p\_DrawOuts@{p\_DrawOuts}}
+\index{p\_DrawOuts@{p\_DrawOuts}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{p\_DrawOuts}{p\_DrawOuts}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_a55a58124d364f8ee41735f2581bace65} 
+\mbox{\hyperlink{class_reconstruction_1_1_draw_outs}{Reconstruction\+::\+Draw\+Outs}} \texorpdfstring{$\ast$}{*} Reconstruction\+::p\+\_\+\+Draw\+Outs}
+
+\Hypertarget{namespace_reconstruction_af671490dae2544dcd115730d401bc043}\index{Reconstruction@{Reconstruction}!p\_lut@{p\_lut}}
+\index{p\_lut@{p\_lut}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{p\_lut}{p\_lut}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_af671490dae2544dcd115730d401bc043} 
+\mbox{\hyperlink{class_reconstruction_1_1_l_u_t}{Reconstruction\+::\+LUT}} \texorpdfstring{$\ast$}{*} Reconstruction\+::p\+\_\+lut}
+
+\Hypertarget{namespace_reconstruction_a882db6a4cdced013e7ef63a4f9e0385a}\index{Reconstruction@{Reconstruction}!p\_uploader@{p\_uploader}}
+\index{p\_uploader@{p\_uploader}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{p\_uploader}{p\_uploader}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_a882db6a4cdced013e7ef63a4f9e0385a} 
+\mbox{\hyperlink{class_uploader}{Uploader}} \texorpdfstring{$\ast$}{*} Reconstruction\+::p\+\_\+uploader}
+
+\Hypertarget{namespace_reconstruction_a9dd23faf5a74cca585201f3278764e74}\index{Reconstruction@{Reconstruction}!prototype@{prototype}}
+\index{prototype@{prototype}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{prototype}{prototype}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_a9dd23faf5a74cca585201f3278764e74} 
+int Reconstruction\+::prototype = 0}
+
+\Hypertarget{namespace_reconstruction_af069e60f84af61c134ed010b539b93cf}\index{Reconstruction@{Reconstruction}!PT@{PT}}
+\index{PT@{PT}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{PT}{PT}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_af069e60f84af61c134ed010b539b93cf} 
+int Reconstruction\+::\+PT}
+
+\Hypertarget{namespace_reconstruction_a5293e1ff777fde07b7f00dd2ae16042d}\index{Reconstruction@{Reconstruction}!pUploader@{pUploader}}
+\index{pUploader@{pUploader}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{pUploader}{pUploader}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_a5293e1ff777fde07b7f00dd2ae16042d} 
+\mbox{\hyperlink{class_uploader}{Uploader}}\texorpdfstring{$\ast$}{*} Reconstruction\+::p\+Uploader}
+
+\Hypertarget{namespace_reconstruction_a44fe2c0e00005ffa3d9f831dbf763723}\index{Reconstruction@{Reconstruction}!rootout\_file@{rootout\_file}}
+\index{rootout\_file@{rootout\_file}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{rootout\_file}{rootout\_file}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_a44fe2c0e00005ffa3d9f831dbf763723} 
+std\+::string Reconstruction\+::rootout\+\_\+file = "{}"{}}
+
+\Hypertarget{namespace_reconstruction_a75d95e59d3e8a8a3baa4c436fa1a5b4c}\index{Reconstruction@{Reconstruction}!runvarstr@{runvarstr}}
+\index{runvarstr@{runvarstr}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{runvarstr}{runvarstr}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_a75d95e59d3e8a8a3baa4c436fa1a5b4c} 
+std\+::string Reconstruction\+::runvarstr}
+
+\Hypertarget{namespace_reconstruction_a02c880aa3fc60efa7a1e32a2cf219781}\index{Reconstruction@{Reconstruction}!scanIndex@{scanIndex}}
+\index{scanIndex@{scanIndex}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{scanIndex}{scanIndex}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_a02c880aa3fc60efa7a1e32a2cf219781} 
+int Reconstruction\+::scan\+Index = 0}
+
+\Hypertarget{namespace_reconstruction_a95778d5c57d744f35d4515247148b504}\index{Reconstruction@{Reconstruction}!scanName@{scanName}}
+\index{scanName@{scanName}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{scanName}{scanName}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_a95778d5c57d744f35d4515247148b504} 
+std\+::string Reconstruction\+::scan\+Name}
+
+\Hypertarget{namespace_reconstruction_ae7e1e0f3abc093e79fc8570d74604192}\index{Reconstruction@{Reconstruction}!selectionSet@{selectionSet}}
+\index{selectionSet@{selectionSet}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{selectionSet}{selectionSet}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_ae7e1e0f3abc093e79fc8570d74604192} 
+std\+::string Reconstruction\+::selection\+Set}
+
+\Hypertarget{namespace_reconstruction_a4f6586c945fb393c11557e5c716096cd}\index{Reconstruction@{Reconstruction}!tag@{tag}}
+\index{tag@{tag}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{tag}{tag}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_a4f6586c945fb393c11557e5c716096cd} 
+std\+::string Reconstruction\+::tag}
+
+\Hypertarget{namespace_reconstruction_a1ec3814e94230dbe1b31c62b4160dc00}\index{Reconstruction@{Reconstruction}!TB@{TB}}
+\index{TB@{TB}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{TB}{TB}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_a1ec3814e94230dbe1b31c62b4160dc00} 
+int Reconstruction\+::\+TB}
+
+\Hypertarget{namespace_reconstruction_aa247a28fec76cc4006345e785c837167}\index{Reconstruction@{Reconstruction}!testbeam@{testbeam}}
+\index{testbeam@{testbeam}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{testbeam}{testbeam}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_aa247a28fec76cc4006345e785c837167} 
+std\+::string Reconstruction\+::testbeam}
+
+\Hypertarget{namespace_reconstruction_a201b3cdb488531810431822413e177c7}\index{Reconstruction@{Reconstruction}!v\_comments@{v\_comments}}
+\index{v\_comments@{v\_comments}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{v\_comments}{v\_comments}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_a201b3cdb488531810431822413e177c7} 
+std\+::vector$<$ std\+::string $>$ Reconstruction\+::v\+\_\+comments}
+
+\Hypertarget{namespace_reconstruction_a50ad7b60a597a2f3777d3b9acb20b3fa}\index{Reconstruction@{Reconstruction}!v\_datafiles@{v\_datafiles}}
+\index{v\_datafiles@{v\_datafiles}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{v\_datafiles}{v\_datafiles}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_a50ad7b60a597a2f3777d3b9acb20b3fa} 
+std\+::vector$<$ std\+::string $>$ Reconstruction\+::v\+\_\+datafiles}
+
+\Hypertarget{namespace_reconstruction_a6704a82aaabd8632841f30f550517058}\index{Reconstruction@{Reconstruction}!v\_rootout\_files@{v\_rootout\_files}}
+\index{v\_rootout\_files@{v\_rootout\_files}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{v\_rootout\_files}{v\_rootout\_files}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_a6704a82aaabd8632841f30f550517058} 
+std\+::vector$<$ std\+::string $>$ Reconstruction\+::v\+\_\+rootout\+\_\+files}
+
+\Hypertarget{namespace_reconstruction_a96149af66110037c26db441bef45da48}\index{Reconstruction@{Reconstruction}!v\_scanspec@{v\_scanspec}}
+\index{v\_scanspec@{v\_scanspec}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{v\_scanspec}{v\_scanspec}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_a96149af66110037c26db441bef45da48} 
+std\+::vector$<$ std\+::string $>$ Reconstruction\+::v\+\_\+scanspec}
+
+\Hypertarget{namespace_reconstruction_a51d538f43e8dd84ac69cdd99fd43c350}\index{Reconstruction@{Reconstruction}!vcorrFuncPaths@{vcorrFuncPaths}}
+\index{vcorrFuncPaths@{vcorrFuncPaths}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{vcorrFuncPaths}{vcorrFuncPaths}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_a51d538f43e8dd84ac69cdd99fd43c350} 
+std\+::vector$<$ std\+::string $>$ Reconstruction\+::vcorr\+Func\+Paths}
+
+\Hypertarget{namespace_reconstruction_ae8d48e6a589f60892172d844b3e79391}\index{Reconstruction@{Reconstruction}!vScanLabels@{vScanLabels}}
+\index{vScanLabels@{vScanLabels}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{vScanLabels}{vScanLabels}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_ae8d48e6a589f60892172d844b3e79391} 
+std\+::vector$<$ std\+::string $>$ Reconstruction\+::v\+Scan\+Labels}
+
+\Hypertarget{namespace_reconstruction_a223c48440ff66da0fa4126418c3062e1}\index{Reconstruction@{Reconstruction}!vScanVals@{vScanVals}}
+\index{vScanVals@{vScanVals}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{vScanVals}{vScanVals}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_a223c48440ff66da0fa4126418c3062e1} 
+std\+::vector$<$ float $>$ Reconstruction\+::v\+Scan\+Vals}
+
+\Hypertarget{namespace_reconstruction_a977a6d8ff81004c5df77f6db4a7a8b11}\index{Reconstruction@{Reconstruction}!vTags@{vTags}}
+\index{vTags@{vTags}!Reconstruction@{Reconstruction}}
+\doxysubsubsection{\texorpdfstring{vTags}{vTags}}
+{\footnotesize\ttfamily \label{namespace_reconstruction_a977a6d8ff81004c5df77f6db4a7a8b11} 
+std\+::vector$<$ std\+::string $>$ Reconstruction\+::v\+Tags}
+

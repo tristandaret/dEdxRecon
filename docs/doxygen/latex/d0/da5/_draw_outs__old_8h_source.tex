@@ -1,0 +1,136 @@
+\doxysection{Draw\+Outs\+\_\+old.\+h}
+\hypertarget{_draw_outs__old_8h_source}{}\label{_draw_outs__old_8h_source}\index{Reconstruction/inc/DrawOuts\_old.h@{Reconstruction/inc/DrawOuts\_old.h}}
+\mbox{\hyperlink{_draw_outs__old_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#ifndef\ DRAWOUTSOLD\_H}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#define\ DRAWOUTSOLD\_H}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_misc_8h}{Misc.h}}"{}}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}SetStyle.h"{}}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{d_edx_8h}{dEdx.h}}"{}}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{comment}{//\ TH2\ comparisons\ of\ the\ different\ methods}}
+\DoxyCodeLine{00017\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_draw_outs__old_8h_aee6fe31917f715f0b59b0baceb13a6bf}{DrawOut\_Methods}}(\textcolor{keyword}{const}\ std::string\ \&OutDir,\ \textcolor{keyword}{const}\ std::string\ \&Tag,}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&Comment,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&nMod);}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{comment}{//\ Draw\ resolution\ of\ 2\ different\ procedures}}
+\DoxyCodeLine{00021\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_draw_outs__old_8h_a8b2e5d54175bbe5bdba19665cc1662fc}{DrawOut\_Versions}}(\textcolor{keyword}{const}\ std::string\ \&inputDir,\ \textcolor{keyword}{const}\ std::string\ \&Method,}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&Comment1,\ \textcolor{keyword}{const}\ std::string\ \&Comment2);}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{comment}{//\ Draw\ separation\ power\ histograms\ for\ all\ methods\ and\ particles}}
+\DoxyCodeLine{00025\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_draw_outs__old_8h_a53f63fac2e460c01cdaa9abcffbf73e4}{DrawOut\_Separation}}(\textcolor{keyword}{const}\ std::string\ \&inputDir,}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&Comment);}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{comment}{//\ Draw\ separation\ power\ histograms\ for\ all\ methods\ and\ particles\ only\ for\ WF\ \&}}
+\DoxyCodeLine{00029\ \textcolor{comment}{//\ XP}}
+\DoxyCodeLine{00030\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_draw_outs__old_8h_aeb6b096df2e84de580f9fb88c6e3fff5}{DrawOut\_Separation\_Reduced}}(\textcolor{keyword}{const}\ std::string\ \&inputDir,}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&Comment,\ std::string\ Energy);}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{comment}{//\ Draw\ all\ scans\ together}}
+\DoxyCodeLine{00034\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_draw_outs__old_8h_ac6ace6c804f2ced12ba2a68a64c4ad6d}{DrawOut\_Scans}}(\textcolor{keyword}{const}\ std::string\ \&inputDir,\ \textcolor{keyword}{const}\ std::string\ \&Comment,}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&WFversion);}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \textcolor{comment}{//\ Draw\ resolution\ as\ function\ of\ Z\ scan}}
+\DoxyCodeLine{00038\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_draw_outs__old_8h_a9eaf3a345d6bb807382233a78ea0599d}{DrawOut\_Zscan}}(\textcolor{keyword}{const}\ std::string\ \&inputDir,\ \textcolor{keyword}{const}\ std::string\ \&Comment,}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&PT);}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{comment}{//\ Draw\ resolution\ as\ function\ of\ Y\ scan}}
+\DoxyCodeLine{00042\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_draw_outs__old_8h_a4d5fc46cf569d54702b4bee19b5e74eb}{DrawOut\_Yscan}}(\textcolor{keyword}{const}\ std::string\ \&inputDir,\ \textcolor{keyword}{const}\ std::string\ \&Comment);}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \textcolor{comment}{//\ Draw\ resolution\ as\ function\ of\ phi\ scan}}
+\DoxyCodeLine{00045\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_draw_outs__old_8h_a1ab33a747c6a434181aff58882342e7d}{DrawOut\_Phiscan}}(\textcolor{keyword}{const}\ std::string\ \&inputDir,\ \textcolor{keyword}{const}\ std::string\ \&Comment,}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&WFversion,\ \textcolor{keyword}{const}\ std::string\ \&zdrift);}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \textcolor{comment}{//\ Draw\ resolution\ as\ function\ of\ theta\ scan}}
+\DoxyCodeLine{00049\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_draw_outs__old_8h_a27f2d41efbe58740d10f2c9908c3faaf}{DrawOut\_Thetascan}}(\textcolor{keyword}{const}\ std::string\ \&inputDir,\ \textcolor{keyword}{const}\ std::string\ \&Comment);}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \textcolor{comment}{//\ Transverse\ diffusion\ coefficient\ effect\ on\ Z\ scan}}
+\DoxyCodeLine{00052\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_draw_outs__old_8h_a58a0c823915bd7b4421a26f1f04fa7db}{DrawOut\_Zscan\_PT}}(\textcolor{keyword}{const}\ std::string\ \&inputDir,\ \textcolor{keyword}{const}\ std::string\ \&Comment);}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \textcolor{comment}{//\ Draw\ resolution\ as\ function\ of\ phi\ scan\ for\ different\ drift\ distances}}
+\DoxyCodeLine{00055\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_draw_outs__old_8h_aafb5cc93e204fdb2fae12207b86c2219}{DrawOut\_Phiscan\_Z}}(\textcolor{keyword}{const}\ std::string\ \&inputDir,\ \textcolor{keyword}{const}\ std::string\ \&Comment,}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&WFversion);}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \textcolor{comment}{//\ Draw\ Energy\ scan}}
+\DoxyCodeLine{00059\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_draw_outs__old_8h_af726b66452a15c66086b2d81e11f04a2}{DrawOut\_Escan}}(\textcolor{keyword}{const}\ std::string\ \&inputDir,\ \textcolor{keyword}{const}\ std::string\ \&Comment);}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \textcolor{comment}{//\ DrawOut\ dE/dx\ systematics\ with\ Z\ scan}}
+\DoxyCodeLine{00062\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_draw_outs__old_8h_a3cf54d94c9328eb82e3d6ef4f1e2e7b8}{DrawOut\_Systematics}}(\textcolor{keyword}{const}\ std::string\ \&inputDir,}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&Comment,\ \textcolor{keyword}{const}\ std::string\ \&scan);}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00066\ \textcolor{preprocessor}{\#}\textcolor{comment}{/***************************************************************************}}
+\DoxyCodeLine{00067\ \textcolor{comment}{\ *\ File:\ DrawOuts\_old.h}}
+\DoxyCodeLine{00068\ \textcolor{comment}{\ *\ Project:\ dEdxRecon}}
+\DoxyCodeLine{00069\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00070\ \textcolor{comment}{\ *\ Brief:\ Legacy/older\ drawout\ interfaces\ kept\ for\ backward\ compatibility.}}
+\DoxyCodeLine{00071\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ Declares\ older\ drawing\ utilities\ that\ may\ be\ used\ by\ legacy}}
+\DoxyCodeLine{00072\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ workflows\ or\ for\ regression\ comparisons.}}
+\DoxyCodeLine{00073\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00074\ \textcolor{comment}{\ *\ Contents:\ legacy\ drawing\ class/function\ declarations.}}
+\DoxyCodeLine{00075\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00076\ \textcolor{comment}{\ *\ Notes:\ Prefer\ the\ newer\ DrawOuts\ API;\ this\ header\ is\ retained\ for}}
+\DoxyCodeLine{00077\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ compatibility.}}
+\DoxyCodeLine{00078\ \textcolor{comment}{\ ***************************************************************************/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \textcolor{preprocessor}{\#ifndef\ DRAWOUTSOLD\_H}}
+\DoxyCodeLine{00081\ \textcolor{preprocessor}{\#define\ DRAWOUTSOLD\_H}}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_misc_8h}{Misc.h}}"{}}}
+\DoxyCodeLine{00084\ \textcolor{preprocessor}{\#include\ "{}SetStyle.h"{}}}
+\DoxyCodeLine{00085\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{d_edx_8h}{dEdx.h}}"{}}}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \textcolor{comment}{//\ TH2\ comparisons\ of\ the\ different\ methods}}
+\DoxyCodeLine{00088\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_draw_outs__old_8h_aee6fe31917f715f0b59b0baceb13a6bf}{DrawOut\_Methods}}(\textcolor{keyword}{const}\ std::string\ \&OutDir,\ \textcolor{keyword}{const}\ std::string\ \&Tag,}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&Comment,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&nMod);}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \textcolor{comment}{//\ Draw\ resolution\ of\ 2\ different\ procedures}}
+\DoxyCodeLine{00092\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_draw_outs__old_8h_a8b2e5d54175bbe5bdba19665cc1662fc}{DrawOut\_Versions}}(\textcolor{keyword}{const}\ std::string\ \&inputDir,\ \textcolor{keyword}{const}\ std::string\ \&Method,}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&Comment1,\ \textcolor{keyword}{const}\ std::string\ \&Comment2);}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \textcolor{comment}{//\ Draw\ separation\ power\ histograms\ for\ all\ methods\ and\ particles}}
+\DoxyCodeLine{00096\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_draw_outs__old_8h_a53f63fac2e460c01cdaa9abcffbf73e4}{DrawOut\_Separation}}(\textcolor{keyword}{const}\ std::string\ \&inputDir,}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&Comment);}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \textcolor{comment}{//\ Draw\ separation\ power\ histograms\ for\ all\ methods\ and\ particles\ only\ for\ WF\ \&}}
+\DoxyCodeLine{00100\ \textcolor{comment}{//\ XP}}
+\DoxyCodeLine{00101\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_draw_outs__old_8h_aeb6b096df2e84de580f9fb88c6e3fff5}{DrawOut\_Separation\_Reduced}}(\textcolor{keyword}{const}\ std::string\ \&inputDir,}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&Comment,\ std::string\ Energy);}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \textcolor{comment}{//\ Draw\ all\ scans\ together}}
+\DoxyCodeLine{00105\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_draw_outs__old_8h_ac6ace6c804f2ced12ba2a68a64c4ad6d}{DrawOut\_Scans}}(\textcolor{keyword}{const}\ std::string\ \&inputDir,\ \textcolor{keyword}{const}\ std::string\ \&Comment,}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&WFversion);}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00108\ \textcolor{comment}{//\ Draw\ resolution\ as\ function\ of\ Z\ scan}}
+\DoxyCodeLine{00109\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_draw_outs__old_8h_a9eaf3a345d6bb807382233a78ea0599d}{DrawOut\_Zscan}}(\textcolor{keyword}{const}\ std::string\ \&inputDir,\ \textcolor{keyword}{const}\ std::string\ \&Comment,}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&PT);}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00112\ \textcolor{comment}{//\ Draw\ resolution\ as\ function\ of\ Y\ scan}}
+\DoxyCodeLine{00113\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_draw_outs__old_8h_a4d5fc46cf569d54702b4bee19b5e74eb}{DrawOut\_Yscan}}(\textcolor{keyword}{const}\ std::string\ \&inputDir,\ \textcolor{keyword}{const}\ std::string\ \&Comment);}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00115\ \textcolor{comment}{//\ Draw\ resolution\ as\ function\ of\ phi\ scan}}
+\DoxyCodeLine{00116\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_draw_outs__old_8h_a1ab33a747c6a434181aff58882342e7d}{DrawOut\_Phiscan}}(\textcolor{keyword}{const}\ std::string\ \&inputDir,\ \textcolor{keyword}{const}\ std::string\ \&Comment,}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&WFversion,\ \textcolor{keyword}{const}\ std::string\ \&zdrift);}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00119\ \textcolor{comment}{//\ Draw\ resolution\ as\ function\ of\ theta\ scan}}
+\DoxyCodeLine{00120\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_draw_outs__old_8h_a27f2d41efbe58740d10f2c9908c3faaf}{DrawOut\_Thetascan}}(\textcolor{keyword}{const}\ std::string\ \&inputDir,\ \textcolor{keyword}{const}\ std::string\ \&Comment);}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00122\ \textcolor{comment}{//\ Transverse\ diffusion\ coefficient\ effect\ on\ Z\ scan}}
+\DoxyCodeLine{00123\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_draw_outs__old_8h_a58a0c823915bd7b4421a26f1f04fa7db}{DrawOut\_Zscan\_PT}}(\textcolor{keyword}{const}\ std::string\ \&inputDir,\ \textcolor{keyword}{const}\ std::string\ \&Comment);}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00125\ \textcolor{comment}{//\ Draw\ resolution\ as\ function\ of\ phi\ scan\ for\ different\ drift\ distances}}
+\DoxyCodeLine{00126\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_draw_outs__old_8h_aafb5cc93e204fdb2fae12207b86c2219}{DrawOut\_Phiscan\_Z}}(\textcolor{keyword}{const}\ std::string\ \&inputDir,\ \textcolor{keyword}{const}\ std::string\ \&Comment,}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&WFversion);}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00129\ \textcolor{comment}{//\ Draw\ Energy\ scan}}
+\DoxyCodeLine{00130\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_draw_outs__old_8h_af726b66452a15c66086b2d81e11f04a2}{DrawOut\_Escan}}(\textcolor{keyword}{const}\ std::string\ \&inputDir,\ \textcolor{keyword}{const}\ std::string\ \&Comment);}
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00132\ \textcolor{comment}{//\ DrawOut\ dE/dx\ systematics\ with\ Z\ scan}}
+\DoxyCodeLine{00133\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_draw_outs__old_8h_a3cf54d94c9328eb82e3d6ef4f1e2e7b8}{DrawOut\_Systematics}}(\textcolor{keyword}{const}\ std::string\ \&inputDir,}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&Comment,\ \textcolor{keyword}{const}\ std::string\ \&scan);}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00136\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

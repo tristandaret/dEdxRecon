@@ -1,0 +1,21 @@
+\doxysection{Fitters/inc/\+PRFParameters.h File Reference}
+\hypertarget{_p_r_f_parameters_8h}{}\label{_p_r_f_parameters_8h}\index{Fitters/inc/PRFParameters.h@{Fitters/inc/PRFParameters.h}}
+
+
+Parameter container and evaluator for the \doxylink{class_pad}{Pad} Response Function (PRF).  
+
+
+{\ttfamily \#include "{}Misc.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_p_r_f_parameters}{PRFParameters}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Parameter container and evaluator for the \doxylink{class_pad}{Pad} Response Function (PRF). 
+
+Declares the \doxylink{class_p_r_f_parameters}{PRFParameters} class which stores polynomial coefficients used to evaluate a PRF model used by cluster/track fitting. Implementation is in \doxylink{_p_r_f_parameters_8cxx}{PRFParameters.\+cxx}.
+
+The implementation provides Eval, Set\+PRF and operator() so the object can be used directly as a functor with ROOT\textquotesingle{}s TF1. It stores the polynomial coefficients and provides a small, stable interface for fitters and waveform utilities. 

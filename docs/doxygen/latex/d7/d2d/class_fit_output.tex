@@ -1,0 +1,229 @@
+\doxysection{Fit\+Output Class Reference}
+\hypertarget{class_fit_output}{}\label{class_fit_output}\index{FitOutput@{FitOutput}}
+
+
+{\ttfamily \#include $<$Fit\+Output.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_fit_output_af2832382759b0dd27b770c28747b4ef8}{Fit\+Output}} ()
+\item 
+virtual \mbox{\hyperlink{class_fit_output_a0c65f8749ba52e922181984f635c34e5}{\texorpdfstring{$\sim$}{\string~}\+Fit\+Output}} ()
+\item 
+\mbox{\hyperlink{class_fit_output_aa750648c58c09fc60971d5986d1e16e1}{Fit\+Output}} (const \mbox{\hyperlink{class_fit_output}{Fit\+Output}} \&To\+Be\+Copied)
+\item 
+\mbox{\hyperlink{class_fit_output}{Fit\+Output}} \& \mbox{\hyperlink{class_fit_output_aad19ca7ed03af24f5113e6903dde7d4b}{operator=}} (const \mbox{\hyperlink{class_fit_output}{Fit\+Output}} \&To\+Be\+Copied)
+\item 
+void \mbox{\hyperlink{class_fit_output_af790346a4f82a985094b495e47913489}{Reset}} ()
+\item 
+void \mbox{\hyperlink{class_fit_output_af1afb81fef816f95639b749ad4fe606d}{Set}} (const int \&Nber\+Of\+Model\+Parameters)
+\item 
+void \mbox{\hyperlink{class_fit_output_ad08d66eb909551d1601527ba70c8d59e}{Set\+Results}} (TVirtual\+Fitter \texorpdfstring{$\ast$}{*}p\+TVirtual\+Fitter)
+\item 
+void \mbox{\hyperlink{class_fit_output_a09d57a26d1181a8aa594df19795e9e28}{Set\+Results}} (const std\+::vector$<$ std\+::string $>$ \&V\+\_\+\+PARname, const std\+::vector$<$ double $>$ \&V\+\_\+\+PAR, const std\+::vector$<$ double $>$ \&V\+\_\+e\+PAR)
+\item 
+void \mbox{\hyperlink{class_fit_output_a75042abe9b795ac2494728ce07c81680}{Print\+Fit\+Output}} ()
+\item 
+void \mbox{\hyperlink{class_fit_output_ae81880ba505c88b86e92c7b77acf805e}{Print\+Fit\+Output\+In\+Canvas}} (double Xstart, double Ystart, double Step)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{class_fit_output_a54192318ca1996b1eeb5b4f78ae2e03c}{m\+\_\+\+Name\+Of\+The\+Model}}
+\item 
+int \mbox{\hyperlink{class_fit_output_aae4ec2cb67c37f21bf63195409ee5309}{m\+\_\+\+Nber\+Of\+Model\+Parameters}}
+\item 
+int \mbox{\hyperlink{class_fit_output_a030c139b1da8d3879ff233b3c7233cf9}{m\+\_\+\+Nber\+Of\+Data\+Points}}
+\item 
+double \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_fit_output_a69514a069906f5c9ebc551b38a7ff90c}{p\+\_\+par}}
+\begin{DoxyCompactList}\small\item\em Parameters. \end{DoxyCompactList}\item 
+std\+::string \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_fit_output_acf7af4c76f0c4474f464bcbee78aede0}{p\+\_\+par\+Name}}
+\begin{DoxyCompactList}\small\item\em Name. \end{DoxyCompactList}\item 
+double \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_fit_output_a9d5d13322b3e367205d308ba32ac8aff}{p\+\_\+eparplus}}
+\begin{DoxyCompactList}\small\item\em Errors. \end{DoxyCompactList}\item 
+double \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_fit_output_a78e7313795a08975328dfd15bae8fb21}{p\+\_\+eparminus}}
+\begin{DoxyCompactList}\small\item\em Errors. \end{DoxyCompactList}\item 
+double \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_fit_output_a68595a11038d4600a6e3a5fc3c5a9527}{p\+\_\+eparparab}}
+\begin{DoxyCompactList}\small\item\em Errors. \end{DoxyCompactList}\item 
+double \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_fit_output_ad9f3c060dbe1dd05169a9e5dbc4d9fa4}{p\+\_\+\+Cov\+Matrix}}
+\begin{DoxyCompactList}\small\item\em Cov matrix. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_fit_output_a9021ae4443b7cd6d87ba77799e0ec87b}{m\+\_\+\+Minn\+LL}}
+\begin{DoxyCompactList}\small\item\em Likelihood. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{class_fit_output_a2c7216f868ba737c4a734cd510a7f513}{m\+\_\+\+Description}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{class_fit_output_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_fit_output_af2832382759b0dd27b770c28747b4ef8}\index{FitOutput@{FitOutput}!FitOutput@{FitOutput}}
+\index{FitOutput@{FitOutput}!FitOutput@{FitOutput}}
+\doxysubsubsection{\texorpdfstring{FitOutput()}{FitOutput()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_fit_output_af2832382759b0dd27b770c28747b4ef8} 
+Fit\+Output\+::\+Fit\+Output (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_fit_output_a0c65f8749ba52e922181984f635c34e5}\index{FitOutput@{FitOutput}!````~FitOutput@{\texorpdfstring{$\sim$}{\string~}FitOutput}}
+\index{````~FitOutput@{\texorpdfstring{$\sim$}{\string~}FitOutput}!FitOutput@{FitOutput}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}FitOutput()}{\string~FitOutput()}}
+{\footnotesize\ttfamily \label{class_fit_output_a0c65f8749ba52e922181984f635c34e5} 
+Fit\+Output\+::\texorpdfstring{$\sim$}{\string~}\+Fit\+Output (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+\Hypertarget{class_fit_output_aa750648c58c09fc60971d5986d1e16e1}\index{FitOutput@{FitOutput}!FitOutput@{FitOutput}}
+\index{FitOutput@{FitOutput}!FitOutput@{FitOutput}}
+\doxysubsubsection{\texorpdfstring{FitOutput()}{FitOutput()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_fit_output_aa750648c58c09fc60971d5986d1e16e1} 
+Fit\+Output\+::\+Fit\+Output (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_fit_output}{Fit\+Output}} \&}]{To\+Be\+Copied}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_fit_output_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_fit_output_aad19ca7ed03af24f5113e6903dde7d4b}\index{FitOutput@{FitOutput}!operator=@{operator=}}
+\index{operator=@{operator=}!FitOutput@{FitOutput}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \label{class_fit_output_aad19ca7ed03af24f5113e6903dde7d4b} 
+\mbox{\hyperlink{class_fit_output}{Fit\+Output}} \& Fit\+Output\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_fit_output}{Fit\+Output}} \&}]{To\+Be\+Copied}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_fit_output_a75042abe9b795ac2494728ce07c81680}\index{FitOutput@{FitOutput}!PrintFitOutput@{PrintFitOutput}}
+\index{PrintFitOutput@{PrintFitOutput}!FitOutput@{FitOutput}}
+\doxysubsubsection{\texorpdfstring{PrintFitOutput()}{PrintFitOutput()}}
+{\footnotesize\ttfamily \label{class_fit_output_a75042abe9b795ac2494728ce07c81680} 
+void Fit\+Output\+::\+Print\+Fit\+Output (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_fit_output_ae81880ba505c88b86e92c7b77acf805e}\index{FitOutput@{FitOutput}!PrintFitOutputInCanvas@{PrintFitOutputInCanvas}}
+\index{PrintFitOutputInCanvas@{PrintFitOutputInCanvas}!FitOutput@{FitOutput}}
+\doxysubsubsection{\texorpdfstring{PrintFitOutputInCanvas()}{PrintFitOutputInCanvas()}}
+{\footnotesize\ttfamily \label{class_fit_output_ae81880ba505c88b86e92c7b77acf805e} 
+void Fit\+Output\+::\+Print\+Fit\+Output\+In\+Canvas (\begin{DoxyParamCaption}\item[{double}]{Xstart}{, }\item[{double}]{Ystart}{, }\item[{double}]{Step}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_fit_output_af790346a4f82a985094b495e47913489}\index{FitOutput@{FitOutput}!Reset@{Reset}}
+\index{Reset@{Reset}!FitOutput@{FitOutput}}
+\doxysubsubsection{\texorpdfstring{Reset()}{Reset()}}
+{\footnotesize\ttfamily \label{class_fit_output_af790346a4f82a985094b495e47913489} 
+void Fit\+Output\+::\+Reset (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_fit_output_af1afb81fef816f95639b749ad4fe606d}\index{FitOutput@{FitOutput}!Set@{Set}}
+\index{Set@{Set}!FitOutput@{FitOutput}}
+\doxysubsubsection{\texorpdfstring{Set()}{Set()}}
+{\footnotesize\ttfamily \label{class_fit_output_af1afb81fef816f95639b749ad4fe606d} 
+void Fit\+Output\+::\+Set (\begin{DoxyParamCaption}\item[{const int \&}]{Nber\+Of\+Model\+Parameters}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_fit_output_a09d57a26d1181a8aa594df19795e9e28}\index{FitOutput@{FitOutput}!SetResults@{SetResults}}
+\index{SetResults@{SetResults}!FitOutput@{FitOutput}}
+\doxysubsubsection{\texorpdfstring{SetResults()}{SetResults()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_fit_output_a09d57a26d1181a8aa594df19795e9e28} 
+void Fit\+Output\+::\+Set\+Results (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::string $>$ \&}]{V\+\_\+\+PARname}{, }\item[{const std\+::vector$<$ double $>$ \&}]{V\+\_\+\+PAR}{, }\item[{const std\+::vector$<$ double $>$ \&}]{V\+\_\+e\+PAR}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_fit_output_ad08d66eb909551d1601527ba70c8d59e}\index{FitOutput@{FitOutput}!SetResults@{SetResults}}
+\index{SetResults@{SetResults}!FitOutput@{FitOutput}}
+\doxysubsubsection{\texorpdfstring{SetResults()}{SetResults()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_fit_output_ad08d66eb909551d1601527ba70c8d59e} 
+void Fit\+Output\+::\+Set\+Results (\begin{DoxyParamCaption}\item[{TVirtual\+Fitter \texorpdfstring{$\ast$}{*}}]{p\+TVirtual\+Fitter}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{class_fit_output_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_fit_output_a2c7216f868ba737c4a734cd510a7f513}\index{FitOutput@{FitOutput}!m\_Description@{m\_Description}}
+\index{m\_Description@{m\_Description}!FitOutput@{FitOutput}}
+\doxysubsubsection{\texorpdfstring{m\_Description}{m\_Description}}
+{\footnotesize\ttfamily \label{class_fit_output_a2c7216f868ba737c4a734cd510a7f513} 
+std\+::string Fit\+Output\+::m\+\_\+\+Description}
+
+\Hypertarget{class_fit_output_a9021ae4443b7cd6d87ba77799e0ec87b}\index{FitOutput@{FitOutput}!m\_MinnLL@{m\_MinnLL}}
+\index{m\_MinnLL@{m\_MinnLL}!FitOutput@{FitOutput}}
+\doxysubsubsection{\texorpdfstring{m\_MinnLL}{m\_MinnLL}}
+{\footnotesize\ttfamily \label{class_fit_output_a9021ae4443b7cd6d87ba77799e0ec87b} 
+double Fit\+Output\+::m\+\_\+\+Minn\+LL}
+
+
+
+Likelihood. 
+
+\Hypertarget{class_fit_output_a54192318ca1996b1eeb5b4f78ae2e03c}\index{FitOutput@{FitOutput}!m\_NameOfTheModel@{m\_NameOfTheModel}}
+\index{m\_NameOfTheModel@{m\_NameOfTheModel}!FitOutput@{FitOutput}}
+\doxysubsubsection{\texorpdfstring{m\_NameOfTheModel}{m\_NameOfTheModel}}
+{\footnotesize\ttfamily \label{class_fit_output_a54192318ca1996b1eeb5b4f78ae2e03c} 
+std\+::string Fit\+Output\+::m\+\_\+\+Name\+Of\+The\+Model}
+
+\Hypertarget{class_fit_output_a030c139b1da8d3879ff233b3c7233cf9}\index{FitOutput@{FitOutput}!m\_NberOfDataPoints@{m\_NberOfDataPoints}}
+\index{m\_NberOfDataPoints@{m\_NberOfDataPoints}!FitOutput@{FitOutput}}
+\doxysubsubsection{\texorpdfstring{m\_NberOfDataPoints}{m\_NberOfDataPoints}}
+{\footnotesize\ttfamily \label{class_fit_output_a030c139b1da8d3879ff233b3c7233cf9} 
+int Fit\+Output\+::m\+\_\+\+Nber\+Of\+Data\+Points}
+
+\Hypertarget{class_fit_output_aae4ec2cb67c37f21bf63195409ee5309}\index{FitOutput@{FitOutput}!m\_NberOfModelParameters@{m\_NberOfModelParameters}}
+\index{m\_NberOfModelParameters@{m\_NberOfModelParameters}!FitOutput@{FitOutput}}
+\doxysubsubsection{\texorpdfstring{m\_NberOfModelParameters}{m\_NberOfModelParameters}}
+{\footnotesize\ttfamily \label{class_fit_output_aae4ec2cb67c37f21bf63195409ee5309} 
+int Fit\+Output\+::m\+\_\+\+Nber\+Of\+Model\+Parameters}
+
+\Hypertarget{class_fit_output_ad9f3c060dbe1dd05169a9e5dbc4d9fa4}\index{FitOutput@{FitOutput}!p\_CovMatrix@{p\_CovMatrix}}
+\index{p\_CovMatrix@{p\_CovMatrix}!FitOutput@{FitOutput}}
+\doxysubsubsection{\texorpdfstring{p\_CovMatrix}{p\_CovMatrix}}
+{\footnotesize\ttfamily \label{class_fit_output_ad9f3c060dbe1dd05169a9e5dbc4d9fa4} 
+double\texorpdfstring{$\ast$}{*} Fit\+Output\+::p\+\_\+\+Cov\+Matrix}
+
+
+
+Cov matrix. 
+
+\Hypertarget{class_fit_output_a78e7313795a08975328dfd15bae8fb21}\index{FitOutput@{FitOutput}!p\_eparminus@{p\_eparminus}}
+\index{p\_eparminus@{p\_eparminus}!FitOutput@{FitOutput}}
+\doxysubsubsection{\texorpdfstring{p\_eparminus}{p\_eparminus}}
+{\footnotesize\ttfamily \label{class_fit_output_a78e7313795a08975328dfd15bae8fb21} 
+double\texorpdfstring{$\ast$}{*} Fit\+Output\+::p\+\_\+eparminus}
+
+
+
+Errors. 
+
+\Hypertarget{class_fit_output_a68595a11038d4600a6e3a5fc3c5a9527}\index{FitOutput@{FitOutput}!p\_eparparab@{p\_eparparab}}
+\index{p\_eparparab@{p\_eparparab}!FitOutput@{FitOutput}}
+\doxysubsubsection{\texorpdfstring{p\_eparparab}{p\_eparparab}}
+{\footnotesize\ttfamily \label{class_fit_output_a68595a11038d4600a6e3a5fc3c5a9527} 
+double\texorpdfstring{$\ast$}{*} Fit\+Output\+::p\+\_\+eparparab}
+
+
+
+Errors. 
+
+\Hypertarget{class_fit_output_a9d5d13322b3e367205d308ba32ac8aff}\index{FitOutput@{FitOutput}!p\_eparplus@{p\_eparplus}}
+\index{p\_eparplus@{p\_eparplus}!FitOutput@{FitOutput}}
+\doxysubsubsection{\texorpdfstring{p\_eparplus}{p\_eparplus}}
+{\footnotesize\ttfamily \label{class_fit_output_a9d5d13322b3e367205d308ba32ac8aff} 
+double\texorpdfstring{$\ast$}{*} Fit\+Output\+::p\+\_\+eparplus}
+
+
+
+Errors. 
+
+\Hypertarget{class_fit_output_a69514a069906f5c9ebc551b38a7ff90c}\index{FitOutput@{FitOutput}!p\_par@{p\_par}}
+\index{p\_par@{p\_par}!FitOutput@{FitOutput}}
+\doxysubsubsection{\texorpdfstring{p\_par}{p\_par}}
+{\footnotesize\ttfamily \label{class_fit_output_a69514a069906f5c9ebc551b38a7ff90c} 
+double\texorpdfstring{$\ast$}{*} Fit\+Output\+::p\+\_\+par}
+
+
+
+Parameters. 
+
+\Hypertarget{class_fit_output_acf7af4c76f0c4474f464bcbee78aede0}\index{FitOutput@{FitOutput}!p\_parName@{p\_parName}}
+\index{p\_parName@{p\_parName}!FitOutput@{FitOutput}}
+\doxysubsubsection{\texorpdfstring{p\_parName}{p\_parName}}
+{\footnotesize\ttfamily \label{class_fit_output_acf7af4c76f0c4474f464bcbee78aede0} 
+std\+::string\texorpdfstring{$\ast$}{*} Fit\+Output\+::p\+\_\+par\+Name}
+
+
+
+Name. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Model\+Event/inc/\mbox{\hyperlink{_fit_output_8h}{Fit\+Output.\+h}}\item 
+Model\+Event/src/\mbox{\hyperlink{_fit_output_8cxx}{Fit\+Output.\+cxx}}\end{DoxyCompactItemize}

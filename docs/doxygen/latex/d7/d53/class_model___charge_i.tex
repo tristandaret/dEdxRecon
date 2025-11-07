@@ -1,0 +1,206 @@
+\doxysection{Model\+\_\+\+ChargeI Class Reference}
+\hypertarget{class_model___charge_i}{}\label{class_model___charge_i}\index{Model\_ChargeI@{Model\_ChargeI}}
+
+
+{\ttfamily \#include $<$Model\+\_\+\+Charge\+I.\+h$>$}
+
+Inheritance diagram for Model\+\_\+\+ChargeI\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{d7/d53/class_model___charge_i}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_model___charge_i_a8169d5a6adc08d735e4e7c8652fbf8f1}{Model\+\_\+\+ChargeI}} ()
+\item 
+virtual \mbox{\hyperlink{class_model___charge_i_a44801b3a94e2da6a691db00c1a820e2b}{\texorpdfstring{$\sim$}{\string~}\+Model\+\_\+\+ChargeI}} ()
+\item 
+double \mbox{\hyperlink{class_model___charge_i_a0a0e795ffb121938cbb127a217129257}{Get\+\_\+\+RC}} () const
+\item 
+double \mbox{\hyperlink{class_model___charge_i_a584348253ee35e6a88ffe7de26cb4947}{Get\+\_\+\+Width}} () const
+\item 
+double \mbox{\hyperlink{class_model___charge_i_a60e8923fb3582f802f7d64d72fa9f9f5}{Get\+\_\+\+Gain}} () const
+\item 
+void \mbox{\hyperlink{class_model___charge_i_abfb6605a5414ae26725f7863dcc193f6}{Set\+\_\+\+RC}} (const double \&RC)
+\item 
+void \mbox{\hyperlink{class_model___charge_i_ac4aa9215ec39b87324e0f207e7696045}{Set\+\_\+\+Width}} (const double \&Width)
+\item 
+void \mbox{\hyperlink{class_model___charge_i_aa741573ffe5f933f777d4617dc16edf1}{Set\+\_\+\+Gain}} (const double \&Gain)
+\item 
+void \mbox{\hyperlink{class_model___charge_i_aa3eadfbcf5a0bdfe2dd02403fb3e20e8}{Set\+\_\+\+Width\+From\+Drift\+Distance}} (const double \&Drift\+Distance\+\_\+cm)
+\item 
+virtual double \mbox{\hyperlink{class_model___charge_i_aec4774a97fb994b27e7a63f294bf87c5}{Get\+\_\+\+Qpad}} (const double \&Time, const double \&Time0, const double \&XTrue, const double \&YTrue, const double \&XL, const double \&XH, const double \&YL, const double \&YH) const =0
+\item 
+virtual void \mbox{\hyperlink{class_model___charge_i_a55905218b536a577469a578d05c24594}{Write\+Out}} () const =0
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_model___charge_i_a9db9667208138535885ca43b936d3b0d}{Width\+From\+Drift\+Distance}} (const double \&Drift\+Distance\+\_\+cm)
+\item 
+virtual void \mbox{\hyperlink{class_model___charge_i_aed72a06b3ea35997245ae68928199c41}{Set\+Secondaries}} ()=0
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{class_model___charge_i_ab7fb523acddc5c83e14e21bf64c20fc2}{m\+\_\+\+RC}}
+\item 
+double \mbox{\hyperlink{class_model___charge_i_abb93b5eda4499f499643a7e58dd45834}{m\+\_\+\+Width}}
+\item 
+double \mbox{\hyperlink{class_model___charge_i_ad5afab674dd1ea3b86067abf449ae523}{m\+\_\+\+Gain}}
+\item 
+double \mbox{\hyperlink{class_model___charge_i_a04216176300c6f1449238057635846ad}{m\+\_\+2\+RCinv}}
+\item 
+double \mbox{\hyperlink{class_model___charge_i_abfef548a4a48ecbf8007f112f59e538f}{m\+\_\+\+Width2}}
+\item 
+double \mbox{\hyperlink{class_model___charge_i_ae6d7e1dab37e8a7f72fb2514e3e038a8}{m\+\_\+\+Norm\+QPad}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{class_model___charge_i_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_model___charge_i_a8169d5a6adc08d735e4e7c8652fbf8f1}\index{Model\_ChargeI@{Model\_ChargeI}!Model\_ChargeI@{Model\_ChargeI}}
+\index{Model\_ChargeI@{Model\_ChargeI}!Model\_ChargeI@{Model\_ChargeI}}
+\doxysubsubsection{\texorpdfstring{Model\_ChargeI()}{Model\_ChargeI()}}
+{\footnotesize\ttfamily \label{class_model___charge_i_a8169d5a6adc08d735e4e7c8652fbf8f1} 
+Model\+\_\+\+Charge\+I\+::\+Model\+\_\+\+ChargeI (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Constructor \Hypertarget{class_model___charge_i_a44801b3a94e2da6a691db00c1a820e2b}\index{Model\_ChargeI@{Model\_ChargeI}!````~Model\_ChargeI@{\texorpdfstring{$\sim$}{\string~}Model\_ChargeI}}
+\index{````~Model\_ChargeI@{\texorpdfstring{$\sim$}{\string~}Model\_ChargeI}!Model\_ChargeI@{Model\_ChargeI}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Model\_ChargeI()}{\string~Model\_ChargeI()}}
+{\footnotesize\ttfamily \label{class_model___charge_i_a44801b3a94e2da6a691db00c1a820e2b} 
+Model\+\_\+\+Charge\+I\+::\texorpdfstring{$\sim$}{\string~}\+Model\+\_\+\+ChargeI (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_model___charge_i_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_model___charge_i_a60e8923fb3582f802f7d64d72fa9f9f5}\index{Model\_ChargeI@{Model\_ChargeI}!Get\_Gain@{Get\_Gain}}
+\index{Get\_Gain@{Get\_Gain}!Model\_ChargeI@{Model\_ChargeI}}
+\doxysubsubsection{\texorpdfstring{Get\_Gain()}{Get\_Gain()}}
+{\footnotesize\ttfamily \label{class_model___charge_i_a60e8923fb3582f802f7d64d72fa9f9f5} 
+double Model\+\_\+\+Charge\+I\+::\+Get\+\_\+\+Gain (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_model___charge_i_aec4774a97fb994b27e7a63f294bf87c5}\index{Model\_ChargeI@{Model\_ChargeI}!Get\_Qpad@{Get\_Qpad}}
+\index{Get\_Qpad@{Get\_Qpad}!Model\_ChargeI@{Model\_ChargeI}}
+\doxysubsubsection{\texorpdfstring{Get\_Qpad()}{Get\_Qpad()}}
+{\footnotesize\ttfamily \label{class_model___charge_i_aec4774a97fb994b27e7a63f294bf87c5} 
+virtual double Model\+\_\+\+Charge\+I\+::\+Get\+\_\+\+Qpad (\begin{DoxyParamCaption}\item[{const double \&}]{Time}{, }\item[{const double \&}]{Time0}{, }\item[{const double \&}]{XTrue}{, }\item[{const double \&}]{YTrue}{, }\item[{const double \&}]{XL}{, }\item[{const double \&}]{XH}{, }\item[{const double \&}]{YL}{, }\item[{const double \&}]{YH}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_model___charge0_d_a675adca0a1eedb8d4758c4a96c940ccd}{Model\+\_\+\+Charge0D}}, and \mbox{\hyperlink{class_model___charge1_d_a732b1788d81cd43798ca19ff3326942f}{Model\+\_\+\+Charge1D}}.
+
+\Hypertarget{class_model___charge_i_a0a0e795ffb121938cbb127a217129257}\index{Model\_ChargeI@{Model\_ChargeI}!Get\_RC@{Get\_RC}}
+\index{Get\_RC@{Get\_RC}!Model\_ChargeI@{Model\_ChargeI}}
+\doxysubsubsection{\texorpdfstring{Get\_RC()}{Get\_RC()}}
+{\footnotesize\ttfamily \label{class_model___charge_i_a0a0e795ffb121938cbb127a217129257} 
+double Model\+\_\+\+Charge\+I\+::\+Get\+\_\+\+RC (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_model___charge_i_a584348253ee35e6a88ffe7de26cb4947}\index{Model\_ChargeI@{Model\_ChargeI}!Get\_Width@{Get\_Width}}
+\index{Get\_Width@{Get\_Width}!Model\_ChargeI@{Model\_ChargeI}}
+\doxysubsubsection{\texorpdfstring{Get\_Width()}{Get\_Width()}}
+{\footnotesize\ttfamily \label{class_model___charge_i_a584348253ee35e6a88ffe7de26cb4947} 
+double Model\+\_\+\+Charge\+I\+::\+Get\+\_\+\+Width (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_model___charge_i_aa741573ffe5f933f777d4617dc16edf1}\index{Model\_ChargeI@{Model\_ChargeI}!Set\_Gain@{Set\_Gain}}
+\index{Set\_Gain@{Set\_Gain}!Model\_ChargeI@{Model\_ChargeI}}
+\doxysubsubsection{\texorpdfstring{Set\_Gain()}{Set\_Gain()}}
+{\footnotesize\ttfamily \label{class_model___charge_i_aa741573ffe5f933f777d4617dc16edf1} 
+void Model\+\_\+\+Charge\+I\+::\+Set\+\_\+\+Gain (\begin{DoxyParamCaption}\item[{const double \&}]{Gain}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_model___charge_i_abfb6605a5414ae26725f7863dcc193f6}\index{Model\_ChargeI@{Model\_ChargeI}!Set\_RC@{Set\_RC}}
+\index{Set\_RC@{Set\_RC}!Model\_ChargeI@{Model\_ChargeI}}
+\doxysubsubsection{\texorpdfstring{Set\_RC()}{Set\_RC()}}
+{\footnotesize\ttfamily \label{class_model___charge_i_abfb6605a5414ae26725f7863dcc193f6} 
+void Model\+\_\+\+Charge\+I\+::\+Set\+\_\+\+RC (\begin{DoxyParamCaption}\item[{const double \&}]{RC}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_model___charge_i_ac4aa9215ec39b87324e0f207e7696045}\index{Model\_ChargeI@{Model\_ChargeI}!Set\_Width@{Set\_Width}}
+\index{Set\_Width@{Set\_Width}!Model\_ChargeI@{Model\_ChargeI}}
+\doxysubsubsection{\texorpdfstring{Set\_Width()}{Set\_Width()}}
+{\footnotesize\ttfamily \label{class_model___charge_i_ac4aa9215ec39b87324e0f207e7696045} 
+void Model\+\_\+\+Charge\+I\+::\+Set\+\_\+\+Width (\begin{DoxyParamCaption}\item[{const double \&}]{Width}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_model___charge_i_aa3eadfbcf5a0bdfe2dd02403fb3e20e8}\index{Model\_ChargeI@{Model\_ChargeI}!Set\_WidthFromDriftDistance@{Set\_WidthFromDriftDistance}}
+\index{Set\_WidthFromDriftDistance@{Set\_WidthFromDriftDistance}!Model\_ChargeI@{Model\_ChargeI}}
+\doxysubsubsection{\texorpdfstring{Set\_WidthFromDriftDistance()}{Set\_WidthFromDriftDistance()}}
+{\footnotesize\ttfamily \label{class_model___charge_i_aa3eadfbcf5a0bdfe2dd02403fb3e20e8} 
+void Model\+\_\+\+Charge\+I\+::\+Set\+\_\+\+Width\+From\+Drift\+Distance (\begin{DoxyParamCaption}\item[{const double \&}]{Drift\+Distance\+\_\+cm}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_model___charge_i_aed72a06b3ea35997245ae68928199c41}\index{Model\_ChargeI@{Model\_ChargeI}!SetSecondaries@{SetSecondaries}}
+\index{SetSecondaries@{SetSecondaries}!Model\_ChargeI@{Model\_ChargeI}}
+\doxysubsubsection{\texorpdfstring{SetSecondaries()}{SetSecondaries()}}
+{\footnotesize\ttfamily \label{class_model___charge_i_aed72a06b3ea35997245ae68928199c41} 
+virtual void Model\+\_\+\+Charge\+I\+::\+Set\+Secondaries (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_model___charge0_d_a1593ec6fdba056b02402ed8adc2ac236}{Model\+\_\+\+Charge0D}}, and \mbox{\hyperlink{class_model___charge1_d_a1e0ac4effeb014978d565c5fd42d5166}{Model\+\_\+\+Charge1D}}.
+
+\Hypertarget{class_model___charge_i_a9db9667208138535885ca43b936d3b0d}\index{Model\_ChargeI@{Model\_ChargeI}!WidthFromDriftDistance@{WidthFromDriftDistance}}
+\index{WidthFromDriftDistance@{WidthFromDriftDistance}!Model\_ChargeI@{Model\_ChargeI}}
+\doxysubsubsection{\texorpdfstring{WidthFromDriftDistance()}{WidthFromDriftDistance()}}
+{\footnotesize\ttfamily \label{class_model___charge_i_a9db9667208138535885ca43b936d3b0d} 
+void Model\+\_\+\+Charge\+I\+::\+Width\+From\+Drift\+Distance (\begin{DoxyParamCaption}\item[{const double \&}]{Drift\+Distance\+\_\+cm}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_model___charge_i_a55905218b536a577469a578d05c24594}\index{Model\_ChargeI@{Model\_ChargeI}!WriteOut@{WriteOut}}
+\index{WriteOut@{WriteOut}!Model\_ChargeI@{Model\_ChargeI}}
+\doxysubsubsection{\texorpdfstring{WriteOut()}{WriteOut()}}
+{\footnotesize\ttfamily \label{class_model___charge_i_a55905218b536a577469a578d05c24594} 
+virtual void Model\+\_\+\+Charge\+I\+::\+Write\+Out (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_model___charge0_d_a24da5f78a44570df48bf69ac8484d794}{Model\+\_\+\+Charge0D}}, and \mbox{\hyperlink{class_model___charge1_d_a4ec10a107fc7a8be6a517dd18c2e0709}{Model\+\_\+\+Charge1D}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{class_model___charge_i_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_model___charge_i_a04216176300c6f1449238057635846ad}\index{Model\_ChargeI@{Model\_ChargeI}!m\_2RCinv@{m\_2RCinv}}
+\index{m\_2RCinv@{m\_2RCinv}!Model\_ChargeI@{Model\_ChargeI}}
+\doxysubsubsection{\texorpdfstring{m\_2RCinv}{m\_2RCinv}}
+{\footnotesize\ttfamily \label{class_model___charge_i_a04216176300c6f1449238057635846ad} 
+double Model\+\_\+\+Charge\+I\+::m\+\_\+2\+RCinv\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_model___charge_i_ad5afab674dd1ea3b86067abf449ae523}\index{Model\_ChargeI@{Model\_ChargeI}!m\_Gain@{m\_Gain}}
+\index{m\_Gain@{m\_Gain}!Model\_ChargeI@{Model\_ChargeI}}
+\doxysubsubsection{\texorpdfstring{m\_Gain}{m\_Gain}}
+{\footnotesize\ttfamily \label{class_model___charge_i_ad5afab674dd1ea3b86067abf449ae523} 
+double Model\+\_\+\+Charge\+I\+::m\+\_\+\+Gain\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_model___charge_i_ae6d7e1dab37e8a7f72fb2514e3e038a8}\index{Model\_ChargeI@{Model\_ChargeI}!m\_NormQPad@{m\_NormQPad}}
+\index{m\_NormQPad@{m\_NormQPad}!Model\_ChargeI@{Model\_ChargeI}}
+\doxysubsubsection{\texorpdfstring{m\_NormQPad}{m\_NormQPad}}
+{\footnotesize\ttfamily \label{class_model___charge_i_ae6d7e1dab37e8a7f72fb2514e3e038a8} 
+double Model\+\_\+\+Charge\+I\+::m\+\_\+\+Norm\+QPad\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_model___charge_i_ab7fb523acddc5c83e14e21bf64c20fc2}\index{Model\_ChargeI@{Model\_ChargeI}!m\_RC@{m\_RC}}
+\index{m\_RC@{m\_RC}!Model\_ChargeI@{Model\_ChargeI}}
+\doxysubsubsection{\texorpdfstring{m\_RC}{m\_RC}}
+{\footnotesize\ttfamily \label{class_model___charge_i_ab7fb523acddc5c83e14e21bf64c20fc2} 
+double Model\+\_\+\+Charge\+I\+::m\+\_\+\+RC\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_model___charge_i_abb93b5eda4499f499643a7e58dd45834}\index{Model\_ChargeI@{Model\_ChargeI}!m\_Width@{m\_Width}}
+\index{m\_Width@{m\_Width}!Model\_ChargeI@{Model\_ChargeI}}
+\doxysubsubsection{\texorpdfstring{m\_Width}{m\_Width}}
+{\footnotesize\ttfamily \label{class_model___charge_i_abb93b5eda4499f499643a7e58dd45834} 
+double Model\+\_\+\+Charge\+I\+::m\+\_\+\+Width\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_model___charge_i_abfef548a4a48ecbf8007f112f59e538f}\index{Model\_ChargeI@{Model\_ChargeI}!m\_Width2@{m\_Width2}}
+\index{m\_Width2@{m\_Width2}!Model\_ChargeI@{Model\_ChargeI}}
+\doxysubsubsection{\texorpdfstring{m\_Width2}{m\_Width2}}
+{\footnotesize\ttfamily \label{class_model___charge_i_abfef548a4a48ecbf8007f112f59e538f} 
+double Model\+\_\+\+Charge\+I\+::m\+\_\+\+Width2\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Model\+Signal/inc/\mbox{\hyperlink{_model___charge_i_8h}{Model\+\_\+\+Charge\+I.\+h}}\item 
+Model\+Signal/src/\mbox{\hyperlink{_model___charge_i_8cxx}{Model\+\_\+\+Charge\+I.\+cxx}}\end{DoxyCompactItemize}

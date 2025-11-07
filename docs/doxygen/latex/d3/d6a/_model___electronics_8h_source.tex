@@ -1,0 +1,53 @@
+\doxysection{Model\+\_\+\+Electronics.\+h}
+\hypertarget{_model___electronics_8h_source}{}\label{_model___electronics_8h_source}\index{ModelSignal/inc/Model\_Electronics.h@{ModelSignal/inc/Model\_Electronics.h}}
+\mbox{\hyperlink{_model___electronics_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#ifndef\ Model\_Electronics\_H}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#define\ Model\_Electronics\_H}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_misc_8h}{Misc.h}}"{}}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_model___electronics_acb3c51a84ae3d25be37e19429ab0c976}{Model\_Electronics}}\ \{}
+\DoxyCodeLine{00022\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00024\ \ \ \mbox{\hyperlink{class_model___electronics_acb3c51a84ae3d25be37e19429ab0c976}{Model\_Electronics}}();}
+\DoxyCodeLine{00025\ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_model___electronics_a96946600193325e7b9ccee86b00c4ec3}{\string~Model\_Electronics}}();}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \textcolor{comment}{//\ Get\ electronics\ parameters}}
+\DoxyCodeLine{00028\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_model___electronics_ab5d1c0688e119f2a1fdc94599c601a33}{Get\_QValue}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00029\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_model___electronics_afabeed84818fa67732f596ad7974afb3}{Get\_ws}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00030\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_model___electronics_a4f5790a9ca2f47f48ef9ce3734049909}{Get\_Amplitude}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \textcolor{comment}{//\ Set\ electronics\ parameters}}
+\DoxyCodeLine{00033\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_model___electronics_a847210ee31fc4dcf2461b07e8a36f392}{Set\_TimeShape}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&QValue,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&ws);}
+\DoxyCodeLine{00034\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_model___electronics_af2df70487ee2d5a2e80d01e9460cf33b}{Set\_Amplitude}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&Amplitude);}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \textcolor{comment}{//\ Impulse\ response}}
+\DoxyCodeLine{00037\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_model___electronics_ae811e13dad5d1fc2dd23734b7c12b410}{Response\_Base}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&Time)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \textcolor{comment}{//\ Derivative\ of\ Impulse\ response}}
+\DoxyCodeLine{00040\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_model___electronics_a904d08a9c5a8d8787b31b21bcbabe84e}{Derive\_Response\_Base}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&Time)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \textcolor{comment}{//\ Big\ Dump}}
+\DoxyCodeLine{00043\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_model___electronics_a6c042a175501535092d55c9e819421d0}{WriteOut}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00046\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00047\ \ \ \textcolor{keywordtype}{void}\ SetSecondaries();}
+\DoxyCodeLine{00048\ \ \ \textcolor{keywordtype}{void}\ GetExtremum();}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \textcolor{keywordtype}{double}\ m\_QValue;}
+\DoxyCodeLine{00051\ \ \ \textcolor{keywordtype}{double}\ m\_ws;}
+\DoxyCodeLine{00052\ \ \ \textcolor{keywordtype}{double}\ m\_Amplitude;}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \ \textcolor{keywordtype}{double}\ m\_Qfactor1;}
+\DoxyCodeLine{00055\ \ \ \textcolor{keywordtype}{double}\ m\_Qfactor2;}
+\DoxyCodeLine{00056\ \ \ \textcolor{keywordtype}{double}\ m\_Prefactor;}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \textcolor{keywordtype}{double}\ m\_AcurMax;}
+\DoxyCodeLine{00059\ \ \ \textcolor{keywordtype}{double}\ m\_TcurMax;}
+\DoxyCodeLine{00060\ \};}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

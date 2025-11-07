@@ -1,0 +1,501 @@
+\doxysection{Pad Class Reference}
+\hypertarget{class_pad}{}\label{class_pad}\index{Pad@{Pad}}
+
+
+{\ttfamily \#include $<$Pad.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_pad_a54713594f79ee54bba33d59e68aeb7b8}{Pad}} (\mbox{\hyperlink{class_model___read_out_geometry}{Model\+\_\+\+Read\+Out\+Geometry}} \texorpdfstring{$\ast$}{*}p\+Model\+\_\+\+Read\+Out\+Geometry, \mbox{\hyperlink{class_model___electronics}{Model\+\_\+\+Electronics}} \texorpdfstring{$\ast$}{*}p\+Model\+\_\+\+Electronics, \mbox{\hyperlink{class_model___charge_i}{Model\+\_\+\+ChargeI}} \texorpdfstring{$\ast$}{*}p\+Model\+\_\+\+ChargeI, std\+::string Pad\+Name, const int \&Event\+Nber, const int \&Entry\+Nber, const int \&Module\+Nber, const int \&iX, const int \&iY, const double \&XL, const double \&XH, const double \&YL, const double \&YH)
+\begin{DoxyCompactList}\small\item\em Construct a \doxylink{class_pad}{Pad} with explicit edges. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_pad_a762bc656d1efde004c8279baf9856264}{Pad}} (\mbox{\hyperlink{class_model___read_out_geometry}{Model\+\_\+\+Read\+Out\+Geometry}} \texorpdfstring{$\ast$}{*}p\+Model\+\_\+\+Read\+Out\+Geometry, \mbox{\hyperlink{class_model___electronics}{Model\+\_\+\+Electronics}} \texorpdfstring{$\ast$}{*}p\+Model\+\_\+\+Electronics, \mbox{\hyperlink{class_model___charge_i}{Model\+\_\+\+ChargeI}} \texorpdfstring{$\ast$}{*}p\+Model\+\_\+\+ChargeI, std\+::string Pad\+Name, const int \&Event\+Nber, const int \&Entry\+Nber, const int \&Module\+Nber, const int \&iX, const int \&iY)
+\begin{DoxyCompactList}\small\item\em Construct a \doxylink{class_pad}{Pad} using geometry lookup for edges. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{class_pad_a45000b0b34f175d0549707e0b90590f4}{\texorpdfstring{$\sim$}{\string~}\+Pad}} ()
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_pad_a9b736adeee93ce71ab465ade7ea04296}{Get\+\_\+\+Event\+Nber}} () const
+\item 
+int \mbox{\hyperlink{class_pad_a6df2c3dcec7c7c72fdf34a87b325b9fa}{Get\+\_\+\+Entry\+Nber}} () const
+\item 
+int \mbox{\hyperlink{class_pad_acca8e45f8388c135113d03ab8768a467}{Get\+\_\+\+Module\+Nber}} () const
+\item 
+int \mbox{\hyperlink{class_pad_aee55f86baabe93ad93200b1dea49a953}{Get\+\_\+iX}} () const
+\item 
+int \mbox{\hyperlink{class_pad_a96aac48284c5b58017b51318f4faf261}{Get\+\_\+iY}} () const
+\item 
+void \mbox{\hyperlink{class_pad_a1949c49f25179715814227a0bfeb4b0b}{Write\+Out}} () const
+\item 
+int \mbox{\hyperlink{class_pad_ab0e9903500d5d04e2bc5361c7eaa6d8d}{Is\+Valid}} () const
+\item 
+void \mbox{\hyperlink{class_pad_a33a17b7b1e28ee3ca286023a73bd903b}{Validate}} ()
+\item 
+void \mbox{\hyperlink{class_pad_a5c82367af6b60353546fa3eb895b1c5a}{Invalidate}} ()
+\item 
+const \mbox{\hyperlink{class_model___read_out_geometry}{Model\+\_\+\+Read\+Out\+Geometry}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_pad_ab7076cee6c0a592870a532763fa1a6fe}{Get\+\_\+\+Model\+\_\+\+Read\+Out\+Geometry}} () const
+\item 
+const \mbox{\hyperlink{class_model___electronics}{Model\+\_\+\+Electronics}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_pad_a696213b6750155da09c141da3186f35e}{Get\+\_\+\+Model\+\_\+\+Electronics}} () const
+\item 
+const \mbox{\hyperlink{class_model___charge_i}{Model\+\_\+\+ChargeI}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_pad_a4d76534a54ba08e0f1284edbc88f52d3}{Get\+\_\+\+Model\+\_\+\+ChargeI}} () const
+\item 
+std\+::string \mbox{\hyperlink{class_pad_a546cbd89c884e8fb74a473dc3ab6cf1a}{Get\+\_\+\+Pad\+Name}} () const
+\item 
+double \mbox{\hyperlink{class_pad_ab658f0c12a23624e07143fcce4ffefe6}{Get\+\_\+\+XPad}} () const
+\item 
+double \mbox{\hyperlink{class_pad_a061f85183f4d7f19f684dfc1c5013d5e}{Get\+\_\+\+YPad}} () const
+\item 
+double \mbox{\hyperlink{class_pad_a634d7c4be31e35bef7a3e5bf597a3cb2}{Get\+\_\+\+XL}} () const
+\item 
+double \mbox{\hyperlink{class_pad_a73ed1c50e736ddf893a2d31d0a39bc4e}{Get\+\_\+\+XH}} () const
+\item 
+double \mbox{\hyperlink{class_pad_aec8bd9afb5ea95156150966f2bd99a2c}{Get\+\_\+\+YL}} () const
+\item 
+double \mbox{\hyperlink{class_pad_a31430c67748d725cf7cab7062f7408c1}{Get\+\_\+\+YH}} () const
+\item 
+double \mbox{\hyperlink{class_pad_ac413a16af013eb7ac1dd7dbc242ae5a5}{Get\+\_\+\+LX}} () const
+\item 
+double \mbox{\hyperlink{class_pad_ae672b724e52e3b6a5caee22ee7c9569c}{Get\+\_\+\+LY}} () const
+\item 
+double \mbox{\hyperlink{class_pad_a6b54d65f8b264632ee5b76678adbd9f2}{Get\+\_\+\+AMax}} () const
+\item 
+double \mbox{\hyperlink{class_pad_a34c8087f7d2760d519a0eee70ea8b5ea}{Get\+\_\+\+TMax}} () const
+\item 
+void \mbox{\hyperlink{class_pad_a800e05d9417dc08d86b3762b10ea2d54}{Set\+\_\+\+AMax}} (const double \&AMax)
+\item 
+void \mbox{\hyperlink{class_pad_a392d1a7889fccf6ef40489703686969e}{Set\+\_\+\+TMax}} (const double \&TMax)
+\item 
+void \mbox{\hyperlink{class_pad_a4faf47c766f302a038be838582f398f4}{Set\+\_\+\+Data\+\_\+2\+Use}} (const int \&i\+Opt)
+\item 
+void \mbox{\hyperlink{class_pad_ae96d6c23f07ffe08cd96f8a1940926ba}{Clear\+\_\+\+ADC}} ()
+\item 
+void \mbox{\hyperlink{class_pad_ae440b4f4e3c68f3b566df930a7a5c8c4}{Set\+\_\+\+ADC}} (const int \&i\+Timeb, const int \&ADC)
+\item 
+void \mbox{\hyperlink{class_pad_af4de2ea7fa9d00551932cf46f9ea473b}{WF\+\_\+\+Do\+Closure}} ()
+\item 
+std\+::vector$<$ float $>$ \mbox{\hyperlink{class_pad_a126549a27820238b1783682dea416637}{Get\+\_\+v\+ADC}} () const
+\item 
+double \mbox{\hyperlink{class_pad_a5a79388288209d3655be6d41bd886bf6}{Get\+\_\+\+AMax\+\_\+\+From\+Set}} () const
+\item 
+double \mbox{\hyperlink{class_pad_ab67ef2f31e92c4c01d77ad92a9f1fc1b}{Get\+\_\+\+TMax\+\_\+\+From\+Set}} () const
+\item 
+double \mbox{\hyperlink{class_pad_a6c310f356c0f72b305a8412f487bc66e}{Get\+\_\+\+AMax\+\_\+\+WF}} () const
+\item 
+double \mbox{\hyperlink{class_pad_a31639ef1f65a53c5bae6897669a7fc70}{Get\+\_\+\+TMax\+\_\+\+WF}} () const
+\item 
+double \mbox{\hyperlink{class_pad_a63a787b322c0260fcc74ee724c5a6a19}{Get\+\_\+\+AMax\+\_\+\+WF\+\_\+01}} () const
+\item 
+double \mbox{\hyperlink{class_pad_a2157c3b8cf5dd8f243ef35d71ee48c82}{Get\+\_\+\+TMax\+\_\+\+WF\+\_\+01}} () const
+\item 
+double \mbox{\hyperlink{class_pad_a4afdca5b76cd2568d599038d0c951fef}{Get\+\_\+\+AMax\+\_\+\+FIT}} () const
+\item 
+double \mbox{\hyperlink{class_pad_aac0c2de19ab0e252537e1a09d4350750}{Get\+\_\+\+TMax\+\_\+\+FIT}} () const
+\item 
+int \mbox{\hyperlink{class_pad_a1ee675d0404407573f8b3890ed07e1c5}{Get\+\_\+\+FIT\+\_\+\+Status}} () const
+\item 
+double \mbox{\hyperlink{class_pad_a94cdb9b1fc5774c4499584479d8d693f}{Get\+\_\+\+FIT\+\_\+\+A0P}} () const
+\item 
+double \mbox{\hyperlink{class_pad_aa8f3dbdff7a1c0ab9ca8cb747fbb5c04}{Get\+\_\+\+FIT\+\_\+\+A0M}} () const
+\item 
+double \mbox{\hyperlink{class_pad_abe9175cbda302c0a5ce7e5d090e347b5}{Get\+\_\+\+FIT\+\_\+\+X0}} () const
+\item 
+double \mbox{\hyperlink{class_pad_a5d484cc316e8687e4d68c4070e0ba3f5}{Get\+\_\+\+FIT\+\_\+\+Y0}} () const
+\item 
+double \mbox{\hyperlink{class_pad_aff5c852d39aab9aacf30f9bd9c7d8f0c}{Get\+\_\+\+FIT\+\_\+\+Xmin}} () const
+\item 
+double \mbox{\hyperlink{class_pad_a4ea22afff836e7b1fa1081b56829bb58}{Get\+\_\+\+FIT\+\_\+\+Xmax}} () const
+\item 
+double \mbox{\hyperlink{class_pad_a28055660d99b16fc494b2f6cb4888b41}{Get\+\_\+\+AMax\+\_\+\+True}} () const
+\item 
+double \mbox{\hyperlink{class_pad_ad59ebd8c5456b07d9df306a886bdaef6}{Get\+\_\+\+TMax\+\_\+\+True}} () const
+\item 
+void \mbox{\hyperlink{class_pad_af0901201076790008973d33fd21958e9}{Set\+\_\+\+AMax\+\_\+\+True}} (const double \&AMax)
+\item 
+void \mbox{\hyperlink{class_pad_a9b0eb33e9fe926b994dc9e81bfa6ab14}{Set\+\_\+\+TMax\+\_\+\+True}} (const double \&TMax)
+\item 
+void \mbox{\hyperlink{class_pad_a68dab5c1205812094c18bd88e5b02042}{Set\+Signal\+Model}} (const double \&Time0, const double \&XTrue, const double \&YTrue)
+\item 
+double \mbox{\hyperlink{class_pad_a87f4e9d0d5af82ebd1d73fc0fc1ffd55}{Get\+\_\+\+Time0}} () const
+\item 
+double \mbox{\hyperlink{class_pad_ad28cd98630af07e37990d618a5f684a2}{Get\+\_\+\+XTrue}} () const
+\item 
+double \mbox{\hyperlink{class_pad_a5b6c3663874b8a10590742cc75e81d34}{Get\+\_\+\+YTrue}} () const
+\item 
+double \mbox{\hyperlink{class_pad_a85098a1d05bb1c023740299e7944f4ae}{Get\+\_\+\+Qpad}} (const double \&Time)
+\item 
+double \mbox{\hyperlink{class_pad_aba8a53ab07f94660ca1c9f0e1b6ced9e}{Get\+\_\+\+APad}} (const double \&Time)
+\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{class_pad_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_pad_a54713594f79ee54bba33d59e68aeb7b8}\index{Pad@{Pad}!Pad@{Pad}}
+\index{Pad@{Pad}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{Pad()}{Pad()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_pad_a54713594f79ee54bba33d59e68aeb7b8} 
+Pad\+::\+Pad (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_model___read_out_geometry}{Model\+\_\+\+Read\+Out\+Geometry}} \texorpdfstring{$\ast$}{*}}]{p\+Model\+\_\+\+Read\+Out\+Geometry}{, }\item[{\mbox{\hyperlink{class_model___electronics}{Model\+\_\+\+Electronics}} \texorpdfstring{$\ast$}{*}}]{p\+Model\+\_\+\+Electronics}{, }\item[{\mbox{\hyperlink{class_model___charge_i}{Model\+\_\+\+ChargeI}} \texorpdfstring{$\ast$}{*}}]{p\+Model\+\_\+\+ChargeI}{, }\item[{std\+::string}]{Pad\+Name}{, }\item[{const int \&}]{Event\+Nber}{, }\item[{const int \&}]{Entry\+Nber}{, }\item[{const int \&}]{Module\+Nber}{, }\item[{const int \&}]{iX}{, }\item[{const int \&}]{iY}{, }\item[{const double \&}]{XL}{, }\item[{const double \&}]{XH}{, }\item[{const double \&}]{YL}{, }\item[{const double \&}]{YH}{}\end{DoxyParamCaption})}
+
+
+
+Construct a \doxylink{class_pad}{Pad} with explicit edges. 
+
+\Hypertarget{class_pad_a762bc656d1efde004c8279baf9856264}\index{Pad@{Pad}!Pad@{Pad}}
+\index{Pad@{Pad}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{Pad()}{Pad()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_pad_a762bc656d1efde004c8279baf9856264} 
+Pad\+::\+Pad (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_model___read_out_geometry}{Model\+\_\+\+Read\+Out\+Geometry}} \texorpdfstring{$\ast$}{*}}]{p\+Model\+\_\+\+Read\+Out\+Geometry}{, }\item[{\mbox{\hyperlink{class_model___electronics}{Model\+\_\+\+Electronics}} \texorpdfstring{$\ast$}{*}}]{p\+Model\+\_\+\+Electronics}{, }\item[{\mbox{\hyperlink{class_model___charge_i}{Model\+\_\+\+ChargeI}} \texorpdfstring{$\ast$}{*}}]{p\+Model\+\_\+\+ChargeI}{, }\item[{std\+::string}]{Pad\+Name}{, }\item[{const int \&}]{Event\+Nber}{, }\item[{const int \&}]{Entry\+Nber}{, }\item[{const int \&}]{Module\+Nber}{, }\item[{const int \&}]{iX}{, }\item[{const int \&}]{iY}{}\end{DoxyParamCaption})}
+
+
+
+Construct a \doxylink{class_pad}{Pad} using geometry lookup for edges. 
+
+\Hypertarget{class_pad_a45000b0b34f175d0549707e0b90590f4}\index{Pad@{Pad}!````~Pad@{\texorpdfstring{$\sim$}{\string~}Pad}}
+\index{````~Pad@{\texorpdfstring{$\sim$}{\string~}Pad}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Pad()}{\string~Pad()}}
+{\footnotesize\ttfamily \label{class_pad_a45000b0b34f175d0549707e0b90590f4} 
+Pad\+::\texorpdfstring{$\sim$}{\string~}\+Pad (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Virtual destructor. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_pad_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_pad_ae96d6c23f07ffe08cd96f8a1940926ba}\index{Pad@{Pad}!Clear\_ADC@{Clear\_ADC}}
+\index{Clear\_ADC@{Clear\_ADC}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{Clear\_ADC()}{Clear\_ADC()}}
+{\footnotesize\ttfamily \label{class_pad_ae96d6c23f07ffe08cd96f8a1940926ba} 
+void Pad\+::\+Clear\+\_\+\+ADC (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_pad_a6b54d65f8b264632ee5b76678adbd9f2}\index{Pad@{Pad}!Get\_AMax@{Get\_AMax}}
+\index{Get\_AMax@{Get\_AMax}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{Get\_AMax()}{Get\_AMax()}}
+{\footnotesize\ttfamily \label{class_pad_a6b54d65f8b264632ee5b76678adbd9f2} 
+double Pad\+::\+Get\+\_\+\+AMax (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_pad_a4afdca5b76cd2568d599038d0c951fef}\index{Pad@{Pad}!Get\_AMax\_FIT@{Get\_AMax\_FIT}}
+\index{Get\_AMax\_FIT@{Get\_AMax\_FIT}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{Get\_AMax\_FIT()}{Get\_AMax\_FIT()}}
+{\footnotesize\ttfamily \label{class_pad_a4afdca5b76cd2568d599038d0c951fef} 
+double Pad\+::\+Get\+\_\+\+AMax\+\_\+\+FIT (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_pad_a5a79388288209d3655be6d41bd886bf6}\index{Pad@{Pad}!Get\_AMax\_FromSet@{Get\_AMax\_FromSet}}
+\index{Get\_AMax\_FromSet@{Get\_AMax\_FromSet}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{Get\_AMax\_FromSet()}{Get\_AMax\_FromSet()}}
+{\footnotesize\ttfamily \label{class_pad_a5a79388288209d3655be6d41bd886bf6} 
+double Pad\+::\+Get\+\_\+\+AMax\+\_\+\+From\+Set (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_pad_a28055660d99b16fc494b2f6cb4888b41}\index{Pad@{Pad}!Get\_AMax\_True@{Get\_AMax\_True}}
+\index{Get\_AMax\_True@{Get\_AMax\_True}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{Get\_AMax\_True()}{Get\_AMax\_True()}}
+{\footnotesize\ttfamily \label{class_pad_a28055660d99b16fc494b2f6cb4888b41} 
+double Pad\+::\+Get\+\_\+\+AMax\+\_\+\+True (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_pad_a6c310f356c0f72b305a8412f487bc66e}\index{Pad@{Pad}!Get\_AMax\_WF@{Get\_AMax\_WF}}
+\index{Get\_AMax\_WF@{Get\_AMax\_WF}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{Get\_AMax\_WF()}{Get\_AMax\_WF()}}
+{\footnotesize\ttfamily \label{class_pad_a6c310f356c0f72b305a8412f487bc66e} 
+double Pad\+::\+Get\+\_\+\+AMax\+\_\+\+WF (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_pad_a63a787b322c0260fcc74ee724c5a6a19}\index{Pad@{Pad}!Get\_AMax\_WF\_01@{Get\_AMax\_WF\_01}}
+\index{Get\_AMax\_WF\_01@{Get\_AMax\_WF\_01}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{Get\_AMax\_WF\_01()}{Get\_AMax\_WF\_01()}}
+{\footnotesize\ttfamily \label{class_pad_a63a787b322c0260fcc74ee724c5a6a19} 
+double Pad\+::\+Get\+\_\+\+AMax\+\_\+\+WF\+\_\+01 (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_pad_aba8a53ab07f94660ca1c9f0e1b6ced9e}\index{Pad@{Pad}!Get\_APad@{Get\_APad}}
+\index{Get\_APad@{Get\_APad}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{Get\_APad()}{Get\_APad()}}
+{\footnotesize\ttfamily \label{class_pad_aba8a53ab07f94660ca1c9f0e1b6ced9e} 
+double Pad\+::\+Get\+\_\+\+APad (\begin{DoxyParamCaption}\item[{const double \&}]{Time}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_pad_a6df2c3dcec7c7c72fdf34a87b325b9fa}\index{Pad@{Pad}!Get\_EntryNber@{Get\_EntryNber}}
+\index{Get\_EntryNber@{Get\_EntryNber}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{Get\_EntryNber()}{Get\_EntryNber()}}
+{\footnotesize\ttfamily \label{class_pad_a6df2c3dcec7c7c72fdf34a87b325b9fa} 
+int Pad\+::\+Get\+\_\+\+Entry\+Nber (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_pad_a9b736adeee93ce71ab465ade7ea04296}\index{Pad@{Pad}!Get\_EventNber@{Get\_EventNber}}
+\index{Get\_EventNber@{Get\_EventNber}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{Get\_EventNber()}{Get\_EventNber()}}
+{\footnotesize\ttfamily \label{class_pad_a9b736adeee93ce71ab465ade7ea04296} 
+int Pad\+::\+Get\+\_\+\+Event\+Nber (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_pad_aa8f3dbdff7a1c0ab9ca8cb747fbb5c04}\index{Pad@{Pad}!Get\_FIT\_A0M@{Get\_FIT\_A0M}}
+\index{Get\_FIT\_A0M@{Get\_FIT\_A0M}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{Get\_FIT\_A0M()}{Get\_FIT\_A0M()}}
+{\footnotesize\ttfamily \label{class_pad_aa8f3dbdff7a1c0ab9ca8cb747fbb5c04} 
+double Pad\+::\+Get\+\_\+\+FIT\+\_\+\+A0M (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_pad_a94cdb9b1fc5774c4499584479d8d693f}\index{Pad@{Pad}!Get\_FIT\_A0P@{Get\_FIT\_A0P}}
+\index{Get\_FIT\_A0P@{Get\_FIT\_A0P}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{Get\_FIT\_A0P()}{Get\_FIT\_A0P()}}
+{\footnotesize\ttfamily \label{class_pad_a94cdb9b1fc5774c4499584479d8d693f} 
+double Pad\+::\+Get\+\_\+\+FIT\+\_\+\+A0P (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_pad_a1ee675d0404407573f8b3890ed07e1c5}\index{Pad@{Pad}!Get\_FIT\_Status@{Get\_FIT\_Status}}
+\index{Get\_FIT\_Status@{Get\_FIT\_Status}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{Get\_FIT\_Status()}{Get\_FIT\_Status()}}
+{\footnotesize\ttfamily \label{class_pad_a1ee675d0404407573f8b3890ed07e1c5} 
+int Pad\+::\+Get\+\_\+\+FIT\+\_\+\+Status (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_pad_abe9175cbda302c0a5ce7e5d090e347b5}\index{Pad@{Pad}!Get\_FIT\_X0@{Get\_FIT\_X0}}
+\index{Get\_FIT\_X0@{Get\_FIT\_X0}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{Get\_FIT\_X0()}{Get\_FIT\_X0()}}
+{\footnotesize\ttfamily \label{class_pad_abe9175cbda302c0a5ce7e5d090e347b5} 
+double Pad\+::\+Get\+\_\+\+FIT\+\_\+\+X0 (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_pad_a4ea22afff836e7b1fa1081b56829bb58}\index{Pad@{Pad}!Get\_FIT\_Xmax@{Get\_FIT\_Xmax}}
+\index{Get\_FIT\_Xmax@{Get\_FIT\_Xmax}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{Get\_FIT\_Xmax()}{Get\_FIT\_Xmax()}}
+{\footnotesize\ttfamily \label{class_pad_a4ea22afff836e7b1fa1081b56829bb58} 
+double Pad\+::\+Get\+\_\+\+FIT\+\_\+\+Xmax (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_pad_aff5c852d39aab9aacf30f9bd9c7d8f0c}\index{Pad@{Pad}!Get\_FIT\_Xmin@{Get\_FIT\_Xmin}}
+\index{Get\_FIT\_Xmin@{Get\_FIT\_Xmin}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{Get\_FIT\_Xmin()}{Get\_FIT\_Xmin()}}
+{\footnotesize\ttfamily \label{class_pad_aff5c852d39aab9aacf30f9bd9c7d8f0c} 
+double Pad\+::\+Get\+\_\+\+FIT\+\_\+\+Xmin (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_pad_a5d484cc316e8687e4d68c4070e0ba3f5}\index{Pad@{Pad}!Get\_FIT\_Y0@{Get\_FIT\_Y0}}
+\index{Get\_FIT\_Y0@{Get\_FIT\_Y0}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{Get\_FIT\_Y0()}{Get\_FIT\_Y0()}}
+{\footnotesize\ttfamily \label{class_pad_a5d484cc316e8687e4d68c4070e0ba3f5} 
+double Pad\+::\+Get\+\_\+\+FIT\+\_\+\+Y0 (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_pad_aee55f86baabe93ad93200b1dea49a953}\index{Pad@{Pad}!Get\_iX@{Get\_iX}}
+\index{Get\_iX@{Get\_iX}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{Get\_iX()}{Get\_iX()}}
+{\footnotesize\ttfamily \label{class_pad_aee55f86baabe93ad93200b1dea49a953} 
+int Pad\+::\+Get\+\_\+iX (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_pad_a96aac48284c5b58017b51318f4faf261}\index{Pad@{Pad}!Get\_iY@{Get\_iY}}
+\index{Get\_iY@{Get\_iY}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{Get\_iY()}{Get\_iY()}}
+{\footnotesize\ttfamily \label{class_pad_a96aac48284c5b58017b51318f4faf261} 
+int Pad\+::\+Get\+\_\+iY (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_pad_ac413a16af013eb7ac1dd7dbc242ae5a5}\index{Pad@{Pad}!Get\_LX@{Get\_LX}}
+\index{Get\_LX@{Get\_LX}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{Get\_LX()}{Get\_LX()}}
+{\footnotesize\ttfamily \label{class_pad_ac413a16af013eb7ac1dd7dbc242ae5a5} 
+double Pad\+::\+Get\+\_\+\+LX (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_pad_ae672b724e52e3b6a5caee22ee7c9569c}\index{Pad@{Pad}!Get\_LY@{Get\_LY}}
+\index{Get\_LY@{Get\_LY}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{Get\_LY()}{Get\_LY()}}
+{\footnotesize\ttfamily \label{class_pad_ae672b724e52e3b6a5caee22ee7c9569c} 
+double Pad\+::\+Get\+\_\+\+LY (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_pad_a4d76534a54ba08e0f1284edbc88f52d3}\index{Pad@{Pad}!Get\_Model\_ChargeI@{Get\_Model\_ChargeI}}
+\index{Get\_Model\_ChargeI@{Get\_Model\_ChargeI}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{Get\_Model\_ChargeI()}{Get\_Model\_ChargeI()}}
+{\footnotesize\ttfamily \label{class_pad_a4d76534a54ba08e0f1284edbc88f52d3} 
+const \mbox{\hyperlink{class_model___charge_i}{Model\+\_\+\+ChargeI}} \texorpdfstring{$\ast$}{*} Pad\+::\+Get\+\_\+\+Model\+\_\+\+ChargeI (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_pad_a696213b6750155da09c141da3186f35e}\index{Pad@{Pad}!Get\_Model\_Electronics@{Get\_Model\_Electronics}}
+\index{Get\_Model\_Electronics@{Get\_Model\_Electronics}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{Get\_Model\_Electronics()}{Get\_Model\_Electronics()}}
+{\footnotesize\ttfamily \label{class_pad_a696213b6750155da09c141da3186f35e} 
+const \mbox{\hyperlink{class_model___electronics}{Model\+\_\+\+Electronics}} \texorpdfstring{$\ast$}{*} Pad\+::\+Get\+\_\+\+Model\+\_\+\+Electronics (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_pad_ab7076cee6c0a592870a532763fa1a6fe}\index{Pad@{Pad}!Get\_Model\_ReadOutGeometry@{Get\_Model\_ReadOutGeometry}}
+\index{Get\_Model\_ReadOutGeometry@{Get\_Model\_ReadOutGeometry}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{Get\_Model\_ReadOutGeometry()}{Get\_Model\_ReadOutGeometry()}}
+{\footnotesize\ttfamily \label{class_pad_ab7076cee6c0a592870a532763fa1a6fe} 
+const \mbox{\hyperlink{class_model___read_out_geometry}{Model\+\_\+\+Read\+Out\+Geometry}} \texorpdfstring{$\ast$}{*} Pad\+::\+Get\+\_\+\+Model\+\_\+\+Read\+Out\+Geometry (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_pad_acca8e45f8388c135113d03ab8768a467}\index{Pad@{Pad}!Get\_ModuleNber@{Get\_ModuleNber}}
+\index{Get\_ModuleNber@{Get\_ModuleNber}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{Get\_ModuleNber()}{Get\_ModuleNber()}}
+{\footnotesize\ttfamily \label{class_pad_acca8e45f8388c135113d03ab8768a467} 
+int Pad\+::\+Get\+\_\+\+Module\+Nber (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_pad_a546cbd89c884e8fb74a473dc3ab6cf1a}\index{Pad@{Pad}!Get\_PadName@{Get\_PadName}}
+\index{Get\_PadName@{Get\_PadName}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{Get\_PadName()}{Get\_PadName()}}
+{\footnotesize\ttfamily \label{class_pad_a546cbd89c884e8fb74a473dc3ab6cf1a} 
+std\+::string Pad\+::\+Get\+\_\+\+Pad\+Name (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_pad_a85098a1d05bb1c023740299e7944f4ae}\index{Pad@{Pad}!Get\_Qpad@{Get\_Qpad}}
+\index{Get\_Qpad@{Get\_Qpad}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{Get\_Qpad()}{Get\_Qpad()}}
+{\footnotesize\ttfamily \label{class_pad_a85098a1d05bb1c023740299e7944f4ae} 
+double Pad\+::\+Get\+\_\+\+Qpad (\begin{DoxyParamCaption}\item[{const double \&}]{Time}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_pad_a87f4e9d0d5af82ebd1d73fc0fc1ffd55}\index{Pad@{Pad}!Get\_Time0@{Get\_Time0}}
+\index{Get\_Time0@{Get\_Time0}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{Get\_Time0()}{Get\_Time0()}}
+{\footnotesize\ttfamily \label{class_pad_a87f4e9d0d5af82ebd1d73fc0fc1ffd55} 
+double Pad\+::\+Get\+\_\+\+Time0 (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_pad_a34c8087f7d2760d519a0eee70ea8b5ea}\index{Pad@{Pad}!Get\_TMax@{Get\_TMax}}
+\index{Get\_TMax@{Get\_TMax}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{Get\_TMax()}{Get\_TMax()}}
+{\footnotesize\ttfamily \label{class_pad_a34c8087f7d2760d519a0eee70ea8b5ea} 
+double Pad\+::\+Get\+\_\+\+TMax (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_pad_aac0c2de19ab0e252537e1a09d4350750}\index{Pad@{Pad}!Get\_TMax\_FIT@{Get\_TMax\_FIT}}
+\index{Get\_TMax\_FIT@{Get\_TMax\_FIT}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{Get\_TMax\_FIT()}{Get\_TMax\_FIT()}}
+{\footnotesize\ttfamily \label{class_pad_aac0c2de19ab0e252537e1a09d4350750} 
+double Pad\+::\+Get\+\_\+\+TMax\+\_\+\+FIT (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_pad_ab67ef2f31e92c4c01d77ad92a9f1fc1b}\index{Pad@{Pad}!Get\_TMax\_FromSet@{Get\_TMax\_FromSet}}
+\index{Get\_TMax\_FromSet@{Get\_TMax\_FromSet}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{Get\_TMax\_FromSet()}{Get\_TMax\_FromSet()}}
+{\footnotesize\ttfamily \label{class_pad_ab67ef2f31e92c4c01d77ad92a9f1fc1b} 
+double Pad\+::\+Get\+\_\+\+TMax\+\_\+\+From\+Set (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_pad_ad59ebd8c5456b07d9df306a886bdaef6}\index{Pad@{Pad}!Get\_TMax\_True@{Get\_TMax\_True}}
+\index{Get\_TMax\_True@{Get\_TMax\_True}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{Get\_TMax\_True()}{Get\_TMax\_True()}}
+{\footnotesize\ttfamily \label{class_pad_ad59ebd8c5456b07d9df306a886bdaef6} 
+double Pad\+::\+Get\+\_\+\+TMax\+\_\+\+True (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_pad_a31639ef1f65a53c5bae6897669a7fc70}\index{Pad@{Pad}!Get\_TMax\_WF@{Get\_TMax\_WF}}
+\index{Get\_TMax\_WF@{Get\_TMax\_WF}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{Get\_TMax\_WF()}{Get\_TMax\_WF()}}
+{\footnotesize\ttfamily \label{class_pad_a31639ef1f65a53c5bae6897669a7fc70} 
+double Pad\+::\+Get\+\_\+\+TMax\+\_\+\+WF (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_pad_a2157c3b8cf5dd8f243ef35d71ee48c82}\index{Pad@{Pad}!Get\_TMax\_WF\_01@{Get\_TMax\_WF\_01}}
+\index{Get\_TMax\_WF\_01@{Get\_TMax\_WF\_01}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{Get\_TMax\_WF\_01()}{Get\_TMax\_WF\_01()}}
+{\footnotesize\ttfamily \label{class_pad_a2157c3b8cf5dd8f243ef35d71ee48c82} 
+double Pad\+::\+Get\+\_\+\+TMax\+\_\+\+WF\+\_\+01 (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_pad_a126549a27820238b1783682dea416637}\index{Pad@{Pad}!Get\_vADC@{Get\_vADC}}
+\index{Get\_vADC@{Get\_vADC}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{Get\_vADC()}{Get\_vADC()}}
+{\footnotesize\ttfamily \label{class_pad_a126549a27820238b1783682dea416637} 
+std\+::vector$<$ float $>$ Pad\+::\+Get\+\_\+v\+ADC (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_pad_a73ed1c50e736ddf893a2d31d0a39bc4e}\index{Pad@{Pad}!Get\_XH@{Get\_XH}}
+\index{Get\_XH@{Get\_XH}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{Get\_XH()}{Get\_XH()}}
+{\footnotesize\ttfamily \label{class_pad_a73ed1c50e736ddf893a2d31d0a39bc4e} 
+double Pad\+::\+Get\+\_\+\+XH (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_pad_a634d7c4be31e35bef7a3e5bf597a3cb2}\index{Pad@{Pad}!Get\_XL@{Get\_XL}}
+\index{Get\_XL@{Get\_XL}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{Get\_XL()}{Get\_XL()}}
+{\footnotesize\ttfamily \label{class_pad_a634d7c4be31e35bef7a3e5bf597a3cb2} 
+double Pad\+::\+Get\+\_\+\+XL (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_pad_ab658f0c12a23624e07143fcce4ffefe6}\index{Pad@{Pad}!Get\_XPad@{Get\_XPad}}
+\index{Get\_XPad@{Get\_XPad}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{Get\_XPad()}{Get\_XPad()}}
+{\footnotesize\ttfamily \label{class_pad_ab658f0c12a23624e07143fcce4ffefe6} 
+double Pad\+::\+Get\+\_\+\+XPad (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_pad_ad28cd98630af07e37990d618a5f684a2}\index{Pad@{Pad}!Get\_XTrue@{Get\_XTrue}}
+\index{Get\_XTrue@{Get\_XTrue}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{Get\_XTrue()}{Get\_XTrue()}}
+{\footnotesize\ttfamily \label{class_pad_ad28cd98630af07e37990d618a5f684a2} 
+double Pad\+::\+Get\+\_\+\+XTrue (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_pad_a31430c67748d725cf7cab7062f7408c1}\index{Pad@{Pad}!Get\_YH@{Get\_YH}}
+\index{Get\_YH@{Get\_YH}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{Get\_YH()}{Get\_YH()}}
+{\footnotesize\ttfamily \label{class_pad_a31430c67748d725cf7cab7062f7408c1} 
+double Pad\+::\+Get\+\_\+\+YH (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_pad_aec8bd9afb5ea95156150966f2bd99a2c}\index{Pad@{Pad}!Get\_YL@{Get\_YL}}
+\index{Get\_YL@{Get\_YL}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{Get\_YL()}{Get\_YL()}}
+{\footnotesize\ttfamily \label{class_pad_aec8bd9afb5ea95156150966f2bd99a2c} 
+double Pad\+::\+Get\+\_\+\+YL (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_pad_a061f85183f4d7f19f684dfc1c5013d5e}\index{Pad@{Pad}!Get\_YPad@{Get\_YPad}}
+\index{Get\_YPad@{Get\_YPad}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{Get\_YPad()}{Get\_YPad()}}
+{\footnotesize\ttfamily \label{class_pad_a061f85183f4d7f19f684dfc1c5013d5e} 
+double Pad\+::\+Get\+\_\+\+YPad (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_pad_a5b6c3663874b8a10590742cc75e81d34}\index{Pad@{Pad}!Get\_YTrue@{Get\_YTrue}}
+\index{Get\_YTrue@{Get\_YTrue}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{Get\_YTrue()}{Get\_YTrue()}}
+{\footnotesize\ttfamily \label{class_pad_a5b6c3663874b8a10590742cc75e81d34} 
+double Pad\+::\+Get\+\_\+\+YTrue (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_pad_a5c82367af6b60353546fa3eb895b1c5a}\index{Pad@{Pad}!Invalidate@{Invalidate}}
+\index{Invalidate@{Invalidate}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{Invalidate()}{Invalidate()}}
+{\footnotesize\ttfamily \label{class_pad_a5c82367af6b60353546fa3eb895b1c5a} 
+void Pad\+::\+Invalidate (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_pad_ab0e9903500d5d04e2bc5361c7eaa6d8d}\index{Pad@{Pad}!IsValid@{IsValid}}
+\index{IsValid@{IsValid}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{IsValid()}{IsValid()}}
+{\footnotesize\ttfamily \label{class_pad_ab0e9903500d5d04e2bc5361c7eaa6d8d} 
+int Pad\+::\+Is\+Valid (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_pad_ae440b4f4e3c68f3b566df930a7a5c8c4}\index{Pad@{Pad}!Set\_ADC@{Set\_ADC}}
+\index{Set\_ADC@{Set\_ADC}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{Set\_ADC()}{Set\_ADC()}}
+{\footnotesize\ttfamily \label{class_pad_ae440b4f4e3c68f3b566df930a7a5c8c4} 
+void Pad\+::\+Set\+\_\+\+ADC (\begin{DoxyParamCaption}\item[{const int \&}]{i\+Timeb}{, }\item[{const int \&}]{ADC}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_pad_a800e05d9417dc08d86b3762b10ea2d54}\index{Pad@{Pad}!Set\_AMax@{Set\_AMax}}
+\index{Set\_AMax@{Set\_AMax}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{Set\_AMax()}{Set\_AMax()}}
+{\footnotesize\ttfamily \label{class_pad_a800e05d9417dc08d86b3762b10ea2d54} 
+void Pad\+::\+Set\+\_\+\+AMax (\begin{DoxyParamCaption}\item[{const double \&}]{AMax}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_pad_af0901201076790008973d33fd21958e9}\index{Pad@{Pad}!Set\_AMax\_True@{Set\_AMax\_True}}
+\index{Set\_AMax\_True@{Set\_AMax\_True}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{Set\_AMax\_True()}{Set\_AMax\_True()}}
+{\footnotesize\ttfamily \label{class_pad_af0901201076790008973d33fd21958e9} 
+void Pad\+::\+Set\+\_\+\+AMax\+\_\+\+True (\begin{DoxyParamCaption}\item[{const double \&}]{AMax}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_pad_a4faf47c766f302a038be838582f398f4}\index{Pad@{Pad}!Set\_Data\_2Use@{Set\_Data\_2Use}}
+\index{Set\_Data\_2Use@{Set\_Data\_2Use}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{Set\_Data\_2Use()}{Set\_Data\_2Use()}}
+{\footnotesize\ttfamily \label{class_pad_a4faf47c766f302a038be838582f398f4} 
+void Pad\+::\+Set\+\_\+\+Data\+\_\+2\+Use (\begin{DoxyParamCaption}\item[{const int \&}]{i\+Opt}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_pad_a392d1a7889fccf6ef40489703686969e}\index{Pad@{Pad}!Set\_TMax@{Set\_TMax}}
+\index{Set\_TMax@{Set\_TMax}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{Set\_TMax()}{Set\_TMax()}}
+{\footnotesize\ttfamily \label{class_pad_a392d1a7889fccf6ef40489703686969e} 
+void Pad\+::\+Set\+\_\+\+TMax (\begin{DoxyParamCaption}\item[{const double \&}]{TMax}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_pad_a9b0eb33e9fe926b994dc9e81bfa6ab14}\index{Pad@{Pad}!Set\_TMax\_True@{Set\_TMax\_True}}
+\index{Set\_TMax\_True@{Set\_TMax\_True}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{Set\_TMax\_True()}{Set\_TMax\_True()}}
+{\footnotesize\ttfamily \label{class_pad_a9b0eb33e9fe926b994dc9e81bfa6ab14} 
+void Pad\+::\+Set\+\_\+\+TMax\+\_\+\+True (\begin{DoxyParamCaption}\item[{const double \&}]{TMax}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_pad_a68dab5c1205812094c18bd88e5b02042}\index{Pad@{Pad}!SetSignalModel@{SetSignalModel}}
+\index{SetSignalModel@{SetSignalModel}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{SetSignalModel()}{SetSignalModel()}}
+{\footnotesize\ttfamily \label{class_pad_a68dab5c1205812094c18bd88e5b02042} 
+void Pad\+::\+Set\+Signal\+Model (\begin{DoxyParamCaption}\item[{const double \&}]{Time0}{, }\item[{const double \&}]{XTrue}{, }\item[{const double \&}]{YTrue}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_pad_a33a17b7b1e28ee3ca286023a73bd903b}\index{Pad@{Pad}!Validate@{Validate}}
+\index{Validate@{Validate}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{Validate()}{Validate()}}
+{\footnotesize\ttfamily \label{class_pad_a33a17b7b1e28ee3ca286023a73bd903b} 
+void Pad\+::\+Validate (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_pad_af4de2ea7fa9d00551932cf46f9ea473b}\index{Pad@{Pad}!WF\_DoClosure@{WF\_DoClosure}}
+\index{WF\_DoClosure@{WF\_DoClosure}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{WF\_DoClosure()}{WF\_DoClosure()}}
+{\footnotesize\ttfamily \label{class_pad_af4de2ea7fa9d00551932cf46f9ea473b} 
+void Pad\+::\+WF\+\_\+\+Do\+Closure (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_pad_a1949c49f25179715814227a0bfeb4b0b}\index{Pad@{Pad}!WriteOut@{WriteOut}}
+\index{WriteOut@{WriteOut}!Pad@{Pad}}
+\doxysubsubsection{\texorpdfstring{WriteOut()}{WriteOut()}}
+{\footnotesize\ttfamily \label{class_pad_a1949c49f25179715814227a0bfeb4b0b} 
+void Pad\+::\+Write\+Out (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Model\+Event/inc/\mbox{\hyperlink{_pad_8h}{Pad.\+h}}\item 
+Model\+Event/src/\mbox{\hyperlink{_pad_8cxx}{Pad.\+cxx}}\end{DoxyCompactItemize}

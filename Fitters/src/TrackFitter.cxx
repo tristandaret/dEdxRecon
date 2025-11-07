@@ -1,32 +1,16 @@
-#/***************************************************************************
- * File: TrackFitter.cxx
- * Project: dEdxRecon
- *
- * Brief: Implementation of the TrackFitter class which interfaces with
- *        ROOT's minimisers (TFitter/TVirtualFitter/TMinuit) to fit track
- *        parameters to cluster/pad data. Contains the static bridge used by
- *        Minuit and the Chi2 evaluation routine.
- *
- * Contents: TrackFitter constructor/destructor, minimisation driver, and
- *           Chi2 calculation implementation.
- *
- * Notes: Do not change the global/static bridge semantics; Minuit requires
- *        the static function pointer wrapper present here.
- ***************************************************************************/
-
 #include "TrackFitter.h"
 #include "TFitter.h"
 
-//--------------------------------------------------------------------//
-/** This class is needed to run Minuit */
+//----------------------------------------------------------------------//
+// This class is needed to run Minuit
 class StaticTrackFitter {
 public:
-  /** Constructor */
+  // Constructor
   StaticTrackFitter();
   virtual ~StaticTrackFitter();
-  /** Set */
+  // Set
   static void Set(TrackFitter *pTrackFitter);
-  /** Pointer */
+  // Pointer
   static TrackFitter *p_TrackFitter;
 };
 

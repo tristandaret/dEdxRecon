@@ -1,0 +1,152 @@
+\doxysection{Track\+Fitter Class Reference}
+\hypertarget{class_track_fitter}{}\label{class_track_fitter}\index{TrackFitter@{TrackFitter}}
+
+
+{\ttfamily \#include $<$Track\+Fitter.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_track_fitter_ae025aac2302f33104dedecc717030d3a}{Track\+Fitter}} (const std\+::string \&Fitter\+Name, const int \&Nber\+Of\+Parameters=2)
+\begin{DoxyCompactList}\small\item\em Construct a \doxylink{class_track_fitter}{Track\+Fitter}. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{class_track_fitter_af133575e88be13eb271000c6d20c7809}{\texorpdfstring{$\sim$}{\string~}\+Track\+Fitter}} ()
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_track_fitter_a37fdbd6ed17d945e6391658e5dacdb41}{Set\+\_\+\+Track}} (\mbox{\hyperlink{class_track}{Track}} \texorpdfstring{$\ast$}{*}p\+Track)
+\begin{DoxyCompactList}\small\item\em Set the track to be fitted. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_track_fitter_a1b431c98427c655d7c50728f1b6608a2}{Do\+Minimisation}} ()
+\begin{DoxyCompactList}\small\item\em Run the minimisation routine. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_track_fitter_a3df1d9e938f891f5d99c281b074c9e2a}{Chi2}} (double par\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Compute chi2 for the current parameter vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{class_track_fitter_a129b8257240eaa58fde435852bd45b55}{m\+\_\+\+Fitter\+Name}}
+\item 
+int \mbox{\hyperlink{class_track_fitter_a3243e619c9427cfd551f8aa9c47d81f9}{m\+\_\+\+Nber\+Of\+Parameters}}
+\item 
+\mbox{\hyperlink{class_track}{Track}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_track_fitter_a1826e20323bf19e89940724bfd0fad99}{p\+\_\+\+Track}}
+\item 
+TVirtual\+Fitter \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_track_fitter_aebe0d4d087dbc913973006907be74ca4}{p\+\_\+\+TVirtual\+Fitter}}
+\begin{DoxyCompactList}\small\item\em Fitter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{class_track_fitter_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_track_fitter_ae025aac2302f33104dedecc717030d3a}\index{TrackFitter@{TrackFitter}!TrackFitter@{TrackFitter}}
+\index{TrackFitter@{TrackFitter}!TrackFitter@{TrackFitter}}
+\doxysubsubsection{\texorpdfstring{TrackFitter()}{TrackFitter()}}
+{\footnotesize\ttfamily \label{class_track_fitter_ae025aac2302f33104dedecc717030d3a} 
+Track\+Fitter\+::\+Track\+Fitter (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{Fitter\+Name}{, }\item[{const int \&}]{Nber\+Of\+Parameters}{ = {\ttfamily 2}}\end{DoxyParamCaption})}
+
+
+
+Construct a \doxylink{class_track_fitter}{Track\+Fitter}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Fitter\+Name} & name used to identify the fitter instance \\
+\hline
+{\em Nber\+Of\+Parameters} & number of fit parameters (default\+: 2) \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_track_fitter_af133575e88be13eb271000c6d20c7809}\index{TrackFitter@{TrackFitter}!````~TrackFitter@{\texorpdfstring{$\sim$}{\string~}TrackFitter}}
+\index{````~TrackFitter@{\texorpdfstring{$\sim$}{\string~}TrackFitter}!TrackFitter@{TrackFitter}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}TrackFitter()}{\string~TrackFitter()}}
+{\footnotesize\ttfamily \label{class_track_fitter_af133575e88be13eb271000c6d20c7809} 
+Track\+Fitter\+::\texorpdfstring{$\sim$}{\string~}\+Track\+Fitter (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Virtual destructor. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_track_fitter_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_track_fitter_a3df1d9e938f891f5d99c281b074c9e2a}\index{TrackFitter@{TrackFitter}!Chi2@{Chi2}}
+\index{Chi2@{Chi2}!TrackFitter@{TrackFitter}}
+\doxysubsubsection{\texorpdfstring{Chi2()}{Chi2()}}
+{\footnotesize\ttfamily \label{class_track_fitter_a3df1d9e938f891f5d99c281b074c9e2a} 
+double Track\+Fitter\+::\+Chi2 (\begin{DoxyParamCaption}\item[{double}]{par}{\mbox{[}$\,$\mbox{]}}\end{DoxyParamCaption})}
+
+
+
+Compute chi2 for the current parameter vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em par} & parameter array used for the chi2 evaluation \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+computed chi2 value 
+\end{DoxyReturn}
+\Hypertarget{class_track_fitter_a1b431c98427c655d7c50728f1b6608a2}\index{TrackFitter@{TrackFitter}!DoMinimisation@{DoMinimisation}}
+\index{DoMinimisation@{DoMinimisation}!TrackFitter@{TrackFitter}}
+\doxysubsubsection{\texorpdfstring{DoMinimisation()}{DoMinimisation()}}
+{\footnotesize\ttfamily \label{class_track_fitter_a1b431c98427c655d7c50728f1b6608a2} 
+int Track\+Fitter\+::\+Do\+Minimisation (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Run the minimisation routine. 
+
+\begin{DoxyReturn}{Returns}
+status code (0 on success, non-\/zero on failure) 
+\end{DoxyReturn}
+\Hypertarget{class_track_fitter_a37fdbd6ed17d945e6391658e5dacdb41}\index{TrackFitter@{TrackFitter}!Set\_Track@{Set\_Track}}
+\index{Set\_Track@{Set\_Track}!TrackFitter@{TrackFitter}}
+\doxysubsubsection{\texorpdfstring{Set\_Track()}{Set\_Track()}}
+{\footnotesize\ttfamily \label{class_track_fitter_a37fdbd6ed17d945e6391658e5dacdb41} 
+void Track\+Fitter\+::\+Set\+\_\+\+Track (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_track}{Track}} \texorpdfstring{$\ast$}{*}}]{p\+Track}{}\end{DoxyParamCaption})}
+
+
+
+Set the track to be fitted. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+Track} & pointer to a \doxylink{class_track}{Track} object (ownership not transferred) \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-variable-members}
+\Hypertarget{class_track_fitter_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_track_fitter_a129b8257240eaa58fde435852bd45b55}\index{TrackFitter@{TrackFitter}!m\_FitterName@{m\_FitterName}}
+\index{m\_FitterName@{m\_FitterName}!TrackFitter@{TrackFitter}}
+\doxysubsubsection{\texorpdfstring{m\_FitterName}{m\_FitterName}}
+{\footnotesize\ttfamily \label{class_track_fitter_a129b8257240eaa58fde435852bd45b55} 
+std\+::string Track\+Fitter\+::m\+\_\+\+Fitter\+Name\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_track_fitter_a3243e619c9427cfd551f8aa9c47d81f9}\index{TrackFitter@{TrackFitter}!m\_NberOfParameters@{m\_NberOfParameters}}
+\index{m\_NberOfParameters@{m\_NberOfParameters}!TrackFitter@{TrackFitter}}
+\doxysubsubsection{\texorpdfstring{m\_NberOfParameters}{m\_NberOfParameters}}
+{\footnotesize\ttfamily \label{class_track_fitter_a3243e619c9427cfd551f8aa9c47d81f9} 
+int Track\+Fitter\+::m\+\_\+\+Nber\+Of\+Parameters\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_track_fitter_a1826e20323bf19e89940724bfd0fad99}\index{TrackFitter@{TrackFitter}!p\_Track@{p\_Track}}
+\index{p\_Track@{p\_Track}!TrackFitter@{TrackFitter}}
+\doxysubsubsection{\texorpdfstring{p\_Track}{p\_Track}}
+{\footnotesize\ttfamily \label{class_track_fitter_a1826e20323bf19e89940724bfd0fad99} 
+\mbox{\hyperlink{class_track}{Track}}\texorpdfstring{$\ast$}{*} Track\+Fitter\+::p\+\_\+\+Track\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_track_fitter_aebe0d4d087dbc913973006907be74ca4}\index{TrackFitter@{TrackFitter}!p\_TVirtualFitter@{p\_TVirtualFitter}}
+\index{p\_TVirtualFitter@{p\_TVirtualFitter}!TrackFitter@{TrackFitter}}
+\doxysubsubsection{\texorpdfstring{p\_TVirtualFitter}{p\_TVirtualFitter}}
+{\footnotesize\ttfamily \label{class_track_fitter_aebe0d4d087dbc913973006907be74ca4} 
+TVirtual\+Fitter\texorpdfstring{$\ast$}{*} Track\+Fitter\+::p\+\_\+\+TVirtual\+Fitter\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Fitter. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Fitters/inc/\mbox{\hyperlink{_track_fitter_8h}{Track\+Fitter.\+h}}\item 
+Fitters/src/\mbox{\hyperlink{_track_fitter_8cxx}{Track\+Fitter.\+cxx}}\end{DoxyCompactItemize}

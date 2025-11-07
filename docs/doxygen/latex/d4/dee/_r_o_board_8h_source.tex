@@ -1,0 +1,67 @@
+\doxysection{ROBoard.\+h}
+\hypertarget{_r_o_board_8h_source}{}\label{_r_o_board_8h_source}\index{ModelEvent/inc/ROBoard.h@{ModelEvent/inc/ROBoard.h}}
+\mbox{\hyperlink{_r_o_board_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#ifndef\ ROBOARD\_H}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ ROBOARD\_H}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#ifndef\ ROBoard\_H}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#define\ ROBoard\_H}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_misc_8h}{Misc.h}}"{}}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_pad_8h}{Pad.h}}"{}}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_model___charge_i_8h}{Model\_ChargeI.h}}"{}}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_model___electronics_8h}{Model\_Electronics.h}}"{}}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_model___read_out_geometry_8h}{Model\_ReadOutGeometry.h}}"{}}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00026\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_r_o_board_a4038f0efaae81a40a44c73ae53151a0c}{ROBoard}}\ \{}
+\DoxyCodeLine{00027\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00029\ \ \ \mbox{\hyperlink{class_r_o_board_a4038f0efaae81a40a44c73ae53151a0c}{ROBoard}}(\mbox{\hyperlink{class_model___read_out_geometry}{Model\_ReadOutGeometry}}\ *pModel\_ReadOutGeometry,}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_model___electronics}{Model\_Electronics}}\ *pModel\_Electronics,\ \mbox{\hyperlink{class_model___charge_i}{Model\_ChargeI}}\ *pModel\_ChargeI);}
+\DoxyCodeLine{00031\ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_r_o_board_a2a75941873b4de222750e1680996e5d2}{\string~ROBoard}}();}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \textcolor{comment}{//\ Models}}
+\DoxyCodeLine{00034\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_model___read_out_geometry}{Model\_ReadOutGeometry}}\ *\mbox{\hyperlink{class_r_o_board_af4dfe76397f6b4da168e296c063712c5}{Get\_Model\_ReadOutGeometry}}();}
+\DoxyCodeLine{00035\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_model___electronics}{Model\_Electronics}}\ *\mbox{\hyperlink{class_r_o_board_ac70b3b08f7b3018f489d7410e01d7ddc}{Get\_Model\_Electronics}}();}
+\DoxyCodeLine{00036\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_model___charge_i}{Model\_ChargeI}}\ *\mbox{\hyperlink{class_r_o_board_a4c79a276420d86f392cf35d8cde359e6}{Get\_Model\_ChargeI}}();}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \textcolor{comment}{//\ Pads\ addition}}
+\DoxyCodeLine{00039\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_r_o_board_a161b281667b8f9ae8e098b6734351825}{Add\_Pad}}(\mbox{\hyperlink{class_pad}{Pad}}\ *pPad);\ \textcolor{comment}{//\ Add\ a\ pad}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \textcolor{comment}{//\ Pads\ Access}}
+\DoxyCodeLine{00042\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_r_o_board_a9c947de179e82b226b058e3f2ce39ef0}{Get\_NberOfPads}}()\ \textcolor{keyword}{const};\ \ \ \ \ \ \ \textcolor{comment}{//\ Size\ of\ Pad\ set}}
+\DoxyCodeLine{00043\ \ \ \mbox{\hyperlink{class_pad}{Pad}}\ *\mbox{\hyperlink{class_r_o_board_a0289df3558a579e299413ed628d18bac}{Get\_Pad}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&Index1D);\ \textcolor{comment}{//\ Get\ Pad}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_r_o_board_a94c40c94ac6a10067e01934685599fb1}{Get\_IsThisPadExisting}}(}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&iX,}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&iY)\ \textcolor{keyword}{const};\ \textcolor{comment}{//\ return\ Pad\ (iX,iY)\ existence\ state}}
+\DoxyCodeLine{00048\ \ \ \mbox{\hyperlink{class_pad}{Pad}}\ *\mbox{\hyperlink{class_r_o_board_a0289df3558a579e299413ed628d18bac}{Get\_Pad}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&iX,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&iY);\ \textcolor{comment}{//\ return\ Pad\ (iX,iY)\ if\ it\ exists}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \mbox{\hyperlink{class_pad}{Pad}}\ *\mbox{\hyperlink{class_r_o_board_a0289df3558a579e299413ed628d18bac}{Get\_Pad}}(\mbox{\hyperlink{class_pad}{Pad}}\ *pPad);\ \textcolor{comment}{//\ return\ Pad\ (iX,iY)\ if\ it\ exists}}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00053\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_r_o_board_a378b1162655244151750f8448a91993c}{GetLinearIndex}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&iX,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&iY)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_r_o_board_af012c4e885c92b123ff6ecf543ee09f8}{Ini\_Models}}(\mbox{\hyperlink{class_model___read_out_geometry}{Model\_ReadOutGeometry}}\ *pModel\_ReadOutGeometry,}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_model___electronics}{Model\_Electronics}}\ *pModel\_Electronics,}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_model___charge_i}{Model\_ChargeI}}\ *pModel\_ChargeI);}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00060\ \ \ \textcolor{keywordtype}{short}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_r_o_board_ac92b16da883cb91f819b257c986aef07}{m\_Nx}};}
+\DoxyCodeLine{00061\ \ \ \textcolor{keywordtype}{short}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_r_o_board_a8a15430d177014fda6142c2d2ca91c9e}{m\_Ny}};}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ std::vector<int>\ \mbox{\hyperlink{class_r_o_board_a60dd197aa2e47f0720d40a07925cb00e}{V\_ExisFlag2D}};}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ std::vector<Pad\ *>\ \mbox{\hyperlink{class_r_o_board_a7845bafeceeb873bdac7056ca4fe8706}{V\_Pad}};}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \ \mbox{\hyperlink{class_model___read_out_geometry}{Model\_ReadOutGeometry}}\ *\mbox{\hyperlink{class_r_o_board_a8f4bc41090c2983b46e5d4d783db6e42}{p\_Model\_ReadOutGeometry}};}
+\DoxyCodeLine{00068\ \ \ \mbox{\hyperlink{class_model___electronics}{Model\_Electronics}}\ *\mbox{\hyperlink{class_r_o_board_addec0074851261ae2f5c878ad5e03912}{p\_Model\_Electronics}};}
+\DoxyCodeLine{00069\ \ \ \mbox{\hyperlink{class_model___charge_i}{Model\_ChargeI}}\ *\mbox{\hyperlink{class_r_o_board_a3fb3be0e97ca357960fef270a0a176d5}{p\_Model\_ChargeI}};}
+\DoxyCodeLine{00070\ \};}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

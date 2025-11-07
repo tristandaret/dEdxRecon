@@ -1,0 +1,2736 @@
+\begin{theindex}
+
+  \item {\texorpdfstring{$\sim$}{\string~}Cluster}
+    \subitem {Cluster}, \hyperpage{34}
+  \item {\texorpdfstring{$\sim$}{\string~}ClusterFitter\_Diagonal}
+    \subitem {ClusterFitter\_Diagonal}, \hyperpage{42}
+  \item {\texorpdfstring{$\sim$}{\string~}ClusterFitter\_Horizontal}
+    \subitem {ClusterFitter\_Horizontal}, \hyperpage{44}
+  \item {\texorpdfstring{$\sim$}{\string~}DrawOuts}
+    \subitem {Reconstruction::DrawOuts}, \hyperpage{50}
+  \item {\texorpdfstring{$\sim$}{\string~}ERAMMaps}
+    \subitem {Reconstruction::ERAMMaps}, \hyperpage{55}
+  \item {\texorpdfstring{$\sim$}{\string~}EramInfo}
+    \subitem {EramInfo}, \hyperpage{53}
+  \item {\texorpdfstring{$\sim$}{\string~}Event}
+    \subitem {Event}, \hyperpage{57}
+  \item {\texorpdfstring{$\sim$}{\string~}FitOutput}
+    \subitem {FitOutput}, \hyperpage{61}
+  \item {\texorpdfstring{$\sim$}{\string~}GaussFunction}
+    \subitem {GaussFunction}, \hyperpage{64}
+  \item {\texorpdfstring{$\sim$}{\string~}LUT}
+    \subitem {Reconstruction::LUT}, \hyperpage{67}
+  \item {\texorpdfstring{$\sim$}{\string~}Model\_Charge0D}
+    \subitem {Model\_Charge0D}, \hyperpage{69}
+  \item {\texorpdfstring{$\sim$}{\string~}Model\_Charge1D}
+    \subitem {Model\_Charge1D}, \hyperpage{72}
+  \item {\texorpdfstring{$\sim$}{\string~}Model\_ChargeI}
+    \subitem {Model\_ChargeI}, \hyperpage{74}
+  \item {\texorpdfstring{$\sim$}{\string~}Model\_Electronics}
+    \subitem {Model\_Electronics}, \hyperpage{77}
+  \item {\texorpdfstring{$\sim$}{\string~}Model\_ReadOutGeometry}
+    \subitem {Model\_ReadOutGeometry}, \hyperpage{79}
+  \item {\texorpdfstring{$\sim$}{\string~}Module}
+    \subitem {Module}, \hyperpage{84}
+  \item {\texorpdfstring{$\sim$}{\string~}PRFParameters}
+    \subitem {PRFParameters}, \hyperpage{98}
+  \item {\texorpdfstring{$\sim$}{\string~}Pad}
+    \subitem {Pad}, \hyperpage{88}
+  \item {\texorpdfstring{$\sim$}{\string~}ParabolaFunction}
+    \subitem {ParabolaFunction}, \hyperpage{95}
+  \item {\texorpdfstring{$\sim$}{\string~}ParabolaFunctionNG}
+    \subitem {ParabolaFunctionNG}, \hyperpage{96}
+  \item {\texorpdfstring{$\sim$}{\string~}ROBoard}
+    \subitem {ROBoard}, \hyperpage{113}
+  \item {\texorpdfstring{$\sim$}{\string~}RecoCluster}
+    \subitem {Reconstruction::RecoCluster}, \hyperpage{100}
+  \item {\texorpdfstring{$\sim$}{\string~}RecoEvent}
+    \subitem {Reconstruction::RecoEvent}, \hyperpage{103}
+  \item {\texorpdfstring{$\sim$}{\string~}RecoModule}
+    \subitem {Reconstruction::RecoModule}, \hyperpage{106}
+  \item {\texorpdfstring{$\sim$}{\string~}RecoPad}
+    \subitem {Reconstruction::RecoPad}, \hyperpage{109}
+  \item {\texorpdfstring{$\sim$}{\string~}Sample}
+    \subitem {Sample}, \hyperpage{116}
+  \item {\texorpdfstring{$\sim$}{\string~}Selector}
+    \subitem {Selector}, \hyperpage{121}
+  \item {\texorpdfstring{$\sim$}{\string~}SetOfTracks}
+    \subitem {SetOfTracks}, \hyperpage{126}
+  \item {\texorpdfstring{$\sim$}{\string~}StaticClusterFitter\_Diagonal}
+    \subitem {StaticClusterFitter\_Diagonal}, \hyperpage{131}
+  \item {\texorpdfstring{$\sim$}{\string~}StaticClusterFitter\_Horizontal}
+    \subitem {StaticClusterFitter\_Horizontal}, \hyperpage{132}
+  \item {\texorpdfstring{$\sim$}{\string~}StaticTrackFitter}
+    \subitem {StaticTrackFitter}, \hyperpage{133}
+  \item {\texorpdfstring{$\sim$}{\string~}Track}
+    \subitem {Track}, \hyperpage{135}
+  \item {\texorpdfstring{$\sim$}{\string~}TrackFitter}
+    \subitem {TrackFitter}, \hyperpage{139}
+  \item {\texorpdfstring{$\sim$}{\string~}Uploader}
+    \subitem {Uploader}, \hyperpage{141}
+  \item {\texorpdfstring{$\sim$}{\string~}Uploader\_ERAM01}
+    \subitem {Uploader\_ERAM01}, \hyperpage{145}
+  \item {\texorpdfstring{$\sim$}{\string~}Uploader\_MockUp\_V1}
+    \subitem {Uploader\_MockUp\_V1}, \hyperpage{147}
+  \item {\texorpdfstring{$\sim$}{\string~}Uploader\_MockUp\_V2}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{151}
+  \item {\texorpdfstring{$\sim$}{\string~}Uploader\_Prototype}
+    \subitem {Uploader\_Prototype}, \hyperpage{159}
+  \item {\texorpdfstring{$\sim$}{\string~}dEdx}
+    \subitem {Reconstruction::dEdx}, \hyperpage{46}
+
+  \indexspace
+
+  \item {ADCmax}
+    \subitem {Reconstruction::RecoPad}, \hyperpage{109}
+  \item {ADCmax\_base}
+    \subitem {Reconstruction::RecoCluster}, \hyperpage{100}
+    \subitem {Reconstruction::RecoPad}, \hyperpage{109}
+  \item {Add\_Cluster}
+    \subitem {Module}, \hyperpage{84}
+    \subitem {Track}, \hyperpage{135}
+  \item {Add\_Event}
+    \subitem {Sample}, \hyperpage{117}
+  \item {Add\_Module}
+    \subitem {Event}, \hyperpage{57}
+  \item {Add\_Pad}
+    \subitem {Cluster}, \hyperpage{35}
+    \subitem {Module}, \hyperpage{84}
+    \subitem {ROBoard}, \hyperpage{113}
+  \item {Add\_Selection}
+    \subitem {Selector}, \hyperpage{121}
+  \item {Add\_Track}
+    \subitem {SetOfTracks}, \hyperpage{126}
+  \item {ALead\_base}
+    \subitem {Reconstruction::RecoCluster}, \hyperpage{100}
+  \item {ALead\_GCorr}
+    \subitem {Reconstruction::RecoCluster}, \hyperpage{100}
+  \item {AmplitudeError}
+    \subitem {AmplitudeError.cxx}, \hyperpage{191}
+    \subitem {AmplitudeError.h}, \hyperpage{173}
+  \item {AmplitudeError.cxx}
+    \subitem {AmplitudeError}, \hyperpage{191}
+    \subitem {AmplitudeError\_Leading}, \hyperpage{191}
+    \subitem {AmplitudeError\_NextLeading}, \hyperpage{192}
+    \subitem {AmplitudeError\_NextNextLeading}, \hyperpage{192}
+  \item {AmplitudeError.h}
+    \subitem {AmplitudeError}, \hyperpage{173}
+  \item {AmplitudeError\_Leading}
+    \subitem {AmplitudeError.cxx}, \hyperpage{191}
+  \item {AmplitudeError\_NextLeading}
+    \subitem {AmplitudeError.cxx}, \hyperpage{192}
+  \item {AmplitudeError\_NextNextLeading}
+    \subitem {AmplitudeError.cxx}, \hyperpage{192}
+  \item {AmplitudeVSLength}
+    \subitem {Reconstruction::DrawOuts}, \hyperpage{50}
+  \item {Analysis.cxx}
+    \subitem {main}, \hyperpage{161}
+  \item {angle\_xy}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{152}
+  \item {angle\_yz}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{152}
+  \item {Apply\_ASelection}
+    \subitem {Selector}, \hyperpage{121}
+  \item {ApplySelection}
+    \subitem {Selector}, \hyperpage{121, 122}
+  \item {Apps Directory Reference}, \hyperpage{15}
+  \item {Apps/Analysis.cxx}, \hyperpage{161}
+  \item {Apps/DrawOut.cxx}, \hyperpage{161}
+  \item {avg\_pad\_mult}
+    \subitem {Reconstruction::RecoEvent}, \hyperpage{103}
+    \subitem {Reconstruction::RecoModule}, \hyperpage{107}
+
+  \indexspace
+
+  \item {b\_angle\_xy}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{152}
+  \item {b\_angle\_yz}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{152}
+  \item {b\_beforeMerging}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{152}
+  \item {b\_charge}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{152}
+  \item {b\_clust\_pos}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{152}
+  \item {b\_clust\_pos\_err}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{152}
+  \item {b\_date}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{152}
+  \item {b\_dEdx}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{152}
+  \item {b\_dx}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{152}
+  \item {b\_ev}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{153}
+  \item {b\_max\_mult}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{153}
+  \item {b\_mean\_mult}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{153}
+  \item {b\_module}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{153}
+  \item {b\_mom}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{153}
+  \item {b\_multiplicity}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{153}
+  \item {b\_offset}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{153}
+  \item {b\_pad\_charge}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{153}
+  \item {b\_pad\_time}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{153}
+  \item {b\_pad\_wf\_q}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{153}
+  \item {b\_pad\_x}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{154}
+  \item {b\_pad\_y}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{154}
+  \item {b\_qfrac}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{154}
+  \item {b\_quality}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{154}
+  \item {b\_residual}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{154}
+  \item {b\_residual\_corr}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{154}
+  \item {b\_rob\_clusters}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{154}
+  \item {b\_sina}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{154}
+  \item {b\_time}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{154}
+  \item {b\_track}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{154}
+  \item {b\_track\_pos}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{155}
+  \item {b\_wf\_fwhm}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{155}
+  \item {b\_wf\_width}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{155}
+  \item {beforeMerging}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{155}
+  \item {BetheBloch}
+    \subitem {ReconTools.cxx}, \hyperpage{242}
+    \subitem {ReconTools.h}, \hyperpage{223}
+  \item {BetheBlochBhabha}
+    \subitem {ReconTools.cxx}, \hyperpage{242}
+    \subitem {ReconTools.h}, \hyperpage{223}
+  \item {BetheBlochExp}
+    \subitem {ReconTools.cxx}, \hyperpage{242}
+    \subitem {ReconTools.h}, \hyperpage{224}
+
+  \indexspace
+
+  \item {CERN22Scan}
+    \subitem {Reconstruction::DrawOuts}, \hyperpage{50}
+  \item {CERN22ScanDraw}
+    \subitem {Reconstruction::DrawOuts}, \hyperpage{50}
+  \item {CERN22ScanFill}
+    \subitem {Reconstruction::DrawOuts}, \hyperpage{50}
+  \item {CERN\_drift}
+    \subitem {Reconstruction}, \hyperpage{25}
+  \item {CERN\_Escan}
+    \subitem {Reconstruction}, \hyperpage{25}
+  \item {charge}
+    \subitem {Reconstruction::RecoCluster}, \hyperpage{101}
+    \subitem {Reconstruction::RecoPad}, \hyperpage{110}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{155}
+  \item {Chi2}
+    \subitem {ClusterFitter\_Diagonal}, \hyperpage{42}
+    \subitem {ClusterFitter\_Horizontal}, \hyperpage{44}
+    \subitem {Track}, \hyperpage{135}
+    \subitem {TrackFitter}, \hyperpage{139}
+  \item {Chi2\_Diagonal}
+    \subitem {Cluster}, \hyperpage{35}
+  \item {Chi2\_Horizontal}
+    \subitem {Cluster}, \hyperpage{35}
+  \item {ClassDef}
+    \subitem {Reconstruction::RecoCluster}, \hyperpage{100}
+    \subitem {Reconstruction::RecoEvent}, \hyperpage{103}
+    \subitem {Reconstruction::RecoModule}, \hyperpage{106}
+    \subitem {Reconstruction::RecoPad}, \hyperpage{109}
+  \item {ClassImp}
+    \subitem {dEdx.cxx}, \hyperpage{234}
+    \subitem {LUTs.cxx}, \hyperpage{241}
+  \item {Clear}
+    \subitem {Reconstruction::RecoEvent}, \hyperpage{103}
+  \item {Clear\_ADC}
+    \subitem {Pad}, \hyperpage{89}
+  \item {Clear\_Clusters}
+    \subitem {Module}, \hyperpage{84}
+  \item {Clear\_Modules}
+    \subitem {Event}, \hyperpage{57}
+  \item {ClearVectors}
+    \subitem {Reconstruction}, \hyperpage{23}
+  \item {clust\_pos}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{155}
+  \item {clust\_pos\_err}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{155}
+  \item {Cluster}, \hyperpage{33}
+    \subitem {\texorpdfstring{$\sim$}{\string~}Cluster}, \hyperpage{34}
+    \subitem {Add\_Pad}, \hyperpage{35}
+    \subitem {Chi2\_Diagonal}, \hyperpage{35}
+    \subitem {Chi2\_Horizontal}, \hyperpage{35}
+    \subitem {Cluster}, \hyperpage{34}
+    \subitem {DoClosure}, \hyperpage{35}
+    \subitem {Eval\_Diagonal}, \hyperpage{35}
+    \subitem {Eval\_Horizontal}, \hyperpage{35}
+    \subitem {FitRes\_Diagonal\_Get\_NberOfTermsInChi2}, \hyperpage{35}
+    \subitem {FitRes\_Diagonal\_Get\_Pad}, \hyperpage{35}
+    \subitem {FitRes\_Diagonal\_Get\_Pull}, \hyperpage{36}
+    \subitem {FitRes\_Diagonal\_Get\_Residual}, \hyperpage{36}
+    \subitem {FitRes\_Horizontal\_Get\_NberOfTermsInChi2}, 
+		\hyperpage{36}
+    \subitem {FitRes\_Horizontal\_Get\_Pad}, \hyperpage{36}
+    \subitem {FitRes\_Horizontal\_Get\_Pull}, \hyperpage{36}
+    \subitem {FitRes\_Horizontal\_Get\_Residual}, \hyperpage{36}
+    \subitem {Get\_Acluster}, \hyperpage{36}
+    \subitem {Get\_AMaxLeading}, \hyperpage{36}
+    \subitem {Get\_Chi2Min}, \hyperpage{36}
+    \subitem {Get\_EntryNber}, \hyperpage{37}
+    \subitem {Get\_EventNber}, \hyperpage{37}
+    \subitem {Get\_eXTrack}, \hyperpage{37}
+    \subitem {Get\_eYTrack}, \hyperpage{37}
+    \subitem {Get\_LeadingPad}, \hyperpage{37}
+    \subitem {Get\_ModuleNber}, \hyperpage{37}
+    \subitem {Get\_NberOfPads}, \hyperpage{37}
+    \subitem {Get\_NextLeadingPad}, \hyperpage{37}
+    \subitem {Get\_NextNextLeadingPad}, \hyperpage{37}
+    \subitem {Get\_Pad}, \hyperpage{37}
+    \subitem {Get\_TMaxLeading}, \hyperpage{38}
+    \subitem {Get\_XTrack}, \hyperpage{38}
+    \subitem {Get\_XTrack\_BeforeMinimisation}, \hyperpage{38}
+    \subitem {Get\_XWeight}, \hyperpage{38}
+    \subitem {Get\_YLeading}, \hyperpage{38}
+    \subitem {Get\_YTrack}, \hyperpage{38}
+    \subitem {Get\_YTrack\_BeforeMinimisation}, \hyperpage{38}
+    \subitem {Get\_YWeight}, \hyperpage{38}
+    \subitem {Invalidate}, \hyperpage{38}
+    \subitem {IsValid}, \hyperpage{38}
+    \subitem {m\_AngleRot}, \hyperpage{41}
+    \subitem {Set\_eXTrack}, \hyperpage{39}
+    \subitem {Set\_eYTrack}, \hyperpage{39}
+    \subitem {Set\_XTrack}, \hyperpage{39}
+    \subitem {Set\_YTrack}, \hyperpage{39}
+    \subitem {SetEval\_Diagonal}, \hyperpage{39}
+    \subitem {SetEval\_Horizontal}, \hyperpage{39}
+    \subitem {SetParameter\_Diagonal}, \hyperpage{39}
+    \subitem {SetParameter\_Horizontal}, \hyperpage{39}
+    \subitem {SetResults\_Diagonal}, \hyperpage{39}
+    \subitem {SetResults\_FailledFit\_Diagonal}, \hyperpage{40}
+    \subitem {SetResults\_FailledFit\_Horizontal}, \hyperpage{40}
+    \subitem {SetResults\_Horizontal}, \hyperpage{40}
+    \subitem {StatusFit}, \hyperpage{40}
+    \subitem {StatusFit\_Diagonal}, \hyperpage{40}
+    \subitem {StatusFit\_Horizontal}, \hyperpage{40}
+    \subitem {Validate}, \hyperpage{40}
+    \subitem {WriteOut}, \hyperpage{40}
+  \item {ClusterFit\_Diagonal}
+    \subitem {ClusterFitter.cxx}, \hyperpage{169}
+    \subitem {ClusterFitter.h}, \hyperpage{163}
+  \item {ClusterFit\_Diagonal\_Cluster}
+    \subitem {ClusterFitter.cxx}, \hyperpage{169}
+    \subitem {ClusterFitter.h}, \hyperpage{163}
+  \item {ClusterFit\_Diagonal\_Event}
+    \subitem {ClusterFitter.cxx}, \hyperpage{170}
+    \subitem {ClusterFitter.h}, \hyperpage{163}
+  \item {ClusterFit\_Horizontal}
+    \subitem {ClusterFitter.cxx}, \hyperpage{170}
+    \subitem {ClusterFitter.h}, \hyperpage{163}
+  \item {ClusterFit\_Horizontal\_Cluster}
+    \subitem {ClusterFitter.cxx}, \hyperpage{170}
+    \subitem {ClusterFitter.h}, \hyperpage{163}
+  \item {ClusterFit\_Horizontal\_Event}
+    \subitem {ClusterFitter.cxx}, \hyperpage{170}
+    \subitem {ClusterFitter.h}, \hyperpage{163}
+  \item {ClusterFitter.cxx}
+    \subitem {ClusterFit\_Diagonal}, \hyperpage{169}
+    \subitem {ClusterFit\_Diagonal\_Cluster}, \hyperpage{169}
+    \subitem {ClusterFit\_Diagonal\_Event}, \hyperpage{170}
+    \subitem {ClusterFit\_Horizontal}, \hyperpage{170}
+    \subitem {ClusterFit\_Horizontal\_Cluster}, \hyperpage{170}
+    \subitem {ClusterFit\_Horizontal\_Event}, \hyperpage{170}
+    \subitem {ClusterFitter\_DiagonalFunction}, \hyperpage{170}
+    \subitem {ClusterFitter\_HorizontalFunction}, \hyperpage{170}
+  \item {ClusterFitter.h}
+    \subitem {ClusterFit\_Diagonal}, \hyperpage{163}
+    \subitem {ClusterFit\_Diagonal\_Cluster}, \hyperpage{163}
+    \subitem {ClusterFit\_Diagonal\_Event}, \hyperpage{163}
+    \subitem {ClusterFit\_Horizontal}, \hyperpage{163}
+    \subitem {ClusterFit\_Horizontal\_Cluster}, \hyperpage{163}
+    \subitem {ClusterFit\_Horizontal\_Event}, \hyperpage{163}
+  \item {ClusterFitter\_Diagonal}, \hyperpage{41}
+    \subitem {\texorpdfstring{$\sim$}{\string~}ClusterFitter\_Diagonal}, 
+		\hyperpage{42}
+    \subitem {Chi2}, \hyperpage{42}
+    \subitem {ClusterFitter\_Diagonal}, \hyperpage{41}
+    \subitem {DoMinimisation}, \hyperpage{42}
+    \subitem {m\_FitterName}, \hyperpage{43}
+    \subitem {p\_Cluster}, \hyperpage{43}
+    \subitem {p\_TVirtualFitter}, \hyperpage{43}
+    \subitem {Set\_Cluster}, \hyperpage{42}
+  \item {ClusterFitter\_DiagonalFunction}
+    \subitem {ClusterFitter.cxx}, \hyperpage{170}
+  \item {ClusterFitter\_Horizontal}, \hyperpage{43}
+    \subitem {\texorpdfstring{$\sim$}{\string~}ClusterFitter\_Horizontal}, 
+		\hyperpage{44}
+    \subitem {Chi2}, \hyperpage{44}
+    \subitem {ClusterFitter\_Horizontal}, \hyperpage{44}
+    \subitem {DoMinimisation}, \hyperpage{44}
+    \subitem {m\_FitterName}, \hyperpage{45}
+    \subitem {p\_Cluster}, \hyperpage{45}
+    \subitem {p\_TVirtualFitter}, \hyperpage{45}
+    \subitem {Set\_Cluster}, \hyperpage{45}
+  \item {ClusterFitter\_HorizontalFunction}
+    \subitem {ClusterFitter.cxx}, \hyperpage{170}
+  \item {combinedFit}
+    \subitem {CombinedFit.h}, \hyperpage{202}
+  \item {CombinedFit.cxx}
+    \subitem {COMBINEDFIT\_H}, \hyperpage{232}
+    \subitem {iparmuon}, \hyperpage{232}
+    \subitem {iparpion}, \hyperpage{232}
+    \subitem {iparpositron}, \hyperpage{232}
+    \subitem {iparproton}, \hyperpage{232}
+    \subitem {npar}, \hyperpage{233}
+  \item {CombinedFit.h}
+    \subitem {combinedFit}, \hyperpage{202}
+  \item {COMBINEDFIT\_H}
+    \subitem {CombinedFit.cxx}, \hyperpage{232}
+  \item {comment}
+    \subitem {Reconstruction}, \hyperpage{25}
+  \item {ComputeCutStage3\_Cut}
+    \subitem {ReconTools.cxx}, \hyperpage{243}
+    \subitem {ReconTools.h}, \hyperpage{224}
+  \item {ComputedEdxGP}
+    \subitem {Reconstruction::dEdx}, \hyperpage{46}
+  \item {ComputedEdxGP1}
+    \subitem {Reconstruction::dEdx}, \hyperpage{46}
+  \item {ComputedEdxWF}
+    \subitem {Reconstruction::dEdx}, \hyperpage{46}
+  \item {ComputedEdxXP}
+    \subitem {Reconstruction::dEdx}, \hyperpage{47}
+  \item {Control}
+    \subitem {Control.cxx}, \hyperpage{233}
+    \subitem {Control.h}, \hyperpage{203}
+    \subitem {Reconstruction::DrawOuts}, \hyperpage{50}
+  \item {Control.cxx}
+    \subitem {Control}, \hyperpage{233}
+  \item {Control.h}
+    \subitem {Control}, \hyperpage{203}
+  \item {corr\_func}
+    \subitem {ReconTools.cxx}, \hyperpage{243}
+    \subitem {ReconTools.h}, \hyperpage{224}
+  \item {Correction}
+    \subitem {Reconstruction}, \hyperpage{23}
+  \item {correction\_wf}
+    \subitem {Reconstruction}, \hyperpage{25}
+  \item {corrFuncPath}
+    \subitem {Reconstruction}, \hyperpage{25}
+
+  \indexspace
+
+  \item {d}
+    \subitem {Reconstruction::RecoPad}, \hyperpage{110}
+  \item {dataPath}
+    \subitem {Reconstruction}, \hyperpage{25}
+  \item {dataScanPath}
+    \subitem {Reconstruction}, \hyperpage{25}
+  \item {date}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{155}
+  \item {dd}
+    \subitem {Reconstruction::RecoPad}, \hyperpage{110}
+  \item {dEdx}
+    \subitem {Reconstruction::dEdx}, \hyperpage{46}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{155}
+  \item {dedx}
+    \subitem {Reconstruction}, \hyperpage{25}
+  \item {dEdx.cxx}
+    \subitem {ClassImp}, \hyperpage{234}
+  \item {dEdxGP1}
+    \subitem {Reconstruction::RecoEvent}, \hyperpage{103}
+  \item {dEdxGP2}
+    \subitem {Reconstruction::RecoEvent}, \hyperpage{103}
+  \item {dEdxGP3}
+    \subitem {Reconstruction::RecoEvent}, \hyperpage{103}
+  \item {dEdxGP4}
+    \subitem {Reconstruction::RecoEvent}, \hyperpage{103}
+  \item {dEdxGP5}
+    \subitem {Reconstruction::RecoEvent}, \hyperpage{104}
+  \item {dEdxPath}
+    \subitem {Reconstruction}, \hyperpage{25}
+  \item {dEdxWF}
+    \subitem {Reconstruction::RecoCluster}, \hyperpage{101}
+    \subitem {Reconstruction::RecoEvent}, \hyperpage{104}
+    \subitem {Reconstruction::RecoModule}, \hyperpage{107}
+  \item {dEdxWFnoTrunc}
+    \subitem {Reconstruction::RecoEvent}, \hyperpage{104}
+    \subitem {Reconstruction::RecoModule}, \hyperpage{107}
+  \item {dEdxXP}
+    \subitem {Reconstruction::RecoEvent}, \hyperpage{104}
+    \subitem {Reconstruction::RecoModule}, \hyperpage{107}
+    \subitem {Reconstruction::RecoPad}, \hyperpage{110}
+  \item {dEdxXPnoTrunc}
+    \subitem {Reconstruction::RecoEvent}, \hyperpage{104}
+    \subitem {Reconstruction::RecoModule}, \hyperpage{107}
+  \item {DefaultAnalysis}
+    \subitem {Reconstruction}, \hyperpage{24}
+  \item {Derive\_Response\_Base}
+    \subitem {Model\_Electronics}, \hyperpage{77}
+  \item {DESY21MultiScan}
+    \subitem {Reconstruction::DrawOuts}, \hyperpage{51}
+  \item {DESY21ScanDraw}
+    \subitem {Reconstruction::DrawOuts}, \hyperpage{51}
+  \item {DESY21ScanFill}
+    \subitem {Reconstruction::DrawOuts}, \hyperpage{51}
+  \item {DESY21SingleScan}
+    \subitem {Reconstruction::DrawOuts}, \hyperpage{51}
+  \item {DESY\_drift}
+    \subitem {Reconstruction}, \hyperpage{25}
+  \item {DESY\_phi}
+    \subitem {Reconstruction}, \hyperpage{26}
+  \item {DESY\_row}
+    \subitem {Reconstruction}, \hyperpage{26}
+  \item {DESY\_theta}
+    \subitem {Reconstruction}, \hyperpage{26}
+  \item {DESY\_yscan}
+    \subitem {Reconstruction}, \hyperpage{26}
+  \item {DESY\_zscan}
+    \subitem {Reconstruction}, \hyperpage{26}
+  \item {DiscardedModule}
+    \subitem {Reconstruction::dEdx}, \hyperpage{47}
+  \item {Displays.cxx}
+    \subitem {DrawOut\_ClusterWFDisplay}, \hyperpage{236}
+    \subitem {DrawOut\_EventDisplay}, \hyperpage{236}
+    \subitem {DrawOut\_GWF}, \hyperpage{236}
+    \subitem {DrawOut\_WaveFormDisplay}, \hyperpage{237}
+    \subitem {GiveMe\_EvtDisplay}, \hyperpage{237}
+    \subitem {GiveMe\_TimeDisplay}, \hyperpage{237}
+    \subitem {GiveMe\_WaveFormDisplay}, \hyperpage{237}
+    \subitem {NewClusterDisplay}, \hyperpage{237}
+    \subitem {NewClusterDisplayMinimal}, \hyperpage{238}
+  \item {Displays.h}
+    \subitem {DrawOut\_ClusterWFDisplay}, \hyperpage{208}
+    \subitem {DrawOut\_EventDisplay}, \hyperpage{208}
+    \subitem {DrawOut\_GWF}, \hyperpage{209}
+    \subitem {DrawOut\_WaveFormDisplay}, \hyperpage{209}
+    \subitem {GiveMe\_EvtDisplay}, \hyperpage{209}
+    \subitem {GiveMe\_TimeDisplay}, \hyperpage{209}
+    \subitem {GiveMe\_WaveFormDisplay}, \hyperpage{210}
+    \subitem {NewClusterDisplay}, \hyperpage{210}
+    \subitem {NewClusterDisplayMinimal}, \hyperpage{210}
+  \item {DO\_Comparison}
+    \subitem {Reconstruction}, \hyperpage{26}
+  \item {DO\_Control}
+    \subitem {Reconstruction}, \hyperpage{26}
+  \item {DO\_dEdx}
+    \subitem {Reconstruction}, \hyperpage{26}
+  \item {DoClosure}
+    \subitem {Cluster}, \hyperpage{35}
+    \subitem {Track}, \hyperpage{135}
+  \item {DoMinimisation}
+    \subitem {ClusterFitter\_Diagonal}, \hyperpage{42}
+    \subitem {ClusterFitter\_Horizontal}, \hyperpage{44}
+    \subitem {TrackFitter}, \hyperpage{139}
+  \item {Draw\_CERN22Scan}
+    \subitem {Reconstruction}, \hyperpage{26}
+  \item {Draw\_Comparison}
+    \subitem {Reconstruction}, \hyperpage{26}
+  \item {Draw\_Control}
+    \subitem {Reconstruction}, \hyperpage{27}
+  \item {Draw\_Corrections}
+    \subitem {Reconstruction}, \hyperpage{27}
+  \item {Draw\_dEdx}
+    \subitem {Reconstruction}, \hyperpage{27}
+  \item {Draw\_DESY21MultScan}
+    \subitem {Reconstruction}, \hyperpage{27}
+  \item {Draw\_DESY21SingleScan}
+    \subitem {Reconstruction}, \hyperpage{27}
+  \item {DrawCERN22Scan}
+    \subitem {Reconstruction}, \hyperpage{24}
+  \item {DrawMultipleScan}
+    \subitem {Reconstruction}, \hyperpage{24}
+  \item {DrawOut.cxx}
+    \subitem {main}, \hyperpage{162}
+  \item {DrawOut\_ClusterWFDisplay}
+    \subitem {Displays.cxx}, \hyperpage{236}
+    \subitem {Displays.h}, \hyperpage{208}
+  \item {DrawOut\_corrections}
+    \subitem {DrawOuts.cxx}, \hyperpage{238}
+  \item {DrawOut\_Escan}
+    \subitem {DrawOuts\_old.cxx}, \hyperpage{239}
+    \subitem {DrawOuts\_old.h}, \hyperpage{214}
+  \item {DrawOut\_EventDisplay}
+    \subitem {Displays.cxx}, \hyperpage{236}
+    \subitem {Displays.h}, \hyperpage{208}
+  \item {drawout\_file}
+    \subitem {Reconstruction}, \hyperpage{27}
+  \item {DrawOut\_GWF}
+    \subitem {Displays.cxx}, \hyperpage{236}
+    \subitem {Displays.h}, \hyperpage{209}
+  \item {DrawOut\_Methods}
+    \subitem {DrawOuts\_old.h}, \hyperpage{214}
+  \item {DrawOut\_Phiscan}
+    \subitem {DrawOuts\_old.h}, \hyperpage{214}
+  \item {DrawOut\_Phiscan\_Z}
+    \subitem {DrawOuts\_old.cxx}, \hyperpage{239}
+    \subitem {DrawOuts\_old.h}, \hyperpage{214}
+  \item {DrawOut\_Scans}
+    \subitem {DrawOuts\_old.cxx}, \hyperpage{239}
+    \subitem {DrawOuts\_old.h}, \hyperpage{214}
+  \item {DrawOut\_Separation}
+    \subitem {DrawOuts\_old.cxx}, \hyperpage{240}
+    \subitem {DrawOuts\_old.h}, \hyperpage{215}
+  \item {DrawOut\_Separation\_Reduced}
+    \subitem {DrawOuts\_old.cxx}, \hyperpage{240}
+    \subitem {DrawOuts\_old.h}, \hyperpage{215}
+  \item {DrawOut\_Systematics}
+    \subitem {DrawOuts\_old.cxx}, \hyperpage{240}
+    \subitem {DrawOuts\_old.h}, \hyperpage{215}
+  \item {DrawOut\_Thetascan}
+    \subitem {DrawOuts\_old.h}, \hyperpage{215}
+  \item {DrawOut\_Versions}
+    \subitem {DrawOuts\_old.cxx}, \hyperpage{240}
+    \subitem {DrawOuts\_old.h}, \hyperpage{215}
+  \item {DrawOut\_WaveFormDisplay}
+    \subitem {Displays.cxx}, \hyperpage{237}
+    \subitem {Displays.h}, \hyperpage{209}
+  \item {DrawOut\_Yscan}
+    \subitem {DrawOuts\_old.h}, \hyperpage{215}
+  \item {DrawOut\_Zscan}
+    \subitem {DrawOuts\_old.h}, \hyperpage{215}
+  \item {DrawOut\_Zscan\_PT}
+    \subitem {DrawOuts\_old.cxx}, \hyperpage{240}
+    \subitem {DrawOuts\_old.h}, \hyperpage{216}
+  \item {drawoutMultiScanPath}
+    \subitem {Reconstruction}, \hyperpage{27}
+  \item {drawoutPath}
+    \subitem {Reconstruction}, \hyperpage{27}
+  \item {drawoutRunPath}
+    \subitem {Reconstruction}, \hyperpage{27}
+  \item {DrawOuts}
+    \subitem {Reconstruction::DrawOuts}, \hyperpage{48}, \hyperpage{50}
+  \item {DrawOuts.cxx}
+    \subitem {DrawOut\_corrections}, \hyperpage{238}
+  \item {DrawOuts\_old.cxx}
+    \subitem {DrawOut\_Escan}, \hyperpage{239}
+    \subitem {DrawOut\_Phiscan\_Z}, \hyperpage{239}
+    \subitem {DrawOut\_Scans}, \hyperpage{239}
+    \subitem {DrawOut\_Separation}, \hyperpage{240}
+    \subitem {DrawOut\_Separation\_Reduced}, \hyperpage{240}
+    \subitem {DrawOut\_Systematics}, \hyperpage{240}
+    \subitem {DrawOut\_Versions}, \hyperpage{240}
+    \subitem {DrawOut\_Zscan\_PT}, \hyperpage{240}
+  \item {DrawOuts\_old.h}
+    \subitem {DrawOut\_Escan}, \hyperpage{214}
+    \subitem {DrawOut\_Methods}, \hyperpage{214}
+    \subitem {DrawOut\_Phiscan}, \hyperpage{214}
+    \subitem {DrawOut\_Phiscan\_Z}, \hyperpage{214}
+    \subitem {DrawOut\_Scans}, \hyperpage{214}
+    \subitem {DrawOut\_Separation}, \hyperpage{215}
+    \subitem {DrawOut\_Separation\_Reduced}, \hyperpage{215}
+    \subitem {DrawOut\_Systematics}, \hyperpage{215}
+    \subitem {DrawOut\_Thetascan}, \hyperpage{215}
+    \subitem {DrawOut\_Versions}, \hyperpage{215}
+    \subitem {DrawOut\_Yscan}, \hyperpage{215}
+    \subitem {DrawOut\_Zscan}, \hyperpage{215}
+    \subitem {DrawOut\_Zscan\_PT}, \hyperpage{216}
+  \item {drawoutScanPath}
+    \subitem {Reconstruction}, \hyperpage{27}
+  \item {DrawSingleScan}
+    \subitem {Reconstruction}, \hyperpage{24}
+  \item {DrawTH2}
+    \subitem {ReconTools.cxx}, \hyperpage{243}
+    \subitem {ReconTools.h}, \hyperpage{224}
+  \item {drawWhichMethods}
+    \subitem {Reconstruction}, \hyperpage{28}
+  \item {driftDist}
+    \subitem {Reconstruction}, \hyperpage{28}
+  \item {driftDistance}
+    \subitem {Reconstruction::RecoPad}, \hyperpage{110}
+  \item {Dt}
+    \subitem {Reconstruction}, \hyperpage{28}
+  \item {DtB}
+    \subitem {Reconstruction}, \hyperpage{28}
+  \item {DtnoB}
+    \subitem {Reconstruction}, \hyperpage{28}
+  \item {DtwithBhere}
+    \subitem {Reconstruction}, \hyperpage{28}
+  \item {DtwithoutBhere}
+    \subitem {Reconstruction}, \hyperpage{28}
+  \item {DumpRec}
+    \subitem {SetOfTracks}, \hyperpage{126}
+    \subitem {Track}, \hyperpage{135}
+  \item {dx}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{155}
+  \item {dy}
+    \subitem {Reconstruction::RecoPad}, \hyperpage{110}
+
+  \indexspace
+
+  \item {Endplate}
+    \subitem {EramInfo}, \hyperpage{53}
+  \item {EnergyLoss}
+    \subitem {Reconstruction::DrawOuts}, \hyperpage{51}
+  \item {EramInfo}, \hyperpage{52}
+    \subitem {\texorpdfstring{$\sim$}{\string~}EramInfo}, 
+		\hyperpage{53}
+    \subitem {Endplate}, \hyperpage{53}
+    \subitem {EramInfo}, \hyperpage{53}
+    \subitem {Gain}, \hyperpage{53}
+    \subitem {Id}, \hyperpage{54}
+    \subitem {InbTPC}, \hyperpage{54}
+    \subitem {IntTPC}, \hyperpage{54}
+    \subitem {Position}, \hyperpage{54}
+    \subitem {RC}, \hyperpage{54}
+    \subitem {Resolution}, \hyperpage{54}
+    \subitem {XX}, \hyperpage{54}
+    \subitem {YY}, \hyperpage{54}
+  \item {ERAMMaps}
+    \subitem {Reconstruction::ERAMMaps}, \hyperpage{55}
+  \item {ETF}
+    \subitem {SignalTools.cxx}, \hyperpage{259}
+    \subitem {SignalTools.h}, \hyperpage{258}
+  \item {ev}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{156}
+  \item {Eval}
+    \subitem {PRFParameters}, \hyperpage{98}
+  \item {Eval\_Diagonal}
+    \subitem {Cluster}, \hyperpage{35}
+  \item {Eval\_Horizontal}
+    \subitem {Cluster}, \hyperpage{35}
+  \item {Event}, \hyperpage{56}
+    \subitem {\texorpdfstring{$\sim$}{\string~}Event}, \hyperpage{57}
+    \subitem {Add\_Module}, \hyperpage{57}
+    \subitem {Clear\_Modules}, \hyperpage{57}
+    \subitem {Event}, \hyperpage{57}
+    \subitem {Get\_Cluster\_Copy}, \hyperpage{57}
+    \subitem {Get\_EntryNber}, \hyperpage{57}
+    \subitem {Get\_EventNber}, \hyperpage{58}
+    \subitem {Get\_Model\_ChargeI}, \hyperpage{58}
+    \subitem {Get\_Model\_Electronics}, \hyperpage{58}
+    \subitem {Get\_Model\_ReadOutGeometry}, \hyperpage{58}
+    \subitem {Get\_Module\_InArray}, \hyperpage{58}
+    \subitem {Get\_NberOfModule}, \hyperpage{58}
+    \subitem {Get\_ThisModule}, \hyperpage{58}
+    \subitem {Get\_ThisModuleConst}, \hyperpage{58}
+    \subitem {GiveMe\_AnUnfittedTrack\_ForThisModule}, \hyperpage{58}
+    \subitem {GiveMe\_Clusters\_ForThisModule}, \hyperpage{58}
+    \subitem {GiveMe\_CutInterCeptXZ\_ForThisModule}, \hyperpage{59}
+    \subitem {GiveMe\_CutSlopeXY\_ForThisModule}, \hyperpage{59}
+    \subitem {GiveMe\_CutSlopeXYZ\_ForThisModule}, \hyperpage{59}
+    \subitem {GiveMe\_CutSlopeXZ\_ForThisModule}, \hyperpage{59}
+    \subitem {GiveMe\_Track\_ForThisModule}, \hyperpage{59}
+    \subitem {Invalidate}, \hyperpage{59}
+    \subitem {Invalidate\_ThisModule}, \hyperpage{59}
+    \subitem {IsValid}, \hyperpage{59}
+    \subitem {Replace\_Clusters\_ForThisModule}, \hyperpage{59}
+    \subitem {Set\_Track\_ForThisModule}, \hyperpage{60}
+    \subitem {SmallDump}, \hyperpage{60}
+    \subitem {Validate}, \hyperpage{60}
+    \subitem {Validate\_ThisModule}, \hyperpage{60}
+    \subitem {Validity\_ForThisModule}, \hyperpage{60}
+    \subitem {WriteOut}, \hyperpage{60}
+  \item {eventNbr}
+    \subitem {Reconstruction::RecoEvent}, \hyperpage{104}
+
+  \indexspace
+
+  \item {fChi2\_1}
+    \subitem {GlobalChi2\_4}, \hyperpage{66}
+  \item {fChi2\_2}
+    \subitem {GlobalChi2\_4}, \hyperpage{66}
+  \item {fChi2\_3}
+    \subitem {GlobalChi2\_4}, \hyperpage{66}
+  \item {fChi2\_4}
+    \subitem {GlobalChi2\_4}, \hyperpage{66}
+  \item {fcorrectDrift}
+    \subitem {Reconstruction}, \hyperpage{28}
+  \item {fcorrectGain}
+    \subitem {Reconstruction}, \hyperpage{28}
+  \item {fcorrectRC}
+    \subitem {Reconstruction}, \hyperpage{28}
+  \item {fcorrectWF}
+    \subitem {Reconstruction}, \hyperpage{29}
+  \item {fCurrent}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{156}
+  \item {FileComparison}
+    \subitem {Reconstruction::DrawOuts}, \hyperpage{52}
+  \item {Fit2Gauss}
+    \subitem {ReconTools.cxx}, \hyperpage{243}
+    \subitem {ReconTools.h}, \hyperpage{224}
+  \item {FitOutput}, \hyperpage{60}
+    \subitem {\texorpdfstring{$\sim$}{\string~}FitOutput}, 
+		\hyperpage{61}
+    \subitem {FitOutput}, \hyperpage{61}
+    \subitem {m\_Description}, \hyperpage{62}
+    \subitem {m\_MinnLL}, \hyperpage{62}
+    \subitem {m\_NameOfTheModel}, \hyperpage{63}
+    \subitem {m\_NberOfDataPoints}, \hyperpage{63}
+    \subitem {m\_NberOfModelParameters}, \hyperpage{63}
+    \subitem {operator=}, \hyperpage{62}
+    \subitem {p\_CovMatrix}, \hyperpage{63}
+    \subitem {p\_eparminus}, \hyperpage{63}
+    \subitem {p\_eparparab}, \hyperpage{63}
+    \subitem {p\_eparplus}, \hyperpage{63}
+    \subitem {p\_par}, \hyperpage{63}
+    \subitem {p\_parName}, \hyperpage{64}
+    \subitem {PrintFitOutput}, \hyperpage{62}
+    \subitem {PrintFitOutputInCanvas}, \hyperpage{62}
+    \subitem {Reset}, \hyperpage{62}
+    \subitem {Set}, \hyperpage{62}
+    \subitem {SetResults}, \hyperpage{62}
+  \item {FitRes\_Diagonal\_Get\_NberOfTermsInChi2}
+    \subitem {Cluster}, \hyperpage{35}
+  \item {FitRes\_Diagonal\_Get\_Pad}
+    \subitem {Cluster}, \hyperpage{35}
+  \item {FitRes\_Diagonal\_Get\_Pull}
+    \subitem {Cluster}, \hyperpage{36}
+  \item {FitRes\_Diagonal\_Get\_Residual}
+    \subitem {Cluster}, \hyperpage{36}
+  \item {FitRes\_Horizontal\_Get\_NberOfTermsInChi2}
+    \subitem {Cluster}, \hyperpage{36}
+  \item {FitRes\_Horizontal\_Get\_Pad}
+    \subitem {Cluster}, \hyperpage{36}
+  \item {FitRes\_Horizontal\_Get\_Pull}
+    \subitem {Cluster}, \hyperpage{36}
+  \item {FitRes\_Horizontal\_Get\_Residual}
+    \subitem {Cluster}, \hyperpage{36}
+  \item {Fitters Directory Reference}, \hyperpage{15}
+  \item {Fitters/inc Directory Reference}, \hyperpage{15}
+  \item {Fitters/inc/ClusterFitter.h}, \hyperpage{162}, \hyperpage{164}
+  \item {Fitters/inc/PRFParameters.h}, \hyperpage{165, 166}
+  \item {Fitters/inc/TrackFitter.h}, \hyperpage{166, 167}
+  \item {Fitters/inc/TrackRecon.h}, \hyperpage{167}, \hyperpage{169}
+  \item {Fitters/src Directory Reference}, \hyperpage{18}
+  \item {Fitters/src/ClusterFitter.cxx}, \hyperpage{169}
+  \item {Fitters/src/PRFParameters.cxx}, \hyperpage{171}
+  \item {Fitters/src/TrackFitter.cxx}, \hyperpage{171}
+  \item {Fitters/src/TrackRecon.cxx}, \hyperpage{171}
+  \item {FourModulesInLine}
+    \subitem {ReconTools.cxx}, \hyperpage{243}
+    \subitem {ReconTools.h}, \hyperpage{224}
+  \item {fsaveSelectOnly}
+    \subitem {Reconstruction}, \hyperpage{29}
+
+  \indexspace
+
+  \item {Gain}
+    \subitem {EramInfo}, \hyperpage{53}
+    \subitem {Reconstruction::ERAMMaps}, \hyperpage{55}
+  \item {gain}
+    \subitem {Reconstruction::RecoPad}, \hyperpage{110}
+  \item {GainCorrection}
+    \subitem {Reconstruction::RecoPad}, \hyperpage{110}
+  \item {GaussFunction}, \hyperpage{64}
+    \subitem {\texorpdfstring{$\sim$}{\string~}GaussFunction}, 
+		\hyperpage{64}
+    \subitem {GaussFunction}, \hyperpage{64}
+    \subitem {Get\_Mean}, \hyperpage{65}
+    \subitem {Get\_Norm}, \hyperpage{65}
+    \subitem {Get\_Sigma}, \hyperpage{65}
+    \subitem {operator()}, \hyperpage{65}
+    \subitem {Set\_Mean}, \hyperpage{65}
+    \subitem {Set\_Norm}, \hyperpage{65}
+    \subitem {Set\_Sigma}, \hyperpage{65}
+  \item {Get\_A0}
+    \subitem {ParabolaFunction}, \hyperpage{95}
+  \item {Get\_A0M}
+    \subitem {ParabolaFunctionNG}, \hyperpage{97}
+  \item {Get\_A0P}
+    \subitem {ParabolaFunctionNG}, \hyperpage{97}
+  \item {Get\_a2}
+    \subitem {Uploader}, \hyperpage{142}
+  \item {Get\_a4}
+    \subitem {Uploader}, \hyperpage{142}
+  \item {Get\_Acluster}
+    \subitem {Cluster}, \hyperpage{36}
+  \item {Get\_AMax}
+    \subitem {Pad}, \hyperpage{89}
+  \item {Get\_AMax\_FIT}
+    \subitem {Pad}, \hyperpage{89}
+  \item {Get\_AMax\_FromSet}
+    \subitem {Pad}, \hyperpage{89}
+  \item {Get\_AMax\_True}
+    \subitem {Pad}, \hyperpage{89}
+  \item {Get\_AMax\_WF}
+    \subitem {Pad}, \hyperpage{89}
+  \item {Get\_AMax\_WF\_01}
+    \subitem {Pad}, \hyperpage{89}
+  \item {Get\_AMaxLeading}
+    \subitem {Cluster}, \hyperpage{36}
+  \item {Get\_Amplitude}
+    \subitem {Model\_Electronics}, \hyperpage{77}
+  \item {Get\_APad}
+    \subitem {Pad}, \hyperpage{89}
+  \item {Get\_b2}
+    \subitem {Uploader}, \hyperpage{142}
+  \item {Get\_b4}
+    \subitem {Uploader}, \hyperpage{142}
+  \item {Get\_Chi2Min}
+    \subitem {Cluster}, \hyperpage{36}
+    \subitem {Sample}, \hyperpage{117}
+    \subitem {Track}, \hyperpage{135}
+  \item {Get\_Cluster}
+    \subitem {Module}, \hyperpage{84}
+    \subitem {Track}, \hyperpage{135}
+  \item {Get\_Cluster\_Copy}
+    \subitem {Event}, \hyperpage{57}
+    \subitem {Module}, \hyperpage{85}
+  \item {Get\_CovMatrix}
+    \subitem {Track}, \hyperpage{135}
+  \item {Get\_Cut\_Stage2\_EventBased}
+    \subitem {Selector}, \hyperpage{122}
+  \item {Get\_Cut\_Stage3\_THigh}
+    \subitem {Selector}, \hyperpage{122}
+  \item {Get\_Cut\_Stage3\_TLow}
+    \subitem {Selector}, \hyperpage{122}
+  \item {Get\_Cut\_Stage4\_APM\_High}
+    \subitem {Selector}, \hyperpage{122}
+  \item {Get\_Cut\_Stage4\_APM\_Low}
+    \subitem {Selector}, \hyperpage{122}
+  \item {Get\_Cut\_Stage5\_Npads\_Hig}
+    \subitem {Selector}, \hyperpage{122}
+  \item {Get\_Cut\_Stage6\_Amax\_Hig}
+    \subitem {Selector}, \hyperpage{122}
+  \item {Get\_Cut\_Stage6\_Amax\_Low}
+    \subitem {Selector}, \hyperpage{123}
+  \item {Get\_Cut\_StageFinal\_NCluster\_Low}
+    \subitem {Selector}, \hyperpage{123}
+  \item {Get\_DD}
+    \subitem {Sample}, \hyperpage{117}
+  \item {Get\_DD\_BeforeMinimisation}
+    \subitem {Sample}, \hyperpage{117}
+  \item {Get\_eDD}
+    \subitem {Sample}, \hyperpage{117}
+  \item {Get\_EntryNber}
+    \subitem {Cluster}, \hyperpage{37}
+    \subitem {Event}, \hyperpage{57}
+    \subitem {Module}, \hyperpage{85}
+    \subitem {Pad}, \hyperpage{89}
+    \subitem {Track}, \hyperpage{135}
+  \item {Get\_eRC}
+    \subitem {Sample}, \hyperpage{117}
+  \item {Get\_Event}
+    \subitem {Sample}, \hyperpage{117}
+  \item {Get\_EventNber}
+    \subitem {Cluster}, \hyperpage{37}
+    \subitem {Event}, \hyperpage{58}
+    \subitem {Module}, \hyperpage{85}
+    \subitem {Pad}, \hyperpage{90}
+    \subitem {Track}, \hyperpage{136}
+  \item {Get\_eXTrack}
+    \subitem {Cluster}, \hyperpage{37}
+  \item {Get\_eYTrack}
+    \subitem {Cluster}, \hyperpage{37}
+  \item {Get\_FIT\_A0M}
+    \subitem {Pad}, \hyperpage{90}
+  \item {Get\_FIT\_A0P}
+    \subitem {Pad}, \hyperpage{90}
+  \item {Get\_FIT\_Status}
+    \subitem {Pad}, \hyperpage{90}
+  \item {Get\_FIT\_X0}
+    \subitem {Pad}, \hyperpage{90}
+  \item {Get\_FIT\_Xmax}
+    \subitem {Pad}, \hyperpage{90}
+  \item {Get\_FIT\_Xmin}
+    \subitem {Pad}, \hyperpage{90}
+  \item {Get\_FIT\_Y0}
+    \subitem {Pad}, \hyperpage{90}
+  \item {Get\_Gain}
+    \subitem {Model\_ChargeI}, \hyperpage{75}
+  \item {Get\_IsThisPadExisting}
+    \subitem {ROBoard}, \hyperpage{113}
+  \item {Get\_iX}
+    \subitem {Pad}, \hyperpage{90}
+  \item {Get\_iY}
+    \subitem {Pad}, \hyperpage{90}
+  \item {Get\_Lambda}
+    \subitem {Model\_Charge1D}, \hyperpage{72}
+  \item {Get\_LeadingPad}
+    \subitem {Cluster}, \hyperpage{37}
+  \item {Get\_LX}
+    \subitem {Model\_ReadOutGeometry}, \hyperpage{79}
+    \subitem {Pad}, \hyperpage{91}
+  \item {Get\_LY}
+    \subitem {Model\_ReadOutGeometry}, \hyperpage{79}
+    \subitem {Pad}, \hyperpage{91}
+  \item {Get\_Mean}
+    \subitem {GaussFunction}, \hyperpage{65}
+  \item {Get\_MinimalNberOfEntries}
+    \subitem {SetOfTracks}, \hyperpage{126}
+  \item {Get\_Model\_Charge1D}
+    \subitem {Uploader}, \hyperpage{142}
+  \item {Get\_Model\_ChargeI}
+    \subitem {Event}, \hyperpage{58}
+    \subitem {Pad}, \hyperpage{91}
+    \subitem {ROBoard}, \hyperpage{113}
+    \subitem {Sample}, \hyperpage{117}
+  \item {Get\_Model\_Electronics}
+    \subitem {Event}, \hyperpage{58}
+    \subitem {Pad}, \hyperpage{91}
+    \subitem {ROBoard}, \hyperpage{113}
+    \subitem {Sample}, \hyperpage{117}
+    \subitem {Uploader}, \hyperpage{142}
+  \item {Get\_Model\_ReadOutGeometry}
+    \subitem {Event}, \hyperpage{58}
+    \subitem {Pad}, \hyperpage{91}
+    \subitem {ROBoard}, \hyperpage{114}
+    \subitem {Sample}, \hyperpage{117}
+    \subitem {Uploader}, \hyperpage{142}
+  \item {Get\_Module\_InArray}
+    \subitem {Event}, \hyperpage{58}
+  \item {Get\_ModuleNber}
+    \subitem {Cluster}, \hyperpage{37}
+    \subitem {Module}, \hyperpage{85}
+    \subitem {Pad}, \hyperpage{91}
+    \subitem {Track}, \hyperpage{136}
+  \item {Get\_NberOfCluster}
+    \subitem {Module}, \hyperpage{85}
+    \subitem {Track}, \hyperpage{136}
+  \item {Get\_NberOfEvent}
+    \subitem {Uploader}, \hyperpage{142}
+  \item {Get\_NberOfEvents}
+    \subitem {Sample}, \hyperpage{118}
+  \item {Get\_NberOfModule}
+    \subitem {Event}, \hyperpage{58}
+  \item {Get\_NberOfPads}
+    \subitem {Cluster}, \hyperpage{37}
+    \subitem {ROBoard}, \hyperpage{114}
+  \item {Get\_NberOfTrack}
+    \subitem {SetOfTracks}, \hyperpage{126}
+  \item {Get\_NextLeadingPad}
+    \subitem {Cluster}, \hyperpage{37}
+  \item {Get\_NextNextLeadingPad}
+    \subitem {Cluster}, \hyperpage{37}
+  \item {Get\_Norm}
+    \subitem {GaussFunction}, \hyperpage{65}
+    \subitem {Uploader}, \hyperpage{142}
+  \item {Get\_Nx}
+    \subitem {Model\_ReadOutGeometry}, \hyperpage{80}
+  \item {Get\_Ny}
+    \subitem {Model\_ReadOutGeometry}, \hyperpage{80}
+  \item {Get\_Pad}
+    \subitem {Cluster}, \hyperpage{37}
+    \subitem {ROBoard}, \hyperpage{114}
+  \item {Get\_PadName}
+    \subitem {Pad}, \hyperpage{91}
+  \item {Get\_ParameterError}
+    \subitem {Track}, \hyperpage{136}
+  \item {Get\_ParameterName}
+    \subitem {Track}, \hyperpage{136}
+  \item {Get\_ParameterValue}
+    \subitem {Track}, \hyperpage{136}
+  \item {Get\_ParameterValue\_BeforeMinimisation}
+    \subitem {Track}, \hyperpage{136}
+  \item {Get\_PRF\_exist}
+    \subitem {Uploader}, \hyperpage{142}
+  \item {Get\_Pull}
+    \subitem {Track}, \hyperpage{136}
+  \item {Get\_Qpad}
+    \subitem {Model\_Charge0D}, \hyperpage{69}
+    \subitem {Model\_Charge1D}, \hyperpage{72}
+    \subitem {Model\_ChargeI}, \hyperpage{75}
+    \subitem {Pad}, \hyperpage{91}
+  \item {Get\_Qprim}
+    \subitem {Model\_Charge0D}, \hyperpage{69}
+  \item {Get\_QValue}
+    \subitem {Model\_Electronics}, \hyperpage{78}
+  \item {Get\_RC}
+    \subitem {Model\_ChargeI}, \hyperpage{75}
+    \subitem {Sample}, \hyperpage{118}
+  \item {Get\_RC\_BeforeMinimisation}
+    \subitem {Sample}, \hyperpage{118}
+  \item {Get\_Residual}
+    \subitem {Track}, \hyperpage{137}
+  \item {Get\_SampleFile}
+    \subitem {Uploader}, \hyperpage{142}
+  \item {Get\_SelectionName}
+    \subitem {Selector}, \hyperpage{123}
+  \item {Get\_SetOfTracks\_ForThisModule}
+    \subitem {Sample}, \hyperpage{118}
+  \item {Get\_Sigma}
+    \subitem {GaussFunction}, \hyperpage{65}
+  \item {Get\_ThisModule}
+    \subitem {Event}, \hyperpage{58}
+  \item {Get\_ThisModuleConst}
+    \subitem {Event}, \hyperpage{58}
+  \item {Get\_Time0}
+    \subitem {Pad}, \hyperpage{91}
+  \item {Get\_TMax}
+    \subitem {Pad}, \hyperpage{91}
+  \item {Get\_TMax\_FIT}
+    \subitem {Pad}, \hyperpage{92}
+  \item {Get\_TMax\_FromSet}
+    \subitem {Pad}, \hyperpage{92}
+  \item {Get\_TMax\_True}
+    \subitem {Pad}, \hyperpage{92}
+  \item {Get\_TMax\_WF}
+    \subitem {Pad}, \hyperpage{92}
+  \item {Get\_TMax\_WF\_01}
+    \subitem {Pad}, \hyperpage{92}
+  \item {Get\_TMaxLeading}
+    \subitem {Cluster}, \hyperpage{38}
+  \item {Get\_Track}
+    \subitem {SetOfTracks}, \hyperpage{126}
+  \item {Get\_vADC}
+    \subitem {Pad}, \hyperpage{92}
+  \item {Get\_Width}
+    \subitem {Model\_ChargeI}, \hyperpage{75}
+  \item {Get\_ws}
+    \subitem {Model\_Electronics}, \hyperpage{78}
+  \item {Get\_X0}
+    \subitem {ParabolaFunction}, \hyperpage{95}
+    \subitem {ParabolaFunctionNG}, \hyperpage{97}
+  \item {Get\_XcPad}
+    \subitem {Model\_ReadOutGeometry}, \hyperpage{80}
+  \item {Get\_XH}
+    \subitem {Pad}, \hyperpage{92}
+  \item {Get\_XHPad}
+    \subitem {Model\_ReadOutGeometry}, \hyperpage{80}
+  \item {Get\_XL}
+    \subitem {Pad}, \hyperpage{92}
+  \item {Get\_XLPad}
+    \subitem {Model\_ReadOutGeometry}, \hyperpage{80}
+  \item {Get\_XPad}
+    \subitem {Pad}, \hyperpage{92}
+  \item {Get\_Xpad\_min}
+    \subitem {Model\_ReadOutGeometry}, \hyperpage{80}
+  \item {Get\_XTrack}
+    \subitem {Cluster}, \hyperpage{38}
+  \item {Get\_XTrack\_BeforeMinimisation}
+    \subitem {Cluster}, \hyperpage{38}
+  \item {Get\_XTrue}
+    \subitem {Pad}, \hyperpage{92}
+  \item {Get\_XWeight}
+    \subitem {Cluster}, \hyperpage{38}
+  \item {Get\_Y0}
+    \subitem {ParabolaFunction}, \hyperpage{95}
+    \subitem {ParabolaFunctionNG}, \hyperpage{97}
+  \item {Get\_YcPad}
+    \subitem {Model\_ReadOutGeometry}, \hyperpage{80}
+  \item {Get\_YH}
+    \subitem {Pad}, \hyperpage{93}
+  \item {Get\_YHPad}
+    \subitem {Model\_ReadOutGeometry}, \hyperpage{80}
+  \item {Get\_YL}
+    \subitem {Pad}, \hyperpage{93}
+  \item {Get\_YLeading}
+    \subitem {Cluster}, \hyperpage{38}
+  \item {Get\_YLPad}
+    \subitem {Model\_ReadOutGeometry}, \hyperpage{81}
+  \item {Get\_YPad}
+    \subitem {Pad}, \hyperpage{93}
+  \item {Get\_Ypad\_min}
+    \subitem {Model\_ReadOutGeometry}, \hyperpage{81}
+  \item {Get\_YTrack}
+    \subitem {Cluster}, \hyperpage{38}
+  \item {Get\_YTrack\_BeforeMinimisation}
+    \subitem {Cluster}, \hyperpage{38}
+  \item {Get\_YTrue}
+    \subitem {Pad}, \hyperpage{93}
+  \item {Get\_YWeight}
+    \subitem {Cluster}, \hyperpage{38}
+  \item {GetFilePRF}
+    \subitem {Sample}, \hyperpage{118}
+  \item {GetGigaWaveform}
+    \subitem {Reconstruction::dEdx}, \hyperpage{47}
+  \item {GetLinearIndex}
+    \subitem {ROBoard}, \hyperpage{114}
+  \item {GetNberOfParameters}
+    \subitem {Track}, \hyperpage{137}
+  \item {GetPadEdges}
+    \subitem {Model\_ReadOutGeometry}, \hyperpage{81}
+  \item {getRatio}
+    \subitem {Reconstruction::LUT}, \hyperpage{68}
+  \item {GetStage3Cut\_CSV}
+    \subitem {ReconTools.cxx}, \hyperpage{243}
+    \subitem {ReconTools.h}, \hyperpage{225}
+  \item {GetTruncatedGigaWaveformGP1}
+    \subitem {Reconstruction::dEdx}, \hyperpage{47}
+  \item {GiveMe\_AnUnfittedTrack}
+    \subitem {Module}, \hyperpage{85}
+  \item {GiveMe\_AnUnfittedTrack\_ForThisModule}
+    \subitem {Event}, \hyperpage{58}
+  \item {GiveMe\_Clusters\_ForThisModule}
+    \subitem {Event}, \hyperpage{58}
+    \subitem {Module}, \hyperpage{85}
+  \item {GiveMe\_CutInterCeptXZ\_ForThisModule}
+    \subitem {Event}, \hyperpage{59}
+  \item {GiveMe\_CutSlopeXY\_ForThisModule}
+    \subitem {Event}, \hyperpage{59}
+  \item {GiveMe\_CutSlopeXYZ\_ForThisModule}
+    \subitem {Event}, \hyperpage{59}
+  \item {GiveMe\_CutSlopeXZ\_ForThisModule}
+    \subitem {Event}, \hyperpage{59}
+  \item {GiveMe\_Event}
+    \subitem {Uploader}, \hyperpage{143}
+    \subitem {Uploader\_ERAM01}, \hyperpage{146}
+    \subitem {Uploader\_MockUp\_V1}, \hyperpage{148}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{151}
+    \subitem {Uploader\_Prototype}, \hyperpage{160}
+  \item {GiveMe\_EvtDisplay}
+    \subitem {Displays.cxx}, \hyperpage{237}
+    \subitem {Displays.h}, \hyperpage{209}
+  \item {GiveMe\_ModuleTrack}
+    \subitem {Module}, \hyperpage{85}
+  \item {GiveMe\_pTH1F\_Ch2Min}
+    \subitem {SetOfTracks}, \hyperpage{126}
+  \item {GiveMe\_pTH1F\_Ch2MinPerNODF}
+    \subitem {SetOfTracks}, \hyperpage{127}
+  \item {GiveMe\_pTH1F\_Pull}
+    \subitem {SetOfTracks}, \hyperpage{127}
+  \item {GiveMe\_pTH1F\_Residual}
+    \subitem {SetOfTracks}, \hyperpage{128}
+  \item {GiveMe\_pTH1F\_TrackDeltaT}
+    \subitem {SetOfTracks}, \hyperpage{128}
+  \item {GiveMe\_pTH1F\_YFitCol}
+    \subitem {SetOfTracks}, \hyperpage{128, 129}
+  \item {GiveMe\_pTH1F\_YTrackInTracks}
+    \subitem {SetOfTracks}, \hyperpage{129}
+  \item {GiveMe\_pTH1F\_YTrackYPadInTracks}
+    \subitem {SetOfTracks}, \hyperpage{130}
+  \item {GiveMe\_pTH1F\_YTrackYPadLeadingInTracks}
+    \subitem {SetOfTracks}, \hyperpage{130}
+  \item {GiveMe\_TimeDisplay}
+    \subitem {Displays.cxx}, \hyperpage{237}
+    \subitem {Displays.h}, \hyperpage{209}
+  \item {GiveMe\_Track\_ForThisModule}
+    \subitem {Event}, \hyperpage{59}
+  \item {GiveMe\_Uploader}
+    \subitem {GiveMe\_Uploader.cxx}, \hyperpage{252}
+    \subitem {GiveMe\_Uploader.h}, \hyperpage{246}
+  \item {GiveMe\_Uploader.cxx}
+    \subitem {GiveMe\_Uploader}, \hyperpage{252}
+  \item {GiveMe\_Uploader.h}
+    \subitem {GiveMe\_Uploader}, \hyperpage{246}
+  \item {GiveMe\_WaveFormDisplay}
+    \subitem {Displays.cxx}, \hyperpage{237}
+    \subitem {Displays.h}, \hyperpage{210}
+  \item {GlobalChi2\_4}, \hyperpage{66}
+    \subitem {fChi2\_1}, \hyperpage{66}
+    \subitem {fChi2\_2}, \hyperpage{66}
+    \subitem {fChi2\_3}, \hyperpage{66}
+    \subitem {fChi2\_4}, \hyperpage{66}
+    \subitem {GlobalChi2\_4}, \hyperpage{66}
+    \subitem {operator()}, \hyperpage{66}
+  \item {GWF}
+    \subitem {Reconstruction::RecoEvent}, \hyperpage{104}
+  \item {GWFtruncatedGP1}
+    \subitem {Reconstruction::RecoEvent}, \hyperpage{104}
+
+  \indexspace
+
+  \item {hist\_to\_graph}
+    \subitem {ReconTools.cxx}, \hyperpage{244}
+    \subitem {ReconTools.h}, \hyperpage{225}
+
+  \indexspace
+
+  \item {ID}
+    \subitem {Reconstruction::ERAMMaps}, \hyperpage{55}
+    \subitem {Reconstruction::RecoModule}, \hyperpage{107}
+  \item {Id}
+    \subitem {EramInfo}, \hyperpage{54}
+  \item {InbTPC}
+    \subitem {EramInfo}, \hyperpage{54}
+  \item {Ini\_Models}
+    \subitem {ROBoard}, \hyperpage{114}
+  \item {Init}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{151}
+  \item {Init\_selection}
+    \subitem {ReconTools.cxx}, \hyperpage{244}
+    \subitem {ReconTools.h}, \hyperpage{225}
+  \item {inputDir}
+    \subitem {Reconstruction}, \hyperpage{29}
+  \item {IntTPC}
+    \subitem {EramInfo}, \hyperpage{54}
+  \item {intUploader}
+    \subitem {Reconstruction}, \hyperpage{29}
+  \item {Invalidate}
+    \subitem {Cluster}, \hyperpage{38}
+    \subitem {Event}, \hyperpage{59}
+    \subitem {Module}, \hyperpage{85}
+    \subitem {Pad}, \hyperpage{93}
+  \item {Invalidate\_ThisModule}
+    \subitem {Event}, \hyperpage{59}
+  \item {iparmuon}
+    \subitem {CombinedFit.cxx}, \hyperpage{232}
+  \item {iparpion}
+    \subitem {CombinedFit.cxx}, \hyperpage{232}
+  \item {iparpositron}
+    \subitem {CombinedFit.cxx}, \hyperpage{232}
+  \item {iparproton}
+    \subitem {CombinedFit.cxx}, \hyperpage{232}
+  \item {IsValid}
+    \subitem {Cluster}, \hyperpage{38}
+    \subitem {Event}, \hyperpage{59}
+    \subitem {Module}, \hyperpage{85}
+    \subitem {Pad}, \hyperpage{93}
+  \item {ix}
+    \subitem {Reconstruction::RecoPad}, \hyperpage{110}
+  \item {iy}
+    \subitem {Reconstruction::RecoPad}, \hyperpage{110}
+
+  \indexspace
+
+  \item {leading}
+    \subitem {Reconstruction::RecoPad}, \hyperpage{111}
+  \item {length}
+    \subitem {Reconstruction::RecoCluster}, \hyperpage{101}
+    \subitem {Reconstruction::RecoPad}, \hyperpage{111}
+  \item {lengthWF}
+    \subitem {Reconstruction::RecoEvent}, \hyperpage{104}
+    \subitem {Reconstruction::RecoModule}, \hyperpage{107}
+  \item {lengthXP}
+    \subitem {Reconstruction::RecoEvent}, \hyperpage{104}
+    \subitem {Reconstruction::RecoModule}, \hyperpage{107}
+  \item {local\_params}
+    \subitem {ReconTools.cxx}, \hyperpage{244}
+    \subitem {ReconTools.h}, \hyperpage{225}
+  \item {log\_file}
+    \subitem {Reconstruction}, \hyperpage{29}
+  \item {LUT}
+    \subitem {Reconstruction::LUT}, \hyperpage{67}
+  \item {LUTrhoLead}
+    \subitem {Reconstruction::RecoCluster}, \hyperpage{101}
+  \item {LUTs.cxx}
+    \subitem {ClassImp}, \hyperpage{241}
+
+  \indexspace
+
+  \item {m\_2RCinv}
+    \subitem {Model\_ChargeI}, \hyperpage{76}
+  \item {m\_a2}
+    \subitem {Uploader}, \hyperpage{143}
+  \item {m\_a4}
+    \subitem {Uploader}, \hyperpage{143}
+  \item {m\_AngleRot}
+    \subitem {Cluster}, \hyperpage{41}
+  \item {m\_b2}
+    \subitem {Uploader}, \hyperpage{143}
+  \item {m\_b4}
+    \subitem {Uploader}, \hyperpage{143}
+  \item {m\_Description}
+    \subitem {FitOutput}, \hyperpage{62}
+  \item {m\_DoIons}
+    \subitem {Model\_Charge0D}, \hyperpage{70}
+  \item {m\_FitterName}
+    \subitem {ClusterFitter\_Diagonal}, \hyperpage{43}
+    \subitem {ClusterFitter\_Horizontal}, \hyperpage{45}
+    \subitem {TrackFitter}, \hyperpage{140}
+  \item {m\_Gain}
+    \subitem {Model\_ChargeI}, \hyperpage{76}
+  \item {m\_Lambda}
+    \subitem {Model\_Charge1D}, \hyperpage{73}
+  \item {m\_MinnLL}
+    \subitem {FitOutput}, \hyperpage{62}
+  \item {m\_NameOfTheModel}
+    \subitem {FitOutput}, \hyperpage{63}
+  \item {m\_NberOfClusters}
+    \subitem {Track}, \hyperpage{137}
+  \item {m\_NberOfDataPoints}
+    \subitem {FitOutput}, \hyperpage{63}
+  \item {m\_NberOfEvent}
+    \subitem {Uploader}, \hyperpage{143}
+  \item {m\_NberOfModelParameters}
+    \subitem {FitOutput}, \hyperpage{63}
+  \item {m\_NberOfParameters}
+    \subitem {TrackFitter}, \hyperpage{140}
+  \item {m\_Norm}
+    \subitem {Uploader}, \hyperpage{143}
+  \item {m\_NormQPad}
+    \subitem {Model\_ChargeI}, \hyperpage{76}
+  \item {m\_Nx}
+    \subitem {ROBoard}, \hyperpage{115}
+  \item {m\_Ny}
+    \subitem {ROBoard}, \hyperpage{115}
+  \item {m\_PRF\_exist}
+    \subitem {Uploader}, \hyperpage{143}
+  \item {m\_Qprim}
+    \subitem {Model\_Charge0D}, \hyperpage{70}
+  \item {m\_RC}
+    \subitem {Model\_ChargeI}, \hyperpage{76}
+  \item {m\_RFactor}
+    \subitem {Model\_Charge0D}, \hyperpage{70}
+  \item {m\_RTrue}
+    \subitem {Model\_Charge0D}, \hyperpage{70}
+  \item {m\_SampleFile}
+    \subitem {Uploader}, \hyperpage{143}
+  \item {m\_Tion}
+    \subitem {Model\_Charge0D}, \hyperpage{71}
+  \item {m\_Width}
+    \subitem {Model\_ChargeI}, \hyperpage{76}
+  \item {m\_Width2}
+    \subitem {Model\_ChargeI}, \hyperpage{76}
+  \item {main}
+    \subitem {Analysis.cxx}, \hyperpage{161}
+    \subitem {DrawOut.cxx}, \hyperpage{162}
+  \item {max\_mult}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{156}
+  \item {mean\_mult}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{156}
+  \item {MeanGain}
+    \subitem {Reconstruction::ERAMMaps}, \hyperpage{55}
+  \item {MeanRC}
+    \subitem {Reconstruction::ERAMMaps}, \hyperpage{55}
+  \item {Model\_Charge0D}, \hyperpage{68}
+    \subitem {\texorpdfstring{$\sim$}{\string~}Model\_Charge0D}, 
+		\hyperpage{69}
+    \subitem {Get\_Qpad}, \hyperpage{69}
+    \subitem {Get\_Qprim}, \hyperpage{69}
+    \subitem {m\_DoIons}, \hyperpage{70}
+    \subitem {m\_Qprim}, \hyperpage{70}
+    \subitem {m\_RFactor}, \hyperpage{70}
+    \subitem {m\_RTrue}, \hyperpage{70}
+    \subitem {m\_Tion}, \hyperpage{71}
+    \subitem {Model\_Charge0D}, \hyperpage{69}
+    \subitem {Set\_Ion}, \hyperpage{70}
+    \subitem {Set\_Qprim}, \hyperpage{70}
+    \subitem {SetSecondaries}, \hyperpage{70}
+    \subitem {WriteOut}, \hyperpage{70}
+  \item {Model\_Charge1D}, \hyperpage{71}
+    \subitem {\texorpdfstring{$\sim$}{\string~}Model\_Charge1D}, 
+		\hyperpage{72}
+    \subitem {Get\_Lambda}, \hyperpage{72}
+    \subitem {Get\_Qpad}, \hyperpage{72}
+    \subitem {m\_Lambda}, \hyperpage{73}
+    \subitem {Model\_Charge1D}, \hyperpage{72}
+    \subitem {Set\_Lambda}, \hyperpage{73}
+    \subitem {SetSecondaries}, \hyperpage{73}
+    \subitem {WriteOut}, \hyperpage{73}
+  \item {Model\_ChargeI}, \hyperpage{74}
+    \subitem {\texorpdfstring{$\sim$}{\string~}Model\_ChargeI}, 
+		\hyperpage{74}
+    \subitem {Get\_Gain}, \hyperpage{75}
+    \subitem {Get\_Qpad}, \hyperpage{75}
+    \subitem {Get\_RC}, \hyperpage{75}
+    \subitem {Get\_Width}, \hyperpage{75}
+    \subitem {m\_2RCinv}, \hyperpage{76}
+    \subitem {m\_Gain}, \hyperpage{76}
+    \subitem {m\_NormQPad}, \hyperpage{76}
+    \subitem {m\_RC}, \hyperpage{76}
+    \subitem {m\_Width}, \hyperpage{76}
+    \subitem {m\_Width2}, \hyperpage{76}
+    \subitem {Model\_ChargeI}, \hyperpage{74}
+    \subitem {Set\_Gain}, \hyperpage{75}
+    \subitem {Set\_RC}, \hyperpage{75}
+    \subitem {Set\_Width}, \hyperpage{75}
+    \subitem {Set\_WidthFromDriftDistance}, \hyperpage{75}
+    \subitem {SetSecondaries}, \hyperpage{76}
+    \subitem {WidthFromDriftDistance}, \hyperpage{76}
+    \subitem {WriteOut}, \hyperpage{76}
+  \item {Model\_Electronics}, \hyperpage{77}
+    \subitem {\texorpdfstring{$\sim$}{\string~}Model\_Electronics}, 
+		\hyperpage{77}
+    \subitem {Derive\_Response\_Base}, \hyperpage{77}
+    \subitem {Get\_Amplitude}, \hyperpage{77}
+    \subitem {Get\_QValue}, \hyperpage{78}
+    \subitem {Get\_ws}, \hyperpage{78}
+    \subitem {Model\_Electronics}, \hyperpage{77}
+    \subitem {Response\_Base}, \hyperpage{78}
+    \subitem {Set\_Amplitude}, \hyperpage{78}
+    \subitem {Set\_TimeShape}, \hyperpage{78}
+    \subitem {WriteOut}, \hyperpage{78}
+  \item {Model\_ReadOutGeometry}, \hyperpage{78}
+    \subitem {\texorpdfstring{$\sim$}{\string~}Model\_ReadOutGeometry}, 
+		\hyperpage{79}
+    \subitem {Get\_LX}, \hyperpage{79}
+    \subitem {Get\_LY}, \hyperpage{79}
+    \subitem {Get\_Nx}, \hyperpage{80}
+    \subitem {Get\_Ny}, \hyperpage{80}
+    \subitem {Get\_XcPad}, \hyperpage{80}
+    \subitem {Get\_XHPad}, \hyperpage{80}
+    \subitem {Get\_XLPad}, \hyperpage{80}
+    \subitem {Get\_Xpad\_min}, \hyperpage{80}
+    \subitem {Get\_YcPad}, \hyperpage{80}
+    \subitem {Get\_YHPad}, \hyperpage{80}
+    \subitem {Get\_YLPad}, \hyperpage{81}
+    \subitem {Get\_Ypad\_min}, \hyperpage{81}
+    \subitem {GetPadEdges}, \hyperpage{81}
+    \subitem {Model\_ReadOutGeometry}, \hyperpage{79}
+    \subitem {Set\_LX}, \hyperpage{81}
+    \subitem {Set\_LY}, \hyperpage{81}
+    \subitem {Set\_Nx}, \hyperpage{81}
+    \subitem {Set\_Ny}, \hyperpage{81}
+    \subitem {Set\_Xpad\_min}, \hyperpage{82}
+    \subitem {Set\_Ypad\_min}, \hyperpage{82}
+    \subitem {SquareGeometry}, \hyperpage{82}
+    \subitem {SwapGeometry}, \hyperpage{82}
+    \subitem {WriteOut}, \hyperpage{82}
+  \item {ModelEvent Directory Reference}, \hyperpage{18}
+  \item {ModelEvent/inc Directory Reference}, \hyperpage{16}
+  \item {ModelEvent/inc/AmplitudeError.h}, \hyperpage{173}
+  \item {ModelEvent/inc/Cluster.h}, \hyperpage{173, 174}
+  \item {ModelEvent/inc/Event.h}, \hyperpage{176}
+  \item {ModelEvent/inc/FitOutput.h}, \hyperpage{178}
+  \item {ModelEvent/inc/Module.h}, \hyperpage{179}
+  \item {ModelEvent/inc/Pad.h}, \hyperpage{180, 181}
+  \item {ModelEvent/inc/ROBoard.h}, \hyperpage{183, 184}
+  \item {ModelEvent/inc/Sample.h}, \hyperpage{185}
+  \item {ModelEvent/inc/SetOfTracks.h}, \hyperpage{187}
+  \item {ModelEvent/inc/TimeError.h}, \hyperpage{189}
+  \item {ModelEvent/inc/Track.h}, \hyperpage{190}
+  \item {ModelEvent/src Directory Reference}, \hyperpage{19}
+  \item {ModelEvent/src/AmplitudeError.cxx}, \hyperpage{191}
+  \item {ModelEvent/src/Cluster.cxx}, \hyperpage{192}
+  \item {ModelEvent/src/Event.cxx}, \hyperpage{192}
+  \item {ModelEvent/src/FitOutput.cxx}, \hyperpage{192}
+  \item {ModelEvent/src/Module.cxx}, \hyperpage{192}
+  \item {ModelEvent/src/Pad.cxx}, \hyperpage{193}
+  \item {ModelEvent/src/ROBoard.cxx}, \hyperpage{193}
+  \item {ModelEvent/src/Sample.cxx}, \hyperpage{193}
+  \item {ModelEvent/src/SetOfTracks.cxx}, \hyperpage{193}
+  \item {ModelEvent/src/TimeError.cxx}, \hyperpage{193}
+  \item {ModelEvent/src/Track.cxx}, \hyperpage{195}
+  \item {ModelSignal Directory Reference}, \hyperpage{18}
+  \item {ModelSignal/inc Directory Reference}, \hyperpage{16}
+  \item {ModelSignal/inc/Model\_Charge0D.h}, \hyperpage{195, 196}
+  \item {ModelSignal/inc/Model\_Charge1D.h}, \hyperpage{196, 197}
+  \item {ModelSignal/inc/Model\_ChargeI.h}, \hyperpage{197, 198}
+  \item {ModelSignal/inc/Model\_Electronics.h}, \hyperpage{198, 199}
+  \item {ModelSignal/inc/Model\_ReadOutGeometry.h}, 
+		\hyperpage{199, 200}
+  \item {ModelSignal/src Directory Reference}, \hyperpage{19}
+  \item {ModelSignal/src/Model\_Charge0D.cxx}, \hyperpage{201}
+  \item {ModelSignal/src/Model\_Charge1D.cxx}, \hyperpage{201}
+  \item {ModelSignal/src/Model\_ChargeI.cxx}, \hyperpage{201}
+  \item {ModelSignal/src/Model\_Electronics.cxx}, \hyperpage{201}
+  \item {ModelSignal/src/Model\_ReadOutGeometry.cxx}, \hyperpage{201}
+  \item {Module}, \hyperpage{82}
+    \subitem {\texorpdfstring{$\sim$}{\string~}Module}, \hyperpage{84}
+    \subitem {Add\_Cluster}, \hyperpage{84}
+    \subitem {Add\_Pad}, \hyperpage{84}
+    \subitem {Clear\_Clusters}, \hyperpage{84}
+    \subitem {Get\_Cluster}, \hyperpage{84}
+    \subitem {Get\_Cluster\_Copy}, \hyperpage{85}
+    \subitem {Get\_EntryNber}, \hyperpage{85}
+    \subitem {Get\_EventNber}, \hyperpage{85}
+    \subitem {Get\_ModuleNber}, \hyperpage{85}
+    \subitem {Get\_NberOfCluster}, \hyperpage{85}
+    \subitem {GiveMe\_AnUnfittedTrack}, \hyperpage{85}
+    \subitem {GiveMe\_Clusters\_ForThisModule}, \hyperpage{85}
+    \subitem {GiveMe\_ModuleTrack}, \hyperpage{85}
+    \subitem {Invalidate}, \hyperpage{85}
+    \subitem {IsValid}, \hyperpage{85}
+    \subitem {Module}, \hyperpage{84}
+    \subitem {ReplaceClusters}, \hyperpage{86}
+    \subitem {Set\_ModuleTrack}, \hyperpage{86}
+    \subitem {SmallDump}, \hyperpage{86}
+    \subitem {Validate}, \hyperpage{86}
+    \subitem {WriteOut}, \hyperpage{86}
+  \item {module}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{156}
+  \item {moduleCase}
+    \subitem {Reconstruction}, \hyperpage{29}
+  \item {mom}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{156}
+  \item {Monitoring}
+    \subitem {Reconstruction}, \hyperpage{24}
+  \item {multiplicity}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{156}
+  \item {multiScanName}
+    \subitem {Reconstruction}, \hyperpage{29}
+
+  \indexspace
+
+  \item {NberOfSelections}
+    \subitem {Selector}, \hyperpage{123}
+  \item {NClusters}
+    \subitem {Reconstruction::RecoEvent}, \hyperpage{105}
+    \subitem {Reconstruction::RecoModule}, \hyperpage{107}
+  \item {NCrossedPads}
+    \subitem {Reconstruction::RecoEvent}, \hyperpage{105}
+    \subitem {Reconstruction::RecoModule}, \hyperpage{107}
+  \item {NewClusterDisplay}
+    \subitem {Displays.cxx}, \hyperpage{237}
+    \subitem {Displays.h}, \hyperpage{210}
+  \item {NewClusterDisplayMinimal}
+    \subitem {Displays.cxx}, \hyperpage{238}
+    \subitem {Displays.h}, \hyperpage{210}
+  \item {NPads}
+    \subitem {Reconstruction::RecoCluster}, \hyperpage{101}
+    \subitem {Reconstruction::RecoEvent}, \hyperpage{105}
+    \subitem {Reconstruction::RecoModule}, \hyperpage{107}
+  \item {npar}
+    \subitem {CombinedFit.cxx}, \hyperpage{233}
+  \item {numberOfModules}
+    \subitem {Reconstruction::RecoEvent}, \hyperpage{105}
+
+  \indexspace
+
+  \item {offset}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{156}
+  \item {operator()}
+    \subitem {GaussFunction}, \hyperpage{65}
+    \subitem {GlobalChi2\_4}, \hyperpage{66}
+    \subitem {ParabolaFunction}, \hyperpage{95}
+    \subitem {ParabolaFunctionNG}, \hyperpage{97}
+    \subitem {PRFParameters}, \hyperpage{99}
+  \item {operator=}
+    \subitem {FitOutput}, \hyperpage{62}
+
+  \indexspace
+
+  \item {p\_Cluster}
+    \subitem {ClusterFitter\_Diagonal}, \hyperpage{43}
+    \subitem {ClusterFitter\_Horizontal}, \hyperpage{45}
+  \item {p\_ClusterFitter\_Diagonal}
+    \subitem {StaticClusterFitter\_Diagonal}, \hyperpage{131}
+  \item {p\_ClusterFitter\_Horizontal}
+    \subitem {StaticClusterFitter\_Horizontal}, \hyperpage{132}
+  \item {p\_CovMatrix}
+    \subitem {FitOutput}, \hyperpage{63}
+  \item {p\_dEdx}
+    \subitem {Reconstruction}, \hyperpage{29}
+  \item {p\_DrawOuts}
+    \subitem {Reconstruction}, \hyperpage{29}
+  \item {p\_eparminus}
+    \subitem {FitOutput}, \hyperpage{63}
+  \item {p\_eparparab}
+    \subitem {FitOutput}, \hyperpage{63}
+  \item {p\_eparplus}
+    \subitem {FitOutput}, \hyperpage{63}
+  \item {p\_lut}
+    \subitem {Reconstruction}, \hyperpage{29}
+  \item {p\_Model\_Charge1D}
+    \subitem {Uploader}, \hyperpage{144}
+  \item {p\_Model\_ChargeI}
+    \subitem {ROBoard}, \hyperpage{115}
+  \item {p\_Model\_Electronics}
+    \subitem {ROBoard}, \hyperpage{115}
+    \subitem {Uploader}, \hyperpage{144}
+  \item {p\_Model\_ReadOutGeometry}
+    \subitem {ROBoard}, \hyperpage{115}
+    \subitem {Uploader}, \hyperpage{144}
+  \item {p\_par}
+    \subitem {FitOutput}, \hyperpage{63}
+  \item {p\_parName}
+    \subitem {FitOutput}, \hyperpage{64}
+  \item {p\_TFile}
+    \subitem {Uploader}, \hyperpage{144}
+  \item {p\_Track}
+    \subitem {TrackFitter}, \hyperpage{140}
+  \item {p\_TrackFitter}
+    \subitem {StaticTrackFitter}, \hyperpage{133}
+  \item {p\_TTree}
+    \subitem {Uploader}, \hyperpage{144}
+  \item {p\_TVirtualFitter}
+    \subitem {ClusterFitter\_Diagonal}, \hyperpage{43}
+    \subitem {ClusterFitter\_Horizontal}, \hyperpage{45}
+    \subitem {TrackFitter}, \hyperpage{140}
+  \item {p\_uploader}
+    \subitem {Reconstruction}, \hyperpage{30}
+  \item {Pad}, \hyperpage{86}
+    \subitem {\texorpdfstring{$\sim$}{\string~}Pad}, \hyperpage{88}
+    \subitem {Clear\_ADC}, \hyperpage{89}
+    \subitem {Get\_AMax}, \hyperpage{89}
+    \subitem {Get\_AMax\_FIT}, \hyperpage{89}
+    \subitem {Get\_AMax\_FromSet}, \hyperpage{89}
+    \subitem {Get\_AMax\_True}, \hyperpage{89}
+    \subitem {Get\_AMax\_WF}, \hyperpage{89}
+    \subitem {Get\_AMax\_WF\_01}, \hyperpage{89}
+    \subitem {Get\_APad}, \hyperpage{89}
+    \subitem {Get\_EntryNber}, \hyperpage{89}
+    \subitem {Get\_EventNber}, \hyperpage{90}
+    \subitem {Get\_FIT\_A0M}, \hyperpage{90}
+    \subitem {Get\_FIT\_A0P}, \hyperpage{90}
+    \subitem {Get\_FIT\_Status}, \hyperpage{90}
+    \subitem {Get\_FIT\_X0}, \hyperpage{90}
+    \subitem {Get\_FIT\_Xmax}, \hyperpage{90}
+    \subitem {Get\_FIT\_Xmin}, \hyperpage{90}
+    \subitem {Get\_FIT\_Y0}, \hyperpage{90}
+    \subitem {Get\_iX}, \hyperpage{90}
+    \subitem {Get\_iY}, \hyperpage{90}
+    \subitem {Get\_LX}, \hyperpage{91}
+    \subitem {Get\_LY}, \hyperpage{91}
+    \subitem {Get\_Model\_ChargeI}, \hyperpage{91}
+    \subitem {Get\_Model\_Electronics}, \hyperpage{91}
+    \subitem {Get\_Model\_ReadOutGeometry}, \hyperpage{91}
+    \subitem {Get\_ModuleNber}, \hyperpage{91}
+    \subitem {Get\_PadName}, \hyperpage{91}
+    \subitem {Get\_Qpad}, \hyperpage{91}
+    \subitem {Get\_Time0}, \hyperpage{91}
+    \subitem {Get\_TMax}, \hyperpage{91}
+    \subitem {Get\_TMax\_FIT}, \hyperpage{92}
+    \subitem {Get\_TMax\_FromSet}, \hyperpage{92}
+    \subitem {Get\_TMax\_True}, \hyperpage{92}
+    \subitem {Get\_TMax\_WF}, \hyperpage{92}
+    \subitem {Get\_TMax\_WF\_01}, \hyperpage{92}
+    \subitem {Get\_vADC}, \hyperpage{92}
+    \subitem {Get\_XH}, \hyperpage{92}
+    \subitem {Get\_XL}, \hyperpage{92}
+    \subitem {Get\_XPad}, \hyperpage{92}
+    \subitem {Get\_XTrue}, \hyperpage{92}
+    \subitem {Get\_YH}, \hyperpage{93}
+    \subitem {Get\_YL}, \hyperpage{93}
+    \subitem {Get\_YPad}, \hyperpage{93}
+    \subitem {Get\_YTrue}, \hyperpage{93}
+    \subitem {Invalidate}, \hyperpage{93}
+    \subitem {IsValid}, \hyperpage{93}
+    \subitem {Pad}, \hyperpage{88}
+    \subitem {Set\_ADC}, \hyperpage{93}
+    \subitem {Set\_AMax}, \hyperpage{93}
+    \subitem {Set\_AMax\_True}, \hyperpage{93}
+    \subitem {Set\_Data\_2Use}, \hyperpage{93}
+    \subitem {Set\_TMax}, \hyperpage{94}
+    \subitem {Set\_TMax\_True}, \hyperpage{94}
+    \subitem {SetSignalModel}, \hyperpage{94}
+    \subitem {Validate}, \hyperpage{94}
+    \subitem {WF\_DoClosure}, \hyperpage{94}
+    \subitem {WriteOut}, \hyperpage{94}
+  \item {pad\_charge}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{156}
+  \item {pad\_time}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{156}
+  \item {pad\_wf\_q}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{157}
+  \item {pad\_x}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{157}
+  \item {pad\_y}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{157}
+  \item {ParabolaFunction}, \hyperpage{94}
+    \subitem {\texorpdfstring{$\sim$}{\string~}ParabolaFunction}, 
+		\hyperpage{95}
+    \subitem {Get\_A0}, \hyperpage{95}
+    \subitem {Get\_X0}, \hyperpage{95}
+    \subitem {Get\_Y0}, \hyperpage{95}
+    \subitem {operator()}, \hyperpage{95}
+    \subitem {ParabolaFunction}, \hyperpage{95}
+    \subitem {Set\_A0}, \hyperpage{95}
+    \subitem {Set\_X0}, \hyperpage{96}
+    \subitem {Set\_Y0}, \hyperpage{96}
+  \item {ParabolaFunctionNG}, \hyperpage{96}
+    \subitem {\texorpdfstring{$\sim$}{\string~}ParabolaFunctionNG}, 
+		\hyperpage{96}
+    \subitem {Get\_A0M}, \hyperpage{97}
+    \subitem {Get\_A0P}, \hyperpage{97}
+    \subitem {Get\_X0}, \hyperpage{97}
+    \subitem {Get\_Y0}, \hyperpage{97}
+    \subitem {operator()}, \hyperpage{97}
+    \subitem {ParabolaFunctionNG}, \hyperpage{96}
+    \subitem {Set\_A0M}, \hyperpage{97}
+    \subitem {Set\_A0P}, \hyperpage{97}
+    \subitem {Set\_X0}, \hyperpage{97}
+    \subitem {Set\_Y0}, \hyperpage{97}
+  \item {peakingTime}
+    \subitem {Reconstruction::RecoEvent}, \hyperpage{105}
+  \item {phi}
+    \subitem {Reconstruction::RecoModule}, \hyperpage{108}
+    \subitem {Reconstruction::RecoPad}, \hyperpage{111}
+  \item {Position}
+    \subitem {EramInfo}, \hyperpage{54}
+  \item {position}
+    \subitem {Reconstruction::RecoModule}, \hyperpage{108}
+  \item {PRFParameters}, \hyperpage{98}
+    \subitem {\texorpdfstring{$\sim$}{\string~}PRFParameters}, 
+		\hyperpage{98}
+    \subitem {Eval}, \hyperpage{98}
+    \subitem {operator()}, \hyperpage{99}
+    \subitem {PRFParameters}, \hyperpage{98}
+    \subitem {SetPRF}, \hyperpage{99}
+  \item {PrintFitOutput}
+    \subitem {FitOutput}, \hyperpage{62}
+  \item {PrintFitOutputInCanvas}
+    \subitem {FitOutput}, \hyperpage{62}
+  \item {PrintStat}
+    \subitem {Selector}, \hyperpage{123}
+  \item {prototype}
+    \subitem {Reconstruction}, \hyperpage{30}
+  \item {PT}
+    \subitem {Reconstruction}, \hyperpage{30}
+  \item {pUploader}
+    \subitem {Reconstruction}, \hyperpage{30}
+
+  \indexspace
+
+  \item {qfrac}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{157}
+  \item {quality}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{157}
+
+  \indexspace
+
+  \item {ratio}
+    \subitem {Reconstruction::RecoPad}, \hyperpage{111}
+  \item {ratioCorr}
+    \subitem {Reconstruction::RecoCluster}, \hyperpage{101}
+  \item {ratioDrift}
+    \subitem {Reconstruction::RecoPad}, \hyperpage{111}
+  \item {ratioFile}
+    \subitem {Reconstruction::RecoPad}, \hyperpage{111}
+  \item {RC}
+    \subitem {EramInfo}, \hyperpage{54}
+    \subitem {Reconstruction::ERAMMaps}, \hyperpage{56}
+    \subitem {Reconstruction::RecoPad}, \hyperpage{111}
+  \item {readCSV}
+    \subitem {ReconTools.cxx}, \hyperpage{244}
+    \subitem {ReconTools.h}, \hyperpage{225}
+  \item {RecoEvent}
+    \subitem {Reconstruction::RecoEvent}, \hyperpage{103}
+  \item {Reconstruction}, \hyperpage{21}
+    \subitem {CERN\_drift}, \hyperpage{25}
+    \subitem {CERN\_Escan}, \hyperpage{25}
+    \subitem {ClearVectors}, \hyperpage{23}
+    \subitem {comment}, \hyperpage{25}
+    \subitem {Correction}, \hyperpage{23}
+    \subitem {correction\_wf}, \hyperpage{25}
+    \subitem {corrFuncPath}, \hyperpage{25}
+    \subitem {dataPath}, \hyperpage{25}
+    \subitem {dataScanPath}, \hyperpage{25}
+    \subitem {dedx}, \hyperpage{25}
+    \subitem {dEdxPath}, \hyperpage{25}
+    \subitem {DefaultAnalysis}, \hyperpage{24}
+    \subitem {DESY\_drift}, \hyperpage{25}
+    \subitem {DESY\_phi}, \hyperpage{26}
+    \subitem {DESY\_row}, \hyperpage{26}
+    \subitem {DESY\_theta}, \hyperpage{26}
+    \subitem {DESY\_yscan}, \hyperpage{26}
+    \subitem {DESY\_zscan}, \hyperpage{26}
+    \subitem {DO\_Comparison}, \hyperpage{26}
+    \subitem {DO\_Control}, \hyperpage{26}
+    \subitem {DO\_dEdx}, \hyperpage{26}
+    \subitem {Draw\_CERN22Scan}, \hyperpage{26}
+    \subitem {Draw\_Comparison}, \hyperpage{26}
+    \subitem {Draw\_Control}, \hyperpage{27}
+    \subitem {Draw\_Corrections}, \hyperpage{27}
+    \subitem {Draw\_dEdx}, \hyperpage{27}
+    \subitem {Draw\_DESY21MultScan}, \hyperpage{27}
+    \subitem {Draw\_DESY21SingleScan}, \hyperpage{27}
+    \subitem {DrawCERN22Scan}, \hyperpage{24}
+    \subitem {DrawMultipleScan}, \hyperpage{24}
+    \subitem {drawout\_file}, \hyperpage{27}
+    \subitem {drawoutMultiScanPath}, \hyperpage{27}
+    \subitem {drawoutPath}, \hyperpage{27}
+    \subitem {drawoutRunPath}, \hyperpage{27}
+    \subitem {drawoutScanPath}, \hyperpage{27}
+    \subitem {DrawSingleScan}, \hyperpage{24}
+    \subitem {drawWhichMethods}, \hyperpage{28}
+    \subitem {driftDist}, \hyperpage{28}
+    \subitem {Dt}, \hyperpage{28}
+    \subitem {DtB}, \hyperpage{28}
+    \subitem {DtnoB}, \hyperpage{28}
+    \subitem {DtwithBhere}, \hyperpage{28}
+    \subitem {DtwithoutBhere}, \hyperpage{28}
+    \subitem {fcorrectDrift}, \hyperpage{28}
+    \subitem {fcorrectGain}, \hyperpage{28}
+    \subitem {fcorrectRC}, \hyperpage{28}
+    \subitem {fcorrectWF}, \hyperpage{29}
+    \subitem {fsaveSelectOnly}, \hyperpage{29}
+    \subitem {inputDir}, \hyperpage{29}
+    \subitem {intUploader}, \hyperpage{29}
+    \subitem {log\_file}, \hyperpage{29}
+    \subitem {moduleCase}, \hyperpage{29}
+    \subitem {Monitoring}, \hyperpage{24}
+    \subitem {multiScanName}, \hyperpage{29}
+    \subitem {p\_dEdx}, \hyperpage{29}
+    \subitem {p\_DrawOuts}, \hyperpage{29}
+    \subitem {p\_lut}, \hyperpage{29}
+    \subitem {p\_uploader}, \hyperpage{30}
+    \subitem {prototype}, \hyperpage{30}
+    \subitem {PT}, \hyperpage{30}
+    \subitem {pUploader}, \hyperpage{30}
+    \subitem {Reconstruction::dEdx}, \hyperpage{47}
+    \subitem {rootout\_file}, \hyperpage{30}
+    \subitem {runvarstr}, \hyperpage{30}
+    \subitem {scanIndex}, \hyperpage{30}
+    \subitem {scanName}, \hyperpage{30}
+    \subitem {selectionSet}, \hyperpage{30}
+    \subitem {Settings}, \hyperpage{24}
+    \subitem {tag}, \hyperpage{30}
+    \subitem {TB}, \hyperpage{31}
+    \subitem {testbeam}, \hyperpage{31}
+    \subitem {v\_comments}, \hyperpage{31}
+    \subitem {v\_datafiles}, \hyperpage{31}
+    \subitem {v\_rootout\_files}, \hyperpage{31}
+    \subitem {v\_scanspec}, \hyperpage{31}
+    \subitem {vcorrFuncPaths}, \hyperpage{31}
+    \subitem {vScanLabels}, \hyperpage{31}
+    \subitem {vScanVals}, \hyperpage{31}
+    \subitem {vTags}, \hyperpage{31}
+    \subitem {WFCorrection}, \hyperpage{24}
+  \item {Reconstruction Directory Reference}, \hyperpage{18}
+  \item {Reconstruction/inc Directory Reference}, \hyperpage{17}
+  \item {Reconstruction/inc/CombinedFit.h}, \hyperpage{201, 202}
+  \item {Reconstruction/inc/Control.h}, \hyperpage{202, 203}
+  \item {Reconstruction/inc/dEdx.h}, \hyperpage{203, 204}
+  \item {Reconstruction/inc/Displays.h}, \hyperpage{207}, 
+		\hyperpage{210}
+  \item {Reconstruction/inc/DrawOuts.h}, \hyperpage{211, 212}
+  \item {Reconstruction/inc/DrawOuts\_old.h}, \hyperpage{213}, 
+		\hyperpage{216}
+  \item {Reconstruction/inc/LUTs.h}, \hyperpage{217, 218}
+  \item {Reconstruction/inc/Monitoring.h}, \hyperpage{220, 221}
+  \item {Reconstruction/inc/Recon\_LinkDef.h}, \hyperpage{222}
+  \item {Reconstruction/inc/ReconTools.h}, \hyperpage{222}, 
+		\hyperpage{226}
+  \item {Reconstruction/inc/Selector.h}, \hyperpage{227, 228}
+  \item {Reconstruction/inc/Variables.h}, \hyperpage{229}, 
+		\hyperpage{231}
+  \item {Reconstruction/src Directory Reference}, \hyperpage{19}
+  \item {Reconstruction/src/CombinedFit.cxx}, \hyperpage{232}
+  \item {Reconstruction/src/Control.cxx}, \hyperpage{233}
+  \item {Reconstruction/src/dEdx.cxx}, \hyperpage{234}
+  \item {Reconstruction/src/Displays.cxx}, \hyperpage{235}
+  \item {Reconstruction/src/DrawOuts.cxx}, \hyperpage{238}
+  \item {Reconstruction/src/DrawOuts\_old.cxx}, \hyperpage{239}
+  \item {Reconstruction/src/LUTs.cxx}, \hyperpage{240}
+  \item {Reconstruction/src/Monitoring.cxx}, \hyperpage{241}
+  \item {Reconstruction/src/ReconTools.cxx}, \hyperpage{242}
+  \item {Reconstruction/src/Selector.cxx}, \hyperpage{245}
+  \item {Reconstruction/src/Variables.cxx}, \hyperpage{245}
+  \item {Reconstruction::dEdx}, \hyperpage{45}
+    \subitem {\texorpdfstring{$\sim$}{\string~}dEdx}, \hyperpage{46}
+    \subitem {ComputedEdxGP}, \hyperpage{46}
+    \subitem {ComputedEdxGP1}, \hyperpage{46}
+    \subitem {ComputedEdxWF}, \hyperpage{46}
+    \subitem {ComputedEdxXP}, \hyperpage{47}
+    \subitem {dEdx}, \hyperpage{46}
+    \subitem {DiscardedModule}, \hyperpage{47}
+    \subitem {GetGigaWaveform}, \hyperpage{47}
+    \subitem {GetTruncatedGigaWaveformGP1}, \hyperpage{47}
+    \subitem {Reconstruction}, \hyperpage{47}
+  \item {Reconstruction::DrawOuts}, \hyperpage{47}
+    \subitem {\texorpdfstring{$\sim$}{\string~}DrawOuts}, 
+		\hyperpage{50}
+    \subitem {AmplitudeVSLength}, \hyperpage{50}
+    \subitem {CERN22Scan}, \hyperpage{50}
+    \subitem {CERN22ScanDraw}, \hyperpage{50}
+    \subitem {CERN22ScanFill}, \hyperpage{50}
+    \subitem {Control}, \hyperpage{50}
+    \subitem {DESY21MultiScan}, \hyperpage{51}
+    \subitem {DESY21ScanDraw}, \hyperpage{51}
+    \subitem {DESY21ScanFill}, \hyperpage{51}
+    \subitem {DESY21SingleScan}, \hyperpage{51}
+    \subitem {DrawOuts}, \hyperpage{48}, \hyperpage{50}
+    \subitem {EnergyLoss}, \hyperpage{51}
+    \subitem {FileComparison}, \hyperpage{52}
+    \subitem {SetStyle}, \hyperpage{52}
+  \item {Reconstruction::ERAMMaps}, \hyperpage{55}
+    \subitem {\texorpdfstring{$\sim$}{\string~}ERAMMaps}, 
+		\hyperpage{55}
+    \subitem {ERAMMaps}, \hyperpage{55}
+    \subitem {Gain}, \hyperpage{55}
+    \subitem {ID}, \hyperpage{55}
+    \subitem {MeanGain}, \hyperpage{55}
+    \subitem {MeanRC}, \hyperpage{55}
+    \subitem {RC}, \hyperpage{56}
+    \subitem {Resolution}, \hyperpage{56}
+  \item {Reconstruction::LUT}, \hyperpage{67}
+    \subitem {\texorpdfstring{$\sim$}{\string~}LUT}, \hyperpage{67}
+    \subitem {getRatio}, \hyperpage{68}
+    \subitem {LUT}, \hyperpage{67}
+  \item {Reconstruction::RecoCluster}, \hyperpage{99}
+    \subitem {\texorpdfstring{$\sim$}{\string~}RecoCluster}, 
+		\hyperpage{100}
+    \subitem {ADCmax\_base}, \hyperpage{100}
+    \subitem {ALead\_base}, \hyperpage{100}
+    \subitem {ALead\_GCorr}, \hyperpage{100}
+    \subitem {charge}, \hyperpage{101}
+    \subitem {ClassDef}, \hyperpage{100}
+    \subitem {dEdxWF}, \hyperpage{101}
+    \subitem {length}, \hyperpage{101}
+    \subitem {LUTrhoLead}, \hyperpage{101}
+    \subitem {NPads}, \hyperpage{101}
+    \subitem {ratioCorr}, \hyperpage{101}
+    \subitem {TLead}, \hyperpage{101}
+    \subitem {v\_pads}, \hyperpage{101}
+    \subitem {yCluster}, \hyperpage{101}
+    \subitem {yWeight}, \hyperpage{101}
+  \item {Reconstruction::RecoEvent}, \hyperpage{102}
+    \subitem {\texorpdfstring{$\sim$}{\string~}RecoEvent}, 
+		\hyperpage{103}
+    \subitem {avg\_pad\_mult}, \hyperpage{103}
+    \subitem {ClassDef}, \hyperpage{103}
+    \subitem {Clear}, \hyperpage{103}
+    \subitem {dEdxGP1}, \hyperpage{103}
+    \subitem {dEdxGP2}, \hyperpage{103}
+    \subitem {dEdxGP3}, \hyperpage{103}
+    \subitem {dEdxGP4}, \hyperpage{103}
+    \subitem {dEdxGP5}, \hyperpage{104}
+    \subitem {dEdxWF}, \hyperpage{104}
+    \subitem {dEdxWFnoTrunc}, \hyperpage{104}
+    \subitem {dEdxXP}, \hyperpage{104}
+    \subitem {dEdxXPnoTrunc}, \hyperpage{104}
+    \subitem {eventNbr}, \hyperpage{104}
+    \subitem {GWF}, \hyperpage{104}
+    \subitem {GWFtruncatedGP1}, \hyperpage{104}
+    \subitem {lengthWF}, \hyperpage{104}
+    \subitem {lengthXP}, \hyperpage{104}
+    \subitem {NClusters}, \hyperpage{105}
+    \subitem {NCrossedPads}, \hyperpage{105}
+    \subitem {NPads}, \hyperpage{105}
+    \subitem {numberOfModules}, \hyperpage{105}
+    \subitem {peakingTime}, \hyperpage{105}
+    \subitem {RecoEvent}, \hyperpage{103}
+    \subitem {selected}, \hyperpage{105}
+    \subitem {timeBinSize}, \hyperpage{105}
+    \subitem {v\_modules}, \hyperpage{105}
+    \subitem {v\_modules\_position}, \hyperpage{105}
+  \item {Reconstruction::RecoModule}, \hyperpage{106}
+    \subitem {\texorpdfstring{$\sim$}{\string~}RecoModule}, 
+		\hyperpage{106}
+    \subitem {avg\_pad\_mult}, \hyperpage{107}
+    \subitem {ClassDef}, \hyperpage{106}
+    \subitem {dEdxWF}, \hyperpage{107}
+    \subitem {dEdxWFnoTrunc}, \hyperpage{107}
+    \subitem {dEdxXP}, \hyperpage{107}
+    \subitem {dEdxXPnoTrunc}, \hyperpage{107}
+    \subitem {ID}, \hyperpage{107}
+    \subitem {lengthWF}, \hyperpage{107}
+    \subitem {lengthXP}, \hyperpage{107}
+    \subitem {NClusters}, \hyperpage{107}
+    \subitem {NCrossedPads}, \hyperpage{107}
+    \subitem {NPads}, \hyperpage{107}
+    \subitem {phi}, \hyperpage{108}
+    \subitem {position}, \hyperpage{108}
+    \subitem {selected}, \hyperpage{108}
+    \subitem {Track}, \hyperpage{108}
+    \subitem {v\_clusters}, \hyperpage{108}
+  \item {Reconstruction::RecoPad}, \hyperpage{108}
+    \subitem {\texorpdfstring{$\sim$}{\string~}RecoPad}, 
+		\hyperpage{109}
+    \subitem {ADCmax}, \hyperpage{109}
+    \subitem {ADCmax\_base}, \hyperpage{109}
+    \subitem {charge}, \hyperpage{110}
+    \subitem {ClassDef}, \hyperpage{109}
+    \subitem {d}, \hyperpage{110}
+    \subitem {dd}, \hyperpage{110}
+    \subitem {dEdxXP}, \hyperpage{110}
+    \subitem {driftDistance}, \hyperpage{110}
+    \subitem {dy}, \hyperpage{110}
+    \subitem {gain}, \hyperpage{110}
+    \subitem {GainCorrection}, \hyperpage{110}
+    \subitem {ix}, \hyperpage{110}
+    \subitem {iy}, \hyperpage{110}
+    \subitem {leading}, \hyperpage{111}
+    \subitem {length}, \hyperpage{111}
+    \subitem {phi}, \hyperpage{111}
+    \subitem {ratio}, \hyperpage{111}
+    \subitem {ratioDrift}, \hyperpage{111}
+    \subitem {ratioFile}, \hyperpage{111}
+    \subitem {RC}, \hyperpage{111}
+    \subitem {T0}, \hyperpage{111}
+    \subitem {TMax}, \hyperpage{111}
+    \subitem {xPad}, \hyperpage{111}
+    \subitem {yPad}, \hyperpage{112}
+  \item {ReconTools.cxx}
+    \subitem {BetheBloch}, \hyperpage{242}
+    \subitem {BetheBlochBhabha}, \hyperpage{242}
+    \subitem {BetheBlochExp}, \hyperpage{242}
+    \subitem {ComputeCutStage3\_Cut}, \hyperpage{243}
+    \subitem {corr\_func}, \hyperpage{243}
+    \subitem {DrawTH2}, \hyperpage{243}
+    \subitem {Fit2Gauss}, \hyperpage{243}
+    \subitem {FourModulesInLine}, \hyperpage{243}
+    \subitem {GetStage3Cut\_CSV}, \hyperpage{243}
+    \subitem {hist\_to\_graph}, \hyperpage{244}
+    \subitem {Init\_selection}, \hyperpage{244}
+    \subitem {local\_params}, \hyperpage{244}
+    \subitem {readCSV}, \hyperpage{244}
+    \subitem {SetStage3Cut\_CSV}, \hyperpage{244}
+    \subitem {Swapped\_graph}, \hyperpage{244}
+    \subitem {trk\_len}, \hyperpage{245}
+  \item {ReconTools.h}
+    \subitem {BetheBloch}, \hyperpage{223}
+    \subitem {BetheBlochBhabha}, \hyperpage{223}
+    \subitem {BetheBlochExp}, \hyperpage{224}
+    \subitem {ComputeCutStage3\_Cut}, \hyperpage{224}
+    \subitem {corr\_func}, \hyperpage{224}
+    \subitem {DrawTH2}, \hyperpage{224}
+    \subitem {Fit2Gauss}, \hyperpage{224}
+    \subitem {FourModulesInLine}, \hyperpage{224}
+    \subitem {GetStage3Cut\_CSV}, \hyperpage{225}
+    \subitem {hist\_to\_graph}, \hyperpage{225}
+    \subitem {Init\_selection}, \hyperpage{225}
+    \subitem {local\_params}, \hyperpage{225}
+    \subitem {readCSV}, \hyperpage{225}
+    \subitem {SetStage3Cut\_CSV}, \hyperpage{225}
+    \subitem {Swapped\_graph}, \hyperpage{225}
+    \subitem {trk\_len}, \hyperpage{226}
+  \item {Replace\_Clusters\_ForThisModule}
+    \subitem {Event}, \hyperpage{59}
+  \item {ReplaceClusters}
+    \subitem {Module}, \hyperpage{86}
+  \item {Reset}
+    \subitem {FitOutput}, \hyperpage{62}
+  \item {Reset\_Selection}
+    \subitem {Selector}, \hyperpage{123}
+  \item {Reset\_StatCounters}
+    \subitem {Selector}, \hyperpage{123}
+  \item {residual}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{157}
+  \item {residual\_corr}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{157}
+  \item {Resolution}
+    \subitem {EramInfo}, \hyperpage{54}
+    \subitem {Reconstruction::ERAMMaps}, \hyperpage{56}
+  \item {Response\_Base}
+    \subitem {Model\_Electronics}, \hyperpage{78}
+  \item {rob\_clusters}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{157}
+  \item {ROBoard}, \hyperpage{112}
+    \subitem {\texorpdfstring{$\sim$}{\string~}ROBoard}, 
+		\hyperpage{113}
+    \subitem {Add\_Pad}, \hyperpage{113}
+    \subitem {Get\_IsThisPadExisting}, \hyperpage{113}
+    \subitem {Get\_Model\_ChargeI}, \hyperpage{113}
+    \subitem {Get\_Model\_Electronics}, \hyperpage{113}
+    \subitem {Get\_Model\_ReadOutGeometry}, \hyperpage{114}
+    \subitem {Get\_NberOfPads}, \hyperpage{114}
+    \subitem {Get\_Pad}, \hyperpage{114}
+    \subitem {GetLinearIndex}, \hyperpage{114}
+    \subitem {Ini\_Models}, \hyperpage{114}
+    \subitem {m\_Nx}, \hyperpage{115}
+    \subitem {m\_Ny}, \hyperpage{115}
+    \subitem {p\_Model\_ChargeI}, \hyperpage{115}
+    \subitem {p\_Model\_Electronics}, \hyperpage{115}
+    \subitem {p\_Model\_ReadOutGeometry}, \hyperpage{115}
+    \subitem {ROBoard}, \hyperpage{113}
+    \subitem {V\_ExisFlag2D}, \hyperpage{115}
+    \subitem {V\_Pad}, \hyperpage{115}
+  \item {ROBoard.h}
+    \subitem {ROBoard\_H}, \hyperpage{184}
+  \item {ROBoard\_H}
+    \subitem {ROBoard.h}, \hyperpage{184}
+  \item {rootout\_file}
+    \subitem {Reconstruction}, \hyperpage{30}
+  \item {runvarstr}
+    \subitem {Reconstruction}, \hyperpage{30}
+
+  \indexspace
+
+  \item {Sample}, \hyperpage{115}
+    \subitem {\texorpdfstring{$\sim$}{\string~}Sample}, \hyperpage{116}
+    \subitem {Add\_Event}, \hyperpage{117}
+    \subitem {Get\_Chi2Min}, \hyperpage{117}
+    \subitem {Get\_DD}, \hyperpage{117}
+    \subitem {Get\_DD\_BeforeMinimisation}, \hyperpage{117}
+    \subitem {Get\_eDD}, \hyperpage{117}
+    \subitem {Get\_eRC}, \hyperpage{117}
+    \subitem {Get\_Event}, \hyperpage{117}
+    \subitem {Get\_Model\_ChargeI}, \hyperpage{117}
+    \subitem {Get\_Model\_Electronics}, \hyperpage{117}
+    \subitem {Get\_Model\_ReadOutGeometry}, \hyperpage{117}
+    \subitem {Get\_NberOfEvents}, \hyperpage{118}
+    \subitem {Get\_RC}, \hyperpage{118}
+    \subitem {Get\_RC\_BeforeMinimisation}, \hyperpage{118}
+    \subitem {Get\_SetOfTracks\_ForThisModule}, \hyperpage{118}
+    \subitem {GetFilePRF}, \hyperpage{118}
+    \subitem {Sample}, \hyperpage{116}
+    \subitem {Set\_DD}, \hyperpage{118}
+    \subitem {Set\_Model\_Charge}, \hyperpage{118}
+    \subitem {Set\_Model\_Electronics}, \hyperpage{118}
+    \subitem {Set\_Model\_ReadOutGeometry}, \hyperpage{118}
+    \subitem {Set\_RC}, \hyperpage{119}
+    \subitem {SetFilePRF}, \hyperpage{119}
+    \subitem {SmallDump}, \hyperpage{119}
+    \subitem {StatusFit}, \hyperpage{119}
+    \subitem {WriteOut}, \hyperpage{119}
+  \item {scanIndex}
+    \subitem {Reconstruction}, \hyperpage{30}
+  \item {scanName}
+    \subitem {Reconstruction}, \hyperpage{30}
+  \item {selected}
+    \subitem {Reconstruction::RecoEvent}, \hyperpage{105}
+    \subitem {Reconstruction::RecoModule}, \hyperpage{108}
+  \item {selectionSet}
+    \subitem {Reconstruction}, \hyperpage{30}
+  \item {Selector}, \hyperpage{119}
+    \subitem {\texorpdfstring{$\sim$}{\string~}Selector}, 
+		\hyperpage{121}
+    \subitem {Add\_Selection}, \hyperpage{121}
+    \subitem {Apply\_ASelection}, \hyperpage{121}
+    \subitem {ApplySelection}, \hyperpage{121, 122}
+    \subitem {Get\_Cut\_Stage2\_EventBased}, \hyperpage{122}
+    \subitem {Get\_Cut\_Stage3\_THigh}, \hyperpage{122}
+    \subitem {Get\_Cut\_Stage3\_TLow}, \hyperpage{122}
+    \subitem {Get\_Cut\_Stage4\_APM\_High}, \hyperpage{122}
+    \subitem {Get\_Cut\_Stage4\_APM\_Low}, \hyperpage{122}
+    \subitem {Get\_Cut\_Stage5\_Npads\_Hig}, \hyperpage{122}
+    \subitem {Get\_Cut\_Stage6\_Amax\_Hig}, \hyperpage{122}
+    \subitem {Get\_Cut\_Stage6\_Amax\_Low}, \hyperpage{123}
+    \subitem {Get\_Cut\_StageFinal\_NCluster\_Low}, \hyperpage{123}
+    \subitem {Get\_SelectionName}, \hyperpage{123}
+    \subitem {NberOfSelections}, \hyperpage{123}
+    \subitem {PrintStat}, \hyperpage{123}
+    \subitem {Reset\_Selection}, \hyperpage{123}
+    \subitem {Reset\_StatCounters}, \hyperpage{123}
+    \subitem {Selector}, \hyperpage{121}
+    \subitem {Set\_Cut\_Stage2\_EventBased}, \hyperpage{123}
+    \subitem {Set\_Cut\_Stage3\_THigh}, \hyperpage{123}
+    \subitem {Set\_Cut\_Stage3\_TLow}, \hyperpage{124}
+    \subitem {Set\_Cut\_Stage4\_APM\_High}, \hyperpage{124}
+    \subitem {Set\_Cut\_Stage4\_APM\_Low}, \hyperpage{124}
+    \subitem {Set\_Cut\_Stage5\_Npads\_Hig}, \hyperpage{124}
+    \subitem {Set\_Cut\_Stage6\_Amax\_Hig}, \hyperpage{124}
+    \subitem {Set\_Cut\_Stage6\_Amax\_Low}, \hyperpage{124}
+    \subitem {Set\_Cut\_StageFinal\_NCluster\_Low}, \hyperpage{124}
+    \subitem {Tell\_Selection}, \hyperpage{124}
+  \item {Selector.h}
+    \subitem {Selector\_H}, \hyperpage{228}
+  \item {Selector\_H}
+    \subitem {Selector.h}, \hyperpage{228}
+  \item {Set}
+    \subitem {FitOutput}, \hyperpage{62}
+    \subitem {StaticClusterFitter\_Diagonal}, \hyperpage{131}
+    \subitem {StaticClusterFitter\_Horizontal}, \hyperpage{132}
+    \subitem {StaticTrackFitter}, \hyperpage{133}
+  \item {Set\_A0}
+    \subitem {ParabolaFunction}, \hyperpage{95}
+  \item {Set\_A0M}
+    \subitem {ParabolaFunctionNG}, \hyperpage{97}
+  \item {Set\_A0P}
+    \subitem {ParabolaFunctionNG}, \hyperpage{97}
+  \item {Set\_ADC}
+    \subitem {Pad}, \hyperpage{93}
+  \item {Set\_AMax}
+    \subitem {Pad}, \hyperpage{93}
+  \item {Set\_AMax\_True}
+    \subitem {Pad}, \hyperpage{93}
+  \item {Set\_Amplitude}
+    \subitem {Model\_Electronics}, \hyperpage{78}
+  \item {Set\_Cluster}
+    \subitem {ClusterFitter\_Diagonal}, \hyperpage{42}
+    \subitem {ClusterFitter\_Horizontal}, \hyperpage{45}
+  \item {Set\_Cut\_Stage2\_EventBased}
+    \subitem {Selector}, \hyperpage{123}
+  \item {Set\_Cut\_Stage3\_THigh}
+    \subitem {Selector}, \hyperpage{123}
+  \item {Set\_Cut\_Stage3\_TLow}
+    \subitem {Selector}, \hyperpage{124}
+  \item {Set\_Cut\_Stage4\_APM\_High}
+    \subitem {Selector}, \hyperpage{124}
+  \item {Set\_Cut\_Stage4\_APM\_Low}
+    \subitem {Selector}, \hyperpage{124}
+  \item {Set\_Cut\_Stage5\_Npads\_Hig}
+    \subitem {Selector}, \hyperpage{124}
+  \item {Set\_Cut\_Stage6\_Amax\_Hig}
+    \subitem {Selector}, \hyperpage{124}
+  \item {Set\_Cut\_Stage6\_Amax\_Low}
+    \subitem {Selector}, \hyperpage{124}
+  \item {Set\_Cut\_StageFinal\_NCluster\_Low}
+    \subitem {Selector}, \hyperpage{124}
+  \item {Set\_Data\_2Use}
+    \subitem {Pad}, \hyperpage{93}
+  \item {Set\_DD}
+    \subitem {Sample}, \hyperpage{118}
+  \item {Set\_eXTrack}
+    \subitem {Cluster}, \hyperpage{39}
+  \item {Set\_eYTrack}
+    \subitem {Cluster}, \hyperpage{39}
+  \item {Set\_Gain}
+    \subitem {Model\_ChargeI}, \hyperpage{75}
+  \item {Set\_Ion}
+    \subitem {Model\_Charge0D}, \hyperpage{70}
+  \item {Set\_Lambda}
+    \subitem {Model\_Charge1D}, \hyperpage{73}
+  \item {Set\_LX}
+    \subitem {Model\_ReadOutGeometry}, \hyperpage{81}
+  \item {Set\_LY}
+    \subitem {Model\_ReadOutGeometry}, \hyperpage{81}
+  \item {Set\_Mean}
+    \subitem {GaussFunction}, \hyperpage{65}
+  \item {Set\_MinimalNberOfEntries}
+    \subitem {SetOfTracks}, \hyperpage{130}
+  \item {Set\_Model\_Charge}
+    \subitem {Sample}, \hyperpage{118}
+  \item {Set\_Model\_Electronics}
+    \subitem {Sample}, \hyperpage{118}
+  \item {Set\_Model\_ReadOutGeometry}
+    \subitem {Sample}, \hyperpage{118}
+  \item {Set\_ModuleTrack}
+    \subitem {Module}, \hyperpage{86}
+  \item {Set\_Norm}
+    \subitem {GaussFunction}, \hyperpage{65}
+  \item {Set\_Nx}
+    \subitem {Model\_ReadOutGeometry}, \hyperpage{81}
+  \item {Set\_Ny}
+    \subitem {Model\_ReadOutGeometry}, \hyperpage{81}
+  \item {Set\_Qprim}
+    \subitem {Model\_Charge0D}, \hyperpage{70}
+  \item {Set\_RC}
+    \subitem {Model\_ChargeI}, \hyperpage{75}
+    \subitem {Sample}, \hyperpage{119}
+  \item {Set\_Sigma}
+    \subitem {GaussFunction}, \hyperpage{65}
+  \item {Set\_TimeShape}
+    \subitem {Model\_Electronics}, \hyperpage{78}
+  \item {Set\_TMax}
+    \subitem {Pad}, \hyperpage{94}
+  \item {Set\_TMax\_True}
+    \subitem {Pad}, \hyperpage{94}
+  \item {Set\_Track}
+    \subitem {TrackFitter}, \hyperpage{139}
+  \item {Set\_Track\_ForThisModule}
+    \subitem {Event}, \hyperpage{60}
+  \item {Set\_Width}
+    \subitem {Model\_ChargeI}, \hyperpage{75}
+  \item {Set\_WidthFromDriftDistance}
+    \subitem {Model\_ChargeI}, \hyperpage{75}
+  \item {Set\_X0}
+    \subitem {ParabolaFunction}, \hyperpage{96}
+    \subitem {ParabolaFunctionNG}, \hyperpage{97}
+  \item {Set\_Xpad\_min}
+    \subitem {Model\_ReadOutGeometry}, \hyperpage{82}
+  \item {Set\_XTrack}
+    \subitem {Cluster}, \hyperpage{39}
+  \item {Set\_Y0}
+    \subitem {ParabolaFunction}, \hyperpage{96}
+    \subitem {ParabolaFunctionNG}, \hyperpage{97}
+  \item {Set\_Ypad\_min}
+    \subitem {Model\_ReadOutGeometry}, \hyperpage{82}
+  \item {Set\_YTrack}
+    \subitem {Cluster}, \hyperpage{39}
+  \item {SetBeforeMerging}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{151}
+  \item {SetEval\_Diagonal}
+    \subitem {Cluster}, \hyperpage{39}
+  \item {SetEval\_Horizontal}
+    \subitem {Cluster}, \hyperpage{39}
+  \item {SetFilePRF}
+    \subitem {Sample}, \hyperpage{119}
+  \item {SetNberOfParameters}
+    \subitem {Track}, \hyperpage{137}
+  \item {SetOfTracks}, \hyperpage{125}
+    \subitem {\texorpdfstring{$\sim$}{\string~}SetOfTracks}, 
+		\hyperpage{126}
+    \subitem {Add\_Track}, \hyperpage{126}
+    \subitem {DumpRec}, \hyperpage{126}
+    \subitem {Get\_MinimalNberOfEntries}, \hyperpage{126}
+    \subitem {Get\_NberOfTrack}, \hyperpage{126}
+    \subitem {Get\_Track}, \hyperpage{126}
+    \subitem {GiveMe\_pTH1F\_Ch2Min}, \hyperpage{126}
+    \subitem {GiveMe\_pTH1F\_Ch2MinPerNODF}, \hyperpage{127}
+    \subitem {GiveMe\_pTH1F\_Pull}, \hyperpage{127}
+    \subitem {GiveMe\_pTH1F\_Residual}, \hyperpage{128}
+    \subitem {GiveMe\_pTH1F\_TrackDeltaT}, \hyperpage{128}
+    \subitem {GiveMe\_pTH1F\_YFitCol}, \hyperpage{128, 129}
+    \subitem {GiveMe\_pTH1F\_YTrackInTracks}, \hyperpage{129}
+    \subitem {GiveMe\_pTH1F\_YTrackYPadInTracks}, \hyperpage{130}
+    \subitem {GiveMe\_pTH1F\_YTrackYPadLeadingInTracks}, 
+		\hyperpage{130}
+    \subitem {Set\_MinimalNberOfEntries}, \hyperpage{130}
+    \subitem {SetOfTracks}, \hyperpage{126}
+  \item {SetParameter}
+    \subitem {Track}, \hyperpage{137}
+  \item {SetParameter\_Diagonal}
+    \subitem {Cluster}, \hyperpage{39}
+  \item {SetParameter\_Horizontal}
+    \subitem {Cluster}, \hyperpage{39}
+  \item {SetParameters\_Internal}
+    \subitem {Track}, \hyperpage{137}
+  \item {SetPRF}
+    \subitem {PRFParameters}, \hyperpage{99}
+  \item {SetResults}
+    \subitem {FitOutput}, \hyperpage{62}
+    \subitem {Track}, \hyperpage{137}
+  \item {SetResults\_Diagonal}
+    \subitem {Cluster}, \hyperpage{39}
+  \item {SetResults\_FailledFit\_Diagonal}
+    \subitem {Cluster}, \hyperpage{40}
+  \item {SetResults\_FailledFit\_Horizontal}
+    \subitem {Cluster}, \hyperpage{40}
+  \item {SetResults\_Horizontal}
+    \subitem {Cluster}, \hyperpage{40}
+  \item {SetSecondaries}
+    \subitem {Model\_Charge0D}, \hyperpage{70}
+    \subitem {Model\_Charge1D}, \hyperpage{73}
+    \subitem {Model\_ChargeI}, \hyperpage{76}
+  \item {SetSignalModel}
+    \subitem {Pad}, \hyperpage{94}
+  \item {SetStage3Cut\_CSV}
+    \subitem {ReconTools.cxx}, \hyperpage{244}
+    \subitem {ReconTools.h}, \hyperpage{225}
+  \item {SetStyle}
+    \subitem {Reconstruction::DrawOuts}, \hyperpage{52}
+  \item {Settings}
+    \subitem {Reconstruction}, \hyperpage{24}
+  \item {Setwap\_XY}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{151}
+  \item {SignalTools.cxx}
+    \subitem {ETF}, \hyperpage{259}
+  \item {SignalTools.h}
+    \subitem {ETF}, \hyperpage{258}
+  \item {sina}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{157}
+  \item {SmallDump}
+    \subitem {Event}, \hyperpage{60}
+    \subitem {Module}, \hyperpage{86}
+    \subitem {Sample}, \hyperpage{119}
+  \item {SquareGeometry}
+    \subitem {Model\_ReadOutGeometry}, \hyperpage{82}
+  \item {StaticClusterFitter\_Diagonal}, \hyperpage{131}
+    \subitem {\texorpdfstring{$\sim$}{\string~}StaticClusterFitter\_Diagonal}, 
+		\hyperpage{131}
+    \subitem {p\_ClusterFitter\_Diagonal}, \hyperpage{131}
+    \subitem {Set}, \hyperpage{131}
+    \subitem {StaticClusterFitter\_Diagonal}, \hyperpage{131}
+  \item {StaticClusterFitter\_Horizontal}, \hyperpage{132}
+    \subitem {\texorpdfstring{$\sim$}{\string~}StaticClusterFitter\_Horizontal}, 
+		\hyperpage{132}
+    \subitem {p\_ClusterFitter\_Horizontal}, \hyperpage{132}
+    \subitem {Set}, \hyperpage{132}
+    \subitem {StaticClusterFitter\_Horizontal}, \hyperpage{132}
+  \item {StaticTrackFitter}, \hyperpage{133}
+    \subitem {\texorpdfstring{$\sim$}{\string~}StaticTrackFitter}, 
+		\hyperpage{133}
+    \subitem {p\_TrackFitter}, \hyperpage{133}
+    \subitem {Set}, \hyperpage{133}
+    \subitem {StaticTrackFitter}, \hyperpage{133}
+  \item {StatusFit}
+    \subitem {Cluster}, \hyperpage{40}
+    \subitem {Sample}, \hyperpage{119}
+  \item {StatusFit\_Diagonal}
+    \subitem {Cluster}, \hyperpage{40}
+  \item {StatusFit\_Horizontal}
+    \subitem {Cluster}, \hyperpage{40}
+  \item {SwapGeometry}
+    \subitem {Model\_ReadOutGeometry}, \hyperpage{82}
+  \item {Swapped\_graph}
+    \subitem {ReconTools.cxx}, \hyperpage{244}
+    \subitem {ReconTools.h}, \hyperpage{225}
+
+  \indexspace
+
+  \item {T0}
+    \subitem {Reconstruction::RecoPad}, \hyperpage{111}
+  \item {tag}
+    \subitem {Reconstruction}, \hyperpage{30}
+  \item {TB}
+    \subitem {Reconstruction}, \hyperpage{31}
+  \item {Tell\_Selection}
+    \subitem {Selector}, \hyperpage{124}
+  \item {testbeam}
+    \subitem {Reconstruction}, \hyperpage{31}
+  \item {time}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{157}
+  \item {timeBinSize}
+    \subitem {Reconstruction::RecoEvent}, \hyperpage{105}
+  \item {TimeError}
+    \subitem {TimeError.cxx}, \hyperpage{194}
+    \subitem {TimeError.h}, \hyperpage{189}
+  \item {TimeError.cxx}
+    \subitem {TimeError}, \hyperpage{194}
+    \subitem {TimeError\_BASE}, \hyperpage{194}
+    \subitem {TimeError\_Leading}, \hyperpage{194}
+    \subitem {TimeError\_NextLeading}, \hyperpage{194}
+    \subitem {TimeError\_NextNextLeading}, \hyperpage{194}
+  \item {TimeError.h}
+    \subitem {TimeError}, \hyperpage{189}
+  \item {TimeError\_BASE}
+    \subitem {TimeError.cxx}, \hyperpage{194}
+  \item {TimeError\_Leading}
+    \subitem {TimeError.cxx}, \hyperpage{194}
+  \item {TimeError\_NextLeading}
+    \subitem {TimeError.cxx}, \hyperpage{194}
+  \item {TimeError\_NextNextLeading}
+    \subitem {TimeError.cxx}, \hyperpage{194}
+  \item {TLead}
+    \subitem {Reconstruction::RecoCluster}, \hyperpage{101}
+  \item {TMax}
+    \subitem {Reconstruction::RecoPad}, \hyperpage{111}
+  \item {Track}, \hyperpage{134}
+    \subitem {\texorpdfstring{$\sim$}{\string~}Track}, \hyperpage{135}
+    \subitem {Add\_Cluster}, \hyperpage{135}
+    \subitem {Chi2}, \hyperpage{135}
+    \subitem {DoClosure}, \hyperpage{135}
+    \subitem {DumpRec}, \hyperpage{135}
+    \subitem {Get\_Chi2Min}, \hyperpage{135}
+    \subitem {Get\_Cluster}, \hyperpage{135}
+    \subitem {Get\_CovMatrix}, \hyperpage{135}
+    \subitem {Get\_EntryNber}, \hyperpage{135}
+    \subitem {Get\_EventNber}, \hyperpage{136}
+    \subitem {Get\_ModuleNber}, \hyperpage{136}
+    \subitem {Get\_NberOfCluster}, \hyperpage{136}
+    \subitem {Get\_ParameterError}, \hyperpage{136}
+    \subitem {Get\_ParameterName}, \hyperpage{136}
+    \subitem {Get\_ParameterValue}, \hyperpage{136}
+    \subitem {Get\_ParameterValue\_BeforeMinimisation}, \hyperpage{136}
+    \subitem {Get\_Pull}, \hyperpage{136}
+    \subitem {Get\_Residual}, \hyperpage{137}
+    \subitem {GetNberOfParameters}, \hyperpage{137}
+    \subitem {m\_NberOfClusters}, \hyperpage{137}
+    \subitem {Reconstruction::RecoModule}, \hyperpage{108}
+    \subitem {SetNberOfParameters}, \hyperpage{137}
+    \subitem {SetParameter}, \hyperpage{137}
+    \subitem {SetParameters\_Internal}, \hyperpage{137}
+    \subitem {SetResults}, \hyperpage{137}
+    \subitem {Track}, \hyperpage{134}
+    \subitem {V\_Cluster}, \hyperpage{137}
+    \subitem {V\_Pull}, \hyperpage{138}
+    \subitem {V\_Residual}, \hyperpage{138}
+    \subitem {Y\_Position}, \hyperpage{137}
+  \item {track}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{158}
+  \item {track\_pos}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{158}
+  \item {TrackFitter}, \hyperpage{138}
+    \subitem {\texorpdfstring{$\sim$}{\string~}TrackFitter}, 
+		\hyperpage{139}
+    \subitem {Chi2}, \hyperpage{139}
+    \subitem {DoMinimisation}, \hyperpage{139}
+    \subitem {m\_FitterName}, \hyperpage{140}
+    \subitem {m\_NberOfParameters}, \hyperpage{140}
+    \subitem {p\_Track}, \hyperpage{140}
+    \subitem {p\_TVirtualFitter}, \hyperpage{140}
+    \subitem {Set\_Track}, \hyperpage{139}
+    \subitem {TrackFitter}, \hyperpage{138}
+  \item {TrackFitter.cxx}
+    \subitem {TrackFitterFunction}, \hyperpage{171}
+  \item {TrackFitterFunction}
+    \subitem {TrackFitter.cxx}, \hyperpage{171}
+  \item {TrackRecon}
+    \subitem {TrackRecon.cxx}, \hyperpage{172}
+    \subitem {TrackRecon.h}, \hyperpage{168}
+  \item {TrackRecon.cxx}
+    \subitem {TrackRecon}, \hyperpage{172}
+    \subitem {TrackRecon\_Event}, \hyperpage{172}
+  \item {TrackRecon.h}
+    \subitem {TrackRecon}, \hyperpage{168}
+    \subitem {TrackRecon\_Event}, \hyperpage{168}
+  \item {TrackRecon\_Event}
+    \subitem {TrackRecon.cxx}, \hyperpage{172}
+    \subitem {TrackRecon.h}, \hyperpage{168}
+  \item {trk\_len}
+    \subitem {ReconTools.cxx}, \hyperpage{245}
+    \subitem {ReconTools.h}, \hyperpage{226}
+
+  \indexspace
+
+  \item {Uploader}, \hyperpage{140}
+    \subitem {\texorpdfstring{$\sim$}{\string~}Uploader}, 
+		\hyperpage{141}
+    \subitem {Get\_a2}, \hyperpage{142}
+    \subitem {Get\_a4}, \hyperpage{142}
+    \subitem {Get\_b2}, \hyperpage{142}
+    \subitem {Get\_b4}, \hyperpage{142}
+    \subitem {Get\_Model\_Charge1D}, \hyperpage{142}
+    \subitem {Get\_Model\_Electronics}, \hyperpage{142}
+    \subitem {Get\_Model\_ReadOutGeometry}, \hyperpage{142}
+    \subitem {Get\_NberOfEvent}, \hyperpage{142}
+    \subitem {Get\_Norm}, \hyperpage{142}
+    \subitem {Get\_PRF\_exist}, \hyperpage{142}
+    \subitem {Get\_SampleFile}, \hyperpage{142}
+    \subitem {GiveMe\_Event}, \hyperpage{143}
+    \subitem {m\_a2}, \hyperpage{143}
+    \subitem {m\_a4}, \hyperpage{143}
+    \subitem {m\_b2}, \hyperpage{143}
+    \subitem {m\_b4}, \hyperpage{143}
+    \subitem {m\_NberOfEvent}, \hyperpage{143}
+    \subitem {m\_Norm}, \hyperpage{143}
+    \subitem {m\_PRF\_exist}, \hyperpage{143}
+    \subitem {m\_SampleFile}, \hyperpage{143}
+    \subitem {p\_Model\_Charge1D}, \hyperpage{144}
+    \subitem {p\_Model\_Electronics}, \hyperpage{144}
+    \subitem {p\_Model\_ReadOutGeometry}, \hyperpage{144}
+    \subitem {p\_TFile}, \hyperpage{144}
+    \subitem {p\_TTree}, \hyperpage{144}
+    \subitem {Uploader}, \hyperpage{141}
+  \item {Uploader Directory Reference}, \hyperpage{20}
+  \item {Uploader/inc Directory Reference}, \hyperpage{17}
+  \item {Uploader/inc/GiveMe\_Uploader.h}, \hyperpage{246}
+  \item {Uploader/inc/Uploader.h}, \hyperpage{246, 247}
+  \item {Uploader/inc/Uploader\_ERAM01.h}, \hyperpage{248}
+  \item {Uploader/inc/Uploader\_MockUp\_V1.h}, \hyperpage{248, 249}
+  \item {Uploader/inc/Uploader\_MockUp\_V2.h}, \hyperpage{249, 250}
+  \item {Uploader/inc/Uploader\_Prototype.h}, \hyperpage{251}
+  \item {Uploader/src Directory Reference}, \hyperpage{19}
+  \item {Uploader/src/GiveMe\_Uploader.cxx}, \hyperpage{252}
+  \item {Uploader/src/Uploader.cxx}, \hyperpage{252}
+  \item {Uploader/src/Uploader\_ERAM01.cxx}, \hyperpage{252}
+  \item {Uploader/src/Uploader\_MockUp\_V1.cxx}, \hyperpage{253}
+  \item {Uploader/src/Uploader\_MockUp\_V2.cxx}, \hyperpage{253}
+  \item {Uploader/src/Uploader\_Prototype.cxx}, \hyperpage{253}
+  \item {Uploader\_ERAM01}, \hyperpage{144}
+    \subitem {\texorpdfstring{$\sim$}{\string~}Uploader\_ERAM01}, 
+		\hyperpage{145}
+    \subitem {GiveMe\_Event}, \hyperpage{146}
+    \subitem {Uploader\_ERAM01}, \hyperpage{145}
+  \item {Uploader\_MockUp\_V1}, \hyperpage{146}
+    \subitem {\texorpdfstring{$\sim$}{\string~}Uploader\_MockUp\_V1}, 
+		\hyperpage{147}
+    \subitem {GiveMe\_Event}, \hyperpage{148}
+    \subitem {Uploader\_MockUp\_V1}, \hyperpage{147}
+  \item {Uploader\_MockUp\_V2}, \hyperpage{148}
+    \subitem {\texorpdfstring{$\sim$}{\string~}Uploader\_MockUp\_V2}, 
+		\hyperpage{151}
+    \subitem {angle\_xy}, \hyperpage{152}
+    \subitem {angle\_yz}, \hyperpage{152}
+    \subitem {b\_angle\_xy}, \hyperpage{152}
+    \subitem {b\_angle\_yz}, \hyperpage{152}
+    \subitem {b\_beforeMerging}, \hyperpage{152}
+    \subitem {b\_charge}, \hyperpage{152}
+    \subitem {b\_clust\_pos}, \hyperpage{152}
+    \subitem {b\_clust\_pos\_err}, \hyperpage{152}
+    \subitem {b\_date}, \hyperpage{152}
+    \subitem {b\_dEdx}, \hyperpage{152}
+    \subitem {b\_dx}, \hyperpage{152}
+    \subitem {b\_ev}, \hyperpage{153}
+    \subitem {b\_max\_mult}, \hyperpage{153}
+    \subitem {b\_mean\_mult}, \hyperpage{153}
+    \subitem {b\_module}, \hyperpage{153}
+    \subitem {b\_mom}, \hyperpage{153}
+    \subitem {b\_multiplicity}, \hyperpage{153}
+    \subitem {b\_offset}, \hyperpage{153}
+    \subitem {b\_pad\_charge}, \hyperpage{153}
+    \subitem {b\_pad\_time}, \hyperpage{153}
+    \subitem {b\_pad\_wf\_q}, \hyperpage{153}
+    \subitem {b\_pad\_x}, \hyperpage{154}
+    \subitem {b\_pad\_y}, \hyperpage{154}
+    \subitem {b\_qfrac}, \hyperpage{154}
+    \subitem {b\_quality}, \hyperpage{154}
+    \subitem {b\_residual}, \hyperpage{154}
+    \subitem {b\_residual\_corr}, \hyperpage{154}
+    \subitem {b\_rob\_clusters}, \hyperpage{154}
+    \subitem {b\_sina}, \hyperpage{154}
+    \subitem {b\_time}, \hyperpage{154}
+    \subitem {b\_track}, \hyperpage{154}
+    \subitem {b\_track\_pos}, \hyperpage{155}
+    \subitem {b\_wf\_fwhm}, \hyperpage{155}
+    \subitem {b\_wf\_width}, \hyperpage{155}
+    \subitem {beforeMerging}, \hyperpage{155}
+    \subitem {charge}, \hyperpage{155}
+    \subitem {clust\_pos}, \hyperpage{155}
+    \subitem {clust\_pos\_err}, \hyperpage{155}
+    \subitem {date}, \hyperpage{155}
+    \subitem {dEdx}, \hyperpage{155}
+    \subitem {dx}, \hyperpage{155}
+    \subitem {ev}, \hyperpage{156}
+    \subitem {fCurrent}, \hyperpage{156}
+    \subitem {GiveMe\_Event}, \hyperpage{151}
+    \subitem {Init}, \hyperpage{151}
+    \subitem {max\_mult}, \hyperpage{156}
+    \subitem {mean\_mult}, \hyperpage{156}
+    \subitem {module}, \hyperpage{156}
+    \subitem {mom}, \hyperpage{156}
+    \subitem {multiplicity}, \hyperpage{156}
+    \subitem {offset}, \hyperpage{156}
+    \subitem {pad\_charge}, \hyperpage{156}
+    \subitem {pad\_time}, \hyperpage{156}
+    \subitem {pad\_wf\_q}, \hyperpage{157}
+    \subitem {pad\_x}, \hyperpage{157}
+    \subitem {pad\_y}, \hyperpage{157}
+    \subitem {qfrac}, \hyperpage{157}
+    \subitem {quality}, \hyperpage{157}
+    \subitem {residual}, \hyperpage{157}
+    \subitem {residual\_corr}, \hyperpage{157}
+    \subitem {rob\_clusters}, \hyperpage{157}
+    \subitem {SetBeforeMerging}, \hyperpage{151}
+    \subitem {Setwap\_XY}, \hyperpage{151}
+    \subitem {sina}, \hyperpage{157}
+    \subitem {time}, \hyperpage{157}
+    \subitem {track}, \hyperpage{158}
+    \subitem {track\_pos}, \hyperpage{158}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{151}
+    \subitem {wf\_fwhm}, \hyperpage{158}
+    \subitem {wf\_width}, \hyperpage{158}
+  \item {Uploader\_Prototype}, \hyperpage{158}
+    \subitem {\texorpdfstring{$\sim$}{\string~}Uploader\_Prototype}, 
+		\hyperpage{159}
+    \subitem {GiveMe\_Event}, \hyperpage{160}
+    \subitem {Uploader\_Prototype}, \hyperpage{159}
+  \item {Utilities Directory Reference}, \hyperpage{20}
+  \item {Utilities/inc Directory Reference}, \hyperpage{18}
+  \item {Utilities/inc/FuncFromTGraph.h}, \hyperpage{253}
+  \item {Utilities/inc/GaussFunction.h}, \hyperpage{254}
+  \item {Utilities/inc/Misc.h}, \hyperpage{254, 255}
+  \item {Utilities/inc/ParabolaFunction.h}, \hyperpage{255, 256}
+  \item {Utilities/inc/ParabolaFunctionNG.h}, \hyperpage{256, 257}
+  \item {Utilities/inc/SignalTools.h}, \hyperpage{257, 258}
+  \item {Utilities/src Directory Reference}, \hyperpage{20}
+  \item {Utilities/src/FuncFromTGraph.cxx}, \hyperpage{258}
+  \item {Utilities/src/GaussFunction.cxx}, \hyperpage{258}
+  \item {Utilities/src/ParabolaFunction.cxx}, \hyperpage{258}
+  \item {Utilities/src/ParabolaFunctionNG.cxx}, \hyperpage{259}
+  \item {Utilities/src/SignalTools.cxx}, \hyperpage{259}
+
+  \indexspace
+
+  \item {V\_Cluster}
+    \subitem {Track}, \hyperpage{137}
+  \item {v\_clusters}
+    \subitem {Reconstruction::RecoModule}, \hyperpage{108}
+  \item {v\_comments}
+    \subitem {Reconstruction}, \hyperpage{31}
+  \item {v\_datafiles}
+    \subitem {Reconstruction}, \hyperpage{31}
+  \item {V\_ExisFlag2D}
+    \subitem {ROBoard}, \hyperpage{115}
+  \item {v\_modules}
+    \subitem {Reconstruction::RecoEvent}, \hyperpage{105}
+  \item {v\_modules\_position}
+    \subitem {Reconstruction::RecoEvent}, \hyperpage{105}
+  \item {V\_Pad}
+    \subitem {ROBoard}, \hyperpage{115}
+  \item {v\_pads}
+    \subitem {Reconstruction::RecoCluster}, \hyperpage{101}
+  \item {V\_Pull}
+    \subitem {Track}, \hyperpage{138}
+  \item {V\_Residual}
+    \subitem {Track}, \hyperpage{138}
+  \item {v\_rootout\_files}
+    \subitem {Reconstruction}, \hyperpage{31}
+  \item {v\_scanspec}
+    \subitem {Reconstruction}, \hyperpage{31}
+  \item {Validate}
+    \subitem {Cluster}, \hyperpage{40}
+    \subitem {Event}, \hyperpage{60}
+    \subitem {Module}, \hyperpage{86}
+    \subitem {Pad}, \hyperpage{94}
+  \item {Validate\_ThisModule}
+    \subitem {Event}, \hyperpage{60}
+  \item {Validity\_ForThisModule}
+    \subitem {Event}, \hyperpage{60}
+  \item {vcorrFuncPaths}
+    \subitem {Reconstruction}, \hyperpage{31}
+  \item {vScanLabels}
+    \subitem {Reconstruction}, \hyperpage{31}
+  \item {vScanVals}
+    \subitem {Reconstruction}, \hyperpage{31}
+  \item {vTags}
+    \subitem {Reconstruction}, \hyperpage{31}
+
+  \indexspace
+
+  \item {WF\_DoClosure}
+    \subitem {Pad}, \hyperpage{94}
+  \item {wf\_fwhm}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{158}
+  \item {wf\_width}
+    \subitem {Uploader\_MockUp\_V2}, \hyperpage{158}
+  \item {WFCorrection}
+    \subitem {Reconstruction}, \hyperpage{24}
+  \item {WidthFromDriftDistance}
+    \subitem {Model\_ChargeI}, \hyperpage{76}
+  \item {WriteOut}
+    \subitem {Cluster}, \hyperpage{40}
+    \subitem {Event}, \hyperpage{60}
+    \subitem {Model\_Charge0D}, \hyperpage{70}
+    \subitem {Model\_Charge1D}, \hyperpage{73}
+    \subitem {Model\_ChargeI}, \hyperpage{76}
+    \subitem {Model\_Electronics}, \hyperpage{78}
+    \subitem {Model\_ReadOutGeometry}, \hyperpage{82}
+    \subitem {Module}, \hyperpage{86}
+    \subitem {Pad}, \hyperpage{94}
+    \subitem {Sample}, \hyperpage{119}
+
+  \indexspace
+
+  \item {xPad}
+    \subitem {Reconstruction::RecoPad}, \hyperpage{111}
+  \item {XX}
+    \subitem {EramInfo}, \hyperpage{54}
+
+  \indexspace
+
+  \item {Y\_Position}
+    \subitem {Track}, \hyperpage{137}
+  \item {yCluster}
+    \subitem {Reconstruction::RecoCluster}, \hyperpage{101}
+  \item {yPad}
+    \subitem {Reconstruction::RecoPad}, \hyperpage{112}
+  \item {yWeight}
+    \subitem {Reconstruction::RecoCluster}, \hyperpage{101}
+  \item {YY}
+    \subitem {EramInfo}, \hyperpage{54}
+
+\end{theindex}

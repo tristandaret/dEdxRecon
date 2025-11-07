@@ -1,0 +1,259 @@
+\doxysection{Uploader Class Reference}
+\hypertarget{class_uploader}{}\label{class_uploader}\index{Uploader@{Uploader}}
+
+
+{\ttfamily \#include $<$Uploader.\+h$>$}
+
+Inheritance diagram for Uploader\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.904762cm]{d4/d3b/class_uploader}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_uploader_aec81ed059aa54d27b5287e32c004649d}{Uploader}} (const std\+::string \&Sample\+File, \mbox{\hyperlink{class_model___read_out_geometry}{Model\+\_\+\+Read\+Out\+Geometry}} \texorpdfstring{$\ast$}{*}p\+Model\+\_\+\+Read\+Out\+Geometry, \mbox{\hyperlink{class_model___electronics}{Model\+\_\+\+Electronics}} \texorpdfstring{$\ast$}{*}p\+Model\+\_\+\+Electronics, \mbox{\hyperlink{class_model___charge1_d}{Model\+\_\+\+Charge1D}} \texorpdfstring{$\ast$}{*}p\+Model\+\_\+\+Charge1D)
+\item 
+virtual \mbox{\hyperlink{class_uploader_a4fb7d8db79102f75a8353344d3b23132}{\texorpdfstring{$\sim$}{\string~}\+Uploader}} ()
+\item 
+std\+::string \mbox{\hyperlink{class_uploader_a73ab9cbc5c0989126b561f7ac0262eae}{Get\+\_\+\+Sample\+File}} ()
+\item 
+int \mbox{\hyperlink{class_uploader_a5c6f9c4ff8f2b1971b521715ede7c2dc}{Get\+\_\+\+Nber\+Of\+Event}} ()
+\item 
+virtual \mbox{\hyperlink{class_event}{Event}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_uploader_ad7a160cf4cff401f9d181f123a88425a}{Give\+Me\+\_\+\+Event}} (const int \&i\+Event, const int \&Module\+Nber\+\_\+\+Input, const int \&Data\+\_\+to\+\_\+\+Use, const int \&Close\+WF=1)=0
+\item 
+int \mbox{\hyperlink{class_uploader_accc0ea3ef10db78665279497d5949221}{Get\+\_\+\+PRF\+\_\+exist}} ()
+\item 
+double \mbox{\hyperlink{class_uploader_a1fc205fe4f061b76d2d2360f56c066db}{Get\+\_\+\+Norm}} ()
+\item 
+double \mbox{\hyperlink{class_uploader_a89b2ef6a1686fd0f9a18419f4655cffc}{Get\+\_\+a2}} ()
+\item 
+double \mbox{\hyperlink{class_uploader_a78664945527466ec29068ff77a6f28f1}{Get\+\_\+a4}} ()
+\item 
+double \mbox{\hyperlink{class_uploader_a78f19be485f5ad1afd47fa0fcfc966fb}{Get\+\_\+b2}} ()
+\item 
+double \mbox{\hyperlink{class_uploader_ae6f4b29e9156967a0434cf9c4e181ed7}{Get\+\_\+b4}} ()
+\item 
+\mbox{\hyperlink{class_model___read_out_geometry}{Model\+\_\+\+Read\+Out\+Geometry}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_uploader_a2e678e9cec7f4537588f34fa4988320f}{Get\+\_\+\+Model\+\_\+\+Read\+Out\+Geometry}} ()
+\item 
+\mbox{\hyperlink{class_model___electronics}{Model\+\_\+\+Electronics}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_uploader_a2e4c6ad7cf59d67398555c39e6514201}{Get\+\_\+\+Model\+\_\+\+Electronics}} ()
+\item 
+\mbox{\hyperlink{class_model___charge1_d}{Model\+\_\+\+Charge1D}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_uploader_af8e61237701836aff5e33451658308ff}{Get\+\_\+\+Model\+\_\+\+Charge1D}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{class_uploader_a90d0d535f6a8355d136747ee47ab7e33}{m\+\_\+\+Sample\+File}}
+\item 
+int \mbox{\hyperlink{class_uploader_a1ea45616465ddbd7d75c24a27b614c98}{m\+\_\+\+Nber\+Of\+Event}}
+\item 
+TFile \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_uploader_a4eeb64031a9d9be88474603eb6badf25}{p\+\_\+\+TFile}}
+\item 
+TTree \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_uploader_a2e336134811e1b5953d0a61a17767341}{p\+\_\+\+TTree}}
+\item 
+\mbox{\hyperlink{class_model___read_out_geometry}{Model\+\_\+\+Read\+Out\+Geometry}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_uploader_af9e5742a66377f703ec13b3c070ed803}{p\+\_\+\+Model\+\_\+\+Read\+Out\+Geometry}}
+\item 
+\mbox{\hyperlink{class_model___electronics}{Model\+\_\+\+Electronics}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_uploader_adb387ba71ea4b7b297bf397fdf502152}{p\+\_\+\+Model\+\_\+\+Electronics}}
+\item 
+\mbox{\hyperlink{class_model___charge1_d}{Model\+\_\+\+Charge1D}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_uploader_a953676c56e8a9bcf0b693d8dde00196e}{p\+\_\+\+Model\+\_\+\+Charge1D}}
+\item 
+short int \mbox{\hyperlink{class_uploader_acda645e8f299bc9b295850e7422918f3}{m\+\_\+\+PRF\+\_\+exist}}
+\item 
+double \mbox{\hyperlink{class_uploader_ae0d5121b1e34900a2e27162a4fc391b0}{m\+\_\+\+Norm}}
+\item 
+double \mbox{\hyperlink{class_uploader_af4bbae8d732180a259924eb109f344b4}{m\+\_\+a2}}
+\item 
+double \mbox{\hyperlink{class_uploader_a30ea891f2b51eab54057a02c2374ff5f}{m\+\_\+a4}}
+\item 
+double \mbox{\hyperlink{class_uploader_adda774b596a2993dea548b5dcc7b506f}{m\+\_\+b2}}
+\item 
+double \mbox{\hyperlink{class_uploader_a50d64b9b4bce3ffb63b6acabb5d325b2}{m\+\_\+b4}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{class_uploader_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_uploader_aec81ed059aa54d27b5287e32c004649d}\index{Uploader@{Uploader}!Uploader@{Uploader}}
+\index{Uploader@{Uploader}!Uploader@{Uploader}}
+\doxysubsubsection{\texorpdfstring{Uploader()}{Uploader()}}
+{\footnotesize\ttfamily \label{class_uploader_aec81ed059aa54d27b5287e32c004649d} 
+Uploader\+::\+Uploader (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{Sample\+File}{, }\item[{\mbox{\hyperlink{class_model___read_out_geometry}{Model\+\_\+\+Read\+Out\+Geometry}} \texorpdfstring{$\ast$}{*}}]{p\+Model\+\_\+\+Read\+Out\+Geometry}{, }\item[{\mbox{\hyperlink{class_model___electronics}{Model\+\_\+\+Electronics}} \texorpdfstring{$\ast$}{*}}]{p\+Model\+\_\+\+Electronics}{, }\item[{\mbox{\hyperlink{class_model___charge1_d}{Model\+\_\+\+Charge1D}} \texorpdfstring{$\ast$}{*}}]{p\+Model\+\_\+\+Charge1D}{}\end{DoxyParamCaption})}
+
+Constructor \Hypertarget{class_uploader_a4fb7d8db79102f75a8353344d3b23132}\index{Uploader@{Uploader}!````~Uploader@{\texorpdfstring{$\sim$}{\string~}Uploader}}
+\index{````~Uploader@{\texorpdfstring{$\sim$}{\string~}Uploader}!Uploader@{Uploader}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Uploader()}{\string~Uploader()}}
+{\footnotesize\ttfamily \label{class_uploader_a4fb7d8db79102f75a8353344d3b23132} 
+Uploader\+::\texorpdfstring{$\sim$}{\string~}\+Uploader (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_uploader_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_uploader_a89b2ef6a1686fd0f9a18419f4655cffc}\index{Uploader@{Uploader}!Get\_a2@{Get\_a2}}
+\index{Get\_a2@{Get\_a2}!Uploader@{Uploader}}
+\doxysubsubsection{\texorpdfstring{Get\_a2()}{Get\_a2()}}
+{\footnotesize\ttfamily \label{class_uploader_a89b2ef6a1686fd0f9a18419f4655cffc} 
+double Uploader\+::\+Get\+\_\+a2 (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_uploader_a78664945527466ec29068ff77a6f28f1}\index{Uploader@{Uploader}!Get\_a4@{Get\_a4}}
+\index{Get\_a4@{Get\_a4}!Uploader@{Uploader}}
+\doxysubsubsection{\texorpdfstring{Get\_a4()}{Get\_a4()}}
+{\footnotesize\ttfamily \label{class_uploader_a78664945527466ec29068ff77a6f28f1} 
+double Uploader\+::\+Get\+\_\+a4 (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_uploader_a78f19be485f5ad1afd47fa0fcfc966fb}\index{Uploader@{Uploader}!Get\_b2@{Get\_b2}}
+\index{Get\_b2@{Get\_b2}!Uploader@{Uploader}}
+\doxysubsubsection{\texorpdfstring{Get\_b2()}{Get\_b2()}}
+{\footnotesize\ttfamily \label{class_uploader_a78f19be485f5ad1afd47fa0fcfc966fb} 
+double Uploader\+::\+Get\+\_\+b2 (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_uploader_ae6f4b29e9156967a0434cf9c4e181ed7}\index{Uploader@{Uploader}!Get\_b4@{Get\_b4}}
+\index{Get\_b4@{Get\_b4}!Uploader@{Uploader}}
+\doxysubsubsection{\texorpdfstring{Get\_b4()}{Get\_b4()}}
+{\footnotesize\ttfamily \label{class_uploader_ae6f4b29e9156967a0434cf9c4e181ed7} 
+double Uploader\+::\+Get\+\_\+b4 (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_uploader_af8e61237701836aff5e33451658308ff}\index{Uploader@{Uploader}!Get\_Model\_Charge1D@{Get\_Model\_Charge1D}}
+\index{Get\_Model\_Charge1D@{Get\_Model\_Charge1D}!Uploader@{Uploader}}
+\doxysubsubsection{\texorpdfstring{Get\_Model\_Charge1D()}{Get\_Model\_Charge1D()}}
+{\footnotesize\ttfamily \label{class_uploader_af8e61237701836aff5e33451658308ff} 
+\mbox{\hyperlink{class_model___charge1_d}{Model\+\_\+\+Charge1D}} \texorpdfstring{$\ast$}{*} Uploader\+::\+Get\+\_\+\+Model\+\_\+\+Charge1D (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_uploader_a2e4c6ad7cf59d67398555c39e6514201}\index{Uploader@{Uploader}!Get\_Model\_Electronics@{Get\_Model\_Electronics}}
+\index{Get\_Model\_Electronics@{Get\_Model\_Electronics}!Uploader@{Uploader}}
+\doxysubsubsection{\texorpdfstring{Get\_Model\_Electronics()}{Get\_Model\_Electronics()}}
+{\footnotesize\ttfamily \label{class_uploader_a2e4c6ad7cf59d67398555c39e6514201} 
+\mbox{\hyperlink{class_model___electronics}{Model\+\_\+\+Electronics}} \texorpdfstring{$\ast$}{*} Uploader\+::\+Get\+\_\+\+Model\+\_\+\+Electronics (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_uploader_a2e678e9cec7f4537588f34fa4988320f}\index{Uploader@{Uploader}!Get\_Model\_ReadOutGeometry@{Get\_Model\_ReadOutGeometry}}
+\index{Get\_Model\_ReadOutGeometry@{Get\_Model\_ReadOutGeometry}!Uploader@{Uploader}}
+\doxysubsubsection{\texorpdfstring{Get\_Model\_ReadOutGeometry()}{Get\_Model\_ReadOutGeometry()}}
+{\footnotesize\ttfamily \label{class_uploader_a2e678e9cec7f4537588f34fa4988320f} 
+\mbox{\hyperlink{class_model___read_out_geometry}{Model\+\_\+\+Read\+Out\+Geometry}} \texorpdfstring{$\ast$}{*} Uploader\+::\+Get\+\_\+\+Model\+\_\+\+Read\+Out\+Geometry (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_uploader_a5c6f9c4ff8f2b1971b521715ede7c2dc}\index{Uploader@{Uploader}!Get\_NberOfEvent@{Get\_NberOfEvent}}
+\index{Get\_NberOfEvent@{Get\_NberOfEvent}!Uploader@{Uploader}}
+\doxysubsubsection{\texorpdfstring{Get\_NberOfEvent()}{Get\_NberOfEvent()}}
+{\footnotesize\ttfamily \label{class_uploader_a5c6f9c4ff8f2b1971b521715ede7c2dc} 
+int Uploader\+::\+Get\+\_\+\+Nber\+Of\+Event (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_uploader_a1fc205fe4f061b76d2d2360f56c066db}\index{Uploader@{Uploader}!Get\_Norm@{Get\_Norm}}
+\index{Get\_Norm@{Get\_Norm}!Uploader@{Uploader}}
+\doxysubsubsection{\texorpdfstring{Get\_Norm()}{Get\_Norm()}}
+{\footnotesize\ttfamily \label{class_uploader_a1fc205fe4f061b76d2d2360f56c066db} 
+double Uploader\+::\+Get\+\_\+\+Norm (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_uploader_accc0ea3ef10db78665279497d5949221}\index{Uploader@{Uploader}!Get\_PRF\_exist@{Get\_PRF\_exist}}
+\index{Get\_PRF\_exist@{Get\_PRF\_exist}!Uploader@{Uploader}}
+\doxysubsubsection{\texorpdfstring{Get\_PRF\_exist()}{Get\_PRF\_exist()}}
+{\footnotesize\ttfamily \label{class_uploader_accc0ea3ef10db78665279497d5949221} 
+int Uploader\+::\+Get\+\_\+\+PRF\+\_\+exist (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_uploader_a73ab9cbc5c0989126b561f7ac0262eae}\index{Uploader@{Uploader}!Get\_SampleFile@{Get\_SampleFile}}
+\index{Get\_SampleFile@{Get\_SampleFile}!Uploader@{Uploader}}
+\doxysubsubsection{\texorpdfstring{Get\_SampleFile()}{Get\_SampleFile()}}
+{\footnotesize\ttfamily \label{class_uploader_a73ab9cbc5c0989126b561f7ac0262eae} 
+std\+::string Uploader\+::\+Get\+\_\+\+Sample\+File (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_uploader_ad7a160cf4cff401f9d181f123a88425a}\index{Uploader@{Uploader}!GiveMe\_Event@{GiveMe\_Event}}
+\index{GiveMe\_Event@{GiveMe\_Event}!Uploader@{Uploader}}
+\doxysubsubsection{\texorpdfstring{GiveMe\_Event()}{GiveMe\_Event()}}
+{\footnotesize\ttfamily \label{class_uploader_ad7a160cf4cff401f9d181f123a88425a} 
+virtual \mbox{\hyperlink{class_event}{Event}} \texorpdfstring{$\ast$}{*} Uploader\+::\+Give\+Me\+\_\+\+Event (\begin{DoxyParamCaption}\item[{const int \&}]{i\+Event}{, }\item[{const int \&}]{Module\+Nber\+\_\+\+Input}{, }\item[{const int \&}]{Data\+\_\+to\+\_\+\+Use}{, }\item[{const int \&}]{Close\+WF}{ = {\ttfamily 1}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_uploader___e_r_a_m01_a9385a14ce4f86ead51615719a544c0ef}{Uploader\+\_\+\+ERAM01}}, \mbox{\hyperlink{class_uploader___mock_up___v1_a769ce1ec5de1ab5f6a8af592adae02d6}{Uploader\+\_\+\+Mock\+Up\+\_\+\+V1}}, \mbox{\hyperlink{class_uploader___mock_up___v2_a815ab97f71ad06bcc037e7791c57cbe8}{Uploader\+\_\+\+Mock\+Up\+\_\+\+V2}}, and \mbox{\hyperlink{class_uploader___prototype_acd93e58fddb4934e16b248fa2ac7ef67}{Uploader\+\_\+\+Prototype}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{class_uploader_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_uploader_af4bbae8d732180a259924eb109f344b4}\index{Uploader@{Uploader}!m\_a2@{m\_a2}}
+\index{m\_a2@{m\_a2}!Uploader@{Uploader}}
+\doxysubsubsection{\texorpdfstring{m\_a2}{m\_a2}}
+{\footnotesize\ttfamily \label{class_uploader_af4bbae8d732180a259924eb109f344b4} 
+double Uploader\+::m\+\_\+a2\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_uploader_a30ea891f2b51eab54057a02c2374ff5f}\index{Uploader@{Uploader}!m\_a4@{m\_a4}}
+\index{m\_a4@{m\_a4}!Uploader@{Uploader}}
+\doxysubsubsection{\texorpdfstring{m\_a4}{m\_a4}}
+{\footnotesize\ttfamily \label{class_uploader_a30ea891f2b51eab54057a02c2374ff5f} 
+double Uploader\+::m\+\_\+a4\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_uploader_adda774b596a2993dea548b5dcc7b506f}\index{Uploader@{Uploader}!m\_b2@{m\_b2}}
+\index{m\_b2@{m\_b2}!Uploader@{Uploader}}
+\doxysubsubsection{\texorpdfstring{m\_b2}{m\_b2}}
+{\footnotesize\ttfamily \label{class_uploader_adda774b596a2993dea548b5dcc7b506f} 
+double Uploader\+::m\+\_\+b2\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_uploader_a50d64b9b4bce3ffb63b6acabb5d325b2}\index{Uploader@{Uploader}!m\_b4@{m\_b4}}
+\index{m\_b4@{m\_b4}!Uploader@{Uploader}}
+\doxysubsubsection{\texorpdfstring{m\_b4}{m\_b4}}
+{\footnotesize\ttfamily \label{class_uploader_a50d64b9b4bce3ffb63b6acabb5d325b2} 
+double Uploader\+::m\+\_\+b4\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_uploader_a1ea45616465ddbd7d75c24a27b614c98}\index{Uploader@{Uploader}!m\_NberOfEvent@{m\_NberOfEvent}}
+\index{m\_NberOfEvent@{m\_NberOfEvent}!Uploader@{Uploader}}
+\doxysubsubsection{\texorpdfstring{m\_NberOfEvent}{m\_NberOfEvent}}
+{\footnotesize\ttfamily \label{class_uploader_a1ea45616465ddbd7d75c24a27b614c98} 
+int Uploader\+::m\+\_\+\+Nber\+Of\+Event\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_uploader_ae0d5121b1e34900a2e27162a4fc391b0}\index{Uploader@{Uploader}!m\_Norm@{m\_Norm}}
+\index{m\_Norm@{m\_Norm}!Uploader@{Uploader}}
+\doxysubsubsection{\texorpdfstring{m\_Norm}{m\_Norm}}
+{\footnotesize\ttfamily \label{class_uploader_ae0d5121b1e34900a2e27162a4fc391b0} 
+double Uploader\+::m\+\_\+\+Norm\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_uploader_acda645e8f299bc9b295850e7422918f3}\index{Uploader@{Uploader}!m\_PRF\_exist@{m\_PRF\_exist}}
+\index{m\_PRF\_exist@{m\_PRF\_exist}!Uploader@{Uploader}}
+\doxysubsubsection{\texorpdfstring{m\_PRF\_exist}{m\_PRF\_exist}}
+{\footnotesize\ttfamily \label{class_uploader_acda645e8f299bc9b295850e7422918f3} 
+short int Uploader\+::m\+\_\+\+PRF\+\_\+exist\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_uploader_a90d0d535f6a8355d136747ee47ab7e33}\index{Uploader@{Uploader}!m\_SampleFile@{m\_SampleFile}}
+\index{m\_SampleFile@{m\_SampleFile}!Uploader@{Uploader}}
+\doxysubsubsection{\texorpdfstring{m\_SampleFile}{m\_SampleFile}}
+{\footnotesize\ttfamily \label{class_uploader_a90d0d535f6a8355d136747ee47ab7e33} 
+std\+::string Uploader\+::m\+\_\+\+Sample\+File\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_uploader_a953676c56e8a9bcf0b693d8dde00196e}\index{Uploader@{Uploader}!p\_Model\_Charge1D@{p\_Model\_Charge1D}}
+\index{p\_Model\_Charge1D@{p\_Model\_Charge1D}!Uploader@{Uploader}}
+\doxysubsubsection{\texorpdfstring{p\_Model\_Charge1D}{p\_Model\_Charge1D}}
+{\footnotesize\ttfamily \label{class_uploader_a953676c56e8a9bcf0b693d8dde00196e} 
+\mbox{\hyperlink{class_model___charge1_d}{Model\+\_\+\+Charge1D}}\texorpdfstring{$\ast$}{*} Uploader\+::p\+\_\+\+Model\+\_\+\+Charge1D\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_uploader_adb387ba71ea4b7b297bf397fdf502152}\index{Uploader@{Uploader}!p\_Model\_Electronics@{p\_Model\_Electronics}}
+\index{p\_Model\_Electronics@{p\_Model\_Electronics}!Uploader@{Uploader}}
+\doxysubsubsection{\texorpdfstring{p\_Model\_Electronics}{p\_Model\_Electronics}}
+{\footnotesize\ttfamily \label{class_uploader_adb387ba71ea4b7b297bf397fdf502152} 
+\mbox{\hyperlink{class_model___electronics}{Model\+\_\+\+Electronics}}\texorpdfstring{$\ast$}{*} Uploader\+::p\+\_\+\+Model\+\_\+\+Electronics\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_uploader_af9e5742a66377f703ec13b3c070ed803}\index{Uploader@{Uploader}!p\_Model\_ReadOutGeometry@{p\_Model\_ReadOutGeometry}}
+\index{p\_Model\_ReadOutGeometry@{p\_Model\_ReadOutGeometry}!Uploader@{Uploader}}
+\doxysubsubsection{\texorpdfstring{p\_Model\_ReadOutGeometry}{p\_Model\_ReadOutGeometry}}
+{\footnotesize\ttfamily \label{class_uploader_af9e5742a66377f703ec13b3c070ed803} 
+\mbox{\hyperlink{class_model___read_out_geometry}{Model\+\_\+\+Read\+Out\+Geometry}}\texorpdfstring{$\ast$}{*} Uploader\+::p\+\_\+\+Model\+\_\+\+Read\+Out\+Geometry\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_uploader_a4eeb64031a9d9be88474603eb6badf25}\index{Uploader@{Uploader}!p\_TFile@{p\_TFile}}
+\index{p\_TFile@{p\_TFile}!Uploader@{Uploader}}
+\doxysubsubsection{\texorpdfstring{p\_TFile}{p\_TFile}}
+{\footnotesize\ttfamily \label{class_uploader_a4eeb64031a9d9be88474603eb6badf25} 
+TFile\texorpdfstring{$\ast$}{*} Uploader\+::p\+\_\+\+TFile\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_uploader_a2e336134811e1b5953d0a61a17767341}\index{Uploader@{Uploader}!p\_TTree@{p\_TTree}}
+\index{p\_TTree@{p\_TTree}!Uploader@{Uploader}}
+\doxysubsubsection{\texorpdfstring{p\_TTree}{p\_TTree}}
+{\footnotesize\ttfamily \label{class_uploader_a2e336134811e1b5953d0a61a17767341} 
+TTree\texorpdfstring{$\ast$}{*} Uploader\+::p\+\_\+\+TTree\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Uploader/inc/\mbox{\hyperlink{_uploader_8h}{Uploader.\+h}}\item 
+Uploader/src/\mbox{\hyperlink{_uploader_8cxx}{Uploader.\+cxx}}\end{DoxyCompactItemize}

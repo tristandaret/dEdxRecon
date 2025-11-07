@@ -1,17 +1,3 @@
-#/***************************************************************************
- * File: TrackRecon.cxx
- * Project: dEdxRecon
- *
- * Brief: Implementation for the top-level track reconstruction routines.
- *        Implements TrackRecon and TrackRecon_Event which orchestrate
- *        fitting over Samples and Events using the TrackFitter API.
- *
- * Contents: TrackRecon(Sample&, ...), TrackRecon_Event(...)
- *
- * Notes: Keep high-level control flow here; heavy numerical code is in
- *        the fitter classes.
- ***************************************************************************/
-
 #include "TrackRecon.h"
 
 #include "Cluster.h"

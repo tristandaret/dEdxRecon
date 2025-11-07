@@ -4,6 +4,11 @@
  *
  * Small helpers and adapters used across reconstruction, plotting and fitting
  * code (linspace equivalents, I/O helpers, Bethe-Bloch wrappers, etc.).
+ *
+ * @details
+ * The implementation file `ReconTools.cxx` contains a collection of
+ * lightweight utilities relied upon by higher-level modules (correction
+ * functions, selection initialization, CSV helpers and physics wrappers).
  */
 #ifndef Reconstruction_TOOLS_H
 #define Reconstruction_TOOLS_H

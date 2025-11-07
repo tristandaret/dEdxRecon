@@ -5,6 +5,12 @@
  * This header exposes the TrackRecon top-level functions that run
  * reconstruction over a Sample or an Event using a TrackFitter. Implementation
  * is in TrackRecon.cxx.
+ *
+ * @details
+ * The implementation orchestrates fitting over Samples and Events and uses
+ * the TrackFitter API to run per-track minimisations. It contains the
+ * top-level control loops that increment fit/failure counters and report
+ * simple summaries after processing.
  */
 #include "Misc.h"
 

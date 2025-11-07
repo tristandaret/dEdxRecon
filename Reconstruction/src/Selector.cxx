@@ -1,17 +1,3 @@
-#/***************************************************************************
- * File: Selector.cxx
- * Project: dEdxRecon
- *
- * Brief: Implementation of selection logic used to filter events/modules/
- *        clusters according to configurable criteria. Encodes selection
- *        stages referenced across the reconstruction pipeline.
- *
- * Contents: Selector class method implementations.
- *
- * Notes: Modifying selection logic affects downstream analyses; keep tests
- *        updated when changing criteria.
- ***************************************************************************/
-
 #include "Selector.h"
 
 #include "Event.h"

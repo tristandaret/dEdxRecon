@@ -1,0 +1,3294 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.10.24)  5 NOV 2025 16:56
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**refman
+(./refman.tex
+LaTeX2e <2024-11-01> patch level 2
+L3 programming layer <2025-01-18>
+(/usr/local/texlive/2025/texmf-dist/tex/generic/iftex/iftex.sty
+Package: iftex 2024/12/12 v1.0g TeX engine tests
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/base/book.cls
+Document Class: book 2024/06/29 v1.4n Standard LaTeX document class
+(/usr/local/texlive/2025/texmf-dist/tex/latex/base/bk10.clo
+File: bk10.clo 2024/06/29 v1.4n Standard LaTeX file (size option)
+)
+\c@part=\count196
+\c@chapter=\count197
+\c@section=\count198
+\c@subsection=\count199
+\c@subsubsection=\count266
+\c@paragraph=\count267
+\c@subparagraph=\count268
+\c@figure=\count269
+\c@table=\count270
+\abovecaptionskip=\skip49
+\belowcaptionskip=\skip50
+\bibindent=\dimen141
+)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/infwarerr/infwarerr.sty
+package info suppressed
+)
+(./doxygen.sty
+Package: doxygen 
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/base/alltt.sty
+Package: alltt 2024/07/07 v2.0g defines alltt environment
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/tools/array.sty
+Package: array 2024/10/17 v2.6g Tabular extension package (FMi)
+\col@sep=\dimen142
+\ar@mcellbox=\box52
+\extrarowheight=\dimen143
+\NC@list=\toks17
+\extratabsurround=\skip51
+\backup@length=\skip52
+\ar@cellbox=\box53
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2023/07/08 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count271
+\calc@Bcount=\count272
+\calc@Adimen=\dimen144
+\calc@Bdimen=\dimen145
+\calc@Askip=\skip53
+\calc@Bskip=\skip54
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count273
+\calc@Cskip=\skip55
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count274
+\float@exts=\toks18
+\float@box=\box54
+\@float@everytoks=\toks19
+\@floatcapt=\box55
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2024/03/16 v1.1e Standard LaTeX ifthen package (DPC)
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/tools/verbatim.sty
+Package: verbatim 2024-01-22 v1.5x LaTeX2e package for verbatim enhancements
+\every@verbatim=\toks20
+\verbatim@line=\toks21
+\verbatim@in@stream=\read2
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/varwidth/varwidth.sty
+Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
+\@vwid@box=\box56
+\sift@deathcycles=\count275
+\@vwid@loff=\dimen146
+\@vwid@roff=\dimen147
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2024/09/29 v3.02 LaTeX color extensions (UK)
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 274.
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2024/04/13 v1.2c Graphics/color driver for pdftex
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/mathcolor.ltx)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1349.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1353.
+Package xcolor Info: Model `RGB' extended on input line 1365.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1367.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1370.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1371.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1372.
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/colortbl/colortbl.sty
+Package: colortbl 2024/07/06 v1.0i Color table columns (DPC)
+\everycr=\toks22
+\minrowclearance=\skip56
+\rownum=\count276
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/tools/longtable.sty
+Package: longtable 2024-10-27 v4.22 Multi-page Table package (DPC)
+\LTleft=\skip57
+\LTright=\skip58
+\LTpre=\skip59
+\LTpost=\skip60
+\LTchunksize=\count277
+\LTcapwidth=\dimen148
+\LT@head=\box57
+\LT@firsthead=\box58
+\LT@foot=\box59
+\LT@lastfoot=\box60
+\LT@gbox=\box61
+\LT@cols=\count278
+\LT@rows=\count279
+\c@LT@tables=\count280
+\c@LT@chunks=\count281
+\LT@p@ftn=\toks23
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/xltabular/xltabular.sty
+Package: xltabular 2025/02/28 v0.2i `xltabular' package (hv,RN)
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/tools/tabularx.sty
+Package: tabularx 2023/12/11 v2.12a `tabularx' package (DPC)
+\TX@col@width=\dimen149
+\TX@old@table=\dimen150
+\TX@old@col=\dimen151
+\TX@target=\dimen152
+\TX@delta=\dimen153
+\TX@cols=\count282
+\TX@ftn=\toks24
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2025/02/11 v2.5l e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count283
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/ltablex/ltablex.sty
+Package: ltablex 2014/08/13 v1.1 Modified tabularx
+))
+(/usr/local/texlive/2025/texmf-dist/tex/latex/tabularray/tabularray.sty
+(/usr/local/texlive/2025/texmf-dist/tex/latex/l3kernel/expl3.sty
+Package: expl3 2025-01-18 L3 programming layer (loader) 
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count284
+\l__pdf_internal_box=\box62
+))
+Package: tabularray 2024-02-16 v2024A Typeset tabulars and arrays with LaTeX3
+\l__tblr_a_int=\count285
+\l__tblr_c_int=\count286
+\l__tblr_r_int=\count287
+\l__tblr_d_dim=\dimen154
+\l__tblr_h_dim=\dimen155
+\l__tblr_o_dim=\dimen156
+\l__tblr_p_dim=\dimen157
+\l__tblr_q_dim=\dimen158
+\l__tblr_r_dim=\dimen159
+\l__tblr_s_dim=\dimen160
+\l__tblr_t_dim=\dimen161
+\l__tblr_v_dim=\dimen162
+\l__tblr_w_dim=\dimen163
+\l__tblr_a_box=\box63
+\l__tblr_b_box=\box64
+\l__tblr_c_box=\box65
+\l__tblr_d_box=\box66
+\g__tblr_table_count_int=\count288
+\c@colnum=\count289
+\c@rowcount=\count290
+\c@colcount=\count291
+\abovesep=\dimen164
+\belowsep=\dimen165
+\leftsep=\dimen166
+\rightsep=\dimen167
+\g_tblr_level_int=\count292
+\g__tblr_data_row_key_count_int=\count293
+\g__tblr_data_column_key_count_int=\count294
+\g__tblr_data_cell_key_count_int=\count295
+\g__tblr_array_int=\count296
+\l__tblr_key_count_int=\count297
+\l__tblr_key_quotient_int=\count298
+\l__tblr_key_quotient_two_int=\count299
+\l__tblr_key_remainder_int=\count300
+\g__tblr_data_str_value_count_int=\count301
+\rulewidth=\dimen168
+\l__tblr_strut_dp_dim=\dimen169
+\l__tblr_strut_ht_dim=\dimen170
+\g__tblr_cell_wd_dim=\dimen171
+\g__tblr_cell_ht_dim=\dimen172
+\g__tblr_cell_head_dim=\dimen173
+\g__tblr_cell_foot_dim=\dimen174
+\l__column_target_dim=\dimen175
+\l__tblr_caption_box=\box67
+\l__tblr_caption_left_box=\box68
+\l__tblr_row_head_box=\box69
+\l__tblr_row_foot_box=\box70
+\l__tblr_row_head_foot_dim=\dimen176
+\tablewidth=\dimen177
+\l__tblr_table_firsthead_box=\box71
+\l__tblr_table_middlehead_box=\box72
+\l__tblr_table_lasthead_box=\box73
+\l__tblr_table_firstfoot_box=\box74
+\l__tblr_table_middlefoot_box=\box75
+\l__tblr_table_lastfoot_box=\box76
+\l__tblr_remain_height_dim=\dimen178
+\l__tblr_long_from_int=\count302
+\l__tblr_long_to_int=\count303
+\l__tblr_curr_i_int=\count304
+\l__tblr_prev_i_int=\count305
+\l__tblr_table_page_int=\count306
+\l__tblr_table_head_box=\box77
+\l__tblr_table_foot_box=\box78
+\l__tblr_table_head_foot_dim=\dimen179
+\l__tblr_table_head_body_foot_dim=\dimen180
+\l__tblr_table_box=\box79
+\l__tblr_table_hlines_box=\box80
+\l__tblr_hline_box=\box81
+\l__tblr_row_box=\box82
+\l__tblr_col_o_wd_dim=\dimen181
+\l__tblr_col_b_wd_dim=\dimen182
+\l__tblr_hline_leftskip_dim=\dimen183
+\l__tblr_hline_rightskip_dim=\dimen184
+\l__tblr_row_ht_dim=\dimen185
+\l__tblr_row_dp_dim=\dimen186
+\l__tblr_row_abovesep_dim=\dimen187
+\l__tblr_row_belowsep_dim=\dimen188
+\l__tblr_row_vlines_box=\box83
+\l__tblr_vline_box=\box84
+\l__tblr_cell_box=\box85
+\l__row_upper_dim=\dimen189
+\l__row_lower_dim=\dimen190
+\l__row_vpace_dim=\dimen191
+\l__tblr_vline_aboveskip_dim=\dimen192
+\l__tblr_vline_belowskip_dim=\dimen193
+\l__tblr_cell_wd_dim=\dimen194
+\l__tblr_cell_ht_dim=\dimen195
+\l__tblr_diag_box=\box86
+)
+\g__doxy_nohyper_int=\count307
+(/usr/local/texlive/2025/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
+Package: fancyvrb 2024/01/20 4.5c verbatim text (tvz,hv)
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+\KV@toks@=\toks25
+)
+\FV@CodeLineNo=\count308
+\FV@InFile=\read3
+\FV@TabBox=\box87
+\c@FancyVerbLine=\count309
+\FV@StepNumber=\count310
+\FV@OutFile=\write3
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/tools/multicol.sty
+Package: multicol 2024/09/14 v1.9i multicolumn formatting (FMi)
+\c@tracingmulticols=\count311
+\mult@box=\box88
+\multicol@leftmargin=\dimen196
+\c@unbalance=\count312
+\c@collectmore=\count313
+\doublecol@number=\count314
+\multicoltolerance=\count315
+\multicolpretolerance=\count316
+\full@width=\dimen197
+\page@free=\dimen198
+\premulticols=\dimen199
+\postmulticols=\dimen256
+\multicolsep=\skip61
+\multicolbaselineskip=\skip62
+\partial@page=\box89
+\last@line=\box90
+\mc@boxedresult=\box91
+\maxbalancingoverflow=\dimen257
+\mult@rightbox=\box92
+\mult@grightbox=\box93
+\mult@firstbox=\box94
+\mult@gfirstbox=\box95
+\@tempa=\box96
+\@tempa=\box97
+\@tempa=\box98
+\@tempa=\box99
+\@tempa=\box100
+\@tempa=\box101
+\@tempa=\box102
+\@tempa=\box103
+\@tempa=\box104
+\@tempa=\box105
+\@tempa=\box106
+\@tempa=\box107
+\@tempa=\box108
+\@tempa=\box109
+\@tempa=\box110
+\@tempa=\box111
+\@tempa=\box112
+\@tempa=\box113
+\@tempa=\box114
+\@tempa=\box115
+\@tempa=\box116
+\@tempa=\box117
+\@tempa=\box118
+\@tempa=\box119
+\@tempa=\box120
+\@tempa=\box121
+\@tempa=\box122
+\@tempa=\box123
+\@tempa=\box124
+\@tempa=\box125
+\@tempa=\box126
+\@tempa=\box127
+\@tempa=\box128
+\@tempa=\box129
+\@tempa=\box130
+\@tempa=\box131
+\c@minrows=\count317
+\c@columnbadness=\count318
+\c@finalcolumnbadness=\count319
+\last@try=\dimen258
+\multicolovershoot=\dimen259
+\multicolundershoot=\dimen260
+\mult@nat@firstbox=\box132
+\colbreak@box=\box133
+\mc@col@check@num=\count320
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/multirow/multirow.sty
+Package: multirow 2024/11/12 v2.9 Span multiple rows of a table
+\multirow@colwidth=\skip63
+\multirow@cntb=\count321
+\multirow@dima=\skip64
+\bigstrutjot=\dimen261
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/hanging/hanging.sty
+Package: hanging 2009/09/02 v1.2b hanging paragraphs and punctuation
+\h@ngcommawd=\skip65
+\h@ngfstopwd=\skip66
+\h@ngquotewd=\skip67
+\h@ngdquotewd=\skip68
+\h@ngquerywd=\skip69
+\h@ngexclwd=\skip70
+\h@ngcolonwd=\skip71
+\h@ngscolonwd=\skip72
+)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/iftex/ifpdf.sty
+Package: ifpdf 2019/10/25 v3.4 ifpdf legacy package. Use iftex instead.
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/adjustbox/adjustbox.sty
+Package: adjustbox 2025/02/26 v1.3c Adjusting TeX boxes (trim, clip, ...)
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+Package: xkeyval 2022/06/16 v2.9 package option processing (HA)
+
+(/usr/local/texlive/2025/texmf-dist/tex/generic/xkeyval/xkeyval.tex
+(/usr/local/texlive/2025/texmf-dist/tex/generic/xkeyval/xkvutils.tex
+\XKV@toks=\toks26
+\XKV@tempa@toks=\toks27
+)
+\XKV@depth=\count322
+File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
+))
+(/usr/local/texlive/2025/texmf-dist/tex/latex/adjustbox/adjcalc.sty
+Package: adjcalc 2012/05/16 v1.1 Provides advanced setlength with multiple back
+-ends (calc, etex, pgfmath)
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/adjustbox/trimclip.sty
+Package: trimclip 2025/02/21 v1.2a Trim and clip general TeX material
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2024/08/06 v1.4g Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2023/12/02 v1.11 sin cos tan (DPC)
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 106.
+)
+\Gin@req@height=\dimen262
+\Gin@req@width=\dimen263
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/collectbox/collectbox.sty
+Package: collectbox 2022/10/17 v0.4c Collect macro arguments as boxes
+\collectedbox=\box134
+)
+\tc@llx=\dimen264
+\tc@lly=\dimen265
+\tc@urx=\dimen266
+\tc@ury=\dimen267
+Package trimclip Info: Using driver 'tc-pdftex.def'.
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/adjustbox/tc-pdftex.def
+File: tc-pdftex.def 2025/02/26 v2.3 Clipping driver for pdftex
+))
+\adjbox@Width=\dimen268
+\adjbox@Height=\dimen269
+\adjbox@Depth=\dimen270
+\adjbox@Totalheight=\dimen271
+\adjbox@pwidth=\dimen272
+\adjbox@pheight=\dimen273
+\adjbox@pdepth=\dimen274
+\adjbox@ptotalheight=\dimen275
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty
+Package: ifoddpage 2022/10/18 v1.2 Conditionals for odd/even page detection
+\c@checkoddpage=\count323
+))
+(/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\@emptytoks=\toks28
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+))
+(/usr/local/texlive/2025/texmf-dist/tex/latex/stackengine/stackengine.sty
+Package: stackengine 2021/07/22 v4.11\ Stacking text and objects in convenient 
+ways
+
+(/usr/local/texlive/2025/texmf-dist/tex/generic/listofitems/listofitems.sty
+(/usr/local/texlive/2025/texmf-dist/tex/generic/listofitems/listofitems.tex
+\loi_cnt_foreach_nest=\count324
+\loi_nestcnt=\count325
+)
+Package: listofitems 2024/03/09 v1.65 Grab items in lists using user-specified 
+sep char (CT)
+)
+\c@@stackindex=\count326
+\@boxshift=\skip73
+\stack@tmplength=\skip74
+\temp@stkl=\skip75
+\@stackedboxwidth=\skip76
+\@addedbox=\box135
+\@anchorbox=\box136
+\@insetbox=\box137
+\se@backgroundbox=\box138
+\stackedbox=\box139
+\@centerbox=\box140
+\c@ROWcellindex@=\count327
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/enumitem/enumitem.sty
+Package: enumitem 2025/02/06 v3.11 Customized lists
+\labelindent=\skip77
+\enit@outerparindent=\dimen276
+\enit@toks=\toks29
+\enit@inbox=\box141
+\enit@count@id=\count328
+\enitdp@description=\count329
+)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/alphalph/alphalph.sty
+Package: alphalph 2019/12/09 v2.6 Convert numbers to letters (HO)
+
+(/usr/local/texlive/2025/texmf-dist/tex/generic/intcalc/intcalc.sty
+Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
+))
+(/usr/local/texlive/2025/texmf-dist/tex/generic/ulem/ulem.sty
+\UL@box=\box142
+\UL@hyphenbox=\box143
+\UL@skip=\skip78
+\UL@hook=\toks30
+\UL@height=\dimen277
+\UL@pe=\count330
+\UL@pixel=\dimen278
+\ULC@box=\box144
+Package: ulem 2019/11/18
+\ULdepth=\dimen279
+)
+\xrefbox=\box145
+\xreflength=\skip79
+\CodeWidthChar=\skip80
+\CodeHeightChar=\skip81
+\DoxyCodeWidth=\skip82
+\c@DoxyEnumeratei=\count331
+\c@DoxyEnumerateii=\count332
+\c@DoxyEnumerateiii=\count333
+\c@DoxyEnumerateiv=\count334
+\c@DoxyEnumeratev=\count335
+\c@DoxyEnumeratevi=\count336
+\c@DoxyEnumeratevii=\count337
+\c@DoxyEnumerateviii=\count338
+\c@DoxyEnumerateix=\count339
+\c@DoxyEnumeratex=\count340
+\c@DoxyEnumeratexi=\count341
+\c@DoxyEnumeratexii=\count342
+\enitdp@DoxyEnumerate=\count343
+\enitdp@DoxyItemize=\count344
+\c@subsubsubsection=\count345
+\c@subsubsubsubsection=\count346
+\c@subsubsubsubsubsection=\count347
+\c@subsubsubsubsubsubsection=\count348
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/base/inputenc.sty
+Package: inputenc 2024/02/08 v1.3d Input encoding file
+\inpenc@prehook=\toks31
+\inpenc@posthook=\toks32
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/base/makeidx.sty
+Package: makeidx 2021/10/04 v1.0m Standard LaTeX package
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/base/textcomp.sty
+Package: textcomp 2024/04/24 v2.1b Standard LaTeX package
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/wasysym/wasysym.sty
+Package: wasysym 2020/01/19 v2.4 Wasy-2 symbol support package
+\symwasy=\mathgroup6
+LaTeX Font Info:    Overwriting symbol font `wasy' in version `bold'
+(Font)                  U/wasy/m/n --> U/wasy/b/n on input line 93.
+)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/iftex/ifxetex.sty
+Package: ifxetex 2019/10/25 v0.7 ifxetex legacy package. Use iftex instead.
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/base/fontenc.sty
+Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/helvet.sty
+Package: helvet 2020/03/25 PSNFSS-v9.3 (WaS) 
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/courier.sty
+Package: courier 2020/03/25 PSNFSS-v9.3 (WaS) 
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/geometry/geometry.sty
+Package: geometry 2020/01/02 v5.9 Page Geometry
+
+(/usr/local/texlive/2025/texmf-dist/tex/generic/iftex/ifvtex.sty
+Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
+)
+\Gm@cnth=\count349
+\Gm@cntv=\count350
+\c@Gm@tempcnt=\count351
+\Gm@bindingoffset=\dimen280
+\Gm@wd@mp=\dimen281
+\Gm@odd@mp=\dimen282
+\Gm@even@mp=\dimen283
+\Gm@layoutwidth=\dimen284
+\Gm@layoutheight=\dimen285
+\Gm@layouthoffset=\dimen286
+\Gm@layoutvoffset=\dimen287
+\Gm@dimlist=\toks33
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/changepage/changepage.sty
+Package: changepage 2009/10/20 v1.0c check page and change page layout
+\c@cp@cntr=\count352
+\cp@tempcnt=\count353
+LaTeX Info: Redefining \checkoddpage on input line 59.
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
+Package: fancyhdr 2025/02/07 v5.2 Extensive control of page headers and footers
+
+\f@nch@headwidth=\skip83
+\f@nch@offset@elh=\skip84
+\f@nch@offset@erh=\skip85
+\f@nch@offset@olh=\skip86
+\f@nch@offset@orh=\skip87
+\f@nch@offset@elf=\skip88
+\f@nch@offset@erf=\skip89
+\f@nch@offset@olf=\skip90
+\f@nch@offset@orf=\skip91
+\f@nch@height=\skip92
+\f@nch@footalignment=\skip93
+\f@nch@widthL=\skip94
+\f@nch@widthC=\skip95
+\f@nch@widthR=\skip96
+\@temptokenb=\toks34
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/natbib/natbib.sty
+Package: natbib 2010/09/13 8.31b (PWD, AO)
+\bibhang=\skip97
+\bibsep=\skip98
+LaTeX Info: Redefining \cite on input line 694.
+\c@NAT@ctr=\count354
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/tocloft/tocloft.sty
+Package: tocloft 2017/08/31 v2.3i parameterised ToC, etc., typesetting
+Package tocloft Info: The document has chapter divisions on input line 51.
+\cftparskip=\skip99
+\cftbeforetoctitleskip=\skip100
+\cftaftertoctitleskip=\skip101
+\cftbeforepartskip=\skip102
+\cftpartnumwidth=\skip103
+\cftpartindent=\skip104
+\cftbeforechapskip=\skip105
+\cftchapindent=\skip106
+\cftchapnumwidth=\skip107
+\cftbeforesecskip=\skip108
+\cftsecindent=\skip109
+\cftsecnumwidth=\skip110
+\cftbeforesubsecskip=\skip111
+\cftsubsecindent=\skip112
+\cftsubsecnumwidth=\skip113
+\cftbeforesubsubsecskip=\skip114
+\cftsubsubsecindent=\skip115
+\cftsubsubsecnumwidth=\skip116
+\cftbeforeparaskip=\skip117
+\cftparaindent=\skip118
+\cftparanumwidth=\skip119
+\cftbeforesubparaskip=\skip120
+\cftsubparaindent=\skip121
+\cftsubparanumwidth=\skip122
+\cftbeforeloftitleskip=\skip123
+\cftafterloftitleskip=\skip124
+\cftbeforefigskip=\skip125
+\cftfigindent=\skip126
+\cftfignumwidth=\skip127
+\c@lofdepth=\count355
+\c@lotdepth=\count356
+\cftbeforelottitleskip=\skip128
+\cftafterlottitleskip=\skip129
+\cftbeforetabskip=\skip130
+\cfttabindent=\skip131
+\cfttabnumwidth=\skip132
+)
+\@indexfile=\write4
+\openout4 = `refman.idx'.
+
+
+Writing index file refman.idx
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/newunicodechar/newunicodechar.sty
+Package: newunicodechar 2018/04/08 v1.2 Defining Unicode characters
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2024-11-05 v7.01l Hypertext links for LaTeX
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty
+Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
+)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty
+Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
+)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pdfescape/pdfescape.sty
+Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
+
+(/usr/local/texlive/2025/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
+Package: ltxcmds 2023-12-04 v1.26 LaTeX kernel commands for general use (HO)
+)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
+)
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+))
+(/usr/local/texlive/2025/texmf-dist/tex/latex/hycolor/hycolor.sty
+Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/hyperref/nameref.sty
+Package: nameref 2023-11-26 v2.56 Cross-referencing by name of section
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/refcount/refcount.sty
+Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
+)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/gettitlestring/gettitlestring.s
+ty
+Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/kvoptions/kvoptions.sty
+Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
+))
+\c@section@level=\count357
+)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/stringenc/stringenc.sty
+Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO
+)
+)
+\@linkdim=\dimen288
+\Hy@linkcounter=\count358
+\Hy@pagecounter=\count359
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2024-11-05 v7.01l Hyperref: PDFDocEncoding definition (HO)
+Now handling font encoding PD1 ...
+... no UTF-8 mapping file for font encoding PD1
+)
+\Hy@SavedSpaceFactor=\count360
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/hyperref/puenc.def
+File: puenc.def 2024-11-05 v7.01l Hyperref: PDF Unicode definition (HO)
+Now handling font encoding PU ...
+... no UTF-8 mapping file for font encoding PU
+)
+Package hyperref Info: Hyper figures OFF on input line 4157.
+Package hyperref Info: Link nesting OFF on input line 4162.
+Package hyperref Info: Hyper index ON on input line 4165.
+Package hyperref Info: Plain pages OFF on input line 4172.
+Package hyperref Info: Backreferencing ON on input line 4175.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4424.
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/hyperref/backref.sty
+Package: backref 2023-11-26 v1.44 Bibliographical back referencing
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+Package: rerunfilecheck 2022-07-10 v1.10 Rerun checks for auxiliary files (HO)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/base/atveryend-ltx.sty
+Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend pac
+kage
+with kernel methods
+)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
+Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
+Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
+)
+))
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
+85.
+))
+\c@Hy@tempcnt=\count361
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip17
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 4763.
+\XeTeXLinkMargin=\dimen289
+
+(/usr/local/texlive/2025/texmf-dist/tex/generic/bitset/bitset.sty
+Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
+)
+\Fld@menulength=\count362
+\Field@Width=\dimen290
+\Fld@charsize=\dimen291
+Package hyperref Info: Hyper figures OFF on input line 6042.
+Package hyperref Info: Link nesting OFF on input line 6047.
+Package hyperref Info: Hyper index ON on input line 6050.
+Package hyperref Info: backreferencing ON on input line 6055.
+Package hyperref Info: Link coloring OFF on input line 6062.
+Package hyperref Info: Link coloring with OCG OFF on input line 6067.
+Package hyperref Info: PDF/A mode OFF on input line 6072.
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/base/atbegshi-ltx.sty
+Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
+package with kernel methods
+)
+\Hy@abspage=\count363
+\c@Item=\count364
+\c@Hfootnote=\count365
+)
+Package hyperref Info: Driver: hpdftex.
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/hyperref/hpdftex.def
+File: hpdftex.def 2024-11-05 v7.01l Hyperref driver for pdfTeX
+\Fld@listcount=\count366
+\c@bookmark@seq@number=\count367
+\Hy@SectionHShift=\skip133
+)
+Package hyperref Info: Option `colorlinks' set `true' on input line 179.
+Package hyperref Info: Option `unicode' set `true' on input line 179.
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2023/08/05 v3.6o Customizing captions (AR)
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
+\caption@tempdima=\dimen292
+\captionmargin=\dimen293
+\caption@leftmargin=\dimen294
+\caption@rightmargin=\dimen295
+\caption@width=\dimen296
+\caption@indent=\dimen297
+\caption@parindent=\dimen298
+\caption@hangindent=\dimen299
+Package caption Info: Standard document class detected.
+)
+\c@caption@flags=\count368
+\c@continuedfloat=\count369
+Package caption Info: changepage package is loaded.
+\caption@adjustwidth@hsize=\dimen300
+\caption@adjustwidth@linewidth=\dimen301
+Package caption Info: float package is loaded.
+Package caption Info: hyperref package is loaded.
+Package caption Info: longtable package is loaded.
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/caption/ltcaption.sty
+Package: ltcaption 2021/01/08 v1.4c longtable captions (AR)
+))
+(/usr/local/texlive/2025/texmf-dist/tex/latex/etoc/etoc.sty
+Package: etoc 2023/10/29 v1.2d Completely customisable TOCs (JFB)
+\Etoc@toctoks=\toks35
+\c@etoc@tocid=\count370
+\etoc@framed@titlebox=\box146
+\etoc@framed@contentsbox=\box147
+)
+LaTeX Font Info:    Trying to load font information for T1+phv on input line 20
+1.
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/t1phv.fd
+File: t1phv.fd 2020/03/25 scalable font definitions for T1/phv.
+)
+LaTeX Font Info:    Font shape `T1/phv/m/n' will be
+(Font)              scaled to size 8.99994pt on input line 201.
+ (./refman.aux
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-constructors' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-variable-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-constructors' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-variable-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-constructors' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-constructors' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-constructors' multiply defined.
+
+
+LaTeX Warning: Label `doc-variable-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-constructors' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-constructors' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-constructors' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-variable-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-constructors' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-constructors' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-variable-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-constructors' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-constructors' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-variable-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-constructors' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-variable-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-constructors' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-variable-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-constructors' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-constructors' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-constructors' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-constructors' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-constructors' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-constructors' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-constructors' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-constructors' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-variable-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-constructors' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-variable-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-constructors' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-variable-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-constructors' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-variable-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-constructors' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-variable-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-constructors' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-constructors' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-constructors' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-constructors' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-variable-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-constructors' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-variable-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-constructors' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-variable-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-constructors' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-variable-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-constructors' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-variable-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-constructors' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-variable-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-constructors' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-constructors' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-constructors' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-variable-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-constructors' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-define-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-define-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-var-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+
+LaTeX Warning: Label `doc-func-members' multiply defined.
+
+)
+\openout1 = `refman.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 201.
+LaTeX Font Info:    ... okay on input line 201.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 201.
+LaTeX Font Info:    ... okay on input line 201.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 201.
+LaTeX Font Info:    ... okay on input line 201.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 201.
+LaTeX Font Info:    ... okay on input line 201.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 201.
+LaTeX Font Info:    ... okay on input line 201.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 201.
+LaTeX Font Info:    ... okay on input line 201.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 201.
+LaTeX Font Info:    ... okay on input line 201.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 201.
+LaTeX Font Info:    ... okay on input line 201.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 201.
+LaTeX Font Info:    ... okay on input line 201.
+ (/usr/local/texlive/2025/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count371
+\scratchdimen=\dimen302
+\scratchbox=\box148
+\nofMPsegments=\count372
+\nofMParguments=\count373
+\everyMPshowfont=\toks36
+\MPscratchCnt=\count374
+\MPscratchDim=\dimen303
+\MPnumerator=\count375
+\makeMPintoPDFobject=\count376
+\everyMPtoPDFconversion=\toks37
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+(/usr/local/texlive/2025/texmf-dist/tex/latex/ninecolors/ninecolors.sty
+Package: ninecolors 2022-02-13 v2022D Select colors with proper color contrast
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
+Package: xparse 2024-08-16 L3 Experimental document command parser
+))
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: a4paper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: twoside 
+* h-part:(L,W,R)=(71.13188pt, 455.24411pt, 71.13188pt)
+* v-part:(T,H,B)=(71.13188pt, 702.78308pt, 71.13188pt)
+* \paperwidth=597.50787pt
+* \paperheight=845.04684pt
+* \textwidth=455.24411pt
+* \textheight=702.78308pt
+* \oddsidemargin=-1.1381pt
+* \evensidemargin=-1.1381pt
+* \topmargin=-31.2056pt
+* \headheight=12.0pt
+* \headsep=18.06749pt
+* \topskip=10.0pt
+* \footskip=25.29494pt
+* \marginparwidth=125.0pt
+* \marginparsep=7.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidetrue
+* \@mparswitchtrue
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+Package backref Info: ** backref set up for natbib ** on input line 201.
+Package hyperref Info: Link coloring ON on input line 201.
+(./refman.out) (./refman.out)
+\@outlinefile=\write5
+\openout5 = `refman.out'.
+
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
+\Etoc@tf=\read4
+Package hyperref Info: Option `pageanchor' set `false' on input line 209.
+Package hyperref Info: Option `bookmarksnumbered' set `true' on input line 209.
+
+Package hyperref Info: Option `unicode' set `true' on input line 209.
+LaTeX Font Info:    Font shape `T1/phv/m/n' will be
+(Font)              scaled to size 12.9599pt on input line 214.
+LaTeX Font Info:    Font shape `T1/phv/m/n' will be
+(Font)              scaled to size 6.29996pt on input line 214.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 214
+.
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 214
+.
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+LaTeX Font Info:    Trying to load font information for U+wasy on input line 21
+4.
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/wasysym/uwasy.fd
+File: uwasy.fd 2020/01/19 v2.4 Wasy-2 symbol font definitions
+)
+LaTeX Font Info:    Font shape `T1/phv/m/n' will be
+(Font)              scaled to size 10.79993pt on input line 216.
+
+
+[1
+
+
+{/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/loc
+al/texlive/2025/texmf-dist/fonts/enc/dvips/base/8r.enc}]
+
+[2
+
+]
+\tf@toc=\write6
+\openout6 = `refman.toc'.
+
+LaTeX Font Info:    Font shape `T1/phv/b/n' will be
+(Font)              scaled to size 8.99994pt on input line 222.
+
+
+LaTeX Font Info:    Font shape `T1/phv/b/n' will be
+(Font)              scaled to size 6.29996pt on input line 222.
+[1]
+
+[2]
+
+[3]
+
+[4]
+
+[5]
+LaTeX Font Info:    Font shape `T1/phv/m/n' will be
+(Font)              scaled to size 7.19995pt on input line 222.
+LaTeX Font Info:    Trying to load font information for T1+pcr on input line 22
+2.
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/t1pcr.fd
+File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
+)
+
+[6]
+
+[7]
+
+[8]
+
+[9]
+
+[10]
+
+[11]
+
+[12]
+
+[13]
+
+[14]
+
+[15]
+
+[16]
+
+[17]
+
+[18]
+
+[19]
+
+[20]
+
+[21]
+
+[22]
+
+[23]
+
+[24]
+
+[25]
+
+[26]
+
+[27]
+
+[28]
+
+[29]
+
+[30]
+
+[31]
+
+[32]
+
+[33]
+
+[34
+
+]
+Package hyperref Info: Option `pageanchor' set `true' on input line 225.
+
+Chapter 1.
+LaTeX Font Info:    Font shape `T1/phv/m/n' will be
+(Font)              scaled to size 18.66588pt on input line 227.
+LaTeX Font Info:    Font shape `T1/phv/b/n' will be
+(Font)              scaled to size 18.66588pt on input line 227.
+LaTeX Font Info:    Font shape `T1/phv/b/n' will be
+(Font)              scaled to size 22.39185pt on input line 227.
+(./dirs.tex
+LaTeX Font Info:    Font shape `T1/phv/b/n' will be
+(Font)              scaled to size 12.9599pt on input line 1.
+
+
+[1
+
+]
+
+[2]
+
+[3])
+
+[4]
+Chapter 2.
+(./namespaces.tex)
+
+[5
+
+]
+
+[6
+
+]
+Chapter 3.
+(./hierarchy.tex
+
+[7])
+
+[8]
+Chapter 4.
+(./annotated.tex
+
+[9
+
+])
+
+[10]
+Chapter 5.
+(./files.tex
+
+[11
+
+]
+
+[12])
+
+[13]
+
+[14
+
+]
+Chapter 6.
+(./dir_6098f77c224c930825758694068d4cda.tex
+LaTeX Font Info:    Trying to load font information for TS1+phv on input line 6
+.
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/ts1phv.fd
+File: ts1phv.fd 2020/03/25 scalable font definitions for TS1/phv.
+)
+LaTeX Font Info:    Font shape `TS1/phv/m/n' will be
+(Font)              scaled to size 8.99994pt on input line 6.
+)
+(./dir_c4587985b869c96ecd5a3e2399525831.tex)
+(./dir_049efb98b1070a831fbf9eaa3ab86e9c.tex
+LaTeX Font Info:    Font shape `T1/phv/m/n' will be
+(Font)              scaled to size 8.09995pt on input line 7.
+LaTeX Font Info:    Font shape `T1/phv/m/it' in size <9> not available
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 7.
+LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
+(Font)              scaled to size 8.09995pt on input line 7.
+LaTeX Font Info:    Font shape `T1/phv/m/it' in size <7> not available
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 11.
+LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
+(Font)              scaled to size 6.29996pt on input line 11.
+)
+(./dir_3f92e4727ba5d461c3b67be65809e60a.tex
+
+[15]) (./dir_1118bd55c76dc454ae4988b5e38a64a1.tex)
+(./dir_4ac1967e13f5e8f914c876791f2a5028.tex
+
+[16]) (./dir_cd793d7894ed649429cd98240fe6995f.tex)
+(./dir_ff7448ee043ddeb53a5bcad899672539.tex
+
+[17]) (./dir_21eb2206862a7eb4b82c19cf941b15aa.tex)
+(./dir_dfa03d548b91d8f34d24dc2e2d034381.tex)
+(./dir_5189e6a5ca97c1ef20d16c35ed4091e4.tex)
+(./dir_bffb1ac51c2938c18765721df20ca313.tex)
+(./dir_99af073fa52b012755ed98d275d9ace7.tex
+
+[18]) (./dir_44ea1912dc16401053757795601edd8e.tex)
+(./dir_4c7f6b70c5238290e3716ca8ab5e1a81.tex)
+(./dir_35227ea571da514929a1be393f99f713.tex)
+(./dir_48fb16a6bf52da3fd75cd110f217a93c.tex
+
+[19]) (./dir_d3f0a921603acb7f33e9f3af4e74264b.tex)
+(./dir_b05a5fa85f84bfc9013183c9d87f9a36.tex)
+
+[20]
+Chapter 7.
+(./d2/df0/namespace_reconstruction.tex
+
+[21
+
+]
+
+[22]
+LaTeX Font Info:    Font shape `T1/phv/b/n' will be
+(Font)              scaled to size 10.79993pt on input line 193.
+LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <8> not available
+(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 224.
+LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <7> not available
+(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 224.
+
+
+[23]
+
+[24]
+
+[25]
+
+[26]
+
+[27]
+
+[28]
+
+[29]
+
+[30])
+
+[31]
+
+[32
+
+]
+Chapter 8.
+(./d2/d23/class_cluster.tex
+
+[33]
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: split table.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+LaTeX Font Info:    Font shape `T1/phv/m/it' in size <10> not available
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 150.
+LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
+(Font)              scaled to size 8.99994pt on input line 150.
+> Step: build the whole table.
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: split table.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+> Step: build the whole table.
+
+
+[34]
+
+[35]
+
+[36]
+
+[37]
+
+[38]
+
+[39]) (./db/d97/class_cluster_fitter___diagonal.tex
+
+[40]
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: split table.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+> Step: build the whole table.
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: split table.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+> Step: build the whole table.
+
+
+[41]
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: split table.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+> Step: build the whole table.
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: split table.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+> Step: build the whole table.
+LaTeX Font Info:    Font shape `T1/phv/bc/n' will be
+(Font)              scaled to size 8.99994pt on input line 79.
+
+Underfull \hbox (badness 10000) detected at line 79
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 92
+[][][]
+ []
+
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: split table.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+> Step: build the whole table.
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: split table.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+> Step: build the whole table.
+
+
+[42]) (./d1/d4a/class_cluster_fitter___horizontal.tex
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: split table.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+> Step: build the whole table.
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: split table.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+> Step: build the whole table.
+
+
+[43]
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: split table.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+> Step: build the whole table.
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: split table.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+> Step: build the whole table.
+
+Underfull \hbox (badness 10000) detected at line 79
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 92
+[][][]
+ []
+
+
+
+[44]
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: split table.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+> Step: build the whole table.
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: split table.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+> Step: build the whole table.
+) (./de/d6e/class_reconstruction_1_1d_edx.tex
+
+[45]
+
+[46]) (./da/d31/class_reconstruction_1_1_draw_outs.tex
+
+[47]
+LaTeX Font Info:    Font shape `T1/phv/b/n' will be
+(Font)              scaled to size 7.19995pt on input line 59.
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: split table.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+> Step: build the whole table.
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: split table.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+> Step: build the whole table.
+
+
+[48]
+
+[49]
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: split table.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+> Step: build the whole table.
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: split table.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+> Step: build the whole table.
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: split table.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+> Step: build the whole table.
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: split table.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+> Step: build the whole table.
+
+
+[50]
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: split table.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+> Step: build the whole table.
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: split table.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+> Step: build the whole table.
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: split table.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+> Step: build the whole table.
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: split table.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+> Step: build the whole table.
+
+
+[51]) (./db/d89/class_eram_info.tex <./db/d89/class_eram_info.pdf>
+<db/d89/class_eram_info.pdf, id=8430, 501.875pt x 573.57286pt>
+File: db/d89/class_eram_info.pdf Graphic file (type pdf)
+<use db/d89/class_eram_info.pdf>
+Package pdftex.def Info: db/d89/class_eram_info.pdf  used on input line 15.
+(pdftex.def)             Requested size: 49.79222pt x 56.9055pt.
+
+
+[52]
+
+[53]) (./db/d75/class_reconstruction_1_1_e_r_a_m_maps.tex
+
+[54]
+
+[55]) (./d1/da9/class_event.tex
+
+[56]
+
+[57]
+
+[58]
+
+[59]) (./d7/d2d/class_fit_output.tex
+
+[60]
+
+[61]
+
+[62]) (./d0/de0/class_gauss_function.tex
+
+[63]
+
+[64]) (./da/df4/struct_global_chi2__4.tex
+
+[65]) (./d1/d27/class_reconstruction_1_1_l_u_t.tex
+
+[66]) (./dd/d82/class_model___charge0_d.tex
+
+[67] <./dd/d82/class_model___charge0_d.pdf>
+<dd/d82/class_model___charge0_d.pdf, id=8783, 501.875pt x 334.57997pt>
+File: dd/d82/class_model___charge0_d.pdf Graphic file (type pdf)
+<use dd/d82/class_model___charge0_d.pdf>
+Package pdftex.def Info: dd/d82/class_model___charge0_d.pdf  used on input line
+ 10.
+(pdftex.def)             Requested size: 85.3559pt x 56.9055pt.
+
+
+[68]
+
+[69]) (./d2/d46/class_model___charge1_d.tex
+
+[70] <./d2/d46/class_model___charge1_d.pdf>
+<d2/d46/class_model___charge1_d.pdf, id=8882, 501.875pt x 334.57997pt>
+File: d2/d46/class_model___charge1_d.pdf Graphic file (type pdf)
+<use d2/d46/class_model___charge1_d.pdf>
+Package pdftex.def Info: d2/d46/class_model___charge1_d.pdf  used on input line
+ 10.
+(pdftex.def)             Requested size: 85.3559pt x 56.9055pt.
+
+
+[71]
+
+[72]) (./d7/d53/class_model___charge_i.tex <./d7/d53/class_model___charge_i.pdf
+>
+<d7/d53/class_model___charge_i.pdf, id=8946, 501.875pt x 167.29501pt>
+File: d7/d53/class_model___charge_i.pdf Graphic file (type pdf)
+<use d7/d53/class_model___charge_i.pdf>
+Package pdftex.def Info: d7/d53/class_model___charge_i.pdf  used on input line 
+10.
+(pdftex.def)             Requested size: 170.7118pt x 56.9055pt.
+
+
+[73]
+
+[74]
+
+[75]) (./d0/d59/class_model___electronics.tex
+
+[76]
+
+[77]) (./d3/d4d/class_model___read_out_geometry.tex
+
+[78]
+
+[79]
+
+[80]
+
+[81]) (./dd/df9/class_module.tex <./dd/df9/class_module.pdf>
+<dd/df9/class_module.pdf, id=9107, 501.875pt x 557.64334pt>
+File: dd/df9/class_module.pdf Graphic file (type pdf)
+<use dd/df9/class_module.pdf>
+Package pdftex.def Info: dd/df9/class_module.pdf  used on input line 10.
+(pdftex.def)             Requested size: 51.20894pt x 56.9055pt.
+
+
+[82]
+
+[83]
+
+[84]
+
+[85]) (./d2/d55/class_pad.tex
+Underfull \hbox (badness 3098) in paragraph at lines 10--11
+[][] \T1/phv/m/n/10 ([] $\OMS/cmsy/m/n/10 ^^C$\T1/phv/m/n/10 p[]Model[]_[][]Rea
+d[]Out[]Geometry, [] $\OMS/cmsy/m/n/10 ^^C$\T1/phv/m/n/10 p[]Model[]_[][]Electr
+onics,
+ []
+
+
+Underfull \hbox (badness 3098) in paragraph at lines 12--13
+[][] \T1/phv/m/n/10 ([] $\OMS/cmsy/m/n/10 ^^C$\T1/phv/m/n/10 p[]Model[]_[][]Rea
+d[]Out[]Geometry, [] $\OMS/cmsy/m/n/10 ^^C$\T1/phv/m/n/10 p[]Model[]_[][]Electr
+onics,
+ []
+
+
+
+[86]
+
+[87]
+
+[88]
+
+[89]
+
+[90]
+
+[91]
+
+[92]
+
+[93]) (./df/d91/class_parabola_function.tex
+
+[94]
+
+[95]) (./da/d4c/class_parabola_function_n_g.tex
+
+[96]) (./dd/d25/class_p_r_f_parameters.tex
+
+[97]
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: split table.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+> Step: build the whole table.
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: split table.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+> Step: build the whole table.
+
+
+[98]
+Underfull \hbox (badness 10000) detected at line 65
+[][][]
+ []
+
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: split table.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+> Step: build the whole table.
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: split table.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+> Step: build the whole table.
+) (./d2/d3d/class_reconstruction_1_1_reco_cluster.tex <./d2/d3d/class_reconstru
+ction_1_1_reco_cluster.pdf>
+<d2/d3d/class_reconstruction_1_1_reco_cluster.pdf, id=9537, 501.875pt x 224.297
+99pt>
+File: d2/d3d/class_reconstruction_1_1_reco_cluster.pdf Graphic file (type pdf)
+<use d2/d3d/class_reconstruction_1_1_reco_cluster.pdf>
+Package pdftex.def Info: d2/d3d/class_reconstruction_1_1_reco_cluster.pdf  used
+ on input line 10.
+(pdftex.def)             Requested size: 127.32167pt x 56.9055pt.
+
+
+[99]
+
+[100]) (./d5/dd0/class_reconstruction_1_1_reco_event.tex <./d5/dd0/class_recons
+truction_1_1_reco_event.pdf>
+<d5/dd0/class_reconstruction_1_1_reco_event.pdf, id=9595, 501.875pt x 234.7972p
+t>
+File: d5/dd0/class_reconstruction_1_1_reco_event.pdf Graphic file (type pdf)
+<use d5/dd0/class_reconstruction_1_1_reco_event.pdf>
+Package pdftex.def Info: d5/dd0/class_reconstruction_1_1_reco_event.pdf  used o
+n input line 10.
+(pdftex.def)             Requested size: 121.63177pt x 56.9055pt.
+
+
+[101]
+
+[102]
+
+[103]
+
+[104]) (./d3/dfc/class_reconstruction_1_1_reco_module.tex <./d3/dfc/class_recon
+struction_1_1_reco_module.pdf>
+<d3/dfc/class_reconstruction_1_1_reco_module.pdf, id=9688, 501.875pt x 221.8187
+3pt>
+File: d3/dfc/class_reconstruction_1_1_reco_module.pdf Graphic file (type pdf)
+<use d3/dfc/class_reconstruction_1_1_reco_module.pdf>
+Package pdftex.def Info: d3/dfc/class_reconstruction_1_1_reco_module.pdf  used 
+on input line 10.
+(pdftex.def)             Requested size: 128.74605pt x 56.9055pt.
+
+
+[105]
+
+[106]
+
+[107]) (./de/d3b/class_reconstruction_1_1_reco_pad.tex <./de/d3b/class_reconstr
+uction_1_1_reco_pad.pdf>
+<de/d3b/class_reconstruction_1_1_reco_pad.pdf, id=9756, 501.875pt x 249.38168pt
+>
+File: de/d3b/class_reconstruction_1_1_reco_pad.pdf Graphic file (type pdf)
+<use de/d3b/class_reconstruction_1_1_reco_pad.pdf>
+Package pdftex.def Info: de/d3b/class_reconstruction_1_1_reco_pad.pdf  used on 
+input line 10.
+(pdftex.def)             Requested size: 114.51752pt x 56.9055pt.
+
+
+[108]
+
+[109]
+
+[110]) (./d7/dec/class_r_o_board.tex
+
+[111] <./d7/dec/class_r_o_board.pdf>
+<d7/dec/class_r_o_board.pdf, id=9842, 501.875pt x 557.64334pt>
+File: d7/dec/class_r_o_board.pdf Graphic file (type pdf)
+<use d7/dec/class_r_o_board.pdf>
+Package pdftex.def Info: d7/dec/class_r_o_board.pdf  used on input line 15.
+(pdftex.def)             Requested size: 51.20894pt x 56.9055pt.
+
+
+[112]
+
+[113]
+
+[114]) (./d4/d72/class_sample.tex
+
+[115]
+
+[116]
+
+[117]
+
+[118]) (./d5/df6/class_selector.tex
+
+[119]
+
+[120]
+
+[121]
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: split table.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+> Step: build the whole table.
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: split table.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+> Step: build the whole table.
+
+
+[122]
+
+[123]) (./de/df7/class_set_of_tracks.tex
+
+[124]
+
+[125]
+
+[126]
+
+[127]
+
+[128]
+
+[129]) (./db/df0/class_static_cluster_fitter___diagonal.tex
+
+[130]) (./dc/d0b/class_static_cluster_fitter___horizontal.tex
+
+[131]
+Underfull \hbox (badness 10000) in paragraph at lines 57--58
+[] $\OMS/cmsy/m/n/8 ^^C$ \T1/pcr/m/n/8 Static[]Cluster[]Fitter[]_[][]Horizontal
+[]::p[]_[][]Cluster[]Fitter[]_[][]Horizontal = NULL
+ []
+
+) (./da/d24/class_static_track_fitter.tex
+
+[132]) (./d6/d2c/class_track.tex
+
+[133]
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: split table.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+> Step: build the whole table.
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: split table.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+> Step: build the whole table.
+
+
+[134]
+
+[135]
+
+[136]
+
+[137]) (./d9/d6e/class_track_fitter.tex
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: split table.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+> Step: build the whole table.
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: split table.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+> Step: build the whole table.
+
+
+[138]
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: split table.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+> Step: build the whole table.
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: split table.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+> Step: build the whole table.
+
+Underfull \hbox (badness 10000) detected at line 83
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 96
+[][][]
+ []
+
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: split table.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+> Step: build the whole table.
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: split table.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+> Step: build the whole table.
+
+
+[139]) (./d4/d3b/class_uploader.tex <./d4/d3b/class_uploader.pdf>
+<d4/d3b/class_uploader.pdf, id=10459, 501.875pt x 68.28511pt>
+File: d4/d3b/class_uploader.pdf Graphic file (type pdf)
+<use d4/d3b/class_uploader.pdf>
+Package pdftex.def Info: d4/d3b/class_uploader.pdf  used on input line 10.
+(pdftex.def)             Requested size: 398.33778pt x 54.19551pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 16--18
+[][] \T1/phv/m/n/10 (const std[]::string &Sample[]File, [] $\OMS/cmsy/m/n/10 ^^
+C$\T1/phv/m/n/10 p[]Model[]_[][]Read[]Out[]Geometry,
+ []
+
+
+
+[140]
+
+[141]
+
+[142]
+
+[143]) (./da/dd7/class_uploader___e_r_a_m01.tex <./da/dd7/class_uploader___e_r_
+a_m01.pdf>
+<da/dd7/class_uploader___e_r_a_m01.pdf, id=10575, 501.875pt x 313.67188pt>
+File: da/dd7/class_uploader___e_r_a_m01.pdf Graphic file (type pdf)
+<use da/dd7/class_uploader___e_r_a_m01.pdf>
+Package pdftex.def Info: da/dd7/class_uploader___e_r_a_m01.pdf  used on input l
+ine 10.
+(pdftex.def)             Requested size: 91.04579pt x 56.9055pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 27--29
+[][] \T1/phv/m/n/10 (const std[]::string &Sample[]File, [] $\OMS/cmsy/m/n/10 ^^
+C$\T1/phv/m/n/10 p[]Model[]_[][]Read[]Out[]Geometry,
+ []
+
+
+
+[144]
+
+[145]) (./d9/ddf/class_uploader___mock_up___v1.tex <./d9/ddf/class_uploader___m
+ock_up___v1.pdf>
+<d9/ddf/class_uploader___mock_up___v1.pdf, id=10655, 501.875pt x 273.1304pt>
+File: d9/ddf/class_uploader___mock_up___v1.pdf Graphic file (type pdf)
+<use d9/ddf/class_uploader___mock_up___v1.pdf>
+Package pdftex.def Info: d9/ddf/class_uploader___mock_up___v1.pdf  used on inpu
+t line 10.
+(pdftex.def)             Requested size: 104.56213pt x 56.9055pt.
+
+Underfull \hbox (badness 1789) in paragraph at lines 16--18
+[][] \T1/phv/m/n/10 (const std[]::string &Sample[]File, [] $\OMS/cmsy/m/n/10 ^^
+C$\T1/phv/m/n/10 p[]Model[]_[][]Read[]Out[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 27--29
+[][] \T1/phv/m/n/10 (const std[]::string &Sample[]File, [] $\OMS/cmsy/m/n/10 ^^
+C$\T1/phv/m/n/10 p[]Model[]_[][]Read[]Out[]Geometry,
+ []
+
+
+
+[146]
+
+[147]) (./d3/d71/class_uploader___mock_up___v2.tex <./d3/d71/class_uploader___m
+ock_up___v2.pdf>
+<d3/d71/class_uploader___mock_up___v2.pdf, id=10735, 501.875pt x 273.1304pt>
+File: d3/d71/class_uploader___mock_up___v2.pdf Graphic file (type pdf)
+<use d3/d71/class_uploader___mock_up___v2.pdf>
+Package pdftex.def Info: d3/d71/class_uploader___mock_up___v2.pdf  used on inpu
+t line 10.
+(pdftex.def)             Requested size: 104.56213pt x 56.9055pt.
+
+Underfull \hbox (badness 1789) in paragraph at lines 16--18
+[][] \T1/phv/m/n/10 (const std[]::string &Sample[]File, [] $\OMS/cmsy/m/n/10 ^^
+C$\T1/phv/m/n/10 p[]Model[]_[][]Read[]Out[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 33--35
+[][] \T1/phv/m/n/10 (const std[]::string &Sample[]File, [] $\OMS/cmsy/m/n/10 ^^
+C$\T1/phv/m/n/10 p[]Model[]_[][]Read[]Out[]Geometry,
+ []
+
+
+
+[148]
+
+[149]
+
+[150]
+
+[151]
+
+[152]
+
+[153]
+
+[154]
+
+[155]
+
+[156]
+
+[157]) (./d4/dd8/class_uploader___prototype.tex <./d4/dd8/class_uploader___prot
+otype.pdf>
+<d4/dd8/class_uploader___prototype.pdf, id=10989, 501.875pt x 304.16637pt>
+File: d4/dd8/class_uploader___prototype.pdf Graphic file (type pdf)
+<use d4/dd8/class_uploader___prototype.pdf>
+Package pdftex.def Info: d4/dd8/class_uploader___prototype.pdf  used on input l
+ine 10.
+(pdftex.def)             Requested size: 93.89456pt x 56.9055pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 27--29
+[][] \T1/phv/m/n/10 (const std[]::string &Sample[]File, [] $\OMS/cmsy/m/n/10 ^^
+C$\T1/phv/m/n/10 p[]Model[]_[][]Read[]Out[]Geometry,
+ []
+
+
+
+[158]
+
+[159])
+
+[160]
+Chapter 9.
+(./da/de1/_analysis_8cxx.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--6
+
+ []
+
+) (./d9/dad/_draw_out_8cxx.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--4
+
+ []
+
+) (./d9/d70/_cluster_fitter_8h.tex
+
+[161
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 8--17
+
+ []
+
+
+Underfull \hbox (badness 3623) in paragraph at lines 29--31
+[]\T1/phv/m/n/10 void [] ([] $\OMS/cmsy/m/n/10 ^^C$\T1/phv/m/n/10 p[]Event, con
+st int &Module[]Nber, TF1 $\OMS/cmsy/m/n/10 ^^C$\T1/phv/m/n/10 p[]TF1[]_[][]To[
+]Be[]Used,
+ []
+
+
+Underfull \hbox (badness 791) in paragraph at lines 31--33
+[]\T1/phv/m/n/10 void [] ([] $\OMS/cmsy/m/n/10 ^^C$\T1/phv/m/n/10 p[]Cluster, c
+onst int &Module[]Nber, TF1 $\OMS/cmsy/m/n/10 ^^C$\T1/phv/m/n/10 p[]TF1[]_[][]T
+o[]Be[]Used,
+ []
+
+
+
+[162]) (./d9/d70/_cluster_fitter_8h_source.tex
+
+[163]
+
+[164]) (./da/d75/_p_r_f_parameters_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--9
+
+ []
+
+) (./da/d75/_p_r_f_parameters_8h_source.tex
+
+[165]) (./d0/da3/_track_fitter_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--14
+
+ []
+
+) (./d0/da3/_track_fitter_8h_source.tex
+
+[166]) (./d2/d1c/_track_recon_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--11
+
+ []
+
+
+
+[167]
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: split table.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+> Step: build the whole table.
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: split table.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+> Step: build the whole table.
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: split table.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+> Step: build the whole table.
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: split table.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+> Step: build the whole table.
+
+Underfull \hbox (badness 10000) detected at line 70
+[][][]
+ []
+
+) (./d2/d1c/_track_recon_8h_source.tex
+
+[168]) (./da/d6e/_cluster_fitter_8cxx.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--6
+
+ []
+
+
+Underfull \hbox (badness 3623) in paragraph at lines 18--20
+[]\T1/phv/m/n/10 void [] ([] $\OMS/cmsy/m/n/10 ^^C$\T1/phv/m/n/10 p[]Event, con
+st int &Module[]Nber, TF1 $\OMS/cmsy/m/n/10 ^^C$\T1/phv/m/n/10 p[]TF1[]_[][]To[
+]Be[]Used,
+ []
+
+
+Underfull \hbox (badness 791) in paragraph at lines 20--22
+[]\T1/phv/m/n/10 void [] ([] $\OMS/cmsy/m/n/10 ^^C$\T1/phv/m/n/10 p[]Cluster, c
+onst int &Module[]Nber, TF1 $\OMS/cmsy/m/n/10 ^^C$\T1/phv/m/n/10 p[]TF1[]_[][]T
+o[]Be[]Used,
+ []
+
+
+
+[169]
+
+[170]) (./db/df1/_p_r_f_parameters_8cxx.tex) (./d3/d00/_track_fitter_8cxx.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--1
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3--5
+
+ []
+
+) (./da/d59/_track_recon_8cxx.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--7
+
+ []
+
+
+
+[171]
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: split table.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+> Step: build the whole table.
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: split table.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+> Step: build the whole table.
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: split table.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+> Step: build the whole table.
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: split table.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+> Step: build the whole table.
+
+Underfull \hbox (badness 10000) detected at line 59
+[][][]
+ []
+
+) (./d7/d48/_amplitude_error_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--10
+
+ []
+
+
+
+[172]) (./d7/d48/_amplitude_error_8h_source.tex) (./d6/d42/_cluster_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--14
+
+ []
+
+
+
+[173]) (./d6/d42/_cluster_8h_source.tex
+
+[174]
+
+[175]) (./de/d6d/_event_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--16
+
+ []
+
+) (./de/d6d/_event_8h_source.tex
+
+[176]
+
+[177]) (./d9/da2/_fit_output_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--12
+
+ []
+
+) (./d9/da2/_fit_output_8h_source.tex
+
+[178]) (./dd/d7a/_module_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--16
+
+ []
+
+) (./dd/d7a/_module_8h_source.tex
+
+[179]) (./db/d96/_pad_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--12
+
+ []
+
+
+
+[180]) (./db/d96/_pad_8h_source.tex
+
+[181]
+
+[182]) (./d4/dee/_r_o_board_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--13
+
+ []
+
+
+
+[183]) (./d4/dee/_r_o_board_8h_source.tex
+
+[184]) (./dd/d42/_sample_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--21
+
+ []
+
+) (./dd/d42/_sample_8h_source.tex
+
+[185]
+
+[186]) (./db/d60/_set_of_tracks_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--11
+
+ []
+
+) (./db/d60/_set_of_tracks_8h_source.tex
+
+[187]) (./d3/de6/_time_error_8h.tex
+
+[188]
+Underfull \hbox (badness 10000) in paragraph at lines 8--10
+
+ []
+
+) (./d3/de6/_time_error_8h_source.tex) (./df/dfc/_track_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--11
+
+ []
+
+
+
+[189]) (./df/dfc/_track_8h_source.tex
+
+[190]) (./d8/ddb/_amplitude_error_8cxx.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--4
+
+ []
+
+
+
+[191]) (./da/d5c/_cluster_8cxx.tex) (./de/dde/_event_8cxx.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--1
+
+ []
+
+) (./d5/d92/_fit_output_8cxx.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--1
+
+ []
+
+) (./d1/d98/_module_8cxx.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--1
+
+ []
+
+) (./d8/d7d/_pad_8cxx.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--1
+
+ []
+
+) (./da/dca/_r_o_board_8cxx.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--1
+
+ []
+
+) (./dd/db0/_sample_8cxx.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--1
+
+ []
+
+
+
+[192]) (./dc/dd7/_set_of_tracks_8cxx.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--1
+
+ []
+
+) (./df/dbb/_time_error_8cxx.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--1
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3--4
+
+ []
+
+
+
+[193]) (./db/dd6/_track_8cxx.tex) (./de/d05/_model___charge0_d_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--1
+
+ []
+
+
+
+[194]
+Underfull \hbox (badness 10000) in paragraph at lines 8--10
+
+ []
+
+) (./de/d05/_model___charge0_d_8h_source.tex
+
+[195]) (./da/da1/_model___charge1_d_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--10
+
+ []
+
+) (./da/da1/_model___charge1_d_8h_source.tex
+
+[196]) (./dc/d51/_model___charge_i_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--9
+
+ []
+
+) (./dc/d51/_model___charge_i_8h_source.tex
+
+[197]) (./d3/d6a/_model___electronics_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--9
+
+ []
+
+) (./d3/d6a/_model___electronics_8h_source.tex
+
+[198]) (./d1/df9/_model___read_out_geometry_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--9
+
+ []
+
+) (./d1/df9/_model___read_out_geometry_8h_source.tex
+
+[199]) (./de/d5a/_model___charge0_d_8cxx.tex)
+(./d3/dc8/_model___charge1_d_8cxx.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--1
+
+ []
+
+
+
+[200]) (./d7/dc9/_model___charge_i_8cxx.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--1
+
+ []
+
+) (./d6/d7a/_model___electronics_8cxx.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--1
+
+ []
+
+) (./d1/d9b/_model___read_out_geometry_8cxx.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--1
+
+ []
+
+) (./dc/d95/_combined_fit_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--1
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 8--16
+
+ []
+
+
+
+[201]) (./dc/d95/_combined_fit_8h_source.tex) (./dc/df5/_control_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--11
+
+ []
+
+
+
+[202]) (./dc/df5/_control_8h_source.tex) (./d0/dce/d_edx_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--13
+
+ []
+
+
+
+[203]) (./d0/dce/d_edx_8h_source.tex
+
+[204]
+
+[205]
+
+[206]) (./d3/d93/_displays_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--15
+
+ []
+
+
+
+[207]
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: split table.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+> Step: build the whole table.
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: split table.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+> Step: build the whole table.
+
+
+[208]
+
+[209]) (./d3/d93/_displays_8h_source.tex
+
+[210]) (./dd/d26/_draw_outs_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--12
+
+ []
+
+) (./dd/d26/_draw_outs_8h_source.tex
+
+[211]
+
+[212]) (./d0/da5/_draw_outs__old_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--11
+
+ []
+
+
+
+[213]
+
+[214]
+
+[215]) (./d0/da5/_draw_outs__old_8h_source.tex
+
+[216]) (./d5/ddb/_l_u_ts_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--7
+
+ []
+
+
+
+[217]) (./d5/ddb/_l_u_ts_8h_source.tex
+Overfull \hbox (86.5555pt too wide) in paragraph at lines 37--37
+\T1/pcr/m/n/7 -----------------------------------------------------------------
+----------------------------------------------------------[]  
+ []
+
+
+
+[218]
+Overfull \hbox (40.35553pt too wide) in paragraph at lines 98--98
+\T1/pcr/m/n/7 -----------------------------------------------------------------
+-----------------------------------------------[]  
+ []
+
+
+
+[219]) (./df/daa/_monitoring_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--12
+
+ []
+
+
+
+[220]
+Overfull \hbox (71.07863pt too wide) in paragraph at lines 72--73
+\T1/phv/m/n/10 level en-try point to run anal-y-sis work-flows; the im-ple-men-
+ta-tion of Mon-i-tor-ing lives in []. 
+ []
+
+) (./df/daa/_monitoring_8h_source.tex) (./d6/df2/_recon___link_def_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--10
+
+ []
+
+
+
+[221]) (./d6/df2/_recon___link_def_8h_source.tex) (./de/d03/_recon_tools_8h.tex
+
+Underfull \hbox (badness 10000) in paragraph at lines 8--19
+
+ []
+
+
+
+[222]
+
+[223]
+
+[224]
+
+[225]) (./de/d03/_recon_tools_8h_source.tex
+
+[226]) (./d7/da2/_selector_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--10
+
+ []
+
+) (./d7/da2/_selector_8h_source.tex
+
+[227]
+
+[228]) (./d8/d7f/_variables_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--11
+
+ []
+
+
+
+[229]
+
+[230]) (./d8/d7f/_variables_8h_source.tex
+LaTeX Font Info:    Trying to load font information for TS1+pcr on input line 5
+4.
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/ts1pcr.fd
+File: ts1pcr.fd 2001/06/04 font definitions for TS1/pcr.
+))
+(./d8/dae/_combined_fit_8cxx.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--6
+
+ []
+
+
+
+[231]) (./dc/d07/_control_8cxx.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--8
+
+ []
+
+
+
+[232]) (./db/d3c/d_edx_8cxx.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--23
+
+ []
+
+
+
+[233]) (./df/d91/_displays_8cxx.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--25
+
+ []
+
+
+
+[234]
+
+[235]
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: split table.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+> Step: build the whole table.
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: split table.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+> Step: build the whole table.
+
+
+[236]
+
+[237]) (./db/de6/_draw_outs_8cxx.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--20
+
+ []
+
+) (./d0/da8/_draw_outs__old_8cxx.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--19
+
+ []
+
+
+
+[238]
+
+[239]) (./db/d24/_l_u_ts_8cxx.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--9
+
+ []
+
+
+
+[240]) (./df/d48/_monitoring_8cxx.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--10
+
+ []
+
+) (./d8/d4d/_recon_tools_8cxx.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--12
+
+ []
+
+
+
+[241]
+
+[242]
+
+[243]) (./d8/d77/_selector_8cxx.tex
+
+[244]) (./de/d47/_variables_8cxx.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--1
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3--4
+
+ []
+
+) (./d5/d2e/_give_me___uploader_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--10
+
+ []
+
+
+
+[245]) (./d5/d2e/_give_me___uploader_8h_source.tex) (./dd/de2/_uploader_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--15
+
+ []
+
+) (./dd/de2/_uploader_8h_source.tex
+
+[246]) (./d2/d7c/_uploader___e_r_a_m01_8h.tex
+
+[247]
+Underfull \hbox (badness 10000) in paragraph at lines 8--10
+
+ []
+
+) (./d2/d7c/_uploader___e_r_a_m01_8h_source.tex)
+(./dc/da8/_uploader___mock_up___v1_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--10
+
+ []
+
+) (./dc/da8/_uploader___mock_up___v1_8h_source.tex
+
+[248]) (./d4/d12/_uploader___mock_up___v2_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--10
+
+ []
+
+) (./d4/d12/_uploader___mock_up___v2_8h_source.tex
+
+[249]
+
+[250]) (./d1/d4b/_uploader___prototype_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--10
+
+ []
+
+) (./d1/d4b/_uploader___prototype_8h_source.tex)
+(./d4/d29/_give_me___uploader_8cxx.tex
+
+[251]
+Underfull \hbox (badness 10000) in paragraph at lines 3--11
+
+ []
+
+) (./df/dc2/_uploader_8cxx.tex) (./da/d8a/_uploader___e_r_a_m01_8cxx.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--1
+
+ []
+
+) (./da/da1/_uploader___mock_up___v1_8cxx.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--1
+
+ []
+
+) (./d4/d48/_uploader___mock_up___v2_8cxx.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--1
+
+ []
+
+) (./db/dee/_uploader___prototype_8cxx.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--1
+
+ []
+
+
+
+[252]) (./d0/dc0/_func_from_t_graph_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--1
+
+ []
+
+) (./d0/dc0/_func_from_t_graph_8h_source.tex) (./dc/d26/_gauss_function_8h.tex
+
+[253]
+Underfull \hbox (badness 10000) in paragraph at lines 8--9
+
+ []
+
+) (./dc/d26/_gauss_function_8h_source.tex) (./de/d4c/_misc_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--21
+
+ []
+
+
+
+[254]) (./de/d4c/_misc_8h_source.tex) (./d6/df9/_parabola_function_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--9
+
+ []
+
+) (./d6/df9/_parabola_function_8h_source.tex
+
+[255]) (./d7/d57/_parabola_function_n_g_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--9
+
+ []
+
+) (./d7/d57/_parabola_function_n_g_8h_source.tex
+
+[256]) (./db/daf/_signal_tools_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--9
+
+ []
+
+
+
+[257]) (./db/daf/_signal_tools_8h_source.tex)
+(./d6/d10/_func_from_t_graph_8cxx.tex) (./d8/de4/_gauss_function_8cxx.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--1
+
+ []
+
+) (./d1/d7f/_parabola_function_8cxx.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--1
+
+ []
+
+) (./de/d4f/_parabola_function_n_g_8cxx.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--1
+
+ []
+
+) (./d6/d56/_signal_tools_8cxx.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--1
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3--5
+
+ []
+
+
+
+[258])
+
+[259]
+
+[260
+
+] (./refman.ind
+LaTeX Font Info:    Font shape `T1/phv/m/n' will be
+(Font)              scaled to size 22.39185pt on input line 1.
+
+
+
+
+[261
+
+
+]
+
+
+
+[262]
+
+
+
+[263]
+
+
+
+[264]
+
+
+
+[265]
+
+
+
+[266]
+
+
+
+[267]
+
+
+
+[268]
+
+
+
+[269]
+
+
+
+[270]
+
+
+
+[271]
+
+
+
+[272]
+
+
+
+[273]
+
+
+
+[274]
+
+
+
+[275]
+
+
+
+[276]
+
+
+
+[277]
+
+
+
+[278]
+
+
+
+[279]
+
+
+
+[280]
+
+
+
+[281]
+
+
+
+[282]
+
+
+
+[283]) (./refman.aux)
+ ***********
+LaTeX2e <2024-11-01> patch level 2
+L3 programming layer <2025-01-18>
+ ***********
+
+
+LaTeX Warning: There were multiply-defined labels.
+
+Package rerunfilecheck Info: File `refman.out' has not changed.
+(rerunfilecheck)             Checksum: FC493ABCB710D69ADD19ACE9AC913AB7;293747.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 27418 strings out of 473190
+ 587874 string characters out of 5715799
+ 1192719 words of memory out of 5000000
+ 46595 multiletter control sequences out of 15000+600000
+ 667566 words of font info for 264 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 101i,16n,117p,1499b,1416s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
+></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><
+/usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></u
+sr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></us
+r/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/
+local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/lo
+cal/texlive/2025/texmf-dist/fonts/type1/urw/courier/ucrb8a.pfb></usr/local/texl
+ive/2025/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2025
+/texmf-dist/fonts/type1/urw/courier/ucrro8a.pfb></usr/local/texlive/2025/texmf-
+dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2025/texmf-dist/fo
+nts/type1/urw/helvetic/uhvb8ac.pfb></usr/local/texlive/2025/texmf-dist/fonts/ty
+pe1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw
+/helvetic/uhvro8a.pfb>
+Output written on refman.pdf (319 pages, 1003569 bytes).
+PDF statistics:
+ 16461 PDF objects out of 18468 (max. 8388607)
+ 15850 compressed objects within 159 object streams
+ 3151 named destinations out of 3580 (max. 500000)
+ 10876 words of extra memory for PDF output out of 12000 (max. 10000000)
+

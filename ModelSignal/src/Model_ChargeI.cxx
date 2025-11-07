@@ -1,16 +1,3 @@
-#/***************************************************************************
- * File: Model_ChargeI.cxx
- * Project: dEdxRecon
- *
- * Brief: Implementation of the abstract base charge model. Provides common
- *        utilities used by concrete charge models (0D, 1D) such as parameter
- *        accessors and width/normalisation helpers.
- *
- * Contents: Model_ChargeI constructor/destructor and shared helpers.
- *
- * Notes: Concrete subclasses implement Get_Qpad and SetSecondaries.
- ***************************************************************************/
-
 #include "Model_ChargeI.h"
 
 Model_ChargeI::Model_ChargeI() {

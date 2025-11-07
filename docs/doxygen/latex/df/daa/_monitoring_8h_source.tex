@@ -1,0 +1,57 @@
+\doxysection{Monitoring.\+h}
+\hypertarget{_monitoring_8h_source}{}\label{_monitoring_8h_source}\index{Reconstruction/inc/Monitoring.h@{Reconstruction/inc/Monitoring.h}}
+\mbox{\hyperlink{_monitoring_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#ifndef\ MONITORING\_H}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#define\ MONITORING\_H}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_give_me___uploader_8h}{GiveMe\_Uploader.h}}"{}}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_uploader_8h}{Uploader.h}}"{}}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_draw_outs_8h}{DrawOuts.h}}"{}}}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{d_edx_8h}{dEdx.h}}"{}}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_reconstruction}{Reconstruction}}\ \{}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{keyword}{extern}\ Reconstruction::dEdx\ *\mbox{\hyperlink{namespace_reconstruction_a361eada0f4a66e9daaf94dd86d1458e0}{p\_dEdx}};}
+\DoxyCodeLine{00033\ \textcolor{keyword}{extern}\ Reconstruction::DrawOuts\ *\mbox{\hyperlink{namespace_reconstruction_a55a58124d364f8ee41735f2581bace65}{p\_DrawOuts}};}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_reconstruction_aa6c4189b9f8794fb9b7ad71b9765b826}{Monitoring}}();}
+\DoxyCodeLine{00036\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_reconstruction_ab8e79e3e83c48bac0667579399d635f7}{Correction}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&corrRC\ =\ 1,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&corrGain\ =\ 1,}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&corrWF\ =\ 1,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&corrDrift\ =\ 1,}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&saveSelectOnly\ =\ 1);}
+\DoxyCodeLine{00039\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_reconstruction_a3f53f87ee01a45f5b47c576c9e6611c3}{Settings}}(\textcolor{keyword}{const}\ std::string\ \&\mbox{\hyperlink{namespace_reconstruction_aa247a28fec76cc4006345e785c837167}{testbeam}},\ \textcolor{keyword}{const}\ std::string\ \&\mbox{\hyperlink{namespace_reconstruction_aff2e417ce2ebbe016c1a923993e5931f}{multiScanName}},}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&\mbox{\hyperlink{namespace_reconstruction_a95778d5c57d744f35d4515247148b504}{scanName}},\ \textcolor{keyword}{const}\ std::string\ \&scanspec,}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&runvarstr\_name,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&uploader,}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&modules,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&peaking\_time,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&diffusion,}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&drift\_dist,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&timbin);}
+\DoxyCodeLine{00044\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_reconstruction_a057ee330bf04cb919427219c25bf2d4f}{ClearVectors}}();}
+\DoxyCodeLine{00045\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_reconstruction_af550d3b32df95f0749794a3b5234009c}{DefaultAnalysis}}();}
+\DoxyCodeLine{00046\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_reconstruction_a96e2ff84f5f53811c3c9999239a9b354}{DrawSingleScan}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&methods\ =\ 0);}
+\DoxyCodeLine{00047\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_reconstruction_aa5658d5b431a6747c639924952a0cfa0}{DrawMultipleScan}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&methods\ =\ 0);}
+\DoxyCodeLine{00048\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_reconstruction_a1fa8abc443a0aee1c67c155e72ab35de}{DrawCERN22Scan}}();}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \textcolor{comment}{//\ Run\ selection}}
+\DoxyCodeLine{00051\ \textcolor{comment}{//\ Files\ to\ use}}
+\DoxyCodeLine{00052\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{namespace_reconstruction_a9dd23faf5a74cca585201f3278764e74}{prototype}};}
+\DoxyCodeLine{00053\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{namespace_reconstruction_a287fadc53d5739888b07f5cca3bc41b9}{CERN\_Escan}};}
+\DoxyCodeLine{00054\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{namespace_reconstruction_acc7cfe2129354c6b814cb3fa1d221735}{CERN\_drift}};}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{namespace_reconstruction_adc74ef74e60b2f0733496d49fb528444}{DESY\_zscan}};}
+\DoxyCodeLine{00057\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{namespace_reconstruction_a82d60e32ba57ed46286aca223f0e76b0}{DESY\_yscan}};}
+\DoxyCodeLine{00058\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{namespace_reconstruction_a20996853dcc322f1b8de80d49dad019f}{DESY\_phi}};}
+\DoxyCodeLine{00059\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{namespace_reconstruction_a175d54a144080ac65c769ed65a9c1e88}{DESY\_theta}};}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \textcolor{comment}{//\ Computations}}
+\DoxyCodeLine{00062\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{namespace_reconstruction_af128763838107a1314ac4bb1cc198e98}{dedx}};}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \textcolor{comment}{//\ DrawOuts}}
+\DoxyCodeLine{00065\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{namespace_reconstruction_a5def978733bb0ac898c165771d23005c}{DO\_Control}};}
+\DoxyCodeLine{00066\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{namespace_reconstruction_ab646562009b56c77f8cf8dce861eeeb4}{DO\_dEdx}};}
+\DoxyCodeLine{00067\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{namespace_reconstruction_a571403e47aab7020ee9f3e20b11c5a9a}{DO\_Comparison}};}
+\DoxyCodeLine{00068\ \}\ \textcolor{comment}{//\ namespace\ Reconstruction}}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

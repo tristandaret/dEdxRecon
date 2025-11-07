@@ -1,17 +1,3 @@
-#/***************************************************************************
- * File: dEdx.cxx
- * Project: dEdxRecon
- *
- * Brief: Implementation of the dE/dx estimation routines. Contains the core
- *        algorithms used to compute energy loss per unit length from
- *        reconstructed cluster/pad information and utilities for particle
- *        identification.
- *
- * Contents: functions and helpers to compute dE/dx and related metrics.
- *
- * Notes: Keep numerical routines here; interfaces live in dEdx.h.
- ***************************************************************************/
-
 #include "dEdx.h"
 #include "LUTs.h"
 #include "Misc_Functions.h"
@@ -424,8 +410,8 @@ void Reconstruction::dEdx::Reconstruction() {
                        p_recopad->phi,
                        p_recopad->length); // impact parameter and length in pad
                                            // in m, angle in degrees
-          p_recopad->d *= 1000;  // in mm
-          p_recopad->dd *= 1000; // in mm
+          p_recopad->d *= 1000;            // in mm
+          p_recopad->dd *= 1000;           // in mm
           p_recopad->length /= costheta;
           p_recocluster->length += p_recopad->length;
 
@@ -720,7 +706,7 @@ void Reconstruction::dEdx::Reconstruction() {
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/* dE/dx RECONSTRUCTION ALGORITHMS */
+// dE/dx RECONSTRUCTION ALGORITHMS
 
 float Reconstruction::dEdx::ComputedEdxWF(std::vector<float> v_dEdxWF,
                                           const int &NClusters,
@@ -913,7 +899,7 @@ void Reconstruction::dEdx::DiscardedModule() {
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/* ANALYSIS CLASSES DEFINITION */
+// ANALYSIS CLASSES DEFINITION
 
 Reconstruction::RecoPad::~RecoPad() {
   // nothing to clear

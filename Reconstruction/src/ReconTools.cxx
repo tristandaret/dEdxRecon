@@ -1,18 +1,3 @@
-#/***************************************************************************
- * File: ReconTools.cxx
- * Project: dEdxRecon
- *
- * Brief: Implementations of small helper utilities used throughout the
- *        reconstruction code (e.g., corrections, file helpers, selection
- *        initialisation). These functions provide reusable building blocks
- *        for higher-level modules.
- *
- * Contents: implementations of functions declared in ReconTools.h.
- *
- * Notes: Keep these utilities lightweight and well-documented as many
- *        modules depend on them.
- ***************************************************************************/
-
 #include "ReconTools.h"
 #include "Displays.h"
 #include "LUTs.h"
@@ -509,8 +494,8 @@ TF1 *Fit2Gauss(TH1F *h1F, const float &x1min, const float &x1max,
 // Bethe-Bloch relativistic for heavy charged particles
 TF1 *BetheBloch(const float &Pmin, const float &Pmax, const double &M,
                 const std::string &particle) {
-  /*	Input: Pmin & Pmax GeV | m GeV
-     Output: keV/cm */
+  //	Input: Pmin & Pmax GeV | m GeV
+  //	Output: keV/cm
   // float n						= 5.357e20; e/cm^3
   // float alpha2					= pow(1/137, 2);
   // float hbar2c2					= pow(1.973e-14, 2) (GeV
@@ -539,8 +524,8 @@ TF1 *BetheBloch(const float &Pmin, const float &Pmax, const double &M,
 // Bethe-Bloch relativistic for positrons with Bhabha scattering
 TF1 *BetheBlochBhabha(const float &Pmin, const float &Pmax, const double &m,
                       const std::string &particle) {
-  /*	Input: Pmin & Pmax GeV | M GeV
-     Output: keV/cm */
+  //	Input: Pmin & Pmax GeV | M GeV
+  //	Output: keV/cm
   // float n						= 5.357e20; e/cm^3
   // float alpha2					= pow(1/137, 2);
   // float hbar2c2					= pow(1.973e-14, 2) (GeV
@@ -570,8 +555,8 @@ TF1 *BetheBlochBhabha(const float &Pmin, const float &Pmax, const double &m,
 // Bethe-Bloch with experimental parametrisation
 TF1 *BetheBlochExp(const float &Pmin, const float &Pmax, const double &M,
                    const std::string &particle) {
-  /*	Input: Pmin & Pmax GeV | m GeV
-     Output: keV/cm */
+  //	Input: Pmin & Pmax GeV | m GeV
+  //	Output: keV/cm
 
   const char *formula = "[0]/pow(x/sqrt(x*x+[5]*[5]),[3]) * ( [1] - "
                         "pow(x/sqrt(x*x+[5]*[5]),[3]) - log([2] "
@@ -854,7 +839,7 @@ void local_params(Pad *pPad, const Track *pTrack, float &d, float &dd,
   // std::setprecision(3) << "q: "	<< q*1000	<< " +- " << dq*1000
   // << " | "; 	std::cout << std::setprecision(3)
   //<< "m: "	<< m		<< " +- " << dm		<< " | ";
-  //std::cout << std::setprecision(3)
+  // std::cout << std::setprecision(3)
   //<< "d: "	<< d*1000	<< " +- " << dd*1000	<< std::endl;
   // }
 }

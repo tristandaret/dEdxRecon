@@ -1,0 +1,114 @@
+\doxysection{Reconstruction/inc/\+Variables.h File Reference}
+\hypertarget{_variables_8h}{}\label{_variables_8h}\index{Reconstruction/inc/Variables.h@{Reconstruction/inc/Variables.h}}
+
+
+Central place to declare reconstruction-\/wide variables and helpers.  
+
+
+{\ttfamily \#include "{}LUTs.\+h"{}}\newline
+{\ttfamily \#include "{}Misc.\+h"{}}\newline
+{\ttfamily \#include "{}Uploader.\+h"{}}\newline
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespace_reconstruction}{Reconstruction}}
+\begin{DoxyCompactList}\small\item\em d\+E/dx estimation and particle identification declarations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_uploader}{Uploader}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespace_reconstruction_a882db6a4cdced013e7ef63a4f9e0385a}{Reconstruction\+::p\+\_\+uploader}}
+\item 
+\mbox{\hyperlink{class_reconstruction_1_1_l_u_t}{Reconstruction\+::\+LUT}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespace_reconstruction_af671490dae2544dcd115730d401bc043}{Reconstruction\+::p\+\_\+lut}}
+\item 
+const std\+::string \mbox{\hyperlink{namespace_reconstruction_a3be77f2d6e8bbd2d2bad5257739798d3}{Reconstruction\+::d\+Edx\+Path}} = "{}../"{}
+\item 
+const std\+::string \mbox{\hyperlink{namespace_reconstruction_aad46e0f0630feac11753a1d2c42151b8}{Reconstruction\+::data\+Path}} = \mbox{\hyperlink{namespace_reconstruction_a3be77f2d6e8bbd2d2bad5257739798d3}{d\+Edx\+Path}} + "{}Data/"{}
+\item 
+std\+::string \mbox{\hyperlink{namespace_reconstruction_a3eb4a73cbd5967c6f73787e462aa16ad}{Reconstruction\+::data\+Scan\+Path}} = "{}"{}
+\item 
+const std\+::string \mbox{\hyperlink{namespace_reconstruction_addfb4627cb45d1021b519eb3fdb10d95}{Reconstruction\+::drawout\+Path}} = \mbox{\hyperlink{namespace_reconstruction_a3be77f2d6e8bbd2d2bad5257739798d3}{d\+Edx\+Path}} + "{}OUT\+\_\+\+Reconstruction\+\_\+\+GP/"{}
+\item 
+std\+::string \mbox{\hyperlink{namespace_reconstruction_a06ce02ca9dc2e7a76823495dcdb8a861}{Reconstruction\+::drawout\+Multi\+Scan\+Path}} = "{}"{}
+\item 
+std\+::string \mbox{\hyperlink{namespace_reconstruction_ac146fb7a467bd0b6bbcc40631a94df62}{Reconstruction\+::drawout\+Scan\+Path}} = "{}"{}
+\item 
+std\+::string \mbox{\hyperlink{namespace_reconstruction_a0b8af3569c931a8bc482a551c36898c2}{Reconstruction\+::drawout\+Run\+Path}} = "{}"{}
+\item 
+std\+::string \mbox{\hyperlink{namespace_reconstruction_a72914e1f56ccd05364109b56bdc1a8eb}{Reconstruction\+::drawout\+\_\+file}} = "{}"{}
+\item 
+std\+::string \mbox{\hyperlink{namespace_reconstruction_a44fe2c0e00005ffa3d9f831dbf763723}{Reconstruction\+::rootout\+\_\+file}} = "{}"{}
+\item 
+std\+::string \mbox{\hyperlink{namespace_reconstruction_add2458fa96d0454c44016028be2702b1}{Reconstruction\+::log\+\_\+file}} = "{}"{}
+\item 
+std\+::string \mbox{\hyperlink{namespace_reconstruction_a8ba512293ba86701a1b1a78d918c0273}{Reconstruction\+::comment}}
+\item 
+std\+::string \mbox{\hyperlink{namespace_reconstruction_ae7e1e0f3abc093e79fc8570d74604192}{Reconstruction\+::selection\+Set}}
+\item 
+std\+::string \mbox{\hyperlink{namespace_reconstruction_a1a0154b2913a09c52258eac54413cb6d}{Reconstruction\+::input\+Dir}}
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_aa255d6ec499c5193fa352506bc59e4fc}{Reconstruction\+::draw\+Which\+Methods}} = 0
+\item 
+std\+::string \mbox{\hyperlink{namespace_reconstruction_a4c7ae43256b6fdd5fc72643d5c71f6a6}{Reconstruction\+::corr\+Func\+Path}} = "{}"{}
+\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{namespace_reconstruction_a51d538f43e8dd84ac69cdd99fd43c350}{Reconstruction\+::vcorr\+Func\+Paths}}
+\item 
+std\+::vector$<$ float $>$ \mbox{\hyperlink{namespace_reconstruction_a223c48440ff66da0fa4126418c3062e1}{Reconstruction\+::v\+Scan\+Vals}}
+\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{namespace_reconstruction_ae8d48e6a589f60892172d844b3e79391}{Reconstruction\+::v\+Scan\+Labels}}
+\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{namespace_reconstruction_a96149af66110037c26db441bef45da48}{Reconstruction\+::v\+\_\+scanspec}}
+\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{namespace_reconstruction_a201b3cdb488531810431822413e177c7}{Reconstruction\+::v\+\_\+comments}}
+\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{namespace_reconstruction_a977a6d8ff81004c5df77f6db4a7a8b11}{Reconstruction\+::v\+Tags}}
+\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{namespace_reconstruction_a50ad7b60a597a2f3777d3b9acb20b3fa}{Reconstruction\+::v\+\_\+datafiles}}
+\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{namespace_reconstruction_a6704a82aaabd8632841f30f550517058}{Reconstruction\+::v\+\_\+rootout\+\_\+files}}
+\item 
+std\+::string \mbox{\hyperlink{namespace_reconstruction_a4f6586c945fb393c11557e5c716096cd}{Reconstruction\+::tag}}
+\item 
+std\+::string \mbox{\hyperlink{namespace_reconstruction_aa247a28fec76cc4006345e785c837167}{Reconstruction\+::testbeam}}
+\item 
+std\+::string \mbox{\hyperlink{namespace_reconstruction_aff2e417ce2ebbe016c1a923993e5931f}{Reconstruction\+::multi\+Scan\+Name}}
+\item 
+std\+::string \mbox{\hyperlink{namespace_reconstruction_a95778d5c57d744f35d4515247148b504}{Reconstruction\+::scan\+Name}}
+\item 
+std\+::string \mbox{\hyperlink{namespace_reconstruction_a75d95e59d3e8a8a3baa4c436fa1a5b4c}{Reconstruction\+::runvarstr}}
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_a02c880aa3fc60efa7a1e32a2cf219781}{Reconstruction\+::scan\+Index}} = 0
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_aebe11808af331f686f3bd0d845d6f951}{Reconstruction\+::int\+Uploader}}
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_a66246bf38d688a4d0d668c2250b386da}{Reconstruction\+::module\+Case}}
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_af069e60f84af61c134ed010b539b93cf}{Reconstruction\+::\+PT}}
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_aaf0aa066dcfa96821489a5d449cdd2a6}{Reconstruction\+::\+Dt}}
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_a19e6ec3c4f542bcd6b15749b4526a919}{Reconstruction\+::\+DtB}}
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_a1509eecf74b816a22cdc97816b22b075}{Reconstruction\+::\+DtnoB}}
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_a1abbe9f647bbdf9a046575dfadc01a0f}{Reconstruction\+::drift\+Dist}}
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_a1ec3814e94230dbe1b31c62b4160dc00}{Reconstruction\+::\+TB}}
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_a19ac4fb414338706da055fbf4c43e57f}{Reconstruction\+::fcorrect\+Gain}}
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_af39c7a3b05e31ad997e6d8ea2d4f7f5f}{Reconstruction\+::fcorrect\+RC}}
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_ab759deecd94c5c0c7089f9c941991cf4}{Reconstruction\+::fcorrect\+WF}}
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_aa0ffb621e6ddc921355fabdd1d6bb940}{Reconstruction\+::fcorrect\+Drift}}
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_a8eac77e8fdca171987cd1622e93e6408}{Reconstruction\+::fsave\+Select\+Only}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Central place to declare reconstruction-\/wide variables and helpers. 
+
+This header exposes shared data structures, constants and light helper utilities used by drawing, monitoring and fitting code. Definitions and initialisation (if any) should live in \doxylink{_variables_8cxx}{Variables.\+cxx}.
+
+The implementation file {\ttfamily \doxylink{_variables_8cxx}{Variables.\+cxx}} defines module-\/global configuration strings, pointers and run parameters used across reconstruction and plotting code. Keep definitions minimal\+: only shared state should be declared here and initialised in the source file. 

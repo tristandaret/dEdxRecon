@@ -5,6 +5,12 @@
  * Declares the PRFParameters class which stores polynomial coefficients used
  * to evaluate a PRF model used by cluster/track fitting. Implementation is in
  * PRFParameters.cxx.
+ *
+ * @details
+ * The implementation provides Eval, SetPRF and operator() so the object can
+ * be used directly as a functor with ROOT's TF1. It stores the polynomial
+ * coefficients and provides a small, stable interface for fitters and
+ * waveform utilities.
  */
 #ifndef PRFParameters_H
 #define PRFParameters_H

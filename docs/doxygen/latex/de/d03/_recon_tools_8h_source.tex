@@ -1,0 +1,103 @@
+\doxysection{Recon\+Tools.\+h}
+\hypertarget{_recon_tools_8h_source}{}\label{_recon_tools_8h_source}\index{Reconstruction/inc/ReconTools.h@{Reconstruction/inc/ReconTools.h}}
+\mbox{\hyperlink{_recon_tools_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#ifndef\ Reconstruction\_TOOLS\_H}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#define\ Reconstruction\_TOOLS\_H}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ "{}TF1.h"{}}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ "{}TH1F.h"{}}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_misc_8h}{Misc.h}}"{}}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ "{}Util.h"{}}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_module_8h}{Module.h}}"{}}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_pad_8h}{Pad.h}}"{}}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_track_8h}{Track.h}}"{}}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_give_me___uploader_8h}{GiveMe\_Uploader.h}}"{}}}
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_selector_8h}{Selector.h}}"{}}}
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_uploader_8h}{Uploader.h}}"{}}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{comment}{/*\ Python's\ numpy\ equivalent\ of\ linspace}}
+\DoxyCodeLine{00033\ \textcolor{comment}{\ *\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00034\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{_recon_tools_8h_a07f950ba5a9919519fdb7fbbc11d2dbe}{FourModulesInLine}}(\textcolor{keyword}{const}\ std::vector<int>\ \&vec);}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_reconstruction}{Reconstruction}}\ \{}
+\DoxyCodeLine{00039\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_reconstruction_a857a325f53feb2a8ab37382badfa3420}{WFCorrection}}(\textcolor{keyword}{const}\ std::string\ \&OutCorr);}
+\DoxyCodeLine{00040\ \}}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \textcolor{comment}{/*\ Call\ the\ correction\ function\ of\ WF\ method}}
+\DoxyCodeLine{00043\ \textcolor{comment}{\ *\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00044\ TF1\ *\mbox{\hyperlink{_recon_tools_8h_a516365dce812c6618f625ee7ea02d6e4}{corr\_func}}(\textcolor{keyword}{const}\ std::string\ \&EventFile,\ \textcolor{keyword}{const}\ std::string\ \&Tag,}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&correctWF);}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \textcolor{comment}{/*\ Initialize\ selection\ stages}}
+\DoxyCodeLine{00048\ \textcolor{comment}{\ *\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00049\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_recon_tools_8h_add774300c91938a319019555c925da1e}{Init\_selection}}(\textcolor{keyword}{const}\ std::string\ \&SelectionSet,\ \mbox{\hyperlink{class_selector}{Selector}}\ \&aSelector,}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&Tag,\ \mbox{\hyperlink{class_uploader}{Uploader}}\ *pUploader,}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&NbrOfMod,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&Data\_to\_Use);}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \textcolor{comment}{/*\ FILE\ HANDLING\ */}}
+\DoxyCodeLine{00054\ \textcolor{comment}{//\ Read\ CSV\ file}}
+\DoxyCodeLine{00055\ std::vector<std::vector<float>>\ \mbox{\hyperlink{_recon_tools_8h_a1f1bdbe4e41128fdf9881992b6c63db8}{readCSV}}(std::string\ filename);}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \textcolor{comment}{//\ Determine\ the\ time\ cut}}
+\DoxyCodeLine{00058\ std::vector<int>\ \mbox{\hyperlink{_recon_tools_8h_a37449070a42628545fb43f92a0a6b44d}{ComputeCutStage3\_Cut}}(\mbox{\hyperlink{class_uploader}{Uploader}}\ *pUploader,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&NbrOfMod,}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&Data\_to\_Use);}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \textcolor{comment}{//\ Function\ to\ search\ for\ a\ word\ in\ a\ CSV\ file}}
+\DoxyCodeLine{00062\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{_recon_tools_8h_aa0478cfc492e8789343203f8ead6c608}{GetStage3Cut\_CSV}}(\textcolor{keyword}{const}\ std::string\ \&filename,}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&targetWord,\ \textcolor{keywordtype}{int}\ \&value1,\ \textcolor{keywordtype}{int}\ \&value2);}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \textcolor{comment}{//\ Function\ to\ update\ a\ CSV\ file}}
+\DoxyCodeLine{00066\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_recon_tools_8h_a89b37f625194b85e46f8eedf4512a939}{SetStage3Cut\_CSV}}(\textcolor{keyword}{const}\ std::string\ \&filename,}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&targetWord,\ \textcolor{keywordtype}{int}\ value1,\ \textcolor{keywordtype}{int}\ value2);}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \textcolor{comment}{/*\ GENERAL\ PHYSICS\ */}}
+\DoxyCodeLine{00070\ \textcolor{comment}{//\ Bethe-\/Bloch\ function}}
+\DoxyCodeLine{00071\ TF1\ *\mbox{\hyperlink{_recon_tools_8h_a4a54b47cc2a53206d96b0bc7a1342f92}{BetheBloch}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \&Emin,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \&Emax,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&m,}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&particle);}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \textcolor{comment}{//\ Bethe-\/Bloch\ relativistic\ for\ positrons\ with\ Bhabha\ scattering}}
+\DoxyCodeLine{00075\ TF1\ *\mbox{\hyperlink{_recon_tools_8h_abe60b077a8490cb15ae4440397ecee51}{BetheBlochBhabha}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \&Pmin,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \&Pmax,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&m,}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&particle);}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \textcolor{comment}{//\ Bethe-\/Bloch\ with\ experimental\ parametrisation}}
+\DoxyCodeLine{00079\ TF1\ *\mbox{\hyperlink{_recon_tools_8h_a9e04fade1cbe7df7429eb2acd1df5ea9}{BetheBlochExp}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \&Pmin,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \&Pmax,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&M,}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&particle);}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \textcolor{comment}{/*\ GENERAL\ MATH*/}}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \textcolor{comment}{//\ Fit\ with\ 2\ gaussians}}
+\DoxyCodeLine{00085\ TF1\ *\mbox{\hyperlink{_recon_tools_8h_a0f39222dbd918b7a898e5b5b326bd338}{Fit2Gauss}}(TH1F\ *h1F);}
+\DoxyCodeLine{00086\ TF1\ *\mbox{\hyperlink{_recon_tools_8h_a0f39222dbd918b7a898e5b5b326bd338}{Fit2Gauss}}(TH1F\ *h1F,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \&x1min,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \&x1max,}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \&x2min,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \&x2max);}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \textcolor{comment}{/*\ SPECIFIC\ MATH*/}}
+\DoxyCodeLine{00090\ \textcolor{comment}{//\ impact\ parameter\ d\ (in\ m)\ \&\ track\ angle\ phi\ (in\ degrees)\ computed\ locally\ at}}
+\DoxyCodeLine{00091\ \textcolor{comment}{//\ the\ level\ of\ the\ pad}}
+\DoxyCodeLine{00092\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_recon_tools_8h_a2bfcb39645b054f8cf7ab640f787faa7}{local\_params}}(\mbox{\hyperlink{class_pad}{Pad}}\ *pPad,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_track}{Track}}\ *pTrack,\ \textcolor{keywordtype}{float}\ \&d,\ \textcolor{keywordtype}{float}\ \&dd,}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ \&phi,\ \textcolor{keywordtype}{float}\ \&trk\_len\_pad);}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \textcolor{comment}{//\ Track\ length}}
+\DoxyCodeLine{00096\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{_recon_tools_8h_a571cc4efaf146929cb25dd1ce6b58dd8}{trk\_len}}(\mbox{\hyperlink{class_module}{Module}}\ *pModule,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_track}{Track}}\ *pTrack);}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \textcolor{comment}{//\ From\ TH1\ get\ TGraph}}
+\DoxyCodeLine{00099\ TGraph\ *\mbox{\hyperlink{_recon_tools_8h_a36d9fbe5c5c55cbf830cbbe263196f48}{hist\_to\_graph}}(TH1\ *h1);}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \textcolor{comment}{//\ From\ TH1\ get\ swapped\ TGraph\ (transpose\ x\ and\ y)}}
+\DoxyCodeLine{00102\ TGraph\ *\mbox{\hyperlink{_recon_tools_8h_ac64b00bd5aa3ca42079e99320f45ea79}{Swapped\_graph}}(TH1\ *h1);}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \textcolor{comment}{/*\ ROOT\ */}}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \textcolor{comment}{//\ Draw\ TH2}}
+\DoxyCodeLine{00107\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_recon_tools_8h_a9a45476722383f83cabd205d7ce4743f}{DrawTH2}}(\textcolor{keyword}{const}\ std::string\ \&OutDir,\ TH2\ *h2);}
+\DoxyCodeLine{00108\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

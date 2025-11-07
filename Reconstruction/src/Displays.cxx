@@ -1,15 +1,3 @@
-#/***************************************************************************
- * File: Displays.cxx
- * Project: dEdxRecon
- *
- * Brief: Implementations of high-level display and plotting helpers used to
- *        create event displays, waveform plots and cluster visualisations.
- *
- * Contents: Display helper implementations declared in Displays.h.
- *
- * Notes: Primarily presentation code; relies on ROOT graphics classes.
- ***************************************************************************/
-
 #include "Displays.h"
 #include "ParabolaFunction.h"
 #include "ParabolaFunctionNG.h"

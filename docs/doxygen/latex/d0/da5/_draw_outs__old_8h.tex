@@ -1,0 +1,127 @@
+\doxysection{Reconstruction/inc/\+Draw\+Outs\+\_\+old.h File Reference}
+\hypertarget{_draw_outs__old_8h}{}\label{_draw_outs__old_8h}\index{Reconstruction/inc/DrawOuts\_old.h@{Reconstruction/inc/DrawOuts\_old.h}}
+
+
+Legacy plotting helpers (kept for reference).  
+
+
+{\ttfamily \#include "{}Misc.\+h"{}}\newline
+{\ttfamily \#include "{}Set\+Style.\+h"{}}\newline
+{\ttfamily \#include "{}d\+Edx.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_draw_outs__old_8h_aee6fe31917f715f0b59b0baceb13a6bf}{Draw\+Out\+\_\+\+Methods}} (const std\+::string \&Out\+Dir, const std\+::string \&Tag, const std\+::string \&Comment, const int \&n\+Mod)
+\item 
+void \mbox{\hyperlink{_draw_outs__old_8h_a8b2e5d54175bbe5bdba19665cc1662fc}{Draw\+Out\+\_\+\+Versions}} (const std\+::string \&input\+Dir, const std\+::string \&Method, const std\+::string \&Comment1, const std\+::string \&Comment2)
+\item 
+void \mbox{\hyperlink{_draw_outs__old_8h_a53f63fac2e460c01cdaa9abcffbf73e4}{Draw\+Out\+\_\+\+Separation}} (const std\+::string \&input\+Dir, const std\+::string \&Comment)
+\item 
+void \mbox{\hyperlink{_draw_outs__old_8h_aeb6b096df2e84de580f9fb88c6e3fff5}{Draw\+Out\+\_\+\+Separation\+\_\+\+Reduced}} (const std\+::string \&input\+Dir, const std\+::string \&Comment, std\+::string Energy)
+\item 
+void \mbox{\hyperlink{_draw_outs__old_8h_ac6ace6c804f2ced12ba2a68a64c4ad6d}{Draw\+Out\+\_\+\+Scans}} (const std\+::string \&input\+Dir, const std\+::string \&Comment, const std\+::string \&WFversion)
+\item 
+void \mbox{\hyperlink{_draw_outs__old_8h_a9eaf3a345d6bb807382233a78ea0599d}{Draw\+Out\+\_\+\+Zscan}} (const std\+::string \&input\+Dir, const std\+::string \&Comment, const int \&PT)
+\item 
+void \mbox{\hyperlink{_draw_outs__old_8h_a4d5fc46cf569d54702b4bee19b5e74eb}{Draw\+Out\+\_\+\+Yscan}} (const std\+::string \&input\+Dir, const std\+::string \&Comment)
+\item 
+void \mbox{\hyperlink{_draw_outs__old_8h_a1ab33a747c6a434181aff58882342e7d}{Draw\+Out\+\_\+\+Phiscan}} (const std\+::string \&input\+Dir, const std\+::string \&Comment, const std\+::string \&WFversion, const std\+::string \&zdrift)
+\item 
+void \mbox{\hyperlink{_draw_outs__old_8h_a27f2d41efbe58740d10f2c9908c3faaf}{Draw\+Out\+\_\+\+Thetascan}} (const std\+::string \&input\+Dir, const std\+::string \&Comment)
+\item 
+void \mbox{\hyperlink{_draw_outs__old_8h_a58a0c823915bd7b4421a26f1f04fa7db}{Draw\+Out\+\_\+\+Zscan\+\_\+\+PT}} (const std\+::string \&input\+Dir, const std\+::string \&Comment)
+\item 
+void \mbox{\hyperlink{_draw_outs__old_8h_aafb5cc93e204fdb2fae12207b86c2219}{Draw\+Out\+\_\+\+Phiscan\+\_\+Z}} (const std\+::string \&input\+Dir, const std\+::string \&Comment, const std\+::string \&WFversion)
+\item 
+void \mbox{\hyperlink{_draw_outs__old_8h_af726b66452a15c66086b2d81e11f04a2}{Draw\+Out\+\_\+\+Escan}} (const std\+::string \&input\+Dir, const std\+::string \&Comment)
+\item 
+void \mbox{\hyperlink{_draw_outs__old_8h_a3cf54d94c9328eb82e3d6ef4f1e2e7b8}{Draw\+Out\+\_\+\+Systematics}} (const std\+::string \&input\+Dir, const std\+::string \&Comment, const std\+::string \&scan)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Legacy plotting helpers (kept for reference). 
+
+Contains an older variant of the Draw\+Outs plotting helper kept for compatibility and reference. Prefer {\ttfamily Draw\+Outs} for new code. 
+
+\label{doc-func-members}
+\Hypertarget{_draw_outs__old_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_draw_outs__old_8h_af726b66452a15c66086b2d81e11f04a2}\index{DrawOuts\_old.h@{DrawOuts\_old.h}!DrawOut\_Escan@{DrawOut\_Escan}}
+\index{DrawOut\_Escan@{DrawOut\_Escan}!DrawOuts\_old.h@{DrawOuts\_old.h}}
+\doxysubsubsection{\texorpdfstring{DrawOut\_Escan()}{DrawOut\_Escan()}}
+{\footnotesize\ttfamily \label{_draw_outs__old_8h_af726b66452a15c66086b2d81e11f04a2} 
+void Draw\+Out\+\_\+\+Escan (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{input\+Dir}{, }\item[{const std\+::string \&}]{Comment}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_draw_outs__old_8h_aee6fe31917f715f0b59b0baceb13a6bf}\index{DrawOuts\_old.h@{DrawOuts\_old.h}!DrawOut\_Methods@{DrawOut\_Methods}}
+\index{DrawOut\_Methods@{DrawOut\_Methods}!DrawOuts\_old.h@{DrawOuts\_old.h}}
+\doxysubsubsection{\texorpdfstring{DrawOut\_Methods()}{DrawOut\_Methods()}}
+{\footnotesize\ttfamily \label{_draw_outs__old_8h_aee6fe31917f715f0b59b0baceb13a6bf} 
+void Draw\+Out\+\_\+\+Methods (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{Out\+Dir}{, }\item[{const std\+::string \&}]{Tag}{, }\item[{const std\+::string \&}]{Comment}{, }\item[{const int \&}]{n\+Mod}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_draw_outs__old_8h_a1ab33a747c6a434181aff58882342e7d}\index{DrawOuts\_old.h@{DrawOuts\_old.h}!DrawOut\_Phiscan@{DrawOut\_Phiscan}}
+\index{DrawOut\_Phiscan@{DrawOut\_Phiscan}!DrawOuts\_old.h@{DrawOuts\_old.h}}
+\doxysubsubsection{\texorpdfstring{DrawOut\_Phiscan()}{DrawOut\_Phiscan()}}
+{\footnotesize\ttfamily \label{_draw_outs__old_8h_a1ab33a747c6a434181aff58882342e7d} 
+void Draw\+Out\+\_\+\+Phiscan (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{input\+Dir}{, }\item[{const std\+::string \&}]{Comment}{, }\item[{const std\+::string \&}]{WFversion}{, }\item[{const std\+::string \&}]{zdrift}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_draw_outs__old_8h_aafb5cc93e204fdb2fae12207b86c2219}\index{DrawOuts\_old.h@{DrawOuts\_old.h}!DrawOut\_Phiscan\_Z@{DrawOut\_Phiscan\_Z}}
+\index{DrawOut\_Phiscan\_Z@{DrawOut\_Phiscan\_Z}!DrawOuts\_old.h@{DrawOuts\_old.h}}
+\doxysubsubsection{\texorpdfstring{DrawOut\_Phiscan\_Z()}{DrawOut\_Phiscan\_Z()}}
+{\footnotesize\ttfamily \label{_draw_outs__old_8h_aafb5cc93e204fdb2fae12207b86c2219} 
+void Draw\+Out\+\_\+\+Phiscan\+\_\+Z (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{input\+Dir}{, }\item[{const std\+::string \&}]{Comment}{, }\item[{const std\+::string \&}]{WFversion}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_draw_outs__old_8h_ac6ace6c804f2ced12ba2a68a64c4ad6d}\index{DrawOuts\_old.h@{DrawOuts\_old.h}!DrawOut\_Scans@{DrawOut\_Scans}}
+\index{DrawOut\_Scans@{DrawOut\_Scans}!DrawOuts\_old.h@{DrawOuts\_old.h}}
+\doxysubsubsection{\texorpdfstring{DrawOut\_Scans()}{DrawOut\_Scans()}}
+{\footnotesize\ttfamily \label{_draw_outs__old_8h_ac6ace6c804f2ced12ba2a68a64c4ad6d} 
+void Draw\+Out\+\_\+\+Scans (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{input\+Dir}{, }\item[{const std\+::string \&}]{Comment}{, }\item[{const std\+::string \&}]{WFversion}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_draw_outs__old_8h_a53f63fac2e460c01cdaa9abcffbf73e4}\index{DrawOuts\_old.h@{DrawOuts\_old.h}!DrawOut\_Separation@{DrawOut\_Separation}}
+\index{DrawOut\_Separation@{DrawOut\_Separation}!DrawOuts\_old.h@{DrawOuts\_old.h}}
+\doxysubsubsection{\texorpdfstring{DrawOut\_Separation()}{DrawOut\_Separation()}}
+{\footnotesize\ttfamily \label{_draw_outs__old_8h_a53f63fac2e460c01cdaa9abcffbf73e4} 
+void Draw\+Out\+\_\+\+Separation (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{input\+Dir}{, }\item[{const std\+::string \&}]{Comment}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_draw_outs__old_8h_aeb6b096df2e84de580f9fb88c6e3fff5}\index{DrawOuts\_old.h@{DrawOuts\_old.h}!DrawOut\_Separation\_Reduced@{DrawOut\_Separation\_Reduced}}
+\index{DrawOut\_Separation\_Reduced@{DrawOut\_Separation\_Reduced}!DrawOuts\_old.h@{DrawOuts\_old.h}}
+\doxysubsubsection{\texorpdfstring{DrawOut\_Separation\_Reduced()}{DrawOut\_Separation\_Reduced()}}
+{\footnotesize\ttfamily \label{_draw_outs__old_8h_aeb6b096df2e84de580f9fb88c6e3fff5} 
+void Draw\+Out\+\_\+\+Separation\+\_\+\+Reduced (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{input\+Dir}{, }\item[{const std\+::string \&}]{Comment}{, }\item[{std\+::string}]{Energy}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_draw_outs__old_8h_a3cf54d94c9328eb82e3d6ef4f1e2e7b8}\index{DrawOuts\_old.h@{DrawOuts\_old.h}!DrawOut\_Systematics@{DrawOut\_Systematics}}
+\index{DrawOut\_Systematics@{DrawOut\_Systematics}!DrawOuts\_old.h@{DrawOuts\_old.h}}
+\doxysubsubsection{\texorpdfstring{DrawOut\_Systematics()}{DrawOut\_Systematics()}}
+{\footnotesize\ttfamily \label{_draw_outs__old_8h_a3cf54d94c9328eb82e3d6ef4f1e2e7b8} 
+void Draw\+Out\+\_\+\+Systematics (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{input\+Dir}{, }\item[{const std\+::string \&}]{Comment}{, }\item[{const std\+::string \&}]{scan}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_draw_outs__old_8h_a27f2d41efbe58740d10f2c9908c3faaf}\index{DrawOuts\_old.h@{DrawOuts\_old.h}!DrawOut\_Thetascan@{DrawOut\_Thetascan}}
+\index{DrawOut\_Thetascan@{DrawOut\_Thetascan}!DrawOuts\_old.h@{DrawOuts\_old.h}}
+\doxysubsubsection{\texorpdfstring{DrawOut\_Thetascan()}{DrawOut\_Thetascan()}}
+{\footnotesize\ttfamily \label{_draw_outs__old_8h_a27f2d41efbe58740d10f2c9908c3faaf} 
+void Draw\+Out\+\_\+\+Thetascan (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{input\+Dir}{, }\item[{const std\+::string \&}]{Comment}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_draw_outs__old_8h_a8b2e5d54175bbe5bdba19665cc1662fc}\index{DrawOuts\_old.h@{DrawOuts\_old.h}!DrawOut\_Versions@{DrawOut\_Versions}}
+\index{DrawOut\_Versions@{DrawOut\_Versions}!DrawOuts\_old.h@{DrawOuts\_old.h}}
+\doxysubsubsection{\texorpdfstring{DrawOut\_Versions()}{DrawOut\_Versions()}}
+{\footnotesize\ttfamily \label{_draw_outs__old_8h_a8b2e5d54175bbe5bdba19665cc1662fc} 
+void Draw\+Out\+\_\+\+Versions (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{input\+Dir}{, }\item[{const std\+::string \&}]{Method}{, }\item[{const std\+::string \&}]{Comment1}{, }\item[{const std\+::string \&}]{Comment2}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_draw_outs__old_8h_a4d5fc46cf569d54702b4bee19b5e74eb}\index{DrawOuts\_old.h@{DrawOuts\_old.h}!DrawOut\_Yscan@{DrawOut\_Yscan}}
+\index{DrawOut\_Yscan@{DrawOut\_Yscan}!DrawOuts\_old.h@{DrawOuts\_old.h}}
+\doxysubsubsection{\texorpdfstring{DrawOut\_Yscan()}{DrawOut\_Yscan()}}
+{\footnotesize\ttfamily \label{_draw_outs__old_8h_a4d5fc46cf569d54702b4bee19b5e74eb} 
+void Draw\+Out\+\_\+\+Yscan (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{input\+Dir}{, }\item[{const std\+::string \&}]{Comment}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_draw_outs__old_8h_a9eaf3a345d6bb807382233a78ea0599d}\index{DrawOuts\_old.h@{DrawOuts\_old.h}!DrawOut\_Zscan@{DrawOut\_Zscan}}
+\index{DrawOut\_Zscan@{DrawOut\_Zscan}!DrawOuts\_old.h@{DrawOuts\_old.h}}
+\doxysubsubsection{\texorpdfstring{DrawOut\_Zscan()}{DrawOut\_Zscan()}}
+{\footnotesize\ttfamily \label{_draw_outs__old_8h_a9eaf3a345d6bb807382233a78ea0599d} 
+void Draw\+Out\+\_\+\+Zscan (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{input\+Dir}{, }\item[{const std\+::string \&}]{Comment}{, }\item[{const int \&}]{PT}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_draw_outs__old_8h_a58a0c823915bd7b4421a26f1f04fa7db}\index{DrawOuts\_old.h@{DrawOuts\_old.h}!DrawOut\_Zscan\_PT@{DrawOut\_Zscan\_PT}}
+\index{DrawOut\_Zscan\_PT@{DrawOut\_Zscan\_PT}!DrawOuts\_old.h@{DrawOuts\_old.h}}
+\doxysubsubsection{\texorpdfstring{DrawOut\_Zscan\_PT()}{DrawOut\_Zscan\_PT()}}
+{\footnotesize\ttfamily \label{_draw_outs__old_8h_a58a0c823915bd7b4421a26f1f04fa7db} 
+void Draw\+Out\+\_\+\+Zscan\+\_\+\+PT (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{input\+Dir}{, }\item[{const std\+::string \&}]{Comment}{}\end{DoxyParamCaption})}
+

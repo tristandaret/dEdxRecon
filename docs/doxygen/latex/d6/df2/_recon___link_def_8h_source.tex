@@ -1,0 +1,30 @@
+\doxysection{Recon\+\_\+\+Link\+Def.\+h}
+\hypertarget{_recon___link_def_8h_source}{}\label{_recon___link_def_8h_source}\index{Reconstruction/inc/Recon\_LinkDef.h@{Reconstruction/inc/Recon\_LinkDef.h}}
+\mbox{\hyperlink{_recon___link_def_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{d_edx_8h}{dEdx.h}}"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#ifdef\ \_\_ROOTCLING\_\_}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#pragma\ link\ off\ all\ globals;}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#pragma\ link\ off\ all\ classes;}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#pragma\ link\ off\ all\ functions;}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{comment}{//\ For\ dEdx\ output}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#pragma\ link\ C++\ namespace\ Reconstruction;}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#pragma\ link\ C++\ namespace\ Reconstruction;}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#pragma\ link\ C++\ class\ Reconstruction::RecoPad\ +\ ;}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#pragma\ link\ C++\ class\ std::vector\ <\ Reconstruction::RecoPad\ *>\ +\ ;}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#pragma\ link\ C++\ class\ Reconstruction::RecoCluster\ +\ ;}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#pragma\ link\ C++\ class\ std::vector\ <\ Reconstruction::RecoCluster\ *>\ +\ ;}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#pragma\ link\ C++\ class\ Reconstruction::RecoModule\ +\ ;}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#pragma\ link\ C++\ class\ std::vector\ <\ Reconstruction::RecoModule\ *>\ +\ ;}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#pragma\ link\ C++\ class\ Reconstruction::RecoEvent\ +\ ;}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{comment}{//\ For\ ERAM\ maps\ reading}}
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#pragma\ link\ C++\ class\ EramInfo\ +\ ;}}
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

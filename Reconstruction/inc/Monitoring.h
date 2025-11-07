@@ -4,6 +4,19 @@
  *
  * Declares functions used to run monitoring, produce diagnostic summaries
  * (histograms, performance numbers) and control analysis settings.
+ *
+ * @details
+ * A small executable `Apps/Analysis.cxx` exists which calls
+ * `Reconstruction::Monitoring()` as a top-level entry point to run
+ * analysis workflows; the implementation of Monitoring lives in
+ * `Reconstruction/src/Monitoring.cxx`.
+ *
+ * @details
+ * The source file contains routines that assemble diagnostic histograms,
+ * run monitoring workflows and produce summaries for inspection. It is the
+ * primary entry point used by the `Analysis` executable to run automated
+ * monitoring and analysis sequences; configuration and selection setup
+ * live in the header-level declarations and other helper modules.
  */
 #ifndef MONITORING_H
 #define MONITORING_H

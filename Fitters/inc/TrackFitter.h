@@ -6,6 +6,15 @@
  * (ROOT's TVirtualFitter/TMinuit) and exposes methods to set the track,
  * run minimisation and compute the chi2. The implementation lives in
  * TrackFitter.cxx.
+ *
+ * @details
+ * Implementation notes: the corresponding source file, TrackFitter.cxx,
+ * contains the concrete interfacing code to ROOT's minimisers and the
+ * static bridge used by Minuit (a file-local helper class that forwards
+ * the minimiser callbacks to a TrackFitter instance). The Chi2 evaluation
+ * routine and Minuit callback registration are performed in the source
+ * implementation. Care must be taken not to change the global/static
+ * bridge semantics as Minuit requires a static callback wrapper.
  */
 
 #ifndef TrackFitter_H

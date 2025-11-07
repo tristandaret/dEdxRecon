@@ -1,0 +1,36 @@
+\doxysection{Parabola\+Function.\+h}
+\hypertarget{_parabola_function_8h_source}{}\label{_parabola_function_8h_source}\index{Utilities/inc/ParabolaFunction.h@{Utilities/inc/ParabolaFunction.h}}
+\mbox{\hyperlink{_parabola_function_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#ifndef\ ParabolaFunction\_H}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#define\ ParabolaFunction\_H}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_misc_8h}{Misc.h}}"{}}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{comment}{//}}
+\DoxyCodeLine{00015\ \textcolor{comment}{//\ Fit\ parabola\ -\/std::fabs(A0)\ *\ std::pow(X0-\/vX,2)+\ Y0\ );}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00018\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_parabola_function_a58532f7c3f28acd45c181ee57ad41b4d}{ParabolaFunction}}\ \{}
+\DoxyCodeLine{00019\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00021\ \ \ \mbox{\hyperlink{class_parabola_function_a58532f7c3f28acd45c181ee57ad41b4d}{ParabolaFunction}}();}
+\DoxyCodeLine{00022\ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_parabola_function_aa59bae2d8c977675465dc79fd8b1b811}{\string~ParabolaFunction}}();}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_parabola_function_a98beb3fd4171c2b83da54e4b047d0c0a}{Get\_A0}}();}
+\DoxyCodeLine{00025\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_parabola_function_a5ba240b654ede92ed9d05058d629a2f1}{Get\_X0}}();}
+\DoxyCodeLine{00026\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_parabola_function_a499af1f0e956fbb58669dd3559d2e9c4}{Get\_Y0}}();}
+\DoxyCodeLine{00027\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_parabola_function_a9fd6410d777acf5c04f4e104459c8903}{Set\_A0}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&A0);}
+\DoxyCodeLine{00028\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_parabola_function_a347f541c9d3ac6a173a2fe3ed1ece322}{Set\_X0}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&X0);}
+\DoxyCodeLine{00029\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_parabola_function_aa48a0e56387fa2dc5951aa8c7db03317}{Set\_Y0}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&Y0);}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_parabola_function_a8b59d6ad097d409a27b3de96b5c2bb18}{operator()}}(\textcolor{keywordtype}{double}\ *x,\ \textcolor{keywordtype}{double}\ *par);}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00034\ \ \ \textcolor{keywordtype}{double}\ m\_A0;}
+\DoxyCodeLine{00035\ \ \ \textcolor{keywordtype}{double}\ m\_X0;}
+\DoxyCodeLine{00036\ \ \ \textcolor{keywordtype}{double}\ m\_Y0;}
+\DoxyCodeLine{00037\ \};}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

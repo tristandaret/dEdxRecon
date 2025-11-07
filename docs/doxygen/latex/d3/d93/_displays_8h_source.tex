@@ -1,0 +1,63 @@
+\doxysection{Displays.\+h}
+\hypertarget{_displays_8h_source}{}\label{_displays_8h_source}\index{Reconstruction/inc/Displays.h@{Reconstruction/inc/Displays.h}}
+\mbox{\hyperlink{_displays_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#ifndef\ DISPLAYS\_H}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#define\ DISPLAYS\_H}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_misc_8h}{Misc.h}}"{}}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_event_8h}{Event.h}}"{}}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_module_8h}{Module.h}}"{}}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_pad_8h}{Pad.h}}"{}}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_sample_8h}{Sample.h}}"{}}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ "{}TH1F.h"{}}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#include\ "{}TH2D.h"{}}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{comment}{//\ Event\ display}}
+\DoxyCodeLine{00036\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_displays_8h_ad7fa96393c4875b4ea24675ac63dffbe}{DrawOut\_EventDisplay}}(\mbox{\hyperlink{class_event}{Event}}\ *pEvent,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&ModuleNber,}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&OUTDIR,\ \textcolor{keyword}{const}\ std::string\ \&TAG);}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00042\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_displays_8h_ad7fa96393c4875b4ea24675ac63dffbe}{DrawOut\_EventDisplay}}(\mbox{\hyperlink{class_module}{Module}}\ *pModule,\ \textcolor{keyword}{const}\ std::string\ \&OUTDIR,}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&TAG,\ \textcolor{keyword}{const}\ std::string\ \&type,}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&parabola,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&slope,}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&intercept);}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00048\ TH2D\ *\mbox{\hyperlink{_displays_8h_a1d9ffed9d03dd0e33d7eead16655eb84}{GiveMe\_EvtDisplay}}(\mbox{\hyperlink{class_event}{Event}}\ *pEvent,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&ModuleNber,}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&TAG);}
+\DoxyCodeLine{00051\ TH2D\ *\mbox{\hyperlink{_displays_8h_a1d9ffed9d03dd0e33d7eead16655eb84}{GiveMe\_EvtDisplay}}(\mbox{\hyperlink{class_module}{Module}}\ *pModule,\ \textcolor{keyword}{const}\ std::string\ \&TAG);}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \textcolor{comment}{//\ Get\ Timing\ Event\ display}}
+\DoxyCodeLine{00054\ TH2D\ *\mbox{\hyperlink{_displays_8h_a936286e3b509a3c7e3186183dfae834f}{GiveMe\_TimeDisplay}}(\mbox{\hyperlink{class_module}{Module}}\ *pModule,\ \textcolor{keyword}{const}\ std::string\ \&TAG);}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/WF\ pad\ Display}}
+\DoxyCodeLine{00057\ \textcolor{comment}{//\ Output\ waveform\ of\ a\ pad\ with\ tagging\ string\ TAG,\ placed\ in\ OUTDIR\ dir}}
+\DoxyCodeLine{00058\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_displays_8h_a964185626427f088abc8d4e5afe2309f}{DrawOut\_WaveFormDisplay}}(\mbox{\hyperlink{class_pad}{Pad}}\ *pPad,\ \textcolor{keyword}{const}\ std::string\ \&OUTDIR,}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&TAG);}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \textcolor{comment}{//\ Get\ waveform\ histo\ of\ pad\ with\ tagging\ string\ TAG}}
+\DoxyCodeLine{00062\ TH1F\ *\mbox{\hyperlink{_displays_8h_ad475141075e240c0932deb34d6690f76}{GiveMe\_WaveFormDisplay}}(\mbox{\hyperlink{class_pad}{Pad}}\ *pPad,\ \textcolor{keyword}{const}\ std::string\ \&TAG);}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/WFs\ cluster\ Display}}
+\DoxyCodeLine{00065\ \textcolor{comment}{//\ TD:\ Draw\ Waveforms\ of\ all\ Pads\ in\ a\ Cluster}}
+\DoxyCodeLine{00066\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_displays_8h_a71509ac632013b193d51a8b4d376ce4c}{DrawOut\_ClusterWFDisplay}}(\mbox{\hyperlink{class_cluster}{Cluster}}\ *pCluster,\ \textcolor{keyword}{const}\ std::string\ \&OUTDIR,}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&TAG);}
+\DoxyCodeLine{00068\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_displays_8h_a71509ac632013b193d51a8b4d376ce4c}{DrawOut\_ClusterWFDisplay}}(\mbox{\hyperlink{class_cluster}{Cluster}}\ *pCluster,\ \textcolor{keyword}{const}\ std::string\ \&OUTDIR,}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&TAG,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&Option,}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&PT,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&TB);}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \textcolor{comment}{//\ Draw\ Event\ waveform}}
+\DoxyCodeLine{00073\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_displays_8h_aff8f6ee3b35ae66b507a99d41bf22463}{DrawOut\_GWF}}(\mbox{\hyperlink{class_event}{Event}}\ *pEvent,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&ModuleNber,}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&OUTDIR,\ \textcolor{keyword}{const}\ std::string\ \&TAG,}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&PT,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&TB,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \&phi\_rad);}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \textcolor{comment}{//\ Redo\ Cluster\ display}}
+\DoxyCodeLine{00078\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_displays_8h_a90b29df35763b1b9819010080bde0ac6}{NewClusterDisplay}}(\mbox{\hyperlink{class_event}{Event}}\ *pEvent,\ \textcolor{keyword}{const}\ std::string\ \&OUTDIR,}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&TAG,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&PT,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&TB);}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_displays_8h_af8fec9e27b1b22bc782eceef8967310d}{NewClusterDisplayMinimal}}(\mbox{\hyperlink{class_event}{Event}}\ *pEvent,\ \textcolor{keyword}{const}\ std::string\ \&OUTDIR,}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&TAG);}
+
+\end{DoxyCode}

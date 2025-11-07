@@ -1,0 +1,61 @@
+\doxysection{Fitters/src/\+Track\+Recon.cxx File Reference}
+\hypertarget{_track_recon_8cxx}{}\label{_track_recon_8cxx}\index{Fitters/src/TrackRecon.cxx@{Fitters/src/TrackRecon.cxx}}
+{\ttfamily \#include "{}Track\+Recon.\+h"{}}\newline
+{\ttfamily \#include "{}Cluster.\+h"{}}\newline
+{\ttfamily \#include "{}Event.\+h"{}}\newline
+{\ttfamily \#include "{}Track.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_track_recon_8cxx_a42c991dfcf0e8ae7f85bbc98875f6e8b}{Track\+Recon}} (\mbox{\hyperlink{class_sample}{Sample}} \&a\+Sample, const int \&Module\+Nber, const int \&Nber\+Of\+Parameters)
+\begin{DoxyCompactList}\small\item\em Run track reconstruction over a sample. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{_track_recon_8cxx_a532557f80b39d11fef23c31bf4a1bf7e}{Track\+Recon\+\_\+\+Event}} (\mbox{\hyperlink{class_track_fitter}{Track\+Fitter}} \&a\+Track\+Fitter, \mbox{\hyperlink{class_event}{Event}} \texorpdfstring{$\ast$}{*}p\+Event, const int \&Module\+Nber, const int \&Nber\+Of\+Parameters)
+\begin{DoxyCompactList}\small\item\em Run track reconstruction for a single event using a \doxylink{class_track_fitter}{Track\+Fitter}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{_track_recon_8cxx_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_track_recon_8cxx_a42c991dfcf0e8ae7f85bbc98875f6e8b}\index{TrackRecon.cxx@{TrackRecon.cxx}!TrackRecon@{TrackRecon}}
+\index{TrackRecon@{TrackRecon}!TrackRecon.cxx@{TrackRecon.cxx}}
+\doxysubsubsection{\texorpdfstring{TrackRecon()}{TrackRecon()}}
+{\footnotesize\ttfamily \label{_track_recon_8cxx_a42c991dfcf0e8ae7f85bbc98875f6e8b} 
+void Track\+Recon (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_sample}{Sample}} \&}]{a\+Sample}{, }\item[{const int \&}]{Module\+Nber}{, }\item[{const int \&}]{Nber\+Of\+Parameters}{ = {\ttfamily 3}}\end{DoxyParamCaption})}
+
+
+
+Run track reconstruction over a sample. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Sample} & reference to the input \doxylink{class_sample}{Sample} \\
+\hline
+{\em Module\+Nber} & module index \\
+\hline
+{\em Nber\+Of\+Parameters} & number of fit parameters (default\+: 3) \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_track_recon_8cxx_a532557f80b39d11fef23c31bf4a1bf7e}\index{TrackRecon.cxx@{TrackRecon.cxx}!TrackRecon\_Event@{TrackRecon\_Event}}
+\index{TrackRecon\_Event@{TrackRecon\_Event}!TrackRecon.cxx@{TrackRecon.cxx}}
+\doxysubsubsection{\texorpdfstring{TrackRecon\_Event()}{TrackRecon\_Event()}}
+{\footnotesize\ttfamily \label{_track_recon_8cxx_a532557f80b39d11fef23c31bf4a1bf7e} 
+int Track\+Recon\+\_\+\+Event (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_track_fitter}{Track\+Fitter}} \&}]{a\+Track\+Fitter}{, }\item[{\mbox{\hyperlink{class_event}{Event}} \texorpdfstring{$\ast$}{*}}]{p\+Event}{, }\item[{const int \&}]{Module\+Nber}{, }\item[{const int \&}]{Nber\+Of\+Parameters}{ = {\ttfamily 3}}\end{DoxyParamCaption})}
+
+
+
+Run track reconstruction for a single event using a \doxylink{class_track_fitter}{Track\+Fitter}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Track\+Fitter} & reference to an existing \doxylink{class_track_fitter}{Track\+Fitter} instance \\
+\hline
+{\em p\+Event} & pointer to the \doxylink{class_event}{Event} to process \\
+\hline
+{\em Module\+Nber} & module index \\
+\hline
+{\em Nber\+Of\+Parameters} & number of fit parameters (default\+: 3) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+integer status (0 on success) 
+\end{DoxyReturn}

@@ -1,16 +1,3 @@
-#/***************************************************************************
- * File: Variables.cxx
- * Project: dEdxRecon
- *
- * Brief: Definitions and initialisation of module-global variables declared
- *        in Variables.h. Central place for configuration strings and
- *        shared pointers used by reconstruction routines.
- *
- * Contents: variable definitions and any default initialisation.
- *
- * Notes: Keep initial values minimal and configurable from callers.
- ***************************************************************************/
-
 #include "Variables.h"
 
 namespace Reconstruction {

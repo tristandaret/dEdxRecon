@@ -1,0 +1,57 @@
+\doxysection{Fit\+Output.\+h}
+\hypertarget{_fit_output_8h_source}{}\label{_fit_output_8h_source}\index{ModelEvent/inc/FitOutput.h@{ModelEvent/inc/FitOutput.h}}
+\mbox{\hyperlink{_fit_output_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#ifndef\ FitOutput\_H}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ FitOutput\_H}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_misc_8h}{Misc.h}}"{}}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}TCanvas.h"{}}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ "{}TMatrixD.h"{}}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ "{}TVirtualFitter.h"{}}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00018\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_fit_output_af2832382759b0dd27b770c28747b4ef8}{FitOutput}}\ \{}
+\DoxyCodeLine{00019\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00020\ \ \ \mbox{\hyperlink{class_fit_output_af2832382759b0dd27b770c28747b4ef8}{FitOutput}}();}
+\DoxyCodeLine{00021\ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_fit_output_a0c65f8749ba52e922181984f635c34e5}{\string~FitOutput}}();}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \mbox{\hyperlink{class_fit_output_af2832382759b0dd27b770c28747b4ef8}{FitOutput}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_fit_output_af2832382759b0dd27b770c28747b4ef8}{FitOutput}}\ \&ToBeCopied);}
+\DoxyCodeLine{00024\ \ \ \mbox{\hyperlink{class_fit_output_af2832382759b0dd27b770c28747b4ef8}{FitOutput}}\ \&\mbox{\hyperlink{class_fit_output_aad19ca7ed03af24f5113e6903dde7d4b}{operator=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_fit_output_af2832382759b0dd27b770c28747b4ef8}{FitOutput}}\ \&ToBeCopied);}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_fit_output_af790346a4f82a985094b495e47913489}{Reset}}();}
+\DoxyCodeLine{00030\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_fit_output_af1afb81fef816f95639b749ad4fe606d}{Set}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&NberOfModelParameters);}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_fit_output_ad08d66eb909551d1601527ba70c8d59e}{SetResults}}(TVirtualFitter\ *pTVirtualFitter);}
+\DoxyCodeLine{00033\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_fit_output_ad08d66eb909551d1601527ba70c8d59e}{SetResults}}(\textcolor{keyword}{const}\ std::vector<std::string>\ \&V\_PARname,}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<double>\ \&V\_PAR,}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<double>\ \&V\_ePAR);}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_fit_output_a75042abe9b795ac2494728ce07c81680}{PrintFitOutput}}();}
+\DoxyCodeLine{00038\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_fit_output_ae81880ba505c88b86e92c7b77acf805e}{PrintFitOutputInCanvas}}(\textcolor{keywordtype}{double}\ Xstart,\ \textcolor{keywordtype}{double}\ Ystart,\ \textcolor{keywordtype}{double}\ Step);}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ std::string\ \mbox{\hyperlink{class_fit_output_a54192318ca1996b1eeb5b4f78ae2e03c}{m\_NameOfTheModel}};}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_fit_output_aae4ec2cb67c37f21bf63195409ee5309}{m\_NberOfModelParameters}};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_fit_output_a030c139b1da8d3879ff233b3c7233cf9}{m\_NberOfDataPoints}};}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \textcolor{keywordtype}{double}\ *\mbox{\hyperlink{class_fit_output_a69514a069906f5c9ebc551b38a7ff90c}{p\_par}};\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00050\ \ \ std::string\ *\mbox{\hyperlink{class_fit_output_acf7af4c76f0c4474f464bcbee78aede0}{p\_parName}};\ }
+\DoxyCodeLine{00051\ \ \ \textcolor{keywordtype}{double}\ *\mbox{\hyperlink{class_fit_output_a9d5d13322b3e367205d308ba32ac8aff}{p\_eparplus}};\ \ \ \ \ }
+\DoxyCodeLine{00052\ \ \ \textcolor{keywordtype}{double}\ *\mbox{\hyperlink{class_fit_output_a78e7313795a08975328dfd15bae8fb21}{p\_eparminus}};\ \ \ \ }
+\DoxyCodeLine{00053\ \ \ \textcolor{keywordtype}{double}\ *\mbox{\hyperlink{class_fit_output_a68595a11038d4600a6e3a5fc3c5a9527}{p\_eparparab}};\ \ \ \ }
+\DoxyCodeLine{00054\ \ \ \textcolor{keywordtype}{double}\ *\mbox{\hyperlink{class_fit_output_ad9f3c060dbe1dd05169a9e5dbc4d9fa4}{p\_CovMatrix}};\ \ \ \ }
+\DoxyCodeLine{00055\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_fit_output_a9021ae4443b7cd6d87ba77799e0ec87b}{m\_MinnLL}};\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ std::string\ \mbox{\hyperlink{class_fit_output_a2c7216f868ba737c4a734cd510a7f513}{m\_Description}};}
+\DoxyCodeLine{00058\ \};}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

@@ -4,6 +4,12 @@
  *
  * Defines the interface used by concrete charge model implementations
  * (0D, 1D, etc.). Provides common parameter accessors and utility helpers.
+ *
+ * @details
+ * Implementations (Model_Charge0D/1D) provide concrete `Get_Qpad` and
+ * `SetSecondaries` logic; this base class implements shared helpers used by
+ * concrete models, such as width-from-drift calculations and normalization
+ * helpers.
  */
 #ifndef Model_ChargeI_H
 #define Model_ChargeI_H

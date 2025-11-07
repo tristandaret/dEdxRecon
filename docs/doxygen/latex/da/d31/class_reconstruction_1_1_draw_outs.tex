@@ -1,0 +1,252 @@
+\doxysection{Reconstruction\+::Draw\+Outs Class Reference}
+\hypertarget{class_reconstruction_1_1_draw_outs}{}\label{class_reconstruction_1_1_draw_outs}\index{Reconstruction::DrawOuts@{Reconstruction::DrawOuts}}
+
+
+Plotting helper for reconstruction results.  
+
+
+
+
+{\ttfamily \#include $<$Draw\+Outs.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_reconstruction_1_1_draw_outs_ab58ee91ac92c6c5ac5e86d628c580f71}{Draw\+Outs}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_reconstruction_1_1_draw_outs_af676842673485b31a45e83623928cb1e}{Draw\+Outs}} (const std\+::string \&input\+File)
+\begin{DoxyCompactList}\small\item\em Construct from a single input file. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_reconstruction_1_1_draw_outs_a940b8d4ec6f07b6e91388685b902c174}{Draw\+Outs}} (const std\+::vector$<$ std\+::string $>$ \&v\+\_\+input\+Files)
+\begin{DoxyCompactList}\small\item\em Construct from a list of input files. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{class_reconstruction_1_1_draw_outs_a81af19829774b44b099e0dec00ebc455}{\texorpdfstring{$\sim$}{\string~}\+Draw\+Outs}} ()
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_reconstruction_1_1_draw_outs_a2ca04bf4f5a6e8be3cdf3a90ca2b2942}{Set\+Style}} ()
+\begin{DoxyCompactList}\small\item\em Set plotting style (ROOT style settings). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_reconstruction_1_1_draw_outs_aecaf1698cceb0861d51dc313ae6c7387}{DESY21\+Scan\+Fill}} ()
+\begin{DoxyCompactList}\small\item\em Fill DESY21 single-\/run scan data. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_reconstruction_1_1_draw_outs_a8bc7d4b7a3708283511f4f5dda657a0d}{DESY21\+Scan\+Draw}} ()
+\begin{DoxyCompactList}\small\item\em Draw DESY21 scan summaries. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_reconstruction_1_1_draw_outs_a27a4acf5b1c95cdcb8077b610bab9472}{CERN22\+Scan\+Fill}} ()
+\begin{DoxyCompactList}\small\item\em Fill CERN22 single-\/run scan data. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_reconstruction_1_1_draw_outs_acb405d9970dfa3dac15a076c5c2172fb}{CERN22\+Scan\+Draw}} ()
+\begin{DoxyCompactList}\small\item\em Draw CERN22 scan summaries. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_reconstruction_1_1_draw_outs_a6b0a4d12b1494e070bc10e5b7cc8ffbb}{Control}} ()
+\begin{DoxyCompactList}\small\item\em General control/entry point for plotting. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_reconstruction_1_1_draw_outs_ab332dd2ddd590fda2475dd913a38ad8d}{Energy\+Loss}} (const int \&methods=0)
+\begin{DoxyCompactList}\small\item\em Produce energy-\/loss plots. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_reconstruction_1_1_draw_outs_a8eb3e1a1122961ff7e372da1adf8ac8f}{File\+Comparison}} ()
+\begin{DoxyCompactList}\small\item\em Produce file comparison plots. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_reconstruction_1_1_draw_outs_a18eca00fa134681beb21ab20e08f838e}{DESY21\+Single\+Scan}} (const int \&methods=0)
+\begin{DoxyCompactList}\small\item\em Draw DESY21 single scan. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_reconstruction_1_1_draw_outs_a62ccd6c8304eedda8355738d6057c8a6}{DESY21\+Multi\+Scan}} (const int \&methods=0)
+\begin{DoxyCompactList}\small\item\em Draw DESY21 multi-\/scan summaries. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_reconstruction_1_1_draw_outs_a7de75b001443f81239dbe571c246923b}{CERN22\+Scan}} ()
+\begin{DoxyCompactList}\small\item\em Draw CERN22 scan summaries (wrapper). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_reconstruction_1_1_draw_outs_acce0a425921206627d003c8676f24e9c}{Amplitude\+VSLength}} ()
+\begin{DoxyCompactList}\small\item\em Plot amplitude versus cluster length. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Plotting helper for reconstruction results. 
+
+Provides methods to create scan drawings, energy loss plots, comparisons and other visual summaries used by the analysis tools. 
+
+\label{doc-constructors}
+\Hypertarget{class_reconstruction_1_1_draw_outs_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_reconstruction_1_1_draw_outs_ab58ee91ac92c6c5ac5e86d628c580f71}\index{Reconstruction::DrawOuts@{Reconstruction::DrawOuts}!DrawOuts@{DrawOuts}}
+\index{DrawOuts@{DrawOuts}!Reconstruction::DrawOuts@{Reconstruction::DrawOuts}}
+\doxysubsubsection{\texorpdfstring{DrawOuts()}{DrawOuts()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{class_reconstruction_1_1_draw_outs_ab58ee91ac92c6c5ac5e86d628c580f71} 
+Reconstruction\+::\+Draw\+Outs\+::\+Draw\+Outs (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Default constructor. 
+
+\Hypertarget{class_reconstruction_1_1_draw_outs_af676842673485b31a45e83623928cb1e}\index{Reconstruction::DrawOuts@{Reconstruction::DrawOuts}!DrawOuts@{DrawOuts}}
+\index{DrawOuts@{DrawOuts}!Reconstruction::DrawOuts@{Reconstruction::DrawOuts}}
+\doxysubsubsection{\texorpdfstring{DrawOuts()}{DrawOuts()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{class_reconstruction_1_1_draw_outs_af676842673485b31a45e83623928cb1e} 
+Reconstruction\+::\+Draw\+Outs\+::\+Draw\+Outs (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{input\+File}{}\end{DoxyParamCaption})}
+
+
+
+Construct from a single input file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em input\+File} & path to the input file \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_reconstruction_1_1_draw_outs_a940b8d4ec6f07b6e91388685b902c174}\index{Reconstruction::DrawOuts@{Reconstruction::DrawOuts}!DrawOuts@{DrawOuts}}
+\index{DrawOuts@{DrawOuts}!Reconstruction::DrawOuts@{Reconstruction::DrawOuts}}
+\doxysubsubsection{\texorpdfstring{DrawOuts()}{DrawOuts()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{class_reconstruction_1_1_draw_outs_a940b8d4ec6f07b6e91388685b902c174} 
+Reconstruction\+::\+Draw\+Outs\+::\+Draw\+Outs (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::string $>$ \&}]{v\+\_\+input\+Files}{}\end{DoxyParamCaption})}
+
+
+
+Construct from a list of input files. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em v\+\_\+input\+Files} & vector with input file paths \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_reconstruction_1_1_draw_outs_a81af19829774b44b099e0dec00ebc455}\index{Reconstruction::DrawOuts@{Reconstruction::DrawOuts}!````~DrawOuts@{\texorpdfstring{$\sim$}{\string~}DrawOuts}}
+\index{````~DrawOuts@{\texorpdfstring{$\sim$}{\string~}DrawOuts}!Reconstruction::DrawOuts@{Reconstruction::DrawOuts}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}DrawOuts()}{\string~DrawOuts()}}
+{\footnotesize\ttfamily \label{class_reconstruction_1_1_draw_outs_a81af19829774b44b099e0dec00ebc455} 
+Reconstruction\+::\+Draw\+Outs\+::\texorpdfstring{$\sim$}{\string~}\+Draw\+Outs (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Virtual destructor. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_reconstruction_1_1_draw_outs_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_reconstruction_1_1_draw_outs_acce0a425921206627d003c8676f24e9c}\index{Reconstruction::DrawOuts@{Reconstruction::DrawOuts}!AmplitudeVSLength@{AmplitudeVSLength}}
+\index{AmplitudeVSLength@{AmplitudeVSLength}!Reconstruction::DrawOuts@{Reconstruction::DrawOuts}}
+\doxysubsubsection{\texorpdfstring{AmplitudeVSLength()}{AmplitudeVSLength()}}
+{\footnotesize\ttfamily \label{class_reconstruction_1_1_draw_outs_acce0a425921206627d003c8676f24e9c} 
+void Reconstruction\+::\+Draw\+Outs\+::\+Amplitude\+VSLength (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Plot amplitude versus cluster length. 
+
+\Hypertarget{class_reconstruction_1_1_draw_outs_a7de75b001443f81239dbe571c246923b}\index{Reconstruction::DrawOuts@{Reconstruction::DrawOuts}!CERN22Scan@{CERN22Scan}}
+\index{CERN22Scan@{CERN22Scan}!Reconstruction::DrawOuts@{Reconstruction::DrawOuts}}
+\doxysubsubsection{\texorpdfstring{CERN22Scan()}{CERN22Scan()}}
+{\footnotesize\ttfamily \label{class_reconstruction_1_1_draw_outs_a7de75b001443f81239dbe571c246923b} 
+void Reconstruction\+::\+Draw\+Outs\+::\+CERN22\+Scan (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Draw CERN22 scan summaries (wrapper). 
+
+\Hypertarget{class_reconstruction_1_1_draw_outs_acb405d9970dfa3dac15a076c5c2172fb}\index{Reconstruction::DrawOuts@{Reconstruction::DrawOuts}!CERN22ScanDraw@{CERN22ScanDraw}}
+\index{CERN22ScanDraw@{CERN22ScanDraw}!Reconstruction::DrawOuts@{Reconstruction::DrawOuts}}
+\doxysubsubsection{\texorpdfstring{CERN22ScanDraw()}{CERN22ScanDraw()}}
+{\footnotesize\ttfamily \label{class_reconstruction_1_1_draw_outs_acb405d9970dfa3dac15a076c5c2172fb} 
+void Reconstruction\+::\+Draw\+Outs\+::\+CERN22\+Scan\+Draw (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Draw CERN22 scan summaries. 
+
+\Hypertarget{class_reconstruction_1_1_draw_outs_a27a4acf5b1c95cdcb8077b610bab9472}\index{Reconstruction::DrawOuts@{Reconstruction::DrawOuts}!CERN22ScanFill@{CERN22ScanFill}}
+\index{CERN22ScanFill@{CERN22ScanFill}!Reconstruction::DrawOuts@{Reconstruction::DrawOuts}}
+\doxysubsubsection{\texorpdfstring{CERN22ScanFill()}{CERN22ScanFill()}}
+{\footnotesize\ttfamily \label{class_reconstruction_1_1_draw_outs_a27a4acf5b1c95cdcb8077b610bab9472} 
+void Reconstruction\+::\+Draw\+Outs\+::\+CERN22\+Scan\+Fill (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Fill CERN22 single-\/run scan data. 
+
+\Hypertarget{class_reconstruction_1_1_draw_outs_a6b0a4d12b1494e070bc10e5b7cc8ffbb}\index{Reconstruction::DrawOuts@{Reconstruction::DrawOuts}!Control@{Control}}
+\index{Control@{Control}!Reconstruction::DrawOuts@{Reconstruction::DrawOuts}}
+\doxysubsubsection{\texorpdfstring{Control()}{Control()}}
+{\footnotesize\ttfamily \label{class_reconstruction_1_1_draw_outs_a6b0a4d12b1494e070bc10e5b7cc8ffbb} 
+void Reconstruction\+::\+Draw\+Outs\+::\+Control (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+General control/entry point for plotting. 
+
+\Hypertarget{class_reconstruction_1_1_draw_outs_a62ccd6c8304eedda8355738d6057c8a6}\index{Reconstruction::DrawOuts@{Reconstruction::DrawOuts}!DESY21MultiScan@{DESY21MultiScan}}
+\index{DESY21MultiScan@{DESY21MultiScan}!Reconstruction::DrawOuts@{Reconstruction::DrawOuts}}
+\doxysubsubsection{\texorpdfstring{DESY21MultiScan()}{DESY21MultiScan()}}
+{\footnotesize\ttfamily \label{class_reconstruction_1_1_draw_outs_a62ccd6c8304eedda8355738d6057c8a6} 
+void Reconstruction\+::\+Draw\+Outs\+::\+DESY21\+Multi\+Scan (\begin{DoxyParamCaption}\item[{const int \&}]{methods}{ = {\ttfamily 0}}\end{DoxyParamCaption})}
+
+
+
+Draw DESY21 multi-\/scan summaries. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em methods} & selection of methods (0\+: both, 1\+: only WF, 2\+: only XP) \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_reconstruction_1_1_draw_outs_a8bc7d4b7a3708283511f4f5dda657a0d}\index{Reconstruction::DrawOuts@{Reconstruction::DrawOuts}!DESY21ScanDraw@{DESY21ScanDraw}}
+\index{DESY21ScanDraw@{DESY21ScanDraw}!Reconstruction::DrawOuts@{Reconstruction::DrawOuts}}
+\doxysubsubsection{\texorpdfstring{DESY21ScanDraw()}{DESY21ScanDraw()}}
+{\footnotesize\ttfamily \label{class_reconstruction_1_1_draw_outs_a8bc7d4b7a3708283511f4f5dda657a0d} 
+void Reconstruction\+::\+Draw\+Outs\+::\+DESY21\+Scan\+Draw (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Draw DESY21 scan summaries. 
+
+\Hypertarget{class_reconstruction_1_1_draw_outs_aecaf1698cceb0861d51dc313ae6c7387}\index{Reconstruction::DrawOuts@{Reconstruction::DrawOuts}!DESY21ScanFill@{DESY21ScanFill}}
+\index{DESY21ScanFill@{DESY21ScanFill}!Reconstruction::DrawOuts@{Reconstruction::DrawOuts}}
+\doxysubsubsection{\texorpdfstring{DESY21ScanFill()}{DESY21ScanFill()}}
+{\footnotesize\ttfamily \label{class_reconstruction_1_1_draw_outs_aecaf1698cceb0861d51dc313ae6c7387} 
+void Reconstruction\+::\+Draw\+Outs\+::\+DESY21\+Scan\+Fill (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Fill DESY21 single-\/run scan data. 
+
+\Hypertarget{class_reconstruction_1_1_draw_outs_a18eca00fa134681beb21ab20e08f838e}\index{Reconstruction::DrawOuts@{Reconstruction::DrawOuts}!DESY21SingleScan@{DESY21SingleScan}}
+\index{DESY21SingleScan@{DESY21SingleScan}!Reconstruction::DrawOuts@{Reconstruction::DrawOuts}}
+\doxysubsubsection{\texorpdfstring{DESY21SingleScan()}{DESY21SingleScan()}}
+{\footnotesize\ttfamily \label{class_reconstruction_1_1_draw_outs_a18eca00fa134681beb21ab20e08f838e} 
+void Reconstruction\+::\+Draw\+Outs\+::\+DESY21\+Single\+Scan (\begin{DoxyParamCaption}\item[{const int \&}]{methods}{ = {\ttfamily 0}}\end{DoxyParamCaption})}
+
+
+
+Draw DESY21 single scan. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em methods} & selection of methods (0\+: both, 1\+: only WF, 2\+: only XP) \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_reconstruction_1_1_draw_outs_ab332dd2ddd590fda2475dd913a38ad8d}\index{Reconstruction::DrawOuts@{Reconstruction::DrawOuts}!EnergyLoss@{EnergyLoss}}
+\index{EnergyLoss@{EnergyLoss}!Reconstruction::DrawOuts@{Reconstruction::DrawOuts}}
+\doxysubsubsection{\texorpdfstring{EnergyLoss()}{EnergyLoss()}}
+{\footnotesize\ttfamily \label{class_reconstruction_1_1_draw_outs_ab332dd2ddd590fda2475dd913a38ad8d} 
+void Reconstruction\+::\+Draw\+Outs\+::\+Energy\+Loss (\begin{DoxyParamCaption}\item[{const int \&}]{methods}{ = {\ttfamily 0}}\end{DoxyParamCaption})}
+
+
+
+Produce energy-\/loss plots. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em methods} & selection of methods (0\+: both, 1\+: only WF, 2\+: only XP) \\
+\hline
+\end{DoxyParams}
+Truncated ETF\Hypertarget{class_reconstruction_1_1_draw_outs_a8eb3e1a1122961ff7e372da1adf8ac8f}\index{Reconstruction::DrawOuts@{Reconstruction::DrawOuts}!FileComparison@{FileComparison}}
+\index{FileComparison@{FileComparison}!Reconstruction::DrawOuts@{Reconstruction::DrawOuts}}
+\doxysubsubsection{\texorpdfstring{FileComparison()}{FileComparison()}}
+{\footnotesize\ttfamily \label{class_reconstruction_1_1_draw_outs_a8eb3e1a1122961ff7e372da1adf8ac8f} 
+void Reconstruction\+::\+Draw\+Outs\+::\+File\+Comparison (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Produce file comparison plots. 
+
+\Hypertarget{class_reconstruction_1_1_draw_outs_a2ca04bf4f5a6e8be3cdf3a90ca2b2942}\index{Reconstruction::DrawOuts@{Reconstruction::DrawOuts}!SetStyle@{SetStyle}}
+\index{SetStyle@{SetStyle}!Reconstruction::DrawOuts@{Reconstruction::DrawOuts}}
+\doxysubsubsection{\texorpdfstring{SetStyle()}{SetStyle()}}
+{\footnotesize\ttfamily \label{class_reconstruction_1_1_draw_outs_a2ca04bf4f5a6e8be3cdf3a90ca2b2942} 
+void Reconstruction\+::\+Draw\+Outs\+::\+Set\+Style (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Set plotting style (ROOT style settings). 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Reconstruction/inc/\mbox{\hyperlink{_draw_outs_8h}{Draw\+Outs.\+h}}\item 
+Reconstruction/src/\mbox{\hyperlink{_draw_outs_8cxx}{Draw\+Outs.\+cxx}}\end{DoxyCompactItemize}

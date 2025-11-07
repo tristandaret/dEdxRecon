@@ -1,0 +1,93 @@
+\doxysection{Track.\+h}
+\hypertarget{_track_8h_source}{}\label{_track_8h_source}\index{ModelEvent/inc/Track.h@{ModelEvent/inc/Track.h}}
+\mbox{\hyperlink{_track_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#ifndef\ Track\_H}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ Track\_H}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_cluster_8h}{Cluster.h}}"{}}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_misc_8h}{Misc.h}}"{}}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_fit_output_8h}{FitOutput.h}}"{}}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{comment}{//\ Track\ equation\ :\ Y\ =\ Sum\_(i=0,Npar-\/1)\ par\_i\ *\ X\string^i}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_track_af5f5eec0fffa6c53df1ee7766eb3358f}{Track}}\ \{}
+\DoxyCodeLine{00020\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00027\ \ \ \mbox{\hyperlink{class_track_af5f5eec0fffa6c53df1ee7766eb3358f}{Track}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&EventNber,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&EntryNber,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&ModuleNber);}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00030\ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_track_a416e75e66accc8eb9e3fafc3e8555216}{\string~Track}}();}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \textcolor{comment}{//\ IDs}}
+\DoxyCodeLine{00033\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_track_a76f17e608a1e103105b8cafba5bfc039}{Get\_EventNber}}()\ \textcolor{keyword}{const};\ \ }
+\DoxyCodeLine{00034\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_track_ae150c863930265703178e34aff302f29}{Get\_EntryNber}}()\ \textcolor{keyword}{const};\ \ }
+\DoxyCodeLine{00035\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_track_a53a3b06ff5f640b23c6f837a40c5913f}{Get\_ModuleNber}}()\ \textcolor{keyword}{const};\ }
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Track\ Data-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\///}}
+\DoxyCodeLine{00038\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_track_a39f505bcb3245191575e31cd884f1c5f}{SetNberOfParameters}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&NberOfParam);}
+\DoxyCodeLine{00039\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_track_a3df2763a1ed51d19cc7b43d6e4577f65}{GetNberOfParameters}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ std::string\ \mbox{\hyperlink{class_track_a46b04235717f048ed64aa5a6b8eabe58}{Get\_ParameterName}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&iPar)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00042\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_track_ae1c89625a747ea7b92469e0c9741e4e5}{Get\_ParameterValue}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&iPar)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00043\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_track_a30a31afdb658d3403b714460a9efd919}{Get\_ParameterError}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&iPar)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_track_aa91207fe600dcd61613221881e4983af}{Get\_ParameterValue\_BeforeMinimisation}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&iPar)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Cluster\ Addition-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\///}}
+\DoxyCodeLine{00048\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_track_a5025935228c0eec5e5d1e6d008988043}{Add\_Cluster}}(\mbox{\hyperlink{class_cluster}{Cluster}}\ *pCluster);}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Cluster\ Access-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\///}}
+\DoxyCodeLine{00051\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_track_a8e94aecf4201579409175f964baf52d2}{Get\_NberOfCluster}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00052\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_cluster}{Cluster}}\ *\mbox{\hyperlink{class_track_a3f008ff85bb1bff185480e4f38c8434f}{Get\_Cluster}}(\textcolor{keywordtype}{int}\ Index1D)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00053\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_track_aff079d43004c50c20d2892c265dbe053}{Get\_Residual}}(\textcolor{keywordtype}{int}\ Index1D)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00054\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_track_a3baa5ba1f6fcbad6d7e079a706fd13bd}{Get\_Pull}}(\textcolor{keywordtype}{int}\ Index1D)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_track_ac8699359a440d6d2a16cd3c9ffcdac69}{DoClosure}}();}
+\DoxyCodeLine{00057\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_track_ae87081db098ff5bee454446bfbdb42c6}{DumpRec}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/According\ to\ Fit\ Y\ position\ for\ given}}
+\DoxyCodeLine{00060\ \ \ \textcolor{comment}{//\ X-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\///}}
+\DoxyCodeLine{00061\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_track_a5ae5e5a189b92622c342aac176916663}{Y\_Position}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&X)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Data\ Members-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\///}}
+\DoxyCodeLine{00064\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00065\ \ \ \textcolor{keywordtype}{int}\ m\_EventNber;}
+\DoxyCodeLine{00066\ \ \ \textcolor{keywordtype}{int}\ m\_EntryNber;}
+\DoxyCodeLine{00067\ \ \ \textcolor{keywordtype}{short}\ \textcolor{keywordtype}{int}\ m\_ModuleNber;}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \ \ \textcolor{keywordtype}{int}\ m\_NberOfParam;}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ std::vector<double>\ m\_Parameter;}
+\DoxyCodeLine{00072\ \ \ std::vector<double>\ m\_eParameter;}
+\DoxyCodeLine{00073\ \ \ std::vector<std::string>\ m\_ParameterName;}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \ \ std::vector<double>\ m\_Parameter\_BeforeMinimisation;}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_track_a84c1f76b0c580c3e5e265ecad3ec4ba3}{m\_NberOfClusters}};}
+\DoxyCodeLine{00081\ \ \ std::vector<Cluster\ *>\ \mbox{\hyperlink{class_track_a70287db72956761680439f8f8eb8fae8}{V\_Cluster}};}
+\DoxyCodeLine{00082\ \ \ std::vector<double>\ \mbox{\hyperlink{class_track_ad70ebed8af203004664188c768ed5cb2}{V\_Residual}};}
+\DoxyCodeLine{00083\ \ \ std::vector<double>\ \mbox{\hyperlink{class_track_adbd9ce900824da1a59b8f481bef38744}{V\_Pull}};}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Track\ Fit\ Stuff-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\///}}
+\DoxyCodeLine{00086\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00087\ \ \ \textcolor{keywordtype}{double}\ m\_Chi2Min;}
+\DoxyCodeLine{00088\ \ \ TMatrixD\ m\_covmatrix;}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00091\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_track_a5c763bedd0f5bc87f684db6a5e257ad6}{Get\_Chi2Min}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00092\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_track_a16f05d0d06f7a81b9194b597be927078}{SetParameter}}(TVirtualFitter\ *pTVirtualFitter);}
+\DoxyCodeLine{00093\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_track_aad1e054a1670c01d6007b8c420f96661}{SetResults}}(TVirtualFitter\ *pTVirtualFitter);}
+\DoxyCodeLine{00094\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_track_a2d476d46420466b05465fdd4d7fa0116}{Chi2}}(\textcolor{keywordtype}{double}\ par[]);}
+\DoxyCodeLine{00095\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_track_a71f8bcae7f583d15b307acbbc815cf86}{SetParameters\_Internal}}(\textcolor{keywordtype}{double}\ par[]);}
+\DoxyCodeLine{00096\ \ \ TMatrixD\ \mbox{\hyperlink{class_track_a47e7c2690b7515b767c18ad4925db104}{Get\_CovMatrix}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00099\ \ \ \mbox{\hyperlink{class_fit_output}{FitOutput}}\ *p\_FitOutput;}
+\DoxyCodeLine{00100\ \};}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

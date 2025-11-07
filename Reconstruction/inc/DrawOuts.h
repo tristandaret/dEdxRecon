@@ -6,6 +6,12 @@
  * summaries of reconstruction results (scan drawing, energy loss plots,
  * comparisons, etc.). Implementation and plotting logic live in
  * DrawOuts.cxx.
+ *
+ * @details
+ * A small top-level executable `DrawOut` exists (Apps/DrawOut.cxx) which
+ * calls into `Reconstruction::DrawOuts` as the runner for generating
+ * visual outputs. The class itself provides fine-grained control functions
+ * used by the executable and by any other consumer of plotting helpers.
  */
 
 #ifndef DRAWOUTS_H

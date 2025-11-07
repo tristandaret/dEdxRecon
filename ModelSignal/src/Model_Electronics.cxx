@@ -1,17 +1,3 @@
-#/***************************************************************************
- * File: Model_Electronics.cxx
- * Project: dEdxRecon
- *
- * Brief: Implementation of the electronics response model. Implements the
- *        impulse response, its derivative and helper routines to compute
- *        shaped amplitudes used by signal simulations and fitter models.
- *
- * Contents: Model_Electronics constructor/destructor, Response_Base,
- *           Derive_Response_Base and setup helpers.
- *
- * Notes: Models readout shaping; keep consistent with digitiser settings.
- ***************************************************************************/
-
 #include "Model_Electronics.h"
 
 Model_Electronics::Model_Electronics() {
@@ -28,7 +14,7 @@ Model_Electronics::Model_Electronics() {
   //	std::cout
   //	<< " m_AcurMax " << std::setw(16) << std::setprecision(9) << m_AcurMax
   //	<< " m_TcurMax " << std::setw(16) << std::setprecision(3) <<
-  //m_TcurMax*1.E9
+  // m_TcurMax*1.E9
   //	<< std::endl;
 }
 

@@ -5,6 +5,11 @@
  * Declares Model_Charge1D which models charge spreading along a single axis
  * (e.g. time/drift). Concrete Get_Qpad and related helpers are provided in
  * Model_Charge1D.cxx.
+ *
+ * @details
+ * The implementation computes pad-integrated charge for longitudinal
+ * spreading-dominated scenarios and exposes helpers to configure lambda and
+ * normalization used in simulations and fits.
  */
 #ifndef Model_Charge1D_H
 #define Model_Charge1D_H

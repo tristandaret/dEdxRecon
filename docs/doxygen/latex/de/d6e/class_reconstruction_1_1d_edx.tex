@@ -1,0 +1,105 @@
+\doxysection{Reconstruction\+::d\+Edx Class Reference}
+\hypertarget{class_reconstruction_1_1d_edx}{}\label{class_reconstruction_1_1d_edx}\index{Reconstruction::dEdx@{Reconstruction::dEdx}}
+
+
+{\ttfamily \#include $<$d\+Edx.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_reconstruction_1_1d_edx_af5e572c70b0bf076ed4c515f5de5bdbd}{d\+Edx}} ()
+\item 
+virtual \mbox{\hyperlink{class_reconstruction_1_1d_edx_a37dd3260c822e703b88caabf1886a244}{\texorpdfstring{$\sim$}{\string~}d\+Edx}} ()
+\item 
+void \mbox{\hyperlink{class_reconstruction_1_1d_edx_afa2201f4fc3b2b177bf40f198050b668}{Reconstruction}} ()
+\item 
+float \mbox{\hyperlink{class_reconstruction_1_1d_edx_af20c5f4f819e9888c087079d55a8e97f}{Computed\+Edx\+WF}} (std\+::vector$<$ float $>$ v\+\_\+d\+Edx\+WF, const int \&NClusters, const float \&alpha)
+\item 
+float \mbox{\hyperlink{class_reconstruction_1_1d_edx_aee361c1b790eb74110b5327202544cda}{Computed\+Edx\+XP}} (const std\+::vector$<$ float $>$ \&v\+\_\+d\+Edx, const std\+::vector$<$ float $>$ \&v\+\_\+dE, const std\+::vector$<$ float $>$ \&v\+\_\+dx, const int \&n\+Crossed\+Pads, const float \&alpha)
+\item 
+float \mbox{\hyperlink{class_reconstruction_1_1d_edx_ae3483f06bbc5e5f142effd4b9423c799}{Computed\+Edx\+GP1}} (const std\+::vector$<$ TH1F $>$ \&v\+Clus\+WF, const std\+::vector$<$ float $>$ \&v\+\_\+d\+Edx, const std\+::vector$<$ float $>$ \&v\+\_\+\+Aclus, const std\+::vector$<$ float $>$ \&v\+\_\+\+Lclus, const int \&n\+Clusters, const float \&alpha)
+\item 
+float \mbox{\hyperlink{class_reconstruction_1_1d_edx_ab700b1cb5f038c2c9d71d8cfbe19ca14}{Computed\+Edx\+GP}} (const TH1F \texorpdfstring{$\ast$}{*}GWF, const std\+::vector$<$ TH1F $>$ \&v\+WF, const std\+::vector$<$ float $>$ \&v\+\_\+d\+Edx, const std\+::vector$<$ float $>$ \&v\+\_\+\+Amax, const float \&event\+Length, const std\+::vector$<$ float $>$ \&v\+\_\+\+Length, const int \&n\+Elements, const float \&alpha)
+\item 
+TH1F \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_reconstruction_1_1d_edx_adeaef4e2b692c230ae7a917bfa975ffd}{Get\+Giga\+Waveform}} (const std\+::vector$<$ TH1F $>$ \&v\+Clus\+WF)
+\item 
+TH1F \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_reconstruction_1_1d_edx_ab7fbbc299a3b0a69defe1dffebb1ff1c}{Get\+Truncated\+Giga\+Waveform\+GP1}} (const std\+::vector$<$ TH1F $>$ \&v\+Clus\+WF, const std\+::vector$<$ float $>$ \&v\+\_\+d\+Edx, const int \&n\+Clusters)
+\item 
+void \mbox{\hyperlink{class_reconstruction_1_1d_edx_a537b88c48bb3a77f177ef64af364463c}{Discarded\+Module}} ()
+\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{class_reconstruction_1_1d_edx_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_reconstruction_1_1d_edx_af5e572c70b0bf076ed4c515f5de5bdbd}\index{Reconstruction::dEdx@{Reconstruction::dEdx}!dEdx@{dEdx}}
+\index{dEdx@{dEdx}!Reconstruction::dEdx@{Reconstruction::dEdx}}
+\doxysubsubsection{\texorpdfstring{dEdx()}{dEdx()}}
+{\footnotesize\ttfamily \label{class_reconstruction_1_1d_edx_af5e572c70b0bf076ed4c515f5de5bdbd} 
+Reconstruction\+::d\+Edx\+::d\+Edx (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_reconstruction_1_1d_edx_a37dd3260c822e703b88caabf1886a244}\index{Reconstruction::dEdx@{Reconstruction::dEdx}!````~dEdx@{\texorpdfstring{$\sim$}{\string~}dEdx}}
+\index{````~dEdx@{\texorpdfstring{$\sim$}{\string~}dEdx}!Reconstruction::dEdx@{Reconstruction::dEdx}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}dEdx()}{\string~dEdx()}}
+{\footnotesize\ttfamily \label{class_reconstruction_1_1d_edx_a37dd3260c822e703b88caabf1886a244} 
+Reconstruction\+::d\+Edx\+::\texorpdfstring{$\sim$}{\string~}d\+Edx (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_reconstruction_1_1d_edx_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_reconstruction_1_1d_edx_ab700b1cb5f038c2c9d71d8cfbe19ca14}\index{Reconstruction::dEdx@{Reconstruction::dEdx}!ComputedEdxGP@{ComputedEdxGP}}
+\index{ComputedEdxGP@{ComputedEdxGP}!Reconstruction::dEdx@{Reconstruction::dEdx}}
+\doxysubsubsection{\texorpdfstring{ComputedEdxGP()}{ComputedEdxGP()}}
+{\footnotesize\ttfamily \label{class_reconstruction_1_1d_edx_ab700b1cb5f038c2c9d71d8cfbe19ca14} 
+float Reconstruction\+::d\+Edx\+::\+Computed\+Edx\+GP (\begin{DoxyParamCaption}\item[{const TH1F \texorpdfstring{$\ast$}{*}}]{GWF}{, }\item[{const std\+::vector$<$ TH1F $>$ \&}]{v\+WF}{, }\item[{const std\+::vector$<$ float $>$ \&}]{v\+\_\+d\+Edx}{, }\item[{const std\+::vector$<$ float $>$ \&}]{v\+\_\+\+Amax}{, }\item[{const float \&}]{event\+Length}{, }\item[{const std\+::vector$<$ float $>$ \&}]{v\+\_\+\+Length}{, }\item[{const int \&}]{n\+Elements}{, }\item[{const float \&}]{alpha}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_reconstruction_1_1d_edx_ae3483f06bbc5e5f142effd4b9423c799}\index{Reconstruction::dEdx@{Reconstruction::dEdx}!ComputedEdxGP1@{ComputedEdxGP1}}
+\index{ComputedEdxGP1@{ComputedEdxGP1}!Reconstruction::dEdx@{Reconstruction::dEdx}}
+\doxysubsubsection{\texorpdfstring{ComputedEdxGP1()}{ComputedEdxGP1()}}
+{\footnotesize\ttfamily \label{class_reconstruction_1_1d_edx_ae3483f06bbc5e5f142effd4b9423c799} 
+float Reconstruction\+::d\+Edx\+::\+Computed\+Edx\+GP1 (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ TH1F $>$ \&}]{v\+Clus\+WF}{, }\item[{const std\+::vector$<$ float $>$ \&}]{v\+\_\+d\+Edx}{, }\item[{const std\+::vector$<$ float $>$ \&}]{v\+\_\+\+Aclus}{, }\item[{const std\+::vector$<$ float $>$ \&}]{v\+\_\+\+Lclus}{, }\item[{const int \&}]{n\+Clusters}{, }\item[{const float \&}]{alpha}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_reconstruction_1_1d_edx_af20c5f4f819e9888c087079d55a8e97f}\index{Reconstruction::dEdx@{Reconstruction::dEdx}!ComputedEdxWF@{ComputedEdxWF}}
+\index{ComputedEdxWF@{ComputedEdxWF}!Reconstruction::dEdx@{Reconstruction::dEdx}}
+\doxysubsubsection{\texorpdfstring{ComputedEdxWF()}{ComputedEdxWF()}}
+{\footnotesize\ttfamily \label{class_reconstruction_1_1d_edx_af20c5f4f819e9888c087079d55a8e97f} 
+float Reconstruction\+::d\+Edx\+::\+Computed\+Edx\+WF (\begin{DoxyParamCaption}\item[{std\+::vector$<$ float $>$}]{v\+\_\+d\+Edx\+WF}{, }\item[{const int \&}]{NClusters}{, }\item[{const float \&}]{alpha}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_reconstruction_1_1d_edx_aee361c1b790eb74110b5327202544cda}\index{Reconstruction::dEdx@{Reconstruction::dEdx}!ComputedEdxXP@{ComputedEdxXP}}
+\index{ComputedEdxXP@{ComputedEdxXP}!Reconstruction::dEdx@{Reconstruction::dEdx}}
+\doxysubsubsection{\texorpdfstring{ComputedEdxXP()}{ComputedEdxXP()}}
+{\footnotesize\ttfamily \label{class_reconstruction_1_1d_edx_aee361c1b790eb74110b5327202544cda} 
+float Reconstruction\+::d\+Edx\+::\+Computed\+Edx\+XP (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ float $>$ \&}]{v\+\_\+d\+Edx}{, }\item[{const std\+::vector$<$ float $>$ \&}]{v\+\_\+dE}{, }\item[{const std\+::vector$<$ float $>$ \&}]{v\+\_\+dx}{, }\item[{const int \&}]{n\+Crossed\+Pads}{, }\item[{const float \&}]{alpha}{}\end{DoxyParamCaption})}
+
+\doxylink{class_reconstruction_1_1d_edx}{d\+Edx} = sum(d\+E)/\+Sum(dx) and not average(d\+E/dx) of each pad = \texorpdfstring{$>$}{>} less sensitive to statistical fluctuations\Hypertarget{class_reconstruction_1_1d_edx_a537b88c48bb3a77f177ef64af364463c}\index{Reconstruction::dEdx@{Reconstruction::dEdx}!DiscardedModule@{DiscardedModule}}
+\index{DiscardedModule@{DiscardedModule}!Reconstruction::dEdx@{Reconstruction::dEdx}}
+\doxysubsubsection{\texorpdfstring{DiscardedModule()}{DiscardedModule()}}
+{\footnotesize\ttfamily \label{class_reconstruction_1_1d_edx_a537b88c48bb3a77f177ef64af364463c} 
+void Reconstruction\+::d\+Edx\+::\+Discarded\+Module (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_reconstruction_1_1d_edx_adeaef4e2b692c230ae7a917bfa975ffd}\index{Reconstruction::dEdx@{Reconstruction::dEdx}!GetGigaWaveform@{GetGigaWaveform}}
+\index{GetGigaWaveform@{GetGigaWaveform}!Reconstruction::dEdx@{Reconstruction::dEdx}}
+\doxysubsubsection{\texorpdfstring{GetGigaWaveform()}{GetGigaWaveform()}}
+{\footnotesize\ttfamily \label{class_reconstruction_1_1d_edx_adeaef4e2b692c230ae7a917bfa975ffd} 
+TH1F \texorpdfstring{$\ast$}{*} Reconstruction\+::d\+Edx\+::\+Get\+Giga\+Waveform (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ TH1F $>$ \&}]{v\+Clus\+WF}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_reconstruction_1_1d_edx_ab7fbbc299a3b0a69defe1dffebb1ff1c}\index{Reconstruction::dEdx@{Reconstruction::dEdx}!GetTruncatedGigaWaveformGP1@{GetTruncatedGigaWaveformGP1}}
+\index{GetTruncatedGigaWaveformGP1@{GetTruncatedGigaWaveformGP1}!Reconstruction::dEdx@{Reconstruction::dEdx}}
+\doxysubsubsection{\texorpdfstring{GetTruncatedGigaWaveformGP1()}{GetTruncatedGigaWaveformGP1()}}
+{\footnotesize\ttfamily \label{class_reconstruction_1_1d_edx_ab7fbbc299a3b0a69defe1dffebb1ff1c} 
+TH1F \texorpdfstring{$\ast$}{*} Reconstruction\+::d\+Edx\+::\+Get\+Truncated\+Giga\+Waveform\+GP1 (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ TH1F $>$ \&}]{v\+Clus\+WF}{, }\item[{const std\+::vector$<$ float $>$ \&}]{v\+\_\+d\+Edx}{, }\item[{const int \&}]{n\+Clusters}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_reconstruction_1_1d_edx_afa2201f4fc3b2b177bf40f198050b668}\index{Reconstruction::dEdx@{Reconstruction::dEdx}!Reconstruction@{Reconstruction}}
+\index{Reconstruction@{Reconstruction}!Reconstruction::dEdx@{Reconstruction::dEdx}}
+\doxysubsubsection{\texorpdfstring{Reconstruction()}{Reconstruction()}}
+{\footnotesize\ttfamily \label{class_reconstruction_1_1d_edx_afa2201f4fc3b2b177bf40f198050b668} 
+void Reconstruction\+::d\+Edx\+::\+Reconstruction (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Reconstruction/inc/\mbox{\hyperlink{d_edx_8h}{d\+Edx.\+h}}\item 
+Reconstruction/src/\mbox{\hyperlink{d_edx_8cxx}{d\+Edx.\+cxx}}\end{DoxyCompactItemize}

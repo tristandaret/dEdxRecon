@@ -1,0 +1,26 @@
+\doxysection{Fitters/inc/\+Track\+Fitter.h File Reference}
+\hypertarget{_track_fitter_8h}{}\label{_track_fitter_8h}\index{Fitters/inc/TrackFitter.h@{Fitters/inc/TrackFitter.h}}
+
+
+Declaration of the \doxylink{class_track_fitter}{Track\+Fitter} class used to perform track fits.  
+
+
+{\ttfamily \#include "{}Misc.\+h"{}}\newline
+{\ttfamily \#include "{}Track.\+h"{}}\newline
+{\ttfamily \#include "{}TMath.\+h"{}}\newline
+{\ttfamily \#include "{}TMatrix\+D.\+h"{}}\newline
+{\ttfamily \#include "{}TMinuit.\+h"{}}\newline
+{\ttfamily \#include "{}TVirtual\+Fitter.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_track_fitter}{Track\+Fitter}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Declaration of the \doxylink{class_track_fitter}{Track\+Fitter} class used to perform track fits. 
+
+This header defines the \doxylink{class_track_fitter}{Track\+Fitter} interface which wraps a minimiser (ROOT\textquotesingle{}s TVirtual\+Fitter/\+TMinuit) and exposes methods to set the track, run minimisation and compute the chi2. The implementation lives in \doxylink{_track_fitter_8cxx}{Track\+Fitter.\+cxx}.
+
+Implementation notes\+: the corresponding source file, \doxylink{_track_fitter_8cxx}{Track\+Fitter.\+cxx}, contains the concrete interfacing code to ROOT\textquotesingle{}s minimisers and the static bridge used by Minuit (a file-\/local helper class that forwards the minimiser callbacks to a \doxylink{class_track_fitter}{Track\+Fitter} instance). The Chi2 evaluation routine and Minuit callback registration are performed in the source implementation. Care must be taken not to change the global/static bridge semantics as Minuit requires a static callback wrapper. 

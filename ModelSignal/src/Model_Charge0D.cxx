@@ -1,16 +1,3 @@
-#/***************************************************************************
- * File: Model_Charge0D.cxx
- * Project: dEdxRecon
- *
- * Brief: Implementation of a simplified 0D charge model that returns an
- *        integrated pad charge given particle and pad geometry parameters.
- *
- * Contents: Model_Charge0D constructor/destructor, Eval routines and helpers
- *           to compute Qpad for a 0-dimensional model.
- *
- * Notes: Used for quick/analytic studies or as a baseline model in tests.
- ***************************************************************************/
-
 #include "Model_Charge0D.h"
 
 Model_Charge0D::Model_Charge0D() : Model_ChargeI() {

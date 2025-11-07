@@ -1,19 +1,6 @@
 #include "Misc.h"
 #include "Util.h"
 
-#/***************************************************************************
- * File: Monitoring.cxx
- * Project: dEdxRecon
- *
- * Brief: Implementation of monitoring tasks which assemble diagnostic
- *        histograms, run analyses and produce summaries for inspection.
- *
- * Contents: Monitoring entry point and helper functions used by
- *           Analysis.cxx.
- *
- * Notes: Used by the Analysis application to run automated monitoring.
- ***************************************************************************/
-
 #include "Monitoring.h"
 #include "ReconTools.h"
 #include "Variables.h"
@@ -540,7 +527,7 @@ void Reconstruction::DrawCERN22Scan() {
 // v_prtcles.push_back(Form("electron_ExB02_Z%s", z);
 //		v_datafiles.push_back(Form
 //("../Data/Data_DESY21/ExB_scan/ExB_360_phim3_200ns_B%s_ym60_z%s_iter0.root",
-//B,
+// B,
 // z)); vTags.push_back(Form("DESY21_ExB%s_Z%s", B, z));
 // v_prtcles.push_back(Form("electron_ExB%s_Z%s", B, z)); if(control or dedx)
 // p_uploader = GiveMe_Uploader (intUploader, v_datafiles.back());
@@ -579,7 +566,7 @@ void Reconstruction::DrawCERN22Scan() {
 // p_uploader = GiveMe_Uploader (intUploader, v_datafiles.back());
 // if (control)		Control
 //(drawoutScanPath, vTags.back(), comment, v_datafiles.back(), selectionSet,
-//p_uploader,
+// p_uploader,
 // moduleCase, 0, PT, TB,
 // v_prtcles.back()); 		if (Draw_control)	DrawOut_Control
 // (drawoutScanPath, vTags.back(), comment, selectionSet, 1); 		if
@@ -616,8 +603,8 @@ void Reconstruction::DrawCERN22Scan() {
 // vTags.push_back(Form("CERN23_MC_z%i00_old", zDrift+1));
 // v_prtcles.push_back(Form("MC %i0cm old", zDrift+1);
 //		if(control or dedx) p_uploader = GiveMe_Uploader (intUploader,
-//v_datafiles.back()); 		if (control)		Control (drawoutScanPath,
-//vTags.back(), comment,
+// v_datafiles.back()); 		if (control)		Control
+// (drawoutScanPath, vTags.back(), comment,
 // v_datafiles.back(), selectionSet,
 // p_uploader, moduleCase, 0, PT, TB, v_prtcles.back()); 		if
 // (Draw_control) DrawOut_Control (drawoutScanPath, vTags.back(), comment,
@@ -682,8 +669,8 @@ void Reconstruction::DrawCERN22Scan() {
 //	int PT_arr[] = {200};
 //	for (int PT : PT_arr){
 //		drawoutScanPath = drawoutPath +
-//Form("/DESY21_Drift/DESY21_Drift_PT%i_139V/", PT); 		MakeMyDir(drawoutScanPath);
-//	if (control or dedx) p_lut = new
+// Form("/DESY21_Drift/DESY21_Drift_PT%i_139V/", PT);
+// MakeMyDir(drawoutScanPath); 	if (control or dedx) p_lut = new
 // LUT(Form("~/Documents/Code/Python/LUT/LUT_Dt%i_PT%i_nphi150_nd150_nRC41_nZ21.root",
 // DtB, PT)); 		int NFiles = 9; 		for (int zDrift = -1;
 // zDrift < NFiles; zDrift++){ if(zDrift == -1)
@@ -695,8 +682,8 @@ void Reconstruction::DrawCERN22Scan() {
 // vTags.push_back(Form("DESY21_z%i60_PT%i", zDrift, PT));
 // v_prtcles.push_back(Form("electron_z%i60", zDrift));}
 //		if(control or dedx) p_uploader = GiveMe_Uploader (intUploader,
-//v_datafiles.back()); 		if (control)		Control (drawoutScanPath,
-//vTags.back(), comment,
+// v_datafiles.back()); 		if (control)		Control
+// (drawoutScanPath, vTags.back(), comment,
 // v_datafiles.back(), selectionSet,
 // p_uploader, moduleCase, 0, PT, TB, v_prtcles.back()); 		if
 // (Draw_control) DrawOut_Control (drawoutScanPath, vTags.back(), comment,

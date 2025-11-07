@@ -1,17 +1,3 @@
-#/***************************************************************************
- * File: ClusterFitter.cxx
- * Project: dEdxRecon
- *
- * Brief: Implementation of cluster-level fitters. Contains the definitions
- *        for horizontal and diagonal cluster fitters and helper functions
- *        that run fits on samples, events and clusters.
- *
- * Contents: ClusterFitter_Horizontal/Diagonal implementations and
- *           ClusterFit_* helper functions.
- *
- * Notes: Uses ROOT fitters (TVirtualFitter/TMinuit) and TF1 model functions.
- ***************************************************************************/
-
 #include "ClusterFitter.h"
 #include "TFitter.h"
 #include "Util.h"
@@ -59,15 +45,15 @@ void ClusterFit_Horizontal_Cluster(
 }
 
 //--------------------------------------------------------------------//
-/** This class is needed to run Minuit */
+// This class is needed to run Minuit
 class StaticClusterFitter_Horizontal {
 public:
-  /** Constructor */
+  // Constructor
   StaticClusterFitter_Horizontal();
   virtual ~StaticClusterFitter_Horizontal();
-  /** Set */
+  // Set
   static void Set(ClusterFitter_Horizontal *pClusterFitter_Horizontal);
-  /** Pointer */
+  // Pointer
   static ClusterFitter_Horizontal *p_ClusterFitter_Horizontal;
 };
 
@@ -257,15 +243,15 @@ void ClusterFit_Diagonal_Cluster(
 }
 
 //--------------------------------------------------------------------//
-/** This class is needed to run Minuit */
+// This class is needed to run Minuit
 class StaticClusterFitter_Diagonal {
 public:
-  /** Constructor */
+  // Constructor
   StaticClusterFitter_Diagonal();
   virtual ~StaticClusterFitter_Diagonal();
-  /** Set */
+  // Set
   static void Set(ClusterFitter_Diagonal *pClusterFitter_Diagonal);
-  /** Pointer */
+  // Pointer
   static ClusterFitter_Diagonal *p_ClusterFitter_Diagonal;
 };
 

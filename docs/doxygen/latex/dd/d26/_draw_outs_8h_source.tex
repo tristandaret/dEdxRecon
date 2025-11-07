@@ -1,0 +1,137 @@
+\doxysection{Draw\+Outs.\+h}
+\hypertarget{_draw_outs_8h_source}{}\label{_draw_outs_8h_source}\index{Reconstruction/inc/DrawOuts.h@{Reconstruction/inc/DrawOuts.h}}
+\mbox{\hyperlink{_draw_outs_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#ifndef\ DRAWOUTS\_H}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#define\ DRAWOUTS\_H}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_misc_8h}{Misc.h}}"{}}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ "{}SetStyle.h"{}}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ "{}TLegend.h"{}}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{d_edx_8h}{dEdx.h}}"{}}}
+\DoxyCodeLine{00024\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_reconstruction}{Reconstruction}}\ \{}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00033\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_reconstruction_1_1_draw_outs_ab58ee91ac92c6c5ac5e86d628c580f71}{DrawOuts}}\ \{}
+\DoxyCodeLine{00034\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00036\ \ \ \mbox{\hyperlink{class_reconstruction_1_1_draw_outs_ab58ee91ac92c6c5ac5e86d628c580f71}{DrawOuts}}();}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00042\ \ \ \mbox{\hyperlink{class_reconstruction_1_1_draw_outs_ab58ee91ac92c6c5ac5e86d628c580f71}{DrawOuts}}(\textcolor{keyword}{const}\ std::string\ \&inputFile);}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00048\ \ \ \mbox{\hyperlink{class_reconstruction_1_1_draw_outs_ab58ee91ac92c6c5ac5e86d628c580f71}{DrawOuts}}(\textcolor{keyword}{const}\ std::vector<std::string>\ \&v\_inputFiles);}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00051\ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_reconstruction_1_1_draw_outs_a81af19829774b44b099e0dec00ebc455}{\string~DrawOuts}}();}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00054\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_reconstruction_1_1_draw_outs_a2ca04bf4f5a6e8be3cdf3a90ca2b2942}{SetStyle}}();}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00057\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_reconstruction_1_1_draw_outs_aecaf1698cceb0861d51dc313ae6c7387}{DESY21ScanFill}}();}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00060\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_reconstruction_1_1_draw_outs_a8bc7d4b7a3708283511f4f5dda657a0d}{DESY21ScanDraw}}();}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00063\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_reconstruction_1_1_draw_outs_a27a4acf5b1c95cdcb8077b610bab9472}{CERN22ScanFill}}();}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00066\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_reconstruction_1_1_draw_outs_acb405d9970dfa3dac15a076c5c2172fb}{CERN22ScanDraw}}();}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00069\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_reconstruction_1_1_draw_outs_a6b0a4d12b1494e070bc10e5b7cc8ffbb}{Control}}();}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00075\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_reconstruction_1_1_draw_outs_ab332dd2ddd590fda2475dd913a38ad8d}{EnergyLoss}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&methods\ =\ 0);}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00078\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_reconstruction_1_1_draw_outs_a8eb3e1a1122961ff7e372da1adf8ac8f}{FileComparison}}();}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00084\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_reconstruction_1_1_draw_outs_a18eca00fa134681beb21ab20e08f838e}{DESY21SingleScan}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&methods\ =\ 0);}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00090\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_reconstruction_1_1_draw_outs_a62ccd6c8304eedda8355738d6057c8a6}{DESY21MultiScan}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&methods\ =\ 0);}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00093\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_reconstruction_1_1_draw_outs_a7de75b001443f81239dbe571c246923b}{CERN22Scan}}();}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00096\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_reconstruction_1_1_draw_outs_acce0a425921206627d003c8676f24e9c}{AmplitudeVSLength}}();}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00099\ \ \ \textcolor{comment}{//\ Files}}
+\DoxyCodeLine{00100\ \ \ std::string\ finputFile;}
+\DoxyCodeLine{00101\ \ \ std::string\ foutputDir;}
+\DoxyCodeLine{00102\ \ \ std::string\ foutputFile;}
+\DoxyCodeLine{00103\ \ \ std::string\ foutputFileWF;}
+\DoxyCodeLine{00104\ \ \ std::string\ foutputFileXP;}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \ \ \textcolor{comment}{//\ Data\ file}}
+\DoxyCodeLine{00107\ \ \ std::vector<TFile\ *>\ v\_fFiles;}
+\DoxyCodeLine{00108\ \ \ std::vector<TTree\ *>\ v\_fTrees;}
+\DoxyCodeLine{00109\ \ \ std::vector<RecoEvent\ *>\ v\_fEvents;}
+\DoxyCodeLine{00110\ \ \ std::vector<int>\ v\_fnentries;}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00112\ \ \ \textcolor{comment}{//\ Reconstruction\ classes}}
+\DoxyCodeLine{00113\ \ \ \mbox{\hyperlink{class_reconstruction_1_1_reco_event}{Reconstruction::RecoEvent}}\ *p\_recoevent;}
+\DoxyCodeLine{00114\ \ \ \mbox{\hyperlink{class_reconstruction_1_1_reco_module}{Reconstruction::RecoModule}}\ *p\_recomodule;}
+\DoxyCodeLine{00115\ \ \ \mbox{\hyperlink{class_reconstruction_1_1_reco_cluster}{Reconstruction::RecoCluster}}\ *p\_recocluster;}
+\DoxyCodeLine{00116\ \ \ \mbox{\hyperlink{class_reconstruction_1_1_reco_pad}{Reconstruction::RecoPad}}\ *p\_recopad;}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00118\ \ \ \textcolor{comment}{//\ Settings}}
+\DoxyCodeLine{00119\ \ \ std::string\ fparticleType;}
+\DoxyCodeLine{00120\ \ \ TCanvas\ *fpCanvas;}
+\DoxyCodeLine{00121\ \ \ \textcolor{keywordtype}{int}\ drawMultiScans\ =\ 0;\ \textcolor{comment}{//\ 0:\ normal\ scan\ |\ 1:\ multi\ scan}}
+\DoxyCodeLine{00122\ \ \ \textcolor{keywordtype}{int}\ fwhichMethods\ =\ 0;\ \ \textcolor{comment}{//\ 0:\ both\ methods\ |\ 1:\ only\ WF\ |\ 2:\ only\ XP}}
+\DoxyCodeLine{00123\ \ \ \textcolor{keywordtype}{int}\ fnMethods\ =\ 2;\ \ \ \ \ \ \textcolor{comment}{//\ Number\ of\ methods:\ 2\ (WF\ and\ XP)\ or\ 1\ (WF\ or\ XP)}}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00125\ \ \ \textcolor{comment}{//\ Shared\ variables}}
+\DoxyCodeLine{00126\ \ \ \textcolor{keywordtype}{int}\ NMod\ =\ 0;}
+\DoxyCodeLine{00127\ \ \ \textcolor{keywordtype}{int}\ NClusters\ =\ 0;}
+\DoxyCodeLine{00128\ \ \ \textcolor{keywordtype}{int}\ NPads\ =\ 0;}
+\DoxyCodeLine{00129\ \ \ \textcolor{keywordtype}{int}\ ix\ =\ 0;}
+\DoxyCodeLine{00130\ \ \ \textcolor{keywordtype}{int}\ iy\ =\ 0;}
+\DoxyCodeLine{00131\ \ \ \textcolor{keywordtype}{int}\ position\ =\ 0;}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00133\ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{float}\ YRESOMAX\ =\ 11;}
+\DoxyCodeLine{00134\ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{float}\ YRESOMIN\ =\ 6.5;}
+\DoxyCodeLine{00135\ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{float}\ YMEANMAX\ =\ 1000;}
+\DoxyCodeLine{00136\ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{float}\ YMEANMIN\ =\ 550;}
+\DoxyCodeLine{00137\ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{float}\ YSTDMAX\ =\ 90;}
+\DoxyCodeLine{00138\ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{float}\ YSTDMIN\ =\ 40;}
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00140\ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{float}\ YRESOMAXCERN\ =\ 7;}
+\DoxyCodeLine{00141\ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{float}\ YRESOMINCERN\ =\ 3;}
+\DoxyCodeLine{00142\ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{float}\ YMEANMAXCERN\ =\ 3;}
+\DoxyCodeLine{00143\ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{float}\ YMEANMINCERN\ =\ 0.5;}
+\DoxyCodeLine{00144\ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{float}\ YSTDMAXCERN\ =\ 0.15;}
+\DoxyCodeLine{00145\ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{float}\ YSTDMINCERN\ =\ 0;}
+\DoxyCodeLine{00146\ \ \ \textcolor{keywordtype}{float}\ keV\ =\ 5.9\ /\ (224\ *\ 1703.74\ /}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 183);\ \textcolor{comment}{//\ 5.9\ Fe\ peak\ energy\ |\ 1703\ mean\ MockUp\ gain\ |\ 224}}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ e-\/\ created\ with\ 5.9keV\ |\ 183\ e-\/\ for\ 1\ ADC}}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00150\ \ \ \textcolor{comment}{//\ Single\ scan\ pointers}}
+\DoxyCodeLine{00151\ \ \ TF1\ *fptf1\_WF;}
+\DoxyCodeLine{00152\ \ \ TF1\ *fptf1\_XP;}
+\DoxyCodeLine{00153\ \ \ TGraphErrors\ *fpTGE\_reso\_WF;}
+\DoxyCodeLine{00154\ \ \ TGraphErrors\ *fpTGE\_reso\_XP;}
+\DoxyCodeLine{00155\ \ \ TGraphErrors\ *fpTGE\_mean\_WF;}
+\DoxyCodeLine{00156\ \ \ TGraphErrors\ *fpTGE\_mean\_XP;}
+\DoxyCodeLine{00157\ \ \ TGraphErrors\ *fpTGE\_std\_WF;}
+\DoxyCodeLine{00158\ \ \ TGraphErrors\ *fpTGE\_std\_XP;}
+\DoxyCodeLine{00159\ }
+\DoxyCodeLine{00160\ \ \ \textcolor{comment}{//\ Multiple\ scan\ pointers}}
+\DoxyCodeLine{00161\ \ \ \textcolor{keywordtype}{int}\ nScans\ =\ 0;}
+\DoxyCodeLine{00162\ \ \ \textcolor{keywordtype}{int}\ nRuns\ =\ 0;}
+\DoxyCodeLine{00163\ \ \ std::vector<int>\ markers\ =\ \{22,\ 34,\ 23,\ 47,\ 33,\ 43\};}
+\DoxyCodeLine{00164\ \ \ std::vector<int>\ colors\ =\ \{kCyan\ -\/\ 6,\ \ \ \ kMagenta\ -\/\ 6,\ kCyan\ +\ 2,}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ kMagenta\ +\ 2,\ kCyan\ +\ 3,\ \ \ \ kMagenta\ +\ 3\};}
+\DoxyCodeLine{00166\ \ \ std::vector<int>\ markersCERN\ =\ \{20,\ 47,\ 34,\ 21\};}
+\DoxyCodeLine{00167\ \ \ std::vector<int>\ colorsCERN\ =\ \{kOrange\ +\ 7,\ kAzure\ -\/\ 6,\ kSpring\ -\/\ 6,}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ kRed\ +\ 1\};}
+\DoxyCodeLine{00169\ \ \ std::vector<TF1\ *>\ v\_fptf1\_WF;}
+\DoxyCodeLine{00170\ \ \ std::vector<TF1\ *>\ v\_fptf1\_XP;}
+\DoxyCodeLine{00171\ \ \ std::vector<TGraphErrors\ *>\ v\_fpTGE\_mean\_WF;}
+\DoxyCodeLine{00172\ \ \ std::vector<TGraphErrors\ *>\ v\_fpTGE\_mean\_XP;}
+\DoxyCodeLine{00173\ \ \ std::vector<TGraphErrors\ *>\ v\_fpTGE\_std\_WF;}
+\DoxyCodeLine{00174\ \ \ std::vector<TGraphErrors\ *>\ v\_fpTGE\_std\_XP;}
+\DoxyCodeLine{00175\ \ \ std::vector<TGraphErrors\ *>\ v\_fpTGE\_reso\_WF;}
+\DoxyCodeLine{00176\ \ \ std::vector<TGraphErrors\ *>\ v\_fpTGE\_reso\_XP;}
+\DoxyCodeLine{00177\ }
+\DoxyCodeLine{00178\ \ \ \textcolor{comment}{//\ Bethe-\/Bloch\ fitting}}
+\DoxyCodeLine{00179\ \ \ std::vector<TF1\ *>\ v\_fptf1\_BB;}
+\DoxyCodeLine{00180\ \};}
+\DoxyCodeLine{00181\ \}\ \textcolor{comment}{//\ namespace\ Reconstruction}}
+\DoxyCodeLine{00182\ }
+\DoxyCodeLine{00183\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

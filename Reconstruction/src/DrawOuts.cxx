@@ -1,16 +1,3 @@
-#/***************************************************************************
- * File: DrawOuts.cxx
- * Project: dEdxRecon
- *
- * Brief: Implementation of the DrawOuts class which contains plotting
- *        routines for scans, energy loss visualisations and comparisons.
- *
- * Contents: DrawOuts methods implementing many plotting tasks using ROOT.
- *
- * Notes: Heavy use of ROOT; this file is focused on presentation rather than
- *        core reconstruction logic.
- ***************************************************************************/
-
 #include "DrawOuts.h"
 #include "CombinedFit.h"
 #include "Misc_Functions.h"

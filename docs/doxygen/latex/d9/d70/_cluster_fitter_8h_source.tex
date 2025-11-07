@@ -1,0 +1,105 @@
+\doxysection{Cluster\+Fitter.\+h}
+\hypertarget{_cluster_fitter_8h_source}{}\label{_cluster_fitter_8h_source}\index{Fitters/inc/ClusterFitter.h@{Fitters/inc/ClusterFitter.h}}
+\mbox{\hyperlink{_cluster_fitter_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#ifndef\ CLUSTER\_FIT\_H}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#define\ CLUSTER\_FIT\_H}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_misc_8h}{Misc.h}}"{}}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_cluster_8h}{Cluster.h}}"{}}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_event_8h}{Event.h}}"{}}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_sample_8h}{Sample.h}}"{}}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#include\ "{}TMath.h"{}}}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#include\ "{}TMatrixD.h"{}}}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#include\ "{}TMinuit.h"{}}}
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#include\ "{}TVirtualFitter.h"{}}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#include\ "{}TF1.h"{}}}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{comment}{//\ HORIZONTAL\ FITTER}}
+\DoxyCodeLine{00034\ \textcolor{comment}{//\ Fit\ Basic:\ \ \ MIGRAD/MINOS}}
+\DoxyCodeLine{00035\ \textcolor{comment}{//}}
+\DoxyCodeLine{00036\ \textcolor{comment}{//\ Fit\ Rescues:}}
+\DoxyCodeLine{00037\ \textcolor{comment}{//\ \ 1:\ MIGRAD-\/>MINMIZE/MIGRAD}}
+\DoxyCodeLine{00038\ \textcolor{comment}{//\ \ 2:\ MIGRAD-\/>SIMPLEX/MIGRAD}}
+\DoxyCodeLine{00039\ \textcolor{comment}{//}}
+\DoxyCodeLine{00040\ \textcolor{comment}{//\ Fit\ failure\ -\/>\ Failure\ procedure\ called}}
+\DoxyCodeLine{00041\ \textcolor{comment}{//}}
+\DoxyCodeLine{00042\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_cluster_fitter___horizontal_a213893a2a6b32999a4d9917e726e11da}{ClusterFitter\_Horizontal}}\ \{}
+\DoxyCodeLine{00043\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00048\ \ \ \mbox{\hyperlink{class_cluster_fitter___horizontal_a213893a2a6b32999a4d9917e726e11da}{ClusterFitter\_Horizontal}}(\textcolor{keyword}{const}\ std::string\ \&FitterName);}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00053\ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_cluster_fitter___horizontal_af7d7c747dee9e0ee4ab25988649aedd9}{\string~ClusterFitter\_Horizontal}}();}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00060\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_cluster_fitter___horizontal_a26f1f1cee160002cbffbcb1d0da00735}{Set\_Cluster}}(\mbox{\hyperlink{class_cluster}{Cluster}}\ *pCluster);}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00066\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_cluster_fitter___horizontal_ace20066af45258ad234ca58937994de1}{DoMinimisation}}();}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00073\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_cluster_fitter___horizontal_aa777634582122f33045d9cd322fb94fc}{Chi2}}(\textcolor{keywordtype}{double}\ par[]);}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00076\ \ \ std::string\ \mbox{\hyperlink{class_cluster_fitter___horizontal_a86d0c902a4d4e98f8881c623763e0c2c}{m\_FitterName}};}
+\DoxyCodeLine{00077\ \ \ \mbox{\hyperlink{class_cluster}{Cluster}}\ *\mbox{\hyperlink{class_cluster_fitter___horizontal_a0004ccab23de48755f1f54ecf798f2bd}{p\_Cluster}};}
+\DoxyCodeLine{00078\ \ \ TVirtualFitter\ *\mbox{\hyperlink{class_cluster_fitter___horizontal_a766d385536846cef1954ead7627cf5fa}{p\_TVirtualFitter}};\ }
+\DoxyCodeLine{00079\ \};}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_cluster_fitter_8h_af18c327c86277fab22c0b62106d71df1}{ClusterFit\_Horizontal}}(\mbox{\hyperlink{class_sample}{Sample}}\ \&aSample,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&ModuleNber,}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ TF1\ *pTF1\_ToBeUsed);}
+\DoxyCodeLine{00083\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_cluster_fitter_8h_a49a77c77988b951d15c1d42217c48fa9}{ClusterFit\_Horizontal\_Event}}(}
+\DoxyCodeLine{00084\ \ \ \ \ \mbox{\hyperlink{class_event}{Event}}\ *pEvent,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&ModuleNber,\ TF1\ *pTF1\_ToBeUsed,}
+\DoxyCodeLine{00085\ \ \ \ \ \mbox{\hyperlink{class_cluster_fitter___horizontal}{ClusterFitter\_Horizontal}}\ \&aClusterFitter\_Horizontal);}
+\DoxyCodeLine{00086\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_cluster_fitter_8h_a4785e0ff174187953048be7b59fbdcf4}{ClusterFit\_Horizontal\_Cluster}}(}
+\DoxyCodeLine{00087\ \ \ \ \ \mbox{\hyperlink{class_cluster}{Cluster}}\ *pCluster,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&ModuleNber,\ TF1\ *pTF1\_ToBeUsed,}
+\DoxyCodeLine{00088\ \ \ \ \ \mbox{\hyperlink{class_cluster_fitter___horizontal}{ClusterFitter\_Horizontal}}\ \&aClusterFitter\_Horizontal);}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \textcolor{comment}{//\ DIAGONAL\ FITTER}}
+\DoxyCodeLine{00093\ \textcolor{comment}{//\ Fit\ Basic:\ \ \ MIGRAD/MINOS}}
+\DoxyCodeLine{00094\ \textcolor{comment}{//}}
+\DoxyCodeLine{00095\ \textcolor{comment}{//\ Fit\ Rescues:}}
+\DoxyCodeLine{00096\ \textcolor{comment}{//\ \ 1:\ MIGRAD-\/>MINMIZE/MIGRAD}}
+\DoxyCodeLine{00097\ \textcolor{comment}{//\ \ 2:\ MIGRAD-\/>SIMPLEX/MIGRAD}}
+\DoxyCodeLine{00098\ \textcolor{comment}{//}}
+\DoxyCodeLine{00099\ \textcolor{comment}{//\ Fit\ failure\ -\/>\ Failure\ procedure\ called}}
+\DoxyCodeLine{00100\ \textcolor{comment}{//}}
+\DoxyCodeLine{00101\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_cluster_fitter___diagonal_a27269c26d37f3deee7ce0112809bc0d6}{ClusterFitter\_Diagonal}}\ \{}
+\DoxyCodeLine{00102\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00107\ \ \ \mbox{\hyperlink{class_cluster_fitter___diagonal_a27269c26d37f3deee7ce0112809bc0d6}{ClusterFitter\_Diagonal}}(\textcolor{keyword}{const}\ std::string\ \&FitterName);}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00112\ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_cluster_fitter___diagonal_ab30c7b46a322f741088aecb6215c7999}{\string~ClusterFitter\_Diagonal}}();}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00114\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00119\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_cluster_fitter___diagonal_af3cf33e5d76f7ff6bee852aa065f9df3}{Set\_Cluster}}(\mbox{\hyperlink{class_cluster}{Cluster}}\ *pCluster);}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00125\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_cluster_fitter___diagonal_ac5999313a521fdd4fdf0c9a0c1da75b8}{DoMinimisation}}();}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00132\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_cluster_fitter___diagonal_a9314a8b01618cdfd797a2f52a321a21b}{Chi2}}(\textcolor{keywordtype}{double}\ par[]);}
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00134\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00135\ \ \ std::string\ \mbox{\hyperlink{class_cluster_fitter___diagonal_a5427281c9e7a994621eb68ef3c7abaca}{m\_FitterName}};}
+\DoxyCodeLine{00136\ \ \ \mbox{\hyperlink{class_cluster}{Cluster}}\ *\mbox{\hyperlink{class_cluster_fitter___diagonal_ae94c59576a251a601342e3706853d86a}{p\_Cluster}};}
+\DoxyCodeLine{00137\ \ \ TVirtualFitter\ *\mbox{\hyperlink{class_cluster_fitter___diagonal_a816470da3d309c76db087f7cd8e10aa3}{p\_TVirtualFitter}};\ }
+\DoxyCodeLine{00138\ \};}
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00140\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Cluster}}
+\DoxyCodeLine{00141\ \textcolor{comment}{//\ Fits-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\//}}
+\DoxyCodeLine{00142\ \textcolor{comment}{//\ Cluster\ Fits}}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00144\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_cluster_fitter_8h_a748b02d065cbb8c83f7725903e811d73}{ClusterFit\_Diagonal}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&AngleRot,\ \mbox{\hyperlink{class_sample}{Sample}}\ \&aSample,}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&ModuleNber,\ TF1\ *pTF1\_ToBeUsed);}
+\DoxyCodeLine{00146\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_cluster_fitter_8h_ac28f3727523beadb21b84e6912852fcc}{ClusterFit\_Diagonal\_Event}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&AngleRot,\ \mbox{\hyperlink{class_event}{Event}}\ *pEvent,}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&ModuleNber,\ TF1\ *pTF1\_ToBeUsed,}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \&Kounter\_Fit,\ \textcolor{keywordtype}{int}\ \&Kounter\_Failure,}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_cluster_fitter___diagonal}{ClusterFitter\_Diagonal}}\ \&aClusterFitter\_Diagonal);}
+\DoxyCodeLine{00150\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_cluster_fitter_8h_abfb130d7dd8f66dc9387b7c114537af0}{ClusterFit\_Diagonal\_Cluster}}(}
+\DoxyCodeLine{00151\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&AngleRot,\ \mbox{\hyperlink{class_cluster}{Cluster}}\ *pCluster,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&ModuleNber,}
+\DoxyCodeLine{00152\ \ \ \ \ TF1\ *pTF1\_ToBeUsed,\ \textcolor{keywordtype}{int}\ \&Kounter\_Fit,\ \textcolor{keywordtype}{int}\ \&Kounter\_Failure,}
+\DoxyCodeLine{00153\ \ \ \ \ \mbox{\hyperlink{class_cluster_fitter___diagonal}{ClusterFitter\_Diagonal}}\ \&aClusterFitter\_Diagonal);}
+\DoxyCodeLine{00154\ }
+\DoxyCodeLine{00155\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

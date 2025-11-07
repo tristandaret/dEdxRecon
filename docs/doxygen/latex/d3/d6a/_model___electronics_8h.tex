@@ -1,0 +1,21 @@
+\doxysection{Model\+Signal/inc/\+Model\+\_\+\+Electronics.h File Reference}
+\hypertarget{_model___electronics_8h}{}\label{_model___electronics_8h}\index{ModelSignal/inc/Model\_Electronics.h@{ModelSignal/inc/Model\_Electronics.h}}
+
+
+Electronics response model declaration.  
+
+
+{\ttfamily \#include "{}Misc.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_model___electronics}{Model\+\_\+\+Electronics}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Electronics response model declaration. 
+
+Declares \doxylink{class_model___electronics}{Model\+\_\+\+Electronics} which provides methods to configure impulse response parameters and evaluate the electronics time-\/shape and derivative. Implementation is in \doxylink{_model___electronics_8cxx}{Model\+\_\+\+Electronics.\+cxx}.
+
+The implementation models the readout shaping and provides both the base impulse response and its derivative. These helpers are used by waveform simulation and fitting code and should match the digitiser settings used by the experiment. 

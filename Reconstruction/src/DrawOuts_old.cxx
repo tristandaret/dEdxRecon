@@ -1,16 +1,3 @@
-#/***************************************************************************
- * File: DrawOuts_old.cxx
- * Project: dEdxRecon
- *
- * Brief: Legacy drawing implementation retained for compatibility and
- *        regression checks. Provides older plotting routines mirroring
- *        the DrawOuts API.
- *
- * Contents: legacy drawing implementations.
- *
- * Notes: Prefer DrawOuts.cxx for modern usage.
- ***************************************************************************/
-
 #include "DrawOuts_old.h"
 #include "CombinedFit.h"
 #include "Misc_Functions.h"
@@ -1523,7 +1510,8 @@ void DrawOut_Scans(const std::string &inputDir, const std::string &Comment,
   v_Text.push_back(new TLatex(5, 10, "#splitline{Z scan}{200 ns}"));
   v_Text.push_back(new TLatex(15, 10, "#splitline{Z scan}{412 ns}"));
   v_Text.push_back(new TLatex(26, 10, "Y scan"));
-  v_Text.push_back(new TLatex(35, 10, "#splitline{#varphi scan}{	5 cm}"));
+  v_Text.push_back(
+      new TLatex(35, 10, "#splitline{#varphi scan}{	5 cm}"));
   v_Text.push_back(new TLatex(43, 10, "#splitline{#varphi scan}{ 55 cm}"));
   v_Text.push_back(new TLatex(51, 10, "#splitline{#varphi scan}{ 95 cm}"));
   v_Text.push_back(new TLatex(56, 10, "#theta scan"));
@@ -2458,7 +2446,7 @@ void DrawOut_Escan(const std::string &inputDir, const std::string &Comment) {
   double paramTHATReconstruction[5] = {0.186543, 5.382656, 0.004234, 2.028548,
                                        -0.994807}; // THATReconstruction fit
   //	double paramClaudio[5] = {0.148800, 6.047,
-  //0.00064,	2.308,		-1.359};		//
+  // 0.00064,	2.308,		-1.359};		//
   // Claudio raw normalized
   double paramClaudio[5] = {0.186524, 5.382954, 0.004232, 2.028659,
                             -0.994959}; // Claudio fit

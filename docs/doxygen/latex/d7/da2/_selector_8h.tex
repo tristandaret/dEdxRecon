@@ -1,0 +1,37 @@
+\doxysection{Reconstruction/inc/\+Selector.h File Reference}
+\hypertarget{_selector_8h}{}\label{_selector_8h}\index{Reconstruction/inc/Selector.h@{Reconstruction/inc/Selector.h}}
+
+
+Selection utilities to filter events, modules and clusters.  
+
+
+{\ttfamily \#include "{}Misc.\+h"{}}\newline
+{\ttfamily \#include "{}Sample.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_selector}{Selector}}
+\begin{DoxyCompactList}\small\item\em Encapsulates event/module/cluster selection logic. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_selector_8h_a6dcee02f0e21f10d1df30c2fcafe9bcd}{Selector\+\_\+H}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Selection utilities to filter events, modules and clusters. 
+
+The \doxylink{class_selector}{Selector} class encapsulates selection stages and criteria and provides methods to apply selections to samples and events.
+
+Implementation in {\ttfamily \doxylink{_selector_8cxx}{Selector.\+cxx}} contains the selection-\/stage definitions and concrete logic for known selection presets (DESY21, CERN22, etc.). Changing selection logic can affect downstream analyses; keep tests updated when criteria change. 
+
+\label{doc-define-members}
+\Hypertarget{_selector_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_selector_8h_a6dcee02f0e21f10d1df30c2fcafe9bcd}\index{Selector.h@{Selector.h}!Selector\_H@{Selector\_H}}
+\index{Selector\_H@{Selector\_H}!Selector.h@{Selector.h}}
+\doxysubsubsection{\texorpdfstring{Selector\_H}{Selector\_H}}
+{\footnotesize\ttfamily \label{_selector_8h_a6dcee02f0e21f10d1df30c2fcafe9bcd} 
+\#define Selector\+\_\+H}
+

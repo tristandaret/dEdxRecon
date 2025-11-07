@@ -1,0 +1,106 @@
+\doxysection{PRFParameters Class Reference}
+\hypertarget{class_p_r_f_parameters}{}\label{class_p_r_f_parameters}\index{PRFParameters@{PRFParameters}}
+
+
+{\ttfamily \#include $<$PRFParameters.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_p_r_f_parameters_a5dd60e43be4af81b0239f380d27a7118}{PRFParameters}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{class_p_r_f_parameters_a5a381d448cfefc786a7b36d435f10680}{\texorpdfstring{$\sim$}{\string~}\+PRFParameters}} ()
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_p_r_f_parameters_a8394f37b7de0e246a54236f6ad02458a}{Eval}} (const double \&Xin)
+\begin{DoxyCompactList}\small\item\em Evaluate the PRF at a given position. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_p_r_f_parameters_a035dd697ae174dbe2c77dd2d3b939194}{operator()}} (double \texorpdfstring{$\ast$}{*}x, double \texorpdfstring{$\ast$}{*}par)
+\begin{DoxyCompactList}\small\item\em Function-\/call operator used by ROOT TF1-\/style callbacks. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_p_r_f_parameters_abab199a683e4ba294d901dd61093f660}{Set\+PRF}} (const double \&Norm, const double \&A2, const double \&A4, const double \&B2, const double \&B4)
+\begin{DoxyCompactList}\small\item\em Set PRF polynomial parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{class_p_r_f_parameters_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_p_r_f_parameters_a5dd60e43be4af81b0239f380d27a7118}\index{PRFParameters@{PRFParameters}!PRFParameters@{PRFParameters}}
+\index{PRFParameters@{PRFParameters}!PRFParameters@{PRFParameters}}
+\doxysubsubsection{\texorpdfstring{PRFParameters()}{PRFParameters()}}
+{\footnotesize\ttfamily \label{class_p_r_f_parameters_a5dd60e43be4af81b0239f380d27a7118} 
+PRFParameters\+::\+PRFParameters (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Default constructor. 
+
+\Hypertarget{class_p_r_f_parameters_a5a381d448cfefc786a7b36d435f10680}\index{PRFParameters@{PRFParameters}!````~PRFParameters@{\texorpdfstring{$\sim$}{\string~}PRFParameters}}
+\index{````~PRFParameters@{\texorpdfstring{$\sim$}{\string~}PRFParameters}!PRFParameters@{PRFParameters}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}PRFParameters()}{\string~PRFParameters()}}
+{\footnotesize\ttfamily \label{class_p_r_f_parameters_a5a381d448cfefc786a7b36d435f10680} 
+PRFParameters\+::\texorpdfstring{$\sim$}{\string~}\+PRFParameters (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Virtual destructor. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_p_r_f_parameters_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_p_r_f_parameters_a8394f37b7de0e246a54236f6ad02458a}\index{PRFParameters@{PRFParameters}!Eval@{Eval}}
+\index{Eval@{Eval}!PRFParameters@{PRFParameters}}
+\doxysubsubsection{\texorpdfstring{Eval()}{Eval()}}
+{\footnotesize\ttfamily \label{class_p_r_f_parameters_a8394f37b7de0e246a54236f6ad02458a} 
+double PRFParameters\+::\+Eval (\begin{DoxyParamCaption}\item[{const double \&}]{Xin}{}\end{DoxyParamCaption})}
+
+
+
+Evaluate the PRF at a given position. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Xin} & input position in cm \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+evaluated PRF value 
+\end{DoxyReturn}
+\Hypertarget{class_p_r_f_parameters_a035dd697ae174dbe2c77dd2d3b939194}\index{PRFParameters@{PRFParameters}!operator()@{operator()}}
+\index{operator()@{operator()}!PRFParameters@{PRFParameters}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}}
+{\footnotesize\ttfamily \label{class_p_r_f_parameters_a035dd697ae174dbe2c77dd2d3b939194} 
+double PRFParameters\+::operator() (\begin{DoxyParamCaption}\item[{double \texorpdfstring{$\ast$}{*}}]{x}{, }\item[{double \texorpdfstring{$\ast$}{*}}]{par}{}\end{DoxyParamCaption})}
+
+
+
+Function-\/call operator used by ROOT TF1-\/style callbacks. 
+
+\Hypertarget{class_p_r_f_parameters_abab199a683e4ba294d901dd61093f660}\index{PRFParameters@{PRFParameters}!SetPRF@{SetPRF}}
+\index{SetPRF@{SetPRF}!PRFParameters@{PRFParameters}}
+\doxysubsubsection{\texorpdfstring{SetPRF()}{SetPRF()}}
+{\footnotesize\ttfamily \label{class_p_r_f_parameters_abab199a683e4ba294d901dd61093f660} 
+void PRFParameters\+::\+Set\+PRF (\begin{DoxyParamCaption}\item[{const double \&}]{Norm}{, }\item[{const double \&}]{A2}{, }\item[{const double \&}]{A4}{, }\item[{const double \&}]{B2}{, }\item[{const double \&}]{B4}{}\end{DoxyParamCaption})}
+
+
+
+Set PRF polynomial parameters. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Norm} & normalization \\
+\hline
+{\em A2} & coefficient A2 \\
+\hline
+{\em A4} & coefficient A4 \\
+\hline
+{\em B2} & coefficient B2 \\
+\hline
+{\em B4} & coefficient B4 \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Fitters/inc/\mbox{\hyperlink{_p_r_f_parameters_8h}{PRFParameters.\+h}}\item 
+Fitters/src/\mbox{\hyperlink{_p_r_f_parameters_8cxx}{PRFParameters.\+cxx}}\end{DoxyCompactItemize}

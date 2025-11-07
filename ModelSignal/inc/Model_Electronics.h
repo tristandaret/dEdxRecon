@@ -5,6 +5,12 @@
  * Declares Model_Electronics which provides methods to configure impulse
  * response parameters and evaluate the electronics time-shape and derivative.
  * Implementation is in Model_Electronics.cxx.
+ *
+ * @details
+ * The implementation models the readout shaping and provides both the base
+ * impulse response and its derivative. These helpers are used by waveform
+ * simulation and fitting code and should match the digitiser settings used
+ * by the experiment.
  */
 #ifndef Model_Electronics_H
 #define Model_Electronics_H

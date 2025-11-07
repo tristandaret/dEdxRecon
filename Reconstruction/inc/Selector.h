@@ -4,6 +4,12 @@
  *
  * The Selector class encapsulates selection stages and criteria and provides
  * methods to apply selections to samples and events.
+ *
+ * @details
+ * Implementation in `Selector.cxx` contains the selection-stage definitions
+ * and concrete logic for known selection presets (DESY21, CERN22, etc.).
+ * Changing selection logic can affect downstream analyses; keep tests
+ * updated when criteria change.
  */
 #ifndef SELECTOR_H
 #define SELECTOR_H

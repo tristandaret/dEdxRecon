@@ -1,4 +1,4 @@
-#/**
+/**
  * @file ClusterFitter.h
  * @brief Declarations for cluster-level fitters used to fit pad-cluster
  *        charge distributions.
@@ -6,6 +6,13 @@
  * This header defines both horizontal and diagonal cluster fitter classes
  * and related helper functions to run fits on Samples, Events and Clusters.
  * Implementations live in ClusterFitter.cxx.
+ *
+ * @details
+ * The corresponding implementation uses ROOT's TVirtualFitter/TMinuit and
+ * registers file-local static bridge classes that forward Minuit callbacks
+ * to the instance methods (Chi2 evaluation). The source contains both the
+ * horizontal and diagonal fitter implementations and several helper
+ * functions to apply fitters to Samples, Events and individual Clusters.
  */
 #ifndef CLUSTER_FIT_H
 #define CLUSTER_FIT_H

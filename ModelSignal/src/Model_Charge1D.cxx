@@ -1,16 +1,3 @@
-#/***************************************************************************
- * File: Model_Charge1D.cxx
- * Project: dEdxRecon
- *
- * Brief: Implementation of the 1D charge model. Models charge spreading
- *        along a single axis (e.g., drift direction) and computes pad
- *        responses accordingly.
- *
- * Contents: Model_Charge1D methods for computing Qpad and secondary setup.
- *
- * Notes: Use this when longitudinal spreading is the dominant effect.
- ***************************************************************************/
-
 #include "Model_Charge1D.h"
 
 Model_Charge1D::Model_Charge1D() : Model_ChargeI() {

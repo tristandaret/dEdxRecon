@@ -1,0 +1,29 @@
+\doxysection{Reconstruction/inc/\+Draw\+Outs.h File Reference}
+\hypertarget{_draw_outs_8h}{}\label{_draw_outs_8h}\index{Reconstruction/inc/DrawOuts.h@{Reconstruction/inc/DrawOuts.h}}
+
+
+Declaration of the Draw\+Outs helper class for plotting and summaries.  
+
+
+{\ttfamily \#include "{}Misc.\+h"{}}\newline
+{\ttfamily \#include "{}Set\+Style.\+h"{}}\newline
+{\ttfamily \#include "{}TLegend.\+h"{}}\newline
+{\ttfamily \#include "{}d\+Edx.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_reconstruction_1_1_draw_outs}{Reconstruction\+::\+Draw\+Outs}}
+\begin{DoxyCompactList}\small\item\em Plotting helper for reconstruction results. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespace_reconstruction}{Reconstruction}}
+\begin{DoxyCompactList}\small\item\em d\+E/dx estimation and particle identification declarations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Declaration of the Draw\+Outs helper class for plotting and summaries. 
+
+The Draw\+Outs class provides routines for creating plots and visual summaries of reconstruction results (scan drawing, energy loss plots, comparisons, etc.). Implementation and plotting logic live in \doxylink{_draw_outs_8cxx}{Draw\+Outs.\+cxx}.
+
+A small top-\/level executable {\ttfamily Draw\+Out} exists (\doxylink{_draw_out_8cxx}{Apps/\+Draw\+Out.\+cxx}) which calls into {\ttfamily \doxylink{class_reconstruction_1_1_draw_outs}{Reconstruction\+::\+Draw\+Outs}} as the runner for generating visual outputs. The class itself provides fine-\/grained control functions used by the executable and by any other consumer of plotting helpers. 

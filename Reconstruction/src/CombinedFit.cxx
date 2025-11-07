@@ -1,17 +1,3 @@
-#/***************************************************************************
- * File: CombinedFit.cxx
- * Project: dEdxRecon
- *
- * Brief: Implementation of combined-fit utilities used to fit multiple data
- *        series together (e.g., simultaneous fits across species for
- *        Bethe-Bloch parameter extraction). Uses ROOT's fitting framework
- *        and wrappers such as WrappedMultiTF1.
- *
- * Contents: combinedFit implementation and helper structures for global chi2.
- *
- * Notes: This code coordinates multiple TF1 instances and ROOT fit helpers.
- ***************************************************************************/
-
 #include "CombinedFit.h"
 #include "ReconTools.h"
 #include "SetStyle.h"
@@ -60,145 +46,194 @@ struct GlobalChi2_4 {
 void combinedFit(std::vector<TGraphErrors *> &v_tge,
                  std::vector<TF1 *> &v_tf1) {
   int Npar = 9;
+#include "CombinedFit.h"
+#include "ReconTools.h"
+#include "SetStyle.h"
 
-  // double par[Npar] = {
-  //    0.278101, 4.356348,   0.012379,   2.001255,  0.815458,
-  //    0.511e-3, 105.658e-3, 139.570e-3, 938.272e-3}; // My fit
-  // double par[Npar] = {
-  //    2,        3.5,        0.03,       2,         0.7,
-  //    0.511e-3, 105.658e-3, 139.570e-3, 938.272e-3}; // From hatRecon
-  //    (initialization)
-  //    => amplitude reset
-  double par[Npar] = {1.65179e+02, 3.62857e+00, 3.18209e-02,
-                      2.07081e+00, 7.14413e-01, 0.511e-3,
-                      105.658e-3,  139.570e-3,  938.272e-3}; // From hatRecon
+  // definition of parameters (0 to 4 shared, last one is particle mass)
+  int npar = 6;
+  int iparpositron[] = {0, 1, 2, 3, 4, 5};
+  int iparmuon[] = {0, 1, 2, 3, 4, 6};
+  int iparpion[] = {0, 1, 2, 3, 4, 7};
+  int iparproton[] = {0, 1, 2, 3, 4, 8};
 
-  v_tf1[0]->SetParameters(par[0], par[1], par[2], par[3], par[4], par[5]);
-  v_tf1[0]->FixParameter(1, par[1]);
-  v_tf1[0]->FixParameter(2, par[2]);
-  v_tf1[0]->FixParameter(3, par[3]);
-  v_tf1[0]->FixParameter(4, par[4]);
-  v_tf1[0]->FixParameter(5, par[5]);
+  // Create the GlobalCHi2 structure
+  struct GlobalChi2_4 {
+    GlobalChi2_4(ROOT::Math::IMultiGenFunction &f1,
+                 ROOT::Math::IMultiGenFunction &f2,
+                 ROOT::Math::IMultiGenFunction &f3,
+                 ROOT::Math::IMultiGenFunction &f4)
+        : fChi2_1(&f1), fChi2_2(&f2), fChi2_3(&f3), fChi2_4(&f4) {}
 
-  v_tf1[1]->SetParameters(par[0], par[1], par[2], par[3], par[4], par[6]);
-  v_tf1[1]->FixParameter(1, par[1]);
-  v_tf1[1]->FixParameter(2, par[2]);
-  v_tf1[1]->FixParameter(3, par[3]);
-  v_tf1[1]->FixParameter(4, par[4]);
-  v_tf1[1]->FixParameter(5, par[6]);
+    double operator()(const double *par) const {
+      double p1[npar];
+      for (int i = 0; i < npar; ++i)
+        p1[i] = par[iparpositron[i]];
 
-  v_tf1[2]->SetParameters(par[0], par[1], par[2], par[3], par[4], par[7]);
-  v_tf1[2]->FixParameter(1, par[1]);
-  v_tf1[2]->FixParameter(2, par[2]);
-  v_tf1[2]->FixParameter(3, par[3]);
-  v_tf1[2]->FixParameter(4, par[4]);
-  v_tf1[2]->FixParameter(5, par[7]);
+      double p2[npar];
+      for (int i = 0; i < npar; ++i)
+        p2[i] = par[iparmuon[i]];
 
-  v_tf1[3]->SetParameters(par[0], par[1], par[2], par[3], par[4], par[8]);
-  v_tf1[3]->FixParameter(1, par[1]);
-  v_tf1[3]->FixParameter(2, par[2]);
-  v_tf1[3]->FixParameter(3, par[3]);
-  v_tf1[3]->FixParameter(4, par[4]);
-  v_tf1[3]->FixParameter(5, par[8]);
+      double p3[npar];
+      for (int i = 0; i < npar; ++i)
+        p3[i] = par[iparpion[i]];
 
-  // perform now global fit
+      double p4[npar];
+      for (int i = 0; i < npar; ++i)
+        p4[i] = par[iparproton[i]];
 
-  ROOT::Math::WrappedMultiTF1 wfpositron(*v_tf1[0], 1);
-  ROOT::Math::WrappedMultiTF1 wfmuon(*v_tf1[1], 1);
-  ROOT::Math::WrappedMultiTF1 wfpion(*v_tf1[2], 1);
-  ROOT::Math::WrappedMultiTF1 wfproton(*v_tf1[3], 1);
+      return (*fChi2_1)(p1) + (*fChi2_2)(p2) + (*fChi2_3)(p3) + (*fChi2_4)(p4);
+    }
 
-  ROOT::Fit::DataOptions opt;
+    const ROOT::Math::IMultiGenFunction *fChi2_1;
+    const ROOT::Math::IMultiGenFunction *fChi2_2;
+    const ROOT::Math::IMultiGenFunction *fChi2_3;
+    const ROOT::Math::IMultiGenFunction *fChi2_4;
+  };
 
-  ROOT::Fit::DataRange rangepositron;
-  rangepositron.SetRange(0, 100);
-  ROOT::Fit::BinData datapositron(opt, rangepositron);
-  ROOT::Fit::FillData(datapositron, v_tge[0]);
+  void combinedFit(std::vector<TGraphErrors *> & v_tge,
+                   std::vector<TF1 *> & v_tf1) {
+    int Npar = 9;
 
-  ROOT::Fit::DataRange rangemuon;
-  rangemuon.SetRange(0, 100);
-  ROOT::Fit::BinData datamuon(opt, rangemuon);
-  ROOT::Fit::FillData(datamuon, v_tge[1]);
+    // double par[Npar] = {
+    //    0.278101, 4.356348,   0.012379,   2.001255,  0.815458,
+    //    0.511e-3, 105.658e-3, 139.570e-3, 938.272e-3}; // My fit
+    // double par[Npar] = {
+    //    2,        3.5,        0.03,       2,         0.7,
+    //    0.511e-3, 105.658e-3, 139.570e-3, 938.272e-3}; // From hatRecon
+    //    (initialization)
+    //    => amplitude reset
+    double par[Npar] = {1.65179e+02, 3.62857e+00, 3.18209e-02,
+                        2.07081e+00, 7.14413e-01, 0.511e-3,
+                        105.658e-3,  139.570e-3,  938.272e-3}; // From hatRecon
 
-  ROOT::Fit::DataRange rangepion;
-  rangepion.SetRange(0, 100);
-  ROOT::Fit::BinData datapion(opt, rangepion);
-  ROOT::Fit::FillData(datapion, v_tge[2]);
+    v_tf1[0]->SetParameters(par[0], par[1], par[2], par[3], par[4], par[5]);
+    v_tf1[0]->FixParameter(1, par[1]);
+    v_tf1[0]->FixParameter(2, par[2]);
+    v_tf1[0]->FixParameter(3, par[3]);
+    v_tf1[0]->FixParameter(4, par[4]);
+    v_tf1[0]->FixParameter(5, par[5]);
 
-  ROOT::Fit::DataRange rangeproton;
-  rangeproton.SetRange(0, 100);
-  ROOT::Fit::BinData dataproton(opt, rangeproton);
-  ROOT::Fit::FillData(dataproton, v_tge[3]);
+    v_tf1[1]->SetParameters(par[0], par[1], par[2], par[3], par[4], par[6]);
+    v_tf1[1]->FixParameter(1, par[1]);
+    v_tf1[1]->FixParameter(2, par[2]);
+    v_tf1[1]->FixParameter(3, par[3]);
+    v_tf1[1]->FixParameter(4, par[4]);
+    v_tf1[1]->FixParameter(5, par[6]);
 
-  ROOT::Fit::Chi2Function chi2_positron(datapositron, wfpositron);
-  ROOT::Fit::Chi2Function chi2_muon(datamuon, wfmuon);
-  ROOT::Fit::Chi2Function chi2_pion(datapion, wfpion);
-  ROOT::Fit::Chi2Function chi2_proton(dataproton, wfproton);
+    v_tf1[2]->SetParameters(par[0], par[1], par[2], par[3], par[4], par[7]);
+    v_tf1[2]->FixParameter(1, par[1]);
+    v_tf1[2]->FixParameter(2, par[2]);
+    v_tf1[2]->FixParameter(3, par[3]);
+    v_tf1[2]->FixParameter(4, par[4]);
+    v_tf1[2]->FixParameter(5, par[7]);
 
-  GlobalChi2_4 GlobalChi2_4(chi2_positron, chi2_muon, chi2_pion, chi2_proton);
+    v_tf1[3]->SetParameters(par[0], par[1], par[2], par[3], par[4], par[8]);
+    v_tf1[3]->FixParameter(1, par[1]);
+    v_tf1[3]->FixParameter(2, par[2]);
+    v_tf1[3]->FixParameter(3, par[3]);
+    v_tf1[3]->FixParameter(4, par[4]);
+    v_tf1[3]->FixParameter(5, par[8]);
 
-  ROOT::Fit::Fitter fitter;
+    // perform now global fit
 
-  // create before the parameter settings in order to fix or set range on them
-  fitter.Config().SetParamsSettings(9, par);
+    ROOT::Math::WrappedMultiTF1 wfpositron(*v_tf1[0], 1);
+    ROOT::Math::WrappedMultiTF1 wfmuon(*v_tf1[1], 1);
+    ROOT::Math::WrappedMultiTF1 wfpion(*v_tf1[2], 1);
+    ROOT::Math::WrappedMultiTF1 wfproton(*v_tf1[3], 1);
 
-  // fitter.Config().ParSettings(0).SetLimits(-0.5, -0.2);
-  fitter.Config().ParSettings(1).Fix();
-  fitter.Config().ParSettings(2).Fix();
-  fitter.Config().ParSettings(3).Fix();
-  fitter.Config().ParSettings(4).Fix();
-  fitter.Config().ParSettings(5).Fix();
-  fitter.Config().ParSettings(6).Fix();
-  fitter.Config().ParSettings(7).Fix();
-  fitter.Config().ParSettings(8).Fix();
-  fitter.Config().MinimizerOptions().SetPrintLevel(1);
-  fitter.Config().SetMinimizer("Minuit2", "Migrad");
+    ROOT::Fit::DataOptions opt;
 
-  // fit FCN function directly
-  // (specify optionally data size and flag to indicate that is a chi2 fit)
-  fitter.FitFCN(9, GlobalChi2_4, 0,
-                datapositron.Size() + datamuon.Size() + datapion.Size() +
-                    dataproton.Size(),
-                true);
-  ROOT::Fit::FitResult result = fitter.Result();
-  result.Print(std::cout);
+    ROOT::Fit::DataRange rangepositron;
+    rangepositron.SetRange(0, 100);
+    ROOT::Fit::BinData datapositron(opt, rangepositron);
+    ROOT::Fit::FillData(datapositron, v_tge[0]);
 
-  TCanvas *c1 = new TCanvas("Simfit", "Simultaneous fit", 1800, 1350);
-  c1->cd();
-  gStyle->SetOptFit(0);
-  std::vector<int> markersCERN = {20, 21, 33, 34};
-  std::vector<int> colorsCERN = {kOrange + 7, kAzure + 2, kGreen + 3, kRed + 1};
+    ROOT::Fit::DataRange rangemuon;
+    rangemuon.SetRange(0, 100);
+    ROOT::Fit::BinData datamuon(opt, rangemuon);
+    ROOT::Fit::FillData(datamuon, v_tge[1]);
 
-  v_tf1[0]->SetFitResult(result, iparpositron);
-  v_tf1[0]->SetLineColor(colorsCERN[0]);
-  Graphic_setup(v_tge[0], 4, markersCERN[0], colorsCERN[0], 1, kBlack);
-  v_tf1[0]->SetTitle(";Energy (GeV);dE/dx (keV/cm)");
-  v_tf1[0]->GetXaxis()->SetLimits(0, 20);
-  v_tf1[0]->SetMinimum(0.5);
-  v_tf1[0]->SetMaximum(3);
-  gPad->SetLogx();
-  v_tf1[0]->Draw();
-  v_tge[0]->Draw("p same");
+    ROOT::Fit::DataRange rangepion;
+    rangepion.SetRange(0, 100);
+    ROOT::Fit::BinData datapion(opt, rangepion);
+    ROOT::Fit::FillData(datapion, v_tge[2]);
 
-  v_tf1[1]->SetFitResult(result, iparmuon);
-  v_tf1[1]->SetLineColor(colorsCERN[1]);
-  Graphic_setup(v_tge[1], 4, markersCERN[1], colorsCERN[1], 1, kBlack);
-  v_tge[1]->Draw("p same");
-  v_tf1[1]->Draw("same");
+    ROOT::Fit::DataRange rangeproton;
+    rangeproton.SetRange(0, 100);
+    ROOT::Fit::BinData dataproton(opt, rangeproton);
+    ROOT::Fit::FillData(dataproton, v_tge[3]);
 
-  v_tf1[2]->SetFitResult(result, iparpion);
-  v_tf1[2]->SetLineColor(colorsCERN[2]);
-  Graphic_setup(v_tge[2], 4, markersCERN[2], colorsCERN[2], 1, kBlack);
-  v_tge[2]->Draw("p same");
-  v_tf1[2]->Draw("same");
+    ROOT::Fit::Chi2Function chi2_positron(datapositron, wfpositron);
+    ROOT::Fit::Chi2Function chi2_muon(datamuon, wfmuon);
+    ROOT::Fit::Chi2Function chi2_pion(datapion, wfpion);
+    ROOT::Fit::Chi2Function chi2_proton(dataproton, wfproton);
 
-  v_tf1[3]->SetFitResult(result, iparproton);
-  v_tf1[3]->SetLineColor(colorsCERN[3]);
-  Graphic_setup(v_tge[3], 4, markersCERN[3], colorsCERN[3], 1, kBlack);
-  v_tge[3]->Draw("p same");
-  v_tf1[3]->Draw("same");
+    GlobalChi2_4 GlobalChi2_4(chi2_positron, chi2_muon, chi2_pion, chi2_proton);
 
-  c1->SaveAs("../OUT_Reconstruction/CERN22_Energy/"
-             "Test_Simultaneous_fit_4approx_test2.pdf");
-  delete c1;
-}
+    ROOT::Fit::Fitter fitter;
+
+    // create before the parameter settings in order to fix or set range on them
+    fitter.Config().SetParamsSettings(9, par);
+
+    // fitter.Config().ParSettings(0).SetLimits(-0.5, -0.2);
+    fitter.Config().ParSettings(1).Fix();
+    fitter.Config().ParSettings(2).Fix();
+    fitter.Config().ParSettings(3).Fix();
+    fitter.Config().ParSettings(4).Fix();
+    fitter.Config().ParSettings(5).Fix();
+    fitter.Config().ParSettings(6).Fix();
+    fitter.Config().ParSettings(7).Fix();
+    fitter.Config().ParSettings(8).Fix();
+    fitter.Config().MinimizerOptions().SetPrintLevel(1);
+    fitter.Config().SetMinimizer("Minuit2", "Migrad");
+
+    // fit FCN function directly
+    // (specify optionally data size and flag to indicate that is a chi2 fit)
+    fitter.FitFCN(9, GlobalChi2_4, 0,
+                  datapositron.Size() + datamuon.Size() + datapion.Size() +
+                      dataproton.Size(),
+                  true);
+    ROOT::Fit::FitResult result = fitter.Result();
+    result.Print(std::cout);
+
+    TCanvas *c1 = new TCanvas("Simfit", "Simultaneous fit", 1800, 1350);
+    c1->cd();
+    gStyle->SetOptFit(0);
+    std::vector<int> markersCERN = {20, 21, 33, 34};
+    std::vector<int> colorsCERN = {kOrange + 7, kAzure + 2, kGreen + 3,
+                                   kRed + 1};
+
+    v_tf1[0]->SetFitResult(result, iparpositron);
+    v_tf1[0]->SetLineColor(colorsCERN[0]);
+    Graphic_setup(v_tge[0], 4, markersCERN[0], colorsCERN[0], 1, kBlack);
+    v_tf1[0]->SetTitle(";Energy (GeV);dE/dx (keV/cm)");
+    v_tf1[0]->GetXaxis()->SetLimits(0, 20);
+    v_tf1[0]->SetMinimum(0.5);
+    v_tf1[0]->SetMaximum(3);
+    gPad->SetLogx();
+    v_tf1[0]->Draw();
+    v_tge[0]->Draw("p same");
+
+    v_tf1[1]->SetFitResult(result, iparmuon);
+    v_tf1[1]->SetLineColor(colorsCERN[1]);
+    Graphic_setup(v_tge[1], 4, markersCERN[1], colorsCERN[1], 1, kBlack);
+    v_tge[1]->Draw("p same");
+    v_tf1[1]->Draw("same");
+
+    v_tf1[2]->SetFitResult(result, iparpion);
+    v_tf1[2]->SetLineColor(colorsCERN[2]);
+    Graphic_setup(v_tge[2], 4, markersCERN[2], colorsCERN[2], 1, kBlack);
+    v_tge[2]->Draw("p same");
+    v_tf1[2]->Draw("same");
+
+    v_tf1[3]->SetFitResult(result, iparproton);
+    v_tf1[3]->SetLineColor(colorsCERN[3]);
+    Graphic_setup(v_tge[3], 4, markersCERN[3], colorsCERN[3], 1, kBlack);
+    v_tge[3]->Draw("p same");
+    v_tf1[3]->Draw("same");
+
+    c1->SaveAs("../OUT_Reconstruction/CERN22_Energy/"
+               "Test_Simultaneous_fit_4approx_test2.pdf");
+    delete c1;
+  }

@@ -1,0 +1,38 @@
+\doxysection{Reconstruction/inc/\+Combined\+Fit.h File Reference}
+\hypertarget{_combined_fit_8h}{}\label{_combined_fit_8h}\index{Reconstruction/inc/CombinedFit.h@{Reconstruction/inc/CombinedFit.h}}
+
+
+Combined fitting utilities declaration.  
+
+
+{\ttfamily \#include $<$Fit/\+Bin\+Data.\+h$>$}\newline
+{\ttfamily \#include $<$Fit/\+Chi2\+FCN.\+h$>$}\newline
+{\ttfamily \#include $<$Fit/\+Fitter.\+h$>$}\newline
+{\ttfamily \#include $<$HFit\+Interface.\+h$>$}\newline
+{\ttfamily \#include $<$Math/\+Wrapped\+Multi\+TF1.\+h$>$}\newline
+{\ttfamily \#include $<$TCanvas.\+h$>$}\newline
+{\ttfamily \#include $<$TH1.\+h$>$}\newline
+{\ttfamily \#include $<$TStyle.\+h$>$}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_combined_fit_8h_a7a2bd01b76d62b38240727b6c6ad12b0}{combined\+Fit}} (std\+::vector$<$ TGraph\+Errors \texorpdfstring{$\ast$}{*} $>$ \&v\+\_\+tge, std\+::vector$<$ TF1 \texorpdfstring{$\ast$}{*} $>$ \&v\+\_\+tf1)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Combined fitting utilities declaration. 
+
+Declares the combined\+Fit helper used to fit multiple TGraph\+Errors/\+TF1 series together (e.\+g., high-\/level fits like Bethe-\/\+Bloch curve fits).
+
+Implementation coordinates multiple TF1 instances and ROOT fit helpers to perform simultaneous fits across different data series (for example, fitting Bethe-\/\+Bloch parameters across particle species). It uses ROOT\textquotesingle{}s fitting framework including Wrapped\+Multi\+TF1 and the ROOT\+::\+Fit\+::\+Fitter interface and exposes a single helper function {\ttfamily \doxylink{_combined_fit_8h_a7a2bd01b76d62b38240727b6c6ad12b0}{combined\+Fit}} which takes vectors of TGraph\+Errors and TF1 pointers and runs a global chi2 fit.
+
+\label{doc-func-members}
+\Hypertarget{_combined_fit_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_combined_fit_8h_a7a2bd01b76d62b38240727b6c6ad12b0}\index{CombinedFit.h@{CombinedFit.h}!combinedFit@{combinedFit}}
+\index{combinedFit@{combinedFit}!CombinedFit.h@{CombinedFit.h}}
+\doxysubsubsection{\texorpdfstring{combinedFit()}{combinedFit()}}
+{\footnotesize\ttfamily \label{_combined_fit_8h_a7a2bd01b76d62b38240727b6c6ad12b0} 
+void combined\+Fit (\begin{DoxyParamCaption}\item[{std\+::vector$<$ TGraph\+Errors \texorpdfstring{$\ast$}{*} $>$ \&}]{v\+\_\+tge}{, }\item[{std\+::vector$<$ TF1 \texorpdfstring{$\ast$}{*} $>$ \&}]{v\+\_\+tf1}{}\end{DoxyParamCaption})}
+

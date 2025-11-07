@@ -1,0 +1,48 @@
+\doxysection{Model\+\_\+\+Charge0\+D.\+h}
+\hypertarget{_model___charge0_d_8h_source}{}\label{_model___charge0_d_8h_source}\index{ModelSignal/inc/Model\_Charge0D.h@{ModelSignal/inc/Model\_Charge0D.h}}
+\mbox{\hyperlink{_model___charge0_d_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#ifndef\ Model\_Charge0D\_H}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#define\ Model\_Charge0D\_H}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_misc_8h}{Misc.h}}"{}}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_model___charge_i_8h}{Model\_ChargeI.h}}"{}}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_model___charge0_d_aee8b51d25ec83e9a25648eced615ada3}{Model\_Charge0D}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_model___charge_i_a8169d5a6adc08d735e4e7c8652fbf8f1}{Model\_ChargeI}}\ \{}
+\DoxyCodeLine{00023\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00025\ \ \ \mbox{\hyperlink{class_model___charge0_d_aee8b51d25ec83e9a25648eced615ada3}{Model\_Charge0D}}();}
+\DoxyCodeLine{00026\ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_model___charge0_d_a21f03c5ae566ea8591e45d2b457ea6c9}{\string~Model\_Charge0D}}();}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \textcolor{comment}{//\ Get\ charge\ spreading\ parameters}}
+\DoxyCodeLine{00029\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_model___charge0_d_a532b6f6a291c7bd5ec57e6d8888a041d}{Get\_Qprim}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \textcolor{comment}{//\ Set\ charge\ spreading\ parameters}}
+\DoxyCodeLine{00032\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_model___charge0_d_a5d3ff32b3ceb0cb76717e39cdb7ead8d}{Set\_Qprim}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&Qprim);}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \textcolor{comment}{//\ Get\ Charge}}
+\DoxyCodeLine{00035\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_model___charge0_d_a675adca0a1eedb8d4758c4a96c940ccd}{Get\_Qpad}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&Time,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&Time0,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&XTrue,}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&YTrue,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&XL,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&XH,}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&YL,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&YH)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \textcolor{comment}{//\ Big\ Dump}}
+\DoxyCodeLine{00040\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_model___charge0_d_a24da5f78a44570df48bf69ac8484d794}{WriteOut}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \textcolor{comment}{//\ Ion\ Effect:\ Set\ charge\ spreading\ parameters}}
+\DoxyCodeLine{00043\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_model___charge0_d_a76028ab9353c44e2925f464601d18c0e}{Set\_Ion}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&DoIons,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&Tion,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&RTrue,}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&RFactor);}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00047\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_model___charge0_d_a1593ec6fdba056b02402ed8adc2ac236}{SetSecondaries}}();}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_model___charge0_d_a578f7fa398d4a80848a1080f10159c50}{m\_Qprim}};}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_model___charge0_d_aa5c2602bc8c19f09d65dcea1367c830f}{m\_DoIons}};}
+\DoxyCodeLine{00052\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_model___charge0_d_a0a5c9df7673187ca170114d494725b74}{m\_Tion}};}
+\DoxyCodeLine{00053\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_model___charge0_d_a2127b129ffa985425389942c1316e110}{m\_RTrue}};}
+\DoxyCodeLine{00054\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_model___charge0_d_a1d8d57f129f335e335c611f87bacd611}{m\_RFactor}};}
+\DoxyCodeLine{00055\ \};}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

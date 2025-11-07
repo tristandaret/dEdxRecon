@@ -5,6 +5,12 @@
  * Declares functions and helpers used by the GUI and plotting components of
  * the reconstruction pipeline (event displays, waveform displays, cluster
  * visualisations, etc.).
+ *
+ * @details
+ * The implementation in `Displays.cxx` contains high-level presentation code
+ * that constructs ROOT-based canvases, histograms and graphical summaries.
+ * This is primarily display code that depends on ROOT and should remain
+ * separate from core reconstruction algorithms.
  */
 
 #ifndef DISPLAYS_H

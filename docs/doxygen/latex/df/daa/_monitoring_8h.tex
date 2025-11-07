@@ -1,0 +1,74 @@
+\doxysection{Reconstruction/inc/\+Monitoring.h File Reference}
+\hypertarget{_monitoring_8h}{}\label{_monitoring_8h}\index{Reconstruction/inc/Monitoring.h@{Reconstruction/inc/Monitoring.h}}
+
+
+Monitoring utilities and entry points for analysis workflows.  
+
+
+{\ttfamily \#include "{}Give\+Me\+\_\+\+Uploader.\+h"{}}\newline
+{\ttfamily \#include "{}Uploader.\+h"{}}\newline
+{\ttfamily \#include "{}Draw\+Outs.\+h"{}}\newline
+{\ttfamily \#include "{}d\+Edx.\+h"{}}\newline
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespace_reconstruction}{Reconstruction}}
+\begin{DoxyCompactList}\small\item\em d\+E/dx estimation and particle identification declarations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespace_reconstruction_aa6c4189b9f8794fb9b7ad71b9765b826}{Reconstruction\+::\+Monitoring}} ()
+\item 
+void \mbox{\hyperlink{namespace_reconstruction_ab8e79e3e83c48bac0667579399d635f7}{Reconstruction\+::\+Correction}} (const int \&corr\+RC=1, const int \&corr\+Gain=1, const int \&corr\+WF=1, const int \&corr\+Drift=1, const int \&save\+Select\+Only=1)
+\item 
+void \mbox{\hyperlink{namespace_reconstruction_a3f53f87ee01a45f5b47c576c9e6611c3}{Reconstruction\+::\+Settings}} (const std\+::string \&\mbox{\hyperlink{namespace_reconstruction_aa247a28fec76cc4006345e785c837167}{testbeam}}, const std\+::string \&\mbox{\hyperlink{namespace_reconstruction_aff2e417ce2ebbe016c1a923993e5931f}{multi\+Scan\+Name}}, const std\+::string \&\mbox{\hyperlink{namespace_reconstruction_a95778d5c57d744f35d4515247148b504}{scan\+Name}}, const std\+::string \&scanspec, const std\+::string \&runvarstr\+\_\+name, const int \&uploader, const int \&modules, const int \&peaking\+\_\+time, const int \&diffusion, const int \&drift\+\_\+dist, const int \&timbin)
+\item 
+void \mbox{\hyperlink{namespace_reconstruction_a057ee330bf04cb919427219c25bf2d4f}{Reconstruction\+::\+Clear\+Vectors}} ()
+\item 
+void \mbox{\hyperlink{namespace_reconstruction_af550d3b32df95f0749794a3b5234009c}{Reconstruction\+::\+Default\+Analysis}} ()
+\item 
+void \mbox{\hyperlink{namespace_reconstruction_a96e2ff84f5f53811c3c9999239a9b354}{Reconstruction\+::\+Draw\+Single\+Scan}} (const int \&methods=0)
+\item 
+void \mbox{\hyperlink{namespace_reconstruction_aa5658d5b431a6747c639924952a0cfa0}{Reconstruction\+::\+Draw\+Multiple\+Scan}} (const int \&methods=0)
+\item 
+void \mbox{\hyperlink{namespace_reconstruction_a1fa8abc443a0aee1c67c155e72ab35de}{Reconstruction\+::\+Draw\+CERN22\+Scan}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_reconstruction_1_1d_edx}{Reconstruction\+::d\+Edx}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespace_reconstruction_a361eada0f4a66e9daaf94dd86d1458e0}{Reconstruction\+::p\+\_\+d\+Edx}}
+\item 
+\mbox{\hyperlink{class_reconstruction_1_1_draw_outs}{Reconstruction\+::\+Draw\+Outs}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespace_reconstruction_a55a58124d364f8ee41735f2581bace65}{Reconstruction\+::p\+\_\+\+Draw\+Outs}}
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_a9dd23faf5a74cca585201f3278764e74}{Reconstruction\+::prototype}} = 0
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_a287fadc53d5739888b07f5cca3bc41b9}{Reconstruction\+::\+CERN\+\_\+\+Escan}} = 1
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_acc7cfe2129354c6b814cb3fa1d221735}{Reconstruction\+::\+CERN\+\_\+drift}} = 0
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_adc74ef74e60b2f0733496d49fb528444}{Reconstruction\+::\+DESY\+\_\+zscan}}
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_a82d60e32ba57ed46286aca223f0e76b0}{Reconstruction\+::\+DESY\+\_\+yscan}}
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_a20996853dcc322f1b8de80d49dad019f}{Reconstruction\+::\+DESY\+\_\+phi}} = 0
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_a175d54a144080ac65c769ed65a9c1e88}{Reconstruction\+::\+DESY\+\_\+theta}} = 0
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_af128763838107a1314ac4bb1cc198e98}{Reconstruction\+::dedx}} = 1
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_a5def978733bb0ac898c165771d23005c}{Reconstruction\+::\+DO\+\_\+\+Control}}
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_ab646562009b56c77f8cf8dce861eeeb4}{Reconstruction\+::\+DO\+\_\+d\+Edx}}
+\item 
+int \mbox{\hyperlink{namespace_reconstruction_a571403e47aab7020ee9f3e20b11c5a9a}{Reconstruction\+::\+DO\+\_\+\+Comparison}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Monitoring utilities and entry points for analysis workflows. 
+
+Declares functions used to run monitoring, produce diagnostic summaries (histograms, performance numbers) and control analysis settings.
+
+A small executable {\ttfamily \doxylink{_analysis_8cxx}{Apps/\+Analysis.\+cxx}} exists which calls {\ttfamily \doxylink{namespace_reconstruction_aa6c4189b9f8794fb9b7ad71b9765b826}{Reconstruction\+::\+Monitoring()}} as a top-\/level entry point to run analysis workflows; the implementation of Monitoring lives in {\ttfamily \doxylink{_monitoring_8cxx}{Reconstruction/src/\+Monitoring.\+cxx}}.
+
+The source file contains routines that assemble diagnostic histograms, run monitoring workflows and produce summaries for inspection. It is the primary entry point used by the {\ttfamily Analysis} executable to run automated monitoring and analysis sequences; configuration and selection setup live in the header-\/level declarations and other helper modules. 

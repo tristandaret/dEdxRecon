@@ -1,0 +1,26 @@
+var searchData=
+[
+  ['unit_20length_20from_20reconstructed_0',['* algorithms used to compute energy loss per unit length from reconstructed',['../d2/df0/namespace_reconstruction.html#autotoc_md8',1,'']]],
+  ['uploader_1',['Uploader',['../d4/d3b/class_uploader.html',1,'Uploader'],['../d4/d3b/class_uploader.html#aec81ed059aa54d27b5287e32c004649d',1,'Uploader::Uploader()']]],
+  ['uploader_2ecxx_2',['Uploader.cxx',['../df/dc2/_uploader_8cxx.html',1,'']]],
+  ['uploader_2eh_3',['Uploader.h',['../dd/de2/_uploader_8h.html',1,'']]],
+  ['uploader_5feram01_4',['Uploader_ERAM01',['../da/dd7/class_uploader___e_r_a_m01.html',1,'Uploader_ERAM01'],['../da/dd7/class_uploader___e_r_a_m01.html#a5e4c8f96ddc2bd1a9822734456537984',1,'Uploader_ERAM01::Uploader_ERAM01()']]],
+  ['uploader_5feram01_2ecxx_5',['Uploader_ERAM01.cxx',['../da/d8a/_uploader___e_r_a_m01_8cxx.html',1,'']]],
+  ['uploader_5feram01_2eh_6',['Uploader_ERAM01.h',['../d2/d7c/_uploader___e_r_a_m01_8h.html',1,'']]],
+  ['uploader_5fmockup_5fv1_7',['Uploader_MockUp_V1',['../d9/ddf/class_uploader___mock_up___v1.html',1,'Uploader_MockUp_V1'],['../d9/ddf/class_uploader___mock_up___v1.html#a330598581dd03e8c37005e428792a96a',1,'Uploader_MockUp_V1::Uploader_MockUp_V1()']]],
+  ['uploader_5fmockup_5fv1_2ecxx_8',['Uploader_MockUp_V1.cxx',['../da/da1/_uploader___mock_up___v1_8cxx.html',1,'']]],
+  ['uploader_5fmockup_5fv1_2eh_9',['Uploader_MockUp_V1.h',['../dc/da8/_uploader___mock_up___v1_8h.html',1,'']]],
+  ['uploader_5fmockup_5fv2_10',['Uploader_MockUp_V2',['../d3/d71/class_uploader___mock_up___v2.html',1,'Uploader_MockUp_V2'],['../d3/d71/class_uploader___mock_up___v2.html#af78aaa5b19c287cbfe281d9e5e9d1ee9',1,'Uploader_MockUp_V2::Uploader_MockUp_V2()']]],
+  ['uploader_5fmockup_5fv2_2ecxx_11',['Uploader_MockUp_V2.cxx',['../d4/d48/_uploader___mock_up___v2_8cxx.html',1,'']]],
+  ['uploader_5fmockup_5fv2_2eh_12',['Uploader_MockUp_V2.h',['../d4/d12/_uploader___mock_up___v2_8h.html',1,'']]],
+  ['uploader_5fprototype_13',['Uploader_Prototype',['../d4/dd8/class_uploader___prototype.html',1,'Uploader_Prototype'],['../d4/dd8/class_uploader___prototype.html#a21ce64af88ebc7033dc1a02ee70d0307',1,'Uploader_Prototype::Uploader_Prototype()']]],
+  ['uploader_5fprototype_2ecxx_14',['Uploader_Prototype.cxx',['../db/dee/_uploader___prototype_8cxx.html',1,'']]],
+  ['uploader_5fprototype_2eh_15',['Uploader_Prototype.h',['../d1/d4b/_uploader___prototype_8h.html',1,'']]],
+  ['used_20across_20the_20reconstruction_20pipeline_20the_20source_16',['* and exposes accessors used across the reconstruction pipeline. The source',['../db/d89/class_eram_info.html#autotoc_md23',1,'']]],
+  ['used_20by_20de_20dx_20and_20track_20cluster_17',['* (geometry, calibration, etc.) used by dE/dx and track/cluster',['../db/d89/class_eram_info.html#autotoc_md18',1,'']]],
+  ['used_20by_20the_20reconstruction_20pipeline_18',['* used to compute energy loss estimates used by the reconstruction pipeline.',['../d2/df0/namespace_reconstruction.html#autotoc_md4',1,'']]],
+  ['used_20in_20calibration_20steps_19',['* compute mean gains/RC values used in calibration steps.',['../db/d89/class_eram_info.html#autotoc_md25',1,'']]],
+  ['used_20to_20compute_20energy_20loss_20estimates_20used_20by_20the_20reconstruction_20pipeline_20',['* used to compute energy loss estimates used by the reconstruction pipeline.',['../d2/df0/namespace_reconstruction.html#autotoc_md4',1,'']]],
+  ['used_20to_20compute_20energy_20loss_20per_20unit_20length_20from_20reconstructed_21',['* algorithms used to compute energy loss per unit length from reconstructed',['../d2/df0/namespace_reconstruction.html#autotoc_md8',1,'']]],
+  ['utilities_20for_20particle_22',['* cluster and pad information, together with helper utilities for particle',['../d2/df0/namespace_reconstruction.html#autotoc_md9',1,'']]]
+];

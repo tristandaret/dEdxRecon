@@ -1,0 +1,176 @@
+\doxysection{Reconstruction/inc/\+Recon\+Tools.h File Reference}
+\hypertarget{_recon_tools_8h}{}\label{_recon_tools_8h}\index{Reconstruction/inc/ReconTools.h@{Reconstruction/inc/ReconTools.h}}
+
+
+Miscellaneous reconstruction helper functions and utilities.  
+
+
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include "{}TF1.\+h"{}}\newline
+{\ttfamily \#include "{}TH1\+F.\+h"{}}\newline
+{\ttfamily \#include "{}Misc.\+h"{}}\newline
+{\ttfamily \#include "{}Util.\+h"{}}\newline
+{\ttfamily \#include "{}Module.\+h"{}}\newline
+{\ttfamily \#include "{}Pad.\+h"{}}\newline
+{\ttfamily \#include "{}Track.\+h"{}}\newline
+{\ttfamily \#include "{}Give\+Me\+\_\+\+Uploader.\+h"{}}\newline
+{\ttfamily \#include "{}Selector.\+h"{}}\newline
+{\ttfamily \#include "{}Uploader.\+h"{}}\newline
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespace_reconstruction}{Reconstruction}}
+\begin{DoxyCompactList}\small\item\em d\+E/dx estimation and particle identification declarations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{_recon_tools_8h_a07f950ba5a9919519fdb7fbbc11d2dbe}{Four\+Modules\+In\+Line}} (const std\+::vector$<$ int $>$ \&vec)
+\item 
+void \mbox{\hyperlink{namespace_reconstruction_a857a325f53feb2a8ab37382badfa3420}{Reconstruction\+::\+WFCorrection}} (const std\+::string \&Out\+Corr)
+\item 
+TF1 \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_recon_tools_8h_a516365dce812c6618f625ee7ea02d6e4}{corr\+\_\+func}} (const std\+::string \&Event\+File, const std\+::string \&Tag, const int \&correct\+WF)
+\item 
+void \mbox{\hyperlink{_recon_tools_8h_add774300c91938a319019555c925da1e}{Init\+\_\+selection}} (const std\+::string \&Selection\+Set, \mbox{\hyperlink{class_selector}{Selector}} \&a\+Selector, const std\+::string \&Tag, \mbox{\hyperlink{class_uploader}{Uploader}} \texorpdfstring{$\ast$}{*}p\+Uploader, const int \&Nbr\+Of\+Mod, const int \&Data\+\_\+to\+\_\+\+Use)
+\item 
+std\+::vector$<$ std\+::vector$<$ float $>$ $>$ \mbox{\hyperlink{_recon_tools_8h_a1f1bdbe4e41128fdf9881992b6c63db8}{read\+CSV}} (std\+::string filename)
+\item 
+std\+::vector$<$ int $>$ \mbox{\hyperlink{_recon_tools_8h_a37449070a42628545fb43f92a0a6b44d}{Compute\+Cut\+Stage3\+\_\+\+Cut}} (\mbox{\hyperlink{class_uploader}{Uploader}} \texorpdfstring{$\ast$}{*}p\+Uploader, const int \&Nbr\+Of\+Mod, const int \&Data\+\_\+to\+\_\+\+Use)
+\item 
+bool \mbox{\hyperlink{_recon_tools_8h_aa0478cfc492e8789343203f8ead6c608}{Get\+Stage3\+Cut\+\_\+\+CSV}} (const std\+::string \&filename, const std\+::string \&target\+Word, int \&value1, int \&value2)
+\item 
+void \mbox{\hyperlink{_recon_tools_8h_a89b37f625194b85e46f8eedf4512a939}{Set\+Stage3\+Cut\+\_\+\+CSV}} (const std\+::string \&filename, const std\+::string \&target\+Word, int value1, int value2)
+\item 
+TF1 \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_recon_tools_8h_a4a54b47cc2a53206d96b0bc7a1342f92}{Bethe\+Bloch}} (const float \&Emin, const float \&Emax, const double \&m, const std\+::string \&particle)
+\item 
+TF1 \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_recon_tools_8h_abe60b077a8490cb15ae4440397ecee51}{Bethe\+Bloch\+Bhabha}} (const float \&Pmin, const float \&Pmax, const double \&m, const std\+::string \&particle)
+\item 
+TF1 \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_recon_tools_8h_a9e04fade1cbe7df7429eb2acd1df5ea9}{Bethe\+Bloch\+Exp}} (const float \&Pmin, const float \&Pmax, const double \&M, const std\+::string \&particle)
+\item 
+TF1 \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_recon_tools_8h_a0f39222dbd918b7a898e5b5b326bd338}{Fit2\+Gauss}} (TH1F \texorpdfstring{$\ast$}{*}h1F)
+\item 
+TF1 \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_recon_tools_8h_ae860e2a31caae95f6f34e80403f639bc}{Fit2\+Gauss}} (TH1F \texorpdfstring{$\ast$}{*}h1F, const float \&x1min, const float \&x1max, const float \&x2min, const float \&x2max)
+\item 
+void \mbox{\hyperlink{_recon_tools_8h_a2bfcb39645b054f8cf7ab640f787faa7}{local\+\_\+params}} (\mbox{\hyperlink{class_pad}{Pad}} \texorpdfstring{$\ast$}{*}p\+Pad, const \mbox{\hyperlink{class_track}{Track}} \texorpdfstring{$\ast$}{*}p\+Track, float \&d, float \&dd, float \&phi, float \&trk\+\_\+len\+\_\+pad)
+\item 
+float \mbox{\hyperlink{_recon_tools_8h_a571cc4efaf146929cb25dd1ce6b58dd8}{trk\+\_\+len}} (\mbox{\hyperlink{class_module}{Module}} \texorpdfstring{$\ast$}{*}p\+Module, const \mbox{\hyperlink{class_track}{Track}} \texorpdfstring{$\ast$}{*}p\+Track)
+\item 
+TGraph \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_recon_tools_8h_a36d9fbe5c5c55cbf830cbbe263196f48}{hist\+\_\+to\+\_\+graph}} (TH1 \texorpdfstring{$\ast$}{*}h1)
+\item 
+TGraph \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_recon_tools_8h_ac64b00bd5aa3ca42079e99320f45ea79}{Swapped\+\_\+graph}} (TH1 \texorpdfstring{$\ast$}{*}h1)
+\item 
+void \mbox{\hyperlink{_recon_tools_8h_a9a45476722383f83cabd205d7ce4743f}{Draw\+TH2}} (const std\+::string \&Out\+Dir, TH2 \texorpdfstring{$\ast$}{*}h2)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Miscellaneous reconstruction helper functions and utilities. 
+
+Small helpers and adapters used across reconstruction, plotting and fitting code (linspace equivalents, I/O helpers, Bethe-\/\+Bloch wrappers, etc.).
+
+The implementation file {\ttfamily \doxylink{_recon_tools_8cxx}{Recon\+Tools.\+cxx}} contains a collection of lightweight utilities relied upon by higher-\/level modules (correction functions, selection initialization, CSV helpers and physics wrappers).
+
+\label{doc-func-members}
+\Hypertarget{_recon_tools_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_recon_tools_8h_a4a54b47cc2a53206d96b0bc7a1342f92}\index{ReconTools.h@{ReconTools.h}!BetheBloch@{BetheBloch}}
+\index{BetheBloch@{BetheBloch}!ReconTools.h@{ReconTools.h}}
+\doxysubsubsection{\texorpdfstring{BetheBloch()}{BetheBloch()}}
+{\footnotesize\ttfamily \label{_recon_tools_8h_a4a54b47cc2a53206d96b0bc7a1342f92} 
+TF1 \texorpdfstring{$\ast$}{*} Bethe\+Bloch (\begin{DoxyParamCaption}\item[{const float \&}]{Emin}{, }\item[{const float \&}]{Emax}{, }\item[{const double \&}]{m}{, }\item[{const std\+::string \&}]{particle}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_recon_tools_8h_abe60b077a8490cb15ae4440397ecee51}\index{ReconTools.h@{ReconTools.h}!BetheBlochBhabha@{BetheBlochBhabha}}
+\index{BetheBlochBhabha@{BetheBlochBhabha}!ReconTools.h@{ReconTools.h}}
+\doxysubsubsection{\texorpdfstring{BetheBlochBhabha()}{BetheBlochBhabha()}}
+{\footnotesize\ttfamily \label{_recon_tools_8h_abe60b077a8490cb15ae4440397ecee51} 
+TF1 \texorpdfstring{$\ast$}{*} Bethe\+Bloch\+Bhabha (\begin{DoxyParamCaption}\item[{const float \&}]{Pmin}{, }\item[{const float \&}]{Pmax}{, }\item[{const double \&}]{m}{, }\item[{const std\+::string \&}]{particle}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_recon_tools_8h_a9e04fade1cbe7df7429eb2acd1df5ea9}\index{ReconTools.h@{ReconTools.h}!BetheBlochExp@{BetheBlochExp}}
+\index{BetheBlochExp@{BetheBlochExp}!ReconTools.h@{ReconTools.h}}
+\doxysubsubsection{\texorpdfstring{BetheBlochExp()}{BetheBlochExp()}}
+{\footnotesize\ttfamily \label{_recon_tools_8h_a9e04fade1cbe7df7429eb2acd1df5ea9} 
+TF1 \texorpdfstring{$\ast$}{*} Bethe\+Bloch\+Exp (\begin{DoxyParamCaption}\item[{const float \&}]{Pmin}{, }\item[{const float \&}]{Pmax}{, }\item[{const double \&}]{M}{, }\item[{const std\+::string \&}]{particle}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_recon_tools_8h_a37449070a42628545fb43f92a0a6b44d}\index{ReconTools.h@{ReconTools.h}!ComputeCutStage3\_Cut@{ComputeCutStage3\_Cut}}
+\index{ComputeCutStage3\_Cut@{ComputeCutStage3\_Cut}!ReconTools.h@{ReconTools.h}}
+\doxysubsubsection{\texorpdfstring{ComputeCutStage3\_Cut()}{ComputeCutStage3\_Cut()}}
+{\footnotesize\ttfamily \label{_recon_tools_8h_a37449070a42628545fb43f92a0a6b44d} 
+std\+::vector$<$ int $>$ Compute\+Cut\+Stage3\+\_\+\+Cut (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_uploader}{Uploader}} \texorpdfstring{$\ast$}{*}}]{p\+Uploader}{, }\item[{const int \&}]{Nbr\+Of\+Mod}{, }\item[{const int \&}]{Data\+\_\+to\+\_\+\+Use}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_recon_tools_8h_a516365dce812c6618f625ee7ea02d6e4}\index{ReconTools.h@{ReconTools.h}!corr\_func@{corr\_func}}
+\index{corr\_func@{corr\_func}!ReconTools.h@{ReconTools.h}}
+\doxysubsubsection{\texorpdfstring{corr\_func()}{corr\_func()}}
+{\footnotesize\ttfamily \label{_recon_tools_8h_a516365dce812c6618f625ee7ea02d6e4} 
+TF1 \texorpdfstring{$\ast$}{*} corr\+\_\+func (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{Event\+File}{, }\item[{const std\+::string \&}]{Tag}{, }\item[{const int \&}]{correct\+WF}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_recon_tools_8h_a9a45476722383f83cabd205d7ce4743f}\index{ReconTools.h@{ReconTools.h}!DrawTH2@{DrawTH2}}
+\index{DrawTH2@{DrawTH2}!ReconTools.h@{ReconTools.h}}
+\doxysubsubsection{\texorpdfstring{DrawTH2()}{DrawTH2()}}
+{\footnotesize\ttfamily \label{_recon_tools_8h_a9a45476722383f83cabd205d7ce4743f} 
+void Draw\+TH2 (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{Out\+Dir}{, }\item[{TH2 \texorpdfstring{$\ast$}{*}}]{h2}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_recon_tools_8h_a0f39222dbd918b7a898e5b5b326bd338}\index{ReconTools.h@{ReconTools.h}!Fit2Gauss@{Fit2Gauss}}
+\index{Fit2Gauss@{Fit2Gauss}!ReconTools.h@{ReconTools.h}}
+\doxysubsubsection{\texorpdfstring{Fit2Gauss()}{Fit2Gauss()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{_recon_tools_8h_a0f39222dbd918b7a898e5b5b326bd338} 
+TF1 \texorpdfstring{$\ast$}{*} Fit2\+Gauss (\begin{DoxyParamCaption}\item[{TH1F \texorpdfstring{$\ast$}{*}}]{h1F}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_recon_tools_8h_ae860e2a31caae95f6f34e80403f639bc}\index{ReconTools.h@{ReconTools.h}!Fit2Gauss@{Fit2Gauss}}
+\index{Fit2Gauss@{Fit2Gauss}!ReconTools.h@{ReconTools.h}}
+\doxysubsubsection{\texorpdfstring{Fit2Gauss()}{Fit2Gauss()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{_recon_tools_8h_ae860e2a31caae95f6f34e80403f639bc} 
+TF1 \texorpdfstring{$\ast$}{*} Fit2\+Gauss (\begin{DoxyParamCaption}\item[{TH1F \texorpdfstring{$\ast$}{*}}]{h1F}{, }\item[{const float \&}]{x1min}{, }\item[{const float \&}]{x1max}{, }\item[{const float \&}]{x2min}{, }\item[{const float \&}]{x2max}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_recon_tools_8h_a07f950ba5a9919519fdb7fbbc11d2dbe}\index{ReconTools.h@{ReconTools.h}!FourModulesInLine@{FourModulesInLine}}
+\index{FourModulesInLine@{FourModulesInLine}!ReconTools.h@{ReconTools.h}}
+\doxysubsubsection{\texorpdfstring{FourModulesInLine()}{FourModulesInLine()}}
+{\footnotesize\ttfamily \label{_recon_tools_8h_a07f950ba5a9919519fdb7fbbc11d2dbe} 
+bool Four\+Modules\+In\+Line (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ int $>$ \&}]{vec}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_recon_tools_8h_aa0478cfc492e8789343203f8ead6c608}\index{ReconTools.h@{ReconTools.h}!GetStage3Cut\_CSV@{GetStage3Cut\_CSV}}
+\index{GetStage3Cut\_CSV@{GetStage3Cut\_CSV}!ReconTools.h@{ReconTools.h}}
+\doxysubsubsection{\texorpdfstring{GetStage3Cut\_CSV()}{GetStage3Cut\_CSV()}}
+{\footnotesize\ttfamily \label{_recon_tools_8h_aa0478cfc492e8789343203f8ead6c608} 
+bool Get\+Stage3\+Cut\+\_\+\+CSV (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{filename}{, }\item[{const std\+::string \&}]{target\+Word}{, }\item[{int \&}]{value1}{, }\item[{int \&}]{value2}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_recon_tools_8h_a36d9fbe5c5c55cbf830cbbe263196f48}\index{ReconTools.h@{ReconTools.h}!hist\_to\_graph@{hist\_to\_graph}}
+\index{hist\_to\_graph@{hist\_to\_graph}!ReconTools.h@{ReconTools.h}}
+\doxysubsubsection{\texorpdfstring{hist\_to\_graph()}{hist\_to\_graph()}}
+{\footnotesize\ttfamily \label{_recon_tools_8h_a36d9fbe5c5c55cbf830cbbe263196f48} 
+TGraph \texorpdfstring{$\ast$}{*} hist\+\_\+to\+\_\+graph (\begin{DoxyParamCaption}\item[{TH1 \texorpdfstring{$\ast$}{*}}]{h1}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_recon_tools_8h_add774300c91938a319019555c925da1e}\index{ReconTools.h@{ReconTools.h}!Init\_selection@{Init\_selection}}
+\index{Init\_selection@{Init\_selection}!ReconTools.h@{ReconTools.h}}
+\doxysubsubsection{\texorpdfstring{Init\_selection()}{Init\_selection()}}
+{\footnotesize\ttfamily \label{_recon_tools_8h_add774300c91938a319019555c925da1e} 
+void Init\+\_\+selection (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{Selection\+Set}{, }\item[{\mbox{\hyperlink{class_selector}{Selector}} \&}]{a\+Selector}{, }\item[{const std\+::string \&}]{Tag}{, }\item[{\mbox{\hyperlink{class_uploader}{Uploader}} \texorpdfstring{$\ast$}{*}}]{p\+Uploader}{, }\item[{const int \&}]{Nbr\+Of\+Mod}{, }\item[{const int \&}]{Data\+\_\+to\+\_\+\+Use}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_recon_tools_8h_a2bfcb39645b054f8cf7ab640f787faa7}\index{ReconTools.h@{ReconTools.h}!local\_params@{local\_params}}
+\index{local\_params@{local\_params}!ReconTools.h@{ReconTools.h}}
+\doxysubsubsection{\texorpdfstring{local\_params()}{local\_params()}}
+{\footnotesize\ttfamily \label{_recon_tools_8h_a2bfcb39645b054f8cf7ab640f787faa7} 
+void local\+\_\+params (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_pad}{Pad}} \texorpdfstring{$\ast$}{*}}]{p\+Pad}{, }\item[{const \mbox{\hyperlink{class_track}{Track}} \texorpdfstring{$\ast$}{*}}]{p\+Track}{, }\item[{float \&}]{d}{, }\item[{float \&}]{dd}{, }\item[{float \&}]{phi}{, }\item[{float \&}]{trk\+\_\+len\+\_\+pad}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_recon_tools_8h_a1f1bdbe4e41128fdf9881992b6c63db8}\index{ReconTools.h@{ReconTools.h}!readCSV@{readCSV}}
+\index{readCSV@{readCSV}!ReconTools.h@{ReconTools.h}}
+\doxysubsubsection{\texorpdfstring{readCSV()}{readCSV()}}
+{\footnotesize\ttfamily \label{_recon_tools_8h_a1f1bdbe4e41128fdf9881992b6c63db8} 
+std\+::vector$<$ std\+::vector$<$ float $>$ $>$ read\+CSV (\begin{DoxyParamCaption}\item[{std\+::string}]{filename}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_recon_tools_8h_a89b37f625194b85e46f8eedf4512a939}\index{ReconTools.h@{ReconTools.h}!SetStage3Cut\_CSV@{SetStage3Cut\_CSV}}
+\index{SetStage3Cut\_CSV@{SetStage3Cut\_CSV}!ReconTools.h@{ReconTools.h}}
+\doxysubsubsection{\texorpdfstring{SetStage3Cut\_CSV()}{SetStage3Cut\_CSV()}}
+{\footnotesize\ttfamily \label{_recon_tools_8h_a89b37f625194b85e46f8eedf4512a939} 
+void Set\+Stage3\+Cut\+\_\+\+CSV (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{filename}{, }\item[{const std\+::string \&}]{target\+Word}{, }\item[{int}]{value1}{, }\item[{int}]{value2}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_recon_tools_8h_ac64b00bd5aa3ca42079e99320f45ea79}\index{ReconTools.h@{ReconTools.h}!Swapped\_graph@{Swapped\_graph}}
+\index{Swapped\_graph@{Swapped\_graph}!ReconTools.h@{ReconTools.h}}
+\doxysubsubsection{\texorpdfstring{Swapped\_graph()}{Swapped\_graph()}}
+{\footnotesize\ttfamily \label{_recon_tools_8h_ac64b00bd5aa3ca42079e99320f45ea79} 
+TGraph \texorpdfstring{$\ast$}{*} Swapped\+\_\+graph (\begin{DoxyParamCaption}\item[{TH1 \texorpdfstring{$\ast$}{*}}]{h1}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_recon_tools_8h_a571cc4efaf146929cb25dd1ce6b58dd8}\index{ReconTools.h@{ReconTools.h}!trk\_len@{trk\_len}}
+\index{trk\_len@{trk\_len}!ReconTools.h@{ReconTools.h}}
+\doxysubsubsection{\texorpdfstring{trk\_len()}{trk\_len()}}
+{\footnotesize\ttfamily \label{_recon_tools_8h_a571cc4efaf146929cb25dd1ce6b58dd8} 
+float trk\+\_\+len (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_module}{Module}} \texorpdfstring{$\ast$}{*}}]{p\+Module}{, }\item[{const \mbox{\hyperlink{class_track}{Track}} \texorpdfstring{$\ast$}{*}}]{p\+Track}{}\end{DoxyParamCaption})}
+

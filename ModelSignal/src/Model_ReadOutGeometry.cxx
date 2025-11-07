@@ -1,16 +1,3 @@
-#/***************************************************************************
- * File: Model_ReadOutGeometry.cxx
- * Project: dEdxRecon
- *
- * Brief: Implementation of the readout geometry model. Provides concrete
- *        methods to query pad centres, edges and board layout parameters.
- *
- * Contents: Model_ReadOutGeometry constructor/destructor and geometry accessors.
- *
- * Notes: Geometry parameters are used throughout simulation and
- *        reconstruction stages.
- ***************************************************************************/
-
 #include "Model_ReadOutGeometry.h"
 
 Model_ReadOutGeometry::Model_ReadOutGeometry() {

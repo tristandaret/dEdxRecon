@@ -1,0 +1,21 @@
+\doxysection{Model\+Signal/inc/\+Model\+\_\+\+ChargeI.h File Reference}
+\hypertarget{_model___charge_i_8h}{}\label{_model___charge_i_8h}\index{ModelSignal/inc/Model\_ChargeI.h@{ModelSignal/inc/Model\_ChargeI.h}}
+
+
+Abstract base class for charge models.  
+
+
+{\ttfamily \#include "{}Misc.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_model___charge_i}{Model\+\_\+\+ChargeI}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Abstract base class for charge models. 
+
+Defines the interface used by concrete charge model implementations (0D, 1D, etc.). Provides common parameter accessors and utility helpers.
+
+Implementations (Model\+\_\+\+Charge0\+D/1D) provide concrete {\ttfamily Get\+\_\+\+Qpad} and {\ttfamily Set\+Secondaries} logic; this base class implements shared helpers used by concrete models, such as width-\/from-\/drift calculations and normalization helpers. 

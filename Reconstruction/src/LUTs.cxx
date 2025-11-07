@@ -1,18 +1,4 @@
-#/***************************************************************************
- * File: LUTs.cxx
- * Project: dEdxRecon
- *
- * Brief: Implementation for LUT building and access. Constructs lookup
- *        tables used by reconstruction modules (e.g., geometry, ERAM maps,
- *        calibration constants) and exposes functions for their use.
- *
- * Contents: LUT construction and I/O helpers.
- *
- * Notes: LUTs are relied upon by many modules; keep API stable.
- ***************************************************************************/
-
 #include "LUTs.h"
-
 #include <algorithm> // for std::find
 #include <iomanip>
 #include <iostream>
@@ -21,9 +7,8 @@
 
 ClassImp(EramInfo)
 
-    /* ERAM MAPS READING
-       ------------------------------------------------------------------------------------------------------------------
-     */
+    // ERAM MAPS READING
+    // ------------------------------------------------------------------------------------------------------------------
     // Default constructor
 
     Reconstruction::ERAMMaps::ERAMMaps(const std::string &file) {
@@ -121,7 +106,7 @@ void Reconstruction::ERAMMaps::Load() {
   }
 }
 
-/* Public functions */
+// Public functions
 // Getters
 int Reconstruction::ERAMMaps::ID(const int &position) {
   return channel2iD[position];
@@ -148,7 +133,7 @@ float Reconstruction::ERAMMaps::MeanRC(const int &position) {
   return fmean_RC[position];
 }
 
-/* Private functions */
+// Private functions
 // Setters
 // ERAMs on endplates 1&3 are X-flipped compared to their maps in the file
 void Reconstruction::ERAMMaps::setGain(const int &position, const int &iX,
@@ -239,9 +224,8 @@ void Reconstruction::ERAMMaps::FillHoles() {
   }
 }
 
-/* Look Up Tables for XP method
- * ------------------------------------------------------------------------------------------------------------------
- */
+// Look Up Tables for XP method
+// ------------------------------------------------------------------------------------------------------------------
 
 float Reconstruction::LUT::LUTValues[Reconstruction::LUT::SNSTEPS_TRANS]
                                     [Reconstruction::LUT::SNSTEPS_RC]
